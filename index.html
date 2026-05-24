@@ -1444,7 +1444,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <div class="fg"><label>Day</label><select id="b-day" disabled><option value="">Day…</option></select></div>
       </div>
       <div class="form-row">
-        <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Shelf 2, windowsill…"></div>
+        <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
         <div class="fg"><label>Form / Shape</label><select id="b-form"><option value="">Select…</option><option>Raw / Rough</option><option>Tumbled</option><option>Polished freeform</option><option>Palm stone</option><option>Sphere</option><option>Tower / Point</option><option>Cluster</option><option>Geode</option><option>Wand</option><option>Cabochon</option><option>Carved</option><option>Slice</option><option>Other</option></select></div>
       </div>
     </div>
@@ -2412,7 +2412,7 @@ function toggleCombo(){
   if(cs)cs.style.display=document.getElementById('f-combo').checked?'block':'none';
 }
 function populateCombos(){
-  const opts='<option value="">Select crystal…</option>'+CRYSTALS.map(c=>`<option value="${c.i}">${c.n}</option>`).join('');
+  const opts='<option value="">Select crystal…</option>'+sortedCrystals(CRYSTALS).map(c=>`<option value="${c.i}">${c.n}</option>`).join('');
   document.querySelectorAll('.csel').forEach(s=>s.innerHTML=opts);
 }
 function addComboRow(){
@@ -2508,7 +2508,7 @@ function loadBatchPhotos(input){
       batchEntries.push({photo:e.target.result,crystalId:'',nickname:''});
       const div=document.createElement('div');
       div.style.cssText='display:grid;grid-template-columns:80px 1fr 1fr;gap:10px;align-items:center;background:var(--white);border:0.5px solid var(--border);border-radius:8px;padding:10px';
-      const crystalOpts='<option value="">Select crystal…</option>'+CRYSTALS.map(c=>`<option value="${c.i}">${c.n}</option>`).join('');
+      const crystalOpts='<option value="">Select crystal…</option>'+sortedCrystals(CRYSTALS).map(c=>`<option value="${c.i}">${c.n}</option>`).join('');
       div.innerHTML=`<img src="${e.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:6px">
         <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3)">Crystal *</label>
           <select data-idx="${entryIdx}" onchange="batchEntries[${entryIdx}].crystalId=this.value" style="padding:7px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--stone);font-family:'Jost',sans-serif;font-size:12px;color:var(--ink);outline:none">${crystalOpts}</select>
@@ -2641,13 +2641,32 @@ function openPopup(n){const el=document.getElementById('popup-'+n);if(el)el.clas
 function closePopup(n){const el=document.getElementById('popup-'+n);if(el)el.classList.remove('open');}
 
 // ── COMBOBOX / TYPE-AHEAD ──
+function sortedCrystals(list){
+  return [...list].sort((a,b)=>(a.n||'').localeCompare((b.n||''),undefined,{sensitivity:'base'}));
+}
 function comboRender(dropId,valId,query){
   const drop=document.getElementById(dropId);
   if(!drop)return;
   const q=(query||'').toLowerCase().trim();
-  const matches=q?CRYSTALS.filter(c=>c.n.toLowerCase().includes(q)||(c.a&&c.a.toLowerCase().includes(q))).slice(0,50):CRYSTALS.slice(0,50);
+  const source=sortedCrystals(CRYSTALS);
+  const matches=q?source.filter(c=>c.n.toLowerCase().includes(q)||(c.a&&c.a.toLowerCase().includes(q))).slice(0,50):source.slice(0,50);
+  drop.innerHTML='';
   if(!matches.length){drop.innerHTML='<div class="combobox-empty">No crystals found</div>';return;}
-  drop.innerHTML=matches.map(c=>`<div class="combobox-option" onclick="comboSelect('${c.i}',${JSON.stringify(c.n)},event,'${dropId}','${valId}')">${c.n}</div>`).join('');
+  matches.forEach(c=>{
+    const opt=document.createElement('div');
+    opt.className='combobox-option';
+    opt.textContent=c.n;
+    opt.dataset.id=c.i;
+    opt.dataset.name=c.n;
+    opt.addEventListener('mousedown',function(e){
+      e.preventDefault();
+      comboSelect(c.i,c.n,e,dropId,valId);
+    });
+    opt.addEventListener('click',function(e){
+      comboSelect(c.i,c.n,e,dropId,valId);
+    });
+    drop.appendChild(opt);
+  });
 }
 function comboFilter(wrapId,inputId,dropId,valId){
   const input=document.getElementById(inputId);
