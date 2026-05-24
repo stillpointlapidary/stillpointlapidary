@@ -469,6 +469,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   </a>
   <div class="topbar-right">
     <span class="stone-count" id="stone-count" role="button" tabindex="0" title="Return to Encyclopedia" onclick="switchTab('encyclopedia',document.querySelector('.nav-tab'))" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('encyclopedia',document.querySelector('.nav-tab'))}"></span>
+    <div class="topbar-auth" id="topbar-auth"></div>
     <button class="btn btn-sm" onclick="openAddEncForm()">+ Entry</button>
     <button class="btn btn-sm" onclick="openPopup('instructions')">? Guide</button>
     <button class="btn btn-sm" onclick="openPopup('manage')">Manage</button>
@@ -4164,5 +4165,133 @@ function renderShapes() {
     <button onclick="dismissPWA(false)" style="font-size:11px;padding:5px 12px;background:transparent;border:0.5px solid rgba(255,255,255,0.3);border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap">Not now</button>
   </div>
 </div>
+<div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
+    <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
+    <div style="margin-bottom:1rem">
+      <label style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+    </div>
+    <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
+    <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
+    <div style="font-size:11px;color:#b0a89e;text-align:center;margin-top:1rem;line-height:1.6">Your collection saves across all your devices.<br>Open the link in the email on this device.</div>
+  </div>
+</div>
+<style>
+.auth-modal-overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.45);z-index:200;align-items:center;justify-content:center;padding:1.5rem}
+.auth-modal-overlay.open{display:flex}
+.topbar-auth{display:flex;align-items:center;gap:8px}
+.auth-user-name{font-size:11px;color:#5a5149;letter-spacing:0.04em;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.auth-sign-out{font-size:11px;color:#b0a89e;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;text-decoration:underline;text-underline-offset:2px;padding:0}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const _supa = window.supabase.createClient(
+  'https://vxujlgyhgnihnqrxzefw.supabase.co',
+  'sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'
+);
+let _currentUser = null;
+
+function _renderAuth(user) {
+  const el = document.getElementById('topbar-auth');
+  if (!el) return;
+  if (user) {
+    const name = user.email ? user.email.split('@')[0] : 'Account';
+    el.innerHTML = '<span class="auth-user-name" title="'+user.email+'">'+name+'</span> <button class="auth-sign-out" onclick="_signOut()">Sign out</button>';
+  } else {
+    el.innerHTML = '<button class="btn btn-sm" onclick="_openAuth()">Sign in</button>';
+  }
+}
+
+async function _authInit() {
+  const { data: { session } } = await _supa.auth.getSession();
+  _currentUser = session?.user ?? null;
+  _renderAuth(_currentUser);
+  _supa.auth.onAuthStateChange(function(_e, session) {
+    _currentUser = session?.user ?? null;
+    _renderAuth(_currentUser);
+    if (_currentUser && window._pendingColl) {
+      window._pendingColl = false;
+      var t = document.querySelectorAll('.nav-tab')[2];
+      if (t) switchTab('collection', t);
+    }
+  });
+  var orig = window.switchTab;
+  window.switchTab = function(name, btn) {
+    if (name === 'collection' && !_currentUser) {
+      window._pendingColl = true;
+      _openAuth('collection');
+      return;
+    }
+    orig(name, btn);
+  };
+}
+
+function _openAuth(reason) {
+  var title = document.getElementById('auth-modal-title');
+  var sub = document.getElementById('auth-modal-sub');
+  var msg = document.getElementById('auth-msg');
+  var inp = document.getElementById('auth-email-input');
+  var btn = document.getElementById('auth-submit-btn');
+  if (reason === 'collection') {
+    title.textContent = 'Sign in to use My Collection';
+    sub.textContent = 'Your collection saves securely to your account and follows you across devices.';
+  } else {
+    title.textContent = 'Sign in to your collection';
+    sub.textContent = "Enter your email and we'll send you a magic link — no password needed.";
+  }
+  msg.textContent = '';
+  msg.style.color = '#8b7355';
+  inp.value = '';
+  btn.disabled = false;
+  btn.textContent = 'Send magic link';
+  document.getElementById('auth-modal-overlay').classList.add('open');
+  setTimeout(function(){ inp.focus(); }, 80);
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-modal-overlay').classList.remove('open');
+}
+
+async function submitMagicLink() {
+  var inp = document.getElementById('auth-email-input');
+  var btn = document.getElementById('auth-submit-btn');
+  var msg = document.getElementById('auth-msg');
+  var email = (inp.value || '').trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent = 'Please enter a valid email address.';
+    msg.style.color = '#c0392b';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  msg.textContent = '';
+  var result = await _supa.auth.signInWithOtp({
+    email: email,
+    options: { emailRedirectTo: window.location.href }
+  });
+  if (result.error) {
+    msg.textContent = result.error.message || 'Something went wrong. Please try again.';
+    msg.style.color = '#c0392b';
+    btn.disabled = false;
+    btn.textContent = 'Send magic link';
+  } else {
+    msg.textContent = '✓ Check your email — link sent! Open it on this device.';
+    msg.style.color = '#8b7355';
+    btn.textContent = 'Link sent';
+  }
+}
+
+async function _signOut() {
+  await _supa.auth.signOut();
+  _currentUser = null;
+  _renderAuth(null);
+}
+
+_authInit();
+</script>
 </body>
 </html>
