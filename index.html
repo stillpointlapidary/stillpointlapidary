@@ -1200,6 +1200,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <button class="popup-close" onclick="closeAddForm()">✕</button>
     <div class="form-title">Add a piece</div>
     <div class="form-sub">Each entry is a specific physical piece in your collection.</div>
+
     <div class="form-row">
       <div class="fg">
         <label>Crystal / Stone *</label>
@@ -1215,50 +1216,61 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       </div>
       <div class="fg"><label>Piece nickname</label><input type="text" id="f-nick" placeholder="e.g. The Dreamer"></div>
     </div>
+
     <div style="margin-bottom:10px">
-      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--ink2)"><input type="checkbox" id="f-combo" onchange="toggleCombo()"> Combo piece (multiple minerals)</label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--ink2)"><input type="checkbox" id="f-combo" onchange="toggleCombo()"> Combo piece (multiple stones)</label>
     </div>
     <div class="combo-section" id="combo-section" style="display:none">
       <div class="sec-label" style="margin-bottom:8px">Additional crystals (up to 3 more)</div>
       <div id="combo-rows"><div class="combo-row"><select class="csel"><option value="">Select crystal…</option></select><button class="rm-combo" onclick="rmCombo(this)">×</button></div></div>
       <button class="btn btn-sm" style="margin-top:8px" onclick="addComboRow()">+ Add</button>
     </div>
+
     <div class="form-divider"></div>
+
     <div class="form-row">
       <div class="fg"><label>Form / Shape</label><select id="f-form"><option value="">Select…</option><option>Raw / Rough</option><option>Tumbled</option><option>Polished freeform</option><option>Palm stone</option><option>Sphere</option><option>Tower / Point</option><option>Cluster</option><option>Geode</option><option>Wand</option><option>Cabochon</option><option>Carved</option><option>Slice</option><option>Egg</option><option>Heart</option><option>Skull</option><option>Other</option></select></div>
-      <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Select…</option><option value="XS">XS — under 2cm</option><option value="S">S — 2 to 5cm</option><option value="M">M — 5 to 10cm</option><option value="L">L — 10 to 20cm</option><option value="XL">XL — over 20cm</option></select></div>
+      <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Select…</option>
+<option value="XS">XS — under 1" / 2.5cm</option>
+<option value="S">S — 1–2" / 2.5–5cm</option>
+<option value="M">M — 2–4" / 5–10cm</option>
+<option value="L">L — 4–8" / 10–20cm</option>
+<option value="XL">XL — over 8" / 20cm+</option></select></div>
     </div>
+
     <div class="form-row">
-      <div class="fg">
-        <label>Dimensions</label>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
-          <input type="text" id="f-len" placeholder='L"' style="padding:9px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--stone);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none;text-align:center">
-          <input type="text" id="f-wid" placeholder='W"' style="padding:9px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--stone);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none;text-align:center">
-          <input type="text" id="f-dep" placeholder='H"' style="padding:9px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--stone);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none;text-align:center">
-        </div>
-        <div style="font-size:10px;color:var(--ink3);margin-top:3px;text-align:center">Length · Width · Height in inches (all optional)</div>
-      </div>
       <div class="fg"><label>Treatment</label><select id="f-treated"><option value="Natural">Natural</option><option value="Heat Treated">Heat Treated</option><option value="Irradiated">Irradiated</option><option value="Dyed">Dyed</option><option value="Coated">Coated (Aura etc.)</option><option value="Stabilized">Stabilized</option><option value="Unknown">Unknown</option></select></div>
+      <div class="fg"><label>Condition</label><select id="f-condition"><option value="Excellent">Excellent</option>
+<option value="Very Good">Very Good</option>
+<option value="Good">Good</option>
+<option value="Fair / Visible Wear">Fair / Visible Wear</option>
+<option value="Chipped / Minor Damage">Chipped / Minor Damage</option>
+<option value="Damaged / Repaired">Damaged / Repaired</option>
+<option value="Unknown">Unknown</option></select></div>
     </div>
+
     <div class="form-divider"></div>
-    <div class="form-row full">
-      <div class="fg"><label>Location</label><input type="text" id="f-loc-custom" placeholder="e.g. Windowsill, travel pouch, altar, bedside dish…"></div>
-    </div>
-    <div class="form-row thirds">
-      <div class="fg"><label>Shelf</label><select id="f-shelf"><option value="">Select…</option><option>Shelf 1</option><option>Shelf 2</option><option>Shelf 3</option><option>Shelf 4</option><option>Shelf 5</option><option>Shelf 6</option><option>Cabinet</option><option>Altar</option><option>Bedside</option><option>Office desk</option><option>Other</option></select></div>
-      <div class="fg"><label>Tier / Row</label><select id="f-tier"><option value="">Select…</option><option>Top</option><option>Upper middle</option><option>Lower middle</option><option>Bottom</option><option>Front</option><option>Back</option></select></div>
-      <div class="fg"><label>Position</label><select id="f-pos"><option value="">Select…</option><option>Left</option><option>Left front</option><option>Left back</option><option>Center</option><option>Center front</option><option>Center back</option><option>Right</option><option>Right front</option><option>Right back</option></select></div>
-    </div>
-    <div class="form-row thirds">
-      <div class="fg"><label>Year acquired</label><select id="f-year" onchange="updateDateCascade()"><option value="">Year…</option></select></div>
-      <div class="fg"><label>Month</label><select id="f-month" onchange="updateDateCascade()" disabled><option value="">Month…</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></div>
-      <div class="fg"><label>Day</label><select id="f-day" disabled><option value="">Day…</option></select></div>
-    </div>
+    <div class="sec-label" style="margin-bottom:10px">Acquisition Details</div>
+
     <div class="form-row">
       <div class="fg"><label>Source</label><input type="text" id="f-source" placeholder="e.g. DFW Crystals"></div>
-      <div class="fg"><label>Price paid</label><input type="text" id="f-price" placeholder="e.g. $45"></div>
+      <div class="fg"><label>Price paid</label><input type="text" id="f-price" placeholder="e.g. $25"></div>
     </div>
+
+    <div class="form-row full">
+      <div class="fg"><label>Date acquired</label><input type="date" id="f-acquired"></div>
+    </div>
+
     <div class="form-divider"></div>
+    <div class="sec-label" style="margin-bottom:10px">Location & Status</div>
+
+    <div class="form-row full">
+      <div class="fg"><label>Location</label><input type="text" id="f-loc-custom" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
+    </div>
+
+    <div class="form-divider"></div>
+    <div class="sec-label" style="margin-bottom:10px">Notes & Photos</div>
+
     <div class="form-row full">
       <div class="fg"><label>Personal notes</label><textarea id="f-notes" placeholder="Stories, intentions, what drew you to this piece…"></textarea></div>
     </div>
@@ -1375,7 +1387,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="popup-title">How to use The Lapidary</div>
   <div class="inst-sec"><h3>Encyclopedia</h3><p>Your reference library. Search or use the filter dropdowns — Family, Theme, Color, Chakra. Each filter opens a panel. The <span style="font-size:10px;border:0.5px solid var(--border);border-radius:50%;padding:1px 4px">?</span> buttons on each property field open explanation cards. A gold dot on a card means you own that stone; an outlined ring means it's on your wishlist.</p></div>
   <div class="inst-sec"><h3>Use When…</h3><p>Choose a feeling, then use the secondary filters that appear to narrow down. Each result card shows the stone's energetic role and its specific Use When guidance — so you can quickly find the right stone for your exact need.</p></div>
-  <div class="inst-sec"><h3>My Collection</h3><p>Your personal catalog. Each entry is a specific physical piece. Tap <strong>+ Add piece</strong>. Use the custom location field for flexible placement (windowsill, travel pouch, altar), or use the structured shelf dropdowns. Photos upload directly and save with your data.</p></div>
+  <div class="inst-sec"><h3>My Collection</h3><p>Your personal catalog. Each entry is a specific physical piece. Tap <strong>+ Add piece</strong>. Use the location field for flexible placement (windowsill, travel pouch, altar, shelf). Photos upload directly and save with your data.</p></div>
   <div class="inst-sec"><h3>Add to your phone home screen</h3><p>On iPhone: open in Safari → Share → Add to Home Screen. On Android: browser menu → Add to Home Screen. Opens like a real app.</p></div>
   <div class="inst-sec"><h3>Backing up your data</h3><p>Use <strong>↓ Backup</strong> regularly. JSON is your save file — it holds everything. Use <strong>↑ Restore</strong> to bring it back after clearing your browser or switching devices.</p><div class="warn-note">⚠ Clearing browser site data will erase your collection. Keep a Backup file on your computer.</div></div>
   </div>
@@ -2443,13 +2455,14 @@ function savePiece(){
     nickname:document.getElementById('f-nick').value,
     form:document.getElementById('f-form').value,
     size:document.getElementById('f-size').value,
-    dims:[document.getElementById('f-len')?.value,document.getElementById('f-wid')?.value,document.getElementById('f-dep')?.value].filter(Boolean).join(' × '),
+    dims:'',
     treated:document.getElementById('f-treated').value,
+    condition:document.getElementById('f-condition')?.value||'',
     locCustom:document.getElementById('f-loc-custom').value,
-    shelf:document.getElementById('f-shelf').value,
-    tier:document.getElementById('f-tier').value,
-    pos:document.getElementById('f-pos').value,
-    acquired:getAcquiredStr('f'),
+    shelf:'',
+    tier:'',
+    pos:'',
+    acquired:document.getElementById('f-acquired')?.value||'',
     source:document.getElementById('f-source').value,
     price:document.getElementById('f-price').value,
     notes:document.getElementById('f-notes').value,
@@ -2579,10 +2592,10 @@ function saveEncEntry(){
 // ── EXPORT ──
 function exportJSON(){dl(JSON.stringify({collection,owned,wish,exported:new Date().toISOString()},null,2),'application/json','TheLapidary_backup.json');}
 function exportCSV(){
-  const rows=[['ID','Crystal','Nickname','Combo','Form','Size','Custom Location','Shelf','Tier','Position','Acquired','Source','Price','Notes']];
+  const rows=[['ID','Crystal','Nickname','Combo','Form','Size','Treatment','Condition','Location','Acquired','Source','Price','Notes']];
   collection.forEach(p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    rows.push([p.id,c?.n||'',p.nickname||'',p.isCombo?'Yes':'No',p.form||'',p.size||'',p.locCustom||'',p.shelf||'',p.tier||'',p.pos||'',p.acquired||'',p.source||'',p.price||'',p.notes||'']);
+    rows.push([p.id,c?.n||'',p.nickname||'',p.isCombo?'Yes':'No',p.form||'',p.size||'',p.treated||'',p.condition||'',p.locCustom||'',p.acquired||'',p.source||'',p.price||'',p.notes||'']);
   });
   dl(rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n'),'text/csv','TheLapidary_collection.csv');
 }
