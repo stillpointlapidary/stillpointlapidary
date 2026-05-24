@@ -4291,6 +4291,74 @@ async function _signOut() {
   _renderAuth(null);
 }
 
+// ── SUPABASE COLLECTION WRITE LAYER ──────────────────────────
+
+// Load owned/wish state from Supabase when user logs in
+async function loadSupabaseState() {
+  if (!_currentUser) return;
+  const { data: wData } = await _supa
+    .from('wishlist_items')
+    .select('stone_id')
+    .eq('user_id', _currentUser.id);
+  if (wData) {
+    wData.forEach(r => { wish[r.stone_id] = true; });
+  }
+  const { data: cData } = await _supa
+    .from('collection_items')
+    .select('stone_id')
+    .eq('user_id', _currentUser.id);
+  if (cData) {
+    cData.forEach(r => { owned[r.stone_id] = true; });
+  }
+  encRender();
+  renderCollection();
+}
+
+window.toggleOwned = async function() {
+  if (!currentCrystal) return;
+  const stoneId = currentCrystal.i;
+  if (!_currentUser) { _openAuth('collection'); return; }
+  const isOwned = !!owned[stoneId];
+  if (isOwned) {
+    await _supa.from('collection_items').delete().eq('user_id', _currentUser.id).eq('stone_id', stoneId);
+    delete owned[stoneId];
+  } else {
+    await _supa.from('collection_items').insert({ user_id: _currentUser.id, stone_id: stoneId });
+    owned[stoneId] = true;
+  }
+  localStorage.setItem('lap_owned', JSON.stringify(owned));
+  document.getElementById('tog-owned').classList.toggle('on', !!owned[stoneId]);
+  encRender();
+};
+
+window.toggleWish = async function() {
+  if (!currentCrystal) return;
+  const stoneId = currentCrystal.i;
+  if (!_currentUser) { _openAuth('collection'); return; }
+  const isWished = !!wish[stoneId];
+  if (isWished) {
+    await _supa.from('wishlist_items').delete().eq('user_id', _currentUser.id).eq('stone_id', stoneId);
+    delete wish[stoneId];
+  } else {
+    await _supa.from('wishlist_items').insert({ user_id: _currentUser.id, stone_id: stoneId });
+    wish[stoneId] = true;
+  }
+  localStorage.setItem('lap_wish', JSON.stringify(wish));
+  document.getElementById('tog-wish').classList.toggle('on', !!wish[stoneId]);
+  encRender();
+};
+
+_supa.auth.onAuthStateChange(function(_e, session) {
+  const wasLoggedOut = !_currentUser;
+  _currentUser = session?.user ?? null;
+  _renderAuth(_currentUser);
+  if (_currentUser && wasLoggedOut) { loadSupabaseState(); }
+  if (_currentUser && window._pendingColl) {
+    window._pendingColl = false;
+    var t = document.querySelectorAll('.nav-tab')[2];
+    if (t) switchTab('collection', t);
+  }
+});
 _authInit();
 </script>
 </body>
