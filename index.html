@@ -238,11 +238,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .coll-card-photo{width:100%;height:100%;object-fit:contain;padding:7px;display:block}
 .coll-card-nophoto{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center}
 .coll-card-nophoto span{font-size:10px;color:var(--ink3)}
-.reference-image-badge{position:absolute;left:8px;bottom:8px;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 7px;border-radius:999px;background:rgba(250,248,246,0.86);border:0.5px solid rgba(42,37,32,0.12);color:rgba(60,52,42,0.72);backdrop-filter:blur(4px);pointer-events:none}
+.reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:7.5px;letter-spacing:0.08em;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:rgba(250,248,246,0.82);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.64);backdrop-filter:blur(4px);pointer-events:none}
 .coll-card-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;line-height:1.2;color:var(--ink);margin-bottom:5px}
 .coll-card-meta{font-size:11px;color:var(--ink2r);margin-bottom:3px}
 .coll-card-loc{font-size:11px;color:var(--accent)}
 .empty-coll{text-align:center;padding:3rem 1rem;color:var(--ink2r);font-size:14px}
+
+.coll-detail-grid{display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:start;margin-bottom:1rem}
+.coll-detail-photo-wrap{width:170px;height:170px;border-radius:10px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.coll-detail-photo-wrap img{width:100%;height:100%;object-fit:contain;padding:8px;display:block}
+.coll-detail-nophoto{width:170px;height:170px;border-radius:10px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:11px}
+.coll-detail-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:0.25rem}
+.coll-detail-sub{font-size:12px;color:var(--ink2r);line-height:1.55;margin-bottom:0.85rem}
+.coll-detail-table{width:100%;border-collapse:collapse;margin-top:0.2rem}
+.coll-detail-table td{font-size:12.5px;color:var(--ink);padding:6px 0;border-bottom:0.5px solid var(--border2);vertical-align:top;line-height:1.5}
+.coll-detail-table td:first-child{width:92px;color:var(--ink2r);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;padding-right:10px}
+.coll-ref-box{background:var(--stone2);border-radius:8px;padding:0.85rem 1rem;margin-top:0.85rem;font-size:13px;color:var(--ink2);line-height:1.65}
+.coll-ref-title{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.35rem;font-family:'Jost',sans-serif}
+@media(max-width:600px){.coll-detail-grid{grid-template-columns:1fr}.coll-detail-photo-wrap,.coll-detail-nophoto{width:100%;height:190px}}
+
 
 /* FORMS */
 .form-overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.4);z-index:200;align-items:flex-start;justify-content:center;padding:1rem;overflow-y:auto}
@@ -1310,6 +1324,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   </div>
 </div>
 
+
+<!-- COLLECTION PIECE DETAIL -->
+<div class="popup-overlay" id="coll-detail-overlay" onclick="if(event.target===this)closeCollDetail()">
+  <div class="popup-box" style="width:min(640px,100%)">
+    <button class="popup-close" onclick="closeCollDetail()">✕</button>
+    <div id="coll-detail-content"></div>
+  </div>
+</div>
+
 <!-- PROPERTY HELP POPUPS -->
 <div class="popup-overlay" id="popup-mohs" onclick="if(event.target===this)closePopup('mohs')">
   <div class="popup-box"><button class="popup-close" onclick="closePopup('mohs')">✕</button>
@@ -1544,6 +1567,7 @@ let openPanel=null;
 let activeMoodIdx=null;
 let activeSubFilter=null;
 let collection=JSON.parse(localStorage.getItem('lap_coll')||'[]');
+let editingCollectionIndex=null;
 let owned=JSON.parse(localStorage.getItem('lap_owned')||'{}');
 let wish=JSON.parse(localStorage.getItem('lap_wish')||'{}');
 let pendingPhotos=[];
@@ -2436,10 +2460,123 @@ function renderCollection(){
 }
 
 
+function collPieceName(p,c){
+  return p?.nickname || (p?.isCombo ? 'Combo piece' : (c?.n || 'Unknown piece'));
+}
+function collPieceLocation(p){
+  return [p?.locCustom,p?.shelf,p?.tier,p?.pos].filter(Boolean).join(' · ');
+}
+function collDetailPhotoHtml(p,c,name){
+  const ownPhoto=firstCollectionPhoto(p);
+  if(ownPhoto){
+    return`<div class="coll-detail-photo-wrap"><img src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}"></div>`;
+  }
+  const refPhoto=firstEncyclopediaPhoto(c);
+  if(refPhoto){
+    const refAlt=c&&c.n?`${c.n} reference image`:name;
+    return`<div class="coll-detail-photo-wrap"><img src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}"><span class="reference-image-badge">Reference image</span></div>`;
+  }
+  return`<div class="coll-detail-nophoto">No photo</div>`;
+}
+function collRow(label,value){
+  if(value===undefined||value===null||String(value).trim()==='')return'';
+  return`<tr><td>${escapeAttr(label)}</td><td>${escapeAttr(value)}</td></tr>`;
+}
 function openCollDetail(idx){
   const p=collection[idx];if(!p)return;
   const c=CRYSTALS.find(x=>x.i===p.crystalId);
-  if(c){switchTabByName('encyclopedia');openDetail(c.i);}
+  const name=collPieceName(p,c);
+  const loc=collPieceLocation(p);
+  const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+  const detail=document.getElementById('coll-detail-content');if(!detail)return;
+  const refLine=c?.uw||c?.er||'';
+  detail.innerHTML=`
+    <div class="popup-title" style="margin-bottom:1rem">Collection piece</div>
+    <div class="coll-detail-grid">
+      ${collDetailPhotoHtml(p,c,name)}
+      <div>
+        <div class="coll-detail-name">${escapeAttr(name)}</div>
+        <div class="coll-detail-sub">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div>
+        <table class="coll-detail-table">
+          ${collRow('Form',p.form)}
+          ${collRow('Size',p.size)}
+          ${collRow('Location',loc)}
+          ${collRow('Treatment',p.treated)}
+          ${collRow('Condition',p.condition)}
+          ${collRow('Acquired',p.acquired)}
+          ${collRow('Source',p.source)}
+          ${collRow('Price',p.price)}
+          ${comboNames.length?collRow('Combo',comboNames.join(' · ')):''}
+          ${collRow('Notes',p.notes)}
+        </table>
+      </div>
+    </div>
+    ${c?`<div class="coll-ref-box"><div class="coll-ref-title">Stone reference</div>${escapeAttr(refLine||'Open the encyclopedia entry for full scientific, care, and metaphysical notes.')}</div>`:''}
+    <div class="form-footer" style="justify-content:space-between;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="editCollPiece(${idx})">Edit piece</button>
+      <button class="btn" onclick="deleteCollPiece(${idx})">Delete piece</button>
+      ${c?`<button class="btn btn-accent" onclick="viewEncyclopediaFromColl('${c.i}')">View encyclopedia</button>`:''}
+    </div>`;
+  document.getElementById('coll-detail-overlay').classList.add('open');
+}
+function closeCollDetail(){
+  const el=document.getElementById('coll-detail-overlay');if(el)el.classList.remove('open');
+}
+function viewEncyclopediaFromColl(stoneId){
+  closeCollDetail();
+  switchTabByName('encyclopedia');
+  setTimeout(()=>openDetail(stoneId),0);
+}
+function editCollPiece(idx){
+  const p=collection[idx];if(!p)return;
+  closeCollDetail();
+  openAddForm(p.crystalId||'');
+  editingCollectionIndex=idx;
+  const title=document.querySelector('#add-form-overlay .form-title');if(title)title.textContent='Edit piece';
+  const sub=document.querySelector('#add-form-overlay .form-sub');if(sub)sub.textContent='Update this specific physical piece in your collection.';
+  const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');if(saveBtn)saveBtn.textContent='Save changes';
+  setFormVal('f-nick',p.nickname||'');
+  setFormVal('f-form',p.form||'');
+  setFormVal('f-size',p.size||'');
+  setFormVal('f-treated',p.treated||'');
+  setFormVal('f-condition',p.condition||'');
+  setFormVal('f-source',p.source||'');
+  setFormVal('f-price',p.price||'');
+  setFormVal('f-acquired',p.acquired||'');
+  setFormVal('f-loc-custom',p.locCustom||'');
+  setFormVal('f-notes',p.notes||'');
+  const combo=document.getElementById('f-combo');
+  if(combo){combo.checked=!!p.isCombo;toggleCombo();}
+  const rows=document.getElementById('combo-rows');
+  if(rows&&p.isCombo){
+    const ids=(p.comboCrystals||[]).slice(0,3);
+    rows.innerHTML=ids.length?ids.map(()=>'<div class="combo-row"><select class="csel"><option value="">Select crystal…</option></select><button class="rm-combo" onclick="rmCombo(this)">×</button></div>').join(''):'<div class="combo-row"><select class="csel"><option value="">Select crystal…</option></select><button class="rm-combo" onclick="rmCombo(this)">×</button></div>';
+    populateCombos();
+    Array.from(rows.querySelectorAll('.csel')).forEach((sel,i)=>{sel.value=ids[i]||'';});
+  }
+}
+function setFormVal(id,val){const el=document.getElementById(id);if(el)el.value=val;}
+async function deleteCollPiece(idx){
+  const p=collection[idx];if(!p)return;
+  const c=CRYSTALS.find(x=>x.i===p.crystalId);
+  const name=collPieceName(p,c);
+  if(!confirm(`Delete ${name} from your collection?`))return;
+  try{
+    if(_currentUser&&p.id){
+      const { error } = await _supa.from('collection_items').delete().eq('user_id',_currentUser.id).eq('id',p.id);
+      if(error)throw error;
+      closeCollDetail();
+      await loadSupabaseState();
+    }else{
+      collection.splice(idx,1);
+      localStorage.setItem('lap_coll',JSON.stringify(collection));
+      localStorage.setItem('lap_last_saved',new Date().toISOString());
+      closeCollDetail();renderCollection();encRender();updateLastSaved();
+    }
+  }catch(err){
+    console.error('Delete piece failed',err);
+    alert('Could not delete piece: '+(err.message||err));
+  }
 }
 
 // ── DATE CASCADE ──
@@ -2472,6 +2609,10 @@ function getAcquiredStr(prefix){
 
 // ── ADD FORM ──
 function openAddForm(preselect){
+  editingCollectionIndex=null;
+  const title=document.querySelector('#add-form-overlay .form-title');if(title)title.textContent='Add a piece';
+  const sub=document.querySelector('#add-form-overlay .form-sub');if(sub)sub.textContent='Each entry is a specific physical piece in your collection.';
+  const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');if(saveBtn)saveBtn.textContent='Save piece';
   // Init combobox
   const ci2=document.getElementById('f-crystal-input');const cv2=document.getElementById('f-crystal-val');const cs3=document.getElementById('f-crystal-selected');
   if(preselect){const pc=CRYSTALS.find(x=>x.i===preselect);if(ci2&&pc)ci2.value=pc.n;if(cv2)cv2.value=preselect||'';if(cs3)cs3.textContent=preselect||'';}else{if(ci2)ci2.value='';if(cv2)cv2.value='';if(cs3)cs3.textContent='';}
@@ -2481,6 +2622,10 @@ function openAddForm(preselect){
   document.getElementById('add-form-overlay').classList.add('open');
 }
 function closeAddForm(){
+  editingCollectionIndex=null;
+  const title=document.querySelector('#add-form-overlay .form-title');if(title)title.textContent='Add a piece';
+  const sub=document.querySelector('#add-form-overlay .form-sub');if(sub)sub.textContent='Each entry is a specific physical piece in your collection.';
+  const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');if(saveBtn)saveBtn.textContent='Save piece';
   document.getElementById('add-form-overlay').classList.remove('open');
   document.getElementById('add-form-overlay').querySelectorAll('input:not([type=file]),select,textarea').forEach(el=>el.value='');
   document.querySelectorAll('#add-form-overlay input[type=checkbox]').forEach(el=>el.checked=false);
@@ -2555,7 +2700,14 @@ function savePiece(){
     notes:document.getElementById('f-notes').value,
     photos:[...pendingPhotos],
   };
-  collection.push(piece);
+  if(editingCollectionIndex!==null&&collection[editingCollectionIndex]){
+    const existing=collection[editingCollectionIndex];
+    piece.id=existing.id;
+    piece.photos=[...(existing.photos||[]),...pendingPhotos].slice(0,3);
+    collection[editingCollectionIndex]=piece;
+  }else{
+    collection.push(piece);
+  }
   localStorage.setItem('lap_coll',JSON.stringify(collection));
   localStorage.setItem('lap_last_saved',new Date().toISOString());
   if(crystalId){owned[crystalId]=true;localStorage.setItem('lap_owned',JSON.stringify(owned));}
@@ -4573,13 +4725,25 @@ window.savePiece = async function(){
   const oldText=saveBtn?saveBtn.textContent:'';
   if(saveBtn){ saveBtn.disabled=true; saveBtn.textContent='Saving…'; }
   try{
-    const { data, error } = await _supa
-      .from('collection_items')
-      .insert(payload)
-      .select('id')
-      .single();
-    if(error)throw error;
-    if(pendingPhotos.length){ await _uploadCollectionPhotos(data.id,pendingPhotos); }
+    const editingPiece=(editingCollectionIndex!==null)?collection[editingCollectionIndex]:null;
+    if(editingPiece&&editingPiece.id){
+      const { error } = await _supa
+        .from('collection_items')
+        .update(payload)
+        .eq('user_id', _currentUser.id)
+        .eq('id', editingPiece.id);
+      if(error)throw error;
+      const remaining=Math.max(0,3-((editingPiece.photos||[]).length));
+      if(pendingPhotos.length&&remaining>0){ await _uploadCollectionPhotos(editingPiece.id,pendingPhotos.slice(0,remaining)); }
+    }else{
+      const { data, error } = await _supa
+        .from('collection_items')
+        .insert(payload)
+        .select('id')
+        .single();
+      if(error)throw error;
+      if(pendingPhotos.length){ await _uploadCollectionPhotos(data.id,pendingPhotos); }
+    }
     closeAddForm();
     await loadSupabaseState();
     updateLastSaved();
