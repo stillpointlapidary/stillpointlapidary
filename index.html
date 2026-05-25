@@ -435,6 +435,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .photo-lightbox{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.85);z-index:200;align-items:center;justify-content:center;cursor:zoom-out}
 .photo-lightbox.open{display:flex}
 .photo-lightbox img{max-width:min(520px,90vw);max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.4);cursor:default}
+.photo-lightbox-label{position:absolute;left:50%;bottom:1.5rem;transform:translateX(-50%);max-width:min(520px,90vw);padding:6px 12px;border-radius:999px;background:rgba(42,37,32,0.58);color:var(--white);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-align:center;pointer-events:none;backdrop-filter:blur(4px)}
 .photo-lightbox-close{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:rgba(250,248,246,0.15);border:0.5px solid rgba(250,248,246,0.25);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
 .photo-lightbox-close:hover{background:rgba(250,248,246,0.25)}
 .lightbox-nav{display:none;position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;border:none;border-radius:999px;background:rgba(250,248,246,0.14);color:var(--white);font-size:34px;line-height:1;cursor:pointer;align-items:center;justify-content:center;transition:background 0.15s}
@@ -769,7 +770,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* Family cards */
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
-.fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white)}
+.fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:all 0.15s}
+.fam-card:hover{border-color:var(--accent2);transform:translateY(-1px);background:var(--stone2)}
+.c101-backtop-wrap{display:flex;justify-content:flex-end;margin:2rem 0 0}.c101-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:'Jost',sans-serif}.c101-backtop:hover{border-color:var(--accent2);color:var(--accent);background:var(--white)}
 .fam-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:3px}
 .fam-count{font-size:11px;color:var(--accent);letter-spacing:0.04em;margin-bottom:6px}
 .fam-desc{font-size:12px;color:var(--ink2);line-height:1.6}
@@ -1176,6 +1179,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <button class="photo-lightbox-close" onclick="event.stopPropagation();closePhotoLightbox()">✕</button>
   <button class="lightbox-nav prev" id="photo-lightbox-prev" onclick="event.stopPropagation();photoLightboxNav(-1)" aria-label="Previous enlarged photo">&#8249;</button>
   <img id="photo-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <div class="photo-lightbox-label" id="photo-lightbox-label"></div>
   <button class="lightbox-nav next" id="photo-lightbox-next" onclick="event.stopPropagation();photoLightboxNav(1)" aria-label="Next enlarged photo">&#8250;</button>
 </div>
 <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
@@ -2454,10 +2458,16 @@ function openPhotoLightbox(src,alt){
 }
 function setPhotoLightboxImage(){
   const img=document.getElementById('photo-lightbox-img');
+  const label=document.getElementById('photo-lightbox-label');
   if(!img)return;
   const src=photoLightboxSources[photoLightboxIndex];
   img.src=src;
   img.alt=photoLightboxAlt||'Crystal reference photo';
+  if(label){
+    const total=photoLightboxSources&&photoLightboxSources.length>1?' '+(photoLightboxIndex+1)+'/'+photoLightboxSources.length:'';
+    label.textContent=(photoLightboxAlt||'Crystal reference photo')+total;
+    label.style.display=photoLightboxAlt?'block':'none';
+  }
 }
 function photoLightboxNav(dir){
   if(!photoLightboxSources || photoLightboxSources.length<2)return;
@@ -2467,6 +2477,8 @@ function photoLightboxNav(dir){
 function closePhotoLightbox(){
   const lb=document.getElementById('photo-lightbox');
   if(lb){lb.classList.remove('open');lb.classList.remove('has-nav');}
+  const label=document.getElementById('photo-lightbox-label');
+  if(label)label.textContent='';
   document.body.style.overflow='';
 }
 function openCollectionPhotoLightbox(idx,startIndex,event){
@@ -3959,11 +3971,25 @@ function init101(){
       <div class="fam-desc">${desc}</div>
       ${energy?`<div class="fam-note">Energy: ${energy}</div>`:''}
       ${care?`<div class="fam-note">Care: ${care}</div>`:''}`;
+    d.onclick=()=>jumpToFamily(name);
+    d.title='View '+name+' stones in the encyclopedia';
     fc.appendChild(d);
   });
 }
 
+function ensure101BackTopButtons(){
+  document.querySelectorAll('.c101-section').forEach(section=>{
+    if(section.querySelector('.c101-backtop-wrap'))return;
+    section.insertAdjacentHTML('beforeend','<div class="c101-backtop-wrap"><button class="c101-backtop" onclick="scrollTo101Top();return false;">Back to top</button></div>');
+  });
+}
+function scrollTo101Top(){
+  const nav=document.getElementById('c101-nav');
+  const y=nav?nav.getBoundingClientRect().top+window.scrollY-96:0;
+  try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
+}
 function show101(sec,btn){
+  ensure101BackTopButtons();
   document.querySelectorAll('.c101-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.c101-pill').forEach(p=>p.classList.remove('active'));
   const section=document.getElementById('s101-'+sec);
@@ -3981,17 +4007,41 @@ function jumpToStone(name){
   },100);
 }
 
+function resetEncyclopediaFiltersForJump(){
+  filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all'};
+  ['fam','theme','color','chakra','mohs','formation','material'].forEach(k=>{
+    document.querySelectorAll('#pills-'+k+' .fpill').forEach(p=>p.classList.toggle('active',p.textContent.trim()==='All'));
+    updateBtn('fbtn-'+k,'fval-'+k,'all');
+  });
+  const searchEl=document.getElementById('enc-search');
+  if(searchEl)searchEl.value='';
+}
+function activateEncyclopediaFilter(key,val){
+  filters[key]=val;
+  document.querySelectorAll('#pills-'+key+' .fpill').forEach(p=>p.classList.toggle('active',p.textContent.trim()===val));
+  updateBtn('fbtn-'+key,'fval-'+key,val);
+  closeAllPanels();
+  encRender();
+  setTimeout(scrollToEncyclopediaResults,60);
+}
+function scrollToEncyclopediaResults(){
+  const el=document.getElementById('crystal-grid')||document.getElementById('enc-count')||document.getElementById('enc-search');
+  if(!el)return;
+  const y=el.getBoundingClientRect().top+window.scrollY-145;
+  try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
+}
 function jumpToChakra(chakra){
   switchTab('encyclopedia', document.querySelector('[onclick*=encyclopedia]'));
   setTimeout(()=>{
-    const searchEl=document.getElementById('enc-search');
-    if(searchEl)searchEl.value='';
-    filters.chakra=chakra;
-    document.querySelectorAll('#pills-chakra .fpill').forEach(p=>p.classList.toggle('active',p.textContent.trim()===chakra));
-    updateBtn('fbtn-chakra','fval-chakra',chakra);
-    closeAllPanels();
-    encRender();
-    scrollPageTop();
+    resetEncyclopediaFiltersForJump();
+    activateEncyclopediaFilter('chakra',chakra);
+  },100);
+}
+function jumpToFamily(family){
+  switchTab('encyclopedia', document.querySelector('[onclick*=encyclopedia]'));
+  setTimeout(()=>{
+    resetEncyclopediaFiltersForJump();
+    activateEncyclopediaFilter('fam',family);
   },100);
 }
 
@@ -4639,7 +4689,7 @@ function printGridModal(){
   cleaned.querySelectorAll('button,.grid-modal-actions,.grid-modal-close').forEach(el=>el.remove());
   printWin.document.write(`<!doctype html><html><head><title>Crystal Grid</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>body{font-family:Jost,sans-serif;color:#2a2520;padding:28px;background:#fff} .grid-modal{max-width:760px;margin:0 auto} svg{max-height:320px} table{page-break-inside:avoid} @page{margin:0.5in}</style>
+    <style>@page{size:letter portrait;margin:0.35in} *{box-sizing:border-box} body{font-family:Jost,sans-serif;color:#2a2520;padding:0;background:#fff;font-size:11px;line-height:1.35} .grid-modal{width:7.8in;max-height:10.25in;margin:0 auto;overflow:hidden} .grid-modal>div{margin-bottom:0.45rem!important} svg{max-height:2.25in!important} table{page-break-inside:avoid;font-size:10.5px} td{padding:4px 6px!important} p{margin:0!important;line-height:1.35!important} [style*='font-size:32px']{font-size:24px!important;margin-bottom:0.25rem!important} [style*='grid-template-columns:1fr 1fr']{gap:0.5rem!important} [style*='padding:1rem']{padding:0.45rem!important}</style>
     </head><body>${cleaned.outerHTML}</body></html>`);
   printWin.document.close();
   printWin.focus();
