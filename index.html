@@ -238,7 +238,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .coll-card-photo{width:100%;height:100%;object-fit:contain;padding:7px;display:block}
 .coll-card-nophoto{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center}
 .coll-card-nophoto span{font-size:10px;color:var(--ink3)}
-.reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:6.5px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border-radius:999px;background:rgba(250,248,246,0.78);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.58);backdrop-filter:blur(4px);pointer-events:none}
+.reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:6px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border-radius:999px;background:rgba(250,248,246,0.78);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.58);backdrop-filter:blur(4px);pointer-events:none}
 .photo-preview-item{position:relative;width:70px;height:70px}
 .photo-preview-item.primary{outline:1.5px solid var(--accent);outline-offset:2px;border-radius:6px}
 .photo-preview-primary{position:absolute;left:3px;bottom:3px;font-size:8px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 4px;border-radius:999px;background:rgba(250,248,246,0.88);border:0.5px solid rgba(42,37,32,0.10);color:var(--accent);cursor:pointer;font-family:'Jost',sans-serif}
@@ -604,9 +604,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 </div><div class="coll-header">
     <div class="coll-title">My Pieces</div>
     <div class="coll-btns">
-      <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add collection pieces</button>
       <button class="btn btn-sm" onclick="exportCollectionCSV()">↓ Collection CSV</button>
       <button class="btn btn-sm" onclick="exportWishlistCSV()">↓ Wishlist CSV</button>
+      <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add collection pieces</button>
       <button class="btn btn-sm btn-accent" onclick="openAddForm()">+ Add piece</button>
     </div>
   </div>
@@ -1983,6 +1983,14 @@ function collectionCardPhotoHtml(p,c,name){
   }
   return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
 }
+function wishlistCardPhotoHtml(c){
+  const refPhoto=firstEncyclopediaPhoto(c);
+  if(refPhoto){
+    const refAlt=c&&c.n?`${c.n} reference image`:'Wishlist reference image';
+    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"><span class="reference-image-badge">Reference image</span></div>`;
+  }
+  return`<div class="coll-card-nophoto" style="background:var(--stone2)"><span style="font-size:18px">♡</span></div>`;
+}
 
 function collectionPieceSignature(p){
   if(!p)return'';
@@ -2450,7 +2458,7 @@ function renderCollection(){
     }
     wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>{
       return`<div class="coll-card" onclick="switchTabByName('encyclopedia');openDetail('${c.i}')">
-        <div class="coll-card-nophoto" style="background:var(--stone2)"><span style="font-size:18px">♡</span></div>
+        ${wishlistCardPhotoHtml(c)}
         <div class="coll-card-name">${c.n}</div>
         <div class="coll-card-meta">${c.er||''}</div>
         <div class="coll-card-loc" style="color:var(--accent2)">On wishlist · tap to view</div>
@@ -2665,6 +2673,8 @@ function openAddForm(preselect){
   populateCombos();pendingPhotos=[];existingEditPhotos=[];editPrimaryPhotoKey=null;
   const pr=document.getElementById('photo-preview-row');if(pr)pr.innerHTML='';
   document.getElementById('add-form-overlay').classList.add('open');
+  scrollElementTop('add-form-overlay');
+  scrollPageTop();
 }
 function closeAddForm(){
   editingCollectionIndex=null;
@@ -2800,6 +2810,7 @@ function savePiece(){
   localStorage.setItem('lap_last_saved',new Date().toISOString());
   if(crystalId){owned[crystalId]=true;localStorage.setItem('lap_owned',JSON.stringify(owned));}
   closeAddForm();renderCollection();encRender();
+  scrollPageTop();
   updateLastSaved();
 }
 
@@ -2874,7 +2885,7 @@ function saveBatch(){
   localStorage.setItem('lap_coll',JSON.stringify(collection));
   localStorage.setItem('lap_owned',JSON.stringify(owned));
   localStorage.setItem('lap_last_saved',new Date().toISOString());
-  closeBatchForm();renderCollection();encRender();
+  closeBatchForm();renderCollection();encRender();scrollPageTop();
   alert(`Saved ${saved} piece${saved!==1?'s':''} to your collection.`);
 }
 
@@ -2917,6 +2928,15 @@ function saveEncEntry(){
 }
 
 // ── EXPORT ──
+function normalizePhotoList(piece){
+  const photos=(piece&&Array.isArray(piece.photos))?piece.photos:[];
+  return photos.map(photo=>{
+    if(!photo)return '';
+    if(typeof photo==='string')return photo;
+    return photo.url||photo.signedUrl||photo.preview||photo.src||photo.path||photo.name||'';
+  }).filter(Boolean);
+}
+
 function exportJSON(){dl(JSON.stringify({collection,owned,wish,exported:new Date().toISOString()},null,2),'application/json','TheLapidary_backup.json');}
 function csvCell(value){return `"${String(value??'').replace(/"/g,'""')}"`;}
 function downloadCSV(rows,filename){
@@ -2998,6 +3018,14 @@ function importJSON(input){
 }
 function dl(content,type,filename){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=filename;a.click();}
 
+function scrollPageTop(){
+  try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
+}
+function scrollElementTop(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollTop=0;
+}
+
 // ── TABS ──
 function switchTab(name,btn){
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
@@ -3006,12 +3034,13 @@ function switchTab(name,btn){
   if(btn)btn.classList.add('active');
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
-  if(name==='collection'){collQuickFilter='all';document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));const tc=document.getElementById('stat-cell-total');if(tc)tc.classList.add('active-stat');renderCollection();}
+  if(name==='collection'){scrollPageTop();collQuickFilter='all';document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));const tc=document.getElementById('stat-cell-total');if(tc)tc.classList.add('active-stat');renderCollection();}
 }
 function switchTabByName(name){
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(name.substring(0,3))));
   document.getElementById('tab-'+name).style.display='block';
+  if(name==='collection'){scrollPageTop();renderCollection();}
 }
 
 // ── POPUPS ──
