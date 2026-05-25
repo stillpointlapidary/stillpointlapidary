@@ -6044,7 +6044,38 @@ _authInit();
       }).join('')+'</div>';
       return;
     }
-
+    
+if(collQuickFilter==='__family__'){
+  const fam=collActiveFamilyName;
+  const items=displayCollection.filter(p=>{
+    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    return (c?.fam===fam||c?.sp===fam)&&passesCollPieceFilters(p);
+  });
+  if(!items.length){
+    wrap.innerHTML=`<div class="empty-coll">No pieces found in ${fam}.</div>`;
+    return;
+  }
+  wrap.innerHTML=
+    `<div id="fam-detail-banner" style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2)">
+      <button onclick="setCollQuickFilter('families')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All Families</button>
+      <span style="color:var(--ink3)">·</span>
+      <span>${escapeAttr(fam)}</span>
+      <span style="color:var(--ink3);margin-left:4px">${items.length} ${items.length===1?'piece':'pieces'}</span>
+    </div>
+    <div class="coll-grid">`+
+    items.map(p=>{
+      const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
+      const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
+      const loc=locParts.slice(0,2).join(' · ');
+      const ri=collection.indexOf(p);
+      const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
+      return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},${jsArg(fam)})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+    }).join('')+
+    `</div>`;
+  return;
+}
+    
     const items=displayCollection.filter(p=>{
       const c=CRYSTALS.find(x=>x.i===p.crystalId);
       return passesCollStoneFilters(c)&&passesCollPieceFilters(p);
