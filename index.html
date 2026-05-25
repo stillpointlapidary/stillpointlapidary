@@ -1795,8 +1795,13 @@ function init(){
   renderMoodGrid('All');
   buildYearSelect('f-year');
   encRender();
-  renderCollection();
   const rememberedTab=(()=>{try{return localStorage.getItem('spl_active_tab')||'encyclopedia';}catch(e){return'encyclopedia';}})();
+  if(rememberedTab==='collection'){
+    const wrap=document.getElementById('coll-wrap');
+    if(wrap)wrap.innerHTML='<div class="empty-coll">Loading your collection…</div>';
+  }else{
+    renderCollection();
+  }
   if(['encyclopedia','mood','collection','identify','101'].includes(rememberedTab)&&rememberedTab!=='encyclopedia'){
     switchTabByName(rememberedTab);
   }
@@ -1862,7 +1867,7 @@ function buildCollColorPanel(){
   const wrap=document.getElementById('cpills-ccolor');
   if(!wrap)return;
   wrap.innerHTML=`<button class="fpill active" onclick="setCollFilter('ccolor','all',this)">All</button>`+
-    COLOR_OPTS.map(c=>`<button class="fpill" onclick="setCollFilter('ccolor','${c.val}',this)"><span class="cswatch" style="background:${c.hex}"></span>${c.val}</button>`).join('');
+    COLOR_OPTS.map(c=>`<button class="fpill" onclick="setCollFilter('ccolor',${jsArg(c.val)},this)"><span class="cswatch" style="background:${c.hex}"></span>${escapeAttr(c.val)}</button>`).join('');
 }
 function collectionStoneMatchesMohs(c,val){
   if(val==='all')return true;
@@ -1909,21 +1914,21 @@ function buildCollPanels(){
   const cm=document.getElementById('cpills-cmohs');
   const cfo=document.getElementById('cpills-cformation');
   const cmt=document.getElementById('cpills-cmaterial');
-  if(cc)cc.innerHTML=`<button class="fpill active" onclick="setCollFilter('cfam','all',this)">All</button>`+cfams.map(f=>`<button class="fpill" onclick="setCollFilter('cfam','${f}',this)">${f}</button>`).join('');
-  if(ct)ct.innerHTML=`<button class="fpill active" onclick="setCollFilter('ctheme','all',this)">All</button>`+THEME_OPTS.map(t=>`<button class="fpill" onclick="setCollFilter('ctheme','${t}',this)">${t}</button>`).join('');
+  if(cc)cc.innerHTML=`<button class="fpill active" onclick="setCollFilter('cfam','all',this)">All</button>`+cfams.map(f=>`<button class="fpill" onclick="setCollFilter('cfam',${jsArg(f)},this)">${escapeAttr(f)}</button>`).join('');
+  if(ct)ct.innerHTML=`<button class="fpill active" onclick="setCollFilter('ctheme','all',this)">All</button>`+THEME_OPTS.map(t=>`<button class="fpill" onclick="setCollFilter('ctheme',${jsArg(t)},this)">${escapeAttr(t)}</button>`).join('');
   buildCollColorPanel();
-  if(cch)cch.innerHTML=`<button class="fpill active" onclick="setCollFilter('cchakra','all',this)">All</button>`+CHAKRA_OPTS.map(ch=>`<button class="fpill" onclick="setCollFilter('cchakra','${ch}',this)">${ch}</button>`).join('');
+  if(cch)cch.innerHTML=`<button class="fpill active" onclick="setCollFilter('cchakra','all',this)">All</button>`+CHAKRA_OPTS.map(ch=>`<button class="fpill" onclick="setCollFilter('cchakra',${jsArg(ch)},this)">${escapeAttr(ch)}</button>`).join('');
   if(cm)cm.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmohs','all',this)">All</button>`+[
     {val:'soft',label:'Soft (1–4)'},{val:'medium',label:'Medium (5–6)'},{val:'hard',label:'Hard (7+)'}
   ].map(x=>`<button class="fpill" onclick="setCollFilter('cmohs','${x.val}',this)">${x.label}</button>`).join('');
-  if(cfo)cfo.innerHTML=`<button class="fpill active" onclick="setCollFilter('cformation','all',this)">All</button>`+formations.map(f=>`<button class="fpill" onclick="setCollFilter('cformation','${f}',this)">${f}</button>`).join('');
-  if(cmt)cmt.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmaterial','all',this)">All</button>`+materials.map(m=>`<button class="fpill" onclick="setCollFilter('cmaterial','${m}',this)">${m}</button>`).join('');
-  if(cf)cf.innerHTML=`<button class="fpill active" onclick="setCollFilter('form','all',this)">All</button>`+forms.map(f=>`<button class="fpill" onclick="setCollFilter('form','${f}',this)">${f}</button>`).join('');
-  if(cs)cs.innerHTML=`<button class="fpill active" onclick="setCollFilter('size','all',this)">All</button>`+sizes.map(sz=>`<button class="fpill" onclick="setCollFilter('size','${sz}',this)">${sz}</button>`).join('');
+  if(cfo)cfo.innerHTML=`<button class="fpill active" onclick="setCollFilter('cformation','all',this)">All</button>`+formations.map(f=>`<button class="fpill" onclick="setCollFilter('cformation',${jsArg(f)},this)">${escapeAttr(f)}</button>`).join('');
+  if(cmt)cmt.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmaterial','all',this)">All</button>`+materials.map(m=>`<button class="fpill" onclick="setCollFilter('cmaterial',${jsArg(m)},this)">${escapeAttr(m)}</button>`).join('');
+  if(cf)cf.innerHTML=`<button class="fpill active" onclick="setCollFilter('form','all',this)">All</button>`+forms.map(f=>`<button class="fpill" onclick="setCollFilter('form',${jsArg(f)},this)">${escapeAttr(f)}</button>`).join('');
+  if(cs)cs.innerHTML=`<button class="fpill active" onclick="setCollFilter('size','all',this)">All</button>`+sizes.map(sz=>`<button class="fpill" onclick="setCollFilter('size',${jsArg(sz)},this)">${escapeAttr(sz)}</button>`).join('');
   const usedShelves=[...new Set(collection.map(p=>p.shelf||p.locCustom||'').filter(Boolean))].sort();
   const shelfOpts=usedShelves.length?usedShelves:['Shelf 1','Shelf 2','Shelf 3','Shelf 4','Altar','Bedside','Cabinet','Office desk'];
   const csh=document.getElementById('cpills-cshelf');
-  if(csh)csh.innerHTML=`<button class="fpill active" onclick="setCollFilter('cshelf','all',this)">All</button>`+shelfOpts.map(sh=>`<button class="fpill" onclick="setCollFilter('cshelf','${sh}',this)">${sh}</button>`).join('');
+  if(csh)csh.innerHTML=`<button class="fpill active" onclick="setCollFilter('cshelf','all',this)">All</button>`+shelfOpts.map(sh=>`<button class="fpill" onclick="setCollFilter('cshelf',${jsArg(sh)},this)">${escapeAttr(sh)}</button>`).join('');
   ['cfam','ctheme','ccolor','cchakra','cmohs','cformation','cmaterial','form','size','cshelf'].forEach(k=>{
     const val=collFilters[k]||'all';
     document.querySelectorAll('#cpills-'+k+' .fpill').forEach(p=>p.classList.toggle('active', p.textContent.trim()===String(val) || (val==='all'&&p.textContent.trim()==='All')));
@@ -2071,6 +2076,7 @@ function noPhotoZoneHtml(c){
   return`<div class="card-img-zone no-photo"><span class="no-photo-orb${extra}" style="--orb:${orb};background:${orb}"></span></div>`;
 }
 
+function jsArg(v){return JSON.stringify(String(v==null?'':v));}
 function escapeAttr(v){
   return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
@@ -2607,6 +2613,9 @@ function renderMoodStones(moodIdx,subFilter){
   const matches=getMoodMatches(moodIdx,subFilter);
   const grid=document.getElementById('mood-stone-grid');
   const countEl=document.getElementById('mood-results-count');
+  const selectedView=document.getElementById('mood-selected-view');
+  if(selectedView)selectedView.style.display='block';
+  if(grid)grid.style.display='grid';
   const m=MOOD_DATA[moodIdx];
   if(countEl)countEl.textContent=matches.length+' stones'+(subFilter?' · '+subFilter:'');
   if(!grid)return;
@@ -2623,11 +2632,11 @@ function renderMoodStones(moodIdx,subFilter){
   }
   grid.innerHTML=matches.map(c=>{
     const tags=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean);
-    const tagHtml=tags.map(t=>`<span class="msc-tag">${t}</span>`).join('');
+    const tagHtml=tags.map(t=>`<span class="msc-tag">${escapeAttr(t)}</span>`).join('');
     let uw=c.uw||'';
     uw=uw.replace(/^use when /i,'');
     uw=uw.charAt(0).toUpperCase()+uw.slice(1);
-    return`<div class="mood-stone-card" onclick="openDetail('${c.i}')"><div class="msc-name">${c.n}</div><div class="msc-tags">${tagHtml}</div><div class="msc-uw">${uw}</div></div>`;
+    return`<div class="mood-stone-card" onclick="openDetail(${jsArg(c.i)})"><div class="msc-id">${escapeAttr(c.i||'')}</div><div class="msc-name">${escapeAttr(c.n||'')}</div><div class="msc-tags">${tagHtml}</div><div class="msc-uw">${escapeAttr(uw)}</div></div>`;
   }).join('');
 }
 
@@ -5227,6 +5236,12 @@ function _rowToCollectionPiece(row,photos){
 }
 async function loadSupabaseState() {
   if (!_currentUser) return;
+
+  const activeTab=document.querySelector('main>section[style*="block"]')?.id || '';
+  const wrap=document.getElementById('coll-wrap');
+  if(activeTab==='tab-collection' && wrap){
+    wrap.innerHTML='<div class="empty-coll">Refreshing your collection…</div>';
+  }
 
   wish = {};
   owned = {};
