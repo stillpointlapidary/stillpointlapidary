@@ -772,7 +772,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
 .fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:all 0.15s}
 .fam-card:hover{border-color:var(--accent2);transform:translateY(-1px);background:var(--stone2)}
-.c101-backtop-wrap{display:flex;justify-content:flex-end;margin:2rem 0 0}.c101-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:'Jost',sans-serif}.c101-backtop:hover{border-color:var(--accent2);color:var(--accent);background:var(--white)}
+.c101-backtop-wrap{display:flex;justify-content:center;margin:2rem 0 0}.c101-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:'Jost',sans-serif}.c101-backtop:hover{border-color:var(--accent2);color:var(--accent);background:var(--white)}
 .fam-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:3px}
 .fam-count{font-size:11px;color:var(--accent);letter-spacing:0.04em;margin-bottom:6px}
 .fam-desc{font-size:12px;color:var(--ink2);line-height:1.6}
@@ -2428,6 +2428,14 @@ function closeDrawer(){
     detailReturnContext=null;
     switchTabByName('collection');
     setTimeout(()=>setCollQuickFilter('wish'),0);
+  } else if(detailReturnContext&&detailReturnContext.type==='grid'){
+    const ctx=detailReturnContext;
+    detailReturnContext=null;
+    switchTabByName('101');
+    setTimeout(()=>{
+      show101('grids');
+      if(ctx.gridId) openGridModal(ctx.gridId);
+    },0);
   }
 }
 let photoLightboxSources=[];
@@ -2464,8 +2472,7 @@ function setPhotoLightboxImage(){
   img.src=src;
   img.alt=photoLightboxAlt||'Crystal reference photo';
   if(label){
-    const total=photoLightboxSources&&photoLightboxSources.length>1?' '+(photoLightboxIndex+1)+'/'+photoLightboxSources.length:'';
-    label.textContent=(photoLightboxAlt||'Crystal reference photo')+total;
+    label.textContent=photoLightboxAlt||'Crystal reference photo';
     label.style.display=photoLightboxAlt?'block':'none';
   }
 }
@@ -2492,7 +2499,7 @@ function openCollectionPhotoLightbox(idx,startIndex,event){
   if(!lb)return;
   photoLightboxSources=sources;
   photoLightboxIndex=Math.max(0,Math.min(startIndex||0,sources.length-1));
-  photoLightboxAlt=collPieceName(p,c)||'Collection photo';
+  photoLightboxAlt=(c&&c.n)||collPieceName(p,c)||'Collection photo';
   setPhotoLightboxImage();
   lb.classList.toggle('has-nav',photoLightboxSources.length>1);
   lb.classList.add('open');
@@ -4018,11 +4025,12 @@ function resetEncyclopediaFiltersForJump(){
 }
 function activateEncyclopediaFilter(key,val){
   filters[key]=val;
-  document.querySelectorAll('#pills-'+key+' .fpill').forEach(p=>p.classList.toggle('active',p.textContent.trim()===val));
+  const pills=document.querySelectorAll('#pills-'+key+' .fpill');
+  pills.forEach(p=>p.classList.toggle('active',p.textContent.trim()===val));
   updateBtn('fbtn-'+key,'fval-'+key,val);
   closeAllPanels();
   encRender();
-  setTimeout(scrollToEncyclopediaResults,60);
+  setTimeout(scrollToEncyclopediaResults,120);
 }
 function scrollToEncyclopediaResults(){
   const el=document.getElementById('crystal-grid')||document.getElementById('enc-count')||document.getElementById('enc-search');
@@ -4182,7 +4190,7 @@ function renderFamilies(tier){
   if(!window.FAM_COUNTS){window.FAM_COUNTS={};CRYSTALS.forEach(c=>{if(c.fam)window.FAM_COUNTS[c.fam]=(window.FAM_COUNTS[c.fam]||0)+1;});}
   const filtered=C101_FAM_DATA.filter(f=>(tier==='all'||f.tier===tier)&&(!q||f.n.toLowerCase().includes(q.toLowerCase())||f.desc.toLowerCase().includes(q.toLowerCase())));
   if(!filtered.length){fc.innerHTML='<div style="color:var(--ink3);font-size:13px;grid-column:1/-1;padding:1rem">No families match.</div>';return;}
-  fc.innerHTML=filtered.map(f=>{const cnt=window.FAM_COUNTS[f.n]||0;return`<div class="fam-card"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stones in encyclopedia</div>`:''}<div class="fam-desc">${f.desc}</div>${f.energy?`<div class="fam-note"><strong style="color:var(--ink2)">Energy:</strong> ${f.energy}</div>`:''}<div class="fam-note"><strong style="color:var(--ink2)">Care:</strong> ${f.care}</div></div>`;}).join('');
+  fc.innerHTML=filtered.map(f=>{const cnt=window.FAM_COUNTS[f.n]||0;const fArg=jsArg(f.n);return`<div class="fam-card" onclick="jumpToFamily(${fArg})" title="View ${escapeAttr(f.n)} stones in the encyclopedia"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stones in encyclopedia</div>`:''}<div class="fam-desc">${f.desc}</div>${f.energy?`<div class="fam-note"><strong style="color:var(--ink2)">Energy:</strong> ${f.energy}</div>`:''}<div class="fam-note"><strong style="color:var(--ink2)">Care:</strong> ${f.care}</div></div>`;}).join('');
 }
 function initFamilies(){
   if(!window.FAM_COUNTS){window.FAM_COUNTS={};CRYSTALS.forEach(c=>{if(c.fam)window.FAM_COUNTS[c.fam]=(window.FAM_COUNTS[c.fam]||0)+1;});}
@@ -4628,7 +4636,7 @@ function openGridModal(gridId) {
   if(!grid) return;
   
   const stoneRows = grid.stones.map(s => 
-    `<tr onclick="closeGridModal();switchTabByName('encyclopedia');openDetail('${s.id}')" style="cursor:pointer">
+    `<tr onclick="detailReturnContext={type:'grid',gridId:'${grid.id}'};closeGridModal();switchTabByName('encyclopedia');openDetail('${s.id}')" style="cursor:pointer">
       <td style="padding:8px 10px 8px 0;vertical-align:middle">
         <span style="display:inline-flex;align-items:center;gap:7px">
           <span style="width:12px;height:12px;border-radius:50%;background:${s.hex};border:0.5px solid rgba(0,0,0,0.1);flex-shrink:0"></span>
