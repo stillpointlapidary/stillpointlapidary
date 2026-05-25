@@ -1652,6 +1652,7 @@ let pendingPhotos=[];
 let existingEditPhotos=[];
 let editPrimaryPhotoKey=null;
 let currentCollDetailIdx=null;
+let collDetailReturnFamily=null;
 let detailReturnContext=null;
 let batchEntries=[];
 let customEntries=JSON.parse(localStorage.getItem('lap_enc_custom')||'[]');
@@ -2844,7 +2845,7 @@ function renderCollection(){
         const loc=locParts.slice(0,2).join(' · ');
         const ri=collection.indexOf(p);
         const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-        return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+        return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},${jsArg(fam)})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
       }).join('')+
       `</div>`;
     return;
@@ -2957,12 +2958,22 @@ function openCollDetail(idx){
     </div>`;
   document.getElementById('coll-detail-overlay').classList.add('open');
 }
+function openCollDetailFromFamily(idx,fam){
+  collDetailReturnFamily=fam;
+  openCollDetail(idx);
+}
 function closeCollDetail(){
   const el=document.getElementById('coll-detail-overlay');if(el)el.classList.remove('open');
+  if(collDetailReturnFamily){
+    const fam=collDetailReturnFamily;
+    collDetailReturnFamily=null;
+    openFamilyDetail(fam);
+  }
 }
 function viewEncyclopediaFromColl(stoneId){
   const p=(currentCollDetailIdx!==null)?collection[currentCollDetailIdx]:null;
   detailReturnContext={type:'collection',pieceId:p&&p.id?p.id:null,idx:currentCollDetailIdx};
+  collDetailReturnFamily=null;
   closeCollDetail();
   switchTabByName('encyclopedia');
   setTimeout(()=>openDetail(stoneId),0);
@@ -2974,6 +2985,7 @@ function viewEncyclopediaFromWishlist(stoneId){
 }
 function editCollPiece(idx){
   const p=collection[idx];if(!p)return;
+  collDetailReturnFamily=null;
   closeCollDetail();
   openAddForm(p.crystalId||'');
   editingCollectionIndex=idx;
@@ -3010,6 +3022,7 @@ async function deleteCollPiece(idx){
   const c=CRYSTALS.find(x=>x.i===p.crystalId);
   const name=collPieceName(p,c);
   if(!confirm(`Delete ${name} from your collection?`))return;
+  collDetailReturnFamily=null;
   try{
     if(_currentUser&&p.id){
       const { error } = await _supa.from('collection_items').delete().eq('user_id',_currentUser.id).eq('id',p.id);
@@ -5949,7 +5962,7 @@ _authInit();
     grid.innerHTML=matches.map(function(c){
       // Build card html but replace the bare openDetail call with one that sets return context
       const raw=encCardHtml(c);
-      return raw.replace(/onclick="openDetail\(/,'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
+      return raw.replace(/onclick="openDetail\(/,"onclick="detailReturnContext={type:'usewhen'};openDetail(");
     }).join('');
   };
 
