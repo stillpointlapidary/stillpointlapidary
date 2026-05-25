@@ -492,7 +492,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="topbar-right">
     <span class="stone-count" id="stone-count" role="button" tabindex="0" title="Return to Encyclopedia" onclick="switchTab('encyclopedia',document.querySelector('.nav-tab'))" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('encyclopedia',document.querySelector('.nav-tab'))}"></span>
     <div class="topbar-auth" id="topbar-auth"></div>
-    <button class="btn btn-sm" onclick="openAddEncForm()">+ Entry</button>
+    <button class="btn btn-sm" id="add-entry-btn" style="display:none" onclick="openAddEncForm()">+ Entry</button>
+    <button class="btn btn-sm" id="request-entry-btn" onclick="openEntryRequestForm()">Request entry</button>
     <button class="btn btn-sm" onclick="openPopup('instructions')">? Guide</button>
     <button class="btn btn-sm" onclick="openPopup('manage')">Manage</button>
   </div>
@@ -1497,16 +1498,34 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="form-sub">Upload multiple photos — each becomes its own entry. Fill in shared details once.</div>
     <div style="background:var(--stone2);border-radius:8px;padding:1rem 1.1rem;margin-bottom:1.25rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Apply to all entries</div>
-      <div class="form-row">
+      <div class="form-row full">
         <div class="fg"><label>Source</label><input type="text" id="b-source" placeholder="e.g. DFW Crystals"></div>
-        <div class="fg"><label>Price each (optional)</label><input type="text" id="b-price" placeholder="e.g. $25"></div>
       </div>
       <div class="form-row full">
         <div class="fg"><label>Date acquired</label><input type="date" id="b-acquired"></div>
       </div>
       <div class="form-row">
         <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
-        <div class="fg"><label>Form / Shape</label><select id="b-form"><option value="">Select…</option><option>Raw / Rough</option><option>Tumbled</option><option>Polished freeform</option><option>Palm stone</option><option>Sphere</option><option>Tower / Point</option><option>Cluster</option><option>Geode</option><option>Wand</option><option>Cabochon</option><option>Carved</option><option>Slice</option><option>Other</option></select></div>
+        <div class="fg"><label>Form / Shape</label><select id="b-form"><option value="">Select…</option>
+<option>Tumbled</option>
+<option>Palm stone</option>
+<option>Raw / Rough</option>
+<option>Freeform</option>
+<option>Tower / Point</option>
+<option>Sphere</option>
+<option>Egg</option>
+<option>Cluster</option>
+<option>Geode</option>
+<option>Slice</option>
+<option>Heart</option>
+<option>Moon</option>
+<option>Star</option>
+<option>Mushroom</option>
+<option>Wand</option>
+<option>Skull</option>
+<option>Cabochon</option>
+<option>Carved</option>
+<option>Other</option></select></div>
       </div>
     </div>
     <div class="fg" style="margin-bottom:1rem">
@@ -1520,6 +1539,26 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="form-footer">
       <button class="btn" onclick="closeBatchForm()">Cancel</button>
       <button class="btn btn-accent" id="batch-save-btn" style="display:none" onclick="saveBatch()">Save all entries</button>
+    </div>
+  </div>
+</div>
+
+<!-- ENTRY REQUEST FORM -->
+<div class="form-overlay" id="entry-request-form-overlay">
+  <div class="form-box">
+    <button class="popup-close" onclick="closeEntryRequestForm()">✕</button>
+    <div class="form-title">Request encyclopedia entry</div>
+    <div class="form-sub">Suggest a stone or variety to add. This prepares a short request you can copy or email.</div>
+    <div class="form-row full">
+      <div class="fg"><label>Stone / Variety name *</label><input type="text" id="req-stone-name" placeholder="e.g. Que Sera Stone"></div>
+    </div>
+    <div class="form-row full">
+      <div class="fg"><label>Notes</label><textarea id="req-stone-notes" placeholder="Alternate names, why it should be added, source links, or photo notes…"></textarea></div>
+    </div>
+    <div class="form-footer">
+      <button class="btn" onclick="closeEntryRequestForm()">Cancel</button>
+      <button class="btn" onclick="copyEntryRequest()">Copy request</button>
+      <button class="btn btn-accent" onclick="emailEntryRequest()">Email request</button>
     </div>
   </div>
 </div>
@@ -2296,6 +2335,10 @@ function closeDrawer(){
       if(idx<0&&ctx.idx!==null&&ctx.idx!==undefined)idx=ctx.idx;
       if(idx>=0&&collection[idx])openCollDetail(idx);
     },0);
+  } else if(detailReturnContext&&detailReturnContext.type==='wishlist'){
+    detailReturnContext=null;
+    switchTabByName('collection');
+    setTimeout(()=>setCollQuickFilter('wish'),0);
   }
 }
 let photoLightboxSources=[];
@@ -2551,7 +2594,7 @@ function renderCollection(){
       return;
     }
     wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>{
-      return`<div class="coll-card" onclick="switchTabByName('encyclopedia');openDetail('${c.i}')">
+      return`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
         ${wishlistCardPhotoHtml(c)}
         <div class="coll-card-name">${c.n}</div>
         <div class="coll-card-meta">${c.er||''}</div>
@@ -2674,6 +2717,11 @@ function viewEncyclopediaFromColl(stoneId){
   const p=(currentCollDetailIdx!==null)?collection[currentCollDetailIdx]:null;
   detailReturnContext={type:'collection',pieceId:p&&p.id?p.id:null,idx:currentCollDetailIdx};
   closeCollDetail();
+  switchTabByName('encyclopedia');
+  setTimeout(()=>openDetail(stoneId),0);
+}
+function viewEncyclopediaFromWishlist(stoneId){
+  detailReturnContext={type:'wishlist'};
   switchTabByName('encyclopedia');
   setTimeout(()=>openDetail(stoneId),0);
 }
@@ -2920,8 +2968,6 @@ function openBatchForm(){
   batchEntries=[];
   const be=document.getElementById('batch-entries');if(be)be.innerHTML='';
   const bsb=document.getElementById('batch-save-btn');if(bsb)bsb.style.display='none';
-  const bmo=document.getElementById('b-month');const bdy=document.getElementById('b-day');
-  if(bmo)bmo.disabled=true;if(bdy)bdy.disabled=true;
   document.getElementById('batch-form-overlay').classList.add('open');
 }
 function closeBatchForm(){
@@ -2934,21 +2980,27 @@ function closeBatchForm(){
 }
 
 function loadBatchPhotos(input){
-  const files=Array.from(input.files);
+  const files=Array.from(input.files||[]);
   batchEntries=[];
   const container=document.getElementById('batch-entries');
   if(container)container.innerHTML='';
-  files.forEach((file)=>{
+  files.forEach((file,fileIdx)=>{
     const reader=new FileReader();
     reader.onload=e=>{
       const entryIdx=batchEntries.length;
       batchEntries.push({photo:e.target.result,crystalId:'',nickname:''});
       const div=document.createElement('div');
       div.style.cssText='display:grid;grid-template-columns:80px 1fr 1fr;gap:10px;align-items:center;background:var(--white);border:0.5px solid var(--border);border-radius:8px;padding:10px';
-      const crystalOpts='<option value="">Select crystal…</option>'+sortedCrystals(CRYSTALS).map(c=>`<option value="${c.i}">${c.n}</option>`).join('');
       div.innerHTML=`<img src="${e.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:6px">
         <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3)">Crystal *</label>
-          <select data-idx="${entryIdx}" onchange="batchEntries[${entryIdx}].crystalId=this.value" style="padding:7px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--stone);font-family:'Jost',sans-serif;font-size:12px;color:var(--ink);outline:none">${crystalOpts}</select>
+          <div class="combobox-wrap">
+            <input type="text" class="combobox-input" id="b-crystal-input-${entryIdx}" placeholder="Type to search…" autocomplete="off"
+              oninput="batchComboFilter(${entryIdx})"
+              onfocus="batchComboFocus(${entryIdx})"
+              onkeydown="batchComboKey(event,${entryIdx})"
+              style="padding:7px 10px;font-size:12px">
+            <div class="combobox-dropdown" id="b-crystal-drop-${entryIdx}"></div>
+          </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3)">Nickname</label>
           <input type="text" placeholder="Optional…" onchange="batchEntries[${entryIdx}].nickname=this.value" style="padding:7px 10px;border:0.5px solid var(--border);border-radius:6px;background:var(--stone);font-family:'Jost',sans-serif;font-size:12px;color:var(--ink);outline:none">
@@ -2962,10 +3014,57 @@ function loadBatchPhotos(input){
   });
   input.value='';
 }
+function batchComboRender(idx,query){
+  const drop=document.getElementById(`b-crystal-drop-${idx}`);if(!drop)return;
+  const q=(query||'').toLowerCase().trim();
+  const source=sortedCrystals(CRYSTALS);
+  const matches=q?source.filter(c=>c.n.toLowerCase().includes(q)||(c.a&&c.a.toLowerCase().includes(q))).slice(0,50):source.slice(0,50);
+  drop.innerHTML='';
+  if(!matches.length){drop.innerHTML='<div class="combobox-empty">No crystals found</div>';return;}
+  matches.forEach(c=>{
+    const opt=document.createElement('div');
+    opt.className='combobox-option';
+    opt.textContent=c.n;
+    opt.addEventListener('mousedown',e=>{e.preventDefault();batchComboSelect(idx,c.i,c.n,e);});
+    opt.addEventListener('click',e=>batchComboSelect(idx,c.i,c.n,e));
+    drop.appendChild(opt);
+  });
+}
+function batchComboFocus(idx){
+  const input=document.getElementById(`b-crystal-input-${idx}`);
+  const drop=document.getElementById(`b-crystal-drop-${idx}`);
+  if(!input||!drop)return;
+  drop.classList.add('open');
+  batchComboRender(idx,input.value||'');
+}
+function batchComboFilter(idx){
+  const input=document.getElementById(`b-crystal-input-${idx}`);
+  const drop=document.getElementById(`b-crystal-drop-${idx}`);
+  if(batchEntries[idx])batchEntries[idx].crystalId='';
+  if(!input||!drop)return;
+  if(!input.value){drop.classList.remove('open');return;}
+  drop.classList.add('open');
+  batchComboRender(idx,input.value);
+}
+function batchComboSelect(idx,crystalId,crystalName,e){
+  e&&e.stopPropagation();
+  if(batchEntries[idx])batchEntries[idx].crystalId=crystalId;
+  const input=document.getElementById(`b-crystal-input-${idx}`);if(input)input.value=crystalName;
+  const drop=document.getElementById(`b-crystal-drop-${idx}`);if(drop)drop.classList.remove('open');
+}
+function batchComboKey(e,idx){
+  const drop=document.getElementById(`b-crystal-drop-${idx}`);if(!drop)return;
+  const opts=drop.querySelectorAll('.combobox-option');
+  const focused=drop.querySelector('.combobox-option.focused');
+  let pos=focused?Array.from(opts).indexOf(focused):-1;
+  if(e.key==='ArrowDown'){e.preventDefault();pos=Math.min(pos+1,opts.length-1);opts.forEach((o,i)=>o.classList.toggle('focused',i===pos));}
+  else if(e.key==='ArrowUp'){e.preventDefault();pos=Math.max(pos-1,0);opts.forEach((o,i)=>o.classList.toggle('focused',i===pos));}
+  else if(e.key==='Enter'&&focused){e.preventDefault();focused.click();}
+  else if(e.key==='Escape'){drop.classList.remove('open');}
+}
 
 function saveBatch(){
   const source=document.getElementById('b-source')?.value||'';
-  const price=document.getElementById('b-price')?.value||'';
   const loc=document.getElementById('b-loc')?.value||'';
   const form=document.getElementById('b-form')?.value||'';
   const acquired=document.getElementById('b-acquired')?.value||'';
@@ -2975,7 +3074,7 @@ function saveBatch(){
     collection.push({
       id:Date.now()+Math.random(),crystalId:entry.crystalId,isCombo:false,comboCrystals:[],
       nickname:entry.nickname,form,size:'',dims:'',treated:'Natural',
-      locCustom:loc,shelf:'',tier:'',pos:'',acquired,source,price,notes:'',
+      locCustom:loc,shelf:'',tier:'',pos:'',acquired,source,price:'',notes:'',
       photos:entry.photo?[entry.photo]:[],
     });
     owned[entry.crystalId]=true;
@@ -3209,6 +3308,46 @@ document.addEventListener('click',function(e){
     document.querySelectorAll('.combobox-dropdown').forEach(d=>d.classList.remove('open'));
   }
 });
+
+function isAdminUser(user){
+  return !!(user&&user.email&&user.email.toLowerCase()==='kikiholz31@duck.com');
+}
+function updateAdminEntryButtons(){
+  const add=document.getElementById('add-entry-btn');
+  const req=document.getElementById('request-entry-btn');
+  const isAdmin=isAdminUser(_currentUser);
+  if(add)add.style.display=isAdmin?'':'none';
+  if(req)req.style.display=isAdmin?'none':'';
+}
+function openEntryRequestForm(){
+  const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.add('open');
+}
+function closeEntryRequestForm(){
+  const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.remove('open');
+  ['req-stone-name','req-stone-notes'].forEach(id=>{const field=document.getElementById(id);if(field)field.value='';});
+}
+function entryRequestText(){
+  const name=(document.getElementById('req-stone-name')?.value||'').trim();
+  const notes=(document.getElementById('req-stone-notes')?.value||'').trim();
+  if(!name){alert('Stone / Variety name is required.');return'';}
+  return `Still Point Lapidary entry request
+
+Stone / Variety: ${name}
+
+Notes:
+${notes||'—'}`;
+}
+async function copyEntryRequest(){
+  const text=entryRequestText();if(!text)return;
+  try{await navigator.clipboard.writeText(text);alert('Entry request copied.');}
+  catch(e){alert(text);}
+}
+function emailEntryRequest(){
+  const text=entryRequestText();if(!text)return;
+  const subject=encodeURIComponent('Still Point Lapidary entry request');
+  const body=encodeURIComponent(text);
+  window.location.href=`mailto:?subject=${subject}&body=${body}`;
+}
 
 function updateLastSaved(){
   const el=document.getElementById('last-saved-display');
@@ -4735,6 +4874,7 @@ let _currentUser = null;
 
 function _renderAuth(user) {
   const el = document.getElementById('topbar-auth');
+  updateAdminEntryButtons();
   if (!el) return;
   if (user) {
     const name = user.email ? user.email.split('@')[0] : 'Account';
