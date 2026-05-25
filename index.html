@@ -2182,16 +2182,28 @@ function collectionCardPhotoHtml(p,c,name,idx){
   return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
 }
 let collFamilyPhotoSources={};
-function familyPhotoSources(entries){
-  const sources=[];
+let collFamilyPhotoLabels={};
+function familyPhotoItems(entries){
+  const seen=new Set();
+  const items=[];
   (entries||[]).forEach(entry=>{
-    sources.push(...collectionPhotoSources(entry.piece,entry.crystal));
+    const label=(entry.crystal&&entry.crystal.n)||collPieceName(entry.piece,entry.crystal)||'Collection photo';
+    collectionPhotoSources(entry.piece,entry.crystal).forEach(src=>{
+      if(!src||seen.has(src))return;
+      seen.add(src);
+      items.push({src,label});
+    });
   });
-  return uniquePhotoSources(sources);
+  return items;
+}
+function familyPhotoSources(entries){
+  return familyPhotoItems(entries).map(item=>item.src);
 }
 function familyCardPhotoHtml(fam,entries){
-  const sources=familyPhotoSources(entries);
+  const items=familyPhotoItems(entries);
+  const sources=items.map(item=>item.src);
   collFamilyPhotoSources[fam]=sources;
+  collFamilyPhotoLabels[fam]=items.map(item=>item.label);
   if(!sources.length)return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
   const key=encodeURIComponent(fam);
   const nav=sources.length>1?`<button class="coll-card-photo-nav prev" onclick="collCardPhotoNav(this,-1,event)" aria-label="Previous photo">‹</button><button class="coll-card-photo-nav next" onclick="collCardPhotoNav(this,1,event)" aria-label="Next photo">›</button>`:'';
@@ -2206,7 +2218,8 @@ function openFamilyPhotoLightbox(encodedFam,startIndex,event){
   if(!lb)return;
   photoLightboxSources=sources;
   photoLightboxIndex=Math.max(0,Math.min(startIndex||0,sources.length-1));
-  photoLightboxAlt=fam+' collection images';
+  photoLightboxLabels=collFamilyPhotoLabels[fam]||null;
+  photoLightboxAlt=(photoLightboxLabels&&photoLightboxLabels[photoLightboxIndex])||fam;
   setPhotoLightboxImage();
   lb.classList.toggle('has-nav',photoLightboxSources.length>1);
   lb.classList.add('open');
@@ -2465,11 +2478,13 @@ function closeDrawer(){
 let photoLightboxSources=[];
 let photoLightboxIndex=0;
 let photoLightboxAlt='';
+let photoLightboxLabels=null;
 function openPhotoLightbox(src,alt){
   const lb=document.getElementById('photo-lightbox');
   const img=document.getElementById('photo-lightbox-img');
   if(!lb||!img)return;
   photoLightboxAlt=alt||'';
+  photoLightboxLabels=null;
   photoLightboxSources=[src];
   photoLightboxIndex=0;
   const carousel=document.getElementById('drawer-carousel');
@@ -2494,10 +2509,11 @@ function setPhotoLightboxImage(){
   if(!img)return;
   const src=photoLightboxSources[photoLightboxIndex];
   img.src=src;
-  img.alt=photoLightboxAlt||'Crystal reference photo';
+  const activeLabel=(photoLightboxLabels&&photoLightboxLabels[photoLightboxIndex])||photoLightboxAlt||'Crystal reference photo';
+  img.alt=activeLabel;
   if(label){
-    label.textContent=photoLightboxAlt||'Crystal reference photo';
-    label.style.display=photoLightboxAlt?'block':'none';
+    label.textContent=activeLabel;
+    label.style.display=activeLabel?'block':'none';
   }
 }
 function photoLightboxNav(dir){
@@ -2508,6 +2524,7 @@ function photoLightboxNav(dir){
 function closePhotoLightbox(){
   const lb=document.getElementById('photo-lightbox');
   if(lb){lb.classList.remove('open');lb.classList.remove('has-nav');}
+  photoLightboxLabels=null;
   const label=document.getElementById('photo-lightbox-label');
   if(label)label.textContent='';
   document.body.style.overflow='';
@@ -2523,6 +2540,7 @@ function openCollectionPhotoLightbox(idx,startIndex,event){
   if(!lb)return;
   photoLightboxSources=sources;
   photoLightboxIndex=Math.max(0,Math.min(startIndex||0,sources.length-1));
+  photoLightboxLabels=null;
   photoLightboxAlt=(c&&c.n)||collPieceName(p,c)||'Collection photo';
   setPhotoLightboxImage();
   lb.classList.toggle('has-nav',photoLightboxSources.length>1);
@@ -4195,10 +4213,7 @@ function runId2(){
   if(!n){g.innerHTML='<div class="id2-empty">No stones match — try removing a filter.</div>';return;}
   const owned=new Set((collection||[]).map(p=>p.crystalId));
   const wished=new Set(Object.keys(wish||{}));
-  g.innerHTML=results.slice(0,72).map(c=>{
-    const b=owned.has(c.i)?'<span class="card-badge badge-owned"></span>':(wished.has(c.i)?'<span class="card-badge badge-wish"></span>':'');
-    return `<div class="crystal-card" onclick="openDetail('${c.i}')">${b}<div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}${c.c}</div><div class="card-role">${(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).join(' \xb7 ')}</div></div>`;
-  }).join('')+(results.length>72?`<div class="id2-empty" style="padding:1rem;font-size:12px">Showing 72 of ${results.length} — add a filter to narrow down.</div>`:'');
+  g.innerHTML=results.slice(0,72).map(c=>encCardHtml(c)).join('')+(results.length>72?`<div class="id2-empty" style="padding:1rem;font-size:12px">Showing 72 of ${results.length} — add a filter to narrow down.</div>`:'');
 }
 function clearId2(){
   id2State={color:null,trans:null,luster:null,hard:null};
@@ -5759,10 +5774,14 @@ _authInit();
     const back=e.target.closest && e.target.closest('.c101-backtop');
     if(back){
       e.preventDefault();
-      const sec=back.closest('section');
-      if(sec && sec.id==='tab-101') window.scrollTo101Top();
-      else if(sec && sec.id) window.scrollToTabTop(sec.id.replace('tab-',''));
-      else window.scrollTo({top:0,left:0,behavior:'smooth'});
+      e.stopPropagation();
+      if(back.closest('#tab-101')) window.scrollTo101Top();
+      else {
+        const tab=back.closest('main > section[id^="tab-"]');
+        if(tab && tab.id) window.scrollToTabTop(tab.id.replace('tab-',''));
+        else window.scrollTo({top:0,left:0,behavior:'smooth'});
+      }
+      return;
     }
   }, true);
 
