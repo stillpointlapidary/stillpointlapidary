@@ -3072,7 +3072,6 @@ function getAcquiredStr(prefix){
 
 // ── ADD FORM ──
 function openAddForm(preselect){
-  editingCollectionIndex=null;
   const title=document.querySelector('#add-form-overlay .form-title');if(title)title.textContent='Add a piece';
   const sub=document.querySelector('#add-form-overlay .form-sub');if(sub)sub.textContent='Each entry is a specific physical piece in your collection.';
   const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');if(saveBtn)saveBtn.textContent='Save piece';
