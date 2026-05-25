@@ -231,7 +231,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .stat-label{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:4px}
 .stat-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink)}
 .coll-filter-cats{display:flex;gap:6px;flex-wrap:wrap;align-items:center;position:relative;margin-bottom:1rem}
-.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,280px));gap:18px;background:transparent;border:none;border-radius:0;overflow:visible;justify-content:start;align-items:start}
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,280px));gap:18px;background:transparent;border:none;border-radius:0;overflow:visible;justify-content:center;align-items:start}
 .coll-card{background:var(--white);padding:1rem 1rem 0.9rem;cursor:pointer;transition:background 0.12s,box-shadow 0.12s,border-color 0.12s;position:relative;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-width:0}
 .coll-card:hover{background:var(--stone2);border-color:rgba(139,115,85,0.24);box-shadow:0 8px 22px rgba(42,37,32,0.06)}
 .coll-card-photo-wrap{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -622,15 +622,27 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
   </div>
   <div class="coll-filter-cats" id="coll-filter-cats">
+    <button class="filter-cat-btn" id="cfbtn-cfam" onclick="toggleCollPanel('cfam',event)">Family <span class="aval" id="cfval-cfam"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-ctheme" onclick="toggleCollPanel('ctheme',event)">Theme <span class="aval" id="cfval-ctheme"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-ccolor" onclick="toggleCollPanel('ccolor',event)">Color <span class="aval" id="cfval-ccolor"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cchakra" onclick="toggleCollPanel('cchakra',event)">Chakra <span class="aval" id="cfval-cchakra"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cmohs" onclick="toggleCollPanel('cmohs',event)">Hardness <span class="aval" id="cfval-cmohs"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cformation" onclick="toggleCollPanel('cformation',event)">Formation <span class="aval" id="cfval-cformation"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cmaterial" onclick="toggleCollPanel('cmaterial',event)">Material <span class="aval" id="cfval-cmaterial"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-form" onclick="toggleCollPanel('form',event)">Form <span class="aval" id="cfval-form"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-size" onclick="toggleCollPanel('size',event)">Size <span class="aval" id="cfval-size"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cfam" onclick="toggleCollPanel('cfam',event)">Family <span class="aval" id="cfval-cfam"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-cshelf" onclick="toggleCollPanel('cshelf',event)">Location <span class="aval" id="cfval-cshelf"></span><span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetCollFilters()">Reset</button>
   </div>
+  <div class="filter-panel" id="cpanel-cfam"><div class="filter-panel-title">Stone family</div><div class="filter-panel-pills" id="cpills-cfam"></div></div>
+  <div class="filter-panel" id="cpanel-ctheme"><div class="filter-panel-title">Theme</div><div class="filter-panel-pills" id="cpills-ctheme"></div></div>
+  <div class="filter-panel" id="cpanel-ccolor"><div class="filter-panel-title">Color</div><div class="filter-panel-pills" id="cpills-ccolor"></div></div>
+  <div class="filter-panel" id="cpanel-cchakra"><div class="filter-panel-title">Chakra</div><div class="filter-panel-pills" id="cpills-cchakra"></div></div>
+  <div class="filter-panel" id="cpanel-cmohs"><div class="filter-panel-title">Mohs hardness</div><div class="filter-panel-pills" id="cpills-cmohs"></div></div>
+  <div class="filter-panel" id="cpanel-cformation"><div class="filter-panel-title">Formation</div><div class="filter-panel-pills" id="cpills-cformation"></div></div>
+  <div class="filter-panel" id="cpanel-cmaterial"><div class="filter-panel-title">Material</div><div class="filter-panel-pills" id="cpills-cmaterial"></div></div>
   <div class="filter-panel" id="cpanel-form"><div class="filter-panel-title">Form / Shape</div><div class="filter-panel-pills" id="cpills-form"></div></div>
   <div class="filter-panel" id="cpanel-size"><div class="filter-panel-title">Size</div><div class="filter-panel-pills" id="cpills-size"></div></div>
-  <div class="filter-panel" id="cpanel-cfam"><div class="filter-panel-title">Stone family</div><div class="filter-panel-pills" id="cpills-cfam"></div></div>
   <div class="filter-panel" id="cpanel-cshelf"><div class="filter-panel-title">Location / Shelf</div><div class="filter-panel-pills" id="cpills-cshelf"></div></div>
   <div id="coll-wrap"></div>
 </section>
@@ -1489,10 +1501,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <div class="fg"><label>Source</label><input type="text" id="b-source" placeholder="e.g. DFW Crystals"></div>
         <div class="fg"><label>Price each (optional)</label><input type="text" id="b-price" placeholder="e.g. $25"></div>
       </div>
-      <div class="form-row thirds">
-        <div class="fg"><label>Year</label><select id="b-year" onchange="updateBatchDate()"><option value="">Year…</option></select></div>
-        <div class="fg"><label>Month</label><select id="b-month" disabled><option value="">Month…</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></div>
-        <div class="fg"><label>Day</label><select id="b-day" disabled><option value="">Day…</option></select></div>
+      <div class="form-row full">
+        <div class="fg"><label>Date acquired</label><input type="date" id="b-acquired"></div>
       </div>
       <div class="form-row">
         <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
@@ -1566,7 +1576,7 @@ const SUB_FILTERS={"0": ["Calming Down", "Nervous System", "Sensory Overwhelm", 
 const SUB_FILTER_KW={"0": {"Calming Down": ["calm", "settle", "slow down"], "Nervous System": ["nervous", "overwhelm", "sensitiv"], "Sensory Overwhelm": ["sensitiv", "overload", "too much"], "Racing Mind": ["racing", "busy mind", "overthink", "restless"]}, "1": {"Earthing & Body": ["body", "earth", "earthing"], "Centering": ["center", "pulled back"], "Scattered Energy": ["scatter", "drained"], "Overwhelm": ["overwhelm"]}, "2": {"Fear & Resistance": ["fear", "resist", "block", "hesit"], "Inertia": ["stuck", "inertia", "stagnant", "static"], "Blocked Forward Motion": ["forward", "momentum", "move", "start"], "Moving Through": ["moving", "unstuck", "progress", "through"]}, "3": {"Falling Asleep": ["sleep", "insomnia", "rest"], "Staying Asleep": ["sleep", "night", "disturb", "wake"], "Anxiety at Night": ["anxiety", "night", "worry", "restless"], "Winding Down": ["calm", "quiet", "unwind", "relax"]}, "4": {"Energetic Shielding": ["shield", "protect", "block"], "Boundary Setting": ["boundary"], "Psychic Protection": ["psychic"], "Space Clearing": ["clearing", "heavy energy"]}, "5": {"Through Change": ["chang", "transit", "shift"], "Emotional Structure": ["structur", "anchor", "stable"], "Steady Support": ["steady", "support", "hold"]}, "6": {"Grief": ["grief", "griev", "mourn"], "Loss of a Person": ["loss", "loved one", "death", "bereav"], "Endings & Goodbyes": ["ending", "goodbye", "letting go", "closure"], "Comfort in Sadness": ["comfort", "support", "hold", "gentl"]}, "7": {"Anxiety": ["anxiety", "anxious", "worry", "fear"], "Sleep & Rest": ["sleep", "rest", "insomnia"], "Nervous System": ["nervous", "sensitiv", "hyperv"], "Overwhelm": ["overwhelm", "too much"]}, "8": {"Releasing Anger": ["anger", "rage", "frustrat", "irritat"], "Processing Hurt": ["hurt", "wound", "pain", "betray"], "Letting Go": ["release", "let go", "forgiv", "move on"], "Finding Peace": ["peace", "calm", "accept", "resolv"]}, "9": {"Grief & Loss": ["grief", "griev", "mourn", "loss"], "Heartbreak": ["heartbreak", "heartbroken", "romantic"], "Forgiveness": ["forgiv", "release", "let go"], "Deep Wounds": ["deep wound", "trauma", "old hurt"]}, "10": {"Creative Spark": ["creat", "inspir", "idea"], "Optimism": ["optim", "hope", "brightl"], "Mood Lifting": ["mood", "lift", "uplift", "depress"], "Playfulness": ["play", "fun", "joy", "light"]}, "11": {"Self-Worth": ["worth", "deserv", "enough"], "Inner Kindness": ["kind", "gentle", "soft"], "After Self-Criticism": ["critic", "judg", "shame"], "Nurturing": ["nurtur", "care", "support"]}, "12": {"Building Trust": ["trust", "safe", "open", "connect"], "Opening Communication": ["communicat", "speak", "express", "honest"], "Healing a Rift": ["heal", "repair", "reconcil", "rift"], "Deepening Connection": ["deep", "bond", "intimac", "close"]}, "13": {"Focus & Study": ["focus", "study", "concentr"], "Decision Making": ["decis", "choice", "clarity"], "Mental Clutter": ["clutter", "fog", "confused"], "Overthinking": ["overthink", "loop", "ruminate"]}, "14": {"Physical Energy": ["energy", "vitality", "stamina", "activat"], "Mental Drive": ["motivat", "drive", "purpose", "direction"], "Getting Started": ["start", "begin", "initiat", "action"], "Sustaining Momentum": ["momentum", "sustain", "persist", "continue"]}, "15": {"Speaking Truth": ["truth", "honest", "authentic"], "Being Heard": ["heard", "voice", "express"], "Difficult Conversations": ["difficult", "hard conversation", "confrontat"], "Honest Expression": ["express", "articulate", "clear"]}, "16": {"Bold Action": ["bold", "action", "courage"], "Self-Trust": ["trust", "instinct", "inner knowing"], "Personal Power": ["power", "authority", "strength"], "Overcoming Fear": ["fear", "hesit", "doubt"]}, "17": {"Abundance": ["abundan", "prosper", "wealth", "financial"], "Drawing In Love": ["love", "relationship", "partner", "attract"], "Attracting Opportunity": ["opportun", "luck", "success", "open"], "Opening to Receive": ["receiv", "allow", "welcome", "open"]}, "18": {"Career & Work": ["career", "work", "profession", "success"], "Financial Goals": ["financial", "money", "prosper", "abundan"], "Creative Projects": ["creat", "project", "vision", "idea"], "Personal Growth": ["growth", "personal", "develop", "become"]}, "19": {"Before Meditation": ["meditat", "stillness", "focus", "center"], "Before a Grid": ["grid", "layout", "sacred", "space"], "New Moon Practice": ["new moon", "lunar", "cycle", "plant"], "Working with a Stone": ["stone", "crystal", "hold", "work"]}, "20": {"Life Direction": ["direction", "path", "purpose", "calling"], "Soul Calling": ["soul", "calling", "mean", "destined"], "Meaning & Purpose": ["meaning", "purpose", "why", "alive"], "Reconnecting to Self": ["reconnect", "self", "identity", "return"]}, "21": {"Inner Knowing": ["inner knowing", "gut", "instinct"], "Dream Work": ["dream", "visions", "sleep"], "Psychic Sensitivity": ["psychic", "sensitiv", "perceptive"], "Visions": ["vision", "seeing", "clairvoy"]}, "22": {"Meditation": ["meditat", "stillness", "quiet mind"], "Higher Guidance": ["higher", "divine", "guidance"], "Divine Connection": ["divine", "sacred", "holy"], "Spiritual Growth": ["growth", "evolv", "ascend"]}, "23": {"Deepening Practice": ["deepen", "practice", "discipl"], "Stillness": ["still", "quiet", "silent", "inner peace"], "Going Inward": ["inward", "inner", "within", "contempl"], "Spiritual Focus": ["focus", "concentrat", "present", "aware"]}, "24": {"Shadow Work": ["shadow", "unconscious", "hidden"], "Releasing Patterns": ["pattern", "habit", "cycle"], "Rebirth & Growth": ["rebirth", "new", "transform"], "Ancestral Work": ["ancestral", "lineage", "inherited"]}, "25": {"Physical Recovery": ["physical", "body", "recover", "restor"], "Emotional Healing": ["emotional", "heart", "wound", "heal"], "After Illness": ["illness", "sick", "weak", "depleted"], "Gentle Support": ["gentl", "soft", "nurtur", "support"]}, "26": {"Stamina": ["stamina", "endur", "persist", "sustain"], "Activation": ["activat", "energiz", "spark", "vitalize"], "Life Force": ["life force", "prana", "chi", "vital"], "Physical Vitality": ["physical", "body", "strength", "vigor"]}, "27": {"Clearing Space": ["space", "room", "environment", "clear"], "Moving Stuck Energy": ["stuck", "stagnant", "heavy", "dense"], "Purification": ["purif", "cleanse", "reset", "fresh"], "Fresh Energy": ["fresh", "renew", "new", "uplift"]}, "28": {"Body Awareness": ["body", "somatic", "sensation", "physical"], "Grounding in the Body": ["ground", "earth", "anchor", "roots"], "Somatic Presence": ["somatic", "present", "here", "aware"], "Embodiment": ["embod", "inhabit", "physical", "flesh"]}};
 // ── STATE ──
 let filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all'};
-let collFilters={form:'all',size:'all',cfam:'all',cshelf:'all'};
+let collFilters={cfam:'all',ctheme:'all',ccolor:'all',cchakra:'all',cmohs:'all',cformation:'all',cmaterial:'all',form:'all',size:'all',cshelf:'all'};
 let collQuickFilter='all'; // 'all' | 'wish'
 let sortBy='name';
 let currentCrystal=null;
@@ -1736,7 +1746,6 @@ function init(){
   buildMoodGroupPills();
   renderMoodGrid('All');
   buildYearSelect('f-year');
-  buildYearSelect('b-year');
   encRender();
   renderCollection();
   document.addEventListener('click',handleOutsideClick);
@@ -1796,22 +1805,78 @@ function buildColorPanel(){
     COLOR_OPTS.map(c=>`<button class="fpill" onclick="setFilter('color','${c.val}',this)"><span class="cswatch" style="background:${c.hex}"></span>${c.val}</button>`).join('');
 }
 
+function buildCollColorPanel(){
+  const wrap=document.getElementById('cpills-ccolor');
+  if(!wrap)return;
+  wrap.innerHTML=`<button class="fpill active" onclick="setCollFilter('ccolor','all',this)">All</button>`+
+    COLOR_OPTS.map(c=>`<button class="fpill" onclick="setCollFilter('ccolor','${c.val}',this)"><span class="cswatch" style="background:${c.hex}"></span>${c.val}</button>`).join('');
+}
+function collectionStoneMatchesMohs(c,val){
+  if(val==='all')return true;
+  const raw=String(c?.m||'').match(/[0-9.]+/g);
+  if(!raw||!raw.length)return false;
+  const nums=raw.map(Number).filter(n=>Number.isFinite(n));
+  const max=Math.max(...nums);
+  if(val==='soft')return max<=4;
+  if(val==='medium')return max>=5&&max<=6;
+  if(val==='hard')return max>=7;
+  return true;
+}
+function collectionStoneMatchesTheme(c,val){
+  if(val==='all')return true;
+  return (c?.primary_theme===val)||((c?.all_themes||[]).includes(val));
+}
+function collectionStoneMatchesColor(c,val){
+  if(val==='all')return true;
+  return c?.col_cat===val||((c?.col_cats||[]).includes(val));
+}
+function collectionStoneMatchesChakra(c,val){
+  if(val==='all')return true;
+  return (c?.chakras||[]).includes(val);
+}
+function collectionStoneMatchesMaterial(c,val){
+  if(val==='all')return true;
+  return c?.mt===val;
+}
+function collectionStoneMatchesFormation(c,val){
+  if(val==='all')return true;
+  return c?.fo===val;
+}
 function buildCollPanels(){
-  const forms=['Cabochon','Carved','Cluster','Egg','Geode','Palm stone','Polished freeform','Raw / Rough','Slice','Sphere','Tower / Point','Tumbled','Wand','Other'];
+  const forms=['Tumbled','Palm stone','Raw / Rough','Freeform','Polished freeform','Tower / Point','Sphere','Egg','Cluster','Geode','Slice','Heart','Moon','Star','Mushroom','Wand','Skull','Carved','Cabochon','Other'];
   const sizes=['XS','S','M','L','XL'];
   const cfams=[...new Set(CRYSTALS.map(c=>c.fam||'').filter(Boolean))].sort();
+  const materials=[...new Set(CRYSTALS.map(c=>c.mt||'').filter(Boolean))].sort();
+  const formations=[...new Set(CRYSTALS.map(c=>c.fo||'').filter(Boolean))].sort();
   const cf=document.getElementById('cpills-form');
   const cs=document.getElementById('cpills-size');
   const cc=document.getElementById('cpills-cfam');
-  if(cf)cf.innerHTML=`<button class="fpill active" onclick="setCollFilter('form','all',this)">All</button>`+forms.map(f=>`<button class="fpill" onclick="setCollFilter('form','${f}',this)">${f}</button>`).join('');
-  if(cs)cs.innerHTML=`<button class="fpill active" onclick="setCollFilter('size','all',this)">All</button>`+sizes.map(s=>`<button class="fpill" onclick="setCollFilter('size','${s}',this)">${s}</button>`).join('');
+  const ct=document.getElementById('cpills-ctheme');
+  const cch=document.getElementById('cpills-cchakra');
+  const cm=document.getElementById('cpills-cmohs');
+  const cfo=document.getElementById('cpills-cformation');
+  const cmt=document.getElementById('cpills-cmaterial');
   if(cc)cc.innerHTML=`<button class="fpill active" onclick="setCollFilter('cfam','all',this)">All</button>`+cfams.map(f=>`<button class="fpill" onclick="setCollFilter('cfam','${f}',this)">${f}</button>`).join('');
+  if(ct)ct.innerHTML=`<button class="fpill active" onclick="setCollFilter('ctheme','all',this)">All</button>`+THEME_OPTS.map(t=>`<button class="fpill" onclick="setCollFilter('ctheme','${t}',this)">${t}</button>`).join('');
+  buildCollColorPanel();
+  if(cch)cch.innerHTML=`<button class="fpill active" onclick="setCollFilter('cchakra','all',this)">All</button>`+CHAKRA_OPTS.map(ch=>`<button class="fpill" onclick="setCollFilter('cchakra','${ch}',this)">${ch}</button>`).join('');
+  if(cm)cm.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmohs','all',this)">All</button>`+[
+    {val:'soft',label:'Soft (1–4)'},{val:'medium',label:'Medium (5–6)'},{val:'hard',label:'Hard (7+)'}
+  ].map(x=>`<button class="fpill" onclick="setCollFilter('cmohs','${x.val}',this)">${x.label}</button>`).join('');
+  if(cfo)cfo.innerHTML=`<button class="fpill active" onclick="setCollFilter('cformation','all',this)">All</button>`+formations.map(f=>`<button class="fpill" onclick="setCollFilter('cformation','${f}',this)">${f}</button>`).join('');
+  if(cmt)cmt.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmaterial','all',this)">All</button>`+materials.map(m=>`<button class="fpill" onclick="setCollFilter('cmaterial','${m}',this)">${m}</button>`).join('');
+  if(cf)cf.innerHTML=`<button class="fpill active" onclick="setCollFilter('form','all',this)">All</button>`+forms.map(f=>`<button class="fpill" onclick="setCollFilter('form','${f}',this)">${f}</button>`).join('');
+  if(cs)cs.innerHTML=`<button class="fpill active" onclick="setCollFilter('size','all',this)">All</button>`+sizes.map(sz=>`<button class="fpill" onclick="setCollFilter('size','${sz}',this)">${sz}</button>`).join('');
   const usedShelves=[...new Set(collection.map(p=>p.shelf||p.locCustom||'').filter(Boolean))].sort();
   const shelfOpts=usedShelves.length?usedShelves:['Shelf 1','Shelf 2','Shelf 3','Shelf 4','Altar','Bedside','Cabinet','Office desk'];
   const csh=document.getElementById('cpills-cshelf');
-  if(csh)csh.innerHTML=`<button class="fpill active" onclick="setCollFilter('cshelf','all',this)">All</button>`+shelfOpts.map(s=>`<button class="fpill" onclick="setCollFilter('cshelf','${s}',this)">${s}</button>`).join('');
+  if(csh)csh.innerHTML=`<button class="fpill active" onclick="setCollFilter('cshelf','all',this)">All</button>`+shelfOpts.map(sh=>`<button class="fpill" onclick="setCollFilter('cshelf','${sh}',this)">${sh}</button>`).join('');
+  ['cfam','ctheme','ccolor','cchakra','cmohs','cformation','cmaterial','form','size','cshelf'].forEach(k=>{
+    const val=collFilters[k]||'all';
+    document.querySelectorAll('#cpills-'+k+' .fpill').forEach(p=>p.classList.toggle('active', p.textContent.trim()===String(val) || (val==='all'&&p.textContent.trim()==='All')));
+    updateBtn('cfbtn-'+k,'cfval-'+k,val);
+  });
 }
-
 function togglePanel(key,e){
   if(e)e.stopPropagation();
   const panel=document.getElementById('panel-'+key);
@@ -1878,8 +1943,8 @@ function resetFilters(){
 }
 
 function resetCollFilters(){
-  collFilters={form:'all',size:'all',cfam:'all',cshelf:'all'};
-  ['form','size','cfam','cshelf'].forEach(k=>{
+  collFilters={cfam:'all',ctheme:'all',ccolor:'all',cchakra:'all',cmohs:'all',cformation:'all',cmaterial:'all',form:'all',size:'all',cshelf:'all'};
+  ['cfam','ctheme','ccolor','cchakra','cmohs','cformation','cmaterial','form','size','cshelf'].forEach(k=>{
     document.querySelectorAll('#cpills-'+k+' .fpill').forEach((p,i)=>p.classList.toggle('active',i===0));
     updateBtn('cfbtn-'+k,'cfval-'+k,'all');
   });
@@ -2500,9 +2565,15 @@ function renderCollection(){
   const items=displayCollection.filter(p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
     const loc=p.shelf||p.locCustom||'';
-    return(collFilters.form==='all'||p.form===collFilters.form)&&
+    return(collFilters.cfam==='all'||(c&&(c.fam===collFilters.cfam||c.sp===collFilters.cfam)))&&
+           collectionStoneMatchesTheme(c,collFilters.ctheme)&&
+           collectionStoneMatchesColor(c,collFilters.ccolor)&&
+           collectionStoneMatchesChakra(c,collFilters.cchakra)&&
+           collectionStoneMatchesMohs(c,collFilters.cmohs)&&
+           collectionStoneMatchesFormation(c,collFilters.cformation)&&
+           collectionStoneMatchesMaterial(c,collFilters.cmaterial)&&
+           (collFilters.form==='all'||p.form===collFilters.form)&&
            (collFilters.size==='all'||p.size===collFilters.size)&&
-           (collFilters.cfam==='all'||(c&&c.fam===collFilters.cfam))&&
            (collFilters.cshelf==='all'||loc.includes(collFilters.cshelf));
   });
 
@@ -2849,7 +2920,6 @@ function openBatchForm(){
   batchEntries=[];
   const be=document.getElementById('batch-entries');if(be)be.innerHTML='';
   const bsb=document.getElementById('batch-save-btn');if(bsb)bsb.style.display='none';
-  buildYearSelect('b-year');
   const bmo=document.getElementById('b-month');const bdy=document.getElementById('b-day');
   if(bmo)bmo.disabled=true;if(bdy)bdy.disabled=true;
   document.getElementById('batch-form-overlay').classList.add('open');
@@ -2857,8 +2927,7 @@ function openBatchForm(){
 function closeBatchForm(){
   document.getElementById('batch-form-overlay').classList.remove('open');
   document.getElementById('batch-form-overlay').querySelectorAll('input:not([type=file]),select').forEach(el=>el.value='');
-  const bmo=document.getElementById('b-month');const bdy=document.getElementById('b-day');
-  if(bmo){bmo.disabled=true;}if(bdy){bdy.disabled=true;}
+
   batchEntries=[];
   const be=document.getElementById('batch-entries');if(be)be.innerHTML='';
   const bsb=document.getElementById('batch-save-btn');if(bsb)bsb.style.display='none';
@@ -2899,7 +2968,7 @@ function saveBatch(){
   const price=document.getElementById('b-price')?.value||'';
   const loc=document.getElementById('b-loc')?.value||'';
   const form=document.getElementById('b-form')?.value||'';
-  const acquired=getAcquiredStr('b');
+  const acquired=document.getElementById('b-acquired')?.value||'';
   let saved=0;
   batchEntries.forEach(entry=>{
     if(!entry.crystalId)return;
