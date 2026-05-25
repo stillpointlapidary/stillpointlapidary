@@ -1501,11 +1501,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="form-row full">
         <div class="fg"><label>Source</label><input type="text" id="b-source" placeholder="e.g. DFW Crystals"></div>
       </div>
-      <div class="form-row full">
-        <div class="fg"><label>Date acquired</label><input type="date" id="b-acquired"></div>
-      </div>
       <div class="form-row">
+        <div class="fg"><label>Date acquired</label><input type="date" id="b-acquired"></div>
         <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
+      </div>
+      <div class="form-row full">
         <div class="fg"><label>Form / Shape</label><select id="b-form"><option value="">Select…</option>
 <option>Tumbled</option>
 <option>Palm stone</option>
@@ -3159,7 +3159,15 @@ async function saveBatch(){
         saved++;
       }
       closeBatchForm();
+      // Give Supabase a tiny breath, then reload the collection so newly saved batch items appear immediately.
+      await new Promise(resolve=>setTimeout(resolve,350));
+      collQuickFilter='all';
+      document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));
+      const totalCell=document.getElementById('stat-cell-total');
+      if(totalCell)totalCell.classList.add('active-stat');
       await loadSupabaseState();
+      renderCollection();
+      encRender();
       updateLastSaved();
       scrollPageTop();
       alert(`Saved ${saved} piece${saved!==1?'s':''} to your collection.`);
