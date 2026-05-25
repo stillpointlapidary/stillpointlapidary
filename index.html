@@ -5799,5 +5799,199 @@ _authInit();
 })();
 </script>
 
+
+
+<script>
+/* ── PRE-PASS TINYFIX 7: contained repairs only ── */
+(function(){
+  function safeScrollTo(el, offset){
+    if(!el)return;
+    const y=el.getBoundingClientRect().top+window.scrollY-(offset||118);
+    try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
+  }
+
+  // Quiet styling tweaks only.
+  const style=document.createElement('style');
+  style.textContent=`
+    .mood-selected-clear{font-size:12.5px!important;color:var(--ink)!important;font-weight:500;letter-spacing:0.02em;}
+    #mood-stone-grid .crystal-card{min-height:100%;}
+    .c101-backtop-wrap{display:flex!important;justify-content:center!important;margin:2rem 0 0!important;}
+  `;
+  document.head.appendChild(style);
+
+  // Remove the decorative dot before selected filter values. It was reading like punctuation.
+  window.updateBtn=function(btnId,valId,val){
+    const btn=document.getElementById(btnId);
+    const valEl=document.getElementById(valId);
+    if(btn)btn.classList.toggle('has-val',val!=='all');
+    if(valEl)valEl.textContent=val==='all'?'':String(val);
+  };
+
+  // Make every Crystals 101 subtab carry a working Back to top button, including How to Work.
+  function ensure101BackButtons(){
+    document.querySelectorAll('#tab-101 .c101-section').forEach(function(section){
+      if(!section.querySelector(':scope > .c101-backtop-wrap')){
+        section.insertAdjacentHTML('beforeend','<div class="c101-backtop-wrap"><button type="button" class="c101-backtop">Back to top</button></div>');
+      }
+    });
+  }
+  window.scrollTo101Top=function(){
+    const active=document.querySelector('#tab-101 .c101-section.active');
+    const h=active&&active.querySelector('.c101-h1');
+    safeScrollTo(h||active||document.getElementById('c101-nav')||document.getElementById('tab-101'),126);
+  };
+  const oldShow101=window.show101;
+  if(typeof oldShow101==='function'){
+    window.show101=function(sec,btn){
+      const result=oldShow101.apply(this,arguments);
+      ensure101BackButtons();
+      return result;
+    };
+  }
+  document.addEventListener('click',function(e){
+    const back=e.target.closest&&e.target.closest('#tab-101 .c101-backtop');
+    if(!back)return;
+    e.preventDefault();
+    e.stopPropagation();
+    window.scrollTo101Top();
+  },true);
+  document.addEventListener('DOMContentLoaded',ensure101BackButtons);
+  setTimeout(ensure101BackButtons,300);
+
+  // Use When result stones now use the same card format/photos as Full Encyclopedia.
+  window.renderMoodStones=function(moodIdx,subFilter){
+    const matches=getMoodMatches(moodIdx,subFilter);
+    const grid=document.getElementById('mood-stone-grid');
+    const countEl=document.getElementById('mood-results-count');
+    const selectedView=document.getElementById('mood-selected-view');
+    if(selectedView)selectedView.style.display='block';
+    if(grid)grid.style.display='grid';
+    if(countEl)countEl.textContent=matches.length+' stones'+(subFilter?' · '+subFilter:'');
+    if(!grid)return;
+    if(!matches.length){grid.innerHTML='<div class="empty-state">No stones match this combination.</div>';return;}
+    const moodGrid=typeof CRYSTAL_GRIDS!=='undefined'&&CRYSTAL_GRIDS.find(g=>(g.moodLinks||[g.moodLink]).includes(moodIdx));
+    const gridBanner=document.getElementById('mood-grid-banner');
+    if(gridBanner){
+      if(moodGrid){
+        gridBanner.style.display='block';
+        gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',document.querySelectorAll('.nav-tab')[4]);setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
+      }else{gridBanner.style.display='none';}
+    }
+    grid.innerHTML=matches.map(function(c){return encCardHtml(c);}).join('');
+  };
+
+  // Helpers for My Collection filters across My Pieces, Families, and Wishlist.
+  function passesCollStoneFilters(c){
+    return !!c &&
+      (collFilters.cfam==='all'||c.fam===collFilters.cfam||c.sp===collFilters.cfam)&&
+      collectionStoneMatchesTheme(c,collFilters.ctheme)&&
+      collectionStoneMatchesColor(c,collFilters.ccolor)&&
+      collectionStoneMatchesChakra(c,collFilters.cchakra)&&
+      collectionStoneMatchesMohs(c,collFilters.cmohs)&&
+      collectionStoneMatchesFormation(c,collFilters.cformation)&&
+      collectionStoneMatchesMaterial(c,collFilters.cmaterial);
+  }
+  function passesCollPieceFilters(p){
+    const loc=p.shelf||p.locCustom||'';
+    return (collFilters.form==='all'||p.form===collFilters.form)&&
+      (collFilters.size==='all'||p.size===collFilters.size)&&
+      (collFilters.cshelf==='all'||loc.includes(collFilters.cshelf));
+  }
+
+  window.renderCollection=function(){
+    buildCollPanels();
+    if(typeof initCollectionFilterDelegation==='function')initCollectionFilterDelegation();
+    const displayCollection=dedupedCollectionItems(collection);
+    const st=document.getElementById('stat-total');
+    const sv=document.getElementById('stat-var');
+    const sw=document.getElementById('stat-wish');
+    if(st)st.textContent=displayCollection.length;
+    if(sv)sv.textContent=new Set(displayCollection.map(p=>{const c=CRYSTALS.find(x=>x.i===p.crystalId);return c?.fam||c?.sp||'Other';}).filter(Boolean)).size;
+    if(sw)sw.textContent=Object.keys(wish).length;
+    const wrap=document.getElementById('coll-wrap');
+    if(!wrap)return;
+
+    if(collQuickFilter==='wish'){
+      const wishIds=Object.keys(wish);
+      let wishCrystals=CRYSTALS.filter(c=>wishIds.includes(c.i));
+      wishCrystals=wishCrystals.filter(c=>passesCollStoneFilters(c));
+      if(!wishCrystals.length){
+        wrap.innerHTML='<div class="empty-coll">'+(wishIds.length?'No wishlist items match your filters.':'Your wishlist is empty. Toggle the Wishlist switch on any encyclopedia entry to add it.')+'</div>';
+        return;
+      }
+      wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
+        ${wishlistCardPhotoHtml(c)}
+        <div class="coll-card-name">${escapeAttr(c.n)}</div>
+        <div class="coll-card-meta">${escapeAttr(c.er||'')}</div>
+        <div class="coll-card-loc" style="color:var(--accent2)">On wishlist · tap to view</div>
+      </div>`).join('')+'</div>';
+      return;
+    }
+
+    if(collQuickFilter==='families'){
+      const groups={};
+      displayCollection.forEach(p=>{
+        const c=CRYSTALS.find(x=>x.i===p.crystalId);
+        if(!c||!passesCollStoneFilters(c)||!passesCollPieceFilters(p))return;
+        const fam=c?.fam||c?.sp||'Other';
+        if(!groups[fam])groups[fam]=[];
+        groups[fam].push({piece:p,crystal:c});
+      });
+      const fams=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
+      if(!fams.length){
+        wrap.innerHTML='<div class="empty-coll">'+(displayCollection.length?'No families match your filters.':'Your collection is empty. Tap + Add piece to get started.')+'</div>';
+        return;
+      }
+      collFamilyPhotoSources={};
+      wrap.innerHTML='<div class="coll-grid">'+fams.map(fam=>{
+        const entries=groups[fam];
+        const names=[...new Set(entries.map(x=>x.crystal?.n||'Unknown'))].slice(0,4).join(' · ');
+        const count=entries.length;
+        const photoHtml=familyCardPhotoHtml(fam,entries);
+        return`<div class="coll-card" onclick="setCollFamilyFilter(${jsArg(fam)})">
+          ${photoHtml}
+          <div class="coll-card-name">${escapeAttr(fam)}</div>
+          <div class="coll-card-piece-count">${count} ${count===1?'piece':'pieces'}</div>
+          <div class="coll-card-meta">${escapeAttr(names)}</div>
+          <div class="coll-card-loc">Tap to filter family</div>
+        </div>`;
+      }).join('')+'</div>';
+      return;
+    }
+
+    const items=displayCollection.filter(p=>{
+      const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      return passesCollStoneFilters(c)&&passesCollPieceFilters(p);
+    });
+    if(!items.length){
+      wrap.innerHTML='<div class="empty-coll">'+(displayCollection.length?'No pieces match your filters.':'Your collection is empty. Tap + Add piece to get started.')+'</div>';
+      return;
+    }
+    wrap.innerHTML='<div class="coll-grid">'+items.map(p=>{
+      const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
+      const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
+      const loc=locParts.slice(0,2).join(' · ');
+      const ri=collection.indexOf(p);
+      const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
+      return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+    }).join('')+'</div>';
+  };
+
+  // Strengthen collection filter pill clicks after the render override.
+  document.addEventListener('click',function(e){
+    const pill=e.target.closest&&e.target.closest('#collection-filter-shell .filter-panel .fpill');
+    if(!pill)return;
+    const panel=pill.closest('.filter-panel');
+    if(!panel||!panel.id||!panel.id.startsWith('cpanel-'))return;
+    e.preventDefault();e.stopPropagation();
+    const key=panel.id.replace('cpanel-','');
+    const raw=pill.getAttribute('data-value')||pill.textContent.trim();
+    const val=raw==='All'?'all':raw;
+    setCollFilter(key,val,pill);
+  },true);
+})();
+</script>
+
 </body>
 </html>
