@@ -3995,6 +3995,7 @@ function init101(){
   init101Grids();
   // Water pills
   const wp = document.getElementById('water-pills');
+  if(wp) wp.innerHTML = '';
   if(wp) C101_WATER.forEach(n=>{
     const p=document.createElement('span');
     p.className='stone-pill';p.textContent=n;
@@ -4002,6 +4003,7 @@ function init101(){
   });
   // Sun pills
   const sp = document.getElementById('sun-pills');
+  if(sp) sp.innerHTML = '';
   if(sp) C101_SUN.forEach(n=>{
     const p=document.createElement('span');
     p.className='stone-pill';p.textContent=n;
