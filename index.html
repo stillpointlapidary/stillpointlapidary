@@ -2845,7 +2845,7 @@ function renderCollection(){
         const loc=locParts.slice(0,2).join(' · ');
         const ri=collection.indexOf(p);
         const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-        return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},${jsArg(fam)})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+        return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},'${fam.replace(/'/g,"\\'")}')">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
       }).join('')+
       `</div>`;
     return;
@@ -6071,7 +6071,7 @@ if(collQuickFilter==='__family__'){
       const loc=locParts.slice(0,2).join(' · ');
       const ri=collection.indexOf(p);
       const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-      return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},${jsArg(fam)})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+      return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},'${fam.replace(/'/g,"\\'")}')">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
     }).join('')+
     `</div>`;
   return;
