@@ -238,7 +238,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .coll-card-photo{width:100%;height:100%;object-fit:contain;padding:7px;display:block}
 .coll-card-nophoto{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center}
 .coll-card-nophoto span{font-size:10px;color:var(--ink3)}
-.reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:7.5px;letter-spacing:0.08em;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:rgba(250,248,246,0.82);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.64);backdrop-filter:blur(4px);pointer-events:none}
+.reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:6.5px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border-radius:999px;background:rgba(250,248,246,0.78);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.58);backdrop-filter:blur(4px);pointer-events:none}
+.photo-preview-item{position:relative;width:70px;height:70px}
+.photo-preview-item.primary{outline:1.5px solid var(--accent);outline-offset:2px;border-radius:6px}
+.photo-preview-primary{position:absolute;left:3px;bottom:3px;font-size:8px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 4px;border-radius:999px;background:rgba(250,248,246,0.88);border:0.5px solid rgba(42,37,32,0.10);color:var(--accent);cursor:pointer;font-family:'Jost',sans-serif}
+.photo-preview-item.primary .photo-preview-primary{background:var(--accent);color:var(--white);border-color:var(--accent)}
 .coll-card-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;line-height:1.2;color:var(--ink);margin-bottom:5px}
 .coll-card-meta{font-size:11px;color:var(--ink2r);margin-bottom:3px}
 .coll-card-loc{font-size:11px;color:var(--accent)}
@@ -1571,6 +1575,10 @@ let editingCollectionIndex=null;
 let owned=JSON.parse(localStorage.getItem('lap_owned')||'{}');
 let wish=JSON.parse(localStorage.getItem('lap_wish')||'{}');
 let pendingPhotos=[];
+let existingEditPhotos=[];
+let editPrimaryPhotoKey=null;
+let currentCollDetailIdx=null;
+let detailReturnContext=null;
 let batchEntries=[];
 let customEntries=JSON.parse(localStorage.getItem('lap_enc_custom')||'[]');
 
@@ -1946,7 +1954,8 @@ function escapeAttr(v){
   return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function firstCollectionPhoto(p){
-  const first=p&&p.photos&&p.photos.length?p.photos[0]:null;
+  const photos=(p&&p.photos)||[];
+  const first=photos.length?photos[0]:null;
   if(!first)return'';
   if(typeof first==='string')return first;
   return first.preview||first.url||first.signedUrl||first.src||'';
@@ -2187,6 +2196,19 @@ function closeDrawer(){
   document.getElementById('drawer-overlay').classList.remove('open');
   document.getElementById('detail-drawer').classList.remove('open');
   currentCrystal=null;
+  if(detailReturnContext&&detailReturnContext.type==='collection'){
+    const ctx=detailReturnContext;
+    detailReturnContext=null;
+    switchTabByName('collection');
+    setTimeout(()=>{
+      let idx=-1;
+      if(ctx.pieceId!==null&&ctx.pieceId!==undefined){
+        idx=collection.findIndex(p=>String(p.id)===String(ctx.pieceId));
+      }
+      if(idx<0&&ctx.idx!==null&&ctx.idx!==undefined)idx=ctx.idx;
+      if(idx>=0&&collection[idx])openCollDetail(idx);
+    },0);
+  }
 }
 let photoLightboxSources=[];
 let photoLightboxIndex=0;
@@ -2478,12 +2500,26 @@ function collDetailPhotoHtml(p,c,name){
   }
   return`<div class="coll-detail-nophoto">No photo</div>`;
 }
+function formatDisplayDate(value){
+  if(!value)return'';
+  const m=String(value).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(!m)return value;
+  return `${m[2]}/${m[3]}/${m[1]}`;
+}
+function formatDisplayPrice(value){
+  if(value===undefined||value===null||String(value).trim()==='')return'';
+  const raw=String(value).trim();
+  const n=Number(raw.replace(/[^0-9.-]/g,''));
+  if(!Number.isFinite(n))return raw.startsWith('$')?raw:`$${raw}`;
+  return n%1===0?`$${n.toFixed(0)}`:`$${n.toFixed(2)}`;
+}
 function collRow(label,value){
   if(value===undefined||value===null||String(value).trim()==='')return'';
   return`<tr><td>${escapeAttr(label)}</td><td>${escapeAttr(value)}</td></tr>`;
 }
 function openCollDetail(idx){
   const p=collection[idx];if(!p)return;
+  currentCollDetailIdx=idx;
   const c=CRYSTALS.find(x=>x.i===p.crystalId);
   const name=collPieceName(p,c);
   const loc=collPieceLocation(p);
@@ -2503,9 +2539,9 @@ function openCollDetail(idx){
           ${collRow('Location',loc)}
           ${collRow('Treatment',p.treated)}
           ${collRow('Condition',p.condition)}
-          ${collRow('Acquired',p.acquired)}
+          ${collRow('Acquired',formatDisplayDate(p.acquired))}
           ${collRow('Source',p.source)}
-          ${collRow('Price',p.price)}
+          ${collRow('Price',formatDisplayPrice(p.price))}
           ${comboNames.length?collRow('Combo',comboNames.join(' · ')):''}
           ${collRow('Notes',p.notes)}
         </table>
@@ -2523,6 +2559,8 @@ function closeCollDetail(){
   const el=document.getElementById('coll-detail-overlay');if(el)el.classList.remove('open');
 }
 function viewEncyclopediaFromColl(stoneId){
+  const p=(currentCollDetailIdx!==null)?collection[currentCollDetailIdx]:null;
+  detailReturnContext={type:'collection',pieceId:p&&p.id?p.id:null,idx:currentCollDetailIdx};
   closeCollDetail();
   switchTabByName('encyclopedia');
   setTimeout(()=>openDetail(stoneId),0);
@@ -2545,6 +2583,10 @@ function editCollPiece(idx){
   setFormVal('f-acquired',p.acquired||'');
   setFormVal('f-loc-custom',p.locCustom||'');
   setFormVal('f-notes',p.notes||'');
+  existingEditPhotos=(p.photos||[]).slice(0,3);
+  editPrimaryPhotoKey=existingEditPhotos.length?photoKey(existingEditPhotos[0],'existing',0):null;
+  pendingPhotos=[];
+  renderPhotoPreviewRow();
   const combo=document.getElementById('f-combo');
   if(combo){combo.checked=!!p.isCombo;toggleCombo();}
   const rows=document.getElementById('combo-rows');
@@ -2617,7 +2659,7 @@ function openAddForm(preselect){
   const ci2=document.getElementById('f-crystal-input');const cv2=document.getElementById('f-crystal-val');const cs3=document.getElementById('f-crystal-selected');
   if(preselect){const pc=CRYSTALS.find(x=>x.i===preselect);if(ci2&&pc)ci2.value=pc.n;if(cv2)cv2.value=preselect||'';if(cs3)cs3.textContent=preselect||'';}else{if(ci2)ci2.value='';if(cv2)cv2.value='';if(cs3)cs3.textContent='';}
   comboRender('f-crystal-drop','f-crystal-val',preselect&&CRYSTALS.find(x=>x.i===preselect)?CRYSTALS.find(x=>x.i===preselect).n:'');
-  populateCombos();pendingPhotos=[];
+  populateCombos();pendingPhotos=[];existingEditPhotos=[];editPrimaryPhotoKey=null;
   const pr=document.getElementById('photo-preview-row');if(pr)pr.innerHTML='';
   document.getElementById('add-form-overlay').classList.add('open');
 }
@@ -2633,7 +2675,7 @@ function closeAddForm(){
   if(ci)ci.value='';if(cv)cv.value='';if(cs2)cs2.textContent='';
   const cs=document.getElementById('combo-section');if(cs)cs.style.display='none';
   const cr=document.getElementById('combo-rows');if(cr)cr.innerHTML='<div class="combo-row"><select class="csel"><option value="">Select crystal…</option></select><button class="rm-combo" onclick="rmCombo(this)">×</button></div>';
-  populateCombos();pendingPhotos=[];
+  populateCombos();pendingPhotos=[];existingEditPhotos=[];editPrimaryPhotoKey=null;
   const pr=document.getElementById('photo-preview-row');if(pr)pr.innerHTML='';
   // Reset date dropdowns
   const mo=document.getElementById('f-month');const dy=document.getElementById('f-day');
@@ -2656,25 +2698,64 @@ function addComboRow(){
 }
 function rmCombo(btn){const r=btn.closest('.combo-row');if(document.getElementById('combo-rows').querySelectorAll('.combo-row').length>1)r.remove();}
 
+
+function photoSrcForPreview(item){
+  if(!item)return'';
+  if(typeof item==='string')return item;
+  return item.preview||item.url||item.signedUrl||item.src||'';
+}
+function photoKey(item,kind,idx){
+  if(!item)return kind+'-'+idx;
+  if(item.id)return 'existing-'+item.id;
+  if(item.storage_path)return 'path-'+item.storage_path;
+  if(item._pendingId)return item._pendingId;
+  return kind+'-'+idx;
+}
+function renderPhotoPreviewRow(){
+  const row=document.getElementById('photo-preview-row');
+  if(!row)return;
+  const existing=(editingCollectionIndex!==null)?existingEditPhotos:[];
+  const all=[...existing.map((p,i)=>({item:p,kind:'existing',idx:i})),...pendingPhotos.map((p,i)=>({item:p,kind:'pending',idx:i}))];
+  row.innerHTML='';
+  all.forEach(entry=>{
+    const src=photoSrcForPreview(entry.item);
+    if(!src)return;
+    const key=photoKey(entry.item,entry.kind,entry.idx);
+    if(!editPrimaryPhotoKey&&entry.idx===0&&entry.kind==='existing')editPrimaryPhotoKey=key;
+    const item=document.createElement('div');
+    item.className='photo-preview-item'+(editPrimaryPhotoKey===key?' primary':'');
+    const rm=entry.kind==='pending'?`<button class="photo-preview-rm" onclick="removePhoto(${entry.idx},this)">×</button>`:'';
+    item.innerHTML=`<img src="${escapeAttr(src)}" alt="preview">${rm}<button type="button" class="photo-preview-primary" onclick="setPrimaryPhoto('${escapeAttr(key)}')">Primary</button>`;
+    row.appendChild(item);
+  });
+}
+function setPrimaryPhoto(key){
+  editPrimaryPhotoKey=key;
+  renderPhotoPreviewRow();
+}
 function previewPhotos(input){
-  Array.from(input.files).slice(0,3-pendingPhotos.length).forEach(file=>{
+  const existingCount=(editingCollectionIndex!==null?existingEditPhotos.length:0);
+  const slots=Math.max(0,3-existingCount-pendingPhotos.length);
+  Array.from(input.files).slice(0,slots).forEach(file=>{
     const reader=new FileReader();
     reader.onload=e=>{
-      pendingPhotos.push({file:file,preview:e.target.result});
-      const row=document.getElementById('photo-preview-row');
-      const item=document.createElement('div');item.className='photo-preview-item';
-      const idx=pendingPhotos.length-1;
-      item.innerHTML=`<img src="${e.target.result}" alt="preview"><button class="photo-preview-rm" onclick="removePhoto(${idx},this)">×</button>`;
-      if(row)row.appendChild(item);
+      pendingPhotos.push({file:file,preview:e.target.result,_pendingId:'pending-'+Date.now()+'-'+Math.random().toString(36).slice(2)});
+      if(!editPrimaryPhotoKey&&existingCount===0&&pendingPhotos.length===1){
+        editPrimaryPhotoKey=pendingPhotos[0]._pendingId;
+      }
+      renderPhotoPreviewRow();
     };
     reader.readAsDataURL(file);
   });
+  if(input.files&&input.files.length>slots&&slots===0){
+    alert('You can keep up to 3 photos per piece.');
+  }
   input.value='';
 }
 function removePhoto(idx,btn){
-  pendingPhotos.splice(idx,1);
-  btn.closest('.photo-preview-item').remove();
-  document.querySelectorAll('.photo-preview-rm').forEach((b,i)=>b.setAttribute('onclick',`removePhoto(${i},this)`));
+  const removed=pendingPhotos.splice(idx,1)[0];
+  if(removed&&editPrimaryPhotoKey===removed._pendingId)editPrimaryPhotoKey=null;
+  renderPhotoPreviewRow();
 }
 
 function savePiece(){
@@ -2703,7 +2784,11 @@ function savePiece(){
   if(editingCollectionIndex!==null&&collection[editingCollectionIndex]){
     const existing=collection[editingCollectionIndex];
     piece.id=existing.id;
-    piece.photos=[...(existing.photos||[]),...pendingPhotos].slice(0,3);
+    const merged=[...(existing.photos||[]),...pendingPhotos].slice(0,3);
+    if(editPrimaryPhotoKey){
+      merged.sort((a,b)=>photoKey(a,'existing',0)===editPrimaryPhotoKey?-1:photoKey(b,'existing',0)===editPrimaryPhotoKey?1:0);
+    }
+    piece.photos=merged;
     collection[editingCollectionIndex]=piece;
   }else{
     collection.push(piece);
@@ -4589,7 +4674,7 @@ async function _getSignedUrls(photoRows){
   const out=[];
   for(const row of rows){
     const url=await _signedPhotoUrl(row.storage_path);
-    if(url)out.push(url);
+    if(url)out.push({id:row.id,storage_path:row.storage_path,display_order:row.display_order,url});
   }
   return out;
 }
@@ -4669,9 +4754,10 @@ async function loadSupabaseState() {
   renderCollection();
 }
 
-async function _uploadCollectionPhotos(collectionItemId,photos){
+async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
   const uploaded=[];
   const items=(photos||[]).slice(0,3);
+  const base=Number.isFinite(Number(startOrder))?Number(startOrder):1;
   for(let i=0;i<items.length;i++){
     const item=items[i];
     const file=item.file || item;
@@ -4681,17 +4767,36 @@ async function _uploadCollectionPhotos(collectionItemId,photos){
       .from('collection-photos')
       .upload(path, file, { cacheControl:'3600', upsert:false, contentType:file.type || 'image/jpeg' });
     if(upErr) throw upErr;
-    const { error: rowErr } = await _supa.from('collection_photos').insert({
+    const { data:photoRow, error: rowErr } = await _supa.from('collection_photos').insert({
       collection_item_id: collectionItemId,
       user_id: _currentUser.id,
       storage_path: path,
-      display_order: i+1
-    });
+      display_order: base+i
+    }).select('id,storage_path,display_order').single();
     if(rowErr) throw rowErr;
-    uploaded.push(path);
+    uploaded.push({...photoRow,_pendingId:item._pendingId||null});
   }
   return uploaded;
 }
+async function _applyPrimaryPhotoOrder(collectionItemId,photoRows,primaryKey){
+  const rows=(photoRows||[]).filter(r=>r&&r.id);
+  if(!rows.length)return;
+  const sorted=rows.slice().sort((a,b)=>{
+    const ka=photoKey(a,'existing',0), kb=photoKey(b,'existing',0);
+    if(primaryKey&&ka===primaryKey)return-1;
+    if(primaryKey&&kb===primaryKey)return 1;
+    return (a.display_order||0)-(b.display_order||0);
+  });
+  for(let i=0;i<sorted.length;i++){
+    const { error } = await _supa.from('collection_photos')
+      .update({display_order:i+1})
+      .eq('user_id',_currentUser.id)
+      .eq('collection_item_id',collectionItemId)
+      .eq('id',sorted[i].id);
+    if(error)throw error;
+  }
+}
+
 
 window.savePiece = async function(){
   if(!_currentUser){ _openAuth('collection'); return; }
@@ -4733,8 +4838,15 @@ window.savePiece = async function(){
         .eq('user_id', _currentUser.id)
         .eq('id', editingPiece.id);
       if(error)throw error;
-      const remaining=Math.max(0,3-((editingPiece.photos||[]).length));
-      if(pendingPhotos.length&&remaining>0){ await _uploadCollectionPhotos(editingPiece.id,pendingPhotos.slice(0,remaining)); }
+      const existingPhotos=(editingPiece.photos||[]).slice(0,3);
+      const remaining=Math.max(0,3-existingPhotos.length);
+      let uploadedRows=[];
+      if(pendingPhotos.length&&remaining>0){ uploadedRows=await _uploadCollectionPhotos(editingPiece.id,pendingPhotos.slice(0,remaining),existingPhotos.length+1); }
+      const allPhotoRows=[...existingPhotos,...uploadedRows];
+      let primaryKey=editPrimaryPhotoKey;
+      const pendingPrimary=uploadedRows.find(r=>r._pendingId&&r._pendingId===editPrimaryPhotoKey);
+      if(pendingPrimary)primaryKey=photoKey(pendingPrimary,'existing',0);
+      if(primaryKey){ await _applyPrimaryPhotoOrder(editingPiece.id,allPhotoRows,primaryKey); }
     }else{
       const { data, error } = await _supa
         .from('collection_items')
@@ -4742,7 +4854,12 @@ window.savePiece = async function(){
         .select('id')
         .single();
       if(error)throw error;
-      if(pendingPhotos.length){ await _uploadCollectionPhotos(data.id,pendingPhotos); }
+      let uploadedRows=[];
+      if(pendingPhotos.length){ uploadedRows=await _uploadCollectionPhotos(data.id,pendingPhotos,1); }
+      let primaryKey=editPrimaryPhotoKey;
+      const pendingPrimary=uploadedRows.find(r=>r._pendingId&&r._pendingId===editPrimaryPhotoKey);
+      if(pendingPrimary)primaryKey=photoKey(pendingPrimary,'existing',0);
+      if(primaryKey){ await _applyPrimaryPhotoOrder(data.id,uploadedRows,primaryKey); }
     }
     closeAddForm();
     await loadSupabaseState();
