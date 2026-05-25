@@ -605,6 +605,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="coll-title">My Pieces</div>
     <div class="coll-btns">
       <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add collection pieces</button>
+      <button class="btn btn-sm" onclick="exportCollectionCSV()">↓ Collection CSV</button>
+      <button class="btn btn-sm" onclick="exportWishlistCSV()">↓ Wishlist CSV</button>
       <button class="btn btn-sm btn-accent" onclick="openAddForm()">+ Add piece</button>
     </div>
   </div>
@@ -1458,7 +1460,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <button class="btn" style="justify-content:flex-start" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportCSV();closePopup('manage')">↓ Export collection (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Export collection (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Export wishlist (CSV)</button>
       </div>
     </div>
     <div style="margin-bottom:1rem">
@@ -2915,14 +2918,65 @@ function saveEncEntry(){
 
 // ── EXPORT ──
 function exportJSON(){dl(JSON.stringify({collection,owned,wish,exported:new Date().toISOString()},null,2),'application/json','TheLapidary_backup.json');}
-function exportCSV(){
-  const rows=[['ID','Crystal','Nickname','Combo','Form','Size','Treatment','Condition','Location','Acquired','Source','Price','Notes']];
-  collection.forEach(p=>{
-    const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    rows.push([p.id,c?.n||'',p.nickname||'',p.isCombo?'Yes':'No',p.form||'',p.size||'',p.treated||'',p.condition||'',p.locCustom||'',p.acquired||'',p.source||'',p.price||'',p.notes||'']);
-  });
-  dl(rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n'),'text/csv','TheLapidary_collection.csv');
+function csvCell(value){return `"${String(value??'').replace(/"/g,'""')}"`;}
+function downloadCSV(rows,filename){
+  const csv=rows.map(r=>r.map(csvCell).join(',')).join('\n');
+  dl(csv,'text/csv;charset=utf-8',filename);
 }
+function exportCollectionCSV(){
+  const rows=[['Piece ID','Crystal ID','Crystal','Nickname','Combo','Combo Stones','Form','Size','Treatment','Condition','Location','Acquired','Source','Price Paid','Primary Photo','Photo Count','Photo URLs','Notes']];
+  const exportItems=dedupedCollectionItems(collection);
+  exportItems.forEach(p=>{
+    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+    const photos=normalizePhotoList(p);
+    rows.push([
+      p.id||'',
+      p.crystalId||'',
+      c?.n||'',
+      p.nickname||'',
+      p.isCombo?'Yes':'No',
+      comboNames.join(' · '),
+      p.form||'',
+      p.size||'',
+      p.treated||'',
+      p.condition||'',
+      collPieceLocation(p)||'',
+      formatDisplayDate(p.acquired)||'',
+      p.source||'',
+      formatDisplayPrice(p.price)||'',
+      photos[0]||'',
+      photos.length,
+      photos.join(' | '),
+      p.notes||''
+    ]);
+  });
+  downloadCSV(rows,'StillPointLapidary_collection.csv');
+}
+function exportWishlistCSV(){
+  const rows=[['Crystal ID','Crystal','Alternate Names','Family','Species','Material Type','Crystal System','Dominant Color','Mohs','Energetic Role','Use When','Chakras','Primary Theme','All Themes']];
+  const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
+  CRYSTALS.filter(c=>wishIds.includes(c.i)).forEach(c=>{
+    rows.push([
+      c.i||'',
+      c.n||'',
+      c.a||'',
+      c.fam||'',
+      c.sp||'',
+      c.mt||'',
+      c.sy||'',
+      c.c||'',
+      c.m||'',
+      c.er||'',
+      c.uw||'',
+      (c.chakras||[]).join(' · '),
+      c.primary_theme||'',
+      (c.all_themes||[]).join(' · ')
+    ]);
+  });
+  downloadCSV(rows,'StillPointLapidary_wishlist.csv');
+}
+function exportCSV(){exportCollectionCSV();}
 function exportEncyclopedia(){
   const rows=[['ID','Name','Alt Names','Family','Species','Material','System','Formation','Transparency','Color','Color Cause','Mohs','Geology Notes','Energetic Role','Use When','Chakras','Element','Zodiac','Intention','Primary Theme','All Themes']];
   CRYSTALS.forEach(c=>{rows.push([c.i,c.n,c.a||'',c.fam||'',c.sp||'',c.mt||'',c.sy||'',c.fo||'',c.tr||'',c.c||'',c.cc||'',c.m||'',c.g||'',c.er||'',c.uw||'',(c.chakras||[]).join('; '),c.element||'',c.zodiac||'',c.aff||'',c.primary_theme||'',(c.all_themes||[]).join('; ')]);});
