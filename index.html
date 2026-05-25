@@ -2840,7 +2840,7 @@ function renderCollection(){
       const names=[...new Set(entries.map(x=>x.crystal?.n||'Unknown'))].slice(0,4).join(' · ');
       const count=entries.length;
       const photoHtml=familyCardPhotoHtml(fam,entries);
-      return`<div class="coll-card" onclick="setCollFamilyFilter(${jsArg(fam)})">
+      return`<div class="coll-card" onclick="openFamilyDetail(${jsArg(fam)})">
         ${photoHtml}
         <div class="coll-card-name">${escapeAttr(fam)}</div>
         <div class="coll-card-piece-count">${count} ${count===1?'piece':'pieces'}</div>
