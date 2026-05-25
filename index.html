@@ -5949,7 +5949,7 @@ _authInit();
     grid.innerHTML=matches.map(function(c){
       // Build card html but replace the bare openDetail call with one that sets return context
       const raw=encCardHtml(c);
-      return raw.replace(/onclick="openDetail\(/,"onclick="detailReturnContext={type:'usewhen'};openDetail(");
+      return raw.replace(/onclick="openDetail\(/,'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
     }).join('');
   };
 
