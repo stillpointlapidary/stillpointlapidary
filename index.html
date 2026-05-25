@@ -5455,11 +5455,14 @@ async function loadSupabaseState() {
     });
   }
 
-  for(const row of (cData||[])){
-    owned[row.stone_id]=true;
-    const urls=await _getSignedUrls(photosByItem[row.id]||[]);
-    collection.push(_rowToCollectionPiece(row,urls));
-  }
+  const pieceResults = await Promise.all(
+    (cData||[]).map(async row => {
+      owned[row.stone_id] = true;
+      const urls = await _getSignedUrls(photosByItem[row.id]||[]);
+      return _rowToCollectionPiece(row, urls);
+    })
+  );
+  pieceResults.forEach(p => collection.push(p));
 
   localStorage.setItem('lap_owned', JSON.stringify(owned));
   localStorage.setItem('lap_wish', JSON.stringify(wish));
