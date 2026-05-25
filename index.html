@@ -236,6 +236,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .coll-card:hover{background:var(--stone2);border-color:rgba(139,115,85,0.24);box-shadow:0 8px 22px rgba(42,37,32,0.06)}
 .coll-card-photo-wrap{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .coll-card-photo{width:100%;height:100%;object-fit:contain;padding:7px;display:block}
+.coll-card-photo-nav{position:absolute;top:50%;transform:translateY(-50%);width:24px;height:36px;border:none;border-radius:999px;background:rgba(250,248,246,0.74);color:var(--ink2);font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;opacity:0;transition:opacity 0.15s,background 0.15s,color 0.15s}
+.coll-card-photo-wrap:hover .coll-card-photo-nav{opacity:1}
+.coll-card-photo-nav:hover{background:var(--white);color:var(--accent)}
+.coll-card-photo-nav.prev{left:6px}
+.coll-card-photo-nav.next{right:6px}
+.coll-card-piece-count{font-size:11px;color:var(--ink2r);margin-bottom:3px;letter-spacing:0.02em}
+@media(max-width:700px){.coll-card-photo-nav{opacity:1}}
 .coll-card-nophoto{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center}
 .coll-card-nophoto span{font-size:10px;color:var(--ink3)}
 .reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:6px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border-radius:999px;background:rgba(250,248,246,0.78);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.58);backdrop-filter:blur(4px);pointer-events:none}
@@ -1777,6 +1784,7 @@ function renderFeaturedStones(){
 }
 // ── INIT ──
 function init(){
+  if('scrollRestoration' in history){history.scrollRestoration='manual';}
   renderFeaturedStones();
   // Load custom encyclopedia entries
   customEntries.forEach(e=>{if(!CRYSTALS.find(c=>c.i===e.i))CRYSTALS.push(e);});
@@ -1788,6 +1796,11 @@ function init(){
   buildYearSelect('f-year');
   encRender();
   renderCollection();
+  const rememberedTab=(()=>{try{return localStorage.getItem('spl_active_tab')||'encyclopedia';}catch(e){return'encyclopedia';}})();
+  if(['encyclopedia','mood','collection','identify','101'].includes(rememberedTab)&&rememberedTab!=='encyclopedia'){
+    switchTabByName(rememberedTab);
+  }
+  scrollPageTop();
   document.addEventListener('click',handleOutsideClick);
   initPWA();
 }
@@ -2093,18 +2106,75 @@ function isReferencePhotoUrl(src,c){
   const ref=firstEncyclopediaPhoto(c);
   return (!!ref&&src===ref)||String(src).includes('/stone-images/encyclopedia/');
 }
+function uniquePhotoSources(sources){
+  const seen=new Set();
+  return (sources||[]).filter(src=>{
+    if(!src||seen.has(src))return false;
+    seen.add(src);
+    return true;
+  });
+}
+function collCardPhotoNav(btn,dir,event){
+  if(event)event.stopPropagation();
+  const wrap=btn.closest('.coll-card-photo-wrap');
+  if(!wrap)return;
+  let sources=[];
+  try{sources=JSON.parse(wrap.dataset.sources||'[]');}catch(e){}
+  if(!sources.length)return;
+  let idx=parseInt(wrap.dataset.photoIndex||'0',10);
+  idx=(idx+dir+sources.length)%sources.length;
+  wrap.dataset.photoIndex=String(idx);
+  const img=wrap.querySelector('img');
+  if(img)img.src=sources[idx];
+}
+function getCardPhotoIndex(el){
+  const wrap=el&&el.closest?el.closest('.coll-card-photo-wrap'):el;
+  const idx=parseInt(wrap?.dataset?.photoIndex||'0',10);
+  return Number.isFinite(idx)?idx:0;
+}
 function collectionCardPhotoHtml(p,c,name,idx){
-  const ownPhoto=firstCollectionPhoto(p);
-  if(ownPhoto){
-    const refBadge=isReferencePhotoUrl(ownPhoto,c)?'<span class="reference-image-badge">Reference image</span>':'';
-    return`<div class="coll-card-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img class="coll-card-photo" src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}" loading="lazy">${refBadge}</div>`;
-  }
+  const ownPhotos=uniquePhotoSources(allCollectionPhotos(p));
   const refPhoto=firstEncyclopediaPhoto(c);
-  if(refPhoto){
-    const refAlt=c&&c.n?`${c.n} reference image`:name;
-    return`<div class="coll-card-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge image"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"><span class="reference-image-badge">Reference image</span></div>`;
+  const sources=ownPhotos.length?ownPhotos:(refPhoto?[refPhoto]:[]);
+  if(sources.length){
+    const isRef=!ownPhotos.length&&!!refPhoto;
+    const badge=isRef?'<span class="reference-image-badge">Reference image</span>':'';
+    const refAlt=isRef&&c&&c.n?`${c.n} reference image`:name;
+    const nav=sources.length>1?`<button class="coll-card-photo-nav prev" onclick="collCardPhotoNav(this,-1,event)" aria-label="Previous photo">‹</button><button class="coll-card-photo-nav next" onclick="collCardPhotoNav(this,1,event)" aria-label="Next photo">›</button>`:'';
+    return`<div class="coll-card-photo-wrap zoomable" data-photo-index="0" data-sources='${escapeAttr(JSON.stringify(sources))}' onclick="openCollectionPhotoLightbox(${idx},getCardPhotoIndex(this),event)" title="Enlarge ${isRef?'image':'photo'}"><img class="coll-card-photo" src="${escapeAttr(sources[0])}" alt="${escapeAttr(refAlt)}" loading="lazy">${nav}${badge}</div>`;
   }
   return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
+}
+let collFamilyPhotoSources={};
+function familyPhotoSources(entries){
+  const sources=[];
+  (entries||[]).forEach(entry=>{
+    sources.push(...collectionPhotoSources(entry.piece,entry.crystal));
+  });
+  return uniquePhotoSources(sources);
+}
+function familyCardPhotoHtml(fam,entries){
+  const sources=familyPhotoSources(entries);
+  collFamilyPhotoSources[fam]=sources;
+  if(!sources.length)return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
+  const key=encodeURIComponent(fam);
+  const nav=sources.length>1?`<button class="coll-card-photo-nav prev" onclick="collCardPhotoNav(this,-1,event)" aria-label="Previous photo">‹</button><button class="coll-card-photo-nav next" onclick="collCardPhotoNav(this,1,event)" aria-label="Next photo">›</button>`:'';
+  return`<div class="coll-card-photo-wrap zoomable" data-photo-index="0" data-sources='${escapeAttr(JSON.stringify(sources))}' onclick="openFamilyPhotoLightbox('${key}',getCardPhotoIndex(this),event)" title="Enlarge family images"><img class="coll-card-photo" src="${escapeAttr(sources[0])}" alt="${escapeAttr(fam)} collection images" loading="lazy">${nav}</div>`;
+}
+function openFamilyPhotoLightbox(encodedFam,startIndex,event){
+  if(event)event.stopPropagation();
+  const fam=decodeURIComponent(encodedFam||'');
+  const sources=collFamilyPhotoSources[fam]||[];
+  if(!sources.length)return;
+  const lb=document.getElementById('photo-lightbox');
+  if(!lb)return;
+  photoLightboxSources=sources;
+  photoLightboxIndex=Math.max(0,Math.min(startIndex||0,sources.length-1));
+  photoLightboxAlt=fam+' collection images';
+  setPhotoLightboxImage();
+  lb.classList.toggle('has-nav',photoLightboxSources.length>1);
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
 }
 function wishlistCardPhotoHtml(c){
   const refPhoto=firstEncyclopediaPhoto(c);
@@ -2642,13 +2712,16 @@ function renderCollection(){
       wrap.innerHTML='<div class="empty-coll">Your collection is empty. Tap + Add piece to get started.</div>';
       return;
     }
+    collFamilyPhotoSources={};
     wrap.innerHTML='<div class="coll-grid">'+fams.map(fam=>{
       const entries=groups[fam];
       const names=[...new Set(entries.map(x=>x.crystal?.n||'Unknown'))].slice(0,4).join(' · ');
       const count=entries.length;
+      const photoHtml=familyCardPhotoHtml(fam,entries);
       return`<div class="coll-card" onclick="setCollFamilyFilter('${escapeAttr(fam)}')">
-        <div class="coll-card-nophoto"><span>${count} ${count===1?'piece':'pieces'}</span></div>
+        ${photoHtml}
         <div class="coll-card-name">${escapeAttr(fam)}</div>
+        <div class="coll-card-piece-count">${count} ${count===1?'piece':'pieces'}</div>
         <div class="coll-card-meta">${escapeAttr(names)}</div>
         <div class="coll-card-loc">Tap to filter family</div>
       </div>`;
@@ -3337,19 +3410,34 @@ function scrollElementTop(id){
 }
 
 // ── TABS ──
+function rememberActiveTab(name){
+  try{localStorage.setItem('spl_active_tab',name);}catch(e){}
+}
+function getTabButton(name){
+  const map={encyclopedia:0,mood:1,collection:2,identify:3,'101':4};
+  const idx=map[name];
+  return idx===undefined?null:document.querySelectorAll('.nav-tab')[idx];
+}
 function switchTab(name,btn){
+  rememberActiveTab(name);
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).style.display='block';
-  if(btn)btn.classList.add('active');
+  const tab=document.getElementById('tab-'+name);
+  if(tab)tab.style.display='block';
+  (btn||getTabButton(name))?.classList.add('active');
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
   if(name==='collection'){scrollPageTop();collQuickFilter='all';document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));const tc=document.getElementById('stat-cell-total');if(tc)tc.classList.add('active-stat');renderCollection();}
 }
 function switchTabByName(name){
+  rememberActiveTab(name);
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
-  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(name.substring(0,3))));
-  document.getElementById('tab-'+name).style.display='block';
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  const tab=document.getElementById('tab-'+name);
+  if(tab)tab.style.display='block';
+  getTabButton(name)?.classList.add('active');
+  if(name==='101'){init101();}
+  if(name==='identify'){initId2();}
   if(name==='collection'){scrollPageTop();renderCollection();}
 }
 
