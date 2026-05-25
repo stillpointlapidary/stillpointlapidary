@@ -2729,6 +2729,15 @@ function setCollFamilyFilter(fam){
   const total=document.getElementById('stat-cell-total');
   if(total)total.classList.add('active-stat');
   renderCollection();
+  // Show a "back to families" banner above the results
+  const wrap=document.getElementById('coll-wrap');
+  if(wrap){
+    const banner=document.createElement('div');
+    banner.id='fam-back-banner';
+    banner.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2)';
+    banner.innerHTML='<button onclick="setCollQuickFilter(\'families\')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All Families</button><span style="color:var(--ink3)">·</span><span>'+fam+'</span>';
+    wrap.insertBefore(banner,wrap.firstChild);
+  }
   scrollPageTop();
 }
 
