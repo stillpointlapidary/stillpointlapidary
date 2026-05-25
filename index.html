@@ -231,12 +231,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .stat-label{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:4px}
 .stat-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink)}
 .coll-filter-cats{display:flex;gap:6px;flex-wrap:wrap;align-items:center;position:relative;margin-bottom:1rem}
-.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
-.coll-card{background:var(--white);padding:1rem 1rem 0.9rem;cursor:pointer;transition:background 0.12s;position:relative}
-.coll-card:hover{background:var(--stone2)}
-.coll-card-photo{width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:8px;display:block}
-.coll-card-nophoto{width:100%;height:90px;border-radius:6px;margin-bottom:8px;background:var(--stone2);display:flex;align-items:center;justify-content:center}
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,280px));gap:18px;background:transparent;border:none;border-radius:0;overflow:visible;justify-content:start;align-items:start}
+.coll-card{background:var(--white);padding:1rem 1rem 0.9rem;cursor:pointer;transition:background 0.12s,box-shadow 0.12s,border-color 0.12s;position:relative;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-width:0}
+.coll-card:hover{background:var(--stone2);border-color:rgba(139,115,85,0.24);box-shadow:0 8px 22px rgba(42,37,32,0.06)}
+.coll-card-photo-wrap{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.coll-card-photo{width:100%;height:100%;object-fit:contain;padding:7px;display:block}
+.coll-card-nophoto{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center}
 .coll-card-nophoto span{font-size:10px;color:var(--ink3)}
+.reference-image-badge{position:absolute;left:8px;bottom:8px;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 7px;border-radius:999px;background:rgba(250,248,246,0.86);border:0.5px solid rgba(42,37,32,0.12);color:rgba(60,52,42,0.72);backdrop-filter:blur(4px);pointer-events:none}
 .coll-card-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;line-height:1.2;color:var(--ink);margin-bottom:5px}
 .coll-card-meta{font-size:11px;color:var(--ink2r);margin-bottom:3px}
 .coll-card-loc{font-size:11px;color:var(--accent)}
@@ -1916,6 +1918,36 @@ function noPhotoZoneHtml(c){
   return`<div class="card-img-zone no-photo"><span class="no-photo-orb${extra}" style="--orb:${orb};background:${orb}"></span></div>`;
 }
 
+function escapeAttr(v){
+  return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function firstCollectionPhoto(p){
+  const first=p&&p.photos&&p.photos.length?p.photos[0]:null;
+  if(!first)return'';
+  if(typeof first==='string')return first;
+  return first.preview||first.url||first.signedUrl||first.src||'';
+}
+function firstEncyclopediaPhoto(c){
+  if(!c)return'';
+  const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
+  if(encPhotos&&encPhotos.length)return SUPABASE_ENC+encPhotos[0];
+  const featuredMatch=FEATURED_STONES.find(s=>s.id===c.i);
+  if(featuredMatch&&featuredMatch.photo)return SUPABASE_STONES+featuredMatch.photo;
+  return'';
+}
+function collectionCardPhotoHtml(p,c,name){
+  const ownPhoto=firstCollectionPhoto(p);
+  if(ownPhoto){
+    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}" loading="lazy"></div>`;
+  }
+  const refPhoto=firstEncyclopediaPhoto(c);
+  if(refPhoto){
+    const refAlt=c&&c.n?`${c.n} reference image`:name;
+    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"><span class="reference-image-badge">Reference image</span></div>`;
+  }
+  return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
+}
+
 function encCardHtml(c){
   const isOwned=!!owned[c.i], isWish=!!wish[c.i];
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
@@ -2360,9 +2392,7 @@ function renderCollection(){
     const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
     const loc=locParts.slice(0,2).join(' · ');
     const ri=collection.indexOf(p);
-    const photoHtml=p.photos&&p.photos[0]
-      ?`<img class="coll-card-photo" src="${p.photos[0]}" alt="${name}" loading="lazy">`
-      :`<div class="coll-card-nophoto"><span>No photo</span></div>`;
+    const photoHtml=collectionCardPhotoHtml(p,c,name);
     return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${name}</div><div class="coll-card-meta">${c?.n||''} ${p.size?'· '+p.size:''}</div><div class="coll-card-loc">${loc}</div></div>`;
   }).join('')+'</div>';
 }
