@@ -615,8 +615,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="stat-cell stat-clickable" id="stat-cell-total" onclick="setCollQuickFilter('all')" title="Show all pieces">
       <div class="stat-label">Total pieces</div><div class="stat-val" id="stat-total">0</div>
     </div>
-    <div class="stat-cell stat-clickable" id="stat-cell-var" onclick="setCollQuickFilter('owned')" title="Show by variety">
-      <div class="stat-label">Varieties</div><div class="stat-val" id="stat-var">0</div>
+    <div class="stat-cell stat-clickable" id="stat-cell-var" onclick="setCollQuickFilter('families')" title="Show collection grouped by family">
+      <div class="stat-label">Families</div><div class="stat-val" id="stat-var">0</div>
     </div>
     <div class="stat-cell stat-clickable" id="stat-cell-wish" onclick="setCollQuickFilter('wish')" title="Show wishlist">
       <div class="stat-label">Wishlist</div><div class="stat-val" id="stat-wish">0</div>
@@ -1623,6 +1623,7 @@ let openPanel=null;
 let activeMoodIdx=null;
 let activeSubFilter=null;
 let collection=JSON.parse(localStorage.getItem('lap_coll')||'[]');
+let addPieceReturnContext=null;
 let editingCollectionIndex=null;
 let owned=JSON.parse(localStorage.getItem('lap_owned')||'{}');
 let wish=JSON.parse(localStorage.getItem('lap_wish')||'{}');
@@ -2451,7 +2452,12 @@ function toggleWish(){
   document.getElementById('tog-wish').classList.toggle('on',!!wish[currentCrystal.i]);
   encRender();
 }
-function addFromDetail(){const c=currentCrystal;closeDrawer();openAddForm(c?.i);}
+function addFromDetail(){
+  const c=currentCrystal;
+  addPieceReturnContext={type:'encyclopedia',stoneId:c?.i||null};
+  closeDrawer();
+  openAddForm(c?.i);
+}
 
 // ── MOOD TAB ──
 function buildMoodGroupPills(){
@@ -2569,10 +2575,21 @@ function setCollQuickFilter(mode){
   collQuickFilter=mode;
   // Update active stat cell
   document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));
-  const cellMap={'all':'stat-cell-total','owned':'stat-cell-var','wish':'stat-cell-wish'};
+  const cellMap={'all':'stat-cell-total','owned':'stat-cell-var','families':'stat-cell-var','wish':'stat-cell-wish'};
   const cell=document.getElementById(cellMap[mode]);
   if(cell)cell.classList.add('active-stat');
   renderCollection();
+}
+
+
+function setCollFamilyFilter(fam){
+  collQuickFilter='all';
+  collFilters.cfam=fam;
+  document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));
+  const total=document.getElementById('stat-cell-total');
+  if(total)total.classList.add('active-stat');
+  renderCollection();
+  scrollPageTop();
 }
 
 function renderCollection(){
@@ -2585,7 +2602,7 @@ function renderCollection(){
   const sv=document.getElementById('stat-var');
   const sw=document.getElementById('stat-wish');
   if(st)st.textContent=displayCollection.length;
-  if(sv)sv.textContent=new Set(displayCollection.filter(p=>p.crystalId).map(p=>p.crystalId)).size;
+  if(sv)sv.textContent=new Set(displayCollection.map(p=>{const c=CRYSTALS.find(x=>x.i===p.crystalId);return c?.fam||c?.sp||'Other';}).filter(Boolean)).size;
   if(sw)sw.textContent=Object.keys(wish).length;
 
   const wrap=document.getElementById('coll-wrap');
@@ -2605,6 +2622,35 @@ function renderCollection(){
         <div class="coll-card-name">${c.n}</div>
         <div class="coll-card-meta">${c.er||''}</div>
         <div class="coll-card-loc" style="color:var(--accent2)">On wishlist · tap to view</div>
+      </div>`;
+    }).join('')+'</div>';
+    return;
+  }
+
+
+  // FAMILY GROUP view
+  if(collQuickFilter==='families'){
+    const groups={};
+    displayCollection.forEach(p=>{
+      const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      const fam=c?.fam||c?.sp||'Other';
+      if(!groups[fam])groups[fam]=[];
+      groups[fam].push({piece:p,crystal:c});
+    });
+    const fams=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
+    if(!fams.length){
+      wrap.innerHTML='<div class="empty-coll">Your collection is empty. Tap + Add piece to get started.</div>';
+      return;
+    }
+    wrap.innerHTML='<div class="coll-grid">'+fams.map(fam=>{
+      const entries=groups[fam];
+      const names=[...new Set(entries.map(x=>x.crystal?.n||'Unknown'))].slice(0,4).join(' · ');
+      const count=entries.length;
+      return`<div class="coll-card" onclick="setCollFamilyFilter('${escapeAttr(fam)}')">
+        <div class="coll-card-nophoto"><span>${count} ${count===1?'piece':'pieces'}</span></div>
+        <div class="coll-card-name">${escapeAttr(fam)}</div>
+        <div class="coll-card-meta">${escapeAttr(names)}</div>
+        <div class="coll-card-loc">Tap to filter family</div>
       </div>`;
     }).join('')+'</div>';
     return;
@@ -5180,6 +5226,30 @@ async function _applyPrimaryPhotoOrder(collectionItemId,photoRows,primaryKey){
 }
 
 
+function _isBlankCollectionPieceForUpgrade(p,stoneId){
+  if(!p||!stoneId||p.crystalId!==stoneId)return false;
+  const hasPhotos=Array.isArray(p.photos)&&p.photos.length>0;
+  const meaningful=[p.nickname,p.form,p.size,p.treated,p.condition,p.locCustom,p.shelf,p.tier,p.pos,p.acquired,p.source,p.price,p.notes].some(v=>String(v||'').trim());
+  const hasCombo=!!p.isCombo || ((p.comboCrystals||[]).length>0) || ((p.comboCrystalNames||[]).length>0);
+  return !hasPhotos&&!meaningful&&!hasCombo;
+}
+function _findBlankCollectionPieceIndex(stoneId){
+  if(!stoneId)return -1;
+  return collection.findIndex(p=>_isBlankCollectionPieceForUpgrade(p,stoneId));
+}
+function _switchToCollectionAndMaybeOpen(pieceId){
+  switchTabByName('collection');
+  scrollPageTop();
+  setTimeout(()=>{
+    renderCollection();
+    if(pieceId!==null&&pieceId!==undefined){
+      const idx=collection.findIndex(p=>String(p.id)===String(pieceId));
+      if(idx>=0)openCollDetail(idx);
+    }
+  },0);
+}
+
+
 window.savePiece = async function(){
   if(!_currentUser){ _openAuth('collection'); return; }
   const crystalId=document.getElementById('f-crystal-val')?.value||'';
@@ -5208,12 +5278,25 @@ window.savePiece = async function(){
     combo_stone_names:comboNames
   };
 
-  const saveBtn=document.querySelector('#add-form-overlay .btn-accent');
+  const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');
   const oldText=saveBtn?saveBtn.textContent:'';
   if(saveBtn){ saveBtn.disabled=true; saveBtn.textContent='Saving…'; }
+  let savedPieceId=null;
   try{
-    const editingPiece=(editingCollectionIndex!==null)?collection[editingCollectionIndex]:null;
+    let editingPiece=(editingCollectionIndex!==null)?collection[editingCollectionIndex]:null;
+
+    // If the user reached this form from an encyclopedia entry after toggling/adding the stone,
+    // upgrade the blank placeholder row instead of creating a second minimal record.
+    if(!editingPiece && addPieceReturnContext && addPieceReturnContext.type==='encyclopedia'){
+      const blankIdx=_findBlankCollectionPieceIndex(crystalId);
+      if(blankIdx>=0){
+        editingCollectionIndex=blankIdx;
+        editingPiece=collection[blankIdx];
+      }
+    }
+
     if(editingPiece&&editingPiece.id){
+      savedPieceId=editingPiece.id;
       const { error } = await _supa
         .from('collection_items')
         .update(payload)
@@ -5223,7 +5306,9 @@ window.savePiece = async function(){
       const existingPhotos=(editingPiece.photos||[]).slice(0,3);
       const remaining=Math.max(0,3-existingPhotos.length);
       let uploadedRows=[];
-      if(pendingPhotos.length&&remaining>0){ uploadedRows=await _uploadCollectionPhotos(editingPiece.id,pendingPhotos.slice(0,remaining),existingPhotos.length+1); }
+      if(pendingPhotos.length&&remaining>0){
+        uploadedRows=await _uploadCollectionPhotos(editingPiece.id,pendingPhotos.slice(0,remaining),existingPhotos.length+1);
+      }
       const allPhotoRows=[...existingPhotos,...uploadedRows];
       let primaryKey=editPrimaryPhotoKey;
       const pendingPrimary=uploadedRows.find(r=>r._pendingId&&r._pendingId===editPrimaryPhotoKey);
@@ -5236,6 +5321,7 @@ window.savePiece = async function(){
         .select('id')
         .single();
       if(error)throw error;
+      savedPieceId=data.id;
       let uploadedRows=[];
       if(pendingPhotos.length){ uploadedRows=await _uploadCollectionPhotos(data.id,pendingPhotos,1); }
       let primaryKey=editPrimaryPhotoKey;
@@ -5244,8 +5330,10 @@ window.savePiece = async function(){
       if(primaryKey){ await _applyPrimaryPhotoOrder(data.id,uploadedRows,primaryKey); }
     }
     closeAddForm();
+    addPieceReturnContext=null;
     await loadSupabaseState();
     updateLastSaved();
+    _switchToCollectionAndMaybeOpen(savedPieceId);
   }catch(err){
     console.error('Save piece failed', err);
     alert('Could not save piece: '+(err.message||err));
