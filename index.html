@@ -5291,7 +5291,14 @@ function renderShapes() {
 <script>
 const _supa = window.supabase.createClient(
   'https://vxujlgyhgnihnqrxzefw.supabase.co',
-  'sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'
+  'sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb',
+  {
+    auth: {
+      detectSessionInUrl: true,
+      persistSession: true,
+      autoRefreshToken: true
+    }
+  }
 );
 let _currentUser = null;
 try{ ['lap_coll','lap_owned','lap_wish'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
