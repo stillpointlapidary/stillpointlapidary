@@ -2690,7 +2690,12 @@ function renderMoodStones(moodIdx,subFilter){
       gridBanner.style.display='none';
     }
   }
-  grid.innerHTML=matches.map(c=>{
+grid.innerHTML=matches.map(c=>{
+    const isOwned=!!owned[c.i],isWish=!!wish[c.i];
+    const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
+    const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
+    const imgZone=encPhotos?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`:noPhotoZoneHtml(c);
+    const roles=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).slice(0,2).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
     return`<div class="crystal-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
   }).join('');
 }
