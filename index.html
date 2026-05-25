@@ -659,6 +659,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="filter-panel" id="cpanel-size"><div class="filter-panel-title">Size</div><div class="filter-panel-pills" id="cpills-size"></div></div>
   <div class="filter-panel" id="cpanel-cshelf"><div class="filter-panel-title">Location / Shelf</div><div class="filter-panel-pills" id="cpills-cshelf"></div></div>
   </div>
+  <div id="coll-sync-status" style="display:none;font-size:11px;color:var(--ink3);letter-spacing:0.05em;text-align:right;margin-bottom:0.5rem;padding-right:2px"></div>
   <div id="coll-wrap"></div>
   <div class="c101-backtop-wrap"><button class="c101-backtop" onclick="scrollToTabTop('collection');return false;">Back to top</button></div>
 </section>
@@ -5452,6 +5453,8 @@ async function loadSupabaseState() {
   localStorage.setItem('lap_wish', JSON.stringify(wish));
   encRender();
   renderCollection();
+  const syncEl=document.getElementById('coll-sync-status');
+  if(syncEl){const now=new Date();syncEl.textContent='Last synced: '+now.toLocaleDateString()+', '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});syncEl.style.display='block';}
 }
 
 async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
