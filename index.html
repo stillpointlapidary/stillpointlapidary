@@ -3086,7 +3086,8 @@ function openAddForm(preselect){
   scrollPageTop();
 }
 function closeAddForm(){
-  editingCollectionIndex=null;
+  const _returnIdx=editingCollectionIndex;
+editingCollectionIndex=null;
   const title=document.querySelector('#add-form-overlay .form-title');if(title)title.textContent='Add a piece';
   const sub=document.querySelector('#add-form-overlay .form-sub');if(sub)sub.textContent='Each entry is a specific physical piece in your collection.';
   const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');if(saveBtn)saveBtn.textContent='Save piece';
@@ -3101,7 +3102,7 @@ function closeAddForm(){
   const pr=document.getElementById('photo-preview-row');if(pr)pr.innerHTML='';
   // Reset date dropdowns
   const mo=document.getElementById('f-month');const dy=document.getElementById('f-day');
-  if(mo){mo.disabled=true;}if(dy){dy.disabled=true;}
+  if(mo){mo.disabled=true;}if(dy){dy.disabled=true;if(_returnIdx!==null&&_returnIdx!==undefined)openCollDetail(_returnIdx);}
 }
 function toggleCombo(){
   const cs=document.getElementById('combo-section');
@@ -3218,7 +3219,7 @@ function savePiece(){
   localStorage.setItem('lap_coll',JSON.stringify(collection));
   localStorage.setItem('lap_last_saved',new Date().toISOString());
   if(crystalId){owned[crystalId]=true;localStorage.setItem('lap_owned',JSON.stringify(owned));}
-  closeAddForm();renderCollection();encRender();
+  const _editIdx=editingCollectionIndex;closeAddForm();renderCollection();encRender();if(_editIdx!==null&&_editIdx!==undefined)openCollDetail(_editIdx);
   scrollPageTop();
   updateLastSaved();
 }
