@@ -3102,7 +3102,7 @@ function closeAddForm(){
   const pr=document.getElementById('photo-preview-row');if(pr)pr.innerHTML='';
   // Reset date dropdowns
   const mo=document.getElementById('f-month');const dy=document.getElementById('f-day');
-  if(mo){mo.disabled=true;}if(dy){dy.disabled=true;if(_returnIdx!==null&&_returnIdx!==undefined)openCollDetail(_returnIdx);}
+  if(mo){mo.disabled=true;}if(dy){dy.disabled=true;}if(_returnIdx!==null&&_returnIdx!==undefined)openCollDetail(_returnIdx);
 }
 function toggleCombo(){
   const cs=document.getElementById('combo-section');
