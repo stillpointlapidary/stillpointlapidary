@@ -231,6 +231,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .stat-label{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:4px}
 .stat-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink)}
 .coll-filter-cats{display:flex;gap:6px;flex-wrap:wrap;align-items:center;position:relative;margin-bottom:1rem}
+.coll-filter-cats+.filter-panel,.coll-filter-cats~.filter-panel{z-index:700;pointer-events:auto}.filter-panel .fpill{pointer-events:auto}
 .coll-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,280px));gap:18px;background:transparent;border:none;border-radius:0;overflow:visible;justify-content:center;align-items:start}
 .coll-card{background:var(--white);padding:1rem 1rem 0.9rem;cursor:pointer;transition:background 0.12s,box-shadow 0.12s,border-color 0.12s;position:relative;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-width:0}
 .coll-card:hover{background:var(--stone2);border-color:rgba(139,115,85,0.24);box-shadow:0 8px 22px rgba(42,37,32,0.06)}
@@ -410,7 +411,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .featured-card-intention{font-size:11px;color:var(--ink2);font-style:italic;line-height:1.4;margin-top:auto}
 .featured-divider{display:flex;align-items:center;gap:1rem;padding:1.25rem 1rem 0.75rem;cursor:pointer}
 .featured-divider-line{flex:1;height:0.5px;background:var(--border)}
-.featured-divider-text{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
+.featured-divider-text{font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);white-space:nowrap;font-weight:500}
 .featured-divider-arrow{font-size:10px;color:var(--accent)}
 @media(max-width:768px){.featured-cards{grid-template-columns:repeat(2,1fr)}.featured-title{font-size:18px}}
 @media(max-width:480px){.featured-cards{grid-template-columns:repeat(2,1fr)}}
@@ -538,10 +539,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <div class="featured-title">Ten stones worth knowing</div>
         <div class="featured-subtitle">A starting point for any collection — chosen for range, availability, and everyday use</div>
       </div>
-      <a class="featured-browse" onclick="document.getElementById('enc-search').scrollIntoView({behavior:'smooth'})">Browse all 363 →</a>
+      <a class="featured-browse" onclick="scrollToFullEncyclopedia();return false;">Browse all 363 →</a>
     </div>
     <div class="featured-cards" id="featured-cards"></div>
-    <div class="featured-divider" onclick="document.getElementById('enc-search').scrollIntoView({behavior:'smooth'})">
+    <div class="featured-divider" onclick="scrollToFullEncyclopedia();return false;">
       <div class="featured-divider-line"></div>
       <div class="featured-divider-text">Full encyclopedia — 363 stones</div>
       <div class="featured-divider-arrow">↓</div>
@@ -633,7 +634,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="stat-label">Wishlist</div><div class="stat-val" id="stat-wish">0</div>
     </div>
   </div>
-  <div style="position:relative;margin-bottom:1rem">
+  <div id="collection-filter-shell" style="position:relative;margin-bottom:1rem">
   <div class="coll-filter-cats" id="coll-filter-cats">
     <button class="filter-cat-btn" id="cfbtn-cfam" onclick="toggleCollPanel('cfam',event)">Family <span class="aval" id="cfval-cfam"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-ctheme" onclick="toggleCollPanel('ctheme',event)">Theme <span class="aval" id="cfval-ctheme"></span><span class="caret">▾</span></button>
@@ -1931,7 +1932,7 @@ function buildCollPanels(){
   if(cch)cch.innerHTML=`<button class="fpill active" onclick="setCollFilter('cchakra','all',this)">All</button>`+CHAKRA_OPTS.map(ch=>`<button class="fpill" onclick="setCollFilter('cchakra',${jsArg(ch)},this)">${escapeAttr(ch)}</button>`).join('');
   if(cm)cm.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmohs','all',this)">All</button>`+[
     {val:'soft',label:'Soft (1–4)'},{val:'medium',label:'Medium (5–6)'},{val:'hard',label:'Hard (7+)'}
-  ].map(x=>`<button class="fpill" onclick="setCollFilter('cmohs','${x.val}',this)">${x.label}</button>`).join('');
+  ].map(x=>`<button class="fpill" data-value="${x.val}" onclick="setCollFilter('cmohs','${x.val}',this)">${x.label}</button>`).join('');
   if(cfo)cfo.innerHTML=`<button class="fpill active" onclick="setCollFilter('cformation','all',this)">All</button>`+formations.map(f=>`<button class="fpill" onclick="setCollFilter('cformation',${jsArg(f)},this)">${escapeAttr(f)}</button>`).join('');
   if(cmt)cmt.innerHTML=`<button class="fpill active" onclick="setCollFilter('cmaterial','all',this)">All</button>`+materials.map(m=>`<button class="fpill" onclick="setCollFilter('cmaterial',${jsArg(m)},this)">${escapeAttr(m)}</button>`).join('');
   if(cf)cf.innerHTML=`<button class="fpill active" onclick="setCollFilter('form','all',this)">All</button>`+forms.map(f=>`<button class="fpill" onclick="setCollFilter('form',${jsArg(f)},this)">${escapeAttr(f)}</button>`).join('');
@@ -1994,10 +1995,28 @@ function setFilter(key,val,btn){
 function setCollFilter(key,val,btn){
   collFilters[key]=val;
   document.querySelectorAll('#cpills-'+key+' .fpill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn)btn.classList.add('active');
   updateBtn('cfbtn-'+key,'cfval-'+key,val);
   closeAllPanels();
   renderCollection();
+}
+
+function initCollectionFilterDelegation(){
+  const shell=document.getElementById('collection-filter-shell')||document.querySelector('#tab-collection [style*="position:relative"]');
+  if(!shell||shell.dataset.filterDelegated==='1')return;
+  shell.dataset.filterDelegated='1';
+  shell.addEventListener('click',function(e){
+    const pill=e.target.closest('.filter-panel .fpill');
+    if(!pill)return;
+    const panel=pill.closest('.filter-panel');
+    if(!panel||!panel.id||!panel.id.startsWith('cpanel-'))return;
+    e.preventDefault();
+    e.stopPropagation();
+    const key=panel.id.replace('cpanel-','');
+    const raw=pill.getAttribute('data-value')||pill.textContent.trim();
+    const val=(raw==='All')?'all':raw;
+    setCollFilter(key,val,pill);
+  });
 }
 
 function resetFilters(){
@@ -2693,6 +2712,7 @@ function setCollFamilyFilter(fam){
 
 function renderCollection(){
   buildCollPanels();
+  initCollectionFilterDelegation();
 
   // Stats use the visible collection list, with exact duplicate rows collapsed.
   // This protects against accidental double/triple saves without hiding genuinely different pieces.
@@ -3939,14 +3959,18 @@ const C101_CHAKRAS = [
 
 const C101_FAMILIES=[["Quartz", 79, "The most abundant crystal family on Earth. Clear Quartz amplifies energy; colored varieties like Amethyst and Citrine carry their own distinct properties.", "Amplification · Clarity · Versatility", "Most varieties are durable (Mohs 7). Safe for water, sunlight, and most cleansing methods."], ["Feldspar", 9, "Includes Moonstone, Labradorite, and Sunstone. Known for adularescence \u2014 the inner glow that seems to move. Deeply connected to intuition and cycles.", "Intuition · Cycles · Inner light", "Mohs 6\u20136.5. Avoid harsh chemicals. Some varieties sensitive to sunlight over time."], ["Calcite", 13, "Soft, colorful, and energetically amplifying. Each color carries specific properties \u2014 orange for creativity, blue for calm, green for renewal. Easy to work with for beginners.", "Amplification · Emotional healing · Gentle energy", "Soft (Mohs 3). Do not use in water. Polish carefully."], ["Tourmaline", 6, "One of the most electrically active mineral families \u2014 tourmaline generates a charge when heated or compressed. Black Tourmaline is the premier protective stone.", "Protection · Grounding · Electromagnetic shielding", "Mohs 7\u20137.5. Generally durable. Black Tourmaline safe for most uses."], ["Garnet", 7, "A large family with many varieties \u2014 not just red. Known for passion, vitality, and grounding life-force energy. Almandine, Pyrope, and Grossular are all garnets.", "Vitality · Passion · Grounding", "Mohs 6.5\u20137.5. Generally durable and water-safe."], ["Jasper", 0, "A form of chalcedony, opaque and richly patterned. Nurturing, stabilizing stones that support endurance and connection to the earth.", "Grounding · Endurance · Nurturing", "Mohs 6.5\u20137. Durable and generally safe for all cleansing methods."], ["Obsidian", 6, "Volcanic glass \u2014 not technically a mineral but a natural glass formed from lava. Deeply protective and truth-revealing. Works fast and can be intense.", "Protection · Shadow work · Truth", "Mohs 5\u20135.5. Handle with care (sharp edges when fractured). Safe for water."], ["Agate", 0, "Banded chalcedony formed in cavities in volcanic rock. Stabilizing, grounding, and protective. Each variety has its own character depending on pattern and color.", "Stability · Grounding · Balance", "Mohs 7. Very durable. Safe for water and most cleansing."], ["Fluorite", 8, "Highly ordered crystal structure that makes it a powerful mental clarifier. Available in many colors; rainbow fluorite integrates all of them. Absorbs and neutralizes negative energy.", "Clarity · Mental focus · Neutralizing", "Soft (Mohs 4). Do not use in water. Sunlight may fade color over time."], ["Kyanite", 6, "One of the few stones said to never need cleansing \u2014 it doesn't accumulate negative energy. Available in blue, black, green, and orange. Aligns chakras automatically.", "Alignment · Communication · Self-cleansing", "Mohs 4.5\u20137 depending on direction. Handle carefully. Do not use in water."], ["Aragonite", 5, "A calcium carbonate mineral closely related to Calcite. Grounding, stabilizing, and supportive during stress. Star Aragonite radiates energy in all directions.", "Grounding · Patience · Stress relief", "Soft (Mohs 3.5\u20134). Do not use in water. Handle with care."], ["Opal", 7, "Unique structure that diffracts light into spectral colors. Amplifies emotions and traits \u2014 use intentionally. Ethiopian and Australian opals have different characters.", "Amplification · Emotion · Inspiration", "Soft (Mohs 5.5\u20136.5). Very water-sensitive \u2014 do not soak. Avoid heat and harsh light."]];
 function init101(){
-  if(window._101inited){
-    init101Grids();
-    return;
+  // If this is called from a restored tab before the later 101 constants have initialized,
+  // retry after the script finishes instead of throwing and breaking the page.
+  try { CRYSTAL_GRIDS; CRYSTAL_SHAPES; C101_FAM_DATA; } catch(e) { setTimeout(init101,0); return; }
+  if(!window._101inited){
+    window._101inited=true;
+    initFamilies();
+    renderShapes();
+  } else {
+    initFamilies();
+    renderShapes();
   }
-  window._101inited=true;
   init101Grids();
-  initFamilies();
-  renderShapes();
   // Water pills
   const wp = document.getElementById('water-pills');
   if(wp) C101_WATER.forEach(n=>{
@@ -4010,6 +4034,8 @@ function show101(sec,btn){
   const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-pill[onclick*="${sec}"]`);
   if(activeBtn)activeBtn.classList.add('active');
   if(sec==='grids')init101Grids();
+  if(sec==='shapes')renderShapes();
+  if(sec==='families')initFamilies();
 }
 
 function jumpToStone(name){
@@ -4199,7 +4225,21 @@ function renderFamilies(tier){
   fc.innerHTML=filtered.map(f=>{const cnt=window.FAM_COUNTS[f.n]||0;const fArg=jsArg(f.n);return`<div class="fam-card" data-family="${escapeAttr(f.n)}" onclick="jumpToFamily(${fArg});return false;" title="View ${escapeAttr(f.n)} stones in the encyclopedia"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stones in encyclopedia</div>`:''}<div class="fam-desc">${f.desc}</div>${f.energy?`<div class="fam-note"><strong style="color:var(--ink2)">Energy:</strong> ${f.energy}</div>`:''}<div class="fam-note"><strong style="color:var(--ink2)">Care:</strong> ${f.care}</div></div>`;}).join('');
 }
 function initFamilies(){
+  try { C101_FAM_DATA; } catch(e) { setTimeout(initFamilies,0); return; }
   if(!window.FAM_COUNTS){window.FAM_COUNTS={};CRYSTALS.forEach(c=>{if(c.fam)window.FAM_COUNTS[c.fam]=(window.FAM_COUNTS[c.fam]||0)+1;});}
+  const fcDelegate=document.getElementById('fam-cards');
+  if(fcDelegate&&fcDelegate.dataset.familyDelegated!=='1'){
+    fcDelegate.dataset.familyDelegated='1';
+    fcDelegate.addEventListener('click',function(e){
+      const card=e.target.closest('.fam-card');
+      if(!card)return;
+      const fam=card.getAttribute('data-family')||card.querySelector('.fam-name')?.textContent?.trim();
+      if(!fam)return;
+      e.preventDefault();
+      e.stopPropagation();
+      jumpToFamily(fam);
+    });
+  }
   const nav=document.getElementById('fam-tier-nav');
   if(nav&&!nav.children.length){
     const allBtn=document.createElement('button');allBtn.className='c101-pill active';allBtn.textContent='All families';allBtn.onclick=()=>setFamTier('all',allBtn);nav.appendChild(allBtn);
@@ -4609,6 +4649,7 @@ function drawDot(x, y, r, hex, name, isCenter) {
 // ── RENDER GRID CARDS ──
 
 function renderGridCards() {
+  try { CRYSTAL_GRIDS; } catch(e) { setTimeout(renderGridCards,0); return; }
   const container = document.getElementById('grid-cards');
   if(!container) return;
   
@@ -4716,6 +4757,7 @@ function closeGridModal() {
 
 // Init grids when 101 tab loads
 function init101Grids() {
+  try { CRYSTAL_GRIDS; } catch(e) { setTimeout(init101Grids,0); return; }
   renderGridCards();
 }
 
@@ -5115,8 +5157,10 @@ function drawCabochonShape(){
 
 // ── RENDER SHAPES ──
 function renderShapes() {
+  try { CRYSTAL_SHAPES; } catch(e) { setTimeout(renderShapes,0); return; }
   const container = document.getElementById('shapes-grid');
-  if(!container || container.children.length > 0) return;
+  if(!container) return;
+  if(container.children.length > 0) return;
   
   CRYSTAL_SHAPES.forEach(shape => {
     const card = document.createElement('div');
@@ -5598,5 +5642,143 @@ _supa.auth.onAuthStateChange(function(_e, session) {
 });
 _authInit();
 </script>
+
+<script>
+/* ── PRE-PASS REPAIR 5: targeted navigation + click hardening ── */
+(function(){
+  function safeScrollTo(el, offset){
+    if(!el)return;
+    const y = el.getBoundingClientRect().top + window.scrollY - (offset || 128);
+    try{ window.scrollTo({top:Math.max(0,y), left:0, behavior:'smooth'}); }
+    catch(e){ window.scrollTo(0, Math.max(0,y)); }
+  }
+  function encSearchEl(){ return document.getElementById('enc-search') || document.getElementById('enc-count') || document.getElementById('crystal-grid'); }
+  window.scrollToFullEncyclopedia = function(){ safeScrollTo(encSearchEl(), 130); };
+  window.scrollToEncyclopediaResults = function(){ safeScrollTo(encSearchEl(), 130); };
+  window.scrollToTabTop = function(name){
+    if(name === '101'){
+      safeScrollTo(document.getElementById('c101-nav') || document.getElementById('tab-101'), 112);
+      return;
+    }
+    safeScrollTo(document.getElementById('tab-'+name) || document.querySelector('main.content'), 112);
+  };
+  window.scrollTo101Top = function(){ safeScrollTo(document.getElementById('c101-nav') || document.getElementById('tab-101'), 112); };
+
+  function resetEncFiltersSafe(){
+    if(typeof resetEncyclopediaFiltersForJump === 'function'){
+      resetEncyclopediaFiltersForJump();
+      return;
+    }
+    if(typeof filters === 'object'){
+      filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all'};
+    }
+    const s=document.getElementById('enc-search');
+    if(s)s.value='';
+  }
+  window.jumpToFilteredEncyclopedia = function(key,val){
+    if(typeof switchTabByName === 'function') switchTabByName('encyclopedia');
+    else if(typeof switchTab === 'function') switchTab('encyclopedia', document.querySelectorAll('.nav-tab')[0]);
+    setTimeout(function(){
+      resetEncFiltersSafe();
+      if(typeof activateEncyclopediaFilter === 'function'){
+        activateEncyclopediaFilter(key,val);
+      }else{
+        if(typeof filters === 'object') filters[key]=val;
+        if(typeof encRender === 'function') encRender();
+      }
+      setTimeout(window.scrollToEncyclopediaResults, 80);
+    },80);
+  };
+  window.jumpToChakra = function(chakra){ window.jumpToFilteredEncyclopedia('chakra', chakra); };
+  window.jumpToFamily = function(family){ window.jumpToFilteredEncyclopedia('fam', family); };
+
+  try{
+    initId2 = function(){
+      const grid=document.getElementById('id2-colors');
+      if(!grid)return;
+      grid.innerHTML='';
+      ID2_COLORS.forEach(function(col){
+        const btn=document.createElement('button');
+        btn.className='id2-color-btn';
+        btn.title=col.val;
+        btn.setAttribute('aria-label', col.val);
+        btn.style.cssText='background:'+col.hex+';border:2.5px solid '+(col.val==='White'?'var(--border)':'transparent');
+        btn.onclick=function(){
+          id2State.color=(id2State.color===col.val)?null:col.val;
+          document.querySelectorAll('.id2-color-btn').forEach(function(b){
+            b.classList.remove('active');
+            b.style.border=b.title==='White'?'2.5px solid var(--border)':'2.5px solid transparent';
+          });
+          if(id2State.color)btn.classList.add('active');
+          if(typeof runId2==='function')runId2();
+        };
+        grid.appendChild(btn);
+      });
+      if(typeof runId2==='function')runId2();
+    };
+  }catch(e){}
+
+  function stampCrystalCards(){
+    document.querySelectorAll('#crystal-grid .crystal-card, #id2-grid .crystal-card').forEach(function(card){
+      if(card.dataset.crystalId)return;
+      const name=(card.querySelector('.card-name')||{}).textContent || '';
+      if(!name || typeof CRYSTALS === 'undefined')return;
+      const match=CRYSTALS.find(function(c){return c.n===name.trim();});
+      if(match)card.dataset.crystalId=match.i;
+    });
+  }
+  try{
+    const oldEncRender=encRender;
+    encRender=function(){ oldEncRender(); stampCrystalCards(); };
+  }catch(e){}
+  try{
+    const oldRunId2=runId2;
+    runId2=function(){ oldRunId2(); stampCrystalCards(); };
+  }catch(e){}
+
+  document.addEventListener('click', function(e){
+    const famCard=e.target.closest && e.target.closest('#fam-cards .fam-card');
+    if(famCard){
+      const fam=famCard.getAttribute('data-family') || (famCard.querySelector('.fam-name')||{}).textContent;
+      if(fam){ e.preventDefault(); e.stopPropagation(); window.jumpToFamily(fam.trim()); return; }
+    }
+    const chakraCard=e.target.closest && e.target.closest('#chakra-cards .chakra-card');
+    if(chakraCard){
+      const name=(chakraCard.querySelector('.chakra-name')||{}).textContent;
+      if(name){ e.preventDefault(); e.stopPropagation(); window.jumpToChakra(name.trim()); return; }
+    }
+    const card=e.target.closest && e.target.closest('#crystal-grid .crystal-card, #id2-grid .crystal-card');
+    if(card){
+      const id=card.dataset.crystalId;
+      if(id && typeof openDetail==='function'){
+        e.preventDefault(); e.stopPropagation();
+        openDetail(id);
+        return;
+      }
+    }
+    const back=e.target.closest && e.target.closest('.c101-backtop');
+    if(back){
+      e.preventDefault();
+      const sec=back.closest('section');
+      if(sec && sec.id==='tab-101') window.scrollTo101Top();
+      else if(sec && sec.id) window.scrollToTabTop(sec.id.replace('tab-',''));
+      else window.scrollTo({top:0,left:0,behavior:'smooth'});
+    }
+  }, true);
+
+  document.addEventListener('DOMContentLoaded', function(){
+    stampCrystalCards();
+    if(document.getElementById('tab-identify')?.style.display !== 'none'){
+      try{ initId2(); }catch(e){}
+    }
+  });
+  setTimeout(function(){
+    stampCrystalCards();
+    const grid=document.getElementById('id2-colors');
+    if(grid && !grid.children.length){ try{ initId2(); }catch(e){} }
+  },250);
+})();
+</script>
+
 </body>
 </html>
