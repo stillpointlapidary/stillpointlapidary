@@ -2987,8 +2987,9 @@ function editCollPiece(idx){
   const p=collection[idx];if(!p)return;
   collDetailReturnFamily=null;
   closeCollDetail();
-  openAddForm(p.crystalId||'');
   editingCollectionIndex=idx;
+  openAddForm(p.crystalId||'');
+
   const title=document.querySelector('#add-form-overlay .form-title');if(title)title.textContent='Edit piece';
   const sub=document.querySelector('#add-form-overlay .form-sub');if(sub)sub.textContent='Update this specific physical piece in your collection.';
   const saveBtn=document.querySelector('#add-form-overlay .form-footer .btn-accent');if(saveBtn)saveBtn.textContent='Save changes';
