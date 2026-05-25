@@ -1948,6 +1948,42 @@ function collectionCardPhotoHtml(p,c,name){
   return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
 }
 
+function collectionPieceSignature(p){
+  if(!p)return'';
+  const photoCount=(p.photos&&p.photos.length)||0;
+  const combos=(p.comboCrystals||[]).slice().sort().join('|');
+  return [
+    p.crystalId||'',
+    p.isCombo?'combo':'single',
+    combos,
+    p.nickname||'',
+    p.form||'',
+    p.size||'',
+    p.treated||'',
+    p.condition||'',
+    p.locCustom||'',
+    p.shelf||'',
+    p.tier||'',
+    p.pos||'',
+    p.acquired||'',
+    p.source||'',
+    p.price||'',
+    p.notes||'',
+    photoCount
+  ].map(v=>String(v).trim().toLowerCase()).join('::');
+}
+function dedupedCollectionItems(list){
+  const seen=new Set();
+  const out=[];
+  (list||[]).forEach(p=>{
+    const sig=collectionPieceSignature(p);
+    if(!sig||seen.has(sig))return;
+    seen.add(sig);
+    out.push(p);
+  });
+  return out;
+}
+
 function encCardHtml(c){
   const isOwned=!!owned[c.i], isWish=!!wish[c.i];
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
@@ -2342,12 +2378,14 @@ function setCollQuickFilter(mode){
 function renderCollection(){
   buildCollPanels();
 
-  // Stats (always from full collection)
+  // Stats use the visible collection list, with exact duplicate rows collapsed.
+  // This protects against accidental double/triple saves without hiding genuinely different pieces.
+  const displayCollection=dedupedCollectionItems(collection);
   const st=document.getElementById('stat-total');
   const sv=document.getElementById('stat-var');
   const sw=document.getElementById('stat-wish');
-  if(st)st.textContent=collection.length;
-  if(sv)sv.textContent=new Set(collection.filter(p=>p.crystalId).map(p=>p.crystalId)).size;
+  if(st)st.textContent=displayCollection.length;
+  if(sv)sv.textContent=new Set(displayCollection.filter(p=>p.crystalId).map(p=>p.crystalId)).size;
   if(sw)sw.textContent=Object.keys(wish).length;
 
   const wrap=document.getElementById('coll-wrap');
@@ -2373,7 +2411,7 @@ function renderCollection(){
   }
 
   // COLLECTION view (filtered)
-  const items=collection.filter(p=>{
+  const items=displayCollection.filter(p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
     const loc=p.shelf||p.locCustom||'';
     return(collFilters.form==='all'||p.form===collFilters.form)&&
@@ -2383,7 +2421,7 @@ function renderCollection(){
   });
 
   if(!items.length){
-    wrap.innerHTML='<div class="empty-coll">'+(collection.length?'No pieces match your filters.':'Your collection is empty. Tap + Add piece to get started.')+'</div>';
+    wrap.innerHTML='<div class="empty-coll">'+(displayCollection.length?'No pieces match your filters.':'Your collection is empty. Tap + Add piece to get started.')+'</div>';
     return;
   }
   wrap.innerHTML='<div class="coll-grid">'+items.map(p=>{
