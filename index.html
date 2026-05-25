@@ -607,7 +607,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="coll-btns">
       <button class="btn btn-sm" onclick="exportCollectionCSV()">↓ Collection CSV</button>
       <button class="btn btn-sm" onclick="exportWishlistCSV()">↓ Wishlist CSV</button>
-      <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add collection pieces</button>
+      <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add</button>
       <button class="btn btn-sm btn-accent" onclick="openAddForm()">+ Add piece</button>
     </div>
   </div>
@@ -1466,7 +1466,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div style="display:flex;flex-direction:column;gap:8px">
         <button class="btn" style="justify-content:flex-start" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
         <button class="btn" style="justify-content:flex-start" onclick="openAddForm();closePopup('manage')">+ Add collection piece</button>
-        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add collection pieces</button>
+        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add</button>
       </div>
     </div>
     <div style="margin-bottom:1.5rem">
@@ -2087,10 +2087,16 @@ function collectionPhotoSources(p,c){
   const refPhoto=firstEncyclopediaPhoto(c);
   return refPhoto?[refPhoto]:[];
 }
+function isReferencePhotoUrl(src,c){
+  if(!src)return false;
+  const ref=firstEncyclopediaPhoto(c);
+  return (!!ref&&src===ref)||String(src).includes('/stone-images/encyclopedia/');
+}
 function collectionCardPhotoHtml(p,c,name,idx){
   const ownPhoto=firstCollectionPhoto(p);
   if(ownPhoto){
-    return`<div class="coll-card-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img class="coll-card-photo" src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}" loading="lazy"></div>`;
+    const refBadge=isReferencePhotoUrl(ownPhoto,c)?'<span class="reference-image-badge">Reference image</span>':'';
+    return`<div class="coll-card-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img class="coll-card-photo" src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}" loading="lazy">${refBadge}</div>`;
   }
   const refPhoto=firstEncyclopediaPhoto(c);
   if(refPhoto){
@@ -2646,7 +2652,8 @@ function collDetailPhotoHtml(p,c,name){
   const idx=(currentCollDetailIdx!==null&&currentCollDetailIdx!==undefined)?currentCollDetailIdx:collection.indexOf(p);
   const ownPhoto=firstCollectionPhoto(p);
   if(ownPhoto){
-    return`<div class="coll-detail-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}"></div>`;
+    const refBadge=isReferencePhotoUrl(ownPhoto,c)?'<span class="reference-image-badge">Reference image</span>':'';
+    return`<div class="coll-detail-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}">${refBadge}</div>`;
   }
   const refPhoto=firstEncyclopediaPhoto(c);
   if(refPhoto){
@@ -2988,7 +2995,7 @@ function loadBatchPhotos(input){
     const reader=new FileReader();
     reader.onload=e=>{
       const entryIdx=batchEntries.length;
-      batchEntries.push({photo:e.target.result,crystalId:'',nickname:''});
+      batchEntries.push({photo:e.target.result,file:file,crystalId:'',nickname:''});
       const div=document.createElement('div');
       div.style.cssText='display:grid;grid-template-columns:80px 1fr 1fr;gap:10px;align-items:center;background:var(--white);border:0.5px solid var(--border);border-radius:8px;padding:10px';
       div.innerHTML=`<img src="${e.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:6px">
@@ -3063,28 +3070,76 @@ function batchComboKey(e,idx){
   else if(e.key==='Escape'){drop.classList.remove('open');}
 }
 
-function saveBatch(){
+async function saveBatch(){
   const source=document.getElementById('b-source')?.value||'';
   const loc=document.getElementById('b-loc')?.value||'';
   const form=document.getElementById('b-form')?.value||'';
   const acquired=document.getElementById('b-acquired')?.value||'';
+  const validEntries=(batchEntries||[]).filter(entry=>entry&&entry.crystalId);
+  if(!validEntries.length){alert('Please assign at least one photo to a crystal.');return;}
+  const saveBtn=document.getElementById('batch-save-btn');
+  const oldText=saveBtn?saveBtn.textContent:'';
+  if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving…';}
   let saved=0;
-  batchEntries.forEach(entry=>{
-    if(!entry.crystalId)return;
-    collection.push({
-      id:Date.now()+Math.random(),crystalId:entry.crystalId,isCombo:false,comboCrystals:[],
-      nickname:entry.nickname,form,size:'',dims:'',treated:'Natural',
-      locCustom:loc,shelf:'',tier:'',pos:'',acquired,source,price:'',notes:'',
-      photos:entry.photo?[entry.photo]:[],
-    });
-    owned[entry.crystalId]=true;
-    saved++;
-  });
-  localStorage.setItem('lap_coll',JSON.stringify(collection));
-  localStorage.setItem('lap_owned',JSON.stringify(owned));
-  localStorage.setItem('lap_last_saved',new Date().toISOString());
-  closeBatchForm();renderCollection();encRender();scrollPageTop();
-  alert(`Saved ${saved} piece${saved!==1?'s':''} to your collection.`);
+  try{
+    if(_currentUser&&_supa){
+      for(const entry of validEntries){
+        const payload={
+          user_id:_currentUser.id,
+          stone_id:entry.crystalId,
+          form_type:form||null,
+          size:null,
+          notes:null,
+          acquired_from:source.trim()||null,
+          acquired_date:acquired||null,
+          price_paid:null,
+          nickname:(entry.nickname||'').trim()||null,
+          treatment:'Natural',
+          condition:null,
+          location:loc.trim()||null,
+          is_combo:false,
+          combo_stone_ids:[],
+          combo_stone_names:[]
+        };
+        const { data, error } = await _supa
+          .from('collection_items')
+          .insert(payload)
+          .select('id')
+          .single();
+        if(error)throw error;
+        if(entry.file instanceof File){
+          await _uploadCollectionPhotos(data.id,[{file:entry.file,_pendingId:'batch-'+saved}],1);
+        }
+        saved++;
+      }
+      closeBatchForm();
+      await loadSupabaseState();
+      updateLastSaved();
+      scrollPageTop();
+      alert(`Saved ${saved} piece${saved!==1?'s':''} to your collection.`);
+    }else{
+      validEntries.forEach(entry=>{
+        collection.push({
+          id:Date.now()+Math.random(),crystalId:entry.crystalId,isCombo:false,comboCrystals:[],
+          nickname:entry.nickname,form,size:'',dims:'',treated:'Natural',
+          locCustom:loc,shelf:'',tier:'',pos:'',acquired,source,price:'',notes:'',
+          photos:entry.photo?[entry.photo]:[],
+        });
+        owned[entry.crystalId]=true;
+        saved++;
+      });
+      localStorage.setItem('lap_coll',JSON.stringify(collection));
+      localStorage.setItem('lap_owned',JSON.stringify(owned));
+      localStorage.setItem('lap_last_saved',new Date().toISOString());
+      closeBatchForm();renderCollection();encRender();scrollPageTop();
+      alert(`Saved ${saved} piece${saved!==1?'s':''} to your collection.`);
+    }
+  }catch(err){
+    console.error('Batch save failed',err);
+    alert('Could not save batch entries: '+(err.message||err));
+  }finally{
+    if(saveBtn){saveBtn.disabled=false;saveBtn.textContent=oldText||'Save all entries';}
+  }
 }
 
 // ── ENCYCLOPEDIA ENTRY ──
@@ -3126,19 +3181,22 @@ function saveEncEntry(){
 }
 
 // ── EXPORT ──
+function exportPhotoValue(photo){
+  if(!photo)return '';
+  const raw=(typeof photo==='string')?photo:(photo.storage_path||photo.path||photo.name||photo.url||photo.signedUrl||photo.preview||photo.src||'');
+  if(!raw)return '';
+  if(String(raw).startsWith('data:image/'))return '[embedded local image omitted from CSV]';
+  return raw;
+}
 function normalizePhotoList(piece){
   const photos=(piece&&Array.isArray(piece.photos))?piece.photos:[];
-  return photos.map(photo=>{
-    if(!photo)return '';
-    if(typeof photo==='string')return photo;
-    return photo.url||photo.signedUrl||photo.preview||photo.src||photo.path||photo.name||'';
-  }).filter(Boolean);
+  return photos.map(exportPhotoValue).filter(Boolean);
 }
 
 function exportJSON(){dl(JSON.stringify({collection,owned,wish,exported:new Date().toISOString()},null,2),'application/json','TheLapidary_backup.json');}
 function csvCell(value){return `"${String(value??'').replace(/"/g,'""')}"`;}
 function downloadCSV(rows,filename){
-  const csv=rows.map(r=>r.map(csvCell).join(',')).join('\n');
+  const csv='\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\n');
   dl(csv,'text/csv;charset=utf-8',filename);
 }
 function exportCollectionCSV(){
@@ -3309,8 +3367,10 @@ document.addEventListener('click',function(e){
   }
 });
 
+const ADMIN_EMAILS = ['kikiholz31@duck.com', 'christieholzwarth@gmail.com', 'dustin@stillpointdfw.com'];
 function isAdminUser(user){
-  return !!(user&&user.email&&user.email.toLowerCase()==='kikiholz31@duck.com');
+  const email=(user&&user.email?user.email:'').toLowerCase();
+  return ADMIN_EMAILS.map(e=>String(e).toLowerCase()).includes(email);
 }
 function updateAdminEntryButtons(){
   const add=document.getElementById('add-entry-btn');
