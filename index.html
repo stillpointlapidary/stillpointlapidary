@@ -4009,6 +4009,7 @@ function init101(){
   });
   // Chakra cards
   const cc = document.getElementById('chakra-cards');
+  if(cc) cc.innerHTML = '';
   if(cc) C101_CHAKRAS.forEach(ch=>{
     const d=document.createElement('div');
     d.className='chakra-card';
