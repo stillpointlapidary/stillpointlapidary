@@ -5883,7 +5883,11 @@ _authInit();
         gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',document.querySelectorAll('.nav-tab')[4]);setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
       }else{gridBanner.style.display='none';}
     }
-    grid.innerHTML=matches.map(function(c){return encCardHtml(c);}).join('');
+    grid.innerHTML=matches.map(function(c){
+      // Build card html but replace the bare openDetail call with one that sets return context
+      const raw=encCardHtml(c);
+      return raw.replace(/onclick="openDetail\(/,"onclick="detailReturnContext={type:'usewhen'};openDetail(");
+    }).join('');
   };
 
   // Helpers for My Collection filters across My Pieces, Families, and Wishlist.
