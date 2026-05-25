@@ -2691,12 +2691,7 @@ function renderMoodStones(moodIdx,subFilter){
     }
   }
   grid.innerHTML=matches.map(c=>{
-    const tags=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean);
-    const tagHtml=tags.map(t=>`<span class="msc-tag">${escapeAttr(t)}</span>`).join('');
-    let uw=c.uw||'';
-    uw=uw.replace(/^use when /i,'');
-    uw=uw.charAt(0).toUpperCase()+uw.slice(1);
-    return`<div class="mood-stone-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})"><div class="msc-id">${escapeAttr(c.i||'')}</div><div class="msc-name">${escapeAttr(c.n||'')}</div><div class="msc-tags">${tagHtml}</div><div class="msc-uw">${escapeAttr(uw)}</div></div>`;
+    return`<div class="crystal-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
   }).join('');
 }
 
