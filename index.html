@@ -1636,7 +1636,8 @@ const SUB_FILTER_KW={"0": {"Calming Down": ["calm", "settle", "slow down"], "Ner
 // ── STATE ──
 let filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all'};
 let collFilters={cfam:'all',ctheme:'all',ccolor:'all',cchakra:'all',cmohs:'all',cformation:'all',cmaterial:'all',form:'all',size:'all',cshelf:'all'};
-let collQuickFilter='all'; // 'all' | 'wish'
+let collQuickFilter='all';
+let collActiveFamilyName=null; // 'all' | 'wish'
 let sortBy='name';
 let currentCrystal=null;
 let openPanel=null;
@@ -2721,7 +2722,15 @@ function setCollQuickFilter(mode){
   renderCollection();
 }
 
-
+function openFamilyDetail(fam){
+  collQuickFilter='__family__';
+  collActiveFamilyName=fam;
+  document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));
+  const total=document.getElementById('stat-cell-total');
+  if(total)total.classList.add('active-stat');
+  renderCollection();
+  scrollPageTop();
+}
 function setCollFamilyFilter(fam){
   collQuickFilter='all';
   collFilters.cfam=fam;
