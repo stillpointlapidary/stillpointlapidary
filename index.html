@@ -251,6 +251,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .coll-detail-grid{display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:start;margin-bottom:1rem}
 .coll-detail-photo-wrap{width:170px;height:170px;border-radius:10px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .coll-detail-photo-wrap img{width:100%;height:100%;object-fit:contain;padding:8px;display:block}
+.coll-card-photo-wrap.zoomable,.coll-detail-photo-wrap.zoomable{cursor:zoom-in}
+.coll-card-photo-wrap.zoomable img,.coll-detail-photo-wrap.zoomable img{pointer-events:none}
 .coll-detail-nophoto{width:170px;height:170px;border-radius:10px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:11px}
 .coll-detail-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:0.25rem}
 .coll-detail-sub{font-size:12px;color:var(--ink2r);line-height:1.55;margin-bottom:0.85rem}
@@ -599,9 +601,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 <!-- COLLECTION -->
 <section id="tab-collection" style="display:none">
-  <div style="font-size:12px;color:var(--ink2);background:var(--stone2);border-radius:8px;padding:0.75rem 1rem;margin-bottom:1rem;border-left:2px solid var(--accent2)">
-  💡 Your collection saves to this browser only. Use <strong>Manage → Backup</strong> regularly to protect your data, or add this app to your home screen for the best experience.
-</div><div class="coll-header">
+  <div class="coll-header">
     <div class="coll-title">My Pieces</div>
     <div class="coll-btns">
       <button class="btn btn-sm" onclick="exportCollectionCSV()">↓ Collection CSV</button>
@@ -1956,12 +1956,18 @@ function noPhotoZoneHtml(c){
 function escapeAttr(v){
   return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+function collectionPhotoUrl(photo){
+  if(!photo)return'';
+  if(typeof photo==='string')return photo;
+  return photo.preview||photo.url||photo.signedUrl||photo.src||'';
+}
 function firstCollectionPhoto(p){
   const photos=(p&&p.photos)||[];
   const first=photos.length?photos[0]:null;
-  if(!first)return'';
-  if(typeof first==='string')return first;
-  return first.preview||first.url||first.signedUrl||first.src||'';
+  return collectionPhotoUrl(first);
+}
+function allCollectionPhotos(p){
+  return ((p&&p.photos)||[]).map(collectionPhotoUrl).filter(Boolean);
 }
 function firstEncyclopediaPhoto(c){
   if(!c)return'';
@@ -1971,15 +1977,21 @@ function firstEncyclopediaPhoto(c){
   if(featuredMatch&&featuredMatch.photo)return SUPABASE_STONES+featuredMatch.photo;
   return'';
 }
-function collectionCardPhotoHtml(p,c,name){
+function collectionPhotoSources(p,c){
+  const ownPhotos=allCollectionPhotos(p);
+  if(ownPhotos.length)return ownPhotos;
+  const refPhoto=firstEncyclopediaPhoto(c);
+  return refPhoto?[refPhoto]:[];
+}
+function collectionCardPhotoHtml(p,c,name,idx){
   const ownPhoto=firstCollectionPhoto(p);
   if(ownPhoto){
-    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}" loading="lazy"></div>`;
+    return`<div class="coll-card-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img class="coll-card-photo" src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}" loading="lazy"></div>`;
   }
   const refPhoto=firstEncyclopediaPhoto(c);
   if(refPhoto){
     const refAlt=c&&c.n?`${c.n} reference image`:name;
-    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"><span class="reference-image-badge">Reference image</span></div>`;
+    return`<div class="coll-card-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge image"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"><span class="reference-image-badge">Reference image</span></div>`;
   }
   return`<div class="coll-card-nophoto"><span>No photo</span></div>`;
 }
@@ -2264,6 +2276,23 @@ function closePhotoLightbox(){
   if(lb){lb.classList.remove('open');lb.classList.remove('has-nav');}
   document.body.style.overflow='';
 }
+function openCollectionPhotoLightbox(idx,startIndex,event){
+  if(event)event.stopPropagation();
+  const p=collection[idx];
+  if(!p)return;
+  const c=CRYSTALS.find(x=>x.i===p.crystalId);
+  const sources=collectionPhotoSources(p,c);
+  if(!sources.length)return;
+  const lb=document.getElementById('photo-lightbox');
+  if(!lb)return;
+  photoLightboxSources=sources;
+  photoLightboxIndex=Math.max(0,Math.min(startIndex||0,sources.length-1));
+  photoLightboxAlt=collPieceName(p,c)||'Collection photo';
+  setPhotoLightboxImage();
+  lb.classList.toggle('has-nav',photoLightboxSources.length>1);
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
 document.addEventListener('keydown',function(e){
   const lb=document.getElementById('photo-lightbox');
   if(!lb || !lb.classList.contains('open'))return;
@@ -2487,7 +2516,7 @@ function renderCollection(){
     const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
     const loc=locParts.slice(0,2).join(' · ');
     const ri=collection.indexOf(p);
-    const photoHtml=collectionCardPhotoHtml(p,c,name);
+    const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
     return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${name}</div><div class="coll-card-meta">${c?.n||''} ${p.size?'· '+p.size:''}</div><div class="coll-card-loc">${loc}</div></div>`;
   }).join('')+'</div>';
 }
@@ -2500,14 +2529,15 @@ function collPieceLocation(p){
   return [p?.locCustom,p?.shelf,p?.tier,p?.pos].filter(Boolean).join(' · ');
 }
 function collDetailPhotoHtml(p,c,name){
+  const idx=(currentCollDetailIdx!==null&&currentCollDetailIdx!==undefined)?currentCollDetailIdx:collection.indexOf(p);
   const ownPhoto=firstCollectionPhoto(p);
   if(ownPhoto){
-    return`<div class="coll-detail-photo-wrap"><img src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}"></div>`;
+    return`<div class="coll-detail-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge photo"><img src="${escapeAttr(ownPhoto)}" alt="${escapeAttr(name)}"></div>`;
   }
   const refPhoto=firstEncyclopediaPhoto(c);
   if(refPhoto){
     const refAlt=c&&c.n?`${c.n} reference image`:name;
-    return`<div class="coll-detail-photo-wrap"><img src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}"><span class="reference-image-badge">Reference image</span></div>`;
+    return`<div class="coll-detail-photo-wrap zoomable" onclick="openCollectionPhotoLightbox(${idx},0,event)" title="Enlarge image"><img src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}"><span class="reference-image-badge">Reference image</span></div>`;
   }
   return`<div class="coll-detail-nophoto">No photo</div>`;
 }
