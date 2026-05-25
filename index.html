@@ -2473,6 +2473,9 @@ function closeDrawer(){
       show101('grids');
       if(ctx.gridId) openGridModal(ctx.gridId);
     },0);
+  } else if(detailReturnContext&&detailReturnContext.type==='usewhen'){
+    detailReturnContext=null;
+    switchTabByName('mood');
   }
 }
 let photoLightboxSources=[];
@@ -2693,7 +2696,7 @@ function renderMoodStones(moodIdx,subFilter){
     let uw=c.uw||'';
     uw=uw.replace(/^use when /i,'');
     uw=uw.charAt(0).toUpperCase()+uw.slice(1);
-    return`<div class="mood-stone-card" onclick="openDetail(${jsArg(c.i)})"><div class="msc-id">${escapeAttr(c.i||'')}</div><div class="msc-name">${escapeAttr(c.n||'')}</div><div class="msc-tags">${tagHtml}</div><div class="msc-uw">${escapeAttr(uw)}</div></div>`;
+    return`<div class="mood-stone-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})"><div class="msc-id">${escapeAttr(c.i||'')}</div><div class="msc-name">${escapeAttr(c.n||'')}</div><div class="msc-tags">${tagHtml}</div><div class="msc-uw">${escapeAttr(uw)}</div></div>`;
   }).join('');
 }
 
