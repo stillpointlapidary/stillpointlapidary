@@ -4502,7 +4502,21 @@ function initPWA(){
   if(window.matchMedia('(display-mode: standalone)').matches) return;
   setTimeout(()=>{
     const banner = document.getElementById('pwa-banner');
-    if(banner) banner.style.display='flex';
+    if(!banner) return;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const title = document.getElementById('pwa-banner-title');
+    const body = document.getElementById('pwa-banner-body');
+    const cta = document.getElementById('pwa-banner-cta');
+    if(isMobile){
+      if(title) title.textContent = 'Add to your home screen';
+      if(body) body.textContent = 'Tap Share → Add to Home Screen for quick access to your collection.';
+      if(cta){ cta.textContent = 'Got it'; cta.onclick = ()=>dismissPWA(true); }
+    } else {
+      if(title) title.textContent = 'Build your collection';
+      if(body) body.textContent = 'Create a free account to track the stones you own, save your wishlist, and carry your collection everywhere.';
+      if(cta){ cta.textContent = 'Create account'; cta.onclick = ()=>{ dismissPWA(true); openAuthModal('signup'); }; }
+    }
+    banner.style.display='flex';
   }, 3000);
 }
 function dismissPWA(permanent){
@@ -5422,11 +5436,11 @@ function renderShapes() {
 </script>
 <div id="pwa-banner" style="display:none;position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);width:min(480px,calc(100vw - 2rem));background:var(--ink);color:var(--white);border-radius:12px;padding:1rem 1.25rem;z-index:999;align-items:center;gap:1rem;box-shadow:0 8px 32px rgba(42,37,32,0.25)">
   <div style="flex:1">
-    <div style="font-size:13px;font-weight:500;margin-bottom:2px">Add to your home screen</div>
-    <div style="font-size:11px;opacity:0.7;line-height:1.5">Install STILL POINT Lapidary for quick access and offline use. Tap Share → Add to Home Screen in Safari.</div>
+    <div id="pwa-banner-title" style="font-size:13px;font-weight:500;margin-bottom:2px"></div>
+    <div id="pwa-banner-body" style="font-size:11px;opacity:0.7;line-height:1.5"></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-    <button onclick="dismissPWA(true)" style="font-size:11px;padding:5px 12px;background:var(--accent);border:none;border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap">Got it</button>
+    <button id="pwa-banner-cta" style="font-size:11px;padding:5px 12px;background:var(--accent);border:none;border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap"></button>
     <button onclick="dismissPWA(false)" style="font-size:11px;padding:5px 12px;background:transparent;border:0.5px solid rgba(255,255,255,0.3);border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap">Not now</button>
   </div>
 </div>
