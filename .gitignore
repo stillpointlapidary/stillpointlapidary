@@ -1,0 +1,21 @@
+# Logo export folders (large image files)
+logo-exports-v3/
+logo-exports-v4/
+logo-exports-v5/
+logo-exports-v6/
+logo-set/
+
+# Working/scratch files
+*.docx
+*.py
+_fonts_embedded.txt
+_logo_data.txt
+
+# Extra HTML tools (not part of the live site)
+lapidary-photo-editor.html
+logo-color-options.html
+logo-index.html
+social-preview.html
+
+# Claude Code workspace files
+.claude/
