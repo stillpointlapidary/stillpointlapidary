@@ -1592,14 +1592,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="form-box">
     <button class="popup-close" onclick="closeAddEncForm()">✕</button>
     <div class="form-title">Add encyclopedia entry</div>
-    <div class="form-sub">Add a new crystal to your reference library. Only Name is required.</div>
+    <div class="form-sub">Name, family, material type, crystal system, formation, color, geological notes, energetic role, and Use When are required.</div>
     <div class="form-row">
-      <div class="fg"><label>Name *</label><input type="text" id="enc-name" placeholder="e.g. Sugilite"></div>
+      <div class="fg">
+        <label style="display:flex;align-items:center;gap:8px">Name *
+          <button class="btn btn-sm" id="enc-autofill-btn" onclick="encAutoFill()" style="font-size:10px;padding:2px 10px;margin-left:auto">✦ Auto-fill with AI</button>
+        </label>
+        <input type="text" id="enc-name" placeholder="e.g. Sugilite" oninput="encCheckDupe(this.value)">
+        <div id="enc-autofill-status" style="font-size:12px;color:var(--ink3);margin-top:4px;display:none"></div>
+        <div id="enc-duplicate-warn" style="font-size:12px;color:#c0392b;margin-top:4px;display:none"></div>
+      </div>
       <div class="fg"><label>Alternate names</label><input type="text" id="enc-alt" placeholder="e.g. Royal Lavulite"></div>
-    </div>
-    <div style="margin-bottom:1rem">
-      <button class="btn btn-accent" id="enc-autofill-btn" onclick="encAutoFill()" style="width:100%;justify-content:center">✦ Auto-fill with AI</button>
-      <div id="enc-autofill-status" style="font-size:12px;color:var(--ink3);margin-top:6px;text-align:center;display:none"></div>
     </div>
     <div class="form-row">
       <div class="fg"><label>Mineral family</label><input type="text" id="enc-fam" placeholder="e.g. Silicates"></div>
@@ -3566,6 +3569,13 @@ async function saveBatch(){
 
 // ── ENCYCLOPEDIA ENTRY ──
 function openAddEncForm(){document.getElementById('add-enc-form-overlay').classList.add('open');}
+function encCheckDupe(val){
+  const warn=document.getElementById('enc-duplicate-warn');
+  if(!warn)return;
+  const match=val.trim()&&CRYSTALS.find(x=>x.n.toLowerCase()===val.trim().toLowerCase());
+  if(match){warn.textContent='⚠ "'+match.n+'" already exists ('+match.i+')';warn.style.display='block';}
+  else{warn.style.display='none';}
+}
 async function encAutoFill(){
   const name=(document.getElementById('enc-name')?.value||'').trim();
   if(!name){alert('Enter a stone name first.');return;}
@@ -3605,6 +3615,20 @@ function closeAddEncForm(){
 function saveEncEntry(){
   const name=document.getElementById('enc-name').value.trim();
   if(!name){alert('Name is required.');return;}
+  // Duplicate check
+  const dupe=CRYSTALS.find(x=>x.n.toLowerCase()===name.toLowerCase());
+  if(dupe){if(!confirm(`"${name}" already exists in the encyclopedia (${dupe.i}). Add anyway?`))return;}
+  // Required fields
+  const missing=[];
+  if(!document.getElementById('enc-fam').value.trim())missing.push('Mineral family');
+  if(!document.getElementById('enc-mt').value)missing.push('Material type');
+  if(!document.getElementById('enc-sy').value)missing.push('Crystal system');
+  if(!document.getElementById('enc-fo').value)missing.push('Formation');
+  if(!document.getElementById('enc-c').value.trim())missing.push('Color');
+  if(!document.getElementById('enc-g').value.trim())missing.push('Geological notes');
+  if(!document.getElementById('enc-er').value.trim())missing.push('Energetic role');
+  if(!document.getElementById('enc-uw').value.trim())missing.push('Use When');
+  if(missing.length){alert('Please fill in required fields:\n• '+missing.join('\n• '));return;}
   const newId='C-'+(9000+customEntries.length+1).toString().padStart(4,'0');
   const uw=document.getElementById('enc-uw').value.trim();
   const er=document.getElementById('enc-er').value.trim();
