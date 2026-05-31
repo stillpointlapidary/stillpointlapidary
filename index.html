@@ -1496,6 +1496,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="printCollectionReport();closePopup('manage')">⎙ Print collection report</button>
+        <button class="btn" style="justify-content:flex-start" onclick="printWishlistReport();closePopup('manage')">⎙ Print wishlist report</button>
         <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Export collection (CSV)</button>
         <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Export wishlist (CSV)</button>
       </div>
@@ -3731,6 +3733,75 @@ function exportWishlistCSV(){
   downloadCSV(rows,'StillPointLapidary_wishlist.csv');
 }
 function exportCSV(){exportCollectionCSV();}
+
+function printCollectionReport(){
+  const items=dedupedCollectionItems(collection);
+  if(!items.length){alert('Your collection is empty.');return;}
+  const rows=items.map(p=>{
+    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    const name=p.nickname?`${c?.n||''} <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:c?.n||'Unknown';
+    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+    const details=[p.form,p.size,p.treated,p.condition].filter(Boolean).join(' · ');
+    const meta=[formatDisplayDate(p.acquired)&&`Acquired ${formatDisplayDate(p.acquired)}`,p.source&&`Source: ${p.source}`,formatDisplayPrice(p.price)&&`${formatDisplayPrice(p.price)}`].filter(Boolean).join(' · ');
+    return `<div style="padding:1rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem">
+        <div style="font-family:'Georgia',serif;font-size:16px;color:#2a2520">${name}</div>
+        <div style="font-size:11px;color:#8a7e72;white-space:nowrap">${p.id||''}</div>
+      </div>
+      ${p.isCombo&&comboNames.length?`<div style="font-size:12px;color:#8a7e72;margin-top:2px">Combo: ${comboNames.join(' · ')}</div>`:''}
+      ${details?`<div style="font-size:12px;color:#5a5149;margin-top:4px">${details}</div>`:''}
+      ${collPieceLocation(p)?`<div style="font-size:12px;color:#8a7e72;margin-top:2px">📍 ${collPieceLocation(p)}</div>`:''}
+      ${meta?`<div style="font-size:11px;color:#a09890;margin-top:4px">${meta}</div>`:''}
+      ${p.notes?`<div style="font-size:12px;color:#5a5149;margin-top:6px;font-style:italic">${p.notes}</div>`:''}
+      ${c?.uw?`<div style="font-size:11px;color:#8a7e72;margin-top:6px;padding:6px 10px;background:#f5f2ef;border-radius:4px">${c.uw}</div>`:''}
+    </div>`;
+  }).join('');
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Georgia',serif;color:#2a2520;background:#fff;padding:2.5rem 3rem;max-width:800px;margin:0 auto}
+  @media print{body{padding:1.5rem 2rem}@page{margin:1.5cm}}</style></head><body>
+  <div style="border-bottom:2px solid #2a2520;padding-bottom:1rem;margin-bottom:0.5rem">
+    <div style="font-family:'Georgia',serif;font-size:28px;font-weight:400;letter-spacing:0.02em">Still Point Lapidary</div>
+    <div style="font-size:13px;color:#8a7e72;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase">My Stone Collection</div>
+  </div>
+  <div style="font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.5rem">${items.length} piece${items.length!==1?'s':''} · Generated ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+  ${rows}
+  <div style="margin-top:2rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center">stillpointlapidary.com</div>
+  </body></html>`);
+  win.document.close();
+  setTimeout(()=>win.print(),400);
+}
+
+function printWishlistReport(){
+  const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
+  const items=CRYSTALS.filter(c=>wishIds.includes(c.i));
+  if(!items.length){alert('Your wishlist is empty.');return;}
+  const rows=items.map(c=>`<div style="padding:1rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem">
+      <div style="font-family:'Georgia',serif;font-size:16px;color:#2a2520">${c.n}</div>
+      <div style="font-size:11px;color:#8a7e72">${c.i}</div>
+    </div>
+    ${c.a?`<div style="font-size:12px;color:#8a7e72;margin-top:2px">Also known as: ${c.a}</div>`:''}
+    <div style="font-size:12px;color:#5a5149;margin-top:4px">${[c.fam,c.c,c.m?c.m+' Mohs':''].filter(Boolean).join(' · ')}</div>
+    ${c.er?`<div style="font-size:12px;color:#8a7e72;margin-top:4px;letter-spacing:0.04em">${c.er}</div>`:''}
+    ${c.uw?`<div style="font-size:12px;color:#5a5149;margin-top:6px;padding:6px 10px;background:#f5f2ef;border-radius:4px;font-style:italic">${c.uw}</div>`:''}
+    ${c.chakras&&c.chakras.length?`<div style="font-size:11px;color:#a09890;margin-top:6px">Chakra: ${c.chakras.join(' · ')}</div>`:''}
+  </div>`).join('');
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Georgia',serif;color:#2a2520;background:#fff;padding:2.5rem 3rem;max-width:800px;margin:0 auto}
+  @media print{body{padding:1.5rem 2rem}@page{margin:1.5cm}}</style></head><body>
+  <div style="border-bottom:2px solid #2a2520;padding-bottom:1rem;margin-bottom:0.5rem">
+    <div style="font-family:'Georgia',serif;font-size:28px;font-weight:400;letter-spacing:0.02em">Still Point Lapidary</div>
+    <div style="font-size:13px;color:#8a7e72;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase">My Wishlist</div>
+  </div>
+  <div style="font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.5rem">${items.length} stone${items.length!==1?'s':''} · Generated ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+  ${rows}
+  <div style="margin-top:2rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center">stillpointlapidary.com</div>
+  </body></html>`);
+  win.document.close();
+  setTimeout(()=>win.print(),400);
+}
 function exportEncyclopedia(){
   const rows=[['ID','Name','Alt Names','Family','Species','Material','System','Formation','Transparency','Color','Color Cause','Mohs','Geology Notes','Energetic Role','Use When','Chakras','Element','Zodiac','Intention','Primary Theme','All Themes']];
   CRYSTALS.forEach(c=>{rows.push([c.i,c.n,c.a||'',c.fam||'',c.sp||'',c.mt||'',c.sy||'',c.fo||'',c.tr||'',c.c||'',c.cc||'',c.m||'',c.g||'',c.er||'',c.uw||'',(c.chakras||[]).join('; '),c.element||'',c.zodiac||'',c.aff||'',c.primary_theme||'',(c.all_themes||[]).join('; ')]);});
