@@ -501,7 +501,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
   </a>
   <div class="topbar-right">
-    <span class="stone-count" id="stone-count" role="button" tabindex="0" title="Return to Encyclopedia" onclick="switchTab('encyclopedia',document.querySelector('.nav-tab'))" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('encyclopedia',document.querySelector('.nav-tab'))}"></span>
+    <span class="stone-count" id="stone-count" role="button" tabindex="0" title="Return to Encyclopedia" onclick="switchTab('encyclopedia',document.querySelector('.nav-tab'));setTimeout(()=>{const el=document.getElementById('enc-search');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},150)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('encyclopedia',document.querySelector('.nav-tab'));setTimeout(()=>{const el=document.getElementById('enc-search');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},150)}"></span>
     <div class="topbar-auth" id="topbar-auth"></div>
     <button class="btn btn-sm" id="add-entry-btn" style="display:none" onclick="openAddEncForm()">+ Entry</button>
     <button class="btn btn-sm" id="request-entry-btn" onclick="openEntryRequestForm()">Request entry</button>
@@ -587,7 +587,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <!-- MOOD / USE WHEN -->
 <section id="tab-mood" style="display:none">
   <div class="mood-intro">What do you need right now?</div>
-  <p class="mood-sub">Choose a feeling or intention. The stones will find you.</p>
+  <p class="mood-sub">Describe how you're feeling, or choose from the options below.</p>
+  <div style="display:flex;gap:8px;margin-bottom:1.5rem;align-items:center">
+    <input type="text" id="mood-ai-input" placeholder="e.g. anxious and scattered, need grounding…" style="flex:1;padding:10px 14px;border:0.5px solid var(--border);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);background:var(--white);outline:none" onkeydown="if(event.key==='Enter')moodAiSearch()">
+    <button onclick="moodAiSearch()" id="mood-ai-btn" style="padding:10px 18px;background:var(--accent);border:none;border-radius:8px;color:var(--white);font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap">✦ Find stones</button>
+  </div>
+  <div id="mood-ai-results" style="display:none;margin-bottom:1.5rem">
+    <div id="mood-ai-status" style="font-size:12px;color:var(--ink3);margin-bottom:0.75rem"></div>
+    <div id="mood-ai-grid" class="crystal-grid"></div>
+    <button onclick="clearMoodAiResults()" style="font-size:11px;color:var(--ink3);background:none;border:none;cursor:pointer;margin-top:0.5rem;letter-spacing:0.06em;text-transform:uppercase">✕ Clear results</button>
+  </div>
   <div class="mood-filter-row" id="mood-group-pills"></div>
   <!-- MOOD GRID: shown when no selection -->
   <div class="mood-grid" id="mood-grid"></div>
@@ -2570,10 +2579,25 @@ function encCardHtml(c){
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
   const roles=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).slice(0,2).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
+  const photoSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:'';
   const imgZone=encPhotos
-    ?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`
+    ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncPhotoLightbox('${c.i}')" style="cursor:zoom-in"><img src="${photoSrc}" alt="${c.n}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
-  return`<div class="crystal-card" onclick="openDetail('${c.i}')">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+}
+function openEncPhotoLightbox(id){
+  const encPhotos=ENCYCLOPEDIA_PHOTOS[id];
+  const c=CRYSTALS.find(x=>x.i===id);
+  if(!encPhotos||!encPhotos.length)return;
+  const srcs=encPhotos.map(f=>SUPABASE_ENC+f);
+  photoLightboxAlt=c?.n||'';
+  photoLightboxLabels=PHOTO_CAPTIONS[id]||null;
+  photoLightboxSources=srcs;
+  photoLightboxIndex=0;
+  const lb=document.getElementById('photo-lightbox');
+  if(lb){lb.classList.toggle('has-nav',srcs.length>1);lb.classList.add('open');}
+  document.body.style.overflow='hidden';
+  setPhotoLightboxImage();
 }
 
 function encRender(){
@@ -2997,6 +3021,43 @@ grid.innerHTML=matches.map(c=>{
   }).join('');
 }
 
+async function moodAiSearch(){
+  const input=document.getElementById('mood-ai-input');
+  const btn=document.getElementById('mood-ai-btn');
+  const resultsWrap=document.getElementById('mood-ai-results');
+  const statusEl=document.getElementById('mood-ai-status');
+  const grid=document.getElementById('mood-ai-grid');
+  const query=(input?.value||'').trim();
+  if(!query){input?.focus();return;}
+  if(btn){btn.disabled=true;btn.textContent='Searching…';}
+  if(resultsWrap)resultsWrap.style.display='block';
+  if(statusEl)statusEl.textContent='Finding the right stones for you…';
+  if(grid)grid.innerHTML='';
+  try{
+    const stoneNames=CRYSTALS.map(c=>c.n);
+    const resp=await fetch('https://vxujlgyhgnihnqrxzefw.supabase.co/functions/v1/claude-stone-lookup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'},
+      body:JSON.stringify({query,stones:stoneNames})
+    });
+    const data=await resp.json();
+    if(!Array.isArray(data)){throw new Error(data.error||'Unexpected response');}
+    const matches=data.map(name=>CRYSTALS.find(c=>c.n.toLowerCase()===name.toLowerCase())).filter(Boolean);
+    if(!matches.length){if(statusEl)statusEl.textContent='No matches found. Try rephrasing.';return;}
+    if(statusEl)statusEl.textContent=`${matches.length} stone${matches.length!==1?'s':''} for "${query}"`;
+    if(grid)grid.innerHTML=matches.map(c=>encCardHtml(c)).join('');
+  }catch(err){
+    if(statusEl)statusEl.textContent='Something went wrong. Please try again.';
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='✦ Find stones';}
+  }
+}
+function clearMoodAiResults(){
+  const input=document.getElementById('mood-ai-input');
+  const resultsWrap=document.getElementById('mood-ai-results');
+  if(input)input.value='';
+  if(resultsWrap)resultsWrap.style.display='none';
+}
 function clearMoodResults(){
   const grid=document.getElementById('mood-grid');
   if(grid)grid.style.display='';
