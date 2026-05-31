@@ -617,8 +617,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="coll-header">
     <div class="coll-title">My Pieces</div>
     <div class="coll-btns">
-      <button class="btn btn-sm" onclick="exportCollectionCSV()">↓ Collection CSV</button>
-      <button class="btn btn-sm" onclick="exportWishlistCSV()">↓ Wishlist CSV</button>
+      <div style="position:relative;display:inline-block">
+        <button class="btn btn-sm" onclick="toggleExportMenu('coll-export-menu')">↓ Collection ▾</button>
+        <div id="coll-export-menu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#fff;border:0.5px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(42,37,32,0.12);z-index:50;min-width:160px;overflow:hidden">
+          <button onclick="openReportOptions('collection');toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">⎙ Print report</button>
+          <button onclick="exportCollectionCSV();toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">↓ Export CSV</button>
+        </div>
+      </div>
+      <div style="position:relative;display:inline-block">
+        <button class="btn btn-sm" onclick="toggleExportMenu('wish-export-menu')">↓ Wishlist ▾</button>
+        <div id="wish-export-menu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#fff;border:0.5px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(42,37,32,0.12);z-index:50;min-width:160px;overflow:hidden">
+          <button onclick="openReportOptions('wishlist');toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">⎙ Print report</button>
+          <button onclick="exportWishlistCSV();toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">↓ Export CSV</button>
+        </div>
+      </div>
       <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add</button>
       <button class="btn btn-sm btn-accent" onclick="openAddForm()">+ Add piece</button>
     </div>
@@ -1509,9 +1521,38 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="aff"> Affirmation</label>
       </div>
     </div>
+    <div style="margin-bottom:1.5rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Layout</div>
+      <div style="display:flex;gap:8px">
+        <label style="flex:1;cursor:pointer">
+          <input type="radio" name="report-layout" value="showcase" style="display:none">
+          <div class="report-layout-opt" data-val="showcase" onclick="selectReportLayout(this)" style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px;cursor:pointer">
+            <div style="font-size:16px;margin-bottom:2px">⬛</div>
+            <div style="font-weight:500">Showcase</div>
+            <div style="font-size:10px;color:var(--ink3)">Large, one per page</div>
+          </div>
+        </label>
+        <label style="flex:1;cursor:pointer">
+          <input type="radio" name="report-layout" value="standard" checked style="display:none">
+          <div class="report-layout-opt selected" data-val="standard" onclick="selectReportLayout(this)" style="border:1px solid var(--accent2);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px;cursor:pointer;background:#faf6f0">
+            <div style="font-size:16px;margin-bottom:2px">▬</div>
+            <div style="font-weight:500">Standard</div>
+            <div style="font-size:10px;color:var(--ink3)">Card with photo</div>
+          </div>
+        </label>
+        <label style="flex:1;cursor:pointer">
+          <input type="radio" name="report-layout" value="compact" style="display:none">
+          <div class="report-layout-opt" data-val="compact" onclick="selectReportLayout(this)" style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px;cursor:pointer">
+            <div style="font-size:16px;margin-bottom:2px">☰</div>
+            <div style="font-weight:500">Compact</div>
+            <div style="font-size:10px;color:var(--ink3)">Dense list</div>
+          </div>
+        </label>
+      </div>
+    </div>
     <div style="display:flex;gap:8px">
       <button class="btn" onclick="closeReportOptions()">Cancel</button>
-      <button class="btn btn-accent" style="flex:1;justify-content:center" id="report-generate-btn" onclick="generateReport()">⎙ Generate report</button>
+      <button class="btn btn-accent" style="flex:1;justify-content:center" id="report-generate-btn" onclick="generateReport()">Generate report</button>
     </div>
     <div id="report-preparing" style="display:none;font-size:12px;color:var(--ink3);text-align:center;margin-top:0.75rem">Preparing report…</div>
   </div>
@@ -1532,11 +1573,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div style="margin-bottom:1.5rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
         <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('collection');closePopup('manage')">⎙ Print collection report</button>
         <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('wishlist');closePopup('manage')">⎙ Print wishlist report</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Export collection (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Export wishlist (CSV)</button>
+      </div>
+    </div>
+    <div style="margin-bottom:1.5rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Encyclopedia (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Collection (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Wishlist (CSV)</button>
       </div>
     </div>
     <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.75rem;background:var(--stone2);border-radius:6px">
@@ -3772,49 +3818,98 @@ function exportWishlistCSV(){
 function exportCSV(){exportCollectionCSV();}
 
 let _reportType='collection';
+function toggleExportMenu(id){
+  const menu=document.getElementById(id);
+  if(!menu)return;
+  const isOpen=menu.style.display!=='none';
+  // Close all menus first
+  ['coll-export-menu','wish-export-menu'].forEach(mid=>{const m=document.getElementById(mid);if(m)m.style.display='none';});
+  if(!isOpen)menu.style.display='block';
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('[id$="-export-menu"]')&&!e.target.textContent?.includes('▾')){
+    ['coll-export-menu','wish-export-menu'].forEach(id=>{const m=document.getElementById(id);if(m)m.style.display='none';});
+  }
+});
+function selectReportLayout(el){
+  document.querySelectorAll('.report-layout-opt').forEach(o=>{
+    o.style.border='1px solid var(--border)';
+    o.style.background='';
+    o.classList.remove('selected');
+  });
+  el.style.border='1px solid var(--accent2)';
+  el.style.background='#faf6f0';
+  el.classList.add('selected');
+}
 function openReportOptions(type){
   _reportType=type;
   document.getElementById('report-options-title').textContent=type==='collection'?'Collection Report Options':'Wishlist Report Options';
-  document.getElementById('report-coll-fields').style.display=type==='collection'?'':'none';
-  document.getElementById('report-enc-section').querySelector('.sec-label').previousElementSibling;
-  const collSection=document.getElementById('report-coll-fields').closest('div');
+  const collSection=document.getElementById('report-coll-fields')?.closest('div[style]');
   if(collSection)collSection.style.display=type==='collection'?'':'none';
   document.getElementById('report-options-overlay').classList.add('open');
 }
 function closeReportOptions(){
   document.getElementById('report-options-overlay').classList.remove('open');
   document.getElementById('report-preparing').style.display='none';
-  document.getElementById('report-generate-btn').disabled=false;
+  const btn=document.getElementById('report-generate-btn');
+  if(btn){btn.disabled=false;btn.textContent='Generate report';}
 }
 function _reportFields(){
   const f={};
   document.querySelectorAll('#report-options-overlay input[type=checkbox]').forEach(cb=>{f[cb.dataset.field]=cb.checked;});
+  f.layout=document.querySelector('.report-layout-opt.selected')?.dataset.val||'standard';
   return f;
 }
-function _reportStyles(){
-  return `*{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Georgia',serif;color:#2a2520;background:#fff;padding:2.5rem 3rem;max-width:820px;margin:0 auto}
-  .card{display:flex;gap:1.25rem;padding:1.25rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid;align-items:flex-start}
-  .card-photo{width:110px;min-width:110px;height:110px;object-fit:cover;border-radius:6px;background:#f0ece7}
-  .card-photo-empty{width:110px;min-width:110px;height:110px;border-radius:6px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
+function _reportStyles(layout){
+  const base=`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Jost',sans-serif;color:#2a2520;background:#faf8f6;padding:2.5rem 3rem;max-width:860px;margin:0 auto}
+  .report-header{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid #c8a96e;padding-bottom:1.25rem;margin-bottom:0.75rem}
+  .report-brand{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#2a2520;letter-spacing:0.04em}
+  .report-brand span{color:#c8a96e;font-style:italic}
+  .report-subtitle{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a7e72;margin-top:3px}
+  .report-meta{font-size:11px;color:#a09890;margin-bottom:2rem;padding-top:0.5rem;letter-spacing:0.04em}
+  .print-btn{background:#c8a96e;color:#fff;border:none;padding:8px 18px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-radius:6px;cursor:pointer;margin-bottom:1.5rem}
+  .stone-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#2a2520;line-height:1.2}
+  .stone-nick{font-style:italic;color:#8a7e72}
+  .stone-sub{font-size:11px;color:#8a7e72;margin-top:3px;letter-spacing:0.04em;text-transform:uppercase}
+  .stone-detail{font-size:13px;color:#5a5149;margin-top:6px}
+  .use-when{font-size:13px;color:#5a5149;margin-top:10px;padding:8px 12px;background:#fff;border-left:2px solid #c8a96e;line-height:1.6;font-style:italic}
+  .meta{font-size:11px;color:#a09890;margin-top:6px;line-height:1.6}
+  .notes{font-size:13px;color:#5a5149;margin-top:8px;font-style:italic;line-height:1.5}
+  .footer{margin-top:3rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
+  @media print{.print-btn{display:none}body{background:#fff;padding:1.5rem 2rem}@page{margin:1.5cm}}`;
+
+  if(layout==='showcase') return base+`
+  .card{padding:2.5rem 0;border-bottom:1px solid #e0dbd4;break-inside:avoid}
+  .card-photo{width:100%;max-height:420px;object-fit:cover;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.12);margin-bottom:1.25rem}
+  .card-photo-empty{width:100%;height:200px;border-radius:10px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;margin-bottom:1.25rem}
+  .card-body{padding:0 0.5rem}
+  .stone-name{font-size:28px}`;
+
+  if(layout==='compact') return base+`
+  .card{display:flex;gap:0.75rem;padding:0.6rem 0;border-bottom:0.5px solid #e8e4de;break-inside:avoid;align-items:flex-start}
+  .card-photo{width:52px;min-width:52px;height:52px;object-fit:cover;border-radius:4px}
+  .card-photo-empty{width:52px;min-width:52px;height:52px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:9px;color:#b0a89e}
   .card-body{flex:1;min-width:0}
-  .stone-name{font-family:'Georgia',serif;font-size:17px;color:#2a2520;line-height:1.2}
-  .stone-sub{font-size:12px;color:#8a7e72;margin-top:3px}
-  .stone-detail{font-size:12px;color:#5a5149;margin-top:5px}
-  .use-when{font-size:12px;color:#5a5149;margin-top:8px;padding:6px 10px;background:#f5f2ef;border-radius:4px;font-style:italic;line-height:1.5}
-  .meta{font-size:11px;color:#a09890;margin-top:5px}
-  .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic}
-  .header{border-bottom:2px solid #2a2520;padding-bottom:1rem;margin-bottom:0.5rem}
-  .header-title{font-size:28px;font-weight:400;letter-spacing:0.02em}
-  .header-sub{font-size:13px;color:#8a7e72;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase}
-  .report-meta{font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.5rem}
-  .footer{margin-top:2rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center}
-  @media print{body{padding:1.5rem 2rem}@page{margin:1.5cm}}`;
+  .stone-name{font-size:14px}
+  .stone-detail{font-size:11px;margin-top:2px}
+  .use-when{font-size:11px;margin-top:4px;padding:4px 8px}
+  .meta{font-size:10px;margin-top:3px}
+  .notes{font-size:11px;margin-top:3px}`;
+
+  // standard (default)
+  return base+`
+  .card{display:flex;gap:1.25rem;padding:1.5rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid;align-items:flex-start}
+  .card-photo{width:120px;min-width:120px;height:120px;object-fit:cover;border-radius:8px;box-shadow:0 2px 12px rgba(42,37,32,0.1)}
+  .card-photo-empty{width:120px;min-width:120px;height:120px;border-radius:8px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
+  .card-body{flex:1;min-width:0}`;
 }
 async function generateReport(){
   const btn=document.getElementById('report-generate-btn');
   const prep=document.getElementById('report-preparing');
-  btn.disabled=true;prep.style.display='block';
+  if(btn){btn.disabled=true;btn.textContent='Preparing…';}
+  if(prep)prep.style.display='block';
   const f=_reportFields();
   try{
     if(_reportType==='collection') await _printCollectionReport(f);
@@ -3856,15 +3951,19 @@ async function _printCollectionReport(f){
       </div>
     </div>`;
   }));
+  const layout=f.layout||'standard';
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles()}</style></head><body>
-  <div class="header"><div class="header-title">Still Point Lapidary</div><div class="header-sub">My Stone Collection</div></div>
-  <div class="report-meta">${items.length} piece${items.length!==1?'s':''} · ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
+  <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
+  <div class="report-header">
+    <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
+    <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">My Stone Collection<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+  </div>
+  <div class="report-meta">${items.length} piece${items.length!==1?'s':''}</div>
   ${rows.join('')}
   <div class="footer">stillpointlapidary.com</div>
   </body></html>`);
   win.document.close();
-  setTimeout(()=>win.print(),600);
 }
 function _printWishlistReport(f){
   const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
@@ -3889,15 +3988,19 @@ function _printWishlistReport(f){
       </div>
     </div>`;
   }).join('');
+  const layout=f.layout||'standard';
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles()}</style></head><body>
-  <div class="header"><div class="header-title">Still Point Lapidary</div><div class="header-sub">My Wishlist</div></div>
-  <div class="report-meta">${items.length} stone${items.length!==1?'s':''} · ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
+  <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
+  <div class="report-header">
+    <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
+    <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">My Wishlist<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+  </div>
+  <div class="report-meta">${items.length} stone${items.length!==1?'s':''}</div>
   ${rows}
   <div class="footer">stillpointlapidary.com</div>
   </body></html>`);
   win.document.close();
-  setTimeout(()=>win.print(),400);
 }
 function exportEncyclopedia(){
   const rows=[['ID','Name','Alt Names','Family','Species','Material','System','Formation','Transparency','Color','Color Cause','Mohs','Geology Notes','Energetic Role','Use When','Chakras','Element','Zodiac','Intention','Primary Theme','All Themes']];
