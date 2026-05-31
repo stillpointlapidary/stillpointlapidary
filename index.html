@@ -3946,16 +3946,18 @@ function _reportBase(){
   .ref-photo-note{font-size:7px;color:#c0b8b0;text-align:center;margin-top:2px;letter-spacing:0.02em;line-height:1.2;word-wrap:break-word;overflow-wrap:break-word;white-space:normal}
   .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
   .report-table{width:100%;border-collapse:collapse}
-  .report-table thead td{padding-bottom:0.75rem;border-bottom:1.5px solid #c8a96e}
+  .report-thead-td{padding:0.75rem 0 0.75rem;border-bottom:1.5px solid #c8a96e}
   .report-table thead{display:table-header-group}
-  .content-wrap{padding-top:1.5rem;vertical-align:top}
-  .page-break{page-break-before:always;break-before:page;height:0;display:block}
+  .content-wrap{padding-top:1.25rem;vertical-align:top}
+  .gallery-row td{padding-top:1.25rem;vertical-align:top}
+  .gallery-row+.gallery-row{page-break-before:always;break-before:page}
   @media print{
     .print-toolbar{display:none}
     body{background:#fff}
     .card{break-inside:avoid;page-break-inside:avoid}
     .report-table thead{display:table-header-group}
-    @page{margin:1.5cm}
+    .gallery-row+.gallery-row{page-break-before:always;break-before:page}
+    @page{margin:2cm 1.5cm}
   }`;
 }
 function _reportStyles(layout){
@@ -3964,7 +3966,8 @@ function _reportStyles(layout){
   body{padding:1rem 2.5rem;max-width:780px}
   .content-wrap{padding-top:1.5rem}
   .card{padding:1rem 0 2rem}
-  .card-photo-wrap{width:100%;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14);margin-bottom:1.25rem}
+  .card-photo-outer{width:min(100%,500px);margin:0 auto 1.25rem}
+  .card-photo-wrap{width:100%;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14)}
   .card-photo-wrap::after{content:'';display:block;padding-bottom:100%}
   .card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:10px}
   .card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;border-radius:10px}
@@ -4004,19 +4007,23 @@ function _reportStyles(layout){
 
   return _reportStyles('standard');
 }
-function _reportHeader(title,count,unit){
-  return `<table class="report-table"><thead><tr><td>
+function _reportHeaderHtml(title,count,unit){
+  return `<table class="report-table"><thead><tr><td class="report-thead-td">
     <div class="report-header">
       <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
       <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
     </div>
     <div class="report-meta">${count} ${unit}${count!==1?'s':''}</div>
-  </td></tr></thead><tbody><tr><td class="content-wrap">`;
+  </td></tr></thead>`;
 }
+// Keep old name as alias
+function _reportHeader(title,count,unit){ return _reportHeaderHtml(title,count,unit); }
 function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
-  if(photoUrl) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>`;
-  if(useEnc&&encFallback) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${encFallback}" alt="${name}"><div class="ref-photo-note">© Still Point Lapidary</div></div>`;
-  return `<div class="card-photo-wrap"><div class="${cssClass.replace('card-photo','card-photo-empty')} ${cssClass.includes('inv-thumb')?'inv-thumb-empty':''}">No photo</div></div>`;
+  const outer=(cssClass==='card-photo'&&arguments[5])?`<div class="card-photo-outer">`:'';
+  const outerClose=outer?'</div>':'';
+  if(photoUrl) return `${outer}<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>${outerClose}`;
+  if(useEnc&&encFallback) return `${outer}<div class="card-photo-wrap"><img class="${cssClass}" src="${encFallback}" alt="${name}"><div class="ref-photo-note">© Still Point Lapidary</div></div>${outerClose}`;
+  return `${outer}<div class="card-photo-wrap"><div class="${cssClass.replace('card-photo','card-photo-empty')} ${cssClass.includes('inv-thumb')?'inv-thumb-empty':''}">No photo</div></div>${outerClose}`;
 }
 async function generateReport(){
   const btn=document.getElementById('report-generate-btn');
@@ -4045,7 +4052,7 @@ async function _printCollectionReport(f){
     const metaParts=[f.acquired&&formatDisplayDate(p.acquired)?`Acquired ${formatDisplayDate(p.acquired)}`:'',f.acquired&&p.source?`Source: ${p.source}`:'',f.price&&formatDisplayPrice(p.price)?formatDisplayPrice(p.price):''].filter(Boolean);
 
     if(layout==='gallery'){
-      const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo');
+      const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo',true);
       const facts=[[c?.fam,'Family'],[c?.sy,'System'],[c?.fo,'Formation'],[c?.m?c.m+' Mohs':null,'Hardness'],[c?.element,'Element'],[c?.chakras?.join(', '),'Chakra']].filter(r=>r[0]);
       return `<div class="card">${ph}
         <div class="stone-name">${name}${nickname}</div>
@@ -4088,17 +4095,21 @@ async function _printCollectionReport(f){
       ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
     </div>`;
   }));
-  let inner;
-  if(layout==='standard') inner=`<div class="card-grid">${cards.join('')}</div>`;
-  else if(layout==='gallery') inner=cards.map((c,i)=>i===0?c:`<div class="page-break"></div>${c}`).join('');
-  else inner=cards.join('');
+  let tbody;
+  if(layout==='gallery'){
+    tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
+  } else if(layout==='standard'){
+    tbody=`<tbody><tr><td class="content-wrap"><div class="card-grid">${cards.join('')}</div><div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  } else {
+    tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  }
+  const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
   <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
-  ${_reportHeader('My Stone Collection',items.length,'piece')}
-  ${inner}
-  <div class="footer">stillpointlapidary.com</div>
-  </td></tr></tbody></table>
+  ${_reportHeaderHtml('My Stone Collection',items.length,'piece')}
+  ${tbody}${galleryFooter}
+  </table>
   </body></html>`);
   win.document.close();
 }
@@ -4124,17 +4135,21 @@ function _printWishlistReport(f){
     const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
     return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
   });
-  let inner;
-  if(layout==='standard') inner=`<div class="card-grid">${cards.join('')}</div>`;
-  else if(layout==='gallery') inner=cards.map((c,i)=>i===0?c:`<div class="page-break"></div>${c}`).join('');
-  else inner=cards.join('');
+  let tbody;
+  if(layout==='gallery'){
+    tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
+  } else if(layout==='standard'){
+    tbody=`<tbody><tr><td class="content-wrap"><div class="card-grid">${cards.join('')}</div><div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  } else {
+    tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  }
+  const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
   <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
-  ${_reportHeader('My Wishlist',items.length,'stone')}
-  ${inner}
-  <div class="footer">stillpointlapidary.com</div>
-  </td></tr></tbody></table>
+  ${_reportHeaderHtml('My Wishlist',items.length,'stone')}
+  ${tbody}${galleryFooter}
+  </table>
   </body></html>`);
   win.document.close();
 }
