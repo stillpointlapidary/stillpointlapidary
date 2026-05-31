@@ -506,7 +506,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <button class="btn btn-sm" id="add-entry-btn" style="display:none" onclick="openAddEncForm()">+ Entry</button>
     <button class="btn btn-sm" id="request-entry-btn" onclick="openEntryRequestForm()">Request entry</button>
     <button class="btn btn-sm" onclick="openPopup('instructions')">? Guide</button>
-    <button class="btn btn-sm" id="manage-btn" style="display:none" onclick="openPopup('manage')">Manage</button>
+    <button class="btn btn-sm" id="manage-btn" onclick="openPopup('manage')">Manage</button>
   </div>
 </header>
 
@@ -1467,12 +1467,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 <div class="popup-overlay" id="popup-instructions" onclick="if(event.target===this)closePopup('instructions')">
   <div class="popup-box"><button class="popup-close" onclick="closePopup('instructions')">✕</button>
-  <div class="popup-title">How to use The Lapidary</div>
-  <div class="inst-sec"><h3>Encyclopedia</h3><p>Your reference library. Search or use the filter dropdowns — Family, Theme, Color, Chakra. Each filter opens a panel. The <span style="font-size:10px;border:0.5px solid var(--border);border-radius:50%;padding:1px 4px">?</span> buttons on each property field open explanation cards. A gold dot on a card means you own that stone; an outlined ring means it's on your wishlist.</p></div>
-  <div class="inst-sec"><h3>Use When…</h3><p>Choose a feeling, then use the secondary filters that appear to narrow down. Each result card shows the stone's energetic role and its specific Use When guidance — so you can quickly find the right stone for your exact need.</p></div>
-  <div class="inst-sec"><h3>My Collection</h3><p>Your personal catalog. Each entry is a specific physical piece. Tap <strong>+ Add piece</strong>. Use the location field for flexible placement (windowsill, travel pouch, altar, shelf). Photos upload directly and save with your data.</p></div>
-  <div class="inst-sec"><h3>Add to your phone home screen</h3><p>On iPhone: open in Safari → Share → Add to Home Screen. On Android: browser menu → Add to Home Screen. Opens like a real app.</p></div>
-  <div class="inst-sec"><h3>Backing up your data</h3><p>Use <strong>↓ Backup</strong> regularly. JSON is your save file — it holds everything. Use <strong>↑ Restore</strong> to bring it back after clearing your browser or switching devices.</p><div class="warn-note">⚠ Clearing browser site data will erase your collection. Keep a Backup file on your computer.</div></div>
+  <div class="popup-title">How to use Still Point Lapidary</div>
+  <div class="inst-sec"><h3>Encyclopedia</h3><p>Your reference library for over 400 crystals and minerals. Search by name or use the filters — Family, Theme, Color, Chakra, Formation, and more. Click any stone to see its full profile: geology, energetic properties, chakra associations, affirmation, and reference photos. A gold dot on a card means you own that stone; an outlined ring means it's on your wishlist.</p></div>
+  <div class="inst-sec"><h3>Use When…</h3><p>Not sure what you need? Start here. Choose a feeling or intention and the encyclopedia will surface the stones best suited for that moment. Use the secondary filters to narrow further.</p></div>
+  <div class="inst-sec"><h3>My Collection</h3><p>Your personal catalog of physical pieces. Sign in to save your collection to the cloud — accessible from any device. Add pieces individually or in batches. Each entry tracks the stone type, form, location, notes, and photos.</p></div>
+  <div class="inst-sec"><h3>Wishlist</h3><p>Save stones you want to remember or acquire. Works alongside your collection — sign in to keep it synced across devices.</p></div>
+  <div class="inst-sec"><h3>Identify</h3><p>Describe a stone's color, transparency, and properties to get a shortlist of likely matches from the encyclopedia.</p></div>
+  <div class="inst-sec"><h3>Crystals 101</h3><p>New to crystals? Start here for foundational knowledge on how stones work, what the properties mean, and how to use them.</p></div>
+  <div class="inst-sec"><h3>Your data</h3><p>Sign in with a free account and your collection and wishlist are saved securely to the cloud — no backups needed, no data lost when you clear your browser.</p></div>
+  <div class="inst-sec"><h3>Don't see your stone?</h3><p>Use the <strong>Request Entry</strong> button at the top of the page to suggest a stone for the encyclopedia. We review every request.</p></div>
   </div>
 </div>
 
@@ -1484,28 +1487,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div style="margin-bottom:1.5rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Add new</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn" style="justify-content:flex-start" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
         <button class="btn" style="justify-content:flex-start" onclick="openAddForm();closePopup('manage')">+ Add collection piece</button>
-        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add</button>
+        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add collection pieces</button>
       </div>
     </div>
     <div style="margin-bottom:1.5rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn" style="justify-content:flex-start" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
         <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Export collection (CSV)</button>
         <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Export wishlist (CSV)</button>
       </div>
     </div>
-    <div style="margin-bottom:1rem">
-      <div class="sec-label" style="margin-bottom:0.75rem">Backup & restore</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn" style="justify-content:flex-start" onclick="exportJSON();closePopup('manage')">↓ Backup collection (JSON)</button>
-        <label class="btn" style="justify-content:flex-start;cursor:pointer">↑ Restore from backup<input type="file" accept=".json" onchange="importJSON(this);closePopup('manage')" style="display:none"></label>
-      </div>
-    </div>
     <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.75rem;background:var(--stone2);border-radius:6px">
-      JSON backup saves everything including photos. Restore brings it back after clearing your browser or switching devices.
+      Your collection and wishlist are saved to the cloud when you're signed in.
       <div style="margin-top:6px;color:var(--ink3)" id="last-saved-display"></div>
     </div>
   </div>
@@ -1568,17 +1564,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="form-box">
     <button class="popup-close" onclick="closeEntryRequestForm()">✕</button>
     <div class="form-title">Request encyclopedia entry</div>
-    <div class="form-sub">Suggest a stone or variety to add. This prepares a short request you can copy or email.</div>
-    <div class="form-row full">
-      <div class="fg"><label>Stone / Variety name *</label><input type="text" id="req-stone-name" placeholder="e.g. Que Sera Stone"></div>
-    </div>
-    <div class="form-row full">
-      <div class="fg"><label>Notes</label><textarea id="req-stone-notes" placeholder="Alternate names, why it should be added, source links, or photo notes…"></textarea></div>
-    </div>
-    <div class="form-footer">
-      <button class="btn" onclick="closeEntryRequestForm()">Cancel</button>
-      <button class="btn" onclick="copyEntryRequest()">Copy request</button>
-      <button class="btn btn-accent" onclick="emailEntryRequest()">Email request</button>
+    <div class="form-sub">Don't see a stone you're looking for? Let us know — we review every request.</div>
+    <form id="entry-request-formspree" action="https://formspree.io/f/xeedwkly" method="POST" onsubmit="handleEntryRequestSubmit(event)">
+      <div class="form-row full">
+        <div class="fg"><label>Stone / Variety name *</label><input type="text" name="stone_name" id="req-stone-name" placeholder="e.g. Que Sera Stone" required></div>
+      </div>
+      <div class="form-row full">
+        <div class="fg"><label>Notes</label><textarea name="notes" id="req-stone-notes" placeholder="Alternate names, why it should be added, source links…"></textarea></div>
+      </div>
+      <input type="hidden" name="_subject" value="Still Point — Encyclopedia Entry Request">
+      <div class="form-footer">
+        <button type="button" class="btn" onclick="closeEntryRequestForm()">Cancel</button>
+        <button type="submit" class="btn btn-accent" id="req-submit-btn">Send request</button>
+      </div>
+    </form>
+    <div id="entry-request-success" style="display:none;text-align:center;padding:1.5rem 0">
+      <div style="font-size:22px;margin-bottom:0.5rem">✓</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;margin-bottom:0.4rem">Request sent</div>
+      <div style="font-size:13px;color:var(--ink3)">We'll review it and add it to the encyclopedia.</div>
+      <button class="btn" style="margin-top:1.25rem" onclick="closeEntryRequestForm()">Close</button>
     </div>
   </div>
 </div>
@@ -3814,8 +3818,7 @@ function updateAdminEntryButtons(){
   const isAdmin=isAdminUser(_currentUser);
   if(add)add.style.display=isAdmin?'':'none';
   if(req)req.style.display=isAdmin?'none':'';
-  const mgmt=document.getElementById('manage-btn');
-  if(mgmt)mgmt.style.display=isAdmin?'':'none';
+  document.querySelectorAll('.manage-admin-only').forEach(el=>el.style.display=isAdmin?'flex':'none');
 }
 function openEntryRequestForm(){
   const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.add('open');
@@ -3823,6 +3826,26 @@ function openEntryRequestForm(){
 function closeEntryRequestForm(){
   const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.remove('open');
   ['req-stone-name','req-stone-notes'].forEach(id=>{const field=document.getElementById(id);if(field)field.value='';});
+  const form=document.getElementById('entry-request-formspree');if(form)form.style.display='';
+  const success=document.getElementById('entry-request-success');if(success)success.style.display='none';
+}
+async function handleEntryRequestSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('req-submit-btn');
+  if(btn){btn.disabled=true;btn.textContent='Sending…';}
+  try{
+    const resp=await fetch('https://formspree.io/f/xeedwkly',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}});
+    if(resp.ok){
+      const form=document.getElementById('entry-request-formspree');if(form)form.style.display='none';
+      const success=document.getElementById('entry-request-success');if(success)success.style.display='block';
+    } else {
+      alert('Something went wrong. Please try again.');
+      if(btn){btn.disabled=false;btn.textContent='Send request';}
+    }
+  } catch(err){
+    alert('Something went wrong. Please try again.');
+    if(btn){btn.disabled=false;btn.textContent='Send request';}
+  }
 }
 function entryRequestText(){
   const name=(document.getElementById('req-stone-name')?.value||'').trim();
