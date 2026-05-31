@@ -3943,13 +3943,13 @@ function _reportBase(){
   .fact strong{color:#5a5149;font-weight:500}
   .meta{font-size:11px;color:#a09890;margin-top:5px;line-height:1.6}
   .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic;line-height:1.5}
-  .ref-photo-note{font-size:9px;color:#b0a89e;text-align:center;margin-top:3px;font-style:italic;word-wrap:break-word;overflow-wrap:break-word;line-height:1.4}
+  .ref-photo-note{font-size:7px;color:#c0b8b0;text-align:center;margin-top:2px;letter-spacing:0.02em;line-height:1.2;word-wrap:break-word;overflow-wrap:break-word;white-space:normal}
   .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
   @media print{
     .print-toolbar{display:none}
     body{background:#fff}
-    .sticky-header{position:fixed;top:0;left:0;right:0;background:#fff;padding:0.6rem 2rem 0.5rem;z-index:100;border-bottom:1.5px solid #c8a96e}
-    .content-wrap{padding-top:130px}
+    .sticky-header{position:fixed;top:0;left:0;right:0;background:#fff;padding:0.5rem 2rem 0.4rem;z-index:100;border-bottom:1.5px solid #c8a96e}
+    .content-wrap{padding-top:150px !important;margin-top:0}
     .card{break-inside:avoid;page-break-inside:avoid}
     @page{margin:1cm 1.5cm}
   }`;
@@ -4011,7 +4011,7 @@ function _reportHeader(title,count,unit){
 }
 function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
   if(photoUrl) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>`;
-  if(useEnc&&encFallback) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${encFallback}" alt="${name}"><div class="ref-photo-note">Still Point Lapidary Crystal Encyclopedia</div></div>`;
+  if(useEnc&&encFallback) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${encFallback}" alt="${name}"><div class="ref-photo-note">SPL ref.</div></div>`;
   return `<div class="card-photo-wrap"><div class="${cssClass.replace('card-photo','card-photo-empty')} ${cssClass.includes('inv-thumb')?'inv-thumb-empty':''}">No photo</div></div>`;
 }
 async function generateReport(){
