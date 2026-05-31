@@ -1480,6 +1480,43 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 </div>
 
 
+<div class="popup-overlay" id="report-options-overlay" onclick="if(event.target===this)closeReportOptions()">
+  <div class="popup-box" style="max-width:420px">
+    <button class="popup-close" onclick="closeReportOptions()">✕</button>
+    <div class="popup-title" id="report-options-title">Collection Report Options</div>
+    <div style="margin-bottom:1.25rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Always included</div>
+      <div style="font-size:12px;color:var(--ink3)">Stone name · Photo (if available)</div>
+    </div>
+    <div style="margin-bottom:1.25rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Collection fields</div>
+      <div style="display:flex;flex-direction:column;gap:6px" id="report-coll-fields">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="form" checked> Form &amp; size</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="condition" checked> Condition</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="location" checked> Location</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="acquired" checked> Acquired date &amp; source</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="price"> Price paid</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="notes" checked> Notes</label>
+      </div>
+    </div>
+    <div style="margin-bottom:1.5rem" id="report-enc-section">
+      <div class="sec-label" style="margin-bottom:0.75rem">Encyclopedia fields</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="usewhen" checked> Use When</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="er"> Energetic role</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="chakras"> Chakras</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="geo"> Geological notes</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="aff"> Affirmation</label>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="closeReportOptions()">Cancel</button>
+      <button class="btn btn-accent" style="flex:1;justify-content:center" id="report-generate-btn" onclick="generateReport()">⎙ Generate report</button>
+    </div>
+    <div id="report-preparing" style="display:none;font-size:12px;color:var(--ink3);text-align:center;margin-top:0.75rem">Preparing report…</div>
+  </div>
+</div>
+
 <div class="popup-overlay" id="popup-manage" onclick="if(event.target===this)closePopup('manage')">
   <div class="popup-box" style="max-width:400px">
     <button class="popup-close" onclick="closePopup('manage')">✕</button>
@@ -1496,8 +1533,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="printCollectionReport();closePopup('manage')">⎙ Print collection report</button>
-        <button class="btn" style="justify-content:flex-start" onclick="printWishlistReport();closePopup('manage')">⎙ Print wishlist report</button>
+        <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('collection');closePopup('manage')">⎙ Print collection report</button>
+        <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('wishlist');closePopup('manage')">⎙ Print wishlist report</button>
         <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Export collection (CSV)</button>
         <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Export wishlist (CSV)</button>
       </div>
@@ -1598,7 +1635,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="form-row">
       <div class="fg">
         <label style="display:flex;align-items:center;gap:8px">Name *
-          <button class="btn btn-sm" id="enc-autofill-btn" onclick="encAutoFill()" style="font-size:10px;padding:2px 10px;margin-left:auto">✦ Auto-fill with AI</button>
+          <button class="btn btn-sm" id="enc-autofill-btn" onclick="encAutoFill()" style="font-size:10px;padding:2px 10px;margin-left:auto;background:#f0e8d8;border-color:#c8a96e;color:#7a5c2a">✦ Auto-fill with AI</button>
         </label>
         <input type="text" id="enc-name" placeholder="e.g. Sugilite" oninput="encCheckDupe(this.value)">
         <div id="enc-autofill-status" style="font-size:12px;color:var(--ink3);margin-top:4px;display:none"></div>
@@ -3734,70 +3771,130 @@ function exportWishlistCSV(){
 }
 function exportCSV(){exportCollectionCSV();}
 
-function printCollectionReport(){
+let _reportType='collection';
+function openReportOptions(type){
+  _reportType=type;
+  document.getElementById('report-options-title').textContent=type==='collection'?'Collection Report Options':'Wishlist Report Options';
+  document.getElementById('report-coll-fields').style.display=type==='collection'?'':'none';
+  document.getElementById('report-enc-section').querySelector('.sec-label').previousElementSibling;
+  const collSection=document.getElementById('report-coll-fields').closest('div');
+  if(collSection)collSection.style.display=type==='collection'?'':'none';
+  document.getElementById('report-options-overlay').classList.add('open');
+}
+function closeReportOptions(){
+  document.getElementById('report-options-overlay').classList.remove('open');
+  document.getElementById('report-preparing').style.display='none';
+  document.getElementById('report-generate-btn').disabled=false;
+}
+function _reportFields(){
+  const f={};
+  document.querySelectorAll('#report-options-overlay input[type=checkbox]').forEach(cb=>{f[cb.dataset.field]=cb.checked;});
+  return f;
+}
+function _reportStyles(){
+  return `*{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Georgia',serif;color:#2a2520;background:#fff;padding:2.5rem 3rem;max-width:820px;margin:0 auto}
+  .card{display:flex;gap:1.25rem;padding:1.25rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid;align-items:flex-start}
+  .card-photo{width:110px;min-width:110px;height:110px;object-fit:cover;border-radius:6px;background:#f0ece7}
+  .card-photo-empty{width:110px;min-width:110px;height:110px;border-radius:6px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
+  .card-body{flex:1;min-width:0}
+  .stone-name{font-family:'Georgia',serif;font-size:17px;color:#2a2520;line-height:1.2}
+  .stone-sub{font-size:12px;color:#8a7e72;margin-top:3px}
+  .stone-detail{font-size:12px;color:#5a5149;margin-top:5px}
+  .use-when{font-size:12px;color:#5a5149;margin-top:8px;padding:6px 10px;background:#f5f2ef;border-radius:4px;font-style:italic;line-height:1.5}
+  .meta{font-size:11px;color:#a09890;margin-top:5px}
+  .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic}
+  .header{border-bottom:2px solid #2a2520;padding-bottom:1rem;margin-bottom:0.5rem}
+  .header-title{font-size:28px;font-weight:400;letter-spacing:0.02em}
+  .header-sub{font-size:13px;color:#8a7e72;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase}
+  .report-meta{font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.5rem}
+  .footer{margin-top:2rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center}
+  @media print{body{padding:1.5rem 2rem}@page{margin:1.5cm}}`;
+}
+async function generateReport(){
+  const btn=document.getElementById('report-generate-btn');
+  const prep=document.getElementById('report-preparing');
+  btn.disabled=true;prep.style.display='block';
+  const f=_reportFields();
+  try{
+    if(_reportType==='collection') await _printCollectionReport(f);
+    else _printWishlistReport(f);
+  }finally{closeReportOptions();}
+}
+async function _printCollectionReport(f){
   const items=dedupedCollectionItems(collection);
   if(!items.length){alert('Your collection is empty.');return;}
-  const rows=items.map(p=>{
+  const rows=await Promise.all(items.map(async p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    const name=p.nickname?`${c?.n||''} <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:c?.n||'Unknown';
+    const displayName=c?.n||'Unknown';
+    const nickname=p.nickname?` <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:'';
     const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
-    const details=[p.form,p.size,p.treated,p.condition].filter(Boolean).join(' · ');
-    const meta=[formatDisplayDate(p.acquired)&&`Acquired ${formatDisplayDate(p.acquired)}`,p.source&&`Source: ${p.source}`,formatDisplayPrice(p.price)&&`${formatDisplayPrice(p.price)}`].filter(Boolean).join(' · ');
-    return `<div style="padding:1rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem">
-        <div style="font-family:'Georgia',serif;font-size:16px;color:#2a2520">${name}</div>
-        <div style="font-size:11px;color:#8a7e72;white-space:nowrap">${p.id||''}</div>
+    const photoUrl=firstCollectionPhoto(p);
+    const photoHtml=photoUrl
+      ?`<img class="card-photo" src="${photoUrl}" alt="${displayName}">`
+      :`<div class="card-photo-empty">No photo</div>`;
+    const formLine=[p.form,p.size,f.condition?p.treated:'',f.condition?p.condition:''].filter(Boolean).join(' · ');
+    const metaParts=[
+      f.acquired&&formatDisplayDate(p.acquired)?`Acquired ${formatDisplayDate(p.acquired)}`:'',
+      f.acquired&&p.source?`Source: ${p.source}`:'',
+      f.price&&formatDisplayPrice(p.price)?formatDisplayPrice(p.price):'',
+    ].filter(Boolean);
+    return `<div class="card">
+      ${photoHtml}
+      <div class="card-body">
+        <div class="stone-name">${displayName}${nickname}</div>
+        ${p.isCombo&&comboNames.length?`<div class="stone-sub">Combo: ${comboNames.join(' · ')}</div>`:''}
+        ${formLine?`<div class="stone-detail">${formLine}</div>`:''}
+        ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
+        ${f.er&&c?.er?`<div class="stone-sub" style="margin-top:6px">${c.er}</div>`:''}
+        ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''}
+        ${metaParts.length?`<div class="meta">${metaParts.join(' · ')}</div>`:''}
+        ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''}
+        ${f.chakras&&c?.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''}
+        ${f.geo&&c?.g?`<div class="meta" style="margin-top:6px">${c.g}</div>`:''}
+        ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
       </div>
-      ${p.isCombo&&comboNames.length?`<div style="font-size:12px;color:#8a7e72;margin-top:2px">Combo: ${comboNames.join(' · ')}</div>`:''}
-      ${details?`<div style="font-size:12px;color:#5a5149;margin-top:4px">${details}</div>`:''}
-      ${collPieceLocation(p)?`<div style="font-size:12px;color:#8a7e72;margin-top:2px">📍 ${collPieceLocation(p)}</div>`:''}
-      ${meta?`<div style="font-size:11px;color:#a09890;margin-top:4px">${meta}</div>`:''}
-      ${p.notes?`<div style="font-size:12px;color:#5a5149;margin-top:6px;font-style:italic">${p.notes}</div>`:''}
-      ${c?.uw?`<div style="font-size:11px;color:#8a7e72;margin-top:6px;padding:6px 10px;background:#f5f2ef;border-radius:4px">${c.uw}</div>`:''}
     </div>`;
-  }).join('');
+  }));
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title>
-  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Georgia',serif;color:#2a2520;background:#fff;padding:2.5rem 3rem;max-width:800px;margin:0 auto}
-  @media print{body{padding:1.5rem 2rem}@page{margin:1.5cm}}</style></head><body>
-  <div style="border-bottom:2px solid #2a2520;padding-bottom:1rem;margin-bottom:0.5rem">
-    <div style="font-family:'Georgia',serif;font-size:28px;font-weight:400;letter-spacing:0.02em">Still Point Lapidary</div>
-    <div style="font-size:13px;color:#8a7e72;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase">My Stone Collection</div>
-  </div>
-  <div style="font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.5rem">${items.length} piece${items.length!==1?'s':''} · Generated ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
-  ${rows}
-  <div style="margin-top:2rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center">stillpointlapidary.com</div>
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles()}</style></head><body>
+  <div class="header"><div class="header-title">Still Point Lapidary</div><div class="header-sub">My Stone Collection</div></div>
+  <div class="report-meta">${items.length} piece${items.length!==1?'s':''} · ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+  ${rows.join('')}
+  <div class="footer">stillpointlapidary.com</div>
   </body></html>`);
   win.document.close();
-  setTimeout(()=>win.print(),400);
+  setTimeout(()=>win.print(),600);
 }
-
-function printWishlistReport(){
+function _printWishlistReport(f){
   const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
   const items=CRYSTALS.filter(c=>wishIds.includes(c.i));
   if(!items.length){alert('Your wishlist is empty.');return;}
-  const rows=items.map(c=>`<div style="padding:1rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem">
-      <div style="font-family:'Georgia',serif;font-size:16px;color:#2a2520">${c.n}</div>
-      <div style="font-size:11px;color:#8a7e72">${c.i}</div>
-    </div>
-    ${c.a?`<div style="font-size:12px;color:#8a7e72;margin-top:2px">Also known as: ${c.a}</div>`:''}
-    <div style="font-size:12px;color:#5a5149;margin-top:4px">${[c.fam,c.c,c.m?c.m+' Mohs':''].filter(Boolean).join(' · ')}</div>
-    ${c.er?`<div style="font-size:12px;color:#8a7e72;margin-top:4px;letter-spacing:0.04em">${c.er}</div>`:''}
-    ${c.uw?`<div style="font-size:12px;color:#5a5149;margin-top:6px;padding:6px 10px;background:#f5f2ef;border-radius:4px;font-style:italic">${c.uw}</div>`:''}
-    ${c.chakras&&c.chakras.length?`<div style="font-size:11px;color:#a09890;margin-top:6px">Chakra: ${c.chakras.join(' · ')}</div>`:''}
-  </div>`).join('');
+  const rows=items.map(c=>{
+    const encPhoto=ENCYCLOPEDIA_PHOTOS[c.i]?.[0];
+    const photoHtml=encPhoto
+      ?`<img class="card-photo" src="${SUPABASE_ENC}${encPhoto}" alt="${c.n}">`
+      :`<div class="card-photo-empty">No photo</div>`;
+    return `<div class="card">
+      ${photoHtml}
+      <div class="card-body">
+        <div class="stone-name">${c.n}</div>
+        ${c.a?`<div class="stone-sub">Also known as: ${c.a}</div>`:''}
+        <div class="stone-detail">${[c.fam,c.c,c.m?c.m+' Mohs':''].filter(Boolean).join(' · ')}</div>
+        ${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''}
+        ${f.er&&c.er?`<div class="stone-sub" style="margin-top:6px">${c.er}</div>`:''}
+        ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''}
+        ${f.geo&&c.g?`<div class="meta" style="margin-top:6px">${c.g}</div>`:''}
+        ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title>
-  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Georgia',serif;color:#2a2520;background:#fff;padding:2.5rem 3rem;max-width:800px;margin:0 auto}
-  @media print{body{padding:1.5rem 2rem}@page{margin:1.5cm}}</style></head><body>
-  <div style="border-bottom:2px solid #2a2520;padding-bottom:1rem;margin-bottom:0.5rem">
-    <div style="font-family:'Georgia',serif;font-size:28px;font-weight:400;letter-spacing:0.02em">Still Point Lapidary</div>
-    <div style="font-size:13px;color:#8a7e72;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase">My Wishlist</div>
-  </div>
-  <div style="font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.5rem">${items.length} stone${items.length!==1?'s':''} · Generated ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles()}</style></head><body>
+  <div class="header"><div class="header-title">Still Point Lapidary</div><div class="header-sub">My Wishlist</div></div>
+  <div class="report-meta">${items.length} stone${items.length!==1?'s':''} · ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
   ${rows}
-  <div style="margin-top:2rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center">stillpointlapidary.com</div>
+  <div class="footer">stillpointlapidary.com</div>
   </body></html>`);
   win.document.close();
   setTimeout(()=>win.print(),400);
