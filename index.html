@@ -4514,8 +4514,8 @@ function initPWA(){
       if(body) body.textContent = 'Tap Share → Add to Home Screen for quick access to your collection.';
       if(cta){ cta.textContent = 'Got it'; cta.onclick = ()=>dismissPWA(true); }
     } else {
-      if(title) title.textContent = 'Build your collection';
-      if(body) body.textContent = 'Create a free account to track the stones you own, save your wishlist, and carry your collection everywhere.';
+      if(title) title.textContent = 'Every stone you love, in one place';
+      if(body) body.textContent = 'Create a free account to save the stones you own, build your wishlist, and carry your collection with you.';
       if(cta){ cta.textContent = 'Create account'; cta.onclick = ()=>{ dismissPWA(true); openAuthModal('signup'); }; }
     }
     banner.style.display='flex';
