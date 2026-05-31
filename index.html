@@ -3946,10 +3946,10 @@ function _reportBase(){
   .ref-photo-note{font-size:7px;color:#c0b8b0;text-align:center;margin-top:2px;letter-spacing:0.02em;line-height:1.2;word-wrap:break-word;overflow-wrap:break-word;white-space:normal}
   .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
   .report-table{width:100%;border-collapse:collapse}
-  .report-thead-td{padding:0.75rem 0 0.75rem;border-bottom:1.5px solid #c8a96e}
+  .report-thead-td{padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #c8a96e}
   .report-table thead{display:table-header-group}
-  .content-wrap{padding-top:1.25rem;vertical-align:top}
-  .gallery-row td{padding-top:1.25rem;vertical-align:top}
+  .content-wrap{padding-top:1.75rem;vertical-align:top}
+  .gallery-row td{padding-top:1.75rem;vertical-align:top}
   .gallery-row+.gallery-row{page-break-before:always;break-before:page}
   @media print{
     .print-toolbar{display:none}
@@ -4048,7 +4048,10 @@ async function _printCollectionReport(f){
     const encFallback=encFallbackFile?SUPABASE_ENC+encFallbackFile:null;
     const nickname=p.nickname?` <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:'';
     const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
-    const formLine=[f.form?(p.form||''):'',f.form?(p.size||''):'',f.condition?(p.treated||''):'',f.condition?(p.condition||''):''].filter(Boolean).join(' · ');
+    const formParts=[f.form&&p.form?`Form: ${p.form}`:'',f.form&&p.size?`Size: ${p.size}`:''].filter(Boolean).join(' · ');
+    const treatLine=f.condition&&p.treated?`Treatment: ${p.treated}`:'';
+    const condLine=f.condition&&p.condition?`Condition: ${p.condition}`:'';
+    const formHtml=[formParts,treatLine,condLine].filter(Boolean).map(l=>`<div>${l}</div>`).join('');
     const metaParts=[f.acquired&&formatDisplayDate(p.acquired)?`Acquired ${formatDisplayDate(p.acquired)}`:'',f.acquired&&p.source?`Source: ${p.source}`:'',f.price&&formatDisplayPrice(p.price)?formatDisplayPrice(p.price):''].filter(Boolean);
 
     if(layout==='gallery'){
@@ -4058,7 +4061,7 @@ async function _printCollectionReport(f){
         <div class="stone-name">${name}${nickname}</div>
         ${c?.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}
         ${p.isCombo&&comboNames.length?`<div class="stone-alt">Combo: ${comboNames.join(' · ')}</div>`:''}
-        ${formLine?`<div class="stone-detail">${formLine}</div>`:''}
+        ${formHtml?`<div class="stone-detail">${formHtml}</div>`:''}
         ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
         ${facts.length?`<div class="fact-grid">${facts.map(([v,l])=>`<div class="fact"><strong>${l}:</strong> ${v}</div>`).join('')}</div>`:''}
         ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''}
@@ -4073,7 +4076,7 @@ async function _printCollectionReport(f){
       return `<div class="inv-row">${ph}
         <div class="inv-body">
           <div class="stone-name">${name}${nickname}</div>
-          <div class="inv-line">${[formLine,f.location&&collPieceLocation(p)?'📍 '+collPieceLocation(p):''].filter(Boolean).join(' · ')}</div>
+          <div class="inv-line">${formHtml}${f.location&&collPieceLocation(p)?`<div>📍 ${collPieceLocation(p)}</div>`:''}</div>
           ${metaParts.length?`<div class="inv-line" style="color:#a09890">${metaParts.join(' · ')}</div>`:''}
           ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
           ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''}
@@ -4085,7 +4088,7 @@ async function _printCollectionReport(f){
     return `<div class="card">${ph}
       <div class="stone-name">${name}${nickname}</div>
       ${p.isCombo&&comboNames.length?`<div class="stone-alt">Combo: ${comboNames.join(' · ')}</div>`:''}
-      ${formLine?`<div class="stone-detail">${formLine}</div>`:''}
+      ${formHtml?`<div class="stone-detail">${formHtml}</div>`:''}
       ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
       ${f.er&&c?.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''}
       ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''}
