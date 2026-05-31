@@ -1514,7 +1514,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
           <div style="font-size:10px;color:var(--ink3);margin-top:2px">One per page</div>
         </div>
         <!-- Reference -->
-        <div class="report-layout-opt selected" data-val="reference" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--accent2);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer;background:#faf6f0">
+        <div class="report-layout-opt selected" data-val="standard" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--accent2);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer;background:#faf6f0">
           <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px">
             <rect x="1" y="4" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/>
             <rect x="3" y="6" width="19" height="12" rx="2" fill="#e8e0d4"/>
@@ -1531,11 +1531,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
             <rect x="28" y="34" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/>
             <rect x="30" y="36" width="19" height="12" rx="2" fill="#e8e0d4"/>
           </svg>
-          <div style="font-weight:500;font-size:12px">Reference</div>
+          <div style="font-weight:500;font-size:12px">Standard</div>
           <div style="font-size:10px;color:var(--ink3);margin-top:2px">2 per page</div>
         </div>
         <!-- Inventory -->
-        <div class="report-layout-opt" data-val="inventory" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer">
+        <div class="report-layout-opt" data-val="compact" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer">
           <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px">
             <rect x="2" y="2" width="48" height="6" rx="1.5" fill="#c8a96e" opacity="0.3"/>
             <rect x="2" y="11" width="8" height="6" rx="1.5" fill="#e8e0d4"/>
@@ -1554,7 +1554,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
             <rect x="13" y="52" width="16" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
             <rect x="13" y="55" width="18" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/>
           </svg>
-          <div style="font-weight:500;font-size:12px">Inventory</div>
+          <div style="font-weight:500;font-size:12px">Compact</div>
           <div style="font-size:10px;color:var(--ink3);margin-top:2px">8+ per page</div>
         </div>
       </div>
@@ -3887,7 +3887,7 @@ function selectReportLayout(el){
   el.style.background='#faf6f0';
   el.classList.add('selected');
   const thumbOpt=document.getElementById('report-thumb-option');
-  if(thumbOpt)thumbOpt.style.display=el.dataset.val==='inventory'?'block':'none';
+  if(thumbOpt)thumbOpt.style.display=el.dataset.val==='compact'?'block':'none';
 }
 function openReportOptions(type){
   _reportType=type;
@@ -3905,7 +3905,10 @@ function openReportOptions(type){
       encPhotoSection.style.display='none';
     }
   }
-  document.getElementById('report-options-overlay').classList.add('open');
+  const overlay=document.getElementById('report-options-overlay');
+  overlay.classList.add('open');
+  const box=overlay.querySelector('.popup-box');
+  if(box)box.scrollTop=0;
 }
 function closeReportOptions(){
   document.getElementById('report-options-overlay').classList.remove('open');
@@ -3916,19 +3919,20 @@ function closeReportOptions(){
 function _reportFields(){
   const f={};
   document.querySelectorAll('#report-options-overlay input[type=checkbox]').forEach(cb=>{f[cb.dataset.field]=cb.checked;});
-  f.layout=document.querySelector('.report-layout-opt.selected')?.dataset.val||'reference';
+  f.layout=document.querySelector('.report-layout-opt.selected')?.dataset.val||'standard';
   return f;
 }
 function _reportBase(){
   return `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Jost',sans-serif;color:#2a2520;background:#faf8f6;margin:0 auto}
-  .report-header{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1.5px solid #c8a96e;padding-bottom:1.25rem;margin-bottom:0.75rem}
-  .report-brand{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:#2a2520;letter-spacing:0.04em}
+  .sticky-header{background:#faf8f6;padding-bottom:0.75rem;margin-bottom:0.75rem;border-bottom:1.5px solid #c8a96e}
+  .report-header{display:flex;align-items:flex-end;justify-content:space-between}
+  .report-brand{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#2a2520;letter-spacing:0.04em}
   .report-brand span{color:#c8a96e;font-style:italic}
-  .report-subtitle{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a7e72;margin-top:3px}
-  .report-meta{font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.4rem;letter-spacing:0.04em}
-  .print-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:1.5rem}
+  .report-subtitle{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#8a7e72;margin-top:2px}
+  .report-meta{font-size:11px;color:#a09890;padding-top:0.3rem;letter-spacing:0.04em}
+  .print-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:1rem}
   .print-btn{background:#c8a96e;color:#fff;border:none;padding:8px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:6px;cursor:pointer}
   .stone-name{font-family:'Cormorant Garamond',serif;font-weight:400;color:#2a2520;line-height:1.2}
   .stone-alt{font-size:11px;color:#8a7e72;margin-top:2px;letter-spacing:0.04em}
@@ -3939,58 +3943,70 @@ function _reportBase(){
   .fact strong{color:#5a5149;font-weight:500}
   .meta{font-size:11px;color:#a09890;margin-top:5px;line-height:1.6}
   .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic;line-height:1.5}
-  .ref-photo-note{font-size:9px;color:#b0a89e;text-align:center;margin-top:3px;font-style:italic;letter-spacing:0.02em}
+  .ref-photo-note{font-size:9px;color:#b0a89e;text-align:center;margin-top:3px;font-style:italic;word-wrap:break-word;overflow-wrap:break-word;line-height:1.4}
   .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
-  @media print{.print-toolbar{display:none}body{background:#fff}@page{margin:1.5cm}}`;
+  @media print{
+    .print-toolbar{display:none}
+    body{background:#fff}
+    .sticky-header{position:fixed;top:0;left:0;right:0;background:#fff;padding:0.6rem 2rem 0.5rem;z-index:100;border-bottom:1.5px solid #c8a96e}
+    .content-wrap{padding-top:90px}
+    @page{margin:1cm 1.5cm}
+  }`;
 }
 function _reportStyles(layout){
   const base=_reportBase();
   if(layout==='gallery') return base+`
-  body{padding:2rem 2.5rem;max-width:780px}
-  .card{page-break-after:always;padding-bottom:2rem}
+  body{padding:1rem 2.5rem;max-width:780px}
+  .content-wrap{padding-top:1rem}
+  .card{display:flex;flex-direction:column;min-height:calc(100vh - 120px);page-break-after:always;padding:1rem 0 1.5rem}
   .card:last-child{page-break-after:auto}
-  .card-photo-wrap{margin-bottom:1.25rem}
-  .card-photo{width:100%;max-height:280px;object-fit:cover;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14);display:block}
-  .card-photo-empty{width:100%;height:200px;border-radius:10px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e}
-  .stone-name{font-size:30px;margin-bottom:4px}
+  .card-photo-wrap{margin-bottom:1rem;flex-shrink:0}
+  .card-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14);display:block;max-height:260px}
+  .card-photo-empty{width:100%;aspect-ratio:4/3;max-height:260px;border-radius:10px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e}
+  .stone-name{font-size:28px;margin-bottom:4px}
   .use-when{font-size:13px}
   .fact-grid{grid-template-columns:1fr 1fr 1fr}
-  .footer{margin-top:2rem}`;
+  .footer{margin-top:1.5rem}
+  @media print{.card{min-height:calc(100vh - 90px)}}`;
 
-  if(layout==='reference') return base+`
-  body{padding:1.5rem 2rem;max-width:none}
-  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 2rem}
-  .card{background:#fff;border-radius:10px;padding:1rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid}
+  if(layout==='standard') return base+`
+  body{padding:1rem 1.5rem;max-width:none}
+  .content-wrap{padding-top:1rem}
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;align-items:start}
+  .card{background:#fff;border-radius:10px;padding:0.875rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid;overflow:hidden}
   .card-photo-wrap{margin-bottom:0.75rem}
-  .card-photo{width:100%;height:140px;object-fit:cover;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1);display:block}
-  .card-photo-empty{width:100%;height:140px;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
-  .stone-name{font-size:20px}
+  .card-photo{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1);display:block}
+  .card-photo-empty{width:100%;aspect-ratio:1;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
+  .stone-name{font-size:19px}
   .use-when{font-size:12px;padding:6px 9px}
   .footer{margin-top:1.5rem;grid-column:1/-1}`;
 
-  if(layout==='inventory') return base+`
-  body{padding:1.25rem 1.5rem;max-width:none}
-  .inv-row{display:flex;gap:10px;padding:7px 0;border-bottom:0.5px solid #ede9e4;break-inside:avoid;align-items:flex-start}
+  if(layout==='compact') return base+`
+  body{padding:1rem 1.5rem;max-width:none}
+  .content-wrap{padding-top:1rem}
+  .inv-row{display:flex;gap:10px;padding:6px 0;border-bottom:0.5px solid #ede9e4;break-inside:avoid;align-items:flex-start}
   .inv-row:first-child{border-top:0.5px solid #ede9e4}
-  .inv-thumb{width:48px;min-width:48px;height:48px;object-fit:cover;border-radius:4px}
-  .inv-thumb-empty{width:48px;min-width:48px;height:48px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:8px;color:#b0a89e;text-align:center;line-height:1.2}
+  .inv-thumb-wrap{flex-shrink:0;width:48px}
+  .inv-thumb{width:48px;height:48px;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block}
+  .inv-thumb-empty{width:48px;height:48px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:8px;color:#b0a89e;text-align:center;line-height:1.3;padding:2px}
   .inv-body{flex:1;min-width:0}
-  .stone-name{font-size:14px;font-family:'Cormorant Garamond',serif}
+  .stone-name{font-size:14px}
   .inv-line{font-size:11px;color:#5a5149;margin-top:2px;line-height:1.4}
   .use-when{font-size:11px;padding:3px 7px;margin-top:4px;border-left-width:2px}
-  .inv-header{display:flex;gap:10px;padding:5px 0 7px;border-bottom:1.5px solid #c8a96e;margin-bottom:2px}
-  .inv-header-thumb{width:48px;min-width:48px;font-size:9px;color:#8a7e72;letter-spacing:0.06em;text-transform:uppercase}
-  .inv-header-text{font-size:9px;color:#8a7e72;letter-spacing:0.06em;text-transform:uppercase}
+  .ref-photo-note{max-width:48px;word-wrap:break-word;overflow-wrap:break-word}
   .footer{margin-top:1.5rem}`;
 
-  return _reportStyles('reference');
+  return _reportStyles('standard');
 }
 function _reportHeader(title,count,unit){
-  return `<div class="report-header">
-    <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
-    <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+  return `<div class="sticky-header">
+    <div class="report-header">
+      <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
+      <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+    </div>
+    <div class="report-meta">${count} ${unit}${count!==1?'s':''}</div>
   </div>
-  <div class="report-meta">${count} ${unit}${count!==1?'s':''}</div>`;
+  <div class="content-wrap">`;
 }
 function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
   if(photoUrl) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>`;
@@ -4039,9 +4055,9 @@ async function _printCollectionReport(f){
         ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic;margin-top:12px;font-size:13px">"${c.aff}"</div>`:''}
       </div>`;
     }
-    if(layout==='inventory'){
+    if(layout==='compact'){
       const showThumb=f.thumbs!==false;
-      const ph=showThumb?_photoHtml(photoUrl,name,encFallback,f.encphoto,'inv-thumb'):'';
+      const ph=showThumb?`<div class="inv-thumb-wrap">${_photoHtml(photoUrl,name,encFallback,f.encphoto,'inv-thumb')}</div>`:'';
       return `<div class="inv-row">${ph}
         <div class="inv-body">
           <div class="stone-name">${name}${nickname}</div>
@@ -4052,7 +4068,7 @@ async function _printCollectionReport(f){
         </div>
       </div>`;
     }
-    // reference (default) — 2 per page grid
+    // standard — 2 per page grid
     const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo');
     return `<div class="card">${ph}
       <div class="stone-name">${name}${nickname}</div>
@@ -4067,12 +4083,14 @@ async function _printCollectionReport(f){
       ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
     </div>`;
   }));
-  const bodyWrap=layout==='reference'?`<div class="card-grid">${cards.join('')}<div class="footer">stillpointlapidary.com</div></div>`:cards.join('')+`<div class="footer">stillpointlapidary.com</div>`;
+  const inner=layout==='standard'?`<div class="card-grid">${cards.join('')}</div>`:cards.join('');
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
   <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
   ${_reportHeader('My Stone Collection',items.length,'piece')}
-  ${bodyWrap}
+  ${inner}
+  <div class="footer">stillpointlapidary.com</div>
+  </div>
   </body></html>`);
   win.document.close();
 }
@@ -4090,20 +4108,22 @@ function _printWishlistReport(f){
       const facts=[[c.fam,'Family'],[c.sy,'System'],[c.fo,'Formation'],[c.m?c.m+' Mohs':null,'Hardness'],[c.element,'Element'],[c.chakras?.join(', '),'Chakra']].filter(r=>r[0]);
       return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${facts.length?`<div class="fact-grid">${facts.map(([v,l])=>`<div class="fact"><strong>${l}:</strong> ${v}</div>`).join('')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic;margin-top:12px;font-size:13px">"${c.aff}"</div>`:''}</div>`;
     }
-    if(layout==='inventory'){
+    if(layout==='compact'){
       const showThumb=f.thumbs!==false;
-      const ph=showThumb?(photoUrl?`<img class="inv-thumb" src="${photoUrl}" alt="${c.n}">`:`<div class="inv-thumb-empty">No photo</div>`):'';
+      const ph=showThumb?`<div class="inv-thumb-wrap">${photoUrl?`<img class="inv-thumb" src="${photoUrl}" alt="${c.n}">`:`<div class="inv-thumb-empty">No photo</div>`}</div>`:'';
       return `<div class="inv-row">${ph}<div class="inv-body"><div class="stone-name">${c.n}</div><div class="inv-line">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''}</div></div>`;
     }
     const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
     return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
   });
-  const bodyWrap=layout==='reference'?`<div class="card-grid">${cards.join('')}<div class="footer">stillpointlapidary.com</div></div>`:cards.join('')+`<div class="footer">stillpointlapidary.com</div>`;
+  const inner=layout==='standard'?`<div class="card-grid">${cards.join('')}</div>`:cards.join('');
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
   <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
   ${_reportHeader('My Wishlist',items.length,'stone')}
-  ${bodyWrap}
+  ${inner}
+  <div class="footer">stillpointlapidary.com</div>
+  </div>
   </body></html>`);
   win.document.close();
 }
