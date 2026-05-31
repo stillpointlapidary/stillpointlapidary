@@ -3945,11 +3945,17 @@ function _reportBase(){
   .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic;line-height:1.5}
   .ref-photo-note{font-size:7px;color:#c0b8b0;text-align:center;margin-top:2px;letter-spacing:0.02em;line-height:1.2;word-wrap:break-word;overflow-wrap:break-word;white-space:normal}
   .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
+  .report-table{width:100%;border-collapse:collapse}
+  .report-table thead td{padding-bottom:0.75rem;border-bottom:1.5px solid #c8a96e}
+  .report-table thead{display:table-header-group}
+  .content-wrap{padding-top:1.5rem;vertical-align:top}
+  .page-break{page-break-before:always;break-before:page;height:0;display:block}
   @media print{
     .print-toolbar{display:none}
     body{background:#fff}
     .card{break-inside:avoid;page-break-inside:avoid}
-    @page{margin:1.8cm 1.5cm}
+    .report-table thead{display:table-header-group}
+    @page{margin:1.5cm}
   }`;
 }
 function _reportStyles(layout){
@@ -3957,17 +3963,15 @@ function _reportStyles(layout){
   if(layout==='gallery') return base+`
   body{padding:1rem 2.5rem;max-width:780px}
   .content-wrap{padding-top:1.5rem}
-  .card{display:flex;flex-direction:column;min-height:calc(100vh - 120px);page-break-after:always;padding:1rem 0 1.5rem}
-  .card:last-child{page-break-after:auto}
-  .card-photo-wrap{margin-bottom:1rem;flex-shrink:0}
-  .card-photo-wrap{width:100%;height:340px;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14);margin-bottom:1.25rem}
-  .card-photo{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px}
-  .card-photo-empty{width:100%;height:100%;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;border-radius:10px}
+  .card{padding:1rem 0 2rem}
+  .card-photo-wrap{width:100%;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14);margin-bottom:1.25rem}
+  .card-photo-wrap::after{content:'';display:block;padding-bottom:100%}
+  .card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:10px}
+  .card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;border-radius:10px}
   .stone-name{font-size:28px;margin-bottom:4px}
   .use-when{font-size:13px}
   .fact-grid{grid-template-columns:1fr 1fr 1fr}
-  .footer{margin-top:1.5rem}
-  @media print{.card{min-height:calc(100vh - 90px)}}`;
+  .footer{margin-top:1.5rem}`;
 
   if(layout==='standard') return base+`
   body{padding:1rem 1.5rem;max-width:none}
@@ -3975,8 +3979,10 @@ function _reportStyles(layout){
   .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;align-items:start}
   .card{background:#fff;border-radius:10px;padding:0.875rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid;overflow:hidden}
   .card-photo-wrap{margin-bottom:0.75rem}
-  .card-photo{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1);display:block}
-  .card-photo-empty{width:100%;aspect-ratio:1;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
+  .card-photo-wrap{position:relative;width:100%;overflow:hidden;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1);margin-bottom:0.75rem}
+  .card-photo-wrap::after{content:'';display:block;padding-bottom:100%}
+  .card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:7px;display:block}
+  .card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
   .stone-name{font-size:19px}
   .use-when{font-size:12px;padding:6px 9px}
   .footer{margin-top:1.5rem;grid-column:1/-1}`;
@@ -3999,14 +4005,13 @@ function _reportStyles(layout){
   return _reportStyles('standard');
 }
 function _reportHeader(title,count,unit){
-  return `<div class="sticky-header">
+  return `<table class="report-table"><thead><tr><td>
     <div class="report-header">
       <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
       <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
     </div>
     <div class="report-meta">${count} ${unit}${count!==1?'s':''}</div>
-  </div>
-  <div class="content-wrap">`;
+  </td></tr></thead><tbody><tr><td class="content-wrap">`;
 }
 function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
   if(photoUrl) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>`;
@@ -4083,14 +4088,17 @@ async function _printCollectionReport(f){
       ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
     </div>`;
   }));
-  const inner=layout==='standard'?`<div class="card-grid">${cards.join('')}</div>`:cards.join('');
+  let inner;
+  if(layout==='standard') inner=`<div class="card-grid">${cards.join('')}</div>`;
+  else if(layout==='gallery') inner=cards.map((c,i)=>i===0?c:`<div class="page-break"></div>${c}`).join('');
+  else inner=cards.join('');
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
   <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
   ${_reportHeader('My Stone Collection',items.length,'piece')}
   ${inner}
   <div class="footer">stillpointlapidary.com</div>
-  </div>
+  </td></tr></tbody></table>
   </body></html>`);
   win.document.close();
 }
@@ -4116,14 +4124,17 @@ function _printWishlistReport(f){
     const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
     return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
   });
-  const inner=layout==='standard'?`<div class="card-grid">${cards.join('')}</div>`:cards.join('');
+  let inner;
+  if(layout==='standard') inner=`<div class="card-grid">${cards.join('')}</div>`;
+  else if(layout==='gallery') inner=cards.map((c,i)=>i===0?c:`<div class="page-break"></div>${c}`).join('');
+  else inner=cards.join('');
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
   <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
   ${_reportHeader('My Wishlist',items.length,'stone')}
   ${inner}
   <div class="footer">stillpointlapidary.com</div>
-  </div>
+  </td></tr></tbody></table>
   </body></html>`);
   win.document.close();
 }
