@@ -1493,25 +1493,92 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 
 <div class="popup-overlay" id="report-options-overlay" onclick="if(event.target===this)closeReportOptions()">
-  <div class="popup-box" style="max-width:420px">
+  <div class="popup-box" style="max-width:480px;max-height:90vh;overflow-y:auto">
     <button class="popup-close" onclick="closeReportOptions()">✕</button>
     <div class="popup-title" id="report-options-title">Collection Report Options</div>
-    <div style="margin-bottom:1.25rem">
-      <div class="sec-label" style="margin-bottom:0.75rem">Always included</div>
-      <div style="font-size:12px;color:var(--ink3)">Stone name · Photo (if available)</div>
+
+    <!-- Layout selector -->
+    <div style="margin-bottom:1.5rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Layout</div>
+      <div style="display:flex;gap:8px">
+        <!-- Gallery -->
+        <div class="report-layout-opt" data-val="gallery" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer">
+          <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px">
+            <rect x="2" y="2" width="48" height="32" rx="3" fill="#e8e0d4"/>
+            <rect x="8" y="38" width="36" height="5" rx="2" fill="#2a2520" opacity="0.7"/>
+            <rect x="12" y="46" width="28" height="3" rx="1.5" fill="#c8a96e" opacity="0.6"/>
+            <rect x="10" y="51" width="32" height="2" rx="1" fill="#a09890" opacity="0.4"/>
+            <rect x="10" y="55" width="24" height="2" rx="1" fill="#a09890" opacity="0.4"/>
+          </svg>
+          <div style="font-weight:500;font-size:12px">Gallery</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:2px">One per page</div>
+        </div>
+        <!-- Reference -->
+        <div class="report-layout-opt selected" data-val="reference" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--accent2);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer;background:#faf6f0">
+          <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px">
+            <rect x="1" y="4" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/>
+            <rect x="3" y="6" width="19" height="12" rx="2" fill="#e8e0d4"/>
+            <rect x="3" y="21" width="14" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="3" y="25" width="19" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/>
+            <rect x="3" y="28" width="15" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/>
+            <rect x="28" y="4" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/>
+            <rect x="30" y="6" width="19" height="12" rx="2" fill="#e8e0d4"/>
+            <rect x="30" y="21" width="14" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="30" y="25" width="19" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/>
+            <rect x="30" y="28" width="15" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/>
+            <rect x="1" y="34" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/>
+            <rect x="3" y="36" width="19" height="12" rx="2" fill="#e8e0d4"/>
+            <rect x="28" y="34" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/>
+            <rect x="30" y="36" width="19" height="12" rx="2" fill="#e8e0d4"/>
+          </svg>
+          <div style="font-weight:500;font-size:12px">Reference</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:2px">2 per page</div>
+        </div>
+        <!-- Inventory -->
+        <div class="report-layout-opt" data-val="inventory" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer">
+          <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px">
+            <rect x="2" y="2" width="48" height="6" rx="1.5" fill="#c8a96e" opacity="0.3"/>
+            <rect x="2" y="11" width="8" height="6" rx="1.5" fill="#e8e0d4"/>
+            <rect x="13" y="12" width="16" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="13" y="15" width="22" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/>
+            <rect x="2" y="21" width="8" height="6" rx="1.5" fill="#e8e0d4"/>
+            <rect x="13" y="22" width="18" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="13" y="25" width="26" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/>
+            <rect x="2" y="31" width="8" height="6" rx="1.5" fill="#e8e0d4"/>
+            <rect x="13" y="32" width="14" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="13" y="35" width="20" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/>
+            <rect x="2" y="41" width="8" height="6" rx="1.5" fill="#e8e0d4"/>
+            <rect x="13" y="42" width="20" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="13" y="45" width="24" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/>
+            <rect x="2" y="51" width="8" height="6" rx="1.5" fill="#e8e0d4"/>
+            <rect x="13" y="52" width="16" height="2" rx="1" fill="#2a2520" opacity="0.6"/>
+            <rect x="13" y="55" width="18" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/>
+          </svg>
+          <div style="font-weight:500;font-size:12px">Inventory</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:2px">8+ per page</div>
+        </div>
+      </div>
+      <!-- Inventory thumbnail option -->
+      <div id="report-thumb-option" style="display:none;margin-top:10px">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="thumbs" checked> Include thumbnail photos</label>
+      </div>
     </div>
-    <div style="margin-bottom:1.25rem">
+
+    <!-- Collection fields -->
+    <div style="margin-bottom:1.25rem" id="report-coll-section">
       <div class="sec-label" style="margin-bottom:0.75rem">Collection fields</div>
       <div style="display:flex;flex-direction:column;gap:6px" id="report-coll-fields">
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="form" checked> Form &amp; size</label>
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="condition" checked> Condition</label>
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="location" checked> Location</label>
-        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="acquired" checked> Acquired date &amp; source</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="acquired" checked> Acquired &amp; source</label>
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="price"> Price paid</label>
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="notes" checked> Notes</label>
       </div>
     </div>
-    <div style="margin-bottom:1.5rem" id="report-enc-section">
+
+    <!-- Encyclopedia fields -->
+    <div style="margin-bottom:1.25rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Encyclopedia fields</div>
       <div style="display:flex;flex-direction:column;gap:6px">
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="usewhen" checked> Use When</label>
@@ -1521,35 +1588,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="aff"> Affirmation</label>
       </div>
     </div>
-    <div style="margin-bottom:1.5rem">
-      <div class="sec-label" style="margin-bottom:0.75rem">Layout</div>
-      <div style="display:flex;gap:8px">
-        <label style="flex:1;cursor:pointer">
-          <input type="radio" name="report-layout" value="showcase" style="display:none">
-          <div class="report-layout-opt" data-val="showcase" onclick="selectReportLayout(this)" style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px;cursor:pointer">
-            <div style="font-size:16px;margin-bottom:2px">⬛</div>
-            <div style="font-weight:500">Showcase</div>
-            <div style="font-size:10px;color:var(--ink3)">Large, one per page</div>
-          </div>
-        </label>
-        <label style="flex:1;cursor:pointer">
-          <input type="radio" name="report-layout" value="standard" checked style="display:none">
-          <div class="report-layout-opt selected" data-val="standard" onclick="selectReportLayout(this)" style="border:1px solid var(--accent2);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px;cursor:pointer;background:#faf6f0">
-            <div style="font-size:16px;margin-bottom:2px">▬</div>
-            <div style="font-weight:500">Standard</div>
-            <div style="font-size:10px;color:var(--ink3)">Card with photo</div>
-          </div>
-        </label>
-        <label style="flex:1;cursor:pointer">
-          <input type="radio" name="report-layout" value="compact" style="display:none">
-          <div class="report-layout-opt" data-val="compact" onclick="selectReportLayout(this)" style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px;cursor:pointer">
-            <div style="font-size:16px;margin-bottom:2px">☰</div>
-            <div style="font-weight:500">Compact</div>
-            <div style="font-size:10px;color:var(--ink3)">Dense list</div>
-          </div>
-        </label>
-      </div>
+
+    <!-- Encyclopedia photo fallback -->
+    <div id="report-enc-photo-section" style="display:none;margin-bottom:1.25rem;padding:10px 12px;background:var(--stone2);border-radius:8px">
+      <div style="font-size:12px;font-weight:500;margin-bottom:6px">Some pieces have no photo</div>
+      <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="encphoto" checked> Use Still Point Lapidary reference images where no photo exists</label>
+      <div style="font-size:11px;color:var(--ink3);margin-top:4px">Images will be labeled "Still Point Lapidary Crystal Encyclopedia"</div>
     </div>
+
     <div style="display:flex;gap:8px">
       <button class="btn" onclick="closeReportOptions()">Cancel</button>
       <button class="btn btn-accent" style="flex:1;justify-content:center" id="report-generate-btn" onclick="generateReport()">Generate report</button>
@@ -3840,12 +3886,25 @@ function selectReportLayout(el){
   el.style.border='1px solid var(--accent2)';
   el.style.background='#faf6f0';
   el.classList.add('selected');
+  const thumbOpt=document.getElementById('report-thumb-option');
+  if(thumbOpt)thumbOpt.style.display=el.dataset.val==='inventory'?'block':'none';
 }
 function openReportOptions(type){
   _reportType=type;
   document.getElementById('report-options-title').textContent=type==='collection'?'Collection Report Options':'Wishlist Report Options';
-  const collSection=document.getElementById('report-coll-fields')?.closest('div[style]');
+  const collSection=document.getElementById('report-coll-section');
   if(collSection)collSection.style.display=type==='collection'?'':'none';
+  // Check for missing photos
+  const encPhotoSection=document.getElementById('report-enc-photo-section');
+  if(encPhotoSection){
+    if(type==='collection'){
+      const items=dedupedCollectionItems(collection);
+      const hasMissing=items.some(p=>!firstCollectionPhoto(p)&&ENCYCLOPEDIA_PHOTOS[p.crystalId]);
+      encPhotoSection.style.display=hasMissing?'block':'none';
+    } else {
+      encPhotoSection.style.display='none';
+    }
+  }
   document.getElementById('report-options-overlay').classList.add('open');
 }
 function closeReportOptions(){
@@ -3857,53 +3916,86 @@ function closeReportOptions(){
 function _reportFields(){
   const f={};
   document.querySelectorAll('#report-options-overlay input[type=checkbox]').forEach(cb=>{f[cb.dataset.field]=cb.checked;});
-  f.layout=document.querySelector('.report-layout-opt.selected')?.dataset.val||'standard';
+  f.layout=document.querySelector('.report-layout-opt.selected')?.dataset.val||'reference';
   return f;
 }
-function _reportStyles(layout){
-  const base=`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+function _reportBase(){
+  return `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Jost',sans-serif;color:#2a2520;background:#faf8f6;padding:2.5rem 3rem;max-width:860px;margin:0 auto}
-  .report-header{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid #c8a96e;padding-bottom:1.25rem;margin-bottom:0.75rem}
-  .report-brand{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#2a2520;letter-spacing:0.04em}
+  body{font-family:'Jost',sans-serif;color:#2a2520;background:#faf8f6;margin:0 auto}
+  .report-header{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1.5px solid #c8a96e;padding-bottom:1.25rem;margin-bottom:0.75rem}
+  .report-brand{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:#2a2520;letter-spacing:0.04em}
   .report-brand span{color:#c8a96e;font-style:italic}
   .report-subtitle{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a7e72;margin-top:3px}
-  .report-meta{font-size:11px;color:#a09890;margin-bottom:2rem;padding-top:0.5rem;letter-spacing:0.04em}
-  .print-btn{background:#c8a96e;color:#fff;border:none;padding:8px 18px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-radius:6px;cursor:pointer;margin-bottom:1.5rem}
-  .stone-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#2a2520;line-height:1.2}
-  .stone-nick{font-style:italic;color:#8a7e72}
-  .stone-sub{font-size:11px;color:#8a7e72;margin-top:3px;letter-spacing:0.04em;text-transform:uppercase}
-  .stone-detail{font-size:13px;color:#5a5149;margin-top:6px}
-  .use-when{font-size:13px;color:#5a5149;margin-top:10px;padding:8px 12px;background:#fff;border-left:2px solid #c8a96e;line-height:1.6;font-style:italic}
-  .meta{font-size:11px;color:#a09890;margin-top:6px;line-height:1.6}
-  .notes{font-size:13px;color:#5a5149;margin-top:8px;font-style:italic;line-height:1.5}
-  .footer{margin-top:3rem;padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
-  @media print{.print-btn{display:none}body{background:#fff;padding:1.5rem 2rem}@page{margin:1.5cm}}`;
+  .report-meta{font-size:11px;color:#a09890;margin-bottom:1.5rem;padding-top:0.4rem;letter-spacing:0.04em}
+  .print-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:1.5rem}
+  .print-btn{background:#c8a96e;color:#fff;border:none;padding:8px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:6px;cursor:pointer}
+  .stone-name{font-family:'Cormorant Garamond',serif;font-weight:400;color:#2a2520;line-height:1.2}
+  .stone-alt{font-size:11px;color:#8a7e72;margin-top:2px;letter-spacing:0.04em}
+  .stone-detail{font-size:12px;color:#5a5149;margin-top:5px;line-height:1.5}
+  .use-when{color:#5a5149;margin-top:8px;padding:7px 11px;background:#fff;border-left:2.5px solid #c8a96e;line-height:1.6;font-style:italic}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-top:8px}
+  .fact{font-size:11px;color:#a09890;line-height:1.4}
+  .fact strong{color:#5a5149;font-weight:500}
+  .meta{font-size:11px;color:#a09890;margin-top:5px;line-height:1.6}
+  .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic;line-height:1.5}
+  .ref-photo-note{font-size:9px;color:#b0a89e;text-align:center;margin-top:3px;font-style:italic;letter-spacing:0.02em}
+  .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
+  @media print{.print-toolbar{display:none}body{background:#fff}@page{margin:1.5cm}}`;
+}
+function _reportStyles(layout){
+  const base=_reportBase();
+  if(layout==='gallery') return base+`
+  body{padding:2rem 2.5rem;max-width:780px}
+  .card{page-break-after:always;padding-bottom:2rem}
+  .card:last-child{page-break-after:auto}
+  .card-photo-wrap{margin-bottom:1.25rem}
+  .card-photo{width:100%;max-height:280px;object-fit:cover;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14);display:block}
+  .card-photo-empty{width:100%;height:200px;border-radius:10px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e}
+  .stone-name{font-size:30px;margin-bottom:4px}
+  .use-when{font-size:13px}
+  .fact-grid{grid-template-columns:1fr 1fr 1fr}
+  .footer{margin-top:2rem}`;
 
-  if(layout==='showcase') return base+`
-  .card{padding:2.5rem 0;border-bottom:1px solid #e0dbd4;break-inside:avoid}
-  .card-photo{width:100%;max-height:420px;object-fit:cover;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.12);margin-bottom:1.25rem}
-  .card-photo-empty{width:100%;height:200px;border-radius:10px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;margin-bottom:1.25rem}
-  .card-body{padding:0 0.5rem}
-  .stone-name{font-size:28px}`;
+  if(layout==='reference') return base+`
+  body{padding:1.5rem 2rem;max-width:none}
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 2rem}
+  .card{background:#fff;border-radius:10px;padding:1rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid}
+  .card-photo-wrap{margin-bottom:0.75rem}
+  .card-photo{width:100%;height:140px;object-fit:cover;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1);display:block}
+  .card-photo-empty{width:100%;height:140px;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
+  .stone-name{font-size:20px}
+  .use-when{font-size:12px;padding:6px 9px}
+  .footer{margin-top:1.5rem;grid-column:1/-1}`;
 
-  if(layout==='compact') return base+`
-  .card{display:flex;gap:0.75rem;padding:0.6rem 0;border-bottom:0.5px solid #e8e4de;break-inside:avoid;align-items:flex-start}
-  .card-photo{width:52px;min-width:52px;height:52px;object-fit:cover;border-radius:4px}
-  .card-photo-empty{width:52px;min-width:52px;height:52px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:9px;color:#b0a89e}
-  .card-body{flex:1;min-width:0}
-  .stone-name{font-size:14px}
-  .stone-detail{font-size:11px;margin-top:2px}
-  .use-when{font-size:11px;margin-top:4px;padding:4px 8px}
-  .meta{font-size:10px;margin-top:3px}
-  .notes{font-size:11px;margin-top:3px}`;
+  if(layout==='inventory') return base+`
+  body{padding:1.25rem 1.5rem;max-width:none}
+  .inv-row{display:flex;gap:10px;padding:7px 0;border-bottom:0.5px solid #ede9e4;break-inside:avoid;align-items:flex-start}
+  .inv-row:first-child{border-top:0.5px solid #ede9e4}
+  .inv-thumb{width:48px;min-width:48px;height:48px;object-fit:cover;border-radius:4px}
+  .inv-thumb-empty{width:48px;min-width:48px;height:48px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:8px;color:#b0a89e;text-align:center;line-height:1.2}
+  .inv-body{flex:1;min-width:0}
+  .stone-name{font-size:14px;font-family:'Cormorant Garamond',serif}
+  .inv-line{font-size:11px;color:#5a5149;margin-top:2px;line-height:1.4}
+  .use-when{font-size:11px;padding:3px 7px;margin-top:4px;border-left-width:2px}
+  .inv-header{display:flex;gap:10px;padding:5px 0 7px;border-bottom:1.5px solid #c8a96e;margin-bottom:2px}
+  .inv-header-thumb{width:48px;min-width:48px;font-size:9px;color:#8a7e72;letter-spacing:0.06em;text-transform:uppercase}
+  .inv-header-text{font-size:9px;color:#8a7e72;letter-spacing:0.06em;text-transform:uppercase}
+  .footer{margin-top:1.5rem}`;
 
-  // standard (default)
-  return base+`
-  .card{display:flex;gap:1.25rem;padding:1.5rem 0;border-bottom:0.5px solid #e0dbd4;break-inside:avoid;align-items:flex-start}
-  .card-photo{width:120px;min-width:120px;height:120px;object-fit:cover;border-radius:8px;box-shadow:0 2px 12px rgba(42,37,32,0.1)}
-  .card-photo-empty{width:120px;min-width:120px;height:120px;border-radius:8px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}
-  .card-body{flex:1;min-width:0}`;
+  return _reportStyles('reference');
+}
+function _reportHeader(title,count,unit){
+  return `<div class="report-header">
+    <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
+    <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+  </div>
+  <div class="report-meta">${count} ${unit}${count!==1?'s':''}</div>`;
+}
+function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
+  if(photoUrl) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>`;
+  if(useEnc&&encFallback) return `<div class="card-photo-wrap"><img class="${cssClass}" src="${encFallback}" alt="${name}"><div class="ref-photo-note">Still Point Lapidary Crystal Encyclopedia</div></div>`;
+  return `<div class="card-photo-wrap"><div class="${cssClass.replace('card-photo','card-photo-empty')} ${cssClass.includes('inv-thumb')?'inv-thumb-empty':''}">No photo</div></div>`;
 }
 async function generateReport(){
   const btn=document.getElementById('report-generate-btn');
@@ -3917,88 +4009,101 @@ async function generateReport(){
   }finally{closeReportOptions();}
 }
 async function _printCollectionReport(f){
+  const layout=f.layout||'reference';
   const items=dedupedCollectionItems(collection);
   if(!items.length){alert('Your collection is empty.');return;}
-  const rows=await Promise.all(items.map(async p=>{
+  const cards=await Promise.all(items.map(async p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    const displayName=c?.n||'Unknown';
+    const name=c?.n||'Unknown';
+    const photoUrl=firstCollectionPhoto(p);
+    const encFallbackFile=ENCYCLOPEDIA_PHOTOS[p.crystalId]?.[0];
+    const encFallback=encFallbackFile?SUPABASE_ENC+encFallbackFile:null;
     const nickname=p.nickname?` <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:'';
     const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
-    const photoUrl=firstCollectionPhoto(p);
-    const photoHtml=photoUrl
-      ?`<img class="card-photo" src="${photoUrl}" alt="${displayName}">`
-      :`<div class="card-photo-empty">No photo</div>`;
-    const formLine=[p.form,p.size,f.condition?p.treated:'',f.condition?p.condition:''].filter(Boolean).join(' · ');
-    const metaParts=[
-      f.acquired&&formatDisplayDate(p.acquired)?`Acquired ${formatDisplayDate(p.acquired)}`:'',
-      f.acquired&&p.source?`Source: ${p.source}`:'',
-      f.price&&formatDisplayPrice(p.price)?formatDisplayPrice(p.price):'',
-    ].filter(Boolean);
-    return `<div class="card">
-      ${photoHtml}
-      <div class="card-body">
-        <div class="stone-name">${displayName}${nickname}</div>
-        ${p.isCombo&&comboNames.length?`<div class="stone-sub">Combo: ${comboNames.join(' · ')}</div>`:''}
+    const formLine=[f.form?(p.form||''):'',f.form?(p.size||''):'',f.condition?(p.treated||''):'',f.condition?(p.condition||''):''].filter(Boolean).join(' · ');
+    const metaParts=[f.acquired&&formatDisplayDate(p.acquired)?`Acquired ${formatDisplayDate(p.acquired)}`:'',f.acquired&&p.source?`Source: ${p.source}`:'',f.price&&formatDisplayPrice(p.price)?formatDisplayPrice(p.price):''].filter(Boolean);
+
+    if(layout==='gallery'){
+      const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo');
+      const facts=[[c?.fam,'Family'],[c?.sy,'System'],[c?.fo,'Formation'],[c?.m?c.m+' Mohs':null,'Hardness'],[c?.element,'Element'],[c?.chakras?.join(', '),'Chakra']].filter(r=>r[0]);
+      return `<div class="card">${ph}
+        <div class="stone-name">${name}${nickname}</div>
+        ${c?.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}
+        ${p.isCombo&&comboNames.length?`<div class="stone-alt">Combo: ${comboNames.join(' · ')}</div>`:''}
         ${formLine?`<div class="stone-detail">${formLine}</div>`:''}
         ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
-        ${f.er&&c?.er?`<div class="stone-sub" style="margin-top:6px">${c.er}</div>`:''}
+        ${facts.length?`<div class="fact-grid">${facts.map(([v,l])=>`<div class="fact"><strong>${l}:</strong> ${v}</div>`).join('')}</div>`:''}
         ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''}
         ${metaParts.length?`<div class="meta">${metaParts.join(' · ')}</div>`:''}
         ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''}
-        ${f.chakras&&c?.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''}
-        ${f.geo&&c?.g?`<div class="meta" style="margin-top:6px">${c.g}</div>`:''}
-        ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
-      </div>
+        ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic;margin-top:12px;font-size:13px">"${c.aff}"</div>`:''}
+      </div>`;
+    }
+    if(layout==='inventory'){
+      const showThumb=f.thumbs!==false;
+      const ph=showThumb?_photoHtml(photoUrl,name,encFallback,f.encphoto,'inv-thumb'):'';
+      return `<div class="inv-row">${ph}
+        <div class="inv-body">
+          <div class="stone-name">${name}${nickname}</div>
+          <div class="inv-line">${[formLine,f.location&&collPieceLocation(p)?'📍 '+collPieceLocation(p):''].filter(Boolean).join(' · ')}</div>
+          ${metaParts.length?`<div class="inv-line" style="color:#a09890">${metaParts.join(' · ')}</div>`:''}
+          ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
+          ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''}
+        </div>
+      </div>`;
+    }
+    // reference (default) — 2 per page grid
+    const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo');
+    return `<div class="card">${ph}
+      <div class="stone-name">${name}${nickname}</div>
+      ${p.isCombo&&comboNames.length?`<div class="stone-alt">Combo: ${comboNames.join(' · ')}</div>`:''}
+      ${formLine?`<div class="stone-detail">${formLine}</div>`:''}
+      ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''}
+      ${f.er&&c?.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''}
+      ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''}
+      ${metaParts.length?`<div class="meta">${metaParts.join(' · ')}</div>`:''}
+      ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''}
+      ${f.chakras&&c?.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''}
+      ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
     </div>`;
   }));
-  const layout=f.layout||'standard';
+  const bodyWrap=layout==='reference'?`<div class="card-grid">${cards.join('')}<div class="footer">stillpointlapidary.com</div></div>`:cards.join('')+`<div class="footer">stillpointlapidary.com</div>`;
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
-  <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
-  <div class="report-header">
-    <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
-    <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">My Stone Collection<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
-  </div>
-  <div class="report-meta">${items.length} piece${items.length!==1?'s':''}</div>
-  ${rows.join('')}
-  <div class="footer">stillpointlapidary.com</div>
+  <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
+  ${_reportHeader('My Stone Collection',items.length,'piece')}
+  ${bodyWrap}
   </body></html>`);
   win.document.close();
 }
 function _printWishlistReport(f){
+  const layout=f.layout||'reference';
   const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
   const items=CRYSTALS.filter(c=>wishIds.includes(c.i));
   if(!items.length){alert('Your wishlist is empty.');return;}
-  const rows=items.map(c=>{
-    const encPhoto=ENCYCLOPEDIA_PHOTOS[c.i]?.[0];
-    const photoHtml=encPhoto
-      ?`<img class="card-photo" src="${SUPABASE_ENC}${encPhoto}" alt="${c.n}">`
-      :`<div class="card-photo-empty">No photo</div>`;
-    return `<div class="card">
-      ${photoHtml}
-      <div class="card-body">
-        <div class="stone-name">${c.n}</div>
-        ${c.a?`<div class="stone-sub">Also known as: ${c.a}</div>`:''}
-        <div class="stone-detail">${[c.fam,c.c,c.m?c.m+' Mohs':''].filter(Boolean).join(' · ')}</div>
-        ${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''}
-        ${f.er&&c.er?`<div class="stone-sub" style="margin-top:6px">${c.er}</div>`:''}
-        ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''}
-        ${f.geo&&c.g?`<div class="meta" style="margin-top:6px">${c.g}</div>`:''}
-        ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}
-      </div>
-    </div>`;
-  }).join('');
-  const layout=f.layout||'standard';
+  const cards=items.map(c=>{
+    const encFile=ENCYCLOPEDIA_PHOTOS[c.i]?.[0];
+    const photoUrl=encFile?SUPABASE_ENC+encFile:null;
+    const detailLine=[c.fam,c.c,c.m?c.m+' Mohs':''].filter(Boolean).join(' · ');
+    if(layout==='gallery'){
+      const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
+      const facts=[[c.fam,'Family'],[c.sy,'System'],[c.fo,'Formation'],[c.m?c.m+' Mohs':null,'Hardness'],[c.element,'Element'],[c.chakras?.join(', '),'Chakra']].filter(r=>r[0]);
+      return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${facts.length?`<div class="fact-grid">${facts.map(([v,l])=>`<div class="fact"><strong>${l}:</strong> ${v}</div>`).join('')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic;margin-top:12px;font-size:13px">"${c.aff}"</div>`:''}</div>`;
+    }
+    if(layout==='inventory'){
+      const showThumb=f.thumbs!==false;
+      const ph=showThumb?(photoUrl?`<img class="inv-thumb" src="${photoUrl}" alt="${c.n}">`:`<div class="inv-thumb-empty">No photo</div>`):'';
+      return `<div class="inv-row">${ph}<div class="inv-body"><div class="stone-name">${c.n}</div><div class="inv-line">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''}</div></div>`;
+    }
+    const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
+    return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
+  });
+  const bodyWrap=layout==='reference'?`<div class="card-grid">${cards.join('')}<div class="footer">stillpointlapidary.com</div></div>`:cards.join('')+`<div class="footer">stillpointlapidary.com</div>`;
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body>
-  <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
-  <div class="report-header">
-    <div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div>
-    <div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">My Wishlist<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
-  </div>
-  <div class="report-meta">${items.length} stone${items.length!==1?'s':''}</div>
-  ${rows}
-  <div class="footer">stillpointlapidary.com</div>
+  <div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>
+  ${_reportHeader('My Wishlist',items.length,'stone')}
+  ${bodyWrap}
   </body></html>`);
   win.document.close();
 }
