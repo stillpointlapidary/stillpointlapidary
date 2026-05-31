@@ -1475,7 +1475,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="inst-sec"><h3>Identify</h3><p>Describe a stone's color, transparency, and properties to get a shortlist of likely matches from the encyclopedia.</p></div>
   <div class="inst-sec"><h3>Crystals 101</h3><p>New to crystals? Start here for foundational knowledge on how stones work, what the properties mean, and how to use them.</p></div>
   <div class="inst-sec"><h3>Your data</h3><p>Sign in with a free account and your collection and wishlist are saved securely to the cloud — no backups needed, no data lost when you clear your browser.</p></div>
-  <div class="inst-sec"><h3>Don't see your stone?</h3><p>Use the <strong>Request Entry</strong> button at the top of the page to suggest a stone for the encyclopedia. We review every request.</p></div>
+  <div class="inst-sec"><h3>Don't see your stone?</h3><p>Use the <a href="#" onclick="closePopup('instructions');openEntryRequestForm();return false;" style="color:var(--accent2);text-decoration:underline">Request Entry</a> button at the top of the page to suggest a stone for the encyclopedia. We review every request.</p></div>
   </div>
 </div>
 
@@ -1596,6 +1596,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="form-row">
       <div class="fg"><label>Name *</label><input type="text" id="enc-name" placeholder="e.g. Sugilite"></div>
       <div class="fg"><label>Alternate names</label><input type="text" id="enc-alt" placeholder="e.g. Royal Lavulite"></div>
+    </div>
+    <div style="margin-bottom:1rem">
+      <button class="btn btn-accent" id="enc-autofill-btn" onclick="encAutoFill()" style="width:100%;justify-content:center">✦ Auto-fill with AI</button>
+      <div id="enc-autofill-status" style="font-size:12px;color:var(--ink3);margin-top:6px;text-align:center;display:none"></div>
     </div>
     <div class="form-row">
       <div class="fg"><label>Mineral family</label><input type="text" id="enc-fam" placeholder="e.g. Silicates"></div>
@@ -3562,6 +3566,38 @@ async function saveBatch(){
 
 // ── ENCYCLOPEDIA ENTRY ──
 function openAddEncForm(){document.getElementById('add-enc-form-overlay').classList.add('open');}
+async function encAutoFill(){
+  const name=(document.getElementById('enc-name')?.value||'').trim();
+  if(!name){alert('Enter a stone name first.');return;}
+  const btn=document.getElementById('enc-autofill-btn');
+  const status=document.getElementById('enc-autofill-status');
+  if(btn){btn.disabled=true;btn.textContent='✦ Looking up…';}
+  if(status){status.textContent='Asking Claude about '+name+'…';status.style.display='block';}
+  try{
+    const resp=await fetch('https://vxujlgyhgnihnqrxzefw.supabase.co/functions/v1/claude-stone-lookup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'},
+      body:JSON.stringify({name})
+    });
+    const d=await resp.json();
+    if(d.error){throw new Error(d.error);}
+    const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;};
+    set('enc-alt',d.a);set('enc-fam',d.fam);set('enc-sp',d.sp);
+    set('enc-c',d.c);set('enc-cc',d.cc);set('enc-g',d.g);
+    set('enc-er',d.er);set('enc-uw',d.uw);set('enc-chakra',Array.isArray(d.chakras)?d.chakras.join(', '):d.chakras);
+    set('enc-element',d.element);set('enc-aff',d.aff);
+    if(d.m){const parts=String(d.m).split(/[-–]/);set('enc-mmin',parts[0]?.trim());set('enc-mmax',parts[1]?.trim()||parts[0]?.trim());}
+    const mtEl=document.getElementById('enc-mt');if(mtEl&&d.mt)mtEl.value=d.mt;
+    const syEl=document.getElementById('enc-sy');if(syEl&&d.sy)syEl.value=d.sy;
+    const foEl=document.getElementById('enc-fo');if(foEl&&d.fo)foEl.value=d.fo;
+    const trEl=document.getElementById('enc-tr');if(trEl&&d.tr)trEl.value=d.tr;
+    if(status){status.textContent='✓ Fields populated — review and adjust before saving.';}
+  }catch(err){
+    if(status){status.textContent='Something went wrong: '+err.message;}
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='✦ Auto-fill with AI';}
+  }
+}
 function closeAddEncForm(){
   document.getElementById('add-enc-form-overlay').classList.remove('open');
   document.getElementById('add-enc-form-overlay').querySelectorAll('input,select,textarea').forEach(el=>el.value='');
