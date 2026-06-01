@@ -326,6 +326,36 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 .mood-selected-card{background:var(--stone2);border:0.5px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background 0.12s}
 .mood-selected-card:hover{background:var(--stone3)}
+
+/* AI FREEFORM SEARCH */
+.ai-search-box{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(42,37,32,0.06)}
+.ai-search-label{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:0.35rem}
+.ai-search-sub{font-size:12px;color:var(--ink2);margin-bottom:0.9rem;line-height:1.5}
+.ai-search-row{display:flex;gap:8px;align-items:flex-end}
+.ai-search-input{flex:1;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);background:var(--stone2);border:0.5px solid var(--border);border-radius:8px;padding:0.65rem 0.85rem;resize:none;line-height:1.5;min-height:60px;outline:none;transition:border-color 0.15s}
+.ai-search-input:focus{border-color:var(--accent2)}
+.ai-search-input::placeholder{color:var(--ink3)}
+.ai-search-btn{flex-shrink:0;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:0.6rem 1rem;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:opacity 0.15s;white-space:nowrap;align-self:flex-end}
+.ai-search-btn:hover{opacity:0.85}
+.ai-search-btn:disabled{opacity:0.5;cursor:not-allowed}
+.ai-search-spinner{width:13px;height:13px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none}
+.ai-search-btn.loading .ai-search-spinner{display:block}
+.ai-search-btn.loading .ai-search-btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-search-divider{display:flex;align-items:center;gap:10px;margin:1.5rem 0 1.25rem;color:var(--ink3);font-size:11px;letter-spacing:0.08em;text-transform:uppercase}
+.ai-search-divider::before,.ai-search-divider::after{content:'';flex:1;height:0.5px;background:var(--border)}
+/* AI RESULTS */
+.ai-results-wrap{display:none;margin-bottom:1.5rem}
+.ai-results-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem}
+.ai-results-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--ink)}
+.ai-results-back{font-size:12px;color:var(--ink2r);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font-family:'Jost',sans-serif;padding:0}
+.ai-stone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
+.ai-stone-card{background:var(--white);padding:1rem;cursor:pointer;transition:background 0.12s;display:flex;flex-direction:column;gap:4px}
+.ai-stone-card:hover{background:var(--stone2)}
+.ai-stone-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);line-height:1.2}
+.ai-stone-reason{font-size:12px;color:var(--ink2);line-height:1.55;font-style:italic}
+.ai-stone-arrow{font-size:11px;color:var(--accent);margin-top:4px}
+.ai-error{font-size:13px;color:#b94a48;padding:0.75rem 1rem;background:#fff5f5;border:0.5px solid #f5c6c6;border-radius:8px;margin-top:0.5rem;display:none}
 .mood-selected-inner{flex:1}
 .mood-selected-clear{font-size:11px;color:var(--ink3);white-space:nowrap;text-decoration:underline;text-underline-offset:2px}
 .mood-results-count{font-size:12px;color:var(--ink3);margin-bottom:0.75rem}
@@ -587,7 +617,34 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <!-- MOOD / USE WHEN -->
 <section id="tab-mood" style="display:none">
   <div class="mood-intro">What do you need right now?</div>
-  <p class="mood-sub">Choose a feeling or intention. The stones will find you.</p>
+
+  <!-- AI FREEFORM SEARCH -->
+  <div class="ai-search-box">
+    <div class="ai-search-label">Describe what you're going through…</div>
+    <div class="ai-search-sub">Type anything — a feeling, a situation, a struggle. The stones will find you.</div>
+    <div class="ai-search-row">
+      <textarea class="ai-search-input" id="ai-search-input" rows="2" placeholder="I've been anxious and can't quiet my mind lately…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAISearch();}"></textarea>
+      <button class="ai-search-btn" id="ai-search-btn" onclick="runAISearch()">
+        <span class="ai-search-btn-text">✦ Find my stones</span>
+        <span class="ai-search-spinner"></span>
+      </button>
+    </div>
+    <div class="ai-error" id="ai-search-error"></div>
+  </div>
+
+  <!-- AI RESULTS (shown after search) -->
+  <div class="ai-results-wrap" id="ai-results-wrap">
+    <div class="ai-results-hdr">
+      <div class="ai-results-title">Stones for you right now</div>
+      <button class="ai-results-back" onclick="clearAIResults()">← Try different words</button>
+    </div>
+    <div class="ai-stone-grid" id="ai-stone-grid"></div>
+  </div>
+
+  <!-- DIVIDER between AI search and tile grid -->
+  <div class="ai-search-divider">or browse by intention</div>
+
+  <p class="mood-sub">Choose a feeling or intention below.</p>
   <div class="mood-filter-row" id="mood-group-pills"></div>
   <!-- MOOD GRID: shown when no selection -->
   <div class="mood-grid" id="mood-grid"></div>
@@ -2851,6 +2908,71 @@ grid.innerHTML=matches.map(c=>{
     return`<div class="crystal-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
   }).join('');
 }
+
+// ── AI FREEFORM SEARCH ────────────────────────────────────────────────────
+async function runAISearch(){
+  const input=document.getElementById('ai-search-input');
+  const btn=document.getElementById('ai-search-btn');
+  const errEl=document.getElementById('ai-search-error');
+  const query=input.value.trim();
+  if(!query)return;
+
+  // Build compact stone list
+  const stones=CRYSTALS.map(s=>({id:s.i,name:s.n,er:s.er||'',uw:s.uw||''}));
+
+  btn.classList.add('loading');
+  btn.disabled=true;
+  errEl.style.display='none';
+
+  try{
+    const res=await fetch(
+      'https://vxujlgyhgnihnqrxzefw.supabase.co/functions/v1/claude-mood-match',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization':'Bearer sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'
+        },
+        body:JSON.stringify({query,stones})
+      }
+    );
+    const data=await res.json();
+    if(data.error) throw new Error(data.error);
+    renderAIResults(data.matches, query);
+  }catch(e){
+    errEl.textContent='Something went wrong. Please try again.';
+    errEl.style.display='block';
+  }finally{
+    btn.classList.remove('loading');
+    btn.disabled=false;
+  }
+}
+
+function renderAIResults(matches, query){
+  const wrap=document.getElementById('ai-results-wrap');
+  const grid=document.getElementById('ai-stone-grid');
+  grid.innerHTML='';
+
+  matches.forEach(m=>{
+    const stone=CRYSTALS.find(s=>s.i===m.id);
+    if(!stone)return;
+    const card=document.createElement('div');
+    card.className='ai-stone-card';
+    card.innerHTML=`<div class="ai-stone-name">${m.name}</div><div class="ai-stone-reason">${m.reason}</div><div class="ai-stone-arrow">View stone →</div>`;
+    card.onclick=()=>openDrawer(stone);
+    grid.appendChild(card);
+  });
+
+  wrap.style.display='block';
+  wrap.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function clearAIResults(){
+  document.getElementById('ai-results-wrap').style.display='none';
+  document.getElementById('ai-search-input').value='';
+  document.getElementById('ai-search-error').style.display='none';
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function clearMoodResults(){
   const grid=document.getElementById('mood-grid');
