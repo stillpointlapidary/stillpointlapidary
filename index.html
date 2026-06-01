@@ -2973,7 +2973,8 @@ function renderAIResults(matches, query){
   });
 
   wrap.style.display='block';
-  wrap.scrollIntoView({behavior:'smooth',block:'start'});
+  const top = wrap.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({top, behavior:'smooth'});
 }
 
 function clearAIResults(){
