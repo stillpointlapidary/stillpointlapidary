@@ -327,23 +327,28 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .mood-selected-card{background:var(--stone2);border:0.5px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background 0.12s}
 .mood-selected-card:hover{background:var(--stone3)}
 
+/* USE WHEN — two-tile layout */
+.use-when-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.75rem}
+@media(max-width:540px){.use-when-tiles{grid-template-columns:1fr}}
+.use-when-tile{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;box-shadow:0 1px 4px rgba(42,37,32,0.06);display:flex;flex-direction:column}
 /* AI FREEFORM SEARCH */
-.ai-search-box{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(42,37,32,0.06)}
 .ai-search-label{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:0.35rem}
-.ai-search-sub{font-size:12px;color:var(--ink2);margin-bottom:0.9rem;line-height:1.5}
-.ai-search-row{display:flex;gap:8px;align-items:flex-end}
-.ai-search-input{flex:1;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);background:var(--stone2);border:0.5px solid var(--border);border-radius:8px;padding:0.65rem 0.85rem;resize:none;line-height:1.5;min-height:60px;outline:none;transition:border-color 0.15s}
+.ai-search-sub{font-size:12px;color:var(--ink2);margin-bottom:0.9rem;line-height:1.5;flex:1}
+.ai-search-input{width:100%;box-sizing:border-box;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);background:var(--stone2);border:0.5px solid var(--border);border-radius:8px;padding:0.65rem 0.85rem;resize:none;line-height:1.5;min-height:72px;outline:none;transition:border-color 0.15s;margin-bottom:0.65rem}
 .ai-search-input:focus{border-color:var(--accent2)}
 .ai-search-input::placeholder{color:var(--ink3)}
-.ai-search-btn{flex-shrink:0;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:0.6rem 1rem;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:opacity 0.15s;white-space:nowrap;align-self:flex-end}
+.ai-search-btn{align-self:flex-start;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:0.6rem 1rem;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:opacity 0.15s;white-space:nowrap}
 .ai-search-btn:hover{opacity:0.85}
 .ai-search-btn:disabled{opacity:0.5;cursor:not-allowed}
 .ai-search-spinner{width:13px;height:13px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none}
 .ai-search-btn.loading .ai-search-spinner{display:block}
 .ai-search-btn.loading .ai-search-btn-text{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
-.ai-search-divider{display:flex;align-items:center;gap:10px;margin:1.5rem 0 1.25rem;color:var(--ink3);font-size:11px;letter-spacing:0.08em;text-transform:uppercase}
-.ai-search-divider::before,.ai-search-divider::after{content:'';flex:1;height:0.5px;background:var(--border)}
+/* BROWSE TILE */
+.browse-tile-label{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:0.35rem}
+.browse-tile-sub{font-size:12px;color:var(--ink2);line-height:1.5;flex:1;margin-bottom:0.9rem}
+.browse-tile-btn{align-self:flex-start;background:transparent;color:var(--accent);border:0.5px solid var(--accent);border-radius:8px;padding:0.6rem 1rem;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;transition:background 0.15s,color 0.15s;white-space:nowrap}
+.browse-tile-btn:hover{background:var(--accent);color:#fff}
 /* AI RESULTS */
 .ai-results-wrap{display:none;margin-bottom:1.5rem}
 .ai-results-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem}
@@ -618,18 +623,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <section id="tab-mood" style="display:none">
   <div class="mood-intro">What do you need right now?</div>
 
-  <!-- AI FREEFORM SEARCH -->
-  <div class="ai-search-box">
-    <div class="ai-search-label">Describe what you're going through…</div>
-    <div class="ai-search-sub">Type anything — a feeling, a situation, a struggle. The stones will find you.</div>
-    <div class="ai-search-row">
-      <textarea class="ai-search-input" id="ai-search-input" rows="2" placeholder="I've been anxious and can't quiet my mind lately…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAISearch();}"></textarea>
+  <!-- TWO-TILE ROW -->
+  <div class="use-when-tiles">
+    <!-- AI FREEFORM SEARCH TILE -->
+    <div class="use-when-tile">
+      <div class="ai-search-label">Describe what you're going through…</div>
+      <div class="ai-search-sub">Type anything — a feeling, a situation, a struggle. The stones will find you.</div>
+      <textarea class="ai-search-input" id="ai-search-input" rows="3" placeholder="I've been anxious and can't quiet my mind lately…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAISearch();}"></textarea>
+      <div class="ai-error" id="ai-search-error"></div>
       <button class="ai-search-btn" id="ai-search-btn" onclick="runAISearch()">
         <span class="ai-search-btn-text">✦ Find my stones</span>
         <span class="ai-search-spinner"></span>
       </button>
     </div>
-    <div class="ai-error" id="ai-search-error"></div>
+    <!-- BROWSE BY INTENTION TILE -->
+    <div class="use-when-tile">
+      <div class="browse-tile-label">Browse by intention</div>
+      <div class="browse-tile-sub">Choose a feeling or energy below — grief, clarity, protection, creativity, and more. Pick what fits and we'll show you the stones.</div>
+      <button class="browse-tile-btn" onclick="document.getElementById('mood-grid').scrollIntoView({behavior:'smooth',block:'start'})">↓ Browse intentions</button>
+    </div>
   </div>
 
   <!-- AI RESULTS (shown after search) -->
@@ -641,10 +653,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="ai-stone-grid" id="ai-stone-grid"></div>
   </div>
 
-  <!-- DIVIDER between AI search and tile grid -->
-  <div class="ai-search-divider">or browse by intention</div>
-
-  <p class="mood-sub">Choose a feeling or intention below.</p>
+  <p class="mood-sub" style="margin-bottom:0.75rem">Choose a feeling or intention below.</p>
   <div class="mood-filter-row" id="mood-group-pills"></div>
   <!-- MOOD GRID: shown when no selection -->
   <div class="mood-grid" id="mood-grid"></div>
@@ -4621,7 +4630,21 @@ function initPWA(){
   if(window.matchMedia('(display-mode: standalone)').matches) return;
   setTimeout(()=>{
     const banner = document.getElementById('pwa-banner');
-    if(banner) banner.style.display='flex';
+    if(!banner) return;
+    const title = document.getElementById('pwa-banner-title');
+    const body  = document.getElementById('pwa-banner-body');
+    const cta   = document.getElementById('pwa-banner-cta');
+    const isLoggedIn = !!(window.currentUser);
+    if(isLoggedIn){
+      if(title) title.textContent = 'Add to your home screen';
+      if(body)  body.textContent  = 'Tap Share → Add to Home Screen for quick access to your collection.';
+      if(cta){  cta.textContent = 'Got it'; cta.onclick = ()=>dismissPWA(true); }
+    } else {
+      if(title) title.textContent = 'Every stone you love, in one place';
+      if(body)  body.textContent  = 'Create a free account to save the stones you own, build your wishlist, and carry your collection with you.';
+      if(cta){  cta.textContent = 'Create account'; cta.onclick = ()=>{ dismissPWA(true); openAuthModal('signup'); }; }
+    }
+    banner.style.display='flex';
   }, 3000);
 }
 function dismissPWA(permanent){
@@ -5541,11 +5564,11 @@ function renderShapes() {
 </script>
 <div id="pwa-banner" style="display:none;position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);width:min(480px,calc(100vw - 2rem));background:var(--ink);color:var(--white);border-radius:12px;padding:1rem 1.25rem;z-index:999;align-items:center;gap:1rem;box-shadow:0 8px 32px rgba(42,37,32,0.25)">
   <div style="flex:1">
-    <div style="font-size:13px;font-weight:500;margin-bottom:2px">Add to your home screen</div>
-    <div style="font-size:11px;opacity:0.7;line-height:1.5">Install STILL POINT Lapidary for quick access and offline use. Tap Share → Add to Home Screen in Safari.</div>
+    <div id="pwa-banner-title" style="font-size:13px;font-weight:500;margin-bottom:2px"></div>
+    <div id="pwa-banner-body" style="font-size:11px;opacity:0.7;line-height:1.5"></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-    <button onclick="dismissPWA(true)" style="font-size:11px;padding:5px 12px;background:var(--accent);border:none;border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap">Got it</button>
+    <button id="pwa-banner-cta" style="font-size:11px;padding:5px 12px;background:var(--accent);border:none;border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap"></button>
     <button onclick="dismissPWA(false)" style="font-size:11px;padding:5px 12px;background:transparent;border:0.5px solid rgba(255,255,255,0.3);border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap">Not now</button>
   </div>
 </div>
