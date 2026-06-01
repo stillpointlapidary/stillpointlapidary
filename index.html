@@ -2973,7 +2973,7 @@ function renderAIResults(matches, query){
   });
 
   wrap.style.display='block';
-  const top = wrap.getBoundingClientRect().top + window.scrollY - 80;
+  const top = wrap.getBoundingClientRect().top + window.scrollY - 120;
   window.scrollTo({top, behavior:'smooth'});
 }
 
@@ -6235,6 +6235,28 @@ _authInit();
   },true);
   document.addEventListener('DOMContentLoaded',ensure101BackButtons);
   setTimeout(ensure101BackButtons,300);
+
+  // Rotate AI search placeholder so repeat visitors see fresh prompts.
+  (function(){
+    const prompts=[
+      'I want a stone for fresh energy, focus, and momentum…',
+      'Something to help me sleep and quiet my mind…',
+      'I\'m going through a big change and need support…',
+      'I want to feel more grounded and present…',
+      'A stone for creativity and getting unstuck…',
+      'I need help with anxiety and nervous energy…',
+      'Something for opening my heart after a hard time…',
+      'I want to attract more abundance and opportunity…',
+    ];
+    let pi=0;
+    function rotatePlaceholder(){
+      const el=document.getElementById('ai-search-input');
+      if(!el||document.activeElement===el)return;
+      pi=(pi+1)%prompts.length;
+      el.placeholder=prompts[pi];
+    }
+    setInterval(rotatePlaceholder,4000);
+  })();
 
   // Use When result stones now use the same card format/photos as Full Encyclopedia.
   window.renderMoodStones=function(moodIdx,subFilter){
