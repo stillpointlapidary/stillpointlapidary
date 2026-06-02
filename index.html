@@ -1582,28 +1582,28 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div style="margin-bottom:1.5rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Add new</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn" style="justify-content:flex-start" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
         <button class="btn" style="justify-content:flex-start" onclick="openAddForm();closePopup('manage')">+ Add collection piece</button>
-        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add</button>
+        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add collection pieces</button>
+      </div>
+    </div>
+    <div style="margin-bottom:1.5rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Print</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('collection');closePopup('manage')">⎙ Print collection report</button>
+        <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('wishlist');closePopup('manage')">⎙ Print wishlist report</button>
       </div>
     </div>
     <div style="margin-bottom:1.5rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn" style="justify-content:flex-start" onclick="exportEncyclopedia();closePopup('manage')">↓ Export encyclopedia (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Export collection (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Export wishlist (CSV)</button>
-      </div>
-    </div>
-    <div style="margin-bottom:1rem">
-      <div class="sec-label" style="margin-bottom:0.75rem">Backup & restore</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn" style="justify-content:flex-start" onclick="exportJSON();closePopup('manage')">↓ Backup collection (JSON)</button>
-        <label class="btn" style="justify-content:flex-start;cursor:pointer">↑ Restore from backup<input type="file" accept=".json" onchange="importJSON(this);closePopup('manage')" style="display:none"></label>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Encyclopedia (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Collection (CSV)</button>
+        <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Wishlist (CSV)</button>
       </div>
     </div>
     <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.75rem;background:var(--stone2);border-radius:6px">
-      JSON backup saves everything including photos. Restore brings it back after clearing your browser or switching devices.
+      Your collection and wishlist are saved to the cloud when you're signed in.
       <div style="margin-top:6px;color:var(--ink3)" id="last-saved-display"></div>
     </div>
   </div>
@@ -3975,6 +3975,7 @@ function updateAdminEntryButtons(){
   const isAdmin=isAdminUser(_currentUser);
   if(add)add.style.display=isAdmin?'':'none';
   if(req)req.style.display=isAdmin?'none':'';
+  document.querySelectorAll('.manage-admin-only').forEach(el=>el.style.display=isAdmin?'flex':'none');
 }
 function openEntryRequestForm(){
   const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.add('open');
