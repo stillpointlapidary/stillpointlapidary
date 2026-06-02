@@ -1326,23 +1326,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="prop-f"><label>Formation <button class="prop-help" onclick="openPopup('formation')">?</button></label><span id="d-fo"></span></div>
       <div class="prop-f"><label>Material <button class="prop-help" onclick="openPopup('material')">?</button></label><span id="d-mt"></span></div>
       <div class="prop-f"><label>Transparency <button class="prop-help" onclick="openPopup('transparency')">?</button></label><span id="d-tr"></span></div>
-      <div class="prop-f" id="d-el-wrap"><label>Element</label><span id="d-el"></span></div>
+      <div class="prop-f" id="d-el-wrap"><label>Element <button class="prop-help" onclick="openPopup('element')">?</button></label><span id="d-el"></span></div>
       <div class="prop-f"><label>Color</label><span id="d-c"></span></div>
       <div class="prop-f"><label>Color cause <button class="prop-help" onclick="openPopup('colorcause')">?</button></label><span id="d-cc"></span></div>
     </div>
     <div id="d-chakra-block">
       <div class="divider"></div>
-      <div class="sec-label">Chakras</div>
+      <div class="sec-label" style="display:flex;align-items:center;gap:4px">Chakras <button class="prop-help" onclick="openPopup('chakra')">?</button></div>
       <div class="chakra-chips" id="d-chakras"></div>
     </div>
     <div id="d-zodiac-block" style="display:none">
       <div style="margin-top:0.75rem"><div class="sec-label">Zodiac</div><div style="font-size:13px;color:var(--ink2)" id="d-zodiac"></div></div>
     </div>
     <div id="d-aff-block" style="display:none">
-      <div style="margin-top:0.75rem"><div class="sec-label">Intention</div><div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink2);line-height:1.6" id="d-aff"></div></div>
+      <div style="margin-top:0.75rem"><div class="sec-label" style="display:flex;align-items:center;gap:4px">Intention <button class="prop-help" onclick="openPopup('aff')">?</button></div><div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink2);line-height:1.6" id="d-aff"></div></div>
     </div>
     <div class="divider"></div>
-    <div class="sec-label">Energetic role</div>
+    <div class="sec-label" style="display:flex;align-items:center;gap:4px">Energetic role <button class="prop-help" onclick="openPopup('er')">?</button></div>
     <div class="tags-row" id="d-tags"></div>
     <div id="d-sib-block" style="display:none">
       <div class="divider"></div>
@@ -1394,7 +1394,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="form-divider"></div>
 
     <div class="form-row">
-      <div class="fg"><label>Form / Shape</label><select id="f-form"><option value="">Select…</option>
+      <div class="fg"><label>Form / Shape <button class="prop-help" onclick="openPopup('form')">?</button></label><select id="f-form"><option value="">Select…</option>
 <option>Tumbled</option>
 <option>Palm stone</option>
 <option>Raw / Rough</option>
@@ -1423,8 +1423,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
 
     <div class="form-row">
-      <div class="fg"><label>Treatment</label><select id="f-treated"><option value="Natural">Natural</option><option value="Heat Treated">Heat Treated</option><option value="Irradiated">Irradiated</option><option value="Dyed">Dyed</option><option value="Coated">Coated (Aura etc.)</option><option value="Stabilized">Stabilized</option><option value="Unknown">Unknown</option></select></div>
-      <div class="fg"><label>Condition</label><select id="f-condition"><option value="Excellent">Excellent</option>
+      <div class="fg"><label>Treatment <button class="prop-help" onclick="openPopup('treatment')">?</button></label><select id="f-treated"><option value="Natural">Natural</option><option value="Heat Treated">Heat Treated</option><option value="Irradiated">Irradiated</option><option value="Dyed">Dyed</option><option value="Coated">Coated (Aura etc.)</option><option value="Stabilized">Stabilized</option><option value="Unknown">Unknown</option></select></div>
+      <div class="fg"><label>Condition <button class="prop-help" onclick="openPopup('condition')">?</button></label><select id="f-condition"><option value="Excellent">Excellent</option>
 <option value="Very Good">Very Good</option>
 <option value="Good">Good</option>
 <option value="Fair / Visible Wear">Fair / Visible Wear</option>
@@ -1483,6 +1483,117 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 </div>
 
 <!-- PROPERTY HELP POPUPS -->
+<div class="popup-overlay" id="popup-element" onclick="if(event.target===this)closePopup('element')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('element')">✕</button>
+  <div class="popup-title">Metaphysical element</div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">The classical elemental correspondence of a stone — a broad energetic category rooted in tradition, not chemistry.</p>
+  <table class="ptable"><tr><th>Element</th><th>Qualities</th><th>Examples</th></tr>
+  <tr><td>Fire</td><td>Energy, passion, will, transformation, activation</td><td>Carnelian, Pyrite, Sunstone</td></tr>
+  <tr><td>Water</td><td>Emotion, intuition, flow, healing, receptivity</td><td>Aquamarine, Moonstone, Blue Calcite</td></tr>
+  <tr><td>Earth</td><td>Grounding, stability, body, growth, patience</td><td>Hematite, Jasper, Black Tourmaline</td></tr>
+  <tr><td>Air</td><td>Mind, clarity, communication, movement, truth</td><td>Fluorite, Sodalite, Selenite</td></tr>
+  <tr><td>Storm</td><td>Intense multi-element energy, transformation, paradox</td><td>Labradorite, Moldavite, Obsidian</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-er" onclick="if(event.target===this)closePopup('er')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('er')">✕</button>
+  <div class="popup-title">Energetic role</div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A short label for a stone's primary quality in practice. Not a claim — a tendency. Separate multiple roles with " / ". Keep it to 2–3 max.</p>
+  <table class="ptable"><tr><th>Role</th><th>What it means</th></tr>
+  <tr><td>Grounding</td><td>Brings scattered energy back to the body and present moment</td></tr>
+  <tr><td>Protection</td><td>Creates energetic boundaries, deflects what isn't yours</td></tr>
+  <tr><td>Amplification</td><td>Magnifies intentions, other stones, and your own field</td></tr>
+  <tr><td>Heart Healing</td><td>Opens, softens, and supports emotional healing</td></tr>
+  <tr><td>Calming / Peace</td><td>Quiets anxiety and mental noise without sedating</td></tr>
+  <tr><td>Clarity / Focus</td><td>Cuts through confusion, supports clear thinking</td></tr>
+  <tr><td>Intuition</td><td>Opens subtle perception and inner knowing</td></tr>
+  <tr><td>Transformation</td><td>Facilitates deep change — works quickly and intensely</td></tr>
+  <tr><td>Vitality / Energy</td><td>Increases life force, motivation, and physical energy</td></tr>
+  <tr><td>Manifestation</td><td>Supports bringing intentions into material reality</td></tr></table>
+  <p class="popup-note">Format example: "Grounding / Protection" or "Heart Healing / Calming"</p></div>
+</div>
+
+<div class="popup-overlay" id="popup-uw" onclick="if(event.target===this)closePopup('uw')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('uw')">✕</button>
+  <div class="popup-title">Use When</div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">One or two sentences describing when a user might reach for this stone. Written from the user's perspective — honest, specific, grounded in the stone's actual character.</p>
+  <table class="ptable"><tr><th></th><th>Example</th></tr>
+  <tr><td>✓ Good</td><td>"Use when you feel scattered or overwhelmed and need to steady yourself."</td></tr>
+  <tr><td>✓ Good</td><td>"Use when anxiety is running the show and you need your nervous system to slow down."</td></tr>
+  <tr><td>✗ Avoid</td><td>Medical claims ("heals disease," "cures anxiety")</td></tr>
+  <tr><td>✗ Avoid</td><td>Vague overpromising ("works for everything," "raises vibration")</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-aff" onclick="if(event.target===this)closePopup('aff')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('aff')">✕</button>
+  <div class="popup-title">Intention / Affirmation</div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A short first-person statement capturing the stone's essential energy. Shown in print reports and the stone detail view.</p>
+  <table class="ptable"><tr><th></th><th>Example</th></tr>
+  <tr><td>✓ Good</td><td>"I am stable. I am held. I trust the structure beneath me."</td></tr>
+  <tr><td>✓ Good</td><td>"I am protected. Nothing that is not mine can enter here."</td></tr>
+  <tr><td>Format</td><td>Start with "I am" or similar. One to three short sentences.</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-chakra" onclick="if(event.target===this)closePopup('chakra')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('chakra')">✕</button>
+  <div class="popup-title">Chakras</div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">Energy centers in the subtle body. A stone may resonate with one or several chakras. Enter multiple separated by commas.</p>
+  <table class="ptable"><tr><th>Chakra</th><th>Location</th><th>Governs</th></tr>
+  <tr><td>Root</td><td>Base of spine</td><td>Safety, body, grounding, survival</td></tr>
+  <tr><td>Sacral</td><td>Below navel</td><td>Creativity, emotion, pleasure</td></tr>
+  <tr><td>Solar Plexus</td><td>Upper abdomen</td><td>Confidence, will, personal power</td></tr>
+  <tr><td>Heart</td><td>Center of chest</td><td>Love, compassion, connection, grief</td></tr>
+  <tr><td>Throat</td><td>Throat</td><td>Communication, truth, expression</td></tr>
+  <tr><td>Third Eye</td><td>Between eyebrows</td><td>Intuition, perception, inner vision</td></tr>
+  <tr><td>Crown</td><td>Top of head</td><td>Spiritual connection, consciousness</td></tr>
+  <tr><td>Earth Star</td><td>Below the feet</td><td>Deep grounding, ancestral connection</td></tr>
+  <tr><td>All</td><td>—</td><td>Works with all centers or is non-specific</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-form" onclick="if(event.target===this)closePopup('form')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('form')">✕</button>
+  <div class="popup-title">Form / Shape</div>
+  <table class="ptable"><tr><th>Form</th><th>Description</th></tr>
+  <tr><td>Tumbled</td><td>Machine-polished until smooth and rounded</td></tr>
+  <tr><td>Palm Stone</td><td>Flat, smooth, shaped to fit the palm</td></tr>
+  <tr><td>Raw / Rough</td><td>Unpolished, natural state as found</td></tr>
+  <tr><td>Freeform</td><td>Carved into an organic, flowing shape</td></tr>
+  <tr><td>Tower</td><td>Six-sided column with flat base — projects energy upward</td></tr>
+  <tr><td>Point</td><td>Natural or cut termination — directs energy through the apex</td></tr>
+  <tr><td>Sphere</td><td>Polished ball — emits energy equally in all directions</td></tr>
+  <tr><td>Egg</td><td>Oval with tapered top — grounding, new beginnings</td></tr>
+  <tr><td>Cluster</td><td>Multiple points on a shared base — radiates in all directions</td></tr>
+  <tr><td>Geode</td><td>Hollow rock with crystalline interior</td></tr>
+  <tr><td>Heart</td><td>Carved heart shape — heart-centered work</td></tr>
+  <tr><td>Wand</td><td>Elongated cylinder — directs and channels energy</td></tr>
+  <tr><td>Slice</td><td>Flat cross-section revealing the stone's interior</td></tr>
+  <tr><td>Mushroom</td><td>Carved mushroom shape — display and altar pieces</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-condition" onclick="if(event.target===this)closePopup('condition')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('condition')">✕</button>
+  <div class="popup-title">Condition</div>
+  <table class="ptable"><tr><th>Grade</th><th>Meaning</th></tr>
+  <tr><td>Excellent</td><td>No visible chips, cracks, or wear. Like new or collector quality.</td></tr>
+  <tr><td>Good</td><td>Minor surface wear or small imperfections. Structurally sound.</td></tr>
+  <tr><td>Fair</td><td>Noticeable chips, scratches, or repairs. Still intact and usable.</td></tr>
+  <tr><td>Poor</td><td>Significant damage, cracks, or missing material.</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-treatment" onclick="if(event.target===this)closePopup('treatment')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('treatment')">✕</button>
+  <div class="popup-title">Treatment</div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">Whether and how a stone has been altered beyond cutting and polishing.</p>
+  <table class="ptable"><tr><th>Treatment</th><th>What it means</th></tr>
+  <tr><td>Natural</td><td>No treatments. Color and form are exactly as found in nature.</td></tr>
+  <tr><td>Heat Treated</td><td>Heated to enhance or change color. Very common — Amethyst → Citrine, Aquamarine.</td></tr>
+  <tr><td>Irradiated</td><td>Radiation used to alter color. Used in some blue Topaz, Tourmaline.</td></tr>
+  <tr><td>Dyed</td><td>Color added artificially. Common in Agate; some Howlite is sold as Turquoise.</td></tr>
+  <tr><td>Coated (Aura etc.)</td><td>Metal bonded to surface at high heat — creates the rainbow Aura Quartzes.</td></tr>
+  <tr><td>Stabilized</td><td>Resin added to strengthen porous stones. Standard for Turquoise.</td></tr>
+  <tr><td>Unknown</td><td>Treatment status not confirmed.</td></tr></table></div>
+</div>
+
 <div class="popup-overlay" id="popup-mohs" onclick="if(event.target===this)closePopup('mohs')">
   <div class="popup-box"><button class="popup-close" onclick="closePopup('mohs')">✕</button>
   <div class="popup-title">Mohs hardness</div>
@@ -1778,29 +1889,29 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="fg"><label>Species</label><input type="text" id="enc-sp" placeholder="e.g. Sugilite"></div>
     </div>
     <div class="form-row">
-      <div class="fg"><label>Material type</label><select id="enc-mt"><option value="">Select…</option><option>Mineral</option><option>Mineraloid</option><option>Aggregate</option><option>Organic</option><option>Fossil</option><option>Synthetic</option></select></div>
-      <div class="fg"><label>Crystal system</label><select id="enc-sy"><option value="">Select…</option><option>Cubic</option><option>Trigonal</option><option>Hexagonal</option><option>Orthorhombic</option><option>Monoclinic</option><option>Triclinic</option><option>Amorphous</option><option>Polymineralic</option></select></div>
+      <div class="fg"><label>Material type <button class="prop-help" onclick="openPopup('material')">?</button></label><select id="enc-mt"><option value="">Select…</option><option>Mineral</option><option>Mineraloid</option><option>Aggregate</option><option>Organic</option><option>Fossil</option><option>Synthetic</option></select></div>
+      <div class="fg"><label>Crystal system <button class="prop-help" onclick="openPopup('system')">?</button></label><select id="enc-sy"><option value="">Select…</option><option>Cubic</option><option>Trigonal</option><option>Hexagonal</option><option>Orthorhombic</option><option>Monoclinic</option><option>Triclinic</option><option>Amorphous</option><option>Polymineralic</option></select></div>
     </div>
     <div class="form-row">
-      <div class="fg"><label>Formation</label><select id="enc-fo"><option value="">Select…</option><option>Igneous</option><option>Sedimentary</option><option>Metamorphic</option><option>Hydrothermal</option><option>Secondary</option><option>Extraterrestrial</option><option>Biological</option></select></div>
-      <div class="fg"><label>Transparency</label><select id="enc-tr"><option value="">Select…</option><option>Transparent</option><option>Transparent to Translucent</option><option>Translucent</option><option>Translucent to Opaque</option><option>Opaque</option></select></div>
+      <div class="fg"><label>Formation <button class="prop-help" onclick="openPopup('formation')">?</button></label><select id="enc-fo"><option value="">Select…</option><option>Igneous</option><option>Sedimentary</option><option>Metamorphic</option><option>Hydrothermal</option><option>Secondary</option><option>Extraterrestrial</option><option>Biological</option></select></div>
+      <div class="fg"><label>Transparency <button class="prop-help" onclick="openPopup('transparency')">?</button></label><select id="enc-tr"><option value="">Select…</option><option>Transparent</option><option>Transparent to Translucent</option><option>Translucent</option><option>Translucent to Opaque</option><option>Opaque</option></select></div>
     </div>
     <div class="form-row">
       <div class="fg"><label>Color</label><input type="text" id="enc-c" placeholder="e.g. Deep purple to violet"></div>
-      <div class="fg"><label>Color cause</label><input type="text" id="enc-cc" placeholder="e.g. Manganese"></div>
+      <div class="fg"><label>Color cause <button class="prop-help" onclick="openPopup('colorcause')">?</button></label><input type="text" id="enc-cc" placeholder="e.g. Manganese"></div>
     </div>
     <div class="form-row">
-      <div class="fg"><label>Mohs min</label><input type="text" id="enc-mmin" placeholder="e.g. 6"></div>
+      <div class="fg"><label>Mohs min <button class="prop-help" onclick="openPopup('mohs')">?</button></label><input type="text" id="enc-mmin" placeholder="e.g. 6"></div>
       <div class="fg"><label>Mohs max</label><input type="text" id="enc-mmax" placeholder="e.g. 6.5"></div>
     </div>
     <div class="form-row full"><div class="fg"><label>Geological notes</label><textarea id="enc-g" placeholder="How it forms, what makes it distinctive, handling notes…"></textarea></div></div>
-    <div class="form-row full"><div class="fg"><label>Energetic role</label><input type="text" id="enc-er" placeholder="e.g. Protection / Heart Healing"></div></div>
-    <div class="form-row full"><div class="fg"><label>Use When</label><textarea id="enc-uw" placeholder="Use when you…" style="min-height:80px"></textarea></div></div>
+    <div class="form-row full"><div class="fg"><label>Energetic role <button class="prop-help" onclick="openPopup('er')">?</button></label><input type="text" id="enc-er" placeholder="e.g. Protection / Heart Healing"></div></div>
+    <div class="form-row full"><div class="fg"><label>Use When <button class="prop-help" onclick="openPopup('uw')">?</button></label><textarea id="enc-uw" placeholder="Use when you…" style="min-height:80px"></textarea></div></div>
     <div class="form-row">
-      <div class="fg"><label>Chakras</label><input type="text" id="enc-chakra" placeholder="e.g. Heart, Crown"></div>
-      <div class="fg"><label>Element</label><input type="text" id="enc-element" placeholder="e.g. Fire, Water"></div>
+      <div class="fg"><label>Chakras <button class="prop-help" onclick="openPopup('chakra')">?</button></label><input type="text" id="enc-chakra" placeholder="e.g. Heart, Crown"></div>
+      <div class="fg"><label>Element <button class="prop-help" onclick="openPopup('element')">?</button></label><input type="text" id="enc-element" placeholder="e.g. Fire, Water"></div>
     </div>
-    <div class="form-row full"><div class="fg"><label>Intention</label><input type="text" id="enc-aff" placeholder="e.g. I am open to divine guidance."></div></div>
+    <div class="form-row full"><div class="fg"><label>Intention <button class="prop-help" onclick="openPopup('aff')">?</button></label><input type="text" id="enc-aff" placeholder="e.g. I am open to divine guidance."></div></div>
     <div class="form-footer">
       <button class="btn" onclick="closeAddEncForm()">Cancel</button>
       <button class="btn btn-accent" onclick="saveEncEntry()">Add to encyclopedia</button>
