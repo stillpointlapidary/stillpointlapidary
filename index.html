@@ -520,16 +520,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .load-more-btn:hover{border-color:var(--accent);color:var(--accent)}
 .load-more-btn:disabled{opacity:0.35;cursor:default;border-color:var(--border)}
 .load-more-count{font-size:11px;color:var(--ink3);margin-top:0.6rem;letter-spacing:0.04em}
-/* TIERED VIEW */
-.enc-view-toggle{font-size:11px;color:var(--ink2r);background:none;border:0.5px solid var(--border);border-radius:20px;padding:4px 10px;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.04em;transition:background 0.12s}
-.enc-view-toggle:hover{background:var(--stone2)}
-.enc-tier-hdr{display:flex;align-items:center;gap:0.6rem;margin:1.5rem 0 0.75rem}
-.enc-tier-hdr:first-child{margin-top:0}
-.enc-tier-line{flex:1;height:0.5px;background:var(--border)}
-.enc-tier-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
-.enc-tier-count{font-size:11px;color:var(--ink3);white-space:nowrap}
-.enc-tier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
-#crystal-grid.tiered{background:transparent;border:none;border-radius:0;overflow:visible}
 
 </style>
 </head>
@@ -620,10 +610,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   </div>
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
-    <div style="display:flex;align-items:center;gap:8px">
-      <button id="enc-view-toggle" class="enc-view-toggle" onclick="toggleEncView()">View A–Z</button>
-      <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="id">ID</option><option value="name" selected>A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
-    </div>
+    <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="id">ID</option><option value="name" selected>A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
   </div>
   <div class="crystal-grid" id="crystal-grid"></div>
   <div class="load-more-wrap" id="load-more-wrap" style="display:none">
@@ -1714,7 +1701,6 @@ const SUB_FILTERS={"0": ["Calming Down", "Nervous System", "Sensory Overwhelm", 
 const SUB_FILTER_KW={"0": {"Calming Down": ["calm", "settle", "slow down"], "Nervous System": ["nervous", "overwhelm", "sensitiv"], "Sensory Overwhelm": ["sensitiv", "overload", "too much"], "Racing Mind": ["racing", "busy mind", "overthink", "restless"]}, "1": {"Earthing & Body": ["body", "earth", "earthing"], "Centering": ["center", "pulled back"], "Scattered Energy": ["scatter", "drained"], "Overwhelm": ["overwhelm"]}, "2": {"Fear & Resistance": ["fear", "resist", "block", "hesit"], "Inertia": ["stuck", "inertia", "stagnant", "static"], "Blocked Forward Motion": ["forward", "momentum", "move", "start"], "Moving Through": ["moving", "unstuck", "progress", "through"]}, "3": {"Falling Asleep": ["sleep", "insomnia", "rest"], "Staying Asleep": ["sleep", "night", "disturb", "wake"], "Anxiety at Night": ["anxiety", "night", "worry", "restless"], "Winding Down": ["calm", "quiet", "unwind", "relax"]}, "4": {"Energetic Shielding": ["shield", "protect", "block"], "Boundary Setting": ["boundary"], "Psychic Protection": ["psychic"], "Space Clearing": ["clearing", "heavy energy"]}, "5": {"Through Change": ["chang", "transit", "shift"], "Emotional Structure": ["structur", "anchor", "stable"], "Steady Support": ["steady", "support", "hold"]}, "6": {"Grief": ["grief", "griev", "mourn"], "Loss of a Person": ["loss", "loved one", "death", "bereav"], "Endings & Goodbyes": ["ending", "goodbye", "letting go", "closure"], "Comfort in Sadness": ["comfort", "support", "hold", "gentl"]}, "7": {"Anxiety": ["anxiety", "anxious", "worry", "fear"], "Sleep & Rest": ["sleep", "rest", "insomnia"], "Nervous System": ["nervous", "sensitiv", "hyperv"], "Overwhelm": ["overwhelm", "too much"]}, "8": {"Releasing Anger": ["anger", "rage", "frustrat", "irritat"], "Processing Hurt": ["hurt", "wound", "pain", "betray"], "Letting Go": ["release", "let go", "forgiv", "move on"], "Finding Peace": ["peace", "calm", "accept", "resolv"]}, "9": {"Grief & Loss": ["grief", "griev", "mourn", "loss"], "Heartbreak": ["heartbreak", "heartbroken", "romantic"], "Forgiveness": ["forgiv", "release", "let go"], "Deep Wounds": ["deep wound", "trauma", "old hurt"]}, "10": {"Creative Spark": ["creat", "inspir", "idea"], "Optimism": ["optim", "hope", "brightl"], "Mood Lifting": ["mood", "lift", "uplift", "depress"], "Playfulness": ["play", "fun", "joy", "light"]}, "11": {"Self-Worth": ["worth", "deserv", "enough"], "Inner Kindness": ["kind", "gentle", "soft"], "After Self-Criticism": ["critic", "judg", "shame"], "Nurturing": ["nurtur", "care", "support"]}, "12": {"Building Trust": ["trust", "safe", "open", "connect"], "Opening Communication": ["communicat", "speak", "express", "honest"], "Healing a Rift": ["heal", "repair", "reconcil", "rift"], "Deepening Connection": ["deep", "bond", "intimac", "close"]}, "13": {"Focus & Study": ["focus", "study", "concentr"], "Decision Making": ["decis", "choice", "clarity"], "Mental Clutter": ["clutter", "fog", "confused"], "Overthinking": ["overthink", "loop", "ruminate"]}, "14": {"Physical Energy": ["energy", "vitality", "stamina", "activat"], "Mental Drive": ["motivat", "drive", "purpose", "direction"], "Getting Started": ["start", "begin", "initiat", "action"], "Sustaining Momentum": ["momentum", "sustain", "persist", "continue"]}, "15": {"Speaking Truth": ["truth", "honest", "authentic"], "Being Heard": ["heard", "voice", "express"], "Difficult Conversations": ["difficult", "hard conversation", "confrontat"], "Honest Expression": ["express", "articulate", "clear"]}, "16": {"Bold Action": ["bold", "action", "courage"], "Self-Trust": ["trust", "instinct", "inner knowing"], "Personal Power": ["power", "authority", "strength"], "Overcoming Fear": ["fear", "hesit", "doubt"]}, "17": {"Abundance": ["abundan", "prosper", "wealth", "financial"], "Drawing In Love": ["love", "relationship", "partner", "attract"], "Attracting Opportunity": ["opportun", "luck", "success", "open"], "Opening to Receive": ["receiv", "allow", "welcome", "open"]}, "18": {"Career & Work": ["career", "work", "profession", "success"], "Financial Goals": ["financial", "money", "prosper", "abundan"], "Creative Projects": ["creat", "project", "vision", "idea"], "Personal Growth": ["growth", "personal", "develop", "become"]}, "19": {"Before Meditation": ["meditat", "stillness", "focus", "center"], "Before a Grid": ["grid", "layout", "sacred", "space"], "New Moon Practice": ["new moon", "lunar", "cycle", "plant"], "Working with a Stone": ["stone", "crystal", "hold", "work"]}, "20": {"Life Direction": ["direction", "path", "purpose", "calling"], "Soul Calling": ["soul", "calling", "mean", "destined"], "Meaning & Purpose": ["meaning", "purpose", "why", "alive"], "Reconnecting to Self": ["reconnect", "self", "identity", "return"]}, "21": {"Inner Knowing": ["inner knowing", "gut", "instinct"], "Dream Work": ["dream", "visions", "sleep"], "Psychic Sensitivity": ["psychic", "sensitiv", "perceptive"], "Visions": ["vision", "seeing", "clairvoy"]}, "22": {"Meditation": ["meditat", "stillness", "quiet mind"], "Higher Guidance": ["higher", "divine", "guidance"], "Divine Connection": ["divine", "sacred", "holy"], "Spiritual Growth": ["growth", "evolv", "ascend"]}, "23": {"Deepening Practice": ["deepen", "practice", "discipl"], "Stillness": ["still", "quiet", "silent", "inner peace"], "Going Inward": ["inward", "inner", "within", "contempl"], "Spiritual Focus": ["focus", "concentrat", "present", "aware"]}, "24": {"Shadow Work": ["shadow", "unconscious", "hidden"], "Releasing Patterns": ["pattern", "habit", "cycle"], "Rebirth & Growth": ["rebirth", "new", "transform"], "Ancestral Work": ["ancestral", "lineage", "inherited"]}, "25": {"Physical Recovery": ["physical", "body", "recover", "restor"], "Emotional Healing": ["emotional", "heart", "wound", "heal"], "After Illness": ["illness", "sick", "weak", "depleted"], "Gentle Support": ["gentl", "soft", "nurtur", "support"]}, "26": {"Stamina": ["stamina", "endur", "persist", "sustain"], "Activation": ["activat", "energiz", "spark", "vitalize"], "Life Force": ["life force", "prana", "chi", "vital"], "Physical Vitality": ["physical", "body", "strength", "vigor"]}, "27": {"Clearing Space": ["space", "room", "environment", "clear"], "Moving Stuck Energy": ["stuck", "stagnant", "heavy", "dense"], "Purification": ["purif", "cleanse", "reset", "fresh"], "Fresh Energy": ["fresh", "renew", "new", "uplift"]}, "28": {"Body Awareness": ["body", "somatic", "sensation", "physical"], "Grounding in the Body": ["ground", "earth", "anchor", "roots"], "Somatic Presence": ["somatic", "present", "here", "aware"], "Embodiment": ["embod", "inhabit", "physical", "flesh"]}};
 // ── STATE ──
 let filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all'};
-let encViewMode='tiered'; // 'tiered' | 'az'
 let collFilters={cfam:'all',ctheme:'all',ccolor:'all',cchakra:'all',cmohs:'all',cformation:'all',cmaterial:'all',form:'all',size:'all',cshelf:'all'};
 let collQuickFilter='all';
 let collActiveFamilyName=null; // 'all' | 'wish'
@@ -2513,80 +2499,32 @@ function encCardHtml(c){
   return`<div class="crystal-card" onclick="openDetail('${c.i}')">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
 }
 
-const TIER_ORDER = ['major','common','specialty','rare'];
-const TIER_LABELS = {major:'Essentials',common:'Well-Known',specialty:'Specialty',rare:'Rare & Exotic'};
-
-function getStoneTier(stone){
-  if(!stone) return 'common';
-  const fam = stone.fam || stone.sp || '';
-  const entry = C101_FAM_DATA.find(f => f.n === fam);
-  return (entry && TIER_ORDER.includes(entry.tier)) ? entry.tier : 'common';
-}
-
-function toggleEncView(){
-  encViewMode = encViewMode === 'tiered' ? 'az' : 'tiered';
-  const btn = document.getElementById('enc-view-toggle');
-  if(btn) btn.textContent = encViewMode === 'tiered' ? 'View A–Z' : 'View by level';
-  encRender();
-}
-
 function encRender(){
   const list = getFiltered();
   const cnt = document.getElementById('enc-count');
   if(cnt) cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' entries';
   const grid = document.getElementById('crystal-grid');
   if(!grid) return;
-
-  const filtersActive = Object.values(filters).some(v => v !== 'all') ||
-    (document.getElementById('enc-search')?.value || '').trim().length > 0;
-
-  // Show/hide view toggle — only relevant when no filter is active
-  const viewToggle = document.getElementById('enc-view-toggle');
-  if(viewToggle) viewToggle.style.display = filtersActive ? 'none' : '';
-
   if(!list.length){
-    grid.classList.remove('tiered');
     grid.innerHTML = '<div class="empty-state">No crystals match your filters.</div>';
     document.getElementById('load-more-wrap').style.display = 'none';
     return;
   }
+
+  // If filters are active, show all results at once
+  const filtersActive = Object.values(filters).some(v => v !== 'all') ||
+    (document.getElementById('enc-search')?.value || '').trim().length > 0;
 
   const PAGE_SIZE = 30;
   window._encList = list;
   window._encPage = 1;
 
   if(filtersActive){
-    // Flat — show all matching results at once
-    grid.classList.remove('tiered');
+    // Show all matching results
     grid.innerHTML = list.map(c => encCardHtml(c)).join('');
     document.getElementById('load-more-wrap').style.display = 'none';
-  } else if(encViewMode === 'tiered'){
-    // Tiered sections — group by level, alpha within each
-    grid.classList.add('tiered');
-    const groups = {major:[],common:[],specialty:[],rare:[]};
-    list.forEach(c => {
-      const t = getStoneTier(c);
-      (groups[t] || groups.common).push(c);
-    });
-    let html = '';
-    TIER_ORDER.forEach(tier => {
-      const stones = groups[tier];
-      if(!stones.length) return;
-      html += `<div class="enc-tier-section">
-        <div class="enc-tier-hdr">
-          <div class="enc-tier-line"></div>
-          <span class="enc-tier-label">${TIER_LABELS[tier]}</span>
-          <span class="enc-tier-count">${stones.length}</span>
-          <div class="enc-tier-line"></div>
-        </div>
-        <div class="enc-tier-grid">${stones.map(c => encCardHtml(c)).join('')}</div>
-      </div>`;
-    });
-    grid.innerHTML = html;
-    document.getElementById('load-more-wrap').style.display = 'none';
   } else {
-    // A–Z paginated browse
-    grid.classList.remove('tiered');
+    // Paginated browse
     grid.innerHTML = list.slice(0, PAGE_SIZE).map(c => encCardHtml(c)).join('');
     updateLoadMore(list, PAGE_SIZE);
   }
