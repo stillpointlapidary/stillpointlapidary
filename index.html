@@ -683,8 +683,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="coll-header">
     <div class="coll-title">My Pieces</div>
     <div class="coll-btns">
-      <button class="btn btn-sm" onclick="exportCollectionCSV()">↓ Collection CSV</button>
-      <button class="btn btn-sm" onclick="exportWishlistCSV()">↓ Wishlist CSV</button>
+      <div style="position:relative;display:inline-block">
+        <button class="btn btn-sm" onclick="toggleExportMenu('coll-export-menu')">↓ Collection ▾</button>
+        <div id="coll-export-menu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#fff;border:0.5px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(42,37,32,0.12);z-index:50;min-width:160px;overflow:hidden">
+          <button onclick="openReportOptions('collection');toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">⎙ Print report</button>
+          <button onclick="exportCollectionCSV();toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">↓ Export CSV</button>
+        </div>
+      </div>
+      <div style="position:relative;display:inline-block">
+        <button class="btn btn-sm" onclick="toggleExportMenu('wish-export-menu')">↓ Wishlist ▾</button>
+        <div id="wish-export-menu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#fff;border:0.5px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(42,37,32,0.12);z-index:50;min-width:160px;overflow:hidden">
+          <button onclick="openReportOptions('wishlist');toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">⎙ Print report</button>
+          <button onclick="exportWishlistCSV();toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">↓ Export CSV</button>
+        </div>
+      </div>
       <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add</button>
       <button class="btn btn-sm btn-accent" onclick="openAddForm()">+ Add piece</button>
     </div>
@@ -1574,6 +1586,64 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   </div>
 </div>
 
+
+<div class="popup-overlay" id="report-options-overlay" onclick="if(event.target===this)closeReportOptions()">
+  <div class="popup-box" style="max-width:480px;max-height:90vh;overflow-y:auto">
+    <button class="popup-close" onclick="closeReportOptions()">✕</button>
+    <div class="popup-title" id="report-options-title">Collection Report Options</div>
+    <div style="margin-bottom:1.5rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Layout</div>
+      <div style="display:flex;gap:8px">
+        <div class="report-layout-opt" data-val="gallery" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer">
+          <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px"><rect x="2" y="2" width="48" height="32" rx="3" fill="#e8e0d4"/><rect x="8" y="38" width="36" height="5" rx="2" fill="#2a2520" opacity="0.7"/><rect x="12" y="46" width="28" height="3" rx="1.5" fill="#c8a96e" opacity="0.6"/><rect x="10" y="51" width="32" height="2" rx="1" fill="#a09890" opacity="0.4"/><rect x="10" y="55" width="24" height="2" rx="1" fill="#a09890" opacity="0.4"/></svg>
+          <div style="font-weight:500;font-size:12px">Gallery</div><div style="font-size:10px;color:var(--ink3);margin-top:2px">One per page</div>
+        </div>
+        <div class="report-layout-opt selected" data-val="standard" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--accent2);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer;background:#faf6f0">
+          <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px"><rect x="1" y="4" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/><rect x="3" y="6" width="19" height="12" rx="2" fill="#e8e0d4"/><rect x="3" y="21" width="14" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="3" y="25" width="19" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/><rect x="3" y="28" width="15" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/><rect x="28" y="4" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/><rect x="30" y="6" width="19" height="12" rx="2" fill="#e8e0d4"/><rect x="30" y="21" width="14" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="30" y="25" width="19" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/><rect x="30" y="28" width="15" height="1.5" rx="0.75" fill="#a09890" opacity="0.5"/><rect x="1" y="34" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/><rect x="3" y="36" width="19" height="12" rx="2" fill="#e8e0d4"/><rect x="28" y="34" width="23" height="26" rx="2" fill="#f0ece7" stroke="#e0dbd4" stroke-width="0.5"/><rect x="30" y="36" width="19" height="12" rx="2" fill="#e8e0d4"/></svg>
+          <div style="font-weight:500;font-size:12px">Standard</div><div style="font-size:10px;color:var(--ink3);margin-top:2px">2 per page</div>
+        </div>
+        <div class="report-layout-opt" data-val="compact" onclick="selectReportLayout(this)" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;font-size:11px;cursor:pointer">
+          <svg width="52" height="60" viewBox="0 0 52 60" style="display:block;margin:0 auto 6px"><rect x="2" y="2" width="48" height="6" rx="1.5" fill="#c8a96e" opacity="0.3"/><rect x="2" y="11" width="8" height="6" rx="1.5" fill="#e8e0d4"/><rect x="13" y="12" width="16" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="13" y="15" width="22" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/><rect x="2" y="21" width="8" height="6" rx="1.5" fill="#e8e0d4"/><rect x="13" y="22" width="18" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="13" y="25" width="26" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/><rect x="2" y="31" width="8" height="6" rx="1.5" fill="#e8e0d4"/><rect x="13" y="32" width="14" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="13" y="35" width="20" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/><rect x="2" y="41" width="8" height="6" rx="1.5" fill="#e8e0d4"/><rect x="13" y="42" width="20" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="13" y="45" width="24" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/><rect x="2" y="51" width="8" height="6" rx="1.5" fill="#e8e0d4"/><rect x="13" y="52" width="16" height="2" rx="1" fill="#2a2520" opacity="0.6"/><rect x="13" y="55" width="18" height="1.5" rx="0.75" fill="#a09890" opacity="0.4"/></svg>
+          <div style="font-weight:500;font-size:12px">Compact</div><div style="font-size:10px;color:var(--ink3);margin-top:2px">8+ per page</div>
+        </div>
+      </div>
+      <div id="report-thumb-option" style="display:none;margin-top:10px">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="thumbs" checked> Include thumbnail photos</label>
+      </div>
+    </div>
+    <div style="margin-bottom:1.25rem" id="report-coll-section">
+      <div class="sec-label" style="margin-bottom:0.75rem">Collection fields</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="form" checked> Form &amp; size</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="condition" checked> Condition</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="location" checked> Location</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="acquired" checked> Acquired &amp; source</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="price"> Price paid</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="notes" checked> Notes</label>
+      </div>
+    </div>
+    <div style="margin-bottom:1.25rem">
+      <div class="sec-label" style="margin-bottom:0.75rem">Encyclopedia fields</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="usewhen" checked> Use When</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="er"> Energetic role</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="chakras"> Chakras</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="geo"> Geological notes</label>
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="aff"> Affirmation</label>
+      </div>
+    </div>
+    <div id="report-enc-photo-section" style="display:none;margin-bottom:1.25rem;padding:10px 12px;background:var(--stone2);border-radius:8px">
+      <div style="font-size:12px;font-weight:500;margin-bottom:6px">Some pieces have no photo</div>
+      <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="encphoto" checked> Use Still Point Lapidary reference images where no photo exists</label>
+      <div style="font-size:11px;color:var(--ink3);margin-top:4px">Images will be labeled "Still Point Lapidary Crystal Encyclopedia"</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="closeReportOptions()">Cancel</button>
+      <button class="btn btn-accent" style="flex:1;justify-content:center" id="report-generate-btn" onclick="generateReport()">Generate report</button>
+    </div>
+    <div id="report-preparing" style="display:none;font-size:12px;color:var(--ink3);text-align:center;margin-top:0.75rem">Preparing report…</div>
+  </div>
+</div>
 
 <div class="popup-overlay" id="popup-manage" onclick="if(event.target===this)closePopup('manage')">
   <div class="popup-box" style="max-width:400px">
@@ -3848,6 +3918,180 @@ function importJSON(input){
   reader.readAsText(file);input.value='';
 }
 function dl(content,type,filename){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=filename;a.click();}
+
+let _reportType='collection';
+function toggleExportMenu(id){
+  const menu=document.getElementById(id);
+  if(!menu)return;
+  const isOpen=menu.style.display!=='none';
+  ['coll-export-menu','wish-export-menu'].forEach(mid=>{const m=document.getElementById(mid);if(m)m.style.display='none';});
+  if(!isOpen)menu.style.display='block';
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('[id$="-export-menu"]')&&!e.target.textContent?.includes('▾')){
+    ['coll-export-menu','wish-export-menu'].forEach(id=>{const m=document.getElementById(id);if(m)m.style.display='none';});
+  }
+});
+function selectReportLayout(el){
+  document.querySelectorAll('.report-layout-opt').forEach(o=>{o.style.border='1px solid var(--border)';o.style.background='';o.classList.remove('selected');});
+  el.style.border='1px solid var(--accent2)';el.style.background='#faf6f0';el.classList.add('selected');
+  const thumbOpt=document.getElementById('report-thumb-option');
+  if(thumbOpt)thumbOpt.style.display=el.dataset.val==='compact'?'block':'none';
+}
+function openReportOptions(type){
+  _reportType=type;
+  document.getElementById('report-options-title').textContent=type==='collection'?'Collection Report Options':'Wishlist Report Options';
+  const collSection=document.getElementById('report-coll-section');
+  if(collSection)collSection.style.display=type==='collection'?'':'none';
+  const encPhotoSection=document.getElementById('report-enc-photo-section');
+  if(encPhotoSection){
+    if(type==='collection'){
+      const items=dedupedCollectionItems(collection);
+      const hasMissing=items.some(p=>!firstCollectionPhoto(p)&&ENCYCLOPEDIA_PHOTOS[p.crystalId]);
+      encPhotoSection.style.display=hasMissing?'block':'none';
+    } else { encPhotoSection.style.display='none'; }
+  }
+  const overlay=document.getElementById('report-options-overlay');
+  overlay.classList.add('open');
+  const box=overlay.querySelector('.popup-box');
+  if(box)box.scrollTop=0;
+}
+function closeReportOptions(){
+  document.getElementById('report-options-overlay').classList.remove('open');
+  document.getElementById('report-preparing').style.display='none';
+  const btn=document.getElementById('report-generate-btn');
+  if(btn){btn.disabled=false;btn.textContent='Generate report';}
+}
+function _reportFields(){
+  const f={};
+  document.querySelectorAll('#report-options-overlay input[type=checkbox]').forEach(cb=>{f[cb.dataset.field]=cb.checked;});
+  f.layout=document.querySelector('.report-layout-opt.selected')?.dataset.val||'standard';
+  return f;
+}
+function _reportBase(){
+  return `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Jost',sans-serif;color:#2a2520;background:#faf8f6;margin:0 auto}
+  .sticky-header{background:#faf8f6;padding-bottom:0.75rem;margin-bottom:0.75rem;border-bottom:1.5px solid #c8a96e}
+  .report-header{display:flex;align-items:flex-end;justify-content:space-between}
+  .report-brand{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#2a2520;letter-spacing:0.04em}
+  .report-brand span{color:#c8a96e;font-style:italic}.report-subtitle{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#8a7e72;margin-top:2px}
+  .report-meta{font-size:11px;color:#a09890;padding-top:0.3rem;letter-spacing:0.04em}
+  .print-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:1rem}
+  .print-btn{background:#c8a96e;color:#fff;border:none;padding:8px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:6px;cursor:pointer}
+  .stone-name{font-family:'Cormorant Garamond',serif;font-weight:400;color:#2a2520;line-height:1.2}
+  .stone-alt{font-size:11px;color:#8a7e72;margin-top:2px;letter-spacing:0.04em}
+  .stone-detail{font-size:12px;color:#5a5149;margin-top:5px;line-height:1.5}
+  .use-when{color:#5a5149;margin-top:8px;padding:7px 11px;background:#fff;border-left:2.5px solid #c8a96e;line-height:1.6;font-style:italic}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-top:8px}
+  .fact{font-size:11px;color:#a09890;line-height:1.4}.fact strong{color:#5a5149;font-weight:500}
+  .meta{font-size:11px;color:#a09890;margin-top:5px;line-height:1.6}
+  .notes{font-size:12px;color:#5a5149;margin-top:6px;font-style:italic;line-height:1.5}
+  .ref-photo-note{font-size:7px;color:#c0b8b0;text-align:center;margin-top:2px;letter-spacing:0.02em;line-height:1.2;word-wrap:break-word;overflow-wrap:break-word;white-space:normal}
+  .footer{padding-top:1rem;border-top:0.5px solid #e0dbd4;font-size:10px;color:#a09890;text-align:center;letter-spacing:0.08em}
+  .report-table{width:100%;border-collapse:collapse}.report-thead-td{padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #c8a96e}
+  .report-table thead{display:table-header-group}.content-wrap{padding-top:1.75rem;vertical-align:top}
+  .gallery-row td{padding-top:1.75rem;vertical-align:top}.gallery-row+.gallery-row{page-break-before:always;break-before:page}
+  @media print{.print-toolbar{display:none}body{background:#fff}.card{break-inside:avoid;page-break-inside:avoid}.report-table thead{display:table-header-group}.gallery-row+.gallery-row{page-break-before:always;break-before:page}@page{margin:2cm 1.5cm}}`;
+}
+function _reportStyles(layout){
+  const base=_reportBase();
+  if(layout==='gallery') return base+`body{padding:1rem 2.5rem;max-width:780px}.content-wrap{padding-top:1.5rem}.card{padding:1rem 0 2rem}.card-photo-outer{width:min(100%,500px);margin:0 auto 1.25rem}.card-photo-wrap{width:100%;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14)}.card-photo-wrap::after{content:'';display:block;padding-bottom:100%}.card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:10px}.card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;border-radius:10px}.stone-name{font-size:28px;margin-bottom:4px}.use-when{font-size:13px}.fact-grid{grid-template-columns:1fr 1fr 1fr}.footer{margin-top:1.5rem}`;
+  if(layout==='standard') return base+`body{padding:1rem 1.5rem;max-width:none}.content-wrap{padding-top:2.5rem}.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;align-items:start}.card{background:#fff;border-radius:10px;padding:0.875rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid;overflow:hidden}.card-photo-wrap{margin-bottom:0.75rem;position:relative;width:100%;overflow:hidden;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1)}.card-photo-wrap::after{content:'';display:block;padding-bottom:100%}.card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:7px;display:block}.card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}.stone-name{font-size:19px}.use-when{font-size:12px;padding:6px 9px}.footer{margin-top:1.5rem;grid-column:1/-1}`;
+  if(layout==='compact') return base+`body{padding:1rem 1.5rem;max-width:none}.content-wrap{padding-top:1.5rem}.inv-row{display:flex;gap:10px;padding:6px 0;border-bottom:0.5px solid #ede9e4;break-inside:avoid;align-items:flex-start}.inv-row:first-child{border-top:0.5px solid #ede9e4}.inv-thumb-wrap{flex-shrink:0;width:48px}.inv-thumb{width:48px;height:48px;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block}.inv-thumb-empty{width:48px;height:48px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:8px;color:#b0a89e;text-align:center;line-height:1.3;padding:2px}.inv-body{flex:1;min-width:0}.stone-name{font-size:14px}.inv-line{font-size:11px;color:#5a5149;margin-top:2px;line-height:1.4}.use-when{font-size:11px;padding:3px 7px;margin-top:4px;border-left-width:2px}.ref-photo-note{max-width:48px;word-wrap:break-word;overflow-wrap:break-word}.footer{margin-top:1.5rem}`;
+  return _reportStyles('standard');
+}
+function _reportHeaderHtml(title,count,unit){
+  return `<table class="report-table"><thead><tr><td class="report-thead-td"><div class="report-header"><div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div><div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div></div><div class="report-meta">${count} ${unit}${count!==1?'s':''}</div></td></tr></thead>`;
+}
+function _reportHeader(title,count,unit){return _reportHeaderHtml(title,count,unit);}
+function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
+  const outer=(cssClass==='card-photo'&&arguments[5])?`<div class="card-photo-outer">`:'';
+  const outerClose=outer?'</div>':'';
+  if(photoUrl) return `${outer}<div class="card-photo-wrap"><img class="${cssClass}" src="${photoUrl}" alt="${name}"></div>${outerClose}`;
+  if(useEnc&&encFallback) return `${outer}<div class="card-photo-wrap"><img class="${cssClass}" src="${encFallback}" alt="${name}"><div class="ref-photo-note">© Still Point Lapidary</div></div>${outerClose}`;
+  return `${outer}<div class="card-photo-wrap"><div class="${cssClass.replace('card-photo','card-photo-empty')} ${cssClass.includes('inv-thumb')?'inv-thumb-empty':''}">No photo</div></div>${outerClose}`;
+}
+async function generateReport(){
+  const btn=document.getElementById('report-generate-btn');
+  const prep=document.getElementById('report-preparing');
+  if(btn){btn.disabled=true;btn.textContent='Preparing…';}
+  if(prep)prep.style.display='block';
+  const f=_reportFields();
+  try{
+    if(_reportType==='collection') await _printCollectionReport(f);
+    else _printWishlistReport(f);
+  }finally{closeReportOptions();}
+}
+async function _printCollectionReport(f){
+  const layout=f.layout||'standard';
+  const items=dedupedCollectionItems(collection);
+  if(!items.length){alert('Your collection is empty.');return;}
+  const cards=await Promise.all(items.map(async p=>{
+    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    const name=c?.n||'Unknown';
+    const photoUrl=firstCollectionPhoto(p);
+    const encFallbackFile=ENCYCLOPEDIA_PHOTOS[p.crystalId]?.[0];
+    const encFallback=encFallbackFile?SUPABASE_ENC+encFallbackFile:null;
+    const nickname=p.nickname?` <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:'';
+    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+    const formParts=[f.form&&p.form?`Form: ${p.form}`:'',f.form&&p.size?`Size: ${p.size}`:''].filter(Boolean).join(' · ');
+    const treatLine=f.condition&&p.treated?`Treatment: ${p.treated}`:'';
+    const condLine=f.condition&&p.condition?`Condition: ${p.condition}`:'';
+    const formHtml=[formParts,treatLine,condLine].filter(Boolean).map(l=>`<div>${l}</div>`).join('');
+    const metaParts=[f.acquired&&formatDisplayDate(p.acquired)?`Acquired ${formatDisplayDate(p.acquired)}`:'',f.acquired&&p.source?`Source: ${p.source}`:'',f.price&&formatDisplayPrice(p.price)?formatDisplayPrice(p.price):''].filter(Boolean);
+    if(layout==='gallery'){
+      const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo',true);
+      const facts=[[c?.fam,'Family'],[c?.sy,'System'],[c?.fo,'Formation'],[c?.m?c.m+' Mohs':null,'Hardness'],[c?.element,'Element'],[c?.chakras?.join(', '),'Chakra']].filter(r=>r[0]);
+      return `<div class="card">${ph}<div class="stone-name">${name}${nickname}</div>${c?.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}${p.isCombo&&comboNames.length?`<div class="stone-alt">Combo: ${comboNames.join(' · ')}</div>`:''} ${formHtml?`<div class="stone-detail">${formHtml}</div>`:''} ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''} ${facts.length?`<div class="fact-grid">${facts.map(([v,l])=>`<div class="fact"><strong>${l}:</strong> ${v}</div>`).join('')}</div>`:''} ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''} ${metaParts.length?`<div class="meta">${metaParts.join(' · ')}</div>`:''} ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''} ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic;margin-top:12px;font-size:13px">"${c.aff}"</div>`:''}</div>`;
+    }
+    if(layout==='compact'){
+      const showThumb=f.thumbs!==false;
+      const ph=showThumb?`<div class="inv-thumb-wrap">${_photoHtml(photoUrl,name,encFallback,f.encphoto,'inv-thumb')}</div>`:'';
+      return `<div class="inv-row">${ph}<div class="inv-body"><div class="stone-name">${name}${nickname}</div><div class="inv-line">${formHtml}${f.location&&collPieceLocation(p)?`<div>📍 ${collPieceLocation(p)}</div>`:''}</div>${metaParts.length?`<div class="inv-line" style="color:#a09890">${metaParts.join(' · ')}</div>`:''} ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''}</div></div>`;
+    }
+    const ph=_photoHtml(photoUrl,name,encFallback,f.encphoto,'card-photo');
+    return `<div class="card">${ph}<div class="stone-name">${name}${nickname}</div>${p.isCombo&&comboNames.length?`<div class="stone-alt">Combo: ${comboNames.join(' · ')}</div>`:''} ${formHtml?`<div class="stone-detail">${formHtml}</div>`:''} ${f.usewhen&&c?.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c?.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.location&&collPieceLocation(p)?`<div class="meta">📍 ${collPieceLocation(p)}</div>`:''} ${metaParts.length?`<div class="meta">${metaParts.join(' · ')}</div>`:''} ${f.notes&&p.notes?`<div class="notes">${p.notes}</div>`:''} ${f.chakras&&c?.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c?.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
+  }));
+  let tbody;
+  if(layout==='gallery') tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
+  else if(layout==='standard') tbody=`<tbody><tr><td class="content-wrap"><div class="card-grid">${cards.join('')}</div><div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  else tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Stone Collection — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body><div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>${_reportHeaderHtml('My Stone Collection',items.length,'piece')}${tbody}${galleryFooter}</table></body></html>`);
+  win.document.close();
+}
+function _printWishlistReport(f){
+  const layout=f.layout||'standard';
+  const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
+  const items=CRYSTALS.filter(c=>wishIds.includes(c.i));
+  if(!items.length){alert('Your wishlist is empty.');return;}
+  const cards=items.map(c=>{
+    const encFile=ENCYCLOPEDIA_PHOTOS[c.i]?.[0];
+    const photoUrl=encFile?SUPABASE_ENC+encFile:null;
+    const detailLine=[c.fam,c.c,c.m?c.m+' Mohs':''].filter(Boolean).join(' · ');
+    if(layout==='gallery'){
+      const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
+      const facts=[[c.fam,'Family'],[c.sy,'System'],[c.fo,'Formation'],[c.m?c.m+' Mohs':null,'Hardness'],[c.element,'Element'],[c.chakras?.join(', '),'Chakra']].filter(r=>r[0]);
+      return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${facts.length?`<div class="fact-grid">${facts.map(([v,l])=>`<div class="fact"><strong>${l}:</strong> ${v}</div>`).join('')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic;margin-top:12px;font-size:13px">"${c.aff}"</div>`:''}</div>`;
+    }
+    if(layout==='compact'){
+      const showThumb=f.thumbs!==false;
+      const ph=showThumb?`<div class="inv-thumb-wrap">${photoUrl?`<img class="inv-thumb" src="${photoUrl}" alt="${c.n}">`:`<div class="inv-thumb-empty">No photo</div>`}</div>`:'';
+      return `<div class="inv-row">${ph}<div class="inv-body"><div class="stone-name">${c.n}</div><div class="inv-line">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''}</div></div>`;
+    }
+    const ph=photoUrl?`<div class="card-photo-wrap"><img class="card-photo" src="${photoUrl}" alt="${c.n}"></div>`:`<div class="card-photo-wrap"><div class="card-photo-empty">No photo</div></div>`;
+    return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
+  });
+  let tbody;
+  if(layout==='gallery') tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
+  else if(layout==='standard') tbody=`<tbody><tr><td class="content-wrap"><div class="card-grid">${cards.join('')}</div><div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  else tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body><div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>${_reportHeaderHtml('My Wishlist',items.length,'stone')}${tbody}${galleryFooter}</table></body></html>`);
+  win.document.close();
+}
 
 function scrollPageTop(){
   try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
