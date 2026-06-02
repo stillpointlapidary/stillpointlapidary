@@ -1758,9 +1758,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="form-box">
     <button class="popup-close" onclick="closeAddEncForm()">✕</button>
     <div class="form-title">Add encyclopedia entry</div>
-    <div class="form-sub">Add a new crystal to your reference library. Only Name is required.</div>
+    <div class="form-sub">Name, family, material type, crystal system, formation, color, geological notes, energetic role, and Use When are required.</div>
     <div class="form-row">
-      <div class="fg"><label>Name *</label><input type="text" id="enc-name" placeholder="e.g. Sugilite"></div>
+      <div class="fg">
+        <label style="display:flex;align-items:center;gap:8px">Name *
+          <button class="btn btn-sm" id="enc-autofill-btn" onclick="encAutoFill()" style="font-size:10px;padding:2px 10px;margin-left:auto;background:#f0e8d8;border-color:#c8a96e;color:#7a5c2a">✦ Auto-fill with AI</button>
+        </label>
+        <input type="text" id="enc-name" placeholder="e.g. Sugilite" oninput="encCheckDupe(this.value)">
+        <div id="enc-autofill-status" style="font-size:12px;color:var(--ink3);margin-top:4px;display:none"></div>
+        <div id="enc-duplicate-warn" style="font-size:12px;color:#c0392b;margin-top:4px;display:none"></div>
+      </div>
       <div class="fg"><label>Alternate names</label><input type="text" id="enc-alt" placeholder="e.g. Royal Lavulite"></div>
     </div>
     <div class="form-row">
@@ -3792,6 +3799,45 @@ async function saveBatch(){
 
 // ── ENCYCLOPEDIA ENTRY ──
 function openAddEncForm(){document.getElementById('add-enc-form-overlay').classList.add('open');}
+function encCheckDupe(val){
+  const warn=document.getElementById('enc-duplicate-warn');
+  if(!warn)return;
+  const match=val.trim()&&CRYSTALS.find(x=>x.n.toLowerCase()===val.trim().toLowerCase());
+  if(match){warn.textContent='⚠ "'+match.n+'" already exists ('+match.i+')';warn.style.display='block';}
+  else{warn.style.display='none';}
+}
+async function encAutoFill(){
+  const name=(document.getElementById('enc-name')?.value||'').trim();
+  if(!name){alert('Enter a stone name first.');return;}
+  const btn=document.getElementById('enc-autofill-btn');
+  const status=document.getElementById('enc-autofill-status');
+  if(btn){btn.disabled=true;btn.textContent='✦ Looking up…';}
+  if(status){status.textContent='Asking Claude about '+name+'…';status.style.display='block';}
+  try{
+    const resp=await fetch('https://vxujlgyhgnihnqrxzefw.supabase.co/functions/v1/claude-stone-lookup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'},
+      body:JSON.stringify({name})
+    });
+    const d=await resp.json();
+    if(d.error){throw new Error(d.error);}
+    const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;};
+    set('enc-alt',d.a);set('enc-fam',d.fam);set('enc-sp',d.sp);
+    set('enc-c',d.c);set('enc-cc',d.cc);set('enc-g',d.g);
+    set('enc-er',d.er);set('enc-uw',d.uw);set('enc-chakra',Array.isArray(d.chakras)?d.chakras.join(', '):d.chakras);
+    set('enc-element',d.element);set('enc-aff',d.aff);
+    if(d.m){const parts=String(d.m).split(/[-–]/);set('enc-mmin',parts[0]?.trim());set('enc-mmax',parts[1]?.trim()||parts[0]?.trim());}
+    const mtEl=document.getElementById('enc-mt');if(mtEl&&d.mt)mtEl.value=d.mt;
+    const syEl=document.getElementById('enc-sy');if(syEl&&d.sy)syEl.value=d.sy;
+    const foEl=document.getElementById('enc-fo');if(foEl&&d.fo)foEl.value=d.fo;
+    const trEl=document.getElementById('enc-tr');if(trEl&&d.tr)trEl.value=d.tr;
+    if(status){status.textContent='✓ Fields populated — review and adjust before saving.';}
+  }catch(err){
+    if(status){status.textContent='Something went wrong: '+err.message;}
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='✦ Auto-fill with AI';}
+  }
+}
 function closeAddEncForm(){
   document.getElementById('add-enc-form-overlay').classList.remove('open');
   document.getElementById('add-enc-form-overlay').querySelectorAll('input,select,textarea').forEach(el=>el.value='');
