@@ -1614,6 +1614,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="thumbs" checked> Include thumbnail photos</label>
       </div>
     </div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:0.5rem">
+      <button id="report-select-all-btn" onclick="toggleAllReportFields()" style="font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.04em;padding:0;text-decoration:underline;text-underline-offset:2px">Select all fields</button>
+    </div>
     <div style="margin-bottom:1.25rem" id="report-coll-section">
       <div class="sec-label" style="margin-bottom:0.75rem">Collection fields</div>
       <div style="display:flex;flex-direction:column;gap:6px">
@@ -4005,6 +4008,13 @@ function openReportOptions(type){
   const box=overlay.querySelector('.popup-box');
   if(box)box.scrollTop=0;
 }
+function toggleAllReportFields(){
+  const boxes=Array.from(document.querySelectorAll('#report-options-overlay input[type=checkbox][data-field]')).filter(cb=>cb.dataset.field!=='thumbs');
+  const allChecked=boxes.every(cb=>cb.checked);
+  boxes.forEach(cb=>cb.checked=!allChecked);
+  const btn=document.getElementById('report-select-all-btn');
+  if(btn)btn.textContent=allChecked?'Select all fields':'Deselect all fields';
+}
 function closeReportOptions(){
   document.getElementById('report-options-overlay').classList.remove('open');
   document.getElementById('report-preparing').style.display='none';
@@ -4044,13 +4054,13 @@ function _reportBase(){
 }
 function _reportStyles(layout){
   const base=_reportBase();
-  if(layout==='gallery') return base+`body{padding:0.75rem 1.25rem;max-width:780px}.content-wrap{padding-top:0}.card{padding:0.5rem 0 1rem}.card-photo-outer{width:min(100%,420px);margin:0 auto 1rem}.card-photo-wrap{width:100%;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14)}.card-photo-wrap::after{content:'';display:block;padding-bottom:85%}.card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:10px}.card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;border-radius:10px}.stone-name{font-size:26px;margin-bottom:4px}.use-when{font-size:13px}.fact-grid{grid-template-columns:1fr 1fr 1fr}.footer{margin-top:1rem}`;
-  if(layout==='standard') return base+`body{padding:0.75rem 1.25rem;max-width:none}.content-wrap{padding-top:0}.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.25rem;align-items:start}.card{background:#fff;border-radius:10px;padding:0.75rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid;overflow:hidden}.card-photo-wrap{margin-bottom:0.65rem;position:relative;width:100%;overflow:hidden;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1)}.card-photo-wrap::after{content:'';display:block;padding-bottom:100%}.card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:7px;display:block}.card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}.stone-name{font-size:18px}.use-when{font-size:12px;padding:5px 8px}.footer{margin-top:1rem;grid-column:1/-1}`;
+  if(layout==='gallery') return base+`body{padding:0.75rem 1.25rem;max-width:780px}.content-wrap{padding-top:0}.card{padding:0.5rem 0 1rem;margin-top:0.75rem}.card-photo-outer{width:min(100%,420px);margin:0 auto 1rem}.card-photo-wrap{width:100%;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 24px rgba(42,37,32,0.14)}.card-photo-wrap::after{content:'';display:block;padding-bottom:85%}.card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:10px}.card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b0a89e;border-radius:10px}.stone-name{font-size:26px;margin-bottom:4px}.use-when{font-size:13px}.fact-grid{grid-template-columns:1fr 1fr 1fr}.footer{margin-top:1rem}`;
+  if(layout==='standard') return base+`body{padding:0.75rem 1.25rem;max-width:none}.std-cell{width:50%;vertical-align:top;padding-bottom:1rem;page-break-inside:avoid}.std-cell:first-child{padding-right:0.625rem}.std-cell:last-child{padding-left:0.625rem}.card{background:#fff;border-radius:10px;padding:0.75rem;box-shadow:0 1px 8px rgba(42,37,32,0.07);break-inside:avoid;overflow:hidden}.card-photo-wrap{margin-bottom:0.65rem;position:relative;width:100%;overflow:hidden;border-radius:7px;box-shadow:0 2px 8px rgba(42,37,32,0.1)}.card-photo-wrap::after{content:'';display:block;padding-bottom:100%}.card-photo{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:7px;display:block}.card-photo-empty{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:7px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#b0a89e}.stone-name{font-size:18px}.use-when{font-size:12px;padding:5px 8px}.footer{margin-top:1rem}`;
   if(layout==='compact') return base+`body{padding:0.75rem 1.25rem;max-width:none}.content-wrap{padding-top:0}.inv-row{display:flex;gap:10px;padding:6px 0;border-bottom:0.5px solid #ede9e4;break-inside:avoid;align-items:flex-start}.inv-row:first-child{border-top:0.5px solid #ede9e4}.inv-thumb-wrap{flex-shrink:0;width:48px}.inv-thumb{width:48px;height:48px;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block}.inv-thumb-empty{width:48px;height:48px;border-radius:4px;background:#f0ece7;display:flex;align-items:center;justify-content:center;font-size:8px;color:#b0a89e;text-align:center;line-height:1.3;padding:2px}.inv-body{flex:1;min-width:0}.stone-name{font-size:14px}.inv-line{font-size:11px;color:#5a5149;margin-top:2px;line-height:1.4}.use-when{font-size:11px;padding:3px 7px;margin-top:4px;border-left-width:2px}.ref-photo-note{max-width:48px;word-wrap:break-word;overflow-wrap:break-word}.footer{margin-top:1.5rem}`;
   return _reportStyles('standard');
 }
 function _reportHeaderHtml(title,count,unit){
-  return `<table class="report-table"><thead><tr><td class="report-thead-td"><div class="report-header"><div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div><div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div></div><div class="report-meta">${count} ${unit}${count!==1?'s':''}</div></td></tr></thead>`;
+  return `<table class="report-table"><thead><tr><td colspan="2" class="report-thead-td"><div class="report-header"><div><div class="report-brand">STILL POINT <span>Lapidary</span></div><div class="report-subtitle">Crystal Reference Library</div></div><div style="text-align:right;font-size:12px;color:#8a7e72;font-family:'Jost',sans-serif">${title}<br><span style="font-size:11px;color:#a09890">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div></div><div class="report-meta">${count} ${unit}${count!==1?'s':''}</div></td></tr></thead>`;
 }
 function _reportHeader(title,count,unit){return _reportHeaderHtml(title,count,unit);}
 function _photoHtml(photoUrl,name,encFallback,useEnc,cssClass){
@@ -4103,7 +4113,7 @@ async function _printCollectionReport(f){
   }));
   let tbody;
   if(layout==='gallery') tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
-  else if(layout==='standard') tbody=`<tbody><tr><td class="content-wrap"><div class="card-grid">${cards.join('')}</div><div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  else if(layout==='standard'){const rows2=[];for(let i=0;i<cards.length;i+=2){rows2.push(`<tr><td class="std-cell">${cards[i]}</td><td class="std-cell">${cards[i+1]||''}</td></tr>`);}tbody=`<tbody>${rows2.join('')}<tr><td colspan="2" class="footer" style="padding-top:1rem;text-align:center">stillpointlapidary.com</td></tr></tbody>`;}
   else tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
   const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
   const win=window.open('','_blank');
@@ -4134,7 +4144,7 @@ function _printWishlistReport(f){
   });
   let tbody;
   if(layout==='gallery') tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
-  else if(layout==='standard') tbody=`<tbody><tr><td class="content-wrap"><div class="card-grid">${cards.join('')}</div><div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
+  else if(layout==='standard'){const rows2=[];for(let i=0;i<cards.length;i+=2){rows2.push(`<tr><td class="std-cell">${cards[i]}</td><td class="std-cell">${cards[i+1]||''}</td></tr>`);}tbody=`<tbody>${rows2.join('')}<tr><td colspan="2" class="footer" style="padding-top:1rem;text-align:center">stillpointlapidary.com</td></tr></tbody>`;}
   else tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
   const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
   const win=window.open('','_blank');
