@@ -4470,7 +4470,7 @@ function updateLastSaved(){
 }
 
 // ── START ──
-(async function loadStonesAndInit() {
+async function loadStonesAndInit() {
   const CACHE_KEY = 'spl_stones_cache';
   const CACHE_VER = 'v2';
 
@@ -4557,7 +4557,7 @@ function updateLastSaved(){
     init();
     updateLastSaved();
   }
-})();
+}
 
 
 // ── IDENTIFY WIZARD ──
@@ -6217,6 +6217,10 @@ const _supa = window.supabase.createClient(
     }
   }
 );
+
+// ── Load stones from Supabase, then init app ──
+loadStonesAndInit();
+
 let _currentUser = null;
 try{ ['lap_coll','lap_owned','lap_wish'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
 
