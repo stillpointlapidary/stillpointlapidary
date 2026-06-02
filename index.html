@@ -529,7 +529,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-tier-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
 .enc-tier-count{font-size:11px;color:var(--ink3);white-space:nowrap}
 .enc-tier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
-#crystal-grid.tiered{background:transparent;border:none;border-radius:0;overflow:visible}
+#crystal-grid.tiered{display:block;background:transparent;border:none;border-radius:0;overflow:visible}
 
 </style>
 </head>
@@ -2561,6 +2561,14 @@ function encRender(){
     grid.innerHTML = list.map(c => encCardHtml(c)).join('');
     document.getElementById('load-more-wrap').style.display = 'none';
   } else if(encViewMode === 'tiered'){
+    // Guard: C101_FAM_DATA is defined later in the file — retry after it loads
+    try { C101_FAM_DATA; } catch(e) {
+      grid.classList.remove('tiered');
+      grid.innerHTML = list.slice(0, PAGE_SIZE).map(c => encCardHtml(c)).join('');
+      updateLoadMore(list, PAGE_SIZE);
+      setTimeout(encRender, 80);
+      return;
+    }
     // Tiered sections — group by level, alpha within each
     grid.classList.add('tiered');
     const groups = {major:[],common:[],specialty:[],rare:[]};
