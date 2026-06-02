@@ -1380,7 +1380,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <option>Palm stone</option>
 <option>Raw / Rough</option>
 <option>Freeform</option>
-<option>Tower / Point</option>
+<option>Tower</option>
+<option>Point</option>
 <option>Sphere</option>
 <option>Egg</option>
 <option>Cluster</option>
@@ -1392,7 +1393,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <option>Mushroom</option>
 <option>Wand</option>
 <option>Skull</option>
-<option>Cabochon</option>
 <option>Carved</option>
 <option>Other</option></select></div>
       <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Select…</option>
@@ -1622,7 +1622,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <option>Palm stone</option>
 <option>Raw / Rough</option>
 <option>Freeform</option>
-<option>Tower / Point</option>
+<option>Tower</option>
+<option>Point</option>
 <option>Sphere</option>
 <option>Egg</option>
 <option>Cluster</option>
@@ -1634,7 +1635,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 <option>Mushroom</option>
 <option>Wand</option>
 <option>Skull</option>
-<option>Cabochon</option>
 <option>Carved</option>
 <option>Other</option></select></div>
       </div>
@@ -1659,7 +1659,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   <div class="form-box">
     <button class="popup-close" onclick="closeEntryRequestForm()">✕</button>
     <div class="form-title">Request encyclopedia entry</div>
-    <div class="form-sub">Suggest a stone or variety to add. This prepares a short request you can copy or email.</div>
+    <div class="form-sub">Suggest a stone or variety to add. We'll review it and add it to the encyclopedia.</div>
     <div class="form-row full">
       <div class="fg"><label>Stone / Variety name *</label><input type="text" id="req-stone-name" placeholder="e.g. Que Sera Stone"></div>
     </div>
@@ -1668,8 +1668,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
     <div class="form-footer">
       <button class="btn" onclick="closeEntryRequestForm()">Cancel</button>
-      <button class="btn" onclick="copyEntryRequest()">Copy request</button>
-      <button class="btn btn-accent" onclick="emailEntryRequest()">Email request</button>
+      <button class="btn btn-accent" onclick="submitEntryRequest()">Send request</button>
     </div>
   </div>
 </div>
@@ -3992,11 +3991,30 @@ async function copyEntryRequest(){
   try{await navigator.clipboard.writeText(text);alert('Entry request copied.');}
   catch(e){alert(text);}
 }
-function emailEntryRequest(){
-  const text=entryRequestText();if(!text)return;
-  const subject=encodeURIComponent('Still Point Lapidary entry request');
-  const body=encodeURIComponent(text);
-  window.location.href=`mailto:?subject=${subject}&body=${body}`;
+async function submitEntryRequest(){
+  const name=(document.getElementById('req-stone-name')?.value||'').trim();
+  const notes=(document.getElementById('req-stone-notes')?.value||'').trim();
+  if(!name){alert('Stone / Variety name is required.');return;}
+  const btn=document.querySelector('#entry-request-form-overlay .btn-accent');
+  const oldText=btn?btn.textContent:'';
+  if(btn){btn.disabled=true;btn.textContent='Sending…';}
+  try{
+    const res=await fetch('https://formspree.io/f/xeedwkly',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({'Stone name':name,'Notes':notes||'—'})
+    });
+    if(res.ok){
+      closeEntryRequestForm();
+      alert('Request sent! We\'ll review it and add it to the encyclopedia.');
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+  }catch(e){
+    alert('Could not send — please check your connection and try again.');
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=oldText;}
+  }
 }
 
 function updateLastSaved(){
@@ -5238,12 +5256,21 @@ const CRYSTAL_SHAPES = [
     draw: drawEggShape,
   },
   {
+    id: 'tower',
+    name: 'Tower',
+    tagline: 'Directed upward, projecting, anchoring',
+    body: 'A flat-based, six-sided column that projects energy upward and outward continuously. Towers are among the most versatile forms — place them in a room to shift the ambient energy, use them in grids as anchor points, or hold during meditation. The flat base makes them stable and easy to place.',
+    use: 'Room energy · Grids · Meditation · Intention setting',
+    examples: ['Amethyst', 'Selenite', 'Labradorite', 'Black Tourmaline'],
+    draw: drawPointShape,
+  },
+  {
     id: 'point',
-    name: 'Point / Tower',
-    tagline: 'Directed, focused, amplifying',
-    body: 'A terminated point directs energy out through the apex. Towers (flat base, pointed top) project energy upward and outward continuously. Use to direct intention, connect to higher frequencies, or anchor a grid. Also used to activate grids — touch each stone lightly to connect them.',
-    use: 'Grid activation · Intention directing · Meditation · Amplification',
-    examples: ['Clear Quartz', 'Selenite', 'Amethyst', 'Black Tourmaline'],
+    name: 'Point',
+    tagline: 'Directed, focused, activating',
+    body: 'A natural or cut termination that directs energy out through the apex. Used to direct intention, move energy in healing work, and activate crystal grids — touch each stone lightly with the point to connect them. Points can face inward (drawing energy toward you) or outward (projecting away).',
+    use: 'Grid activation · Energy direction · Healing work · Amplification',
+    examples: ['Clear Quartz', 'Amethyst', 'Citrine', 'Rose Quartz'],
     draw: drawPointShape,
   },
   {
@@ -5344,15 +5371,6 @@ const CRYSTAL_SHAPES = [
     use: 'Energy healing · Chakra work · Directing energy · Body work',
     examples: ['Selenite', 'Clear Quartz', 'Rose Quartz', 'Obsidian'],
     draw: drawWandShape,
-  },
-  {
-    id: 'cabochon',
-    name: 'Cabochon',
-    tagline: 'Wearable, integrated, jewelry',
-    body: 'A polished, domed stone with a flat back — the standard cut for crystal jewelry. When worn, the stone stays in continuous contact with your body\'s energy field throughout the day. The choice of stone matters; the intention to wear it matters more.',
-    use: 'Jewelry · Daily wear · Continuous contact · Gifting',
-    examples: ['Labradorite', 'Moonstone', 'Turquoise', 'Malachite'],
-    draw: drawCabochonShape,
   },
 ];
 
@@ -5573,7 +5591,7 @@ function drawCabochonShape(){
 }
 
 // ── RENDER SHAPES ──
-const SHAPE_DISPLAY_ORDER = ['tumbled','palm','raw','flame','point','sphere','egg','cluster','geode','slice','heart','moon','star','wand','cabochon','worry','pyramid','cube','druzy'];
+const SHAPE_DISPLAY_ORDER = ['tumbled','palm','raw','flame','tower','point','sphere','egg','cluster','geode','slice','heart','moon','star','wand','worry','pyramid','cube','druzy'];
 
 function renderShapes() {
   try { CRYSTAL_SHAPES; } catch(e) { setTimeout(renderShapes,0); return; }
