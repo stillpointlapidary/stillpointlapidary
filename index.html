@@ -108,8 +108,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .filter-cat-btn .caret{font-size:8px;opacity:0.7;transition:transform 0.15s}
 .filter-cat-btn.open .caret{transform:rotate(180deg)}
 .filter-cat-btn .aval{font-size:10px;max-width:70px;overflow:hidden;text-overflow:ellipsis;opacity:0.8}
-.reset-link{font-size:11px;color:var(--ink2r);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font-family:'Jost',sans-serif;margin-left:4px}
+.reset-link{font-size:11px;color:var(--ink2r);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font-family:'Jost',sans-serif;margin-left:4px;opacity:0;pointer-events:none;transition:opacity 0.15s}
 .reset-link:hover{color:var(--accent)}
+.reset-link.filters-on{opacity:1;pointer-events:auto;color:var(--accent)}
 
 /* FILTER PANEL DROPDOWN */
 .filter-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:10px;z-index:60;box-shadow:0 6px 24px rgba(42,37,32,0.12);min-width:210px}
@@ -2727,30 +2728,40 @@ function encCardHtml(c){
 
 function encRender(){
   const list = getFiltered();
+
+  const filtersActive = Object.values(filters).some(v => v !== 'all') ||
+    (document.getElementById('enc-search')?.value || '').trim().length > 0;
+
+  // Active filter count
+  const activeCount = Object.values(filters).filter(v => v !== 'all').length +
+    ((document.getElementById('enc-search')?.value || '').trim().length > 0 ? 1 : 0);
+
+  // Results count + filter indicator
   const cnt = document.getElementById('enc-count');
-  if(cnt) cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' entries';
+  if(cnt){
+    cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' entries';
+    if(activeCount > 0) cnt.textContent += ' · ' + activeCount + ' filter' + (activeCount > 1 ? 's' : '') + ' active';
+  }
+
+  // Show Reset only when filters are on
+  document.querySelectorAll('.reset-link').forEach(el => el.classList.toggle('filters-on', filtersActive));
+
   const grid = document.getElementById('crystal-grid');
   if(!grid) return;
   if(!list.length){
-    grid.innerHTML = '<div class="empty-state">No crystals match your filters.</div>';
+    grid.innerHTML = '<div class="empty-state">No crystals match.<br><span style="font-size:12px;margin-top:6px;display:block"><button onclick="resetFilters()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:\'Jost\',sans-serif;font-size:12px;text-decoration:underline;text-underline-offset:2px;padding:0">Clear filters</button> to see all stones.</span></div>';
     document.getElementById('load-more-wrap').style.display = 'none';
     return;
   }
-
-  // If filters are active, show all results at once
-  const filtersActive = Object.values(filters).some(v => v !== 'all') ||
-    (document.getElementById('enc-search')?.value || '').trim().length > 0;
 
   const PAGE_SIZE = 30;
   window._encList = list;
   window._encPage = 1;
 
   if(filtersActive){
-    // Show all matching results
     grid.innerHTML = list.map(c => encCardHtml(c)).join('');
     document.getElementById('load-more-wrap').style.display = 'none';
   } else {
-    // Paginated browse
     grid.innerHTML = list.slice(0, PAGE_SIZE).map(c => encCardHtml(c)).join('');
     updateLoadMore(list, PAGE_SIZE);
   }
@@ -6277,7 +6288,7 @@ async function loadSupabaseState() {
   const activeTab=document.querySelector('main>section[style*="block"]')?.id || '';
   const wrap=document.getElementById('coll-wrap');
   if(activeTab==='tab-collection' && wrap){
-    wrap.innerHTML='<div class="empty-coll">Refreshing your collection…</div>';
+    wrap.innerHTML='<div class="empty-coll" style="opacity:0.5;font-size:12px">Syncing…</div>';
   }
 
   wish = {};
@@ -6332,7 +6343,7 @@ async function loadSupabaseState() {
   encRender();
   renderCollection();
   const syncEl=document.getElementById('coll-sync-status');
-  if(syncEl){const now=new Date();syncEl.textContent='Last synced: '+now.toLocaleDateString()+', '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});syncEl.style.display='block';}
+  if(syncEl)syncEl.style.display='none';
 }
 
 async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
