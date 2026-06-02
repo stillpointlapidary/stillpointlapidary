@@ -847,11 +847,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
 .fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:all 0.15s}
 .fam-card:hover{border-color:var(--accent2);transform:translateY(-1px);background:var(--stone2)}
+/* ENC PHOTO LIGHTBOX */
+.enc-lightbox{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.7);z-index:400;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+.enc-lightbox.open{display:flex}
+.enc-lightbox-img{max-width:min(82vw,700px);max-height:82vh;object-fit:contain;border-radius:10px;box-shadow:0 16px 64px rgba(42,37,32,0.35);cursor:default}
+.enc-lightbox-close{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:rgba(42,37,32,0.55);border:none;color:#faf8f6;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 /* CARE ACCORDION */
 .care-accordion-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:0.75rem 1rem;border-radius:10px;border:0.5px solid var(--border);background:var(--white);transition:background 0.15s;user-select:none}
 .care-accordion-hdr:hover{background:var(--stone2)}
 .care-accordion-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--ink)}
-.care-accordion-caret{font-size:11px;color:var(--ink3);transition:transform 0.2s;margin-left:0.5rem}
+.care-accordion-hint{font-size:10px;color:var(--ink3);letter-spacing:0.05em;margin-left:0.5rem;transition:opacity 0.2s}
+.care-accordion-hdr.open .care-accordion-hint{opacity:0;pointer-events:none}
+.care-accordion-caret{font-size:11px;color:var(--ink3);transition:transform 0.2s;margin-left:0.25rem}
 .care-accordion-hdr.open .care-accordion-caret{transform:rotate(180deg)}
 .care-accordion-body{overflow:hidden;max-height:0;transition:max-height 0.3s ease}
 .care-accordion-body.open{max-height:2000px}
@@ -1019,7 +1026,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="c101-block">
       <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
         <span class="care-accordion-title">⚠ Do Not Use Water On These</span>
-        <span class="care-accordion-caret">▾</span>
+        <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">▾</span></span>
       </div>
       <div class="care-accordion-body">
         <div class="care-accordion-inner">
@@ -1032,7 +1039,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="c101-block">
       <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
         <span class="care-accordion-title">☀ Keep These Out of Extended Sunlight</span>
-        <span class="care-accordion-caret">▾</span>
+        <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">▾</span></span>
       </div>
       <div class="care-accordion-body">
         <div class="care-accordion-inner">
@@ -2517,10 +2524,11 @@ function encCardHtml(c){
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
   const roles=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).slice(0,2).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
-  const imgZone=encPhotos
-    ?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`
-    :noPhotoZoneHtml(c);
-  return`<div class="crystal-card" onclick="openDetail('${c.i}')">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+  const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
+  const imgZone=imgSrc
+    ?`<div class="card-img-zone has-photo" onclick="openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${imgSrc}" alt="${c.n}" loading="lazy"></div>`
+    :`<div onclick="openDetail('${c.i}')">${noPhotoZoneHtml(c)}</div>`;
+  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
 }
 
 function encRender(){
@@ -4454,6 +4462,7 @@ function show101(sec,btn){
 function jumpToStone(name){
   switchTab('encyclopedia', document.querySelector('[onclick*=encyclopedia]'));
   setTimeout(()=>{
+    resetEncyclopediaFiltersForJump();
     const searchEl = document.getElementById('enc-search');
     if(searchEl){ searchEl.value=name; searchEl.dispatchEvent(new Event('input')); }
   },100);
@@ -4512,6 +4521,25 @@ const TOXIC_NOTES = {
   'Vanadinite':'Contains vanadium — handle finished specimens only. Wash hands.',
   'Chalcopyrite':'Copper-iron sulfide — keep dry, wash hands.',
 };
+
+function openEncLightbox(src, alt, e){
+  if(e) e.stopPropagation();
+  const lb = document.getElementById('enc-lightbox');
+  const img = document.getElementById('enc-lightbox-img');
+  if(!lb || !img) return;
+  img.src = src;
+  img.alt = alt || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeEncLightbox(){
+  const lb = document.getElementById('enc-lightbox');
+  if(lb) lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeEncLightbox();
+});
 
 function toggleCareAccordion(hdr){
   const body = hdr.nextElementSibling;
@@ -5634,6 +5662,10 @@ function renderShapes() {
     <button id="pwa-banner-cta" style="font-size:11px;padding:5px 12px;background:var(--accent);border:none;border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap"></button>
     <button onclick="dismissPWA(false)" style="font-size:11px;padding:5px 12px;background:transparent;border:0.5px solid rgba(255,255,255,0.3);border-radius:6px;color:var(--white);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap">Not now</button>
   </div>
+</div>
+<div class="enc-lightbox" id="enc-lightbox" onclick="closeEncLightbox()">
+  <button class="enc-lightbox-close" onclick="closeEncLightbox()">✕</button>
+  <img class="enc-lightbox-img" id="enc-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
 </div>
 <div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
   <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
