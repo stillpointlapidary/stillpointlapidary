@@ -836,7 +836,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* ER role cards */
 .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:1.5rem}
-.role-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white)}
+.role-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:background 0.12s,border-color 0.12s}
+.role-card:hover{background:var(--stone2);border-color:var(--accent2)}
+.role-link{font-size:10.5px;color:var(--accent);margin-top:6px;letter-spacing:0.03em}
 .role-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;color:var(--ink);letter-spacing:0.01em;margin-bottom:4px}
 .role-desc{font-size:12px;color:var(--ink2);line-height:1.6}
 .role-eg{font-size:11px;color:var(--ink3);margin-top:5px;font-style:italic}
@@ -845,6 +847,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
 .fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:all 0.15s}
 .fam-card:hover{border-color:var(--accent2);transform:translateY(-1px);background:var(--stone2)}
+/* CARE ACCORDION */
+.care-accordion-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:0.75rem 1rem;border-radius:10px;border:0.5px solid var(--border);background:var(--white);transition:background 0.15s;user-select:none}
+.care-accordion-hdr:hover{background:var(--stone2)}
+.care-accordion-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--ink)}
+.care-accordion-caret{font-size:11px;color:var(--ink3);transition:transform 0.2s;margin-left:0.5rem}
+.care-accordion-hdr.open .care-accordion-caret{transform:rotate(180deg)}
+.care-accordion-body{overflow:hidden;max-height:0;transition:max-height 0.3s ease}
+.care-accordion-body.open{max-height:2000px}
+.care-accordion-inner{padding:0.75rem 0 0}
 .c101-backtop-wrap{display:flex;justify-content:center;margin:2rem 0 0}.c101-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:'Jost',sans-serif}.c101-backtop:hover{border-color:var(--accent2);color:var(--accent);background:var(--white)}
 .fam-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:3px}
 .fam-count{font-size:11px;color:var(--accent);letter-spacing:0.04em;margin-bottom:6px}
@@ -1006,15 +1017,29 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
 
     <div class="c101-block">
-      <div class="c101-h2">⚠ Do Not Use Water On These</div>
-      <div class="c101-body">The following stones from your encyclopedia are water-sensitive — they may dissolve, rust, become toxic, or lose their structure:</div>
-      <div class="stone-pills" id="water-pills"></div>
+      <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
+        <span class="care-accordion-title">⚠ Do Not Use Water On These</span>
+        <span class="care-accordion-caret">▾</span>
+      </div>
+      <div class="care-accordion-body">
+        <div class="care-accordion-inner">
+          <div class="c101-body" style="margin-bottom:0.75rem">The following stones from your encyclopedia are water-sensitive — they may dissolve, rust, become toxic, or lose their structure:</div>
+          <div class="stone-pills" id="water-pills"></div>
+        </div>
+      </div>
     </div>
 
     <div class="c101-block">
-      <div class="c101-h2">☀ Keep These Out of Extended Sunlight</div>
-      <div class="c101-body">These stones from your encyclopedia can fade, crack, or lose color intensity with prolonged sun exposure. Brief morning light is usually fine; avoid leaving them in a sunny window for hours:</div>
-      <div class="stone-pills" id="sun-pills"></div>
+      <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
+        <span class="care-accordion-title">☀ Keep These Out of Extended Sunlight</span>
+        <span class="care-accordion-caret">▾</span>
+      </div>
+      <div class="care-accordion-body">
+        <div class="care-accordion-inner">
+          <div class="c101-body" style="margin-bottom:0.75rem">These stones from your encyclopedia can fade, crack, or lose color intensity with prolonged sun exposure. Brief morning light is usually fine; avoid leaving them in a sunny window for hours:</div>
+          <div class="stone-pills" id="sun-pills"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1030,7 +1055,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
 
     <div class="c101-block">
-      <div class="c101-h2">The Seven Centers</div>
+      <div class="c101-h2">The Eight Energy Centers</div>
       <div class="chakra-grid" id="chakra-cards"></div>
     </div>
 
@@ -1056,18 +1081,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div class="c101-block">
       <div class="c101-h2">The Main Role Categories</div>
       <div class="role-grid">
-        <div class="role-card"><div class="role-name">Grounding</div><div class="role-desc">Brings scattered or anxious energy back into the body. Creates safety, presence, and physical connection.</div><div class="role-eg">Hematite, Black Tourmaline, Red Jasper</div></div>
-        <div class="role-card"><div class="role-name">Protection</div><div class="role-desc">Creates energetic boundaries. Deflects or absorbs incoming energy that isn't yours. Essential for empaths.</div><div class="role-eg">Black Tourmaline, Labradorite, Obsidian</div></div>
-        <div class="role-card"><div class="role-name">Amplification</div><div class="role-desc">Magnifies the energy of intentions, other stones, and your own field. Use deliberately — amplifies everything.</div><div class="role-eg">Clear Quartz, Selenite, Herkimer Diamond</div></div>
-        <div class="role-card"><div class="role-name">Heart Healing</div><div class="role-desc">Opens, softens, and repairs the emotional heart. Grief, loss, self-love, compassion, and relationship wounds.</div><div class="role-eg">Rose Quartz, Rhodonite, Green Aventurine</div></div>
-        <div class="role-card"><div class="role-name">Calming / Peace</div><div class="role-desc">Lowers the volume on anxiety and mental noise. Different from grounding — this is quieting, not anchoring.</div><div class="role-eg">Blue Lace Agate, Lepidolite, Celestite</div></div>
-        <div class="role-card"><div class="role-name">Clarity / Focus</div><div class="role-desc">Cuts through fog, indecision, and mental clutter. Supports concentration, decision-making, and seeing clearly.</div><div class="role-eg">Fluorite, Sodalite, Clear Calcite</div></div>
-        <div class="role-card"><div class="role-name">Intuition</div><div class="role-desc">Opens the third eye and subtle perception. Supports dreams, psychic awareness, and inner knowing.</div><div class="role-eg">Lapis Lazuli, Labradorite, Amethyst</div></div>
-        <div class="role-card"><div class="role-name">Transformation</div><div class="role-desc">Facilitates deep change. Not gentle — these stones push you through thresholds. Work with them intentionally.</div><div class="role-eg">Moldavite, Malachite, Obsidian</div></div>
-        <div class="role-card"><div class="role-name">Shadow Work</div><div class="role-desc">Supports facing, integrating, and healing what lives in the unconscious. Requires courage and self-compassion.</div><div class="role-eg">Nuumite, Black Kyanite, Orca Agate</div></div>
-        <div class="role-card"><div class="role-name">Vitality / Energy</div><div class="role-desc">Increases physical energy, motivation, and life force. Activating rather than calming.</div><div class="role-eg">Carnelian, Red Jasper, Pyrite</div></div>
-        <div class="role-card"><div class="role-name">Spiritual Connection</div><div class="role-desc">Bridges the personal and the transcendent. Opens awareness to something larger — however you define that.</div><div class="role-eg">Amethyst, Selenite, Celestite</div></div>
-        <div class="role-card"><div class="role-name">Manifestation</div><div class="role-desc">Supports bringing intentions into material form. Works best when paired with clarity about what you actually want.</div><div class="role-eg">Citrine, Pyrite, Rutilated Quartz</div></div>
+        <div class="role-card" onclick="jumpToTheme('Grounding')" title="View Grounding stones in encyclopedia"><div class="role-name">Grounding</div><div class="role-desc">Brings scattered or anxious energy back into the body. Creates safety, presence, and physical connection.</div><div class="role-eg">Hematite, Black Tourmaline, Red Jasper</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Protection')" title="View Protection stones in encyclopedia"><div class="role-name">Protection</div><div class="role-desc">Creates energetic boundaries. Deflects or absorbs incoming energy that isn't yours. Essential for empaths.</div><div class="role-eg">Black Tourmaline, Labradorite, Obsidian</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Clarity & Focus')" title="View Amplification stones in encyclopedia"><div class="role-name">Amplification</div><div class="role-desc">Magnifies the energy of intentions, other stones, and your own field. Use deliberately — amplifies everything.</div><div class="role-eg">Clear Quartz, Selenite, Herkimer Diamond</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Heart Healing')" title="View Heart Healing stones in encyclopedia"><div class="role-name">Heart Healing</div><div class="role-desc">Opens, softens, and repairs the emotional heart. Grief, loss, self-love, compassion, and relationship wounds.</div><div class="role-eg">Rose Quartz, Rhodonite, Green Aventurine</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Calm & Peace')" title="View Calming stones in encyclopedia"><div class="role-name">Calming / Peace</div><div class="role-desc">Lowers the volume on anxiety and mental noise. Different from grounding — this is quieting, not anchoring.</div><div class="role-eg">Blue Lace Agate, Lepidolite, Celestite</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Clarity & Focus')" title="View Clarity stones in encyclopedia"><div class="role-name">Clarity / Focus</div><div class="role-desc">Cuts through fog, indecision, and mental clutter. Supports concentration, decision-making, and seeing clearly.</div><div class="role-eg">Fluorite, Sodalite, Clear Calcite</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Intuition')" title="View Intuition stones in encyclopedia"><div class="role-name">Intuition</div><div class="role-desc">Opens the third eye and subtle perception. Supports dreams, psychic awareness, and inner knowing.</div><div class="role-eg">Lapis Lazuli, Labradorite, Amethyst</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Transformation')" title="View Transformation stones in encyclopedia"><div class="role-name">Transformation</div><div class="role-desc">Facilitates deep change. Not gentle — these stones push you through thresholds. Work with them intentionally.</div><div class="role-eg">Moldavite, Malachite, Obsidian</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Transformation')" title="View Shadow Work stones in encyclopedia"><div class="role-name">Shadow Work</div><div class="role-desc">Supports facing, integrating, and healing what lives in the unconscious. Requires courage and self-compassion.</div><div class="role-eg">Nuumite, Black Kyanite, Orca Agate</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Vitality')" title="View Vitality stones in encyclopedia"><div class="role-name">Vitality / Energy</div><div class="role-desc">Increases physical energy, motivation, and life force. Activating rather than calming.</div><div class="role-eg">Carnelian, Red Jasper, Pyrite</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Spiritual Connection')" title="View Spiritual Connection stones in encyclopedia"><div class="role-name">Spiritual Connection</div><div class="role-desc">Bridges the personal and the transcendent. Opens awareness to something larger — however you define that.</div><div class="role-eg">Amethyst, Selenite, Celestite</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Manifestation')" title="View Manifestation stones in encyclopedia"><div class="role-name">Manifestation</div><div class="role-desc">Supports bringing intentions into material form. Works best when paired with clarity about what you actually want.</div><div class="role-eg">Citrine, Pyrite, Rutilated Quartz</div><div class="role-link">View in encyclopedia →</div></div>
       </div>
     </div>
 
@@ -4454,6 +4479,9 @@ function jumpToChakra(chakra){
 function jumpToFamily(family){
   jumpToFilteredEncyclopedia('fam',family);
 }
+function jumpToTheme(theme){
+  jumpToFilteredEncyclopedia('theme',theme);
+}
 
 
 
@@ -4466,6 +4494,14 @@ const TOXIC_NOTES = {
   'Vanadinite':'Contains vanadium — handle finished specimens only. Wash hands.',
   'Chalcopyrite':'Copper-iron sulfide — keep dry, wash hands.',
 };
+
+function toggleCareAccordion(hdr){
+  const body = hdr.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  hdr.classList.toggle('open', !isOpen);
+  hdr.setAttribute('aria-expanded', String(!isOpen));
+}
 
 function runCareSearch(val){
   const result = document.getElementById('care-search-result');
@@ -5537,13 +5573,21 @@ function drawCabochonShape(){
 }
 
 // ── RENDER SHAPES ──
+const SHAPE_DISPLAY_ORDER = ['tumbled','palm','raw','flame','point','sphere','egg','cluster','geode','slice','heart','moon','star','wand','cabochon','worry','pyramid','cube','druzy'];
+
 function renderShapes() {
   try { CRYSTAL_SHAPES; } catch(e) { setTimeout(renderShapes,0); return; }
   const container = document.getElementById('shapes-grid');
   if(!container) return;
   if(container.children.length > 0) return;
-  
-  CRYSTAL_SHAPES.forEach(shape => {
+
+  const ordered = [...CRYSTAL_SHAPES].sort((a,b) => {
+    const ai = SHAPE_DISPLAY_ORDER.indexOf(a.id);
+    const bi = SHAPE_DISPLAY_ORDER.indexOf(b.id);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
+
+  ordered.forEach(shape => {
     const card = document.createElement('div');
     card.className = 'shape-card';
     card.innerHTML = `
@@ -6214,9 +6258,7 @@ _authInit();
     });
   }
   window.scrollTo101Top=function(){
-    const active=document.querySelector('#tab-101 .c101-section.active');
-    const h=active&&active.querySelector('.c101-h1');
-    safeScrollTo(h||active||document.getElementById('c101-nav')||document.getElementById('tab-101'),126);
+    try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
   };
   const oldShow101=window.show101;
   if(typeof oldShow101==='function'){
