@@ -541,7 +541,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <button class="btn btn-sm" id="add-entry-btn" style="display:none" onclick="openAddEncForm()">+ Entry</button>
     <button class="btn btn-sm" id="request-entry-btn" onclick="openEntryRequestForm()">Request entry</button>
     <button class="btn btn-sm" onclick="openPopup('instructions')">? Guide</button>
-    <button class="btn btn-sm" onclick="openPopup('manage')">Manage</button>
+    <button class="btn btn-sm" id="manage-btn" style="display:none" onclick="openPopup('manage')">Manage</button>
   </div>
 </header>
 
@@ -5707,6 +5707,8 @@ try{ ['lap_coll','lap_owned','lap_wish'].forEach(k=>localStorage.removeItem(k));
 
 function _renderAuth(user) {
   const el = document.getElementById('topbar-auth');
+  const manageBtn = document.getElementById('manage-btn');
+  if(manageBtn) manageBtn.style.display = user ? '' : 'none';
   updateAdminEntryButtons();
   if (!el) return;
   if (user) {
