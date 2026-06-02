@@ -4760,6 +4760,7 @@ function jumpToStone(name){
     resetEncyclopediaFiltersForJump();
     const searchEl = document.getElementById('enc-search');
     if(searchEl){ searchEl.value=name; searchEl.dispatchEvent(new Event('input')); }
+    setTimeout(scrollToEncyclopediaResults, 150);
   },100);
 }
 
