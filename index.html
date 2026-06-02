@@ -4997,31 +4997,24 @@ function famSearch(){renderFamilies(window.currentFamTier||'all');}
 
 // ── PWA ADD TO HOME SCREEN ──
 function initPWA(){
-  const key='spl-visit-count';
-  const count = parseInt(localStorage.getItem(key)||'0') + 1;
-  localStorage.setItem(key, count);
-  // Show on second visit onwards, not first
-  if(count < 2) return;
-  // Don't show if already dismissed permanently
+  // Only show once per browser session (sessionStorage resets when tab closes)
+  if(sessionStorage.getItem('spl-pwa-shown')) return;
+  // Don't show if permanently dismissed
   if(localStorage.getItem('spl-pwa-dismissed')) return;
-  // Don't show if already installed (standalone mode)
+  // Don't show if already installed as PWA
   if(window.matchMedia('(display-mode: standalone)').matches) return;
   setTimeout(()=>{
+    // Don't show if user is logged in
+    if(_currentUser) return;
     const banner = document.getElementById('pwa-banner');
     if(!banner) return;
+    sessionStorage.setItem('spl-pwa-shown','1');
     const title = document.getElementById('pwa-banner-title');
     const body  = document.getElementById('pwa-banner-body');
     const cta   = document.getElementById('pwa-banner-cta');
-    const isLoggedIn = !!(window.currentUser);
-    if(isLoggedIn){
-      if(title) title.textContent = 'Add to your home screen';
-      if(body)  body.textContent  = 'Tap Share → Add to Home Screen for quick access to your collection.';
-      if(cta){  cta.textContent = 'Got it'; cta.onclick = ()=>dismissPWA(true); }
-    } else {
-      if(title) title.textContent = 'Every stone you love, in one place';
-      if(body)  body.textContent  = 'Create a free account to save the stones you own, build your wishlist, and carry your collection with you.';
-      if(cta){  cta.textContent = 'Create account'; cta.onclick = ()=>{ dismissPWA(true); openAuthModal('signup'); }; }
-    }
+    if(title) title.textContent = 'Every stone you love, in one place';
+    if(body)  body.textContent  = 'Create a free account to save the stones you own, build your wishlist, and carry your collection with you.';
+    if(cta){  cta.textContent = 'Create account'; cta.onclick = ()=>{ dismissPWA(true); _openAuth(); }; }
     banner.style.display='flex';
   }, 3000);
 }
