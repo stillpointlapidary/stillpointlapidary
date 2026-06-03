@@ -5049,9 +5049,11 @@ function openEncLightbox(src, alt, e){
   if(e) e.stopPropagation();
   const lb = document.getElementById('enc-lightbox');
   const img = document.getElementById('enc-lightbox-img');
+  const label = document.getElementById('enc-lightbox-label');
   if(!lb || !img) return;
   img.src = src;
   img.alt = alt || '';
+  if(label){ label.textContent = alt || ''; label.style.display = alt ? 'block' : 'none'; }
   lb.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -6182,6 +6184,7 @@ function renderShapes() {
 <div class="enc-lightbox" id="enc-lightbox" onclick="closeEncLightbox()">
   <button class="enc-lightbox-close" onclick="closeEncLightbox()">✕</button>
   <img class="enc-lightbox-img" id="enc-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <div class="photo-lightbox-label" id="enc-lightbox-label" style="display:none"></div>
 </div>
 <div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
   <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
