@@ -118,6 +118,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .filter-panel-title{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:8px;padding:0 2px}
 .filter-panel-pills{display:flex;flex-wrap:wrap;gap:5px}
 .fpill{font-size:11px;letter-spacing:0.03em;padding:4px 11px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:transparent;color:var(--ink2);font-family:'Jost',sans-serif;transition:all 0.12s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.theme-group-label{width:100%;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);font-family:'Jost',sans-serif;margin:8px 0 4px;padding-left:2px}
 .fpill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
 .fpill:hover:not(.active){border-color:var(--accent2);color:var(--accent)}
 .cswatch{width:9px;height:9px;border-radius:50%;border:0.5px solid rgba(0,0,0,0.1);flex-shrink:0}
@@ -1103,13 +1104,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="role-grid">
         <div class="role-card" onclick="jumpToTheme('Grounding')" title="View Grounding stones in encyclopedia"><div class="role-name">Grounding</div><div class="role-desc">Brings scattered or anxious energy back into the body. Creates safety, presence, and physical connection.</div><div class="role-eg">Hematite, Black Tourmaline, Red Jasper</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Protection')" title="View Protection stones in encyclopedia"><div class="role-name">Protection</div><div class="role-desc">Creates energetic boundaries. Deflects or absorbs incoming energy that isn't yours. Essential for empaths.</div><div class="role-eg">Black Tourmaline, Labradorite, Obsidian</div><div class="role-link">View in encyclopedia →</div></div>
-        <div class="role-card" onclick="jumpToTheme('Clarity & Focus')" title="View Amplification stones in encyclopedia"><div class="role-name">Amplification</div><div class="role-desc">Magnifies the energy of intentions, other stones, and your own field. Use deliberately — amplifies everything.</div><div class="role-eg">Clear Quartz, Selenite, Herkimer Diamond</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Amplification')" title="View Amplification stones in encyclopedia"><div class="role-name">Amplification</div><div class="role-desc">Magnifies the energy of intentions, other stones, and your own field. Use deliberately — amplifies everything.</div><div class="role-eg">Clear Quartz, Selenite, Herkimer Diamond</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Heart Healing')" title="View Heart Healing stones in encyclopedia"><div class="role-name">Heart Healing</div><div class="role-desc">Opens, softens, and repairs the emotional heart. Grief, loss, self-love, compassion, and relationship wounds.</div><div class="role-eg">Rose Quartz, Rhodonite, Green Aventurine</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Calm & Peace')" title="View Calming stones in encyclopedia"><div class="role-name">Calming / Peace</div><div class="role-desc">Lowers the volume on anxiety and mental noise. Different from grounding — this is quieting, not anchoring.</div><div class="role-eg">Blue Lace Agate, Lepidolite, Celestite</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Clarity & Focus')" title="View Clarity stones in encyclopedia"><div class="role-name">Clarity / Focus</div><div class="role-desc">Cuts through fog, indecision, and mental clutter. Supports concentration, decision-making, and seeing clearly.</div><div class="role-eg">Fluorite, Sodalite, Clear Calcite</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Intuition')" title="View Intuition stones in encyclopedia"><div class="role-name">Intuition</div><div class="role-desc">Opens the third eye and subtle perception. Supports dreams, psychic awareness, and inner knowing.</div><div class="role-eg">Lapis Lazuli, Labradorite, Amethyst</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Transformation')" title="View Transformation stones in encyclopedia"><div class="role-name">Transformation</div><div class="role-desc">Facilitates deep change. Not gentle — these stones push you through thresholds. Work with them intentionally.</div><div class="role-eg">Moldavite, Malachite, Obsidian</div><div class="role-link">View in encyclopedia →</div></div>
-        <div class="role-card" onclick="jumpToTheme('Transformation')" title="View Shadow Work stones in encyclopedia"><div class="role-name">Shadow Work</div><div class="role-desc">Supports facing, integrating, and healing what lives in the unconscious. Requires courage and self-compassion.</div><div class="role-eg">Nuumite, Black Kyanite, Orca Agate</div><div class="role-link">View in encyclopedia →</div></div>
+        <div class="role-card" onclick="jumpToTheme('Emotional Regulation')" title="View Emotional Regulation stones in encyclopedia"><div class="role-name">Emotional Regulation</div><div class="role-desc">Supports processing and stabilizing strong feelings. Helps you move through emotions without being swept away.</div><div class="role-eg">Lepidolite, Blue Lace Agate, Mangano Calcite</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Vitality')" title="View Vitality stones in encyclopedia"><div class="role-name">Vitality / Energy</div><div class="role-desc">Increases physical energy, motivation, and life force. Activating rather than calming.</div><div class="role-eg">Carnelian, Red Jasper, Pyrite</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Spiritual Connection')" title="View Spiritual Connection stones in encyclopedia"><div class="role-name">Spiritual Connection</div><div class="role-desc">Bridges the personal and the transcendent. Opens awareness to something larger — however you define that.</div><div class="role-eg">Amethyst, Selenite, Celestite</div><div class="role-link">View in encyclopedia →</div></div>
         <div class="role-card" onclick="jumpToTheme('Manifestation')" title="View Manifestation stones in encyclopedia"><div class="role-name">Manifestation</div><div class="role-desc">Supports bringing intentions into material form. Works best when paired with clarity about what you actually want.</div><div class="role-eg">Citrine, Pyrite, Rutilated Quartz</div><div class="role-link">View in encyclopedia →</div></div>
@@ -1964,7 +1965,13 @@ const SP_FAM={
 };
 
 const FAM_OPTS=['Aggregate','Apatite','Aragonite','Beryl','Calcite','Copper Minerals','Feldspar','Fluorite','Fossil Material','Garnet','Gypsum','Iron Minerals','Kyanite','Obsidian','Opal','Organic Material','Quartz','Serpentine','Silicates','Synthetic Material','Tourmaline'];
-const THEME_OPTS=['Calm & Peace','Clarity & Focus','Communication','Confidence','Grounding','Heart Healing','Intuition','Joy','Manifestation','Protection','Self-Love','Spiritual Connection','Stability','Transformation','Vitality'];
+const THEME_OPTS=['Grounding','Protection','Heart Healing','Emotional Regulation','Calm & Peace','Self-Love','Joy','Clarity & Focus','Communication','Intuition','Spiritual Connection','Vitality','Amplification','Transformation','Manifestation','Confidence'];
+const THEME_GROUPS=[
+  {label:'Grounded & Protected', themes:['Grounding','Protection']},
+  {label:'Heart & Emotions',     themes:['Heart Healing','Emotional Regulation','Calm & Peace','Self-Love','Joy']},
+  {label:'Mind & Spirit',        themes:['Clarity & Focus','Communication','Intuition','Spiritual Connection']},
+  {label:'Energy & Change',      themes:['Vitality','Amplification','Transformation','Manifestation','Confidence']},
+];
 const COLOR_OPTS=[
   {val:'Red',hex:'#b04a4a'},{val:'Orange',hex:'#d4783a'},{val:'Yellow',hex:'#c9a832'},
   {val:'Green',hex:'#4a8a5a'},{val:'Pink',hex:'#d4839a'},{val:'Blue',hex:'#5a8ab0'},
@@ -2279,7 +2286,7 @@ function buildYearSelect(id){
 function buildEncPanels(){
   const famOpts=FAM_OPTS.filter(f=>CRYSTALS.some(c=>c.fam===f||c.sp===f));
   buildPanel('pills-fam','fam',famOpts.map(f=>({val:f,label:f})));
-  buildPanel('pills-theme','theme',THEME_OPTS.map(t=>({val:t,label:t})));
+  buildThemedPanel('pills-theme','theme');
   buildColorPanel();
   buildPanel('pills-chakra','chakra',CHAKRA_OPTS.map(c=>({val:c,label:c})));
   buildPanel('pills-mohs','mohs',[
@@ -2311,6 +2318,17 @@ function buildPanel(containerId,filterKey,items){
   if(!wrap)return;
   wrap.innerHTML=`<button class="fpill active" onclick="setFilter('${filterKey}','all',this)">All</button>`+
     items.map(it=>`<button class="fpill" onclick="setFilter('${filterKey}','${it.val}',this)">${it.label}</button>`).join('');
+}
+
+function buildThemedPanel(containerId,filterKey){
+  const wrap=document.getElementById(containerId);
+  if(!wrap)return;
+  let html=`<button class="fpill active" onclick="setFilter('${filterKey}','all',this)">All</button>`;
+  THEME_GROUPS.forEach(g=>{
+    html+=`<div class="theme-group-label">${g.label}</div>`;
+    html+=g.themes.map(t=>`<button class="fpill" onclick="setFilter('${filterKey}','${t}',this)">${t}</button>`).join('');
+  });
+  wrap.innerHTML=html;
 }
 
 function buildColorPanel(){
@@ -3946,7 +3964,6 @@ async function encAutoFill(){
       body:JSON.stringify({name})
     });
     const d=await resp.json();
-    console.log('AI autofill response:', JSON.stringify(d));
     if(d.error){throw new Error(d.error);}
     const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;};
     set('enc-alt',d.a);set('enc-fam',d.fam);set('enc-sp',d.sp);
