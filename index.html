@@ -2176,7 +2176,6 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0354": ["ulexite-specimen.webp"],
   "C-0356": ["variscite-tumble.webp"],
   "C-0363": ["calligraphy-stone-tumble.webp", "calligraphy-stone-tumble-2.webp"],
-  "C-0364": ["actinolite-specimen.webp"],
   "C-0365": ["afghanite-heart.webp"],
   "C-0366": ["agate-mushroom.webp", "agate-sphere.webp"],
   "C-0367": ["asbolane-specimen.webp"],
@@ -2536,7 +2535,7 @@ function getFiltered(){
     const famOk=filters.fam==='all'||c.fam===filters.fam||c.sp===filters.fam;
     const themeOk=filters.theme==='all'||
       (c.all_themes&&c.all_themes.some(t=>t.toLowerCase().includes(filters.theme.toLowerCase())))||
-      (c.er&&c.er.toLowerCase().includes(filters.theme.toLowerCase()));
+      [c.er1,c.er2,c.er3].some(v=>v&&v.toLowerCase().includes(filters.theme.toLowerCase()));
     const colorOk=filters.color==='all'||(c.col_cats&&c.col_cats.includes(filters.color));
     const chakraOk=filters.chakra==='all'||(c.chakras&&(c.chakras.includes(filters.chakra)||c.chakras.includes('All')));
     const mohsVal=parseFloat(c.m)||0;
@@ -2546,7 +2545,7 @@ function getFiltered(){
       (filters.mohs==='hard'&&mohsVal>=7);
     const formOk=filters.formation==='all'||(c.fo&&c.fo.toLowerCase().includes(filters.formation.toLowerCase()));
     const matOk=filters.material==='all'||(c.mt&&c.mt.toLowerCase().includes(filters.material.toLowerCase()));
-    const searchOk=!q||[c.n,c.a,c.er,c.uw,c.c,c.g,c.fam].some(v=>v&&v.toLowerCase().includes(q));
+    const searchOk=!q||[c.n,c.a,c.er1,c.er2,c.er3,c.uw,c.c,c.g,c.fam].some(v=>v&&v.toLowerCase().includes(q));
     return famOk&&themeOk&&colorOk&&chakraOk&&mohsOk&&formOk&&matOk&&searchOk;
   }).sort((a,b)=>{
     if(sortBy==='name')return a.n.localeCompare(b.n);
@@ -2761,7 +2760,7 @@ function dedupedCollectionItems(list){
 function encCardHtml(c){
   const isOwned=!!owned[c.i], isWish=!!wish[c.i];
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
-  const roles=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).slice(0,2).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
+  const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
@@ -2934,7 +2933,7 @@ function openDetail(id){
   if(zb){if(c.zodiac){document.getElementById('d-zodiac').textContent=c.zodiac;zb.style.display='';}else zb.style.display='none';}
   const ab=document.getElementById('d-aff-block');
   if(ab){if(c.aff){document.getElementById('d-aff').textContent='"'+c.aff+'"';ab.style.display='';}else ab.style.display='none';}
-  const tags=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean);
+  const tags=[c.er1,c.er2,c.er3].filter(Boolean);
   document.getElementById('d-tags').innerHTML=tags.map((t,i)=>`<span class="tag${i===0?' primary':''}">${t}</span>`).join('');
   const sb=document.getElementById('d-sib-block');
   if(sb){const fe=Object.entries(SP_FAM).find(([,ids])=>ids.includes(c.i));if(fe){const oth=fe[1].filter(id=>id!==c.i).map(id=>CRYSTALS.find(x=>x.i===id)).filter(Boolean);if(oth.length){document.getElementById('d-sibs').innerHTML=oth.map(s=>`<span class="sib-tag" onclick="openDetail('${s.i}')">${s.n}</span>`).join('');sb.style.display='';}else sb.style.display='none';}else sb.style.display='none';}
@@ -3160,7 +3159,7 @@ function getMoodMatches(moodIdx,subFilter){
     const subKwMap=SUB_FILTER_KW[String(moodIdx)];
     if(subKwMap&&subKwMap[subFilter]){
       const kws=subKwMap[subFilter];
-      const filtered=matches.filter(c=>kws.some(k=>((c.uw||'')+(c.er||'')).toLowerCase().includes(k)));
+      const filtered=matches.filter(c=>kws.some(k=>((c.uw||'')+(c.er1||'')+(c.er2||'')+(c.er3||'')).toLowerCase().includes(k)));
       if(filtered.length>0)matches=filtered;
     }
   }
@@ -3237,7 +3236,7 @@ grid.innerHTML=matches.map(c=>{
     const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
     const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
     const imgZone=encPhotos?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`:noPhotoZoneHtml(c);
-    const roles=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).slice(0,2).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
+    const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
     return`<div class="crystal-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
   }).join('');
 }
@@ -3251,7 +3250,7 @@ async function runAISearch(){
   if(!query)return;
 
   // Build compact stone list
-  const stones=CRYSTALS.map(s=>({id:s.i,name:s.n,er:s.er||'',uw:s.uw||''}));
+  const stones=CRYSTALS.map(s=>({id:s.i,name:s.n,er:[s.er1,s.er2,s.er3].filter(Boolean).join(' / '),uw:s.uw||''}));
 
   btn.classList.add('loading');
   btn.disabled=true;
@@ -3386,7 +3385,7 @@ function renderCollection(){
       return`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
         ${wishlistCardPhotoHtml(c)}
         <div class="coll-card-name">${c.n}</div>
-        <div class="coll-card-meta">${c.er||''}</div>
+        <div class="coll-card-meta">${[c.er1,c.er2,c.er3].filter(Boolean).join(' · ')}</div>
         <div class="coll-card-loc" style="color:var(--accent2)">On wishlist</div>
       </div>`;
     }).join('')+'</div>';
@@ -3534,7 +3533,7 @@ function openCollDetail(idx){
   const loc=collPieceLocation(p);
   const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
   const detail=document.getElementById('coll-detail-content');if(!detail)return;
-  const refLine=c?.uw||c?.er||'';
+  const refLine=c?.uw||[c?.er1,c?.er2,c?.er3].filter(Boolean).join(' · ')||'';
   detail.innerHTML=`
     <div class="popup-title" style="margin-bottom:1rem">Collection piece</div>
     <div class="coll-detail-grid">
@@ -4038,7 +4037,7 @@ async function encAutoFill(){
     const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;};
     set('enc-alt',d.a);set('enc-fam',d.fam);set('enc-sp',d.sp);
     set('enc-c',d.c);set('enc-cc',d.cc);set('enc-g',d.g);
-    set('enc-er',d.er);set('enc-uw',d.uw);set('enc-chakra',Array.isArray(d.chakras)?d.chakras.join(', '):d.chakras);
+    set('enc-er',[d.er1,d.er2,d.er3].filter(Boolean).join(' / '));set('enc-uw',d.uw);set('enc-chakra',Array.isArray(d.chakras)?d.chakras.join(', '):d.chakras);
     set('enc-element',d.element);set('enc-aff',d.aff);
     if(d.m){const parts=String(d.m).split(/[-–]/);set('enc-mmin',parts[0]?.trim());set('enc-mmax',parts[1]?.trim()||parts[0]?.trim());}
     const mtEl=document.getElementById('enc-mt');if(mtEl&&d.mt)mtEl.value=d.mt;
@@ -4151,7 +4150,7 @@ function exportWishlistCSV(){
       c.sy||'',
       c.c||'',
       c.m||'',
-      c.er||'',
+      [c.er1,c.er2,c.er3].filter(Boolean).join(' / '),
       c.uw||'',
       (c.chakras||[]).join(' · '),
       c.primary_theme||'',
@@ -4162,8 +4161,8 @@ function exportWishlistCSV(){
 }
 function exportCSV(){exportCollectionCSV();}
 function exportEncyclopedia(){
-  const rows=[['ID','Name','Alt Names','Family','Species','Material','System','Formation','Transparency','Color','Color Cause','Mohs','Geology Notes','Energetic Role','Use When','Chakras','Element','Zodiac','Intention','Primary Theme','All Themes']];
-  CRYSTALS.forEach(c=>{rows.push([c.i,c.n,c.a||'',c.fam||'',c.sp||'',c.mt||'',c.sy||'',c.fo||'',c.tr||'',c.c||'',c.cc||'',c.m||'',c.g||'',c.er||'',c.uw||'',(c.chakras||[]).join('; '),c.element||'',c.zodiac||'',c.aff||'',c.primary_theme||'',(c.all_themes||[]).join('; ')]);});
+  const rows=[['ID','Name','Alt Names','Family','Species','Material','System','Formation','Transparency','Color','Color Cause','Mohs','Geology Notes','Energetic Role 1','Energetic Role 2','Energetic Role 3','Use When','Chakras','Element','Zodiac','Intention','Primary Theme','All Themes']];
+  CRYSTALS.forEach(c=>{rows.push([c.i,c.n,c.a||'',c.fam||'',c.sp||'',c.mt||'',c.sy||'',c.fo||'',c.tr||'',c.c||'',c.cc||'',c.m||'',c.g||'',c.er1||'',c.er2||'',c.er3||'',c.uw||'',(c.chakras||[]).join('; '),c.element||'',c.zodiac||'',c.aff||'',c.primary_theme||'',(c.all_themes||[]).join('; ')]);});
   dl(rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n'),'text/csv','TheLapidary_Encyclopedia.csv');
 }
 function importJSON(input){
@@ -4553,7 +4552,9 @@ async function loadStonesAndInit() {
 
   function mapRow(r) {
     const cats = Array.isArray(r.color_categories) ? r.color_categories : (r.color_categories ? [r.color_categories] : []);
-    const er   = (r.energetic_role  || '').toLowerCase();
+    const er1  = (r.energetic_role_1 || '').toLowerCase();
+    const er2  = (r.energetic_role_2 || '').toLowerCase();
+    const er3  = (r.energetic_role_3 || '').toLowerCase();
     const pt   = (r.primary_theme   || '').toLowerCase();
     const at   = (r.all_themes      || []).map(t => t.toLowerCase()).join(' ');
     return {
@@ -4571,7 +4572,9 @@ async function loadStonesAndInit() {
       cc:            r.color_cause       || '',
       m:             r.mohs              || '',
       g:             r.geo_notes         || '',
-      er:            r.energetic_role    || '',
+      er1:           r.energetic_role_1  || '',
+      er2:           r.energetic_role_2  || '',
+      er3:           r.energetic_role_3  || '',
       uw:            r.use_when          || '',
       chakras:       r.chakras           || [],
       element:       r.element           || '',
@@ -4584,7 +4587,7 @@ async function loadStonesAndInit() {
       all_themes:    r.all_themes        || [],
       o:             false,
       w:             false,
-      _search:       [er, er, er, er, pt, at].join(' '),
+      _search:       [er1, er2, er3, pt, at].join(' '),
     };
   }
 
@@ -4945,7 +4948,7 @@ function showIdentifyResults(){
     const imgZone=encPhotos
       ?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`
       :noPhotoZoneHtml(c);
-    const roles=(c.er||'').split('/').map(t=>t.trim()).filter(Boolean).slice(0,2).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
+    const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
     return`<div class="crystal-card" onclick="openDetailFromIdentify('${c.i}')">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
   }).join('');
 }
@@ -7021,7 +7024,7 @@ _authInit();
       wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
         ${wishlistCardPhotoHtml(c)}
         <div class="coll-card-name">${escapeAttr(c.n)}</div>
-        <div class="coll-card-meta">${escapeAttr(c.er||'')}</div>
+        <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
         <div class="coll-card-loc" style="color:var(--accent2)">On wishlist</div>
       </div>`).join('')+'</div>';
       return;
