@@ -319,6 +319,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .popup-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border-radius:50%;border:0.5px solid var(--border);background:transparent;cursor:pointer;font-size:16px;color:var(--ink2);display:flex;align-items:center;justify-content:center}
 .popup-close:hover{background:var(--stone2)}
 .ptable{width:100%;border-collapse:collapse}
+.csys-row{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.csys-row:last-child{border-bottom:none}
+.csys-diagram{flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center}
+.csys-info{flex:1}
+.csys-name{font-size:13px;font-weight:500;color:var(--accent);font-family:'Jost',sans-serif;margin-bottom:2px}
+.csys-geo{font-size:12px;color:var(--ink2);line-height:1.4}
+.csys-energy{font-size:11px;color:var(--ink3);margin-top:2px;letter-spacing:0.02em}
 .ptable th{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:6px 8px;border-bottom:0.5px solid var(--border)}
 .ptable td{font-size:13px;color:var(--ink);padding:8px 8px;border-bottom:0.5px solid var(--border2);vertical-align:top}
 .ptable td:first-child{font-weight:500;color:var(--accent);padding-right:12px;white-space:nowrap}
@@ -1360,10 +1367,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     </div>
     <div class="owned-row">
       <div class="drawer-pill-row">
-        <button class="drawer-pill" id="drawer-pill-owned" onclick="toggleOwned()"></button>
-        <button class="drawer-pill" id="drawer-pill-wish" onclick="toggleWish()"></button>
+        <button class="drawer-pill" id="drawer-pill-owned" onclick="drawerCollectionAction()"></button>
+        <button class="drawer-pill" id="drawer-pill-wish" onclick="drawerWishlistAction()"></button>
       </div>
-      <button class="drawer-addpiece-link" onclick="addFromDetail()">+ Add piece to collection</button>
+      <button class="drawer-addpiece-link" onclick="addFromDetail()">+ Add a specific piece</button>
     </div>
   </div>
 </div>
@@ -1618,17 +1625,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 </div>
 
 <div class="popup-overlay" id="popup-system" onclick="if(event.target===this)closePopup('system')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('system')">✕</button>
+  <div class="popup-box" style="max-width:600px"><button class="popup-close" onclick="closePopup('system')">✕</button>
   <div class="popup-title">Crystal systems</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A crystal system describes the geometric arrangement of a mineral's internal structure — how its atoms are ordered. This affects its shape, cleavage, and energetically, how it channels or holds energy.</p>
-  <table class="ptable"><tr><th>System</th><th>Geometry</th><th>Energy quality</th></tr>
-  <tr><td>Cubic</td><td>Perfect equal axes — forms cubes and octahedra</td><td>Balanced, complete, whole</td></tr>
-  <tr><td>Trigonal</td><td>Three-fold symmetry — very common in nature</td><td>Amplifying, directional</td></tr>
-  <tr><td>Hexagonal</td><td>Six-fold symmetry — often columnar</td><td>Expansive, radiating</td></tr>
-  <tr><td>Orthorhombic</td><td>Three unequal axes at right angles</td><td>Grounding, structural</td></tr>
-  <tr><td>Monoclinic</td><td>One tilted axis — prismatic shapes</td><td>Cleansing, flowing</td></tr>
-  <tr><td>Triclinic</td><td>All axes tilted — lowest symmetry</td><td>Complex, multi-directional</td></tr>
-  <tr><td>Amorphous</td><td>No crystal structure — glass-like</td><td>Absorbing, protective</td></tr></table></div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1.25rem">A crystal system describes the geometric arrangement of a mineral's internal structure — how its atoms are ordered. This affects its shape, cleavage, and energetically, how it channels or holds energy.</p>
+  <div style="display:flex;flex-direction:column;gap:0">
+    <!-- Cubic -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="15,38 45,38 45,18 15,18" /><polygon points="15,18 25,10 55,10 45,18" /><polygon points="45,18 55,10 55,30 45,38" /><line x1="15" y1="18" x2="25" y2="10"/><line x1="15" y1="38" x2="25" y2="30"/><line x1="25" y1="10" x2="25" y2="30"/><line x1="25" y1="30" x2="55" y2="30"/><line x1="25" y1="30" x2="45" y2="38" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Cubic</div><div class="csys-geo">Equal axes — cubes and octahedra</div><div class="csys-energy">Balanced, complete, whole</div></div></div>
+    <!-- Trigonal -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="30,8 52,44 8,44"/><line x1="30" y1="8" x2="30" y2="52"/><line x1="52" y1="44" x2="30" y2="52"/><line x1="8" y1="44" x2="30" y2="52"/><line x1="30" y1="8" x2="52" y2="20" stroke-dasharray="2,2" opacity="0.5"/><line x1="52" y1="20" x2="52" y2="44" stroke-dasharray="2,2" opacity="0.5"/><line x1="52" y1="20" x2="30" y2="52" stroke-dasharray="2,2" opacity="0.5"/></g></svg></div><div class="csys-info"><div class="csys-name">Trigonal</div><div class="csys-geo">Three-fold symmetry — rhombohedral</div><div class="csys-energy">Amplifying, directional</div></div></div>
+    <!-- Hexagonal -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="30,6 50,17 50,39 30,50 10,39 10,17"/><polygon points="30,18 42,25 42,39 30,46 18,39 18,25"/><line x1="30" y1="6" x2="30" y2="18"/><line x1="50" y1="17" x2="42" y2="25"/><line x1="50" y1="39" x2="42" y2="39"/><line x1="30" y1="50" x2="30" y2="46"/><line x1="10" y1="39" x2="18" y2="39"/><line x1="10" y1="17" x2="18" y2="25"/></g></svg></div><div class="csys-info"><div class="csys-name">Hexagonal</div><div class="csys-geo">Six-fold symmetry — columnar prisms</div><div class="csys-energy">Expansive, radiating</div></div></div>
+    <!-- Orthorhombic -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="10,42 38,42 38,22 10,22"/><polygon points="10,22 20,12 48,12 38,22"/><polygon points="38,22 48,12 48,32 38,42"/><line x1="10" y1="22" x2="20" y2="12"/><line x1="10" y1="42" x2="20" y2="32"/><line x1="20" y1="12" x2="20" y2="32"/><line x1="20" y1="32" x2="48" y2="32"/><line x1="20" y1="32" x2="38" y2="42" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Orthorhombic</div><div class="csys-geo">Three unequal axes at right angles</div><div class="csys-energy">Grounding, structural</div></div></div>
+    <!-- Monoclinic -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="8,44 36,44 36,24 8,24"/><polygon points="8,24 22,10 50,10 36,24"/><polygon points="36,24 50,10 50,30 36,44"/><line x1="8" y1="24" x2="22" y2="10"/><line x1="8" y1="44" x2="18" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="34" x2="46" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="34" x2="36" y2="44" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="10" x2="18" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="22" y1="10" x2="18" y2="10" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Monoclinic</div><div class="csys-geo">One tilted axis — prismatic shapes</div><div class="csys-energy">Cleansing, flowing</div></div></div>
+    <!-- Triclinic -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="6,46 32,46 40,28 14,28"/><polygon points="6,46 12,14 38,8 40,28"/><line x1="6" y1="46" x2="12" y2="14"/><line x1="32" y1="46" x2="38" y2="8"/><line x1="40" y1="28" x2="38" y2="8"/><line x1="14" y1="28" x2="12" y2="14"/><line x1="12" y1="14" x2="38" y2="8"/><line x1="14" y1="28" x2="6" y2="46" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Triclinic</div><div class="csys-geo">All axes tilted — lowest symmetry</div><div class="csys-energy">Complex, multi-directional</div></div></div>
+    <!-- Amorphous -->
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><path d="M30,8 C42,6 54,14 56,26 C58,38 50,52 38,54 C26,56 12,50 8,38 C4,26 10,12 20,9 C24,7 27,8.5 30,8 Z"/><circle cx="22" cy="24" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="38" cy="20" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="32" cy="36" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="18" cy="38" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="42" cy="40" r="1.5" fill="#c8a96e" opacity="0.5"/></g></svg></div><div class="csys-info"><div class="csys-name">Amorphous</div><div class="csys-geo">No crystal structure — glass-like</div><div class="csys-energy">Absorbing, protective</div></div></div>
+  </div></div>
 </div>
 
 <div class="popup-overlay" id="popup-formation" onclick="if(event.target===this)closePopup('formation')">
@@ -3050,15 +3065,47 @@ function updateDrawerStatus(id){
   const pillOwned=document.getElementById('drawer-pill-owned');
   const pillWish=document.getElementById('drawer-pill-wish');
   if(pillOwned){
-    pillOwned.textContent=isOwned?'✓ In your collection':'+ Add to collection';
+    pillOwned.textContent=isOwned?'♥ In your collection':'+ Add to collection';
     pillOwned.classList.toggle('drawer-pill-active',isOwned);
   }
   if(pillWish){
-    pillWish.textContent=isWish?'✓ On your wishlist':'♡ Add to wishlist';
+    pillWish.textContent=isWish?'♥ On your wishlist':'♡ Add to wishlist';
     pillWish.classList.toggle('drawer-pill-active',isWish);
   }
 }
 
+function drawerCollectionAction(){
+  if(!currentCrystal)return;
+  if(owned[currentCrystal.i]){
+    // Already owned — remove
+    delete owned[currentCrystal.i];
+    localStorage.setItem('lap_owned',JSON.stringify(owned));
+    updateDrawerStatus(currentCrystal.i);
+    encRender();
+  } else {
+    // Not owned — open add piece form
+    addFromDetail();
+  }
+}
+function drawerWishlistAction(){
+  if(!currentCrystal)return;
+  if(wish[currentCrystal.i]){
+    // Already wishlisted — remove
+    delete wish[currentCrystal.i];
+    localStorage.setItem('lap_wish',JSON.stringify(wish));
+    updateDrawerStatus(currentCrystal.i);
+    encRender();
+  } else {
+    // Add to wishlist + confirm
+    wish[currentCrystal.i]=true;
+    localStorage.setItem('lap_wish',JSON.stringify(wish));
+    updateDrawerStatus(currentCrystal.i);
+    encRender();
+    // Brief confirmation
+    const pill=document.getElementById('drawer-pill-wish');
+    if(pill){const orig=pill.textContent;pill.textContent='✓ Added!';setTimeout(()=>{if(pill)pill.textContent='♥ On your wishlist';},1200);}
+  }
+}
 function toggleOwned(){
   if(!currentCrystal)return;
   owned[currentCrystal.i]=!owned[currentCrystal.i];
