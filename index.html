@@ -3946,6 +3946,7 @@ async function encAutoFill(){
       body:JSON.stringify({name})
     });
     const d=await resp.json();
+    console.log('AI autofill response:', JSON.stringify(d));
     if(d.error){throw new Error(d.error);}
     const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;};
     set('enc-alt',d.a);set('enc-fam',d.fam);set('enc-sp',d.sp);
