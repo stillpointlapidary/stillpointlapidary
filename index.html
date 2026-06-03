@@ -1370,7 +1370,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
         <button class="drawer-pill" id="drawer-pill-owned" onclick="drawerCollectionAction()"></button>
         <button class="drawer-pill" id="drawer-pill-wish" onclick="drawerWishlistAction()"></button>
       </div>
-      <button class="drawer-addpiece-link" onclick="addFromDetail()">+ Add a specific piece</button>
     </div>
   </div>
 </div>
@@ -1776,7 +1775,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     <div id="report-enc-photo-section" style="display:none;margin-bottom:1.25rem;padding:10px 12px;background:var(--stone2);border-radius:8px">
       <div style="font-size:12px;font-weight:500;margin-bottom:6px">Reference images</div>
       <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" data-field="encphoto" checked> Use Still Point Lapidary reference images where no personal photo exists</label>
-      <div style="font-size:11px;color:var(--ink3);margin-top:4px">Reference images will be labeled "Reference image" in the report</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:4px">Collection reports label each reference image. Wishlist reports include a single footer credit.</div>
     </div>
     <div style="display:flex;gap:8px">
       <button class="btn" onclick="closeReportOptions()">Cancel</button>
@@ -4355,10 +4354,11 @@ function _printWishlistReport(f){
     return `<div class="card">${ph}<div class="stone-name">${c.n}</div>${c.a?`<div class="stone-alt">Also known as: ${c.a}</div>`:''}<div class="stone-detail">${detailLine}</div>${f.usewhen&&c.uw?`<div class="use-when">${c.uw}</div>`:''} ${f.er&&c.er?`<div class="stone-alt" style="margin-top:6px">${c.er}</div>`:''} ${f.chakras&&c.chakras?.length?`<div class="meta">Chakra: ${c.chakras.join(' · ')}</div>`:''} ${f.aff&&c.aff?`<div class="meta" style="font-style:italic">"${c.aff}"</div>`:''}</div>`;
   });
   let tbody;
+  const attrib=f.encphoto?'<div style="font-style:italic;margin-top:3px">Crystal reference images courtesy of Still Point Lapidary</div>':'';
   if(layout==='gallery') tbody=cards.map(c=>`<tbody class="gallery-row"><tr><td>${c}</td></tr></tbody>`).join('');
-  else if(layout==='standard'){const rows2=[];for(let i=0;i<cards.length;i+=2){rows2.push(`<tr><td class="std-cell">${cards[i]}</td><td class="std-cell">${cards[i+1]||''}</td></tr>`);}tbody=`<tbody>${rows2.join('')}<tr><td colspan="2" class="footer" style="padding-top:1rem;text-align:center">stillpointlapidary.com</td></tr></tbody>`;}
-  else tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com</div></td></tr></tbody>`;
-  const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com</td></tr></tbody>`:'';
+  else if(layout==='standard'){const rows2=[];for(let i=0;i<cards.length;i+=2){rows2.push(`<tr><td class="std-cell">${cards[i]}</td><td class="std-cell">${cards[i+1]||''}</td></tr>`);}tbody=`<tbody>${rows2.join('')}<tr><td colspan="2" class="footer" style="padding-top:1rem;text-align:center">stillpointlapidary.com${attrib}</td></tr></tbody>`;}
+  else tbody=`<tbody><tr><td class="content-wrap">${cards.join('')}<div class="footer">stillpointlapidary.com${attrib}</div></td></tr></tbody>`;
+  const galleryFooter=layout==='gallery'?`<tbody><tr><td class="footer" style="padding-top:1rem;text-align:center;font-size:10px;color:#a09890;letter-spacing:0.08em">stillpointlapidary.com${attrib}</td></tr></tbody>`:'';
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>My Wishlist — Still Point Lapidary</title><style>${_reportStyles(layout)}</style></head><body><div class="print-toolbar"><button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button></div>${_reportHeaderHtml('My Wishlist',items.length,'stone')}${tbody}${galleryFooter}</table></body></html>`);
   win.document.close();
