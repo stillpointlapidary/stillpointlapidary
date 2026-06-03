@@ -183,11 +183,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .sib-tag{font-size:11px;padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;color:var(--ink2);cursor:pointer;display:inline-block}
 .sib-tag:hover{border-color:var(--accent2);color:var(--accent)}
 .owned-row{display:flex;flex-direction:column;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);gap:10px}
-.drawer-status-row{display:none;flex-wrap:wrap;gap:6px}
-.drawer-status-chip{font-size:11px;letter-spacing:0.03em;padding:4px 10px;border-radius:999px;font-family:'Jost',sans-serif}
-.chip-owned{background:var(--accent2);color:var(--white)}
-.chip-wish{background:transparent;border:1.5px solid var(--accent2);color:var(--accent2)}
-.drawer-action-row{display:flex;flex-wrap:wrap;gap:8px}
+.drawer-pill-row{display:flex;gap:8px;flex-wrap:wrap}
+.drawer-pill{font-size:11.5px;letter-spacing:0.03em;padding:6px 14px;border-radius:999px;border:1.5px solid var(--accent2);background:transparent;color:var(--accent2);font-family:'Jost',sans-serif;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.drawer-pill:hover{background:var(--accent2);color:var(--white)}
+.drawer-pill.drawer-pill-active{background:var(--accent2);color:var(--white)}
+.drawer-pill.drawer-pill-active:hover{background:transparent;color:var(--accent2)}
+.drawer-addpiece-link{font-size:11px;color:var(--ink3);background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.04em;padding:0;text-decoration:underline;text-underline-offset:2px;text-align:left}
+.drawer-addpiece-link:hover{color:var(--ink)}
 .toggle-group{display:flex;gap:1rem}
 .toggle-item{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--ink2)}
 .tog{width:34px;height:20px;border-radius:10px;border:0.5px solid var(--border);background:var(--stone3);position:relative;cursor:pointer;transition:background 0.15s;flex-shrink:0}
@@ -1357,12 +1359,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="sibs-row" id="d-sibs"></div>
     </div>
     <div class="owned-row">
-      <div class="drawer-status-row" id="drawer-status-row"></div>
-      <div class="drawer-action-row">
-        <button class="btn btn-sm" id="drawer-btn-owned" onclick="toggleOwned()"></button>
-        <button class="btn btn-sm" id="drawer-btn-wish" onclick="toggleWish()"></button>
-        <button class="btn btn-sm btn-accent" onclick="addFromDetail()">+ Add piece</button>
+      <div class="drawer-pill-row">
+        <button class="drawer-pill" id="drawer-pill-owned" onclick="toggleOwned()"></button>
+        <button class="drawer-pill" id="drawer-pill-wish" onclick="toggleWish()"></button>
       </div>
+      <button class="drawer-addpiece-link" onclick="addFromDetail()">+ Add piece to collection</button>
     </div>
   </div>
 </div>
@@ -3046,18 +3047,16 @@ function filterByFamily(){
 function updateDrawerStatus(id){
   const isOwned=!!owned[id];
   const isWish=!!wish[id];
-  const statusRow=document.getElementById('drawer-status-row');
-  const btnOwned=document.getElementById('drawer-btn-owned');
-  const btnWish=document.getElementById('drawer-btn-wish');
-  if(statusRow){
-    let chips='';
-    if(isOwned) chips+='<span class="drawer-status-chip chip-owned">✓ In your collection</span>';
-    if(isWish)  chips+='<span class="drawer-status-chip chip-wish">♡ On your wishlist</span>';
-    statusRow.innerHTML=chips;
-    statusRow.style.display=chips?'flex':'none';
+  const pillOwned=document.getElementById('drawer-pill-owned');
+  const pillWish=document.getElementById('drawer-pill-wish');
+  if(pillOwned){
+    pillOwned.textContent=isOwned?'✓ In your collection':'+ Add to collection';
+    pillOwned.classList.toggle('drawer-pill-active',isOwned);
   }
-  if(btnOwned) btnOwned.textContent=isOwned?'Remove from collection':'+ Add to collection';
-  if(btnWish)  btnWish.textContent=isWish?'Remove from wishlist':'♡ Add to wishlist';
+  if(pillWish){
+    pillWish.textContent=isWish?'✓ On your wishlist':'♡ Add to wishlist';
+    pillWish.classList.toggle('drawer-pill-active',isWish);
+  }
 }
 
 function toggleOwned(){
@@ -5088,7 +5087,7 @@ function openEncLightbox(src, alt, e){
   if(!lb || !img) return;
   img.src = src;
   img.alt = alt || '';
-  if(label){ label.textContent = alt || ''; label.style.display = alt ? 'block' : 'none'; }
+  if(label){ label.innerHTML = (alt?`<span>${alt}</span> `:'')+'<span style="opacity:0.7;font-size:9px;letter-spacing:0.1em">· REFERENCE IMAGE</span>'; label.style.display='block'; }
   lb.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
