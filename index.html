@@ -182,7 +182,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .chakra-chip{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border);color:var(--ink2)}
 .sib-tag{font-size:11px;padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;color:var(--ink2);cursor:pointer;display:inline-block}
 .sib-tag:hover{border-color:var(--accent2);color:var(--accent)}
-.owned-row{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);flex-wrap:wrap;gap:8px}
+.owned-row{display:flex;flex-direction:column;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);gap:10px}
+.drawer-status-row{display:none;flex-wrap:wrap;gap:6px}
+.drawer-status-chip{font-size:11px;letter-spacing:0.03em;padding:4px 10px;border-radius:999px;font-family:'Jost',sans-serif}
+.chip-owned{background:var(--accent2);color:var(--white)}
+.chip-wish{background:transparent;border:1.5px solid var(--accent2);color:var(--accent2)}
+.drawer-action-row{display:flex;flex-wrap:wrap;gap:8px}
 .toggle-group{display:flex;gap:1rem}
 .toggle-item{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--ink2)}
 .tog{width:34px;height:20px;border-radius:10px;border:0.5px solid var(--border);background:var(--stone3);position:relative;cursor:pointer;transition:background 0.15s;flex-shrink:0}
@@ -248,7 +253,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:700px){.coll-card-photo-nav{opacity:1}}
 .coll-card-nophoto{width:100%;height:132px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center}
 .coll-card-nophoto span{font-size:10px;color:var(--ink3)}
-.reference-image-badge{position:absolute;left:7px;bottom:7px;font-size:6px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border-radius:999px;background:rgba(250,248,246,0.78);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.58);backdrop-filter:blur(4px);pointer-events:none}
+.reference-image-badge{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);font-size:6px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border-radius:999px;background:rgba(250,248,246,0.78);border:0.5px solid rgba(42,37,32,0.10);color:rgba(60,52,42,0.58);backdrop-filter:blur(4px);pointer-events:none;white-space:nowrap}
 .photo-preview-item{position:relative;width:70px;height:70px}
 .photo-preview-item.primary{outline:1.5px solid var(--accent);outline-offset:2px;border-radius:6px}
 .photo-preview-primary{position:absolute;left:3px;bottom:3px;font-size:8px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 4px;border-radius:999px;background:rgba(250,248,246,0.88);border:0.5px solid rgba(42,37,32,0.10);color:var(--accent);cursor:pointer;font-family:'Jost',sans-serif}
@@ -1352,11 +1357,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       <div class="sibs-row" id="d-sibs"></div>
     </div>
     <div class="owned-row">
-      <div class="toggle-group">
-        <div class="toggle-item" onclick="toggleOwned()"><div class="tog" id="tog-owned"><div class="tog-knob"></div></div><span>In collection</span></div>
-        <div class="toggle-item" onclick="toggleWish()"><div class="tog" id="tog-wish"><div class="tog-knob"></div></div><span>Wishlist</span></div>
+      <div class="drawer-status-row" id="drawer-status-row"></div>
+      <div class="drawer-action-row">
+        <button class="btn btn-sm" id="drawer-btn-owned" onclick="toggleOwned()"></button>
+        <button class="btn btn-sm" id="drawer-btn-wish" onclick="toggleWish()"></button>
+        <button class="btn btn-sm btn-accent" onclick="addFromDetail()">+ Add piece</button>
       </div>
-      <button class="btn btn-sm btn-accent" onclick="addFromDetail()">+ Add piece</button>
     </div>
   </div>
 </div>
@@ -2913,8 +2919,7 @@ function openDetail(id){
   document.getElementById('d-tags').innerHTML=tags.map((t,i)=>`<span class="tag${i===0?' primary':''}">${t}</span>`).join('');
   const sb=document.getElementById('d-sib-block');
   if(sb){const fe=Object.entries(SP_FAM).find(([,ids])=>ids.includes(c.i));if(fe){const oth=fe[1].filter(id=>id!==c.i).map(id=>CRYSTALS.find(x=>x.i===id)).filter(Boolean);if(oth.length){document.getElementById('d-sibs').innerHTML=oth.map(s=>`<span class="sib-tag" onclick="openDetail('${s.i}')">${s.n}</span>`).join('');sb.style.display='';}else sb.style.display='none';}else sb.style.display='none';}
-  document.getElementById('tog-owned').classList.toggle('on',!!owned[c.i]);
-  document.getElementById('tog-wish').classList.toggle('on',!!wish[c.i]);
+  updateDrawerStatus(c.i);
   document.getElementById('drawer-overlay').classList.add('open');
   document.getElementById('detail-drawer').classList.add('open');
 }
@@ -3038,12 +3043,29 @@ function filterByFamily(){
   jumpToFamily(fam);
 }
 
+function updateDrawerStatus(id){
+  const isOwned=!!owned[id];
+  const isWish=!!wish[id];
+  const statusRow=document.getElementById('drawer-status-row');
+  const btnOwned=document.getElementById('drawer-btn-owned');
+  const btnWish=document.getElementById('drawer-btn-wish');
+  if(statusRow){
+    let chips='';
+    if(isOwned) chips+='<span class="drawer-status-chip chip-owned">✓ In your collection</span>';
+    if(isWish)  chips+='<span class="drawer-status-chip chip-wish">♡ On your wishlist</span>';
+    statusRow.innerHTML=chips;
+    statusRow.style.display=chips?'flex':'none';
+  }
+  if(btnOwned) btnOwned.textContent=isOwned?'Remove from collection':'+ Add to collection';
+  if(btnWish)  btnWish.textContent=isWish?'Remove from wishlist':'♡ Add to wishlist';
+}
+
 function toggleOwned(){
   if(!currentCrystal)return;
   owned[currentCrystal.i]=!owned[currentCrystal.i];
   if(!owned[currentCrystal.i])delete owned[currentCrystal.i];
   localStorage.setItem('lap_owned',JSON.stringify(owned));
-  document.getElementById('tog-owned').classList.toggle('on',!!owned[currentCrystal.i]);
+  updateDrawerStatus(currentCrystal.i);
   encRender();
 }
 function toggleWish(){
@@ -3051,7 +3073,7 @@ function toggleWish(){
   wish[currentCrystal.i]=!wish[currentCrystal.i];
   if(!wish[currentCrystal.i])delete wish[currentCrystal.i];
   localStorage.setItem('lap_wish',JSON.stringify(wish));
-  document.getElementById('tog-wish').classList.toggle('on',!!wish[currentCrystal.i]);
+  updateDrawerStatus(currentCrystal.i);
   encRender();
 }
 function addFromDetail(){
