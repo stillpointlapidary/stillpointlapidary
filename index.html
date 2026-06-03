@@ -3960,7 +3960,7 @@ async function encAutoFill(){
   try{
     const resp=await fetch('https://vxujlgyhgnihnqrxzefw.supabase.co/functions/v1/claude-stone-lookup',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4dWpsZ3loZ25paG5xcnh6ZWZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMjQwNDQsImV4cCI6MjA5NDkwMDA0NH0.1qWY2MsxbiNsS6zzJ1y9amD_KIVwxvoFzODbH5RJoI8'},
       body:JSON.stringify({name})
     });
     const d=await resp.json();
