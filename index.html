@@ -6758,6 +6758,8 @@ _authInit();
     }
     const card=e.target.closest && e.target.closest('#crystal-grid .crystal-card, #id2-grid .crystal-card');
     if(card){
+      // Let image zone clicks fall through to its own onclick (lightbox)
+      if(e.target.closest('.card-img-zone')) return;
       const id=card.dataset.crystalId;
       if(id && typeof openDetail==='function'){
         e.preventDefault(); e.stopPropagation();
