@@ -2713,7 +2713,7 @@ function wishlistCardPhotoHtml(c){
   const refPhoto=firstEncyclopediaPhoto(c);
   if(refPhoto){
     const refAlt=c&&c.n?`${c.n} reference image`:'Wishlist reference image';
-    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"><span class="reference-image-badge">Reference image</span></div>`;
+    return`<div class="coll-card-photo-wrap"><img class="coll-card-photo" src="${escapeAttr(refPhoto)}" alt="${escapeAttr(refAlt)}" loading="lazy"></div>`;
   }
   return`<div class="coll-card-nophoto" style="background:var(--stone2)"><span style="font-size:18px">♡</span></div>`;
 }
@@ -3076,11 +3076,8 @@ function updateDrawerStatus(id){
 function drawerCollectionAction(){
   if(!currentCrystal)return;
   if(owned[currentCrystal.i]){
-    // Already owned — remove
-    delete owned[currentCrystal.i];
-    localStorage.setItem('lap_owned',JSON.stringify(owned));
-    updateDrawerStatus(currentCrystal.i);
-    encRender();
+    // Already owned — remove via synced toggle
+    toggleOwned();
   } else {
     // Not owned — open add piece form
     addFromDetail();
@@ -3088,21 +3085,13 @@ function drawerCollectionAction(){
 }
 function drawerWishlistAction(){
   if(!currentCrystal)return;
-  if(wish[currentCrystal.i]){
-    // Already wishlisted — remove
-    delete wish[currentCrystal.i];
-    localStorage.setItem('lap_wish',JSON.stringify(wish));
-    updateDrawerStatus(currentCrystal.i);
-    encRender();
-  } else {
-    // Add to wishlist + confirm
-    wish[currentCrystal.i]=true;
-    localStorage.setItem('lap_wish',JSON.stringify(wish));
-    updateDrawerStatus(currentCrystal.i);
-    encRender();
-    // Brief confirmation
+  const wasWished=!!wish[currentCrystal.i];
+  // Use synced toggleWish (saves to Supabase for logged-in users)
+  toggleWish();
+  if(!wasWished){
+    // Brief confirmation on add
     const pill=document.getElementById('drawer-pill-wish');
-    if(pill){const orig=pill.textContent;pill.textContent='✓ Added!';setTimeout(()=>{if(pill)pill.textContent='♥ On your wishlist';},1200);}
+    if(pill){pill.textContent='✓ Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
   }
 }
 function toggleOwned(){
@@ -6700,7 +6689,7 @@ window.toggleOwned = async function() {
     await _supa.from('collection_items').insert({ user_id: _currentUser.id, stone_id: stoneId });
   }
   await loadSupabaseState();
-  document.getElementById('tog-owned')?.classList.toggle('on', !!owned[stoneId]);
+  updateDrawerStatus(stoneId);
   encRender();
 };
 
@@ -6717,7 +6706,7 @@ window.toggleWish = async function() {
     wish[stoneId] = true;
   }
   localStorage.setItem('lap_wish', JSON.stringify(wish));
-  document.getElementById('tog-wish')?.classList.toggle('on', !!wish[stoneId]);
+  updateDrawerStatus(stoneId);
   renderCollection();
   encRender();
 };
