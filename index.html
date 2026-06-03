@@ -3335,7 +3335,8 @@ function openFamilyDetail(fam){
   const total=document.getElementById('stat-cell-total');
   if(total)total.classList.add('active-stat');
   renderCollection();
-  scrollPageTop();
+  const wrap=document.getElementById('coll-wrap');
+  if(wrap){const y=wrap.getBoundingClientRect().top+window.scrollY-120;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
 }
 function setCollFamilyFilter(fam){
   collQuickFilter='all';
