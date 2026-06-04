@@ -33,8 +33,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:600px){.studio-banner{top:78px;height:24px;padding:0 1rem}}
 
 /* NAV */
-.main-nav{background:var(--white);border-bottom:0.5px solid var(--border);display:flex;overflow-x:auto;padding:0 1rem;position:sticky;top:96px;z-index:49}
-@media(max-width:600px){.main-nav{top:78px}}
+.main-nav-wrap{position:sticky;top:96px;z-index:49;background:var(--white)}
+.main-nav{background:var(--white);border-bottom:0.5px solid var(--border);display:flex;overflow-x:auto;padding:0 1rem;scrollbar-width:none}
+.main-nav::-webkit-scrollbar{display:none}
+@media(max-width:600px){.main-nav-wrap{top:78px}}
+
+/* Scroll-fade hint on nav (mobile only) */
+@media(max-width:600px){
+  .main-nav-wrap::after{content:'';position:absolute;top:0;right:0;bottom:1px;width:36px;background:linear-gradient(to right,transparent,var(--white));pointer-events:none;z-index:1}
+}
 .nav-tab{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;padding:14px 20px;background:transparent;border:none;cursor:pointer;color:var(--ink2r);border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.15s}
 .nav-tab.active{color:var(--ink);border-bottom-color:var(--accent)}
 .nav-tab:hover:not(.active){color:var(--ink)}
@@ -311,18 +318,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* ── MOBILE OPTIMIZATIONS ── */
 @media(max-width:600px){
 
-  /* Topbar: hide non-essential buttons to prevent overflow */
-  #request-entry-btn,#guide-btn{display:none}
+  /* Topbar: hide non-essential items */
+  #request-entry-btn,#guide-btn,.stone-count{display:none}
+
+  /* Intro panel: hide kicker + long description, keep title + buttons only */
+  .intro-kicker{display:none}
+  .intro-text{display:none}
+  .intro-title{font-size:18px;line-height:1.25;margin-bottom:0.75rem}
 
   /* Main nav: hide scrollbar, allow horizontal scroll without wrapping */
   .main-nav{-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .main-nav::-webkit-scrollbar{display:none}
 
-  /* Hero intro panel: tighter text */
-  .intro-title{font-size:18px;line-height:1.2}
-  .intro-text{font-size:13px}
+  /* Intro panel padding */
   .intro-panel{padding:1rem}
-  .intro-kicker{font-size:10px}
 
   /* Encyclopedia filter pills: horizontal scroll, no wrap */
   .filter-cats{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
