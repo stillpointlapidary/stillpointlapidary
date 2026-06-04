@@ -4554,7 +4554,7 @@ async function loadSupabaseState() {
   encRender();
   renderCollection();
   const syncEl=document.getElementById('coll-sync-status');
-  if(syncEl)syncEl.style.display='none';
+  if(syncEl){const t=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});syncEl.textContent='Synced at '+t;syncEl.style.display='block';}
 }
 
 async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
