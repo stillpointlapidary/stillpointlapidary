@@ -738,11 +738,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .use-when-tile--primary{order:3}
 }
 @media(max-width:600px){
-  .use-when-tile--primary{background:transparent;border:none;box-shadow:none;padding:0.5rem 0 0;align-items:center}
-  .browse-tile-label{display:none}
-  .browse-tile-sub{display:none}
-  .browse-tile-btn{background:transparent;border:none;color:var(--ink2r);padding:0.4rem 0;font-size:13px;align-self:center;text-decoration:underline;text-underline-offset:3px;letter-spacing:0.03em;border-radius:0}
-  .browse-tile-btn:hover{background:transparent;color:var(--ink)}
+  /* Hide Browse tile entirely — the list is right below */
+  .use-when-tile--primary{display:none}
+
+  /* More space between heading and AI card */
+  .mood-intro{margin-bottom:1rem}
+
+  /* OR divider: more prominent text, shorter lines */
+  .use-when-or{padding:16px 0;font-size:13px;color:var(--ink2r);letter-spacing:0.1em}
+  .use-when-or::before,.use-when-or::after{flex:0 0 48px;max-width:48px}
 }
 
 /* Crystal grids mobile: horizontal layout, square swatch left, text right */
