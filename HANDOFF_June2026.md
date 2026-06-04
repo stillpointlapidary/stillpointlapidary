@@ -45,7 +45,7 @@
 ### Field mapping (Supabase → JS short keys)
 `id→i, name→n, alternate_names→a, family→fam, species→sp, material_type→mt, crystal_system→sy, formation→fo, transparency→tr, color→c, color_hex→ch, color_cause→cc, mohs→m, geo_notes→g, energetic_role_1→er1, energetic_role_2→er2, energetic_role_3→er3, use_when→uw, affirmation→aff, color_categories→col_cats, chakras→chakras, element→element, zodiac→zodiac, primary_theme→primary_theme, all_themes→all_themes`
 
-**Note:** The old `energetic_role` column still exists in Supabase but is no longer read by the app. It can be dropped in a future cleanup. The app now uses `energetic_role_1`, `energetic_role_2`, `energetic_role_3`.
+The app uses `energetic_role_1`, `energetic_role_2`, `energetic_role_3`. The old `energetic_role` column has been dropped from Supabase (June 3, 2026).
 
 ---
 
@@ -134,15 +134,11 @@
 
 ## Remaining Work
 
-### 🔧 High Priority
-1. **Push to GitHub** — changes from this session are not yet committed or pushed. Site will not update until pushed to main.
-
 ### 📱 Medium Priority
-2. **Mobile QA pass** — full test on real phone
+1. **Mobile QA pass** — full test on real phone
 
 ### 🗂 Low Priority / Future Sessions
-3. **Drop old `energetic_role` column** from Supabase (optional cleanup — app no longer reads it)
-4. **File structure cleanup (Step 5)** — extract CSS → `styles.css`, app logic → `app.js`
+2. **File structure cleanup (Step 5)** — extract CSS → `styles.css`, app logic → `app.js`
 5. **Move to Cloudflare Pages (Step 6)** — connect GitHub repo, configure domain, remove CNAME
 6. **Collection empty state** — improve first-time user experience
 7. **Per-stone tier data** — rarity filter (needs to be set per stone)
