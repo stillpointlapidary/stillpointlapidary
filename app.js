@@ -3122,7 +3122,7 @@ function show101(sec,btn){
   const section=document.getElementById('s101-'+sec);
   if(section)section.classList.add('active');
   const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-pill[onclick*="${sec}"]`);
-  if(activeBtn)activeBtn.classList.add('active');
+  if(activeBtn){activeBtn.classList.add('active');activeBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}
   if(sec==='grids')init101Grids();
   if(sec==='shapes')renderShapes();
   if(sec==='families')initFamilies();
