@@ -350,9 +350,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #id2-grid .card-body{padding:0.5rem 0.75rem}
   #id2-grid .card-name{font-size:14px;margin-bottom:2px}
 
-  /* Crystals 101 section nav: horizontal scroll, no wrap */
-  .c101-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .c101-nav::-webkit-scrollbar{display:none}
+  /* Crystals 101 section nav: bleed to screen edges on mobile */
+  .c101-nav-wrap{margin:0 -1rem}
+  .c101-nav{padding:0.75rem 1rem;padding-right:3rem}
 
   /* Crystal grid cards (Crystals 101 starter grids): keep images in bounds */
   .grid-card-swatch{height:120px;overflow:hidden}
@@ -598,8 +598,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* ── Crystals 101 CSS (from lines 837–921) ── */
 .c101-wrap{max-width:780px;margin:0 auto;padding:1.5rem}
-.c101-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;position:sticky;top:116px;z-index:45;background:var(--stone);padding:0.75rem 0;border-bottom:0.5px solid var(--border)}
-.c101-pill{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:7px 16px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);transition:all 0.15s;white-space:nowrap}
+.c101-nav-wrap{position:sticky;top:116px;z-index:45;background:var(--stone);border-bottom:0.5px solid var(--border);margin:0 -1.5rem}
+.c101-nav-wrap::after{content:'';position:absolute;top:0;right:0;bottom:0;width:56px;background:linear-gradient(to right,transparent,var(--stone) 80%);pointer-events:none}
+.c101-nav{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:0.75rem 1.5rem;padding-right:3rem;margin-bottom:0}
+.c101-nav::-webkit-scrollbar{display:none}
+.c101-pill{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:7px 16px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);transition:all 0.15s;white-space:nowrap;flex-shrink:0}
 .c101-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
 .c101-section{display:none}
 .c101-section.active{display:block}
