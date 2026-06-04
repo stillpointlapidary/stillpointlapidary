@@ -144,7 +144,7 @@
     <div class="use-when-tile use-when-tile--primary">
       <div class="browse-tile-label">Browse by intention</div>
       <div class="browse-tile-sub">Explore by feeling or intention — clarity, creativity, grounding, protection, and more. Choose what calls to you.</div>
-      <button class="browse-tile-btn" onclick="document.getElementById('mood-grid').scrollIntoView({behavior:'smooth',block:'start'})">↓ Browse intentions</button>
+      <button class="browse-tile-btn" onclick="(function(){const el=document.getElementById('mood-group-pills');if(!el)return;const y=el.getBoundingClientRect().top+window.scrollY-160;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});})()">↓ Browse intentions</button>
     </div>
     <!-- OR DIVIDER -->
     <div class="use-when-or">or</div>
