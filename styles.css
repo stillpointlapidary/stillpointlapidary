@@ -744,10 +744,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   /* More space between heading and AI card */
   .mood-intro{margin-bottom:1rem}
 
-  /* OR divider: more prominent text, shorter lines */
-  .use-when-or{padding:16px 0;font-size:13px;color:var(--ink2r);letter-spacing:0.1em}
-  .use-when-or::before,.use-when-or::after{flex:0 0 48px;max-width:48px}
+  /* OR divider: explicit redeclaration so iOS Safari renders lines correctly */
+  .use-when-or{display:flex;flex-direction:row;align-items:center;padding:16px 0;gap:10px;font-size:12px;color:var(--ink2r);letter-spacing:0.12em}
+  .use-when-or::before,.use-when-or::after{content:'';display:block;height:1px;width:48px;flex:0 0 48px;background:var(--ink3);opacity:0.5}
 }
+
+/* Browse intentions card: mirrors AI card style */
+.mood-browse-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;box-shadow:0 1px 4px rgba(42,37,32,0.06);margin-bottom:1.25rem}
 
 /* Crystal grids mobile: horizontal layout, square swatch left, text right */
 @media(max-width:600px){
