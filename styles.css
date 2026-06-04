@@ -496,10 +496,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .featured-card-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;color:var(--ink);line-height:1.2}
 .featured-card-use{font-size:11px;color:var(--ink2r);line-height:1.4;letter-spacing:0.01em}
 .featured-card-intention{font-size:11px;color:var(--ink2);font-style:italic;line-height:1.4;margin-top:auto}
-.featured-divider{display:flex;align-items:center;gap:1rem;padding:1.25rem 1rem 0.75rem;cursor:pointer}
-.featured-divider-line{flex:1;height:0.5px;background:var(--border)}
-.featured-divider-text{font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);white-space:nowrap;font-weight:500}
-.featured-divider-arrow{font-size:10px;color:var(--accent)}
+.featured-divider{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1.1rem;background:rgba(139,115,85,0.1);border:0.5px solid rgba(139,115,85,0.25);border-radius:8px;cursor:pointer;margin:1rem 0 0.5rem}
+.featured-divider-left{display:flex;align-items:center;gap:10px}
+.featured-divider-text{font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);font-weight:500;white-space:nowrap}
+.featured-divider-count{font-size:11px;color:var(--ink3);letter-spacing:0.05em;border-left:0.5px solid var(--border);padding-left:10px;white-space:nowrap}
+.featured-divider-arrow{font-size:13px;color:var(--accent)}
 @media(max-width:768px){.featured-cards{grid-template-columns:repeat(2,1fr)}.featured-title{font-size:18px}}
 @media(max-width:480px){.featured-cards{grid-template-columns:repeat(2,1fr)}}
 
