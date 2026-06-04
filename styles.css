@@ -731,6 +731,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .featured-cards{grid-template-columns:1fr}
 }
 
+/* Use When mobile: AI search first, Browse as a simple link */
+@media(max-width:540px){
+  .use-when-tile--ai{order:-1}
+  .use-when-or{display:none}
+}
+@media(max-width:600px){
+  .use-when-tile--primary{background:transparent;border:none;box-shadow:none;padding:0.5rem 0 0;align-items:center}
+  .browse-tile-label{display:none}
+  .browse-tile-sub{display:none}
+  .browse-tile-btn{background:transparent;border:none;color:var(--ink2r);padding:0.4rem 0;font-size:13px;align-self:center;text-decoration:underline;text-underline-offset:3px;letter-spacing:0.03em;border-radius:0}
+  .browse-tile-btn:hover{background:transparent;color:var(--ink)}
+}
+
+/* Crystal grids mobile: horizontal layout, square swatch left, text right */
+@media(max-width:600px){
+  .grid-card{flex-direction:row;align-items:flex-start;gap:1rem;padding:1rem}
+  .grid-card-swatch{width:76px;height:76px;min-width:76px;flex-shrink:0}
+}
+
 /* Stone pill list */
 .stone-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .stone-pill{font-size:11px;padding:3px 10px;border:0.5px solid var(--border);border-radius:10px;color:var(--ink2);background:var(--stone2);cursor:pointer}
