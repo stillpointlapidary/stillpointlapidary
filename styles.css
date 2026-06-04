@@ -308,6 +308,51 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--stone3);border-radius:2px}
 @media(max-width:600px){.topbar{padding:0 1rem}.content{padding:1rem}.form-row{grid-template-columns:1fr}.form-row.thirds{grid-template-columns:1fr 1fr}.props-grid{grid-template-columns:1fr}.drawer{width:100vw}.coll-stats{grid-template-columns:1fr 1fr}.coll-btns{flex-direction:column}}
 
+/* ── MOBILE OPTIMIZATIONS ── */
+@media(max-width:600px){
+
+  /* Topbar: hide non-essential buttons to prevent overflow */
+  #request-entry-btn,#guide-btn{display:none}
+
+  /* Main nav: hide scrollbar, allow horizontal scroll without wrapping */
+  .main-nav{-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .main-nav::-webkit-scrollbar{display:none}
+
+  /* Hero intro panel: tighter text */
+  .intro-title{font-size:18px;line-height:1.2}
+  .intro-text{font-size:13px}
+  .intro-panel{padding:1rem}
+  .intro-kicker{font-size:10px}
+
+  /* Encyclopedia filter pills: horizontal scroll, no wrap */
+  .filter-cats{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+  .filter-cats::-webkit-scrollbar{display:none}
+
+  /* Encyclopedia cards: reduce image height for less stacking */
+  .card-img-zone{height:90px}
+  .card-img-zone img{max-height:90px}
+  .crystal-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+
+  /* Identify tab: horizontal card layout (thumbnail left, text right) */
+  #id2-grid{grid-template-columns:1fr;background:transparent;border:none;border-radius:0;gap:8px}
+  #id2-grid .crystal-card{flex-direction:row;align-items:center;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:72px}
+  #id2-grid .card-img-zone{width:80px;height:80px;flex-shrink:0;border-right:0.5px solid var(--border2)}
+  #id2-grid .card-img-zone img{max-height:80px}
+  #id2-grid .card-body{padding:0.5rem 0.75rem}
+  #id2-grid .card-name{font-size:14px;margin-bottom:2px}
+
+  /* Crystals 101 section nav: horizontal scroll, no wrap */
+  .c101-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .c101-nav::-webkit-scrollbar{display:none}
+
+  /* Crystal grid cards (Crystals 101 starter grids): keep images in bounds */
+  .grid-card-swatch{height:120px;overflow:hidden}
+  .grid-cards-container{grid-template-columns:1fr}
+
+  /* Reduce id2-wrap padding on mobile */
+  .id2-wrap{padding:1rem 1rem 1.5rem}
+}
+
 .mood-selected-card{background:var(--stone2);border:0.5px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background 0.12s}
 .mood-selected-card:hover{background:var(--stone3)}
 
