@@ -678,6 +678,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   /* Fix Crystals 101 sub-nav sticky top: topbar(78px) + main-nav(~44px) = 122px */
   .c101-nav-wrap{top:122px}
 
+  /* Pull c101 content flush with main nav — cancel content padding + own padding */
+  .c101-wrap{padding-top:0;margin-top:-1rem}
+
+  /* Restore breathing room between sub-nav pills and section content */
+  .c101-section{padding-top:1.25rem}
+
   /* Tighten intro panel — hide title text, keep CTAs only */
   .intro-panel{padding:0.75rem 1rem;margin-bottom:0.75rem}
   .intro-title{display:none}
