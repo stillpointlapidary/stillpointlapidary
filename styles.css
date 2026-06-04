@@ -684,6 +684,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   /* Restore breathing room between sub-nav pills and section content */
   .c101-section{padding-top:1.25rem}
 
+  /* Center intro action buttons on mobile */
+  .intro-actions{justify-content:center}
+
   /* Tighten intro panel — hide title text, keep CTAs only */
   .intro-panel{padding:0.75rem 1rem;margin-bottom:0.75rem}
   .intro-title{display:none}
