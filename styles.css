@@ -678,8 +678,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   /* Fix Crystals 101 sub-nav sticky top: topbar(78px) + main-nav(~44px) = 122px */
   .c101-nav-wrap{top:122px}
 
-  /* Tighten intro panel — less vertical scroll tax before content */
+  /* Tighten intro panel — hide title text, keep CTAs only */
   .intro-panel{padding:0.75rem 1rem;margin-bottom:0.75rem}
+  .intro-title{display:none}
 
   /* Reduce featured section breathing room */
   .featured-section{padding:1.25rem 0 0.25rem}
