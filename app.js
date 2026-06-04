@@ -2449,7 +2449,9 @@ function switchTab(name,btn){
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   const tab=document.getElementById('tab-'+name);
   if(tab)tab.style.display='block';
-  (btn||getTabButton(name))?.classList.add('active');
+  const _navBtn=btn||getTabButton(name);
+  _navBtn?.classList.add('active');
+  _navBtn?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   scrollPageTop();
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
@@ -2461,7 +2463,9 @@ function switchTabByName(name){
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   const tab=document.getElementById('tab-'+name);
   if(tab)tab.style.display='block';
-  getTabButton(name)?.classList.add('active');
+  const _navBtn=getTabButton(name);
+  _navBtn?.classList.add('active');
+  _navBtn?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
   if(name==='collection'){scrollPageTop();renderCollection();}

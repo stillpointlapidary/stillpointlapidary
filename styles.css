@@ -672,6 +672,52 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .badge-warn{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fdf0dc;color:#7a5010;letter-spacing:0.04em}
 .badge-no{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fde8e8;color:#7a2020;letter-spacing:0.04em}
 
+/* ── MOBILE POLISH PASS ── */
+@media(max-width:600px){
+
+  /* Fix Crystals 101 sub-nav sticky top: topbar(78px) + main-nav(~44px) = 122px */
+  .c101-nav-wrap{top:122px}
+
+  /* Tighten intro panel — less vertical scroll tax before content */
+  .intro-panel{padding:0.75rem 1rem;margin-bottom:0.75rem}
+
+  /* Reduce featured section breathing room */
+  .featured-section{padding:1.25rem 0 0.25rem}
+  .featured-header{margin-bottom:0.875rem}
+
+  /* Touch targets: filter chips and collection filter chips (was ~22px, now 44px) */
+  .filter-cat-btn{padding:10px 14px;min-height:44px}
+  .coll-filter-cats .filter-cat-btn{padding:10px 14px;min-height:44px}
+
+  /* Touch targets: Crystals 101 section pills */
+  .c101-pill{padding:10px 16px;min-height:44px}
+
+  /* Touch targets: drawer close button (was 34px) */
+  .drawer-close{width:44px;height:44px}
+
+  /* Tighter Crystals 101 article spacing */
+  .c101-wrap{padding:1rem}
+  .c101-h1{font-size:24px}
+  .c101-sub{margin-bottom:1.25rem}
+  .c101-block{margin-bottom:1.75rem}
+
+  /* Tighter drawer side padding on full-width mobile */
+  .drawer-inner{padding:3.5rem 1.25rem 2.5rem}
+
+  /* Mood intention cards: right-arrow tap affordance */
+  .mood-card{position:relative;padding-right:2.25rem}
+  .mood-card::after{content:'›';position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:22px;line-height:1;opacity:0.55;pointer-events:none}
+  .mood-card.active-mood::after{color:var(--accent);opacity:0.9}
+
+  /* Featured browse link: larger tap area */
+  .featured-browse{padding:6px 2px;display:inline-block}
+}
+
+/* Single-column featured cards on very small screens */
+@media(max-width:380px){
+  .featured-cards{grid-template-columns:1fr}
+}
+
 /* Stone pill list */
 .stone-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .stone-pill{font-size:11px;padding:3px 10px;border:0.5px solid var(--border);border-radius:10px;color:var(--ink2);background:var(--stone2);cursor:pointer}
