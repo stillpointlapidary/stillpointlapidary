@@ -19,3 +19,24 @@ social-preview.html
 
 # Claude Code workspace files
 .claude/
+
+# Dev/handoff notes — internal only
+HANDOFF*.md
+*.docx
+
+# Backup files — never deploy these
+*.bak
+*.xlsx
+index backup*.html
+index_backup*.html
+
+# Node / migration scripts
+node_modules/
+package.json
+package-lock.json
+supabase/migrate_stones.js
+supabase/patch_index.js
+supabase/fix_loader.js
+supabase/extract_files.js
+supabase/patch_split.js
+supabase/rarity_first_pass.sql
