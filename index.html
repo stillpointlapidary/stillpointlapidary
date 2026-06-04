@@ -74,7 +74,7 @@
   <div class="intro-panel">
     <div class="intro-copy">
       <div class="intro-kicker">Crystal reference · collection tracking · guided discovery</div>
-      <h1 class="intro-title">A curated crystal encyclopedia and collection tracker<br><span>for intuitive work and practical collecting.</span></h1>
+      <h1 class="intro-title">A curated crystal encyclopedia and collection tracker for intuitive work and practical collecting.</h1>
       <p class="intro-text">Search <span id="intro-stone-count">363</span> stones by name, color, chakra, hardness, formation, or intention. Use it to identify pieces, compare properties, and build a personal collection that's easy to navigate.</p>
     </div>
     <div class="intro-actions">
@@ -140,9 +140,17 @@
 
   <!-- TWO-TILE ROW -->
   <div class="use-when-tiles">
-    <!-- AI FREEFORM SEARCH TILE -->
-    <div class="use-when-tile">
-      <div class="ai-search-label">What's on your mind right now?</div>
+    <!-- BROWSE BY INTENTION TILE (primary) -->
+    <div class="use-when-tile use-when-tile--primary">
+      <div class="browse-tile-label">Browse by intention</div>
+      <div class="browse-tile-sub">Explore by feeling or intention — clarity, creativity, grounding, protection, and more. Choose what calls to you.</div>
+      <button class="browse-tile-btn" onclick="document.getElementById('mood-grid').scrollIntoView({behavior:'smooth',block:'start'})">↓ Browse intentions</button>
+    </div>
+    <!-- OR DIVIDER -->
+    <div class="use-when-or">or</div>
+    <!-- AI FREEFORM SEARCH TILE (secondary) -->
+    <div class="use-when-tile use-when-tile--ai">
+      <div class="ai-search-label">Describe what you need <span class="ai-badge">✦ AI</span></div>
       <div class="ai-search-sub">Type anything — a feeling, an intention, a moment you're in.</div>
       <textarea class="ai-search-input" id="ai-search-input" rows="3" maxlength="300" placeholder="I want a stone for fresh energy, focus, and momentum…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAISearch();}"></textarea>
       <div class="ai-error" id="ai-search-error"></div>
@@ -150,12 +158,6 @@
         <span class="ai-search-btn-text">✦ Find my stones</span>
         <span class="ai-search-spinner"></span>
       </button>
-    </div>
-    <!-- BROWSE BY INTENTION TILE -->
-    <div class="use-when-tile">
-      <div class="browse-tile-label">Browse by intention</div>
-      <div class="browse-tile-sub">Explore by feeling or intention — clarity, creativity, grounding, protection, and more. Choose what calls to you.</div>
-      <button class="browse-tile-btn" onclick="document.getElementById('mood-grid').scrollIntoView({behavior:'smooth',block:'start'})">↓ Browse intentions</button>
     </div>
   </div>
 
@@ -673,7 +675,7 @@
     <div style="flex:1 1 620px;max-width:780px">
       <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--ink);margin-bottom:0.5rem">Still Point <em style="font-style:italic;color:var(--accent)">Lapidary</em></div>
       <div style="font-size:12px;color:var(--ink2);line-height:1.8">
-        A curated crystal reference library and collection tracker from <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent);font-weight:500;text-decoration:none">Still Point {technodelic} Studio</a> in Dallas / Fort Worth.<br>
+        A curated crystal reference library and collection tracker from <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent);font-weight:500;text-decoration:none">Still Point {technodelic} Studio</a> in Dallas / Fort Worth.<br><br>
         Explore nervous system reset, guided wellness sessions, and immersive energy work at <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent);font-weight:500;text-decoration:none">stillpointdfw.com</a>.<br><br>
         <em style="color:var(--ink3)">This app is a personal reference tool. Crystal work is complementary and not a substitute for medical advice.</em>
       </div>
