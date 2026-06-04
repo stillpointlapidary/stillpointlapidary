@@ -79,6 +79,7 @@
     <div class="intro-actions">
       <button class="btn btn-sm btn-accent" onclick="switchTab('mood',document.querySelectorAll('.nav-tab')[1])">Choose by intention</button>
       <button class="btn btn-sm" onclick="switchTab('identify',document.querySelectorAll('.nav-tab')[3])">Identify a stone</button>
+      <button class="btn btn-sm enc-browse-all-pill" onclick="document.getElementById('enc-search').scrollIntoView({behavior:'smooth',block:'start'})">Browse full encyclopedia</button>
     </div>
   </div>
   <!-- TEN STONES WORTH KNOWING -->
@@ -136,7 +137,7 @@
 
 <!-- MOOD / USE WHEN -->
 <section id="tab-mood" style="display:none">
-  <div class="mood-intro">Let your next stone find you <span style="font-size:0.65em;color:var(--accent);opacity:0.6;vertical-align:0.1em">✦</span></div>
+  <div class="mood-intro">Let your next stone find you.</div>
 
   <!-- TWO-TILE ROW -->
   <div class="use-when-tiles">
@@ -170,8 +171,10 @@
     <div class="ai-stone-grid" id="ai-stone-grid"></div>
   </div>
 
-  <p class="mood-sub" style="margin-bottom:0.75rem">Choose a feeling or intention below.</p>
-  <div class="mood-filter-row" id="mood-group-pills"></div>
+  <div class="mood-browse-card">
+    <p class="mood-sub" style="margin-bottom:0.75rem">Choose a feeling or intention below.</p>
+    <div class="mood-filter-row" id="mood-group-pills"></div>
+  </div>
   <!-- MOOD GRID: shown when no selection -->
   <div class="mood-grid" id="mood-grid"></div>
   <!-- SELECTED MOOD VIEW: shown after selection -->
