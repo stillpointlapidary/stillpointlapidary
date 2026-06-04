@@ -731,10 +731,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .featured-cards{grid-template-columns:1fr}
 }
 
-/* Use When mobile: AI search first, Browse as a simple link */
+/* Use When mobile: AI search first, OR divider, Browse link last */
 @media(max-width:540px){
-  .use-when-tile--ai{order:-1}
-  .use-when-or{display:none}
+  .use-when-tile--ai{order:1}
+  .use-when-or{order:2}
+  .use-when-tile--primary{order:3}
 }
 @media(max-width:600px){
   .use-when-tile--primary{background:transparent;border:none;box-shadow:none;padding:0.5rem 0 0;align-items:center}
