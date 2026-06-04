@@ -377,9 +377,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .use-when-or{order:2}
   .use-when-tile--primary{order:3}
 }
-.use-when-or{display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);padding:0 4px;white-space:nowrap}
-@media(max-width:540px){.use-when-or{padding:10px 0;font-size:11px;letter-spacing:0.1em;color:var(--ink3);text-align:center;border-left:none;position:relative}.use-when-or::before,.use-when-or::after{content:'';position:absolute;top:50%;width:38%;height:0.5px;background:var(--border)}.use-when-or::before{left:0}.use-when-or::after{right:0}}
-.ai-badge{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);border:0.5px solid var(--accent2);border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle;font-family:'Jost',sans-serif;opacity:0.8}
+.use-when-or{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);padding:0 4px;white-space:nowrap}
+.use-when-or::before,.use-when-or::after{content:'';display:block;width:1px;flex:1;background:var(--border)}
+@media(max-width:540px){
+  .use-when-or{flex-direction:row;padding:12px 0}
+  .use-when-or::before,.use-when-or::after{width:auto;height:0.5px;flex:1}
+}
 /* AI FREEFORM SEARCH */
 .ai-search-label{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:0.35rem}
 .ai-search-sub{font-size:12px;color:var(--ink2);margin-bottom:0.9rem;line-height:1.5;flex:1}
