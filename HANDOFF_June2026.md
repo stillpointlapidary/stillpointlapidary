@@ -134,11 +134,8 @@ The app uses `energetic_role_1`, `energetic_role_2`, `energetic_role_3`. The old
 
 ## Remaining Work
 
-### 📱 Medium Priority
-1. **Mobile QA pass** — full test on real phone
-
 ### 🗂 Low Priority / Future Sessions
-2. **File structure cleanup (Step 5)** — extract CSS → `styles.css`, app logic → `app.js`
+1. **File structure cleanup** — ✅ Done (session 3): `styles.css` + `app.js` + `index.html`
 5. **Move to Cloudflare Pages (Step 6)** — connect GitHub repo, configure domain, remove CNAME
 6. **Collection empty state** — improve first-time user experience
 7. **Per-stone tier data** — rarity filter (needs to be set per stone)
@@ -153,4 +150,4 @@ The app uses `energetic_role_1`, `energetic_role_2`, `energetic_role_3`. The old
 
 ---
 
-*Session 2 complete. Energetic role system fully rebuilt with clean 3-column schema. 363 stones, data is clean. Push to GitHub is the next action.*
+*Session 3 complete. File split, mobile QA pass, and UI polish. Everything pushed and live.*
