@@ -132,13 +132,39 @@ The app uses `energetic_role_1`, `energetic_role_2`, `energetic_role_3`. The old
 
 ---
 
+## What Was Done Session 4 (June 4, 2026)
+
+### UI Polish
+- **Crystals 101 subtabs** — changed from wrapped pill rows to a single horizontal scrolling row with fade + partial pill on the right edge to signal more tabs. Applied to both desktop and mobile.
+- **Renamed** "How to Work With Crystals" → "Working With Crystals" (pill + section heading)
+- **Homepage intro** — removed verbose subtitle below headline; headline now stands alone
+- **Full encyclopedia divider** — replaced flat text divider with a tinted accent band (light brown tint, border, left-aligned text + stone count + arrow). Much more visible as a tappable element.
+- **My Collection sync timestamp** — after collection loads from Supabase, shows "Synced at [time]" instead of hiding the status element
+
+### Pass 1 Status — COMPLETE ✅
+All four Pass 1 items confirmed done:
+- 1a: Loading/sync messaging — already quiet and clean
+- 1b: Empty states — already built and styled
+- 1c: Active filter count + clear filters — already implemented
+- 1d: Last synced timestamp — added this session
+
+---
+
+## Next Up — Pass 2: Supabase Audit
+
+Three things to check:
+1. **Schema vs. code** — cross-check what the code actually queries against the schema doc
+2. **RLS policies** — confirm Row Level Security is correct for all tables, especially `collection_photos`
+3. **Form field wiring** — confirm all expanded fields (treatment, condition, is_combo, nickname, acquired_date, acquired_from, price_paid, notes) are correctly wired in the Add/Edit Piece form
+
+---
+
 ## Remaining Work
 
 ### 🗂 Low Priority / Future Sessions
-1. **File structure cleanup** — ✅ Done (session 3): `styles.css` + `app.js` + `index.html`
-5. **Move to Cloudflare Pages (Step 6)** — connect GitHub repo, configure domain, remove CNAME
-6. **Collection empty state** — improve first-time user experience
-7. **Per-stone tier data** — rarity filter (needs to be set per stone)
+1. **Move to Cloudflare Pages** — connect GitHub repo, configure domain, remove CNAME
+2. **Per-stone tier data** — rarity filter (needs to be set per stone)
+3. **Pass 3** — Content expansion: more crystals, more encyclopedia photos
 
 ---
 
@@ -150,4 +176,4 @@ The app uses `energetic_role_1`, `energetic_role_2`, `energetic_role_3`. The old
 
 ---
 
-*Session 3 complete. File split, mobile QA pass, and UI polish. Everything pushed and live.*
+*Session 4 complete. Pass 1 polish done. Ready for Pass 2 Supabase audit next session.*
