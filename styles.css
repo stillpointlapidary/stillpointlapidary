@@ -380,8 +380,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .use-when-or{order:2}
   .use-when-tile--primary{order:3}
 }
-.use-when-or{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink2);padding:0 4px;white-space:nowrap}
-.use-when-or::before,.use-when-or::after{content:'';display:block;width:1px;flex:1;background:var(--border)}
+.use-when-or{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink2);padding:0 4px;white-space:nowrap}
+.use-when-or::before,.use-when-or::after{content:'';display:block;width:1px;flex:1;background:var(--ink3)}
 @media(max-width:540px){
   .use-when-or{flex-direction:row;padding:12px 0}
   .use-when-or::before,.use-when-or::after{width:auto;height:0.5px;flex:1}
