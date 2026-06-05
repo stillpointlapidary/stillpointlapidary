@@ -617,10 +617,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* ── Crystals 101 CSS (from lines 837–921) ── */
 .c101-wrap{padding:0.5rem 0 1.5rem}
-.c101-nav-wrap{position:sticky;top:116px;z-index:45;background:var(--stone);border-bottom:0.5px solid var(--border);margin:0 -1.5rem}
-.c101-nav-wrap::after{display:none}
-.c101-nav{display:flex;gap:8px;flex-wrap:wrap;overflow-x:visible;scrollbar-width:none;padding:0.75rem 1.5rem;margin-bottom:0}
-.c101-nav::-webkit-scrollbar{display:none}
+.c101-layout{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1rem}
+.c101-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0}
+.c101-sidebar-item{display:block;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s}
+.c101-sidebar-item:hover{background:var(--stone);color:var(--ink)}
+.c101-sidebar-item.active{background:var(--white);border-left-color:var(--accent);color:var(--ink);font-weight:500}
+.c101-content-pane{background:var(--white);padding:28px 32px;min-width:0}
+.c101-nav{display:flex;gap:8px;flex-wrap:wrap;padding:0;margin-bottom:1rem}
 .c101-pill{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:7px 16px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);transition:all 0.15s;white-space:nowrap;flex-shrink:0}
 .c101-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
 .c101-section{display:none}
@@ -693,14 +696,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* ── MOBILE POLISH PASS ── */
 @media(max-width:600px){
 
-  /* Fix Crystals 101 sub-nav sticky top: topbar(78px) + main-nav(~44px) = 122px */
-  .c101-nav-wrap{top:122px}
-
-  /* Pull c101 content flush with main nav — cancel content padding + own padding */
-  .c101-wrap{padding-top:0;margin-top:-1rem}
-
-  /* Restore breathing room between sub-nav pills and section content */
-  .c101-section{padding-top:1.25rem}
+  /* Crystals 101 sidebar → horizontal strip on mobile */
+  .c101-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;border-radius:8px}
+  .c101-sidebar{border-right:none;border-bottom:0.5px solid var(--border);display:flex;flex-wrap:nowrap;overflow-x:auto;padding:6px 8px;scrollbar-width:none}
+  .c101-sidebar::-webkit-scrollbar{display:none}
+  .c101-sidebar-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:8px 12px;flex-shrink:0}
+  .c101-sidebar-item.active{border-left:none;border-bottom-color:var(--accent);background:transparent;font-weight:500}
+  .c101-content-pane{padding:20px 16px}
 
   /* Center intro action buttons on mobile */
   .intro-actions{justify-content:center}

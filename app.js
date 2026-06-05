@@ -3125,11 +3125,11 @@ function scrollTo101Top(){
 function show101(sec,btn){
   ensure101BackTopButtons();
   document.querySelectorAll('.c101-section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.c101-pill').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.c101-sidebar-item').forEach(p=>p.classList.remove('active'));
   const section=document.getElementById('s101-'+sec);
   if(section)section.classList.add('active');
-  const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-pill[onclick*="${sec}"]`);
-  if(activeBtn){activeBtn.classList.add('active');activeBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}
+  const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-sidebar-item[onclick*="${sec}"]`);
+  if(activeBtn)activeBtn.classList.add('active');
   if(sec==='grids')init101Grids();
   if(sec==='shapes')renderShapes();
   if(sec==='families')initFamilies();
