@@ -4966,13 +4966,17 @@ _authInit();
   (function(){
     const prompts=[
       'I want a stone for fresh energy, focus, and momentum…',
-      'Something to help me sleep and quiet my mind…',
-      'I\'m going through a big change and need support…',
+      'Something to help me feel calm and centered…',
+      'I\'m ready for a new chapter and want support…',
       'I want to feel more grounded and present…',
-      'A stone for creativity and getting unstuck…',
-      'I need help with anxiety and nervous energy…',
-      'Something for opening my heart after a hard time…',
+      'A stone for creativity and inspired thinking…',
+      'Something to help me feel more confident…',
+      'I want to open my heart and attract more love…',
       'I want to attract more abundance and opportunity…',
+      'Something for clarity when I have a big decision…',
+      'I want to feel more joy and lightness…',
+      'A stone to help me trust my intuition…',
+      'Something to bring more peace into my home…',
     ];
     let pi=0;
     function rotatePlaceholder(){
