@@ -73,19 +73,19 @@
 
 <!-- ENCYCLOPEDIA -->
 <section id="tab-encyclopedia">
-  <div class="intro-panel">
-    <div class="intro-copy">
-      <div class="intro-kicker">Crystal reference · collection tracking · guided discovery</div>
-      <h1 class="intro-title">A curated crystal encyclopedia and collection tracker for intuitive work and practical collecting.</h1>
-    </div>
-    <div class="intro-actions">
-      <div class="intro-actions-stack">
-        <div class="intro-actions-top">
-          <button class="btn btn-sm btn-accent" onclick="switchTab('mood',document.querySelectorAll('.nav-tab')[1])">Choose by intention</button>
+  <div class="site-hero">
+    <div class="site-hero-inner">
+      <div class="site-hero-left">
+        <div class="hero-kicker-rule"></div>
+        <div class="hero-kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
+        <h1 class="hero-headline">Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em></h1>
+        <p class="hero-sub">363 stones. AI-powered mood matching. Your personal collection — tracked, searchable, and always with you.</p>
+        <div class="hero-btns">
+          <button class="btn btn-sm btn-accent" onclick="switchTab('mood',document.querySelectorAll('.nav-tab')[1])">Start exploring</button>
           <button class="btn btn-sm" onclick="switchTab('identify',document.querySelectorAll('.nav-tab')[3])">Identify a stone</button>
         </div>
-        <button class="btn btn-sm enc-browse-all-pill" onclick="document.getElementById('enc-search').scrollIntoView({behavior:'smooth',block:'start'})">Browse full encyclopedia</button>
       </div>
+      <div class="site-hero-right" id="sotd-container"></div>
     </div>
   </div>
   <!-- TEN STONES WORTH KNOWING -->
