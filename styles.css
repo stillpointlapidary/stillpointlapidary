@@ -477,26 +477,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:900px){.grid-cards-container{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.grid-card{flex-direction:column}.grid-card-swatch{width:100%;height:100px}.grid-cards-container{grid-template-columns:1fr}}
 
 
-/* CRYSTAL SHAPES */
-.shapes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;margin-top:1.5rem}
-.shape-card{background:var(--white);padding:1.25rem;display:flex;gap:1.25rem;align-items:flex-start;transition:background 0.12s}
-.shape-card:hover{background:var(--stone2)}
-.shape-illustration{width:90px;height:90px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--stone2);border-radius:8px;border:0.5px solid var(--border)}
-.shape-body{flex:1;min-width:0}
-.shape-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:2px}
-.shape-tagline{font-size:11px;letter-spacing:0.05em;color:var(--accent);margin-bottom:6px}
-.shape-desc{font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px}
-.shape-use{font-size:11px;color:var(--ink3);margin-bottom:6px}
-.shape-use-label{font-weight:500;color:var(--ink2)}
-.shape-examples{display:flex;flex-wrap:wrap;gap:4px}
-.shape-pill{font-size:11px;padding:2px 8px;border:0.5px solid var(--border);border-radius:20px;color:var(--ink2);cursor:pointer;background:var(--white)}
+/* CRYSTAL SHAPES — sidebar layout */
+.shapes-grid{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1.5rem;min-height:420px}
+.shapes-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0;overflow-y:auto}
+.shape-sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;white-space:nowrap}
+.shape-sidebar-item:hover{background:var(--stone);color:var(--ink)}
+.shape-sidebar-item.active{background:var(--white);border-left-color:var(--accent);color:var(--ink);font-weight:500}
+.shape-sidebar-icon{flex-shrink:0;opacity:0.45}
+.shape-sidebar-item.active .shape-sidebar-icon{opacity:1}
+.shapes-pane{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;gap:0}
+.shape-pane-layout{display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:start}
+.shape-illustration{width:130px;height:130px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--stone2);border-radius:10px;border:0.5px solid var(--border)}
+.shape-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--ink);margin-bottom:2px}
+.shape-tagline{font-size:11px;letter-spacing:0.05em;color:var(--accent);margin-bottom:14px}
+.shape-desc{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:12px}
+.shape-use{font-size:12px;color:var(--ink3);margin-bottom:10px}
+.shape-use-label{font-weight:500;color:var(--ink2r);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+.shape-examples{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.shape-pill{font-size:11px;padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;color:var(--ink2);cursor:pointer;background:var(--stone)}
 .shape-pill:hover{background:var(--stone2);color:var(--accent)}
-@media(max-width:600px){.shapes-grid{grid-template-columns:1fr}.shape-illustration{width:70px;height:70px}}
+@media(max-width:700px){.shapes-grid{grid-template-columns:1fr;grid-template-rows:auto 1fr}.shapes-sidebar{border-right:none;border-bottom:0.5px solid var(--border);display:flex;flex-wrap:nowrap;overflow-x:auto;padding:8px}.shape-sidebar-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:8px 14px}.shape-sidebar-item.active{border-left:none;border-bottom-color:var(--accent)}.shapes-pane{padding:20px}.shape-pane-layout{grid-template-columns:1fr}}
 
 
 /* TEN STONES WORTH KNOWING */
 .featured-section{padding:2rem 0 0.5rem;border-bottom:0.5px solid var(--border2);margin-bottom:0}
-.featured-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.25rem;padding:0 1rem}
+.featured-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.25rem;padding:0 1rem}
 .featured-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);letter-spacing:0.01em}
 .featured-subtitle{font-size:14px;color:var(--ink2);letter-spacing:0.03em}
 .featured-browse{font-size:11px;color:var(--accent);letter-spacing:0.06em;text-decoration:none;cursor:pointer}
