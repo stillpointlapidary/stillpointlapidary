@@ -56,6 +56,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .intro-actions-stack{display:flex;flex-direction:column;gap:8px}
 .intro-actions-top{display:flex;gap:8px}
 .enc-browse-all-pill{width:100%;text-align:center;justify-content:center}
+.intro-actions .btn:not(.btn-accent){border-color:rgba(42,37,32,0.25)}
 @media(max-width:760px){.intro-panel{display:block}.intro-actions{justify-content:flex-start;margin-top:0.85rem}.intro-title{font-size:23px}}
 
 /* BUTTONS */
