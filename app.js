@@ -4336,7 +4336,39 @@ function renderShapes() {
     strip.appendChild(item);
   });
 
-  container.appendChild(strip);
+  // Wrap strip with scroll arrows
+  const stripOuter = document.createElement('div');
+  stripOuter.className = 'shapes-strip-outer';
+
+  const chevL = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+  const chevR = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  const arrowLeft = document.createElement('button');
+  arrowLeft.className = 'shapes-scroll-arrow shapes-scroll-arrow--left';
+  arrowLeft.innerHTML = chevL;
+  arrowLeft.setAttribute('aria-label', 'Scroll left');
+  arrowLeft.addEventListener('click', () => strip.scrollBy({left: -180, behavior: 'smooth'}));
+
+  const arrowRight = document.createElement('button');
+  arrowRight.className = 'shapes-scroll-arrow shapes-scroll-arrow--right visible';
+  arrowRight.innerHTML = chevR;
+  arrowRight.setAttribute('aria-label', 'Scroll right');
+  arrowRight.addEventListener('click', () => strip.scrollBy({left: 180, behavior: 'smooth'}));
+
+  function updateShapeArrows() {
+    const atStart = strip.scrollLeft <= 2;
+    const atEnd = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 2;
+    arrowLeft.classList.toggle('visible', !atStart);
+    arrowRight.classList.toggle('visible', !atEnd);
+  }
+  strip.addEventListener('scroll', updateShapeArrows, {passive: true});
+  setTimeout(updateShapeArrows, 50);
+
+  stripOuter.appendChild(arrowLeft);
+  stripOuter.appendChild(strip);
+  stripOuter.appendChild(arrowRight);
+
+  container.appendChild(stripOuter);
   container.appendChild(pane);
 
   // Show first shape by default
