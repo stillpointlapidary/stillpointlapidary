@@ -3080,6 +3080,12 @@ function init101(){
     renderShapes();
   }
   init101Grids();
+  // Restore last-viewed section within Crystals 101
+  const saved101=(()=>{try{return localStorage.getItem('spl_101_section');}catch(e){return null;}})();
+  if(saved101&&saved101!=='work'){
+    const btn=document.querySelector(`.c101-sidebar-item[onclick*="${saved101}"]`);
+    show101(saved101,btn);
+  }
   // Water pills
   const wp = document.getElementById('water-pills');
   if(wp) wp.innerHTML = '';
@@ -3139,6 +3145,7 @@ function scrollTo101Top(){
 }
 function show101(sec,btn){
   ensure101BackTopButtons();
+  try{localStorage.setItem('spl_101_section',sec);}catch(e){}
   document.querySelectorAll('.c101-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.c101-sidebar-item').forEach(p=>p.classList.remove('active'));
   // Scroll so the layout top sits at the same position it naturally had on load
