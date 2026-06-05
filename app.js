@@ -4305,28 +4305,27 @@ function renderShapes() {
     return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
   });
 
-  // Build sidebar
-  const sidebar = document.createElement('div');
-  sidebar.className = 'shapes-sidebar';
+  // Build horizontal strip
+  const strip = document.createElement('div');
+  strip.className = 'shapes-strip';
 
   // Build pane
   const pane = document.createElement('div');
   pane.className = 'shapes-pane';
 
   ordered.forEach((shape, i) => {
-    // Sidebar item
     const item = document.createElement('div');
-    item.className = 'shape-sidebar-item' + (i === 0 ? ' active' : '');
-    item.innerHTML = `<span class="shape-sidebar-icon">${shape.draw()}</span>${shape.name}`;
+    item.className = 'shape-strip-item' + (i === 0 ? ' active' : '');
+    item.innerHTML = `<span class="shape-strip-icon">${shape.draw()}</span><span>${shape.name}</span>`;
     item.addEventListener('click', () => {
-      sidebar.querySelectorAll('.shape-sidebar-item').forEach(el => el.classList.remove('active'));
+      strip.querySelectorAll('.shape-strip-item').forEach(el => el.classList.remove('active'));
       item.classList.add('active');
       showShapePane(shape, pane);
     });
-    sidebar.appendChild(item);
+    strip.appendChild(item);
   });
 
-  container.appendChild(sidebar);
+  container.appendChild(strip);
   container.appendChild(pane);
 
   // Show first shape by default

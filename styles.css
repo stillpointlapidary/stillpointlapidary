@@ -477,16 +477,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:900px){.grid-cards-container{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.grid-card{flex-direction:column}.grid-card-swatch{width:100%;height:100px}.grid-cards-container{grid-template-columns:1fr}}
 
 
-/* CRYSTAL SHAPES — sidebar layout */
-.shapes-grid{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1.5rem;min-height:420px}
-.shapes-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0;overflow-y:auto}
-.shape-sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;white-space:nowrap}
-.shape-sidebar-item:hover{background:var(--stone);color:var(--ink)}
-.shape-sidebar-item.active{background:var(--white);border-left-color:var(--accent);color:var(--ink);font-weight:500}
-.shape-sidebar-icon{flex-shrink:0;opacity:0.45;display:flex;align-items:center}
-.shape-sidebar-icon svg{width:22px;height:22px}
-.shape-sidebar-item.active .shape-sidebar-icon{opacity:1}
-.shapes-pane{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;gap:0}
+/* CRYSTAL SHAPES — horizontal strip layout */
+.shapes-grid{border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1.5rem}
+.shapes-strip{display:flex;flex-wrap:nowrap;overflow-x:auto;background:var(--stone2);border-bottom:0.5px solid var(--border);padding:8px 12px;gap:4px;scrollbar-width:none}
+.shapes-strip::-webkit-scrollbar{display:none}
+.shape-strip-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.15s;border:0.5px solid transparent;flex-shrink:0}
+.shape-strip-item:hover{background:var(--stone);color:var(--ink)}
+.shape-strip-item.active{background:var(--white);border-color:var(--border);color:var(--ink);font-weight:500}
+.shape-strip-icon{flex-shrink:0;opacity:0.45;display:flex;align-items:center}
+.shape-strip-icon svg{width:16px;height:16px}
+.shape-strip-item.active .shape-strip-icon{opacity:1}
+.shapes-pane{background:var(--white);padding:28px 32px}
 .shape-pane-layout{display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:start}
 .shape-illustration{width:160px;height:160px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--stone2);border-radius:10px;border:0.5px solid var(--border)}
 .shape-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink);margin-bottom:4px}
@@ -497,7 +498,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .shape-examples{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .shape-pill{font-size:11px;padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;color:var(--ink2);cursor:pointer;background:var(--stone)}
 .shape-pill:hover{background:var(--stone2);color:var(--accent)}
-@media(max-width:700px){.shapes-grid{grid-template-columns:1fr;grid-template-rows:auto 1fr}.shapes-sidebar{border-right:none;border-bottom:0.5px solid var(--border);display:flex;flex-wrap:nowrap;overflow-x:auto;padding:8px}.shape-sidebar-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:8px 14px}.shape-sidebar-item.active{border-left:none;border-bottom-color:var(--accent)}.shapes-pane{padding:20px}.shape-pane-layout{grid-template-columns:1fr}}
+@media(max-width:700px){.shapes-pane{padding:20px}.shape-pane-layout{grid-template-columns:1fr}}
 
 
 /* TEN STONES WORTH KNOWING */
@@ -617,12 +618,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* ── Crystals 101 CSS (from lines 837–921) ── */
 .c101-wrap{padding:0.5rem 0 1.5rem}
-.c101-layout{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1rem}
-.c101-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0}
+.c101-layout{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;margin-top:1rem;align-items:start}
+.c101-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0;border-radius:12px 0 0 12px;position:sticky;top:118px;max-height:calc(100vh - 138px);overflow-y:auto}
 .c101-sidebar-item{display:block;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s}
 .c101-sidebar-item:hover{background:var(--stone);color:var(--ink)}
 .c101-sidebar-item.active{background:var(--white);border-left-color:var(--accent);color:var(--ink);font-weight:500}
-.c101-content-pane{background:var(--white);padding:28px 32px;min-width:0}
+.c101-content-pane{background:var(--white);padding:28px 32px;min-width:0;border-radius:0 12px 12px 0}
 .c101-nav{display:flex;gap:8px;flex-wrap:wrap;padding:0;margin-bottom:1rem}
 .c101-pill{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:7px 16px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);transition:all 0.15s;white-space:nowrap;flex-shrink:0}
 .c101-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
@@ -697,12 +698,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:600px){
 
   /* Crystals 101 sidebar → horizontal strip on mobile */
-  .c101-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;border-radius:8px}
-  .c101-sidebar{border-right:none;border-bottom:0.5px solid var(--border);display:flex;flex-wrap:nowrap;overflow-x:auto;padding:6px 8px;scrollbar-width:none}
+  .c101-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;border-radius:8px;align-items:stretch}
+  .c101-sidebar{position:static;max-height:none;border-right:none;border-bottom:0.5px solid var(--border);border-radius:8px 8px 0 0;display:flex;flex-wrap:nowrap;overflow-x:auto;padding:6px 8px;scrollbar-width:none}
   .c101-sidebar::-webkit-scrollbar{display:none}
   .c101-sidebar-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:8px 12px;flex-shrink:0}
   .c101-sidebar-item.active{border-left:none;border-bottom-color:var(--accent);background:transparent;font-weight:500}
-  .c101-content-pane{padding:20px 16px}
+  .c101-content-pane{padding:20px 16px;border-radius:0 0 8px 8px}
 
   /* Center intro action buttons on mobile */
   .intro-actions{justify-content:center}
