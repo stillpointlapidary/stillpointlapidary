@@ -3059,7 +3059,10 @@ function set101StickyTop(){
   // Measure the sidebar's natural position BEFORE any scroll happens and lock it in
   requestAnimationFrame(function(){
     const top = sidebar.getBoundingClientRect().top;
-    if(top > 0) sidebar.style.top = top + 'px';
+    if(top > 0){
+      sidebar.style.top = top + 'px';
+      window._c101LayoutTop = top; // save for sidebar-click scroll target
+    }
   });
 }
 
@@ -3138,15 +3141,15 @@ function show101(sec,btn){
   ensure101BackTopButtons();
   document.querySelectorAll('.c101-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.c101-sidebar-item').forEach(p=>p.classList.remove('active'));
-  // Always scroll to top of the content pane when switching sections
-  const pane = document.querySelector('.c101-content-pane');
-  if(pane){ const y=pane.getBoundingClientRect().top+window.scrollY-130; window.scrollTo({top:Math.max(0,y),behavior:'smooth'}); }
+  // Scroll so the layout top sits at the same position it naturally had on load
+  const layout = document.querySelector('.c101-layout');
+  if(layout){ const offset = window._c101LayoutTop || 180; const y = layout.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top:Math.max(0,y),behavior:'smooth'}); }
   const section=document.getElementById('s101-'+sec);
   if(section)section.classList.add('active');
   const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-sidebar-item[onclick*="${sec}"]`);
   if(activeBtn)activeBtn.classList.add('active');
   if(sec==='grids')init101Grids();
-  if(sec==='shapes')renderShapes();
+  if(sec==='shapes'){renderShapes();requestAnimationFrame(function(){setTimeout(function(){if(window._updateShapeArrows)window._updateShapeArrows();},100);});}
   if(sec==='families')initFamilies();
 }
 
@@ -4372,7 +4375,8 @@ function renderShapes() {
     arrowRight.classList.toggle('visible', !atEnd);
   }
   strip.addEventListener('scroll', updateShapeArrows, {passive: true});
-  requestAnimationFrame(function(){ updateShapeArrows(); setTimeout(updateShapeArrows, 300); });
+  // Can't measure scrollWidth while section is hidden — expose for call when section becomes visible
+  window._updateShapeArrows = updateShapeArrows;
 
   stripOuter.appendChild(arrowLeft);
   stripOuter.appendChild(strip);
