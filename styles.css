@@ -1,7 +1,7 @@
 /* ── Main CSS (from lines 39–540) ── */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --grid-line: rgba(42,37,32,0.22);--stone:#f7f5f2;--stone2:#ede9e3;--stone3:#e3ddd6;--ink:#3a3530;--ink2:#45403b;--ink3:#7a7268;--ink2r:#5a5048;--accent:#8b7355;--accent2:#c8a96e;--border:rgba(42,37,32,0.12);--border2:rgba(42,37,32,0.07);--white:#faf8f6}
+  --grid-line: rgba(42,37,32,0.22);--stone:#f7f5f2;--stone2:#ede9e3;--stone3:#e3ddd6;--ink:#524d47;--ink2:#6b6560;--ink3:#9a948e;--ink2r:#7a7268;--accent:#8b7355;--accent2:#c8a96e;--border:rgba(42,37,32,0.12);--border2:rgba(42,37,32,0.07);--white:#faf8f6}
 html{font-size:16px}
 body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-height:100vh}
 .app-shell{display:flex;flex-direction:column;min-height:100vh}
@@ -197,7 +197,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .tog.on .tog-knob{left:17px}
 
 /* MOOD TAB */
-.mood-intro{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:1.25rem}
+.mood-intro{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:1.25rem}
 .mood-sub{font-size:14px;color:var(--ink2);margin-bottom:1.25rem;line-height:1.6}
 .mood-filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
 .mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
