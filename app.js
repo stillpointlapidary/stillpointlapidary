@@ -4300,20 +4300,46 @@ function renderShapes() {
     return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
   });
 
-  ordered.forEach(shape => {
-    const card = document.createElement('div');
-    card.className = 'shape-card';
-    card.innerHTML = `
+  // Build sidebar
+  const sidebar = document.createElement('div');
+  sidebar.className = 'shapes-sidebar';
+
+  // Build pane
+  const pane = document.createElement('div');
+  pane.className = 'shapes-pane';
+
+  ordered.forEach((shape, i) => {
+    // Sidebar item
+    const item = document.createElement('div');
+    item.className = 'shape-sidebar-item' + (i === 0 ? ' active' : '');
+    item.innerHTML = `<span class="shape-sidebar-icon">${shape.draw()}</span>${shape.name}`;
+    item.addEventListener('click', () => {
+      sidebar.querySelectorAll('.shape-sidebar-item').forEach(el => el.classList.remove('active'));
+      item.classList.add('active');
+      showShapePane(shape, pane);
+    });
+    sidebar.appendChild(item);
+  });
+
+  container.appendChild(sidebar);
+  container.appendChild(pane);
+
+  // Show first shape by default
+  showShapePane(ordered[0], pane);
+}
+
+function showShapePane(shape, pane) {
+  pane.innerHTML = `
+    <div class="shape-pane-layout">
       <div class="shape-illustration">${shape.draw()}</div>
-      <div class="shape-body">
+      <div>
         <div class="shape-name">${shape.name}</div>
         <div class="shape-tagline">${shape.tagline}</div>
         <div class="shape-desc">${shape.body}</div>
         <div class="shape-use"><span class="shape-use-label">Best for</span> ${shape.use}</div>
         <div class="shape-examples">${shape.examples.map(e=>`<span class="shape-pill" onclick="jumpToStone('${e}')">${e}</span>`).join('')}</div>
-      </div>`;
-    container.appendChild(card);
-  });
+      </div>
+    </div>`;
 }
 
 
