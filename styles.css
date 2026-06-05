@@ -479,8 +479,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* CRYSTAL SHAPES — horizontal strip layout */
 .shapes-grid{border:0.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1.5rem}
-.shapes-strip{display:flex;flex-wrap:nowrap;overflow-x:auto;background:var(--stone2);border-bottom:0.5px solid var(--border);padding:8px 12px;gap:4px;scrollbar-width:none}
+.shapes-strip-outer{position:relative;background:var(--stone2);border-bottom:0.5px solid var(--border)}
+.shapes-strip{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:8px 36px;gap:4px;scrollbar-width:none}
 .shapes-strip::-webkit-scrollbar{display:none}
+.shapes-scroll-arrow{position:absolute;top:0;height:100%;width:36px;border:none;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;color:var(--ink2);opacity:0;transition:opacity 0.2s;pointer-events:none}
+.shapes-scroll-arrow.visible{opacity:1;pointer-events:auto}
+.shapes-scroll-arrow--left{left:0;background:linear-gradient(to right,var(--stone2) 55%,transparent)}
+.shapes-scroll-arrow--right{right:0;background:linear-gradient(to left,var(--stone2) 55%,transparent)}
 .shape-strip-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.15s;border:0.5px solid transparent;flex-shrink:0}
 .shape-strip-item:hover{background:var(--stone);color:var(--ink)}
 .shape-strip-item.active{background:var(--white);border-color:var(--border);color:var(--ink);font-weight:500}
