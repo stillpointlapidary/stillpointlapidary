@@ -610,10 +610,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-tips{margin-top:1.5rem;padding:1rem 1.25rem;background:var(--stone2);border-radius:8px;font-size:12px;color:var(--ink3);line-height:1.8}
 
 /* ── Crystals 101 CSS (from lines 837–921) ── */
-.c101-wrap{max-width:780px;margin:0 auto;padding:1.5rem}
+.c101-wrap{max-width:780px;margin:0 auto;padding:0.5rem 1.5rem 1.5rem}
 .c101-nav-wrap{position:sticky;top:116px;z-index:45;background:var(--stone);border-bottom:0.5px solid var(--border);margin:0 -1.5rem}
-.c101-nav-wrap::after{content:'';position:absolute;top:0;right:0;bottom:0;width:56px;background:linear-gradient(to right,transparent,var(--stone) 80%);pointer-events:none}
-.c101-nav{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:0.75rem 1.5rem;padding-right:3rem;margin-bottom:0}
+.c101-nav-wrap::after{display:none}
+.c101-nav{display:flex;gap:8px;flex-wrap:wrap;overflow-x:visible;scrollbar-width:none;padding:0.75rem 1.5rem;margin-bottom:0}
 .c101-nav::-webkit-scrollbar{display:none}
 .c101-pill{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:7px 16px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);transition:all 0.15s;white-space:nowrap;flex-shrink:0}
 .c101-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
