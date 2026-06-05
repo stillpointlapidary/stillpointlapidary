@@ -1205,8 +1205,13 @@ function intentionCardClick(group, el) {
   el.classList.add('active');
 
   if (group === 'all') {
-    // Browse all → scroll to full encyclopedia
-    scrollToFullEncyclopedia();
+    clearMoodResults();
+    renderMoodGrid('All');
+    const grid = document.getElementById('mood-grid');
+    if (grid) {
+      const y = grid.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    }
     return;
   }
 
@@ -4801,7 +4806,7 @@ _authInit();
     catch(e){ window.scrollTo(0, Math.max(0,y)); }
   }
   function encSearchEl(){ return document.getElementById('enc-search') || document.getElementById('enc-count') || document.getElementById('crystal-grid'); }
-  window.scrollToFullEncyclopedia = function(){ safeScrollTo(encSearchEl(), 130); };
+  window.scrollToFullEncyclopedia = function(){ safeScrollTo(document.querySelector('.featured-divider') || encSearchEl(), 165); };
   window.scrollToEncyclopediaResults = function(){ safeScrollTo(encSearchEl(), 130); };
   window.scrollToTabTop = function(name){
     if(name === '101'){
