@@ -2463,9 +2463,10 @@ function switchTabByName(name){
   const _navBtn=getTabButton(name);
   _navBtn?.classList.add('active');
   _navBtn?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  scrollPageTop();
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
-  if(name==='collection'){scrollPageTop();renderCollection();}
+  if(name==='collection'){renderCollection();}
 }
 
 function scrollToTabTop(name){
@@ -3137,6 +3138,9 @@ function show101(sec,btn){
   ensure101BackTopButtons();
   document.querySelectorAll('.c101-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.c101-sidebar-item').forEach(p=>p.classList.remove('active'));
+  // Always scroll to top of the content pane when switching sections
+  const pane = document.querySelector('.c101-content-pane');
+  if(pane){ const y=pane.getBoundingClientRect().top+window.scrollY-130; window.scrollTo({top:Math.max(0,y),behavior:'smooth'}); }
   const section=document.getElementById('s101-'+sec);
   if(section)section.classList.add('active');
   const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-sidebar-item[onclick*="${sec}"]`);
@@ -4362,7 +4366,7 @@ function renderShapes() {
     arrowRight.classList.toggle('visible', !atEnd);
   }
   strip.addEventListener('scroll', updateShapeArrows, {passive: true});
-  setTimeout(updateShapeArrows, 50);
+  requestAnimationFrame(function(){ updateShapeArrows(); setTimeout(updateShapeArrows, 300); });
 
   stripOuter.appendChild(arrowLeft);
   stripOuter.appendChild(strip);
