@@ -53,6 +53,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .intro-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.15;color:var(--ink);margin-bottom:0.25rem}
 .intro-text{font-size:14px;line-height:1.7;color:var(--ink2)}
 .intro-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.enc-browse-all-pill{flex-basis:100%;text-align:center;justify-content:center}
 @media(max-width:760px){.intro-panel{display:block}.intro-actions{justify-content:flex-start;margin-top:0.85rem}.intro-title{font-size:23px}}
 
 /* BUTTONS */
@@ -486,7 +487,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .featured-section{padding:2rem 0 0.5rem;border-bottom:0.5px solid var(--border2);margin-bottom:0}
 .featured-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.25rem;padding:0 1rem}
 .featured-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);letter-spacing:0.01em}
-.featured-subtitle{font-size:11px;color:var(--ink3);letter-spacing:0.06em}
+.featured-subtitle{font-size:14px;color:var(--ink2);letter-spacing:0.03em}
 .featured-browse{font-size:11px;color:var(--accent);letter-spacing:0.06em;text-decoration:none;cursor:pointer}
 .featured-browse:hover{text-decoration:underline;text-underline-offset:3px}
 .featured-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:8px;overflow:hidden;margin:0 0 0 0}
