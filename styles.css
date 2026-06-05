@@ -293,8 +293,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* POPUPS */
 .popup-overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.35);z-index:300;align-items:center;justify-content:center;padding:1rem}
 .popup-overlay.open{display:flex}
-.popup-box{background:var(--white);border-radius:12px;padding:1.75rem;width:min(500px,100%);max-height:88vh;overflow-y:auto;position:relative}
-.popup-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:1.25rem;color:var(--ink)}
+.popup-box{background:var(--white);border-radius:12px;padding:1.25rem 1.75rem 1.5rem;width:min(500px,100%);max-height:88vh;overflow-y:auto;position:relative}
+.popup-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:0.85rem;color:var(--ink)}
 .popup-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border-radius:50%;border:0.5px solid var(--border);background:transparent;cursor:pointer;font-size:16px;color:var(--ink2);display:flex;align-items:center;justify-content:center}
 .popup-close:hover{background:var(--stone2)}
 .ptable{width:100%;border-collapse:collapse}
@@ -596,7 +596,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-wrap{padding:1.5rem 0 2rem}
 .id2-h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ink);margin-bottom:0.25rem}
 .id2-sub{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:1.5rem}
-.id2-filters{display:flex;flex-direction:column;gap:14px;margin-bottom:1.5rem;padding:1.25rem;background:var(--white);border:0.5px solid var(--border);border-radius:12px}
+.id2-filters{display:flex;flex-direction:column;gap:14px;margin-bottom:1.5rem;padding:1.25rem;background:var(--white);border:0.5px solid var(--border);border-radius:12px;max-width:800px}
 .id2-filter-row{display:flex;align-items:flex-start;gap:14px}
 .id2-flabel{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;width:100px;flex-shrink:0;padding-top:9px}
 .id2-color-grid{display:flex;flex-wrap:wrap;gap:8px}
