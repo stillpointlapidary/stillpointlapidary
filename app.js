@@ -1854,48 +1854,6 @@ function removePhoto(idx,btn){
   renderPhotoPreviewRow();
 }
 
-function savePiece(){
-  const crystalId=document.getElementById('f-crystal-val')?.value||'';
-  const isCombo=document.getElementById('f-combo')?.checked||false;
-  if(!crystalId&&!isCombo){alert('Please select a crystal.');return;}
-  const comboCrystals=isCombo?Array.from(document.querySelectorAll('.csel')).map(s=>s.value).filter(Boolean):[];
-  const piece={
-    id:Date.now(),crystalId,isCombo,comboCrystals,
-    nickname:document.getElementById('f-nick').value,
-    form:document.getElementById('f-form').value,
-    size:document.getElementById('f-size').value,
-    dims:'',
-    treated:document.getElementById('f-treated').value,
-    condition:document.getElementById('f-condition')?.value||'',
-    locCustom:document.getElementById('f-loc-custom').value,
-    shelf:'',
-    tier:'',
-    pos:'',
-    acquired:document.getElementById('f-acquired')?.value||'',
-    source:document.getElementById('f-source').value,
-    price:document.getElementById('f-price').value,
-    notes:document.getElementById('f-notes').value,
-    photos:[...pendingPhotos],
-  };
-  if(editingCollectionIndex!==null&&collection[editingCollectionIndex]){
-    const existing=collection[editingCollectionIndex];
-    piece.id=existing.id;
-    const merged=[...(existing.photos||[]),...pendingPhotos].slice(0,3);
-    if(editPrimaryPhotoKey){
-      merged.sort((a,b)=>photoKey(a,'existing',0)===editPrimaryPhotoKey?-1:photoKey(b,'existing',0)===editPrimaryPhotoKey?1:0);
-    }
-    piece.photos=merged;
-    collection[editingCollectionIndex]=piece;
-  }else{
-    collection.push(piece);
-  }
-  localStorage.setItem('lap_coll',JSON.stringify(collection));
-  localStorage.setItem('lap_last_saved',new Date().toISOString());
-  if(crystalId){owned[crystalId]=true;localStorage.setItem('lap_owned',JSON.stringify(owned));}
-  const _editIdx=editingCollectionIndex;closeAddForm();renderCollection();encRender();if(_editIdx!==null&&_editIdx!==undefined)openCollDetail(_editIdx);
-  scrollPageTop();
-  updateLastSaved();
-}
 
 // ── BATCH ADD ──
 function openBatchForm(){
