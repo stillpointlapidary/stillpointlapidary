@@ -374,7 +374,6 @@ function init(){
   if(isEncyclopediaPage){
     buildEncPanels();
     buildMoodGroupPills();
-    renderMoodGrid('All');
     buildYearSelect('f-year');
     encRender();
     const rememberedTab=(()=>{try{return localStorage.getItem('spl_active_tab')||'encyclopedia';}catch(e){return'encyclopedia';}})();
@@ -1235,6 +1234,9 @@ function intentionCardClick(group, el) {
     renderMoodGrid('All');
     const grid = document.getElementById('mood-grid');
     if (grid) {
+      grid.style.display = '';
+      const rb = document.getElementById('mood-reset-bar');
+      if (rb) rb.style.display = '';
       const y = grid.getBoundingClientRect().top + window.scrollY - 120;
       window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
@@ -1246,6 +1248,9 @@ function intentionCardClick(group, el) {
   renderMoodGrid(group);
   const grid = document.getElementById('mood-grid');
   if (grid) {
+    grid.style.display = '';
+    const rb = document.getElementById('mood-reset-bar');
+    if (rb) rb.style.display = '';
     const y = grid.getBoundingClientRect().top + window.scrollY - 120;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }
@@ -1274,6 +1279,10 @@ function moodGroupFilter(group,btn){
   btn.classList.add('active');
   clearMoodResults();
   renderMoodGrid(group);
+  const grid=document.getElementById('mood-grid');
+  if(grid)grid.style.display='';
+  const rb=document.getElementById('mood-reset-bar');
+  if(rb)rb.style.display='';
 }
 
 function renderMoodGrid(group){
@@ -1444,8 +1453,22 @@ function clearAIResults(){
 function clearMoodResults(){
   const grid=document.getElementById('mood-grid');
   if(grid)grid.style.display='';
+  const rb=document.getElementById('mood-reset-bar');
+  if(rb)rb.style.display='';
   const sv=document.getElementById('mood-selected-view');
   if(sv)sv.style.display='none';
+  document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
+  activeMoodIdx=null;activeSubFilter=null;
+}
+
+function resetUseWhen(){
+  const grid=document.getElementById('mood-grid');
+  if(grid)grid.style.display='none';
+  const rb=document.getElementById('mood-reset-bar');
+  if(rb)rb.style.display='none';
+  const sv=document.getElementById('mood-selected-view');
+  if(sv)sv.style.display='none';
+  document.querySelectorAll('#intention-grid .intention-card').forEach(c=>c.classList.remove('active'));
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
 }
