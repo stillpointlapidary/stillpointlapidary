@@ -181,8 +181,11 @@
     <div class="ai-stone-grid" id="ai-stone-grid"></div>
   </div>
 
-  <!-- MOOD GRID: shown when no selection -->
-  <div class="mood-grid" id="mood-grid"></div>
+  <!-- MOOD GRID: shown after category tile click -->
+  <div id="mood-reset-bar" style="display:none;padding:0.75rem 0 0.25rem;text-align:right">
+    <button onclick="resetUseWhen()" style="background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);letter-spacing:0.04em;padding:0">← Clear selection</button>
+  </div>
+  <div class="mood-grid" id="mood-grid" style="display:none"></div>
   <!-- SELECTED MOOD VIEW: shown after selection -->
   <div id="mood-selected-view" style="display:none">
     <div class="mood-selected-card" id="mood-selected-card" onclick="clearMoodResults()">
