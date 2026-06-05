@@ -355,19 +355,18 @@
 <section id="tab-101" style="display:none">
 
 <div class="c101-wrap">
-  <!-- Section nav pills -->
-  <div class="c101-nav-wrap">
-    <div class="c101-nav" id="c101-nav">
-      <button class="c101-pill active" onclick="show101('work')">Working With Crystals</button>
-      <button class="c101-pill" onclick="show101('shapes')">Crystal Shapes</button>
-      <button class="c101-pill" onclick="show101('cleanse')">Cleansing & Charging</button>
-      <button class="c101-pill" onclick="show101('chakras')">Chakra Guide</button>
-      <button class="c101-pill" onclick="show101('roles')">Energetic Roles</button>
-      <button class="c101-pill" onclick="show101('families')">Crystal Families</button>
-      <button class="c101-pill" onclick="show101('care')">Choosing & Care</button>
-      <button class="c101-pill" onclick="show101('grids')">Crystal Grids</button>
-    </div>
-  </div>
+  <div class="c101-layout">
+    <nav class="c101-sidebar" id="c101-nav">
+      <div class="c101-sidebar-item active" onclick="show101('work',this)">Working With Crystals</div>
+      <div class="c101-sidebar-item" onclick="show101('shapes',this)">Crystal Shapes</div>
+      <div class="c101-sidebar-item" onclick="show101('cleanse',this)">Cleansing &amp; Charging</div>
+      <div class="c101-sidebar-item" onclick="show101('chakras',this)">Chakra Guide</div>
+      <div class="c101-sidebar-item" onclick="show101('roles',this)">Energetic Roles</div>
+      <div class="c101-sidebar-item" onclick="show101('families',this)">Crystal Families</div>
+      <div class="c101-sidebar-item" onclick="show101('care',this)">Choosing &amp; Care</div>
+      <div class="c101-sidebar-item" onclick="show101('grids',this)">Crystal Grids</div>
+    </nav>
+    <div class="c101-content-pane">
 
   <!-- ══════════════════════════════════════
        SECTION 1: HOW TO WORK WITH CRYSTALS
@@ -702,6 +701,8 @@
   <div class="grid-cards-container" id="grid-cards">
   </div>
 </div>
+    </div><!-- /c101-content-pane -->
+  </div><!-- /c101-layout -->
 
 <!-- Grid Detail Modal -->
 <div class="grid-modal-overlay" id="grid-modal-overlay" onclick="if(event.target===this)closeGridModal()">
