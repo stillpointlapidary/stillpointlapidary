@@ -130,6 +130,11 @@
     <span class="results-count" id="enc-count"></span>
     <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="id">ID</option><option value="name" selected>A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
   </div>
+  <div id="stones-error" style="display:none;padding:3rem 1.5rem;text-align:center;color:var(--ink2)">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:0.75rem;color:var(--ink)">Having trouble connecting</div>
+    <div style="font-size:14px;line-height:1.8;max-width:420px;margin:0 auto 1.5rem">The encyclopedia couldn't load right now — this is usually a brief connection issue. Please check your internet connection and try refreshing the page.</div>
+    <button class="btn btn-sm" onclick="location.reload()">Refresh page</button>
+  </div>
   <div class="crystal-grid" id="crystal-grid"></div>
   <div class="load-more-wrap" id="load-more-wrap" style="display:none">
     <button class="load-more-btn" id="load-more-btn" onclick="loadMoreStones()">Load more stones</button>
