@@ -3280,7 +3280,12 @@ function runCareSearch(val){
 
 
 // ── IDENTIFY V2 ──
-var id2State={color:null,trans:null,luster:null,hard:null};
+var id2State={color:null,trans:null,luster:null,hard:null,mattype:null};
+const MATTYPE_FN={
+  mineral: c=>c.mt==='Mineral',
+  glassy:  c=>c.mt==='Mineraloid',
+  organic: c=>c.mt==='Organic'||c.mt==='Fossil',
+};
 const ID2_COLORS=[
   {val:'Red',hex:'#b04a4a'},{val:'Orange',hex:'#c4683a'},{val:'Yellow',hex:'#c9a832'},
   {val:'Green',hex:'#4a8a5a'},{val:'Pink',hex:'#d4839a'},{val:'Blue',hex:'#4a7aaa'},
@@ -3333,6 +3338,7 @@ function runId2(){
     }
     if(id2State.luster&&LUSTER_FN[id2State.luster]&&!LUSTER_FN[id2State.luster](c))return false;
     if(id2State.hard&&HARD_FN[id2State.hard]&&!HARD_FN[id2State.hard](c))return false;
+    if(id2State.mattype&&MATTYPE_FN[id2State.mattype]&&!MATTYPE_FN[id2State.mattype](c))return false;
     return true;
   });
   const n=results.length;
@@ -3344,7 +3350,7 @@ function runId2(){
   g.innerHTML=results.slice(0,72).map(c=>encCardHtml(c)).join('')+(results.length>72?`<div class="id2-empty" style="padding:1rem;font-size:12px">Showing 72 of ${results.length} — add a filter to narrow down.</div>`:'');
 }
 function clearId2(){
-  id2State={color:null,trans:null,luster:null,hard:null};
+  id2State={color:null,trans:null,luster:null,hard:null,mattype:null};
   document.querySelectorAll('.id2-color-btn').forEach(b=>{b.classList.remove('active');b.style.border=b.title==='White'?'2.5px solid var(--border)':'2.5px solid transparent';});
   document.querySelectorAll('.id2-pill').forEach(p=>p.classList.remove('active'));
   runId2();

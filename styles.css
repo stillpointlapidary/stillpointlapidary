@@ -609,7 +609,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-filter-row:first-child{grid-column:1/-1;padding-bottom:16px;border-bottom:0.5px solid var(--border2)}
 .id2-filter-row:first-child .id2-flabel{margin-bottom:10px}
 .id2-flabel{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;display:block;margin-bottom:8px}
-.id2-color-grid{display:flex;flex-wrap:wrap;gap:8px}
+.id2-color-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .id2-color-btn{width:34px;height:34px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:all 0.15s;flex-shrink:0}
 .id2-color-btn.active{box-shadow:0 0 0 2px var(--white),0 0 0 4px var(--ink)}
 .id2-pills{display:flex;flex-wrap:wrap;gap:6px}
