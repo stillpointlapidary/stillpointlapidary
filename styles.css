@@ -486,10 +486,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .shapes-scroll-arrow.visible{opacity:1;pointer-events:auto}
 .shapes-scroll-arrow--left{left:0;background:linear-gradient(to right,var(--stone2) 55%,transparent)}
 .shapes-scroll-arrow--right{right:0;background:linear-gradient(to left,var(--stone2) 55%,transparent)}
-.shape-strip-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.15s;border:0.5px solid transparent;flex-shrink:0}
-.shape-strip-item:hover{background:var(--stone);color:var(--ink)}
-.shape-strip-item.active{background:var(--white);border-color:var(--border);color:var(--ink);font-weight:500}
-.shape-strip-icon{flex-shrink:0;opacity:0.45;display:flex;align-items:center}
+.shape-strip-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.15s;border:0.5px solid var(--border);flex-shrink:0}
+.shape-strip-item:hover{background:var(--stone);color:var(--ink);border-color:var(--accent2)}
+.shape-strip-item.active{background:var(--white);border-color:var(--accent2);color:var(--ink);font-weight:500}
+.shape-strip-icon{flex-shrink:0;opacity:0.65;display:flex;align-items:center}
 .shape-strip-icon svg{width:16px;height:16px}
 .shape-strip-item.active .shape-strip-icon{opacity:1}
 .shapes-pane{background:var(--white);padding:28px 32px}
