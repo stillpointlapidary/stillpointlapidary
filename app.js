@@ -366,22 +366,27 @@ function init(){
   // Load custom encyclopedia entries
   customEntries.forEach(e=>{if(!CRYSTALS.find(c=>c.i===e.i))CRYSTALS.push(e);});
   const n=CRYSTALS.length;
-  document.getElementById('stone-count').textContent=n+' entries';
+  const stoneCountEl=document.getElementById('stone-count');
+  if(stoneCountEl)stoneCountEl.textContent=n+' entries';
   ['intro-stone-count','browse-stone-count','divider-stone-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
-  buildEncPanels();
-  buildMoodGroupPills();
-  renderMoodGrid('All');
-  buildYearSelect('f-year');
-  encRender();
-  const rememberedTab=(()=>{try{return localStorage.getItem('spl_active_tab')||'encyclopedia';}catch(e){return'encyclopedia';}})();
-  if(rememberedTab==='collection'){
-    const wrap=document.getElementById('coll-wrap');
-    if(wrap)wrap.innerHTML='<div class="empty-coll">Loading your collection…</div>';
-  }else{
-    renderCollection();
-  }
-  if(['encyclopedia','mood','collection','identify','101'].includes(rememberedTab)&&rememberedTab!=='encyclopedia'){
-    switchTabByName(rememberedTab);
+  // Encyclopedia-only initialisation (skipped on homepage)
+  const isEncyclopediaPage=!!document.getElementById('crystal-grid');
+  if(isEncyclopediaPage){
+    buildEncPanels();
+    buildMoodGroupPills();
+    renderMoodGrid('All');
+    buildYearSelect('f-year');
+    encRender();
+    const rememberedTab=(()=>{try{return localStorage.getItem('spl_active_tab')||'encyclopedia';}catch(e){return'encyclopedia';}})();
+    if(rememberedTab==='collection'){
+      const wrap=document.getElementById('coll-wrap');
+      if(wrap)wrap.innerHTML='<div class="empty-coll">Loading your collection…</div>';
+    }else{
+      renderCollection();
+    }
+    if(['encyclopedia','mood','collection','identify','101'].includes(rememberedTab)&&rememberedTab!=='encyclopedia'){
+      switchTabByName(rememberedTab);
+    }
   }
   scrollPageTop();
   document.addEventListener('click',handleOutsideClick);
