@@ -154,8 +154,39 @@
     <!-- BROWSE BY INTENTION TILE (primary) -->
     <div class="use-when-tile use-when-tile--primary">
       <div class="browse-tile-label">Explore by feeling or intention</div>
-      <div class="browse-tile-sub">Clarity, creativity, grounding, protection, and more. Choose what calls to you.</div>
-      <div class="mood-filter-row" id="mood-group-pills"></div>
+      <div class="browse-tile-sub">Choose what calls to you — or browse all stones below.</div>
+      <div class="intention-grid" id="intention-grid">
+        <div class="intention-card" style="background:#ede6d6;border-color:#c8bda4;color:#5a4e34" onclick="intentionCardClick('Grounding & Stability',this)">
+          <div class="intention-card-icon">🪨</div>
+          <div class="intention-card-name">Grounding</div>
+          <div class="intention-card-sub">&amp; Stability</div>
+        </div>
+        <div class="intention-card" style="background:#f0e4ea;border-color:#d4b5c5;color:#7a3d58" onclick="intentionCardClick('Heart & Emotional',this)">
+          <div class="intention-card-icon">💚</div>
+          <div class="intention-card-name">Heart</div>
+          <div class="intention-card-sub">&amp; Emotional</div>
+        </div>
+        <div class="intention-card" style="background:#dfe8f0;border-color:#afc4d4;color:#2d5470" onclick="intentionCardClick('Mind & Will',this)">
+          <div class="intention-card-icon">⚡</div>
+          <div class="intention-card-name">Mind</div>
+          <div class="intention-card-sub">&amp; Will</div>
+        </div>
+        <div class="intention-card" style="background:#e8e2f0;border-color:#bdb0d4;color:#4a3870" onclick="intentionCardClick('Spirit & Intuition',this)">
+          <div class="intention-card-icon">🔮</div>
+          <div class="intention-card-name">Spirit</div>
+          <div class="intention-card-sub">&amp; Intuition</div>
+        </div>
+        <div class="intention-card" style="background:#ddeee5;border-color:#a8ccb8;color:#2d5e44" onclick="intentionCardClick('Body & Vitality',this)">
+          <div class="intention-card-icon">🌿</div>
+          <div class="intention-card-name">Body</div>
+          <div class="intention-card-sub">&amp; Vitality</div>
+        </div>
+        <div class="intention-card intention-card--browse" style="background:#f7f5f2;border-color:#c5bfb8;border-style:dashed;color:#8b7355" onclick="intentionCardClick('all',this)">
+          <div class="intention-card-icon" style="font-size:20px">→</div>
+          <div class="intention-card-name" style="font-style:italic">Browse all</div>
+          <div class="intention-card-sub">363 stones</div>
+        </div>
+      </div>
     </div>
     <!-- OR DIVIDER -->
     <div class="use-when-or">or</div>

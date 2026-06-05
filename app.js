@@ -1198,6 +1198,40 @@ function addFromDetail(){
 }
 
 // ── MOOD TAB ──
+
+function intentionCardClick(group, el) {
+  // Clear active state on all cards
+  document.querySelectorAll('#intention-grid .intention-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+
+  if (group === 'all') {
+    // Browse all → scroll to full encyclopedia
+    scrollToFullEncyclopedia();
+    return;
+  }
+
+  // Filter mood grid by group and scroll to results
+  clearMoodResults();
+  renderMoodGrid(group);
+  const grid = document.getElementById('mood-grid');
+  if (grid) {
+    const y = grid.getBoundingClientRect().top + window.scrollY - 120;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  // TODO: Once primary_theme data is cleaned up in Supabase, replace renderMoodGrid(group)
+  // with a direct stone filter using primary_theme:
+  //   const THEME_MAP = {
+  //     'Grounding & Stability': 'Grounding',
+  //     'Heart & Emotional': 'Heart Healing',  // exact values pending data audit
+  //     'Mind & Will': 'Clarity & Focus',
+  //     'Spirit & Intuition': 'Intuition',
+  //     'Body & Vitality': 'Vitality',
+  //   };
+  //   const matches = CRYSTALS.filter(c => (c.all_themes||[]).includes(THEME_MAP[group]));
+  //   renderIntentionResults(matches, group);
+}
+
 function buildMoodGroupPills(){
   const wrap=document.getElementById('mood-group-pills');
   if(!wrap)return;

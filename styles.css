@@ -401,8 +401,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @keyframes spin{to{transform:rotate(360deg)}}
 /* BROWSE TILE */
 .browse-tile-label{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--ink);margin-bottom:0.35rem}
-.browse-tile-sub{font-size:12px;color:var(--ink2);line-height:1.5;flex:1;margin-bottom:0.9rem}
+.browse-tile-sub{font-size:12px;color:var(--ink2);line-height:1.5;margin-bottom:0.9rem}
 .browse-tile-btn{align-self:flex-start;background:transparent;color:var(--accent);border:0.5px solid var(--accent);border-radius:8px;padding:0.6rem 1rem;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;transition:background 0.15s,color 0.15s;white-space:nowrap}
+/* INTENTION CARDS */
+.intention-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0.5rem}
+.intention-card{border-radius:12px;padding:18px 10px 14px;text-align:center;cursor:pointer;border-width:0.5px;border-style:solid;transition:transform 0.15s,box-shadow 0.15s}
+.intention-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.intention-card.active{outline:2px solid #2a2520;outline-offset:2px}
+.intention-card-icon{font-size:24px;margin-bottom:8px;line-height:1}
+.intention-card-name{font-size:12px;font-weight:500;line-height:1.3}
+.intention-card-sub{font-size:10px;opacity:0.75;margin-top:2px;line-height:1.3}
 .browse-tile-btn:hover{background:var(--accent);color:#fff}
 /* AI RESULTS */
 .ai-results-wrap{display:none;margin-bottom:1.5rem}
