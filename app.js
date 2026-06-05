@@ -2657,13 +2657,19 @@ async function loadStonesAndInit() {
     // First visit — show loader, wait for fetch, then init
     const loader = document.getElementById('stones-loader');
     if (loader) loader.style.display = 'flex';
+    let loadFailed = false;
     try {
       const fresh = await fetchFresh();
       CRYSTALS.push(...fresh);
     } catch(e) {
       console.error('Failed to load stones from Supabase:', e);
+      loadFailed = true;
     }
     if (loader) loader.style.display = 'none';
+    if (loadFailed) {
+      const errEl = document.getElementById('stones-error');
+      if (errEl) errEl.style.display = 'block';
+    }
     init();
     updateLastSaved();
   }
