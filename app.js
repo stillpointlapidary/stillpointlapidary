@@ -4550,7 +4550,12 @@ const _supa = window.supabase.createClient(
 );
 
 // ── Load stones from Supabase, then init app ──
-loadStonesAndInit();
+loadStonesAndInit().then(()=>{
+  const action=new URLSearchParams(window.location.search).get('action');
+  if(action==='guide') setTimeout(()=>openPopup('instructions'),300);
+  else if(action==='manage') setTimeout(()=>openPopup('manage'),300);
+  else if(action==='add-entry') setTimeout(()=>openAddEncForm(),300);
+});
 
 let _currentUser = null;
 try{ ['lap_coll','lap_owned','lap_wish'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
