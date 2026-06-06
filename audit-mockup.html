@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Point — Site Audit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.audit-label { background: #2a2520; padding: 10px 24px; font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(200,169,110,0.8); position: sticky; top: 0; z-index: 200; }
+.audit-section { padding: 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.audit-divider { height: 3px; background: var(--stone2); }
+.mock-drawer { position: relative; width: min(430px, 100%); background: var(--white); border: 0.5px solid var(--border); border-radius: 12px; padding: 3rem 1.75rem 2rem; overflow: hidden; }
+.fake-photo { background: linear-gradient(145deg, #6898d8 0%, #3060b8 100%); border-radius: 10px; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.fake-photo img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+.img-amethyst { background: linear-gradient(160deg, #b090d8 0%, #7a50a8 100%); }
+.img-rose { background: linear-gradient(160deg, #e8c0c0 0%, #d09090 100%); }
+.img-citrine { background: linear-gradient(160deg, #e8c840 0%, #c89820 100%); }
+.img-lab { background: linear-gradient(160deg, #6080b0 0%, #3050a0 100%); }
+.img-black { background: linear-gradient(160deg, #4a4440 0%, #2a2420 100%); }
+.img-sel { background: linear-gradient(160deg, #f4f2ec 0%, #e0ddd4 100%); }
+.img-hem { background: linear-gradient(160deg, #888898 0%, #585868 100%); }
+.img-cq { background: linear-gradient(160deg, #f0f0f8 0%, #d0d0e8 100%); }
+</style>
+</head>
+<body style="background:var(--stone)">
+
+<!-- ══ NAV (reference) ══ -->
+<div class="audit-label">Nav & Header — reference</div>
+<header class="topbar">
+  <a href="#" class="brand-home">
+    <div class="brand-block">
+      <img src="apple-touch-icon.png" class="brand-logo" style="height:44px">
+      <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+      </div>
+    </div>
+  </a>
+  <div class="topbar-right">
+    <span class="stone-count">363 entries</span>
+    <button class="btn btn-sm">Sign In</button>
+    <button class="btn btn-sm">? Guide</button>
+  </div>
+</header>
+<div class="main-nav-wrap"><nav class="main-nav">
+  <button class="nav-tab active">Encyclopedia</button>
+  <button class="nav-tab">Use When…</button>
+  <button class="nav-tab">My Collection</button>
+  <button class="nav-tab">Identify</button>
+  <button class="nav-tab">Crystals 101</button>
+</nav></div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ HERO (locked) ══ -->
+<div class="audit-label">Hero — LOCKED ✓</div>
+<div class="site-hero">
+  <div class="site-hero-inner" style="max-width:1100px;margin:0 auto">
+    <div class="site-hero-left">
+      <div class="hero-kicker-rule"></div>
+      <div class="hero-kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
+      <h1 class="hero-headline">Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em></h1>
+      <p class="hero-sub">363 stones. AI-powered mood matching. Your personal collection — tracked, searchable, and always with you.</p>
+      <div class="hero-btns">
+        <button class="btn btn-sm btn-accent">Start Exploring</button>
+        <button class="btn btn-sm">Identify a Stone</button>
+      </div>
+    </div>
+    <div class="site-hero-right">
+      <div class="sotd-card">
+        <div class="sotd-card-photo"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite"></div>
+        <div class="sotd-card-body">
+          <div class="sotd-card-label">Stone of the Day</div>
+          <div class="sotd-card-name">Labradorite</div>
+          <div class="sotd-card-tagline">Intuition · Magic · Protection</div>
+          <div class="sotd-card-desc">The stone of transformation. Protective, deeply intuitive, and endlessly surprising.</div>
+          <div class="sotd-card-link">View Labradorite in the encyclopedia →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ FEATURED / TEN STONES ══ -->
+<div class="audit-label">Featured — Ten Stones Worth Knowing</div>
+<div class="audit-section">
+  <div class="featured-header" style="margin-bottom:1rem">
+    <div>
+      <div class="featured-title">Ten stones worth knowing</div>
+      <div class="featured-subtitle">A starting point for any collection — chosen for range, availability, and everyday use</div>
+    </div>
+    <a class="featured-browse">Browse all 363 stones →</a>
+  </div>
+  <div class="featured-cards" style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:8px;overflow:hidden">
+    <div class="featured-card has-photo" onclick="">
+      <img class="featured-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/amethyst-specimen.webp" alt="Amethyst">
+      <div class="featured-card-name-row" style="display:flex;align-items:center;gap:0.6rem;padding:0.75rem 0.875rem 0">
+        <div class="featured-card-name">Amethyst</div>
+      </div>
+      <div class="featured-card-use">Calm · Sleep · Protection</div>
+    </div>
+    <div class="featured-card has-photo">
+      <img class="featured-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/rose-quartz.webp" alt="Rose Quartz">
+      <div class="featured-card-name-row" style="display:flex;align-items:center;gap:0.6rem;padding:0.75rem 0.875rem 0">
+        <div class="featured-card-name">Rose Quartz</div>
+      </div>
+      <div class="featured-card-use">Love · Heart · Self-compassion</div>
+    </div>
+    <div class="featured-card has-photo">
+      <img class="featured-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/citrine-freeform.webp" alt="Citrine">
+      <div class="featured-card-name-row" style="display:flex;align-items:center;gap:0.6rem;padding:0.75rem 0.875rem 0">
+        <div class="featured-card-name">Citrine</div>
+      </div>
+      <div class="featured-card-use">Abundance · Confidence · Joy</div>
+    </div>
+    <div class="featured-card has-photo">
+      <img class="featured-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite">
+      <div class="featured-card-name-row" style="display:flex;align-items:center;gap:0.6rem;padding:0.75rem 0.875rem 0">
+        <div class="featured-card-name">Labradorite</div>
+      </div>
+      <div class="featured-card-use">Intuition · Magic · Protection</div>
+    </div>
+    <div class="featured-card has-photo">
+      <img class="featured-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/black-tourmaline.webp" alt="Black Tourmaline">
+      <div class="featured-card-name-row" style="display:flex;align-items:center;gap:0.6rem;padding:0.75rem 0.875rem 0">
+        <div class="featured-card-name">Black Tourmaline</div>
+      </div>
+      <div class="featured-card-use">Protection · Grounding</div>
+    </div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ ENCYCLOPEDIA CARDS ══ -->
+<div class="audit-label">Encyclopedia — Search, Filters & Cards</div>
+<div class="audit-section">
+  <div class="search-wrap" style="margin-bottom:1rem">
+    <span class="search-icon">⌕</span>
+    <input type="text" placeholder="Search 363 stones…">
+  </div>
+  <div class="filter-cats" style="margin-bottom:0.75rem">
+    <button class="filter-cat-btn">Family <span class="caret">▾</span></button>
+    <button class="filter-cat-btn has-val">Theme: Calm &amp; Peace <span class="caret">▾</span></button>
+    <button class="filter-cat-btn">Color <span class="caret">▾</span></button>
+    <button class="filter-cat-btn">Chakra <span class="caret">▾</span></button>
+    <button class="filter-cat-btn">Formation <span class="caret">▾</span></button>
+    <button class="reset-link filters-on">Reset</button>
+  </div>
+  <div class="meta-row">
+    <div class="results-count">24 stones</div>
+    <div class="sort-wrap"><label>Sort</label><select><option>A–Z</option><option>Z–A</option></select></div>
+  </div>
+  <div class="crystal-grid">
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/amethyst-specimen.webp" alt="Amethyst"></div>
+      <div class="card-body"><div class="card-name">Amethyst</div><div class="card-color"><span class="color-dot" style="background:#9b59b6"></span>Purple</div><div class="card-role">Calm<span class="card-role-sep">·</span>Sleep<span class="card-role-sep">·</span>Protection</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/rose-quartz.webp" alt="Rose Quartz"></div>
+      <div class="card-body"><div class="card-name">Rose Quartz</div><div class="card-color"><span class="color-dot" style="background:#e8a0a0"></span>Pink</div><div class="card-role">Love<span class="card-role-sep">·</span>Heart<span class="card-role-sep">·</span>Self-compassion</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/citrine-freeform.webp" alt="Citrine"></div>
+      <div class="card-body"><div class="card-name">Citrine</div><div class="card-color"><span class="color-dot" style="background:#e8c840"></span>Yellow</div><div class="card-role">Abundance<span class="card-role-sep">·</span>Confidence<span class="card-role-sep">·</span>Joy</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite"></div>
+      <div class="card-body"><div class="card-name">Labradorite</div><div class="card-color"><span class="color-dot" style="background:#6080b0"></span>Blue-Grey</div><div class="card-role">Intuition<span class="card-role-sep">·</span>Magic<span class="card-role-sep">·</span>Protection</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/black-tourmaline.webp" alt="Black Tourmaline"></div>
+      <div class="card-body"><div class="card-name">Black Tourmaline</div><div class="card-color"><span class="color-dot" style="background:#2a2420"></span>Black</div><div class="card-role">Protection<span class="card-role-sep">·</span>Grounding</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/selenite.webp" alt="Selenite"></div>
+      <div class="card-body"><div class="card-name">Selenite</div><div class="card-color"><span class="color-dot" style="background:#f0ece6"></span>White</div><div class="card-role">Cleansing<span class="card-role-sep">·</span>Clarity<span class="card-role-sep">·</span>Light</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/hematite.webp" alt="Hematite"></div>
+      <div class="card-body"><div class="card-name">Hematite</div><div class="card-color"><span class="color-dot" style="background:#585868"></span>Silver-Grey</div><div class="card-role">Grounding<span class="card-role-sep">·</span>Stability<span class="card-role-sep">·</span>Focus</div></div>
+    </div>
+    <div class="crystal-card">
+      <div class="card-img-zone"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/carnelian.webp" alt="Carnelian"></div>
+      <div class="card-body"><div class="card-name">Carnelian</div><div class="card-color"><span class="color-dot" style="background:#c05030"></span>Orange-Red</div><div class="card-role">Motivation<span class="card-role-sep">·</span>Creativity<span class="card-role-sep">·</span>Action</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ STONE DETAIL DRAWER ══ -->
+<div class="audit-label">Stone Detail Drawer</div>
+<div class="audit-section">
+  <div class="mock-drawer">
+    <div style="height:220px;background:#ffffff;border-radius:10px;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;overflow:hidden;border:0.5px solid var(--border2)">
+      <img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite" style="max-width:100%;max-height:100%;object-fit:contain;padding:16px">
+    </div>
+    <div class="d-id">C-0028 · Feldspar Family</div>
+    <div class="d-name">Labradorite</div>
+    <div class="d-alt">Spectrolite, Rainbow Moonstone (var.)</div>
+    <div class="fam-tag">Feldspar Family</div>
+    <div class="divider"></div>
+    <div class="sec-label">Use When</div>
+    <div class="use-when-box">You need magic to feel real again. When life has gone flat and you want to remember there's more going on beneath the surface.</div>
+    <div class="divider"></div>
+    <div class="sec-label">Properties</div>
+    <div class="props-grid">
+      <div class="prop-f"><label>Chakra</label><span>Third Eye</span></div>
+      <div class="prop-f"><label>Mohs</label><span>6–6.5</span></div>
+      <div class="prop-f"><label>Formation</label><span>Igneous</span></div>
+      <div class="prop-f"><label>Color</label><span>Blue, Grey, Gold</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="sec-label">Themes</div>
+    <div class="tags-row">
+      <span class="tag primary">Intuition</span>
+      <span class="tag primary">Magic</span>
+      <span class="tag">Transformation</span>
+      <span class="tag">Protection</span>
+      <span class="tag">Transition</span>
+    </div>
+    <div class="divider"></div>
+    <div class="sec-label">Geology</div>
+    <div class="geo-text">A feldspar mineral famous for its iridescent play of color — labradorescence — caused by light scattering between thin structural layers. Found primarily in Canada, Finland, and Madagascar.</div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ USE WHEN / MOOD ══ -->
+<div class="audit-label">Use When… — Mood Tiles & AI Search</div>
+<div class="audit-section">
+  <div class="mood-intro">What do you need right now?</div>
+  <div class="mood-sub">Choose a feeling or intention — or describe it in your own words.</div>
+  <div style="display:flex;gap:8px;margin-bottom:1.5rem;align-items:center">
+    <div style="flex:1;position:relative">
+      <span class="search-icon">✦</span>
+      <input type="text" placeholder="Describe what you're going through…" style="width:100%;padding:10px 16px 10px 36px;border:0.5px solid var(--border);border-radius:8px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);outline:none">
+    </div>
+    <button class="btn btn-accent">Find my stone</button>
+  </div>
+  <div class="mood-grid" style="margin-bottom:1.5rem">
+    <div class="mood-card">
+      <div class="mood-group-label">Calm & Rest</div>
+      <div class="mood-label">Calm & Peace</div>
+      <div class="mood-sub-text">Anxiety, nervous system, overwhelm</div>
+    </div>
+    <div class="mood-card active-mood">
+      <div class="mood-group-label">Grounding</div>
+      <div class="mood-label">Grounding</div>
+      <div class="mood-sub-text">Earthing, centering, scattered energy</div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-group-label">Protection</div>
+      <div class="mood-label">Protection</div>
+      <div class="mood-sub-text">Shielding, boundaries, space clearing</div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-group-label">Heart</div>
+      <div class="mood-label">Heart Healing</div>
+      <div class="mood-sub-text">Grief, loss, heartbreak, forgiveness</div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-group-label">Mind</div>
+      <div class="mood-label">Clarity & Focus</div>
+      <div class="mood-sub-text">Focus, decisions, mental clutter</div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-group-label">Spirit</div>
+      <div class="mood-label">Intuition</div>
+      <div class="mood-sub-text">Inner knowing, dream work, visions</div>
+    </div>
+  </div>
+  <!-- mood result cards -->
+  <div class="mood-results-hdr">
+    <div class="mood-results-title">Stones for Calm & Peace</div>
+    <button class="mood-back">← Back to all moods</button>
+  </div>
+  <div class="mood-stone-grid">
+    <div class="mood-stone-card">
+      <div class="msc-id">C-0119</div>
+      <div class="msc-name">Amethyst</div>
+      <div class="msc-tags"><span class="msc-tag">Calm</span><span class="msc-tag">Sleep</span><span class="msc-tag">Protection</span></div>
+      <div class="msc-uw">"When the mind won't stop. When sleep feels far away."</div>
+    </div>
+    <div class="mood-stone-card">
+      <div class="msc-id">C-0175</div>
+      <div class="msc-name">Selenite</div>
+      <div class="msc-tags"><span class="msc-tag">Cleansing</span><span class="msc-tag">Peace</span></div>
+      <div class="msc-uw">"When the space feels heavy and you need to clear it."</div>
+    </div>
+    <div class="mood-stone-card">
+      <div class="msc-id">C-0108</div>
+      <div class="msc-name">Rose Quartz</div>
+      <div class="msc-tags"><span class="msc-tag">Love</span><span class="msc-tag">Comfort</span></div>
+      <div class="msc-uw">"When you need to be held, even by yourself."</div>
+    </div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ COLLECTION ══ -->
+<div class="audit-label">My Collection</div>
+<div class="audit-section">
+  <div class="coll-header">
+    <div class="coll-title">My Collection</div>
+    <div class="coll-btns">
+      <button class="btn btn-sm btn-accent">+ Add piece</button>
+      <button class="btn btn-sm">Filters</button>
+    </div>
+  </div>
+  <div class="coll-stats">
+    <div class="stat-cell"><div class="stat-label">Total pieces</div><div class="stat-val">47</div></div>
+    <div class="stat-cell"><div class="stat-label">Stone types</div><div class="stat-val">31</div></div>
+    <div class="stat-cell"><div class="stat-label">Wishlist</div><div class="stat-val">12</div></div>
+  </div>
+  <div class="coll-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="coll-card">
+      <div class="coll-card-photo-wrap"><img class="coll-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/amethyst-specimen.webp" alt="Amethyst"></div>
+      <div class="coll-card-piece-count">2 pieces</div>
+      <div class="coll-card-name">Amethyst</div>
+      <div class="coll-card-meta">Tumble · Medium · Bedside</div>
+    </div>
+    <div class="coll-card">
+      <div class="coll-card-photo-wrap"><img class="coll-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite"></div>
+      <div class="coll-card-piece-count">1 piece</div>
+      <div class="coll-card-name">Labradorite</div>
+      <div class="coll-card-meta">Freeform · Large · Altar</div>
+    </div>
+    <div class="coll-card">
+      <div class="coll-card-photo-wrap"><img class="coll-card-photo" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/selenite.webp" alt="Selenite"></div>
+      <div class="coll-card-piece-count">3 pieces</div>
+      <div class="coll-card-name">Selenite</div>
+      <div class="coll-card-meta">Wand · Various · Multiple</div>
+    </div>
+    <div class="coll-card">
+      <div class="coll-card-nophoto"><span>No photo yet</span></div>
+      <div class="coll-card-piece-count">1 piece</div>
+      <div class="coll-card-name">Black Tourmaline</div>
+      <div class="coll-card-meta">Raw · Small · Pocket</div>
+    </div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ EMPTY STATES ══ -->
+<div class="audit-label">Empty States — Collection & Search</div>
+<div class="audit-section" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+  <div style="background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:2rem">
+    <div class="empty-coll-state">
+      <div class="empty-coll-icon">◇</div>
+      <div class="empty-coll-title">Your collection is empty</div>
+      <div class="empty-coll-text">Add stones you own to build your collection and track them across all your devices.</div>
+      <button class="empty-coll-btn">Explore the Encyclopedia</button>
+    </div>
+  </div>
+  <div style="background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:2rem">
+    <div class="empty-coll-state">
+      <div class="empty-coll-icon">✦</div>
+      <div class="empty-coll-title">No stones found</div>
+      <div class="empty-coll-text">Try adjusting your filters or search for something different.</div>
+      <button class="empty-coll-btn">Clear filters</button>
+    </div>
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ CRYSTALS 101 ══ -->
+<div class="audit-label">Crystals 101 — Section Headers & Body Text</div>
+<div class="audit-section" style="max-width:760px">
+  <div style="font-family:Georgia,serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:0.5rem">Working With Crystals</div>
+  <div style="font-size:13px;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem">Section 1 of 8</div>
+  <div style="font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:1.5rem">
+    There's no single right method. Crystal work doesn't require ritual, belief, or expertise. What it requires is attention — and a willingness to notice what shifts when you bring something physical into your environment or your hands.
+  </div>
+  <div style="background:var(--stone2);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem;border-left:2px solid var(--accent2)">
+    <div style="font-family:Georgia,serif;font-size:16px;font-style:italic;color:var(--ink);line-height:1.6">Crystals don't think. What intention-setting does is prime your own mind to notice relevant feelings, patterns, and shifts.</div>
+  </div>
+  <div style="font-size:14px;color:var(--ink2);line-height:1.8">
+    The stone becomes a physical anchor for something you're already doing internally. That's not a small thing — it's the same mechanism behind journaling, prayer, or any other physical practice that supports inner work.
+  </div>
+</div>
+
+<div class="audit-divider"></div>
+
+<!-- ══ FOOTER ══ -->
+<div class="audit-label">Footer — BEFORE (current live site)</div>
+<footer style="background:var(--white);border-top:0.5px solid var(--border);padding:1.5rem;text-align:center">
+  <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3)">
+    Still Point <em style="font-style:italic">Lapidary</em> — A curated crystal reference library and collection tracker from
+    <a href="https://stillpoint.studio" style="color:var(--accent2);text-decoration:none">Still Point {technodelic} Studio</a> in Dallas / Fort Worth.
+    <br>Explore nervous system reset, guided wellness sessions, and immersive energy work at stillpoint.studio
+  </div>
+</footer>
+
+<div class="audit-divider"></div>
+
+<div class="audit-label">Footer — OPTION A · Warm, branded, Still Point Studio prominent</div>
+<footer style="background:var(--white);border-top:0.5px solid var(--border);padding:2.5rem 1.5rem">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+    <div>
+      <div style="font-family:Georgia,serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:6px">Still Point <em style="color:#c8a96e;font-style:italic">Lapidary</em></div>
+      <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">Crystal Reference Library</div>
+      <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);line-height:1.7">A curated reference for 363 stones — built for intuitive work and practical collecting. Free to use, always growing.</div>
+    </div>
+    <div>
+      <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px">From the studio</div>
+      <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:10px">Still Point Lapidary is a project of <a href="https://stillpoint.studio" style="color:var(--accent2);text-decoration:none;font-weight:500">Still Point {technodelic} Studio</a> in Dallas / Fort Worth — offering nervous system reset, guided wellness sessions, and immersive energy work.</div>
+      <a href="https://stillpoint.studio" style="font-family:'Jost',sans-serif;font-size:11px;color:var(--accent2);letter-spacing:0.04em;text-decoration:none">Visit stillpoint.studio →</a>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:1.5rem auto 0;padding-top:1.5rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);display:flex;justify-content:space-between">
+    <span>© 2025 Still Point {technodelic} Studio</span>
+    <span>Dallas / Fort Worth, TX</span>
+  </div>
+</footer>
+
+<div class="audit-divider"></div>
+
+<div class="audit-label">Footer — OPTION B · Minimal, centered, quiet</div>
+<footer style="background:var(--white);border-top:0.5px solid var(--border);padding:2.5rem 1.5rem;text-align:center">
+  <div style="max-width:600px;margin:0 auto">
+    <div style="font-family:Georgia,serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:4px">Still Point <em style="color:#c8a96e;font-style:italic">Lapidary</em></div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);margin-bottom:16px;letter-spacing:0.04em">A crystal reference library for intuitive work and practical collecting</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);line-height:1.8">
+      A project of <a href="https://stillpoint.studio" style="color:var(--accent2);text-decoration:none">Still Point {technodelic} Studio</a> · Dallas / Fort Worth
+    </div>
+    <div style="margin-top:1.25rem;font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.06em">© 2025 STILL POINT {TECHNODELIC} STUDIO</div>
+  </div>
+</footer>
+
+<div style="height:3rem"></div>
+
+</body>
+</html>

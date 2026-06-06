@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Point — Hero Size Options</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Georgia, serif; color: #2a2520; background: #f5f3ef; }
+
+.site-header { background: white; border-bottom: 0.5px solid #ddd8d0; padding: 0 32px; display: flex; align-items: center; height: 72px; }
+.logo-main { font-size: 18px; font-weight: 400; letter-spacing: 0.06em; }
+.logo-main em { color: #c8a96e; font-style: italic; }
+.logo-sub { font-family: sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9390; margin-top: 2px; }
+.site-nav { background: white; border-bottom: 0.5px solid #ddd8d0; padding: 0 32px; display: flex; gap: 2rem; font-family: sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9390; }
+.site-nav span { padding: 14px 0; border-bottom: 2px solid transparent; }
+.site-nav .active { color: #2a2520; border-bottom-color: #c8a96e; }
+
+.label { background: #2a2520; padding: 8px 32px; font-family: sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(200,169,110,0.8); }
+.divider { height: 2px; background: #e8e4de; }
+
+.hero { background: #f5f3ef; }
+.hero-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1fr 340px; gap: 52px; align-items: center; }
+.hero-left { padding: 48px 0 44px; display: flex; flex-direction: column; }
+
+.kicker-rule { width: 32px; height: 1px; background: #c8a96e; margin-bottom: 14px; }
+.kicker { font-family: sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9390; margin-bottom: 18px; }
+.headline em { color: #c8a96e; font-style: italic; }
+.sub { font-family: sans-serif; font-size: 13px; color: #5a5248; line-height: 1.75; margin-bottom: 26px; }
+.btns { display: flex; gap: 12px; }
+.btn-primary { background: #c8a96e; color: #2a2520; border: none; border-radius: 6px; padding: 10px 22px; font-family: sans-serif; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; font-weight: 700; }
+.btn-secondary { background: transparent; color: #2a2520; border: 0.5px solid rgba(42,37,32,0.3); border-radius: 6px; padding: 10px 18px; font-family: sans-serif; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; }
+
+.hero-right { padding: 24px 0; display: flex; align-items: center; }
+.sotd { background: white; border: 0.5px solid #ddd8d0; border-radius: 12px; overflow: hidden; width: 100%; display: flex; flex-direction: column; box-shadow: 0 3px 20px rgba(42,37,32,0.07); }
+.sotd-photo { width: 100%; background: linear-gradient(180deg, #ffffff 0%, #f8f6f2 100%); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.sotd-photo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; padding: 12px; }
+.sotd-body { padding: 16px 18px 18px; border-top: 0.5px solid #ede8e0; }
+.sotd-label { font-family: sans-serif; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #c8a96e; font-weight: 700; margin-bottom: 5px; }
+.sotd-name { font-family: Georgia, serif; font-weight: 400; color: #2a2520; margin-bottom: 3px; }
+.sotd-tagline { font-family: sans-serif; font-size: 11px; color: #c8a96e; letter-spacing: 0.04em; margin-bottom: 8px; }
+.sotd-desc { font-family: sans-serif; font-size: 11.5px; color: #5a5248; line-height: 1.6; margin-bottom: 12px; }
+.sotd-link { font-family: sans-serif; font-size: 11px; color: #c8a96e; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-right:12px">
+    <ellipse cx="18" cy="25" rx="5" ry="9" stroke="#c8a96e" stroke-width="1.1"/>
+    <ellipse cx="18" cy="25" rx="3" ry="6" transform="rotate(40 18 25)" stroke="#c8a96e" stroke-width="1.1"/>
+    <ellipse cx="18" cy="25" rx="3" ry="6" transform="rotate(-40 18 25)" stroke="#c8a96e" stroke-width="1.1"/>
+  </svg>
+  <div>
+    <div class="logo-main">STILL POINT <em>Lapidary</em></div>
+    <div class="logo-sub">Crystal Reference Library</div>
+  </div>
+  <div style="margin-left:auto;font-family:sans-serif;font-size:11px;color:#9a9390">363 entries &nbsp;·&nbsp; christieholzwarth</div>
+</div>
+<div class="site-nav">
+  <span class="active">Encyclopedia</span><span>Use When…</span><span>My Collection</span><span>Identify</span><span>Crystals 101</span>
+</div>
+
+<!-- OPTION 1: 26px headline / 120px photo -->
+<div class="label">Option 1 — 26px headline · Most restrained</div>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="kicker-rule"></div>
+      <div class="kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
+      <div class="headline" style="font-size:26px;line-height:1.28;margin-bottom:18px">
+        Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em>
+      </div>
+      <div class="sub">363 stones. AI-powered mood matching. Your personal collection — tracked, searchable, and always with you.</div>
+      <div class="btns"><button class="btn-primary">Start Exploring</button><button class="btn-secondary">Sign In</button></div>
+    </div>
+    <div class="hero-right">
+      <div class="sotd">
+        <div class="sotd-photo" style="height:120px"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite"></div>
+        <div class="sotd-body">
+          <div class="sotd-label">Stone of the Day</div>
+          <div class="sotd-name" style="font-size:19px">Labradorite</div>
+          <div class="sotd-tagline">Intuition · Magic · Protection</div>
+          <div class="sotd-desc">The stone of transformation. Its iridescent flash appears when you move it in light. Protective and endlessly surprising.</div>
+          <div class="sotd-link">View Labradorite in the encyclopedia →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OPTION 2: 30px headline / 130px photo -->
+<div class="label">Option 2 — 30px headline · Balanced</div>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="kicker-rule"></div>
+      <div class="kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
+      <div class="headline" style="font-size:30px;line-height:1.25;margin-bottom:18px">
+        Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em>
+      </div>
+      <div class="sub">363 stones. AI-powered mood matching. Your personal collection — tracked, searchable, and always with you.</div>
+      <div class="btns"><button class="btn-primary">Start Exploring</button><button class="btn-secondary">Sign In</button></div>
+    </div>
+    <div class="hero-right">
+      <div class="sotd">
+        <div class="sotd-photo" style="height:130px"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite"></div>
+        <div class="sotd-body">
+          <div class="sotd-label">Stone of the Day</div>
+          <div class="sotd-name" style="font-size:20px">Labradorite</div>
+          <div class="sotd-tagline">Intuition · Magic · Protection</div>
+          <div class="sotd-desc">The stone of transformation. Its iridescent flash appears when you move it in light. Protective and endlessly surprising.</div>
+          <div class="sotd-link">View Labradorite in the encyclopedia →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OPTION 3: 33px headline / 140px photo -->
+<div class="label">Option 3 — 33px headline · Slightly fuller</div>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="kicker-rule"></div>
+      <div class="kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
+      <div class="headline" style="font-size:33px;line-height:1.22;margin-bottom:20px">
+        Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em>
+      </div>
+      <div class="sub">363 stones. AI-powered mood matching. Your personal collection — tracked, searchable, and always with you.</div>
+      <div class="btns"><button class="btn-primary">Start Exploring</button><button class="btn-secondary">Sign In</button></div>
+    </div>
+    <div class="hero-right">
+      <div class="sotd">
+        <div class="sotd-photo" style="height:140px"><img src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp" alt="Labradorite"></div>
+        <div class="sotd-body">
+          <div class="sotd-label">Stone of the Day</div>
+          <div class="sotd-name" style="font-size:21px">Labradorite</div>
+          <div class="sotd-tagline">Intuition · Magic · Protection</div>
+          <div class="sotd-desc">The stone of transformation. Its iridescent flash appears when you move it in light. Protective and endlessly surprising.</div>
+          <div class="sotd-link">View Labradorite in the encyclopedia →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

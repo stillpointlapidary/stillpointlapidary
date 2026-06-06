@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Point — Design Mockups</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', serif; background: #f0ece6; color: #2a2520; }
+
+/* ── SECTION HEADERS ── */
+.section-header { background: #2a2520; color: white; padding: 14px 40px; font-family: sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; position: sticky; top: 0; z-index: 100; }
+.section-header span { color: #c8a96e; margin-left: 12px; font-weight: 300; font-style: italic; font-family: Georgia, serif; text-transform: none; letter-spacing: 0; font-size: 14px; }
+
+/* ── SHARED CHROME ── */
+.fake-header { background: white; border-bottom: 0.5px solid #ddd8d0; padding: 0 32px; display: flex; align-items: center; gap: 2rem; height: 72px; }
+.logo-mark { width: 40px; height: 40px; }
+.logo-text { line-height: 1.1; }
+.logo-main { font-size: 18px; font-weight: 300; letter-spacing: 0.08em; }
+.logo-main em { color: #c8a96e; font-style: italic; }
+.logo-sub { font-family: sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9390; }
+.fake-nav { background: white; border-bottom: 0.5px solid #ddd8d0; padding: 0 32px; display: flex; gap: 2rem; font-family: sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9390; }
+.fake-nav span { padding: 14px 0; border-bottom: 2px solid transparent; cursor: pointer; }
+.fake-nav .active { color: #2a2520; border-bottom-color: #c8a96e; }
+
+/* ── CONTENT WRAPPER ── */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+.option-tag { font-family: sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #c8a96e; border-bottom: 1.5px solid #c8a96e; padding-bottom: 8px; margin-bottom: 24px; }
+
+/* ── CARD ATOMS ── */
+.stone-name { font-family: Georgia, serif; font-size: 16px; font-weight: 400; color: #2a2520; margin-bottom: 4px; }
+.stone-meta { font-family: sans-serif; font-size: 11px; color: #9a9390; }
+.stone-role { font-family: sans-serif; font-size: 11px; color: #c8a96e; }
+
+/* stone placeholder photos */
+.photo { width: 100%; object-fit: contain; display: block; }
+.amethyst { background: linear-gradient(160deg, #b090d8 0%, #7a50a8 100%); }
+.rosequartz { background: linear-gradient(160deg, #e8c0c0 0%, #d09090 100%); }
+.clearquartz { background: linear-gradient(160deg, #f0f0f8 0%, #d0d0e8 100%); }
+.citrine { background: linear-gradient(160deg, #e8c840 0%, #c89820 100%); }
+.labradorite { background: linear-gradient(160deg, #6080b0 0%, #3050a0 100%); }
+.amber { background: linear-gradient(160deg, #e8a840 0%, #c87820 100%); }
+.hematite { background: linear-gradient(160deg, #606070 0%, #303040 100%); }
+.morganite { background: linear-gradient(160deg, #e8c0d0 0%, #d090b0 100%); }
+
+.divider { height: 1px; background: #ddd8d0; margin: 0; }
+
+/* ══════════════════════════════════════════════
+   SECTION 1 — COLLECTION CARD SIZES
+══════════════════════════════════════════════ */
+
+/* CURRENT (132px) */
+.coll-grid-a { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.coll-card-a { background: white; border: 0.5px solid #ddd8d0; border-radius: 10px; overflow: hidden; }
+.coll-photo-a { height: 132px; display: flex; align-items: center; justify-content: center; }
+.coll-body-a { padding: 12px; }
+
+/* OPTION B (180px) */
+.coll-grid-b { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.coll-card-b { background: white; border: 0.5px solid #ddd8d0; border-radius: 10px; overflow: hidden; }
+.coll-photo-b { height: 180px; display: flex; align-items: center; justify-content: center; }
+.coll-body-b { padding: 14px; }
+
+/* OPTION C — no border, drop shadow, 200px */
+.coll-grid-c { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.coll-card-c { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(42,37,32,0.08); }
+.coll-photo-c { height: 200px; display: flex; align-items: center; justify-content: center; }
+.coll-body-c { padding: 16px; }
+
+/* ══════════════════════════════════════════════
+   SECTION 2 — MAIN PAGE OPTIONS
+══════════════════════════════════════════════ */
+
+/* CURRENT — for reference */
+.intro-box { border: 0.5px solid #ddd8d0; border-radius: 12px; background: white; padding: 2rem 2.5rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+.intro-kicker { font-family: sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9a9390; margin-bottom: 8px; }
+.intro-title { font-size: 26px; font-weight: 300; line-height: 1.2; margin-bottom: 8px; }
+.intro-desc { font-family: sans-serif; font-size: 13px; color: #7a7470; line-height: 1.6; }
+.btn-solid { background: #5a4e34; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-family: sans-serif; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; display: block; text-align: center; margin-bottom: 8px; }
+.btn-outline { background: transparent; color: #2a2520; border: 0.5px solid #ddd8d0; border-radius: 6px; padding: 10px 20px; font-family: sans-serif; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; display: block; text-align: center; }
+.cta-col { display: flex; flex-direction: column; gap: 0; min-width: 200px; }
+
+/* OPTION 1 — Three gateway cards */
+.gateway-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 2.5rem; }
+.gateway-card { border-radius: 12px; padding: 28px 24px; cursor: pointer; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; justify-content: flex-end; }
+.gateway-card-bg { position: absolute; inset: 0; opacity: 0.12; }
+.gateway-label { font-family: sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #9a9390; margin-bottom: 8px; position: relative; }
+.gateway-title { font-size: 22px; font-weight: 300; margin-bottom: 6px; position: relative; }
+.gateway-desc { font-family: sans-serif; font-size: 12px; color: #7a7470; line-height: 1.5; position: relative; }
+.gateway-arrow { font-size: 11px; color: #c8a96e; margin-top: 10px; position: relative; font-family: sans-serif; }
+
+/* OPTION 2 — Minimal hero + single CTA */
+.hero-line { font-size: 13px; font-family: sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9390; margin-bottom: 12px; }
+.hero-title { font-size: 38px; font-weight: 300; line-height: 1.15; margin-bottom: 20px; max-width: 620px; }
+.hero-title em { color: #c8a96e; font-style: italic; }
+.hero-cta-row { display: flex; gap: 12px; margin-bottom: 0; flex-wrap: wrap; }
+.btn-hero { padding: 12px 28px; border-radius: 8px; font-family: sans-serif; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+.btn-hero-primary { background: #5a4e34; color: white; border: none; }
+.btn-hero-secondary { background: transparent; color: #5a4e34; border: 1.5px solid #c8a96e; }
+.hero-divider { width: 40px; height: 2px; background: linear-gradient(to right, #c8a96e, transparent); margin: 28px 0; }
+
+/* OPTION 3 — Full-width colorblock intro */
+.colorblock { background: #2a2520; padding: 48px 0; margin-bottom: 0; }
+.colorblock-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.colorblock-left h1 { font-size: 32px; font-weight: 300; color: white; line-height: 1.2; margin-bottom: 16px; }
+.colorblock-left h1 em { color: #c8a96e; }
+.colorblock-left p { font-family: sans-serif; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 24px; }
+.btn-gold { background: #c8a96e; color: #2a2520; border: none; border-radius: 6px; padding: 12px 24px; font-family: sans-serif; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; font-weight: 600; }
+.colorblock-right { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mini-stone { border-radius: 8px; height: 100px; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px; position: relative; overflow: hidden; }
+.mini-stone-name { font-size: 12px; color: white; font-weight: 400; position: relative; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+
+/* 10 STONES SECTION */
+.ten-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem; }
+.ten-title { font-size: 20px; font-weight: 300; }
+.ten-sub { font-family: sans-serif; font-size: 12px; color: #9a9390; margin-top: 3px; }
+.ten-link { font-family: sans-serif; font-size: 12px; color: #c8a96e; }
+.ten-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+.ten-card { background: white; border-radius: 8px; overflow: hidden; border: 0.5px solid #eee; cursor: pointer; }
+.ten-photo { height: 220px; display: flex; align-items: center; justify-content: center; }
+.ten-body { padding: 12px; border-top: 0.5px solid #f0ece6; }
+.ten-name { font-size: 15px; margin-bottom: 3px; }
+.ten-roles { font-family: sans-serif; font-size: 11px; color: #9a9390; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: COLLECTION CARD SIZE OPTIONS
+══════════════════════════════════════════════ -->
+<div class="section-header">Collection Card Size <span>Option A — current 132px vs Options B & C</span></div>
+
+<div class="wrap">
+  <div class="option-tag" style="margin-bottom:8px">Current — 132px photo height (for reference)</div>
+  <p style="font-family:sans-serif;font-size:12px;color:#9a9390;margin-bottom:20px">Photos feel compressed on the wider 4-column layout. Data-grid feel.</p>
+  <div class="coll-grid-a">
+    <div class="coll-card-a"><div class="coll-photo-a amethyst photo"></div><div class="coll-body-a"><div class="stone-name">Amethyst Sphere</div><div class="stone-meta">Amethyst</div></div></div>
+    <div class="coll-card-a"><div class="coll-photo-a rosequartz photo"></div><div class="coll-body-a"><div class="stone-name">Rose Quartz</div><div class="stone-meta">Rose Quartz · M · Pink shelf</div></div></div>
+    <div class="coll-card-a"><div class="coll-photo-a amber photo"></div><div class="coll-body-a"><div class="stone-name">Amber Piece</div><div class="stone-meta">Amber</div></div></div>
+    <div class="coll-card-a"><div class="coll-photo-a citrine photo"></div><div class="coll-body-a"><div class="stone-name">Citrine</div><div class="stone-meta">Citrine</div></div></div>
+  </div>
+</div>
+
+<div class="divider" style="margin:0 0 2px"></div>
+
+<div class="wrap">
+  <div class="option-tag">Option B — 180px photo height</div>
+  <p style="font-family:sans-serif;font-size:12px;color:#9a9390;margin-bottom:20px">Photos breathe. Feels more like a gallery. Still fits 4 across comfortably.</p>
+  <div class="coll-grid-b">
+    <div class="coll-card-b"><div class="coll-photo-b amethyst photo"></div><div class="coll-body-b"><div class="stone-name">Amethyst Sphere</div><div class="stone-meta">Amethyst</div></div></div>
+    <div class="coll-card-b"><div class="coll-photo-b rosequartz photo"></div><div class="coll-body-b"><div class="stone-name">Rose Quartz</div><div class="stone-meta">Rose Quartz · M · Pink shelf</div></div></div>
+    <div class="coll-card-b"><div class="coll-photo-b amber photo"></div><div class="coll-body-b"><div class="stone-name">Amber Piece</div><div class="stone-meta">Amber</div></div></div>
+    <div class="coll-card-b"><div class="coll-photo-b citrine photo"></div><div class="coll-body-b"><div class="stone-name">Citrine</div><div class="stone-meta">Citrine</div></div></div>
+  </div>
+</div>
+
+<div class="divider" style="margin:0 0 2px"></div>
+
+<div class="wrap">
+  <div class="option-tag">Option C — 200px + shadow, no border</div>
+  <p style="font-family:sans-serif;font-size:12px;color:#9a9390;margin-bottom:20px">Editorial gallery feel. Matches the Ten Stones section weight. Feels upscale.</p>
+  <div class="coll-grid-c">
+    <div class="coll-card-c"><div class="coll-photo-c amethyst photo"></div><div class="coll-body-c"><div class="stone-name">Amethyst Sphere</div><div class="stone-meta">Amethyst</div></div></div>
+    <div class="coll-card-c"><div class="coll-photo-c rosequartz photo"></div><div class="coll-body-c"><div class="stone-name">Rose Quartz</div><div class="stone-meta">Rose Quartz · M · Pink shelf</div></div></div>
+    <div class="coll-card-c"><div class="coll-photo-c amber photo"></div><div class="coll-body-c"><div class="stone-name">Amber Piece</div><div class="stone-meta">Amber</div></div></div>
+    <div class="coll-card-c"><div class="coll-photo-c citrine photo"></div><div class="coll-body-c"><div class="stone-name">Citrine</div><div class="stone-meta">Citrine</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: MAIN PAGE OPTIONS
+══════════════════════════════════════════════ -->
+<div class="section-header" style="margin-top:2px">Main Page Intro <span>Three directions for the hero / intro section</span></div>
+
+<!-- CURRENT (reference) -->
+<div class="fake-header">
+  <svg class="logo-mark" viewBox="0 0 40 40"><ellipse cx="20" cy="28" rx="6" ry="10" fill="none" stroke="#c8a96e" stroke-width="1.2"/><ellipse cx="20" cy="28" rx="3" ry="6" transform="rotate(45 20 28)" fill="none" stroke="#c8a96e" stroke-width="1.2"/><ellipse cx="20" cy="28" rx="3" ry="6" transform="rotate(-45 20 28)" fill="none" stroke="#c8a96e" stroke-width="1.2"/></svg>
+  <div class="logo-text"><div class="logo-main">STILL POINT <em>Lapidary</em></div><div class="logo-sub">Crystal Reference Library</div></div>
+</div>
+<div class="fake-nav"><span class="active">Encyclopedia</span><span>Use When…</span><span>My Collection</span><span>Identify</span><span>Crystals 101</span></div>
+<div class="wrap">
+  <div class="option-tag" style="margin-bottom:8px">Current — for reference</div>
+  <div class="intro-box">
+    <div>
+      <div class="intro-kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
+      <div class="intro-title">A curated crystal encyclopedia and collection tracker for intuitive work and practical collecting.</div>
+    </div>
+    <div class="cta-col" style="gap:8px">
+      <button class="btn-solid">Choose by Intention</button>
+      <button class="btn-outline">Identify a Stone</button>
+      <button class="btn-outline" style="margin-top:4px">Browse Full Encyclopedia</button>
+    </div>
+  </div>
+  <div class="ten-header"><div><div class="ten-title">Ten stones worth knowing</div><div class="ten-sub">A starting point for any collection</div></div><div class="ten-link">Browse all 363 stones →</div></div>
+  <div class="ten-grid">
+    <div class="ten-card"><div class="ten-photo amethyst"></div><div class="ten-body"><div class="ten-name">Amethyst</div><div class="ten-roles">Calm · Sleep · Protection</div></div></div>
+    <div class="ten-card"><div class="ten-photo rosequartz"></div><div class="ten-body"><div class="ten-name">Rose Quartz</div><div class="ten-roles">Love · Heart · Self-compassion</div></div></div>
+    <div class="ten-card"><div class="ten-photo clearquartz"></div><div class="ten-body"><div class="ten-name">Clear Quartz</div><div class="ten-roles">Amplification · Clarity</div></div></div>
+    <div class="ten-card"><div class="ten-photo citrine"></div><div class="ten-body"><div class="ten-name">Citrine</div><div class="ten-roles">Abundance · Confidence</div></div></div>
+    <div class="ten-card"><div class="ten-photo labradorite"></div><div class="ten-body"><div class="ten-name">Labradorite</div><div class="ten-roles">Intuition · Magic</div></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OPTION 1 — Three gateway cards -->
+<div class="fake-header">
+  <svg class="logo-mark" viewBox="0 0 40 40"><ellipse cx="20" cy="28" rx="6" ry="10" fill="none" stroke="#c8a96e" stroke-width="1.2"/><ellipse cx="20" cy="28" rx="3" ry="6" transform="rotate(45 20 28)" fill="none" stroke="#c8a96e" stroke-width="1.2"/><ellipse cx="20" cy="28" rx="3" ry="6" transform="rotate(-45 20 28)" fill="none" stroke="#c8a96e" stroke-width="1.2"/></svg>
+  <div class="logo-text"><div class="logo-main">STILL POINT <em>Lapidary</em></div><div class="logo-sub">Crystal Reference Library</div></div>
+</div>
+<div class="fake-nav"><span class="active">Encyclopedia</span><span>Use When…</span><span>My Collection</span><span>Identify</span><span>Crystals 101</span></div>
+<div class="wrap">
+  <div class="option-tag">Option 1 — Three gateway cards replace the intro box</div>
+  <p style="font-family:sans-serif;font-size:12px;color:#9a9390;margin-bottom:20px">No text description needed — each card IS the action. Beginner immediately sees three clear entry points. The "Learn" card naturally guides a starter toward Crystals 101.</p>
+  <div class="gateway-grid">
+    <div class="gateway-card" style="background:#ede6d6">
+      <div class="gateway-label">I know what I feel</div>
+      <div class="gateway-title">Find my stone</div>
+      <div class="gateway-desc">Tell me what you're going through. I'll point you to the right stone.</div>
+      <div class="gateway-arrow">Choose by intention →</div>
+    </div>
+    <div class="gateway-card" style="background:#dfe8f0">
+      <div class="gateway-label">I have a stone in hand</div>
+      <div class="gateway-title">Identify it</div>
+      <div class="gateway-desc">Color, transparency, surface — narrow it down from 363 options.</div>
+      <div class="gateway-arrow">Open the identifier →</div>
+    </div>
+    <div class="gateway-card" style="background:#ddeee5">
+      <div class="gateway-label">I'm just starting out</div>
+      <div class="gateway-title">Learn & browse</div>
+      <div class="gateway-desc">What do crystals actually do? Start with the ten stones every collection needs.</div>
+      <div class="gateway-arrow">Explore the encyclopedia →</div>
+    </div>
+  </div>
+  <div class="ten-header"><div><div class="ten-title">Ten stones worth knowing</div><div class="ten-sub">A starting point for any collection</div></div><div class="ten-link">Browse all 363 stones →</div></div>
+  <div class="ten-grid">
+    <div class="ten-card"><div class="ten-photo amethyst"></div><div class="ten-body"><div class="ten-name">Amethyst</div><div class="ten-roles">Calm · Sleep · Protection</div></div></div>
+    <div class="ten-card"><div class="ten-photo rosequartz"></div><div class="ten-body"><div class="ten-name">Rose Quartz</div><div class="ten-roles">Love · Heart · Self-compassion</div></div></div>
+    <div class="ten-card"><div class="ten-photo clearquartz"></div><div class="ten-body"><div class="ten-name">Clear Quartz</div><div class="ten-roles">Amplification · Clarity</div></div></div>
+    <div class="ten-card"><div class="ten-photo citrine"></div><div class="ten-body"><div class="ten-name">Citrine</div><div class="ten-roles">Abundance · Confidence</div></div></div>
+    <div class="ten-card"><div class="ten-photo labradorite"></div><div class="ten-body"><div class="ten-name">Labradorite</div><div class="ten-roles">Intuition · Magic</div></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OPTION 2 — Minimal hero -->
+<div class="fake-header">
+  <svg class="logo-mark" viewBox="0 0 40 40"><ellipse cx="20" cy="28" rx="6" ry="10" fill="none" stroke="#c8a96e" stroke-width="1.2"/><ellipse cx="20" cy="28" rx="3" ry="6" transform="rotate(45 20 28)" fill="none" stroke="#c8a96e" stroke-width="1.2"/><ellipse cx="20" cy="28" rx="3" ry="6" transform="rotate(-45 20 28)" fill="none" stroke="#c8a96e" stroke-width="1.2"/></svg>
+  <div class="logo-text"><div class="logo-main">STILL POINT <em>Lapidary</em></div><div class="logo-sub">Crystal Reference Library</div></div>
+</div>
+<div class="fake-nav"><span class="active">Encyclopedia</span><span>Use When…</span><span>My Collection</span><span>Identify</span><span>Crystals 101</span></div>
+<div class="wrap">
+  <div class="option-tag">Option 2 — Minimal hero, let the stones speak</div>
+  <p style="font-family:sans-serif;font-size:12px;color:#9a9390;margin-bottom:20px">Strip away the intro card entirely. One clean headline, two CTAs, then immediately into the Ten Stones. The stones do the selling. Very editorial / magazine feel.</p>
+  <div class="hero-line">Crystal Reference · Collection Tracking · Guided Discovery</div>
+  <div class="hero-title">Every stone you'll ever need to know. <em>Find yours.</em></div>
+  <div class="hero-cta-row">
+    <button class="btn-hero btn-hero-primary">Choose by intention</button>
+    <button class="btn-hero btn-hero-secondary">Browse the encyclopedia</button>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="ten-header"><div><div class="ten-title">Ten stones worth knowing</div><div class="ten-sub">A starting point for any collection — chosen for range, availability, and everyday use</div></div><div class="ten-link">Browse all 363 →</div></div>
+  <div class="ten-grid">
+    <div class="ten-card"><div class="ten-photo amethyst"></div><div class="ten-body"><div class="ten-name">Amethyst</div><div class="ten-roles">Calm · Sleep · Protection</div></div></div>
+    <div class="ten-card"><div class="ten-photo rosequartz"></div><div class="ten-body"><div class="ten-name">Rose Quartz</div><div class="ten-roles">Love · Heart · Self-compassion</div></div></div>
+    <div class="ten-card"><div class="ten-photo clearquartz"></div><div class="ten-body"><div class="ten-name">Clear Quartz</div><div class="ten-roles">Amplification · Clarity</div></div></div>
+    <div class="ten-card"><div class="ten-photo citrine"></div><div class="ten-body"><div class="ten-name">Citrine</div><div class="ten-roles">Abundance · Confidence</div></div></div>
+    <div class="ten-card"><div class="ten-photo labradorite"></div><div class="ten-body"><div class="ten-name">Labradorite</div><div class="ten-roles">Intuition · Magic</div></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OPTION 3 — Dark colorblock hero -->
+<div style="background:#f0ece6">
+<div class="colorblock">
+  <div class="colorblock-inner">
+    <div class="colorblock-left">
+      <h1>The crystal reference that works as hard as you do. <em>Every stone. Every use.</em></h1>
+      <p>363 stones. AI-powered mood matching. Your personal collection — tracked, searchable, and always with you.</p>
+      <div style="display:flex;gap:12px">
+        <button class="btn-gold">Start exploring</button>
+        <button style="background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:12px 20px;font-family:sans-serif;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer">Sign in</button>
+      </div>
+    </div>
+    <div class="colorblock-right">
+      <div class="mini-stone amethyst"><div class="mini-stone-name">Amethyst</div></div>
+      <div class="mini-stone rosequartz"><div class="mini-stone-name">Rose Quartz</div></div>
+      <div class="mini-stone labradorite"><div class="mini-stone-name">Labradorite</div></div>
+      <div class="mini-stone citrine"><div class="mini-stone-name">Citrine</div></div>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="option-tag" style="margin-top:0;padding-top:0;border:none;color:#9a9390;font-size:10px">Option 3 — Dark hero. Bold brand statement. Then stones immediately below.</div>
+  <div class="ten-header"><div><div class="ten-title">Ten stones worth knowing</div><div class="ten-sub">A starting point for any collection</div></div><div class="ten-link">Browse all 363 →</div></div>
+  <div class="ten-grid">
+    <div class="ten-card"><div class="ten-photo amethyst"></div><div class="ten-body"><div class="ten-name">Amethyst</div><div class="ten-roles">Calm · Sleep · Protection</div></div></div>
+    <div class="ten-card"><div class="ten-photo rosequartz"></div><div class="ten-body"><div class="ten-name">Rose Quartz</div><div class="ten-roles">Love · Heart · Self-compassion</div></div></div>
+    <div class="ten-card"><div class="ten-photo clearquartz"></div><div class="ten-body"><div class="ten-name">Clear Quartz</div><div class="ten-roles">Amplification · Clarity</div></div></div>
+    <div class="ten-card"><div class="ten-photo citrine"></div><div class="ten-body"><div class="ten-name">Citrine</div><div class="ten-roles">Abundance · Confidence</div></div></div>
+    <div class="ten-card"><div class="ten-photo labradorite"></div><div class="ten-body"><div class="ten-name">Labradorite</div><div class="ten-roles">Intuition · Magic</div></div></div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
