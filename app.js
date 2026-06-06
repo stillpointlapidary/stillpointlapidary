@@ -886,7 +886,7 @@ function encRender(){
   const grid = document.getElementById('crystal-grid');
   if(!grid) return;
   if(!list.length){
-    grid.innerHTML = '<div class="empty-state">No crystals match.<br><span style="font-size:12px;margin-top:6px;display:block"><button onclick="resetFilters()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-family:\'Jost\',sans-serif;font-size:12px;text-decoration:underline;text-underline-offset:2px;padding:0">Clear filters</button> to see all stones.</span></div>';
+    grid.innerHTML = '<div class="empty-coll-state"><div class="empty-coll-icon">✦</div><div class="empty-coll-title">No stones found</div><div class="empty-coll-text">Try adjusting your filters or search for something different.</div><button class="empty-coll-btn" onclick="resetFilters()">Clear filters</button></div>';
     document.getElementById('load-more-wrap').style.display = 'none';
     return;
   }
@@ -3343,6 +3343,7 @@ var id2State={color:null,trans:null,luster:null,hard:null,heft:null};
 const HEFT_FN={
   light:   c=>['Gypsum','Organic Material','Fossil Material'].includes(c.fam)||['Amber','Selenite','Satin Spar','Pumice','Desert Rose'].some(n=>c.n.includes(n)),
   heavy:   c=>['Iron Minerals','Sulfides'].includes(c.fam)||['Hematite','Pyrite','Galena','Magnetite','Lodestone','Chalcopyrite','Bismuth','Barite','Cassiterite'].some(n=>c.n.includes(n)),
+  average: c=>!HEFT_FN.light(c)&&!HEFT_FN.heavy(c),
 };
 const ID2_COLORS=[
   {val:'Red',hex:'#b04a4a'},{val:'Orange',hex:'#c4683a'},{val:'Yellow',hex:'#c9a832'},
