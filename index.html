@@ -81,7 +81,7 @@
         <h1 class="hero-headline">Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em></h1>
         <p class="hero-sub">363 stones. AI-powered mood matching. Your collection — tracked, searchable, and always with you.</p>
         <div class="hero-btns">
-          <button class="btn btn-sm btn-accent" onclick="location.href='encyclopedia.html'">Start exploring</button>
+          <button class="btn btn-sm btn-accent" onclick="localStorage.setItem('spl_active_tab','mood');location.href='encyclopedia.html'">Start exploring</button>
           <button class="btn btn-sm" onclick="localStorage.setItem('spl_active_tab','identify');location.href='encyclopedia.html'">Identify a stone</button>
         </div>
       </div>
@@ -107,6 +107,33 @@
       </div>
     </div>
   </div>
+
+<!-- EXPLORE FURTHER TILES -->
+<div class="home-explore">
+  <div class="home-explore-label">Explore further</div>
+  <div class="home-explore-tiles">
+    <div class="home-explore-tile" onclick="location.href='encyclopedia.html'">
+      <div class="home-explore-tile-name">Encyclopedia</div>
+      <div class="home-explore-tile-desc">Browse all 363 stones by name, color, or intention</div>
+      <div class="home-explore-tile-arrow">→</div>
+    </div>
+    <div class="home-explore-tile" onclick="localStorage.setItem('spl_active_tab','mood');location.href='encyclopedia.html'">
+      <div class="home-explore-tile-name">Use When…</div>
+      <div class="home-explore-tile-desc">Find the right stone for this moment</div>
+      <div class="home-explore-tile-arrow">→</div>
+    </div>
+    <div class="home-explore-tile" onclick="localStorage.setItem('spl_active_tab','collection');location.href='encyclopedia.html'">
+      <div class="home-explore-tile-name">My Collection</div>
+      <div class="home-explore-tile-desc">Track the stones you own across every device</div>
+      <div class="home-explore-tile-arrow">→</div>
+    </div>
+    <div class="home-explore-tile" onclick="localStorage.setItem('spl_active_tab','101');location.href='encyclopedia.html'">
+      <div class="home-explore-tile-name">Crystals 101</div>
+      <div class="home-explore-tile-desc">How to choose, use, and care for your stones</div>
+      <div class="home-explore-tile-arrow">→</div>
+    </div>
+  </div>
+</div>
 
 </main>
 </div>
