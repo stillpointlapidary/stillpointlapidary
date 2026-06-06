@@ -2219,10 +2219,9 @@ function closeAddEncForm(){
   document.getElementById('add-enc-form-overlay').classList.remove('open');
   document.getElementById('add-enc-form-overlay').querySelectorAll('input,select,textarea').forEach(el=>el.value='');
 }
-function saveEncEntry(){
+async function saveEncEntry(){
   const name=document.getElementById('enc-name').value.trim();
   if(!name){alert('Name is required.');return;}
-  const newId='C-'+(9000+customEntries.length+1).toString().padStart(4,'0');
   const uw=document.getElementById('enc-uw').value.trim();
   const er=document.getElementById('enc-er').value.trim();
   const chakraStr=document.getElementById('enc-chakra').value.trim();
@@ -2231,24 +2230,48 @@ function saveEncEntry(){
   const mmax=document.getElementById('enc-mmax').value.trim();
   const mohs=mmin&&mmax?(mmin===mmax?mmin:mmin+'–'+mmax):(mmin||mmax||'');
   const c=document.getElementById('enc-c').value.trim();
-  const newEntry={
-    i:newId,n:name,a:document.getElementById('enc-alt').value.trim(),
-    fam:document.getElementById('enc-fam').value.trim(),
-    sp:document.getElementById('enc-sp').value.trim(),
-    mt:document.getElementById('enc-mt').value,sy:document.getElementById('enc-sy').value,
-    fo:document.getElementById('enc-fo').value,tr:document.getElementById('enc-tr').value,
-    c,ch:'#c8b89a',cc:document.getElementById('enc-cc').value.trim(),
-    m:mohs,g:document.getElementById('enc-g').value.trim(),er,uw,o:false,w:false,
-    chakras,element:document.getElementById('enc-element').value.trim(),
-    zodiac:'',aff:document.getElementById('enc-aff').value.trim(),
-    col_cats:['Multi'],all_themes:[],primary_theme:'',_search:'',isCustom:true,
-  };
-  customEntries.push(newEntry);
-  localStorage.setItem('lap_enc_custom',JSON.stringify(customEntries));
-  CRYSTALS.push(newEntry);
-  closeAddEncForm();encRender();
-  document.getElementById('stone-count').textContent=CRYSTALS.length+' entries';
-  alert(`"${name}" added to encyclopedia as ${newId}.`);
+  const alt=document.getElementById('enc-alt').value.trim();
+  const fam=document.getElementById('enc-fam').value.trim();
+  const sp=document.getElementById('enc-sp').value.trim();
+  const element=document.getElementById('enc-element').value.trim();
+  const aff=document.getElementById('enc-aff').value.trim();
+  const g=document.getElementById('enc-g').value.trim();
+  const cc=document.getElementById('enc-cc').value.trim();
+
+  // Save to Supabase as the source of truth
+  if(_supa&&_currentUser){
+    const saveBtn=document.querySelector('#add-enc-form-overlay .btn-accent');
+    if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving…';}
+    const payload={
+      name,alternate_names:alt||null,family:fam||null,species:sp||null,
+      material_type:document.getElementById('enc-mt').value||null,
+      crystal_system:document.getElementById('enc-sy').value||null,
+      formation:document.getElementById('enc-fo').value||null,
+      transparency:document.getElementById('enc-tr').value||null,
+      color:c||null,color_hex:'#c8b89a',color_cause:cc||null,
+      mohs:mohs||null,geo_notes:g||null,
+      energetic_role_1:er||null,use_when:uw||null,affirmation:aff||null,
+      chakras:chakras.length?chakras:null,element:element||null,
+      color_categories:['Multi'],all_themes:[],primary_theme:'',
+    };
+    const {data,error}=await _supa.from('stones').insert(payload).select('id').single();
+    if(saveBtn){saveBtn.disabled=false;saveBtn.textContent='Save entry';}
+    if(error){alert('Error saving to database: '+error.message);return;}
+    const newId=data.id;
+    const newEntry={
+      i:newId,n:name,a:alt,fam,sp,
+      mt:document.getElementById('enc-mt').value,sy:document.getElementById('enc-sy').value,
+      fo:document.getElementById('enc-fo').value,tr:document.getElementById('enc-tr').value,
+      c,ch:'#c8b89a',cc,m:mohs,g,er1:er,er2:'',er3:'',uw,o:false,w:false,
+      chakras,element,zodiac:'',aff,col_cats:['Multi'],all_themes:[],primary_theme:'',_search:er,
+    };
+    CRYSTALS.push(newEntry);
+    closeAddEncForm();encRender();
+    const sc=document.getElementById('stone-count');if(sc)sc.textContent=CRYSTALS.length+' entries';
+    alert(`"${name}" added to encyclopedia as ${newId}.`);
+  } else {
+    alert('You must be signed in to add encyclopedia entries.');
+  }
 }
 
 // ── EXPORT ──
