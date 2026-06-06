@@ -546,6 +546,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .featured-card-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink);line-height:1.2}
 .featured-card-use{font-size:11px;color:var(--ink2r);line-height:1.4;letter-spacing:0.01em}
 .featured-card-intention{font-size:11px;color:var(--ink2);font-style:italic;line-height:1.4;margin-top:auto}
+/* HOME EXPLORE TILES */
+.home-explore{padding:2.5rem 0 1rem}
+.home-explore-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem}
+.home-explore-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
+.home-explore-tile{background:var(--white);padding:1.25rem 1.25rem 1rem;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;gap:0.3rem}
+.home-explore-tile:hover{background:var(--stone);outline:1.5px solid var(--accent2);outline-offset:-1px;z-index:1}
+.home-explore-tile-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink)}
+.home-explore-tile-desc{font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);line-height:1.6;flex:1}
+.home-explore-tile-arrow{font-family:'Jost',sans-serif;font-size:13px;color:var(--accent2);margin-top:0.5rem}
+@media(max-width:700px){.home-explore-tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.home-explore-tiles{grid-template-columns:1fr}}
 .featured-divider{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1.1rem;background:rgba(139,115,85,0.1);border:0.5px solid rgba(139,115,85,0.25);border-radius:8px;cursor:pointer;margin:2rem 0 0.5rem}
 .featured-divider-left{display:flex;align-items:center;gap:10px}
 .featured-divider-text{font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);font-weight:700;white-space:nowrap}
