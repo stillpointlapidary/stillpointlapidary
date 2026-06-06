@@ -57,6 +57,13 @@
 
 ---
 
+### Encyclopedia Intro Line ✓
+- Georgia italic 16px, ink2 color, sits above the search bar
+- Text: *"Search by name, color, intention, or property"*
+- Option B chosen from four mockup options
+
+---
+
 ## 🔧 STILL NEEDS DECISION / ACTION
 
 ### Stone Detail Drawer — Photo Background
