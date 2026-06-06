@@ -547,14 +547,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .featured-card-use{font-size:11px;color:var(--ink2r);line-height:1.4;letter-spacing:0.01em}
 .featured-card-intention{font-size:11px;color:var(--ink2);font-style:italic;line-height:1.4;margin-top:auto}
 /* HOME EXPLORE TILES */
-.home-explore{padding:2.5rem 0 1rem}
+.home-explore{padding:2rem 0 1rem}
 .home-explore-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem}
-.home-explore-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
-.home-explore-tile{background:var(--white);padding:1.25rem 1.25rem 1rem;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;gap:0.3rem}
-.home-explore-tile:hover{background:var(--stone);outline:1.5px solid var(--accent2);outline-offset:-1px;z-index:1}
-.home-explore-tile-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink)}
-.home-explore-tile-desc{font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);line-height:1.6;flex:1}
-.home-explore-tile-arrow{font-family:'Jost',sans-serif;font-size:13px;color:var(--accent2);margin-top:0.5rem}
+.home-explore-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.home-explore-tile{padding:16px 18px;cursor:pointer;transition:filter 0.15s;display:flex;flex-direction:column;gap:7px;border-radius:10px;border:0.5px solid transparent}
+.home-explore-tile:hover{filter:brightness(0.96)}
+.home-explore-tile--enc {background:#ede6d6;border-color:#c8bda4;color:#5a4e34}
+.home-explore-tile--uw  {background:#e8e2f0;border-color:#bdb0d4;color:#4a3870}
+.home-explore-tile--coll{background:#ddeee5;border-color:#a8ccb8;color:#2d5e44}
+.home-explore-tile--101 {background:#dfe8f0;border-color:#afc4d4;color:#2d5470}
+.home-explore-tile-icon{opacity:0.65;display:flex;align-items:center;width:20px;height:20px}
+.home-explore-tile-name{font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.01em}
+.home-explore-tile-desc{font-family:'Jost',sans-serif;font-size:11px;line-height:1.55;opacity:0.75}
 @media(max-width:700px){.home-explore-tiles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:420px){.home-explore-tiles{grid-template-columns:1fr}}
 .featured-divider{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1.1rem;background:rgba(139,115,85,0.1);border:0.5px solid rgba(139,115,85,0.25);border-radius:8px;cursor:pointer;margin:2rem 0 0.5rem}
