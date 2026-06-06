@@ -60,7 +60,7 @@ Return ONLY a valid JSON object with these exact keys. No explanation, no markdo
 }`;
 
     const response = await client.messages.create({
-      model: "claude-sonnet-4-5-20251001",
+      model: "claude-opus-4-5",
       max_tokens: 1024,
       messages: [{ role: "user", content: prompt }],
     });
