@@ -48,9 +48,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 .content{flex:1;padding:1.5rem;max-width:1100px;margin:0 auto;width:100%}
 /* SITE HERO */
-.site-hero{background:#f5f3ef;margin-bottom:1rem}
+.site-hero{background:#f5f3ef;margin-bottom:1rem;margin-top:-1.5rem}
 .site-hero-inner{display:grid;grid-template-columns:1fr 340px;gap:52px;align-items:center;padding:0 32px}
-.site-hero-left{padding:48px 0 44px;display:flex;flex-direction:column}
+.site-hero-left{padding:28px 0 32px;display:flex;flex-direction:column}
 .hero-kicker-rule{width:32px;height:1px;background:#c8a96e;margin-bottom:14px}
 .hero-kicker{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#9a9390;margin-bottom:18px}
 .hero-headline{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;line-height:1.25;margin-bottom:18px;color:var(--ink)}
