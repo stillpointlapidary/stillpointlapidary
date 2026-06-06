@@ -512,7 +512,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .shapes-scroll-arrow.visible{opacity:1;pointer-events:auto}
 .shapes-scroll-arrow--left{}
 .shapes-scroll-arrow--right{}
-.shape-strip-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.15s;border:0.5px solid var(--border);flex-shrink:0}
+.shape-strip-item{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.15s;border:1px solid rgba(42,37,32,0.28);flex-shrink:0}
 .shape-strip-item:hover{background:var(--stone);color:var(--ink);border-color:var(--accent2)}
 .shape-strip-item.active{background:var(--white);border-color:var(--accent2);color:var(--ink);font-weight:500}
 .shape-strip-icon{flex-shrink:0;opacity:0.65;display:flex;align-items:center}
@@ -626,7 +626,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 
 /* ── Identify Tab CSS (from lines 763–784) ── */
-.id2-wrap{padding:1.5rem 0 2rem}
+.id2-wrap{padding:0.25rem 0 2rem}
 .id2-h1{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:0.25rem}
 .id2-sub{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:1.5rem}
 .id2-filters{display:grid;grid-template-columns:1fr 1fr;gap:20px 40px;margin-bottom:1.5rem;padding:1.5rem 1.75rem;background:var(--white);border:0.5px solid var(--border);border-radius:12px}
