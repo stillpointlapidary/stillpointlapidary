@@ -668,7 +668,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* ── Crystals 101 CSS (from lines 837–921) ── */
 .c101-wrap{padding:0 0 1.5rem}
 .c101-layout{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;margin-top:0.5rem;align-items:start}
-.c101-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0;border-radius:12px 0 0 12px;position:sticky;top:118px;max-height:calc(100vh - 138px);overflow-y:auto}
+.c101-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0;border-radius:12px 0 0 12px;position:sticky;top:148px;max-height:calc(100vh - 168px);overflow-y:auto}
 .c101-sidebar-item{display:block;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s}
 .c101-sidebar-item:hover{background:var(--stone);color:var(--ink)}
 .c101-sidebar-item.active{background:var(--white);border-left-color:var(--accent);color:var(--ink);font-weight:500}
