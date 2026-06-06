@@ -1237,7 +1237,7 @@ function intentionCardClick(group, el) {
       grid.style.display = '';
       const rb = document.getElementById('mood-reset-bar');
       if (rb) rb.style.display = '';
-      const y = grid.getBoundingClientRect().top + window.scrollY - 120;
+      const y = grid.getBoundingClientRect().top + window.scrollY - 148;
       window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
     return;
@@ -1251,7 +1251,7 @@ function intentionCardClick(group, el) {
     grid.style.display = '';
     const rb = document.getElementById('mood-reset-bar');
     if (rb) rb.style.display = '';
-    const y = grid.getBoundingClientRect().top + window.scrollY - 120;
+    const y = grid.getBoundingClientRect().top + window.scrollY - 148;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }
 
