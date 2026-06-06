@@ -46,7 +46,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .nav-tab.active{color:var(--ink);border-bottom-color:var(--accent)}
 .nav-tab:hover:not(.active){color:var(--ink)}
 
-.content{flex:1;padding:1.5rem;max-width:1100px;margin:0 auto;width:100%}
+.content{flex:1;padding:1rem 1.5rem 1.5rem;max-width:1100px;margin:0 auto;width:100%}
 /* SITE HERO */
 .site-hero{background:#f5f3ef;margin-bottom:1rem;margin-top:-1.5rem}
 .site-hero-inner{display:grid;grid-template-columns:1fr 340px;gap:52px;align-items:center;padding:0 32px}
