@@ -384,7 +384,7 @@ function init(){
   const n=CRYSTALS.length;
   const stoneCountEl=document.getElementById('stone-count');
   if(stoneCountEl)stoneCountEl.textContent=n+' entries';
-  ['intro-stone-count','browse-stone-count','divider-stone-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+  ['intro-stone-count','browse-stone-count','divider-stone-count','hero-stone-count','explore-stone-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
   // Encyclopedia-only initialisation (skipped on homepage)
   const isEncyclopediaPage=!!document.getElementById('crystal-grid');
   if(isEncyclopediaPage){
