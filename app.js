@@ -4552,9 +4552,9 @@ const _supa = window.supabase.createClient(
 // ── Load stones from Supabase, then init app ──
 loadStonesAndInit().then(()=>{
   const action=new URLSearchParams(window.location.search).get('action');
-  if(action==='guide') setTimeout(()=>openPopup('instructions'),300);
-  else if(action==='manage') setTimeout(()=>openPopup('manage'),300);
-  else if(action==='add-entry') setTimeout(()=>openAddEncForm(),300);
+  if(action==='guide') openPopup('instructions');
+  else if(action==='manage') openPopup('manage');
+  else if(action==='add-entry') openAddEncForm();
 });
 
 let _currentUser = null;

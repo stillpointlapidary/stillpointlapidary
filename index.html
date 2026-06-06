@@ -55,10 +55,10 @@
   <div class="topbar-right">
   <span class="stone-count" id="stone-count"></span>
     <div class="topbar-auth" id="topbar-auth"></div>
-    <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="encyclopedia.html?action=add-entry">+ Entry</a>
+    <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="encyclopedia.html?action=add-entry" onclick="localStorage.setItem('spl_active_tab','encyclopedia')">+ Entry</a>
     <button class="btn btn-sm" id="request-entry-btn" onclick="openEntryRequestForm()">Request entry</button>
-    <a class="btn btn-sm" id="guide-btn" href="encyclopedia.html?action=guide">? Guide</a>
-    <a class="btn btn-sm" id="manage-btn" style="display:none" href="encyclopedia.html?action=manage">Manage</a>
+    <a class="btn btn-sm" id="guide-btn" href="encyclopedia.html?action=guide" onclick="localStorage.setItem('spl_active_tab','encyclopedia')">? Guide</a>
+    <a class="btn btn-sm" id="manage-btn" style="display:none" href="encyclopedia.html?action=manage" onclick="localStorage.setItem('spl_active_tab','encyclopedia')">Manage</a>
   </div>
 </header>
 

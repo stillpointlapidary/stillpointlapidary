@@ -1209,31 +1209,31 @@
 <div class="popup-overlay" id="popup-manage" onclick="if(event.target===this)closePopup('manage')">
   <div class="popup-box" style="max-width:400px">
     <button class="popup-close" onclick="closePopup('manage')">✕</button>
-    <div class="popup-title">Manage</div>
-    <div style="margin-bottom:1rem">
-      <div class="sec-label" style="margin-bottom:0.4rem">Add new</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
-        <button class="btn" style="justify-content:flex-start" onclick="openAddForm();closePopup('manage')">+ Add collection piece</button>
-        <button class="btn" style="justify-content:flex-start" onclick="openBatchForm();closePopup('manage')">+ Batch add collection pieces</button>
+    <div class="popup-title" style="margin-bottom:0.6rem">Manage</div>
+    <div style="margin-bottom:0.6rem">
+      <div class="sec-label" style="margin-bottom:0.3rem">Add new</div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openAddEncForm();closePopup('manage')">+ Add encyclopedia entry</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openAddForm();closePopup('manage')">+ Add collection piece</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openBatchForm();closePopup('manage')">+ Batch add collection pieces</button>
       </div>
     </div>
-    <div style="margin-bottom:1rem">
-      <div class="sec-label" style="margin-bottom:0.4rem">Print</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('collection');closePopup('manage')">⎙ Print collection report</button>
-        <button class="btn" style="justify-content:flex-start" onclick="openReportOptions('wishlist');closePopup('manage')">⎙ Print wishlist report</button>
+    <div style="margin-bottom:0.6rem">
+      <div class="sec-label" style="margin-bottom:0.3rem">Print</div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openReportOptions('collection');closePopup('manage')">⎙ Print collection report</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openReportOptions('wishlist');closePopup('manage')">⎙ Print wishlist report</button>
       </div>
     </div>
-    <div style="margin-bottom:1rem">
-      <div class="sec-label" style="margin-bottom:0.4rem">Export</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <button class="btn manage-admin-only" style="justify-content:flex-start;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Encyclopedia (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportCollectionCSV();closePopup('manage')">↓ Collection (CSV)</button>
-        <button class="btn" style="justify-content:flex-start" onclick="exportWishlistCSV();closePopup('manage')">↓ Wishlist (CSV)</button>
+    <div style="margin-bottom:0.6rem">
+      <div class="sec-label" style="margin-bottom:0.3rem">Export</div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Encyclopedia (CSV)</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportCollectionCSV();closePopup('manage')">↓ Collection (CSV)</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportWishlistCSV();closePopup('manage')">↓ Wishlist (CSV)</button>
       </div>
     </div>
-    <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.75rem;background:var(--stone2);border-radius:6px">
+    <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.6rem 0.75rem;background:var(--stone2);border-radius:6px">
       Your collection and wishlist are saved to the cloud when you're signed in.
       <div style="margin-top:6px;color:var(--ink3)" id="last-saved-display"></div>
     </div>
