@@ -2242,7 +2242,12 @@ async function saveEncEntry(){
   if(_supa&&_currentUser){
     const saveBtn=document.querySelector('#add-enc-form-overlay .btn-accent');
     if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving…';}
+    // Generate next C-9xxx ID
+    const {data:maxRow}=await _supa.from('stones').select('id').like('id','C-9%').order('id',{ascending:false}).limit(1).maybeSingle();
+    const nextNum=maxRow?parseInt(maxRow.id.replace('C-',''))+1:9001;
+    const newId='C-'+nextNum.toString().padStart(4,'0');
     const payload={
+      id:newId,
       name,alternate_names:alt||null,family:fam||null,species:sp||null,
       material_type:document.getElementById('enc-mt').value||null,
       crystal_system:document.getElementById('enc-sy').value||null,
