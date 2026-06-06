@@ -107,6 +107,22 @@ const MOOD_DATA=[
 ]
 const MOOD_GROUPS=['All','Grounding & Stability','Heart & Emotional','Mind & Will','Spirit & Intuition','Body & Vitality'];
 
+// Maps each intention card group to the all_themes values used in Supabase
+const INTENTION_THEME_MAP = {
+  'Grounding & Stability': ['Grounding', 'Protection'],
+  'Heart & Emotional':     ['Heart Healing', 'Emotional Balance', 'Calm & Peace', 'Self-Love', 'Joy'],
+  'Mind & Will':           ['Clarity & Focus', 'Communication', 'Confidence'],
+  'Spirit & Intuition':    ['Intuition', 'Spiritual Connection', 'Transformation'],
+  'Body & Vitality':       ['Vitality', 'Amplification', 'Manifestation'],
+};
+const INTENTION_CARD_SUBS = {
+  'Grounding & Stability': 'Presence, stability, inner calm',
+  'Heart & Emotional':     'Love, compassion, forgiveness',
+  'Mind & Will':           'Mental clarity, motivation, fresh perspective',
+  'Spirit & Intuition':    'Intuition, inner wisdom, spiritual awareness',
+  'Body & Vitality':       'Energy, resilience, vitality',
+};
+
 
 // ── IMAGE STORAGE FALLBACKS ──
 // Claude's prior version referenced encyclopedia photo constants that were not present in this file.
@@ -1243,29 +1259,63 @@ function intentionCardClick(group, el) {
     return;
   }
 
-  // Filter mood grid by group and scroll to results
+  // Filter directly from CRYSTALS by all_themes
   clearMoodResults();
-  renderMoodGrid(group);
-  const grid = document.getElementById('mood-grid');
-  if (grid) {
-    grid.style.display = '';
-    const rb = document.getElementById('mood-reset-bar');
-    if (rb) rb.style.display = '';
-    const y = grid.getBoundingClientRect().top + window.scrollY - 148;
+  const themes = INTENTION_THEME_MAP[group] || [];
+  const matches = CRYSTALS.filter(c => themes.some(t => (c.all_themes||[]).includes(t)));
+  renderIntentionResults(matches, group);
+
+  // Scroll to results
+  const sv = document.getElementById('mood-selected-view');
+  if (sv) {
+    const y = sv.getBoundingClientRect().top + window.scrollY - 148;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }
+}
 
-  // TODO: Once primary_theme data is cleaned up in Supabase, replace renderMoodGrid(group)
-  // with a direct stone filter using primary_theme:
-  //   const THEME_MAP = {
-  //     'Grounding & Stability': 'Grounding',
-  //     'Heart & Emotional': 'Heart Healing',  // exact values pending data audit
-  //     'Mind & Will': 'Clarity & Focus',
-  //     'Spirit & Intuition': 'Intuition',
-  //     'Body & Vitality': 'Vitality',
-  //   };
-  //   const matches = CRYSTALS.filter(c => (c.all_themes||[]).includes(THEME_MAP[group]));
-  //   renderIntentionResults(matches, group);
+function renderIntentionResults(matches, group) {
+  // Hide the mood card grid — we're going straight to stones
+  const moodGrid = document.getElementById('mood-grid');
+  if (moodGrid) moodGrid.style.display = 'none';
+
+  // Show reset bar
+  const rb = document.getElementById('mood-reset-bar');
+  if (rb) rb.style.display = '';
+
+  // Populate the selected-card header with the category name
+  const groupEl = document.getElementById('mood-selected-group');
+  const labelEl = document.getElementById('mood-selected-label');
+  const subEl   = document.getElementById('mood-selected-sub');
+  if (groupEl) groupEl.textContent = '';
+  if (labelEl) labelEl.textContent = group;
+  if (subEl)   subEl.textContent   = INTENTION_CARD_SUBS[group] || '';
+
+  // Hide sub-filter row and grid banner (not used in category browse)
+  const sfRow = document.getElementById('sub-filter-row');
+  if (sfRow) sfRow.style.display = 'none';
+  const gridBanner = document.getElementById('mood-grid-banner');
+  if (gridBanner) gridBanner.style.display = 'none';
+
+  // Stone count
+  const countEl = document.getElementById('mood-results-count');
+  if (countEl) countEl.textContent = matches.length + ' stones';
+
+  // Show the selected-view container
+  const selectedView = document.getElementById('mood-selected-view');
+  if (selectedView) selectedView.style.display = 'block';
+
+  // Render stone cards
+  const stoneGrid = document.getElementById('mood-stone-grid');
+  if (!stoneGrid) return;
+  stoneGrid.style.display = 'grid';
+  if (!matches.length) {
+    stoneGrid.innerHTML = '<div class="empty-state">No stones found for this category yet.</div>';
+    return;
+  }
+  stoneGrid.innerHTML = matches.map(function(c) {
+    const raw = encCardHtml(c);
+    return raw.replace(/onclick="openDetail\(/, 'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
+  }).join('');
 }
 
 function buildMoodGroupPills(){
