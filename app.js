@@ -109,8 +109,8 @@ const MOOD_GROUPS=['All','Grounding & Stability','Heart & Emotional','Mind & Wil
 
 // Maps each intention card group to the all_themes values used in Supabase
 const INTENTION_THEME_MAP = {
-  'Grounding & Stability': ['Grounding', 'Protection'],
-  'Heart & Emotional':     ['Heart Healing', 'Emotional Balance', 'Calm & Peace', 'Self-Love', 'Joy'],
+  'Grounding & Stability': ['Grounding', 'Protection', 'Calm & Peace'],
+  'Heart & Emotional':     ['Heart Healing', 'Emotional Balance', 'Self-Love', 'Joy'],
   'Mind & Will':           ['Clarity & Focus', 'Communication', 'Confidence'],
   'Spirit & Intuition':    ['Intuition', 'Spiritual Connection', 'Transformation'],
   'Body & Vitality':       ['Vitality', 'Amplification', 'Manifestation'],
