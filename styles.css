@@ -234,8 +234,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .coll-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px}
 .coll-title{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:var(--ink)}
 .coll-btns{display:flex;gap:6px;flex-wrap:wrap}
-.coll-stats{display:grid;grid-template-columns:190px 1fr;gap:10px;margin-bottom:1rem}
+.coll-stats{display:grid;grid-template-columns:220px 1fr;gap:10px;margin-bottom:1rem;align-items:stretch}
 .stats-stacked{display:flex;flex-direction:column;gap:10px}
+.stats-stacked .stat-cell{flex:1;display:flex;flex-direction:column;justify-content:center;padding:11px 16px}
 .stat-cell{background:var(--white);padding:11px 14px;border:0.5px solid var(--border);border-radius:10px}
 .stat-label{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:5px}
 .stat-num-row{display:flex;align-items:baseline;gap:7px}

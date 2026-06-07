@@ -16,103 +16,33 @@
     --tier-wish: #c8a96e;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Jost', sans-serif; background: var(--stone); color: var(--ink); padding: 40px 24px; max-width: 900px; margin: 0 auto; }
+  body { font-family: 'Jost', sans-serif; background: var(--stone); color: var(--ink); padding: 40px 24px; max-width: 960px; margin: 0 auto; }
 
   .page-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
   .page-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .state-title { font-family: Georgia, serif; font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
+  .state-title { font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
   .state-desc { font-size: 12px; color: var(--ink2); line-height: 1.6; margin-bottom: 20px; }
-  .demo-block { margin-bottom: 52px; }
+  .demo-block { margin-bottom: 56px; }
 
-  /* ── shared cell shell ── */
-  .stat-cell {
-    background: var(--white); border: 0.5px solid var(--border);
-    border-radius: 10px; padding: 14px 16px;
-  }
-  .stat-cell-label {
-    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink3); margin-bottom: 6px;
-  }
-  .stat-cell-value {
-    font-family: Georgia, serif; font-size: 30px; font-weight: 400;
-    color: var(--ink); line-height: 1;
-  }
-  .stat-cell-sub {
-    font-size: 10px; color: var(--ink3); margin-top: 4px;
-  }
-  .stat-cell-sub strong { color: var(--tier-wish); font-weight: 500; }
+  /* ── shared stat cell shell ── */
+  .stat-label { font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink2r); margin-bottom: 5px; }
+  .stat-num-row { display: flex; align-items: baseline; gap: 7px; }
+  .stat-val { font-family: Georgia, serif; font-size: 26px; font-weight: 400; color: var(--ink); line-height: 1; }
+  .stat-sub { font-size: 10px; color: var(--ink3); }
 
-  /* ── OPTION A: current layout (3 columns) ── */
-  .stats-grid-current {
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    gap: 10px;
-  }
-
-  /* ── OPTION B: condensed layout (2 columns, stats stacked) ── */
-  .stats-grid-new {
-    display: grid;
-    grid-template-columns: 190px 1fr;
-    gap: 10px;
-  }
-  .stats-stacked {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .stat-cell-stacked {
-    background: var(--white); border: 0.5px solid var(--border);
-    border-radius: 10px; padding: 11px 14px;
-    flex: 1;
-  }
-  .stat-cell-stacked .stat-cell-label { margin-bottom: 5px; }
-  .stat-num-row {
-    display: flex; align-items: baseline; gap: 7px;
-  }
-  .stat-num-row .stat-cell-value { font-size: 26px; }
-  .stat-num-row .stat-cell-sub { margin-top: 0; font-size: 10px; color: var(--ink3); }
-
-  /* ── tier bars (shared) ── */
-  .tier-header-row {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px;
-  }
-  .tier-section-label {
-    font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink2r);
-  }
-  .tier-toggle {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 10px; letter-spacing: 0.06em; color: var(--ink3);
-    cursor: pointer; user-select: none;
-  }
-  .toggle-track {
-    width: 28px; height: 15px; border-radius: 8px;
-    background: var(--tier-wish); position: relative; flex-shrink: 0;
-  }
-  .toggle-thumb {
-    width: 11px; height: 11px; border-radius: 50%; background: white;
-    position: absolute; top: 2px; right: 2px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  }
-  .tier-col-headers {
-    display: grid;
-    grid-template-columns: 140px 1fr 40px 48px 40px 36px;
-    gap: 6px; align-items: center;
-    margin-bottom: 6px; padding-bottom: 6px;
-    border-bottom: 0.5px solid var(--border2);
-  }
-  .tier-col-hdr {
-    font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink3); text-align: right;
-  }
+  /* ── tier chart shared ── */
+  .tier-chart-cell { background: var(--white); border: 0.5px solid var(--border); border-radius: 10px; padding: 11px 14px; }
+  .tier-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .tier-section-label { font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink2r); }
+  .tier-toggle { display: flex; align-items: center; gap: 6px; font-size: 10px; letter-spacing: 0.06em; color: var(--ink3); cursor: pointer; user-select: none; }
+  .toggle-track { width: 28px; height: 15px; border-radius: 8px; background: var(--tier-wish); position: relative; flex-shrink: 0; }
+  .toggle-thumb { width: 11px; height: 11px; border-radius: 50%; background: white; position: absolute; top: 2px; right: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+  .tier-col-headers { display: grid; grid-template-columns: 140px 1fr 40px 48px 40px 36px; gap: 6px; align-items: center; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 0.5px solid var(--border2); }
+  .tier-col-hdr { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); text-align: right; }
   .tier-col-hdr:first-child { text-align: left; }
   .tier-col-hdr.owned-hdr { color: var(--tier-owned); }
   .tier-col-hdr.wish-hdr  { color: var(--tier-wish); }
-  .tier-bar-row {
-    display: grid;
-    grid-template-columns: 140px 1fr 40px 48px 40px 36px;
-    gap: 6px; align-items: center; margin-bottom: 7px;
-  }
+  .tier-bar-row { display: grid; grid-template-columns: 140px 1fr 40px 48px 40px 36px; gap: 6px; align-items: center; margin-bottom: 7px; }
   .tier-bar-row:last-child { margin-bottom: 0; }
   .tier-bar-lbl { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3); }
   .tier-bar-track { height: 5px; background: var(--stone2); border-radius: 3px; overflow: hidden; display: flex; }
@@ -120,142 +50,137 @@
   .tier-bar-wish  { height: 100%; background: var(--tier-wish); }
   .tier-num { font-size: 11px; color: var(--ink2); text-align: right; font-variant-numeric: tabular-nums; }
   .tier-num.owned { color: var(--tier-owned); font-weight: 500; }
-  .tier-num.wish  { color: var(--tier-wish);  font-weight: 500; }
+  .tier-num.wish  { color: var(--tier-wish); font-weight: 500; }
   .tier-num.intier { color: var(--ink2); }
   .tier-pct { font-size: 11px; font-weight: 500; color: var(--ink2); text-align: right; font-variant-numeric: tabular-nums; }
 
-  hr { border: none; border-top: 1px dashed var(--border); margin: 48px 0; }
-  .label-chip { display: inline-block; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--stone2); color: var(--ink3); border-radius: 4px; padding: 2px 7px; margin-bottom: 14px; }
+  /* ════════════════════════════
+     CURRENT — compact, natural height
+  ════════════════════════════ */
+  .layout-current { display: grid; grid-template-columns: 190px 1fr; gap: 10px; }
+  .stacked-current { display: flex; flex-direction: column; gap: 10px; }
+  .stat-cell-current {
+    background: var(--white); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 11px 14px;
+  }
+
+  /* ════════════════════════════
+     OPTION A — stretch to full height, same 190px
+  ════════════════════════════ */
+  .layout-a { display: grid; grid-template-columns: 190px 1fr; gap: 10px; align-items: stretch; }
+  .stacked-a { display: flex; flex-direction: column; gap: 10px; }
+  .stat-cell-a {
+    background: var(--white); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 11px 14px;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  /* ════════════════════════════
+     OPTION B — stretch to full height, wider 220px
+  ════════════════════════════ */
+  .layout-b { display: grid; grid-template-columns: 220px 1fr; gap: 10px; align-items: stretch; }
+  .stacked-b { display: flex; flex-direction: column; gap: 10px; }
+  .stat-cell-b {
+    background: var(--white); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 11px 16px;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+  }
 </style>
 </head>
 <body>
 
-
-<!-- ═══════════════════════════
-     OPTION A — Current layout
-════════════════════════════ -->
+<!-- ══════════════
+     CURRENT
+══════════════ -->
 <div class="demo-block">
-  <p class="page-label">Option A &nbsp;—&nbsp; Current (3 columns)</p>
-  <p class="state-title">Total Pieces and Wishlist as separate equal columns</p>
-  <p class="state-desc">The two stat cells each take up a full column equal to each other. The tier chart gets 2/4 of the total width (the 2fr column). Numbers are prominent but the chart feels compressed.</p>
+  <p class="page-label">Current</p>
+  <p class="state-title">Compact cells, natural height, 190px column</p>
+  <p class="state-desc">What's live now. Cells sit at their natural height, shorter than the chart.</p>
 
-  <div class="stats-grid-current">
-    <!-- Total Pieces -->
-    <div class="stat-cell">
-      <div class="stat-cell-label">Total Pieces</div>
-      <div class="stat-cell-value">13</div>
-      <div class="stat-cell-sub">in your collection</div>
+  <div class="layout-current">
+    <div class="stacked-current">
+      <div class="stat-cell-current">
+        <div class="stat-label">Total Pieces</div>
+        <div class="stat-num-row"><div class="stat-val">14</div><div class="stat-sub">in your collection</div></div>
+      </div>
+      <div class="stat-cell-current">
+        <div class="stat-label">Wishlist</div>
+        <div class="stat-num-row"><div class="stat-val" style="color:var(--tier-wish)">8</div><div class="stat-sub">stones on your list</div></div>
+      </div>
     </div>
-    <!-- Wishlist -->
-    <div class="stat-cell">
-      <div class="stat-cell-label">Wishlist</div>
-      <div class="stat-cell-value">8</div>
-      <div class="stat-cell-sub">stones on your list</div>
-    </div>
-    <!-- Tier chart -->
-    <div class="stat-cell">
-      <div class="tier-header-row">
-        <div class="tier-section-label">By Collector Tier</div>
-        <label class="tier-toggle">Include wishlist <div class="toggle-track"><div class="toggle-thumb"></div></div></label>
-      </div>
-      <div class="tier-col-headers">
-        <div class="tier-col-hdr"></div>
-        <div class="tier-col-hdr"></div>
-        <div class="tier-col-hdr owned-hdr">Owned</div>
-        <div class="tier-col-hdr wish-hdr">Wish</div>
-        <div class="tier-col-hdr">In Tier</div>
-        <div class="tier-col-hdr">%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">The Essentials</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:17%"></div><div class="tier-bar-wish" style="width:17%"></div></div>
-        <div class="tier-num owned">5</div><div class="tier-num wish">5</div><div class="tier-num intier">29</div><div class="tier-pct">17%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">Shelf Builders</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:6%"></div><div class="tier-bar-wish" style="width:3%"></div></div>
-        <div class="tier-num owned">4</div><div class="tier-num wish">2</div><div class="tier-num intier">67</div><div class="tier-pct">6%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">Collector Favorites</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:0%"></div></div>
-        <div class="tier-num owned">3</div><div class="tier-num wish" style="opacity:0.3">0</div><div class="tier-num intier">124</div><div class="tier-pct">2%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">Rare Finds</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:2%"></div></div>
-        <div class="tier-num owned">1</div><div class="tier-num wish">1</div><div class="tier-num intier">48</div><div class="tier-pct">2%</div>
-      </div>
+    <div class="tier-chart-cell">
+      <div class="tier-header-row"><div class="tier-section-label">By Collector Tier</div><label class="tier-toggle">Include wishlist <div class="toggle-track"><div class="toggle-thumb"></div></div></label></div>
+      <div class="tier-col-headers"><div class="tier-col-hdr"></div><div class="tier-col-hdr"></div><div class="tier-col-hdr owned-hdr">Owned</div><div class="tier-col-hdr wish-hdr">Wish</div><div class="tier-col-hdr">In Tier</div><div class="tier-col-hdr">%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">The Essentials</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:17%"></div><div class="tier-bar-wish" style="width:17%"></div></div><div class="tier-num owned">5</div><div class="tier-num wish">5</div><div class="tier-num intier">29</div><div class="tier-pct">17%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Shelf Builders</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:6%"></div><div class="tier-bar-wish" style="width:3%"></div></div><div class="tier-num owned">4</div><div class="tier-num wish">2</div><div class="tier-num intier">67</div><div class="tier-pct">6%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Collector Favorites</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div></div><div class="tier-num owned">3</div><div class="tier-num wish" style="opacity:0.3">0</div><div class="tier-num intier">124</div><div class="tier-pct">2%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Rare Finds</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:2%"></div></div><div class="tier-num owned">1</div><div class="tier-num wish">1</div><div class="tier-num intier">49</div><div class="tier-pct">2%</div></div>
     </div>
   </div>
 </div>
 
-
-<!-- ═══════════════════════════
-     OPTION B — Condensed layout
-════════════════════════════ -->
+<!-- ══════════════
+     OPTION A
+══════════════ -->
 <div class="demo-block">
-  <p class="page-label">Option B &nbsp;—&nbsp; Condensed (2 columns, stats stacked)</p>
-  <p class="state-title">Total Pieces + Wishlist stacked in one narrow column (~160px)</p>
-  <p class="state-desc">The two stat cells stack vertically in a fixed 160px column. The tier chart expands to fill the remaining width. Numbers stay readable; the chart gets significantly more room to breathe.</p>
+  <p class="page-label">Option A — Full height, 190px (no width change)</p>
+  <p class="state-title">Same content and padding, cells stretch to match chart height</p>
+  <p class="state-desc">Nothing changes visually except the cells grow to fill the chart's height. Content stays centered vertically. No width taken from the chart.</p>
 
-  <div class="stats-grid-new">
-    <!-- Left: stacked stats -->
-    <div class="stats-stacked">
-      <div class="stat-cell-stacked">
-        <div class="stat-cell-label">Total Pieces</div>
-        <div class="stat-num-row">
-          <div class="stat-cell-value">13</div>
-          <div class="stat-cell-sub">in your collection</div>
-        </div>
+  <div class="layout-a">
+    <div class="stacked-a">
+      <div class="stat-cell-a">
+        <div class="stat-label">Total Pieces</div>
+        <div class="stat-num-row"><div class="stat-val">14</div><div class="stat-sub">in your collection</div></div>
       </div>
-      <div class="stat-cell-stacked">
-        <div class="stat-cell-label">Wishlist</div>
-        <div class="stat-num-row">
-          <div class="stat-cell-value" style="color: var(--tier-wish);">8</div>
-          <div class="stat-cell-sub">stones on your list</div>
-        </div>
+      <div class="stat-cell-a">
+        <div class="stat-label">Wishlist</div>
+        <div class="stat-num-row"><div class="stat-val" style="color:var(--tier-wish)">8</div><div class="stat-sub">stones on your list</div></div>
       </div>
     </div>
-    <!-- Right: tier chart -->
-    <div class="stat-cell">
-      <div class="tier-header-row">
-        <div class="tier-section-label">By Collector Tier</div>
-        <label class="tier-toggle">Include wishlist <div class="toggle-track"><div class="toggle-thumb"></div></div></label>
+    <div class="tier-chart-cell">
+      <div class="tier-header-row"><div class="tier-section-label">By Collector Tier</div><label class="tier-toggle">Include wishlist <div class="toggle-track"><div class="toggle-thumb"></div></div></label></div>
+      <div class="tier-col-headers"><div class="tier-col-hdr"></div><div class="tier-col-hdr"></div><div class="tier-col-hdr owned-hdr">Owned</div><div class="tier-col-hdr wish-hdr">Wish</div><div class="tier-col-hdr">In Tier</div><div class="tier-col-hdr">%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">The Essentials</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:17%"></div><div class="tier-bar-wish" style="width:17%"></div></div><div class="tier-num owned">5</div><div class="tier-num wish">5</div><div class="tier-num intier">29</div><div class="tier-pct">17%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Shelf Builders</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:6%"></div><div class="tier-bar-wish" style="width:3%"></div></div><div class="tier-num owned">4</div><div class="tier-num wish">2</div><div class="tier-num intier">67</div><div class="tier-pct">6%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Collector Favorites</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div></div><div class="tier-num owned">3</div><div class="tier-num wish" style="opacity:0.3">0</div><div class="tier-num intier">124</div><div class="tier-pct">2%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Rare Finds</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:2%"></div></div><div class="tier-num owned">1</div><div class="tier-num wish">1</div><div class="tier-num intier">49</div><div class="tier-pct">2%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════
+     OPTION B
+══════════════ -->
+<div class="demo-block">
+  <p class="page-label">Option B — Full height, 220px (slightly wider)</p>
+  <p class="state-title">Same as A but cells widen to 220px — chart gives back ~30px</p>
+  <p class="state-desc">A hair more breathing room in the stat cells. Chart narrows slightly but still reads clearly at this viewport width.</p>
+
+  <div class="layout-b">
+    <div class="stacked-b">
+      <div class="stat-cell-b">
+        <div class="stat-label">Total Pieces</div>
+        <div class="stat-num-row"><div class="stat-val">14</div><div class="stat-sub">in your collection</div></div>
       </div>
-      <div class="tier-col-headers">
-        <div class="tier-col-hdr"></div>
-        <div class="tier-col-hdr"></div>
-        <div class="tier-col-hdr owned-hdr">Owned</div>
-        <div class="tier-col-hdr wish-hdr">Wish</div>
-        <div class="tier-col-hdr">In Tier</div>
-        <div class="tier-col-hdr">%</div>
+      <div class="stat-cell-b">
+        <div class="stat-label">Wishlist</div>
+        <div class="stat-num-row"><div class="stat-val" style="color:var(--tier-wish)">8</div><div class="stat-sub">stones on your list</div></div>
       </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">The Essentials</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:17%"></div><div class="tier-bar-wish" style="width:17%"></div></div>
-        <div class="tier-num owned">5</div><div class="tier-num wish">5</div><div class="tier-num intier">29</div><div class="tier-pct">17%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">Shelf Builders</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:6%"></div><div class="tier-bar-wish" style="width:3%"></div></div>
-        <div class="tier-num owned">4</div><div class="tier-num wish">2</div><div class="tier-num intier">67</div><div class="tier-pct">6%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">Collector Favorites</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:0%"></div></div>
-        <div class="tier-num owned">3</div><div class="tier-num wish" style="opacity:0.3">0</div><div class="tier-num intier">124</div><div class="tier-pct">2%</div>
-      </div>
-      <div class="tier-bar-row">
-        <div class="tier-bar-lbl">Rare Finds</div>
-        <div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:2%"></div></div>
-        <div class="tier-num owned">1</div><div class="tier-num wish">1</div><div class="tier-num intier">48</div><div class="tier-pct">2%</div>
-      </div>
+    </div>
+    <div class="tier-chart-cell">
+      <div class="tier-header-row"><div class="tier-section-label">By Collector Tier</div><label class="tier-toggle">Include wishlist <div class="toggle-track"><div class="toggle-thumb"></div></div></label></div>
+      <div class="tier-col-headers"><div class="tier-col-hdr"></div><div class="tier-col-hdr"></div><div class="tier-col-hdr owned-hdr">Owned</div><div class="tier-col-hdr wish-hdr">Wish</div><div class="tier-col-hdr">In Tier</div><div class="tier-col-hdr">%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">The Essentials</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:17%"></div><div class="tier-bar-wish" style="width:17%"></div></div><div class="tier-num owned">5</div><div class="tier-num wish">5</div><div class="tier-num intier">29</div><div class="tier-pct">17%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Shelf Builders</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:6%"></div><div class="tier-bar-wish" style="width:3%"></div></div><div class="tier-num owned">4</div><div class="tier-num wish">2</div><div class="tier-num intier">67</div><div class="tier-pct">6%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Collector Favorites</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div></div><div class="tier-num owned">3</div><div class="tier-num wish" style="opacity:0.3">0</div><div class="tier-num intier">124</div><div class="tier-pct">2%</div></div>
+      <div class="tier-bar-row"><div class="tier-bar-lbl">Rare Finds</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:2%"></div><div class="tier-bar-wish" style="width:2%"></div></div><div class="tier-num owned">1</div><div class="tier-num wish">1</div><div class="tier-num intier">49</div><div class="tier-pct">2%</div></div>
     </div>
   </div>
 </div>
 
 <p style="font-size:11px; color:var(--ink3); text-align:center; margin-top:8px;">Still Point Lapidary · Stats Layout Mockup · June 2026</p>
-
 </body>
 </html>
