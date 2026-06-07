@@ -526,7 +526,7 @@ function collectionStoneMatchesFormation(c,val){
   return c?.fo===val;
 }
 function buildCollPanels(){
-  const forms=['Tumbled','Palm stone','Raw / Rough','Freeform','Polished freeform','Tower / Point','Sphere','Egg','Cluster','Geode','Slice','Heart','Moon','Star','Mushroom','Wand','Skull','Carved','Cabochon','Other'];
+  const forms=['Tumble','Palm Stone','Worry Stone','Heart','Sphere','Egg','Tower','Pyramid','Cube','Freeform','Flame','Bowl / Dish','Raw / Natural','Specimen','Point','Cluster','Geode','Druzy','Slice / Slab','Moon','Star','Mushroom','Wand','Carving','Other'];
   const sizes=['XS','S','M','L','XL'];
   const cfams=[...new Set(CRYSTALS.map(c=>c.fam||'').filter(Boolean))].sort();
   const materials=[...new Set(CRYSTALS.map(c=>c.mt||'').filter(Boolean))].sort();
@@ -4168,19 +4168,17 @@ function init101Grids() {
 
 // ── CRYSTAL SHAPES ──
 
+const SHAPE_CATEGORIES = [
+  { label: 'Holdable', ids: ['tumble','palm','worry','heart'] },
+  { label: 'Display',  ids: ['sphere','egg','tower','pyramid','cube','freeform','flame','bowl'] },
+  { label: 'Natural',  ids: ['raw','specimen','point','cluster','geode','druzy','slice'] },
+  { label: 'Symbolic', ids: ['moon','star','mushroom','wand','carving'] },
+];
+
 const CRYSTAL_SHAPES = [
   {
-    id: 'raw',
-    name: 'Raw / Natural',
-    tagline: 'Unfiltered, natural energy',
-    body: 'Closest to how the stone formed. Energy radiates outward in all directions, unmodified. Most powerful for grounding, space-holding, and any work where you want the full unmediated quality of the stone. Less refined, but often more potent.',
-    use: 'Grounding · Space clearing · Long-term placement · Altars',
-    examples: ['Black Tourmaline', 'Selenite', 'Amethyst', 'Citrine'],
-    draw: drawRawShape,
-  },
-  {
-    id: 'tumbled',
-    name: 'Tumbled',
+    id: 'tumble',
+    name: 'Tumble',
     tagline: 'Polished, softened, accessible',
     body: 'Machine-polished until smooth. The energy is gentler and more diffuse than raw — easier to carry, hold, and work with daily. Ideal for beginners and for stones used in direct body contact. The most versatile and widely available form.',
     use: 'Daily carry · Body work · Grids · Gifting',
@@ -4204,6 +4202,15 @@ const CRYSTAL_SHAPES = [
     use: 'Anxiety · Fidgeting · Grounding · Daily carry',
     examples: ['Howlite', 'Amethyst', 'Lepidolite', 'Sodalite'],
     draw: drawWorryShape,
+  },
+  {
+    id: 'heart',
+    name: 'Heart',
+    tagline: 'Emotional, receptive, heart-centered',
+    body: 'Carved into a heart shape to concentrate and activate heart-center energy. The shape itself is an intention. Used in emotional healing, self-love practice, relationship work, and as a physical symbol of what you are working toward. Comforting to hold during difficult emotional work.',
+    use: 'Heart healing · Self-love · Grief · Relationship intention',
+    examples: ['Rose Quartz', 'Rhodonite', 'Green Aventurine', 'Malachite'],
+    draw: drawHeartShape,
   },
   {
     id: 'sphere',
@@ -4230,25 +4237,7 @@ const CRYSTAL_SHAPES = [
     body: 'A flat-based, six-sided column that projects energy upward and outward continuously. Towers are among the most versatile forms — place them in a room to shift the ambient energy, use them in grids as anchor points, or hold during meditation. The flat base makes them stable and easy to place.',
     use: 'Room energy · Grids · Meditation · Intention setting',
     examples: ['Amethyst', 'Selenite', 'Labradorite', 'Black Tourmaline'],
-    draw: drawPointShape,
-  },
-  {
-    id: 'point',
-    name: 'Point',
-    tagline: 'Directed, focused, activating',
-    body: 'A natural or cut termination that directs energy out through the apex. Used to direct intention, move energy in healing work, and activate crystal grids — touch each stone lightly with the point to connect them. Points can face inward (drawing energy toward you) or outward (projecting away).',
-    use: 'Grid activation · Energy direction · Healing work · Amplification',
-    examples: ['Clear Quartz', 'Amethyst', 'Citrine', 'Rose Quartz'],
-    draw: drawPointShape,
-  },
-  {
-    id: 'flame',
-    name: 'Flame / Freeform',
-    tagline: 'Organic, flowing, sculptural',
-    body: 'Carved or naturally formed into a flame or free organic shape — no flat base, no hard geometry. Energy moves along the curves rather than projecting in a single direction. Each piece is unique. Used decoratively and energetically, often as a room centerpiece or meditation focal point.',
-    use: 'Room presence · Meditation focus · Display · Transformation work',
-    examples: ['Labradorite', 'Selenite', 'Rose Quartz', 'Malachite'],
-    draw: drawFlameShape,
+    draw: drawTowerShape,
   },
   {
     id: 'pyramid',
@@ -4269,13 +4258,94 @@ const CRYSTAL_SHAPES = [
     draw: drawCubeShape,
   },
   {
-    id: 'heart',
-    name: 'Heart',
-    tagline: 'Emotional, receptive, heart-centered',
-    body: 'Carved into a heart shape to concentrate and activate heart-center energy. The shape itself is an intention. Used in emotional healing, self-love practice, relationship work, and as a physical symbol of what you are working toward. Comforting to hold during difficult emotional work.',
-    use: 'Heart healing · Self-love · Grief · Relationship intention',
-    examples: ['Rose Quartz', 'Rhodonite', 'Green Aventurine', 'Malachite'],
-    draw: drawHeartShape,
+    id: 'freeform',
+    name: 'Freeform',
+    tagline: 'Organic, sculptural, one-of-a-kind',
+    body: 'Shaped or naturally formed into an organic, flowing form with no fixed geometry. Each piece is completely unique — no two are alike. Energy moves freely along the curves. Often the most personal and expressive form in a collection, chosen as much for beauty as for practice.',
+    use: 'Room presence · Meditation focal point · Display · Personal altar',
+    examples: ['Labradorite', 'Rose Quartz', 'Ocean Jasper', 'Malachite'],
+    draw: drawFreeformShape,
+  },
+  {
+    id: 'flame',
+    name: 'Flame',
+    tagline: 'Transformation, upward movement, passion',
+    body: 'Carved or polished into a tapering flame silhouette — wide at the base, narrowing to a flowing point. Energy rises upward along the form, making it associated with transformation, clarity, and movement. A striking display piece that also functions as a gentle directional energy tool.',
+    use: 'Transformation work · Display · Room energy · Meditation focus',
+    examples: ['Labradorite', 'Selenite', 'Amethyst', 'Citrine'],
+    draw: drawFlameShape,
+  },
+  {
+    id: 'bowl',
+    name: 'Bowl / Dish',
+    tagline: 'Receiving, holding, offering',
+    body: 'A shallow carved bowl or dish. Used as a charging plate for other stones, a vessel for intentions, or a beautiful offering piece. The concave form draws energy inward and holds it — receptive rather than projecting. Practical for display as well as ceremonial use.',
+    use: 'Charging other stones · Altar · Intention holding · Display',
+    examples: ['Selenite', 'Rose Quartz', 'Amethyst', 'Clear Quartz'],
+    draw: drawBowlShape,
+  },
+  {
+    id: 'raw',
+    name: 'Raw / Natural',
+    tagline: 'Unfiltered, natural energy',
+    body: 'Closest to how the stone formed. Energy radiates outward in all directions, unmodified. Most powerful for grounding, space-holding, and any work where you want the full unmediated quality of the stone. Less refined, but often more potent.',
+    use: 'Grounding · Space clearing · Long-term placement · Altars',
+    examples: ['Black Tourmaline', 'Selenite', 'Amethyst', 'Citrine'],
+    draw: drawRawShape,
+  },
+  {
+    id: 'specimen',
+    name: 'Specimen',
+    tagline: 'Natural, unmodified, mineral character',
+    body: 'A naturally formed piece collected as found, often including matrix, host rock, or multiple crystal formations. Not cut or polished beyond basic preparation. The most honest expression of how a stone actually grows in the earth — chosen for its mineral character as much as its energy.',
+    use: 'Display · Education · Altar · Natural presence',
+    examples: ['Pyrite', 'Amethyst', 'Malachite', 'Celestite'],
+    draw: drawSpecimenShape,
+  },
+  {
+    id: 'point',
+    name: 'Point',
+    tagline: 'Directed, focused, activating',
+    body: 'A natural or cut termination that directs energy out through the apex. Used to direct intention, move energy in healing work, and activate crystal grids — touch each stone lightly with the point to connect them. Points can face inward (drawing energy toward you) or outward (projecting away).',
+    use: 'Grid activation · Energy direction · Healing work · Amplification',
+    examples: ['Clear Quartz', 'Amethyst', 'Citrine', 'Rose Quartz'],
+    draw: drawPointShape,
+  },
+  {
+    id: 'cluster',
+    name: 'Cluster',
+    tagline: 'Radiating, communal, space-filling',
+    body: 'Multiple points growing from a shared base. Each crystal in the cluster radiates in its own direction — the result is an omnidirectional broadcast. Excellent for spaces, rooms, and group settings. Clusters also continuously cleanse the energy around them and make impressive display pieces.',
+    use: 'Room energy · Space cleansing · Group settings · Display',
+    examples: ['Amethyst', 'Quartz', 'Celestite', 'Pyrite'],
+    draw: drawClusterShape,
+  },
+  {
+    id: 'geode',
+    name: 'Geode',
+    tagline: 'Hidden interior, protective, amplifying',
+    body: 'Unremarkable outside, crystalline interior. The hollow cavity amplifies and stores energy. Geodes protect what is inside — energetically and literally. A closed geode holds intention; an open geode broadcasts it. Excellent for spaces, altars, and long-term energetic work.',
+    use: 'Space holding · Amplification · Protection · Altar',
+    examples: ['Amethyst', 'Quartz', 'Celestite', 'Calcite'],
+    draw: drawGeodeShape,
+  },
+  {
+    id: 'druzy',
+    name: 'Druzy',
+    tagline: 'Amplifying surface, sparkle, coating',
+    body: 'A surface covered in a layer of tiny, sparkling micro-crystals formed within a cavity or on a host stone. Not a carved shape but a natural formation. Amplifies the energy of whatever surrounds it, adds visual brilliance, and is commonly used in jewelry and decorative settings. Often found coating Agate or Chalcedony.',
+    use: 'Amplification · Jewelry · Display · Enhancing other stones',
+    examples: ['Druzy Agate', 'Grape Agate', 'Chalcopyrite', 'Uvarovite'],
+    draw: drawDruzyShape,
+  },
+  {
+    id: 'slice',
+    name: 'Slice / Slab',
+    tagline: 'Display, altar, writing surface',
+    body: 'A flat cross-section of a stone or geode, revealing the interior pattern. Used as altar bases, charging plates, display surfaces, and decorative pieces. Agate slices with natural banding are common; geode slices show the crystalline interior. Energy radiates from the flat face.',
+    use: 'Altar base · Charging plate · Display · Space energy',
+    examples: ['Agate', 'Amethyst', 'Selenite', 'Obsidian'],
+    draw: drawSliceShape,
   },
   {
     id: 'moon',
@@ -4296,40 +4366,13 @@ const CRYSTAL_SHAPES = [
     draw: drawStarShape,
   },
   {
-    id: 'slice',
-    name: 'Slice / Slab',
-    tagline: 'Display, altar, writing surface',
-    body: 'A flat cross-section of a stone or geode, revealing the interior pattern. Used as altar bases, charging plates, display surfaces, and decorative pieces. Agate slices with natural banding are common; geode slices show the crystalline interior. Energy radiates from the flat face.',
-    use: 'Altar base · Charging plate · Display · Space energy',
-    examples: ['Agate', 'Amethyst', 'Selenite', 'Obsidian'],
-    draw: drawSliceShape,
-  },
-  {
-    id: 'cluster',
-    name: 'Cluster',
-    tagline: 'Radiating, communal, space-filling',
-    body: 'Multiple points growing from a shared base. Each crystal in the cluster radiates in its own direction — the result is an omnidirectional broadcast. Excellent for spaces, rooms, and group settings. Clusters also continuously cleanse the energy around them and make impressive display pieces.',
-    use: 'Room energy · Space cleansing · Group settings · Display',
-    examples: ['Amethyst', 'Quartz', 'Celestite', 'Pyrite'],
-    draw: drawClusterShape,
-  },
-  {
-    id: 'druzy',
-    name: 'Druzy',
-    tagline: 'Amplifying surface, sparkle, coating',
-    body: 'A surface covered in a layer of tiny, sparkling micro-crystals formed within a cavity or on a host stone. Not a carved shape but a natural formation. Amplifies the energy of whatever surrounds it, adds visual brilliance, and is commonly used in jewelry and decorative settings. Often found coating Agate or Chalcedony.',
-    use: 'Amplification · Jewelry · Display · Enhancing other stones',
-    examples: ['Druzy Agate', 'Grape Agate', 'Chalcopyrite', 'Uvarovite'],
-    draw: drawDruzyShape,
-  },
-  {
-    id: 'geode',
-    name: 'Geode',
-    tagline: 'Hidden interior, protective, amplifying',
-    body: 'Unremarkable outside, crystalline interior. The hollow cavity amplifies and stores energy. Geodes protect what is inside — energetically and literally. A closed geode holds intention; an open geode broadcasts it. Excellent for spaces, altars, and long-term energetic work.',
-    use: 'Space holding · Amplification · Protection · Altar',
-    examples: ['Amethyst', 'Quartz', 'Celestite', 'Calcite'],
-    draw: drawGeodeShape,
+    id: 'mushroom',
+    name: 'Mushroom',
+    tagline: 'Grounding yet reaching, earthy, symbolic',
+    body: 'Carved to echo the mushroom form — a wide cap and narrow stem. Beloved for its symbolism: rooted in the earth while growing upward, and connected to the hidden network beneath the surface. Associated with grounding, organic growth, and the quiet intelligence of natural systems.',
+    use: 'Grounding · Growth intention · Symbolic work · Display',
+    examples: ['Agate', 'Obsidian', 'Amethyst', 'Rose Quartz'],
+    draw: drawMushroomShape,
   },
   {
     id: 'wand',
@@ -4339,6 +4382,15 @@ const CRYSTAL_SHAPES = [
     use: 'Energy healing · Chakra work · Directing energy · Body work',
     examples: ['Selenite', 'Clear Quartz', 'Rose Quartz', 'Obsidian'],
     draw: drawWandShape,
+  },
+  {
+    id: 'carving',
+    name: 'Carving',
+    tagline: 'Symbolic, intentional, artisan',
+    body: 'Any carved form not covered by the specific shapes listed — skulls, animals, angels, goddess figures, hands, and other figures. The carved form layers symbolic meaning over the stone\'s natural energy. Choose a carving when the shape itself carries personal meaning for your practice or collection.',
+    use: 'Symbolic work · Altars · Collection · Gifting',
+    examples: ['Obsidian', 'Labradorite', 'Rose Quartz', 'Clear Quartz'],
+    draw: drawCarvingShape,
   },
 ];
 
@@ -4548,6 +4600,76 @@ function drawWandShape(){
   </svg>`;
 }
 
+function drawTowerShape(){
+  return `<svg viewBox="0 0 120 120" width="78" height="78">
+    <polygon points="60,14 75,34 75,96 45,96 45,34"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2" stroke-linejoin="round"/>
+    <line x1="60" y1="14" x2="60" y2="96" stroke="${shapeS()}" stroke-width="0.4" opacity="0.4"/>
+    <line x1="45" y1="52" x2="75" y2="52" stroke="${shapeS()}" stroke-width="0.4" opacity="0.35"/>
+    <line x1="45" y1="74" x2="75" y2="74" stroke="${shapeS()}" stroke-width="0.4" opacity="0.35"/>
+    <line x1="45" y1="96" x2="75" y2="96" stroke="${shapeS()}" stroke-width="1.6" opacity="0.5"/>
+  </svg>`;
+}
+
+function drawFreeformShape(){
+  return `<svg viewBox="0 0 120 120" width="78" height="78">
+    <path d="M48,18 C60,14 80,22 88,38 C96,54 90,72 78,84 C66,96 48,100 36,88 C24,76 22,58 30,42 C36,30 36,22 48,18 Z"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M52,30 C62,28 74,36 78,50 C82,64 74,76 64,80"
+      fill="none" stroke="${shapeS()}" stroke-width="0.45" opacity="0.35"/>
+  </svg>`;
+}
+
+function drawBowlShape(){
+  return `<svg viewBox="0 0 120 120" width="78" height="78">
+    <path d="M22,52 C22,80 38,96 60,96 C82,96 98,80 98,52 Z"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2"/>
+    <line x1="22" y1="52" x2="98" y2="52" stroke="${shapeS()}" stroke-width="1.2"/>
+    <path d="M34,52 C34,74 44,86 60,86 C76,86 86,74 86,52"
+      fill="none" stroke="${shapeS()}" stroke-width="0.45" opacity="0.4"/>
+  </svg>`;
+}
+
+function drawSpecimenShape(){
+  return `<svg viewBox="0 0 120 120" width="78" height="78">
+    <polygon points="60,16 80,28 90,52 84,76 66,92 40,88 24,68 28,42 44,24"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2" stroke-linejoin="round"/>
+    <line x1="60" y1="16" x2="40" y2="88" stroke="${shapeS()}" stroke-width="0.4" opacity="0.3"/>
+    <line x1="80" y1="28" x2="24" y2="68" stroke="${shapeS()}" stroke-width="0.4" opacity="0.3"/>
+    <line x1="90" y1="52" x2="44" y2="24" stroke="${shapeS()}" stroke-width="0.4" opacity="0.3"/>
+    <polygon points="54,34 62,34 66,42 60,48 52,44"
+      fill="rgba(42,37,32,0.07)" stroke="${shapeS()}" stroke-width="0.6" opacity="0.6"/>
+  </svg>`;
+}
+
+function drawMushroomShape(){
+  return `<svg viewBox="0 0 120 120" width="78" height="78">
+    <path d="M26,64 C26,38 40,20 60,20 C80,20 94,38 94,64 Z"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M26,64 C26,70 38,74 60,74 C82,74 94,70 94,64"
+      fill="none" stroke="${shapeS()}" stroke-width="1.2"/>
+    <rect x="52" y="74" width="16" height="26" rx="4"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2"/>
+    <ellipse cx="60" cy="100" rx="12" ry="4"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="0.8"/>
+  </svg>`;
+}
+
+function drawCarvingShape(){
+  return `<svg viewBox="0 0 120 120" width="78" height="78">
+    <ellipse cx="60" cy="52" rx="26" ry="30"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2"/>
+    <ellipse cx="50" cy="46" rx="7" ry="8"
+      fill="rgba(42,37,32,0.07)" stroke="${shapeS()}" stroke-width="0.8"/>
+    <ellipse cx="70" cy="46" rx="7" ry="8"
+      fill="rgba(42,37,32,0.07)" stroke="${shapeS()}" stroke-width="0.8"/>
+    <path d="M50,66 C54,72 66,72 70,66"
+      fill="none" stroke="${shapeS()}" stroke-width="1" stroke-linecap="round"/>
+    <path d="M44,88 C48,80 52,78 60,78 C68,78 72,80 76,88"
+      fill="${shapeF()}" stroke="${shapeS()}" stroke-width="1.2" stroke-linejoin="round"/>
+  </svg>`;
+}
+
 function drawCabochonShape(){
   return `<svg viewBox="0 0 120 120" width="78" height="78">
     <path d="M18,76 Q18,34 60,30 Q102,34 102,76 L102,82 Q102,88 60,88 Q18,88 18,82 Z"
@@ -4559,78 +4681,68 @@ function drawCabochonShape(){
 }
 
 // ── RENDER SHAPES ──
-const SHAPE_DISPLAY_ORDER = ['tumbled','palm','raw','flame','tower','point','sphere','egg','cluster','geode','slice','heart','moon','star','wand','worry','pyramid','cube','druzy'];
 
 function renderShapes() {
-  try { CRYSTAL_SHAPES; } catch(e) { setTimeout(renderShapes,0); return; }
+  try { CRYSTAL_SHAPES; SHAPE_CATEGORIES; } catch(e) { setTimeout(renderShapes,0); return; }
   const container = document.getElementById('shapes-grid');
   if(!container) return;
   if(container.children.length > 0) return;
 
-  const ordered = [...CRYSTAL_SHAPES].sort((a,b) => {
-    const ai = SHAPE_DISPLAY_ORDER.indexOf(a.id);
-    const bi = SHAPE_DISPLAY_ORDER.indexOf(b.id);
-    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-  });
+  const shapeMap = Object.fromEntries(CRYSTAL_SHAPES.map(s => [s.id, s]));
 
-  // Build horizontal strip
-  const strip = document.createElement('div');
-  strip.className = 'shapes-strip';
-
-  // Build pane
   const pane = document.createElement('div');
   pane.className = 'shapes-pane';
 
-  ordered.forEach((shape, i) => {
-    const item = document.createElement('div');
-    item.className = 'shape-strip-item' + (i === 0 ? ' active' : '');
-    item.innerHTML = `<span class="shape-strip-icon">${shape.draw()}</span><span>${shape.name}</span>`;
-    item.addEventListener('click', () => {
-      strip.querySelectorAll('.shape-strip-item').forEach(el => el.classList.remove('active'));
-      item.classList.add('active');
-      showShapePane(shape, pane);
+  // Build category-row strip
+  const strip = document.createElement('div');
+  strip.className = 'shapes-strip strip-with-headers';
+
+  let firstShape = null;
+  const allItems = [];
+
+  SHAPE_CATEGORIES.forEach(cat => {
+    const row = document.createElement('div');
+    row.className = 'cat-row';
+
+    const label = document.createElement('span');
+    label.className = 'cat-row-label';
+    label.textContent = cat.label;
+    row.appendChild(label);
+
+    const chips = document.createElement('div');
+    chips.className = 'cat-row-chips';
+
+    cat.ids.forEach(id => {
+      const shape = shapeMap[id];
+      if(!shape) return;
+      if(!firstShape) firstShape = shape;
+
+      const item = document.createElement('button');
+      item.className = 'shape-strip-item';
+      item.innerHTML = `<span class="shape-strip-icon">${shape.draw()}</span><span>${shape.name}</span>`;
+      item.addEventListener('click', () => {
+        allItems.forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+        showShapePane(shape, pane);
+      });
+      chips.appendChild(item);
+      allItems.push(item);
     });
-    strip.appendChild(item);
+
+    row.appendChild(chips);
+    strip.appendChild(row);
   });
 
-  // Wrap strip with scroll arrows
   const stripOuter = document.createElement('div');
   stripOuter.className = 'shapes-strip-outer';
-
-  const chevL = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
-  const chevR = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
-
-  const arrowLeft = document.createElement('button');
-  arrowLeft.className = 'shapes-scroll-arrow shapes-scroll-arrow--left';
-  arrowLeft.innerHTML = chevL;
-  arrowLeft.setAttribute('aria-label', 'Scroll left');
-  arrowLeft.addEventListener('click', () => strip.scrollBy({left: -180, behavior: 'smooth'}));
-
-  const arrowRight = document.createElement('button');
-  arrowRight.className = 'shapes-scroll-arrow shapes-scroll-arrow--right visible';
-  arrowRight.innerHTML = chevR;
-  arrowRight.setAttribute('aria-label', 'Scroll right');
-  arrowRight.addEventListener('click', () => strip.scrollBy({left: 180, behavior: 'smooth'}));
-
-  function updateShapeArrows() {
-    const atStart = strip.scrollLeft <= 2;
-    const atEnd = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 2;
-    arrowLeft.classList.toggle('visible', !atStart);
-    arrowRight.classList.toggle('visible', !atEnd);
-  }
-  strip.addEventListener('scroll', updateShapeArrows, {passive: true});
-  // Can't measure scrollWidth while section is hidden — expose for call when section becomes visible
-  window._updateShapeArrows = updateShapeArrows;
-
-  stripOuter.appendChild(arrowLeft);
   stripOuter.appendChild(strip);
-  stripOuter.appendChild(arrowRight);
 
   container.appendChild(stripOuter);
   container.appendChild(pane);
 
-  // Show first shape by default
-  showShapePane(ordered[0], pane);
+  // Activate first item and show its pane
+  if(allItems[0]) allItems[0].classList.add('active');
+  if(firstShape) showShapePane(firstShape, pane);
 }
 
 function showShapePane(shape, pane) {
