@@ -123,14 +123,14 @@
     <button class="filter-cat-btn" id="fbtn-tier" onclick="togglePanel('tier',event)">Tier <span class="aval" id="fval-tier"></span><span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetFilters()">Reset</button>
   </div>
-  <div class="filter-panel" id="panel-fam"><div class="filter-panel-title">Mineral family</div><div class="filter-panel-pills" id="pills-fam"></div></div>
+  <div class="filter-panel" id="panel-fam"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Mineral family <button class="prop-help" onclick="openPopup('filter-fam');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-fam"></div></div>
   <div class="filter-panel" id="panel-theme"><div class="filter-panel-title">Energetic theme</div><div class="filter-panel-pills" id="pills-theme"></div></div>
   <div class="filter-panel" id="panel-color"><div class="filter-panel-title">Color</div><div class="filter-panel-pills" id="pills-color"></div></div>
   <div class="filter-panel" id="panel-chakra"><div class="filter-panel-title">Chakra</div><div class="filter-panel-pills" id="pills-chakra"></div></div>
   <div class="filter-panel" id="panel-mohs"><div class="filter-panel-title">Mohs hardness</div><div class="filter-panel-pills" id="pills-mohs"></div></div>
   <div class="filter-panel" id="panel-formation"><div class="filter-panel-title">Formation environment</div><div class="filter-panel-pills" id="pills-formation"></div></div>
-  <div class="filter-panel" id="panel-material"><div class="filter-panel-title">Material type</div><div class="filter-panel-pills" id="pills-material"></div></div>
-  <div class="filter-panel" id="panel-tier"><div class="filter-panel-title">Collector tier</div><div class="filter-panel-pills" id="pills-tier"></div></div>
+  <div class="filter-panel" id="panel-material"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Material type <button class="prop-help" onclick="openPopup('material');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-material"></div></div>
+  <div class="filter-panel" id="panel-tier"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Collector tier <button class="prop-help" onclick="openPopup('filter-tier');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-tier"></div></div>
   </div>
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
@@ -1192,6 +1192,28 @@
   <tr><td>Organic</td><td>Biological origin — from living things (Amber, Coral, Pearl)</td></tr>
   <tr><td>Fossil</td><td>Preserved ancient biological material (Ammonite, Petrified Wood)</td></tr>
   <tr><td>Synthetic</td><td>Man-made material (Goldstone, Opalite)</td></tr></table></div>
+</div>
+
+<div class="popup-overlay" id="popup-filter-fam" onclick="if(event.target===this)closePopup('filter-fam')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('filter-fam')">✕</button>
+  <div class="popup-title">Mineral family</div>
+  <p class="popup-note" style="margin-bottom:0.75rem">Stones are grouped by their mineral chemistry — what they're made of at a molecular level. Most families share physical traits like hardness range, crystal structure, and care requirements.</p>
+  <p class="popup-note">A few examples: all Quartzes (Amethyst, Rose Quartz, Citrine) share the same silicon dioxide base. All Feldspars (Moonstone, Labradorite, Amazonite) share a framework silicate structure. Family is the most reliable way to predict how a stone behaves physically.</p>
+  </div>
+</div>
+
+<div class="popup-overlay" id="popup-filter-tier" onclick="if(event.target===this)closePopup('filter-tier')">
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('filter-tier')">✕</button>
+  <div class="popup-title">Collector tiers</div>
+  <p class="popup-note" style="margin-bottom:0.75rem">Tiers reflect practical collecting experience — not mineralogical rarity. They describe how easy a stone is to find and who typically seeks it out.</p>
+  <table class="ptable">
+    <tr><th>Tier</th><th>What it means</th></tr>
+    <tr><td>Essentials</td><td>The first stones most people buy. Found in almost any shop, including mall and gift stores. Foundational to crystal practice.</td></tr>
+    <tr><td>Shelf Builders</td><td>Natural next additions as a collection grows. Available at well-stocked dedicated crystal shops.</td></tr>
+    <tr><td>Collector Favorites</td><td>Intentional acquisitions by intermediate to advanced collectors. You know what you want and go looking for it.</td></tr>
+    <tr><td>Rare Finds</td><td>Serious collector territory. Hard to find, often expensive, or niche. Usually requires online sourcing or specialist dealers.</td></tr>
+  </table>
+  </div>
 </div>
 
 <div class="popup-overlay" id="popup-size" onclick="if(event.target===this)closePopup('size')">
