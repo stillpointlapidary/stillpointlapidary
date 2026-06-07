@@ -377,7 +377,6 @@ function renderSotd(){
         <div class="sotd-card-label">Stone of the Day</div>
         <div class="sotd-card-name">${s.name}</div>
         <div class="sotd-card-tagline">${s.use}</div>
-        <div class="sotd-card-link">View in the encyclopedia →</div>
       </div>
     </div>`;
   } else {
@@ -388,7 +387,6 @@ function renderSotd(){
         <div class="sotd-card-label">Stone of the Day</div>
         <div class="sotd-card-name">${s.name}</div>
         <div class="sotd-card-tagline">${s.use}</div>
-        <div class="sotd-card-link">View in the encyclopedia →</div>
       </div>
     </div>`;
   }
