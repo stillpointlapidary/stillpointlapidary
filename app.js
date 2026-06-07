@@ -4169,10 +4169,10 @@ function init101Grids() {
 // ── CRYSTAL SHAPES ──
 
 const SHAPE_CATEGORIES = [
-  { label: 'Holdable', ids: ['tumble','palm','worry','heart'] },
-  { label: 'Display',  ids: ['sphere','egg','tower','pyramid','cube','freeform','flame','bowl'] },
-  { label: 'Natural',  ids: ['raw','specimen','point','cluster','geode','druzy','slice'] },
-  { label: 'Symbolic', ids: ['moon','star','mushroom','wand','carving'] },
+  { label: 'Holdable', def: 'Pieces meant to be carried, held, or kept close',                          ids: ['tumble','palm','worry','heart'] },
+  { label: 'Display',  def: 'Pieces chosen for shape, presence, shelf appeal, or visual structure',     ids: ['sphere','egg','tower','pyramid','cube','freeform','flame','bowl'] },
+  { label: 'Natural',  def: 'Pieces that show the stone\'s natural growth, texture, and mineral character', ids: ['raw','specimen','point','cluster','geode','druzy','slice'] },
+  { label: 'Symbolic', def: 'Pieces chosen because the shape itself carries meaning',                   ids: ['moon','star','mushroom','wand','carving'] },
 ];
 
 const CRYSTAL_SHAPES = [
@@ -4693,20 +4693,29 @@ function renderShapes() {
   const pane = document.createElement('div');
   pane.className = 'shapes-pane';
 
-  // Build category-row strip
   const strip = document.createElement('div');
   strip.className = 'shapes-strip strip-with-headers';
 
-  let firstShape = null;
-  const allItems = [];
+  const catLabelEls = {};
+  const allChipItems = [];
+
+  function setActiveCat(catLabel) {
+    Object.entries(catLabelEls).forEach(([lbl, el]) => el.classList.toggle('active-cat', lbl === catLabel));
+  }
 
   SHAPE_CATEGORIES.forEach(cat => {
     const row = document.createElement('div');
     row.className = 'cat-row';
 
-    const label = document.createElement('span');
+    const label = document.createElement('button');
     label.className = 'cat-row-label';
     label.textContent = cat.label;
+    label.addEventListener('click', () => {
+      allChipItems.forEach(el => el.classList.remove('active'));
+      setActiveCat(cat.label);
+      showCategoryGrid(cat, pane, shapeMap, setActiveCat);
+    });
+    catLabelEls[cat.label] = label;
     row.appendChild(label);
 
     const chips = document.createElement('div');
@@ -4715,18 +4724,17 @@ function renderShapes() {
     cat.ids.forEach(id => {
       const shape = shapeMap[id];
       if(!shape) return;
-      if(!firstShape) firstShape = shape;
-
       const item = document.createElement('button');
       item.className = 'shape-strip-item';
       item.innerHTML = `<span class="shape-strip-icon">${shape.draw()}</span><span>${shape.name}</span>`;
       item.addEventListener('click', () => {
-        allItems.forEach(el => el.classList.remove('active'));
+        allChipItems.forEach(el => el.classList.remove('active'));
         item.classList.add('active');
-        showShapePane(shape, pane);
+        setActiveCat(cat.label);
+        showShapeDetail(shape, cat, pane, shapeMap, setActiveCat);
       });
       chips.appendChild(item);
-      allItems.push(item);
+      allChipItems.push(item);
     });
 
     row.appendChild(chips);
@@ -4740,13 +4748,60 @@ function renderShapes() {
   container.appendChild(stripOuter);
   container.appendChild(pane);
 
-  // Activate first item and show its pane
-  if(allItems[0]) allItems[0].classList.add('active');
-  if(firstShape) showShapePane(firstShape, pane);
+  // Default: show Holdable category grid
+  const firstCat = SHAPE_CATEGORIES[0];
+  setActiveCat(firstCat.label);
+  showCategoryGrid(firstCat, pane, shapeMap, setActiveCat);
 }
 
-function showShapePane(shape, pane) {
+function showCategoryGrid(cat, pane, shapeMap, setActiveCat) {
+  const shapes = cat.ids.map(id => shapeMap[id]).filter(Boolean);
+  const chevL = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+
   pane.innerHTML = `
+    <div class="cat-grid-header">
+      <span class="cat-grid-title">${cat.label}</span>
+      <span class="cat-grid-sub">${cat.def || ''}</span>
+    </div>
+    <div class="cat-grid">
+      ${shapes.map(s => `
+        <div class="cat-card" data-id="${s.id}">
+          <div class="cat-card-illus">${s.draw()}</div>
+          <div class="cat-card-body">
+            <div class="cat-card-name">${s.name}</div>
+            <div class="cat-card-tagline">${s.tagline}</div>
+            <div class="cat-card-desc">${s.body}</div>
+          </div>
+        </div>`).join('')}
+    </div>
+    <div class="forms-browse">
+      <div class="forms-browse-label">Explore by form type</div>
+      <div class="forms-browse-cats">
+        ${SHAPE_CATEGORIES.map(c => `<button class="browse-cat-pill${c.label===cat.label?' active':''}" data-cat="${c.label}">${c.label}</button>`).join('')}
+      </div>
+    </div>`;
+
+  pane.querySelectorAll('.cat-card').forEach(card => {
+    const shape = shapeMap[card.dataset.id];
+    if(!shape) return;
+    card.addEventListener('click', () => {
+      setActiveCat(cat.label);
+      showShapeDetail(shape, cat, pane, shapeMap, setActiveCat);
+    });
+  });
+
+  pane.querySelectorAll('.browse-cat-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const target = SHAPE_CATEGORIES.find(c => c.label === pill.dataset.cat);
+      if(target) { setActiveCat(target.label); showCategoryGrid(target, pane, shapeMap, setActiveCat); }
+    });
+  });
+}
+
+function showShapeDetail(shape, cat, pane, shapeMap, setActiveCat) {
+  const chevL = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+  pane.innerHTML = `
+    <button class="shape-back-link">${chevL} Back to ${cat.label}</button>
     <div class="shape-pane-layout">
       <div class="shape-illustration">${shape.draw()}</div>
       <div>
@@ -4757,6 +4812,10 @@ function showShapePane(shape, pane) {
         <div class="shape-examples">${shape.examples.map(e=>`<span class="shape-pill" onclick="jumpToStone('${e}')">${e}</span>`).join('')}</div>
       </div>
     </div>`;
+  pane.querySelector('.shape-back-link').addEventListener('click', () => {
+    setActiveCat(cat.label);
+    showCategoryGrid(cat, pane, shapeMap, setActiveCat);
+  });
 }
 
 
