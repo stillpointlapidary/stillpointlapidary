@@ -1660,7 +1660,7 @@ function renderTierBars(){
     const ownedW=(owned/total*100).toFixed(1);
     const wlW=showWish?Math.min(wl/total*100,100-parseFloat(ownedW)).toFixed(1):'0';
     return`<div class="tier-bar-row${showWish?'':' no-wish'}">
-      <div class="tier-bar-lbl">${t.label}</div>
+      <div class="tier-bar-lbl tb-lbl-click" onclick="jumpToFilteredEncyclopedia('tier','${t.num}')" title="Browse ${t.label} in Encyclopedia">${t.label}</div>
       <div class="tier-bar-track"><div class="tier-bar-owned" style="width:${ownedW}%"></div><div class="tier-bar-wish" style="width:${wlW}%"></div></div>
       <div class="tier-bar-num owned${owned>0?' tb-click':''}" ${owned>0?`onclick="filterCollByTierOwned(${t.num})" title="View ${owned} owned piece${owned===1?'':'s'}"`:''}>${owned}</div>
       ${showWish?`<div class="tier-bar-num wish${wl===0?' dim':''}${wl>0?' tb-click':''}" ${wl>0?`onclick="filterCollByTierWish(${t.num})" title="View ${wl} wishlist item${wl===1?'':'s'}"`:''}>${wl}</div>`:''}
