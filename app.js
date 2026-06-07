@@ -1439,7 +1439,7 @@ function renderMoodStones(moodIdx,subFilter){
   if(gridBanner){
     if(moodGrid){
       gridBanner.style.display='block';
-      gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',document.querySelectorAll('.nav-tab')[4]);setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
+      gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',getTabButton('101'));setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
     } else {
       gridBanner.style.display='none';
     }
@@ -2326,7 +2326,6 @@ async function saveEncEntry(){
     const {data,error}=await _supa.from('stones').insert(payload).select('id').single();
     if(saveBtn){saveBtn.disabled=false;saveBtn.textContent='Save entry';}
     if(error){alert('Error saving to database: '+error.message);return;}
-    const newId=data.id;
     const newEntry={
       i:newId,n:name,a:alt,fam,sp,
       mt:document.getElementById('enc-mt').value,sy:document.getElementById('enc-sy').value,
@@ -2627,7 +2626,7 @@ function rememberActiveTab(name){
   try{localStorage.setItem('spl_active_tab',name);}catch(e){}
 }
 function getTabButton(name){
-  const map={encyclopedia:0,mood:1,collection:2,identify:3,'101':4};
+  const map={mood:1,encyclopedia:2,identify:3,collection:4,'101':5};
   const idx=map[name];
   return idx===undefined?null:document.querySelectorAll('.nav-tab')[idx];
 }
@@ -5127,7 +5126,7 @@ _authInit();
   }
   window.jumpToFilteredEncyclopedia = function(key,val){
     if(typeof switchTabByName === 'function') switchTabByName('encyclopedia');
-    else if(typeof switchTab === 'function') switchTab('encyclopedia', document.querySelectorAll('.nav-tab')[0]);
+    else if(typeof switchTab === 'function') switchTab('encyclopedia', document.querySelectorAll('.nav-tab')[2]);
     setTimeout(function(){
       resetEncFiltersSafe();
       if(typeof activateEncyclopediaFilter === 'function'){
@@ -5142,42 +5141,7 @@ _authInit();
   window.jumpToChakra = function(chakra){ window.jumpToFilteredEncyclopedia('chakra', chakra); };
   window.jumpToFamily = function(family){ window.jumpToFilteredEncyclopedia('fam', family); };
 
-  try{
-    initId2 = function(){
-      const grid=document.getElementById('id2-colors');
-      if(!grid)return;
-      // Reset state
-      id2State={color:null,trans:null,luster:null,hard:null,heft:null};
-      id2Revealed={trans:false,luster:false,advanced:false};
-      ['trans','luster','advanced'].forEach(function(key){
-        const el=document.getElementById('id2-step-'+key);
-        if(el){el.classList.add('id2-step-hidden');el.classList.remove('id2-step-reveal');}
-      });
-      const advBody=document.getElementById('id2-advanced-body');
-      if(advBody)advBody.style.display='none';
-      // Rebuild color buttons if needed
-      if(grid.children.length>0){if(typeof runId2==='function')runId2();return;}
-      grid.innerHTML='';
-      ID2_COLORS.forEach(function(col){
-        const btn=document.createElement('button');
-        btn.className='id2-color-btn';
-        btn.title=col.val;
-        btn.setAttribute('aria-label', col.val);
-        btn.style.cssText='background:'+col.hex+';border:2.5px solid '+(col.val==='White'?'var(--border)':'transparent');
-        btn.onclick=function(){
-          id2State.color=(id2State.color===col.val)?null:col.val;
-          document.querySelectorAll('.id2-color-btn').forEach(function(b){
-            b.classList.remove('active');
-            b.style.border=b.title==='White'?'2.5px solid var(--border)':'2.5px solid transparent';
-          });
-          if(id2State.color)btn.classList.add('active');
-          if(typeof runId2==='function')runId2();
-        };
-        grid.appendChild(btn);
-      });
-      if(typeof runId2==='function')runId2();
-    };
-  }catch(e){}
+  // initId2 is defined in the main app — do not override it here
 
   function stampCrystalCards(){
     document.querySelectorAll('#crystal-grid .crystal-card, #id2-grid .crystal-card').forEach(function(card){
@@ -5343,7 +5307,7 @@ _authInit();
     if(gridBanner){
       if(moodGrid){
         gridBanner.style.display='block';
-        gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',document.querySelectorAll('.nav-tab')[4]);setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
+        gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',getTabButton('101'));setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
       }else{gridBanner.style.display='none';}
     }
     grid.innerHTML=matches.map(function(c){
