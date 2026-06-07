@@ -4666,10 +4666,15 @@ const _supa = window.supabase.createClient(
 
 // ── Load stones from Supabase, then init app ──
 loadStonesAndInit().then(()=>{
-  const action=new URLSearchParams(window.location.search).get('action');
+  const params=new URLSearchParams(window.location.search);
+  const action=params.get('action');
   if(action==='guide') openPopup('instructions');
   else if(action==='manage') openPopup('manage');
   else if(action==='add-entry') openAddEncForm();
+  const tabParam=params.get('tab');
+  if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
+    switchTabByName(tabParam);
+  }
 });
 
 let _currentUser = null;
