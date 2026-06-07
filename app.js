@@ -5001,6 +5001,8 @@ loadStonesAndInit().then(()=>{
   const tabParam=params.get('tab');
   if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
     switchTabByName(tabParam);
+    // Re-apply after auth+data loading settles (auth callbacks can fire and re-render after init)
+    setTimeout(()=>switchTabByName(tabParam), 600);
   }
 });
 
