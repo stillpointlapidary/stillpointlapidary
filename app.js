@@ -2745,7 +2745,7 @@ function updateLastSaved(){
 // ── START ──
 async function loadStonesAndInit() {
   const CACHE_KEY = 'spl_stones_cache';
-  const CACHE_VER = 'v2';
+  const CACHE_VER = 'v3';
 
   function mapRow(r) {
     const cats = Array.isArray(r.color_categories) ? r.color_categories : (r.color_categories ? [r.color_categories] : []);
@@ -2782,6 +2782,9 @@ async function loadStonesAndInit() {
       isMulti:       cats.length > 1,
       primary_theme: r.primary_theme     || '',
       all_themes:    r.all_themes        || [],
+      tier:          r.collection_tier   || null,
+      man_made:      r.is_man_made       || false,
+      tox:           r.toxicity_note     || '',
       o:             false,
       w:             false,
       _search:       [er1, er2, er3, pt, at].join(' '),
