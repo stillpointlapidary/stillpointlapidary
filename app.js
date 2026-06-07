@@ -1049,6 +1049,9 @@ function openDetail(id){
   
   document.getElementById('d-uw').textContent=c.uw||'—';
   document.getElementById('d-geo').textContent=c.g||'—';
+  const toxMsg=TOXIC_NOTES[c.n]||c.tox||'';
+  const toxBlock=document.getElementById('d-tox-block');
+  if(toxBlock){if(toxMsg){document.getElementById('d-tox').textContent=toxMsg;toxBlock.style.display='';}else toxBlock.style.display='none';}
   document.getElementById('d-sy').textContent=c.sy||'—';
   document.getElementById('d-fo').textContent=c.fo||'—';
   document.getElementById('d-m').textContent=c.m?c.m+' Mohs':'—';
@@ -3526,12 +3529,20 @@ function jumpToTheme(theme){
 
 // ── CARE SEARCH ──
 const TOXIC_NOTES = {
-  'Malachite':'Copper-based — toxic dust when dry-polished. Never use in water elixirs.',
-  'Cinnabar':'Mercury sulfide — display only. Wash hands after handling.',
-  'Galena':'Lead-based — wash hands after handling. Keep away from children.',
-  'Pyrite':'Can release sulfuric acid when wet. Keep dry.',
-  'Vanadinite':'Contains vanadium — handle finished specimens only. Wash hands.',
-  'Chalcopyrite':'Copper-iron sulfide — keep dry, wash hands.',
+  'Malachite':        'Copper-based — never use in water elixirs. Wash hands after handling raw or powdered specimens.',
+  'Cinnabar':         'Mercury sulfide — display only. Wash hands after every handling session.',
+  'Galena':           'Lead sulfide — wash hands after handling. Never use in water. Keep away from children.',
+  'Pyrite':           'Can release sulfuric acid when wet — keep dry.',
+  'Vanadinite':       'Lead vanadate — wash hands after handling. Display only; never use in water.',
+  'Chalcopyrite':     'Copper-iron sulfide — keep dry, wash hands after handling.',
+  'Bumblebee Jasper': 'Contains arsenic minerals — wash hands after handling. Never use in water or elixirs.',
+  'Wulfenite':        'Lead molybdate — wash hands after handling. Display only; never use in water.',
+  'Pyromorphite':     'Lead chlorophosphate — wash hands after handling. Display only; never use in water.',
+  'Stibnite':         'Antimony sulfide — wash hands after handling. Never use in water.',
+  'Sulfur':           'Avoid inhaling dust or fumes. Never use in water. Keep away from heat and open flame.',
+  'Vivianite':        'Iron phosphate — safe to handle; keep dry. Oxidizes with prolonged air and light exposure.',
+  'Zincite':          'Contains zinc oxide — wash hands after handling. Avoid inhaling dust from raw specimens.',
+  'Tremolite':        'May contain asbestiform fibers — handle polished specimens only. Never sand, cut, or break.',
 };
 
 function openEncLightbox(src, alt, e){
