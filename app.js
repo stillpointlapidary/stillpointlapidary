@@ -3486,6 +3486,7 @@ function runCareSearch(val){
 
 // ── IDENTIFY V2 ──
 var id2State={color:null,trans:null,luster:null,hard:null,heft:null};
+var id2Revealed={trans:false,luster:false,advanced:false};
 const HEFT_FN={
   light:   c=>['Gypsum','Organic Material','Fossil Material'].includes(c.fam)||['Amber','Selenite','Satin Spar','Pumice','Desert Rose'].some(n=>c.n.includes(n)),
   heavy:   c=>['Iron Minerals','Sulfides'].includes(c.fam)||['Hematite','Pyrite','Galena','Magnetite','Lodestone','Chalcopyrite','Bismuth','Barite','Cassiterite'].some(n=>c.n.includes(n)),
@@ -3527,6 +3528,12 @@ function initId2(){
   });
   runId2();
 }
+function revealId2Step(id){
+  const el=document.getElementById(id);
+  if(!el||!el.classList.contains('id2-step-hidden'))return;
+  el.classList.remove('id2-step-hidden');
+  el.classList.add('id2-step-reveal');
+}
 function setId2(type,val,el){
   const prev=id2State[type];
   id2State[type]=(prev===val)?null:val;
@@ -3534,7 +3541,34 @@ function setId2(type,val,el){
   if(id2State[type])el.classList.add('active');
   runId2();
 }
+function toggleId2Advanced(){
+  const body=document.getElementById('id2-advanced-body');
+  const caret=document.getElementById('id2-adv-caret');
+  if(!body)return;
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  if(caret)caret.textContent=open?'▾':'▴';
+}
 function runId2(){
+  // Progressive reveal
+  if(id2State.color&&!id2Revealed.trans){id2Revealed.trans=true;revealId2Step('id2-step-trans');}
+  if(id2State.trans&&!id2Revealed.luster){id2Revealed.luster=true;revealId2Step('id2-step-luster');}
+  if(id2State.luster&&!id2Revealed.advanced){id2Revealed.advanced=true;revealId2Step('id2-step-advanced');}
+
+  const hasFilter=id2State.color||id2State.trans||id2State.luster||id2State.hard||id2State.heft;
+  const prompt=document.getElementById('id2-prompt');
+  const grid=document.getElementById('id2-grid');
+  const bar=document.getElementById('id2-result-bar');
+  if(!hasFilter){
+    if(prompt)prompt.style.display='block';
+    if(grid)grid.style.display='none';
+    if(bar)bar.style.display='none';
+    return;
+  }
+  if(prompt)prompt.style.display='none';
+  if(grid)grid.style.display='';
+  if(bar)bar.style.display='';
+
   const results=CRYSTALS.filter(c=>{
     if(id2State.color&&!(c.col_cats&&c.col_cats.includes(id2State.color)))return false;
     if(id2State.trans){
@@ -3547,17 +3581,26 @@ function runId2(){
     return true;
   });
   const n=results.length;
-  document.getElementById('id2-count').innerHTML=`<strong>${n}</strong> stone${n===1?'':'s'} match`;
+  const countEl=document.getElementById('id2-count');
+  if(countEl)countEl.innerHTML=`Possible matches <strong style="color:var(--ink);margin-left:4px">${n}</strong>`;
   const g=document.getElementById('id2-grid');
+  if(!g)return;
   if(!n){g.innerHTML='<div class="id2-empty">No stones match — try removing a filter.</div>';return;}
-  const owned=new Set((collection||[]).map(p=>p.crystalId));
-  const wished=new Set(Object.keys(wish||{}));
-  g.innerHTML=results.slice(0,72).map(c=>encCardHtml(c)).join('')+(results.length>72?`<div class="id2-empty" style="padding:1rem;font-size:12px">Showing 72 of ${results.length} — add a filter to narrow down.</div>`:'');
+  g.innerHTML=results.slice(0,72).map(c=>encCardHtml(c)).join('')+(results.length>72?`<div class="id2-empty" style="padding:1rem;font-size:12px">Showing 72 of ${results.length} — add more filters to narrow down.</div>`:'');
 }
 function clearId2(){
   id2State={color:null,trans:null,luster:null,hard:null,heft:null};
+  id2Revealed={trans:false,luster:false,advanced:false};
   document.querySelectorAll('.id2-color-btn').forEach(b=>{b.classList.remove('active');b.style.border=b.title==='White'?'2.5px solid var(--border)':'2.5px solid transparent';});
   document.querySelectorAll('.id2-pill').forEach(p=>p.classList.remove('active'));
+  ['trans','luster','advanced'].forEach(key=>{
+    const el=document.getElementById('id2-step-'+key);
+    if(el){el.classList.add('id2-step-hidden');el.classList.remove('id2-step-reveal');}
+  });
+  const advBody=document.getElementById('id2-advanced-body');
+  if(advBody)advBody.style.display='none';
+  const caret=document.getElementById('id2-adv-caret');
+  if(caret)caret.textContent='▾';
   runId2();
 }
 
@@ -5103,6 +5146,17 @@ _authInit();
     initId2 = function(){
       const grid=document.getElementById('id2-colors');
       if(!grid)return;
+      // Reset state
+      id2State={color:null,trans:null,luster:null,hard:null,heft:null};
+      id2Revealed={trans:false,luster:false,advanced:false};
+      ['trans','luster','advanced'].forEach(function(key){
+        const el=document.getElementById('id2-step-'+key);
+        if(el){el.classList.add('id2-step-hidden');el.classList.remove('id2-step-reveal');}
+      });
+      const advBody=document.getElementById('id2-advanced-body');
+      if(advBody)advBody.style.display='none';
+      // Rebuild color buttons if needed
+      if(grid.children.length>0){if(typeof runId2==='function')runId2();return;}
       grid.innerHTML='';
       ID2_COLORS.forEach(function(col){
         const btn=document.createElement('button');
