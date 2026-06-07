@@ -400,7 +400,8 @@ function init(){
     buildMoodGroupPills();
     buildYearSelect('f-year');
     encRender();
-    const rememberedTab=(()=>{try{return localStorage.getItem('spl_active_tab')||'home';}catch(e){return'home';}})();
+    const urlTab=(()=>{try{const p=new URLSearchParams(window.location.search).get('tab');return(['mood','encyclopedia','identify','collection','101'].includes(p)?p:null);}catch(e){return null;}})();
+    const rememberedTab=urlTab||(()=>{try{return localStorage.getItem('spl_active_tab')||'home';}catch(e){return'home';}})();
     if(rememberedTab==='collection'){
       const wrap=document.getElementById('coll-wrap');
       if(wrap)wrap.innerHTML='<div class="empty-coll">Loading your collection…</div>';
