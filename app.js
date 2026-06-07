@@ -5218,6 +5218,9 @@ async function loadSupabaseState() {
   renderCollection();
   const syncEl=document.getElementById('coll-sync-status');
   if(syncEl){const t=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});syncEl.textContent='Synced at '+t;syncEl.style.display='block';}
+  // Re-apply URL tab param — auth+data load can fire after initial tab switch
+  const _urlTab=(()=>{try{return new URLSearchParams(window.location.search).get('tab');}catch(e){return null;}})();
+  if(_urlTab&&['mood','identify','collection','101'].includes(_urlTab)){switchTabByName(_urlTab);}
 }
 
 async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
