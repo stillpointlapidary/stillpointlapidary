@@ -946,6 +946,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .tier-bar-num.wish.dim{opacity:0.3}
 .tier-bar-num.total{color:var(--ink3)}
 .tier-bar-num.pct{color:var(--ink2);font-weight:500}
+.tier-bar-num.tb-click{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+.tier-bar-num.tb-click:hover{opacity:0.7}
 
 @media(max-width:600px){
   .coll-stats{grid-template-columns:1fr}
