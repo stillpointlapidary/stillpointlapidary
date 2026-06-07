@@ -1603,9 +1603,11 @@ function encDoorwayBrowse(key){
 }
 
 // ── Collection Tier Bars ──
+let _tierWishlistOn = true;
+
 function renderTierBars(){
-  const el=document.getElementById('tier-bars');
-  if(!el||!CRYSTALS.length)return;
+  const container = document.getElementById('tier-bars');
+  if(!container||!CRYSTALS.length)return;
   const displayCollection=dedupedCollectionItems(collection);
   const ownedIds=new Set(displayCollection.map(p=>p.crystalId));
   const wishIds=new Set(Object.keys(wish));
@@ -1615,7 +1617,18 @@ function renderTierBars(){
     {num:3,label:'Collector Favorites'},
     {num:4,label:'Rare Finds'},
   ];
-  el.innerHTML=tiers.map(t=>{
+
+  const showWish = _tierWishlistOn;
+
+  const colHeaders = `<div class="tier-bar-headers${showWish?'':' no-wish'}">
+    <div></div><div></div>
+    <div class="tier-bar-col-hdr owned-hdr">Owned</div>
+    ${showWish?'<div class="tier-bar-col-hdr wish-hdr">Wishlist</div>':''}
+    <div class="tier-bar-col-hdr">In Tier</div>
+    <div class="tier-bar-col-hdr">%</div>
+  </div>`;
+
+  const rows = tiers.map(t=>{
     const tierStones=CRYSTALS.filter(c=>c.tier===t.num||Number(c.tier)===t.num);
     const total=tierStones.length;
     if(!total)return'';
@@ -1623,9 +1636,22 @@ function renderTierBars(){
     const wl=tierStones.filter(c=>wishIds.has(c.i)).length;
     const pct=Math.round(owned/total*100);
     const ownedW=(owned/total*100).toFixed(1);
-    const wlW=Math.min(wl/total*100,100-parseFloat(ownedW)).toFixed(1);
-    return`<div class="tier-bar-row"><div class="tier-bar-lbl">${t.label}</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:${ownedW}%"></div><div class="tier-bar-wish" style="width:${wlW}%"></div></div><div class="tier-bar-meta">${owned} owned · ${wl} wishlist · ${pct}%</div></div>`;
+    const wlW=showWish?Math.min(wl/total*100,100-parseFloat(ownedW)).toFixed(1):'0';
+    return`<div class="tier-bar-row${showWish?'':' no-wish'}">
+      <div class="tier-bar-lbl">${t.label}</div>
+      <div class="tier-bar-track"><div class="tier-bar-owned" style="width:${ownedW}%"></div><div class="tier-bar-wish" style="width:${wlW}%"></div></div>
+      <div class="tier-bar-num owned">${owned}</div>
+      ${showWish?`<div class="tier-bar-num wish${wl===0?' dim':''}">${wl}</div>`:''}
+      <div class="tier-bar-num total">${total}</div>
+      <div class="tier-bar-num pct">${pct}%</div>
+    </div>`;
   }).join('');
+
+  container.innerHTML = colHeaders + rows;
+
+  // Re-attach toggle listener (container is re-rendered each time)
+  const toggle = document.getElementById('tier-wish-toggle');
+  if(toggle) toggle.addEventListener('change', ()=>{ _tierWishlistOn=toggle.checked; renderTierBars(); });
 }
 
 function renderCollection(){
@@ -4743,6 +4769,11 @@ function renderShapes() {
 
   const stripOuter = document.createElement('div');
   stripOuter.className = 'shapes-strip-outer';
+
+  const stripIntro = document.createElement('div');
+  stripIntro.className = 'shapes-strip-intro';
+  stripIntro.textContent = 'Select a category to explore, or choose any form below to learn more.';
+  stripOuter.appendChild(stripIntro);
   stripOuter.appendChild(strip);
 
   container.appendChild(stripOuter);

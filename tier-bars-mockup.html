@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tier Bars — Redesign Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --stone:#f7f5f2; --stone2:#ede9e3; --stone3:#e3ddd6;
+    --ink:#524d47; --ink2:#6b6560; --ink3:#9a948e; --ink2r:#7a7268;
+    --accent:#8b7355; --accent2:#c8a96e;
+    --border:rgba(42,37,32,0.12); --border2:rgba(42,37,32,0.07);
+    --white:#faf8f6;
+    --tier-owned: #7a9e8a;
+    --tier-wish: #c8a96e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Jost', sans-serif; background: var(--stone); color: var(--ink); padding: 40px 24px; max-width: 860px; margin: 0 auto; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .page-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .state-title { font-family: Georgia, serif; font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
+  .state-desc { font-size: 12px; color: var(--ink2); line-height: 1.6; margin-bottom: 24px; }
+  .demo-block { margin-bottom: 52px; }
+
+  /* ── stat cell shell (matches existing site) ── */
+  .stat-tier-cell {
+    background: var(--white); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+
+  /* ── header row ── */
+  .tier-header-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .tier-section-label {
+    font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink2r);
+  }
+
+  /* ── toggle ── */
+  .tier-toggle {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; letter-spacing: 0.06em; color: var(--ink3);
+    cursor: pointer; user-select: none;
+  }
+  .toggle-track {
+    width: 28px; height: 15px; border-radius: 8px;
+    background: var(--tier-wish); position: relative;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .toggle-track.off { background: var(--stone3); }
+  .toggle-thumb {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: white; position: absolute; top: 2px; right: 2px;
+    transition: right 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .toggle-track.off .toggle-thumb { right: auto; left: 2px; }
+
+  /* ── column headers ── */
+  .tier-col-headers {
+    display: grid;
+    grid-template-columns: 150px 1fr 44px 52px 80px;
+    gap: 8px; align-items: center;
+    margin-bottom: 6px; padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--border2);
+  }
+  .tier-col-headers.no-wish {
+    grid-template-columns: 150px 1fr 44px 80px;
+  }
+  .tier-col-hdr {
+    font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink3); text-align: right;
+  }
+  .tier-col-hdr:first-child { text-align: left; }
+  .tier-col-hdr.owned-hdr { color: var(--tier-owned); }
+  .tier-col-hdr.wish-hdr  { color: var(--tier-wish); }
+
+  /* ── bar rows ── */
+  .tier-bar-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 44px 52px 80px;
+    gap: 8px; align-items: center; margin-bottom: 7px;
+  }
+  .tier-bar-row:last-child { margin-bottom: 0; }
+  .tier-bar-row.no-wish {
+    grid-template-columns: 150px 1fr 44px 80px;
+  }
+  .tier-bar-lbl {
+    font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink3); white-space: nowrap;
+  }
+  .tier-bar-track {
+    height: 5px; background: var(--stone2); border-radius: 3px;
+    overflow: hidden; display: flex;
+  }
+  .tier-bar-owned { height: 100%; background: var(--tier-owned); transition: width 0.4s ease; }
+  .tier-bar-wish  { height: 100%; background: var(--tier-wish);  transition: width 0.4s ease; }
+
+  .tier-num {
+    font-size: 11px; color: var(--ink2); text-align: right;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .tier-num.owned { color: var(--tier-owned); font-weight: 500; }
+  .tier-num.wish  { color: var(--tier-wish);  font-weight: 500; }
+
+  .tier-pct {
+    font-size: 10px; color: var(--ink3); text-align: right;
+    font-variant-numeric: tabular-nums; white-space: nowrap; line-height: 1.3;
+  }
+  .tier-pct strong { color: var(--ink2); font-weight: 500; font-size: 11px; }
+  .tier-pct span { display: block; font-size: 9px; color: var(--ink3); }
+
+  hr { border: none; border-top: 1px dashed var(--border); margin: 48px 0; }
+</style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════
+     STATE 1 — Wishlist ON (default)
+════════════════════════════════ -->
+
+<div class="demo-block">
+  <p class="page-label">State 1 &nbsp;—&nbsp; Default (wishlist included)</p>
+  <p class="state-title">Toggle on: bar shows owned + wishlist, all columns visible</p>
+  <p class="state-desc">Default view. Gold segment shows wishlist alongside owned. Column headers anchor the numbers so no inline labels needed. "% of 29" tells the full story at a glance.</p>
+
+  <div class="stat-tier-cell">
+    <div class="tier-header-row">
+      <div class="tier-section-label">By Collector Tier</div>
+      <label class="tier-toggle">
+        Include wishlist
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      </label>
+    </div>
+
+    <!-- column headers -->
+    <div class="tier-col-headers">
+      <div class="tier-col-hdr"></div>
+      <div class="tier-col-hdr"></div>
+      <div class="tier-col-hdr owned-hdr">Owned</div>
+      <div class="tier-col-hdr wish-hdr">Wishlist</div>
+      <div class="tier-col-hdr">Progress</div>
+    </div>
+
+    <!-- The Essentials: 29 stones, 5 owned, 5 wishlist -->
+    <div class="tier-bar-row">
+      <div class="tier-bar-lbl">The Essentials</div>
+      <div class="tier-bar-track">
+        <div class="tier-bar-owned" style="width:17.2%"></div>
+        <div class="tier-bar-wish"  style="width:17.2%"></div>
+      </div>
+      <div class="tier-num owned">5</div>
+      <div class="tier-num wish">5</div>
+      <div class="tier-pct"><strong>17%</strong> <span>of 29</span></div>
+    </div>
+
+    <!-- Shelf Builders: 67 stones, 4 owned, 2 wishlist -->
+    <div class="tier-bar-row">
+      <div class="tier-bar-lbl">Shelf Builders</div>
+      <div class="tier-bar-track">
+        <div class="tier-bar-owned" style="width:6%"></div>
+        <div class="tier-bar-wish"  style="width:3%"></div>
+      </div>
+      <div class="tier-num owned">4</div>
+      <div class="tier-num wish">2</div>
+      <div class="tier-pct"><strong>6%</strong> <span>of 67</span></div>
+    </div>
+
+    <!-- Collector Favorites: 124 stones, 3 owned, 0 wishlist -->
+    <div class="tier-bar-row">
+      <div class="tier-bar-lbl">Collector Favorites</div>
+      <div class="tier-bar-track">
+        <div class="tier-bar-owned" style="width:2.4%"></div>
+        <div class="tier-bar-wish"  style="width:0%"></div>
+      </div>
+      <div class="tier-num owned">3</div>
+      <div class="tier-num wish" style="opacity:0.35">0</div>
+      <div class="tier-pct"><strong>2%</strong> <span>of 124</span></div>
+    </div>
+
+    <!-- Rare Finds: 48 stones, 1 owned, 1 wishlist -->
+    <div class="tier-bar-row">
+      <div class="tier-bar-lbl">Rare Finds</div>
+      <div class="tier-bar-track">
+        <div class="tier-bar-owned" style="width:2.1%"></div>
+        <div class="tier-bar-wish"  style="width:2.1%"></div>
+      </div>
+      <div class="tier-num owned">1</div>
+      <div class="tier-num wish">1</div>
+      <div class="tier-pct"><strong>2%</strong> <span>of 48</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════
+     STATE 2 — Wishlist OFF
+════════════════════════════════ -->
+
+<div class="demo-block">
+  <p class="page-label">State 2 &nbsp;—&nbsp; Wishlist toggled off</p>
+  <p class="state-title">Bar shows owned only, Wishlist column removed</p>
+  <p class="state-desc">Clean "pure progress" view. The Wishlist column disappears entirely — no clutter, just owned count vs. total. The bar only shows the green segment.</p>
+
+  <div class="stat-tier-cell">
+    <div class="tier-header-row">
+      <div class="tier-section-label">By Collector Tier</div>
+      <label class="tier-toggle">
+        Include wishlist
+        <div class="toggle-track off"><div class="toggle-thumb"></div></div>
+      </label>
+    </div>
+
+    <!-- column headers (no wishlist col) -->
+    <div class="tier-col-headers no-wish">
+      <div class="tier-col-hdr"></div>
+      <div class="tier-col-hdr"></div>
+      <div class="tier-col-hdr owned-hdr">Owned</div>
+      <div class="tier-col-hdr">Progress</div>
+    </div>
+
+    <div class="tier-bar-row no-wish">
+      <div class="tier-bar-lbl">The Essentials</div>
+      <div class="tier-bar-track"><div class="tier-bar-owned" style="width:17.2%"></div></div>
+      <div class="tier-num owned">5</div>
+      <div class="tier-pct"><strong>17%</strong> <span>of 29</span></div>
+    </div>
+
+    <div class="tier-bar-row no-wish">
+      <div class="tier-bar-lbl">Shelf Builders</div>
+      <div class="tier-bar-track"><div class="tier-bar-owned" style="width:6%"></div></div>
+      <div class="tier-num owned">4</div>
+      <div class="tier-pct"><strong>6%</strong> <span>of 67</span></div>
+    </div>
+
+    <div class="tier-bar-row no-wish">
+      <div class="tier-bar-lbl">Collector Favorites</div>
+      <div class="tier-bar-track"><div class="tier-bar-owned" style="width:2.4%"></div></div>
+      <div class="tier-num owned">3</div>
+      <div class="tier-pct"><strong>2%</strong> <span>of 124</span></div>
+    </div>
+
+    <div class="tier-bar-row no-wish">
+      <div class="tier-bar-lbl">Rare Finds</div>
+      <div class="tier-bar-track"><div class="tier-bar-owned" style="width:2.1%"></div></div>
+      <div class="tier-num owned">1</div>
+      <div class="tier-pct"><strong>2%</strong> <span>of 48</span></div>
+    </div>
+  </div>
+</div>
+
+<p style="font-size:11px; color:var(--ink3); text-align:center; margin-top:8px;">Still Point Lapidary · Tier Bars Redesign Mockup · June 2026</p>
+
+</body>
+</html>
