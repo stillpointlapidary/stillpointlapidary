@@ -264,11 +264,21 @@
     </div>
   </div>
   <div class="coll-stats">
-    <div class="stat-cell stat-clickable" id="stat-cell-total" onclick="setCollQuickFilter('all')" title="Show all pieces">
-      <div class="stat-label">Total pieces</div><div class="stat-val" id="stat-total">0</div>
-    </div>
-    <div class="stat-cell stat-clickable" id="stat-cell-wish" onclick="setCollQuickFilter('wish')" title="Show wishlist">
-      <div class="stat-label">Wishlist</div><div class="stat-val" id="stat-wish">0</div>
+    <div class="stats-stacked">
+      <div class="stat-cell stat-clickable" id="stat-cell-total" onclick="setCollQuickFilter('all')" title="Show all pieces">
+        <div class="stat-label">Total Pieces</div>
+        <div class="stat-num-row">
+          <div class="stat-val" id="stat-total">0</div>
+          <div class="stat-sub">in your collection</div>
+        </div>
+      </div>
+      <div class="stat-cell stat-clickable" id="stat-cell-wish" onclick="setCollQuickFilter('wish')" title="Show wishlist">
+        <div class="stat-label">Wishlist</div>
+        <div class="stat-num-row">
+          <div class="stat-val" id="stat-wish" style="color:var(--accent2)">0</div>
+          <div class="stat-sub">stones on your list</div>
+        </div>
+      </div>
     </div>
     <div class="stat-cell stat-tier-cell" id="stat-cell-var">
       <div class="tier-bars-header">
