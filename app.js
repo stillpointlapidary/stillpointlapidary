@@ -375,10 +375,10 @@ function renderSotd(){
     :``;
   const cardStyle=s.photo?``:`style="background:${s.hex||'#c8bca8'}"`;
   container.innerHTML=`<div class="sotd-wrap">
-    <div class="sotd-eyebrow">Stone of the Day</div>
     <div class="sotd-card" onclick="openDetail('${s.id}')" style="cursor:pointer" ${cardStyle}>
       ${cardInner}
       <div class="sotd-card-overlay${s.photo?'':' sotd-card-overlay--nophoto'}">
+        <div class="sotd-card-label">Stone of the Day</div>
         <div class="sotd-card-name">${s.name}</div>
         <div class="sotd-card-tagline">${s.use}</div>
       </div>
