@@ -8,6 +8,7 @@ let filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation
 let collFilters={cfam:'all',ctheme:'all',ccolor:'all',cchakra:'all',cmohs:'all',cformation:'all',cmaterial:'all',form:'all',size:'all',cshelf:'all'};
 let collQuickFilter='all';
 let collActiveFamilyName=null; // 'all' | 'wish'
+let _collTierNum=null;
 let sortBy='tier';
 
 function _emptyCollHtml(){
@@ -1587,6 +1588,23 @@ function setCollFamilyFilter(fam){
   scrollPageTop();
 }
 
+function filterCollByTierOwned(tierNum){
+  _collTierNum=tierNum;
+  collQuickFilter='tier-owned';
+  document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));
+  renderCollection();
+  const wrap=document.getElementById('coll-wrap');
+  if(wrap){setTimeout(()=>{const y=wrap.getBoundingClientRect().top+window.scrollY-120;window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});},50);}
+}
+function filterCollByTierWish(tierNum){
+  _collTierNum=tierNum;
+  collQuickFilter='tier-wish';
+  document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));
+  renderCollection();
+  const wrap=document.getElementById('coll-wrap');
+  if(wrap){setTimeout(()=>{const y=wrap.getBoundingClientRect().top+window.scrollY-120;window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});},50);}
+}
+
 // ── Encyclopedia Doorway ──
 let encDoorwayDismissed=false;
 function dismissEncDoorway(){
@@ -1644,9 +1662,9 @@ function renderTierBars(){
     return`<div class="tier-bar-row${showWish?'':' no-wish'}">
       <div class="tier-bar-lbl">${t.label}</div>
       <div class="tier-bar-track"><div class="tier-bar-owned" style="width:${ownedW}%"></div><div class="tier-bar-wish" style="width:${wlW}%"></div></div>
-      <div class="tier-bar-num owned">${owned}</div>
-      ${showWish?`<div class="tier-bar-num wish${wl===0?' dim':''}">${wl}</div>`:''}
-      <div class="tier-bar-num total">${total}</div>
+      <div class="tier-bar-num owned${owned>0?' tb-click':''}" ${owned>0?`onclick="filterCollByTierOwned(${t.num})" title="View ${owned} owned piece${owned===1?'':'s'}"`:''}>${owned}</div>
+      ${showWish?`<div class="tier-bar-num wish${wl===0?' dim':''}${wl>0?' tb-click':''}" ${wl>0?`onclick="filterCollByTierWish(${t.num})" title="View ${wl} wishlist item${wl===1?'':'s'}"`:''}>${wl}</div>`:''}
+      <div class="tier-bar-num total tb-click" onclick="jumpToFilteredEncyclopedia('tier','${t.num}')" title="Browse ${t.label} in Encyclopedia">${total}</div>
       <div class="tier-bar-num pct">${pct}%</div>
     </div>`;
   }).join('');
@@ -5683,6 +5701,37 @@ _authInit();
     if(typeof renderTierBars==='function')renderTierBars();
     const wrap=document.getElementById('coll-wrap');
     if(!wrap)return;
+
+    const _tierLabels={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
+    if(collQuickFilter==='tier-owned'||collQuickFilter==='tier-wish'){
+      const isTierWish=collQuickFilter==='tier-wish';
+      const tNum=_collTierNum;
+      const tLabel=_tierLabels[tNum]||('Tier '+tNum);
+      const backBtn=`<div style="margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:10px"><button onclick="setCollQuickFilter('all')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All</button><span style="color:var(--ink3)">·</span><span>${tLabel} ${isTierWish?'Wishlist':'Owned'}</span></div>`;
+      if(isTierWish){
+        const wishIds=Object.keys(wish);
+        const items=CRYSTALS.filter(c=>wishIds.includes(c.i)&&(Number(c.tier)===tNum));
+        if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No wishlist items in '+tLabel+'.</div>';return;}
+        wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
+          ${wishlistCardPhotoHtml(c)}
+          <div class="coll-card-name">${escapeAttr(c.n)}</div>
+          <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
+        </div>`).join('')+'</div>';
+      } else {
+        const items=displayCollection.filter(p=>{const c=CRYSTALS.find(x=>x.i===p.crystalId);return c&&Number(c.tier)===tNum&&passesCollPieceFilters(p);});
+        if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No owned pieces in '+tLabel+'.</div>';return;}
+        wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(p=>{
+          const c=CRYSTALS.find(x=>x.i===p.crystalId);
+          const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
+          const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
+          const loc=locParts.slice(0,2).join(' · ');
+          const ri=collection.indexOf(p);
+          const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
+          return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+        }).join('')+'</div>';
+      }
+      return;
+    }
 
     if(collQuickFilter==='wish'){
       const wishIds=Object.keys(wish);
