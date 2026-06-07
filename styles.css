@@ -68,7 +68,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .sotd-card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .sotd-card-overlay{position:absolute;bottom:0;left:0;right:0;padding:36px 16px 14px;background:linear-gradient(to top,rgba(28,22,16,0.72) 0%,rgba(28,22,16,0) 100%)}
 .sotd-card-overlay--nophoto{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;background:linear-gradient(160deg,rgba(0,0,0,0.08) 0%,rgba(0,0,0,0.45) 100%)}
-.sotd-card-label{font-family:'Jost',sans-serif;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,169,110,0.9);font-weight:700;margin-bottom:4px}
+.sotd-card-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#c8a96e;font-weight:700;margin-bottom:5px;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
 .sotd-card-name{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:#fff;line-height:1.2;margin-bottom:3px}
 .sotd-card-tagline{font-family:'Jost',sans-serif;font-size:11px;color:rgba(255,255,255,0.75);letter-spacing:0.03em;margin-bottom:8px}
 .sotd-card-link{font-family:'Jost',sans-serif;font-size:10px;color:rgba(200,169,110,0.85);cursor:pointer}
