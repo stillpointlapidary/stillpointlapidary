@@ -2698,6 +2698,95 @@ function scrollToTabTop(name){
 function openPopup(n){const el=document.getElementById('popup-'+n);if(el)el.classList.add('open');}
 function closePopup(n){const el=document.getElementById('popup-'+n);if(el)el.classList.remove('open');}
 
+// ── PHOTO PLANNING ──
+const PP_PRIORITIES=[
+  {val:'',label:'—'},
+  {val:'0',label:'★ 10 Stones'},
+  {val:'1',label:'Essentials'},
+  {val:'2',label:'Shelf Builders'},
+  {val:'3',label:'Collector Favorites'},
+  {val:'4',label:'Rare Finds'},
+];
+let _ppData={};    // id → {internal_tier, photo_batch}
+let _ppFilter='all';
+let _ppSaveTimer=null;
+
+async function openPhotoPlan(){
+  openPopup('photo-plan');
+  const rows=document.getElementById('pp-rows');
+  rows.innerHTML='<div style="padding:24px;text-align:center;color:var(--ink3);font-size:13px">Loading…</div>';
+  document.getElementById('pp-summary').textContent='';
+  document.getElementById('pp-filters').innerHTML='';
+
+  const {data,error}=await _supa.from('stones').select('id,name,tier,internal_tier,photo_batch').order('tier').order('name');
+  if(error||!data){rows.innerHTML='<div style="padding:24px;text-align:center;color:var(--ink3);font-size:13px">Could not load stones.</div>';return;}
+
+  data.forEach(s=>{ _ppData[s.id]={internal_tier:s.internal_tier??'',photo_batch:s.photo_batch??''}; });
+  _ppFilter='all';
+  renderPhotoPlanFilters(data);
+  renderPhotoPlanRows(data);
+}
+
+function renderPhotoPlanFilters(data){
+  const assigned=data.filter(s=>_ppData[s.id].internal_tier!==''||_ppData[s.id].photo_batch!=='');
+  const unassigned=data.length-assigned.length;
+  document.getElementById('pp-summary').textContent=`${data.length} stones · ${assigned.length} assigned · ${unassigned} unassigned`;
+
+  const batches=[...new Set(data.map(s=>_ppData[s.id].photo_batch).filter(b=>b!==''))].sort((a,b)=>a-b);
+  const filters=[{val:'all',label:'All'},{val:'starred',label:'★ 10 Stones'},{val:'unassigned',label:'Unassigned'},...batches.map(b=>({val:'batch'+b,label:'Batch '+b}))];
+  const wrap=document.getElementById('pp-filters');
+  wrap.innerHTML='';
+  filters.forEach(f=>{
+    const btn=document.createElement('button');
+    btn.className='pp-filter-btn'+(f.val===_ppFilter?' active':'');
+    btn.textContent=f.label;
+    btn.onclick=()=>{_ppFilter=f.val;renderPhotoPlanRows(data);document.querySelectorAll('.pp-filter-btn').forEach(b=>b.classList.toggle('active',b===btn));};
+    wrap.appendChild(btn);
+  });
+}
+
+function renderPhotoPlanRows(data){
+  let rows=data;
+  if(_ppFilter==='starred') rows=data.filter(s=>_ppData[s.id].internal_tier==='0');
+  else if(_ppFilter==='unassigned') rows=data.filter(s=>_ppData[s.id].internal_tier===''&&_ppData[s.id].photo_batch==='');
+  else if(_ppFilter.startsWith('batch')) rows=data.filter(s=>String(_ppData[s.id].photo_batch)===_ppFilter.slice(5));
+
+  const TIER_COLORS={1:'#8b7355',2:'#7a9e8a',3:'#7a7aaa',4:'#aa7a7a'};
+  const wrap=document.getElementById('pp-rows');
+  if(!rows.length){wrap.innerHTML='<div style="padding:24px;text-align:center;color:var(--ink3);font-size:13px">No stones match this filter.</div>';return;}
+
+  wrap.innerHTML=rows.map(s=>{
+    const d=_ppData[s.id];
+    const hex=(CRYSTALS.find(c=>c.i===s.id)||{}).ch||'#c8b89a';
+    const tierDot=s.tier?`<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${TIER_COLORS[s.tier]||'#ccc'};flex-shrink:0;margin-right:6px"></span>`:'';
+    const priorityOpts=PP_PRIORITIES.map(p=>`<option value="${p.val}"${p.val===String(d.internal_tier??'')?' selected':''}>${p.label}</option>`).join('');
+    return`<div class="pp-row" data-id="${s.id}">
+      <div style="display:flex;align-items:center;gap:6px;min-width:0">
+        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${hex};flex-shrink:0"></span>
+        <span style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name||s.id}</span>
+      </div>
+      <div style="text-align:center">${tierDot}</div>
+      <div><select class="pp-priority-sel" data-id="${s.id}" onchange="ppSaveRow('${s.id}')" style="width:100%;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 4px;background:var(--white);color:var(--ink)">${priorityOpts}</select></div>
+      <div><input type="number" class="pp-batch-inp" data-id="${s.id}" value="${d.photo_batch??''}" min="1" max="99" placeholder="—" onchange="ppSaveRow('${s.id}')" style="width:52px;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white);color:var(--ink)"></div>
+    </div>`;
+  }).join('');
+}
+
+async function ppSaveRow(id){
+  const sel=document.querySelector(`.pp-priority-sel[data-id="${id}"]`);
+  const inp=document.querySelector(`.pp-batch-inp[data-id="${id}"]`);
+  if(!sel||!inp)return;
+  const internal_tier=sel.value===''?null:sel.value;
+  const photo_batch=inp.value===''?null:parseInt(inp.value,10);
+  _ppData[id]={internal_tier:internal_tier??'',photo_batch:photo_batch??''};
+
+  const status=document.getElementById('pp-status');
+  status.textContent='Saving…';
+  const {error}=await _supa.from('stones').update({internal_tier,photo_batch}).eq('id',id);
+  status.textContent=error?'Error saving.':'Saved.';
+  setTimeout(()=>{if(status.textContent==='Saved.')status.textContent='';},2000);
+}
+
 // ── COMBOBOX / TYPE-AHEAD ──
 function sortedCrystals(list){
   return [...list].sort((a,b)=>(a.n||'').localeCompare((b.n||''),undefined,{sensitivity:'base'}));
