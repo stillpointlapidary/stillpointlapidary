@@ -310,59 +310,83 @@
 <section id="tab-identify" style="display:none">
 <div class="id2-wrap">
   <div class="id2-h1">What stone is this?</div>
-  <div class="id2-sub">Filter by what you can observe. Select any combination — results update live.</div>
-  <div class="id2-filters">
-    <div class="id2-filter-row">
-      <div class="id2-flabel">Color</div>
+  <div class="id2-sub">Start with what you can see. Each answer narrows the list.</div>
+
+  <div class="id2-card">
+    <!-- Step 1: Color — always visible -->
+    <div class="id2-step" id="id2-step-color">
+      <div class="id2-step-label"><span class="id2-step-num">①</span> Color</div>
       <div class="id2-color-grid" id="id2-colors"></div>
     </div>
-    <div class="id2-divider"></div>
-    <div class="id2-filter-row">
-      <div class="id2-flabel">See through it?</div>
+
+    <!-- Step 2: Transparency — revealed after color -->
+    <div class="id2-step id2-step-hidden" id="id2-step-trans">
+      <div class="id2-step-divider"></div>
+      <div class="id2-step-label"><span class="id2-step-num">②</span> See through it?</div>
       <div class="id2-pills">
-        <button class="id2-pill" onclick="setId2('trans','Transparent',this)">Yes — clear like glass</button>
-        <button class="id2-pill" onclick="setId2('trans','Translucent',this)">Partly — light gets through</button>
-        <button class="id2-pill" onclick="setId2('trans','Opaque',this)">No — fully solid</button>
+        <button class="id2-pill" onclick="setId2('trans','Transparent',this)">Clear like glass</button>
+        <button class="id2-pill" onclick="setId2('trans','Translucent',this)">Light gets through</button>
+        <button class="id2-pill" onclick="setId2('trans','Opaque',this)">Fully solid</button>
       </div>
     </div>
-    <div class="id2-divider"></div>
-    <div class="id2-filter-row">
-      <div class="id2-flabel">Surface look</div>
+
+    <!-- Step 3: Luster — revealed after transparency -->
+    <div class="id2-step id2-step-hidden" id="id2-step-luster">
+      <div class="id2-step-divider"></div>
+      <div class="id2-step-label"><span class="id2-step-num">③</span> Surface look</div>
       <div class="id2-pills">
         <button class="id2-pill" onclick="setId2('luster','glassy',this)">Glassy &amp; bright</button>
         <button class="id2-pill" onclick="setId2('luster','silky',this)">Silky or pearly</button>
-        <button class="id2-pill" onclick="setId2('luster','metallic',this)">Metallic &amp; shiny</button>
+        <button class="id2-pill" onclick="setId2('luster','metallic',this)">Metallic</button>
         <button class="id2-pill" onclick="setId2('luster','earthy',this)">Dull or earthy</button>
-        <button class="id2-pill" onclick="setId2('luster','iridescent',this)">Iridescent / color-shifting</button>
+        <button class="id2-pill" onclick="setId2('luster','iridescent',this)">Iridescent</button>
       </div>
     </div>
-    <div class="id2-divider"></div>
-    <div class="id2-filter-row">
-      <div class="id2-flabel">How tough is it?</div>
-      <div class="id2-pills">
-        <button class="id2-pill" onclick="setId2('hard','delicate',this)">Delicate — scratches easily</button>
-        <button class="id2-pill" onclick="setId2('hard','everyday',this)">Medium — holds up well</button>
-        <button class="id2-pill" onclick="setId2('hard','tough',this)">Tough — nearly scratch-proof</button>
-      </div>
-    </div>
-    <div class="id2-divider"></div>
-    <div class="id2-filter-row">
-      <div class="id2-flabel">How heavy does it feel?</div>
-      <div class="id2-pills">
-        <button class="id2-pill" onclick="setId2('heft','light',this)">Surprisingly light for its size</button>
-        <button class="id2-pill" onclick="setId2('heft','average',this)">Appropriate for its size</button>
-        <button class="id2-pill" onclick="setId2('heft','heavy',this)">Surprisingly heavy for its size</button>
+
+    <!-- Step 4: Advanced — revealed after luster, collapsed -->
+    <div class="id2-step id2-step-hidden" id="id2-step-advanced">
+      <div class="id2-step-divider"></div>
+      <button class="id2-advanced-toggle" onclick="toggleId2Advanced()">
+        <span class="id2-step-num">④</span> More clues <span id="id2-adv-caret" class="id2-adv-caret">▾</span>
+      </button>
+      <div id="id2-advanced-body" style="display:none">
+        <div class="id2-adv-section">
+          <div class="id2-flabel">How tough is it?</div>
+          <div class="id2-pills">
+            <button class="id2-pill" onclick="setId2('hard','delicate',this)">Scratches easily</button>
+            <button class="id2-pill" onclick="setId2('hard','everyday',this)">Holds up well</button>
+            <button class="id2-pill" onclick="setId2('hard','tough',this)">Very scratch-proof</button>
+          </div>
+        </div>
+        <div class="id2-adv-section">
+          <div class="id2-flabel">How heavy does it feel?</div>
+          <div class="id2-pills">
+            <button class="id2-pill" onclick="setId2('heft','light',this)">Lighter than expected</button>
+            <button class="id2-pill" onclick="setId2('heft','average',this)">About right</button>
+            <button class="id2-pill" onclick="setId2('heft','heavy',this)">Heavier than expected</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="id2-result-bar">
-    <div class="id2-count" id="id2-count" style="font-size:13px;color:var(--ink2)"><strong>362</strong> stones match</div>
+
+  <!-- Result bar — hidden until first selection -->
+  <div class="id2-result-bar" id="id2-result-bar" style="display:none">
+    <div class="id2-count" id="id2-count">Possible matches</div>
     <button class="id2-clear" onclick="clearId2()">Clear all</button>
   </div>
-  <div class="crystal-grid" id="id2-grid"></div>
+
+  <!-- Prompt state — shown before any selection -->
+  <div class="id2-prompt" id="id2-prompt">
+    <div class="id2-prompt-icon">◇</div>
+    <div class="id2-prompt-text">Pick a color to begin</div>
+  </div>
+
+  <div class="crystal-grid" id="id2-grid" style="display:none"></div>
+
   <div class="id2-tips">
-    <strong style="color:var(--ink2);display:block;margin-bottom:4px">Tips for better results</strong>
-    <strong>Color</strong> narrows the field fastest — start there. <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine like glass; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Try scratching a hidden spot with a fingernail (~2.5 Mohs) — delicate stones scratch easily, tough ones resist.
+    <strong style="color:var(--ink2);display:block;margin-bottom:4px">Tips</strong>
+    <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine like glass; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Try scratching a hidden spot with a fingernail — delicate stones scratch easily, tough ones don't.
   </div>
   <div class="c101-backtop-wrap"><button class="c101-backtop" onclick="scrollToTabTop('identify');return false;">Back to top</button></div>
 </div>

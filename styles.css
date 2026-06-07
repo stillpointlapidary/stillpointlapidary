@@ -345,7 +345,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .warn-note{color:#8a6020;background:#fdf9f0;border:0.5px solid #d4b882;border-radius:6px;padding:0.6rem 0.9rem;font-size:12px;line-height:1.6;margin-top:0.75rem}
 
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--stone3);border-radius:2px}
-@media(max-width:600px){.topbar{padding:0 1rem}.content{padding:1rem}.form-row{grid-template-columns:1fr}.form-row.thirds{grid-template-columns:1fr 1fr}.props-grid{grid-template-columns:1fr}.drawer{width:100vw}.coll-stats{grid-template-columns:1fr 1fr}.coll-btns{flex-direction:column}.coll-grid{grid-template-columns:repeat(2,1fr)}.id2-filters{grid-template-columns:1fr}.id2-filter-row:first-child{grid-column:1}}
+@media(max-width:600px){.topbar{padding:0 1rem}.content{padding:1rem}.form-row{grid-template-columns:1fr}.form-row.thirds{grid-template-columns:1fr 1fr}.props-grid{grid-template-columns:1fr}.drawer{width:100vw}.coll-stats{grid-template-columns:1fr 1fr}.coll-btns{flex-direction:column}.coll-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* ── MOBILE OPTIMIZATIONS ── */
 @media(max-width:600px){
@@ -390,8 +390,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .grid-card-swatch{height:120px;overflow:hidden}
   .grid-cards-container{grid-template-columns:1fr}
 
-  /* Reduce id2-wrap padding on mobile */
-  .id2-wrap{padding:1rem 1rem 1.5rem}
+  /* Identify tab mobile */
+  .id2-wrap{padding:1rem 0 1.5rem}
+  .id2-card{padding:1.1rem 1rem;border-radius:10px}
+  .id2-color-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;justify-items:center}
+  .id2-color-btn{width:100%;max-width:38px;height:32px}
+  .id2-pill{white-space:normal;font-size:11px;padding:5px 10px}
 }
 
 .mood-selected-card{background:var(--stone2);border:0.5px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background 0.12s}
@@ -645,25 +649,43 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* ── Identify Tab CSS (from lines 763–784) ── */
 .id2-wrap{padding:0.25rem 0 2rem}
 .id2-h1{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:0.25rem}
-.id2-sub{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:1.5rem}
-.id2-filters{display:grid;grid-template-columns:1fr 1fr;gap:20px 40px;margin-bottom:1.5rem;padding:1.5rem 1.75rem;background:var(--white);border:0.5px solid var(--border);border-radius:12px}
-.id2-divider{display:none}
-.id2-filter-row{display:block;padding:0}
-.id2-filter-row:first-child{grid-column:1/-1;padding-bottom:16px;border-bottom:0.5px solid var(--border2)}
-.id2-filter-row:first-child .id2-flabel{margin-bottom:10px}
+.id2-sub{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:1.25rem}
+/* Card container */
+.id2-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem 1.75rem;margin-bottom:1.25rem;overflow:hidden}
+/* Steps */
+.id2-step{display:block}
+.id2-step-hidden{display:none}
+.id2-step-reveal{animation:id2fade 0.3s ease both}
+@keyframes id2fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.id2-step-divider{height:0.5px;background:var(--border2);margin:1.1rem 0}
+.id2-step-label{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:10px}
+.id2-step-num{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--accent2);font-weight:400;letter-spacing:0;text-transform:none;flex-shrink:0}
+/* Color grid */
 .id2-flabel{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;display:block;margin-bottom:8px}
-.id2-color-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.id2-color-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 .id2-color-btn{width:34px;height:34px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:all 0.15s;flex-shrink:0}
 .id2-color-btn.active{box-shadow:0 0 0 2px var(--white),0 0 0 4px var(--ink)}
+/* Pills */
 .id2-pills{display:flex;flex-wrap:wrap;gap:6px}
 .id2-pill{font-size:12px;padding:6px 14px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);font-family:'Jost',sans-serif;transition:all 0.15s;white-space:nowrap}
 .id2-pill:hover{border-color:var(--accent2);color:var(--accent)}
 .id2-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
-.id2-divider{height:0.5px;background:var(--border);margin:2px 0}
+/* Advanced section */
+.id2-advanced-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);padding:0;margin-bottom:0}
+.id2-advanced-toggle:hover{color:var(--ink)}
+.id2-adv-caret{font-size:9px;transition:transform 0.15s}
+.id2-adv-section{margin-top:1rem}
+/* Result bar */
 .id2-result-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.id2-count{font-size:13px;color:var(--ink2)}
 .id2-count strong{font-weight:500}
 .id2-clear{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 12px;border:0.5px solid var(--border);border-radius:6px;background:transparent;cursor:pointer;color:var(--ink3);font-family:'Jost',sans-serif}
 .id2-clear:hover{color:var(--ink)}
+/* Prompt state */
+.id2-prompt{text-align:center;padding:3rem 1rem;color:var(--ink3)}
+.id2-prompt-icon{font-size:28px;margin-bottom:0.5rem;opacity:0.4}
+.id2-prompt-text{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink3)}
+/* Empty / overflow */
 .id2-empty{text-align:center;padding:3rem 1rem;color:var(--ink3);font-size:13px;grid-column:1/-1}
 .id2-tips{margin-top:1.5rem;padding:1rem 1.25rem;background:var(--stone2);border-radius:8px;font-size:12px;color:var(--ink3);line-height:1.8}
 
