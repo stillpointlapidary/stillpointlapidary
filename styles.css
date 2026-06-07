@@ -893,13 +893,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* ── Collection Tier Bars ── */
 .stat-tier-cell{padding:0.6rem 0.85rem}
 .tier-bars-label{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:5px}
-.tier-bar-row{display:grid;grid-template-columns:60px 1fr 54px;gap:6px;align-items:center;margin-bottom:5px}
+.tier-bar-row{display:grid;grid-template-columns:140px 1fr auto;gap:10px;align-items:center;margin-bottom:6px}
 .tier-bar-row:last-child{margin-bottom:0}
-.tier-bar-lbl{font-size:9px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tier-bar-lbl{font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
 .tier-bar-track{height:5px;background:var(--stone2);border-radius:3px;overflow:hidden;display:flex}
 .tier-bar-owned{height:100%;background:#7a9e8a;transition:width 0.4s ease}
 .tier-bar-wish{height:100%;background:#c8a96e;transition:width 0.4s ease}
-.tier-bar-meta{font-size:9px;color:var(--ink3);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.tier-bar-meta{font-size:10px;color:var(--ink3);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
 
 @media(max-width:600px){
   .coll-stats{grid-template-columns:1fr 1fr}

@@ -1610,9 +1610,9 @@ function renderTierBars(){
   const ownedIds=new Set(displayCollection.map(p=>p.crystalId));
   const wishIds=new Set(Object.keys(wish));
   const tiers=[
-    {num:1,label:'Essentials'},
-    {num:2,label:'Shelf Bldrs'},
-    {num:3,label:'Collector'},
+    {num:1,label:'The Essentials'},
+    {num:2,label:'Shelf Builders'},
+    {num:3,label:'Collector Favorites'},
     {num:4,label:'Rare Finds'},
   ];
   el.innerHTML=tiers.map(t=>{
@@ -1624,7 +1624,7 @@ function renderTierBars(){
     const pct=Math.round(owned/total*100);
     const ownedW=(owned/total*100).toFixed(1);
     const wlW=Math.min(wl/total*100,100-parseFloat(ownedW)).toFixed(1);
-    return`<div class="tier-bar-row"><div class="tier-bar-lbl">${t.label}</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:${ownedW}%"></div><div class="tier-bar-wish" style="width:${wlW}%"></div></div><div class="tier-bar-meta">${owned} · ${wl}wl · ${pct}%</div></div>`;
+    return`<div class="tier-bar-row"><div class="tier-bar-lbl">${t.label}</div><div class="tier-bar-track"><div class="tier-bar-owned" style="width:${ownedW}%"></div><div class="tier-bar-wish" style="width:${wlW}%"></div></div><div class="tier-bar-meta">${owned} owned · ${wl} wishlist · ${pct}%</div></div>`;
   }).join('');
 }
 
