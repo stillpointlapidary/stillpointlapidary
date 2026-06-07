@@ -271,7 +271,14 @@
       <div class="stat-label">Wishlist</div><div class="stat-val" id="stat-wish">0</div>
     </div>
     <div class="stat-cell stat-tier-cell" id="stat-cell-var">
-      <div class="tier-bars-label">By Collector Tier</div>
+      <div class="tier-bars-header">
+        <div class="tier-bars-label">By Collector Tier</div>
+        <label class="tier-wish-toggle-label">
+          Include wishlist
+          <input type="checkbox" id="tier-wish-toggle" checked>
+          <span class="tier-wish-track"><span class="tier-wish-thumb"></span></span>
+        </label>
+      </div>
       <div id="tier-bars"></div>
     </div>
   </div>
@@ -399,7 +406,7 @@
   <div class="c101-layout">
     <nav class="c101-sidebar" id="c101-nav">
       <div class="c101-sidebar-item active" onclick="show101('work',this)">Working With Crystals</div>
-      <div class="c101-sidebar-item" onclick="show101('shapes',this)">Crystal Shapes</div>
+      <div class="c101-sidebar-item" onclick="show101('shapes',this)">Crystal Forms</div>
       <div class="c101-sidebar-item" onclick="show101('cleanse',this)">Cleansing &amp; Charging</div>
       <div class="c101-sidebar-item" onclick="show101('chakras',this)">Chakra Guide</div>
       <div class="c101-sidebar-item" onclick="show101('roles',this)">Energetic Roles</div>
