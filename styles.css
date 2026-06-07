@@ -49,7 +49,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .content{flex:1;padding:1rem 1.5rem 1.5rem;max-width:1100px;margin:0 auto;width:100%}
 /* SITE HERO */
 .site-hero{background:#f5f3ef;margin-bottom:1rem;margin-top:-1.5rem}
-.site-hero-inner{display:grid;grid-template-columns:1fr 260px;gap:52px;align-items:start;padding:0 32px}
+.site-hero-inner{display:grid;grid-template-columns:1fr 260px;gap:52px;align-items:center;padding:0 32px}
 .site-hero-left{padding:36px 0 40px;display:flex;flex-direction:column}
 .hero-kicker-rule{width:32px;height:1px;background:#c8a96e;margin-bottom:14px}
 .hero-kicker{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#9a9390;margin-bottom:18px}
@@ -61,13 +61,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .hero-btns .btn-accent:hover{background:#b89860;border-color:#b89860}
 .hero-btns .btn{padding:10px 18px;font-size:11px;color:var(--ink);border-color:rgba(42,37,32,0.3)}
 .site-hero-right{padding:36px 0 28px;display:flex;align-items:flex-start}
+.sotd-wrap{width:100%;display:flex;flex-direction:column;gap:9px}
+.sotd-eyebrow{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);font-weight:600}
 .sotd-card{border-radius:12px;overflow:hidden;width:100%;aspect-ratio:1/1;position:relative;box-shadow:0 4px 28px rgba(42,37,32,0.14);transition:box-shadow 0.2s}
 .sotd-card:hover{box-shadow:0 8px 36px rgba(42,37,32,0.2)}
 .sotd-card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .sotd-card-overlay{position:absolute;bottom:0;left:0;right:0;padding:36px 16px 14px;background:linear-gradient(to top,rgba(28,22,16,0.72) 0%,rgba(28,22,16,0) 100%)}
 .sotd-card-overlay--nophoto{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;background:linear-gradient(160deg,rgba(0,0,0,0.08) 0%,rgba(0,0,0,0.45) 100%)}
 .sotd-card-label{font-family:'Jost',sans-serif;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,169,110,0.9);font-weight:700;margin-bottom:4px}
-.sotd-card-name{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:#fff;line-height:1.2;margin-bottom:3px}
+.sotd-card-name{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:#fff;line-height:1.2;margin-bottom:3px}
 .sotd-card-tagline{font-family:'Jost',sans-serif;font-size:11px;color:rgba(255,255,255,0.75);letter-spacing:0.03em;margin-bottom:8px}
 .sotd-card-link{font-family:'Jost',sans-serif;font-size:10px;color:rgba(200,169,110,0.85);cursor:pointer}
 .sotd-card-link:hover{color:rgba(200,169,110,1)}
