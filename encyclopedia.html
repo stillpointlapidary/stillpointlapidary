@@ -77,7 +77,36 @@
 
 <!-- ENCYCLOPEDIA -->
 <section id="tab-encyclopedia">
-  <div class="mood-intro" style="margin-bottom:0.75rem">Search by name, color, intention, or property</div>
+  <div id="enc-doorway" class="enc-doorway">
+    <div class="enc-doorway-headline">Explore the Crystal Library</div>
+    <div class="enc-doorway-sub" id="enc-doorway-sub">333 stones across 4 collector tiers</div>
+    <div class="enc-browse-label">Browse by</div>
+    <div class="enc-browse-grid">
+      <div class="enc-browse-tile" onclick="encDoorwayBrowse('fam')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="12,3 20.5,8 20.5,16 12,21 3.5,16 3.5,8" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round" fill="var(--accent)" fill-opacity="0.1"/><line x1="3.5" y1="8" x2="12" y2="12.5" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/><line x1="20.5" y1="8" x2="12" y2="12.5" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/><line x1="12" y1="12.5" x2="12" y2="21" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/></svg>
+        <div class="enc-browse-tile-label">Family</div>
+      </div>
+      <div class="enc-browse-tile" onclick="encDoorwayBrowse('color')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="10" r="5" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.12"/><circle cx="15" cy="10" r="5" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.12"/><circle cx="12" cy="15.5" r="5" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.12"/></svg>
+        <div class="enc-browse-tile-label">Color</div>
+      </div>
+      <div class="enc-browse-tile" onclick="encDoorwayBrowse('chakra')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.08"/><circle cx="12" cy="12" r="3" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.2"/><line x1="12" y1="4" x2="12" y2="7" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="20" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/><line x1="4" y1="12" x2="7" y2="12" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/><line x1="17" y1="12" x2="20" y2="12" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <div class="enc-browse-tile-label">Chakra</div>
+      </div>
+      <div class="enc-browse-tile" onclick="encDoorwayBrowse('theme')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="enc-browse-tile-label">Intention</div>
+      </div>
+      <div class="enc-browse-tile" onclick="encDoorwayBrowse('tier')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="1" y="17" width="5" height="5" rx="1" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="1.3"/><rect x="7" y="13" width="5" height="9" rx="1" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="1.3"/><rect x="13" y="9" width="5" height="13" rx="1" fill="var(--accent)" fill-opacity="0.4" stroke="var(--accent)" stroke-width="1.3"/><rect x="19" y="5" width="4" height="17" rx="1" fill="var(--accent)" fill-opacity="0.5" stroke="var(--accent)" stroke-width="1.3"/></svg>
+        <div class="enc-browse-tile-label">Collector Tier</div>
+      </div>
+    </div>
+    <div class="enc-doorway-cta">
+      <button class="btn" onclick="dismissEncDoorway()">Browse the full library →</button>
+    </div>
+  </div>
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
     <input type="text" id="enc-search" placeholder="Search name, color, use, property…" oninput="encRender()">
@@ -91,6 +120,7 @@
     <button class="filter-cat-btn" id="fbtn-mohs" onclick="togglePanel('mohs',event)">Hardness <span class="aval" id="fval-mohs"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="fbtn-formation" onclick="togglePanel('formation',event)">Formation <span class="aval" id="fval-formation"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="fbtn-material" onclick="togglePanel('material',event)">Material <span class="aval" id="fval-material"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-tier" onclick="togglePanel('tier',event)">Tier <span class="aval" id="fval-tier"></span><span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetFilters()">Reset</button>
   </div>
   <div class="filter-panel" id="panel-fam"><div class="filter-panel-title">Mineral family</div><div class="filter-panel-pills" id="pills-fam"></div></div>
@@ -100,10 +130,11 @@
   <div class="filter-panel" id="panel-mohs"><div class="filter-panel-title">Mohs hardness</div><div class="filter-panel-pills" id="pills-mohs"></div></div>
   <div class="filter-panel" id="panel-formation"><div class="filter-panel-title">Formation environment</div><div class="filter-panel-pills" id="pills-formation"></div></div>
   <div class="filter-panel" id="panel-material"><div class="filter-panel-title">Material type</div><div class="filter-panel-pills" id="pills-material"></div></div>
+  <div class="filter-panel" id="panel-tier"><div class="filter-panel-title">Collector tier</div><div class="filter-panel-pills" id="pills-tier"></div></div>
   </div>
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
-    <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="id">ID</option><option value="name" selected>A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
+    <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
   </div>
   <div id="stones-error" style="display:none;padding:3rem 1.5rem;text-align:center;color:var(--ink2)">
     <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:0.75rem;color:var(--ink)">Having trouble connecting</div>
@@ -236,8 +267,9 @@
     <div class="stat-cell stat-clickable" id="stat-cell-total" onclick="setCollQuickFilter('all')" title="Show all pieces">
       <div class="stat-label">Total pieces</div><div class="stat-val" id="stat-total">0</div>
     </div>
-    <div class="stat-cell stat-clickable" id="stat-cell-var" onclick="setCollQuickFilter('families')" title="Show collection grouped by family">
-      <div class="stat-label">Families</div><div class="stat-val" id="stat-var">0</div>
+    <div class="stat-cell stat-tier-cell" id="stat-cell-var">
+      <div class="tier-bars-label">By Collector Tier</div>
+      <div id="tier-bars"></div>
     </div>
     <div class="stat-cell stat-clickable" id="stat-cell-wish" onclick="setCollQuickFilter('wish')" title="Show wishlist">
       <div class="stat-label">Wishlist</div><div class="stat-val" id="stat-wish">0</div>
