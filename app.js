@@ -370,17 +370,28 @@ function renderSotd(){
   const day=Math.floor(Date.now()/86400000);
   const s=FEATURED_STONES[day%FEATURED_STONES.length];
   if(!s)return;
-  const photoHtml=s.photo?`<div class="sotd-card-photo"><img src="${SUPABASE_STONES}${s.photo}" alt="${s.name}" loading="lazy"></div>`:'';
-  container.innerHTML=`<div class="sotd-card" onclick="openDetail('${s.id}')" style="cursor:pointer">
-    ${photoHtml}
-    <div class="sotd-card-body">
-      <div class="sotd-card-label">Stone of the Day</div>
-      <div class="sotd-card-name">${s.name}</div>
-      <div class="sotd-card-tagline">${s.use}</div>
-      <div class="sotd-card-desc">"${s.intention}"</div>
-      <div class="sotd-card-link">View ${s.name} in the encyclopedia →</div>
-    </div>
-  </div>`;
+  if(s.photo){
+    container.innerHTML=`<div class="sotd-card" onclick="openDetail('${s.id}')" style="cursor:pointer">
+      <img class="sotd-card-img" src="${SUPABASE_STONES}${s.photo}" alt="${s.name}" loading="lazy">
+      <div class="sotd-card-overlay">
+        <div class="sotd-card-label">Stone of the Day</div>
+        <div class="sotd-card-name">${s.name}</div>
+        <div class="sotd-card-tagline">${s.use}</div>
+        <div class="sotd-card-link">View in the encyclopedia →</div>
+      </div>
+    </div>`;
+  } else {
+    // No photo — solid color background with overlay
+    const bg=s.hex||'#c8bca8';
+    container.innerHTML=`<div class="sotd-card sotd-card--nophoto" onclick="openDetail('${s.id}')" style="cursor:pointer;background:${bg}">
+      <div class="sotd-card-overlay sotd-card-overlay--nophoto">
+        <div class="sotd-card-label">Stone of the Day</div>
+        <div class="sotd-card-name">${s.name}</div>
+        <div class="sotd-card-tagline">${s.use}</div>
+        <div class="sotd-card-link">View in the encyclopedia →</div>
+      </div>
+    </div>`;
+  }
 }
 
 // ── INIT ──
