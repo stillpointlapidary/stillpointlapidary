@@ -789,6 +789,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .role-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink);letter-spacing:0.01em;margin-bottom:4px}
 .role-desc{font-size:12px;color:var(--ink2);line-height:1.6}
 .role-eg{font-size:11px;color:var(--ink3);margin-top:5px;font-style:italic}
+.kit-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1rem}
+.kit-card{border:0.5px solid var(--border);border-radius:10px;background:var(--white);display:flex;overflow:hidden}
+.kit-stripe{width:4px;flex-shrink:0}
+.kit-card-body{padding:0.75rem 0.85rem;min-width:0}
+.kit-role{font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:400;color:var(--ink);margin-bottom:5px}
+.kit-stones{font-size:11px;color:var(--ink2);line-height:1.75}
+.kit-stone{display:block}
+.kit-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:0.04em;color:var(--ink2);border:0.5px solid var(--border);border-radius:6px;padding:9px 16px;background:var(--white);cursor:pointer;font-family:'Jost',sans-serif}
+.kit-cta:hover{background:var(--stone2);border-color:var(--accent2)}
+@media(max-width:700px){.kit-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* Family cards */
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
