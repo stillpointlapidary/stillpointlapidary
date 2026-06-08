@@ -156,6 +156,65 @@
   <div class="filter-panel" id="panel-material"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Material type <button class="prop-help" onclick="openPopup('material');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-material"></div></div>
   <div class="filter-panel" id="panel-tier"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Collector tier <button class="prop-help" onclick="openPopup('filter-tier');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-tier"></div></div>
   </div>
+
+  <!-- TIER LANDING: visible while encyclopedia is in landing state -->
+  <div id="enc-tier-landing">
+    <div class="enc-tier-section">
+      <div class="enc-tier-header">
+        <span class="enc-tier-badge">Tier 1</span>
+        <div class="enc-tier-title-block">
+          <h2 class="enc-tier-title">The Essentials</h2>
+          <span class="enc-tier-count" id="enc-t1-count"></span>
+          <p class="enc-tier-desc">Whether you're brand new to crystals or building your first collection, these are the stones people reach for again and again.</p>
+        </div>
+        <button class="btn btn-sm enc-tier-viewall" onclick="encBrowseTier(1)">View all →</button>
+      </div>
+      <div class="enc-tier-grid" id="enc-tier-1-grid"></div>
+      <div class="enc-next-shelf">
+        <div class="enc-next-photo" aria-hidden="true"></div>
+        <div class="enc-next-copy">
+          <h3 class="enc-next-title">Ready for the next shelf?</h3>
+          <p>Once you know the essentials, explore stones with more personality and collector appeal.</p>
+          <button class="btn btn-accent" onclick="encTierAccordionExpand(2)">Explore Shelf Builders →</button>
+        </div>
+        <div class="enc-next-up">
+          <span class="enc-next-up-label">Next up</span>
+          <strong class="enc-next-up-name">Tier 2<br>Shelf Builders</strong>
+          <span class="enc-next-up-count" id="enc-t2-count-teaser"></span>
+        </div>
+      </div>
+    </div>
+    <div class="enc-tier-accordion">
+      <div class="enc-accordion-row" id="enc-acc-row-2">
+        <span class="enc-tier-badge enc-tier-badge--sm">Tier 2</span>
+        <div class="enc-accordion-info">
+          <span class="enc-accordion-name">Shelf Builders</span>
+          <span class="enc-accordion-count" id="enc-t2-count"></span>
+        </div>
+        <button class="btn btn-sm" onclick="encTierAccordionExpand(2)">Explore →</button>
+      </div>
+      <div class="enc-accordion-grid" id="enc-acc-2-grid"></div>
+      <div class="enc-accordion-row" id="enc-acc-row-3">
+        <span class="enc-tier-badge enc-tier-badge--sm">Tier 3</span>
+        <div class="enc-accordion-info">
+          <span class="enc-accordion-name">Collector Favorites</span>
+          <span class="enc-accordion-count" id="enc-t3-count"></span>
+        </div>
+        <button class="btn btn-sm" onclick="encTierAccordionExpand(3)">Explore →</button>
+      </div>
+      <div class="enc-accordion-grid" id="enc-acc-3-grid"></div>
+      <div class="enc-accordion-row" id="enc-acc-row-4">
+        <span class="enc-tier-badge enc-tier-badge--sm">Tier 4</span>
+        <div class="enc-accordion-info">
+          <span class="enc-accordion-name">Rare Finds</span>
+          <span class="enc-accordion-count" id="enc-t4-count"></span>
+        </div>
+        <button class="btn btn-sm" onclick="encTierAccordionExpand(4)">Explore →</button>
+      </div>
+      <div class="enc-accordion-grid" id="enc-acc-4-grid"></div>
+    </div>
+  </div><!-- /enc-tier-landing -->
+
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
     <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
