@@ -2891,6 +2891,9 @@ function updateAdminEntryButtons(){
 function openEntryRequestForm(){
   const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.add('open');
 }
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('request-entry-btn')?.addEventListener('click',openEntryRequestForm);
+});
 function closeEntryRequestForm(){
   const el=document.getElementById('entry-request-form-overlay');if(el)el.classList.remove('open');
   ['req-stone-name','req-stone-notes'].forEach(id=>{const field=document.getElementById(id);if(field)field.value='';});

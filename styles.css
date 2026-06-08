@@ -32,6 +32,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .studio-banner a:hover{color:var(--ink)}
 @media(max-width:600px){.studio-banner{top:78px;height:24px;padding:0 1rem}}
 
+/* SITE FOOTER */
+.site-footer{background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center}
+.site-footer-inner{max-width:520px;margin:0 auto}
+.site-footer-eyebrow{font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem}
+.site-footer-logo{display:block;font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none}
+.site-footer-logo em{color:var(--accent2);font-style:italic}
+.site-footer-tagline{font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem}
+.site-footer-location{font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem}
+.site-footer-links{margin-bottom:1.25rem;font-size:12px;letter-spacing:0.04em}
+.site-footer-link{color:var(--ink2);text-decoration:none}
+.site-footer-link--accent{color:var(--accent2)}
+.site-footer-dot{color:var(--ink3);margin:0 0.5rem}
+.site-footer-legal{max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-size:10px;color:var(--ink3);letter-spacing:0.04em}
+
 /* NAV */
 .main-nav-wrap{position:sticky;top:96px;z-index:49;background:var(--white)}
 .main-nav{background:var(--white);border-bottom:0.5px solid var(--border);display:flex;overflow-x:auto;padding:0 1rem;scrollbar-width:none}
@@ -593,7 +607,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .home-explore{padding:2rem 0 1rem}
 .home-explore-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem}
 .home-explore-tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.home-explore-tile{padding:14px 15px;cursor:pointer;transition:filter 0.15s;display:flex;flex-direction:column;gap:6px;border-radius:10px;border:0.5px solid transparent}
+.home-explore-tile{padding:14px 15px;cursor:pointer;transition:filter 0.15s;display:flex;flex-direction:column;gap:6px;border-radius:10px;border:0.5px solid transparent;text-decoration:none;color:inherit}
 .home-explore-tile:hover{filter:brightness(0.96)}
 .home-explore-tile--enc {background:#ede6d6;border-color:#c8bda4;color:#5a4e34}
 .home-explore-tile--uw  {background:#e8e2f0;border-color:#bdb0d4;color:#4a3870}
