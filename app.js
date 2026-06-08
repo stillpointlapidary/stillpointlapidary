@@ -2785,13 +2785,7 @@ function switchTab(name,btn){
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
   if(name==='collection'){collQuickFilter='all';document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));const tc=document.getElementById('stat-cell-total');if(tc)tc.classList.add('active-stat');renderCollection();}
-  if(name==='encyclopedia'){
-    const landing=document.getElementById('enc-landing');
-    const tierLanding=document.getElementById('enc-tier-landing');
-    const hide=encDoorwayDismissed?'none':'';
-    if(landing)landing.style.display=hide;
-    if(tierLanding)tierLanding.style.display=hide;
-  }
+  if(name==='encyclopedia'){restoreEncLanding();}
 }
 function switchTabByName(name){
   rememberActiveTab(name);
@@ -2806,13 +2800,7 @@ function switchTabByName(name){
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
   if(name==='collection'){renderCollection();}
-  if(name==='encyclopedia'){
-    const landing=document.getElementById('enc-landing');
-    const tierLanding=document.getElementById('enc-tier-landing');
-    const hide=encDoorwayDismissed?'none':'';
-    if(landing)landing.style.display=hide;
-    if(tierLanding)tierLanding.style.display=hide;
-  }
+  if(name==='encyclopedia'){restoreEncLanding();}
 }
 
 function scrollToTabTop(name){
