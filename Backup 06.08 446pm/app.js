@@ -23,7 +23,7 @@ function _emptyCollHtml(){
   return `<div class="empty-coll-state">
     <div class="empty-coll-icon">◇</div>
     <div class="empty-coll-title">Your collection is empty</div>
-    <div class="empty-coll-text">Add stones you own to track your collection across all your devices.</div>
+    <div class="empty-coll-text">Add stones you own to build your collection and track them across all your devices.</div>
     <button class="empty-coll-btn" onclick="switchTabByName('encyclopedia')">Explore the Encyclopedia</button>
   </div>`;
 }
@@ -3814,12 +3814,6 @@ function renderId2Steps(){
     else {activeIdx=i; break;}
     if(i===ID2_STEPS.length-1) activeIdx=ID2_STEPS.length;
   }
-
-  // Intro guidance — appears between the Identify hero and the step progress/cards
-  const intro=document.createElement('p');
-  intro.className='id2-intro';
-  intro.textContent='Start with what you can see. Choose the closest match for each step, or skip anything you’re unsure about. The guide will narrow the possibilities as you go.';
-  wrap.appendChild(intro);
 
   // Progress bar — 5 step pills across the top
   const NUMS=['①','②','③','④','⑤'];
