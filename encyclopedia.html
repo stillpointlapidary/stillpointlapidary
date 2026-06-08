@@ -84,8 +84,8 @@
         <h1 class="enc-hero-title"><span class="enc-hero-line1">Build your crystal knowledge</span><br>one shelf at a time.</h1>
         <p class="enc-hero-sub">Start with The Essentials, then explore deeper — by color, intention, family, chakra, or collector tier.</p>
         <div class="enc-hero-btns">
-          <button class="btn btn-accent" onclick="document.getElementById('enc-tier-landing').scrollIntoView({behavior:'smooth',block:'start'})">Start with The Essentials</button>
-          <button class="btn" onclick="dismissEncDoorway();setTimeout(()=>{const el=document.getElementById('enc-search');if(el){el.scrollIntoView({behavior:'smooth',block:'nearest'});el.focus();}},80)">Browse full library →</button>
+          <button class="btn btn-accent" onclick="document.getElementById('enc-essentials-top').scrollIntoView({behavior:'smooth',block:'start'})">Start with The Essentials</button>
+          <button class="btn" onclick="document.querySelector('.enc-library-panel').scrollIntoView({behavior:'smooth',block:'start'})">Browse full library →</button>
         </div>
       </div>
     </div>
@@ -127,6 +127,13 @@
           <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
       </div>
+      <div class="enc-panel-search-row">
+        <div class="enc-panel-search-divider"><span>or search directly</span></div>
+        <div class="enc-panel-search-wrap">
+          <span class="enc-panel-search-icon">⌕</span>
+          <input type="text" id="enc-search" class="enc-panel-search-input" placeholder="Search by name, color, use, property…" oninput="encRender()">
+        </div>
+      </div>
     </div>
 
   </div><!-- /enc-landing -->
@@ -135,12 +142,12 @@
   <div id="enc-tier-landing">
 
     <!-- Tier 1 — The Essentials (full grid) -->
-    <div class="enc-tier-section">
+    <div class="enc-tier-section" id="enc-essentials-top">
       <div class="enc-tier-header">
         <div class="enc-tier-badge">Tier 1</div>
         <div class="enc-tier-title-block">
           <span class="enc-tier-title">The Essentials</span>
-          <span class="enc-tier-count"><span id="enc-t1-count">—</span> stones</span>
+          <span class="enc-tier-count"><span id="enc-t1-count">—</span></span>
           <span class="enc-tier-desc">The foundation stones — versatile, accessible, and widely loved. A great place to start any collection.</span>
         </div>
         <button class="btn btn-sm enc-tier-viewall" onclick="encBrowseTier(1)">View all →</button>
@@ -154,10 +161,10 @@
       <div class="enc-next-copy">
         <div class="enc-next-eyebrow">Beyond The Essentials</div>
         <div class="enc-next-title">What's on your next shelf?</div>
-        <div class="enc-next-desc">Once you have the foundations, Tier 2 opens up a world of color, energy, and intention. Explore deeper picks hand-selected for growing collections.</div>
+        <div class="enc-next-desc">Once you have the foundations, Shelf Builders opens up a world of color, energy, and intention. Explore deeper picks hand-selected for growing collections.</div>
       </div>
       <div class="enc-next-cta">
-        <button class="btn btn-accent" onclick="encTierAccordionExpand(2)">Explore Tier 2</button>
+        <button class="btn btn-accent" onclick="encTierAccordionExpand(2)">Explore Shelf Builders</button>
       </div>
     </div>
 
@@ -166,15 +173,15 @@
       <div class="enc-accordion-row" onclick="encTierAccordionExpand(2)">
         <div class="enc-tier-badge enc-tier-badge--sm">Tier 2</div>
         <div>
-          <span class="enc-accordion-title">Expanding Your Collection</span>
-          <span class="enc-accordion-count"><span id="enc-t2-count-teaser">—</span> stones</span>
+          <span class="enc-accordion-title">Shelf Builders</span>
+          <span class="enc-accordion-count"><span id="enc-t2-count-teaser">—</span></span>
         </div>
         <span class="enc-accordion-caret" id="enc-acc-2-caret">▾</span>
       </div>
       <div class="enc-accordion-body" id="enc-acc-2-body" style="display:none">
         <div class="enc-accordion-grid" id="enc-acc-2-grid"></div>
         <div style="padding:0 1.5rem 1.25rem;text-align:right">
-          <button class="btn btn-sm" onclick="encBrowseTier(2)">View all Tier 2 →</button>
+          <button class="btn btn-sm" onclick="encBrowseTier(2)">View all Shelf Builders →</button>
         </div>
       </div>
     </div>
@@ -184,15 +191,15 @@
       <div class="enc-accordion-row" onclick="encTierAccordionExpand(3)">
         <div class="enc-tier-badge enc-tier-badge--sm">Tier 3</div>
         <div>
-          <span class="enc-accordion-title">The Collector's Range</span>
-          <span class="enc-accordion-count"><span id="enc-t3-count">—</span> stones</span>
+          <span class="enc-accordion-title">Collector Favorites</span>
+          <span class="enc-accordion-count"><span id="enc-t3-count">—</span></span>
         </div>
         <span class="enc-accordion-caret" id="enc-acc-3-caret">▾</span>
       </div>
       <div class="enc-accordion-body" id="enc-acc-3-body" style="display:none">
         <div class="enc-accordion-grid" id="enc-acc-3-grid"></div>
         <div style="padding:0 1.5rem 1.25rem;text-align:right">
-          <button class="btn btn-sm" onclick="encBrowseTier(3)">View all Tier 3 →</button>
+          <button class="btn btn-sm" onclick="encBrowseTier(3)">View all Collector Favorites →</button>
         </div>
       </div>
     </div>
@@ -203,7 +210,7 @@
         <div class="enc-tier-badge enc-tier-badge--sm">Tier 4</div>
         <div>
           <span class="enc-accordion-title">Rare &amp; Specialty Finds</span>
-          <span class="enc-accordion-count"><span id="enc-t4-count">—</span> stones</span>
+          <span class="enc-accordion-count"><span id="enc-t4-count">—</span></span>
         </div>
         <span class="enc-accordion-caret" id="enc-acc-4-caret">▾</span>
       </div>
@@ -217,10 +224,6 @@
 
   </div><!-- /enc-tier-landing -->
 
-  <div class="search-wrap">
-    <span class="search-icon">⌕</span>
-    <input type="text" id="enc-search" placeholder="Search name, color, use, property…" oninput="encRender()">
-  </div>
   <div style="position:relative;margin-bottom:0.5rem">
   <div class="filter-cats" id="enc-filter-cats">
     <button class="filter-cat-btn" id="fbtn-fam" onclick="togglePanel('fam',event)">Family <span class="aval" id="fval-fam"></span><span class="caret">▾</span></button>
