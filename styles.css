@@ -65,42 +65,42 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .homepage-hero{margin-top:-1rem;margin-bottom:0}
 .site-hero-card{
   border-radius:16px;overflow:hidden;position:relative;
-  height:auto;
-  min-height:clamp(430px,34vw,560px);
+  height:400px;
+  min-height:0;
   background-image:
     linear-gradient(to right,rgba(16,26,40,0.86) 0%,rgba(16,26,40,0.58) 42%,rgba(16,26,40,0.18) 66%,rgba(16,26,40,0.22) 100%),
     linear-gradient(to bottom,rgba(16,26,40,0.28) 0%,rgba(16,26,40,0) 20%,rgba(16,26,40,0) 78%,rgba(16,26,40,0.32) 100%),
     url('assets/hero2.png');
-  background-size:auto,auto,cover;
-  background-position:left center,left center,65% center;
+  background-size:auto,auto,84% auto;
+  background-position:left center,left center,right center;
   background-repeat:no-repeat,no-repeat,no-repeat;
   display:flex;align-items:center;
 }
 .site-hero-left{
   position:relative;z-index:2;
-  width:52%;padding:2.5rem 2rem 2.5rem 2.5rem;
-  display:flex;flex-direction:column;gap:1rem;
+  width:56%;padding:2.2rem 2rem 2.2rem 2.5rem;
+  display:flex;flex-direction:column;gap:0.85rem;
 }
 .hero-kicker{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#c8a96e;font-weight:500;margin-bottom:0}
 .hero-headline{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,2.8vw,44px);font-weight:400;line-height:1.15;color:#fff;margin:0}
 .hero-headline em{font-style:italic;color:#c8a96e}
-.hero-sub{font-family:'Jost',sans-serif;font-size:13px;color:rgba(255,255,255,0.68);line-height:1.75;margin:0;max-width:360px}
+.hero-sub{font-family:'Jost',sans-serif;font-size:13px;color:rgba(255,255,255,0.74);line-height:1.75;margin:0;max-width:560px}
 .hero-btns{display:flex;gap:10px;flex-wrap:wrap}
 .hero-btns .btn-accent{background:#c8a96e;color:#2a2520;border-color:#c8a96e;padding:10px 20px;font-size:11px;font-weight:700}
 .hero-btns .btn-accent:hover{background:#b89860;border-color:#b89860}
-.btn-ghost-hero{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.88);border:0.5px solid rgba(255,255,255,0.3);padding:10px 18px;font-size:11px;font-family:'Jost',sans-serif;letter-spacing:0.08em;text-transform:uppercase;border-radius:7px;text-decoration:none;display:inline-flex;align-items:center;transition:background 0.15s}
-.btn-ghost-hero:hover{background:rgba(255,255,255,0.2)}
+.btn-ghost-hero{background:rgba(250,248,246,0.18);color:#fff;border:0.5px solid rgba(255,255,255,0.62);padding:10px 18px;font-size:11px;font-family:'Jost',sans-serif;letter-spacing:0.08em;text-transform:uppercase;border-radius:7px;text-decoration:none;display:inline-flex;align-items:center;transition:background 0.15s,border-color 0.15s}
+.btn-ghost-hero:hover{background:rgba(250,248,246,0.28);border-color:rgba(255,255,255,0.82)}
 .hero-meta{display:flex;gap:1.25rem;margin-top:0.1rem}
 .hero-meta-stat{font-family:'Jost',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.04em}
 .hero-meta-stat strong{color:rgba(255,255,255,0.78);font-weight:500}
 .hero-meta-dot{color:rgba(255,255,255,0.25);font-size:11px}
-.hero-sotd-row{display:flex;align-items:center;gap:12px;padding-top:0.9rem;border-top:0.5px solid rgba(200,169,110,0.28);margin-top:0.25rem}
+.hero-sotd-row{display:none!important;align-items:center;gap:12px;padding-top:0.9rem;border-top:0.5px solid rgba(200,169,110,0.28);margin-top:0.25rem}
 .hero-sotd-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#c8a96e;font-weight:500;white-space:nowrap}
 .hero-sotd-link{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:19px;color:#fff;text-decoration:none;transition:color 0.15s}
 .hero-sotd-link:hover{color:#c8a96e}
 /* SOTD data passthrough — keep JS container but hide it */
 #sotd-container{display:none!important}
-@media(max-width:768px){.site-hero-card{height:auto;min-height:320px;background-position:left center,left center,70% center}.site-hero-left{width:80%;padding:2rem 1.5rem}}
+@media(max-width:768px){.site-hero-card{height:auto;min-height:320px;background-size:auto,auto,cover;background-position:left center,left center,70% center}.site-hero-left{width:80%;padding:2rem 1.5rem}.hero-sub br{display:none}}
 
 .intro-panel{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.15rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .intro-copy{max-width:680px}
@@ -718,7 +718,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Hero banner */
 .id2-hero{position:relative;margin:-1rem calc(50% - 50vw) 0;height:clamp(190px,18vw,240px);overflow:hidden;background:#e8e2da}
 .id2-hero-placeholder{position:absolute;inset:0;background:linear-gradient(120deg,#d4c9b8 0%,#bfb09e 50%,#c8bfb0 100%)}
-.id2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+.id2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 58%;display:block}
 .id2-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(38,28,18,0.72) 0%,rgba(38,28,18,0.32) 42%,rgba(38,28,18,0) 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem max(1.5rem,calc((100vw - 1100px)/2 + 1.5rem))}
 .id2-hero-kicker{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#fff;font-weight:600;margin-bottom:4px}
 .id2-hero-h1{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:#fff;line-height:1.2}
