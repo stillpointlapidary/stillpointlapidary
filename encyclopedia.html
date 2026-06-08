@@ -448,70 +448,22 @@
   </div>
 
 <div class="id2-wrap">
-  <div class="id2-card">
-    <!-- Step 1: Color — always visible -->
-    <div class="id2-step" id="id2-step-color">
-      <div class="id2-step-label"><span class="id2-step-num">①</span> Color</div>
-      <div class="id2-invite">What color is it? We'll narrow it down from there.</div>
-      <div class="id2-color-grid" id="id2-colors"></div>
-    </div>
 
-    <!-- Step 2: Transparency — revealed after color -->
-    <div class="id2-step id2-step-hidden" id="id2-step-trans">
-      <div class="id2-step-divider"></div>
-      <div class="id2-step-label"><span class="id2-step-num">②</span> See through it?</div>
-      <div class="id2-pills">
-        <button class="id2-pill" onclick="setId2('trans','Transparent',this)">Clear like glass</button>
-        <button class="id2-pill" onclick="setId2('trans','Translucent',this)">Light gets through</button>
-        <button class="id2-pill" onclick="setId2('trans','Opaque',this)">Fully solid</button>
-      </div>
-    </div>
+  <!-- Step cards — JS renders answered/active states into this container -->
+  <div id="id2-steps"></div>
 
-    <!-- Step 3: Luster — revealed after transparency -->
-    <div class="id2-step id2-step-hidden" id="id2-step-luster">
-      <div class="id2-step-divider"></div>
-      <div class="id2-step-label"><span class="id2-step-num">③</span> Surface look</div>
-      <div class="id2-pills">
-        <button class="id2-pill" onclick="setId2('luster','glassy',this)">Glassy &amp; bright</button>
-        <button class="id2-pill" onclick="setId2('luster','silky',this)">Silky or pearly</button>
-        <button class="id2-pill" onclick="setId2('luster','metallic',this)">Metallic</button>
-        <button class="id2-pill" onclick="setId2('luster','earthy',this)">Dull or earthy</button>
-        <button class="id2-pill" onclick="setId2('luster','iridescent',this)">Iridescent</button>
-      </div>
-    </div>
-
-    <!-- Step 4: Advanced — revealed after luster, collapsed -->
-    <div class="id2-step id2-step-hidden" id="id2-step-advanced">
-      <div class="id2-step-divider"></div>
-      <button class="id2-advanced-toggle" onclick="toggleId2Advanced()">
-        <span class="id2-step-num">④</span> More clues <span id="id2-adv-caret" class="id2-adv-caret">▾</span>
-      </button>
-      <div id="id2-advanced-body" style="display:none">
-        <div class="id2-adv-section">
-          <div class="id2-flabel">How tough is it?</div>
-          <div class="id2-pills">
-            <button class="id2-pill" onclick="setId2('hard','delicate',this)">Scratches easily</button>
-            <button class="id2-pill" onclick="setId2('hard','everyday',this)">Holds up well</button>
-            <button class="id2-pill" onclick="setId2('hard','tough',this)">Very scratch-proof</button>
-          </div>
+  <!-- Color step — always first, static structure for JS to clone from -->
+  <template id="id2-tpl-color">
+    <div class="id2-sc id2-sc--active" id="id2-step-color">
+      <div class="id2-sc-inner">
+        <div class="id2-sc-header">
+          <span class="id2-sc-num">①</span>
+          <span class="id2-sc-q">What color is it?</span>
         </div>
-        <div class="id2-adv-section">
-          <div class="id2-flabel">How heavy does it feel?</div>
-          <div class="id2-pills">
-            <button class="id2-pill" onclick="setId2('heft','light',this)">Lighter than expected</button>
-            <button class="id2-pill" onclick="setId2('heft','average',this)">About right</button>
-            <button class="id2-pill" onclick="setId2('heft','heavy',this)">Heavier than expected</button>
-          </div>
-        </div>
+        <div class="id2-color-grid" id="id2-colors"></div>
       </div>
     </div>
-
-    <!-- Tips — always visible at card bottom -->
-    <div class="id2-step-divider" style="margin-top:1.25rem"></div>
-    <div class="id2-card-tips">
-      <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Scratch a hidden spot with a fingernail — delicate stones scratch easily.
-    </div>
-  </div>
+  </template>
 
   <!-- Result bar — hidden until first selection -->
   <div class="id2-result-bar" id="id2-result-bar" style="display:none">

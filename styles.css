@@ -707,36 +707,47 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(42,32,22,0.68) 0%,rgba(42,32,22,0.1) 55%,rgba(42,32,22,0) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.4rem 1.75rem}
 .id2-hero-kicker{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(200,169,110,0.9);font-weight:600;margin-bottom:5px}
 .id2-hero-h1{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:#fff;line-height:1.2;margin-bottom:3px}
-.id2-invite{font-size:13px;color:var(--ink3);margin-bottom:10px;margin-top:-2px}
-/* Wrap & card */
+/* Wrap */
 .id2-wrap{padding:1.25rem 0 2rem}
-.id2-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem 1.75rem;margin-bottom:1rem;overflow:hidden}
-/* Steps */
-.id2-step{display:block}
-.id2-step-hidden{display:none}
-.id2-step-reveal{animation:id2fade 0.3s ease both}
-@keyframes id2fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.id2-step-divider{height:0.5px;background:var(--border2);margin:1.1rem 0}
-.id2-step-label{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:10px}
-.id2-step-num{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--accent2);font-weight:400;letter-spacing:0;text-transform:none;flex-shrink:0}
+#id2-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+/* Step cards */
+.id2-sc{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.id2-sc--answered{border-left:3px solid var(--accent2)}
+.id2-sc--active{box-shadow:0 6px 24px rgba(42,37,32,0.08);border-color:rgba(200,169,110,0.4)}
+@keyframes id2fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.id2-sc-slidein{animation:id2fade 0.28s cubic-bezier(0.22,1,0.36,1) both}
+/* Answered row */
+.id2-sc-answered-row{display:flex;align-items:center;gap:12px;padding:0.8rem 1.4rem}
+.id2-sc-num{font-family:Georgia,'Times New Roman',serif;font-size:13px;color:var(--accent2);flex-shrink:0}
+.id2-sc-aname{font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);flex:1}
+.id2-sc-chip{background:#f1e8d8;color:var(--accent);font-size:11.5px;padding:3px 12px;border-radius:20px;font-weight:500;border:0.5px solid rgba(200,169,110,0.4);white-space:nowrap}
+.id2-sc-chip--skip{background:transparent;color:var(--ink3);border-color:var(--border);font-style:italic}
+.id2-sc-change{font-size:11px;color:var(--ink3);background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0;font-family:'Jost',sans-serif;flex-shrink:0}
+.id2-sc-change:hover{color:var(--accent)}
+/* Active card inner */
+.id2-sc-inner{padding:1.5rem 1.75rem}
+.id2-sc-header{display:flex;align-items:baseline;gap:10px;margin-bottom:1.1rem}
+.id2-sc--active .id2-sc-num{font-size:22px}
+.id2-sc-q{font-size:17px;font-weight:400;color:var(--ink);line-height:1.35}
 /* Color grid */
-.id2-flabel{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);font-weight:500;display:block;margin-bottom:8px}
-.id2-color-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
-.id2-color-btn{width:34px;height:34px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:all 0.15s;flex-shrink:0}
+.id2-color-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.id2-color-btn{width:38px;height:38px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:all 0.15s;flex-shrink:0}
+.id2-color-btn:hover{transform:scale(1.1)}
 .id2-color-btn.active{box-shadow:0 0 0 2px var(--white),0 0 0 4px var(--ink)}
-/* Pills */
-.id2-pills{display:flex;flex-wrap:wrap;gap:6px}
-.id2-pill{font-size:12px;padding:6px 14px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);font-family:'Jost',sans-serif;transition:all 0.15s;white-space:nowrap}
-.id2-pill:hover{border-color:var(--accent2);color:var(--accent)}
+/* Pills row with inline skip */
+.id2-pills-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.id2-pill{font-size:12.5px;padding:7px 17px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);font-family:'Jost',sans-serif;transition:all 0.15s;white-space:nowrap}
+.id2-pill:hover{border-color:var(--accent2);color:var(--accent);background:#fdf8f2}
 .id2-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
-/* Advanced section */
-.id2-advanced-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);padding:0;margin-bottom:0}
-.id2-advanced-toggle:hover{color:var(--ink)}
-.id2-adv-caret{font-size:9px;transition:transform 0.15s}
-.id2-adv-section{margin-top:1rem}
-/* Tips inside card */
-.id2-card-tips{font-size:11.5px;color:var(--ink3);line-height:1.85}
-.id2-card-tips strong{color:var(--ink2);font-weight:500}
+.id2-skip-pill{font-size:11.5px;padding:7px 14px;border:none;background:transparent;cursor:pointer;color:var(--ink3);font-family:'Jost',sans-serif;transition:all 0.15s;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.id2-skip-pill:hover{color:var(--accent)}
+/* Tooltips */
+.id2-tooltip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:5px}
+.id2-tip-btn{width:14px;height:14px;border-radius:50%;border:1px solid var(--accent2);background:transparent;color:var(--accent2);font-size:8px;font-family:'Jost',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1;flex-shrink:0;transition:all 0.15s;vertical-align:middle}
+.id2-tip-btn:hover{background:var(--accent2);color:var(--white)}
+.id2-tooltip{display:none;position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);background:var(--ink);color:var(--white);font-size:11.5px;line-height:1.6;padding:10px 13px;border-radius:8px;width:260px;font-family:'Jost',sans-serif;letter-spacing:0.01em;z-index:100;pointer-events:none;text-transform:none;font-weight:400}
+.id2-tooltip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--ink)}
+.id2-tooltip-wrap:hover .id2-tooltip,.id2-tip-btn:focus+.id2-tooltip{display:block}
 /* Result bar */
 .id2-result-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .id2-count{font-size:13px;color:var(--ink2)}
