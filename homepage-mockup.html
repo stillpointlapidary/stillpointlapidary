@@ -79,9 +79,8 @@ body { padding-top: 46px; }
 
 .hero-a-card {
   border-radius: 20px; overflow: hidden; position: relative;
-  height: 400px;
-  /* background-image set by JS — use 100% auto so photo fills card width without zooming in */
-  background-size: cover; background-position: center 35%;
+  height: 340px; max-height: 340px;
+  background-size: cover; background-position: 65% center;
   transition: background-color 0.4s ease;
   display: flex; align-items: center;
 }
@@ -104,17 +103,17 @@ body { padding-top: 46px; }
 .hero-a-stat { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; }
 .hero-a-stat strong { color: rgba(255,255,255,0.78); font-weight: 500; }
 
-/* SOTD inline line — subtle gold accent within the hero */
+/* SOTD inline line */
 .hero-sotd-line {
-  display: flex; align-items: center; gap: 10px;
-  margin-top: 0.25rem; padding-top: 1rem;
-  border-top: 0.5px solid rgba(200,169,110,0.22);
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 0.5rem; padding-top: 1rem;
+  border-top: 0.5px solid rgba(200,169,110,0.30);
 }
-.hero-sotd-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(200,169,110,0.6); }
+.hero-sotd-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent2); font-weight: 500; white-space: nowrap; }
 .hero-sotd-link {
-  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px;
-  color: rgba(255,255,255,0.88); text-decoration: none; letter-spacing: 0.01em;
-  border-bottom: 0.5px solid rgba(200,169,110,0.4); padding-bottom: 1px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px;
+  color: #fff; text-decoration: none; letter-spacing: 0.01em;
+  border-bottom: none; padding-bottom: 0;
   transition: color 0.15s, border-color 0.15s;
 }
 .hero-sotd-link:hover { color: var(--accent2); border-color: var(--accent2); }
@@ -451,9 +450,8 @@ function applyHero(){
     const src = currentPhoto === 'img1' ? 'assets/hero1.png' : 'assets/hero2.png';
     card.style.backgroundImage    = t.overlay + ', url("' + src + '")';
     card.style.backgroundColor    = '';
-    // 2 gradient layers (auto) + 1 photo layer (100% auto = scale to card width, no zoom)
-    card.style.backgroundSize     = 'auto, auto, 100% auto';
-    card.style.backgroundPosition = 'left center, left center, center 35%';
+    card.style.backgroundSize     = 'auto, auto, cover';
+    card.style.backgroundPosition = 'left center, left center, 65% center';
     card.style.backgroundRepeat   = 'no-repeat, no-repeat, no-repeat';
   }
 }
