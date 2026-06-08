@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -79,13 +79,14 @@
   <div id="enc-landing">
 
     <div class="enc-hero">
+      <img src="/assets/enc-hero.png" alt="Crystal display in soft natural light" class="enc-hero-img">
       <div class="enc-hero-content">
         <div class="enc-hero-eyebrow">Crystal Library</div>
-        <h1 class="enc-hero-title"><span class="enc-hero-line1">Build your crystal knowledge</span><br>one shelf at a time.</h1>
-        <p class="enc-hero-sub">Start with The Essentials, then explore deeper â€” by color, intention, family, chakra, or collector tier.</p>
+        <h1 class="enc-hero-title">Build your crystal knowledge<br>one shelf at a time.</h1>
+        <p class="enc-hero-sub">Start with The Essentials, then explore deeper — by color, intention, family, chakra, or collector tier.</p>
         <div class="enc-hero-btns">
           <button class="btn btn-accent" onclick="document.getElementById('enc-tier-landing').scrollIntoView({behavior:'smooth',block:'start'})">Start with The Essentials</button>
-          <button class="btn" onclick="dismissEncDoorway();setTimeout(()=>{const el=document.getElementById('enc-search');if(el){el.scrollIntoView({behavior:'smooth',block:'nearest'});el.focus();}},80)">Browse full library â†’</button>
+          <button class="btn" onclick="dismissEncDoorway();setTimeout(()=>{const el=document.getElementById('enc-search');if(el){el.scrollIntoView({behavior:'smooth',block:'nearest'});el.focus();}},80)">Browse full library →</button>
         </div>
       </div>
     </div>
@@ -93,57 +94,57 @@
     <div class="enc-library-panel">
       <div class="enc-panel-heading">
         <h2 class="enc-panel-title">Browse the library your way</h2>
-        <div class="enc-panel-ornament" aria-hidden="true">âœ§</div>
+        <div class="enc-panel-ornament" aria-hidden="true">✧</div>
       </div>
       <div class="enc-pathway-grid">
         <button class="enc-pathway-card" onclick="encDoorwayBrowse('color')">
           <div class="enc-pathway-icon enc-pathway-icon--color"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="10" r="5" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.12"/><circle cx="15" cy="10" r="5" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.12"/><circle cx="12" cy="15.5" r="5" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.12"/></svg></div>
           <div class="enc-pathway-name">By Color</div>
           <div class="enc-pathway-desc">Find stones by the colors that speak to you.</div>
-          <span class="enc-pathway-arrow" aria-hidden="true">â†’</span>
+          <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
         <button class="enc-pathway-card" onclick="switchTabByName('mood')">
           <div class="enc-pathway-icon enc-pathway-icon--intention"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="enc-pathway-name">By Intention</div>
           <div class="enc-pathway-desc">Stones that support your goals and well-being.</div>
-          <span class="enc-pathway-arrow" aria-hidden="true">â†’</span>
+          <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
         <button class="enc-pathway-card" onclick="encDoorwayBrowse('chakra')">
           <div class="enc-pathway-icon enc-pathway-icon--chakra"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.08"/><circle cx="12" cy="12" r="3" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent)" fill-opacity="0.2"/><line x1="12" y1="4" x2="12" y2="7" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="20" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/><line x1="4" y1="12" x2="7" y2="12" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/><line x1="17" y1="12" x2="20" y2="12" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
           <div class="enc-pathway-name">By Chakra</div>
           <div class="enc-pathway-desc">Stones connected to each energy center.</div>
-          <span class="enc-pathway-arrow" aria-hidden="true">â†’</span>
+          <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
         <button class="enc-pathway-card" onclick="encDoorwayBrowse('tier')">
           <div class="enc-pathway-icon enc-pathway-icon--tier"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="1" y="17" width="5" height="5" rx="1" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="1.3"/><rect x="7" y="13" width="5" height="9" rx="1" fill="var(--accent)" fill-opacity="0.3" stroke="var(--accent)" stroke-width="1.3"/><rect x="13" y="9" width="5" height="13" rx="1" fill="var(--accent)" fill-opacity="0.4" stroke="var(--accent)" stroke-width="1.3"/><rect x="19" y="5" width="4" height="17" rx="1" fill="var(--accent)" fill-opacity="0.5" stroke="var(--accent)" stroke-width="1.3"/></svg></div>
           <div class="enc-pathway-name">By Collector Tier</div>
           <div class="enc-pathway-desc">Browse from Essentials to Rare Finds.</div>
-          <span class="enc-pathway-arrow" aria-hidden="true">â†’</span>
+          <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
         <button class="enc-pathway-card" onclick="encDoorwayBrowse('fam')">
           <div class="enc-pathway-icon enc-pathway-icon--family"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="12,3 20.5,8 20.5,16 12,21 3.5,16 3.5,8" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round" fill="var(--accent)" fill-opacity="0.1"/><line x1="3.5" y1="8" x2="12" y2="12.5" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/><line x1="20.5" y1="8" x2="12" y2="12.5" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/><line x1="12" y1="12.5" x2="12" y2="21" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/></svg></div>
           <div class="enc-pathway-name">By Family</div>
           <div class="enc-pathway-desc">Explore by mineral family and composition.</div>
-          <span class="enc-pathway-arrow" aria-hidden="true">â†’</span>
+          <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
       </div>
     </div>
 
   </div><!-- /enc-landing -->
   <div class="search-wrap">
-    <span class="search-icon">âŒ•</span>
-    <input type="text" id="enc-search" placeholder="Search name, color, use, propertyâ€¦" oninput="encRender()">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="enc-search" placeholder="Search name, color, use, property…" oninput="encRender()">
   </div>
   <div style="position:relative;margin-bottom:0.5rem">
   <div class="filter-cats" id="enc-filter-cats">
-    <button class="filter-cat-btn" id="fbtn-fam" onclick="togglePanel('fam',event)">Family <span class="aval" id="fval-fam"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-theme" onclick="togglePanel('theme',event)">Theme <span class="aval" id="fval-theme"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-color" onclick="togglePanel('color',event)">Color <span class="aval" id="fval-color"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-chakra" onclick="togglePanel('chakra',event)">Chakra <span class="aval" id="fval-chakra"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-mohs" onclick="togglePanel('mohs',event)">Hardness <span class="aval" id="fval-mohs"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-formation" onclick="togglePanel('formation',event)">Formation <span class="aval" id="fval-formation"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-material" onclick="togglePanel('material',event)">Material <span class="aval" id="fval-material"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="fbtn-tier" onclick="togglePanel('tier',event)">Tier <span class="aval" id="fval-tier"></span><span class="caret">â–¾</span></button>
+    <button class="filter-cat-btn" id="fbtn-fam" onclick="togglePanel('fam',event)">Family <span class="aval" id="fval-fam"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-theme" onclick="togglePanel('theme',event)">Theme <span class="aval" id="fval-theme"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-color" onclick="togglePanel('color',event)">Color <span class="aval" id="fval-color"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-chakra" onclick="togglePanel('chakra',event)">Chakra <span class="aval" id="fval-chakra"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-mohs" onclick="togglePanel('mohs',event)">Hardness <span class="aval" id="fval-mohs"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-formation" onclick="togglePanel('formation',event)">Formation <span class="aval" id="fval-formation"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-material" onclick="togglePanel('material',event)">Material <span class="aval" id="fval-material"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="fbtn-tier" onclick="togglePanel('tier',event)">Tier <span class="aval" id="fval-tier"></span><span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetFilters()">Reset</button>
   </div>
   <div class="filter-panel" id="panel-fam"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Mineral family <button class="prop-help" onclick="openPopup('filter-fam');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-fam"></div></div>
@@ -155,72 +156,13 @@
   <div class="filter-panel" id="panel-material"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Material type <button class="prop-help" onclick="openPopup('material');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-material"></div></div>
   <div class="filter-panel" id="panel-tier"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Collector tier <button class="prop-help" onclick="openPopup('filter-tier');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-tier"></div></div>
   </div>
-
-  <!-- TIER LANDING: visible while encyclopedia is in landing state -->
-  <div id="enc-tier-landing">
-    <div class="enc-tier-section">
-      <div class="enc-tier-header">
-        <span class="enc-tier-badge">Tier 1</span>
-        <div class="enc-tier-title-block">
-          <h2 class="enc-tier-title">The Essentials</h2>
-          <span class="enc-tier-count" id="enc-t1-count"></span>
-          <p class="enc-tier-desc">Whether you're brand new to crystals or building your first collection, these are the stones people reach for again and again.</p>
-        </div>
-        <button class="btn btn-sm enc-tier-viewall" onclick="encBrowseTier(1)">View all â†’</button>
-      </div>
-      <div class="enc-tier-grid" id="enc-tier-1-grid"></div>
-      <div class="enc-next-shelf">
-        <div class="enc-next-photo" aria-hidden="true"></div>
-        <div class="enc-next-copy">
-          <h3 class="enc-next-title">Ready for the next shelf?</h3>
-          <p>Once you know the essentials, explore stones with more personality and collector appeal.</p>
-          <button class="btn btn-accent" onclick="encTierAccordionExpand(2)">Explore Shelf Builders â†’</button>
-        </div>
-        <div class="enc-next-up">
-          <span class="enc-next-up-label">Next up</span>
-          <strong class="enc-next-up-name">Tier 2<br>Shelf Builders</strong>
-          <span class="enc-next-up-count" id="enc-t2-count-teaser"></span>
-        </div>
-      </div>
-    </div>
-    <div class="enc-tier-accordion">
-      <div class="enc-accordion-row" id="enc-acc-row-2">
-        <span class="enc-tier-badge enc-tier-badge--sm">Tier 2</span>
-        <div class="enc-accordion-info">
-          <span class="enc-accordion-name">Shelf Builders</span>
-          <span class="enc-accordion-count" id="enc-t2-count"></span>
-        </div>
-        <button class="btn btn-sm" onclick="encTierAccordionExpand(2)">Explore â†’</button>
-      </div>
-      <div class="enc-accordion-grid" id="enc-acc-2-grid"></div>
-      <div class="enc-accordion-row" id="enc-acc-row-3">
-        <span class="enc-tier-badge enc-tier-badge--sm">Tier 3</span>
-        <div class="enc-accordion-info">
-          <span class="enc-accordion-name">Collector Favorites</span>
-          <span class="enc-accordion-count" id="enc-t3-count"></span>
-        </div>
-        <button class="btn btn-sm" onclick="encTierAccordionExpand(3)">Explore â†’</button>
-      </div>
-      <div class="enc-accordion-grid" id="enc-acc-3-grid"></div>
-      <div class="enc-accordion-row" id="enc-acc-row-4">
-        <span class="enc-tier-badge enc-tier-badge--sm">Tier 4</span>
-        <div class="enc-accordion-info">
-          <span class="enc-accordion-name">Rare Finds</span>
-          <span class="enc-accordion-count" id="enc-t4-count"></span>
-        </div>
-        <button class="btn btn-sm" onclick="encTierAccordionExpand(4)">Explore â†’</button>
-      </div>
-      <div class="enc-accordion-grid" id="enc-acc-4-grid"></div>
-    </div>
-  </div><!-- /enc-tier-landing -->
-
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
-    <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A â€“ Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
+    <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
   </div>
   <div id="stones-error" style="display:none;padding:3rem 1.5rem;text-align:center;color:var(--ink2)">
     <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:0.75rem;color:var(--ink)">Having trouble connecting</div>
-    <div style="font-size:14px;line-height:1.8;max-width:420px;margin:0 auto 1.5rem">The encyclopedia couldn't load right now â€” this is usually a brief connection issue. Please check your internet connection and try refreshing the page.</div>
+    <div style="font-size:14px;line-height:1.8;max-width:420px;margin:0 auto 1.5rem">The encyclopedia couldn't load right now — this is usually a brief connection issue. Please check your internet connection and try refreshing the page.</div>
     <button class="btn btn-sm" onclick="location.reload()">Refresh page</button>
   </div>
   <div class="crystal-grid" id="crystal-grid"></div>
@@ -237,7 +179,7 @@
     <!-- BROWSE BY INTENTION TILE (primary) -->
     <div class="use-when-tile use-when-tile--primary">
       <div class="browse-tile-label">Explore by feeling or intention</div>
-      <div class="browse-tile-sub">Choose a category to see matching stones â€” or browse all 30 moods.</div>
+      <div class="browse-tile-sub">Choose a category to see matching stones — or browse all 30 moods.</div>
       <div class="intention-grid" id="intention-grid">
         <div class="intention-card" style="background:#ede6d6;border-color:#c8bda4;color:#5a4e34" onclick="intentionCardClick('Grounding & Stability',this)">
           <div class="intention-card-icon"><svg width="28" height="28" viewBox="0 0 24 24"><polygon points="12 3 22 21 2 21" fill="#5a4e34" opacity="0.2"/><polygon points="12 3 22 21 2 21" fill="none" stroke="#5a4e34" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
@@ -265,7 +207,7 @@
           <div class="intention-card-sub">Energy, resilience, vitality</div>
         </div>
         <div class="intention-card intention-card--browse" style="background:#f7f5f2;border-color:var(--border);border-style:solid;color:#8b7355" onclick="intentionCardClick('all',this)">
-          <div class="intention-card-icon" style="font-size:20px">â†’</div>
+          <div class="intention-card-icon" style="font-size:20px">→</div>
           <div class="intention-card-name" style="font-style:italic">Browse all</div>
           <div class="intention-card-sub">30 moods</div>
         </div>
@@ -276,11 +218,11 @@
     <!-- AI FREEFORM SEARCH TILE (secondary) -->
     <div class="use-when-tile use-when-tile--ai">
       <div class="ai-search-label">What's on your mind right now?</div>
-      <div class="ai-search-sub">Type anything â€” a feeling, an intention, a moment you're in.</div>
-      <textarea class="ai-search-input" id="ai-search-input" rows="3" maxlength="300" placeholder="I want a stone for fresh energy, focus, and momentumâ€¦" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAISearch();}"></textarea>
+      <div class="ai-search-sub">Type anything — a feeling, an intention, a moment you're in.</div>
+      <textarea class="ai-search-input" id="ai-search-input" rows="3" maxlength="300" placeholder="I want a stone for fresh energy, focus, and momentum…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAISearch();}"></textarea>
       <div class="ai-error" id="ai-search-error"></div>
       <button class="ai-search-btn" id="ai-search-btn" onclick="runAISearch()">
-        <span class="ai-search-btn-text">âœ¦ Find my stones</span>
+        <span class="ai-search-btn-text">✦ Find my stones</span>
         <span class="ai-search-spinner"></span>
       </button>
     </div>
@@ -290,14 +232,14 @@
   <div class="ai-results-wrap" id="ai-results-wrap">
     <div class="ai-results-hdr">
       <div class="ai-results-title">Stones for you right now</div>
-      <button class="ai-results-back" onclick="clearAIResults()">â† Try different words</button>
+      <button class="ai-results-back" onclick="clearAIResults()">← Try different words</button>
     </div>
     <div class="ai-stone-grid" id="ai-stone-grid"></div>
   </div>
 
   <!-- MOOD GRID: shown after category tile click -->
   <div id="mood-reset-bar" style="display:none;padding:0.75rem 0 0.25rem;text-align:right">
-    <button onclick="resetUseWhen()" style="background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);letter-spacing:0.04em;padding:0">â† Clear selection</button>
+    <button onclick="resetUseWhen()" style="background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);letter-spacing:0.04em;padding:0">← Clear selection</button>
   </div>
   <div class="mood-grid" id="mood-grid" style="display:none"></div>
   <!-- SELECTED MOOD VIEW: shown after selection -->
@@ -308,7 +250,7 @@
         <div id="mood-selected-label" class="mood-label"></div>
         <div id="mood-selected-sub" class="mood-sub-text"></div>
       </div>
-      <span class="mood-selected-clear">â† Change</span>
+      <span class="mood-selected-clear">← Change</span>
     </div>
     <div class="sub-filter-row" id="sub-filter-row" style="display:none">
       <span class="sub-filter-label">Narrow by</span>
@@ -327,17 +269,17 @@
     <div class="coll-title">My Pieces</div>
     <div class="coll-btns">
       <div style="position:relative;display:inline-block">
-        <button class="btn btn-sm" onclick="toggleExportMenu('coll-export-menu')">â†“ Collection â–¾</button>
+        <button class="btn btn-sm" onclick="toggleExportMenu('coll-export-menu')">↓ Collection ▾</button>
         <div id="coll-export-menu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#fff;border:0.5px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(42,37,32,0.12);z-index:50;min-width:160px;overflow:hidden">
-          <button onclick="openReportOptions('collection');toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">âŽ™ Print report</button>
-          <button onclick="exportCollectionCSV();toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">â†“ Export CSV</button>
+          <button onclick="openReportOptions('collection');toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">⎙ Print report</button>
+          <button onclick="exportCollectionCSV();toggleExportMenu('coll-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">↓ Export CSV</button>
         </div>
       </div>
       <div style="position:relative;display:inline-block">
-        <button class="btn btn-sm" onclick="toggleExportMenu('wish-export-menu')">â†“ Wishlist â–¾</button>
+        <button class="btn btn-sm" onclick="toggleExportMenu('wish-export-menu')">↓ Wishlist ▾</button>
         <div id="wish-export-menu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#fff;border:0.5px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(42,37,32,0.12);z-index:50;min-width:160px;overflow:hidden">
-          <button onclick="openReportOptions('wishlist');toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">âŽ™ Print report</button>
-          <button onclick="exportWishlistCSV();toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">â†“ Export CSV</button>
+          <button onclick="openReportOptions('wishlist');toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2)">⎙ Print report</button>
+          <button onclick="exportWishlistCSV();toggleExportMenu('wish-export-menu')" style="display:block;width:100%;text-align:left;padding:9px 14px;font-size:12px;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--ink2);border-top:0.5px solid var(--border)">↓ Export CSV</button>
         </div>
       </div>
       <button class="btn btn-sm" onclick="openBatchForm()">+ Batch add</button>
@@ -375,16 +317,16 @@
   </div>
   <div id="collection-filter-shell" style="position:relative;margin-bottom:1rem">
   <div class="coll-filter-cats" id="coll-filter-cats">
-    <button class="filter-cat-btn" id="cfbtn-cfam" onclick="toggleCollPanel('cfam',event)">Family <span class="aval" id="cfval-cfam"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-ctheme" onclick="toggleCollPanel('ctheme',event)">Theme <span class="aval" id="cfval-ctheme"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-ccolor" onclick="toggleCollPanel('ccolor',event)">Color <span class="aval" id="cfval-ccolor"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cchakra" onclick="toggleCollPanel('cchakra',event)">Chakra <span class="aval" id="cfval-cchakra"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cmohs" onclick="toggleCollPanel('cmohs',event)">Hardness <span class="aval" id="cfval-cmohs"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cformation" onclick="toggleCollPanel('cformation',event)">Formation <span class="aval" id="cfval-cformation"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cmaterial" onclick="toggleCollPanel('cmaterial',event)">Material <span class="aval" id="cfval-cmaterial"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-form" onclick="toggleCollPanel('form',event)">Form <span class="aval" id="cfval-form"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-size" onclick="toggleCollPanel('size',event)">Size <span class="aval" id="cfval-size"></span><span class="caret">â–¾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cshelf" onclick="toggleCollPanel('cshelf',event)">Location <span class="aval" id="cfval-cshelf"></span><span class="caret">â–¾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cfam" onclick="toggleCollPanel('cfam',event)">Family <span class="aval" id="cfval-cfam"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-ctheme" onclick="toggleCollPanel('ctheme',event)">Theme <span class="aval" id="cfval-ctheme"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-ccolor" onclick="toggleCollPanel('ccolor',event)">Color <span class="aval" id="cfval-ccolor"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cchakra" onclick="toggleCollPanel('cchakra',event)">Chakra <span class="aval" id="cfval-cchakra"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cmohs" onclick="toggleCollPanel('cmohs',event)">Hardness <span class="aval" id="cfval-cmohs"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cformation" onclick="toggleCollPanel('cformation',event)">Formation <span class="aval" id="cfval-cformation"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cmaterial" onclick="toggleCollPanel('cmaterial',event)">Material <span class="aval" id="cfval-cmaterial"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-form" onclick="toggleCollPanel('form',event)">Form <span class="aval" id="cfval-form"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-size" onclick="toggleCollPanel('size',event)">Size <span class="aval" id="cfval-size"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn" id="cfbtn-cshelf" onclick="toggleCollPanel('cshelf',event)">Location <span class="aval" id="cfval-cshelf"></span><span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetCollFilters()">Reset</button>
   </div>
   <div class="filter-panel" id="cpanel-cfam"><div class="filter-panel-title">Stone family</div><div class="filter-panel-pills" id="cpills-cfam"></div></div>
@@ -407,7 +349,7 @@
 
 <section id="tab-identify" style="display:none">
 
-  <!-- Hero banner â€” swap placeholder div for <img class="id2-hero-img" src="identify-hero.webp" alt=""> when photo is ready -->
+  <!-- Hero banner — swap placeholder div for <img class="id2-hero-img" src="identify-hero.webp" alt=""> when photo is ready -->
   <div class="id2-hero">
     <div class="id2-hero-placeholder"></div>
     <div class="id2-hero-overlay">
@@ -418,17 +360,17 @@
 
 <div class="id2-wrap">
   <div class="id2-card">
-    <!-- Step 1: Color â€” always visible -->
+    <!-- Step 1: Color — always visible -->
     <div class="id2-step" id="id2-step-color">
-      <div class="id2-step-label"><span class="id2-step-num">â‘ </span> Color</div>
+      <div class="id2-step-label"><span class="id2-step-num">①</span> Color</div>
       <div class="id2-invite">What color is it? We'll narrow it down from there.</div>
       <div class="id2-color-grid" id="id2-colors"></div>
     </div>
 
-    <!-- Step 2: Transparency â€” revealed after color -->
+    <!-- Step 2: Transparency — revealed after color -->
     <div class="id2-step id2-step-hidden" id="id2-step-trans">
       <div class="id2-step-divider"></div>
-      <div class="id2-step-label"><span class="id2-step-num">â‘¡</span> See through it?</div>
+      <div class="id2-step-label"><span class="id2-step-num">②</span> See through it?</div>
       <div class="id2-pills">
         <button class="id2-pill" onclick="setId2('trans','Transparent',this)">Clear like glass</button>
         <button class="id2-pill" onclick="setId2('trans','Translucent',this)">Light gets through</button>
@@ -436,10 +378,10 @@
       </div>
     </div>
 
-    <!-- Step 3: Luster â€” revealed after transparency -->
+    <!-- Step 3: Luster — revealed after transparency -->
     <div class="id2-step id2-step-hidden" id="id2-step-luster">
       <div class="id2-step-divider"></div>
-      <div class="id2-step-label"><span class="id2-step-num">â‘¢</span> Surface look</div>
+      <div class="id2-step-label"><span class="id2-step-num">③</span> Surface look</div>
       <div class="id2-pills">
         <button class="id2-pill" onclick="setId2('luster','glassy',this)">Glassy &amp; bright</button>
         <button class="id2-pill" onclick="setId2('luster','silky',this)">Silky or pearly</button>
@@ -449,11 +391,11 @@
       </div>
     </div>
 
-    <!-- Step 4: Advanced â€” revealed after luster, collapsed -->
+    <!-- Step 4: Advanced — revealed after luster, collapsed -->
     <div class="id2-step id2-step-hidden" id="id2-step-advanced">
       <div class="id2-step-divider"></div>
       <button class="id2-advanced-toggle" onclick="toggleId2Advanced()">
-        <span class="id2-step-num">â‘£</span> More clues <span id="id2-adv-caret" class="id2-adv-caret">â–¾</span>
+        <span class="id2-step-num">④</span> More clues <span id="id2-adv-caret" class="id2-adv-caret">▾</span>
       </button>
       <div id="id2-advanced-body" style="display:none">
         <div class="id2-adv-section">
@@ -475,14 +417,14 @@
       </div>
     </div>
 
-    <!-- Tips â€” always visible at card bottom -->
+    <!-- Tips — always visible at card bottom -->
     <div class="id2-step-divider" style="margin-top:1.25rem"></div>
     <div class="id2-card-tips">
-      <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Scratch a hidden spot with a fingernail â€” delicate stones scratch easily.
+      <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Scratch a hidden spot with a fingernail — delicate stones scratch easily.
     </div>
   </div>
 
-  <!-- Result bar â€” hidden until first selection -->
+  <!-- Result bar — hidden until first selection -->
   <div class="id2-result-bar" id="id2-result-bar" style="display:none">
     <div class="id2-count" id="id2-count">Possible matches</div>
     <button class="id2-clear" onclick="clearId2()">Clear all</button>
@@ -511,16 +453,16 @@
     </nav>
     <div class="c101-content-pane">
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- ══════════════════════════════════════
        SECTION 1: HOW TO WORK WITH CRYSTALS
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  ══════════════════════════════════════ -->
   <div class="c101-section active" id="s101-work">
     <div class="c101-h1">How to Work With Crystals</div>
     <div class="c101-sub">From intention to practice</div>
 
     <div class="c101-block">
       <div class="c101-h2">Setting Intention</div>
-      <div class="c101-body">Intention is what separates a stone on a shelf from a stone in practice. Before you work with a crystal, take a moment â€” hold it in both hands, breathe, and state what you're bringing to it. This doesn't need to be elaborate. "I'm working on letting go of anxiety" is enough. You're not casting a spell; you're directing your attention and giving the stone a context to work within.</div>
+      <div class="c101-body">Intention is what separates a stone on a shelf from a stone in practice. Before you work with a crystal, take a moment — hold it in both hands, breathe, and state what you're bringing to it. This doesn't need to be elaborate. "I'm working on letting go of anxiety" is enough. You're not casting a spell; you're directing your attention and giving the stone a context to work within.</div>
       <div class="c101-callout"><strong>The honest version:</strong> Crystals don't think. What intention-setting does is prime your own mind to notice relevant feelings, patterns, and shifts. The stone becomes a physical anchor for something you're already doing internally. That's not a small thing.</div>
     </div>
 
@@ -531,8 +473,8 @@
         <thead><tr><th>Method</th><th>How</th><th>Best for</th></tr></thead>
         <tbody>
           <tr><td><strong>Holding</strong></td><td>In one or both hands during meditation, breathwork, or quiet time</td><td>Direct energetic work, grounding, emotional processing</td></tr>
-          <tr><td><strong>Carrying</strong></td><td>Pocket, bag, or bra â€” kept close throughout the day</td><td>Ongoing support, protection, subtle reminders</td></tr>
-          <tr><td><strong>Wearing</strong></td><td>Jewelry â€” closest to the skin and specific body areas</td><td>Chakra work, sustained energy, intentional adornment</td></tr>
+          <tr><td><strong>Carrying</strong></td><td>Pocket, bag, or bra — kept close throughout the day</td><td>Ongoing support, protection, subtle reminders</td></tr>
+          <tr><td><strong>Wearing</strong></td><td>Jewelry — closest to the skin and specific body areas</td><td>Chakra work, sustained energy, intentional adornment</td></tr>
           <tr><td><strong>Placing</strong></td><td>On the body during rest, on a nightstand, desk, or altar</td><td>Environmental energy, sleep support, space-holding</td></tr>
           <tr><td><strong>Gridding</strong></td><td>Arranging multiple stones in geometric patterns with a clear intention</td><td>Amplification, manifestation, space clearing</td></tr>
           <tr><td><strong>Meditating</strong></td><td>Hold or place on corresponding chakra; sit quietly and observe</td><td>Deep inner work, intuitive downloads, focused healing</td></tr>
@@ -542,13 +484,13 @@
 
     <div class="c101-block">
       <div class="c101-h2">Trusting Your Intuition</div>
-      <div class="c101-body">The properties listed in an encyclopedia â€” including this one â€” are a starting point, not a prescription. If a stone is described as calming but it makes you feel restless, trust that. If you're drawn to a stone whose listed properties don't match what you think you need, pick it up anyway.</div>
+      <div class="c101-body">The properties listed in an encyclopedia — including this one — are a starting point, not a prescription. If a stone is described as calming but it makes you feel restless, trust that. If you're drawn to a stone whose listed properties don't match what you think you need, pick it up anyway.</div>
       <div class="c101-callout"><strong>At intermediate level, your intuition is data.</strong> You've handled enough stones to know the difference between a random preference and a genuine pull. When your gut disagrees with a description, your experience with that stone wins.</div>
     </div>
 
     <div class="c101-block">
       <div class="c101-h2">When a Stone Doesn't Feel Right</div>
-      <div class="c101-body">Sometimes a stone that should work for you â€” by every property measure â€” just doesn't. This happens. The usual reasons:</div>
+      <div class="c101-body">Sometimes a stone that should work for you — by every property measure — just doesn't. This happens. The usual reasons:</div>
       <div class="c101-body">
         <strong>It needs cleansing.</strong> A stone that's been sitting around or was handled by others may feel dense or flat. Cleanse it before writing it off.<br><br>
         <strong>Wrong timing.</strong> Some stones feel too activating when you're already overwhelmed, or too grounding when you need to move energy. Put it down and come back.<br><br>
@@ -557,16 +499,16 @@
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- ══════════════════════════════════════
        SECTION 2: CLEANSING & CHARGING
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  ══════════════════════════════════════ -->
 <!-- CRYSTAL FORMS SECTION -->
   <div class="c101-section" id="s101-shapes">
     <div class="c101-h1">Crystal Forms</div>
-    <div class="c101-sub">How form affects function â€” what each form does and when to reach for it</div>
+    <div class="c101-sub">How form affects function — what each form does and when to reach for it</div>
 
     <div class="c101-block">
-      <div class="c101-body">A form is the way a stone appears as a collectible piece â€” naturally grown, cut, polished, carved, or shaped. The form you choose changes how you work with a stone, how you carry it, and how it fits into your space.</div>
+      <div class="c101-body">A form is the way a stone appears as a collectible piece — naturally grown, cut, polished, carved, or shaped. The form you choose changes how you work with a stone, how you carry it, and how it fits into your space.</div>
     </div>
 
     <div id="shapes-grid" class="shapes-grid"></div>
@@ -579,22 +521,22 @@
 
     <div class="c101-block">
       <div class="c101-h2">Why It Matters</div>
-      <div class="c101-body">Crystals are energetically porous. They pick up the emotional residue of environments, people, and experiences â€” not metaphorically, but in the sense that a stone carried through a difficult week feels different from a freshly cleansed one. Cleansing resets that. Charging amplifies and directs a stone's natural energy. Think of cleansing as clearing the slate, and charging as sharpening the pencil.</div>
+      <div class="c101-body">Crystals are energetically porous. They pick up the emotional residue of environments, people, and experiences — not metaphorically, but in the sense that a stone carried through a difficult week feels different from a freshly cleansed one. Cleansing resets that. Charging amplifies and directs a stone's natural energy. Think of cleansing as clearing the slate, and charging as sharpening the pencil.</div>
       <div class="c101-callout"><strong>New stones always get cleansed first.</strong> You don't know how many hands have touched them, what environments they've been in, or what energy they've accumulated. Start clean.</div>
     </div>
 
     <div class="c101-block">
       <div class="c101-h2">Cleansing Methods</div>
-      <div class="c101-body">Choose based on your stone's physical properties â€” not all methods work for all stones.</div>
+      <div class="c101-body">Choose based on your stone's physical properties — not all methods work for all stones.</div>
       <div class="method-grid">
-        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="var(--accent)" opacity="0.2"/><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Moonlight</div><div class="method-desc">Leave stones out overnight under the moon â€” full moon is most potent but any phase works. Safe for all stones.</div><div class="method-caveat">Works indoors through a window too</div></div>
+        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="var(--accent)" opacity="0.2"/><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Moonlight</div><div class="method-desc">Leave stones out overnight under the moon — full moon is most potent but any phase works. Safe for all stones.</div><div class="method-caveat">Works indoors through a window too</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="var(--accent)" opacity="0.2"/><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="method-name">Sound</div><div class="method-desc">Singing bowls, bells, tuning forks, or even clapping near your stones. Vibration moves stagnant energy. Safe for all stones.</div><div class="method-caveat">One of the best all-purpose methods</div></div>
-        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="var(--accent)" opacity="0.2"/><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20h8" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg></div><div class="method-name">Smoke</div><div class="method-desc">Pass stones through smoke from sacred herbs. Don't let the stone sit in direct smoke for too long â€” a few passes is enough.</div><div class="method-caveat">Safe for all stones; ventilate the room</div></div>
+        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="var(--accent)" opacity="0.2"/><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20h8" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg></div><div class="method-name">Smoke</div><div class="method-desc">Pass stones through smoke from sacred herbs. Don't let the stone sit in direct smoke for too long — a few passes is enough.</div><div class="method-caveat">Safe for all stones; ventilate the room</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Breath</div><div class="method-desc">Hold the stone and blow sharply across it with clear intention to release what doesn't belong. Underrated and immediate.</div><div class="method-caveat">Surprisingly effective for quick resets</div></div>
-        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" fill="var(--accent)" opacity="0.2"/><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" fill="var(--accent)" opacity="0.4"/></svg></div><div class="method-name">Earth Burial</div><div class="method-desc">Bury in soil for 24â€“48 hours. Deep, slow, thorough cleansing. Best for heavily loaded stones or after intense work.</div><div class="method-caveat">Mark the spot. Use a mesh bag to find it.</div></div>
+        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" fill="var(--accent)" opacity="0.2"/><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" fill="var(--accent)" opacity="0.4"/></svg></div><div class="method-name">Earth Burial</div><div class="method-desc">Bury in soil for 24–48 hours. Deep, slow, thorough cleansing. Best for heavily loaded stones or after intense work.</div><div class="method-caveat">Mark the spot. Use a mesh bag to find it.</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9 9 9" fill="var(--accent)" opacity="0.15"/><polygon points="12 2 15 9 22 9 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9 9 9" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Selenite</div><div class="method-desc">Place stones on a selenite plate or beside a selenite wand overnight. Selenite is self-cleansing and will clear other stones.</div><div class="method-caveat">Can't use water on selenite itself</div></div>
-        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" fill="var(--accent)" opacity="0.2"/><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Running Water</div><div class="method-desc">Hold under cool running water for 30â€“60 seconds with intention. Quick and grounding â€” but not safe for all stones.</div><div class="method-caveat">See water-sensitive list below</div></div>
-        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="8" cy="14" r="2" fill="var(--accent)" opacity="0.4"/><circle cx="14" cy="10" r="2" fill="var(--accent)" opacity="0.4"/><circle cx="17" cy="16" r="2" fill="var(--accent)" opacity="0.4"/><circle cx="8" cy="14" r="2" fill="none" stroke="var(--accent)" stroke-width="1.2"/><circle cx="14" cy="10" r="2" fill="none" stroke="var(--accent)" stroke-width="1.2"/><circle cx="17" cy="16" r="2" fill="none" stroke="var(--accent)" stroke-width="1.2"/><path d="M4 20h16" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/></svg></div><div class="method-name">Salt (Dry)</div><div class="method-desc">Bury in dry sea salt for several hours. Powerful, but use dry salt only â€” never saltwater. Can damage softer stones.</div><div class="method-caveat">Avoid on porous, soft, or metallic stones</div></div>
+        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" fill="var(--accent)" opacity="0.2"/><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Running Water</div><div class="method-desc">Hold under cool running water for 30–60 seconds with intention. Quick and grounding — but not safe for all stones.</div><div class="method-caveat">See water-sensitive list below</div></div>
+        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="8" cy="14" r="2" fill="var(--accent)" opacity="0.4"/><circle cx="14" cy="10" r="2" fill="var(--accent)" opacity="0.4"/><circle cx="17" cy="16" r="2" fill="var(--accent)" opacity="0.4"/><circle cx="8" cy="14" r="2" fill="none" stroke="var(--accent)" stroke-width="1.2"/><circle cx="14" cy="10" r="2" fill="none" stroke="var(--accent)" stroke-width="1.2"/><circle cx="17" cy="16" r="2" fill="none" stroke="var(--accent)" stroke-width="1.2"/><path d="M4 20h16" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/></svg></div><div class="method-name">Salt (Dry)</div><div class="method-desc">Bury in dry sea salt for several hours. Powerful, but use dry salt only — never saltwater. Can damage softer stones.</div><div class="method-caveat">Avoid on porous, soft, or metallic stones</div></div>
       </div>
     </div>
 
@@ -604,9 +546,9 @@
       <table class="care-table">
         <thead><tr><th>Method</th><th>Effect</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td><strong>Sunlight</strong></td><td>Activating, energizing, solar â€” great for action-oriented stones</td><td>30 minutes max; some stones fade (see below)</td></tr>
-          <tr><td><strong>Moonlight</strong></td><td>Intuitive, receptive, feminine â€” ideal for emotional and spiritual work</td><td>Overnight; safe for all stones</td></tr>
-          <tr><td><strong>Intention</strong></td><td>You are the charger â€” hold the stone and breathe your purpose into it</td><td>Works best after cleansing; most direct method</td></tr>
+          <tr><td><strong>Sunlight</strong></td><td>Activating, energizing, solar — great for action-oriented stones</td><td>30 minutes max; some stones fade (see below)</td></tr>
+          <tr><td><strong>Moonlight</strong></td><td>Intuitive, receptive, feminine — ideal for emotional and spiritual work</td><td>Overnight; safe for all stones</td></tr>
+          <tr><td><strong>Intention</strong></td><td>You are the charger — hold the stone and breathe your purpose into it</td><td>Works best after cleansing; most direct method</td></tr>
           <tr><td><strong>Crystal cluster</strong></td><td>Place on amethyst, quartz, or citrine cluster to charge passively</td><td>24 hours; clusters need their own periodic cleansing</td></tr>
           <tr><td><strong>Sacred geometry grid</strong></td><td>Placing in a grid with clear quartz amplifies specific intentions</td><td>Program the grid first with your intention</td></tr>
         </tbody>
@@ -615,14 +557,14 @@
 
     <div class="c101-block">
       <div class="c101-h2">How Often</div>
-      <div class="c101-body">There's no strict schedule â€” learn to read the energy. Stones used daily in active work need cleansing more often than display pieces. Signs a stone is ready: it feels heavy, dull, or suddenly unpleasant to hold. Stones you carry through stressful periods need attention after that period ends. A good default: cleanse monthly with the full moon, and anytime you feel a shift.</div>
+      <div class="c101-body">There's no strict schedule — learn to read the energy. Stones used daily in active work need cleansing more often than display pieces. Signs a stone is ready: it feels heavy, dull, or suddenly unpleasant to hold. Stones you carry through stressful periods need attention after that period ends. A good default: cleanse monthly with the full moon, and anytime you feel a shift.</div>
     </div>
 
     <div class="c101-block">
       <div class="c101-h2" style="display:flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="var(--accent)" opacity="0.15"/><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="1.5"/><line x1="16.5" y1="16.5" x2="22" y2="22" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/></svg>Check Any Stone</div>
-      <div class="c101-body" style="margin-bottom:0.75rem">Type a stone name to see its care status â€” water safety, sun sensitivity, and any toxicity notes.</div>
+      <div class="c101-body" style="margin-bottom:0.75rem">Type a stone name to see its care status — water safety, sun sensitivity, and any toxicity notes.</div>
       <div style="position:relative;margin-bottom:1rem">
-        <input type="text" id="care-search" placeholder="e.g. Malachite, Selenite, Pyriteâ€¦"
+        <input type="text" id="care-search" placeholder="e.g. Malachite, Selenite, Pyrite…"
           style="width:100%;padding:10px 16px;border:0.5px solid var(--border);border-radius:8px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);outline:none"
           oninput="runCareSearch(this.value)">
       </div>
@@ -631,12 +573,12 @@
 
     <div class="c101-block">
       <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
-        <span class="care-accordion-title">âš  Do Not Use Water On These</span>
-        <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">â–¾</span></span>
+        <span class="care-accordion-title">⚠ Do Not Use Water On These</span>
+        <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">▾</span></span>
       </div>
       <div class="care-accordion-body">
         <div class="care-accordion-inner">
-          <div class="c101-body" style="margin-bottom:0.75rem">The following stones from your encyclopedia are water-sensitive â€” they may dissolve, rust, become toxic, or lose their structure:</div>
+          <div class="c101-body" style="margin-bottom:0.75rem">The following stones from your encyclopedia are water-sensitive — they may dissolve, rust, become toxic, or lose their structure:</div>
           <div class="stone-pills" id="water-pills"></div>
         </div>
       </div>
@@ -644,8 +586,8 @@
 
     <div class="c101-block">
       <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
-        <span class="care-accordion-title">â˜€ Keep These Out of Extended Sunlight</span>
-        <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">â–¾</span></span>
+        <span class="care-accordion-title">☀ Keep These Out of Extended Sunlight</span>
+        <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">▾</span></span>
       </div>
       <div class="care-accordion-body">
         <div class="care-accordion-inner">
@@ -656,15 +598,15 @@
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- ══════════════════════════════════════
        SECTION 3: CHAKRA GUIDE
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  ══════════════════════════════════════ -->
   <div class="c101-section" id="s101-chakras">
     <div class="c101-h1">Chakra Guide</div>
-    <div class="c101-sub">Root to Crown, plus Earth Star â€” what each center governs, how imbalance feels, and which stones serve them</div>
+    <div class="c101-sub">Root to Crown, plus Earth Star — what each center governs, how imbalance feels, and which stones serve them</div>
 
     <div class="c101-block">
-      <div class="c101-body">Chakras are energy centers in the subtle body, recognized across Indian, Tibetan, and other traditions for thousands of years. Working with crystals on specific chakras isn't about believing in a particular cosmology â€” it's about using stones as a focusing tool for areas of your life and body that need attention. The seven main centers map to both physical locations and psychological themes.</div>
+      <div class="c101-body">Chakras are energy centers in the subtle body, recognized across Indian, Tibetan, and other traditions for thousands of years. Working with crystals on specific chakras isn't about believing in a particular cosmology — it's about using stones as a focusing tool for areas of your life and body that need attention. The seven main centers map to both physical locations and psychological themes.</div>
     </div>
 
     <div class="c101-block">
@@ -674,20 +616,20 @@
 
     <div class="c101-block">
       <div class="c101-h2">Using Chakra Awareness in Practice</div>
-      <div class="c101-body">You don't need to know which chakra is blocked to work intuitively. But if you notice a pattern â€” difficulty speaking up, chronic anxiety in the gut, feeling disconnected from your body â€” mapping that to a chakra gives you a more targeted way to choose stones and direct your attention. Use the Encyclopedia's chakra filter to find stones for any center.</div>
+      <div class="c101-body">You don't need to know which chakra is blocked to work intuitively. But if you notice a pattern — difficulty speaking up, chronic anxiety in the gut, feeling disconnected from your body — mapping that to a chakra gives you a more targeted way to choose stones and direct your attention. Use the Encyclopedia's chakra filter to find stones for any center.</div>
       <div class="c101-callout"><strong>Intermediate note:</strong> Stones don't only work on their primary chakra. A stone like Moldavite technically works on the Heart and Third Eye simultaneously. Let the overall energy profile of a stone guide you, not just its chakra assignment.</div>
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- ══════════════════════════════════════
        SECTION 4: ENERGETIC ROLES
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  ══════════════════════════════════════ -->
   <div class="c101-section" id="s101-roles">
     <div class="c101-h1">Energetic Roles Explained</div>
-    <div class="c101-sub">A decoder ring for the tags in this app â€” and how to use them intentionally</div>
+    <div class="c101-sub">A decoder ring for the tags in this app — and how to use them intentionally</div>
 
     <div class="c101-block">
-      <div class="c101-body">Every stone in this encyclopedia has an energetic role â€” a short label describing its primary quality in practice. These aren't about what a stone cures or guarantees. They describe the energetic character of the stone: what it tends to amplify, settle, open, or move. Two stones can share a role and still feel completely different in your hands.</div>
+      <div class="c101-body">Every stone in this encyclopedia has an energetic role — a short label describing its primary quality in practice. These aren't about what a stone cures or guarantees. They describe the energetic character of the stone: what it tends to amplify, settle, open, or move. Two stones can share a role and still feel completely different in your hands.</div>
       <div class="c101-callout"><strong>How to read them:</strong> "Calming / Communication / Gentle Expression" doesn't mean the stone does all three equally. It means those three qualities live in the same energetic signature. You'll feel which one is primary for you in a given moment.</div>
     </div>
 
@@ -696,47 +638,48 @@
       <div class="role-grid">
         <div class="role-card" onclick="jumpToTheme('Grounding')" title="View Grounding stones in encyclopedia"><div class="role-name">Grounding</div><div class="role-desc">Brings scattered or anxious energy back into the body. Creates safety, presence, and physical connection.</div><div class="role-eg">Hematite, Black Tourmaline, Red Jasper</div></div>
         <div class="role-card" onclick="jumpToTheme('Protection')" title="View Protection stones in encyclopedia"><div class="role-name">Protection</div><div class="role-desc">Creates energetic boundaries. Deflects or absorbs incoming energy that isn't yours. Essential for empaths.</div><div class="role-eg">Black Tourmaline, Labradorite, Obsidian</div></div>
-        <div class="role-card" onclick="jumpToTheme('Amplification')" title="View Amplification stones in encyclopedia"><div class="role-name">Amplification</div><div class="role-desc">Magnifies the energy of intentions, other stones, and your own field. Use deliberately â€” amplifies everything.</div><div class="role-eg">Clear Quartz, Selenite, Herkimer Diamond</div></div>
+        <div class="role-card" onclick="jumpToTheme('Amplification')" title="View Amplification stones in encyclopedia"><div class="role-name">Amplification</div><div class="role-desc">Magnifies the energy of intentions, other stones, and your own field. Use deliberately — amplifies everything.</div><div class="role-eg">Clear Quartz, Selenite, Herkimer Diamond</div></div>
         <div class="role-card" onclick="jumpToTheme('Heart Healing')" title="View Heart Healing stones in encyclopedia"><div class="role-name">Heart Healing</div><div class="role-desc">Opens, softens, and repairs the emotional heart. Grief, loss, self-love, compassion, and relationship wounds.</div><div class="role-eg">Rose Quartz, Rhodonite, Green Aventurine</div></div>
-        <div class="role-card" onclick="jumpToTheme('Calm & Peace')" title="View Calming stones in encyclopedia"><div class="role-name">Calming / Peace</div><div class="role-desc">Lowers the volume on anxiety and mental noise. Different from grounding â€” this is quieting, not anchoring.</div><div class="role-eg">Blue Lace Agate, Lepidolite, Celestite</div></div>
+        <div class="role-card" onclick="jumpToTheme('Calm & Peace')" title="View Calming stones in encyclopedia"><div class="role-name">Calming / Peace</div><div class="role-desc">Lowers the volume on anxiety and mental noise. Different from grounding — this is quieting, not anchoring.</div><div class="role-eg">Blue Lace Agate, Lepidolite, Celestite</div></div>
         <div class="role-card" onclick="jumpToTheme('Clarity & Focus')" title="View Clarity stones in encyclopedia"><div class="role-name">Clarity / Focus</div><div class="role-desc">Cuts through fog, indecision, and mental clutter. Supports concentration, decision-making, and seeing clearly.</div><div class="role-eg">Fluorite, Sodalite, Clear Calcite</div></div>
         <div class="role-card" onclick="jumpToTheme('Intuition')" title="View Intuition stones in encyclopedia"><div class="role-name">Intuition</div><div class="role-desc">Opens the third eye and subtle perception. Supports dreams, psychic awareness, and inner knowing.</div><div class="role-eg">Lapis Lazuli, Labradorite, Amethyst</div></div>
-        <div class="role-card" onclick="jumpToTheme('Transformation')" title="View Transformation stones in encyclopedia"><div class="role-name">Transformation</div><div class="role-desc">Facilitates deep change. Not gentle â€” these stones push you through thresholds. Work with them intentionally.</div><div class="role-eg">Moldavite, Malachite, Obsidian</div></div>
+        <div class="role-card" onclick="jumpToTheme('Transformation')" title="View Transformation stones in encyclopedia"><div class="role-name">Transformation</div><div class="role-desc">Facilitates deep change. Not gentle — these stones push you through thresholds. Work with them intentionally.</div><div class="role-eg">Moldavite, Malachite, Obsidian</div></div>
         <div class="role-card" onclick="jumpToTheme('Emotional Regulation')" title="View Emotional Regulation stones in encyclopedia"><div class="role-name">Emotional Regulation</div><div class="role-desc">Supports processing and stabilizing strong feelings. Helps you move through emotions without being swept away.</div><div class="role-eg">Lepidolite, Blue Lace Agate, Mangano Calcite</div></div>
         <div class="role-card" onclick="jumpToTheme('Vitality')" title="View Vitality stones in encyclopedia"><div class="role-name">Vitality / Energy</div><div class="role-desc">Increases physical energy, motivation, and life force. Activating rather than calming.</div><div class="role-eg">Carnelian, Red Jasper, Pyrite</div></div>
-        <div class="role-card" onclick="jumpToTheme('Spiritual Connection')" title="View Spiritual Connection stones in encyclopedia"><div class="role-name">Spiritual Connection</div><div class="role-desc">Bridges the personal and the transcendent. Opens awareness to something larger â€” however you define that.</div><div class="role-eg">Amethyst, Selenite, Celestite</div></div>
+        <div class="role-card" onclick="jumpToTheme('Spiritual Connection')" title="View Spiritual Connection stones in encyclopedia"><div class="role-name">Spiritual Connection</div><div class="role-desc">Bridges the personal and the transcendent. Opens awareness to something larger — however you define that.</div><div class="role-eg">Amethyst, Selenite, Celestite</div></div>
         <div class="role-card" onclick="jumpToTheme('Manifestation')" title="View Manifestation stones in encyclopedia"><div class="role-name">Manifestation</div><div class="role-desc">Supports bringing intentions into material form. Works best when paired with clarity about what you actually want.</div><div class="role-eg">Citrine, Pyrite, Rutilated Quartz</div></div>
       </div>
     </div>
+    
 
     <div class="c101-block">
       <div class="c101-h2">Building a Balanced Collection</div>
-      <div class="c101-body">A working collection isn't just "stones I love." At intermediate level, you start thinking about what the collection does as a whole. A useful check: do you have something in each major role category? Collections skew heavily toward calming and heart stones, which is natural â€” but if you never have protection or grounding stones, you may notice you feel scattered or depleted.</div>
-      <div class="c101-callout"><strong>The minimum viable working kit:</strong> One grounding stone. One protection stone. One heart stone. One clarity stone. One high-vibration or spiritual stone. Five stones, five roles â€” a complete energetic vocabulary.</div>
+      <div class="c101-body">A working collection isn't just "stones I love." At intermediate level, you start thinking about what the collection does as a whole. A useful check: do you have something in each major role category? Collections skew heavily toward calming and heart stones, which is natural — but if you never have protection or grounding stones, you may notice you feel scattered or depleted.</div>
+      <div class="c101-callout"><strong>The minimum viable working kit:</strong> One grounding stone. One protection stone. One heart stone. One clarity stone. One high-vibration or spiritual stone. Five stones, five roles — a complete energetic vocabulary.</div>
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- ══════════════════════════════════════
        SECTION 5: CRYSTAL FAMILIES
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  ══════════════════════════════════════ -->
   <div class="c101-section" id="s101-families">
     <div class="c101-h1">Crystal Families</div>
-    <div class="c101-sub">Why a jasper is not just a jasper â€” and why families matter</div>
+    <div class="c101-sub">Why a jasper is not just a jasper — and why families matter</div>
 
     <div class="c101-block">
-      <div class="c101-body">Crystal families are defined by mineral structure and chemistry, not appearance. Two stones that look nothing alike can share a family â€” and two stones with the same name can belong to entirely different ones. Understanding families helps you predict care requirements, energetic tendencies, and why certain stones work the way they do.</div>
+      <div class="c101-body">Crystal families are defined by mineral structure and chemistry, not appearance. Two stones that look nothing alike can share a family — and two stones with the same name can belong to entirely different ones. Understanding families helps you predict care requirements, energetic tendencies, and why certain stones work the way they do.</div>
     </div>
 
     <div class="c101-block">
       <div class="c101-h2">Why Families Share Energetic Tendencies</div>
-      <div class="c101-body">It's not coincidence that most Quartzes amplify, most Garnets energize, and most Calcites work with emotional flow. The mineral structure determines how a stone interacts with light, electricity, and subtle energy. Silicon dioxide (Quartz) is piezoelectric â€” it generates charge under pressure, which may be why so many Quartzes feel activating. Understanding the family gives you a head start on understanding any new stone within it.</div>
+      <div class="c101-body">It's not coincidence that most Quartzes amplify, most Garnets energize, and most Calcites work with emotional flow. The mineral structure determines how a stone interacts with light, electricity, and subtle energy. Silicon dioxide (Quartz) is piezoelectric — it generates charge under pressure, which may be why so many Quartzes feel activating. Understanding the family gives you a head start on understanding any new stone within it.</div>
       <div class="c101-callout"><strong>Practical implication:</strong> If you receive an unfamiliar stone and it's in the Quartz family, you already know it will likely be durable (7+ Mohs), work well with amplification, and respond well to moonlight cleansing. The family is a shortcut.</div>
     </div>
 
     <div class="c101-block">
       <div class="c101-h2">Browse Crystal Families</div>
       <div style="position:relative;margin-bottom:1rem">
-        <input type="text" id="fam-search-input" placeholder="Search familiesâ€¦" oninput="famSearch()"
+        <input type="text" id="fam-search-input" placeholder="Search families…" oninput="famSearch()"
           style="width:100%;padding:9px 16px;border:0.5px solid var(--border);border-radius:8px;background:var(--white);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none">
       </div>
       <div class="c101-nav" id="fam-tier-nav" style="margin-bottom:1.25rem"></div>
@@ -744,9 +687,9 @@
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- ══════════════════════════════════════
        SECTION 6: CHOOSING & CARE
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  ══════════════════════════════════════ -->
   <div class="c101-section" id="s101-care">
     <div class="c101-h1">Choosing & Care</div>
     <div class="c101-sub">How to pick the right stone, and how to keep it</div>
@@ -757,9 +700,9 @@
       <table class="care-table">
         <thead><tr><th>#</th><th>Method</th><th>When to use it</th></tr></thead>
         <tbody>
-          <tr><td><strong>1</strong></td><td><strong>Intuition first</strong> â€” which stone pulls your attention, feels right in your hand, or keeps catching your eye?</td><td>Always. This is your primary signal.</td></tr>
-          <tr><td><strong>2</strong></td><td><strong>Intention second</strong> â€” what do you actually need right now? Use the Choose by Intention tab to find stones by need.</td><td>When you have a clear goal but no strong pull</td></tr>
-          <tr><td><strong>3</strong></td><td><strong>Properties third</strong> â€” look up specific properties, chakras, or energetic roles to narrow down.</td><td>Research mode; building a targeted collection</td></tr>
+          <tr><td><strong>1</strong></td><td><strong>Intuition first</strong> — which stone pulls your attention, feels right in your hand, or keeps catching your eye?</td><td>Always. This is your primary signal.</td></tr>
+          <tr><td><strong>2</strong></td><td><strong>Intention second</strong> — what do you actually need right now? Use the Choose by Intention tab to find stones by need.</td><td>When you have a clear goal but no strong pull</td></tr>
+          <tr><td><strong>3</strong></td><td><strong>Properties third</strong> — look up specific properties, chakras, or energetic roles to narrow down.</td><td>Research mode; building a targeted collection</td></tr>
         </tbody>
       </table>
       <div class="c101-callout"><strong>At intermediate level, trust the pull over the book.</strong> If your gut says Black Tourmaline even though you "should" want Rose Quartz, your energy body often knows what it needs before your mind does.</div>
@@ -767,7 +710,7 @@
 
     <div class="c101-block">
       <div class="c101-h2">Building Your Collection Over Time</div>
-      <div class="c101-body">The collections that serve people best aren't the biggest â€” they're the most intentional. Some principles that hold up over time:</div>
+      <div class="c101-body">The collections that serve people best aren't the biggest — they're the most intentional. Some principles that hold up over time:</div>
       <div class="c101-body">
         <strong>Depth over breadth.</strong> Three Amethysts you've worked with deeply serve you better than thirty stones you've never connected with.<br><br>
         <strong>Fill the gaps deliberately.</strong> Check your collection against the major energetic role categories. If you have nothing for grounding or protection, you have a real gap.<br><br>
@@ -782,10 +725,10 @@
       <table class="care-table">
         <thead><tr><th>Hardness</th><th>Durability</th><th>Care notes</th><th>Examples</th></tr></thead>
         <tbody>
-          <tr><td>1â€“3</td><td><span class="badge-no">Fragile</span></td><td>Handle gently, no water, no salt, no ultrasonic cleaners, store separately</td><td>Talc, Selenite (2), Halite (2.5), Calcite (3)</td></tr>
-          <tr><td>3â€“5</td><td><span class="badge-warn">Moderate</span></td><td>Avoid prolonged water contact; can scratch easily; wrap for storage</td><td>Fluorite (4), Apatite (5), Kyanite (4.5â€“5)</td></tr>
-          <tr><td>5â€“6</td><td><span class="badge-warn">Average</span></td><td>Generally durable; some water sensitivity; check specific stone</td><td>Opal (5.5), Labradorite (6), Turquoise (5â€“6)</td></tr>
-          <tr><td>6â€“7</td><td><span class="badge-safe">Good</span></td><td>Most common range; handles everyday wear well</td><td>Moonstone (6), Feldspar (6â€“6.5), Pyrite (6â€“6.5)</td></tr>
+          <tr><td>1–3</td><td><span class="badge-no">Fragile</span></td><td>Handle gently, no water, no salt, no ultrasonic cleaners, store separately</td><td>Talc, Selenite (2), Halite (2.5), Calcite (3)</td></tr>
+          <tr><td>3–5</td><td><span class="badge-warn">Moderate</span></td><td>Avoid prolonged water contact; can scratch easily; wrap for storage</td><td>Fluorite (4), Apatite (5), Kyanite (4.5–5)</td></tr>
+          <tr><td>5–6</td><td><span class="badge-warn">Average</span></td><td>Generally durable; some water sensitivity; check specific stone</td><td>Opal (5.5), Labradorite (6), Turquoise (5–6)</td></tr>
+          <tr><td>6–7</td><td><span class="badge-safe">Good</span></td><td>Most common range; handles everyday wear well</td><td>Moonstone (6), Feldspar (6–6.5), Pyrite (6–6.5)</td></tr>
           <tr><td>7+</td><td><span class="badge-safe">Excellent</span></td><td>Highly durable; safe for water, most jewelry applications</td><td>Quartz (7), Topaz (8), Corundum (9), Diamond (10)</td></tr>
         </tbody>
       </table>
@@ -794,9 +737,9 @@
     <div class="c101-block">
       <div class="c101-h2">The Three Main Hazards</div>
       <div class="c101-body">Most crystal damage comes from three sources:</div>
-      <div class="c101-warn"><strong>Water</strong> â€” Dissolves salt-based stones (Halite), rusts iron-rich ones (Pyrite, Galena), and breaks down soft stones over time. See the full water-sensitive list in the Cleansing section.</div>
-      <div class="c101-warn"><strong>Sunlight</strong> â€” Fades color in UV-sensitive stones. Amethyst, Rose Quartz, Fluorite, and Celestite are the most common casualties. A sunny windowsill is a slow bleach.</div>
-      <div class="c101-warn"><strong>Dropping</strong> â€” Obvious but often ignored. Calcites, Selenite, and Fluorite have perfect cleavage â€” they split cleanly along crystal planes. One drop on a hard floor can split a piece. Store them padded.</div>
+      <div class="c101-warn"><strong>Water</strong> — Dissolves salt-based stones (Halite), rusts iron-rich ones (Pyrite, Galena), and breaks down soft stones over time. See the full water-sensitive list in the Cleansing section.</div>
+      <div class="c101-warn"><strong>Sunlight</strong> — Fades color in UV-sensitive stones. Amethyst, Rose Quartz, Fluorite, and Celestite are the most common casualties. A sunny windowsill is a slow bleach.</div>
+      <div class="c101-warn"><strong>Dropping</strong> — Obvious but often ignored. Calcites, Selenite, and Fluorite have perfect cleavage — they split cleanly along crystal planes. One drop on a hard floor can split a piece. Store them padded.</div>
     </div>
 
     <div class="c101-block">
@@ -824,11 +767,11 @@
   <!-- What is a grid -->
   <div class="grid-intro-block">
     <h3 class="grid-intro-title">What a grid actually does</h3>
-    <p class="grid-intro-body">A crystal grid is a geometric arrangement of stones set with a shared intention. The geometry matters â€” different shapes direct energy differently. A triangle focuses and points. A circle contains and protects. A star both sends and receives. The stones amplify each other's qualities because they're in relationship, not working in isolation.</p>
-    <p class="grid-intro-body">The most important element is not the geometry â€” it's the moment of activation. Before you place the final stone, hold the intention clearly. State it aloud or silently. The grid holds that frequency until you dismantle it.</p>
+    <p class="grid-intro-body">A crystal grid is a geometric arrangement of stones set with a shared intention. The geometry matters — different shapes direct energy differently. A triangle focuses and points. A circle contains and protects. A star both sends and receives. The stones amplify each other's qualities because they're in relationship, not working in isolation.</p>
+    <p class="grid-intro-body">The most important element is not the geometry — it's the moment of activation. Before you place the final stone, hold the intention clearly. State it aloud or silently. The grid holds that frequency until you dismantle it.</p>
     <div class="grid-tip-row">
       <div class="grid-tip"><span class="grid-tip-label">Activation</span>Place stones from outside in, ending at the center. State your intention, then touch each stone lightly with a clear quartz point to "connect" them.</div>
-      <div class="grid-tip"><span class="grid-tip-label">Duration</span>Most grids are set for a specific purpose and dismantled when it resolves â€” a week, a month, a season. Cleanse all stones afterward.</div>
+      <div class="grid-tip"><span class="grid-tip-label">Duration</span>Most grids are set for a specific purpose and dismantled when it resolves — a week, a month, a season. Cleanse all stones afterward.</div>
       <div class="grid-tip"><span class="grid-tip-label">Placement</span>Grids can sit on a cloth, a mirror, sacred geometry paper, or bare wood. The surface matters less than the intention.</div>
     </div>
   </div>
@@ -845,7 +788,7 @@
 <!-- Grid Detail Modal -->
 <div class="grid-modal-overlay" id="grid-modal-overlay" onclick="if(event.target===this)closeGridModal()">
   <div class="grid-modal" id="grid-modal">
-    <button class="grid-modal-close" onclick="closeGridModal()">âœ•</button>
+    <button class="grid-modal-close" onclick="closeGridModal()">✕</button>
     <div id="grid-modal-content"></div>
   </div>
 </div>
@@ -857,15 +800,15 @@
     <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
     <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
     <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
-    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas Â· Fort Worth</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
     <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
       <a href="tel:6826812062" style="color:var(--ink2);text-decoration:none">682-681-2062</a>
-      <span style="color:var(--ink3);margin:0 0.5rem">Â·</span>
+      <span style="color:var(--ink3);margin:0 0.5rem">·</span>
       <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
     </div>
   </div>
   <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
-    Â© 2026 Still Point {technodelic} Studio
+    © 2026 Still Point {technodelic} Studio
   </div>
 </footer>
 </div>
@@ -883,7 +826,7 @@
 
 <!-- DETAIL DRAWER -->
 <div class="photo-lightbox" id="photo-lightbox" onclick="closePhotoLightbox()">
-  <button class="photo-lightbox-close" onclick="event.stopPropagation();closePhotoLightbox()">âœ•</button>
+  <button class="photo-lightbox-close" onclick="event.stopPropagation();closePhotoLightbox()">✕</button>
   <button class="lightbox-nav prev" id="photo-lightbox-prev" onclick="event.stopPropagation();photoLightboxNav(-1)" aria-label="Previous enlarged photo">&#8249;</button>
   <img id="photo-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
   <div class="photo-lightbox-label" id="photo-lightbox-label"></div>
@@ -892,7 +835,7 @@
 <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="detail-drawer">
   <div class="drawer-inner">
-    <button class="drawer-close" onclick="closeDrawer()">âœ•</button>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
     <div class="drawer-header">
       <div class="drawer-header-text">
         <div class="d-id" id="d-id"></div>
@@ -909,7 +852,7 @@
     <div class="sec-label" style="margin-top:1rem">Geology & formation</div>
     <div class="geo-text" id="d-geo"></div>
     <div id="d-tox-block" style="display:none;margin-top:0.6rem;padding:8px 12px;background:#fff8f0;border:0.5px solid #d4824a;border-radius:6px;font-size:12px;color:#7a3a10;line-height:1.5">
-      <span style="font-weight:600">âš  Handling note:</span> <span id="d-tox"></span>
+      <span style="font-weight:600">⚠ Handling note:</span> <span id="d-tox"></span>
     </div>
     <div class="divider"></div>
     <div class="sec-label">Properties</div>
@@ -948,8 +891,8 @@
         <button class="drawer-pill" id="drawer-pill-wish" onclick="drawerWishlistAction()"></button>
       </div>
       <div id="drawer-view-links" style="display:none;gap:12px;font-size:11px;color:var(--ink3)">
-        <a id="drawer-view-coll" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View collection â†’</a>
-        <a id="drawer-view-wish" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View wishlist â†’</a>
+        <a id="drawer-view-coll" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View collection →</a>
+        <a id="drawer-view-wish" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View wishlist →</a>
       </div>
     </div>
   </div>
@@ -958,7 +901,7 @@
 <!-- ADD PIECE FORM -->
 <div class="form-overlay" id="add-form-overlay">
   <div class="form-box">
-    <button class="popup-close" onclick="closeAddForm()">âœ•</button>
+    <button class="popup-close" onclick="closeAddForm()">✕</button>
     <div class="form-title">Add a piece</div>
     <div class="form-sub">Each entry is a specific physical piece in your collection.</div>
 
@@ -966,7 +909,7 @@
       <div class="fg">
         <label>Crystal / Stone *</label>
         <div class="combobox-wrap">
-          <input type="text" class="combobox-input" id="f-crystal-input" placeholder="Type to search (e.g. amethyst)â€¦" autocomplete="off"
+          <input type="text" class="combobox-input" id="f-crystal-input" placeholder="Type to search (e.g. amethyst)…" autocomplete="off"
             oninput="comboFilter('','f-crystal-input','f-crystal-drop','f-crystal-val')"
             onfocus="if(this.value.length>0){comboOpen('f-crystal-drop');comboRender('f-crystal-drop','f-crystal-val',this.value);}"
             onkeydown="comboKey(event,'f-crystal-drop','f-crystal-input','f-crystal-val')">
@@ -983,14 +926,14 @@
     </div>
     <div class="combo-section" id="combo-section" style="display:none">
       <div class="sec-label" style="margin-bottom:8px">Additional crystals (up to 3 more)</div>
-      <div id="combo-rows"><div class="combo-row"><select class="csel"><option value="">Select crystalâ€¦</option></select><button class="rm-combo" onclick="rmCombo(this)">Ã—</button></div></div>
+      <div id="combo-rows"><div class="combo-row"><select class="csel"><option value="">Select crystal…</option></select><button class="rm-combo" onclick="rmCombo(this)">×</button></div></div>
       <button class="btn btn-sm" style="margin-top:8px" onclick="addComboRow()">+ Add</button>
     </div>
 
     <div class="form-divider"></div>
 
     <div class="form-row">
-      <div class="fg"><label>Form / Shape <button class="prop-help" onclick="openPopup('form')">?</button></label><select id="f-form"><option value="">Selectâ€¦</option>
+      <div class="fg"><label>Form / Shape <button class="prop-help" onclick="openPopup('form')">?</button></label><select id="f-form"><option value="">Select…</option>
 <option>Tumbled</option>
 <option>Palm stone</option>
 <option>Raw / Rough</option>
@@ -1010,12 +953,12 @@
 <option>Skull</option>
 <option>Carved</option>
 <option>Other</option></select></div>
-      <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Selectâ€¦</option>
-<option value="XS">XS â€” under 1" / 2.5cm</option>
-<option value="S">S â€” 1â€“2" / 2.5â€“5cm</option>
-<option value="M">M â€” 2â€“4" / 5â€“10cm</option>
-<option value="L">L â€” 4â€“8" / 10â€“20cm</option>
-<option value="XL">XL â€” over 8" / 20cm+</option></select></div>
+      <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Select…</option>
+<option value="XS">XS — under 1" / 2.5cm</option>
+<option value="S">S — 1–2" / 2.5–5cm</option>
+<option value="M">M — 2–4" / 5–10cm</option>
+<option value="L">L — 4–8" / 10–20cm</option>
+<option value="XL">XL — over 8" / 20cm+</option></select></div>
     </div>
 
     <div class="form-row">
@@ -1045,14 +988,14 @@
     <div class="sec-label" style="margin-bottom:10px">Location & Status</div>
 
     <div class="form-row full">
-      <div class="fg"><label>Location</label><input type="text" id="f-loc-custom" placeholder="e.g. Bedroom, office shelf, travel pouchâ€¦"></div>
+      <div class="fg"><label>Location</label><input type="text" id="f-loc-custom" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
     </div>
 
     <div class="form-divider"></div>
     <div class="sec-label" style="margin-bottom:10px">Notes & Photos</div>
 
     <div class="form-row full">
-      <div class="fg"><label>Personal notes</label><textarea id="f-notes" placeholder="Stories, intentions, what drew you to this pieceâ€¦"></textarea></div>
+      <div class="fg"><label>Personal notes</label><textarea id="f-notes" placeholder="Stories, intentions, what drew you to this piece…"></textarea></div>
     </div>
     <div class="fg" style="margin-bottom:10px">
       <label>Photos</label>
@@ -1073,16 +1016,16 @@
 <!-- COLLECTION PIECE DETAIL -->
 <div class="popup-overlay" id="coll-detail-overlay" onclick="if(event.target===this)closeCollDetail()">
   <div class="popup-box" style="width:min(640px,100%)">
-    <button class="popup-close" onclick="closeCollDetail()">âœ•</button>
+    <button class="popup-close" onclick="closeCollDetail()">✕</button>
     <div id="coll-detail-content"></div>
   </div>
 </div>
 
 <!-- PROPERTY HELP POPUPS -->
 <div class="popup-overlay" id="popup-element" onclick="if(event.target===this)closePopup('element')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('element')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('element')">✕</button>
   <div class="popup-title">Metaphysical element</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">The classical elemental correspondence of a stone â€” a broad energetic category rooted in tradition, not chemistry.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">The classical elemental correspondence of a stone — a broad energetic category rooted in tradition, not chemistry.</p>
   <table class="ptable"><tr><th>Element</th><th>Qualities</th><th>Examples</th></tr>
   <tr><td>Fire</td><td>Energy, passion, will, transformation, activation</td><td>Carnelian, Pyrite, Sunstone</td></tr>
   <tr><td>Water</td><td>Emotion, intuition, flow, healing, receptivity</td><td>Aquamarine, Moonstone, Blue Calcite</td></tr>
@@ -1092,9 +1035,9 @@
 </div>
 
 <div class="popup-overlay" id="popup-er" onclick="if(event.target===this)closePopup('er')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('er')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('er')">✕</button>
   <div class="popup-title">Energetic role</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A short label for a stone's primary quality in practice. Not a claim â€” a tendency. Separate multiple roles with " / ". Keep it to 2â€“3 max.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A short label for a stone's primary quality in practice. Not a claim — a tendency. Separate multiple roles with " / ". Keep it to 2–3 max.</p>
   <table class="ptable"><tr><th>Role</th><th>What it means</th></tr>
   <tr><td>Grounding</td><td>Brings scattered energy back to the body and present moment</td></tr>
   <tr><td>Protection</td><td>Creates energetic boundaries, deflects what isn't yours</td></tr>
@@ -1103,35 +1046,35 @@
   <tr><td>Calming / Peace</td><td>Quiets anxiety and mental noise without sedating</td></tr>
   <tr><td>Clarity / Focus</td><td>Cuts through confusion, supports clear thinking</td></tr>
   <tr><td>Intuition</td><td>Opens subtle perception and inner knowing</td></tr>
-  <tr><td>Transformation</td><td>Facilitates deep change â€” works quickly and intensely</td></tr>
+  <tr><td>Transformation</td><td>Facilitates deep change — works quickly and intensely</td></tr>
   <tr><td>Vitality / Energy</td><td>Increases life force, motivation, and physical energy</td></tr>
   <tr><td>Manifestation</td><td>Supports bringing intentions into material reality</td></tr></table>
   <p class="popup-note">Format example: "Grounding / Protection" or "Heart Healing / Calming"</p></div>
 </div>
 
 <div class="popup-overlay" id="popup-uw" onclick="if(event.target===this)closePopup('uw')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('uw')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('uw')">✕</button>
   <div class="popup-title">Use When</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">One or two sentences describing when a user might reach for this stone. Written from the user's perspective â€” honest, specific, grounded in the stone's actual character.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">One or two sentences describing when a user might reach for this stone. Written from the user's perspective — honest, specific, grounded in the stone's actual character.</p>
   <table class="ptable"><tr><th></th><th>Example</th></tr>
-  <tr><td>âœ“ Good</td><td>"Use when you feel scattered or overwhelmed and need to steady yourself."</td></tr>
-  <tr><td>âœ“ Good</td><td>"Use when anxiety is running the show and you need your nervous system to slow down."</td></tr>
-  <tr><td>âœ— Avoid</td><td>Medical claims ("heals disease," "cures anxiety")</td></tr>
-  <tr><td>âœ— Avoid</td><td>Vague overpromising ("works for everything," "raises vibration")</td></tr></table></div>
+  <tr><td>✓ Good</td><td>"Use when you feel scattered or overwhelmed and need to steady yourself."</td></tr>
+  <tr><td>✓ Good</td><td>"Use when anxiety is running the show and you need your nervous system to slow down."</td></tr>
+  <tr><td>✗ Avoid</td><td>Medical claims ("heals disease," "cures anxiety")</td></tr>
+  <tr><td>✗ Avoid</td><td>Vague overpromising ("works for everything," "raises vibration")</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-aff" onclick="if(event.target===this)closePopup('aff')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('aff')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('aff')">✕</button>
   <div class="popup-title">Intention / Affirmation</div>
   <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A short first-person statement capturing the stone's essential energy. Shown in print reports and the stone detail view.</p>
   <table class="ptable"><tr><th></th><th>Example</th></tr>
-  <tr><td>âœ“ Good</td><td>"I am stable. I am held. I trust the structure beneath me."</td></tr>
-  <tr><td>âœ“ Good</td><td>"I am protected. Nothing that is not mine can enter here."</td></tr>
+  <tr><td>✓ Good</td><td>"I am stable. I am held. I trust the structure beneath me."</td></tr>
+  <tr><td>✓ Good</td><td>"I am protected. Nothing that is not mine can enter here."</td></tr>
   <tr><td>Format</td><td>Start with "I am" or similar. One to three short sentences.</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-chakra" onclick="if(event.target===this)closePopup('chakra')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('chakra')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('chakra')">✕</button>
   <div class="popup-title">Chakras</div>
   <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">Energy centers in the subtle body. A stone may resonate with one or several chakras. Enter multiple separated by commas.</p>
   <table class="ptable"><tr><th>Chakra</th><th>Location</th><th>Governs</th></tr>
@@ -1143,31 +1086,31 @@
   <tr><td>Third Eye</td><td>Between eyebrows</td><td>Intuition, perception, inner vision</td></tr>
   <tr><td>Crown</td><td>Top of head</td><td>Spiritual connection, consciousness</td></tr>
   <tr><td>Earth Star</td><td>Below the feet</td><td>Deep grounding, ancestral connection</td></tr>
-  <tr><td>All</td><td>â€”</td><td>Works with all centers or is non-specific</td></tr></table></div>
+  <tr><td>All</td><td>—</td><td>Works with all centers or is non-specific</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-form" onclick="if(event.target===this)closePopup('form')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('form')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('form')">✕</button>
   <div class="popup-title">Form / Shape</div>
   <table class="ptable"><tr><th>Form</th><th>Description</th></tr>
   <tr><td>Tumbled</td><td>Machine-polished until smooth and rounded</td></tr>
   <tr><td>Palm Stone</td><td>Flat, smooth, shaped to fit the palm</td></tr>
   <tr><td>Raw / Rough</td><td>Unpolished, natural state as found</td></tr>
   <tr><td>Freeform</td><td>Carved into an organic, flowing shape</td></tr>
-  <tr><td>Tower</td><td>Six-sided column with flat base â€” projects energy upward</td></tr>
-  <tr><td>Point</td><td>Natural or cut termination â€” directs energy through the apex</td></tr>
-  <tr><td>Sphere</td><td>Polished ball â€” emits energy equally in all directions</td></tr>
-  <tr><td>Egg</td><td>Oval with tapered top â€” grounding, new beginnings</td></tr>
-  <tr><td>Cluster</td><td>Multiple points on a shared base â€” radiates in all directions</td></tr>
+  <tr><td>Tower</td><td>Six-sided column with flat base — projects energy upward</td></tr>
+  <tr><td>Point</td><td>Natural or cut termination — directs energy through the apex</td></tr>
+  <tr><td>Sphere</td><td>Polished ball — emits energy equally in all directions</td></tr>
+  <tr><td>Egg</td><td>Oval with tapered top — grounding, new beginnings</td></tr>
+  <tr><td>Cluster</td><td>Multiple points on a shared base — radiates in all directions</td></tr>
   <tr><td>Geode</td><td>Hollow rock with crystalline interior</td></tr>
-  <tr><td>Heart</td><td>Carved heart shape â€” heart-centered work</td></tr>
-  <tr><td>Wand</td><td>Elongated cylinder â€” directs and channels energy</td></tr>
+  <tr><td>Heart</td><td>Carved heart shape — heart-centered work</td></tr>
+  <tr><td>Wand</td><td>Elongated cylinder — directs and channels energy</td></tr>
   <tr><td>Slice</td><td>Flat cross-section revealing the stone's interior</td></tr>
-  <tr><td>Mushroom</td><td>Carved mushroom shape â€” display and altar pieces</td></tr></table></div>
+  <tr><td>Mushroom</td><td>Carved mushroom shape — display and altar pieces</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-condition" onclick="if(event.target===this)closePopup('condition')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('condition')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('condition')">✕</button>
   <div class="popup-title">Condition</div>
   <table class="ptable"><tr><th>Grade</th><th>Meaning</th></tr>
   <tr><td>Excellent</td><td>No visible chips, cracks, or wear. Like new or collector quality.</td></tr>
@@ -1177,119 +1120,119 @@
 </div>
 
 <div class="popup-overlay" id="popup-treatment" onclick="if(event.target===this)closePopup('treatment')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('treatment')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('treatment')">✕</button>
   <div class="popup-title">Treatment</div>
   <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">Whether and how a stone has been altered beyond cutting and polishing.</p>
   <table class="ptable"><tr><th>Treatment</th><th>What it means</th></tr>
   <tr><td>Natural</td><td>No treatments. Color and form are exactly as found in nature.</td></tr>
-  <tr><td>Heat Treated</td><td>Heated to enhance or change color. Very common â€” Amethyst â†’ Citrine, Aquamarine.</td></tr>
+  <tr><td>Heat Treated</td><td>Heated to enhance or change color. Very common — Amethyst → Citrine, Aquamarine.</td></tr>
   <tr><td>Irradiated</td><td>Radiation used to alter color. Used in some blue Topaz, Tourmaline.</td></tr>
   <tr><td>Dyed</td><td>Color added artificially. Common in Agate; some Howlite is sold as Turquoise.</td></tr>
-  <tr><td>Coated (Aura etc.)</td><td>Metal bonded to surface at high heat â€” creates the rainbow Aura Quartzes.</td></tr>
+  <tr><td>Coated (Aura etc.)</td><td>Metal bonded to surface at high heat — creates the rainbow Aura Quartzes.</td></tr>
   <tr><td>Stabilized</td><td>Resin added to strengthen porous stones. Standard for Turquoise.</td></tr>
   <tr><td>Unknown</td><td>Treatment status not confirmed.</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-mohs" onclick="if(event.target===this)closePopup('mohs')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('mohs')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('mohs')">✕</button>
   <div class="popup-title">Mohs hardness</div>
   <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">The Mohs scale rates a mineral's scratch resistance from 1 (softest) to 10 (hardest). It tells you how to care for a stone and whether it can safely go in water.</p>
   <table class="ptable"><tr><th>Rating</th><th>What it means</th><th>Examples</th></tr>
-  <tr><td>1â€“2</td><td>Very soft â€” scratched by a fingernail. Keep dry.</td><td>Selenite, Amber, Talc</td></tr>
-  <tr><td>3â€“4</td><td>Soft â€” scratched by a copper coin. Avoid water.</td><td>Calcite, Fluorite, Azurite</td></tr>
-  <tr><td>5â€“6</td><td>Medium â€” scratched by a knife blade.</td><td>Apatite, Labradorite, Opal</td></tr>
-  <tr><td>6.5â€“7</td><td>Hard â€” not scratched by everyday objects.</td><td>Quartz, Jasper, Garnet</td></tr>
-  <tr><td>7.5â€“9</td><td>Very hard â€” durable for most uses.</td><td>Beryl, Sapphire, Ruby</td></tr>
+  <tr><td>1–2</td><td>Very soft — scratched by a fingernail. Keep dry.</td><td>Selenite, Amber, Talc</td></tr>
+  <tr><td>3–4</td><td>Soft — scratched by a copper coin. Avoid water.</td><td>Calcite, Fluorite, Azurite</td></tr>
+  <tr><td>5–6</td><td>Medium — scratched by a knife blade.</td><td>Apatite, Labradorite, Opal</td></tr>
+  <tr><td>6.5–7</td><td>Hard — not scratched by everyday objects.</td><td>Quartz, Jasper, Garnet</td></tr>
+  <tr><td>7.5–9</td><td>Very hard — durable for most uses.</td><td>Beryl, Sapphire, Ruby</td></tr>
   <tr><td>10</td><td>Hardest natural material.</td><td>Diamond</td></tr></table>
   <p class="popup-note">General water safety: stones above 6 Mohs are usually safe for brief water contact. Below 5, keep dry. Always check for toxic minerals first (e.g. Malachite, Cinnabar).</p></div>
 </div>
 
 <div class="popup-overlay" id="popup-system" onclick="if(event.target===this)closePopup('system')">
-  <div class="popup-box" style="max-width:600px"><button class="popup-close" onclick="closePopup('system')">âœ•</button>
+  <div class="popup-box" style="max-width:600px"><button class="popup-close" onclick="closePopup('system')">✕</button>
   <div class="popup-title">Crystal systems</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1.25rem">A crystal system describes the geometric arrangement of a mineral's internal structure â€” how its atoms are ordered. This affects its shape, cleavage, and energetically, how it channels or holds energy.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1.25rem">A crystal system describes the geometric arrangement of a mineral's internal structure — how its atoms are ordered. This affects its shape, cleavage, and energetically, how it channels or holds energy.</p>
   <div style="display:flex;flex-direction:column;gap:0">
     <!-- Cubic -->
-    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="15,38 45,38 45,18 15,18" /><polygon points="15,18 25,10 55,10 45,18" /><polygon points="45,18 55,10 55,30 45,38" /><line x1="15" y1="18" x2="25" y2="10"/><line x1="15" y1="38" x2="25" y2="30"/><line x1="25" y1="10" x2="25" y2="30"/><line x1="25" y1="30" x2="55" y2="30"/><line x1="25" y1="30" x2="45" y2="38" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Cubic</div><div class="csys-geo">Equal axes â€” cubes and octahedra</div><div class="csys-energy">Balanced, complete, whole</div></div></div>
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="15,38 45,38 45,18 15,18" /><polygon points="15,18 25,10 55,10 45,18" /><polygon points="45,18 55,10 55,30 45,38" /><line x1="15" y1="18" x2="25" y2="10"/><line x1="15" y1="38" x2="25" y2="30"/><line x1="25" y1="10" x2="25" y2="30"/><line x1="25" y1="30" x2="55" y2="30"/><line x1="25" y1="30" x2="45" y2="38" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Cubic</div><div class="csys-geo">Equal axes — cubes and octahedra</div><div class="csys-energy">Balanced, complete, whole</div></div></div>
     <!-- Trigonal -->
-    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="30,8 52,44 8,44"/><line x1="30" y1="8" x2="30" y2="52"/><line x1="52" y1="44" x2="30" y2="52"/><line x1="8" y1="44" x2="30" y2="52"/><line x1="30" y1="8" x2="52" y2="20" stroke-dasharray="2,2" opacity="0.5"/><line x1="52" y1="20" x2="52" y2="44" stroke-dasharray="2,2" opacity="0.5"/><line x1="52" y1="20" x2="30" y2="52" stroke-dasharray="2,2" opacity="0.5"/></g></svg></div><div class="csys-info"><div class="csys-name">Trigonal</div><div class="csys-geo">Three-fold symmetry â€” rhombohedral</div><div class="csys-energy">Amplifying, directional</div></div></div>
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="30,8 52,44 8,44"/><line x1="30" y1="8" x2="30" y2="52"/><line x1="52" y1="44" x2="30" y2="52"/><line x1="8" y1="44" x2="30" y2="52"/><line x1="30" y1="8" x2="52" y2="20" stroke-dasharray="2,2" opacity="0.5"/><line x1="52" y1="20" x2="52" y2="44" stroke-dasharray="2,2" opacity="0.5"/><line x1="52" y1="20" x2="30" y2="52" stroke-dasharray="2,2" opacity="0.5"/></g></svg></div><div class="csys-info"><div class="csys-name">Trigonal</div><div class="csys-geo">Three-fold symmetry — rhombohedral</div><div class="csys-energy">Amplifying, directional</div></div></div>
     <!-- Hexagonal -->
-    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="30,6 50,17 50,39 30,50 10,39 10,17"/><polygon points="30,18 42,25 42,39 30,46 18,39 18,25"/><line x1="30" y1="6" x2="30" y2="18"/><line x1="50" y1="17" x2="42" y2="25"/><line x1="50" y1="39" x2="42" y2="39"/><line x1="30" y1="50" x2="30" y2="46"/><line x1="10" y1="39" x2="18" y2="39"/><line x1="10" y1="17" x2="18" y2="25"/></g></svg></div><div class="csys-info"><div class="csys-name">Hexagonal</div><div class="csys-geo">Six-fold symmetry â€” columnar prisms</div><div class="csys-energy">Expansive, radiating</div></div></div>
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="30,6 50,17 50,39 30,50 10,39 10,17"/><polygon points="30,18 42,25 42,39 30,46 18,39 18,25"/><line x1="30" y1="6" x2="30" y2="18"/><line x1="50" y1="17" x2="42" y2="25"/><line x1="50" y1="39" x2="42" y2="39"/><line x1="30" y1="50" x2="30" y2="46"/><line x1="10" y1="39" x2="18" y2="39"/><line x1="10" y1="17" x2="18" y2="25"/></g></svg></div><div class="csys-info"><div class="csys-name">Hexagonal</div><div class="csys-geo">Six-fold symmetry — columnar prisms</div><div class="csys-energy">Expansive, radiating</div></div></div>
     <!-- Orthorhombic -->
     <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="10,42 38,42 38,22 10,22"/><polygon points="10,22 20,12 48,12 38,22"/><polygon points="38,22 48,12 48,32 38,42"/><line x1="10" y1="22" x2="20" y2="12"/><line x1="10" y1="42" x2="20" y2="32"/><line x1="20" y1="12" x2="20" y2="32"/><line x1="20" y1="32" x2="48" y2="32"/><line x1="20" y1="32" x2="38" y2="42" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Orthorhombic</div><div class="csys-geo">Three unequal axes at right angles</div><div class="csys-energy">Grounding, structural</div></div></div>
     <!-- Monoclinic -->
-    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="8,44 36,44 36,24 8,24"/><polygon points="8,24 22,10 50,10 36,24"/><polygon points="36,24 50,10 50,30 36,44"/><line x1="8" y1="24" x2="22" y2="10"/><line x1="8" y1="44" x2="18" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="34" x2="46" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="34" x2="36" y2="44" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="10" x2="18" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="22" y1="10" x2="18" y2="10" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Monoclinic</div><div class="csys-geo">One tilted axis â€” prismatic shapes</div><div class="csys-energy">Cleansing, flowing</div></div></div>
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="8,44 36,44 36,24 8,24"/><polygon points="8,24 22,10 50,10 36,24"/><polygon points="36,24 50,10 50,30 36,44"/><line x1="8" y1="24" x2="22" y2="10"/><line x1="8" y1="44" x2="18" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="34" x2="46" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="34" x2="36" y2="44" stroke-dasharray="2,2" opacity="0.4"/><line x1="18" y1="10" x2="18" y2="34" stroke-dasharray="2,2" opacity="0.4"/><line x1="22" y1="10" x2="18" y2="10" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Monoclinic</div><div class="csys-geo">One tilted axis — prismatic shapes</div><div class="csys-energy">Cleansing, flowing</div></div></div>
     <!-- Triclinic -->
-    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="6,46 32,46 40,28 14,28"/><polygon points="6,46 12,14 38,8 40,28"/><line x1="6" y1="46" x2="12" y2="14"/><line x1="32" y1="46" x2="38" y2="8"/><line x1="40" y1="28" x2="38" y2="8"/><line x1="14" y1="28" x2="12" y2="14"/><line x1="12" y1="14" x2="38" y2="8"/><line x1="14" y1="28" x2="6" y2="46" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Triclinic</div><div class="csys-geo">All axes tilted â€” lowest symmetry</div><div class="csys-energy">Complex, multi-directional</div></div></div>
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><polygon points="6,46 32,46 40,28 14,28"/><polygon points="6,46 12,14 38,8 40,28"/><line x1="6" y1="46" x2="12" y2="14"/><line x1="32" y1="46" x2="38" y2="8"/><line x1="40" y1="28" x2="38" y2="8"/><line x1="14" y1="28" x2="12" y2="14"/><line x1="12" y1="14" x2="38" y2="8"/><line x1="14" y1="28" x2="6" y2="46" stroke-dasharray="2,2" opacity="0.4"/></g></svg></div><div class="csys-info"><div class="csys-name">Triclinic</div><div class="csys-geo">All axes tilted — lowest symmetry</div><div class="csys-energy">Complex, multi-directional</div></div></div>
     <!-- Amorphous -->
-    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><path d="M30,8 C42,6 54,14 56,26 C58,38 50,52 38,54 C26,56 12,50 8,38 C4,26 10,12 20,9 C24,7 27,8.5 30,8 Z"/><circle cx="22" cy="24" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="38" cy="20" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="32" cy="36" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="18" cy="38" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="42" cy="40" r="1.5" fill="#c8a96e" opacity="0.5"/></g></svg></div><div class="csys-info"><div class="csys-name">Amorphous</div><div class="csys-geo">No crystal structure â€” glass-like</div><div class="csys-energy">Absorbing, protective</div></div></div>
+    <div class="csys-row"><div class="csys-diagram"><svg viewBox="0 0 60 60" width="48" height="48"><g stroke="#c8a96e" stroke-width="1.2" fill="none" opacity="0.9"><path d="M30,8 C42,6 54,14 56,26 C58,38 50,52 38,54 C26,56 12,50 8,38 C4,26 10,12 20,9 C24,7 27,8.5 30,8 Z"/><circle cx="22" cy="24" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="38" cy="20" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="32" cy="36" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="18" cy="38" r="1.5" fill="#c8a96e" opacity="0.5"/><circle cx="42" cy="40" r="1.5" fill="#c8a96e" opacity="0.5"/></g></svg></div><div class="csys-info"><div class="csys-name">Amorphous</div><div class="csys-geo">No crystal structure — glass-like</div><div class="csys-energy">Absorbing, protective</div></div></div>
   </div></div>
 </div>
 
 <div class="popup-overlay" id="popup-formation" onclick="if(event.target===this)closePopup('formation')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('formation')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('formation')">✕</button>
   <div class="popup-title">Formation environments</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">How a crystal formed tells you something about its nature â€” the pressures, temperatures, and time it took to become what it is. Many practitioners believe this shapes a stone's energy.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">How a crystal formed tells you something about its nature — the pressures, temperatures, and time it took to become what it is. Many practitioners believe this shapes a stone's energy.</p>
   <table class="ptable"><tr><th>Environment</th><th>How it forms</th><th>Energetic quality</th></tr>
   <tr><td>Igneous</td><td>From cooling magma or lava</td><td>Fiery, transformative, primal</td></tr>
   <tr><td>Sedimentary</td><td>From compressed layers over long time</td><td>Patient, layered, ancestral</td></tr>
   <tr><td>Metamorphic</td><td>Under intense heat and pressure</td><td>Resilient, alchemical, powerful</td></tr>
   <tr><td>Hydrothermal</td><td>From hot mineral-rich water through rock</td><td>Flowing, clarifying, communicative</td></tr>
   <tr><td>Secondary</td><td>From weathering of other minerals</td><td>Transformational, surface-level clarity</td></tr>
-  <tr><td>Extraterrestrial</td><td>From space â€” meteorites, impact glass</td><td>Cosmic, expansive, grounding paradox</td></tr>
-  <tr><td>Biological</td><td>From living organisms â€” trees, shells</td><td>Life-force, preservation, memory</td></tr></table></div>
+  <tr><td>Extraterrestrial</td><td>From space — meteorites, impact glass</td><td>Cosmic, expansive, grounding paradox</td></tr>
+  <tr><td>Biological</td><td>From living organisms — trees, shells</td><td>Life-force, preservation, memory</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-transparency" onclick="if(event.target===this)closePopup('transparency')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('transparency')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('transparency')">✕</button>
   <div class="popup-title">Transparency</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">How much light passes through a stone. This is partly aesthetic, partly structural â€” and many practitioners associate clarity with higher-vibration or more focused energy.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">How much light passes through a stone. This is partly aesthetic, partly structural — and many practitioners associate clarity with higher-vibration or more focused energy.</p>
   <table class="ptable"><tr><th>Level</th><th>Meaning</th></tr>
-  <tr><td>Transparent</td><td>Fully see-through â€” light passes freely (e.g. clear Quartz, Topaz)</td></tr>
+  <tr><td>Transparent</td><td>Fully see-through — light passes freely (e.g. clear Quartz, Topaz)</td></tr>
   <tr><td>Translucent</td><td>Light passes through but image is diffused (e.g. Rose Quartz, Selenite)</td></tr>
-  <tr><td>Translucent to Opaque</td><td>Varies by specimen â€” some pieces are more open than others</td></tr>
+  <tr><td>Translucent to Opaque</td><td>Varies by specimen — some pieces are more open than others</td></tr>
   <tr><td>Opaque</td><td>No light passes through (e.g. Hematite, Malachite, Jasper)</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-colorcause" onclick="if(event.target===this)closePopup('colorcause')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('colorcause')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('colorcause')">✕</button>
   <div class="popup-title">What causes color?</div>
-  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A stone's color comes from trace minerals, structural effects, or how it formed. This is why color matters beyond aesthetics â€” it reflects the actual chemistry of what you're holding.</p>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">A stone's color comes from trace minerals, structural effects, or how it formed. This is why color matters beyond aesthetics — it reflects the actual chemistry of what you're holding.</p>
   <table class="ptable"><tr><th>Cause</th><th>What it means</th></tr>
-  <tr><td>Iron</td><td>Most common color agent â€” produces reds, yellows, greens, and blacks</td></tr>
+  <tr><td>Iron</td><td>Most common color agent — produces reds, yellows, greens, and blacks</td></tr>
   <tr><td>Copper</td><td>Produces vivid blues, blue-greens, and greens</td></tr>
   <tr><td>Manganese</td><td>Produces pinks, mauves, and some blacks</td></tr>
   <tr><td>Chromium</td><td>Produces intense emerald greens and some reds</td></tr>
   <tr><td>Titanium</td><td>Produces blues and is often responsible for sapphire color</td></tr>
-  <tr><td>Irradiation</td><td>Natural radiation alters crystal structure â€” creates purples, smoky tones</td></tr>
+  <tr><td>Irradiation</td><td>Natural radiation alters crystal structure — creates purples, smoky tones</td></tr>
   <tr><td>Layered structure</td><td>Thin internal layers create iridescence (labradorite, moonstone)</td></tr>
   <tr><td>Surface coating</td><td>Applied metal bonding creates Aura quartzes</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-material" onclick="if(event.target===this)closePopup('material')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('material')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('material')">✕</button>
   <div class="popup-title">Material types</div>
   <table class="ptable"><tr><th>Type</th><th>Meaning</th></tr>
   <tr><td>Mineral</td><td>A single natural crystalline species with defined chemistry</td></tr>
-  <tr><td>Mineraloid</td><td>Natural but not crystalline â€” glass-like structure (Obsidian, Opal)</td></tr>
+  <tr><td>Mineraloid</td><td>Natural but not crystalline — glass-like structure (Obsidian, Opal)</td></tr>
   <tr><td>Aggregate</td><td>A natural mix of minerals with no single species identity (Lapis, Unakite)</td></tr>
-  <tr><td>Organic</td><td>Biological origin â€” from living things (Amber, Coral, Pearl)</td></tr>
+  <tr><td>Organic</td><td>Biological origin — from living things (Amber, Coral, Pearl)</td></tr>
   <tr><td>Fossil</td><td>Preserved ancient biological material (Ammonite, Petrified Wood)</td></tr>
   <tr><td>Synthetic</td><td>Man-made material (Goldstone, Opalite)</td></tr></table></div>
 </div>
 
 <div class="popup-overlay" id="popup-filter-fam" onclick="if(event.target===this)closePopup('filter-fam')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('filter-fam')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('filter-fam')">✕</button>
   <div class="popup-title">Mineral family</div>
-  <p class="popup-note" style="margin-bottom:0.75rem">Stones are grouped by their mineral chemistry â€” what they're made of at a molecular level. Most families share physical traits like hardness range, crystal structure, and care requirements.</p>
+  <p class="popup-note" style="margin-bottom:0.75rem">Stones are grouped by their mineral chemistry — what they're made of at a molecular level. Most families share physical traits like hardness range, crystal structure, and care requirements.</p>
   <p class="popup-note">A few examples: all Quartzes (Amethyst, Rose Quartz, Citrine) share the same silicon dioxide base. All Feldspars (Moonstone, Labradorite, Amazonite) share a framework silicate structure. Family is the most reliable way to predict how a stone behaves physically.</p>
   </div>
 </div>
 
 <div class="popup-overlay" id="popup-filter-tier" onclick="if(event.target===this)closePopup('filter-tier')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('filter-tier')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('filter-tier')">✕</button>
   <div class="popup-title">Collector tiers</div>
-  <p class="popup-note" style="margin-bottom:0.75rem">Tiers reflect practical collecting experience â€” not mineralogical rarity. They describe how easy a stone is to find and who typically seeks it out.</p>
+  <p class="popup-note" style="margin-bottom:0.75rem">Tiers reflect practical collecting experience — not mineralogical rarity. They describe how easy a stone is to find and who typically seeks it out.</p>
   <table class="ptable">
     <tr><th>Tier</th><th>What it means</th></tr>
     <tr><td>Essentials</td><td>The first stones most people buy. Found in almost any shop, including mall and gift stores. Foundational to crystal practice.</td></tr>
@@ -1301,27 +1244,27 @@
 </div>
 
 <div class="popup-overlay" id="popup-size" onclick="if(event.target===this)closePopup('size')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('size')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('size')">✕</button>
   <div class="popup-title">Size guide</div>
   <table class="ptable"><tr><th>Size</th><th>Measurement</th><th>Examples</th></tr>
   <tr><td>XS</td><td>Under 2cm / 1 in</td><td>Tiny tumbles, chips, small points</td></tr>
-  <tr><td>S</td><td>2â€“5cm / 1â€“2 in</td><td>Standard tumbles, small palm stones</td></tr>
-  <tr><td>M</td><td>5â€“10cm / 2â€“4 in</td><td>Large palm stones, small clusters, medium towers</td></tr>
-  <tr><td>L</td><td>10â€“20cm / 4â€“8 in</td><td>Large clusters, statement towers, big spheres</td></tr>
+  <tr><td>S</td><td>2–5cm / 1–2 in</td><td>Standard tumbles, small palm stones</td></tr>
+  <tr><td>M</td><td>5–10cm / 2–4 in</td><td>Large palm stones, small clusters, medium towers</td></tr>
+  <tr><td>L</td><td>10–20cm / 4–8 in</td><td>Large clusters, statement towers, big spheres</td></tr>
   <tr><td>XL</td><td>Over 20cm / 8+ in</td><td>Statement clusters, large geodes, altar pieces</td></tr></table>
   <p class="popup-note">Measure the longest dimension. When in doubt, size up.</p></div>
 </div>
 
 <div class="popup-overlay" id="popup-instructions" onclick="if(event.target===this)closePopup('instructions')">
-  <div class="popup-box"><button class="popup-close" onclick="closePopup('instructions')">âœ•</button>
+  <div class="popup-box"><button class="popup-close" onclick="closePopup('instructions')">✕</button>
   <div class="popup-title">How to use Still Point Lapidary</div>
-  <div class="inst-sec"><h3>Encyclopedia</h3><p>Your reference library for over 363 crystals and minerals. Search by name or use the filters â€” Family, Theme, Color, Chakra, Formation, and more. Click any stone to see its full profile: geology, energetic properties, chakra associations, affirmation, and reference photos. A gold dot on a card means you own that stone; an outlined ring means it's on your wishlist.</p></div>
+  <div class="inst-sec"><h3>Encyclopedia</h3><p>Your reference library for over 363 crystals and minerals. Search by name or use the filters — Family, Theme, Color, Chakra, Formation, and more. Click any stone to see its full profile: geology, energetic properties, chakra associations, affirmation, and reference photos. A gold dot on a card means you own that stone; an outlined ring means it's on your wishlist.</p></div>
   <div class="inst-sec"><h3>Choose by Intention</h3><p>Not sure what you need? Start here. Type a feeling or intention in the AI search, or choose from the intention tiles below. Each result shows you why that stone fits your moment.</p></div>
-  <div class="inst-sec"><h3>My Collection</h3><p>Your personal catalog of physical pieces. Sign in to save your collection to the cloud â€” accessible from any device. Add pieces individually or in batches. Each entry tracks the stone type, form, location, notes, and photos.</p></div>
-  <div class="inst-sec"><h3>Wishlist</h3><p>Save stones you want to remember or acquire. Works alongside your collection â€” sign in to keep it synced across devices.</p></div>
+  <div class="inst-sec"><h3>My Collection</h3><p>Your personal catalog of physical pieces. Sign in to save your collection to the cloud — accessible from any device. Add pieces individually or in batches. Each entry tracks the stone type, form, location, notes, and photos.</p></div>
+  <div class="inst-sec"><h3>Wishlist</h3><p>Save stones you want to remember or acquire. Works alongside your collection — sign in to keep it synced across devices.</p></div>
   <div class="inst-sec"><h3>Identify</h3><p>Describe a stone's color, transparency, and properties to get a shortlist of likely matches from the encyclopedia.</p></div>
   <div class="inst-sec"><h3>Crystals 101</h3><p>New to crystals? Start here for foundational knowledge on how stones work, what the properties mean, and how to use them.</p></div>
-  <div class="inst-sec"><h3>Your data</h3><p>Sign in with a free account and your collection and wishlist are saved securely to the cloud â€” no backups needed, no data lost when you clear your browser.</p></div>
+  <div class="inst-sec"><h3>Your data</h3><p>Sign in with a free account and your collection and wishlist are saved securely to the cloud — no backups needed, no data lost when you clear your browser.</p></div>
   <div class="inst-sec"><h3>Don't see your stone?</h3><p>Use the <a href="#" onclick="closePopup('instructions');openEntryRequestForm();return false;" style="color:var(--accent2);text-decoration:underline">Request Entry</a> button at the top of the page to suggest a stone for the encyclopedia. We review every request.</p></div>
   </div>
 </div>
@@ -1329,7 +1272,7 @@
 
 <div class="popup-overlay" id="report-options-overlay" onclick="if(event.target===this)closeReportOptions()">
   <div class="popup-box" style="max-width:480px;max-height:90vh;overflow-y:auto">
-    <button class="popup-close" onclick="closeReportOptions()">âœ•</button>
+    <button class="popup-close" onclick="closeReportOptions()">✕</button>
     <div class="popup-title" id="report-options-title">Collection Report Options</div>
     <div style="margin-bottom:1.5rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Layout</div>
@@ -1384,13 +1327,13 @@
       <button class="btn" onclick="closeReportOptions()">Cancel</button>
       <button class="btn btn-accent" style="flex:1;justify-content:center" id="report-generate-btn" onclick="generateReport()">Generate report</button>
     </div>
-    <div id="report-preparing" style="display:none;font-size:12px;color:var(--ink3);text-align:center;margin-top:0.75rem">Preparing reportâ€¦</div>
+    <div id="report-preparing" style="display:none;font-size:12px;color:var(--ink3);text-align:center;margin-top:0.75rem">Preparing report…</div>
   </div>
 </div>
 
 <div class="popup-overlay" id="popup-manage" onclick="if(event.target===this)closePopup('manage')">
   <div class="popup-box" style="max-width:400px">
-    <button class="popup-close" onclick="closePopup('manage')">âœ•</button>
+    <button class="popup-close" onclick="closePopup('manage')">✕</button>
     <div class="popup-title" style="margin-bottom:0.6rem">Manage</div>
     <div style="margin-bottom:0.6rem">
       <div class="sec-label" style="margin-bottom:0.3rem">Add new</div>
@@ -1403,22 +1346,22 @@
     <div style="margin-bottom:0.6rem">
       <div class="sec-label" style="margin-bottom:0.3rem">Print</div>
       <div style="display:flex;flex-direction:column;gap:4px">
-        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openReportOptions('collection');closePopup('manage')">âŽ™ Print collection report</button>
-        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openReportOptions('wishlist');closePopup('manage')">âŽ™ Print wishlist report</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openReportOptions('collection');closePopup('manage')">⎙ Print collection report</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="openReportOptions('wishlist');closePopup('manage')">⎙ Print wishlist report</button>
       </div>
     </div>
     <div style="margin-bottom:0.6rem">
       <div class="sec-label" style="margin-bottom:0.3rem">Admin</div>
       <div style="display:flex;flex-direction:column;gap:4px">
-        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openPhotoPlan();closePopup('manage')">ðŸ“· Photo planning</button>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openPhotoPlan();closePopup('manage')">📷 Photo planning</button>
       </div>
     </div>
     <div style="margin-bottom:0.6rem">
       <div class="sec-label" style="margin-bottom:0.3rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:4px">
-        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="exportEncyclopedia();closePopup('manage')">â†“ Encyclopedia (CSV)</button>
-        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportCollectionCSV();closePopup('manage')">â†“ Collection (CSV)</button>
-        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportWishlistCSV();closePopup('manage')">â†“ Wishlist (CSV)</button>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Encyclopedia (CSV)</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportCollectionCSV();closePopup('manage')">↓ Collection (CSV)</button>
+        <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportWishlistCSV();closePopup('manage')">↓ Wishlist (CSV)</button>
       </div>
     </div>
     <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.6rem 0.75rem;background:var(--stone2);border-radius:6px">
@@ -1430,7 +1373,7 @@
 <!-- PHOTO PLANNING PANEL -->
 <div class="popup-overlay" id="popup-photo-plan" onclick="if(event.target===this)closePopup('photo-plan')">
   <div class="popup-box" style="max-width:720px;width:95vw;max-height:88vh;display:flex;flex-direction:column;overflow-y:hidden">
-    <button class="popup-close" onclick="closePopup('photo-plan')">âœ•</button>
+    <button class="popup-close" onclick="closePopup('photo-plan')">✕</button>
     <div class="popup-title" style="margin-bottom:0.4rem">Photo Planning</div>
     <div id="pp-summary" style="font-size:12px;color:var(--ink3);margin-bottom:0.75rem"></div>
     <div id="pp-filters" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.75rem"></div>
@@ -1447,9 +1390,9 @@
 <!-- BATCH ADD FORM -->
 <div class="form-overlay" id="batch-form-overlay">
   <div class="form-box" style="max-width:680px">
-    <button class="popup-close" onclick="closeBatchForm()">âœ•</button>
+    <button class="popup-close" onclick="closeBatchForm()">✕</button>
     <div class="form-title">Batch add pieces</div>
-    <div class="form-sub">Upload multiple photos â€” each becomes its own entry. Fill in shared details once.</div>
+    <div class="form-sub">Upload multiple photos — each becomes its own entry. Fill in shared details once.</div>
     <div style="background:var(--stone2);border-radius:8px;padding:1rem 1.1rem;margin-bottom:1.25rem">
       <div class="sec-label" style="margin-bottom:0.75rem">Apply to all entries</div>
       <div class="form-row full">
@@ -1457,10 +1400,10 @@
       </div>
       <div class="form-row">
         <div class="fg"><label>Date acquired</label><input type="date" id="b-acquired"></div>
-        <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Bedroom, office shelf, travel pouchâ€¦"></div>
+        <div class="fg"><label>Location</label><input type="text" id="b-loc" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
       </div>
       <div class="form-row full">
-        <div class="fg"><label>Form / Shape</label><select id="b-form"><option value="">Selectâ€¦</option>
+        <div class="fg"><label>Form / Shape</label><select id="b-form"><option value="">Select…</option>
 <option>Tumbled</option>
 <option>Palm stone</option>
 <option>Raw / Rough</option>
@@ -1483,7 +1426,7 @@
       </div>
     </div>
     <div class="fg" style="margin-bottom:1rem">
-      <label>Upload photos â€” one per stone</label>
+      <label>Upload photos — one per stone</label>
       <div class="photo-upload-area" onclick="document.getElementById('b-photos').click()">
         <p>Tap to select multiple photos at once</p><span>Each photo will create one entry</span>
         <input type="file" id="b-photos" accept="image/*" multiple style="display:none" onchange="loadBatchPhotos(this)">
@@ -1500,14 +1443,14 @@
 <!-- ENTRY REQUEST FORM -->
 <div class="form-overlay" id="entry-request-form-overlay">
   <div class="form-box">
-    <button class="popup-close" onclick="closeEntryRequestForm()">âœ•</button>
+    <button class="popup-close" onclick="closeEntryRequestForm()">✕</button>
     <div class="form-title">Request encyclopedia entry</div>
     <div class="form-sub">Suggest a stone or variety to add. We'll review it and add it to the encyclopedia.</div>
     <div class="form-row full">
       <div class="fg"><label>Stone / Variety name *</label><input type="text" id="req-stone-name" placeholder="e.g. Que Sera Stone"></div>
     </div>
     <div class="form-row full">
-      <div class="fg"><label>Notes</label><textarea id="req-stone-notes" placeholder="Alternate names, why it should be added, source links, or photo notesâ€¦"></textarea></div>
+      <div class="fg"><label>Notes</label><textarea id="req-stone-notes" placeholder="Alternate names, why it should be added, source links, or photo notes…"></textarea></div>
     </div>
     <div class="form-footer">
       <button class="btn" onclick="closeEntryRequestForm()">Cancel</button>
@@ -1519,13 +1462,13 @@
 <!-- ADD ENCYCLOPEDIA ENTRY FORM -->
 <div class="form-overlay" id="add-enc-form-overlay">
   <div class="form-box">
-    <button class="popup-close" onclick="closeAddEncForm()">âœ•</button>
+    <button class="popup-close" onclick="closeAddEncForm()">✕</button>
     <div class="form-title">Add encyclopedia entry</div>
     <div class="form-sub">Name, family, material type, crystal system, formation, color, geological notes, energetic role, and Use When are required.</div>
     <div class="form-row">
       <div class="fg">
         <label style="display:flex;align-items:center;gap:8px">Name *
-          <button class="btn btn-sm" id="enc-autofill-btn" onclick="encAutoFill()" style="font-size:10px;padding:2px 10px;margin-left:auto;background:#f0e8d8;border-color:#c8a96e;color:#7a5c2a">âœ¦ Auto-fill with AI</button>
+          <button class="btn btn-sm" id="enc-autofill-btn" onclick="encAutoFill()" style="font-size:10px;padding:2px 10px;margin-left:auto;background:#f0e8d8;border-color:#c8a96e;color:#7a5c2a">✦ Auto-fill with AI</button>
         </label>
         <input type="text" id="enc-name" placeholder="e.g. Sugilite" oninput="encCheckDupe(this.value)">
         <div id="enc-autofill-status" style="font-size:12px;color:var(--ink3);margin-top:4px;display:none"></div>
@@ -1538,12 +1481,12 @@
       <div class="fg"><label>Species</label><input type="text" id="enc-sp" placeholder="e.g. Sugilite"></div>
     </div>
     <div class="form-row">
-      <div class="fg"><label>Material type <button class="prop-help" onclick="openPopup('material')">?</button></label><select id="enc-mt"><option value="">Selectâ€¦</option><option>Mineral</option><option>Mineraloid</option><option>Aggregate</option><option>Organic</option><option>Fossil</option><option>Synthetic</option></select></div>
-      <div class="fg"><label>Crystal system <button class="prop-help" onclick="openPopup('system')">?</button></label><select id="enc-sy"><option value="">Selectâ€¦</option><option>Cubic</option><option>Trigonal</option><option>Hexagonal</option><option>Orthorhombic</option><option>Monoclinic</option><option>Triclinic</option><option>Amorphous</option><option>Polymineralic</option></select></div>
+      <div class="fg"><label>Material type <button class="prop-help" onclick="openPopup('material')">?</button></label><select id="enc-mt"><option value="">Select…</option><option>Mineral</option><option>Mineraloid</option><option>Aggregate</option><option>Organic</option><option>Fossil</option><option>Synthetic</option></select></div>
+      <div class="fg"><label>Crystal system <button class="prop-help" onclick="openPopup('system')">?</button></label><select id="enc-sy"><option value="">Select…</option><option>Cubic</option><option>Trigonal</option><option>Hexagonal</option><option>Orthorhombic</option><option>Monoclinic</option><option>Triclinic</option><option>Amorphous</option><option>Polymineralic</option></select></div>
     </div>
     <div class="form-row">
-      <div class="fg"><label>Formation <button class="prop-help" onclick="openPopup('formation')">?</button></label><select id="enc-fo"><option value="">Selectâ€¦</option><option>Igneous</option><option>Sedimentary</option><option>Metamorphic</option><option>Hydrothermal</option><option>Secondary</option><option>Extraterrestrial</option><option>Biological</option></select></div>
-      <div class="fg"><label>Transparency <button class="prop-help" onclick="openPopup('transparency')">?</button></label><select id="enc-tr"><option value="">Selectâ€¦</option><option>Transparent</option><option>Transparent to Translucent</option><option>Translucent</option><option>Translucent to Opaque</option><option>Opaque</option></select></div>
+      <div class="fg"><label>Formation <button class="prop-help" onclick="openPopup('formation')">?</button></label><select id="enc-fo"><option value="">Select…</option><option>Igneous</option><option>Sedimentary</option><option>Metamorphic</option><option>Hydrothermal</option><option>Secondary</option><option>Extraterrestrial</option><option>Biological</option></select></div>
+      <div class="fg"><label>Transparency <button class="prop-help" onclick="openPopup('transparency')">?</button></label><select id="enc-tr"><option value="">Select…</option><option>Transparent</option><option>Transparent to Translucent</option><option>Translucent</option><option>Translucent to Opaque</option><option>Opaque</option></select></div>
     </div>
     <div class="form-row">
       <div class="fg"><label>Color</label><input type="text" id="enc-c" placeholder="e.g. Deep purple to violet"></div>
@@ -1553,9 +1496,9 @@
       <div class="fg"><label>Mohs min <button class="prop-help" onclick="openPopup('mohs')">?</button></label><input type="text" id="enc-mmin" placeholder="e.g. 6"></div>
       <div class="fg"><label>Mohs max</label><input type="text" id="enc-mmax" placeholder="e.g. 6.5"></div>
     </div>
-    <div class="form-row full"><div class="fg"><label>Geological notes</label><textarea id="enc-g" placeholder="How it forms, what makes it distinctive, handling notesâ€¦"></textarea></div></div>
+    <div class="form-row full"><div class="fg"><label>Geological notes</label><textarea id="enc-g" placeholder="How it forms, what makes it distinctive, handling notes…"></textarea></div></div>
     <div class="form-row full"><div class="fg"><label>Energetic role <button class="prop-help" onclick="openPopup('er')">?</button></label><input type="text" id="enc-er" placeholder="e.g. Protection / Heart Healing"></div></div>
-    <div class="form-row full"><div class="fg"><label>Use When <button class="prop-help" onclick="openPopup('uw')">?</button></label><textarea id="enc-uw" placeholder="Use when youâ€¦" style="min-height:80px"></textarea></div></div>
+    <div class="form-row full"><div class="fg"><label>Use When <button class="prop-help" onclick="openPopup('uw')">?</button></label><textarea id="enc-uw" placeholder="Use when you…" style="min-height:80px"></textarea></div></div>
     <div class="form-row">
       <div class="fg"><label>Chakras <button class="prop-help" onclick="openPopup('chakra')">?</button></label><input type="text" id="enc-chakra" placeholder="e.g. Heart, Crown"></div>
       <div class="fg"><label>Element <button class="prop-help" onclick="openPopup('element')">?</button></label><input type="text" id="enc-element" placeholder="e.g. Fire, Water"></div>
@@ -1579,16 +1522,16 @@
   </div>
 </div>
 <div class="enc-lightbox" id="enc-lightbox" onclick="closeEncLightbox()">
-  <button class="enc-lightbox-close" onclick="closeEncLightbox()">âœ•</button>
+  <button class="enc-lightbox-close" onclick="closeEncLightbox()">✕</button>
   <img class="enc-lightbox-img" id="enc-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
   <div class="photo-lightbox-label" id="enc-lightbox-label" style="display:none"></div>
 </div>
 <div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
   <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
-    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">âœ•</button>
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
     <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
     <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
-    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link â€” no password needed.</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
     <div style="margin-bottom:1rem">
       <label style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
       <input type="email" id="auth-email-input" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
@@ -1607,4 +1550,3 @@
 
 </body>
 </html>
-
