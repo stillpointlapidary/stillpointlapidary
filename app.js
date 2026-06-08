@@ -530,6 +530,22 @@ function collectionStoneMatchesFormation(c,val){
   if(val==='all')return true;
   return c?.fo===val;
 }
+function passesCollStoneFilters(c){
+  return !!c &&
+    (collFilters.cfam==='all'||c.fam===collFilters.cfam||c.sp===collFilters.cfam)&&
+    collectionStoneMatchesTheme(c,collFilters.ctheme)&&
+    collectionStoneMatchesColor(c,collFilters.ccolor)&&
+    collectionStoneMatchesChakra(c,collFilters.cchakra)&&
+    collectionStoneMatchesMohs(c,collFilters.cmohs)&&
+    collectionStoneMatchesFormation(c,collFilters.cformation)&&
+    collectionStoneMatchesMaterial(c,collFilters.cmaterial);
+}
+function passesCollPieceFilters(p){
+  const loc=p.shelf||p.locCustom||'';
+  return (collFilters.form==='all'||p.form===collFilters.form)&&
+    (collFilters.size==='all'||p.size===collFilters.size)&&
+    (collFilters.cshelf==='all'||loc.includes(collFilters.cshelf));
+}
 function buildCollPanels(){
   const forms=['Tumble','Palm Stone','Worry Stone','Heart','Sphere','Egg','Tower','Pyramid','Cube','Freeform','Flame','Bowl / Dish','Raw / Natural','Specimen','Point','Cluster','Geode','Druzy','Slice / Slab','Moon','Star','Mushroom','Wand','Carving','Other'];
   const sizes=['XS','S','M','L','XL'];
@@ -598,7 +614,7 @@ function updateBtn(btnId,valId,val){
   const btn=document.getElementById(btnId);
   const valEl=document.getElementById(valId);
   if(btn)btn.classList.toggle('has-val',val!=='all');
-  if(valEl)valEl.textContent=val==='all'?'':'· '+val;
+  if(valEl)valEl.textContent=val==='all'?'':String(val);
 }
 
 function setFilter(key,val,btn){
@@ -1243,22 +1259,8 @@ function drawerWishlistAction(){
     if(pill){pill.textContent='✓ Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
   }
 }
-function toggleOwned(){
-  if(!currentCrystal)return;
-  owned[currentCrystal.i]=!owned[currentCrystal.i];
-  if(!owned[currentCrystal.i])delete owned[currentCrystal.i];
-  localStorage.setItem('lap_owned',JSON.stringify(owned));
-  updateDrawerStatus(currentCrystal.i);
-  encRender();
-}
-function toggleWish(){
-  if(!currentCrystal)return;
-  wish[currentCrystal.i]=!wish[currentCrystal.i];
-  if(!wish[currentCrystal.i])delete wish[currentCrystal.i];
-  localStorage.setItem('lap_wish',JSON.stringify(wish));
-  updateDrawerStatus(currentCrystal.i);
-  encRender();
-}
+// toggleOwned and toggleWish are defined as window.toggleOwned / window.toggleWish
+// near the Supabase write layer (async, Supabase-backed).
 function addFromDetail(){
   const c=currentCrystal;
   addPieceReturnContext={type:'encyclopedia',stoneId:c?.i||null};
@@ -1438,7 +1440,6 @@ function renderMoodStones(moodIdx,subFilter){
   const selectedView=document.getElementById('mood-selected-view');
   if(selectedView)selectedView.style.display='block';
   if(grid)grid.style.display='grid';
-  const m=MOOD_DATA[moodIdx];
   if(countEl)countEl.textContent=matches.length+' stones'+(subFilter?' · '+subFilter:'');
   if(!grid)return;
   if(!matches.length){grid.innerHTML='<div class="empty-state">No stones match this combination.</div>';return;}
@@ -1448,17 +1449,11 @@ function renderMoodStones(moodIdx,subFilter){
     if(moodGrid){
       gridBanner.style.display='block';
       gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',getTabButton('101'));setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
-    } else {
-      gridBanner.style.display='none';
-    }
+    }else{gridBanner.style.display='none';}
   }
-grid.innerHTML=matches.map(c=>{
-    const isOwned=!!owned[c.i],isWish=!!wish[c.i];
-    const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
-    const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
-    const imgZone=encPhotos?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`:noPhotoZoneHtml(c);
-    const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
-    return`<div class="crystal-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+  grid.innerHTML=matches.map(function(c){
+    const raw=encCardHtml(c);
+    return raw.replace(/onclick="openDetail\(/,'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
   }).join('');
 }
 
@@ -1695,37 +1690,65 @@ function renderCollection(){
   const wrap=document.getElementById('coll-wrap');
   if(!wrap)return;
 
-  // WISHLIST view
-  if(collQuickFilter==='wish'){
-    const wishIds=Object.keys(wish);
-    const wishCrystals=CRYSTALS.filter(c=>wishIds.includes(c.i));
-    if(!wishCrystals.length){
-      wrap.innerHTML=_emptyWishHtml();
-      return;
-    }
-    wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>{
-      return`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
+  const _tierLabels={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
+  if(collQuickFilter==='tier-owned'||collQuickFilter==='tier-wish'){
+    const isTierWish=collQuickFilter==='tier-wish';
+    const tNum=_collTierNum;
+    const tLabel=_tierLabels[tNum]||('Tier '+tNum);
+    const backBtn=`<div style="margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:10px"><button onclick="setCollQuickFilter('all')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All</button><span style="color:var(--ink3)">·</span><span>${tLabel} ${isTierWish?'Wishlist':'Owned'}</span></div>`;
+    if(isTierWish){
+      const wishIds=Object.keys(wish);
+      const items=CRYSTALS.filter(c=>wishIds.includes(c.i)&&(Number(c.tier)===tNum));
+      if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No wishlist items in '+tLabel+'.</div>';return;}
+      wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
         ${wishlistCardPhotoHtml(c)}
-        <div class="coll-card-name">${c.n}</div>
-        <div class="coll-card-meta">${[c.er1,c.er2,c.er3].filter(Boolean).join(' · ')}</div>
-      </div>`;
-    }).join('')+'</div>';
+        <div class="coll-card-name">${escapeAttr(c.n)}</div>
+        <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
+      </div>`).join('')+'</div>';
+    } else {
+      const items=displayCollection.filter(p=>{const c=CRYSTALS.find(x=>x.i===p.crystalId);return c&&Number(c.tier)===tNum&&passesCollPieceFilters(p);});
+      if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No owned pieces in '+tLabel+'.</div>';return;}
+      wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(p=>{
+        const c=CRYSTALS.find(x=>x.i===p.crystalId);
+        const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
+        const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
+        const loc=locParts.slice(0,2).join(' · ');
+        const ri=collection.indexOf(p);
+        const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
+        return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
+      }).join('')+'</div>';
+    }
     return;
   }
 
+  if(collQuickFilter==='wish'){
+    const wishIds=Object.keys(wish);
+    let wishCrystals=CRYSTALS.filter(c=>wishIds.includes(c.i));
+    wishCrystals=wishCrystals.filter(c=>passesCollStoneFilters(c));
+    if(!wishCrystals.length){
+      wrap.innerHTML=wishIds.length?'<div class="empty-coll">No wishlist items match your filters.</div>':_emptyWishHtml();
+      return;
+    }
+    wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
+      ${wishlistCardPhotoHtml(c)}
+      <div class="coll-card-name">${escapeAttr(c.n)}</div>
+      <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
+    </div>`).join('')+'</div>';
+    return;
+  }
 
-  // FAMILY GROUP view
   if(collQuickFilter==='families'){
     const groups={};
     displayCollection.forEach(p=>{
       const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      if(!c||!passesCollStoneFilters(c)||!passesCollPieceFilters(p))return;
       const fam=c?.fam||c?.sp||'Other';
       if(!groups[fam])groups[fam]=[];
       groups[fam].push({piece:p,crystal:c});
     });
     const fams=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
     if(!fams.length){
-      wrap.innerHTML=_emptyCollHtml();
+      wrap.innerHTML=displayCollection.length?'<div class="empty-coll">No families match your filters.</div>':_emptyCollHtml();
       return;
     }
     collFamilyPhotoSources={};
@@ -1745,7 +1768,6 @@ function renderCollection(){
     return;
   }
 
-  // FAMILY DETAIL view
   if(collQuickFilter==='__family__'){
     const fam=collActiveFamilyName;
     const items=displayCollection.filter(p=>{
@@ -1753,7 +1775,7 @@ function renderCollection(){
       return (c?.fam===fam||c?.sp===fam)&&passesCollPieceFilters(p);
     });
     if(!items.length){
-      wrap.innerHTML=`<div class="empty-coll">No pieces found in ${fam}.</div>`;
+      wrap.innerHTML=`<div class="empty-coll">No pieces found in ${escapeAttr(fam)}.</div>`;
       return;
     }
     wrap.innerHTML=
@@ -1777,22 +1799,10 @@ function renderCollection(){
     return;
   }
 
-  // COLLECTION view (filtered)
   const items=displayCollection.filter(p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    const loc=p.shelf||p.locCustom||'';
-    return(collFilters.cfam==='all'||(c&&(c.fam===collFilters.cfam||c.sp===collFilters.cfam)))&&
-           collectionStoneMatchesTheme(c,collFilters.ctheme)&&
-           collectionStoneMatchesColor(c,collFilters.ccolor)&&
-           collectionStoneMatchesChakra(c,collFilters.cchakra)&&
-           collectionStoneMatchesMohs(c,collFilters.cmohs)&&
-           collectionStoneMatchesFormation(c,collFilters.cformation)&&
-           collectionStoneMatchesMaterial(c,collFilters.cmaterial)&&
-           (collFilters.form==='all'||p.form===collFilters.form)&&
-           (collFilters.size==='all'||p.size===collFilters.size)&&
-           (collFilters.cshelf==='all'||loc.includes(collFilters.cshelf));
+    return passesCollStoneFilters(c)&&passesCollPieceFilters(p);
   });
-
   if(!items.length){
     wrap.innerHTML=displayCollection.length?'<div class="empty-coll">No pieces match your filters.</div>':_emptyCollHtml();
     return;
@@ -1804,7 +1814,7 @@ function renderCollection(){
     const loc=locParts.slice(0,2).join(' · ');
     const ri=collection.indexOf(p);
     const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-    return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${name}</div><div class="coll-card-meta">${c?.n||''} ${p.size?'· '+p.size:''}</div><div class="coll-card-loc">${loc}</div></div>`;
+    return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
   }).join('')+'</div>';
 }
 
@@ -2712,9 +2722,14 @@ function switchTabByName(name){
 }
 
 function scrollToTabTop(name){
-  const tab=document.getElementById('tab-'+name);
-  if(!tab)return;
-  const y=tab.getBoundingClientRect().top+window.scrollY-120;
+  let el;
+  if(name==='101'){
+    el=document.getElementById('c101-nav')||document.getElementById('tab-101');
+  }else{
+    el=document.getElementById('tab-'+name)||document.querySelector('main.content');
+  }
+  if(!el)return;
+  const y=el.getBoundingClientRect().top+window.scrollY-112;
   try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
 }
 
@@ -3463,9 +3478,7 @@ function ensure101BackTopButtons(){
   });
 }
 function scrollTo101Top(){
-  const nav=document.getElementById('c101-nav');
-  const y=nav?nav.getBoundingClientRect().top+window.scrollY-96:0;
-  try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
+  try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
 }
 function show101(sec,btn){
   ensure101BackTopButtons();
@@ -3513,9 +3526,9 @@ function activateEncyclopediaFilter(key,val){
   setTimeout(scrollToEncyclopediaResults,120);
 }
 function scrollToEncyclopediaResults(){
-  const el=document.getElementById('crystal-grid')||document.getElementById('enc-count')||document.getElementById('enc-search');
+  const el=document.getElementById('enc-search')||document.getElementById('enc-count')||document.getElementById('crystal-grid');
   if(!el)return;
-  const y=el.getBoundingClientRect().top+window.scrollY-145;
+  const y=el.getBoundingClientRect().top+window.scrollY-130;
   try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
 }
 function jumpToFilteredEncyclopedia(key,val){
@@ -5091,9 +5104,10 @@ async function _authInit() {
   _renderAuth(_currentUser);
   if (_currentUser) { loadSupabaseState(); }
   _supa.auth.onAuthStateChange(function(_e, session) {
+    const wasLoggedOut = !_currentUser;
     _currentUser = session?.user ?? null;
     _renderAuth(_currentUser);
-    if (_currentUser) { loadSupabaseState(); }
+    if (_currentUser && wasLoggedOut) { loadSupabaseState(); }
     if (_currentUser && window._pendingColl) {
       window._pendingColl = false;
       var t = document.querySelectorAll('.nav-tab')[4];
@@ -5478,17 +5492,6 @@ window.toggleWish = async function() {
   encRender();
 };
 
-_supa.auth.onAuthStateChange(function(_e, session) {
-  const wasLoggedOut = !_currentUser;
-  _currentUser = session?.user ?? null;
-  _renderAuth(_currentUser);
-  if (_currentUser && wasLoggedOut) { loadSupabaseState(); }
-  if (_currentUser && window._pendingColl) {
-    window._pendingColl = false;
-    var t = document.querySelectorAll('.nav-tab')[4];
-    if (t) switchTab('collection', t);
-  }
-});
 _authInit();
 
 /* ── Nav / Click Hardening (from lines 6737–6878) ── */
@@ -5502,43 +5505,6 @@ _authInit();
   }
   function encSearchEl(){ return document.getElementById('enc-search') || document.getElementById('enc-count') || document.getElementById('crystal-grid'); }
   window.scrollToFullEncyclopedia = function(){ safeScrollTo(document.querySelector('.featured-divider') || encSearchEl(), 165); };
-  window.scrollToEncyclopediaResults = function(){ safeScrollTo(encSearchEl(), 130); };
-  window.scrollToTabTop = function(name){
-    if(name === '101'){
-      safeScrollTo(document.getElementById('c101-nav') || document.getElementById('tab-101'), 112);
-      return;
-    }
-    safeScrollTo(document.getElementById('tab-'+name) || document.querySelector('main.content'), 112);
-  };
-  window.scrollTo101Top = function(){ safeScrollTo(document.getElementById('c101-nav') || document.getElementById('tab-101'), 112); };
-
-  function resetEncFiltersSafe(){
-    if(typeof resetEncyclopediaFiltersForJump === 'function'){
-      resetEncyclopediaFiltersForJump();
-      return;
-    }
-    if(typeof filters === 'object'){
-      filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all',tier:'all'};
-    }
-    const s=document.getElementById('enc-search');
-    if(s)s.value='';
-  }
-  window.jumpToFilteredEncyclopedia = function(key,val){
-    if(typeof switchTabByName === 'function') switchTabByName('encyclopedia');
-    else if(typeof switchTab === 'function') switchTab('encyclopedia', document.querySelectorAll('.nav-tab')[2]);
-    setTimeout(function(){
-      resetEncFiltersSafe();
-      if(typeof activateEncyclopediaFilter === 'function'){
-        activateEncyclopediaFilter(key,val);
-      }else{
-        if(typeof filters === 'object') filters[key]=val;
-        if(typeof encRender === 'function') encRender();
-      }
-      setTimeout(window.scrollToEncyclopediaResults, 80);
-    },80);
-  };
-  window.jumpToChakra = function(chakra){ window.jumpToFilteredEncyclopedia('chakra', chakra); };
-  window.jumpToFamily = function(family){ window.jumpToFilteredEncyclopedia('fam', family); };
 
   // initId2 is defined in the main app — do not override it here
 
@@ -5564,12 +5530,12 @@ _authInit();
     const famCard=e.target.closest && e.target.closest('#fam-cards .fam-card');
     if(famCard){
       const fam=famCard.getAttribute('data-family') || (famCard.querySelector('.fam-name')||{}).textContent;
-      if(fam){ e.preventDefault(); e.stopPropagation(); window.jumpToFamily(fam.trim()); return; }
+      if(fam){ e.preventDefault(); e.stopPropagation(); jumpToFamily(fam.trim()); return; }
     }
     const chakraCard=e.target.closest && e.target.closest('#chakra-cards .chakra-card');
     if(chakraCard){
       const name=(chakraCard.querySelector('.chakra-name')||{}).textContent;
-      if(name){ e.preventDefault(); e.stopPropagation(); window.jumpToChakra(name.trim()); return; }
+      if(name){ e.preventDefault(); e.stopPropagation(); jumpToChakra(name.trim()); return; }
     }
     const card=e.target.closest && e.target.closest('#crystal-grid .crystal-card, #id2-grid .crystal-card');
     if(card){
@@ -5609,16 +5575,8 @@ _authInit();
   },250);
 })();
 
-/* ── Scroll Fixes (from lines 6882–7127) ── */
-/* ── PRE-PASS TINYFIX 7: contained repairs only ── */
+/* ── Styling + 101 back-button injection ── */
 (function(){
-  function safeScrollTo(el, offset){
-    if(!el)return;
-    const y=el.getBoundingClientRect().top+window.scrollY-(offset||118);
-    try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
-  }
-
-  // Quiet styling tweaks only.
   const style=document.createElement('style');
   style.textContent=`
     .mood-selected-clear{font-size:12.5px!important;color:var(--ink)!important;font-weight:500;letter-spacing:0.02em;}
@@ -5627,15 +5585,6 @@ _authInit();
   `;
   document.head.appendChild(style);
 
-  // Remove the decorative dot before selected filter values. It was reading like punctuation.
-  window.updateBtn=function(btnId,valId,val){
-    const btn=document.getElementById(btnId);
-    const valEl=document.getElementById(valId);
-    if(btn)btn.classList.toggle('has-val',val!=='all');
-    if(valEl)valEl.textContent=val==='all'?'':String(val);
-  };
-
-  // Make every Crystals 101 subtab carry a working Back to top button, including How to Work.
   function ensure101BackButtons(){
     document.querySelectorAll('#tab-101 .c101-section').forEach(function(section){
       if(!section.querySelector(':scope > .c101-backtop-wrap')){
@@ -5643,23 +5592,12 @@ _authInit();
       }
     });
   }
-  window.scrollTo101Top=function(){
-    try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
-  };
-  const oldShow101=window.show101;
-  if(typeof oldShow101==='function'){
-    window.show101=function(sec,btn){
-      const result=oldShow101.apply(this,arguments);
-      ensure101BackButtons();
-      return result;
-    };
-  }
   document.addEventListener('click',function(e){
     const back=e.target.closest&&e.target.closest('#tab-101 .c101-backtop');
     if(!back)return;
     e.preventDefault();
     e.stopPropagation();
-    window.scrollTo101Top();
+    scrollTo101Top();
   },true);
   document.addEventListener('DOMContentLoaded',ensure101BackButtons);
   setTimeout(ensure101BackButtons,300);
@@ -5690,191 +5628,7 @@ _authInit();
     setInterval(rotatePlaceholder,4000);
   })();
 
-  // Use When result stones now use the same card format/photos as Full Encyclopedia.
-  window.renderMoodStones=function(moodIdx,subFilter){
-    const matches=getMoodMatches(moodIdx,subFilter);
-    const grid=document.getElementById('mood-stone-grid');
-    const countEl=document.getElementById('mood-results-count');
-    const selectedView=document.getElementById('mood-selected-view');
-    if(selectedView)selectedView.style.display='block';
-    if(grid)grid.style.display='grid';
-    if(countEl)countEl.textContent=matches.length+' stones'+(subFilter?' · '+subFilter:'');
-    if(!grid)return;
-    if(!matches.length){grid.innerHTML='<div class="empty-state">No stones match this combination.</div>';return;}
-    const moodGrid=typeof CRYSTAL_GRIDS!=='undefined'&&CRYSTAL_GRIDS.find(g=>(g.moodLinks||[g.moodLink]).includes(moodIdx));
-    const gridBanner=document.getElementById('mood-grid-banner');
-    if(gridBanner){
-      if(moodGrid){
-        gridBanner.style.display='block';
-        gridBanner.innerHTML=`<div style="margin-top:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:1rem"><span style="font-size:13px;color:var(--ink2)">There is a grid for this intention.</span><button class="btn btn-sm" onclick="switchTab('101',getTabButton('101'));setTimeout(()=>{show101('grids');openGridModal('${moodGrid.id}');},400)">View ${moodGrid.name} →</button></div>`;
-      }else{gridBanner.style.display='none';}
-    }
-    grid.innerHTML=matches.map(function(c){
-      // Build card html but replace the bare openDetail call with one that sets return context
-      const raw=encCardHtml(c);
-      return raw.replace(/onclick="openDetail\(/,'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
-    }).join('');
-  };
-
-  // Helpers for My Collection filters across My Pieces, Families, and Wishlist.
-  function passesCollStoneFilters(c){
-    return !!c &&
-      (collFilters.cfam==='all'||c.fam===collFilters.cfam||c.sp===collFilters.cfam)&&
-      collectionStoneMatchesTheme(c,collFilters.ctheme)&&
-      collectionStoneMatchesColor(c,collFilters.ccolor)&&
-      collectionStoneMatchesChakra(c,collFilters.cchakra)&&
-      collectionStoneMatchesMohs(c,collFilters.cmohs)&&
-      collectionStoneMatchesFormation(c,collFilters.cformation)&&
-      collectionStoneMatchesMaterial(c,collFilters.cmaterial);
-  }
-  function passesCollPieceFilters(p){
-    const loc=p.shelf||p.locCustom||'';
-    return (collFilters.form==='all'||p.form===collFilters.form)&&
-      (collFilters.size==='all'||p.size===collFilters.size)&&
-      (collFilters.cshelf==='all'||loc.includes(collFilters.cshelf));
-  }
-
-  window.renderCollection=function(){
-    buildCollPanels();
-    if(typeof initCollectionFilterDelegation==='function')initCollectionFilterDelegation();
-    const displayCollection=dedupedCollectionItems(collection);
-    const st=document.getElementById('stat-total');
-    const sw=document.getElementById('stat-wish');
-    if(st)st.textContent=displayCollection.length;
-    if(sw)sw.textContent=Object.keys(wish).length;
-    if(typeof renderTierBars==='function')renderTierBars();
-    const wrap=document.getElementById('coll-wrap');
-    if(!wrap)return;
-
-    const _tierLabels={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
-    if(collQuickFilter==='tier-owned'||collQuickFilter==='tier-wish'){
-      const isTierWish=collQuickFilter==='tier-wish';
-      const tNum=_collTierNum;
-      const tLabel=_tierLabels[tNum]||('Tier '+tNum);
-      const backBtn=`<div style="margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:10px"><button onclick="setCollQuickFilter('all')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All</button><span style="color:var(--ink3)">·</span><span>${tLabel} ${isTierWish?'Wishlist':'Owned'}</span></div>`;
-      if(isTierWish){
-        const wishIds=Object.keys(wish);
-        const items=CRYSTALS.filter(c=>wishIds.includes(c.i)&&(Number(c.tier)===tNum));
-        if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No wishlist items in '+tLabel+'.</div>';return;}
-        wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
-          ${wishlistCardPhotoHtml(c)}
-          <div class="coll-card-name">${escapeAttr(c.n)}</div>
-          <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
-        </div>`).join('')+'</div>';
-      } else {
-        const items=displayCollection.filter(p=>{const c=CRYSTALS.find(x=>x.i===p.crystalId);return c&&Number(c.tier)===tNum&&passesCollPieceFilters(p);});
-        if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No owned pieces in '+tLabel+'.</div>';return;}
-        wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(p=>{
-          const c=CRYSTALS.find(x=>x.i===p.crystalId);
-          const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
-          const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
-          const loc=locParts.slice(0,2).join(' · ');
-          const ri=collection.indexOf(p);
-          const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-          return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
-        }).join('')+'</div>';
-      }
-      return;
-    }
-
-    if(collQuickFilter==='wish'){
-      const wishIds=Object.keys(wish);
-      let wishCrystals=CRYSTALS.filter(c=>wishIds.includes(c.i));
-      wishCrystals=wishCrystals.filter(c=>passesCollStoneFilters(c));
-      if(!wishCrystals.length){
-        wrap.innerHTML=wishIds.length?'<div class="empty-coll">No wishlist items match your filters.</div>':_emptyWishHtml();
-        return;
-      }
-      wrap.innerHTML='<div class="coll-grid">'+wishCrystals.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
-        ${wishlistCardPhotoHtml(c)}
-        <div class="coll-card-name">${escapeAttr(c.n)}</div>
-        <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
-      </div>`).join('')+'</div>';
-      return;
-    }
-
-    if(collQuickFilter==='families'){
-      const groups={};
-      displayCollection.forEach(p=>{
-        const c=CRYSTALS.find(x=>x.i===p.crystalId);
-        if(!c||!passesCollStoneFilters(c)||!passesCollPieceFilters(p))return;
-        const fam=c?.fam||c?.sp||'Other';
-        if(!groups[fam])groups[fam]=[];
-        groups[fam].push({piece:p,crystal:c});
-      });
-      const fams=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
-      if(!fams.length){
-        wrap.innerHTML=displayCollection.length?'<div class="empty-coll">No families match your filters.</div>':_emptyCollHtml();
-        return;
-      }
-      collFamilyPhotoSources={};
-      wrap.innerHTML='<div class="coll-grid">'+fams.map(fam=>{
-        const entries=groups[fam];
-        const names=[...new Set(entries.map(x=>x.crystal?.n||'Unknown'))].slice(0,4).join(' · ');
-        const count=entries.length;
-        const photoHtml=familyCardPhotoHtml(fam,entries);
-        return`<div class="coll-card" onclick="openFamilyDetail('${fam.replace(/'/g,"\\'")}')" >
-          ${photoHtml}
-          <div class="coll-card-name">${escapeAttr(fam)}</div>
-          <div class="coll-card-piece-count">${count} ${count===1?'piece':'pieces'}</div>
-          <div class="coll-card-meta">${escapeAttr(names)}</div>
-          <div class="coll-card-loc">Tap to view family</div>
-        </div>`;
-      }).join('')+'</div>';
-      return;
-    }
-    
-if(collQuickFilter==='__family__'){
-  const fam=collActiveFamilyName;
-  const items=displayCollection.filter(p=>{
-    const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    return (c?.fam===fam||c?.sp===fam)&&passesCollPieceFilters(p);
-  });
-  if(!items.length){
-    wrap.innerHTML=`<div class="empty-coll">No pieces found in ${fam}.</div>`;
-    return;
-  }
-  wrap.innerHTML=
-    `<div id="fam-detail-banner" style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2)">
-      <button onclick="setCollQuickFilter('families')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All Families</button>
-      <span style="color:var(--ink3)">·</span>
-      <span>${escapeAttr(fam)}</span>
-      <span style="color:var(--ink3);margin-left:4px">${items.length} ${items.length===1?'piece':'pieces'}</span>
-    </div>
-    <div class="coll-grid">`+
-    items.map(p=>{
-      const c=CRYSTALS.find(x=>x.i===p.crystalId);
-      const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
-      const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
-      const loc=locParts.slice(0,2).join(' · ');
-      const ri=collection.indexOf(p);
-      const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-      return`<div class="coll-card" onclick="openCollDetailFromFamily(${ri},'${fam.replace(/'/g,"\\'")}')">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
-    }).join('')+
-    `</div>`;
-  return;
-}
-    
-    const items=displayCollection.filter(p=>{
-      const c=CRYSTALS.find(x=>x.i===p.crystalId);
-      return passesCollStoneFilters(c)&&passesCollPieceFilters(p);
-    });
-    if(!items.length){
-      wrap.innerHTML=displayCollection.length?'<div class="empty-coll">No pieces match your filters.</div>':_emptyCollHtml();
-      return;
-    }
-    wrap.innerHTML='<div class="coll-grid">'+items.map(p=>{
-      const c=CRYSTALS.find(x=>x.i===p.crystalId);
-      const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
-      const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
-      const loc=locParts.slice(0,2).join(' · ');
-      const ri=collection.indexOf(p);
-      const photoHtml=collectionCardPhotoHtml(p,c,name,ri);
-      return`<div class="coll-card" onclick="openCollDetail(${ri})">${photoHtml}<div class="coll-card-name">${escapeAttr(name)}</div><div class="coll-card-meta">${escapeAttr(c?.n||'')} ${p.size?'· '+escapeAttr(p.size):''}</div><div class="coll-card-loc">${escapeAttr(loc)}</div></div>`;
-    }).join('')+'</div>';
-  };
-
-  // Strengthen collection filter pill clicks after the render override.
+  // Collection filter pill click hardening (capture-mode, complements initCollectionFilterDelegation).
   document.addEventListener('click',function(e){
     const pill=e.target.closest&&e.target.closest('#collection-filter-shell .filter-panel .fpill');
     if(!pill)return;
