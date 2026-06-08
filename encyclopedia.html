@@ -79,10 +79,9 @@
   <div id="enc-landing">
 
     <div class="enc-hero">
-      <img src="/assets/enc-hero.png" alt="Crystal display in soft natural light" class="enc-hero-img">
       <div class="enc-hero-content">
         <div class="enc-hero-eyebrow">Crystal Library</div>
-        <h1 class="enc-hero-title">Build your crystal knowledge<br>one shelf at a time.</h1>
+        <h1 class="enc-hero-title"><span class="enc-hero-line1">Build your crystal knowledge</span><br>one shelf at a time.</h1>
         <p class="enc-hero-sub">Start with The Essentials, then explore deeper — by color, intention, family, chakra, or collector tier.</p>
         <div class="enc-hero-btns">
           <button class="btn btn-accent" onclick="document.getElementById('enc-tier-landing').scrollIntoView({behavior:'smooth',block:'start'})">Start with The Essentials</button>
@@ -131,6 +130,93 @@
     </div>
 
   </div><!-- /enc-landing -->
+
+  <!-- TIER LANDING: default view showing Tier 1 grid + teaser rows for 2/3/4 -->
+  <div id="enc-tier-landing">
+
+    <!-- Tier 1 — The Essentials (full grid) -->
+    <div class="enc-tier-section">
+      <div class="enc-tier-header">
+        <div class="enc-tier-badge">Tier 1</div>
+        <div class="enc-tier-title-block">
+          <span class="enc-tier-title">The Essentials</span>
+          <span class="enc-tier-count"><span id="enc-t1-count">—</span> stones</span>
+          <span class="enc-tier-desc">The foundation stones — versatile, accessible, and widely loved. A great place to start any collection.</span>
+        </div>
+        <button class="btn btn-sm enc-tier-viewall" onclick="encBrowseTier(1)">View all →</button>
+      </div>
+      <div class="enc-tier-grid" id="enc-tier-1-grid"></div>
+    </div>
+
+    <!-- "What's on your next shelf?" bridge card -->
+    <div class="enc-next-shelf">
+      <div class="enc-next-photo"></div>
+      <div class="enc-next-copy">
+        <div class="enc-next-eyebrow">Beyond The Essentials</div>
+        <div class="enc-next-title">What's on your next shelf?</div>
+        <div class="enc-next-desc">Once you have the foundations, Tier 2 opens up a world of color, energy, and intention. Explore deeper picks hand-selected for growing collections.</div>
+      </div>
+      <div class="enc-next-cta">
+        <button class="btn btn-accent" onclick="encTierAccordionExpand(2)">Explore Tier 2</button>
+      </div>
+    </div>
+
+    <!-- Tier 2 accordion -->
+    <div class="enc-tier-accordion" id="enc-acc-2">
+      <div class="enc-accordion-row" onclick="encTierAccordionExpand(2)">
+        <div class="enc-tier-badge enc-tier-badge--sm">Tier 2</div>
+        <div>
+          <span class="enc-accordion-title">Expanding Your Collection</span>
+          <span class="enc-accordion-count"><span id="enc-t2-count-teaser">—</span> stones</span>
+        </div>
+        <span class="enc-accordion-caret" id="enc-acc-2-caret">▾</span>
+      </div>
+      <div class="enc-accordion-body" id="enc-acc-2-body" style="display:none">
+        <div class="enc-accordion-grid" id="enc-acc-2-grid"></div>
+        <div style="padding:0 1.5rem 1.25rem;text-align:right">
+          <button class="btn btn-sm" onclick="encBrowseTier(2)">View all Tier 2 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 3 accordion -->
+    <div class="enc-tier-accordion" id="enc-acc-3">
+      <div class="enc-accordion-row" onclick="encTierAccordionExpand(3)">
+        <div class="enc-tier-badge enc-tier-badge--sm">Tier 3</div>
+        <div>
+          <span class="enc-accordion-title">The Collector's Range</span>
+          <span class="enc-accordion-count"><span id="enc-t3-count">—</span> stones</span>
+        </div>
+        <span class="enc-accordion-caret" id="enc-acc-3-caret">▾</span>
+      </div>
+      <div class="enc-accordion-body" id="enc-acc-3-body" style="display:none">
+        <div class="enc-accordion-grid" id="enc-acc-3-grid"></div>
+        <div style="padding:0 1.5rem 1.25rem;text-align:right">
+          <button class="btn btn-sm" onclick="encBrowseTier(3)">View all Tier 3 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 4 accordion -->
+    <div class="enc-tier-accordion" id="enc-acc-4">
+      <div class="enc-accordion-row" onclick="encTierAccordionExpand(4)">
+        <div class="enc-tier-badge enc-tier-badge--sm">Tier 4</div>
+        <div>
+          <span class="enc-accordion-title">Rare &amp; Specialty Finds</span>
+          <span class="enc-accordion-count"><span id="enc-t4-count">—</span> stones</span>
+        </div>
+        <span class="enc-accordion-caret" id="enc-acc-4-caret">▾</span>
+      </div>
+      <div class="enc-accordion-body" id="enc-acc-4-body" style="display:none">
+        <div class="enc-accordion-grid" id="enc-acc-4-grid"></div>
+        <div style="padding:0 1.5rem 1.25rem;text-align:right">
+          <button class="btn btn-sm" onclick="encBrowseTier(4)">View all Tier 4 →</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /enc-tier-landing -->
+
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
     <input type="text" id="enc-search" placeholder="Search name, color, use, property…" oninput="encRender()">
