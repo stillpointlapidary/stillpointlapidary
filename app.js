@@ -3807,6 +3807,21 @@ function renderId2Steps(){
     if(i===ID2_STEPS.length-1) activeIdx=ID2_STEPS.length;
   }
 
+  // Progress bar — 5 step pills across the top
+  const NUMS=['①','②','③','④','⑤'];
+  const prog=document.createElement('div');
+  prog.className='id2-progress';
+  ID2_STEPS.forEach((s,i)=>{
+    const pill=document.createElement('div');
+    const isDone=id2State[s.key]!==null;
+    const isActive=i===activeIdx;
+    pill.className='id2-prog-step'+(isDone?' done':isActive?' active':' ');
+    pill.innerHTML=`<span class="id2-prog-num">${NUMS[i]}</span><span>${s.name}</span>`;
+    if(isDone) pill.onclick=()=>id2ChangeStep(i);
+    prog.appendChild(pill);
+  });
+  wrap.appendChild(prog);
+
   // Answered steps
   for(let i=0;i<activeIdx&&i<ID2_STEPS.length;i++){
     const s=ID2_STEPS[i];
