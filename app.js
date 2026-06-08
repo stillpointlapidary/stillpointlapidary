@@ -403,17 +403,30 @@ function init(){
     buildEncPanels();
     buildMoodGroupPills();
     buildYearSelect('f-year');
-    encRender();
+
+    // Read the intended tab BEFORE any rendering so we can hide encyclopedia immediately
+    // and avoid the flash where encyclopedia briefly appears before the real target tab.
     const urlTab=(()=>{try{const p=new URLSearchParams(window.location.search).get('tab');return(['mood','encyclopedia','identify','collection','101'].includes(p)?p:null);}catch(e){return null;}})();
     const rememberedTab=urlTab||(()=>{try{return localStorage.getItem('spl_active_tab')||'home';}catch(e){return'home';}})();
-    if(rememberedTab==='collection'){
-      const wrap=document.getElementById('coll-wrap');
-      if(wrap)wrap.innerHTML='<div class="empty-coll">Loading your collection…</div>';
-    }else{
-      renderCollection();
-    }
-    if(['encyclopedia','mood','collection','identify','101'].includes(rememberedTab)&&rememberedTab!=='encyclopedia'){
+
+    // Apply the target tab immediately — before encRender() — so the correct tab is
+    // the first thing the user sees. encRender() then renders into a hidden section.
+    if(['mood','collection','identify','101'].includes(rememberedTab)){
       switchTabByName(rememberedTab);
+      if(rememberedTab==='collection'){
+        // Auth hasn't resolved yet; show a loading state until loadSupabaseState fires.
+        const wrap=document.getElementById('coll-wrap');
+        if(wrap)wrap.innerHTML='<div class="empty-coll">Loading your collection…</div>';
+      }
+    }
+
+    // Always populate the encyclopedia grid (it may be hidden, but ready on tab switch).
+    encRender();
+
+    // Populate collection stats for non-collection tabs (collection tab is handled above
+    // and will be re-rendered by loadSupabaseState once auth resolves).
+    if(rememberedTab!=='collection'){
+      renderCollection();
     }
   }
   scrollPageTop();
