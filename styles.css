@@ -521,6 +521,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* CRYSTAL GRIDS */
 .grid-intro-block{background:var(--stone2);border-radius:10px;padding:1.5rem;margin-bottom:2rem}
+.grid-intro-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,34%);gap:1.25rem;align-items:stretch}
+.grid-intro-copy{min-width:0}
+.grid-intro-photo{overflow:hidden;border-radius:9px;border:0.5px solid rgba(42,37,32,0.12);background:var(--white);min-height:220px}
+.grid-intro-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center center}
 .grid-intro-title{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:var(--ink);margin-bottom:0.75rem}
 .grid-intro-body{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:0.75rem}
 .grid-tip-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:1rem}
@@ -543,6 +547,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .grid-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin:-0.25rem 2.25rem 1rem 0}
 @media print{body>*:not(.app-shell){display:none!important}.topbar,.main-nav,.studio-banner,footer,.grid-modal-close,.grid-modal-actions{display:none!important}.grid-modal-overlay{display:block!important;position:static!important;background:white!important;padding:0!important}.grid-modal{box-shadow:none!important;width:100%!important;max-height:none!important;overflow:visible!important;padding:0!important}.grid-modal *{color:#2a2520!important}}
 @media(max-width:900px){.grid-cards-container{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.grid-card{flex-direction:column}.grid-card-swatch{width:100%;height:100px}.grid-cards-container{grid-template-columns:1fr}}
+@media(max-width:900px){.grid-intro-main{grid-template-columns:1fr}.grid-intro-photo{min-height:260px;max-height:360px}}
 
 
 /* CRYSTAL SHAPES — horizontal strip layout */
