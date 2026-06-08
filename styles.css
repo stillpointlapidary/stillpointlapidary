@@ -777,8 +777,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* Family cards */
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
-.fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:all 0.15s}
-.fam-card:hover{border-color:var(--accent2);transform:translateY(-1px);background:var(--stone2)}
+.fam-card{border:0.5px solid var(--border);border-radius:10px;overflow:hidden;background:var(--white);cursor:pointer;transition:all 0.15s}
+.fam-card:hover{border-color:var(--accent2);transform:translateY(-2px);box-shadow:0 4px 16px rgba(42,37,32,0.1)}
+.fam-photo{height:110px;width:100%;position:relative;overflow:hidden;flex-shrink:0}
+.fam-photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.fam-photo-placeholder{position:absolute;inset:0}
+.fam-body{padding:0.85rem 0.9rem}
 /* ENC PHOTO LIGHTBOX */
 .enc-lightbox{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.7);z-index:400;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
 .enc-lightbox.open{display:flex}
