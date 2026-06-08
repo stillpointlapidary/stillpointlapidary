@@ -784,7 +784,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:1.5rem}
 .role-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);cursor:pointer;transition:background 0.12s,border-color 0.12s}
 .role-card:hover{background:var(--stone2);border-color:var(--accent2)}
-.role-link{font-size:10.5px;color:var(--accent);margin-top:6px;letter-spacing:0.03em}
 .role-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink);letter-spacing:0.01em;margin-bottom:4px}
 .role-desc{font-size:12px;color:var(--ink2);line-height:1.6}
 .role-eg{font-size:11px;color:var(--ink3);margin-top:5px;font-style:italic}
@@ -955,6 +954,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-hero-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .enc-hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--accent2)}
 .enc-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,3vw,46px);line-height:1.08;font-weight:400;letter-spacing:-0.015em;color:var(--ink);margin-bottom:1rem}
+.enc-hero-line1{white-space:nowrap}
 .enc-hero-sub{font-size:15px;color:var(--ink2);line-height:1.7;margin-bottom:1.5rem;max-width:400px}
 .enc-hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .enc-hero-btns .btn{font-size:12px;padding:10px 20px;min-height:42px}
