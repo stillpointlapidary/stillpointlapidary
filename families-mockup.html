@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Families — Tile Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --stone:#f7f5f2; --stone2:#ede9e3; --stone3:#e3ddd6;
+  --ink:#524d47; --ink2:#6b6560; --ink3:#9a948e;
+  --accent:#8b7355; --accent2:#c8a96e;
+  --border:rgba(42,37,32,0.12); --border2:rgba(42,37,32,0.07);
+  --white:#faf8f6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',sans-serif;background:#e8e4de;color:var(--ink);padding:48px 24px}
+
+.page-header{max-width:960px;margin:0 auto 48px;padding-bottom:20px;border-bottom:0.5px solid var(--border)}
+.page-eyebrow{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.page-title{font-family:Georgia,serif;font-size:26px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.page-sub{font-size:13px;color:var(--ink2);line-height:1.7;max-width:580px}
+.page-sub strong{color:var(--ink);font-weight:500}
+
+.mock-shell{max-width:960px;margin:0 auto;background:var(--stone);border-radius:14px;overflow:hidden;box-shadow:0 4px 32px rgba(42,37,32,0.12)}
+.mock-nav{background:var(--white);border-bottom:0.5px solid var(--border);padding:0 1.5rem;display:flex}
+.mock-nav-tab{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:12px 16px;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap}
+.mock-nav-tab.active{color:var(--ink);border-bottom-color:var(--accent2)}
+
+.mock-content{padding:1.5rem;max-width:860px;margin:0 auto}
+.c101-h1{font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:0.25rem}
+.c101-sub{font-size:13px;color:var(--ink2);margin-bottom:1.25rem}
+.c101-body{font-size:13.5px;color:var(--ink2);line-height:1.8;margin-bottom:1rem}
+.c101-h2{font-family:Georgia,serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:0.75rem}
+.c101-callout{background:var(--stone2);border-left:3px solid var(--accent2);padding:0.85rem 1rem;border-radius:0 8px 8px 0;font-size:13px;color:var(--ink2);line-height:1.7;margin-top:1rem}
+.c101-block{margin-bottom:1.75rem}
+.divider{height:0.5px;background:var(--border);margin:1.5rem 0}
+
+/* Pills */
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem}
+.c101-pill{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;padding:6px 14px;border:0.5px solid var(--border);border-radius:20px;background:transparent;cursor:pointer;color:var(--ink2);font-family:'Jost',sans-serif;white-space:nowrap}
+.c101-pill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+
+/* Search */
+.fam-search{width:100%;padding:9px 16px;border:0.5px solid var(--border);border-radius:8px;background:var(--white);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none;margin-bottom:1rem}
+
+/* ── FAMILY GRID ── */
+.fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
+
+/* ── FAMILY CARD WITH PHOTO ── */
+.fam-card{border:0.5px solid var(--border);border-radius:10px;overflow:hidden;background:var(--white);cursor:pointer;transition:all 0.15s}
+.fam-card:hover{border-color:var(--accent2);transform:translateY(-2px);box-shadow:0 4px 16px rgba(42,37,32,0.1)}
+
+.fam-photo{height:110px;width:100%;position:relative;overflow:hidden}
+.fam-photo-img{width:100%;height:100%;object-fit:cover;display:block}
+/* Each family gets a characteristic placeholder gradient */
+.fam-photo-placeholder{position:absolute;inset:0}
+.fam-photo-label{position:absolute;bottom:0;left:0;right:0;padding:4px 8px;background:rgba(42,32,22,0.45);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.8);font-family:'Jost',sans-serif}
+
+.fam-body{padding:0.85rem 0.9rem}
+.fam-name{font-family:Georgia,serif;font-size:15px;font-weight:400;color:var(--ink);margin-bottom:2px}
+.fam-count{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
+.fam-energy{font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px}
+.fam-examples{font-size:10.5px;color:var(--ink3);letter-spacing:0.01em;border-top:0.5px solid var(--border2);padding-top:7px;line-height:1.5}
+
+/* Photo placeholder gradients — one per family */
+.ph-quartz    {background:linear-gradient(145deg,#c9b8d8 0%,#9b7ab5 50%,#7a5a9a 100%)}
+.ph-feldspar  {background:linear-gradient(145deg,#d4c8b8 0%,#b8ccca 50%,#7a9aaa 100%)}
+.ph-calcite   {background:linear-gradient(145deg,#f0d4a0 0%,#d4894a 60%,#c07030 100%)}
+.ph-garnet    {background:linear-gradient(145deg,#c47878 0%,#8b2a2a 60%,#6a1a1a 100%)}
+.ph-tourmaline{background:linear-gradient(145deg,#5a5a5a 0%,#3a3530 60%,#2a2520 100%)}
+.ph-obsidian  {background:linear-gradient(145deg,#5a5550 0%,#2a2520 60%,#1a1512 100%)}
+.ph-fluorite  {background:linear-gradient(145deg,#b8d4c8 0%,#9a7ab5 50%,#6a8a6a 100%)}
+/* Common families */
+.ph-silicates {background:linear-gradient(145deg,#d4c8b8 0%,#b8a898 60%,#9a8878 100%)}
+.ph-aggregate {background:linear-gradient(145deg,#c8b898 0%,#a89878 60%,#8a7858 100%)}
+.ph-oxides    {background:linear-gradient(145deg,#c8a8a8 0%,#8a5858 60%,#5a3838 100%)}
+.ph-carbonates{background:linear-gradient(145deg,#c8e8c8 0%,#5a9a5a 60%,#3a7a3a 100%)}
+.ph-phosphates{background:linear-gradient(145deg,#a8c8d8 0%,#5a8aaa 60%,#3a6a8a 100%)}
+.ph-sulfides  {background:linear-gradient(145deg,#d4c880 0%,#b8a820 60%,#8a7810 100%)}
+.ph-opal      {background:linear-gradient(145deg,#e8e0d8 0%,#d0c8e8 50%,#b8d0e0 100%)}
+
+/* ── ANNOTATION LAYER ── */
+.annotation{display:flex;align-items:flex-start;gap:10px;margin-top:8px;padding:8px 10px;background:rgba(200,169,110,0.12);border:0.5px solid rgba(200,169,110,0.3);border-radius:6px;font-size:11px;color:var(--accent);line-height:1.5}
+.annotation-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+
+/* ── COMPARISON SECTION ── */
+.compare-wrap{max-width:960px;margin:40px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.compare-block{background:var(--stone);border-radius:14px;overflow:hidden;box-shadow:0 4px 32px rgba(42,37,32,0.12)}
+.compare-label{background:var(--ink);color:var(--white);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;font-weight:500}
+.compare-inner{padding:1rem}
+/* Old tile */
+.old-fam-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white);margin-bottom:8px}
+.old-fam-name{font-family:Georgia,serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:3px}
+.old-fam-count{font-size:11px;color:var(--accent);letter-spacing:0.04em;margin-bottom:6px}
+.old-fam-desc{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:5px}
+.old-fam-note{font-size:11px;color:var(--ink3);margin-top:5px;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-eyebrow">Still Point Lapidary · Design Review</div>
+  <div class="page-title">Crystal Families — Photo Tile Mockup</div>
+  <p class="page-sub">
+    Family tiles with photo slots. Placeholder gradients stand in until the real photos arrive — each is color-matched to that family's representative stone. The gradient is intentional design, not a stopgap: it looks good on its own and improves when the photo replaces it.
+    <br><br>
+    <strong>Photo labels</strong> on each tile tell you exactly what to shoot.
+  </p>
+</div>
+
+
+<!-- ══════════════════════════════ FULL PAGE MOCKUP ══════════════════════════════ -->
+<div class="mock-shell">
+  <div class="mock-nav">
+    <div class="mock-nav-tab">Working With Crystals</div>
+    <div class="mock-nav-tab">Crystal Forms</div>
+    <div class="mock-nav-tab">Chakras</div>
+    <div class="mock-nav-tab active">Crystal Families</div>
+    <div class="mock-nav-tab">Choosing &amp; Care</div>
+  </div>
+
+  <div class="mock-content">
+    <div class="c101-h1">Crystal Families</div>
+    <div class="c101-sub">Why a jasper is not just a jasper — and why families matter</div>
+
+    <div class="c101-block">
+      <div class="c101-body">Crystal families are defined by mineral structure and chemistry, not appearance. Two stones that look nothing alike can share a family — and two stones with the same name can belong to entirely different ones. Understanding families helps you predict care requirements, energetic tendencies, and why certain stones work the way they do.</div>
+    </div>
+
+    <div class="c101-block">
+      <div class="c101-h2">Why Families Share Energetic Tendencies</div>
+      <div class="c101-body">It's not coincidence that most Quartzes amplify, most Garnets energize, and most Calcites work with emotional flow. The mineral structure determines how a stone interacts with light, electricity, and subtle energy. Silicon dioxide (Quartz) is piezoelectric — it generates charge under pressure, which may be why so many Quartzes feel activating. Understanding the family gives you a head start on understanding any new stone within it.</div>
+      <div class="c101-callout"><strong>Practical implication:</strong> If you receive an unfamiliar stone and it's in the Quartz family, you already know it will likely be durable (7+ Mohs), work well with amplification, and respond well to moonlight cleansing. The family is a shortcut.</div>
+    </div>
+
+    <div class="c101-block">
+      <div class="c101-h2">Browse Crystal Families</div>
+      <input class="fam-search" placeholder="Search families…" disabled>
+      <div class="pill-row">
+        <div class="c101-pill active">The Big Seven</div>
+        <div class="c101-pill">Common Families</div>
+        <div class="c101-pill">Specialty Families</div>
+        <div class="c101-pill">Rare &amp; Exotic</div>
+        <div class="c101-pill">All families</div>
+      </div>
+
+      <!-- BIG SEVEN TILES -->
+      <div class="fam-grid">
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-quartz"></div>
+            <div class="fam-photo-label">📷 Amethyst cluster or clear point</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Quartz</div>
+            <div class="fam-count">52 stones</div>
+            <div class="fam-energy">Amplifying, clarifying, versatile. Most Quartzes enhance intention and energy.</div>
+            <div class="fam-examples">Amethyst · Rose Quartz · Citrine · Clear Quartz</div>
+          </div>
+        </div>
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-feldspar"></div>
+            <div class="fam-photo-label">📷 Labradorite — show the flash</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Feldspar</div>
+            <div class="fam-count">18 stones</div>
+            <div class="fam-energy">Luminous, intuitive, connected to cycles and inner glow. Many show adularescence.</div>
+            <div class="fam-examples">Moonstone · Labradorite · Amazonite · Sunstone</div>
+          </div>
+        </div>
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-calcite"></div>
+            <div class="fam-photo-label">📷 Orange or honey calcite — the color is the story</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Calcite</div>
+            <div class="fam-count">14 stones</div>
+            <div class="fam-energy">Emotionally amplifying and clearing — each color adds a specific chakra quality.</div>
+            <div class="fam-examples">Orange Calcite · Blue Calcite · Green Calcite · Mangano Calcite</div>
+          </div>
+        </div>
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-garnet"></div>
+            <div class="fam-photo-label">📷 Deep red almandine — raw or tumbled</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Garnet</div>
+            <div class="fam-count">12 stones</div>
+            <div class="fam-energy">Energizing, passionate, grounding. Strong root and sacral energy as a family.</div>
+            <div class="fam-examples">Almandine · Pyrope · Spessartine · Rhodolite</div>
+          </div>
+        </div>
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-tourmaline"></div>
+            <div class="fam-photo-label">📷 Black tourmaline raw — show the striations</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Tourmaline</div>
+            <div class="fam-count">11 stones</div>
+            <div class="fam-energy">Strongly protective and balancing. Black Tourmaline is the most widely used protective stone.</div>
+            <div class="fam-examples">Black Tourmaline · Watermelon Tourmaline · Rubellite</div>
+          </div>
+        </div>
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-obsidian"></div>
+            <div class="fam-photo-label">📷 Black obsidian sphere — or a raw chunk showing glassy break</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Obsidian</div>
+            <div class="fam-count">8 stones</div>
+            <div class="fam-energy">Powerful shadow work, truth-revealing, and protective. One of the most intense families.</div>
+            <div class="fam-examples">Black Obsidian · Mahogany Obsidian · Snowflake Obsidian</div>
+          </div>
+        </div>
+
+        <div class="fam-card">
+          <div class="fam-photo">
+            <div class="fam-photo-placeholder ph-fluorite"></div>
+            <div class="fam-photo-label">📷 Banded purple-green fluorite — the color banding is the point</div>
+          </div>
+          <div class="fam-body">
+            <div class="fam-name">Fluorite</div>
+            <div class="fam-count">9 stones</div>
+            <div class="fam-energy">The clearest thinking stone. Cuts through confusion and supports focus.</div>
+            <div class="fam-examples">Purple Fluorite · Green Fluorite · Rainbow Fluorite · Blue Fluorite</div>
+          </div>
+        </div>
+
+      </div><!-- end fam-grid -->
+    </div><!-- end c101-block -->
+  </div><!-- end mock-content -->
+</div><!-- end mock-shell -->
+
+
+<!-- ══════════════════════════════ BEFORE / AFTER ══════════════════════════════ -->
+<div class="compare-wrap">
+
+  <div class="compare-block">
+    <div class="compare-label">Before — current tile</div>
+    <div class="compare-inner">
+      <div class="old-fam-card">
+        <div class="old-fam-name">Quartz</div>
+        <div class="old-fam-count">52 stones in encyclopedia</div>
+        <div class="old-fam-desc">Silicon dioxide — the most abundant mineral family on Earth. Includes Clear Quartz, Amethyst, Rose Quartz, Citrine, Jasper, Agate, and Chalcedony.</div>
+        <div class="old-fam-note"><strong style="color:#6b6560">Energy:</strong> Amplifying, clarifying, versatile. Most Quartzes enhance intention and energy.</div>
+        <div class="old-fam-note"><strong style="color:#6b6560">Care:</strong> Mohs 7. Safe for water. Amethyst and Rose Quartz fade in prolonged sun.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-block">
+    <div class="compare-label">After — new tile</div>
+    <div class="compare-inner">
+      <div class="fam-card" style="margin-bottom:0">
+        <div class="fam-photo">
+          <div class="fam-photo-placeholder ph-quartz"></div>
+          <div class="fam-photo-label">📷 Amethyst cluster or clear point</div>
+        </div>
+        <div class="fam-body">
+          <div class="fam-name">Quartz</div>
+          <div class="fam-count">52 stones</div>
+          <div class="fam-energy">Amplifying, clarifying, versatile. Most Quartzes enhance intention and energy.</div>
+          <div class="fam-examples">Amethyst · Rose Quartz · Citrine · Clear Quartz</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════ PHOTO BRIEF ══════════════════════════════ -->
+<div style="max-width:960px;margin:40px auto 0;background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.75rem;box-shadow:0 2px 16px rgba(42,37,32,0.08)">
+  <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent2);font-weight:600;margin-bottom:6px">Photo Brief — Big Seven</div>
+  <div style="font-family:Georgia,serif;font-size:20px;color:var(--ink);margin-bottom:16px">7 photos, same setup for all</div>
+  <div style="font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:1.25rem">
+    All 7 photos should feel like a <strong style="color:var(--ink)">set</strong>: same surface, same light, same treatment. The tile grid will feel cohesive even before you have photos for every family.
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">
+    <div style="background:var(--stone2);border-radius:8px;padding:1rem">
+      <div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em">Setup</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:2;list-style:none;padding:0">
+        <li>📐 Square crop (same as Stone of the Day)</li>
+        <li>🧺 White marble or cream linen surface</li>
+        <li>💡 Soft natural window light — no flash</li>
+        <li>📏 One stone per shot, centered with breathing room</li>
+        <li>🚫 No labels, no props, no jewelry</li>
+      </ul>
+    </div>
+    <div style="background:var(--stone2);border-radius:8px;padding:1rem">
+      <div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em">Processing</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:2;list-style:none;padding:0">
+        <li>📱 iPhone → square crop in Photos</li>
+        <li>✨ Encyclopedia Photo Brightening preset</li>
+        <li>🌐 CloudConvert → WEBP, 800px, q85</li>
+        <li>💾 Name: <code style="font-size:11px;background:var(--stone3);padding:1px 5px;border-radius:3px">fam-quartz.webp</code> etc.</li>
+        <li>☁️ Upload to Supabase storage</li>
+      </ul>
+    </div>
+  </div>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px">
+    <thead>
+      <tr style="border-bottom:0.5px solid var(--border)">
+        <th style="text-align:left;padding:6px 8px;color:var(--ink3);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:10px">Family</th>
+        <th style="text-align:left;padding:6px 8px;color:var(--ink3);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:10px">Shoot this</th>
+        <th style="text-align:left;padding:6px 8px;color:var(--ink3);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:10px">Why</th>
+        <th style="text-align:left;padding:6px 8px;color:var(--ink3);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:10px">Filename</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:0.5px solid var(--border2)">
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Quartz</td>
+        <td style="padding:8px;color:var(--ink2)">Amethyst cluster or clear quartz point</td>
+        <td style="padding:8px;color:var(--ink3)">Most recognizable Quartz face; purple reads immediately</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-quartz.webp</td>
+      </tr>
+      <tr style="border-bottom:0.5px solid var(--border2)">
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Feldspar</td>
+        <td style="padding:8px;color:var(--ink2)">Labradorite — angled to catch the flash</td>
+        <td style="padding:8px;color:var(--ink3)">The labradorescence is unmistakable — no other family looks like this</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-feldspar.webp</td>
+      </tr>
+      <tr style="border-bottom:0.5px solid var(--border2)">
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Calcite</td>
+        <td style="padding:8px;color:var(--ink2)">Orange or honey calcite — raw or polished</td>
+        <td style="padding:8px;color:var(--ink3)">The warm color reads the family's emotional warmth; very photogenic</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-calcite.webp</td>
+      </tr>
+      <tr style="border-bottom:0.5px solid var(--border2)">
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Garnet</td>
+        <td style="padding:8px;color:var(--ink2)">Deep red almandine, tumbled or raw</td>
+        <td style="padding:8px;color:var(--ink3)">That dark red is the color signature of the whole family</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-garnet.webp</td>
+      </tr>
+      <tr style="border-bottom:0.5px solid var(--border2)">
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Tourmaline</td>
+        <td style="padding:8px;color:var(--ink2)">Black tourmaline raw piece — show the vertical striations</td>
+        <td style="padding:8px;color:var(--ink3)">The striated texture is diagnostic and looks great in macro</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-tourmaline.webp</td>
+      </tr>
+      <tr style="border-bottom:0.5px solid var(--border2)">
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Obsidian</td>
+        <td style="padding:8px;color:var(--ink2)">Black obsidian sphere — or raw chunk showing glassy conchoidal break</td>
+        <td style="padding:8px;color:var(--ink3)">The glassy mirror-black is unlike any other stone</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-obsidian.webp</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;font-family:Georgia,serif;color:var(--ink)">Fluorite</td>
+        <td style="padding:8px;color:var(--ink2)">Banded purple-green fluorite octahedron or cube</td>
+        <td style="padding:8px;color:var(--ink3)">The color banding is the whole story — no other family does this</td>
+        <td style="padding:8px;font-family:monospace;font-size:11px;color:var(--accent)">fam-fluorite.webp</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:1.25rem;padding:0.9rem 1rem;background:var(--stone2);border-radius:8px;font-size:12px;color:var(--ink3);line-height:1.7">
+    <strong style="color:var(--ink2)">When you're ready to wire them in:</strong> I'll add a <code style="font-size:11px;background:var(--stone3);padding:1px 5px;border-radius:3px">photo</code> field to each entry in <code style="font-size:11px;background:var(--stone3);padding:1px 5px;border-radius:3px">C101_FAM_DATA</code> and update <code style="font-size:11px;background:var(--stone3);padding:1px 5px;border-radius:3px">renderFamilies()</code> to show the photo when present, placeholder gradient when not. Until then the gradient tiles look intentional and finished.
+  </div>
+</div>
+
+</body>
+</html>
