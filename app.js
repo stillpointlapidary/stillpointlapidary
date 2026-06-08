@@ -3773,7 +3773,13 @@ function renderFamilies(tier){
   } else {
     filtered=filtered.slice().sort((a,b)=>(window.FAM_COUNTS[b.n]||0)-(window.FAM_COUNTS[a.n]||0));
   }
-  fc.innerHTML=filtered.map(f=>{const cnt=window.FAM_COUNTS[f.n]||0;const fArg=jsArg(f.n);return`<div class="fam-card" data-family="${escapeAttr(f.n)}" onclick="jumpToFamily(${fArg});return false;" title="View ${escapeAttr(f.n)} stones in the encyclopedia"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stones in encyclopedia</div>`:''}<div class="fam-desc">${f.desc}</div>${f.energy?`<div class="fam-note"><strong style="color:var(--ink2)">Energy:</strong> ${f.energy}</div>`:''}<div class="fam-note"><strong style="color:var(--ink2)">Care:</strong> ${f.care}</div></div>`;}).join('');
+  fc.innerHTML=filtered.map(f=>{
+    const cnt=window.FAM_COUNTS[f.n]||0;
+    const fArg=jsArg(f.n);
+    // Derive top examples from CRYSTALS: stones in this family, sorted by tier asc then name
+    const examples=CRYSTALS.filter(c=>c.fam===f.n).sort((a,b)=>(a.tier||9)-(b.tier||9)||(a.n>b.n?1:-1)).slice(0,4).map(c=>c.n).join(' · ');
+    return`<div class="fam-card" data-family="${escapeAttr(f.n)}" onclick="jumpToFamily(${fArg});return false;" title="View ${escapeAttr(f.n)} stones in the encyclopedia"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stone${cnt===1?'':'s'}</div>`:''}<div class="fam-energy">${f.energy||f.desc}</div>${examples?`<div class="fam-examples">${examples}</div>`:''}</div>`;
+  }).join('');
 }
 function initFamilies(){
   try { C101_FAM_DATA; } catch(e) { setTimeout(initFamilies,0); return; }
