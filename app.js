@@ -387,16 +387,20 @@ function renderSotd(){
 }
 
 // ── INIT ──
+function updateStoneCounts(){
+  const n=CRYSTALS.length;
+  const stoneCountEl=document.getElementById('stone-count');
+  if(stoneCountEl)stoneCountEl.textContent=n+' entries';
+  ['intro-stone-count','browse-stone-count','divider-stone-count','hero-stone-count','explore-stone-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+}
+
 function init(){
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
   renderFeaturedStones();
   renderSotd();
   // Load custom encyclopedia entries
   customEntries.forEach(e=>{if(!CRYSTALS.find(c=>c.i===e.i))CRYSTALS.push(e);});
-  const n=CRYSTALS.length;
-  const stoneCountEl=document.getElementById('stone-count');
-  if(stoneCountEl)stoneCountEl.textContent=n+' entries';
-  ['intro-stone-count','browse-stone-count','divider-stone-count','hero-stone-count','explore-stone-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+  updateStoneCounts();
   // Encyclopedia-only initialisation (skipped on homepage)
   const isEncyclopediaPage=!!document.getElementById('crystal-grid');
   if(isEncyclopediaPage){
@@ -718,8 +722,10 @@ function getFiltered(){
 }
 
 
+const COLOR_HEX_MAP={'Purple':'#7a5a9a','Blue':'#4a7aaa','Green':'#4a8a5a','Pink':'#d4839a','Red':'#b04a4a','Orange':'#c4683a','Yellow':'#c9a832','Black':'#3a3530','White':'#d8d4ce','Brown':'#8b6f47','Gray':'#8a8a8a','Multi':'#9a7a8a'};
+
 function colorDotsHtml(c){
-  const hexMap={'Purple':'#7a5a9a','Blue':'#4a7aaa','Green':'#4a8a5a','Pink':'#d4839a','Red':'#b04a4a','Orange':'#c4683a','Yellow':'#c9a832','Black':'#3a3530','White':'#d8d4ce','Brown':'#8b6f47','Gray':'#8a8a8a','Multi':'#9a7a8a'};
+  const hexMap=COLOR_HEX_MAP;
   const cats=(c.col_cats&&c.col_cats.length>0)?c.col_cats:[];
   if(cats.length>1){
     const cols=cats.slice(0,4).map(x=>hexMap[x]||c.ch||'#aaa');
@@ -742,7 +748,7 @@ function hexToWash(hex){
 }
 function noPhotoZoneHtml(c){
   const cats=(c.col_cats&&c.col_cats.length>0)?c.col_cats:[];
-  const hexMap={'Purple':'#7a5a9a','Blue':'#4a7aaa','Green':'#4a8a5a','Pink':'#d4839a','Red':'#b04a4a','Orange':'#c4683a','Yellow':'#c9a832','Black':'#3a3530','White':'#d8d4ce','Brown':'#8b6f47','Gray':'#8a8a8a','Multi':'#9a7a8a'};
+  const hexMap=COLOR_HEX_MAP;
   let orb=c.ch||'#d8d4ce';
   let extra='';
   if(cats.length>1){
@@ -2409,7 +2415,7 @@ async function saveEncEntry(){
     };
     CRYSTALS.push(newEntry);
     closeAddEncForm();encRender();
-    const sc=document.getElementById('stone-count');if(sc)sc.textContent=CRYSTALS.length+' entries';
+    updateStoneCounts();
     alert(`"${name}" added to encyclopedia as ${newId}.`);
   } else {
     alert('You must be signed in to add encyclopedia entries.');
@@ -3057,6 +3063,8 @@ async function loadStonesAndInit() {
     fetchFresh().then(fresh => {
       CRYSTALS.length = 0;
       CRYSTALS.push(...fresh);
+      updateStoneCounts();
+      if(document.getElementById('crystal-grid'))encRender();
     }).catch(e => console.warn('Background stone refresh failed:', e));
   } else {
     // First visit — show loader, wait for fetch, then init
@@ -5641,17 +5649,5 @@ _authInit();
     setInterval(rotatePlaceholder,4000);
   })();
 
-  // Collection filter pill click hardening (capture-mode, complements initCollectionFilterDelegation).
-  document.addEventListener('click',function(e){
-    const pill=e.target.closest&&e.target.closest('#collection-filter-shell .filter-panel .fpill');
-    if(!pill)return;
-    const panel=pill.closest('.filter-panel');
-    if(!panel||!panel.id||!panel.id.startsWith('cpanel-'))return;
-    e.preventDefault();e.stopPropagation();
-    const key=panel.id.replace('cpanel-','');
-    const raw=pill.getAttribute('data-value')||pill.textContent.trim();
-    const val=raw==='All'?'all':raw;
-    setCollFilter(key,val,pill);
-  },true);
 })();
 
