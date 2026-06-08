@@ -701,14 +701,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* ── Identify Tab ── */
 /* Hero banner */
-.id2-hero{position:relative;margin:-1rem -1.5rem 0;height:180px;overflow:hidden;background:var(--stone3)}
+.id2-hero{position:relative;margin:-1rem -1.5rem 0;height:170px;overflow:hidden;background:#e8e2da}
 .id2-hero-placeholder{position:absolute;inset:0;background:linear-gradient(120deg,#d4c9b8 0%,#bfb09e 50%,#c8bfb0 100%)}
-.id2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
-.id2-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(42,32,22,0.75) 0%,rgba(42,32,22,0.25) 50%,rgba(42,32,22,0.08) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.4rem 1.75rem}
-.id2-hero-kicker{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#fff;opacity:0.85;font-weight:600;margin-bottom:5px}
-.id2-hero-h1{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:#fff;line-height:1.2;margin-bottom:3px}
+.id2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+.id2-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(38,28,18,0.72) 0%,rgba(38,28,18,0.32) 42%,rgba(38,28,18,0) 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem 1.5rem}
+.id2-hero-kicker{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#fff;font-weight:600;margin-bottom:4px}
+.id2-hero-h1{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:#fff;line-height:1.2}
 /* Wrap */
 .id2-wrap{padding:1.25rem 0 2rem}
+/* Step progress bar */
+.id2-progress{display:flex;align-items:center;gap:0;margin-bottom:1.25rem;background:var(--white);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
+.id2-prog-step{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:0.7rem 0.5rem;font-size:11px;letter-spacing:0.04em;color:var(--ink3);border-right:0.5px solid var(--border);cursor:default;transition:background 0.15s}
+.id2-prog-step:last-child{border-right:none}
+.id2-prog-step.done{color:var(--accent);background:#fdf8f2;cursor:pointer}
+.id2-prog-step.done:hover{background:#faf2e8}
+.id2-prog-step.active{color:var(--ink);font-weight:500;background:#fff}
+.id2-prog-num{font-family:Georgia,'Times New Roman',serif;font-size:12px;color:var(--accent2)}
+.id2-prog-step.active .id2-prog-num{font-size:13px}
 #id2-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
 /* Step cards */
 .id2-sc{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
@@ -725,10 +734,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-sc-change{font-size:11px;color:var(--ink3);background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0;font-family:'Jost',sans-serif;flex-shrink:0}
 .id2-sc-change:hover{color:var(--accent)}
 /* Active card inner */
-.id2-sc-inner{padding:1.5rem 1.75rem}
-.id2-sc-header{display:flex;align-items:baseline;gap:10px;margin-bottom:1.1rem}
-.id2-sc--active .id2-sc-num{font-size:22px}
-.id2-sc-q{font-size:17px;font-weight:400;color:var(--ink);line-height:1.35}
+.id2-sc-inner{padding:1.25rem 1.5rem}
+.id2-sc-header{display:flex;align-items:baseline;gap:10px;margin-bottom:1rem}
+.id2-sc--active .id2-sc-num{font-size:18px}
+.id2-sc-q{font-size:15px;font-weight:400;color:var(--ink);line-height:1.35}
 /* Color grid */
 .id2-color-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .id2-color-btn{width:38px;height:38px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:all 0.15s;flex-shrink:0}
