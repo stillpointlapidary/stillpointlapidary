@@ -946,6 +946,101 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-browse-tile-label{font-size:10px;letter-spacing:0.04em;color:var(--ink2);line-height:1.3}
 .enc-doorway-cta{text-align:center}
 
+/* ── Encyclopedia Landing ── */
+
+/* Hero — explicit height so abs-positioned image resolves correctly */
+.enc-hero{position:relative;overflow:hidden;border:0.5px solid var(--border);border-radius:14px;background:var(--white);margin-bottom:1.25rem;height:400px;box-shadow:0 12px 36px rgba(42,37,32,0.07)}
+.enc-hero-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.enc-hero::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(250,248,246,.97) 0%,rgba(250,248,246,.91) 26%,rgba(250,248,246,.48) 52%,rgba(250,248,246,.08) 100%);pointer-events:none}
+.enc-hero-content{position:relative;z-index:1;max-width:480px;padding:3rem 3rem 2.75rem}
+.enc-hero-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.enc-hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--accent2)}
+.enc-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,3vw,46px);line-height:1.08;font-weight:400;letter-spacing:-0.015em;color:var(--ink);margin-bottom:1rem}
+.enc-hero-sub{font-size:15px;color:var(--ink2);line-height:1.7;margin-bottom:1.5rem;max-width:400px}
+.enc-hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.enc-hero-btns .btn{font-size:12px;padding:10px 20px;min-height:42px}
+
+/* Pathway panel */
+.enc-library-panel{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.75rem 1.75rem 1.5rem;margin-bottom:1.25rem;box-shadow:0 6px 22px rgba(42,37,32,0.04)}
+.enc-panel-heading{text-align:center;margin-bottom:1.5rem}
+.enc-panel-title{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:0.5rem}
+.enc-panel-ornament{color:var(--accent2);font-size:14px;display:flex;align-items:center;justify-content:center;gap:12px}
+.enc-panel-ornament::before,.enc-panel-ornament::after{content:"";width:40px;height:1px;background:var(--border)}
+.enc-pathway-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.enc-pathway-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem 1rem 1.25rem;min-height:170px;border:0.5px solid var(--border);border-radius:12px;background:rgba(255,255,255,.6);cursor:pointer;transition:all 0.18s;font-family:'Jost',sans-serif}
+.enc-pathway-card:hover{border-color:var(--accent2);background:var(--white);box-shadow:0 8px 22px rgba(42,37,32,0.08);transform:translateY(-2px)}
+.enc-pathway-icon{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin-bottom:0.85rem;flex-shrink:0}
+.enc-pathway-icon--color{background:#f4ede2}
+.enc-pathway-icon--intention{background:#f1eaf4}
+.enc-pathway-icon--chakra{background:#e8f0ea}
+.enc-pathway-icon--tier{background:#f1e8d8}
+.enc-pathway-icon--family{background:#eaeff4}
+.enc-pathway-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink);margin-bottom:6px}
+.enc-pathway-desc{font-size:12px;color:var(--ink3);line-height:1.55;margin-bottom:0.6rem;max-width:140px}
+.enc-pathway-arrow{font-size:15px;color:var(--accent)}
+
+/* Tier landing sections */
+#enc-tier-landing{margin-bottom:0}
+.enc-tier-section{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.75rem 1.75rem 1.5rem;margin-bottom:1rem;box-shadow:0 6px 22px rgba(42,37,32,0.04)}
+.enc-tier-header{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;margin-bottom:1.25rem}
+.enc-tier-badge{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:26px;border-radius:5px;background:#ece3d6;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;font-size:10px;font-family:'Jost',sans-serif;flex-shrink:0;margin-top:5px}
+.enc-tier-badge--sm{height:24px;min-width:60px}
+.enc-tier-title-block{min-width:0}
+.enc-tier-title{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:400;color:var(--ink);display:inline;margin-right:12px}
+.enc-tier-count{font-size:12px;color:var(--ink3);letter-spacing:0.03em}
+.enc-tier-desc{font-size:13px;color:var(--ink2);line-height:1.65;margin-top:8px;max-width:640px;display:block}
+.enc-tier-viewall{align-self:start;white-space:nowrap;flex-shrink:0}
+.enc-tier-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
+
+/* Next-shelf teaser — matches Lyra's three-column layout */
+.enc-next-shelf{display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(260px,1.5fr) minmax(160px,.75fr);border:0.5px solid rgba(139,115,85,.38);border-radius:12px;overflow:hidden;background:var(--white);align-items:stretch;margin-top:0}
+.enc-next-photo{background-image:url('/assets/enc-hero.png');background-size:cover;background-position:center;min-height:140px}
+.enc-next-copy{padding:1.5rem 1.75rem}
+.enc-next-title{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.enc-next-copy p{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:1rem}
+.enc-next-copy .btn{font-size:12px;padding:9px 16px}
+.enc-next-up{padding:1.5rem 1.5rem;border-left:0.5px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:5px;background:linear-gradient(135deg,#faf6ee,#faf8f6)}
+.enc-next-up-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);display:block}
+.enc-next-up-name{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.15;display:block}
+.enc-next-up-count{font-size:12px;color:var(--ink3);display:block;margin-top:3px}
+
+/* Accordion — Tier 2/3/4 rows */
+.enc-tier-accordion{background:var(--white);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1rem;box-shadow:0 4px 14px rgba(42,37,32,0.03)}
+.enc-accordion-row{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:1rem 1.5rem;border-bottom:0.5px solid var(--border)}
+.enc-accordion-row:last-of-type{border-bottom:none}
+.enc-accordion-info{display:flex;align-items:center;gap:12px;min-width:0}
+.enc-accordion-name{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:var(--ink)}
+.enc-accordion-count{font-size:12px;color:var(--ink3)}
+.enc-accordion-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border2);border-top:0.5px solid var(--border)}
+
+/* Responsive */
+@media(max-width:900px){
+  .enc-hero{height:340px}
+  .enc-hero-content{padding:2rem 2rem 1.75rem}
+  .enc-pathway-grid{grid-template-columns:repeat(3,1fr)}
+  .enc-tier-grid,.enc-accordion-grid{grid-template-columns:repeat(4,1fr)}
+  .enc-next-shelf{grid-template-columns:1fr 1fr}
+  .enc-next-photo{display:none}
+  .enc-next-up{border-left:none;border-top:0.5px solid var(--border)}
+}
+@media(max-width:600px){
+  .enc-hero{height:auto;min-height:320px}
+  .enc-hero::after{background:linear-gradient(180deg,rgba(250,248,246,.97) 0%,rgba(250,248,246,.92) 48%,rgba(250,248,246,.28) 100%)}
+  .enc-hero-content{padding:1.75rem 1.25rem}
+  .enc-hero-title{font-size:27px}
+  .enc-hero-sub{font-size:14px}
+  .enc-pathway-grid{grid-template-columns:repeat(2,1fr)}
+  .enc-pathway-card{min-height:140px;padding:1.1rem 0.75rem}
+  .enc-tier-header{grid-template-columns:auto 1fr}
+  .enc-tier-viewall{display:none}
+  .enc-tier-title{font-size:22px}
+  .enc-tier-grid,.enc-accordion-grid{grid-template-columns:repeat(3,1fr)}
+  .enc-next-shelf{grid-template-columns:1fr}
+  .enc-next-up{display:none}
+  .enc-accordion-row{grid-template-columns:auto 1fr auto;padding:0.85rem 1rem}
+  .enc-accordion-name{font-size:17px}
+}
+
 /* ── Collection Tier Bars ── */
 .stat-tier-cell{padding:0.6rem 0.85rem}
 .tier-bars-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
