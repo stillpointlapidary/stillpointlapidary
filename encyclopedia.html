@@ -323,10 +323,18 @@
 <!-- IDENTIFY -->
 
 <section id="tab-identify" style="display:none">
-<div class="id2-wrap">
-  <div class="id2-h1">What stone is this?</div>
-  <div class="id2-sub">Start with what you can see. Each answer narrows the list.</div>
 
+  <!-- Hero banner — swap placeholder div for <img class="id2-hero-img" src="identify-hero.webp" alt=""> when photo is ready -->
+  <div class="id2-hero">
+    <div class="id2-hero-placeholder"></div>
+    <div class="id2-hero-overlay">
+      <div class="id2-hero-kicker">Crystal Identification</div>
+      <div class="id2-hero-h1">What stone is this?</div>
+      <div class="id2-hero-sub">Start with what you can see. Each answer narrows the list.</div>
+    </div>
+  </div>
+
+<div class="id2-wrap">
   <div class="id2-card">
     <!-- Step 1: Color — always visible -->
     <div class="id2-step" id="id2-step-color">
@@ -383,6 +391,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Tips — always visible at card bottom -->
+    <div class="id2-step-divider" style="margin-top:1.25rem"></div>
+    <div class="id2-card-tips">
+      <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Scratch a hidden spot with a fingernail — delicate stones scratch easily.
+    </div>
   </div>
 
   <!-- Result bar — hidden until first selection -->
@@ -391,18 +405,8 @@
     <button class="id2-clear" onclick="clearId2()">Clear all</button>
   </div>
 
-  <!-- Prompt state — shown before any selection -->
-  <div class="id2-prompt" id="id2-prompt">
-    <div class="id2-prompt-icon">◇</div>
-    <div class="id2-prompt-text">Pick a color to begin</div>
-  </div>
-
   <div class="crystal-grid" id="id2-grid" style="display:none"></div>
 
-  <div class="id2-tips">
-    <strong style="color:var(--ink2);display:block;margin-bottom:4px">Tips</strong>
-    <strong>See through it?</strong> Hold it up to a window. <strong>Surface look:</strong> glassy = bright shine like glass; silky/pearly = soft sheen; metallic = catches light like metal; earthy = matte and dull. <strong>How tough?</strong> Try scratching a hidden spot with a fingernail — delicate stones scratch easily, tough ones don't.
-  </div>
   <div class="c101-backtop-wrap"><button class="c101-backtop" onclick="scrollToTabTop('identify');return false;">Back to top</button></div>
 </div>
 </section>
