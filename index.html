@@ -74,63 +74,75 @@
 
 <!-- HERO -->
 <section class="homepage-hero">
-  <div class="site-hero">
-    <div class="site-hero-inner">
-      <div class="site-hero-left">
-        <div class="hero-kicker-rule"></div>
-        <div class="hero-kicker">Crystal Reference · Collection Tracking · Guided Discovery</div>
-        <h1 class="hero-headline">Your curated reference for <em>intuitive work</em><br><em>and practical collecting</em></h1>
-        <p class="hero-sub"><span id="hero-stone-count">333</span> stones. AI-powered mood matching. Your collection — tracked, searchable, and always with you.</p>
-        <div class="hero-btns">
-          <a class="btn btn-sm btn-accent" href="/encyclopedia?tab=mood">Start exploring</a>
-          <a class="btn btn-sm" href="/encyclopedia?tab=identify">Identify a stone</a>
-        </div>
+  <div class="site-hero-card">
+    <div class="site-hero-left">
+      <div class="hero-kicker">Your intuitive guide to crystals</div>
+      <h1 class="hero-headline">Understand. Choose.<br><em>Collect with confidence.</em></h1>
+      <p class="hero-sub">Still Point Lapidary is your personal crystal reference — <span id="hero-stone-count">333</span> stones, guided identification, and a collection tracker that goes everywhere you do.</p>
+      <div class="hero-btns">
+        <a class="btn btn-sm btn-accent" href="/encyclopedia?tab=mood">Start exploring</a>
+        <a class="btn btn-sm btn-ghost-hero" href="/encyclopedia?tab=identify">Identify a stone</a>
       </div>
-      <div class="site-hero-right" id="sotd-container"></div>
+      <div class="hero-meta">
+        <span class="hero-meta-stat"><strong>333</strong> stones</span>
+        <span class="hero-meta-dot">·</span>
+        <span class="hero-meta-stat"><strong>AI</strong> mood matching</span>
+        <span class="hero-meta-dot">·</span>
+        <span class="hero-meta-stat"><strong>Build</strong> your collection</span>
+      </div>
+      <div class="hero-sotd-row" id="hero-sotd-row" style="display:none">
+        <span class="hero-sotd-label">Today's stone</span>
+        <a class="hero-sotd-link" id="hero-sotd-link" href="/encyclopedia">—</a>
+      </div>
     </div>
   </div>
+  <!-- keep SOTD container for JS — hidden, data only -->
+  <div id="sotd-container" style="display:none"></div>
 </section>
 
 <!-- TEN STONES WORTH KNOWING -->
 <div class="featured-section" id="featured-section">
-    <div class="featured-header">
-      <div>
-        <div class="featured-title">Ten stones worth knowing</div>
-        <div class="featured-subtitle">A starting point for any collection — chosen for range, availability, and everyday use</div>
-      </div>
-      <a class="featured-browse" href="/encyclopedia">Browse all <span id="browse-stone-count">333</span> stones →</a>
+  <div class="featured-header">
+    <div>
+      <div class="featured-title">Ten stones worth knowing</div>
+      <div class="featured-subtitle">A starting point — chosen for range, beauty, and everyday use</div>
     </div>
-    <div class="featured-cards" id="featured-cards"></div>
+    <a class="featured-browse" href="/encyclopedia">Browse all <span id="browse-stone-count">333</span> stones →</a>
   </div>
+  <div class="featured-cards" id="featured-cards"></div>
+</div>
 
-<!-- EXPLORE FURTHER TILES -->
-<div class="home-explore">
-  <div class="home-explore-label">Explore further</div>
-  <div class="home-explore-tiles">
-    <a class="home-explore-tile home-explore-tile--enc" href="/encyclopedia">
-      <div class="home-explore-tile-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-      <div class="home-explore-tile-name">Encyclopedia</div>
-      <div class="home-explore-tile-desc">Browse all <span id="explore-stone-count">333</span> stones by name, color, or intention</div>
+<!-- WHERE DO YOU WANT TO GO -->
+<div class="home-pathways">
+  <div class="home-pathways-header">
+    <div class="home-pathways-title">Where do you want to go?</div>
+    <div class="home-pathways-sub">Five ways to deepen your practice</div>
+  </div>
+  <div class="home-pathways-grid">
+    <a class="home-pw-card" href="/encyclopedia?tab=mood">
+      <div class="home-pw-icon home-pw-icon--mood"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="#8b7355" stroke-width="1.5" fill="#8b7355" fill-opacity="0.12"/></svg></div>
+      <div class="home-pw-name">Choose by Intention</div>
+      <div class="home-pw-desc">Tell us how you're feeling. We'll find the right stone for this moment.</div>
     </a>
-    <a class="home-explore-tile home-explore-tile--uw" href="/encyclopedia?tab=mood">
-      <div class="home-explore-tile-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-      <div class="home-explore-tile-name">Choose by Intention</div>
-      <div class="home-explore-tile-desc">Find the right stone for this moment</div>
+    <a class="home-pw-card" href="/encyclopedia">
+      <div class="home-pw-icon home-pw-icon--enc"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#8b7355" stroke-width="1.5" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="#8b7355" stroke-width="1.5" fill="#8b7355" fill-opacity="0.08"/></svg></div>
+      <div class="home-pw-name">Browse Encyclopedia</div>
+      <div class="home-pw-desc">Browse all <span id="explore-stone-count">333</span> stones by color, family, chakra, tier, or free search.</div>
     </a>
-    <a class="home-explore-tile home-explore-tile--id" href="/encyclopedia?tab=identify">
-      <div class="home-explore-tile-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-      <div class="home-explore-tile-name">Identify</div>
-      <div class="home-explore-tile-desc">Figure out what stone you're looking at</div>
+    <a class="home-pw-card" href="/encyclopedia?tab=identify">
+      <div class="home-pw-icon home-pw-icon--id"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#8b7355" stroke-width="1.5" fill="#8b7355" fill-opacity="0.08"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#8b7355" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="home-pw-name">Identify a Stone</div>
+      <div class="home-pw-desc">Holding something you can't name? Answer five questions and we'll narrow it down.</div>
     </a>
-    <a class="home-explore-tile home-explore-tile--coll" href="/encyclopedia?tab=collection">
-      <div class="home-explore-tile-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <div class="home-explore-tile-name">My Collection</div>
-      <div class="home-explore-tile-desc">Track the stones you own across every device</div>
+    <a class="home-pw-card" href="/encyclopedia?tab=collection">
+      <div class="home-pw-icon home-pw-icon--coll"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="#8b7355" stroke-width="1.5" fill="#8b7355" fill-opacity="0.1" stroke-linejoin="round"/></svg></div>
+      <div class="home-pw-name">My Collection</div>
+      <div class="home-pw-desc">Log what you own, track your wishlist, and carry your collection with you.</div>
     </a>
-    <a class="home-explore-tile home-explore-tile--101" href="/encyclopedia?tab=101">
-      <div class="home-explore-tile-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      <div class="home-explore-tile-name">Crystals 101</div>
-      <div class="home-explore-tile-desc">How to choose, use, and care for your stones</div>
+    <a class="home-pw-card" href="/encyclopedia?tab=101">
+      <div class="home-pw-icon home-pw-icon--101"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" stroke="#8b7355" stroke-width="1.5" fill="#8b7355" fill-opacity="0.08"/><path d="M12 8v4M12 16h.01" stroke="#8b7355" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div class="home-pw-name">Crystals 101</div>
+      <div class="home-pw-desc">New to crystals? Start here — the language, the lore, and how to build a practice.</div>
     </a>
   </div>
 </div>

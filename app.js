@@ -366,10 +366,18 @@ function renderFeaturedStones(){
 // ── STONE OF THE DAY ──
 function renderSotd(){
   const container=document.getElementById('sotd-container');
-  if(!container)return;
   const day=Math.floor(Date.now()/86400000);
   const s=FEATURED_STONES[day%FEATURED_STONES.length];
   if(!s)return;
+  // Wire up the hero "Today's stone" line
+  const sotdRow=document.getElementById('hero-sotd-row');
+  const sotdLink=document.getElementById('hero-sotd-link');
+  if(sotdRow&&sotdLink){
+    sotdLink.textContent=s.name+' →';
+    sotdLink.onclick=(e)=>{e.preventDefault();openDetail(s.id);};
+    sotdRow.style.display='flex';
+  }
+  if(!container)return;
   const cardInner=s.photo
     ?`<img class="sotd-card-img" src="${SUPABASE_STONES}${s.photo}" alt="${s.name}" loading="lazy">`
     :``;
