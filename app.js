@@ -3764,8 +3764,15 @@ function renderFamilies(tier){
   if(!fc)return;
   const q=(document.getElementById('fam-search-input')||{}).value||'';
   if(!window.FAM_COUNTS){window.FAM_COUNTS={};CRYSTALS.forEach(c=>{if(c.fam)window.FAM_COUNTS[c.fam]=(window.FAM_COUNTS[c.fam]||0)+1;});}
-  const filtered=C101_FAM_DATA.filter(f=>(tier==='all'||f.tier===tier)&&(!q||f.n.toLowerCase().includes(q.toLowerCase())||f.desc.toLowerCase().includes(q.toLowerCase())));
+  let filtered=C101_FAM_DATA.filter(f=>(tier==='all'||f.tier===tier)&&(!q||f.n.toLowerCase().includes(q.toLowerCase())||f.desc.toLowerCase().includes(q.toLowerCase())));
   if(!filtered.length){fc.innerHTML='<div style="color:var(--ink3);font-size:13px;grid-column:1/-1;padding:1rem">No families match.</div>';return;}
+  // Sort by stone count descending; within 'all' view, order by tier group first then count
+  if(tier==='all'){
+    const tierOrder={major:0,common:1,specialty:2,rare:3};
+    filtered=filtered.slice().sort((a,b)=>{const td=(tierOrder[a.tier]||99)-(tierOrder[b.tier]||99);if(td!==0)return td;return(window.FAM_COUNTS[b.n]||0)-(window.FAM_COUNTS[a.n]||0);});
+  } else {
+    filtered=filtered.slice().sort((a,b)=>(window.FAM_COUNTS[b.n]||0)-(window.FAM_COUNTS[a.n]||0));
+  }
   fc.innerHTML=filtered.map(f=>{const cnt=window.FAM_COUNTS[f.n]||0;const fArg=jsArg(f.n);return`<div class="fam-card" data-family="${escapeAttr(f.n)}" onclick="jumpToFamily(${fArg});return false;" title="View ${escapeAttr(f.n)} stones in the encyclopedia"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stones in encyclopedia</div>`:''}<div class="fam-desc">${f.desc}</div>${f.energy?`<div class="fam-note"><strong style="color:var(--ink2)">Energy:</strong> ${f.energy}</div>`:''}<div class="fam-note"><strong style="color:var(--ink2)">Care:</strong> ${f.care}</div></div>`;}).join('');
 }
 function initFamilies(){
@@ -3786,10 +3793,10 @@ function initFamilies(){
   }
   const nav=document.getElementById('fam-tier-nav');
   if(nav&&!nav.children.length){
-    const allBtn=document.createElement('button');allBtn.className='c101-pill active';allBtn.textContent='All families';allBtn.onclick=()=>setFamTier('all',allBtn);nav.appendChild(allBtn);
-    C101_TIERS.forEach(t=>{const btn=document.createElement('button');btn.className='c101-pill';btn.textContent=t.label;btn.onclick=()=>setFamTier(t.id,btn);nav.appendChild(btn);});
+    C101_TIERS.forEach(t=>{const btn=document.createElement('button');btn.className='c101-pill';btn.textContent=t.label;btn.onclick=()=>setFamTier(t.id,btn);if(t.id==='major')btn.classList.add('active');nav.appendChild(btn);});
+    const allBtn=document.createElement('button');allBtn.className='c101-pill';allBtn.textContent='All families';allBtn.onclick=()=>setFamTier('all',allBtn);nav.appendChild(allBtn);
   }
-  window.currentFamTier='all';renderFamilies('all');
+  window.currentFamTier='major';renderFamilies('major');
 }
 function setFamTier(tier,btn){document.querySelectorAll('#fam-tier-nav .c101-pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');window.currentFamTier=tier;renderFamilies(tier);}
 function famSearch(){renderFamilies(window.currentFamTier||'all');}
