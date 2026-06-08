@@ -1670,10 +1670,32 @@ function renderEncTierPreview(){
   if(!CRYSTALS.length)return;
   const t1=document.getElementById('enc-tier-1-grid');
   if(t1&&!t1.dataset.rendered){
-    const stones=CRYSTALS.filter(c=>Number(c.tier)===1).slice(0,6);
-    t1.innerHTML=stones.map(c=>encCardHtml(c)).join('');
+    const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
+    encTier1RenderUpTo(allT1,6,t1);
     t1.dataset.rendered='1';
   }
+}
+
+function encTier1RenderUpTo(allStones,upTo,grid){
+  grid.innerHTML=allStones.slice(0,upTo).map(c=>encCardHtml(c)).join('');
+  const remaining=allStones.length-upTo;
+  const existingPill=document.getElementById('enc-t1-more-pill');
+  if(existingPill)existingPill.remove();
+  if(remaining>0){
+    const nextBatch=Math.min(30,remaining);
+    const pill=document.createElement('div');
+    pill.id='enc-t1-more-pill';
+    pill.style.cssText='text-align:center;margin:1rem 0 0.5rem';
+    pill.innerHTML=`<button class="btn btn-sm enc-more-pill" onclick="encTier1ShowMore(${upTo},${upTo+nextBatch})">View ${nextBatch} more Essentials →</button>`;
+    grid.after(pill);
+  }
+}
+
+function encTier1ShowMore(currentCount,newCount){
+  const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
+  const t1=document.getElementById('enc-tier-1-grid');
+  if(!t1)return;
+  encTier1RenderUpTo(allT1,newCount,t1);
 }
 
 function renderEncTierCounts(){
@@ -1689,18 +1711,23 @@ function renderEncTierCounts(){
 }
 
 function encTierAccordionExpand(num){
-  const gridId='enc-acc-'+num+'-grid';
-  const grid=document.getElementById(gridId);
-  if(!grid)return;
-  if(grid.dataset.rendered){
-    grid.style.display=grid.style.display==='none'?'':'none';
+  const body=document.getElementById('enc-acc-'+num+'-body');
+  const grid=document.getElementById('enc-acc-'+num+'-grid');
+  const caret=document.getElementById('enc-acc-'+num+'-caret');
+  if(!body)return;
+  if(body.style.display!=='none'){
+    body.style.display='none';
+    if(caret)caret.textContent='▾';
     return;
   }
-  const stones=CRYSTALS.filter(c=>Number(c.tier)===num);
-  grid.innerHTML=stones.map(c=>encCardHtml(c)).join('');
-  grid.dataset.rendered='1';
-  grid.style.display='';
-  grid.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(grid&&!grid.dataset.rendered){
+    const stones=CRYSTALS.filter(c=>Number(c.tier)===num);
+    grid.innerHTML=stones.map(c=>encCardHtml(c)).join('');
+    grid.dataset.rendered='1';
+  }
+  body.style.display='';
+  if(caret)caret.textContent='▴';
+  setTimeout(()=>body.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
 
 // ── Collection Tier Bars ──
