@@ -950,8 +950,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* Hero — explicit height so abs-positioned image resolves correctly */
 .enc-hero{position:relative;overflow:hidden;border:0.5px solid var(--border);border-radius:14px;background:var(--white);margin-bottom:1.25rem;height:400px;box-shadow:0 12px 36px rgba(42,37,32,0.07);background-image:url('/assets/enc-hero.png');background-size:62%;background-position:right center;background-repeat:no-repeat}
-.enc-hero::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(250,248,246,.97) 0%,rgba(250,248,246,.91) 26%,rgba(250,248,246,.48) 52%,rgba(250,248,246,.08) 100%);pointer-events:none}
-.enc-hero-content{position:relative;z-index:1;max-width:480px;padding:3rem 3rem 2.75rem}
+.enc-hero::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(250,248,246,1) 0%,rgba(250,248,246,.99) 32%,rgba(250,248,246,.88) 44%,rgba(250,248,246,.5) 58%,rgba(250,248,246,.08) 78%,rgba(250,248,246,0) 100%);pointer-events:none}
+.enc-hero-content{position:relative;z-index:1;max-width:560px;padding:3rem 3rem 2.75rem}
 .enc-hero-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .enc-hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--accent2)}
 .enc-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,3vw,46px);line-height:1.08;font-weight:400;letter-spacing:-0.015em;color:var(--ink);margin-bottom:1rem}
