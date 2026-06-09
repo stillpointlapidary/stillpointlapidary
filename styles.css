@@ -1233,6 +1233,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .stat-val{font-size:26px}
   .stat-sub{font-size:10px}
   .stat-tier-cell{grid-column:1/-1}
+  .stat-tier-cell{padding:1rem}
+  .tier-bars-header{display:block;margin-bottom:0.9rem}
+  .tier-bars-label{font-family:Georgia,'Times New Roman',serif;font-size:21px;letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:0.65rem}
+  .tier-wish-toggle-label{width:100%;justify-content:space-between;padding:0.65rem 0.75rem;border:0.5px solid var(--border);border-radius:10px;background:var(--stone);font-size:11px;color:var(--ink2r)}
+  .tier-wish-track{width:34px;height:19px}
+  .tier-wish-thumb{width:15px;height:15px}
+  .tier-bar-headers{display:none}
+  #tier-bars{display:flex;flex-direction:column;gap:10px}
+  .tier-bar-row,.tier-bar-row.no-wish{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;align-items:center;padding:0.9rem 0.85rem;border:0.5px solid var(--border);border-radius:10px;background:var(--white);margin-bottom:0}
+  .tier-bar-lbl{grid-column:1/-2;font-family:Georgia,'Times New Roman',serif;font-size:17px;letter-spacing:0;text-transform:none;color:var(--ink);white-space:normal}
+  .tier-bar-track{grid-column:1/-1;grid-row:3;height:8px;margin-top:0.25rem;background:var(--stone2)}
+  .tier-bar-num{font-size:12px;text-align:left;display:inline-flex;align-items:center;gap:3px;color:var(--ink2);white-space:nowrap}
+  .tier-bar-num::before{content:attr(data-label) ':';font-size:10px;color:var(--ink3);letter-spacing:0.04em;text-transform:uppercase}
+  .tier-bar-num.owned{grid-column:1;color:#3FAF9A}
+  .tier-bar-num.wish{grid-column:2;color:#c8a96e}
+  .tier-bar-num.total{grid-column:3;color:var(--ink2)}
+  .tier-bar-num.pct{grid-column:4;grid-row:1;justify-self:end;background:var(--stone2);border:0.5px solid var(--border2);border-radius:999px;padding:3px 8px;color:var(--accent);font-weight:600}
+  .tier-bar-num.pct::before{content:''}
+  .tier-bar-row.no-wish{grid-template-columns:1fr auto auto}
+  .tier-bar-row.no-wish .tier-bar-num.total{grid-column:2}
+  .tier-bar-row.no-wish .tier-bar-num.pct{grid-column:3}
+  .coll-filter-cats{flex-wrap:wrap;gap:7px;overflow:visible}
+  .coll-filter-cats .filter-cat-btn{white-space:nowrap;max-width:100%}
+  #collection-filter-shell{margin-bottom:0.65rem!important}
+  .empty-coll-state{padding:2.5rem 1.25rem}
   .enc-browse-grid{grid-template-columns:repeat(3,1fr)}
   .enc-doorway-headline{font-size:20px}
 }
