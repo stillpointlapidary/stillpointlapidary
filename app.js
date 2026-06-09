@@ -1580,14 +1580,25 @@ async function runAISearch(){
   const btn=document.getElementById('ai-search-btn');
   const errEl=document.getElementById('ai-search-error');
   const query=input.value.trim();
-  if(!query)return;
+  if(!query){
+    if(errEl){
+      errEl.textContent='Type a feeling, intention, or situation first.';
+      errEl.classList.add('ai-error--gentle');
+      errEl.style.display='block';
+    }
+    if(input)input.focus();
+    return;
+  }
 
   // Build compact stone list
   const stones=CRYSTALS.map(s=>({id:s.i,name:s.n,er:[s.er1,s.er2,s.er3].filter(Boolean).join(' / '),uw:s.uw||''}));
 
   btn.classList.add('loading');
   btn.disabled=true;
-  errEl.style.display='none';
+  if(errEl){
+    errEl.classList.remove('ai-error--gentle');
+    errEl.style.display='none';
+  }
 
   try{
     const res=await fetch(
@@ -1605,8 +1616,11 @@ async function runAISearch(){
     if(data.error) throw new Error(data.error);
     renderAIResults(data.matches, query);
   }catch(e){
-    errEl.textContent='Something went wrong. Please try again.';
-    errEl.style.display='block';
+    if(errEl){
+      errEl.textContent='Something went wrong. Please try again.';
+      errEl.classList.remove('ai-error--gentle');
+      errEl.style.display='block';
+    }
   }finally{
     btn.classList.remove('loading');
     btn.disabled=false;
@@ -1616,6 +1630,11 @@ async function runAISearch(){
 function renderAIResults(matches, query){
   const wrap=document.getElementById('ai-results-wrap');
   const grid=document.getElementById('ai-stone-grid');
+  const errEl=document.getElementById('ai-search-error');
+  if(errEl){
+    errEl.classList.remove('ai-error--gentle');
+    errEl.style.display='none';
+  }
   grid.innerHTML='';
 
   matches.forEach(m=>{
@@ -1636,7 +1655,11 @@ function renderAIResults(matches, query){
 function clearAIResults(){
   document.getElementById('ai-results-wrap').style.display='none';
   document.getElementById('ai-search-input').value='';
-  document.getElementById('ai-search-error').style.display='none';
+  const errEl=document.getElementById('ai-search-error');
+  if(errEl){
+    errEl.classList.remove('ai-error--gentle');
+    errEl.style.display='none';
+  }
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
