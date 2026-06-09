@@ -999,6 +999,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .c101-h1{font-size:19px}
   .c101-sub{margin-bottom:1.25rem}
   .c101-block{margin-bottom:1.75rem}
+  #s101-work .work-methods-table,
+  #s101-work .work-methods-table tbody,
+  #s101-work .work-methods-table tr,
+  #s101-work .work-methods-table td{display:block;width:100%;box-sizing:border-box}
+  #s101-work .work-methods-table{border-collapse:separate;border-spacing:0;margin-bottom:1.35rem}
+  #s101-work .work-methods-table thead{display:none}
+  #s101-work .work-methods-table tbody{display:flex;flex-direction:column;gap:10px}
+  #s101-work .work-methods-table tr{padding:0.9rem 1rem;border:0.5px solid var(--border);border-radius:11px;background:var(--white);box-shadow:0 3px 12px rgba(42,37,32,0.035)}
+  #s101-work .work-methods-table td{border-bottom:none;padding:0;color:var(--ink2);font-size:13px;line-height:1.55}
+  #s101-work .work-methods-table td:first-child{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:0.55rem}
+  #s101-work .work-methods-table td:first-child strong{font-weight:400}
+  #s101-work .work-methods-table td:nth-child(n+2){padding-left:0;margin-top:0.45rem}
+  #s101-work .work-methods-table td:nth-child(n+2)::before{display:block;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+  #s101-work .work-methods-table td:nth-child(2)::before{content:'How'}
+  #s101-work .work-methods-table td:nth-child(3)::before{content:'Best for'}
 
   /* Tighter drawer side padding on full-width mobile */
   .drawer-inner{padding:3.5rem 1.25rem 2.5rem}
