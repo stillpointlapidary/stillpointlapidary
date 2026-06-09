@@ -145,6 +145,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .filter-panel.open{display:block}
 .filter-panel-title{font-size:12px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:8px;padding:0 2px}
 .filter-panel-pills{display:flex;flex-wrap:wrap;gap:5px}
+.filter-more-panel{min-width:190px}
+.filter-more-list{display:flex;flex-direction:column;gap:7px}
+.filter-more-list .filter-cat-btn{width:100%;justify-content:space-between;padding:7px 12px}
+.filter-more-list .filter-cat-btn .aval{margin-left:auto}
 .fpill{font-size:12px;letter-spacing:0.03em;padding:4px 11px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:transparent;color:var(--ink2);font-family:'Jost',sans-serif;transition:all 0.12s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
 .theme-group-label{width:100%;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);font-family:'Jost',sans-serif;margin:8px 0 4px;padding-left:2px}
 .fpill.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
@@ -1070,14 +1074,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-tier-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
 
 /* Next-shelf teaser — matches Lyra's three-column layout */
-.enc-next-shelf{display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(260px,1.5fr) minmax(160px,.75fr);border:0.5px solid rgba(139,115,85,.38);border-radius:12px;overflow:hidden;background:var(--white);align-items:stretch;margin-top:0}
+.enc-next-shelf{display:grid;grid-template-columns:minmax(200px,1.05fr) minmax(320px,1.75fr) minmax(150px,.55fr);border:0.5px solid rgba(139,115,85,.38);border-radius:12px;overflow:hidden;background:var(--white);align-items:stretch;margin-top:0}
 .enc-next-photo{background-image:url('/assets/enc-hero.png');background-size:cover;background-position:center;min-height:140px}
 .enc-next-copy{padding:1.5rem 1.75rem}
 .enc-next-title{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:var(--ink);margin-bottom:8px}
 .enc-next-copy p{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-bottom:1rem}
 .enc-next-copy .btn{font-size:12px;padding:9px 16px}
-.enc-next-cta{display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.enc-next-cta{display:flex;align-items:center;justify-content:center;padding:1rem 1.25rem}
 .enc-next-cta .btn{font-size:11px;padding:9px 16px;white-space:nowrap;letter-spacing:0.07em;justify-content:center;max-width:260px}
+.enc-next-cta .enc-next-btn{font-size:10.5px;padding:8px 13px;max-width:170px;min-width:0;white-space:normal;text-align:center;line-height:1.25}
 .enc-next-eyebrow{font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-family:'Jost',sans-serif;margin-bottom:6px}
 .enc-next-desc{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-top:8px}
 .enc-next-up{padding:1.5rem 1.5rem;border-left:0.5px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:5px;background:linear-gradient(135deg,#faf6ee,#faf8f6)}

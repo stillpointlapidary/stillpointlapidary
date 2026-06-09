@@ -164,7 +164,7 @@
         <div class="enc-next-desc">Once you have the foundations, Shelf Builders opens up a world of color, energy, and intention. Explore deeper picks hand-selected for growing collections.</div>
       </div>
       <div class="enc-next-cta">
-        <button class="btn btn-accent" onclick="encTierAccordionExpand(2)">Explore Tier 2: Shelf Builders →</button>
+        <button class="btn btn-accent enc-next-btn" onclick="encTierAccordionExpand(2)" title="Explore Tier 2: Shelf Builders">Explore Tier 2 →</button>
       </div>
     </div>
 
@@ -230,16 +230,22 @@
     <button class="filter-cat-btn" id="fbtn-theme" onclick="togglePanel('theme',event)">Theme <span class="aval" id="fval-theme"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="fbtn-color" onclick="togglePanel('color',event)">Color <span class="aval" id="fval-color"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="fbtn-chakra" onclick="togglePanel('chakra',event)">Chakra <span class="aval" id="fval-chakra"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="fbtn-mohs" onclick="togglePanel('mohs',event)">Hardness <span class="aval" id="fval-mohs"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="fbtn-formation" onclick="togglePanel('formation',event)">Formation <span class="aval" id="fval-formation"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="fbtn-material" onclick="togglePanel('material',event)">Material <span class="aval" id="fval-material"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="fbtn-tier" onclick="togglePanel('tier',event)">Tier <span class="aval" id="fval-tier"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn filter-more-btn" id="fbtn-more" onclick="togglePanel('more',event)">More <span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetFilters()">Reset</button>
   </div>
   <div class="filter-panel" id="panel-fam"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Mineral family <button class="prop-help" onclick="openPopup('filter-fam');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-fam"></div></div>
   <div class="filter-panel" id="panel-theme"><div class="filter-panel-title">Energetic theme</div><div class="filter-panel-pills" id="pills-theme"></div></div>
   <div class="filter-panel" id="panel-color"><div class="filter-panel-title">Color</div><div class="filter-panel-pills" id="pills-color"></div></div>
   <div class="filter-panel" id="panel-chakra"><div class="filter-panel-title">Chakra</div><div class="filter-panel-pills" id="pills-chakra"></div></div>
+  <div class="filter-panel filter-more-panel" id="panel-more">
+    <div class="filter-panel-title">Advanced filters</div>
+    <div class="filter-more-list">
+      <button class="filter-cat-btn" id="fbtn-mohs" onclick="togglePanel('mohs',event)">Hardness <span class="aval" id="fval-mohs"></span><span class="caret">▾</span></button>
+      <button class="filter-cat-btn" id="fbtn-formation" onclick="togglePanel('formation',event)">Formation <span class="aval" id="fval-formation"></span><span class="caret">▾</span></button>
+      <button class="filter-cat-btn" id="fbtn-material" onclick="togglePanel('material',event)">Material <span class="aval" id="fval-material"></span><span class="caret">▾</span></button>
+    </div>
+  </div>
   <div class="filter-panel" id="panel-mohs"><div class="filter-panel-title">Mohs hardness</div><div class="filter-panel-pills" id="pills-mohs"></div></div>
   <div class="filter-panel" id="panel-formation"><div class="filter-panel-title">Formation environment</div><div class="filter-panel-pills" id="pills-formation"></div></div>
   <div class="filter-panel" id="panel-material"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Material type <button class="prop-help" onclick="openPopup('material');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-material"></div></div>
@@ -410,18 +416,24 @@
     <button class="filter-cat-btn" id="cfbtn-ctheme" onclick="toggleCollPanel('ctheme',event)">Theme <span class="aval" id="cfval-ctheme"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-ccolor" onclick="toggleCollPanel('ccolor',event)">Color <span class="aval" id="cfval-ccolor"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-cchakra" onclick="toggleCollPanel('cchakra',event)">Chakra <span class="aval" id="cfval-cchakra"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cmohs" onclick="toggleCollPanel('cmohs',event)">Hardness <span class="aval" id="cfval-cmohs"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cformation" onclick="toggleCollPanel('cformation',event)">Formation <span class="aval" id="cfval-cformation"></span><span class="caret">▾</span></button>
-    <button class="filter-cat-btn" id="cfbtn-cmaterial" onclick="toggleCollPanel('cmaterial',event)">Material <span class="aval" id="cfval-cmaterial"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-form" onclick="toggleCollPanel('form',event)">Form <span class="aval" id="cfval-form"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-size" onclick="toggleCollPanel('size',event)">Size <span class="aval" id="cfval-size"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn" id="cfbtn-cshelf" onclick="toggleCollPanel('cshelf',event)">Location <span class="aval" id="cfval-cshelf"></span><span class="caret">▾</span></button>
+    <button class="filter-cat-btn filter-more-btn" id="cfbtn-more" onclick="toggleCollPanel('more',event)">More <span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetCollFilters()">Reset</button>
   </div>
   <div class="filter-panel" id="cpanel-cfam"><div class="filter-panel-title">Stone family</div><div class="filter-panel-pills" id="cpills-cfam"></div></div>
   <div class="filter-panel" id="cpanel-ctheme"><div class="filter-panel-title">Theme</div><div class="filter-panel-pills" id="cpills-ctheme"></div></div>
   <div class="filter-panel" id="cpanel-ccolor"><div class="filter-panel-title">Color</div><div class="filter-panel-pills" id="cpills-ccolor"></div></div>
   <div class="filter-panel" id="cpanel-cchakra"><div class="filter-panel-title">Chakra</div><div class="filter-panel-pills" id="cpills-cchakra"></div></div>
+  <div class="filter-panel filter-more-panel" id="cpanel-more">
+    <div class="filter-panel-title">Advanced filters</div>
+    <div class="filter-more-list">
+      <button class="filter-cat-btn" id="cfbtn-cmohs" onclick="toggleCollPanel('cmohs',event)">Hardness <span class="aval" id="cfval-cmohs"></span><span class="caret">▾</span></button>
+      <button class="filter-cat-btn" id="cfbtn-cformation" onclick="toggleCollPanel('cformation',event)">Formation <span class="aval" id="cfval-cformation"></span><span class="caret">▾</span></button>
+      <button class="filter-cat-btn" id="cfbtn-cmaterial" onclick="toggleCollPanel('cmaterial',event)">Material <span class="aval" id="cfval-cmaterial"></span><span class="caret">▾</span></button>
+    </div>
+  </div>
   <div class="filter-panel" id="cpanel-cmohs"><div class="filter-panel-title">Mohs hardness</div><div class="filter-panel-pills" id="cpills-cmohs"></div></div>
   <div class="filter-panel" id="cpanel-cformation"><div class="filter-panel-title">Formation</div><div class="filter-panel-pills" id="cpills-cformation"></div></div>
   <div class="filter-panel" id="cpanel-cmaterial"><div class="filter-panel-title">Material</div><div class="filter-panel-pills" id="cpills-cmaterial"></div></div>
