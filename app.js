@@ -1672,6 +1672,56 @@ function renderMoodStones(moodIdx,subFilter){
 }
 
 // ── AI FREEFORM SEARCH ────────────────────────────────────────────────────
+const AI_FALLBACK_THEMES=[
+  {terms:['inspiration','inspired','creative','creativity','create','artist','ideas','spark'],themes:['Joy','Vitality','Manifestation','Confidence'],reason:'supports creative spark and fresh momentum'},
+  {terms:['motivation','motivated','momentum','drive','energy','start','stuck','procrastinating'],themes:['Vitality','Confidence','Manifestation'],reason:'helps you move from stuck energy into action'},
+  {terms:['work','career','business','project','focus','productivity','study'],themes:['Clarity & Focus','Confidence','Manifestation','Abundance'],reason:'supports focus, confidence, and purposeful work'},
+  {terms:['calm','anxious','anxiety','overwhelm','stress','peace','rest'],themes:['Calm & Peace','Emotional Regulation','Grounding'],reason:'helps quiet overwhelm and steady your nervous system'},
+  {terms:['sleep','rest','night','insomnia','tired'],themes:['Calm & Peace','Spiritual Connection','Grounding'],reason:'supports winding down and settling into rest'},
+  {terms:['love','heart','grief','sad','relationship','forgive','self love','self-love'],themes:['Heart Healing','Self-Love','Emotional Regulation'],reason:'supports emotional softness, heart healing, and self-kindness'},
+  {terms:['protect','protection','boundary','shield','negative','energy'],themes:['Protection','Grounding'],reason:'supports energetic boundaries and steadier protection'},
+  {terms:['intuition','dream','spiritual','psychic','guidance','third eye'],themes:['Intuition','Spiritual Connection'],reason:'supports inner knowing and spiritual connection'},
+  {terms:['change','transition','transform','release','letting go','new chapter'],themes:['Transformation','Grounding'],reason:'supports change, release, and moving through transition'},
+  {terms:['money','abundance','prosperity','opportunity','success'],themes:['Abundance','Manifestation','Confidence'],reason:'supports opportunity, confidence, and receiving'}
+];
+
+function aiFallbackMatches(query){
+  const q=String(query||'').toLowerCase();
+  const tokens=q.split(/[^a-z0-9]+/).filter(t=>t.length>2);
+  const themeHits=[];
+  AI_FALLBACK_THEMES.forEach(group=>{
+    if(group.terms.some(term=>q.includes(term))){
+      group.themes.forEach(theme=>themeHits.push({theme,reason:group.reason}));
+    }
+  });
+  const scored=CRYSTALS.map(c=>{
+    const hay=[
+      c.n,c.a,c.er1,c.er2,c.er3,c.uw,c.primary_theme,
+      ...(c.all_themes||[])
+    ].filter(Boolean).join(' ').toLowerCase();
+    let score=0;
+    let reason='';
+    themeHits.forEach(hit=>{
+      if((c.primary_theme||'')===hit.theme || (c.all_themes||[]).includes(hit.theme)){
+        score+=5;
+        if(!reason)reason=hit.reason;
+      }
+    });
+    tokens.forEach(t=>{ if(hay.includes(t))score+=1; });
+    if(c.tier===1)score+=0.5;
+    return {c,score,reason};
+  }).filter(r=>r.score>0)
+    .sort((a,b)=>b.score-a.score || (a.c.tier||9)-(b.c.tier||9) || a.c.n.localeCompare(b.c.n))
+    .slice(0,8);
+
+  const fallback=scored.length?scored:CRYSTALS.filter(c=>c.tier===1).slice(0,8).map(c=>({c,score:1,reason:'is a versatile starter stone for finding your footing'}));
+  return fallback.map(r=>({
+    id:r.c.i,
+    name:r.c.n,
+    reason:`${r.c.n} ${r.reason || 'matches the feeling and intention in your words'}.`
+  }));
+}
+
 async function runAISearch(){
   const input=document.getElementById('ai-search-input');
   const btn=document.getElementById('ai-search-btn');
@@ -1711,13 +1761,11 @@ async function runAISearch(){
     );
     const data=await res.json();
     if(data.error) throw new Error(data.error);
+    if(!Array.isArray(data.matches) || !data.matches.length) throw new Error('No AI matches returned');
     renderAIResults(data.matches, query);
   }catch(e){
-    if(errEl){
-      errEl.textContent='Something went wrong. Please try again.';
-      errEl.classList.remove('ai-error--gentle');
-      errEl.style.display='block';
-    }
+    console.warn('AI mood match failed; using local fallback.', e);
+    renderAIResults(aiFallbackMatches(query), query);
   }finally{
     btn.classList.remove('loading');
     btn.disabled=false;
@@ -1740,7 +1788,7 @@ function renderAIResults(matches, query){
     const card=document.createElement('div');
     card.className='ai-stone-card';
     card.innerHTML=`<div class="ai-stone-name">${m.name}</div><div class="ai-stone-reason">${m.reason}</div><div class="ai-stone-arrow">View stone →</div>`;
-    card.onclick=()=>openDrawer(stone);
+    card.onclick=()=>{detailReturnContext={type:'usewhen'};openDetail(stone.i);};
     grid.appendChild(card);
   });
 
