@@ -421,7 +421,7 @@ function init(){
     // Read the intended tab BEFORE any rendering so we can hide encyclopedia immediately
     // and avoid the flash where encyclopedia briefly appears before the real target tab.
     const urlTab=(()=>{try{const p=new URLSearchParams(window.location.search).get('tab');return(['mood','encyclopedia','identify','collection','101'].includes(p)?p:null);}catch(e){return null;}})();
-    const rememberedTab=urlTab||(()=>{try{return localStorage.getItem('spl_active_tab')||'home';}catch(e){return'home';}})();
+    const rememberedTab=urlTab||'encyclopedia';
 
     // Apply the target tab immediately — before encRender() — so the correct tab is
     // the first thing the user sees. encRender() then renders into a hidden section.
