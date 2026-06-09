@@ -3582,12 +3582,7 @@ function init101(){
     renderShapes();
   }
   init101Grids();
-  // Restore last-viewed section within Crystals 101
-  const saved101=(()=>{try{return localStorage.getItem('spl_101_section');}catch(e){return null;}})();
-  if(saved101&&saved101!=='work'){
-    const btn=document.querySelector(`.c101-sidebar-item[onclick*="${saved101}"]`);
-    show101(saved101,btn);
-  }
+  show101('work',document.querySelector('.c101-sidebar-item[onclick*="work"]'));
   // Water pills
   const wp = document.getElementById('water-pills');
   if(wp) wp.innerHTML = '';
