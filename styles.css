@@ -433,10 +433,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .grid-cards-container{grid-template-columns:1fr}
 
   /* Identify tab mobile */
-  .id2-hero{margin:0 0 1rem;height:160px;border-radius:10px}
+  .id2-hero{margin:0 0 0.8rem;height:130px;border-radius:10px}
   .id2-hero-overlay{padding:1rem 1.1rem}
   .id2-hero-h1{font-size:24px}
-  .id2-wrap{padding:1rem 0 1.5rem}
+  .id2-wrap{padding:0.85rem 0 1.5rem}
   .id2-card{padding:1.1rem 1rem;border-radius:10px}
   .id2-color-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;justify-items:center}
   .id2-color-btn{width:100%;max-width:38px;height:32px}
@@ -759,7 +759,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Hero banner */
 .id2-hero{position:relative;margin:0 0 1rem;height:clamp(170px,16vw,220px);overflow:hidden;background:#e8e2da;border:0.5px solid var(--border);border-radius:14px;box-shadow:0 12px 36px rgba(42,37,32,0.07)}
 .id2-hero-placeholder{position:absolute;inset:0;background:linear-gradient(120deg,#d4c9b8 0%,#bfb09e 50%,#c8bfb0 100%)}
-.id2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 58%;display:block}
+.id2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
 .id2-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(38,28,18,0.72) 0%,rgba(38,28,18,0.32) 42%,rgba(38,28,18,0) 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.35rem 1.6rem}
 .id2-hero-kicker{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#fff;font-weight:600;margin-bottom:4px}
 .id2-hero-h1{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;color:#fff;line-height:1.16}
@@ -1276,8 +1276,19 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 }
 
 @media(max-width:600px){
-  .id2-hero{margin:0 0 1rem;height:160px;border-radius:10px}
+  .id2-hero{margin:0 0 0.8rem;height:130px;border-radius:10px}
   .id2-hero-overlay{padding:1rem}
   .id2-hero-h1{font-size:24px}
-  .id2-wrap{padding:0.9rem 0 1.5rem}
+  .id2-wrap{padding:0.75rem 0 1.5rem}
+  .id2-intro{margin-bottom:0.55rem;padding:0 0.4rem;font-size:13px;line-height:1.55}
+  .id2-progress{margin-bottom:0.7rem;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .id2-progress::-webkit-scrollbar{display:none}
+  .id2-prog-step{flex:0 0 auto;min-width:86px;padding:0.55rem 0.75rem;font-size:11px;white-space:nowrap}
+  #id2-steps{gap:6px;margin-bottom:0.75rem}
+  .id2-sc-answered-row{gap:8px;min-height:44px;padding:0.55rem 0.75rem}
+  .id2-sc-aname{font-size:10.5px;line-height:1.2}
+  .id2-sc-chip{padding:3px 9px;line-height:1.25;white-space:normal;text-align:center}
+  .id2-sc-change{min-height:36px;padding:8px 2px;font-size:12px}
+  .id2-sc-inner{padding:0.95rem 1rem}
+  .id2-sc-header{margin-bottom:0.8rem}
 }
