@@ -1671,8 +1671,7 @@ function encDoorwayBrowse(key){
     const panel=document.getElementById('panel-'+key);
     const btn=document.getElementById('fbtn-'+key);
     if(panel&&btn){panel.classList.add('open');btn.classList.add('open');openPanel=key;}
-    const fc=document.getElementById('enc-filter-cats');
-    if(fc)fc.scrollIntoView({behavior:'smooth',block:'nearest'});
+    scrollToPageSection('#enc-filter-cats');
   },150);
 }
 
@@ -1681,8 +1680,7 @@ function encBrowseTier(num){
   setTimeout(()=>{
     closeAllPanels();
     setFilter('tier',String(num));
-    const fc=document.getElementById('enc-filter-cats');
-    if(fc)fc.scrollIntoView({behavior:'smooth',block:'nearest'});
+    scrollToPageSection('#enc-filter-cats');
   },150);
 }
 
@@ -1747,7 +1745,7 @@ function encTierAccordionExpand(num){
   }
   body.style.display='';
   if(caret)caret.textContent='▴';
-  setTimeout(()=>body.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  setTimeout(()=>scrollToPageSection(document.getElementById('enc-acc-'+num)),50);
 }
 
 // ── Collection Tier Bars ──
@@ -2808,6 +2806,19 @@ function scrollPageTop(){
 function scrollElementTop(id){
   const el=document.getElementById(id);
   if(el)el.scrollTop=0;
+}
+function getStickyScrollOffset(){
+  const topbar=document.querySelector('.topbar');
+  const nav=document.querySelector('.main-nav-wrap');
+  const topbarHeight=topbar?topbar.getBoundingClientRect().height:0;
+  const navHeight=nav?nav.getBoundingClientRect().height:0;
+  return topbarHeight+navHeight+18;
+}
+function scrollToPageSection(target){
+  const el=typeof target==='string'?document.querySelector(target):target;
+  if(!el)return;
+  const y=el.getBoundingClientRect().top+window.scrollY-getStickyScrollOffset();
+  try{window.scrollTo({top:Math.max(0,y),left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,y));}
 }
 
 // ── TABS ──
