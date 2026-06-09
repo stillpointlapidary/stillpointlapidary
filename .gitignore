@@ -6,6 +6,7 @@ logo-exports-v6/
 logo-set/
 
 # Working/scratch files
+tmp-visual/
 *.docx
 *.py
 _fonts_embedded.txt
