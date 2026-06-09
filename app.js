@@ -127,7 +127,7 @@ const INTENTION_THEME_MAP = {
 const INTENTION_CARD_SUBS = {
   'Grounding & Stability': 'Presence, stability, inner calm',
   'Heart & Emotional':     'Love, compassion, forgiveness',
-  'Mind & Will':           'Mental clarity, motivation, fresh perspective',
+  'Mind & Will':           'Clarity, focus, motivation',
   'Spirit & Intuition':    'Intuition, inner wisdom, spiritual awareness',
   'Body & Vitality':       'Energy, resilience, vitality',
 };
@@ -5836,4 +5836,3 @@ _authInit();
   })();
 
 })();
-
