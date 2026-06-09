@@ -82,7 +82,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   display:flex;flex-direction:column;gap:1.15rem;
 }
 .hero-kicker{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#c8a96e;font-weight:500;margin-bottom:0}
-.hero-headline{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,2.8vw,44px);font-weight:400;line-height:1.15;color:#fff;margin:0}
+.hero-headline{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,2.8vw,44px);font-weight:400;line-height:1.15;color:#fff;margin:0}
 .hero-headline em{font-style:italic;color:#c8a96e}
 .hero-sub{font-family:'Jost',sans-serif;font-size:13px;color:rgba(255,255,255,0.76);line-height:1.9;margin:0;max-width:560px}
 .hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-top:0.2rem}
@@ -96,7 +96,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .hero-meta-dot{color:rgba(200,169,110,0.9);font-size:15px;font-weight:500}
 .hero-sotd-row{display:none!important;align-items:center;gap:12px;padding-top:0.9rem;border-top:0.5px solid rgba(200,169,110,0.28);margin-top:0.25rem}
 .hero-sotd-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#c8a96e;font-weight:500;white-space:nowrap}
-.hero-sotd-link{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:19px;color:#fff;text-decoration:none;transition:color 0.15s}
+.hero-sotd-link{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:19px;color:#fff;text-decoration:none;transition:color 0.15s}
 .hero-sotd-link:hover{color:#c8a96e}
 /* SOTD data passthrough — keep JS container but hide it */
 #sotd-container{display:none!important}
@@ -615,7 +615,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* TEN STONES WORTH KNOWING */
 .featured-section{padding:2.25rem 0 1.25rem;border-bottom:0.5px solid var(--border2);margin-bottom:0}
 .featured-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.25rem;padding:0 0}
-.featured-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:400;color:var(--ink)}
+.featured-title{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:var(--ink)}
 .featured-subtitle{font-size:14px;color:var(--ink2);margin-top:6px;line-height:1.5}
 .featured-browse{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:#8b7355;text-decoration:none;border-bottom:1px solid rgba(139,115,85,0.3);padding-bottom:1px;white-space:nowrap}
 .featured-browse:hover{color:var(--ink);border-color:var(--ink)}
@@ -629,7 +629,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* HOME EXPLORE TILES */
 .home-pathways{padding:2rem 0 2rem}
 .home-pathways-header{margin-bottom:1.25rem}
-.home-pathways-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:400;color:var(--ink)}
+.home-pathways-title{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:var(--ink)}
 .home-pathways-sub{font-size:14px;color:var(--ink3);margin-top:4px}
 .home-pathways-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .home-pw-card{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem 1.4rem 1.25rem;display:flex;flex-direction:column;gap:0.7rem;cursor:pointer;text-decoration:none;color:inherit;transition:all 0.18s}
@@ -640,7 +640,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .home-pw-icon--id  {background:#e8f0ea}
 .home-pw-icon--coll{background:#eaeff4}
 .home-pw-icon--101 {background:#f0ece4}
-.home-pw-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:400;color:var(--ink)}
+.home-pw-name{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink)}
 .home-pw-desc{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);line-height:1.6;flex:1}
 @media(max-width:900px){.home-pathways-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.home-pathways-grid{grid-template-columns:repeat(2,1fr)}}
