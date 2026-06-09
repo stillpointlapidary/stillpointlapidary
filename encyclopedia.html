@@ -85,7 +85,7 @@
         <p class="enc-hero-sub">Start with the Essentials, then explore by color, intention, family, chakra, or collector tier.</p>
         <div class="enc-hero-btns">
           <button class="btn btn-accent" onclick="scrollToPageSection('#enc-essentials-top')">Start with the Essentials</button>
-          <button class="btn" onclick="scrollToPageSection('.enc-library-panel')">Browse full library →</button>
+          <button class="btn" onclick="encHeroBrowseFullLibrary()">Browse full library →</button>
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
           <div class="enc-pathway-desc">Find stones by the colors that speak to you.</div>
           <span class="enc-pathway-arrow" aria-hidden="true">→</span>
         </button>
-        <button class="enc-pathway-card" onclick="switchTabByName('mood')">
+        <button class="enc-pathway-card" onclick="encDoorwayIntention()">
           <div class="enc-pathway-icon enc-pathway-icon--intention"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="enc-pathway-name">By Intention</div>
           <div class="enc-pathway-desc">Stones that support your goals and well-being.</div>
@@ -131,13 +131,20 @@
         <div class="enc-panel-search-divider"><span>or search directly</span></div>
         <div class="enc-panel-search-wrap">
           <span class="enc-panel-search-icon">⌕</span>
-          <input type="text" id="enc-search" class="enc-panel-search-input" placeholder="Search by name, color, use, property…" oninput="encRender()">
+          <input type="text" id="enc-search" class="enc-panel-search-input" placeholder="Search by name, color, use, property…" onfocus="encLandingSearchFocus()" oninput="syncEncSearch('desktop')">
         </div>
       </div>
     </div>
 
   </div><!-- /enc-landing -->
 
+  <div class="enc-search-results-panel" id="enc-search-results-panel">
+  <div class="enc-mobile-search-head">Search Library</div>
+  <div class="enc-mobile-search-wrap">
+    <span class="enc-panel-search-icon">⌕</span>
+    <input type="text" id="enc-mobile-search" class="enc-panel-search-input" placeholder="Search by name, color, use, property…" onfocus="encEnterSearchMode(false)" oninput="syncEncSearch('mobile')">
+  </div>
+  <div class="enc-active-filter-row" id="enc-active-filter-row"></div>
   <div style="position:relative;margin-bottom:0.5rem">
   <div class="filter-cats" id="enc-filter-cats">
     <button class="filter-cat-btn" id="fbtn-fam" onclick="togglePanel('fam',event)">Family <span class="aval" id="fval-fam"></span><span class="caret">▾</span></button>
@@ -168,6 +175,7 @@
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
     <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
+  </div>
   </div>
 
   <!-- TIER LANDING: default view showing Tier 1 grid + teaser rows for 2/3/4 -->
