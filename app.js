@@ -688,8 +688,10 @@ function togglePanel(key,e){
   const panel=document.getElementById('panel-'+key);
   const btn=document.getElementById('fbtn-'+key);
   if(!panel||!btn)return;
+  if(isMobileView())dismissEncDoorway();
   if(openPanel===key){panel.classList.remove('open');btn.classList.remove('open');openPanel=null;}
   else{closeAllPanels();panel.classList.add('open');btn.classList.add('open');openPanel=key;}
+  if(isMobileView())setTimeout(()=>encScrollToSearchArea(false),20);
 }
 
 function toggleCollPanel(key,e){
@@ -720,6 +722,95 @@ function updateBtn(btnId,valId,val){
   updateMoreFilterButtons();
 }
 
+function isMobileView(){
+  return window.matchMedia&&window.matchMedia('(max-width: 600px)').matches;
+}
+
+function encSearchValue(){
+  return (document.getElementById('enc-mobile-search')?.value || document.getElementById('enc-search')?.value || '').trim();
+}
+
+function syncEncSearch(source){
+  const desktop=document.getElementById('enc-search');
+  const mobile=document.getElementById('enc-mobile-search');
+  const val=(source==='mobile'?mobile:desktop)?.value || '';
+  if(source==='mobile'&&desktop)desktop.value=val;
+  if(source==='desktop'&&mobile)mobile.value=val;
+  if(isMobileView())dismissEncDoorway();
+  encRender();
+  if(isMobileView())encScrollToSearchArea(false);
+}
+
+function encScrollToSearchArea(smooth=true){
+  const target=document.getElementById('enc-search-results-panel')||document.getElementById('enc-filter-cats');
+  if(!target)return;
+  const y=target.getBoundingClientRect().top+window.scrollY-118;
+  try{window.scrollTo({top:Math.max(0,y),left:0,behavior:smooth?'smooth':'auto'});}catch(e){window.scrollTo(0,Math.max(0,y));}
+}
+
+function encEnterSearchMode(scroll=true){
+  dismissEncDoorway();
+  encRender();
+  if(scroll!==false)setTimeout(()=>encScrollToSearchArea(true),40);
+}
+
+function encHeroBrowseFullLibrary(){
+  if(isMobileView())encEnterSearchMode(true);
+  else scrollToPageSection('.enc-library-panel');
+}
+
+function encLandingSearchFocus(){
+  if(!isMobileView())return;
+  encEnterSearchMode(true);
+  setTimeout(()=>document.getElementById('enc-mobile-search')?.focus(),80);
+}
+
+function renderEncActiveFilters(){
+  const row=document.getElementById('enc-active-filter-row');
+  if(!row)return;
+  const chips=[];
+  const names={fam:'Family',theme:'Theme',color:'Color',chakra:'Chakra',tier:'Tier',mohs:'Hardness',formation:'Formation',material:'Material'};
+  Object.keys(filters).forEach(k=>{
+    if(filters[k]&&filters[k]!=='all')chips.push(`<button class="enc-active-chip" type="button" onclick="clearEncFilter('${k}')">${names[k]||k}: ${escapeAttr(filters[k])} ×</button>`);
+  });
+  const q=encSearchValue();
+  if(q)chips.push(`<button class="enc-active-chip" type="button" onclick="clearEncSearch()">Search: ${escapeAttr(q)} ×</button>`);
+  row.innerHTML=chips.length?`<span class="enc-active-label">Active filters</span>${chips.join('')}<button class="enc-clear-all" type="button" onclick="clearEncAllFilters()">Clear All</button>`:'';
+}
+
+function clearEncFilter(key){
+  filters[key]='all';
+  document.querySelectorAll('#pills-'+key+' .fpill').forEach((p,i)=>p.classList.toggle('active',i===0));
+  updateBtn('fbtn-'+key,'fval-'+key,'all');
+  closeAllPanels();
+  encRender();
+  if(isMobileView())encScrollToSearchArea(true);
+}
+
+function clearEncSearch(){
+  const desktop=document.getElementById('enc-search');
+  const mobile=document.getElementById('enc-mobile-search');
+  if(desktop)desktop.value='';
+  if(mobile)mobile.value='';
+  encRender();
+  if(isMobileView())encScrollToSearchArea(true);
+}
+
+function clearEncAllFilters(){
+  filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all',tier:'all'};
+  const desktop=document.getElementById('enc-search');
+  const mobile=document.getElementById('enc-mobile-search');
+  if(desktop)desktop.value='';
+  if(mobile)mobile.value='';
+  ['fam','theme','color','chakra','mohs','formation','material','tier'].forEach(k=>{
+    document.querySelectorAll('#pills-'+k+' .fpill').forEach((p,i)=>p.classList.toggle('active',i===0));
+    updateBtn('fbtn-'+k,'fval-'+k,'all');
+  });
+  closeAllPanels();
+  encEnterSearchMode(false);
+  if(isMobileView())encScrollToSearchArea(true);
+}
+
 function updateMoreFilterButtons(){
   const encMore=document.getElementById('fbtn-more');
   if(encMore){
@@ -738,6 +829,7 @@ function setFilter(key,val,btn){
   updateBtn('fbtn-'+key,'fval-'+key,val);
   closeAllPanels();
   encRender();
+  if(isMobileView())encScrollToSearchArea(false);
 }
 
 function setCollFilter(key,val,btn){
@@ -771,6 +863,8 @@ function resetFilters(){
   filters={fam:'all',theme:'all',color:'all',chakra:'all',mohs:'all',formation:'all',material:'all',tier:'all'};
   const s=document.getElementById('enc-search');
   if(s)s.value='';
+  const ms=document.getElementById('enc-mobile-search');
+  if(ms)ms.value='';
   ['fam','theme','color','chakra','mohs','formation','material','tier'].forEach(k=>{
     document.querySelectorAll('#pills-'+k+' .fpill').forEach((p,i)=>p.classList.toggle('active',i===0));
     updateBtn('fbtn-'+k,'fval-'+k,'all');
@@ -792,7 +886,7 @@ function resetCollFilters(){
 function encSort(v){sortBy=v;encRender();}
 
 function getFiltered(){
-  const q=(document.getElementById('enc-search')?.value||'').toLowerCase().trim();
+  const q=encSearchValue().toLowerCase();
   return CRYSTALS.filter(c=>{
     const famOk=filters.fam==='all'||c.fam===filters.fam||c.sp===filters.fam;
     const themeOk=filters.theme==='all'||
@@ -1039,23 +1133,24 @@ function encRender(){
   const list = getFiltered();
 
   const filtersActive = Object.values(filters).some(v => v !== 'all') ||
-    (document.getElementById('enc-search')?.value || '').trim().length > 0;
+    encSearchValue().length > 0;
 
   if(filtersActive)dismissEncDoorway();
 
   // Active filter count
   const activeCount = Object.values(filters).filter(v => v !== 'all').length +
-    ((document.getElementById('enc-search')?.value || '').trim().length > 0 ? 1 : 0);
+    (encSearchValue().length > 0 ? 1 : 0);
 
   // Results count + filter indicator
   const cnt = document.getElementById('enc-count');
   if(cnt){
-    cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' entries';
+    cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' stones';
     if(activeCount > 0) cnt.textContent += ' · ' + activeCount + ' filter' + (activeCount > 1 ? 's' : '') + ' active';
   }
 
   // Show Reset only when filters are on
   document.querySelectorAll('.reset-link').forEach(el => el.classList.toggle('filters-on', filtersActive));
+  renderEncActiveFilters();
 
   const grid = document.getElementById('crystal-grid');
   if(!grid) return;
@@ -1771,8 +1866,14 @@ function encDoorwayBrowse(key){
     const panel=document.getElementById('panel-'+key);
     const btn=document.getElementById('fbtn-'+key);
     if(panel&&btn){panel.classList.add('open');btn.classList.add('open');openPanel=key;}
-    scrollToPageSection('#enc-filter-cats');
+    if(isMobileView())encScrollToSearchArea(true);
+    else scrollToPageSection('#enc-filter-cats');
   },150);
+}
+
+function encDoorwayIntention(){
+  if(isMobileView())encDoorwayBrowse('theme');
+  else switchTabByName('mood');
 }
 
 function encBrowseTier(num){
@@ -1780,7 +1881,8 @@ function encBrowseTier(num){
   setTimeout(()=>{
     closeAllPanels();
     setFilter('tier',String(num));
-    scrollToPageSection('#enc-filter-cats');
+    if(isMobileView())encScrollToSearchArea(true);
+    else scrollToPageSection('#enc-filter-cats');
   },150);
 }
 
@@ -1810,6 +1912,10 @@ function encTier1RenderUpTo(allStones,upTo,grid){
 }
 
 function encTier1ShowMore(currentCount,newCount){
+  if(isMobileView()){
+    encBrowseTier(1);
+    return;
+  }
   const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
   const t1=document.getElementById('enc-tier-1-grid');
   if(!t1)return;

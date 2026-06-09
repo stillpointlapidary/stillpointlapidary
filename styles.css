@@ -1088,6 +1088,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-panel-search-icon{padding:0 12px 0 14px;color:var(--ink3);font-size:17px;line-height:1;pointer-events:none;flex-shrink:0}
 .enc-panel-search-input{flex:1;border:none;outline:none;background:transparent;padding:11px 14px 11px 0;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);letter-spacing:0.02em}
 .enc-panel-search-input::placeholder{color:var(--ink3)}
+.enc-mobile-search-head,.enc-mobile-search-wrap{display:none}
+.enc-active-filter-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 0.75rem}
+.enc-active-filter-row:empty{display:none}
+.enc-active-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);width:100%}
+.enc-active-chip,.enc-clear-all{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.03em;border:0.5px solid var(--border);border-radius:999px;background:var(--white);color:var(--ink2);padding:5px 10px;cursor:pointer}
+.enc-active-chip{background:var(--stone2);color:var(--ink)}
+.enc-clear-all{color:var(--accent);border-color:rgba(139,115,85,0.25)}
+.enc-active-chip:hover,.enc-clear-all:hover{border-color:var(--accent2);color:var(--accent)}
 
 /* Tier landing sections */
 #enc-tier-landing{margin-bottom:0}
@@ -1142,17 +1150,44 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 }
 @media(max-width:600px){
   .enc-library-panel,.enc-tier-section,.enc-next-shelf,.enc-tier-accordion{scroll-margin-top:132px}
-  .enc-hero{height:auto;min-height:320px;background-size:90%;background-position:bottom center}
+  .enc-hero{height:auto;min-height:250px;background-size:90%;background-position:bottom center;margin-bottom:0.9rem}
   .enc-hero::after{background:linear-gradient(180deg,rgba(250,248,246,.97) 0%,rgba(250,248,246,.92) 48%,rgba(250,248,246,.28) 100%)}
-  .enc-hero-content{padding:1.75rem 1.25rem}
-  .enc-hero-title{font-size:27px}
-  .enc-hero-sub{font-size:14px}
+  .enc-hero-content{padding:1.35rem 1.15rem}
+  .enc-hero-eyebrow{margin-bottom:0.65rem}
+  .enc-hero-title{font-size:24px;margin-bottom:0.65rem}
+  .enc-hero-sub{font-size:13px;line-height:1.55;margin-bottom:1rem}
+  .enc-hero-btns .btn-accent{display:none}
+  .enc-hero-btns .btn{min-height:40px}
+  .enc-library-panel{padding:1.25rem 1rem;margin-bottom:1rem}
+  .enc-panel-heading{margin-bottom:1rem}
   .enc-pathway-grid{grid-template-columns:repeat(2,1fr)}
-  .enc-pathway-card{min-height:115px;padding:0.9rem 0.75rem}
+  .enc-pathway-card{min-height:102px;padding:0.75rem 0.65rem}
+  .enc-pathway-card:nth-child(5){display:none}
+  .enc-pathway-icon{width:40px;height:40px;margin-bottom:0.45rem}
+  .enc-pathway-desc{display:none}
+  .enc-search-results-panel{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;box-shadow:0 3px 14px rgba(42,37,32,0.04)}
+  .enc-mobile-search-head{display:block;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:0.75rem}
+  .enc-mobile-search-wrap{display:flex;align-items:center;border:0.5px solid var(--border);border-radius:10px;background:var(--stone);overflow:hidden;margin-bottom:0.85rem}
+  #tab-encyclopedia .filter-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;overflow:visible;padding-bottom:0;margin-bottom:0.85rem}
+  #tab-encyclopedia .filter-cat-btn{justify-content:space-between;width:100%;min-height:40px;padding:8px 11px}
+  #tab-encyclopedia #fbtn-more,#tab-encyclopedia .filter-more-panel{display:none}
+  #tab-encyclopedia .filter-panel{position:static;box-shadow:none;min-width:0;width:100%;border-radius:10px;margin:0 0 0.85rem;padding:0.85rem;background:var(--stone)}
+  #tab-encyclopedia .filter-panel.open{display:block}
+  #tab-encyclopedia .filter-panel-pills{gap:6px}
+  #tab-encyclopedia .fpill{min-height:34px}
+  #tab-encyclopedia .meta-row{align-items:flex-start;gap:0.75rem;margin-bottom:0.9rem}
+  #tab-encyclopedia .sort-wrap{width:100%;justify-content:space-between}
+  #tab-encyclopedia .sort-wrap select{min-width:140px}
   .enc-tier-header{grid-template-columns:auto 1fr}
   .enc-tier-viewall{display:none}
   .enc-tier-title{font-size:22px}
-  .enc-tier-grid,.enc-accordion-grid{grid-template-columns:repeat(3,1fr)}
+  .enc-tier-grid,.enc-accordion-grid,#tab-encyclopedia #crystal-grid{grid-template-columns:1fr;gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
+  .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card{flex-direction:row;align-items:center;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:88px;background:var(--white)}
+  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone{width:92px;height:92px;flex-shrink:0;border-right:0.5px solid var(--border2)}
+  .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img{max-height:92px}
+  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body{padding:0.6rem 0.8rem;min-width:0}
+  .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name{font-size:16px;overflow-wrap:normal}
+  .enc-tier-grid .card-color,.enc-accordion-grid .card-color,#tab-encyclopedia #crystal-grid .card-color{line-height:1.35}
   .enc-next-shelf{grid-template-columns:1fr}
   .enc-next-up{display:none}
   .enc-accordion-row{grid-template-columns:auto 1fr auto;padding:0.85rem 1rem}
