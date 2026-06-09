@@ -5302,18 +5302,37 @@ const _supa = window.supabase.createClient(
 );
 
 // ── Load stones from Supabase, then init app ──
+function runPageAction(action, attempt){
+  if(!action)return;
+  const n=attempt||0;
+  let handled=false;
+  if(action==='guide'){
+    handled=!!document.getElementById('popup-instructions');
+    if(handled)openPopup('instructions');
+  }else if(action==='manage'){
+    handled=!!document.getElementById('popup-manage');
+    if(handled)openPopup('manage');
+  }else if(action==='add-entry'){
+    handled=!!document.getElementById('add-enc-form-overlay');
+    if(handled)openAddEncForm();
+  }else if(action==='request-entry'){
+    handled=!!document.getElementById('entry-request-form-overlay');
+    if(handled)openEntryRequestForm();
+  }
+  if(!handled&&n<5)setTimeout(()=>runPageAction(action,n+1),120);
+}
+
 loadStonesAndInit().then(()=>{
   const params=new URLSearchParams(window.location.search);
   const action=params.get('action');
-  if(action==='guide') openPopup('instructions');
-  else if(action==='manage') openPopup('manage');
-  else if(action==='add-entry') openAddEncForm();
   const tabParam=params.get('tab');
   if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
     switchTabByName(tabParam);
     // Re-apply after auth+data loading settles (auth callbacks can fire and re-render after init)
     setTimeout(()=>switchTabByName(tabParam), 600);
   }
+  runPageAction(action);
+  setTimeout(()=>runPageAction(action), 650);
 });
 
 let _currentUser = null;
