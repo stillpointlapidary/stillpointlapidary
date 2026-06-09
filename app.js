@@ -2802,6 +2802,14 @@ function scrollElementTop(id){
 function rememberActiveTab(name){
   try{localStorage.setItem('spl_active_tab',name);}catch(e){}
 }
+function syncTabUrl(name){
+  if(!document.getElementById('crystal-grid') || !history.replaceState) return;
+  try{
+    const url=new URL(window.location.href);
+    url.searchParams.set('tab',name);
+    history.replaceState(null,'',url.pathname+url.search+url.hash);
+  }catch(e){}
+}
 function getTabButton(name){
   const map={mood:1,encyclopedia:2,identify:3,collection:4,'101':5};
   const idx=map[name];
@@ -2809,6 +2817,7 @@ function getTabButton(name){
 }
 function switchTab(name,btn){
   rememberActiveTab(name);
+  syncTabUrl(name);
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   const tab=document.getElementById('tab-'+name);
@@ -2824,6 +2833,7 @@ function switchTab(name,btn){
 }
 function switchTabByName(name){
   rememberActiveTab(name);
+  syncTabUrl(name);
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   const tab=document.getElementById('tab-'+name);
