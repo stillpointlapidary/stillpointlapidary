@@ -613,6 +613,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .browse-cat-pill{padding:5px 14px;border-radius:20px;border:0.5px solid var(--border);font-size:11px;letter-spacing:0.05em;color:var(--ink2);cursor:pointer;background:var(--stone);transition:all 0.15s;font-family:'Jost',sans-serif}
 .browse-cat-pill:hover{background:var(--stone2);border-color:var(--accent2);color:var(--ink)}
 .browse-cat-pill.active{background:var(--stone2);border-color:var(--accent2);color:var(--ink);font-weight:500}
+.shapes-mobile{display:none}
 @media(max-width:600px){.cat-grid{grid-template-columns:1fr}.cat-grid-header{flex-direction:column;gap:4px}}
 @media(max-width:700px){.shapes-pane{padding:20px}.shape-pane-layout{grid-template-columns:1fr}}
 
@@ -959,6 +960,36 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   /* Touch targets: Crystals 101 section pills */
   .c101-pill{padding:10px 16px;min-height:44px}
+
+  /* Crystal Forms: mobile mini-reference layout */
+  #s101-shapes .c101-photo-intro--forms{gap:0.85rem;margin-bottom:1rem}
+  #s101-shapes .c101-photo-copy .c101-body{font-size:13.5px;line-height:1.65;margin-bottom:0.7rem}
+  #s101-shapes .c101-photo-slot{max-width:100%;aspect-ratio:16/10}
+  #s101-shapes .shapes-grid{border:none;border-radius:0;overflow:visible;margin-top:0.9rem}
+  #s101-shapes .shapes-strip-outer,
+  #s101-shapes .shapes-pane{display:none}
+  #s101-shapes .shapes-mobile{display:block}
+  .forms-mobile-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.55rem}
+  .forms-mobile-selector{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0.95rem}
+  .forms-mobile-cat{min-height:44px;border:0.5px solid var(--border);border-radius:10px;background:var(--white);color:var(--ink2);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer}
+  .forms-mobile-cat.active{background:var(--ink);border-color:var(--ink);color:var(--white)}
+  .forms-mobile-sections{display:flex;flex-direction:column;gap:8px}
+  .forms-mobile-section{border:0.5px solid var(--border);border-radius:11px;background:var(--white);overflow:hidden}
+  .forms-mobile-section-toggle{width:100%;min-height:52px;border:none;background:var(--stone2);display:flex;align-items:center;gap:10px;text-align:left;padding:0.8rem 0.9rem;font-family:'Jost',sans-serif;color:var(--ink);cursor:pointer}
+  .forms-mobile-caret{width:18px;height:18px;border-radius:50%;border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--white)}
+  .forms-mobile-caret::before{content:'+';font-size:13px;line-height:1;color:var(--accent)}
+  .forms-mobile-section.open .forms-mobile-caret::before{content:'-'}
+  .forms-mobile-section-title{display:block;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.15}
+  .forms-mobile-section-sub{display:block;margin-top:3px;font-size:11.5px;line-height:1.35;color:var(--ink3)}
+  .forms-mobile-list{display:none;padding:8px;background:var(--white)}
+  .forms-mobile-section.open .forms-mobile-list{display:flex;flex-direction:column;gap:8px}
+  .mobile-form-card{display:flex;gap:10px;align-items:flex-start;border:0.5px solid var(--border2);border-radius:10px;background:var(--stone);padding:0.7rem 0.75rem}
+  .mobile-form-icon{width:58px;height:58px;display:flex;align-items:center;justify-content:center;flex:0 0 58px;border:0.5px solid var(--border);border-radius:9px;background:var(--white)}
+  .mobile-form-icon svg{width:42px;height:42px}
+  .mobile-form-copy{min-width:0}
+  .mobile-form-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:2px}
+  .mobile-form-tagline{font-size:10.5px;line-height:1.35;letter-spacing:0.035em;color:var(--accent);margin-bottom:4px}
+  .mobile-form-desc{font-size:12px;line-height:1.55;color:var(--ink2)}
 
   /* Touch targets: drawer close button (was 34px) */
   .drawer-close{width:44px;height:44px}

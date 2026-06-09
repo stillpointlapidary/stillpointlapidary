@@ -5419,11 +5419,79 @@ function renderShapes() {
 
   container.appendChild(stripOuter);
   container.appendChild(pane);
+  renderMobileShapes(container, shapeMap);
 
   // Default: show Holdable category grid
   const firstCat = SHAPE_CATEGORIES[0];
   setActiveCat(firstCat.label);
   showCategoryGrid(firstCat, pane, shapeMap, setActiveCat);
+}
+
+function renderMobileShapes(container, shapeMap) {
+  const mobile = document.createElement('div');
+  mobile.className = 'shapes-mobile';
+  mobile.innerHTML = `
+    <div class="forms-mobile-label">Browse by category</div>
+    <div class="forms-mobile-selector" role="tablist" aria-label="Crystal form categories">
+      ${SHAPE_CATEGORIES.map((cat, i) => `<button class="forms-mobile-cat${i===0?' active':''}" type="button" data-cat="${cat.label}" aria-selected="${i===0?'true':'false'}">${cat.label}</button>`).join('')}
+    </div>
+    <div class="forms-mobile-sections">
+      ${SHAPE_CATEGORIES.map((cat, i) => {
+        const shapes = cat.ids.map(id => shapeMap[id]).filter(Boolean);
+        return `
+          <section class="forms-mobile-section${i===0?' open':''}" data-cat="${cat.label}">
+            <button class="forms-mobile-section-toggle" type="button" aria-expanded="${i===0?'true':'false'}">
+              <span class="forms-mobile-caret" aria-hidden="true"></span>
+              <span>
+                <span class="forms-mobile-section-title">${cat.label}</span>
+                <span class="forms-mobile-section-sub">${cat.def || ''}</span>
+              </span>
+            </button>
+            <div class="forms-mobile-list">
+              ${shapes.map(s => `
+                <article class="mobile-form-card">
+                  <div class="mobile-form-icon">${s.draw()}</div>
+                  <div class="mobile-form-copy">
+                    <div class="mobile-form-name">${s.name}</div>
+                    <div class="mobile-form-tagline">${s.tagline}</div>
+                    <div class="mobile-form-desc">${s.tile || s.body}</div>
+                  </div>
+                </article>`).join('')}
+            </div>
+          </section>`;
+      }).join('')}
+    </div>`;
+
+  function setMobileCategory(catLabel, scroll) {
+    let activeSection = null;
+    mobile.querySelectorAll('.forms-mobile-section').forEach(section => {
+      const isActive = section.dataset.cat === catLabel;
+      section.classList.toggle('open', isActive);
+      section.querySelector('.forms-mobile-section-toggle')?.setAttribute('aria-expanded', String(isActive));
+      if(isActive) activeSection = section;
+    });
+    mobile.querySelectorAll('.forms-mobile-cat').forEach(btn => {
+      const isActive = btn.dataset.cat === catLabel;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+    if(scroll && activeSection) {
+      requestAnimationFrame(() => activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }
+
+  mobile.querySelectorAll('.forms-mobile-cat').forEach(btn => {
+    btn.addEventListener('click', () => setMobileCategory(btn.dataset.cat, true));
+  });
+  mobile.querySelectorAll('.forms-mobile-section-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.closest('.forms-mobile-section');
+      if(!section) return;
+      setMobileCategory(section.dataset.cat, false);
+    });
+  });
+
+  container.appendChild(mobile);
 }
 
 function showCategoryGrid(cat, pane, shapeMap, setActiveCat) {
