@@ -936,11 +936,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   /* Crystals 101 sidebar → horizontal strip on mobile */
   .c101-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;border-radius:8px;align-items:stretch}
-  .c101-sidebar{position:static;max-height:none;border-right:none;border-bottom:0.5px solid var(--border);border-radius:8px 8px 0 0;display:flex;flex-wrap:nowrap;overflow-x:auto;padding:6px 8px;scrollbar-width:none}
+  .c101-sidebar{position:static;max-height:none;border-right:none;border-bottom:0.5px solid var(--border);border-radius:8px 8px 0 0;display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;overflow-y:hidden;padding:9px 10px 11px;scroll-padding:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .c101-sidebar::-webkit-scrollbar{display:none}
-  .c101-sidebar-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:8px 12px;flex-shrink:0}
-  .c101-sidebar-item.active{border-left:none;border-bottom-color:var(--accent);background:transparent;font-weight:500}
-  .c101-content-pane{padding:20px 16px;border-radius:0 0 8px 8px}
+  .c101-sidebar-item{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;padding:10px 13px;min-height:44px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:11.5px;line-height:1.15;letter-spacing:0.025em;border-radius:8px 8px 0 0}
+  .c101-sidebar-item.active{border-left:none;border-bottom-color:var(--accent);background:var(--white);color:var(--ink);font-weight:500}
+  .c101-content-pane{padding:22px 16px 20px;border-radius:0 0 8px 8px}
 
   /* Center intro action buttons on mobile */
   .intro-actions{justify-content:center}
