@@ -1014,6 +1014,42 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-work .work-methods-table td:nth-child(n+2)::before{display:block;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
   #s101-work .work-methods-table td:nth-child(2)::before{content:'How'}
   #s101-work .work-methods-table td:nth-child(3)::before{content:'Best for'}
+  #s101-cleanse.active{display:flex;flex-direction:column}
+  #s101-cleanse .c101-wide-photo--cleansing{aspect-ratio:16/7.25;margin-bottom:1rem}
+  #s101-cleanse .c101-block{margin-bottom:1.3rem}
+  #s101-cleanse .cleanse-quick-start{display:block;order:1}
+  #s101-cleanse .cleanse-quick-list{display:grid;gap:8px}
+  #s101-cleanse .cleanse-quick-list div{border:0.5px solid var(--border);border-radius:10px;background:var(--white);padding:0.72rem 0.85rem;font-size:12.5px;line-height:1.45;color:var(--ink2)}
+  #s101-cleanse .cleanse-quick-list div::before{content:'•';color:var(--accent);margin-right:7px}
+  #s101-cleanse .why-matters-block{order:2}
+  #s101-cleanse .cleanse-methods-block{order:3}
+  #s101-cleanse .water-warning-block{order:4}
+  #s101-cleanse .sun-warning-block{order:5}
+  #s101-cleanse .charging-methods-block{order:6}
+  #s101-cleanse .how-often-block{order:7}
+  #s101-cleanse .care-search-block{order:8}
+  #s101-cleanse .method-grid{display:none}
+  #s101-cleanse .cleanse-method-mobile-groups{display:flex;flex-direction:column;gap:12px}
+  #s101-cleanse .cleanse-method-group{display:flex;flex-direction:column;gap:8px}
+  #s101-cleanse .cleanse-method-group-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0.1rem 0 0.1rem}
+  #s101-cleanse .method-card{padding:0.78rem 0.9rem}
+  #s101-cleanse .method-name{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;line-height:1.2}
+  #s101-cleanse .method-desc{font-size:12.5px;line-height:1.55}
+  #s101-cleanse .charging-methods-table,
+  #s101-cleanse .charging-methods-table tbody,
+  #s101-cleanse .charging-methods-table tr,
+  #s101-cleanse .charging-methods-table td{display:block;width:100%;box-sizing:border-box}
+  #s101-cleanse .charging-methods-table{border-collapse:separate;border-spacing:0;margin-bottom:1.2rem}
+  #s101-cleanse .charging-methods-table thead{display:none}
+  #s101-cleanse .charging-methods-table tbody{display:flex;flex-direction:column;gap:10px}
+  #s101-cleanse .charging-methods-table tr{padding:0.9rem 1rem;border:0.5px solid var(--border);border-radius:11px;background:var(--white);box-shadow:0 3px 12px rgba(42,37,32,0.035)}
+  #s101-cleanse .charging-methods-table td{border-bottom:none;padding:0;color:var(--ink2);font-size:13px;line-height:1.55}
+  #s101-cleanse .charging-methods-table td:first-child{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:0.55rem}
+  #s101-cleanse .charging-methods-table td:first-child strong{font-weight:400}
+  #s101-cleanse .charging-methods-table td:nth-child(n+2){margin-top:0.45rem}
+  #s101-cleanse .charging-methods-table td:nth-child(n+2)::before{display:block;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+  #s101-cleanse .charging-methods-table td:nth-child(2)::before{content:'Effect'}
+  #s101-cleanse .charging-methods-table td:nth-child(3)::before{content:'Notes'}
 
   /* Tighter drawer side padding on full-width mobile */
   .drawer-inner{padding:3.5rem 1.25rem 2.5rem}
@@ -1070,6 +1106,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Method cards */
 .method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:1.5rem}
 .method-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white)}
+.cleanse-quick-start,.cleanse-method-mobile-groups{display:none}
 .method-icon{font-size:20px;margin-bottom:6px}
 .method-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:4px}
 .method-desc{font-size:12px;color:var(--ink2);line-height:1.6}
