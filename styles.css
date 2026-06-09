@@ -672,7 +672,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .starter-stone-modal-media{height:230px;border-radius:10px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .starter-stone-modal-image{width:100%;height:100%;object-fit:contain;padding:12px;display:block}
 .starter-stone-modal-dot{width:110px;height:110px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.12)}
-.starter-stone-modal-kicker{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem}
 .starter-stone-modal-title{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:0.8rem}
 .starter-stone-modal-qualities{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1rem}
 .starter-stone-modal-qualities span{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:999px;padding:5px 10px}

@@ -395,7 +395,6 @@ function openStarterStoneModal(index){
   content.innerHTML = `
     <div class="starter-stone-modal-media">${photoHtml}</div>
     <div class="starter-stone-modal-copy">
-      <div class="starter-stone-modal-kicker">Starter stone ${starterStoneModalIndex + 1} of ${FEATURED_STONES.length}</div>
       <h2 class="starter-stone-modal-title" id="starter-stone-modal-title">${escapeAttr(s.name)}</h2>
       <div class="starter-stone-modal-qualities">${starterStoneQualitiesHtml(s)}</div>
       <div class="starter-stone-modal-best"><span>Best for</span>${escapeAttr(STARTER_STONE_BEST_FOR[s.id] || '')}</div>
