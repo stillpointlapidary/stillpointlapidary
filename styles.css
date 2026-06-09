@@ -676,6 +676,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .starter-stone-modal-title{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:0.8rem}
 .starter-stone-modal-qualities{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1rem}
 .starter-stone-modal-qualities span{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:999px;padding:5px 10px}
+.starter-stone-modal-best{font-size:13px;line-height:1.55;color:var(--ink2);margin-bottom:1rem}
+.starter-stone-modal-best span{display:block;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
 .starter-stone-modal-intention{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;line-height:1.55;color:var(--ink);margin-bottom:1.1rem}
 .starter-stone-modal-learn{border:none;background:transparent;color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;padding:0;border-bottom:1px solid rgba(139,115,85,0.28)}
 .starter-stone-modal-learn:hover,.starter-stone-modal-learn:focus-visible{color:var(--ink);border-color:var(--ink);outline:none}

@@ -340,6 +340,19 @@ const FEATURED_STONES = [
   {id:'C-0129', name:'Black Tourmaline', hex:'#3a3530', photo:'black-tourmaline.webp',use:'Protection · Grounding · Shield', intention:'I am protected. Nothing that is not mine can enter.'},
 ];
 
+const STARTER_STONE_BEST_FOR = {
+  'C-0119': 'Winding down, meditation, and emotional reset.',
+  'C-0108': 'Softening self-talk and opening the heart.',
+  'C-0105': 'Clarifying intentions and amplifying other stones.',
+  'C-0121': 'Confidence, fresh momentum, and welcoming opportunity.',
+  'C-0028': 'Trusting intuition through change or uncertainty.',
+  'C-0175': 'Clearing stagnant energy and refreshing a space.',
+  'C-0178': 'Heart-led growth, optimism, and new openings.',
+  'C-0153': 'Creative energy, courage, and getting started.',
+  'C-0041': 'Coming back to the body and steadying scattered energy.',
+  'C-0129': 'Energetic boundaries, grounding, and protection.'
+};
+
 let starterStoneModalIndex = 0;
 let starterStonePreviousFocus = null;
 
@@ -385,8 +398,9 @@ function openStarterStoneModal(index){
       <div class="starter-stone-modal-kicker">Starter stone ${starterStoneModalIndex + 1} of ${FEATURED_STONES.length}</div>
       <h2 class="starter-stone-modal-title" id="starter-stone-modal-title">${escapeAttr(s.name)}</h2>
       <div class="starter-stone-modal-qualities">${starterStoneQualitiesHtml(s)}</div>
+      <div class="starter-stone-modal-best"><span>Best for</span>${escapeAttr(STARTER_STONE_BEST_FOR[s.id] || '')}</div>
       <div class="starter-stone-modal-intention">"${escapeAttr(s.intention)}"</div>
-      <button class="starter-stone-modal-learn" type="button" onclick="learnMoreStarterStone()">Learn more in the encyclopedia →</button>
+      <button class="starter-stone-modal-learn" type="button" onclick="learnMoreStarterStone()">View full entry →</button>
     </div>`;
   starterStonePreviousFocus = document.activeElement;
   overlay.classList.add('open');
