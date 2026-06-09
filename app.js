@@ -640,6 +640,18 @@ function updateBtn(btnId,valId,val){
   const valEl=document.getElementById(valId);
   if(btn)btn.classList.toggle('has-val',val!=='all');
   if(valEl)valEl.textContent=val==='all'?'':String(val);
+  updateMoreFilterButtons();
+}
+
+function updateMoreFilterButtons(){
+  const encMore=document.getElementById('fbtn-more');
+  if(encMore){
+    encMore.classList.toggle('has-val',['mohs','formation','material'].some(k=>filters&&filters[k]&&filters[k]!=='all'));
+  }
+  const collMore=document.getElementById('cfbtn-more');
+  if(collMore){
+    collMore.classList.toggle('has-val',['cmohs','cformation','cmaterial'].some(k=>collFilters&&collFilters[k]&&collFilters[k]!=='all'));
+  }
 }
 
 function setFilter(key,val,btn){
