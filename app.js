@@ -340,29 +340,93 @@ const FEATURED_STONES = [
   {id:'C-0129', name:'Black Tourmaline', hex:'#3a3530', photo:'black-tourmaline.webp',use:'Protection · Grounding · Shield', intention:'I am protected. Nothing that is not mine can enter.'},
 ];
 
+let starterStoneModalIndex = 0;
+let starterStonePreviousFocus = null;
+
+function featuredStoneQualities(s){
+  if(s.qualities && s.qualities.length) return s.qualities;
+  return String(s.use || '').replace(/\u00c2/g,'').split(/\s*\u00b7\s*/).filter(Boolean);
+}
+
 function renderFeaturedStones(){
   const container = document.getElementById('featured-cards');
   if(!container || container.children.length > 0) return;
-  container.innerHTML = FEATURED_STONES.map(s => {
+  container.innerHTML = FEATURED_STONES.map((s,index) => {
     const hasPhoto = !!s.photo;
     const photoHtml = hasPhoto
-      ? `<img class="featured-card-photo" src="${SUPABASE_STONES}${s.photo}" alt="${s.name} crystal specimen" loading="lazy">`
-      : '';
-    const dotHtml = !hasPhoto
-      ? `<div class="featured-card-dot" style="background:${s.hex}"></div>`
-      : '';
+      ? `<img class="starter-stone-image" src="${SUPABASE_STONES}${s.photo}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy">`
+      : `<div class="starter-stone-dot" style="background:${escapeAttr(s.hex)}"></div>`;
+    const qualities = featuredStoneQualities(s).map(q => `<span>${escapeAttr(q)}</span>`).join('');
     return `
-    <div class="featured-card${hasPhoto?' has-photo':''}" onclick="openDetail('${s.id}')">
-      ${photoHtml}
-      <div class="featured-card-name-row" style="display:flex;align-items:center;gap:0.6rem${hasPhoto?'':';padding:0'}">
-        ${dotHtml}
-        <div class="featured-card-name">${s.name}</div>
-      </div>
-      <div class="featured-card-use">${s.use}</div>
-      <div class="featured-card-intention">"${s.intention}"</div>
-    </div>`;
+    <button class="starter-stone-tile" type="button" onclick="openStarterStoneModal(${index})" aria-label="Open ${escapeAttr(s.name)} starter stone details">
+      <span class="starter-stone-image-wrap">${photoHtml}</span>
+      <span class="starter-stone-name">${escapeAttr(s.name)}</span>
+      <span class="starter-stone-qualities">${qualities}</span>
+    </button>`;
   }).join('');
 }
+
+function starterStoneQualitiesHtml(s){
+  return featuredStoneQualities(s).map(q => `<span>${escapeAttr(q)}</span>`).join('');
+}
+
+function openStarterStoneModal(index){
+  const overlay = document.getElementById('starter-stone-modal-overlay');
+  const content = document.getElementById('starter-stone-modal-content');
+  if(!overlay || !content) return;
+  starterStoneModalIndex = (index + FEATURED_STONES.length) % FEATURED_STONES.length;
+  const s = FEATURED_STONES[starterStoneModalIndex];
+  const photoHtml = s.photo
+    ? `<img class="starter-stone-modal-image" src="${SUPABASE_STONES}${s.photo}" alt="${escapeAttr(s.name)} crystal specimen">`
+    : `<div class="starter-stone-modal-dot" style="background:${escapeAttr(s.hex)}"></div>`;
+  content.innerHTML = `
+    <div class="starter-stone-modal-media">${photoHtml}</div>
+    <div class="starter-stone-modal-copy">
+      <div class="starter-stone-modal-kicker">Starter stone ${starterStoneModalIndex + 1} of ${FEATURED_STONES.length}</div>
+      <h2 class="starter-stone-modal-title" id="starter-stone-modal-title">${escapeAttr(s.name)}</h2>
+      <div class="starter-stone-modal-qualities">${starterStoneQualitiesHtml(s)}</div>
+      <div class="starter-stone-modal-intention">"${escapeAttr(s.intention)}"</div>
+      <button class="starter-stone-modal-learn" type="button" onclick="learnMoreStarterStone()">Learn more in the encyclopedia →</button>
+    </div>`;
+  starterStonePreviousFocus = document.activeElement;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  const closeBtn = overlay.querySelector('.starter-stone-modal-close');
+  if(closeBtn) closeBtn.focus();
+}
+
+function closeStarterStoneModal(){
+  const overlay = document.getElementById('starter-stone-modal-overlay');
+  if(!overlay) return;
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  if(starterStonePreviousFocus && starterStonePreviousFocus.focus) starterStonePreviousFocus.focus();
+  starterStonePreviousFocus = null;
+}
+
+function navStarterStoneModal(dir){
+  openStarterStoneModal(starterStoneModalIndex + dir);
+}
+
+function starterStoneOverlayClick(e){
+  if(e.target && e.target.id === 'starter-stone-modal-overlay') closeStarterStoneModal();
+}
+
+function learnMoreStarterStone(){
+  const s = FEATURED_STONES[starterStoneModalIndex];
+  closeStarterStoneModal();
+  if(s) openDetail(s.id);
+}
+
+document.addEventListener('keydown',function(e){
+  const overlay = document.getElementById('starter-stone-modal-overlay');
+  if(!overlay || !overlay.classList.contains('open')) return;
+  if(e.key === 'Escape') closeStarterStoneModal();
+  if(e.key === 'ArrowLeft') navStarterStoneModal(-1);
+  if(e.key === 'ArrowRight') navStarterStoneModal(1);
+});
 // ── STONE OF THE DAY ──
 function renderSotd(){
   const container=document.getElementById('sotd-container');

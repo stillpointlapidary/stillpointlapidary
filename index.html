@@ -106,6 +106,15 @@
   <div class="featured-cards" id="featured-cards"></div>
 </div>
 
+<div class="starter-stone-modal-overlay" id="starter-stone-modal-overlay" onclick="starterStoneOverlayClick(event)" aria-hidden="true">
+  <div class="starter-stone-modal" role="dialog" aria-modal="true" aria-labelledby="starter-stone-modal-title">
+    <button class="starter-stone-modal-close" type="button" onclick="closeStarterStoneModal()" aria-label="Close starter stone details">×</button>
+    <button class="starter-stone-modal-nav starter-stone-modal-prev" type="button" onclick="navStarterStoneModal(-1)" aria-label="Previous starter stone">‹</button>
+    <div class="starter-stone-modal-content" id="starter-stone-modal-content"></div>
+    <button class="starter-stone-modal-nav starter-stone-modal-next" type="button" onclick="navStarterStoneModal(1)" aria-label="Next starter stone">›</button>
+  </div>
+</div>
+
 <!-- WHERE DO YOU WANT TO GO -->
 <div class="home-pathways" id="home-pathways">
   <div class="home-pathways-header">
