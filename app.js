@@ -430,7 +430,9 @@ function starterStoneOverlayClick(e){
 function learnMoreStarterStone(){
   const s = FEATURED_STONES[starterStoneModalIndex];
   closeStarterStoneModal();
-  if(s) openDetail(s.id);
+  if(!s) return;
+  switchTabByName('encyclopedia');
+  setTimeout(()=>openDetail(s.id),0);
 }
 
 document.addEventListener('keydown',function(e){
