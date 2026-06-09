@@ -5481,66 +5481,74 @@ function renderMobileShapes(container, shapeMap) {
   const mobile = document.createElement('div');
   mobile.className = 'shapes-mobile';
   mobile.innerHTML = `
-    <div class="forms-mobile-label">Browse by category</div>
-    <div class="forms-mobile-selector" role="tablist" aria-label="Crystal form categories">
-      ${SHAPE_CATEGORIES.map((cat, i) => `<button class="forms-mobile-cat${i===0?' active':''}" type="button" data-cat="${cat.label}" aria-selected="${i===0?'true':'false'}">${cat.label}</button>`).join('')}
+    <div class="forms-mobile-landing">
+      ${SHAPE_CATEGORIES.map((cat, i) => `
+        <button class="forms-mobile-topic${i===0?' active':''}" type="button" data-cat="${cat.label}" aria-selected="${i===0?'true':'false'}">
+          <span class="forms-mobile-topic-name">${cat.label}</span>
+          <span class="forms-mobile-topic-sub">${cat.def || ''}</span>
+        </button>`).join('')}
     </div>
-    <div class="forms-mobile-sections">
-      ${SHAPE_CATEGORIES.map((cat, i) => {
-        const shapes = cat.ids.map(id => shapeMap[id]).filter(Boolean);
-        return `
-          <section class="forms-mobile-section${i===0?' open':''}" data-cat="${cat.label}">
-            <button class="forms-mobile-section-toggle" type="button" aria-expanded="${i===0?'true':'false'}">
-              <span class="forms-mobile-caret" aria-hidden="true"></span>
-              <span>
-                <span class="forms-mobile-section-title">${cat.label}</span>
-                <span class="forms-mobile-section-sub">${cat.def || ''}</span>
-              </span>
-            </button>
-            <div class="forms-mobile-list">
-              ${shapes.map(s => `
-                <article class="mobile-form-card">
-                  <div class="mobile-form-icon">${s.draw()}</div>
-                  <div class="mobile-form-copy">
-                    <div class="mobile-form-name">${s.name}</div>
-                    <div class="mobile-form-tagline">${s.tagline}</div>
-                    <div class="mobile-form-desc">${s.tile || s.body}</div>
-                  </div>
-                </article>`).join('')}
-            </div>
-          </section>`;
-      }).join('')}
-    </div>`;
+    <div class="forms-mobile-label">Forms in this category</div>
+    <div class="forms-mobile-tile-grid"></div>
+    <div class="forms-mobile-detail" aria-live="polite"></div>`;
+
+  const tileGrid = mobile.querySelector('.forms-mobile-tile-grid');
+  const detail = mobile.querySelector('.forms-mobile-detail');
+
+  function renderMobileDetail(shape) {
+    detail.innerHTML = `
+      <article class="mobile-form-detail-card">
+        <div class="mobile-form-detail-icon">${shape.draw()}</div>
+        <div class="mobile-form-detail-copy">
+          <div class="mobile-form-detail-name">${shape.name}</div>
+          <div class="mobile-form-detail-tagline">${shape.tagline}</div>
+          <div class="mobile-form-detail-desc">${shape.body}</div>
+          <div class="mobile-form-detail-use"><span>Best for</span>${shape.use}</div>
+          <div class="mobile-form-detail-examples">
+            ${shape.examples.map(e => `<button type="button" class="shape-pill" onclick="jumpToStone('${e}')">${e}</button>`).join('')}
+          </div>
+        </div>
+      </article>`;
+  }
 
   function setMobileCategory(catLabel, scroll) {
-    let activeSection = null;
-    mobile.querySelectorAll('.forms-mobile-section').forEach(section => {
-      const isActive = section.dataset.cat === catLabel;
-      section.classList.toggle('open', isActive);
-      section.querySelector('.forms-mobile-section-toggle')?.setAttribute('aria-expanded', String(isActive));
-      if(isActive) activeSection = section;
-    });
-    mobile.querySelectorAll('.forms-mobile-cat').forEach(btn => {
+    const cat = SHAPE_CATEGORIES.find(c => c.label === catLabel) || SHAPE_CATEGORIES[0];
+    const shapes = cat.ids.map(id => shapeMap[id]).filter(Boolean);
+
+    mobile.querySelectorAll('.forms-mobile-topic').forEach(btn => {
       const isActive = btn.dataset.cat === catLabel;
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-selected', String(isActive));
     });
-    if(scroll && activeSection) {
-      requestAnimationFrame(() => activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+
+    tileGrid.innerHTML = shapes.map((s, i) => `
+      <button class="mobile-form-tile${i===0?' active':''}" type="button" data-id="${s.id}">
+        <span class="mobile-form-tile-icon">${s.draw()}</span>
+        <span class="mobile-form-tile-name">${s.name}</span>
+      </button>`).join('');
+
+    tileGrid.querySelectorAll('.mobile-form-tile').forEach(tile => {
+      tile.addEventListener('click', () => {
+        const shape = shapeMap[tile.dataset.id];
+        if(!shape) return;
+        tileGrid.querySelectorAll('.mobile-form-tile').forEach(el => el.classList.remove('active'));
+        tile.classList.add('active');
+        renderMobileDetail(shape);
+        requestAnimationFrame(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+      });
+    });
+
+    if(shapes[0]) renderMobileDetail(shapes[0]);
+    if(scroll) {
+      requestAnimationFrame(() => tileGrid.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
   }
 
-  mobile.querySelectorAll('.forms-mobile-cat').forEach(btn => {
+  mobile.querySelectorAll('.forms-mobile-topic').forEach(btn => {
     btn.addEventListener('click', () => setMobileCategory(btn.dataset.cat, true));
   });
-  mobile.querySelectorAll('.forms-mobile-section-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const section = btn.closest('.forms-mobile-section');
-      if(!section) return;
-      setMobileCategory(section.dataset.cat, false);
-    });
-  });
 
+  setMobileCategory(SHAPE_CATEGORIES[0].label, false);
   container.appendChild(mobile);
 }
 
