@@ -247,6 +247,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .mood-results{margin-top:1.5rem;display:none}
 .mood-results-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:8px}
 .mood-results-title{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:var(--ink)}
+.mood-selected-card+.sub-filter-row+#mood-grid-banner+.mood-results-title,.sub-filter-row+#mood-grid-banner+.mood-results-title{margin-bottom:0.35rem}
 .mood-back{font-size:12px;color:var(--ink2r);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font-family:'Jost',sans-serif}
 /* sub-filter row */
 .sub-filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px}

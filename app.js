@@ -39,8 +39,12 @@ let currentCrystal=null;
 let openPanel=null;
 let activeMoodIdx=null;
 let activeSubFilter=null;
+let activeIntentionMode=null;
+let activeIntentionQuery='';
 let activeIntentionGroup=null;
 let activeIntentionFilter='all';
+let activeIntentionFilterDefs=[];
+let activeIntentionBaseMatches=[];
 let activeIntentionMatches=[];
 let activeIntentionVisibleCount=30;
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
@@ -1554,7 +1558,7 @@ function intentionFilterHaystack(c){
 
 function applyIntentionSubFilter(matches, group, filterLabel){
   if(!filterLabel || filterLabel==='all')return matches;
-  const filter=(INTENTION_SUB_FILTERS[group]||[]).find(f=>f.label===filterLabel);
+  const filter=((INTENTION_SUB_FILTERS[group]||[]).length ? INTENTION_SUB_FILTERS[group] : activeIntentionFilterDefs).find(f=>f.label===filterLabel);
   if(!filter)return matches;
   return matches.filter(c=>{
     const themes=c.all_themes||[];
@@ -1565,11 +1569,42 @@ function applyIntentionSubFilter(matches, group, filterLabel){
   });
 }
 
-function buildIntentionSubFilters(group){
-  const subs=INTENTION_SUB_FILTERS[group]||[];
+function intentionCategoryDisplayName(group){
+  const map={
+    'Grounding & Stability':'Grounding',
+    'Heart & Emotional':'Heart support',
+    'Mind & Will':'Mental clarity',
+    'Spirit & Intuition':'intuition',
+    'Body & Vitality':'body energy'
+  };
+  return map[group]||group||'these stones';
+}
+
+function intentionResultsTitle(){
+  if(activeIntentionMode==='ai')return'Stones for you right now';
+  if(activeIntentionMode==='category')return`Stones for ${intentionCategoryDisplayName(activeIntentionGroup).toLowerCase()}`;
+  if(activeIntentionMode==='mood'&&activeMoodIdx!==null){
+    const mood=MOOD_DATA[activeMoodIdx];
+    return mood?`Stones for ${mood.label.replace(/^I (feel|need|want|am|\'m) /i,'').toLowerCase()}`:'Stones for this intention';
+  }
+  return'Stones for this intention';
+}
+
+function buildAiSubFilters(stones){
+  const ordered=['Grounding','Protection','Heart Healing','Emotional Regulation','Calm & Peace','Self-Love','Clarity & Focus','Communication','Intuition','Spiritual Connection','Vitality','Transformation','Manifestation','Confidence'];
+  const present=new Set();
+  stones.forEach(c=>{
+    (c.all_themes||[]).forEach(t=>present.add(t));
+    [c.primary_theme,c.er1,c.er2,c.er3].filter(Boolean).forEach(t=>present.add(t));
+  });
+  return ordered.filter(t=>present.has(t)).slice(0,8).map(label=>({label,themes:[label],keywords:[label.toLowerCase()]}));
+}
+
+function buildSharedSubFilters(filters){
   const row=document.getElementById('sub-filter-row');
   const pillsEl=document.getElementById('sub-filter-pills');
   if(!row || !pillsEl)return;
+  const subs=filters||[];
   if(!subs.length){row.style.display='none';pillsEl.innerHTML='';return;}
   row.style.display='flex';
   const chips=[{label:'All'},...subs];
@@ -1581,15 +1616,23 @@ function buildIntentionSubFilters(group){
   }).join('');
 }
 
+function buildIntentionSubFilters(group){
+  buildSharedSubFilters(INTENTION_SUB_FILTERS[group]||[]);
+}
+
 function renderIntentionStoneCards(){
   const stoneGrid = document.getElementById('mood-stone-grid');
   if (!stoneGrid) return;
   stoneGrid.style.display = 'grid';
   const visible=activeIntentionMatches.slice(0,activeIntentionVisibleCount);
   if (!visible.length) {
-    stoneGrid.innerHTML = '<div class="empty-state">No stones found for this category yet.</div>';
+    stoneGrid.innerHTML = '<div class="empty-state">No stones found for this intention yet.</div>';
   }else{
     stoneGrid.innerHTML = visible.map(function(c) {
+      if(activeIntentionMode==='ai'){
+        const reason=getIntentionCardDescription(c, activeIntentionQuery);
+        return `<div class="ai-stone-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})"><div class="ai-stone-name">${escapeAttr(c.n)}</div><div class="ai-stone-reason">${escapeAttr(reason)}</div><div class="ai-stone-arrow">View stone &rarr;</div></div>`;
+      }
       const raw = encCardHtml(c);
       return raw.replace(/onclick="openDetail\(/, 'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
     }).join('');
@@ -1609,6 +1652,8 @@ function renderIntentionStoneCards(){
 
 function updateIntentionCount(){
   const countEl = document.getElementById('mood-results-count');
+  const titleEl = document.getElementById('mood-shared-results-title');
+  if(titleEl)titleEl.textContent=intentionResultsTitle();
   if(!countEl)return;
   countEl.textContent = activeIntentionMatches.length + ' stones' + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
 }
@@ -1616,8 +1661,7 @@ function updateIntentionCount(){
 function setIntentionSubFilter(val,btn){
   activeIntentionFilter=val||'all';
   activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
-  const allMatches=getIntentionGroupMatches(activeIntentionGroup);
-  activeIntentionMatches=applyIntentionSubFilter(allMatches, activeIntentionGroup, activeIntentionFilter);
+  activeIntentionMatches=applyIntentionSubFilter(activeIntentionBaseMatches, activeIntentionGroup, activeIntentionFilter);
   document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.remove('active'));
   if(btn)btn.classList.add('active');
   updateIntentionCount();
@@ -1649,8 +1693,11 @@ function intentionCardClick(group, el) {
   }
 
   clearMoodResults();
+  activeIntentionMode='category';
+  activeIntentionQuery='';
   activeIntentionGroup=group;
   activeIntentionFilter='all';
+  activeIntentionFilterDefs=INTENTION_SUB_FILTERS[group]||[];
   activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
   const matches = getIntentionGroupMatches(group);
   renderIntentionResults(matches, group);
@@ -1677,14 +1724,17 @@ function renderIntentionResults(matches, group) {
   const labelEl = document.getElementById('mood-selected-label');
   const subEl   = document.getElementById('mood-selected-sub');
   if (groupEl) groupEl.textContent = '';
-  if (labelEl) labelEl.textContent = group;
+  if (labelEl) labelEl.textContent = 'Showing: ' + intentionCategoryDisplayName(group);
   if (subEl)   subEl.textContent   = INTENTION_CARD_SUBS[group] || '';
+  const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');
+  if(selectedClear)selectedClear.textContent='← Change';
 
   // Show category-level refinement chips
   buildIntentionSubFilters(group);
   const gridBanner = document.getElementById('mood-grid-banner');
   if (gridBanner) gridBanner.style.display = 'none';
 
+  activeIntentionBaseMatches=matches;
   activeIntentionMatches=matches;
   updateIntentionCount();
 
@@ -1737,7 +1787,7 @@ function getMoodMatches(moodIdx,subFilter){
 }
 
 function showMoodResults(idx,el){
-  activeMoodIdx=idx;activeSubFilter=null;
+  activeIntentionMode='mood';activeMoodIdx=idx;activeSubFilter=null;
   const m=MOOD_DATA[idx];
   // Hide grid, show only selected card + results
   document.getElementById('mood-grid').style.display='none';
@@ -1747,6 +1797,8 @@ function showMoodResults(idx,el){
     document.getElementById('mood-selected-group').textContent=m.group;
     document.getElementById('mood-selected-label').textContent=m.label;
     document.getElementById('mood-selected-sub').textContent=m.sub;
+    const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');
+    if(selectedClear)selectedClear.textContent='← Change';
   }
   buildSubFilters(idx);
   renderMoodStones(idx,null);
@@ -1787,6 +1839,10 @@ function renderMoodStones(moodIdx,subFilter){
   const selectedView=document.getElementById('mood-selected-view');
   const loadMore=document.getElementById('mood-load-more');
   if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
+  const oldAi=document.getElementById('ai-results-wrap');
+  if(oldAi)oldAi.style.display='none';
+  const titleEl=document.getElementById('mood-shared-results-title');
+  if(titleEl)titleEl.textContent=intentionResultsTitle();
   if(selectedView)selectedView.style.display='block';
   if(grid)grid.style.display='grid';
   if(countEl)countEl.textContent=matches.length+' stones'+(subFilter?' · '+subFilter:'');
@@ -1847,9 +1903,9 @@ function aiFallbackMatches(query){
     return {c,score,reason};
   }).filter(r=>r.score>0)
     .sort((a,b)=>b.score-a.score || (a.c.tier||9)-(b.c.tier||9) || a.c.n.localeCompare(b.c.n))
-    .slice(0,8);
+    .slice(0,60);
 
-  const fallback=scored.length?scored:CRYSTALS.filter(c=>c.tier===1).slice(0,8).map(c=>({c,score:1,reason:'is a versatile starter stone for finding your footing'}));
+  const fallback=scored.length?scored:CRYSTALS.filter(c=>c.tier===1).slice(0,60).map(c=>({c,score:1,reason:'is a versatile starter stone for finding your footing'}));
   return fallback.map(r=>({
     id:r.c.i,
     name:r.c.n,
@@ -1961,35 +2017,53 @@ function getIntentionCardDescription(stone, selectedIntention){
 }
 
 function renderAIResults(matches, query){
-  const wrap=document.getElementById('ai-results-wrap');
-  const grid=document.getElementById('ai-stone-grid');
   const errEl=document.getElementById('ai-search-error');
   if(errEl){
     errEl.classList.remove('ai-error--gentle');
     errEl.style.display='none';
   }
-  grid.innerHTML='';
-
-  matches.forEach(m=>{
-    const stone=CRYSTALS.find(s=>s.i===m.id) || CRYSTALS.find(s=>s.n===m.name);
-    if(!stone)return;
-    const name=stone.n || m.name || 'Stone';
-    const reason=getIntentionCardDescription(stone, query);
-    const card=document.createElement('div');
-    card.className='ai-stone-card';
-    card.innerHTML=`<div class="ai-stone-name">${escapeAttr(name)}</div><div class="ai-stone-reason">${escapeAttr(reason)}</div><div class="ai-stone-arrow">View stone &rarr;</div>`;
-    card.onclick=()=>{detailReturnContext={type:'usewhen'};openDetail(stone.i);};
-    grid.appendChild(card);
-  });
-
-  wrap.style.display='block';
-  const top = wrap.getBoundingClientRect().top + window.scrollY - 120;
-  window.scrollTo({top, behavior:'smooth'});
+  const oldWrap=document.getElementById('ai-results-wrap');
+  if(oldWrap)oldWrap.style.display='none';
+  clearMoodResults();
+  document.querySelectorAll('#intention-grid .intention-card').forEach(c=>c.classList.remove('active'));
+  const stones=matches.map(m=>CRYSTALS.find(s=>s.i===m.id) || CRYSTALS.find(s=>s.n===m.name)).filter(Boolean);
+  activeIntentionMode='ai';
+  activeIntentionQuery=query;
+  activeIntentionGroup=null;
+  activeIntentionFilter='all';
+  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionBaseMatches=stones;
+  activeIntentionMatches=stones;
+  activeIntentionFilterDefs=buildAiSubFilters(stones);
+  const moodGrid=document.getElementById('mood-grid');
+  if(moodGrid)moodGrid.style.display='none';
+  const rb=document.getElementById('mood-reset-bar');
+  if(rb)rb.style.display='';
+  const groupEl=document.getElementById('mood-selected-group');
+  const labelEl=document.getElementById('mood-selected-label');
+  const subEl=document.getElementById('mood-selected-sub');
+  if(groupEl)groupEl.textContent='AI search';
+  if(labelEl)labelEl.textContent='Showing stones for: “'+query+'”';
+  if(subEl)subEl.textContent='Matched from your words and the stone profiles.';
+  const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');
+  if(selectedClear)selectedClear.textContent='← Try different words';
+  buildSharedSubFilters(activeIntentionFilterDefs);
+  const gridBanner=document.getElementById('mood-grid-banner');
+  if(gridBanner)gridBanner.style.display='none';
+  const selectedView=document.getElementById('mood-selected-view');
+  if(selectedView)selectedView.style.display='block';
+  updateIntentionCount();
+  renderIntentionStoneCards();
+  const top = selectedView ? selectedView.getBoundingClientRect().top + window.scrollY - 120 : 0;
+  window.scrollTo({top:Math.max(0,top), behavior:'smooth'});
 }
 
 function clearAIResults(){
-  document.getElementById('ai-results-wrap').style.display='none';
-  document.getElementById('ai-search-input').value='';
+  const wrap=document.getElementById('ai-results-wrap');
+  if(wrap)wrap.style.display='none';
+  const input=document.getElementById('ai-search-input');
+  if(input){input.value='';input.focus();}
+  clearMoodResults();
   const errEl=document.getElementById('ai-search-error');
   if(errEl){
     errEl.classList.remove('ai-error--gentle');
@@ -1998,6 +2072,20 @@ function clearAIResults(){
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
+function handleIntentionResultsChange(){
+  if(activeIntentionMode==='ai'){
+    clearAIResults();
+    const input=document.getElementById('ai-search-input');
+    if(input){
+      const y=input.getBoundingClientRect().top+window.scrollY-145;
+      window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+      setTimeout(()=>input.focus(),150);
+    }
+    return;
+  }
+  clearMoodResults();
+}
+
 function clearMoodResults(){
   const grid=document.getElementById('mood-grid');
   if(grid)grid.style.display='';
@@ -2005,11 +2093,17 @@ function clearMoodResults(){
   if(rb)rb.style.display='';
   const sv=document.getElementById('mood-selected-view');
   if(sv)sv.style.display='none';
+  const oldAi=document.getElementById('ai-results-wrap');
+  if(oldAi)oldAi.style.display='none';
   const loadMore=document.getElementById('mood-load-more');
   if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
+  const titleEl=document.getElementById('mood-shared-results-title');
+  if(titleEl)titleEl.textContent='';
+  const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');
+  if(selectedClear)selectedClear.textContent='← Change';
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
-  activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
 }
 
 function resetUseWhen(){
@@ -2019,12 +2113,16 @@ function resetUseWhen(){
   if(rb)rb.style.display='none';
   const sv=document.getElementById('mood-selected-view');
   if(sv)sv.style.display='none';
+  const oldAi=document.getElementById('ai-results-wrap');
+  if(oldAi)oldAi.style.display='none';
   const loadMore=document.getElementById('mood-load-more');
   if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
+  const titleEl=document.getElementById('mood-shared-results-title');
+  if(titleEl)titleEl.textContent='';
   document.querySelectorAll('#intention-grid .intention-card').forEach(c=>c.classList.remove('active'));
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
-  activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
 }
 
 // ── COLLECTION ──
