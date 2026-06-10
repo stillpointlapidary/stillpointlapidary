@@ -1205,7 +1205,7 @@ function encCardHtml(c){
   const imgZone=imgSrc
     ?`<div class="card-img-zone has-photo" onclick="openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${imgSrc}" alt="${c.n}" loading="lazy"></div>`
     :`<div onclick="openDetail('${c.i}')">${noPhotoZoneHtml(c)}</div>`;
-  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}</div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${roles?`<div>${roles}</div>`:''}</div></div>`;
 }
 
 const pagedStoneLists={};
