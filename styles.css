@@ -1351,6 +1351,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .tier-bar-num.tb-click:hover{opacity:0.7}
 
 @media(max-width:600px){
+  #tab-collection.collection-signed-out-mobile .coll-header,
+  #tab-collection.collection-signed-out-mobile .coll-stats,
+  #tab-collection.collection-signed-out-mobile #collection-filter-shell,
+  #tab-collection.collection-signed-out-mobile #coll-sync-status,
+  #tab-collection.collection-signed-out-mobile > .c101-backtop-wrap{display:none}
+  #tab-collection.collection-signed-out-mobile #coll-wrap{margin-top:0}
+  #tab-collection.collection-signed-out-mobile .empty-coll-state{min-height:58vh;padding:3.5rem 1.25rem}
+  #tab-collection.collection-signed-out-mobile .empty-coll-text{max-width:330px}
   .coll-stats{grid-template-columns:1fr}
   .stats-stacked{grid-template-columns:1fr 1fr;gap:10px}
   .stats-stacked .stat-cell{min-height:auto;padding:11px 16px}
