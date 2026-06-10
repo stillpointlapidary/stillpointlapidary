@@ -4696,7 +4696,7 @@ function renderId2Steps(){
   if(activeIdx<ID2_STEPS.length){
     const s=ID2_STEPS[activeIdx];
     const card=document.createElement('div');
-    card.className='id2-sc id2-sc--active id2-sc-slidein';
+    card.className='id2-sc id2-sc--active id2-sc-slidein' + (s.type==='color' ? ' id2-sc--color' : '');
 
     const tipHtml=s.tip
       ? `<span class="id2-tooltip-wrap"><button class="id2-tip-btn" tabindex="-1">?</button><span class="id2-tooltip">${s.tip}</span></span>`
