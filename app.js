@@ -483,8 +483,12 @@ function learnMoreStarterStone(){
   const s = FEATURED_STONES[starterStoneModalIndex];
   closeStarterStoneModal();
   if(!s) return;
+  if(!document.getElementById('tab-encyclopedia')){
+    window.location.href='encyclopedia.html?tab=encyclopedia&stone='+encodeURIComponent(s.id);
+    return;
+  }
   switchTabByName('encyclopedia');
-  setTimeout(()=>openDetail(s.id),0);
+  openDetail(s.id);
 }
 
 document.addEventListener('keydown',function(e){
@@ -3278,6 +3282,10 @@ function scrollToPageSection(target){
 }
 
 // ── TABS ──
+function clearInitialTabStyle(){
+  const el=document.getElementById('initial-tab-style');
+  if(el)el.remove();
+}
 function rememberActiveTab(name){
   try{localStorage.setItem('spl_active_tab',name);}catch(e){}
 }
@@ -3324,6 +3332,7 @@ function setWishlistNavActive(){
   if(wishBtn)wishBtn.classList.add('active');
 }
 function switchTab(name,btn){
+  clearInitialTabStyle();
   closeMobileNav();
   rememberActiveTab(name);
   syncTabUrl(name);
@@ -3341,6 +3350,7 @@ function switchTab(name,btn){
   if(name==='encyclopedia'){restoreEncLanding();}
 }
 function switchTabByName(name){
+  clearInitialTabStyle();
   closeMobileNav();
   rememberActiveTab(name);
   syncTabUrl(name);
@@ -5925,6 +5935,7 @@ loadStonesAndInit().then(()=>{
   const params=new URLSearchParams(window.location.search);
   const action=params.get('action');
   const tabParam=params.get('tab');
+  const stoneParam=params.get('stone');
   const collectionView=params.get('view');
   if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
     switchTabByName(tabParam);
@@ -5934,6 +5945,10 @@ loadStonesAndInit().then(()=>{
       switchTabByName(tabParam);
       if(tabParam==='collection'&&collectionView==='wishlist'){setCollQuickFilter('wish');setWishlistNavActive();}
     }, 600);
+  }
+  if(stoneParam){
+    switchTabByName('encyclopedia');
+    openDetail(stoneParam);
   }
   runPageAction(action);
   setTimeout(()=>runPageAction(action), 650);
