@@ -499,7 +499,7 @@ function learnMoreStarterStone(){
     window.location.href=target.href;
     return;
   }
-  switchTabByName('encyclopedia');
+  showEncyclopediaForDirectStoneOpen();
   openStoneEntryWhenReady(s.id,s.name);
 }
 
@@ -797,7 +797,11 @@ function isMobileView(){
 }
 
 function encSearchValue(){
-  return (document.getElementById('enc-mobile-search')?.value || document.getElementById('enc-search')?.value || '').trim();
+  const desktop=document.getElementById('enc-search');
+  const mobile=document.getElementById('enc-mobile-search');
+  const primary=isMobileView()?mobile:desktop;
+  const fallback=isMobileView()?desktop:mobile;
+  return (primary?.value || fallback?.value || '').trim();
 }
 
 function syncEncSearch(source){
@@ -1262,7 +1266,9 @@ function encRender(){
   const filtersActive = Object.values(filters).some(v => v !== 'all') ||
     encSearchValue().length > 0;
 
-  if(filtersActive)dismissEncDoorway();
+  const desktopSearch=document.getElementById('enc-search');
+  const keepDesktopSearchOpen=!isMobileView() && document.activeElement===desktopSearch;
+  if(filtersActive&&!keepDesktopSearchOpen)dismissEncDoorway();
 
   // Active filter count
   const activeCount = Object.values(filters).filter(v => v !== 'all').length +
@@ -1459,6 +1465,19 @@ function openStoneEntryWhenReady(id,name,tries=0){
     return;
   }
   if(tries<30)setTimeout(()=>openStoneEntryWhenReady(id,name,tries+1),150);
+}
+
+function showEncyclopediaForDirectStoneOpen(){
+  clearInitialTabStyle();
+  closeMobileNav();
+  rememberActiveTab('encyclopedia');
+  syncTabUrl('encyclopedia');
+  document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  const tab=document.getElementById('tab-encyclopedia');
+  if(tab)tab.style.display='block';
+  const navBtn=getTabButton('encyclopedia');
+  navBtn?.classList.add('active');
 }
 
 function closeDrawer(){
@@ -1746,7 +1765,7 @@ function buildSharedSubFilters(filters){
     const label=ch.label;
     const value=label==='All'?'all':label;
     const active=(activeIntentionFilter||'all')===value;
-    return`<button class="sfpill${active?' active':''}" onclick="event.stopPropagation();setIntentionSubFilter(${value==='all'?'null':jsArg(value)},this)">${escapeAttr(label)}</button>`;
+    return`<button class="sfpill${active?' active':''}" onclick="setIntentionSubFilter(${value==='all'?'null':jsArg(value)},this,event)">${escapeAttr(label)}</button>`;
   }).join('');
 }
 
@@ -1796,7 +1815,8 @@ function updateIntentionCount(){
   countEl.textContent = activeIntentionMatches.length + ' stones' + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
 }
 
-function setIntentionSubFilter(val,btn){
+function setIntentionSubFilter(val,btn,evt){
+  if(evt)evt.stopPropagation();
   activeIntentionFilter=val||'all';
   activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
   activeIntentionMatches=sortIntentionMatches(
@@ -1963,11 +1983,12 @@ function buildSubFilters(idx){
   if(!subs||!subs.length){row.style.display='none';return;}
   row.style.display='flex';
   const pillsEl=document.getElementById('sub-filter-pills');
-  if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" onclick="event.stopPropagation();setSubFilter(null,this)">All</button>`+
-    subs.map(s=>`<button class="sfpill" onclick="event.stopPropagation();setSubFilter(${jsArg(s)},this)">${escapeAttr(s)}</button>`).join('');
+  if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" onclick="setSubFilter(null,this,event)">All</button>`+
+    subs.map(s=>`<button class="sfpill" onclick="setSubFilter(${jsArg(s)},this,event)">${escapeAttr(s)}</button>`).join('');
 }
 
-function setSubFilter(val,btn){
+function setSubFilter(val,btn,evt){
+  if(evt)evt.stopPropagation();
   activeSubFilter=val;
   activeIntentionFilter=val||'all';
   activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
@@ -6245,9 +6266,9 @@ loadStonesAndInit().then(()=>{
   if(stoneParam){
     try{sessionStorage.removeItem('spl_pending_stone');}catch(e){}
     try{sessionStorage.removeItem('spl_pending_stone_name');}catch(e){}
-    switchTabByName('encyclopedia');
+    showEncyclopediaForDirectStoneOpen();
     openStoneEntryWhenReady(stoneParam,stoneNameParam);
-    setTimeout(()=>{switchTabByName('encyclopedia');openStoneEntryWhenReady(stoneParam,stoneNameParam);},700);
+    setTimeout(()=>{showEncyclopediaForDirectStoneOpen();openStoneEntryWhenReady(stoneParam,stoneNameParam);},700);
     setTimeout(()=>openStoneEntryWhenReady(stoneParam,stoneNameParam),1400);
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
