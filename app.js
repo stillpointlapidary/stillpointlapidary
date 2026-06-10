@@ -1849,18 +1849,7 @@ function renderIntentionStoneCards(){
   if (!visible.length) {
     stoneGrid.innerHTML = '<div class="empty-state">No stones found for this intention yet.</div>';
   }else{
-    stoneGrid.innerHTML = visible.map(function(c) {
-      if(activeIntentionMode==='ai'){
-        const reason=getIntentionCardDescription(c, activeIntentionQuery);
-        const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
-        const imgZone=encPhotos
-          ?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
-          :noPhotoZoneHtml(c);
-        return `<div class="crystal-card mood-result-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})">${imgZone}<div class="card-body"><div class="card-name">${escapeAttr(c.n)}</div><div class="ai-stone-reason">${escapeAttr(reason)}</div></div></div>`;
-      }
-      const raw = stripInlineCardColor(encCardHtml(c));
-      return raw.replace(/onclick="openDetail\(/, 'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
-    }).join('');
+    stoneGrid.innerHTML = visible.map(intentionStoneCardHtml).join('');
   }
 
   const loadMore=document.getElementById('mood-load-more');
@@ -2257,6 +2246,106 @@ function getIntentionCardDescription(stone, selectedIntention){
   }
 
   return'A supportive match for this intention based on its energetic profile.';
+}
+
+function compactIntentionReason(text){
+  return String(text||'')
+    .replace(/^use when you\s+/i,'')
+    .replace(/^use when\s+/i,'')
+    .replace(/^best for:\s*/i,'')
+    .replace(/\s+/g,' ')
+    .trim()
+    .replace(/[.!?]+$/,'');
+}
+
+function selectedIntentionContextLabel(){
+  if(activeIntentionFilter&&activeIntentionFilter!=='all')return activeIntentionFilter;
+  if(activeIntentionMode==='mood'&&activeMoodIdx!==null){
+    const mood=MOOD_DATA[activeMoodIdx];
+    return mood ? mood.label : 'this intention';
+  }
+  if(activeIntentionMode==='category')return intentionCategoryDisplayName(activeIntentionGroup);
+  if(activeIntentionMode==='ai')return activeIntentionQuery || 'this intention';
+  return 'this intention';
+}
+
+function intentionThemePhrase(stone){
+  const themes=[stone.primary_theme,stone.er1,stone.er2,stone.er3,...(stone.all_themes||[])]
+    .filter(Boolean)
+    .map(t=>String(t).toLowerCase());
+  const has=(...terms)=>terms.some(t=>themes.includes(t.toLowerCase()));
+  if(has('Grounding','Stability'))return'feeling anchored and steady';
+  if(has('Protection'))return'holding clearer energetic boundaries';
+  if(has('Calm & Peace','Emotional Regulation'))return'settling overwhelm and finding calm';
+  if(has('Heart Healing','Self-Love'))return'softening the heart and supporting self-kindness';
+  if(has('Clarity & Focus'))return'clearing mental static and sharpening focus';
+  if(has('Communication'))return'speaking clearly and expressing what matters';
+  if(has('Intuition','Spiritual Connection'))return'tuning into inner guidance';
+  if(has('Vitality'))return'restoring energy and forward momentum';
+  if(has('Transformation'))return'moving through change with steadier footing';
+  if(has('Manifestation','Abundance'))return'opening to opportunity with clear intention';
+  if(has('Confidence'))return'building confidence and self-trust';
+  if(stone.uw)return compactIntentionReason(stone.uw);
+  return'supporting the selected intention';
+}
+
+function intentionContextPhrase(label){
+  if(/stability|steady|structure|support/.test(label))return'creating steadier emotional ground';
+  if(/ground|earthing|body|embodiment|present/.test(label))return'feeling anchored in your body';
+  if(/nervous|overwhelm|anxiety|calm|sleep|rest|winding/.test(label))return'settling the nervous system';
+  if(/protect|shield|boundar/.test(label))return'clearer boundaries and energetic protection';
+  if(/focus|clarity|decision|overthink|mental/.test(label))return'clearing mental static';
+  if(/motivation|energy|stamina|vital|momentum|start/.test(label))return'rebuilding forward momentum';
+  if(/confidence|self-trust|power|fear|bold/.test(label))return'supporting self-trust';
+  if(/grief|heart|self-love|compassion|forgiv|relationship/.test(label))return'softening emotional edges';
+  if(/communication|truth|heard|express/.test(label))return'clearer expression';
+  if(/intuition|dream|psychic|guidance|meditation|spiritual/.test(label))return'inner listening and spiritual focus';
+  if(/transform|change|release|pattern|rebirth/.test(label))return'moving through change';
+  if(/manifest|abundance|opportunity|receive|career|financial/.test(label))return'focusing intention toward opportunity';
+  if(/creative|joy|play|optim/.test(label))return'creative spark and lighter energy';
+  return'';
+}
+
+function blendIntentionPhrases(context, theme){
+  if(!context)return theme;
+  if(!theme || theme==='supporting the selected intention')return context;
+  const cleanTheme=theme
+    .replace(/^feeling /,'')
+    .replace(/^holding /,'')
+    .replace(/^settling /,'settling ')
+    .replace(/^supporting /,'supporting ');
+  if(context.toLowerCase()===cleanTheme.toLowerCase())return context;
+  if(context.length+cleanTheme.length>86)return context;
+  return `${context} with ${cleanTheme}`;
+}
+
+function selectedIntentionPhrase(stone){
+  const label=String(selectedIntentionContextLabel()||'').toLowerCase();
+  const hay=intentionFilterHaystack(stone);
+  const context=intentionContextPhrase(label);
+  const theme=intentionThemePhrase(stone);
+  if(context)return blendIntentionPhrases(context,theme);
+  if(hay.includes(label))return compactIntentionReason(stone.uw) || theme;
+  return theme;
+}
+
+function intentionBestForText(stone){
+  if(activeIntentionMode==='ai'){
+    const reason=compactIntentionReason(getIntentionCardDescription(stone, activeIntentionQuery));
+    if(reason)return reason;
+  }
+  return selectedIntentionPhrase(stone);
+}
+
+function intentionStoneCardHtml(c){
+  const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">Â·</span>');
+  const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
+  const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
+  const imgZone=imgSrc
+    ?`<div class="card-img-zone has-photo" onclick="openEncLightbox(${jsArg(imgSrc)},${jsArg(c.n)},event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
+    :noPhotoZoneHtml(c);
+  const reason=intentionBestForText(c);
+  return `<div class="crystal-card mood-result-card">${imgZone}<div class="card-body" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})" style="cursor:pointer"><div class="card-name">${escapeAttr(c.n)}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}<div class="mood-best-for"><span>Best for:</span> ${escapeAttr(reason)}</div></div></div>`;
 }
 
 function renderAIResults(matches, query){
