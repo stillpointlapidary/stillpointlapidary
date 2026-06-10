@@ -352,7 +352,7 @@
   <div class="mood-grid" id="mood-grid" style="display:none"></div>
   <!-- SELECTED MOOD VIEW: shown after selection -->
   <div id="mood-selected-view" style="display:none">
-    <div class="mood-selected-card" id="mood-selected-card" onclick="clearMoodResults()">
+    <div class="mood-selected-card" id="mood-selected-card" onclick="handleIntentionResultsChange()">
       <div class="mood-selected-inner">
         <div id="mood-selected-group" class="mood-group-label"></div>
         <div id="mood-selected-label" class="mood-label"></div>
@@ -365,6 +365,7 @@
       <div id="sub-filter-pills"></div>
     </div>
     <div id="mood-grid-banner" style="display:none"></div>
+    <div class="mood-results-title" id="mood-shared-results-title"></div>
     <div class="mood-results-count" id="mood-results-count"></div>
     <div class="mood-stone-grid" id="mood-stone-grid"></div>
     <div class="mood-load-more" id="mood-load-more" style="display:none"></div>
