@@ -1363,6 +1363,10 @@ function buildDrawerPhotoHtml(srcs, name){
     <span class="drawer-ref-photo-label" id="drawer-carousel-enlarge" onclick="openPhotoLightbox('${firstSrc}','${firstName}')">Enlarge</span>
   </div>`;
 }
+function buildDrawerNoPhotoHtml(c){
+  const placeholder=noPhotoZoneHtml(c).replace('card-img-zone no-photo','drawer-ref-photo-thumb drawer-ref-photo-placeholder');
+  return`<div class="drawer-ref-photo-col">${placeholder}</div>`;
+}
 function drawerPhotoNav(dir){
   const el = document.getElementById('drawer-carousel');
   if(!el) return;
@@ -1411,7 +1415,7 @@ function openDetail(id){
       const imgSrc = `${SUPABASE_STONES}${featuredMatch.photo}`;
       drawerPhotoWrap.innerHTML = buildDrawerPhotoHtml([imgSrc], featuredMatch.name);
     } else {
-      drawerPhotoWrap.innerHTML = '';
+      drawerPhotoWrap.innerHTML = buildDrawerNoPhotoHtml(c);
     }
   }
   document.getElementById('d-id').textContent=c.i;
@@ -1667,6 +1671,48 @@ function filterByFamily(){
   jumpToFamily(fam);
 }
 
+const PENDING_DRAWER_ACTION_KEY='spl_pending_drawer_action';
+
+function savePendingDrawerAction(actionType,stone){
+  if(!stone||!stone.i)return;
+  try{
+    sessionStorage.setItem(PENDING_DRAWER_ACTION_KEY,JSON.stringify({
+      action:actionType,
+      stoneId:stone.i,
+      stoneName:stone.n||'',
+      returnPath:window.location.pathname+window.location.search+window.location.hash
+    }));
+  }catch(e){}
+}
+
+function readPendingDrawerAction(){
+  try{
+    const raw=sessionStorage.getItem(PENDING_DRAWER_ACTION_KEY);
+    return raw?JSON.parse(raw):null;
+  }catch(e){return null;}
+}
+
+function clearPendingDrawerAction(){
+  try{sessionStorage.removeItem(PENDING_DRAWER_ACTION_KEY);}catch(e){}
+}
+
+function pendingDrawerAuthReason(actionType){
+  return actionType==='add_to_wishlist'?'save-wishlist':'save-collection';
+}
+
+function requestDrawerSaveSignIn(actionType){
+  if(!currentCrystal)return;
+  savePendingDrawerAction(actionType,currentCrystal);
+  if(document.getElementById('auth-modal-overlay')){
+    _openAuth(pendingDrawerAuthReason(actionType));
+    return;
+  }
+  const target=new URL('encyclopedia.html',window.location.href);
+  target.searchParams.set('stone',currentCrystal.i);
+  target.searchParams.set('stoneName',currentCrystal.n||'');
+  window.location.href=target.href;
+}
+
 function updateDrawerStatus(id){
   const isOwned=!!owned[id];
   const isWish=!!wish[id];
@@ -1709,6 +1755,53 @@ function drawerWishlistAction(){
     // Brief confirmation on add
     const pill=document.getElementById('drawer-pill-wish');
     if(pill){pill.textContent='✓ Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
+  }
+}
+function updateDrawerStatus(id){
+  const isOwned=!!owned[id];
+  const isWish=!!wish[id];
+  const signedIn=!!_currentUser;
+  const pillOwned=document.getElementById('drawer-pill-owned');
+  const pillWish=document.getElementById('drawer-pill-wish');
+  if(pillOwned){
+    pillOwned.textContent=isOwned?'In your collection':(signedIn?'Add to collection':'Save to collection');
+    pillOwned.classList.toggle('drawer-pill-active',isOwned);
+  }
+  if(pillWish){
+    pillWish.textContent=isWish?'On your wishlist':(signedIn?'Add to wishlist':'Save to wishlist');
+    pillWish.classList.toggle('drawer-pill-active',isWish);
+  }
+  const viewLinks=document.getElementById('drawer-view-links');
+  const viewColl=document.getElementById('drawer-view-coll');
+  const viewWish=document.getElementById('drawer-view-wish');
+  if(viewLinks){
+    if(viewColl) viewColl.style.display=isOwned?'inline':'none';
+    if(viewWish) viewWish.style.display=isWish?'inline':'none';
+    viewLinks.style.display=(isOwned||isWish)?'flex':'none';
+  }
+}
+
+function drawerCollectionAction(){
+  if(!currentCrystal)return;
+  if(!_currentUser){
+    requestDrawerSaveSignIn('add_to_collection');
+    return;
+  }
+  if(owned[currentCrystal.i])toggleOwned();
+  else addFromDetail();
+}
+
+function drawerWishlistAction(){
+  if(!currentCrystal)return;
+  if(!_currentUser){
+    requestDrawerSaveSignIn('add_to_wishlist');
+    return;
+  }
+  const wasWished=!!wish[currentCrystal.i];
+  toggleWish();
+  if(!wasWished){
+    const pill=document.getElementById('drawer-pill-wish');
+    if(pill){pill.textContent='Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
   }
 }
 // toggleOwned and toggleWish are defined as window.toggleOwned / window.toggleWish
@@ -6463,18 +6556,29 @@ function _renderAuth(user) {
   } else {
     el.innerHTML = '<button class="btn btn-sm" onclick="_openAuth()">Sign in</button>';
   }
+  if(currentCrystal)updateDrawerStatus(currentCrystal.i);
 }
 
 async function _authInit() {
   const { data: { session } } = await _supa.auth.getSession();
   _currentUser = session?.user ?? null;
   _renderAuth(_currentUser);
-  if (_currentUser) { loadSupabaseState(); }
-  _supa.auth.onAuthStateChange(function(_e, session) {
+  if (_currentUser) {
+    await loadSupabaseState();
+    await handlePendingDrawerActionAfterSignIn();
+  } else {
+    promptPendingDrawerActionIfNeeded();
+  }
+  _supa.auth.onAuthStateChange(async function(_e, session) {
     const wasLoggedOut = !_currentUser;
     _currentUser = session?.user ?? null;
     _renderAuth(_currentUser);
-    if (_currentUser && wasLoggedOut) { loadSupabaseState(); }
+    if (_currentUser && wasLoggedOut) {
+      await loadSupabaseState();
+      await handlePendingDrawerActionAfterSignIn();
+    } else if(!_currentUser) {
+      promptPendingDrawerActionIfNeeded();
+    }
     if (_currentUser && window._pendingColl) {
       window._pendingColl = false;
       var t = document.querySelectorAll('.nav-tab')[4];
@@ -6483,13 +6587,65 @@ async function _authInit() {
   });
 }
 
+function promptPendingDrawerActionIfNeeded(){
+  const pending=readPendingDrawerAction();
+  if(!pending||!pending.action||!pending.stoneId||_currentUser)return;
+  if(!document.getElementById('auth-modal-overlay'))return;
+  const drawerOpen=document.getElementById('detail-drawer')?.classList.contains('open');
+  if(!drawerOpen)openDetailWhenReady(pending.stoneId);
+  setTimeout(()=>_openAuth(pendingDrawerAuthReason(pending.action)),120);
+}
+
+async function handlePendingDrawerActionAfterSignIn(){
+  const pending=readPendingDrawerAction();
+  if(!pending||!pending.action||!pending.stoneId||!_currentUser)return;
+  clearPendingDrawerAction();
+  if(document.getElementById('auth-modal-overlay'))closeAuthModal();
+  openDetailWhenReady(pending.stoneId);
+  if(pending.action==='add_to_wishlist'){
+    try{
+      if(!wish[pending.stoneId]){
+        await _supa.from('wishlist_items').insert({ user_id:_currentUser.id, stone_id:pending.stoneId });
+        wish[pending.stoneId]=true;
+        localStorage.setItem('lap_wish',JSON.stringify(wish));
+      }
+      await loadSupabaseState();
+      openDetailWhenReady(pending.stoneId);
+      setTimeout(()=>updateDrawerStatus(pending.stoneId),180);
+    }catch(err){
+      console.warn('Could not resume wishlist save after sign-in',err);
+    }
+  }else if(pending.action==='add_to_collection'){
+    setTimeout(()=>{
+      const stone=CRYSTALS.find(c=>c.i===pending.stoneId);
+      if(stone){
+        currentCrystal=stone;
+        addFromDetail();
+      }else{
+        openAddForm(pending.stoneId);
+      }
+    },180);
+  }
+}
+
 function _openAuth(reason) {
   var title = document.getElementById('auth-modal-title');
   var sub = document.getElementById('auth-modal-sub');
   var msg = document.getElementById('auth-msg');
   var inp = document.getElementById('auth-email-input');
   var btn = document.getElementById('auth-submit-btn');
-  if (reason === 'collection') {
+  if(!title||!sub||!msg||!inp||!btn){
+    const target=new URL('encyclopedia.html',window.location.href);
+    window.location.href=target.href;
+    return;
+  }
+  if (reason === 'save-collection') {
+    title.textContent = 'Sign in to save this stone';
+    sub.textContent = 'Sign in to save this stone to your collection.';
+  } else if (reason === 'save-wishlist') {
+    title.textContent = 'Sign in to save this stone';
+    sub.textContent = 'Sign in to add this stone to your wishlist.';
+  } else if (reason === 'collection') {
     title.textContent = 'Sign in to use My Collection';
     sub.textContent = 'Your collection saves securely to your account and follows you across devices.';
   } else {
