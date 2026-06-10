@@ -17,7 +17,7 @@ function _emptyCollHtml(){
       <div class="empty-coll-icon">◇</div>
       <div class="empty-coll-title">Your collection starts here</div>
       <div class="empty-coll-text">Track the stones you own, build a wishlist, and watch your progress across collector tiers — all saved to your account and available on any device.</div>
-      <button class="empty-coll-btn btn-accent" onclick="window._pendingColl=true;_openAuth('collection')">Sign in to get started</button>
+      <button class="empty-coll-btn btn-accent" onclick="window._pendingColl=true;_openAuth('collection')">Start Your Collection</button>
     </div>`;
   }
   return `<div class="empty-coll-state">
@@ -2057,6 +2057,15 @@ function renderTierBars(){
 }
 
 function renderCollection(){
+  const wrap=document.getElementById('coll-wrap');
+  const collectionTab=document.getElementById('tab-collection');
+  const isMobileSignedOut=!_currentUser&&window.matchMedia&&window.matchMedia('(max-width: 600px)').matches;
+  if(collectionTab) collectionTab.classList.toggle('collection-signed-out-mobile', isMobileSignedOut);
+  if(isMobileSignedOut){
+    if(wrap) wrap.innerHTML=_emptyCollHtml();
+    return;
+  }
+
   buildCollPanels();
   initCollectionFilterDelegation();
 
@@ -2069,7 +2078,6 @@ function renderCollection(){
   if(sw)sw.textContent=Object.keys(wish).length;
   renderTierBars();
 
-  const wrap=document.getElementById('coll-wrap');
   if(!wrap)return;
 
   const _tierLabels={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
