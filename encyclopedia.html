@@ -73,7 +73,6 @@
   <button class="nav-tab" onclick="switchTab('identify',this)">Identify</button>
   <button class="nav-tab" onclick="switchTab('collection',this)">My Collection</button>
   <button class="nav-tab" onclick="switchTab('101',this)">Crystals 101</button>
-  <button class="nav-tab nav-tab-mobile-only" onclick="switchToWishlist(this)">Wishlist</button>
 </nav></div>
 <main class="content">
 
@@ -544,7 +543,7 @@
         <thead><tr><th>Method</th><th>How</th><th>Best for</th></tr></thead>
         <tbody>
           <tr><td><strong>Holding</strong></td><td>In one or both hands during meditation, breathwork, or quiet time</td><td>Direct energetic work, grounding, emotional processing</td></tr>
-          <tr><td><strong>Carrying</strong></td><td>Pocket, bag, or bra — kept close throughout the day</td><td>Ongoing support, protection, subtle reminders</td></tr>
+          <tr><td><strong>Carrying</strong></td><td>Pocket, pouch, or bag — kept close throughout the day</td><td>Ongoing support, protection, subtle reminders</td></tr>
           <tr><td><strong>Wearing</strong></td><td>Jewelry — closest to the skin and specific body areas</td><td>Chakra work, sustained energy, intentional adornment</td></tr>
           <tr><td><strong>Placing</strong></td><td>On the body during rest, on a nightstand, desk, or altar</td><td>Environmental energy, sleep support, space-holding</td></tr>
           <tr><td><strong>Gridding</strong></td><td>Arranging multiple stones in geometric patterns with a clear intention</td><td>Amplification, manifestation, space clearing</td></tr>
@@ -682,7 +681,7 @@
 
     <div class="c101-block water-warning-block">
       <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
-        <span class="care-accordion-title">⚠ Do Not Use Water On These</span>
+        <span class="care-accordion-title">⚠ Water-sensitive stones</span>
         <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">▾</span></span>
       </div>
       <div class="care-accordion-body">
@@ -695,7 +694,7 @@
 
     <div class="c101-block sun-warning-block">
       <div class="care-accordion-hdr" onclick="toggleCareAccordion(this)" aria-expanded="false">
-        <span class="care-accordion-title">☀ Keep These Out of Extended Sunlight</span>
+        <span class="care-accordion-title">☀ Sunlight-sensitive stones</span>
         <span style="display:flex;align-items:center;gap:0"><span class="care-accordion-hint">Tap to expand</span><span class="care-accordion-caret">▾</span></span>
       </div>
       <div class="care-accordion-body">
@@ -742,8 +741,8 @@
       <div class="c101-photo-copy">
         <div class="c101-h1">Energetic Roles Explained</div>
         <div class="c101-sub">A decoder ring for the tags in this app — and how to use them intentionally</div>
-        <div class="c101-body">Every stone in this encyclopedia has an energetic role — a short label describing its primary quality in practice. These aren't about what a stone cures or guarantees. They describe the energetic character of the stone: what it tends to amplify, settle, open, or move. Two stones can share a role and still feel completely different in your hands.</div>
-        <div class="c101-callout"><strong>How to read them:</strong> "Calming / Communication / Gentle Expression" doesn't mean the stone does all three equally. It means those three qualities live in the same energetic signature. You'll feel which one is primary for you in a given moment.</div>
+        <div class="c101-body">Every stone in this encyclopedia has an energetic role: a short label for its primary quality in practice. These are not claims about what a stone cures or guarantees. They describe what a stone tends to amplify, settle, open, or move. Two stones can share a role and still feel different in your hands.</div>
+        <div class="c101-callout"><strong>How to read them:</strong> "Calming / Communication / Gentle Expression" does not mean the stone does all three equally. It means those qualities share one energetic signature. You will feel which one is primary in a given moment.</div>
       </div>
       <figure class="c101-photo-slot">
         <img src="assets/energetic-top.png" alt="Energetic role stones including black tourmaline, hematite, labradorite, rose quartz, and clear quartz">
@@ -794,8 +793,8 @@
       <div class="c101-photo-copy">
         <div class="c101-h1">Crystal Families</div>
         <div class="c101-sub">Why a jasper is not just a jasper, and why families matter</div>
-        <div class="c101-body">Crystal families are defined by mineral structure and chemistry, not appearance. Two stones that look nothing alike can share a family, and two stones with the same name can belong to entirely different ones. Understanding families helps you predict care requirements, energetic tendencies, and why certain stones work the way they do.</div>
-        <div class="c101-body">Families are useful shortcuts. Once you know the behavior of a family, you can make better guesses about hardness, water safety, sunlight sensitivity, and how a new stone may feel in practice.</div>
+        <div class="c101-body">Crystal families are defined by mineral structure and chemistry, not appearance. Stones that look nothing alike can share a family, while stones with the same name can belong to different ones. Families help you predict care needs, energetic tendencies, and why stones behave as they do.</div>
+        <div class="c101-body">Families are useful shortcuts. Once you know a family's behavior, you can better guess hardness, water safety, sunlight sensitivity, and how a new stone may feel in practice.</div>
       </div>
       <figure class="c101-photo-slot">
         <img src="assets/family-lyra.png" alt="Related crystals in several colors and forms displayed together on a wooden tray">
@@ -1494,17 +1493,17 @@
       </div>
     </div>
     <div style="margin-bottom:0.6rem">
-      <div class="sec-label" style="margin-bottom:0.3rem">Admin</div>
-      <div style="display:flex;flex-direction:column;gap:4px">
-        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openPhotoPlan();closePopup('manage')">📷 Photo planning</button>
-      </div>
-    </div>
-    <div style="margin-bottom:0.6rem">
       <div class="sec-label" style="margin-bottom:0.3rem">Export</div>
       <div style="display:flex;flex-direction:column;gap:4px">
         <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="exportEncyclopedia();closePopup('manage')">↓ Encyclopedia (CSV)</button>
         <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportCollectionCSV();closePopup('manage')">↓ Collection (CSV)</button>
         <button class="btn" style="justify-content:flex-start;padding:5px 12px" onclick="exportWishlistCSV();closePopup('manage')">↓ Wishlist (CSV)</button>
+      </div>
+    </div>
+    <div style="margin-bottom:0.6rem">
+      <div class="sec-label" style="margin-bottom:0.3rem">Admin</div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openPhotoPlan();closePopup('manage')">📷 Photo planning</button>
       </div>
     </div>
     <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.6rem 0.75rem;background:var(--stone2);border-radius:6px">
