@@ -60,6 +60,9 @@
     <button class="btn btn-sm" id="request-entry-btn" onclick="openEntryRequestForm()">Request entry</button>
     <button class="btn btn-sm" id="guide-btn" onclick="openPopup('instructions')">? Guide</button>
     <button class="btn btn-sm" id="manage-btn" style="display:none" onclick="openPopup('manage')">Manage</button>
+    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -70,6 +73,7 @@
   <button class="nav-tab" onclick="switchTab('identify',this)">Identify</button>
   <button class="nav-tab" onclick="switchTab('collection',this)">My Collection</button>
   <button class="nav-tab" onclick="switchTab('101',this)">Crystals 101</button>
+  <button class="nav-tab nav-tab-mobile-only" onclick="switchToWishlist(this)">Wishlist</button>
 </nav></div>
 <main class="content">
 

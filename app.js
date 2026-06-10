@@ -3102,7 +3102,37 @@ function getTabButton(name){
   const idx=map[name];
   return idx===undefined?null:document.querySelectorAll('.nav-tab')[idx];
 }
+function setMobileMenuOpen(open){
+  document.body.classList.toggle('mobile-nav-open', !!open);
+  document.querySelectorAll('.mobile-menu-toggle').forEach(btn=>{
+    btn.classList.toggle('active', !!open);
+    btn.setAttribute('aria-expanded', String(!!open));
+    btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  });
+}
+function toggleMobileNav(btn){
+  const open=!document.body.classList.contains('mobile-nav-open');
+  setMobileMenuOpen(open);
+  if(btn) btn.setAttribute('aria-expanded', String(open));
+}
+function closeMobileNav(){
+  setMobileMenuOpen(false);
+}
+function switchToWishlist(btn){
+  closeMobileNav();
+  switchTab('collection', getTabButton('collection'));
+  setCollQuickFilter('wish');
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+function setWishlistNavActive(){
+  if(!window.matchMedia || !window.matchMedia('(max-width: 768px)').matches) return;
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  const wishBtn=document.querySelector('.nav-tab-mobile-only');
+  if(wishBtn)wishBtn.classList.add('active');
+}
 function switchTab(name,btn){
+  closeMobileNav();
   rememberActiveTab(name);
   syncTabUrl(name);
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
@@ -3119,6 +3149,7 @@ function switchTab(name,btn){
   if(name==='encyclopedia'){restoreEncLanding();}
 }
 function switchTabByName(name){
+  closeMobileNav();
   rememberActiveTab(name);
   syncTabUrl(name);
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
@@ -5666,10 +5697,15 @@ loadStonesAndInit().then(()=>{
   const params=new URLSearchParams(window.location.search);
   const action=params.get('action');
   const tabParam=params.get('tab');
+  const collectionView=params.get('view');
   if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
     switchTabByName(tabParam);
+    if(tabParam==='collection'&&collectionView==='wishlist'){setCollQuickFilter('wish');setWishlistNavActive();}
     // Re-apply after auth+data loading settles (auth callbacks can fire and re-render after init)
-    setTimeout(()=>switchTabByName(tabParam), 600);
+    setTimeout(()=>{
+      switchTabByName(tabParam);
+      if(tabParam==='collection'&&collectionView==='wishlist'){setCollQuickFilter('wish');setWishlistNavActive();}
+    }, 600);
   }
   runPageAction(action);
   setTimeout(()=>runPageAction(action), 650);
