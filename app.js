@@ -1772,6 +1772,59 @@ async function runAISearch(){
   }
 }
 
+function sentenceWithPeriod(value){
+  const trimmed=String(value||'').trim();
+  if(!trimmed)return'';
+  return /[.!?]$/.test(trimmed)?trimmed:`${trimmed}.`;
+}
+
+function cleanIntentionTerm(value){
+  return String(value||'').trim().replace(/[.!?]+$/,'');
+}
+
+function getIntentionCardDescription(stone, selectedIntention){
+  if(!stone)return'A supportive match for this intention based on its energetic profile.';
+  const useWhen=[
+    stone.useWhen,
+    stone.use_when,
+    stone.useWhenYou,
+    stone.use_when_you,
+    stone.use,
+    stone.uw
+  ].find(v=>typeof v==='string' && v.trim());
+
+  if(useWhen){
+    const trimmed=useWhen.trim();
+    if(/^use when you\b/i.test(trimmed))return trimmed;
+    if(/^when you\b/i.test(trimmed))return sentenceWithPeriod(`Use ${trimmed.charAt(0).toLowerCase()}${trimmed.slice(1)}`);
+    if(/^you\b/i.test(trimmed))return sentenceWithPeriod(`Use when ${trimmed.charAt(0).toLowerCase()}${trimmed.slice(1)}`);
+    return sentenceWithPeriod(`Use when you ${trimmed.charAt(0).toLowerCase()}${trimmed.slice(1)}`);
+  }
+
+  const bestFor=[
+    stone.bestFor,
+    stone.best_for,
+    stone.intentions,
+    stone.keywords,
+    stone.energeticUses,
+    stone.energetic_uses,
+    stone.all_themes,
+    stone.primary_theme,
+    [stone.er1,stone.er2,stone.er3].filter(Boolean)
+  ].find(v=>(Array.isArray(v)&&v.length) || (typeof v==='string' && v.trim()));
+
+  if(Array.isArray(bestFor) && bestFor.length){
+    const terms=bestFor.map(cleanIntentionTerm).filter(Boolean).slice(0,4);
+    if(terms.length)return`Best for: ${terms.join(', ')}.`;
+  }
+
+  if(typeof bestFor==='string' && bestFor.trim()){
+    return`Best for: ${cleanIntentionTerm(bestFor)}.`;
+  }
+
+  return'A supportive match for this intention based on its energetic profile.';
+}
+
 function renderAIResults(matches, query){
   const wrap=document.getElementById('ai-results-wrap');
   const grid=document.getElementById('ai-stone-grid');
@@ -1783,11 +1836,13 @@ function renderAIResults(matches, query){
   grid.innerHTML='';
 
   matches.forEach(m=>{
-    const stone=CRYSTALS.find(s=>s.i===m.id);
+    const stone=CRYSTALS.find(s=>s.i===m.id) || CRYSTALS.find(s=>s.n===m.name);
     if(!stone)return;
+    const name=stone.n || m.name || 'Stone';
+    const reason=getIntentionCardDescription(stone, query);
     const card=document.createElement('div');
     card.className='ai-stone-card';
-    card.innerHTML=`<div class="ai-stone-name">${m.name}</div><div class="ai-stone-reason">${m.reason}</div><div class="ai-stone-arrow">View stone →</div>`;
+    card.innerHTML=`<div class="ai-stone-name">${escapeAttr(name)}</div><div class="ai-stone-reason">${escapeAttr(reason)}</div><div class="ai-stone-arrow">View stone &rarr;</div>`;
     card.onclick=()=>{detailReturnContext={type:'usewhen'};openDetail(stone.i);};
     grid.appendChild(card);
   });
