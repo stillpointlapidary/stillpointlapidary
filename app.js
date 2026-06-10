@@ -1,5 +1,6 @@
 /* ── Main App JS (from lines 1949–6252) ── */
 let CRYSTALS = [];  // populated async from Supabase
+const RESULT_BATCH_SIZE = 30;
 const MOOD_THEME_MAP={"0": ["Grounding", "Calm & Peace"], "1": ["Grounding", "Stability"], "2": ["Grounding", "Confidence"], "3": ["Calm & Peace"], "4": ["Protection"], "5": ["Stability", "Grounding"], "6": ["Heart Healing", "Self-Love"], "7": ["Calm & Peace"], "8": ["Transformation", "Clarity & Focus"], "9": ["Heart Healing"], "10": ["Joy", "Vitality"], "11": ["Self-Love"], "12": ["Communication", "Heart Healing"], "13": ["Clarity & Focus"], "14": ["Vitality", "Confidence"], "15": ["Communication"], "16": ["Confidence"], "17": ["Manifestation", "Confidence"], "18": ["Manifestation", "Confidence"], "20": ["Confidence", "Manifestation"], "21": ["Spiritual Connection", "Clarity & Focus"], "22": ["Intuition"], "23": ["Spiritual Connection", "Intuition"], "24": ["Spiritual Connection", "Calm & Peace"], "25": ["Transformation"], "26": ["Heart Healing", "Vitality"], "27": ["Vitality"], "28": ["Transformation", "Protection"], "29": ["Grounding", "Vitality"], "19": ["Spiritual Connection", "Clarity & Focus"]};
 const SUB_FILTERS={"0": ["Calming Down", "Nervous System", "Sensory Overwhelm", "Racing Mind"], "1": ["Earthing & Body", "Centering", "Scattered Energy", "Overwhelm"], "2": ["Fear & Resistance", "Inertia", "Blocked Forward Motion", "Moving Through"], "3": ["Falling Asleep", "Staying Asleep", "Anxiety at Night", "Winding Down"], "4": ["Energetic Shielding", "Boundary Setting", "Psychic Protection", "Space Clearing"], "5": ["Through Change", "Emotional Structure", "Steady Support"], "6": ["Grief", "Loss of a Person", "Endings & Goodbyes", "Comfort in Sadness"], "7": ["Anxiety", "Sleep & Rest", "Nervous System", "Overwhelm"], "8": ["Releasing Anger", "Processing Hurt", "Letting Go", "Finding Peace"], "9": ["Grief & Loss", "Heartbreak", "Forgiveness", "Deep Wounds"], "10": ["Creative Spark", "Optimism", "Mood Lifting", "Playfulness"], "11": ["Self-Worth", "Inner Kindness", "After Self-Criticism", "Nurturing"], "12": ["Building Trust", "Opening Communication", "Healing a Rift", "Deepening Connection"], "13": ["Focus & Study", "Decision Making", "Mental Clutter", "Overthinking"], "14": ["Physical Energy", "Mental Drive", "Getting Started", "Sustaining Momentum"], "15": ["Speaking Truth", "Being Heard", "Difficult Conversations", "Honest Expression"], "16": ["Bold Action", "Self-Trust", "Personal Power", "Overcoming Fear"], "17": ["Abundance", "Drawing In Love", "Attracting Opportunity", "Opening to Receive"], "18": ["Career & Work", "Financial Goals", "Creative Projects", "Personal Growth"], "19": ["Before Meditation", "Before a Grid", "New Moon Practice", "Working with a Stone"], "20": ["Life Direction", "Soul Calling", "Meaning & Purpose", "Reconnecting to Self"], "21": ["Inner Knowing", "Dream Work", "Psychic Sensitivity", "Visions"], "22": ["Meditation", "Higher Guidance", "Divine Connection", "Spiritual Growth"], "23": ["Deepening Practice", "Stillness", "Going Inward", "Spiritual Focus"], "24": ["Shadow Work", "Releasing Patterns", "Rebirth & Growth", "Ancestral Work"], "25": ["Physical Recovery", "Emotional Healing", "After Illness", "Gentle Support"], "26": ["Stamina", "Activation", "Life Force", "Physical Vitality"], "27": ["Clearing Space", "Moving Stuck Energy", "Purification", "Fresh Energy"], "28": ["Body Awareness", "Grounding in the Body", "Somatic Presence", "Embodiment"]};
 const SUB_FILTER_KW={"0": {"Calming Down": ["calm", "settle", "slow down"], "Nervous System": ["nervous", "overwhelm", "sensitiv"], "Sensory Overwhelm": ["sensitiv", "overload", "too much"], "Racing Mind": ["racing", "busy mind", "overthink", "restless"]}, "1": {"Earthing & Body": ["body", "earth", "earthing"], "Centering": ["center", "pulled back"], "Scattered Energy": ["scatter", "drained"], "Overwhelm": ["overwhelm"]}, "2": {"Fear & Resistance": ["fear", "resist", "block", "hesit"], "Inertia": ["stuck", "inertia", "stagnant", "static"], "Blocked Forward Motion": ["forward", "momentum", "move", "start"], "Moving Through": ["moving", "unstuck", "progress", "through"]}, "3": {"Falling Asleep": ["sleep", "insomnia", "rest"], "Staying Asleep": ["sleep", "night", "disturb", "wake"], "Anxiety at Night": ["anxiety", "night", "worry", "restless"], "Winding Down": ["calm", "quiet", "unwind", "relax"]}, "4": {"Energetic Shielding": ["shield", "protect", "block"], "Boundary Setting": ["boundary"], "Psychic Protection": ["psychic"], "Space Clearing": ["clearing", "heavy energy"]}, "5": {"Through Change": ["chang", "transit", "shift"], "Emotional Structure": ["structur", "anchor", "stable"], "Steady Support": ["steady", "support", "hold"]}, "6": {"Grief": ["grief", "griev", "mourn"], "Loss of a Person": ["loss", "loved one", "death", "bereav"], "Endings & Goodbyes": ["ending", "goodbye", "letting go", "closure"], "Comfort in Sadness": ["comfort", "support", "hold", "gentl"]}, "7": {"Anxiety": ["anxiety", "anxious", "worry", "fear"], "Sleep & Rest": ["sleep", "rest", "insomnia"], "Nervous System": ["nervous", "sensitiv", "hyperv"], "Overwhelm": ["overwhelm", "too much"]}, "8": {"Releasing Anger": ["anger", "rage", "frustrat", "irritat"], "Processing Hurt": ["hurt", "wound", "pain", "betray"], "Letting Go": ["release", "let go", "forgiv", "move on"], "Finding Peace": ["peace", "calm", "accept", "resolv"]}, "9": {"Grief & Loss": ["grief", "griev", "mourn", "loss"], "Heartbreak": ["heartbreak", "heartbroken", "romantic"], "Forgiveness": ["forgiv", "release", "let go"], "Deep Wounds": ["deep wound", "trauma", "old hurt"]}, "10": {"Creative Spark": ["creat", "inspir", "idea"], "Optimism": ["optim", "hope", "brightl"], "Mood Lifting": ["mood", "lift", "uplift", "depress"], "Playfulness": ["play", "fun", "joy", "light"]}, "11": {"Self-Worth": ["worth", "deserv", "enough"], "Inner Kindness": ["kind", "gentle", "soft"], "After Self-Criticism": ["critic", "judg", "shame"], "Nurturing": ["nurtur", "care", "support"]}, "12": {"Building Trust": ["trust", "safe", "open", "connect"], "Opening Communication": ["communicat", "speak", "express", "honest"], "Healing a Rift": ["heal", "repair", "reconcil", "rift"], "Deepening Connection": ["deep", "bond", "intimac", "close"]}, "13": {"Focus & Study": ["focus", "study", "concentr"], "Decision Making": ["decis", "choice", "clarity"], "Mental Clutter": ["clutter", "fog", "confused"], "Overthinking": ["overthink", "loop", "ruminate"]}, "14": {"Physical Energy": ["energy", "vitality", "stamina", "activat"], "Mental Drive": ["motivat", "drive", "purpose", "direction"], "Getting Started": ["start", "begin", "initiat", "action"], "Sustaining Momentum": ["momentum", "sustain", "persist", "continue"]}, "15": {"Speaking Truth": ["truth", "honest", "authentic"], "Being Heard": ["heard", "voice", "express"], "Difficult Conversations": ["difficult", "hard conversation", "confrontat"], "Honest Expression": ["express", "articulate", "clear"]}, "16": {"Bold Action": ["bold", "action", "courage"], "Self-Trust": ["trust", "instinct", "inner knowing"], "Personal Power": ["power", "authority", "strength"], "Overcoming Fear": ["fear", "hesit", "doubt"]}, "17": {"Abundance": ["abundan", "prosper", "wealth", "financial"], "Drawing In Love": ["love", "relationship", "partner", "attract"], "Attracting Opportunity": ["opportun", "luck", "success", "open"], "Opening to Receive": ["receiv", "allow", "welcome", "open"]}, "18": {"Career & Work": ["career", "work", "profession", "success"], "Financial Goals": ["financial", "money", "prosper", "abundan"], "Creative Projects": ["creat", "project", "vision", "idea"], "Personal Growth": ["growth", "personal", "develop", "become"]}, "19": {"Before Meditation": ["meditat", "stillness", "focus", "center"], "Before a Grid": ["grid", "layout", "sacred", "space"], "New Moon Practice": ["new moon", "lunar", "cycle", "plant"], "Working with a Stone": ["stone", "crystal", "hold", "work"]}, "20": {"Life Direction": ["direction", "path", "purpose", "calling"], "Soul Calling": ["soul", "calling", "mean", "destined"], "Meaning & Purpose": ["meaning", "purpose", "why", "alive"], "Reconnecting to Self": ["reconnect", "self", "identity", "return"]}, "21": {"Inner Knowing": ["inner knowing", "gut", "instinct"], "Dream Work": ["dream", "visions", "sleep"], "Psychic Sensitivity": ["psychic", "sensitiv", "perceptive"], "Visions": ["vision", "seeing", "clairvoy"]}, "22": {"Meditation": ["meditat", "stillness", "quiet mind"], "Higher Guidance": ["higher", "divine", "guidance"], "Divine Connection": ["divine", "sacred", "holy"], "Spiritual Growth": ["growth", "evolv", "ascend"]}, "23": {"Deepening Practice": ["deepen", "practice", "discipl"], "Stillness": ["still", "quiet", "silent", "inner peace"], "Going Inward": ["inward", "inner", "within", "contempl"], "Spiritual Focus": ["focus", "concentrat", "present", "aware"]}, "24": {"Shadow Work": ["shadow", "unconscious", "hidden"], "Releasing Patterns": ["pattern", "habit", "cycle"], "Rebirth & Growth": ["rebirth", "new", "transform"], "Ancestral Work": ["ancestral", "lineage", "inherited"]}, "25": {"Physical Recovery": ["physical", "body", "recover", "restor"], "Emotional Healing": ["emotional", "heart", "wound", "heal"], "After Illness": ["illness", "sick", "weak", "depleted"], "Gentle Support": ["gentl", "soft", "nurtur", "support"]}, "26": {"Stamina": ["stamina", "endur", "persist", "sustain"], "Activation": ["activat", "energiz", "spark", "vitalize"], "Life Force": ["life force", "prana", "chi", "vital"], "Physical Vitality": ["physical", "body", "strength", "vigor"]}, "27": {"Clearing Space": ["space", "room", "environment", "clear"], "Moving Stuck Energy": ["stuck", "stagnant", "heavy", "dense"], "Purification": ["purif", "cleanse", "reset", "fresh"], "Fresh Energy": ["fresh", "renew", "new", "uplift"]}, "28": {"Body Awareness": ["body", "somatic", "sensation", "physical"], "Grounding in the Body": ["ground", "earth", "anchor", "roots"], "Somatic Presence": ["somatic", "present", "here", "aware"], "Embodiment": ["embod", "inhabit", "physical", "flesh"]}};
@@ -1188,7 +1189,60 @@ function encCardHtml(c){
   const imgZone=imgSrc
     ?`<div class="card-img-zone has-photo" onclick="openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${imgSrc}" alt="${c.n}" loading="lazy"></div>`
     :`<div onclick="openDetail('${c.i}')">${noPhotoZoneHtml(c)}</div>`;
-  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}</div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+}
+
+const pagedStoneLists={};
+
+function ensureStoneListLoadMore(container,id){
+  if(!container)return null;
+  let wrap=document.getElementById(id);
+  if(!wrap){
+    wrap=document.createElement('div');
+    wrap.id=id;
+    wrap.className='stone-list-load-more';
+    container.after(wrap);
+  }
+  return wrap;
+}
+
+function renderPagedStoneList({stones,container,stateKey,renderCard,loadMoreContainer,batchSize=RESULT_BATCH_SIZE}){
+  if(!container)return;
+  const list=stones||[];
+  const existing=pagedStoneLists[stateKey];
+  const visible=existing&&existing.list===list?existing.visible:batchSize;
+  pagedStoneLists[stateKey]={list,container,stateKey,renderCard,loadMoreContainer,batchSize,visible};
+  const shown=list.slice(0,visible);
+  container.innerHTML=shown.map(renderCard).join('');
+  updatePagedStoneLoadMore(stateKey);
+}
+
+function updatePagedStoneLoadMore(stateKey){
+  const state=pagedStoneLists[stateKey];
+  if(!state)return;
+  const actual=Math.min(state.visible,state.list.length);
+  const remaining=state.list.length-actual;
+  let wrap=state.loadMoreContainer;
+  if(typeof wrap==='string')wrap=document.getElementById(wrap);
+  if(!wrap)wrap=ensureStoneListLoadMore(state.container,'load-more-'+stateKey.replace(/[^a-z0-9_-]/gi,'-'));
+  state.loadMoreContainer=wrap;
+  if(!wrap)return;
+  if(remaining>0){
+    wrap.style.display='block';
+    wrap.innerHTML=`<button class="load-more-btn" type="button" onclick="pagedStoneListLoadMore(${jsArg(stateKey)})">Load more stones</button><div class="load-more-count">${actual} of ${state.list.length} shown &mdash; ${remaining} more</div>`;
+  }else{
+    wrap.style.display='none';
+    wrap.innerHTML='';
+  }
+}
+
+function pagedStoneListLoadMore(stateKey){
+  const state=pagedStoneLists[stateKey];
+  if(!state)return;
+  state.visible+=state.batchSize;
+  const shown=state.list.slice(0,state.visible);
+  state.container.innerHTML=shown.map(state.renderCard).join('');
+  updatePagedStoneLoadMore(stateKey);
 }
 
 function encRender(){
@@ -1222,28 +1276,20 @@ function encRender(){
     return;
   }
 
-  const PAGE_SIZE = 30;
   window._encList = list;
   window._encPage = 1;
 
-  if(filtersActive){
-    grid.innerHTML = list.map(c => encCardHtml(c)).join('');
-    document.getElementById('load-more-wrap').style.display = 'none';
-  } else {
-    grid.innerHTML = list.slice(0, PAGE_SIZE).map(c => encCardHtml(c)).join('');
-    updateLoadMore(list, PAGE_SIZE);
-  }
+  renderPagedStoneList({
+    stones:list,
+    container:grid,
+    stateKey:'enc-main',
+    renderCard:encCardHtml,
+    loadMoreContainer:document.getElementById('load-more-wrap')
+  });
 }
 
 function loadMoreStones(){
-  const list = window._encList || [];
-  const PAGE_SIZE = 30;
-  window._encPage = (window._encPage || 1) + 1;
-  const showing = window._encPage * PAGE_SIZE;
-  const grid = document.getElementById('crystal-grid');
-  const newCards = list.slice(showing - PAGE_SIZE, showing).map(c => encCardHtml(c)).join('');
-  grid.insertAdjacentHTML('beforeend', newCards);
-  updateLoadMore(list, showing);
+  pagedStoneListLoadMore('enc-main');
 }
 
 function updateLoadMore(list, showing){
@@ -2201,6 +2247,8 @@ function restoreEncLanding(){
   if(tierLanding)tierLanding.style.display='';
   const grid=document.getElementById('crystal-grid');
   if(grid)grid.innerHTML='';
+  const loadMore=document.getElementById('load-more-wrap');
+  if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
 }
 
 function encDoorwayBrowse(key){
@@ -2241,6 +2289,14 @@ function renderEncTierPreview(){
 }
 
 function encTier1RenderUpTo(allStones,upTo,grid){
+  renderPagedStoneList({
+    stones:allStones,
+    container:grid,
+    stateKey:'enc-tier-1',
+    renderCard:encCardHtml,
+    loadMoreContainer:ensureStoneListLoadMore(grid,'enc-tier-1-more')
+  });
+  return;
   grid.innerHTML=allStones.slice(0,upTo).map(c=>encCardHtml(c)).join('');
   const remaining=allStones.length-upTo;
   const existingPill=document.getElementById('enc-t1-more-pill');
@@ -2288,10 +2344,15 @@ function encTierAccordionExpand(num){
     if(caret)caret.textContent='▾';
     return;
   }
-  if(grid&&!grid.dataset.rendered){
+  if(grid){
     const stones=CRYSTALS.filter(c=>Number(c.tier)===num);
-    grid.innerHTML=stones.map(c=>encCardHtml(c)).join('');
-    grid.dataset.rendered='1';
+    renderPagedStoneList({
+      stones,
+      container:grid,
+      stateKey:'enc-tier-'+num,
+      renderCard:encCardHtml,
+      loadMoreContainer:ensureStoneListLoadMore(grid,'enc-tier-'+num+'-more')
+    });
   }
   body.style.display='';
   if(caret)caret.textContent='▴';
@@ -4124,7 +4185,17 @@ function showIdentifyResults(){
   subEl.textContent = count<=5?'These are your most likely candidates based on your answers.':'Tap any stone to see its full entry. Start with the most visually similar.';
   
   const grid = document.getElementById('id-results-grid');
-  const display = identifyCandidates.slice(0,20);
+  if(grid){
+    renderPagedStoneList({
+      stones:identifyCandidates,
+      container:grid,
+      stateKey:'identify-results',
+      renderCard:c=>encCardHtml(c).replace(/onclick="openDetail\(/g,'onclick="openDetailFromIdentify('),
+      loadMoreContainer:ensureStoneListLoadMore(grid,'identify-load-more')
+    });
+    return;
+  }
+  const display = identifyCandidates.slice(0,RESULT_BATCH_SIZE);
   grid.innerHTML = display.map(c=>{
     const isOwned=!!owned[c.i],isWish=!!wish[c.i];
     const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
@@ -4133,7 +4204,7 @@ function showIdentifyResults(){
       ?`<div class="card-img-zone has-photo"><img src="${SUPABASE_ENC}${encPhotos[0]}" alt="${c.n}" loading="lazy"></div>`
       :noPhotoZoneHtml(c);
     const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
-    return`<div class="crystal-card" onclick="openDetailFromIdentify('${c.i}')">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}<span style="font-size:10.5px;color:var(--ink3);margin-left:3px">${c.c||''}</span></div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+    return`<div class="crystal-card" onclick="openDetailFromIdentify('${c.i}')">${badge}${imgZone}<div class="card-body"><div class="card-name">${c.n}</div><div class="card-color">${colorDotsHtml(c)}</div>${roles?`<div>${roles}</div>`:''}</div></div>`;
   }).join('');
 }
 
@@ -4611,12 +4682,25 @@ function runId2Results(){
   if(countEl)countEl.innerHTML=`Possible matches <strong style="color:var(--ink);margin-left:4px">${n}</strong>`;
   const g=document.getElementById('id2-grid');
   if(!g)return;
-  if(!n){g.innerHTML='<div class="id2-empty">No stones match — try removing a filter.</div>';return;}
-  g.innerHTML=results.slice(0,72).map(c=>encCardHtml(c)).join('')+(results.length>72?`<div class="id2-empty" style="padding:1rem;font-size:12px">Showing 72 of ${results.length} — add more filters to narrow down.</div>`:'');
+  const previousId2LoadMore=document.getElementById('id2-load-more');
+  if(previousId2LoadMore){previousId2LoadMore.style.display='none';previousId2LoadMore.innerHTML='';}
+  if(n){
+    renderPagedStoneList({
+      stones:results,
+      container:g,
+      stateKey:'id2-results',
+      renderCard:encCardHtml,
+      loadMoreContainer:ensureStoneListLoadMore(g,'id2-load-more')
+    });
+    return;
+  }
+  g.innerHTML='<div class="id2-empty">No stones match — try removing a filter.</div>';
 }
 
 function clearId2(){
   id2State={color:null,trans:null,luster:null,hard:null,heft:null};
+  const loadMore=document.getElementById('id2-load-more');
+  if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
   renderId2Steps();
 }
 

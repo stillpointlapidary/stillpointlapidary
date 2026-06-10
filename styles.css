@@ -755,7 +755,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 
 /* LOAD MORE */
-.load-more-wrap{text-align:center;padding:2rem 0 1rem}
+.load-more-wrap,.stone-list-load-more{text-align:center;padding:2rem 0 1rem}
 .load-more-btn{
   display:inline-flex;align-items:center;gap:0.5rem;
   padding:0.75rem 2rem;
