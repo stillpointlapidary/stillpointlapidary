@@ -489,18 +489,18 @@ function learnMoreStarterStone(){
   const s = FEATURED_STONES[starterStoneModalIndex];
   closeStarterStoneModal();
   if(!s) return;
+  const identifier=s.id || normalizeStoneName(s.name).replace(/\s+/g,'-');
   if(!document.getElementById('tab-encyclopedia')){
-    try{sessionStorage.setItem('spl_pending_stone',s.id);}catch(e){}
+    try{sessionStorage.setItem('spl_pending_stone',identifier);}catch(e){}
     try{sessionStorage.setItem('spl_pending_stone_name',s.name);}catch(e){}
     const target=new URL('encyclopedia.html', window.location.href);
-    target.searchParams.set('tab','encyclopedia');
-    target.searchParams.set('stone',s.id);
+    target.searchParams.set('stone',identifier);
     target.searchParams.set('stoneName',s.name);
     window.location.href=target.href;
     return;
   }
   showEncyclopediaForDirectStoneOpen();
-  openStoneEntryWhenReady(s.id,s.name);
+  openPendingStoneEntry(identifier,s.name);
 }
 
 document.addEventListener('keydown',function(e){
@@ -563,6 +563,7 @@ function init(){
     renderEncTierPreview();
     renderEncTierCounts();
     buildMoodGroupPills();
+    initNarrowByDelegation();
     buildYearSelect('f-year');
 
     // Read the intended tab BEFORE any rendering so we can hide encyclopedia immediately
@@ -1453,30 +1454,47 @@ function normalizeStoneName(v){
   return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }
 
-function findStoneEntry(id,name){
-  const idText=String(id||'').trim();
-  const nameText=normalizeStoneName(name);
-  return CRYSTALS.find(x=>String(x.i)===idText)
-    || (nameText ? CRYSTALS.find(x=>normalizeStoneName(x.n)===nameText) : null)
-    || (nameText ? CRYSTALS.find(x=>normalizeStoneName(x.a).split(' ').join(' ').includes(nameText)) : null);
+function stoneSlug(v){
+  return normalizeStoneName(v).replace(/\s+/g,'-');
 }
 
-function openStoneEntryWhenReady(id,name,tries=0){
-  const found=findStoneEntry(id,name);
+function findStoneEntry(identifier,name){
+  const idText=String(identifier||'').trim();
+  const idLower=idText.toLowerCase();
+  const idNorm=normalizeStoneName(idText);
+  const idSlug=stoneSlug(idText);
+  const nameNorm=normalizeStoneName(name);
+  const nameSlug=stoneSlug(name);
+  return CRYSTALS.find(x=>String(x.i).toLowerCase()===idLower)
+    || CRYSTALS.find(x=>stoneSlug(x.slug||'')===idSlug)
+    || CRYSTALS.find(x=>stoneSlug(x.n)===idSlug)
+    || CRYSTALS.find(x=>nameSlug&&stoneSlug(x.n)===nameSlug)
+    || CRYSTALS.find(x=>{
+      const alt=normalizeStoneName(x.a);
+      return !!nameNorm&&(alt.split(/\s*,\s*/).some(a=>normalizeStoneName(a)===nameNorm)||alt.includes(nameNorm));
+    })
+    || CRYSTALS.find(x=>{
+      const n=normalizeStoneName(x.n);
+      return !!idNorm&&(n.includes(idNorm)||idNorm.includes(n));
+    });
+}
+
+function openPendingStoneEntry(identifier,name){
+  const found=findStoneEntry(identifier,name);
   const drawer=document.getElementById('detail-drawer');
   if(found&&drawer){
     dismissEncDoorway();
     openDetail(found.i);
-    return;
+    return true;
   }
-  if(tries<30)setTimeout(()=>openStoneEntryWhenReady(id,name,tries+1),150);
+  console.warn('Still Point: no encyclopedia stone matched deep link', {identifier,name});
+  return false;
 }
 
 function showEncyclopediaForDirectStoneOpen(){
   clearInitialTabStyle();
   closeMobileNav();
   rememberActiveTab('encyclopedia');
-  syncTabUrl('encyclopedia');
   document.querySelectorAll('main>section').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   const tab=document.getElementById('tab-encyclopedia');
@@ -1770,7 +1788,7 @@ function buildSharedSubFilters(filters){
     const label=ch.label;
     const value=label==='All'?'all':label;
     const active=(activeIntentionFilter||'all')===value;
-    return`<button class="sfpill${active?' active':''}" onclick="setIntentionSubFilter(${value==='all'?'null':jsArg(value)},this,event)">${escapeAttr(label)}</button>`;
+    return`<button class="sfpill${active?' active':''}" type="button" data-subfilter="${escapeAttr(value)}">${escapeAttr(label)}</button>`;
   }).join('');
 }
 
@@ -1820,16 +1838,14 @@ function updateIntentionCount(){
   countEl.textContent = activeIntentionMatches.length + ' stones' + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
 }
 
-function setIntentionSubFilter(val,btn,evt){
-  if(evt)evt.stopPropagation();
+function setIntentionSubFilter(val){
   activeIntentionFilter=val||'all';
   activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
   activeIntentionMatches=sortIntentionMatches(
     applyIntentionSubFilter(activeIntentionBaseMatches, activeIntentionGroup, activeIntentionFilter),
     {group:activeIntentionGroup,filterLabel:activeIntentionFilter}
   );
-  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.remove('active'));
-  if(btn)btn.classList.add('active');
+  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.toggle('active',(p.dataset.subfilter||'all')===activeIntentionFilter));
   updateIntentionCount();
   renderIntentionStoneCards();
 }
@@ -1837,6 +1853,21 @@ function setIntentionSubFilter(val,btn,evt){
 function loadMoreIntentionStones(){
   activeIntentionVisibleCount+=MOOD_RESULT_PAGE_SIZE;
   renderIntentionStoneCards();
+}
+
+function initNarrowByDelegation(){
+  const pillsEl=document.getElementById('sub-filter-pills');
+  if(!pillsEl||pillsEl.dataset.delegated==='1')return;
+  pillsEl.dataset.delegated='1';
+  pillsEl.addEventListener('click',function(e){
+    const btn=e.target.closest('[data-subfilter]');
+    if(!btn||!pillsEl.contains(btn))return;
+    e.preventDefault();
+    e.stopPropagation();
+    const value=btn.dataset.subfilter||'all';
+    if(activeIntentionMode==='mood')setSubFilter(value);
+    else setIntentionSubFilter(value);
+  });
 }
 
 function intentionCardClick(group, el) {
@@ -1988,18 +2019,16 @@ function buildSubFilters(idx){
   if(!subs||!subs.length){row.style.display='none';return;}
   row.style.display='flex';
   const pillsEl=document.getElementById('sub-filter-pills');
-  if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" onclick="setSubFilter(null,this,event)">All</button>`+
-    subs.map(s=>`<button class="sfpill" onclick="setSubFilter(${jsArg(s)},this,event)">${escapeAttr(s)}</button>`).join('');
+  if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" type="button" data-subfilter="all">All</button>`+
+    subs.map(s=>`<button class="sfpill" type="button" data-subfilter="${escapeAttr(s)}">${escapeAttr(s)}</button>`).join('');
 }
 
-function setSubFilter(val,btn,evt){
-  if(evt)evt.stopPropagation();
-  activeSubFilter=val;
-  activeIntentionFilter=val||'all';
+function setSubFilter(val){
+  activeSubFilter=(val&&val!=='all')?val:null;
+  activeIntentionFilter=activeSubFilter||'all';
   activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
-  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  renderMoodStones(activeMoodIdx,val);
+  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.toggle('active',(p.dataset.subfilter||'all')===(activeSubFilter||'all')));
+  renderMoodStones(activeMoodIdx,activeSubFilter);
 }
 
 function renderMoodStones(moodIdx,subFilter){
@@ -3925,6 +3954,7 @@ async function loadStonesAndInit() {
     const at   = (r.all_themes      || []).map(t => t.toLowerCase()).join(' ');
     return {
       i:             r.id,
+      slug:          r.slug              || '',
       n:             r.name              || '',
       a:             r.alternate_names   || '',
       fam:           r.family            || '',
@@ -6263,7 +6293,7 @@ loadStonesAndInit().then(()=>{
   })();
   const tierParam=params.get('tier');
   const collectionView=params.get('view');
-  if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
+  if(!stoneParam&&tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
     switchTabByName(tabParam);
     if(tabParam==='collection'&&collectionView==='wishlist'){setCollQuickFilter('wish');setWishlistNavActive();}
     // Re-apply after auth+data loading settles (auth callbacks can fire and re-render after init)
@@ -6276,9 +6306,7 @@ loadStonesAndInit().then(()=>{
     try{sessionStorage.removeItem('spl_pending_stone');}catch(e){}
     try{sessionStorage.removeItem('spl_pending_stone_name');}catch(e){}
     showEncyclopediaForDirectStoneOpen();
-    openStoneEntryWhenReady(stoneParam,stoneNameParam);
-    setTimeout(()=>{showEncyclopediaForDirectStoneOpen();openStoneEntryWhenReady(stoneParam,stoneNameParam);},700);
-    setTimeout(()=>openStoneEntryWhenReady(stoneParam,stoneNameParam),1400);
+    openPendingStoneEntry(stoneParam,stoneNameParam);
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
     setTimeout(()=>encBrowseTier(tierParam),120);
