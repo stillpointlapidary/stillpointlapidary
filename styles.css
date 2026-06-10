@@ -887,6 +887,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .role-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink);letter-spacing:0.01em;margin-bottom:4px}
 .role-desc{font-size:12px;color:var(--ink2);line-height:1.6}
 .role-eg{font-size:11px;color:var(--ink3);margin-top:5px;font-style:italic}
+.role-cta{display:none}
 .kit-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1rem}
 .kit-card{border:0.5px solid var(--border);border-radius:10px;background:var(--white);display:flex;overflow:hidden}
 .kit-stripe{width:4px;flex-shrink:0}
@@ -897,6 +898,24 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .kit-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:0.04em;color:var(--ink2);border:0.5px solid var(--border);border-radius:6px;padding:9px 16px;background:var(--white);cursor:pointer;font-family:'Jost',sans-serif}
 .kit-cta:hover{background:var(--stone2);border-color:var(--accent2)}
 @media(max-width:700px){.kit-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  #s101-roles .role-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:1.35rem}
+  #s101-roles .role-card{min-height:0;transform:none}
+  #s101-roles .role-card:hover{transform:none}
+  #s101-roles .role-body{width:100%;padding:0.75rem 0.9rem}
+  #s101-roles .role-name{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:0;font-size:16px}
+  #s101-roles .role-name::after{content:'+';width:20px;height:20px;border:0.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 20px;background:var(--stone);color:var(--accent);font-family:'Jost',sans-serif;font-size:13px;line-height:1}
+  #s101-roles .role-card.open .role-name{margin-bottom:7px}
+  #s101-roles .role-card.open .role-name::after{content:'-'}
+  #s101-roles .role-desc,
+  #s101-roles .role-eg,
+  #s101-roles .role-cta{display:none}
+  #s101-roles .role-card.open .role-desc{display:block}
+  #s101-roles .role-card.open .role-eg{display:block}
+  #s101-roles .role-card.open .role-cta{display:inline-flex;margin-top:0.8rem;border:none;background:transparent;color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.055em;text-transform:uppercase;cursor:pointer;padding:0;text-align:left}
+  #s101-roles .role-card.open .role-cta:hover{color:var(--ink)}
+}
+@media(max-width:420px){#s101-roles .kit-grid{grid-template-columns:1fr}}
 @media(max-width:900px){.c101-photo-intro{grid-template-columns:1fr;gap:0.9rem}.c101-photo-slot{max-width:220px;justify-self:start}.c101-wide-photo,.c101-wide-photo--work,.c101-wide-photo--cleansing,.c101-wide-photo--chakras,.c101-wide-photo--kit,.c101-wide-photo--care{width:100%;height:auto;aspect-ratio:16/9}}
 
 /* Family cards */
