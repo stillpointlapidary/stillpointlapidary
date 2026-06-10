@@ -491,7 +491,7 @@ function learnMoreStarterStone(){
   if(!s) return;
   const identifier=s.id || normalizeStoneName(s.name).replace(/\s+/g,'-');
   const onHomepage=!document.getElementById('tab-encyclopedia');
-  if(onHomepage && !isMobileView() && document.getElementById('detail-drawer')){
+  if(onHomepage && document.getElementById('detail-drawer')){
     const returnIndex=starterStoneModalIndex;
     closeStarterStoneModal();
     detailReturnContext={type:'starterStone',index:returnIndex};
@@ -1573,7 +1573,7 @@ function closeDrawer(){
     const ctx=detailReturnContext;
     detailReturnContext=null;
     setTimeout(()=>{
-      if(ctx&&Number.isInteger(ctx.index)&&!isMobileView()){
+      if(ctx&&Number.isInteger(ctx.index)){
         openStarterStoneModal(ctx.index);
       }else{
         scrollToPageSection('#featured-section');
