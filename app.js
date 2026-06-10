@@ -808,13 +808,6 @@ function syncEncSearch(source){
   if(source==='desktop'&&mobile)mobile.value=val;
   if(isMobileView())dismissEncDoorway();
   encRender();
-  if(source==='desktop'&&!isMobileView()&&val&&mobile){
-    requestAnimationFrame(()=>{
-      mobile.focus();
-      const end=mobile.value.length;
-      try{mobile.setSelectionRange(end,end);}catch(e){}
-    });
-  }
   if(isMobileView())encScrollToSearchArea(false);
 }
 
