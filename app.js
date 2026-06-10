@@ -3932,6 +3932,40 @@ function ensure101BackTopButtons(){
 function scrollTo101Top(){
   try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
 }
+function roleThemeFromCard(card){
+  const raw=card?.getAttribute('onclick')||'';
+  const match=raw.match(/jumpToTheme\('([^']+)'\)/);
+  return match?match[1]:(card?.querySelector('.role-name')?.textContent||'').trim();
+}
+function setupMobileRoleAccordion(){
+  const cards=[...document.querySelectorAll('#s101-roles .role-card')];
+  if(!cards.length)return;
+  cards.forEach((card,idx)=>{
+    if(!card.classList.contains('role-accordion-ready')){
+      card.classList.add('role-accordion-ready');
+      card.setAttribute('aria-expanded', idx===0?'true':'false');
+      const roleName=(card.querySelector('.role-name')?.textContent||'Role').trim();
+      const theme=roleThemeFromCard(card);
+      const body=card.querySelector('.role-body');
+      if(body&&!body.querySelector('.role-cta')){
+        const cta=document.createElement('button');
+        cta.type='button';
+        cta.className='role-cta';
+        cta.textContent=`Browse ${roleName} stones →`;
+        cta.addEventListener('click',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          jumpToTheme(theme);
+        });
+        body.appendChild(cta);
+      }
+    }
+  });
+  if(window.matchMedia&&window.matchMedia('(max-width: 768px)').matches&&!cards.some(card=>card.classList.contains('open'))){
+    cards[0].classList.add('open');
+    cards[0].setAttribute('aria-expanded','true');
+  }
+}
 function show101(sec,btn){
   ensure101BackTopButtons();
   try{localStorage.setItem('spl_101_section',sec);}catch(e){}
@@ -3947,6 +3981,7 @@ function show101(sec,btn){
   if(sec==='grids')init101Grids();
   if(sec==='shapes'){renderShapes();requestAnimationFrame(function(){setTimeout(function(){if(window._updateShapeArrows)window._updateShapeArrows();},100);});}
   if(sec==='families')initFamilies();
+  if(sec==='roles')setupMobileRoleAccordion();
 }
 
 function jumpToStone(name){
@@ -6156,6 +6191,20 @@ _authInit();
     const oldRunId2=runId2;
     runId2=function(){ oldRunId2(); stampCrystalCards(); };
   }catch(e){}
+
+  document.addEventListener('click', function(e){
+    const roleCard=e.target.closest && e.target.closest('#s101-roles .role-card');
+    if(roleCard && window.matchMedia && window.matchMedia('(max-width: 768px)').matches && !e.target.closest('.role-cta')){
+      e.preventDefault();
+      e.stopPropagation();
+      document.querySelectorAll('#s101-roles .role-card').forEach(card=>{
+        const isActive=card===roleCard;
+        card.classList.toggle('open', isActive);
+        card.setAttribute('aria-expanded', String(isActive));
+      });
+      return;
+    }
+  }, true);
 
   document.addEventListener('click', function(e){
     const famCard=e.target.closest && e.target.closest('#fam-cards .fam-card');
