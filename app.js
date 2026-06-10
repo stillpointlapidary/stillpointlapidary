@@ -39,6 +39,10 @@ let currentCrystal=null;
 let openPanel=null;
 let activeMoodIdx=null;
 let activeSubFilter=null;
+let activeIntentionGroup=null;
+let activeIntentionFilter='all';
+let activeIntentionMatches=[];
+let activeIntentionVisibleCount=30;
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
 let addPieceReturnContext=null;
 let editingCollectionIndex=null;
@@ -131,6 +135,54 @@ const INTENTION_CARD_SUBS = {
   'Spirit & Intuition':    'Intuition, inner wisdom, spiritual awareness',
   'Body & Vitality':       'Energy, resilience, vitality',
 };
+const INTENTION_SUB_FILTERS = {
+  'Grounding & Stability': [
+    {label:'Anxiety', keywords:['anxiety','anxious','worry','overwhelm']},
+    {label:'Stability', themes:['Stability','Grounding'], keywords:['stable','stability','steady','steadiness']},
+    {label:'Protection', themes:['Protection'], keywords:['protect','shield','boundary']},
+    {label:'Overthinking', themes:['Clarity & Focus'], keywords:['overthink','racing mind','ruminate','mental clutter']},
+    {label:'Nervous System', keywords:['nervous','sensitiv','soothe','settle']},
+    {label:'Sleep', themes:['Calm & Peace'], keywords:['sleep','rest','night','insomnia']},
+    {label:'Focus', themes:['Clarity & Focus'], keywords:['focus','center','clarity']}
+  ],
+  'Heart & Emotional': [
+    {label:'Self-Love', themes:['Self-Love'], keywords:['self-love','self love','self-worth','self-compassion']},
+    {label:'Grief', themes:['Heart Healing'], keywords:['grief','grieving','loss','mourn']},
+    {label:'Compassion', themes:['Heart Healing','Self-Love'], keywords:['compassion','kindness','empathy']},
+    {label:'Forgiveness', themes:['Heart Healing'], keywords:['forgiv','release','let go']},
+    {label:'Emotional Balance', themes:['Emotional Balance','Emotional Regulation'], keywords:['emotional balance','emotional regulation','balance']},
+    {label:'Relationships', themes:['Heart Healing','Communication'], keywords:['relationship','connection','trust','communication']},
+    {label:'Inner Child', themes:['Self-Love','Joy'], keywords:['inner child','nurtur','play','gentle']}
+  ],
+  'Mind & Will': [
+    {label:'Clarity', themes:['Clarity & Focus'], keywords:['clarity','clear','decision']},
+    {label:'Focus', themes:['Clarity & Focus'], keywords:['focus','study','concentrat']},
+    {label:'Motivation', themes:['Vitality','Confidence'], keywords:['motivat','drive','momentum']},
+    {label:'Confidence', themes:['Confidence'], keywords:['confidence','self-trust','power']},
+    {label:'Communication', themes:['Communication'], keywords:['communicat','speak','voice']},
+    {label:'Manifestation', themes:['Manifestation'], keywords:['manifest','abundance','intention']},
+    {label:'Decision Making', themes:['Clarity & Focus'], keywords:['decision','choice','direction']}
+  ],
+  'Spirit & Intuition': [
+    {label:'Intuition', themes:['Intuition'], keywords:['intuition','inner knowing','psychic']},
+    {label:'Meditation', themes:['Spiritual Connection','Calm & Peace'], keywords:['meditat','stillness','quiet']},
+    {label:'Spiritual Connection', themes:['Spiritual Connection'], keywords:['spiritual','divine','guidance']},
+    {label:'Transformation', themes:['Transformation'], keywords:['transform','shadow','rebirth']},
+    {label:'Dream Work', themes:['Intuition','Spiritual Connection'], keywords:['dream','vision']},
+    {label:'Purpose', themes:['Clarity & Focus','Spiritual Connection'], keywords:['purpose','path','meaning']},
+    {label:'Higher Guidance', themes:['Spiritual Connection'], keywords:['higher guidance','divine','sacred']}
+  ],
+  'Body & Vitality': [
+    {label:'Vitality', themes:['Vitality'], keywords:['vitality','life force','energ']},
+    {label:'Energy', themes:['Vitality','Amplification'], keywords:['energy','activation','spark']},
+    {label:'Recovery', themes:['Heart Healing','Vitality'], keywords:['recover','healing','restor']},
+    {label:'Stamina', themes:['Vitality'], keywords:['stamina','endurance','sustain']},
+    {label:'Clearing', themes:['Amplification','Transformation'], keywords:['clearing','cleanse','purif','stuck energy']},
+    {label:'Embodiment', themes:['Grounding'], keywords:['body','embodiment','somatic','presence']},
+    {label:'Resilience', themes:['Vitality','Grounding'], keywords:['resilience','strength','support']}
+  ]
+};
+const MOOD_RESULT_PAGE_SIZE = 30;
 
 
 // ── IMAGE STORAGE FALLBACKS ──
@@ -1484,6 +1536,95 @@ function addFromDetail(){
 
 // ── MOOD TAB ──
 
+function getIntentionGroupMatches(group){
+  const themes = INTENTION_THEME_MAP[group] || [];
+  return CRYSTALS.filter(c => themes.some(t => (c.all_themes||[]).includes(t)));
+}
+
+function intentionFilterHaystack(c){
+  return [
+    c.n,c.a,c.uw,c.er1,c.er2,c.er3,c.primary_theme,
+    ...(c.all_themes||[])
+  ].filter(Boolean).join(' ').toLowerCase();
+}
+
+function applyIntentionSubFilter(matches, group, filterLabel){
+  if(!filterLabel || filterLabel==='all')return matches;
+  const filter=(INTENTION_SUB_FILTERS[group]||[]).find(f=>f.label===filterLabel);
+  if(!filter)return matches;
+  return matches.filter(c=>{
+    const themes=c.all_themes||[];
+    const themeHit=(filter.themes||[]).some(t=>themes.includes(t) || c.primary_theme===t);
+    if(themeHit)return true;
+    const hay=intentionFilterHaystack(c);
+    return (filter.keywords||[]).some(k=>hay.includes(String(k).toLowerCase()));
+  });
+}
+
+function buildIntentionSubFilters(group){
+  const subs=INTENTION_SUB_FILTERS[group]||[];
+  const row=document.getElementById('sub-filter-row');
+  const pillsEl=document.getElementById('sub-filter-pills');
+  if(!row || !pillsEl)return;
+  if(!subs.length){row.style.display='none';pillsEl.innerHTML='';return;}
+  row.style.display='flex';
+  const chips=[{label:'All'},...subs];
+  pillsEl.innerHTML=chips.map(ch=>{
+    const label=ch.label;
+    const value=label==='All'?'all':label;
+    const active=(activeIntentionFilter||'all')===value;
+    return`<button class="sfpill${active?' active':''}" onclick="setIntentionSubFilter(${value==='all'?'null':jsArg(value)},this)">${escapeAttr(label)}</button>`;
+  }).join('');
+}
+
+function renderIntentionStoneCards(){
+  const stoneGrid = document.getElementById('mood-stone-grid');
+  if (!stoneGrid) return;
+  stoneGrid.style.display = 'grid';
+  const visible=activeIntentionMatches.slice(0,activeIntentionVisibleCount);
+  if (!visible.length) {
+    stoneGrid.innerHTML = '<div class="empty-state">No stones found for this category yet.</div>';
+  }else{
+    stoneGrid.innerHTML = visible.map(function(c) {
+      const raw = encCardHtml(c);
+      return raw.replace(/onclick="openDetail\(/, 'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
+    }).join('');
+  }
+
+  const loadMore=document.getElementById('mood-load-more');
+  if(loadMore){
+    if(activeIntentionMatches.length>activeIntentionVisibleCount){
+      loadMore.style.display='block';
+      loadMore.innerHTML=`<div class="mood-load-more-text">Showing ${visible.length} of ${activeIntentionMatches.length}</div><button class="mood-load-more-btn" type="button" onclick="loadMoreIntentionStones()">Load more stones</button>`;
+    }else{
+      loadMore.style.display='none';
+      loadMore.innerHTML='';
+    }
+  }
+}
+
+function updateIntentionCount(){
+  const countEl = document.getElementById('mood-results-count');
+  if(!countEl)return;
+  countEl.textContent = activeIntentionMatches.length + ' stones' + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
+}
+
+function setIntentionSubFilter(val,btn){
+  activeIntentionFilter=val||'all';
+  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  const allMatches=getIntentionGroupMatches(activeIntentionGroup);
+  activeIntentionMatches=applyIntentionSubFilter(allMatches, activeIntentionGroup, activeIntentionFilter);
+  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  updateIntentionCount();
+  renderIntentionStoneCards();
+}
+
+function loadMoreIntentionStones(){
+  activeIntentionVisibleCount+=MOOD_RESULT_PAGE_SIZE;
+  renderIntentionStoneCards();
+}
+
 function intentionCardClick(group, el) {
   // Clear active state on all cards
   document.querySelectorAll('#intention-grid .intention-card').forEach(c => c.classList.remove('active'));
@@ -1503,10 +1644,11 @@ function intentionCardClick(group, el) {
     return;
   }
 
-  // Filter directly from CRYSTALS by all_themes
   clearMoodResults();
-  const themes = INTENTION_THEME_MAP[group] || [];
-  const matches = CRYSTALS.filter(c => themes.some(t => (c.all_themes||[]).includes(t)));
+  activeIntentionGroup=group;
+  activeIntentionFilter='all';
+  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  const matches = getIntentionGroupMatches(group);
   renderIntentionResults(matches, group);
 
   // Scroll to results
@@ -1534,32 +1676,19 @@ function renderIntentionResults(matches, group) {
   if (labelEl) labelEl.textContent = group;
   if (subEl)   subEl.textContent   = INTENTION_CARD_SUBS[group] || '';
 
-  // Hide sub-filter row and grid banner (not used in category browse)
-  const sfRow = document.getElementById('sub-filter-row');
-  if (sfRow) sfRow.style.display = 'none';
+  // Show category-level refinement chips
+  buildIntentionSubFilters(group);
   const gridBanner = document.getElementById('mood-grid-banner');
   if (gridBanner) gridBanner.style.display = 'none';
 
-  // Stone count
-  const countEl = document.getElementById('mood-results-count');
-  if (countEl) countEl.textContent = matches.length + ' stones';
+  activeIntentionMatches=matches;
+  updateIntentionCount();
 
   // Show the selected-view container
   const selectedView = document.getElementById('mood-selected-view');
   if (selectedView) selectedView.style.display = 'block';
 
-  // Render stone cards
-  const stoneGrid = document.getElementById('mood-stone-grid');
-  if (!stoneGrid) return;
-  stoneGrid.style.display = 'grid';
-  if (!matches.length) {
-    stoneGrid.innerHTML = '<div class="empty-state">No stones found for this category yet.</div>';
-    return;
-  }
-  stoneGrid.innerHTML = matches.map(function(c) {
-    const raw = encCardHtml(c);
-    return raw.replace(/onclick="openDetail\(/, 'onclick="detailReturnContext={type:\'usewhen\'};openDetail(');
-  }).join('');
+  renderIntentionStoneCards();
 }
 
 function buildMoodGroupPills(){
@@ -1652,6 +1781,8 @@ function renderMoodStones(moodIdx,subFilter){
   const grid=document.getElementById('mood-stone-grid');
   const countEl=document.getElementById('mood-results-count');
   const selectedView=document.getElementById('mood-selected-view');
+  const loadMore=document.getElementById('mood-load-more');
+  if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
   if(selectedView)selectedView.style.display='block';
   if(grid)grid.style.display='grid';
   if(countEl)countEl.textContent=matches.length+' stones'+(subFilter?' · '+subFilter:'');
@@ -1870,8 +2001,11 @@ function clearMoodResults(){
   if(rb)rb.style.display='';
   const sv=document.getElementById('mood-selected-view');
   if(sv)sv.style.display='none';
+  const loadMore=document.getElementById('mood-load-more');
+  if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
+  activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
 }
 
 function resetUseWhen(){
@@ -1881,9 +2015,12 @@ function resetUseWhen(){
   if(rb)rb.style.display='none';
   const sv=document.getElementById('mood-selected-view');
   if(sv)sv.style.display='none';
+  const loadMore=document.getElementById('mood-load-more');
+  if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
   document.querySelectorAll('#intention-grid .intention-card').forEach(c=>c.classList.remove('active'));
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
+  activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
 }
 
 // ── COLLECTION ──

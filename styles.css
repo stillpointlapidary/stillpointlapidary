@@ -251,9 +251,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* sub-filter row */
 .sub-filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;padding:0.75rem 1rem;background:var(--stone2);border-radius:8px}
 .sub-filter-label{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-right:4px;display:flex;align-items:center}
+#sub-filter-pills{display:flex;gap:6px;flex-wrap:wrap;min-width:0}
 .sfpill{font-size:12px;padding:4px 11px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Jost',sans-serif;transition:all 0.12s;white-space:nowrap}
 .sfpill.active{background:var(--accent);color:var(--white);border-color:var(--accent)}
 .sfpill:hover:not(.active){border-color:var(--accent2);color:var(--accent)}
+.mood-load-more{text-align:center;margin:1rem 0 0}
+.mood-load-more-text{font-size:12px;color:var(--ink3);margin-bottom:0.55rem}
+.mood-load-more-btn{border:0.5px solid var(--border);border-radius:999px;background:var(--white);color:var(--accent);font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;padding:9px 18px;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s}
+.mood-load-more-btn:hover{background:var(--stone2);border-color:var(--accent2);color:var(--ink)}
 
 /* MOOD RESULT CARDS - redesigned */
 .mood-stone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
@@ -508,6 +513,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .ai-stone-card{min-width:0}
   .ai-stone-name,.ai-stone-reason{overflow-wrap:anywhere}
   .ai-stone-reason{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .sub-filter-row{flex-wrap:nowrap;align-items:center;overflow:hidden;padding:0.65rem 0.75rem}
+  #sub-filter-pills{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  #sub-filter-pills::-webkit-scrollbar{display:none}
 }
 .ai-error{font-size:13px;color:#b94a48;padding:0.75rem 1rem;background:#fff5f5;border:0.5px solid #f5c6c6;border-radius:8px;margin-top:0.5rem;display:none}
 .ai-error.ai-error--gentle{color:var(--ink2);background:var(--stone2);border-color:var(--border)}
