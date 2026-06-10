@@ -488,10 +488,18 @@ function starterStoneOverlayClick(e){
 
 function learnMoreStarterStone(){
   const s = FEATURED_STONES[starterStoneModalIndex];
-  closeStarterStoneModal();
   if(!s) return;
   const identifier=s.id || normalizeStoneName(s.name).replace(/\s+/g,'-');
-  if(!document.getElementById('tab-encyclopedia')){
+  const onHomepage=!document.getElementById('tab-encyclopedia');
+  if(onHomepage && !isMobileView() && document.getElementById('detail-drawer')){
+    const returnIndex=starterStoneModalIndex;
+    closeStarterStoneModal();
+    detailReturnContext={type:'starterStone',index:returnIndex};
+    if(openPendingStoneEntry(identifier,s.name))return;
+    detailReturnContext=null;
+  }
+  closeStarterStoneModal();
+  if(onHomepage){
     try{sessionStorage.setItem('spl_pending_stone',identifier);}catch(e){}
     try{sessionStorage.setItem('spl_pending_stone_name',s.name);}catch(e){}
     const target=new URL('encyclopedia.html', window.location.href);
@@ -1561,6 +1569,16 @@ function closeDrawer(){
   } else if(detailReturnContext&&detailReturnContext.type==='usewhen'){
     detailReturnContext=null;
     switchTabByName('mood');
+  } else if(detailReturnContext&&detailReturnContext.type==='starterStone'){
+    const ctx=detailReturnContext;
+    detailReturnContext=null;
+    setTimeout(()=>{
+      if(ctx&&Number.isInteger(ctx.index)&&!isMobileView()){
+        openStarterStoneModal(ctx.index);
+      }else{
+        scrollToPageSection('#featured-section');
+      }
+    },0);
   }
 }
 let photoLightboxSources=[];
