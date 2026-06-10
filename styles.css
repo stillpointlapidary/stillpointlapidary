@@ -318,6 +318,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .empty-coll-btn.btn-accent{background:var(--accent);color:var(--white);border-color:var(--accent)}
 .empty-coll-btn.btn-accent:hover{background:var(--ink);border-color:var(--ink)}
 
+@media(min-width:601px){
+  #tab-collection.collection-signed-out #collection-filter-shell{display:none}
+  #tab-collection.collection-signed-out #coll-wrap{margin-top:0}
+  #tab-collection.collection-signed-out .empty-coll-state{padding-top:1.25rem}
+}
+
 .coll-detail-grid{display:grid;grid-template-columns:170px 1fr;gap:1rem;align-items:start;margin-bottom:1rem}
 .coll-detail-photo-wrap{width:170px;height:170px;border-radius:10px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .coll-detail-photo-wrap img{width:100%;height:100%;object-fit:contain;padding:8px;display:block}

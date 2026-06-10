@@ -2529,8 +2529,12 @@ function renderTierBars(){
 function renderCollection(){
   const wrap=document.getElementById('coll-wrap');
   const collectionTab=document.getElementById('tab-collection');
-  const isMobileSignedOut=!_currentUser&&window.matchMedia&&window.matchMedia('(max-width: 600px)').matches;
-  if(collectionTab) collectionTab.classList.toggle('collection-signed-out-mobile', isMobileSignedOut);
+  const isSignedOut=!_currentUser;
+  const isMobileSignedOut=isSignedOut&&window.matchMedia&&window.matchMedia('(max-width: 600px)').matches;
+  if(collectionTab){
+    collectionTab.classList.toggle('collection-signed-out', isSignedOut);
+    collectionTab.classList.toggle('collection-signed-out-mobile', isMobileSignedOut);
+  }
   if(isMobileSignedOut){
     if(wrap) wrap.innerHTML=_emptyCollHtml();
     return;
