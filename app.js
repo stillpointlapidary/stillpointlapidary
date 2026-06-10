@@ -50,6 +50,7 @@ let activeIntentionMatches=[];
 let activeIntentionVisibleCount=30;
 let activeIntentionScoreMap={};
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
+let _currentUser=null;
 let addPieceReturnContext=null;
 let editingCollectionIndex=null;
 let owned={}; // Supabase-backed; do not seed from legacy browser cache.
@@ -499,8 +500,7 @@ function learnMoreStarterStone(){
     window.location.href=target.href;
     return;
   }
-  showEncyclopediaForDirectStoneOpen();
-  openPendingStoneEntry(identifier,s.name);
+  queueDirectStoneOpen(identifier,s.name);
 }
 
 document.addEventListener('keydown',function(e){
@@ -584,6 +584,7 @@ function init(){
 
     // Always populate the encyclopedia grid (it may be hidden, but ready on tab switch).
     encRender();
+    resolveDirectStoneOpen();
 
     // Populate collection stats for non-collection tabs (collection tab is handled above
     // and will be re-rendered by loadSupabaseState once auth resolves).
@@ -1479,16 +1480,42 @@ function findStoneEntry(identifier,name){
     });
 }
 
+let pendingDirectStoneOpen=null;
+
 function openPendingStoneEntry(identifier,name){
   const found=findStoneEntry(identifier,name);
   const drawer=document.getElementById('detail-drawer');
-  if(found&&drawer){
+  if(!found){
+    console.warn('Still Point: no encyclopedia stone matched deep link', {identifier,name,stoneCount:CRYSTALS.length});
+    return false;
+  }
+  if(!drawer){
+    console.warn('Still Point: encyclopedia drawer is not available for deep link', {identifier,name,matchedId:found.i});
+    return false;
+  }
+  try{
     dismissEncDoorway();
     openDetail(found.i);
-    return true;
+    return document.getElementById('detail-drawer')?.classList.contains('open') || false;
+  }catch(err){
+    console.warn('Still Point: matched stone but could not open encyclopedia drawer', {identifier,name,matchedId:found.i,error:err});
+    return false;
   }
-  console.warn('Still Point: no encyclopedia stone matched deep link', {identifier,name});
-  return false;
+}
+
+function resolveDirectStoneOpen(){
+  if(!pendingDirectStoneOpen)return false;
+  if(!document.getElementById('tab-encyclopedia'))return false;
+  showEncyclopediaForDirectStoneOpen();
+  const opened=openPendingStoneEntry(pendingDirectStoneOpen.identifier,pendingDirectStoneOpen.name);
+  if(opened)pendingDirectStoneOpen=null;
+  return opened;
+}
+
+function queueDirectStoneOpen(identifier,name){
+  if(!identifier)return false;
+  pendingDirectStoneOpen={identifier,name:name||''};
+  return resolveDirectStoneOpen();
 }
 
 function showEncyclopediaForDirectStoneOpen(){
@@ -4031,6 +4058,7 @@ async function loadStonesAndInit() {
         renderEncTierCounts();
         if(!encDoorwayDismissed)return;
         encRender();
+        resolveDirectStoneOpen();
       }
     }).catch(e => console.warn('Background stone refresh failed:', e));
   } else {
@@ -6305,8 +6333,7 @@ loadStonesAndInit().then(()=>{
   if(stoneParam){
     try{sessionStorage.removeItem('spl_pending_stone');}catch(e){}
     try{sessionStorage.removeItem('spl_pending_stone_name');}catch(e){}
-    showEncyclopediaForDirectStoneOpen();
-    openPendingStoneEntry(stoneParam,stoneNameParam);
+    queueDirectStoneOpen(stoneParam,stoneNameParam);
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
     setTimeout(()=>encBrowseTier(tierParam),120);
@@ -6315,7 +6342,6 @@ loadStonesAndInit().then(()=>{
   setTimeout(()=>runPageAction(action), 650);
 });
 
-let _currentUser = null;
 try{ ['lap_coll','lap_owned','lap_wish'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
 
 function _renderAuth(user) {
