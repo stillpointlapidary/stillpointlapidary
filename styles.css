@@ -102,7 +102,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .hero-sotd-link:hover{color:#c8a96e}
 /* SOTD data passthrough — keep JS container but hide it */
 #sotd-container{display:none!important}
-@media(max-width:768px){.site-hero-card{height:auto;min-height:320px;background-size:auto,auto,cover;background-position:left center,left center,70% center}.site-hero-left{width:80%;padding:2rem 1.5rem}.hero-sub br{display:none}}
+@media(max-width:768px){.site-hero-card{height:auto;min-height:320px;background-size:auto,auto,cover;background-position:left center,left center,70% center}.site-hero-left{width:88%;padding:2rem 1.5rem}.hero-kicker{font-size:11px;letter-spacing:0.11em;white-space:nowrap}.hero-sub br{display:none}}
 
 .intro-panel{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.15rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .intro-copy{max-width:680px}
