@@ -870,9 +870,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .chakra-dot{width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:8px;flex-shrink:0}
 .chakra-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink);display:flex;align-items:center;margin-bottom:4px}
 .chakra-loc{font-size:11px;color:var(--ink3);margin-bottom:6px}
-.chakra-theme{font-size:12px;color:var(--ink2);line-height:1.5;margin-bottom:8px}
-.chakra-count{font-size:11px;color:var(--accent);letter-spacing:0.04em}
-.chakra-imbalance{font-size:11px;color:var(--ink3);font-style:italic;line-height:1.5;margin-top:6px;padding-top:6px;border-top:0.5px solid var(--border2)}
+.chakra-theme{font-size:12px;color:var(--ink2);line-height:1.5;margin-bottom:9px}
+.chakra-imbalance{font-size:11px;color:var(--ink3);line-height:1.5;margin-top:7px;padding-top:7px;border-top:0.5px solid var(--border2)}
+.chakra-imbalance-label{display:block;font-size:9.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.chakra-imbalance-tags{display:flex;flex-wrap:wrap;gap:5px}
+.chakra-imbalance-tag{display:inline-flex;align-items:center;border:0.5px solid var(--border2);border-radius:999px;background:var(--stone);padding:3px 8px;font-size:10.5px;line-height:1.25;color:var(--ink2)}
+.chakra-cta{margin-top:0.85rem;border:none;background:transparent;color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.055em;text-transform:uppercase;cursor:pointer;padding:0;text-align:left}
+.chakra-cta:hover{color:var(--ink)}
 
 /* ER role cards */
 .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:1.5rem}

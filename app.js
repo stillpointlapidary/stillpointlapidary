@@ -3911,11 +3911,12 @@ function init101(){
   if(cc) C101_CHAKRAS.forEach(ch=>{
     const d=document.createElement('div');
     d.className='chakra-card';
+    const imbalanceTags=(ch.imbalance||'').split(',').map(s=>s.trim()).filter(Boolean).map(item=>`<span class="chakra-imbalance-tag">${escapeAttr(item)}</span>`).join('');
     d.innerHTML=`<div class="chakra-name"><span class="chakra-dot" style="background:${ch.color}"></span>${ch.name}</div>
       <div class="chakra-loc">${ch.loc}</div>
       <div class="chakra-theme">${ch.theme}</div>
-      <div class="chakra-count">${ch.num} stones in encyclopedia</div>
-      <div class="chakra-imbalance">Signs of imbalance: ${ch.imbalance}</div>`;
+      <div class="chakra-imbalance"><span class="chakra-imbalance-label">Signs of imbalance</span><div class="chakra-imbalance-tags">${imbalanceTags}</div></div>
+      <button class="chakra-cta" type="button" onclick="event.stopPropagation();jumpToChakra('${escapeAttr(ch.name)}')">Browse ${escapeAttr(ch.name)} Chakra Stones →</button>`;
     d.onclick=()=>jumpToChakra(ch.name);
     cc.appendChild(d);
   });
