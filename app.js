@@ -490,7 +490,11 @@ function learnMoreStarterStone(){
   closeStarterStoneModal();
   if(!s) return;
   if(!document.getElementById('tab-encyclopedia')){
-    window.location.href='encyclopedia.html?tab=encyclopedia&stone='+encodeURIComponent(s.id);
+    try{sessionStorage.setItem('spl_pending_stone',s.id);}catch(e){}
+    const target=new URL('encyclopedia.html', window.location.href);
+    target.searchParams.set('tab','encyclopedia');
+    target.searchParams.set('stone',s.id);
+    window.location.href=target.href;
     return;
   }
   switchTabByName('encyclopedia');
@@ -1900,7 +1904,7 @@ function getMoodMatches(moodIdx,subFilter){
     if(subKwMap&&subKwMap[subFilter]){
       const kws=subKwMap[subFilter];
       const filtered=matches.filter(c=>kws.some(k=>((c.uw||'')+(c.er1||'')+(c.er2||'')+(c.er3||'')).toLowerCase().includes(k)));
-      if(filtered.length>0)matches=filtered;
+      matches=filtered;
     }
   }
   return matches;
@@ -1942,7 +1946,7 @@ function buildSubFilters(idx){
   row.style.display='flex';
   const pillsEl=document.getElementById('sub-filter-pills');
   if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" onclick="setSubFilter(null,this)">All</button>`+
-    subs.map(s=>`<button class="sfpill" onclick="setSubFilter('${s}',this)">${s}</button>`).join('');
+    subs.map(s=>`<button class="sfpill" onclick="setSubFilter(${jsArg(s)},this)">${escapeAttr(s)}</button>`).join('');
 }
 
 function setSubFilter(val,btn){
@@ -6203,7 +6207,9 @@ loadStonesAndInit().then(()=>{
   const params=new URLSearchParams(window.location.search);
   const action=params.get('action');
   const tabParam=params.get('tab');
-  const stoneParam=params.get('stone');
+  const stoneParam=params.get('stone') || (function(){
+    try{return sessionStorage.getItem('spl_pending_stone') || '';}catch(e){return '';}
+  })();
   const tierParam=params.get('tier');
   const collectionView=params.get('view');
   if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
@@ -6216,9 +6222,11 @@ loadStonesAndInit().then(()=>{
     }, 600);
   }
   if(stoneParam){
+    try{sessionStorage.removeItem('spl_pending_stone');}catch(e){}
     switchTabByName('encyclopedia');
     openDetailWhenReady(stoneParam);
     setTimeout(()=>{switchTabByName('encyclopedia');openDetailWhenReady(stoneParam);},700);
+    setTimeout(()=>openDetailWhenReady(stoneParam),1400);
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
     setTimeout(()=>encBrowseTier(tierParam),120);
