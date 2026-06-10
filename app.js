@@ -1269,6 +1269,11 @@ function encRender(){
   const desktopSearch=document.getElementById('enc-search');
   const keepDesktopSearchOpen=!isMobileView() && document.activeElement===desktopSearch;
   if(filtersActive&&!keepDesktopSearchOpen)dismissEncDoorway();
+  if(filtersActive&&keepDesktopSearchOpen){
+    encDoorwayDismissed=true;
+    const tierLanding=document.getElementById('enc-tier-landing');
+    if(tierLanding)tierLanding.style.display='none';
+  }
 
   // Active filter count
   const activeCount = Object.values(filters).filter(v => v !== 'all').length +
