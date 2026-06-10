@@ -491,14 +491,16 @@ function learnMoreStarterStone(){
   if(!s) return;
   if(!document.getElementById('tab-encyclopedia')){
     try{sessionStorage.setItem('spl_pending_stone',s.id);}catch(e){}
+    try{sessionStorage.setItem('spl_pending_stone_name',s.name);}catch(e){}
     const target=new URL('encyclopedia.html', window.location.href);
     target.searchParams.set('tab','encyclopedia');
     target.searchParams.set('stone',s.id);
+    target.searchParams.set('stoneName',s.name);
     window.location.href=target.href;
     return;
   }
   switchTabByName('encyclopedia');
-  openDetailWhenReady(s.id);
+  openStoneEntryWhenReady(s.id,s.name);
 }
 
 document.addEventListener('keydown',function(e){
@@ -1443,6 +1445,29 @@ function openDetailWhenReady(id,tries=0){
   if(tries<20)setTimeout(()=>openDetailWhenReady(id,tries+1),150);
 }
 
+function normalizeStoneName(v){
+  return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function findStoneEntry(id,name){
+  const idText=String(id||'').trim();
+  const nameText=normalizeStoneName(name);
+  return CRYSTALS.find(x=>String(x.i)===idText)
+    || (nameText ? CRYSTALS.find(x=>normalizeStoneName(x.n)===nameText) : null)
+    || (nameText ? CRYSTALS.find(x=>normalizeStoneName(x.a).split(' ').join(' ').includes(nameText)) : null);
+}
+
+function openStoneEntryWhenReady(id,name,tries=0){
+  const found=findStoneEntry(id,name);
+  const drawer=document.getElementById('detail-drawer');
+  if(found&&drawer){
+    dismissEncDoorway();
+    openDetail(found.i);
+    return;
+  }
+  if(tries<30)setTimeout(()=>openStoneEntryWhenReady(id,name,tries+1),150);
+}
+
 function closeDrawer(){
   document.getElementById('drawer-overlay').classList.remove('open');
   document.getElementById('detail-drawer').classList.remove('open');
@@ -1728,7 +1753,7 @@ function buildSharedSubFilters(filters){
     const label=ch.label;
     const value=label==='All'?'all':label;
     const active=(activeIntentionFilter||'all')===value;
-    return`<button class="sfpill${active?' active':''}" onclick="setIntentionSubFilter(${value==='all'?'null':jsArg(value)},this)">${escapeAttr(label)}</button>`;
+    return`<button class="sfpill${active?' active':''}" onclick="event.stopPropagation();setIntentionSubFilter(${value==='all'?'null':jsArg(value)},this)">${escapeAttr(label)}</button>`;
   }).join('');
 }
 
@@ -1945,8 +1970,8 @@ function buildSubFilters(idx){
   if(!subs||!subs.length){row.style.display='none';return;}
   row.style.display='flex';
   const pillsEl=document.getElementById('sub-filter-pills');
-  if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" onclick="setSubFilter(null,this)">All</button>`+
-    subs.map(s=>`<button class="sfpill" onclick="setSubFilter(${jsArg(s)},this)">${escapeAttr(s)}</button>`).join('');
+  if(pillsEl)pillsEl.innerHTML=`<button class="sfpill active" onclick="event.stopPropagation();setSubFilter(null,this)">All</button>`+
+    subs.map(s=>`<button class="sfpill" onclick="event.stopPropagation();setSubFilter(${jsArg(s)},this)">${escapeAttr(s)}</button>`).join('');
 }
 
 function setSubFilter(val,btn){
@@ -6210,6 +6235,9 @@ loadStonesAndInit().then(()=>{
   const stoneParam=params.get('stone') || (function(){
     try{return sessionStorage.getItem('spl_pending_stone') || '';}catch(e){return '';}
   })();
+  const stoneNameParam=params.get('stoneName') || (function(){
+    try{return sessionStorage.getItem('spl_pending_stone_name') || '';}catch(e){return '';}
+  })();
   const tierParam=params.get('tier');
   const collectionView=params.get('view');
   if(tabParam&&['mood','encyclopedia','identify','collection','101'].includes(tabParam)){
@@ -6223,10 +6251,11 @@ loadStonesAndInit().then(()=>{
   }
   if(stoneParam){
     try{sessionStorage.removeItem('spl_pending_stone');}catch(e){}
+    try{sessionStorage.removeItem('spl_pending_stone_name');}catch(e){}
     switchTabByName('encyclopedia');
-    openDetailWhenReady(stoneParam);
-    setTimeout(()=>{switchTabByName('encyclopedia');openDetailWhenReady(stoneParam);},700);
-    setTimeout(()=>openDetailWhenReady(stoneParam),1400);
+    openStoneEntryWhenReady(stoneParam,stoneNameParam);
+    setTimeout(()=>{switchTabByName('encyclopedia');openStoneEntryWhenReady(stoneParam,stoneNameParam);},700);
+    setTimeout(()=>openStoneEntryWhenReady(stoneParam,stoneNameParam),1400);
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
     setTimeout(()=>encBrowseTier(tierParam),120);
