@@ -6593,25 +6593,31 @@ function renderMobileShapes(container, shapeMap) {
     const idx = activeCatShapes.findIndex(s => s.id === shape.id);
     const total = activeCatShapes.length;
     const pos = idx >= 0 ? idx + 1 : 1;
+    const usePills = shape.use.split('·').map(u => `<span class="mobile-form-use-pill">${u.trim()}</span>`).join('');
     detail.innerHTML = `
       <article class="mobile-form-detail-card">
-        <div class="mobile-form-detail-nav">
-          <button class="mobile-form-nav-btn" aria-label="Previous form" data-dir="-1">${chevL}</button>
-          <span class="mobile-form-nav-name">${shape.name}</span>
-          <button class="mobile-form-nav-btn" aria-label="Next form" data-dir="1">${chevR}</button>
+        <div class="mobile-form-detail-hero">
+          <div class="mobile-form-detail-hero-icon">${shape.draw()}</div>
         </div>
-        <div class="mobile-form-detail-inner">
-          <div class="mobile-form-detail-icon">${shape.draw()}</div>
-          <div class="mobile-form-detail-copy">
-            <div class="mobile-form-detail-tagline">${shape.tagline}</div>
-            <div class="mobile-form-detail-desc">${shape.body}</div>
-            <div class="mobile-form-detail-use"><span>Best for</span>${shape.use}</div>
-            <div class="mobile-form-detail-examples">
-              ${shape.examples.map(e => `<button type="button" class="shape-pill" onclick="jumpToStone('${e}')">${e}</button>`).join('')}
+        <div class="mobile-form-detail-copy">
+          <div class="mobile-form-detail-nav">
+            <button class="mobile-form-nav-btn" aria-label="Previous form" data-dir="-1">${chevL}</button>
+            <div class="mobile-form-detail-hdr">
+              <div class="mobile-form-nav-name">${shape.name}</div>
+              <div class="mobile-form-detail-tagline">${shape.tagline}</div>
             </div>
+            <button class="mobile-form-nav-btn" aria-label="Next form" data-dir="1">${chevR}</button>
+          </div>
+          <div class="mobile-form-detail-desc">${shape.body}</div>
+          <div class="mobile-form-detail-use-row">
+            <div class="mobile-form-detail-use-label">Best for</div>
+            <div class="mobile-form-use-pills">${usePills}</div>
+          </div>
+          <div class="mobile-form-detail-examples">
+            ${shape.examples.map(e => `<button type="button" class="shape-pill" onclick="jumpToStone('${e}')">${e}</button>`).join('')}
           </div>
         </div>
-        <div class="mobile-form-nav-indicator">${catLabel} · ${pos} / ${total}</div>
+        <div class="mobile-form-nav-indicator">${catLabel} · ${pos} of ${total}</div>
       </article>`;
 
     detail.querySelectorAll('.mobile-form-nav-btn').forEach(btn => {
