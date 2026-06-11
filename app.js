@@ -6439,68 +6439,44 @@ function renderShapes() {
   const pane = document.createElement('div');
   pane.className = 'shapes-pane';
 
-  const strip = document.createElement('div');
-  strip.className = 'shapes-strip strip-with-headers';
-
-  const catLabelEls = {};
-  const allChipItems = [];
+  const catCardEls = {};
 
   function setActiveCat(catLabel) {
-    Object.entries(catLabelEls).forEach(([lbl, el]) => el.classList.toggle('active-cat', lbl === catLabel));
+    Object.entries(catCardEls).forEach(([lbl, el]) => el.classList.toggle('active', lbl === catLabel));
   }
 
-  SHAPE_CATEGORIES.forEach(cat => {
-    const row = document.createElement('div');
-    row.className = 'cat-row';
+  // Build 4-category selector
+  const selectorOuter = document.createElement('div');
+  selectorOuter.className = 'shapes-cat-selector';
 
-    const label = document.createElement('button');
-    label.className = 'cat-row-label';
-    label.textContent = cat.label;
-    label.addEventListener('click', () => {
-      allChipItems.forEach(el => el.classList.remove('active'));
+  const selectorIntro = document.createElement('div');
+  selectorIntro.className = 'shapes-cat-selector-intro';
+  selectorIntro.innerHTML = '<span class="shapes-cat-selector-heading">Select a form family to explore.</span><span class="shapes-cat-selector-sub">Each family groups forms with similar ways of being and use.</span>';
+  selectorOuter.appendChild(selectorIntro);
+
+  const catCards = document.createElement('div');
+  catCards.className = 'shapes-cat-cards';
+
+  SHAPE_CATEGORIES.forEach(cat => {
+    const card = document.createElement('button');
+    card.className = 'shapes-cat-card';
+    card.type = 'button';
+    const previews = cat.ids.map(id => shapeMap[id]&&shapeMap[id].name).filter(Boolean).join(' · ');
+    card.innerHTML = `<div class="shapes-cat-card-title">${cat.label}</div><div class="shapes-cat-card-def">${cat.def}</div><div class="shapes-cat-card-previews">${previews}</div>`;
+    card.addEventListener('click', () => {
       setActiveCat(cat.label);
       showCategoryGrid(cat, pane, shapeMap, setActiveCat);
     });
-    catLabelEls[cat.label] = label;
-    row.appendChild(label);
-
-    const chips = document.createElement('div');
-    chips.className = 'cat-row-chips';
-
-    cat.ids.forEach(id => {
-      const shape = shapeMap[id];
-      if(!shape) return;
-      const item = document.createElement('button');
-      item.className = 'shape-strip-item';
-      item.innerHTML = `<span class="shape-strip-icon">${shape.draw()}</span><span>${shape.name}</span>`;
-      item.addEventListener('click', () => {
-        allChipItems.forEach(el => el.classList.remove('active'));
-        item.classList.add('active');
-        setActiveCat(cat.label);
-        showShapeDetail(shape, cat, pane, shapeMap, setActiveCat);
-      });
-      chips.appendChild(item);
-      allChipItems.push(item);
-    });
-
-    row.appendChild(chips);
-    strip.appendChild(row);
+    catCardEls[cat.label] = card;
+    catCards.appendChild(card);
   });
 
-  const stripOuter = document.createElement('div');
-  stripOuter.className = 'shapes-strip-outer';
-
-  const stripIntro = document.createElement('div');
-  stripIntro.className = 'shapes-strip-intro';
-  stripIntro.textContent = 'Select a category to explore, or choose any form below to learn more.';
-  stripOuter.appendChild(stripIntro);
-  stripOuter.appendChild(strip);
-
-  container.appendChild(stripOuter);
+  selectorOuter.appendChild(catCards);
+  container.appendChild(selectorOuter);
   container.appendChild(pane);
   renderMobileShapes(container, shapeMap);
 
-  // Default: show Holdable category grid
+  // Default: Holdable
   const firstCat = SHAPE_CATEGORIES[0];
   setActiveCat(firstCat.label);
   showCategoryGrid(firstCat, pane, shapeMap, setActiveCat);
@@ -6643,12 +6619,6 @@ function showCategoryGrid(cat, pane, shapeMap, setActiveCat) {
             <div class="cat-card-desc">${s.tile||s.body}</div>
           </div>
         </div>`).join('')}
-    </div>
-    <div class="forms-browse">
-      <div class="forms-browse-label">Explore by form type</div>
-      <div class="forms-browse-cats">
-        ${SHAPE_CATEGORIES.map(c => `<button class="browse-cat-pill${c.label===cat.label?' active':''}" data-cat="${c.label}">${c.label}</button>`).join('')}
-      </div>
     </div>`;
 
   pane.querySelectorAll('.cat-card').forEach(card => {
@@ -6657,13 +6627,6 @@ function showCategoryGrid(cat, pane, shapeMap, setActiveCat) {
     card.addEventListener('click', () => {
       setActiveCat(cat.label);
       showShapeDetail(shape, cat, pane, shapeMap, setActiveCat);
-    });
-  });
-
-  pane.querySelectorAll('.browse-cat-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      const target = SHAPE_CATEGORIES.find(c => c.label === pill.dataset.cat);
-      if(target) { setActiveCat(target.label); showCategoryGrid(target, pane, shapeMap, setActiveCat); }
     });
   });
 }
