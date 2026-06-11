@@ -380,7 +380,7 @@
 
 <section id="tab-collection" style="display:none">
   <div class="coll-header">
-    <div class="coll-title">My Pieces</div>
+    <div class="coll-title">My Collection</div>
     <div class="coll-btns">
       <div style="position:relative;display:inline-block">
         <button class="btn btn-sm" onclick="toggleExportMenu('coll-export-menu')">↓ Collection ▾</button>
@@ -400,6 +400,16 @@
       <button class="btn btn-sm btn-accent" onclick="openAddForm()">+ Add piece</button>
     </div>
   </div>
+
+  <!-- Mobile only: count summary + collection/wishlist toggle -->
+  <div class="coll-mobile-meta" id="coll-mobile-meta">
+    <div class="coll-mobile-counts" id="coll-mobile-counts">0 pieces · 0 wishlist</div>
+    <div class="coll-mobile-toggle" id="coll-mobile-toggle">
+      <button class="coll-toggle-btn coll-toggle-active" id="coll-toggle-collection" onclick="collMobileTab('all')">Collection</button>
+      <button class="coll-toggle-btn" id="coll-toggle-wish" onclick="collMobileTab('wish')">Wishlist</button>
+    </div>
+  </div>
+
   <div class="coll-stats">
     <div class="stats-stacked">
       <div class="stat-cell stat-clickable" id="stat-cell-total" onclick="setCollQuickFilter('all')" title="Show all pieces">
@@ -463,6 +473,39 @@
   <div id="coll-sync-status" style="display:none;font-size:11px;color:var(--ink3);letter-spacing:0.05em;text-align:right;margin-bottom:0.5rem;padding-right:2px"></div>
   <div id="coll-wrap"></div>
   <div class="c101-backtop-wrap"><button class="c101-backtop" onclick="scrollToTabTop('collection');return false;">Back to top</button></div>
+
+  <!-- Mobile floating action button -->
+  <button class="coll-fab" id="coll-fab" onclick="openCollFabSheet()" aria-label="Add stone">+</button>
+
+  <!-- FAB bottom sheet -->
+  <div class="coll-fab-overlay" id="coll-fab-overlay" onclick="closeCollFabSheet()"></div>
+  <div class="coll-fab-sheet" id="coll-fab-sheet">
+    <div class="coll-fab-sheet-header">
+      <div class="coll-fab-sheet-title">Add to Collection</div>
+      <button class="coll-fab-sheet-close" onclick="closeCollFabSheet()">✕</button>
+    </div>
+    <button class="coll-fab-sheet-option" onclick="closeCollFabSheet();openAddForm()">
+      <span class="coll-fab-sheet-icon">+</span>
+      <div>
+        <div class="coll-fab-sheet-opt-name">Add Single Piece</div>
+        <div class="coll-fab-sheet-opt-sub">Log one stone to your collection</div>
+      </div>
+    </button>
+    <button class="coll-fab-sheet-option" onclick="closeCollFabSheet();openBatchForm()">
+      <span class="coll-fab-sheet-icon">⊞</span>
+      <div>
+        <div class="coll-fab-sheet-opt-name">Batch Add Pieces</div>
+        <div class="coll-fab-sheet-opt-sub">Add multiple stones at once</div>
+      </div>
+    </button>
+    <button class="coll-fab-sheet-option" onclick="closeCollFabSheet();switchTabByName('encyclopedia')">
+      <span class="coll-fab-sheet-icon">♡</span>
+      <div>
+        <div class="coll-fab-sheet-opt-name">Add to Wishlist</div>
+        <div class="coll-fab-sheet-opt-sub">Browse the library and tap ♡ on any stone</div>
+      </div>
+    </button>
+  </div>
 </section>
 
 <!-- IDENTIFY -->
