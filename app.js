@@ -53,6 +53,7 @@ let intentionIncludeTier4=false;
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
 let _currentUser=null;
 let addPieceReturnContext=null;
+let desktopSotdStone=null;
 let editingCollectionIndex=null;
 let owned={}; // Supabase-backed; do not seed from legacy browser cache.
 let wish={}; // Supabase-backed; do not seed from legacy browser cache.
@@ -586,6 +587,7 @@ const SOTD_TIER_LABELS={1:'The Essentials',2:'Shelf Builders',3:'Collector Favor
 function renderDesktopSotdCard(s){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container||!s)return;
+  desktopSotdStone=s;
   const t=s.tier>=1&&s.tier<=4?s.tier:1;
   const tierDisplay=`Tier ${t} · ${SOTD_TIER_LABELS[t]}`;
   const photoHtml=s.photo
@@ -605,12 +607,24 @@ function renderDesktopSotdCard(s){
         ${roles?`<div class="desktop-sotd-roles">${roles}</div>`:''}
         ${useSentence?`<div class="desktop-sotd-use">${escapeAttr(useSentence)}</div>`:''}
         <div class="desktop-sotd-actions">
-          <a class="desktop-sotd-btn-enc" href="encyclopedia.html?stone=${encodeURIComponent(String(s.id))}&stoneName=${encodeURIComponent(s.name)}&from=sotd">View in encyclopedia</a>
-          <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}">Add to wishlist</button>
+          <button class="desktop-sotd-btn-enc" type="button">View full entry</button>
+          <button class="desktop-sotd-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
+          <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to wishlist</button>
           <span class="desktop-sotd-signin">Sign in to save stones to your collection</span>
         </div>
       </div>
     </div>`;
+  const encBtn=container.querySelector('.desktop-sotd-btn-enc');
+  if(encBtn) encBtn.addEventListener('click',()=>openStarterStoneModal(0,[s]));
+  const collBtn=container.querySelector('.desktop-sotd-btn-coll');
+  if(collBtn){
+    collBtn.addEventListener('click',function(){
+      const sid=this.dataset.sotdId;
+      const sname=this.dataset.sotdName||'';
+      savePendingDrawerAction('add_to_collection',{i:sid,n:sname});
+      window.location.href='encyclopedia.html?stone='+encodeURIComponent(sid)+'&stoneName='+encodeURIComponent(sname)+'&from=sotd';
+    });
+  }
   const wishBtn=container.querySelector('.desktop-sotd-btn-wish');
   if(wishBtn){
     wishBtn.addEventListener('click',function(){
@@ -619,6 +633,24 @@ function renderDesktopSotdCard(s){
       savePendingDrawerAction('add_to_wishlist',{i:sid,n:sname});
       window.location.href='encyclopedia.html?stone='+encodeURIComponent(sid)+'&stoneName='+encodeURIComponent(sname)+'&from=sotd';
     });
+  }
+  updateDesktopSotdAuth();
+}
+
+function updateDesktopSotdAuth(){
+  const container=document.getElementById('desktop-sotd-wrap');
+  if(!container)return;
+  const signin=container.querySelector('.desktop-sotd-signin');
+  const collBtn=container.querySelector('.desktop-sotd-btn-coll');
+  const wishBtn=container.querySelector('.desktop-sotd-btn-wish');
+  if(_currentUser){
+    if(signin)signin.style.display='none';
+    if(collBtn)collBtn.style.display='';
+    if(wishBtn)wishBtn.style.display='';
+  } else {
+    if(signin)signin.style.display='';
+    if(collBtn)collBtn.style.display='none';
+    if(wishBtn)wishBtn.style.display='none';
   }
 }
 
@@ -1934,7 +1966,11 @@ function drawerWishlistAction(){
 // near the Supabase write layer (async, Supabase-backed).
 function addFromDetail(){
   const c=currentCrystal;
-  addPieceReturnContext={type:'encyclopedia',stoneId:c?.i||null};
+  const savedCtx=detailReturnContext;
+  detailReturnContext=null;
+  addPieceReturnContext=savedCtx&&savedCtx.type==='sotd'
+    ?{type:'sotd',stoneId:c?.i||null}
+    :{type:'encyclopedia',stoneId:c?.i||null};
   closeDrawer();
   openAddForm(c?.i);
 }
@@ -3328,7 +3364,9 @@ function closeAddForm(){
   const pr=document.getElementById('photo-preview-row');if(pr)pr.innerHTML='';
   // Reset date dropdowns
   const mo=document.getElementById('f-month');const dy=document.getElementById('f-day');
-  if(mo){mo.disabled=true;}if(dy){dy.disabled=true;}if(_returnIdx!==null&&_returnIdx!==undefined)openCollDetail(_returnIdx);
+  if(mo){mo.disabled=true;}if(dy){dy.disabled=true;}
+  if(addPieceReturnContext&&addPieceReturnContext.type==='sotd'){addPieceReturnContext=null;window.location.href='index.html';return;}
+  if(_returnIdx!==null&&_returnIdx!==undefined)openCollDetail(_returnIdx);
 }
 function toggleCombo(){
   const cs=document.getElementById('combo-section');
@@ -6820,6 +6858,7 @@ async function _authInit() {
       await handlePendingDrawerActionAfterSignIn();
     } else if(!_currentUser) {
       promptPendingDrawerActionIfNeeded();
+      updateDesktopSotdAuth();
     }
     if (_currentUser && window._pendingColl) {
       window._pendingColl = false;
@@ -7062,6 +7101,7 @@ async function loadSupabaseState() {
   // Re-apply URL tab param — auth+data load can fire after initial tab switch
   const _urlTab=(()=>{try{return new URLSearchParams(window.location.search).get('tab');}catch(e){return null;}})();
   if(_urlTab&&['mood','identify','collection','101'].includes(_urlTab)){switchTabByName(_urlTab);}
+  updateDesktopSotdAuth();
 }
 
 async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
