@@ -983,7 +983,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .chakra-cta:hover{color:var(--ink)}
 
 /* ER role cards */
-.role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:1.5rem}
+.role-group-label{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:1.25rem 0 0.55rem;padding-bottom:0.3rem;border-bottom:0.5px solid var(--border2)}
+.role-group-label:first-child{margin-top:0}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:0.75rem}
 .role-card{border:0.5px solid var(--border);border-radius:10px;background:var(--white);cursor:pointer;transition:background 0.12s,border-color 0.12s;display:flex;overflow:hidden}
 .role-card:hover{background:var(--stone2);border-color:var(--accent2)}
 .role-stripe{width:4px;flex-shrink:0}
