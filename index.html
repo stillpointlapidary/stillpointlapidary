@@ -264,6 +264,93 @@
 
 
 
+<div class="form-overlay" id="add-form-overlay">
+  <div class="form-box">
+    <button class="popup-close" onclick="closeAddForm()">✕</button>
+    <div class="form-title">Add a piece</div>
+    <div class="form-sub">Each entry is a specific physical piece in your collection.</div>
+    <div class="form-row">
+      <div class="fg">
+        <label>Crystal / Stone *</label>
+        <div class="combobox-wrap">
+          <input type="text" class="combobox-input" id="f-crystal-input" placeholder="Type to search (e.g. amethyst)…" autocomplete="off"
+            oninput="comboFilter('','f-crystal-input','f-crystal-drop','f-crystal-val')"
+            onfocus="if(this.value.length>0){comboOpen('f-crystal-drop');comboRender('f-crystal-drop','f-crystal-val',this.value);}"
+            onkeydown="comboKey(event,'f-crystal-drop','f-crystal-input','f-crystal-val')">
+          <div class="combobox-dropdown" id="f-crystal-drop"></div>
+          <div id="f-crystal-selected" style="display:none"></div>
+          <input type="hidden" id="f-crystal-val">
+        </div>
+      </div>
+      <div class="fg"><label>Piece nickname</label><input type="text" id="f-nick" placeholder="e.g. The Dreamer"></div>
+    </div>
+    <div style="margin-bottom:10px">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--ink2)"><input type="checkbox" id="f-combo" onchange="toggleCombo()"> Combo piece (multiple stones)</label>
+    </div>
+    <div class="combo-section" id="combo-section" style="display:none">
+      <div class="sec-label" style="margin-bottom:8px">Additional crystals (up to 3 more)</div>
+      <div id="combo-rows"><div class="combo-row"><select class="csel"><option value="">Select crystal…</option></select><button class="rm-combo" onclick="rmCombo(this)">×</button></div></div>
+      <button class="btn btn-sm" style="margin-top:8px" onclick="addComboRow()">+ Add</button>
+    </div>
+    <div class="form-divider"></div>
+    <div class="form-row">
+      <div class="fg"><label>Form / Shape <button class="prop-help" onclick="openPopup('form')">?</button></label><select id="f-form"><option value="">Select…</option><option>Tumbled</option><option>Palm stone</option><option>Raw / Rough</option><option>Freeform</option><option>Tower</option><option>Point</option><option>Sphere</option><option>Egg</option><option>Cluster</option><option>Geode</option><option>Slice</option><option>Heart</option><option>Moon</option><option>Star</option><option>Mushroom</option><option>Wand</option><option>Skull</option><option>Carved</option><option>Other</option></select></div>
+      <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Select…</option><option value="XS">XS — under 1" / 2.5cm</option><option value="S">S — 1–2" / 2.5–5cm</option><option value="M">M — 2–4" / 5–10cm</option><option value="L">L — 4–8" / 10–20cm</option><option value="XL">XL — over 8" / 20cm+</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Treatment <button class="prop-help" onclick="openPopup('treatment')">?</button></label><select id="f-treated"><option value="Natural">Natural</option><option value="Heat Treated">Heat Treated</option><option value="Irradiated">Irradiated</option><option value="Dyed">Dyed</option><option value="Coated">Coated (Aura etc.)</option><option value="Stabilized">Stabilized</option><option value="Unknown">Unknown</option></select></div>
+      <div class="fg"><label>Condition <button class="prop-help" onclick="openPopup('condition')">?</button></label><select id="f-condition"><option value="Excellent">Excellent</option><option value="Very Good">Very Good</option><option value="Good">Good</option><option value="Fair / Visible Wear">Fair / Visible Wear</option><option value="Chipped / Minor Damage">Chipped / Minor Damage</option><option value="Damaged / Repaired">Damaged / Repaired</option><option value="Unknown">Unknown</option></select></div>
+    </div>
+    <div class="form-divider"></div>
+    <div class="sec-label" style="margin-bottom:10px">Acquisition Details</div>
+    <div class="form-row">
+      <div class="fg"><label>Source</label><input type="text" id="f-source" placeholder="e.g. DFW Crystals"></div>
+      <div class="fg"><label>Price paid</label><input type="text" id="f-price" placeholder="e.g. $25"></div>
+    </div>
+    <div class="form-row full">
+      <div class="fg"><label>Date acquired</label><input type="date" id="f-acquired"></div>
+    </div>
+    <div class="form-divider"></div>
+    <div class="sec-label" style="margin-bottom:10px">Location & Status</div>
+    <div class="form-row full">
+      <div class="fg"><label>Location</label><input type="text" id="f-loc-custom" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
+    </div>
+    <div class="form-divider"></div>
+    <div class="sec-label" style="margin-bottom:10px">Notes & Photos</div>
+    <div class="form-row full">
+      <div class="fg"><label>Personal notes</label><textarea id="f-notes" placeholder="Stories, intentions, what drew you to this piece…"></textarea></div>
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label>Photos</label>
+      <div class="photo-upload-area" onclick="document.getElementById('f-photos').click()">
+        <p>Tap to add photos</p><span>Select multiple at once</span>
+        <input type="file" id="f-photos" accept="image/*" multiple style="display:none" onchange="previewPhotos(this)">
+      </div>
+      <div class="photo-preview-row" id="photo-preview-row"></div>
+    </div>
+    <div class="form-footer">
+      <button class="btn" onclick="closeAddForm()">Cancel</button>
+      <button class="btn btn-accent" onclick="savePiece()">Save piece</button>
+    </div>
+  </div>
+</div>
+
+<div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
+    <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
+    <div style="margin-bottom:1rem">
+      <label style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+    </div>
+    <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
+    <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
+    <div style="font-size:11px;color:#b0a89e;text-align:center;margin-top:1rem;line-height:1.6">Your collection saves across all your devices.<br>Open the link in the email on this device.</div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="app.js"></script>
 
