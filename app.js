@@ -621,7 +621,7 @@ function renderDesktopSotdCard(s){
         ${roles?`<div class="desktop-sotd-roles">${roles}</div>`:''}
         ${useSentence?`<div class="desktop-sotd-use">${escapeAttr(useSentence)}</div>`:''}
         <div class="desktop-sotd-actions">
-          <a class="desktop-sotd-btn-enc" href="encyclopedia.html" data-sotd-id="${escapeAttr(String(s.id))}">View in encyclopedia</a>
+          <a class="desktop-sotd-btn-enc" href="encyclopedia.html?stone=${encodeURIComponent(String(s.id))}&stoneName=${encodeURIComponent(s.name)}&from=sotd">View in encyclopedia</a>
           <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}">Add to wishlist</button>
           <span class="desktop-sotd-signin">Sign in to save stones to your collection</span>
         </div>
@@ -1720,6 +1720,9 @@ function closeDrawer(){
         scrollToPageSection('#featured-section');
       }
     },0);
+  } else if(detailReturnContext&&detailReturnContext.type==='sotd'){
+    detailReturnContext=null;
+    window.location.href='index.html#desktop-sotd-section';
   }
 }
 let photoLightboxSources=[];
@@ -6747,6 +6750,7 @@ loadStonesAndInit().then(()=>{
   if(stoneParam){
     try{sessionStorage.removeItem('spl_pending_stone');}catch(e){}
     try{sessionStorage.removeItem('spl_pending_stone_name');}catch(e){}
+    if(params.get('from')==='sotd')detailReturnContext={type:'sotd'};
     queueDirectStoneOpen(stoneParam,stoneNameParam);
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
