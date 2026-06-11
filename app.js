@@ -615,14 +615,19 @@ function renderDesktopSotdCard(s){
       </div>
     </div>`;
   const encBtn=container.querySelector('.desktop-sotd-btn-enc');
-  if(encBtn) encBtn.addEventListener('click',()=>openStarterStoneModal(0,[s]));
+  if(encBtn) encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
   const collBtn=container.querySelector('.desktop-sotd-btn-coll');
   if(collBtn){
     collBtn.addEventListener('click',function(){
       const sid=this.dataset.sotdId;
       const sname=this.dataset.sotdName||'';
-      savePendingDrawerAction('add_to_collection',{i:sid,n:sname});
-      window.location.href='encyclopedia.html?stone='+encodeURIComponent(sid)+'&stoneName='+encodeURIComponent(sname)+'&from=sotd';
+      if(!_currentUser){
+        savePendingDrawerAction('add_to_collection',{i:sid,n:sname});
+        _openAuth('save-collection');
+        return;
+      }
+      addPieceReturnContext={type:'sotd',stoneId:sid};
+      openAddForm(sid);
     });
   }
   const wishBtn=container.querySelector('.desktop-sotd-btn-wish');
@@ -630,8 +635,12 @@ function renderDesktopSotdCard(s){
     wishBtn.addEventListener('click',function(){
       const sid=this.dataset.sotdId;
       const sname=this.dataset.sotdName||'';
-      savePendingDrawerAction('add_to_wishlist',{i:sid,n:sname});
-      window.location.href='encyclopedia.html?stone='+encodeURIComponent(sid)+'&stoneName='+encodeURIComponent(sname)+'&from=sotd';
+      if(!_currentUser){
+        savePendingDrawerAction('add_to_wishlist',{i:sid,n:sname});
+        _openAuth('save-wishlist');
+        return;
+      }
+      sotdWishlistDirect(sid);
     });
   }
   updateDesktopSotdAuth();
@@ -646,12 +655,36 @@ function updateDesktopSotdAuth(){
   if(_currentUser){
     if(signin)signin.style.display='none';
     if(collBtn)collBtn.style.display='';
-    if(wishBtn)wishBtn.style.display='';
+    if(wishBtn){
+      wishBtn.style.display='';
+      if(desktopSotdStone&&wish[desktopSotdStone.id]){
+        wishBtn.textContent='On Wishlist';
+        wishBtn.disabled=true;
+      } else {
+        wishBtn.textContent='Add to wishlist';
+        wishBtn.disabled=false;
+      }
+    }
   } else {
     if(signin)signin.style.display='';
     if(collBtn)collBtn.style.display='none';
     if(wishBtn)wishBtn.style.display='none';
   }
+}
+
+async function sotdWishlistDirect(stoneId){
+  if(!_currentUser)return;
+  const wishBtn=document.querySelector('#desktop-sotd-wrap .desktop-sotd-btn-wish');
+  if(wish[stoneId]){
+    if(wishBtn){wishBtn.textContent='On Wishlist';wishBtn.disabled=true;}
+    return;
+  }
+  try{
+    await _supa.from('wishlist_items').insert({user_id:_currentUser.id,stone_id:stoneId});
+    wish[stoneId]=true;
+    localStorage.setItem('lap_wish',JSON.stringify(wish));
+    if(wishBtn){wishBtn.textContent='Saved to Wishlist ✓';wishBtn.disabled=true;}
+  }catch(err){console.warn('SOTD wishlist save failed',err);}
 }
 
 function renderMobileSotdCard(s){
@@ -1738,6 +1771,8 @@ function closeDrawer(){
         openStarterStoneModal(ctx.index, ctx.source);
       }
     },0);
+  } else if(detailReturnContext&&detailReturnContext.type==='home-sotd'){
+    detailReturnContext=null;
   } else if(detailReturnContext&&detailReturnContext.type==='sotd'){
     detailReturnContext=null;
     window.location.href='index.html#desktop-sotd-section';
@@ -6872,8 +6907,11 @@ function promptPendingDrawerActionIfNeeded(){
   const pending=readPendingDrawerAction();
   if(!pending||!pending.action||!pending.stoneId||_currentUser)return;
   if(!document.getElementById('auth-modal-overlay'))return;
-  const drawerOpen=document.getElementById('detail-drawer')?.classList.contains('open');
-  if(!drawerOpen)openDetailWhenReady(pending.stoneId);
+  const onHomepage=!document.getElementById('tab-encyclopedia');
+  if(!onHomepage){
+    const drawerOpen=document.getElementById('detail-drawer')?.classList.contains('open');
+    if(!drawerOpen)openDetailWhenReady(pending.stoneId);
+  }
   setTimeout(()=>_openAuth(pendingDrawerAuthReason(pending.action)),120);
 }
 
@@ -6882,28 +6920,33 @@ async function handlePendingDrawerActionAfterSignIn(){
   if(!pending||!pending.action||!pending.stoneId||!_currentUser)return;
   clearPendingDrawerAction();
   if(document.getElementById('auth-modal-overlay'))closeAuthModal();
-  openDetailWhenReady(pending.stoneId);
+  const onHomepage=!document.getElementById('tab-encyclopedia');
   if(pending.action==='add_to_wishlist'){
     try{
       if(!wish[pending.stoneId]){
-        await _supa.from('wishlist_items').insert({ user_id:_currentUser.id, stone_id:pending.stoneId });
+        await _supa.from('wishlist_items').insert({user_id:_currentUser.id,stone_id:pending.stoneId});
         wish[pending.stoneId]=true;
         localStorage.setItem('lap_wish',JSON.stringify(wish));
       }
       await loadSupabaseState();
-      openDetailWhenReady(pending.stoneId);
-      setTimeout(()=>updateDrawerStatus(pending.stoneId),180);
+      if(onHomepage){
+        updateDesktopSotdAuth();
+      }else{
+        openDetailWhenReady(pending.stoneId);
+        setTimeout(()=>updateDrawerStatus(pending.stoneId),180);
+      }
     }catch(err){
       console.warn('Could not resume wishlist save after sign-in',err);
     }
   }else if(pending.action==='add_to_collection'){
     setTimeout(()=>{
-      const stone=CRYSTALS.find(c=>c.i===pending.stoneId);
-      if(stone){
-        currentCrystal=stone;
-        addFromDetail();
-      }else{
+      if(onHomepage){
+        addPieceReturnContext={type:'sotd',stoneId:pending.stoneId};
         openAddForm(pending.stoneId);
+      }else{
+        const stone=CRYSTALS.find(c=>c.i===pending.stoneId);
+        if(stone){currentCrystal=stone;addFromDetail();}
+        else{openAddForm(pending.stoneId);}
       }
     },180);
   }
