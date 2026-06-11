@@ -1532,6 +1532,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #tab-collection.collection-signed-out-mobile .coll-stats,
   #tab-collection.collection-signed-out-mobile #collection-filter-shell,
   #tab-collection.collection-signed-out-mobile #coll-sync-status,
+  #tab-collection.collection-signed-out-mobile .coll-mobile-meta,
+  #tab-collection.collection-signed-out-mobile .coll-fab,
   #tab-collection.collection-signed-out-mobile > .c101-backtop-wrap{display:none}
   #tab-collection.collection-signed-out-mobile #coll-wrap{margin-top:0}
   #tab-collection.collection-signed-out-mobile .empty-coll-state{min-height:58vh;padding:3.5rem 1.25rem}
@@ -1569,6 +1571,58 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .empty-coll-state{padding:2.5rem 1.25rem}
   .enc-browse-grid{grid-template-columns:repeat(3,1fr)}
   .enc-doorway-headline{font-size:20px}
+}
+
+/* ── MOBILE COLLECTION REDESIGN ── */
+
+/* Default: hide mobile-only elements on desktop */
+.coll-mobile-meta{display:none}
+.coll-fab{display:none}
+.coll-fab-overlay{display:none}
+.coll-fab-sheet{display:none}
+
+@media(max-width:600px){
+  /* Hide desktop action buttons */
+  .coll-btns{display:none}
+
+  /* Hide Total Pieces / Wishlist stat cells — replaced by toggle */
+  .stats-stacked{display:none}
+
+  /* Show mobile meta block */
+  .coll-mobile-meta{display:block;margin-bottom:1rem}
+  .coll-mobile-counts{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);letter-spacing:0.04em;margin-bottom:0.65rem}
+
+  /* Segmented toggle */
+  .coll-mobile-toggle{display:inline-flex;background:var(--stone2);border:0.5px solid var(--border);border-radius:10px;padding:3px;gap:3px}
+  .coll-toggle-btn{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;padding:7px 20px;border:none;border-radius:7px;background:transparent;color:var(--ink2r);cursor:pointer;transition:background 0.15s,color 0.15s}
+  .coll-toggle-btn.coll-toggle-active{background:var(--white);color:var(--accent);box-shadow:0 1px 4px rgba(42,37,32,0.1);font-weight:500}
+
+  /* Sync status — subtle, right-aligned, moves below filters */
+  #coll-sync-status{margin-top:0.4rem;margin-bottom:0.3rem}
+
+  /* Signed-out: hide mobile-meta too */
+  #tab-collection.collection-signed-out-mobile .coll-mobile-meta{display:none}
+
+  /* Floating action button */
+  .coll-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:calc(env(safe-area-inset-bottom) + 24px);right:20px;width:56px;height:56px;border-radius:999px;background:var(--accent);color:var(--white);border:none;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 4px 20px rgba(42,37,32,0.22);z-index:200;transition:background 0.15s,transform 0.12s}
+  .coll-fab:active{transform:scale(0.93)}
+  #tab-collection.collection-signed-out-mobile .coll-fab{display:none}
+
+  /* FAB overlay */
+  .coll-fab-overlay{position:fixed;inset:0;background:rgba(42,37,32,0.35);z-index:210;opacity:0;pointer-events:none;transition:opacity 0.2s}
+  .coll-fab-overlay.open{display:block;opacity:1;pointer-events:all}
+
+  /* FAB bottom sheet */
+  .coll-fab-sheet{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-radius:16px 16px 0 0;border-top:0.5px solid var(--border);box-shadow:0 -8px 40px rgba(42,37,32,0.14);z-index:220;padding:0 0 calc(env(safe-area-inset-bottom) + 12px);transform:translateY(100%);transition:transform 0.25s cubic-bezier(0.32,0.72,0,1)}
+  .coll-fab-sheet.open{transform:translateY(0)}
+  .coll-fab-sheet-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px}
+  .coll-fab-sheet-title{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink)}
+  .coll-fab-sheet-close{background:none;border:none;font-size:16px;color:var(--ink3);cursor:pointer;padding:4px;line-height:1}
+  .coll-fab-sheet-option{display:flex;align-items:center;gap:16px;width:100%;padding:14px 20px;background:none;border:none;border-top:0.5px solid var(--border2);cursor:pointer;text-align:left}
+  .coll-fab-sheet-option:active{background:var(--stone2)}
+  .coll-fab-sheet-icon{width:36px;height:36px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--accent);flex-shrink:0}
+  .coll-fab-sheet-opt-name{font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+  .coll-fab-sheet-opt-sub{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);line-height:1.4}
 }
 
 @media(max-width:768px){

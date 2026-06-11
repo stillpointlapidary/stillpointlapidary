@@ -2789,6 +2789,30 @@ function resetUseWhen(){
 }
 
 // ── COLLECTION ──
+function syncCollMobileToggle(mode){
+  const btnColl=document.getElementById('coll-toggle-collection');
+  const btnWish=document.getElementById('coll-toggle-wish');
+  if(!btnColl||!btnWish)return;
+  btnColl.classList.toggle('coll-toggle-active',mode==='all'||mode==='__family__'||mode==='tier-owned');
+  btnWish.classList.toggle('coll-toggle-active',mode==='wish'||mode==='tier-wish');
+}
+
+function collMobileTab(mode){
+  setCollQuickFilter(mode);
+}
+
+function openCollFabSheet(){
+  document.getElementById('coll-fab-overlay').classList.add('open');
+  document.getElementById('coll-fab-sheet').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeCollFabSheet(){
+  document.getElementById('coll-fab-overlay').classList.remove('open');
+  document.getElementById('coll-fab-sheet').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 function setCollQuickFilter(mode){
   collQuickFilter=mode;
   // Update active stat cell
@@ -2796,6 +2820,7 @@ function setCollQuickFilter(mode){
   const cellMap={'all':'stat-cell-total','wish':'stat-cell-wish'};
   const cell=document.getElementById(cellMap[mode]);
   if(cell)cell.classList.add('active-stat');
+  syncCollMobileToggle(mode);
   renderCollection();
 }
 
@@ -3043,8 +3068,12 @@ function renderCollection(){
   const displayCollection=dedupedCollectionItems(collection);
   const st=document.getElementById('stat-total');
   const sw=document.getElementById('stat-wish');
-  if(st)st.textContent=displayCollection.length;
-  if(sw)sw.textContent=Object.keys(wish).length;
+  const collCount=displayCollection.length;
+  const wishCount=Object.keys(wish).length;
+  if(st)st.textContent=collCount;
+  if(sw)sw.textContent=wishCount;
+  const mobileCounts=document.getElementById('coll-mobile-counts');
+  if(mobileCounts)mobileCounts.textContent=collCount+' piece'+(collCount===1?'':'s')+' · '+wishCount+' wishlist';
   renderTierBars();
 
   if(!wrap)return;
