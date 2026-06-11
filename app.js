@@ -4992,6 +4992,22 @@ function toggleCareAccordion(hdr){
   hdr.setAttribute('aria-expanded', String(!isOpen));
 }
 
+document.addEventListener('click', function(e){
+  const hdr = e.target.closest && e.target.closest('.charge-accordion-hdr');
+  if(!hdr) return;
+  const item = hdr.closest('.charge-accordion-item');
+  if(!item) return;
+  const isOpen = item.classList.contains('open');
+  // Close all, then open this one if it was closed
+  item.closest('.charge-accordion-list')
+      .querySelectorAll('.charge-accordion-item')
+      .forEach(i => { i.classList.remove('open'); i.querySelector('.charge-accordion-toggle').textContent = '+'; });
+  if(!isOpen){
+    item.classList.add('open');
+    hdr.querySelector('.charge-accordion-toggle').textContent = '−';
+  }
+});
+
 function runCareSearch(val){
   const result = document.getElementById('care-search-result');
   if(!val.trim()){ result.style.display='none'; return; }

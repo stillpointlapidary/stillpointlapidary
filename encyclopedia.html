@@ -39,7 +39,7 @@
 <title>Still Point Lapidary</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script>(function(){try{var t=new URLSearchParams(location.search).get('tab');var m={mood:2,identify:4,collection:5,'101':6};if(m[t]){var s=document.createElement('style');s.id='initial-tab-style';s.textContent='main>section{display:none!important}#tab-'+t+'{display:block!important}.main-nav .nav-tab.active{color:var(--ink2r);border-bottom-color:transparent;background:transparent}.main-nav .nav-tab:nth-child('+m[t]+'){color:var(--ink);border-bottom-color:var(--accent)}@media(max-width:768px){.main-nav .nav-tab:nth-child('+m[t]+'){background:var(--stone2);border-bottom-color:var(--border2)}}';document.head.appendChild(s);}}catch(e){}})();</script>
+<script>(function(){try{var t=new URLSearchParams(location.search).get('tab');var m={mood:2,identify:4,'101':5,collection:6};if(m[t]){var s=document.createElement('style');s.id='initial-tab-style';s.textContent='main>section{display:none!important}#tab-'+t+'{display:block!important}.main-nav .nav-tab.active{color:var(--ink2r);border-bottom-color:transparent;background:transparent}.main-nav .nav-tab:nth-child('+m[t]+'){color:var(--ink);border-bottom-color:var(--accent)}@media(max-width:768px){.main-nav .nav-tab:nth-child('+m[t]+'){background:var(--stone2);border-bottom-color:var(--border2)}}';document.head.appendChild(s);}}catch(e){}})();</script>
 </head>
 <body>
 <div class="app-shell">
@@ -71,8 +71,8 @@
   <button class="nav-tab" onclick="switchTab('mood',this)">Choose by Intention</button>
   <button class="nav-tab active" onclick="switchTab('encyclopedia',this)">Encyclopedia</button>
   <button class="nav-tab" onclick="switchTab('identify',this)">Identify</button>
-  <button class="nav-tab" onclick="switchTab('collection',this)">My Collection</button>
   <button class="nav-tab" onclick="switchTab('101',this)">Crystals 101</button>
+  <button class="nav-tab" onclick="switchTab('collection',this)">My Collection</button>
 </nav></div>
 <main class="content">
 
@@ -628,7 +628,8 @@
 
     <div class="c101-block why-matters-block">
       <div class="c101-h2">Why It Matters</div>
-      <div class="c101-body">Crystals are energetically porous. They pick up the emotional residue of environments, people, and experiences — not metaphorically, but in the sense that a stone carried through a difficult week feels different from a freshly cleansed one. Cleansing resets that. Charging amplifies and directs a stone's natural energy. Think of cleansing as clearing the slate, and charging as sharpening the pencil.</div>
+      <div class="c101-body">Crystals are energetically porous. They pick up the emotional residue of environments, people, and experiences, not metaphorically, but in the sense that a stone carried through a difficult week feels different from a freshly cleansed one. Cleansing resets that.</div>
+      <div class="c101-body">Charging amplifies and directs a stone's natural energy. Think of cleansing as clearing the slate, and charging as sharpening the pencil.</div>
       <div class="c101-callout"><strong>New stones always get cleansed first.</strong> You don't know how many hands have touched them, what environments they've been in, or what energy they've accumulated. Start clean.</div>
     </div>
 
@@ -638,7 +639,7 @@
       <div class="method-grid">
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="var(--accent)" opacity="0.2"/><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Moonlight</div><div class="method-desc">Leave stones out overnight under the moon — full moon is most potent but any phase works.</div><div class="method-caveat">Works indoors through a window too</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="var(--accent)" opacity="0.2"/><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="method-name">Sound</div><div class="method-desc">Singing bowls, bells, tuning forks, or even clapping near your stones. Vibration moves stagnant energy.</div><div class="method-caveat">One of the best all-purpose methods</div></div>
-        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="var(--accent)" opacity="0.2"/><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20h8" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg></div><div class="method-name">Smoke</div><div class="method-desc">Pass stones through smoke from sacred herbs. Don't let the stone sit in direct smoke for too long — a few passes is enough.</div><div class="method-caveat">Ventilate the room</div></div>
+        <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="var(--accent)" opacity="0.2"/><path d="M12 20c0-4 4-4 4-8a4 4 0 0 0-8 0c0 4 4 4 4 8z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 20h8" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg></div><div class="method-name">Smoke</div><div class="method-desc">Pass stones through smoke from sage. Don't let the stone sit in direct smoke for too long — a few passes is enough.</div><div class="method-caveat">Ventilate the room</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Breath</div><div class="method-desc">Hold the stone and blow sharply across it with clear intention to release what doesn't belong. Underrated and immediate.</div><div class="method-caveat">Surprisingly effective for quick resets</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" fill="var(--accent)" opacity="0.2"/><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" fill="var(--accent)" opacity="0.4"/></svg></div><div class="method-name">Earth Burial</div><div class="method-desc">Bury in soil for 24–48 hours. Deep, slow, thorough cleansing. Best for heavily loaded stones or after intense work.</div><div class="method-caveat">Mark the spot. Use a mesh bag to find it.</div></div>
         <div class="method-card"><div class="method-icon"><svg width="28" height="28" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9 9 9" fill="var(--accent)" opacity="0.15"/><polygon points="12 2 15 9 22 9 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9 9 9" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="method-name">Selenite</div><div class="method-desc">Place stones on a selenite plate or beside a selenite wand overnight. Selenite is self-cleansing and will clear other stones.</div><div class="method-caveat">Can't use water on selenite itself</div></div>
@@ -647,15 +648,15 @@
       </div>
       <div class="cleanse-method-mobile-groups">
         <div class="cleanse-method-group">
-          <div class="cleanse-method-group-title">Safest for Almost All Stones</div>
-          <div class="method-card"><div class="method-name">Moonlight</div><div class="method-desc">Leave stones out overnight under the moon — full moon is most potent but any phase works. Safe for all stones.</div><div class="method-caveat">Works indoors through a window too</div></div>
-          <div class="method-card"><div class="method-name">Sound</div><div class="method-desc">Singing bowls, bells, tuning forks, or even clapping near your stones. Vibration moves stagnant energy. Safe for all stones.</div><div class="method-caveat">One of the best all-purpose methods</div></div>
-          <div class="method-card"><div class="method-name">Breath</div><div class="method-desc">Hold the stone and blow sharply across it with clear intention to release what doesn't belong. Underrated and immediate.</div><div class="method-caveat">Surprisingly effective for quick resets</div></div>
+          <div class="cleanse-method-group-title">Safe for Almost All Stones</div>
           <div class="method-card"><div class="method-name">Selenite</div><div class="method-desc">Place stones on a selenite plate or beside a selenite wand overnight. Selenite is self-cleansing and will clear other stones.</div><div class="method-caveat">Can't use water on selenite itself</div></div>
+          <div class="method-card"><div class="method-name">Sound</div><div class="method-desc">Singing bowls, bells, tuning forks, or even clapping near your stones. Vibration moves stagnant energy. Safe for all stones.</div><div class="method-caveat">One of the best all-purpose methods</div></div>
+          <div class="method-card"><div class="method-name">Moonlight</div><div class="method-desc">Leave stones out overnight under the moon — full moon is most potent but any phase works. Safe for all stones.</div><div class="method-caveat">Works indoors through a window too</div></div>
+          <div class="method-card"><div class="method-name">Breath</div><div class="method-desc">Hold the stone and blow sharply across it with clear intention to release what doesn't belong. Underrated and immediate.</div><div class="method-caveat">Surprisingly effective for quick resets</div></div>
         </div>
         <div class="cleanse-method-group">
           <div class="cleanse-method-group-title">Use With Care</div>
-          <div class="method-card"><div class="method-name">Smoke</div><div class="method-desc">Pass stones through smoke from sacred herbs. Don't let the stone sit in direct smoke for too long — a few passes is enough.</div><div class="method-caveat">Safe for all stones; ventilate the room</div></div>
+          <div class="method-card"><div class="method-name">Smoke</div><div class="method-desc">Pass stones through smoke from sage. Don't let the stone sit in direct smoke for too long — a few passes is enough.</div><div class="method-caveat">Safe for all stones; ventilate the room</div></div>
           <div class="method-card"><div class="method-name">Running Water</div><div class="method-desc">Hold under cool running water for 30–60 seconds with intention. Quick and grounding — but not safe for all stones.</div><div class="method-caveat">See water-sensitive list below</div></div>
         </div>
         <div class="cleanse-method-group">
@@ -679,6 +680,28 @@
           <tr><td><strong>Sacred geometry grid</strong></td><td>Placing in a grid with clear quartz amplifies specific intentions</td><td>Program the grid first with your intention</td></tr>
         </tbody>
       </table>
+      <div class="charge-accordion-list">
+        <div class="charge-accordion-item" data-effect="Activating, energizing, solar" data-notes="30 minutes max; some stones fade (see sun-sensitive list below)">
+          <div class="charge-accordion-hdr">Sunlight<span class="charge-accordion-toggle">+</span></div>
+          <div class="charge-accordion-body"><div class="charge-accordion-inner"><div class="charge-effect-label">Effect</div><div class="charge-effect">Activating, energizing, solar — great for action-oriented stones</div><div class="charge-notes-label">Notes</div><div class="charge-notes">30 minutes max; some stones fade (see sun-sensitive list below)</div></div></div>
+        </div>
+        <div class="charge-accordion-item">
+          <div class="charge-accordion-hdr">Moonlight<span class="charge-accordion-toggle">+</span></div>
+          <div class="charge-accordion-body"><div class="charge-accordion-inner"><div class="charge-effect-label">Effect</div><div class="charge-effect">Intuitive, receptive, feminine — ideal for emotional and spiritual work</div><div class="charge-notes-label">Notes</div><div class="charge-notes">Overnight; safe for all stones</div></div></div>
+        </div>
+        <div class="charge-accordion-item">
+          <div class="charge-accordion-hdr">Intention<span class="charge-accordion-toggle">+</span></div>
+          <div class="charge-accordion-body"><div class="charge-accordion-inner"><div class="charge-effect-label">Effect</div><div class="charge-effect">You are the charger — hold the stone and breathe your purpose into it</div><div class="charge-notes-label">Notes</div><div class="charge-notes">Works best after cleansing; most direct method</div></div></div>
+        </div>
+        <div class="charge-accordion-item">
+          <div class="charge-accordion-hdr">Crystal Cluster<span class="charge-accordion-toggle">+</span></div>
+          <div class="charge-accordion-body"><div class="charge-accordion-inner"><div class="charge-effect-label">Effect</div><div class="charge-effect">Place on amethyst, quartz, or citrine cluster to charge passively</div><div class="charge-notes-label">Notes</div><div class="charge-notes">24 hours; clusters need their own periodic cleansing</div></div></div>
+        </div>
+        <div class="charge-accordion-item">
+          <div class="charge-accordion-hdr">Sacred Geometry Grid<span class="charge-accordion-toggle">+</span></div>
+          <div class="charge-accordion-body"><div class="charge-accordion-inner"><div class="charge-effect-label">Effect</div><div class="charge-effect">Placing in a grid with clear quartz amplifies specific intentions</div><div class="charge-notes-label">Notes</div><div class="charge-notes">Program the grid first with your intention</div></div></div>
+        </div>
+      </div>
     </div>
 
     <div class="c101-block how-often-block">
@@ -687,6 +710,7 @@
     </div>
 
     <div class="c101-block care-search-block">
+      <div class="c101-h2 care-safety-heading">Stone Safety</div>
       <div class="c101-h2" style="display:flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="var(--accent)" opacity="0.15"/><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="1.5"/><line x1="16.5" y1="16.5" x2="22" y2="22" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/></svg>Check Any Stone</div>
       <div class="c101-body" style="margin-bottom:0.75rem">Type a stone name to see its care status — water safety, sun sensitivity, and any toxicity notes.</div>
       <div style="position:relative;margin-bottom:1rem">
@@ -853,7 +877,7 @@
       <table class="care-table choose-methods-table">
         <thead><tr><th>#</th><th>Method</th><th>When to use it</th></tr></thead>
         <tbody>
-          <tr><td><strong>1</strong></td><td><strong>Intuition first</strong> — which stone pulls your attention, feels right in your hand, or keeps catching your eye?</td><td>Always. This is your primary signal.</td></tr>
+          <tr><td><strong>1</strong></td><td><strong>Intuition first</strong> — which stone pulls your attention, feels right in your hand, or keeps catching your eye?</td><td>This is your primary signal.</td></tr>
           <tr><td><strong>2</strong></td><td><strong>Intention second</strong> — what do you actually need right now? Use the Choose by Intention tab to find stones by need.</td><td>When you have a clear goal but no strong pull</td></tr>
           <tr><td><strong>3</strong></td><td><strong>Properties third</strong> — look up specific properties, chakras, or energetic roles to narrow down.</td><td>Research mode; building a targeted collection</td></tr>
         </tbody>
