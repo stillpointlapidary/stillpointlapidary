@@ -1128,26 +1128,29 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-care .choose-methods-table td:nth-child(3)::before,
   #s101-care .toxicity-awareness-table td:nth-child(2)::before,
   #s101-care .toxicity-awareness-table td:nth-child(3)::before{display:none}
-  #s101-care .hardness-care-table td:nth-child(2)::before{content:'Durability'}
-  #s101-care .hardness-care-table td:nth-child(3)::before{content:'Care notes'}
-  #s101-care .hardness-care-table td:nth-child(4)::before{content:'Examples'}
+  #s101-care .hardness-care-table td:nth-child(2)::before{display:none}
+  #s101-care .hardness-care-table td:nth-child(3)::before{display:none}
+  #s101-care .hardness-care-table td:nth-child(4)::before{content:'Examples';display:block;font-size:9.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
   #s101-care .c101-wide-photo--care{aspect-ratio:16/8;margin-bottom:1rem}
   #s101-care .c101-body{font-size:13.5px;line-height:1.7}
   #s101-care .choose-methods-table tbody{gap:6px}
-  #s101-care .choose-methods-table tr{display:grid;grid-template-columns:28px 1fr;padding:0.72rem 0.82rem;gap:0 8px}
-  #s101-care .choose-methods-table td:first-child{grid-row:1/3;margin:0;font-size:17px;text-align:center;color:var(--accent)}
-  #s101-care .choose-methods-table td:nth-child(2){margin:0;font-size:12.8px}
-  #s101-care .choose-methods-table td:nth-child(3){grid-column:2;margin-top:3px;font-size:12px;color:var(--ink3);font-style:italic}
-  #s101-care .hardness-care-table tbody,
+  #s101-care .choose-methods-table tr{display:grid;grid-template-columns:1fr;padding:0.72rem 0.82rem;gap:4px}
+  #s101-care .choose-methods-table td:first-child{margin:0;font-size:13px}
+  #s101-care .choose-methods-table td:nth-child(2){margin:0;font-size:12px;color:var(--ink3);font-style:italic}
+  #s101-care .hardness-care-table tbody{gap:10px}
   #s101-care .toxicity-awareness-table tbody{gap:7px}
-  #s101-care .hardness-care-table tr,
+  #s101-care .hardness-care-table tr{padding:0;background:transparent;box-shadow:none;border:none;display:block}
   #s101-care .toxicity-awareness-table tr{padding:0.72rem 0.82rem}
-  #s101-care .hardness-care-table td:first-child,
+  #s101-care .hardness-care-table thead{display:none}
+  /* Compact hardness card: custom layout via display:contents on tr */
+  #s101-care .hardness-care-table tbody tr{background:var(--white);border:0.5px solid var(--border);border-radius:11px;padding:0.9rem 1rem;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;gap:0;box-shadow:0 2px 8px rgba(42,37,32,0.03)}
+  #s101-care .hardness-care-table td{border:none;padding:0;margin:0}
+  #s101-care .hardness-care-table td:first-child{grid-column:1;grid-row:1;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.2;align-self:center}
+  #s101-care .hardness-care-table td:nth-child(2){grid-column:2;grid-row:1;align-self:center;justify-self:end;margin:0}
+  #s101-care .hardness-care-table td:nth-child(3){grid-column:1/3;grid-row:2;font-size:13px;line-height:1.58;color:var(--ink2);margin-top:0.55rem}
+  #s101-care .hardness-care-table td:nth-child(4){grid-column:1/3;grid-row:3;font-size:12px;color:var(--ink3);margin-top:0.65rem;padding-top:0.55rem;border-top:0.5px solid var(--border2)}
   #s101-care .toxicity-awareness-table td:first-child{margin-bottom:0.35rem;font-size:16px}
-  #s101-care .hardness-care-table td:nth-child(2){display:inline-block;margin:0 0 0.35rem}
-  #s101-care .hardness-care-table td:nth-child(3),
   #s101-care .toxicity-awareness-table td:nth-child(2){margin-top:0;font-size:12.5px}
-  #s101-care .hardness-care-table td:nth-child(4),
   #s101-care .toxicity-awareness-table td:nth-child(3){margin-top:0.25rem;font-size:11.5px;color:var(--ink3)}
   #s101-work .work-methods-table,
   #s101-work .work-methods-table tbody,
