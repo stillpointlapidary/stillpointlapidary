@@ -4788,8 +4788,7 @@ function init101(){
     d.innerHTML=`<div class="chakra-name"><span class="chakra-dot" style="background:${ch.color}"></span>${ch.name}</div>
       <div class="chakra-loc">${ch.loc}</div>
       <div class="chakra-theme">${ch.theme}</div>
-      <div class="chakra-imbalance"><span class="chakra-imbalance-label">Signs of imbalance</span><div class="chakra-imbalance-tags">${imbalanceTags}</div></div>
-      <button class="chakra-cta" type="button" onclick="event.stopPropagation();jumpToChakra('${escapeAttr(ch.name)}')">Browse ${escapeAttr(ch.name)} Chakra Stones →</button>`;
+      <div class="chakra-imbalance"><span class="chakra-imbalance-label">Signs of imbalance</span><div class="chakra-imbalance-tags">${imbalanceTags}</div></div>`;
     d.onclick=()=>jumpToChakra(ch.name);
     cc.appendChild(d);
   });
