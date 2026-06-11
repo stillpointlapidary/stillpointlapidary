@@ -575,6 +575,79 @@ function sotdUseSentence(s){
 
 const SOTD_TIER_LABELS={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
 
+const _SOTD_EDITORIAL={
+  'Calm & Peace':'A quieting stone for mental stillness, ease, and emotional steadiness.',
+  'Grounding':'A stabilizing stone for anchoring scattered energy and returning to center.',
+  'Stability':'A grounding stone for steadiness through change and uncertain ground.',
+  'Protection':'A shielding stone for energetic boundaries, clarity, and steady ground.',
+  'Heart Healing':'A softening stone for grief, forgiveness, and the slow work of the heart.',
+  'Self-Love':'A nurturing stone for inner kindness and the practice of caring for yourself.',
+  'Clarity & Focus':'A clarifying stone for mental precision, intention, and clear thinking.',
+  'Intuition':'An opening stone for inner knowing, subtle perception, and quiet guidance.',
+  'Spiritual Connection':'A contemplative stone for deepening practice and expanding awareness.',
+  'Transformation':'A catalyst stone for release, renewal, and moving through thresholds.',
+  'Confidence':'An empowering stone for self-trust, forward motion, and personal authority.',
+  'Manifestation':'An activating stone for aligning intention with action and drawing results.',
+  'Joy':'A brightening stone for optimism, creative spark, and the lighter side of being.',
+  'Vitality':'An energizing stone for physical momentum, stamina, and renewed drive.',
+  'Communication':'A clarifying stone for honest expression, being heard, and speaking truth.',
+};
+const _SOTD_PAIRING={
+  'Calm':'Amethyst or Smoky Quartz','Peace':'Amethyst or Smoky Quartz','Sleep':'Lepidolite or Amethyst',
+  'Protection':'Black Tourmaline or Hematite','Grounding':'Black Tourmaline or Obsidian','Stabil':'Black Tourmaline or Smoky Quartz',
+  'Heart':'Rose Quartz or Rhodonite','Love':'Rose Quartz or Rhodonite','Self':'Rose Quartz or Kunzite',
+  'Confidence':'Citrine or Tiger\'s Eye','Manifestation':'Citrine or Pyrite',
+  'Clarity':'Clear Quartz or Fluorite','Focus':'Clear Quartz or Fluorite',
+  'Creativity':'Carnelian or Sunstone','Joy':'Carnelian or Citrine',
+  'Intuition':'Labradorite or Selenite','Spiritual':'Labradorite or Moonstone',
+  'Communication':'Aquamarine or Blue Lace Agate','Transform':'Malachite or Labradorite',
+  'Vitality':'Carnelian or Red Jasper',
+};
+const _SOTD_PROMPT={
+  'Calm':'Hold for 60 seconds before replying, deciding, or spiraling.',
+  'Peace':'Hold for 60 seconds before replying, deciding, or spiraling.',
+  'Sleep':'Place it on your nightstand or under your pillow tonight.',
+  'Protection':'Set it near your front door or workspace as an anchor.',
+  'Grounding':'Hold it in both palms and take three slow breaths.',
+  'Stabil':'Hold it in both palms and take three slow breaths.',
+  'Heart':'Place it over your sternum and breathe into the space there.',
+  'Love':'Place it over your sternum and breathe into the space there.',
+  'Self':'Place it over your sternum and breathe gently.',
+  'Clarity':'Keep it nearby when you need a quieter, more precise mind.',
+  'Focus':'Place it at your workspace before starting something that matters.',
+  'Confidence':'Hold it before a conversation that requires your full voice.',
+  'Manifestation':'Write one clear intention nearby and let it hold the focus.',
+  'Creativity':'Keep it visible while you work on something you care about.',
+  'Joy':'Set it somewhere you\'ll see it and let it be a small, quiet reminder.',
+  'Intuition':'Sit with it for a few minutes before a decision or creative choice.',
+  'Spiritual':'Use it to open or close a meditation or intention-setting session.',
+  'Communication':'Hold it before a conversation that needs your most honest voice.',
+  'Transform':'Let it sit nearby as a marker of the change you are moving through.',
+  'Vitality':'Keep it close when your energy needs a slow, steady lift.',
+};
+
+function _sotdLookup(map,q){
+  if(!q)return null;
+  const exact=map[q];if(exact)return exact;
+  for(const k of Object.keys(map)){if(q.toLowerCase().includes(k.toLowerCase()))return map[k];}
+  return null;
+}
+
+function getSotdEditorialLine(s){
+  const q=(s.qualities&&s.qualities[0])||'';
+  return _sotdLookup(_SOTD_EDITORIAL,q)||'';
+}
+
+function getStonePairing(s){
+  const q=(s.qualities&&s.qualities[0])||'';
+  return _sotdLookup(_SOTD_PAIRING,q)||'Clear Quartz or Amethyst';
+}
+
+function getStoneDailyPrompt(s){
+  const q=(s.qualities&&s.qualities[0])||'';
+  return _sotdLookup(_SOTD_PROMPT,q)||'Keep it nearby today as a quiet point of focus.';
+}
+
 function renderDesktopSotdCard(s){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container||!s)return;
@@ -584,18 +657,24 @@ function renderDesktopSotdCard(s){
   const photoHtml=s.photo
     ?`<img class="desktop-sotd-photo-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy">`
     :`<div class="desktop-sotd-photo-fallback" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div>`;
-  const roles=(s.qualities||[]).slice(0,3).map(q=>`<span class="desktop-sotd-role">${escapeAttr(q)}</span>`).join('');
+  const primaryQuality=(s.qualities&&s.qualities[0])||'';
+  const roles=(s.qualities||[]).slice(0,2).map(q=>`<span class="desktop-sotd-role">${escapeAttr(q)}</span>`).join('');
+  const editorial=getSotdEditorialLine(s);
   const useSentence=sotdUseSentence(s);
+  const pairing=getStonePairing(s);
+  const prompt=getStoneDailyPrompt(s);
+  const bestFor=primaryQuality||'Daily grounding';
   container.innerHTML=`
     <div class="desktop-sotd-strip">
       <div class="desktop-sotd-photo">${photoHtml}</div>
       <div class="desktop-sotd-body">
-        <div class="desktop-sotd-kicker">Stone of the day</div>
+        <div class="desktop-sotd-kicker">Stone of the Day</div>
         <div class="desktop-sotd-name-row">
           <span class="desktop-sotd-name">${escapeAttr(s.name)}</span>
           <span class="desktop-sotd-tier">${escapeAttr(tierDisplay)}</span>
         </div>
         ${roles?`<div class="desktop-sotd-roles">${roles}</div>`:''}
+        ${editorial?`<div class="desktop-sotd-editorial">${escapeAttr(editorial)}</div>`:''}
         ${useSentence?`<div class="desktop-sotd-use">${escapeAttr(useSentence)}</div>`:''}
         <div class="desktop-sotd-actions">
           <button class="desktop-sotd-btn-enc" type="button">View full entry</button>
@@ -603,6 +682,12 @@ function renderDesktopSotdCard(s){
           <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to wishlist</button>
           <span class="desktop-sotd-signin">Sign in to save stones to your collection</span>
         </div>
+      </div>
+      <div class="desktop-sotd-note">
+        <div class="desktop-sotd-note-kicker">Today's Note</div>
+        <div class="desktop-sotd-note-row"><span class="desktop-sotd-note-lbl">Best for</span><span class="desktop-sotd-note-val">${escapeAttr(bestFor)}</span></div>
+        <div class="desktop-sotd-note-row"><span class="desktop-sotd-note-lbl">Pair with</span><span class="desktop-sotd-note-val">${escapeAttr(pairing)}</span></div>
+        <div class="desktop-sotd-note-prompt">${escapeAttr(prompt)}</div>
       </div>
     </div>`;
   const encBtn=container.querySelector('.desktop-sotd-btn-enc');
@@ -612,11 +697,7 @@ function renderDesktopSotdCard(s){
     collBtn.addEventListener('click',function(){
       const sid=this.dataset.sotdId;
       const sname=this.dataset.sotdName||'';
-      if(!_currentUser){
-        savePendingDrawerAction('add_to_collection',{i:sid,n:sname});
-        _openAuth('save-collection');
-        return;
-      }
+      if(!_currentUser){savePendingDrawerAction('add_to_collection',{i:sid,n:sname});_openAuth('save-collection');return;}
       addPieceReturnContext={type:'sotd',stoneId:sid};
       openAddForm(sid);
     });
@@ -626,15 +707,11 @@ function renderDesktopSotdCard(s){
     wishBtn.addEventListener('click',function(){
       const sid=this.dataset.sotdId;
       const sname=this.dataset.sotdName||'';
-      if(!_currentUser){
-        savePendingDrawerAction('add_to_wishlist',{i:sid,n:sname});
-        _openAuth('save-wishlist');
-        return;
-      }
+      if(!_currentUser){savePendingDrawerAction('add_to_wishlist',{i:sid,n:sname});_openAuth('save-wishlist');return;}
       sotdWishlistDirect(sid);
     });
   }
-  updateDesktopSotdAuth();
+  updateDesktopSotdAuth();updateMobileSotdAuth();
 }
 
 function updateDesktopSotdAuth(){
@@ -665,40 +742,108 @@ function updateDesktopSotdAuth(){
 
 async function sotdWishlistDirect(stoneId){
   if(!_currentUser)return;
-  const wishBtn=document.querySelector('#desktop-sotd-wrap .desktop-sotd-btn-wish');
+  const dWishBtn=document.querySelector('#desktop-sotd-wrap .desktop-sotd-btn-wish');
+  const mWishBtn=document.querySelector('#mobile-sotd-card-wrap .mobile-sotd-wish-btn');
   if(wish[stoneId]){
-    if(wishBtn){wishBtn.textContent='On Wishlist';wishBtn.disabled=true;}
+    if(dWishBtn){dWishBtn.textContent='On Wishlist';dWishBtn.disabled=true;}
+    if(mWishBtn){mWishBtn.textContent='On Wishlist';mWishBtn.disabled=true;}
     return;
   }
   try{
     await _supa.from('wishlist_items').insert({user_id:_currentUser.id,stone_id:stoneId});
     wish[stoneId]=true;
     localStorage.setItem('lap_wish',JSON.stringify(wish));
-    if(wishBtn){wishBtn.textContent='Saved to Wishlist ✓';wishBtn.disabled=true;}
+    if(dWishBtn){dWishBtn.textContent='Saved to Wishlist ✓';dWishBtn.disabled=true;}
+    if(mWishBtn){mWishBtn.textContent='Saved to Wishlist ✓';mWishBtn.disabled=true;}
   }catch(err){console.warn('SOTD wishlist save failed',err);}
 }
 
 function renderMobileSotdCard(s){
   mobileSotdStone=s;
   const container=document.getElementById('mobile-sotd-card-wrap');
-  if(!container || !s)return;
+  if(!container||!s)return;
   const photoHtml=s.photo
-    ? `<div class="mobile-sotd-image-wrap"><img class="mobile-sotd-image" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy"></div>`
-    : `<div class="mobile-sotd-image-wrap mobile-sotd-image-wrap--fallback"><div class="mobile-sotd-dot" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div></div>`;
-  const qualities=featuredStoneQualities(s).slice(0,3).map(q=>`<span>${escapeAttr(q)}</span>`).join('');
+    ?`<div class="mobile-sotd-image-wrap"><img class="mobile-sotd-image" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy"></div>`
+    :`<div class="mobile-sotd-image-wrap mobile-sotd-image-wrap--fallback"><div class="mobile-sotd-dot" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div></div>`;
+  const t=s.tier>=1&&s.tier<=4?s.tier:1;
+  const tierDisplay=`Tier ${t} · ${SOTD_TIER_LABELS[t]}`;
+  const primaryQ=(s.qualities&&s.qualities[0])||'';
+  const qualities=featuredStoneQualities(s).slice(0,2).map(q=>`<span>${escapeAttr(q)}</span>`).join('');
+  const editorial=getSotdEditorialLine(s);
   const useSentence=sotdUseSentence(s);
+  const pairing=getStonePairing(s);
+  const prompt=getStoneDailyPrompt(s);
+  const sid=String(s.id);
+  const sname=escapeAttr(s.name);
   container.innerHTML=`
     <div class="mobile-sotd-card">
       ${photoHtml}
       <div class="mobile-sotd-copy">
         <div class="mobile-sotd-label">Stone of the Day</div>
-        <div class="mobile-sotd-name">${escapeAttr(s.name)}</div>
-        <div class="mobile-sotd-qualities">${qualities}</div>
+        <div class="mobile-sotd-name">${sname}</div>
+        <div class="mobile-sotd-meta-row">
+          <span class="mobile-sotd-tier-pill">${escapeAttr(tierDisplay)}</span>
+          ${primaryQ?`<span class="mobile-sotd-qual-pill">${escapeAttr(primaryQ)}</span>`:''}
+        </div>
+        ${editorial?`<div class="mobile-sotd-editorial">${escapeAttr(editorial)}</div>`:''}
         ${useSentence?`<div class="mobile-sotd-use">${escapeAttr(useSentence)}</div>`:''}
-        <button class="mobile-sotd-view-btn" type="button" onclick="openStarterStoneModal(0,[mobileSotdStone])" aria-label="View ${escapeAttr(s.name)}">View stone</button>
+        <div class="mobile-sotd-note-box">
+          <div class="mobile-sotd-note-row"><span class="mobile-sotd-note-lbl">Pair with</span><span class="mobile-sotd-note-val">${escapeAttr(pairing)}</span></div>
+          <div class="mobile-sotd-note-row"><span class="mobile-sotd-note-lbl">Try this</span><span class="mobile-sotd-note-val">${escapeAttr(prompt)}</span></div>
+        </div>
+        <div class="mobile-sotd-actions">
+          <button class="mobile-sotd-view-btn" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View full entry</button>
+          <div class="mobile-sotd-secondary-actions">
+            <button class="mobile-sotd-coll-btn" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">Add to collection</button>
+            <button class="mobile-sotd-wish-btn" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">Add to wishlist</button>
+            <span class="mobile-sotd-signin-hint" style="display:none">Sign in to save stones</span>
+          </div>
+        </div>
       </div>
       <a class="mobile-sotd-essentials-link" href="encyclopedia.html?tab=encyclopedia&tier=1">New to crystals? Start your first shelf with the Essentials →</a>
     </div>`;
+  container.querySelector('.mobile-sotd-view-btn').addEventListener('click',()=>{
+    detailReturnContext={type:'home-sotd'};openDetail(s.id);
+  });
+  const mCollBtn=container.querySelector('.mobile-sotd-coll-btn');
+  if(mCollBtn){
+    mCollBtn.addEventListener('click',function(){
+      if(!_currentUser){savePendingDrawerAction('add_to_collection',{i:sid,n:s.name});_openAuth('save-collection');return;}
+      addPieceReturnContext={type:'sotd',stoneId:sid};openAddForm(sid);
+    });
+  }
+  const mWishBtn=container.querySelector('.mobile-sotd-wish-btn');
+  if(mWishBtn){
+    mWishBtn.addEventListener('click',function(){
+      if(!_currentUser){savePendingDrawerAction('add_to_wishlist',{i:sid,n:s.name});_openAuth('save-wishlist');return;}
+      sotdWishlistDirect(sid);
+    });
+  }
+  updateMobileSotdAuth();
+}
+
+function updateMobileSotdAuth(){
+  const container=document.getElementById('mobile-sotd-card-wrap');
+  if(!container)return;
+  const signin=container.querySelector('.mobile-sotd-signin-hint');
+  const collBtn=container.querySelector('.mobile-sotd-coll-btn');
+  const wishBtn=container.querySelector('.mobile-sotd-wish-btn');
+  if(_currentUser){
+    if(signin)signin.style.display='none';
+    if(collBtn)collBtn.style.display='';
+    if(wishBtn){
+      wishBtn.style.display='';
+      if(mobileSotdStone&&wish[mobileSotdStone.id]){
+        wishBtn.textContent='On Wishlist';wishBtn.disabled=true;
+      } else {
+        wishBtn.textContent='Add to wishlist';wishBtn.disabled=false;
+      }
+    }
+  } else {
+    if(signin)signin.style.display='';
+    if(collBtn)collBtn.style.display='none';
+    if(wishBtn)wishBtn.style.display='none';
+  }
 }
 
 function renderSotd(){
@@ -6923,7 +7068,7 @@ async function _authInit() {
       await handlePendingDrawerActionAfterSignIn();
     } else if(!_currentUser) {
       promptPendingDrawerActionIfNeeded();
-      updateDesktopSotdAuth();
+      updateDesktopSotdAuth();updateMobileSotdAuth();
     }
     if (_currentUser && window._pendingColl) {
       window._pendingColl = false;
@@ -6960,7 +7105,7 @@ async function handlePendingDrawerActionAfterSignIn(){
       }
       await loadSupabaseState();
       if(onHomepage){
-        updateDesktopSotdAuth();
+        updateDesktopSotdAuth();updateMobileSotdAuth();
       }else{
         openDetailWhenReady(pending.stoneId);
         setTimeout(()=>updateDrawerStatus(pending.stoneId),180);
@@ -7170,7 +7315,7 @@ async function loadSupabaseState() {
   // Re-apply URL tab param — auth+data load can fire after initial tab switch
   const _urlTab=(()=>{try{return new URLSearchParams(window.location.search).get('tab');}catch(e){return null;}})();
   if(_urlTab&&['mood','identify','collection','101'].includes(_urlTab)){switchTabByName(_urlTab);}
-  updateDesktopSotdAuth();
+  updateDesktopSotdAuth();updateMobileSotdAuth();
 }
 
 async function _uploadCollectionPhotos(collectionItemId,photos,startOrder){
