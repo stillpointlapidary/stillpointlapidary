@@ -255,8 +255,8 @@
         <button class="drawer-pill" id="drawer-pill-wish" onclick="drawerWishlistAction()"></button>
       </div>
       <div id="drawer-view-links" style="display:none;gap:12px;font-size:11px;color:var(--ink3)">
-        <a id="drawer-view-coll" href="encyclopedia.html?tab=collection" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif">View collection -></a>
-        <a id="drawer-view-wish" href="encyclopedia.html?tab=collection" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif">View wishlist -></a>
+        <a id="drawer-view-coll" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View collection →</a>
+        <a id="drawer-view-wish" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View wishlist →</a>
       </div>
     </div>
   </div>

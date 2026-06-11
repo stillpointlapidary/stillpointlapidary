@@ -493,15 +493,6 @@ function learnMoreStarterStone(){
     detailReturnContext=null;
   }
   closeStarterStoneModal();
-  if(onHomepage){
-    try{sessionStorage.setItem('spl_pending_stone',identifier);}catch(e){}
-    try{sessionStorage.setItem('spl_pending_stone_name',s.name);}catch(e){}
-    const target=new URL('encyclopedia.html', window.location.href);
-    target.searchParams.set('stone',identifier);
-    target.searchParams.set('stoneName',s.name);
-    window.location.href=target.href;
-    return;
-  }
   queueDirectStoneOpen(identifier,s.name);
 }
 
@@ -1861,6 +1852,12 @@ function filterByFamily(){
   if(!currentCrystal)return;
   const fam=currentCrystal.fam;
   closeDrawer();
+  if(!document.getElementById('tab-encyclopedia')){
+    const target=new URL('encyclopedia.html',window.location.href);
+    target.searchParams.set('fam',fam);
+    window.location.href=target.href;
+    return;
+  }
   jumpToFamily(fam);
 }
 
@@ -1896,14 +1893,7 @@ function pendingDrawerAuthReason(actionType){
 function requestDrawerSaveSignIn(actionType){
   if(!currentCrystal)return;
   savePendingDrawerAction(actionType,currentCrystal);
-  if(document.getElementById('auth-modal-overlay')){
-    _openAuth(pendingDrawerAuthReason(actionType));
-    return;
-  }
-  const target=new URL('encyclopedia.html',window.location.href);
-  target.searchParams.set('stone',currentCrystal.i);
-  target.searchParams.set('stoneName',currentCrystal.n||'');
-  window.location.href=target.href;
+  _openAuth(pendingDrawerAuthReason(actionType));
 }
 
 function updateDrawerStatus(id){
@@ -6852,6 +6842,9 @@ loadStonesAndInit().then(()=>{
   }else if(tabParam==='encyclopedia'&&tierParam){
     switchTabByName('encyclopedia');
     setTimeout(()=>encBrowseTier(tierParam),120);
+  }else if(params.get('fam')){
+    switchTabByName('encyclopedia');
+    setTimeout(()=>jumpToFamily(params.get('fam')),120);
   }
   runPageAction(action);
   setTimeout(()=>runPageAction(action), 650);
@@ -6958,11 +6951,7 @@ function _openAuth(reason) {
   var msg = document.getElementById('auth-msg');
   var inp = document.getElementById('auth-email-input');
   var btn = document.getElementById('auth-submit-btn');
-  if(!title||!sub||!msg||!inp||!btn){
-    const target=new URL('encyclopedia.html',window.location.href);
-    window.location.href=target.href;
-    return;
-  }
+  if(!title||!sub||!msg||!inp||!btn){console.error('Auth modal elements missing');return;}
   if (reason === 'save-collection') {
     title.textContent = 'Sign in to save this stone';
     sub.textContent = 'Sign in to save this stone to your collection.';
