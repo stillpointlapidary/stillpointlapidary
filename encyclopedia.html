@@ -88,7 +88,6 @@
         <p class="enc-hero-sub">Start with the Essentials, then explore by color, intention, family, chakra, or collector tier.</p>
         <div class="enc-hero-btns">
           <button class="btn btn-accent" onclick="scrollToPageSection('#enc-essentials-top')">Start with the Essentials</button>
-          <button class="btn" onclick="encHeroBrowseFullLibrary()">Browse full library →</button>
         </div>
       </div>
     </div>
@@ -366,6 +365,9 @@
     <div id="mood-grid-banner" style="display:none"></div>
     <div class="mood-results-title" id="mood-shared-results-title"></div>
     <div class="mood-results-count" id="mood-results-count"></div>
+    <div class="mood-tier4-row" id="mood-tier4-row" style="display:none">
+      <label class="mood-tier4-label"><input type="checkbox" id="mood-tier4-check" onchange="toggleIntentionTier4(this)"> Include Rare Finds (Tier 4)</label>
+    </div>
     <div class="mood-stone-grid" id="mood-stone-grid"></div>
     <div class="mood-load-more" id="mood-load-more" style="display:none"></div>
   </div>
