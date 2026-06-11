@@ -6629,8 +6629,10 @@ function renderMobileShapes(container, shapeMap) {
     if(labelName) labelName.textContent = cat.label + ' Forms';
     if(labelDef) labelDef.textContent = cat.def || '';
 
-    tileGrid.innerHTML = activeCatShapes.map((s, i) => `
-      <button class="mobile-form-tile${i===0?' active':''}" type="button" data-id="${s.id}">
+    detail.innerHTML = '';
+
+    tileGrid.innerHTML = activeCatShapes.map((s) => `
+      <button class="mobile-form-tile" type="button" data-id="${s.id}">
         <span class="mobile-form-tile-icon">${s.draw()}</span>
         <span class="mobile-form-tile-name">${s.name}</span>
       </button>`).join('');
@@ -6645,8 +6647,6 @@ function renderMobileShapes(container, shapeMap) {
         requestAnimationFrame(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
       });
     });
-
-    if(activeCatShapes[0]) renderMobileDetail(activeCatShapes[0], catLabel);
     if(scroll) {
       const labelEl = mobile.querySelector('.forms-mobile-label');
       requestAnimationFrame(() => (labelEl||tileGrid).scrollIntoView({ behavior: 'smooth', block: 'start' }));
