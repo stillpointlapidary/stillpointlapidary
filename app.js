@@ -423,23 +423,6 @@ function featuredStoneQualities(s){
   return String(s.use || '').replace(/\u00c2/g,'').split(/\s*\u00b7\s*/).filter(Boolean);
 }
 
-function renderFeaturedStones(){
-  const container = document.getElementById('featured-cards');
-  if(!container || container.children.length > 0) return;
-  container.innerHTML = FEATURED_STONES.map((s,index) => {
-    const hasPhoto = !!s.photo;
-    const photoHtml = hasPhoto
-      ? `<img class="starter-stone-image" src="${SUPABASE_STONES}${s.photo}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy">`
-      : `<div class="starter-stone-dot" style="background:${escapeAttr(s.hex)}"></div>`;
-    const qualities = featuredStoneQualities(s).map(q => `<span>${escapeAttr(q)}</span>`).join('');
-    return `
-    <button class="starter-stone-tile" type="button" onclick="openStarterStoneModal(${index})" aria-label="Open ${escapeAttr(s.name)} starter stone details">
-      <span class="starter-stone-image-wrap">${photoHtml}</span>
-      <span class="starter-stone-name">${escapeAttr(s.name)}</span>
-      <span class="starter-stone-qualities">${qualities}</span>
-    </button>`;
-  }).join('');
-}
 
 function starterStoneQualitiesHtml(s){
   return featuredStoneQualities(s).map(q => `<span>${escapeAttr(q)}</span>`).join('');
@@ -706,7 +689,6 @@ function updateStoneCounts(){
 
 function init(){
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
-  renderFeaturedStones();
   renderSotd();
   // Load custom encyclopedia entries
   customEntries.forEach(e=>{if(!CRYSTALS.find(c=>c.i===e.i))CRYSTALS.push(e);});
@@ -985,10 +967,6 @@ function encEnterSearchMode(scroll=true){
   if(scroll!==false)setTimeout(()=>encScrollToSearchArea(true),40);
 }
 
-function encHeroBrowseFullLibrary(){
-  if(isMobileView())encEnterSearchMode(true);
-  else scrollToPageSection('.enc-library-panel');
-}
 
 function encLandingSearchFocus(){
   if(!isMobileView())return;
@@ -1726,8 +1704,6 @@ function closeDrawer(){
     setTimeout(()=>{
       if(ctx&&Number.isInteger(ctx.index)){
         openStarterStoneModal(ctx.index, ctx.source);
-      }else{
-        scrollToPageSection('#featured-section');
       }
     },0);
   } else if(detailReturnContext&&detailReturnContext.type==='sotd'){

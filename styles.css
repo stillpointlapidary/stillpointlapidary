@@ -685,22 +685,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:700px){.shapes-pane{padding:20px}.shape-pane-layout{grid-template-columns:1fr}}
 
 
-/* TEN STONES WORTH KNOWING */
-.featured-section{padding:2.25rem 0 1.25rem;border-bottom:0.5px solid var(--border2);margin-bottom:0}
-.featured-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.25rem;padding:0 0}
-.featured-title{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:400;color:var(--ink)}
-.featured-subtitle{font-size:14px;color:var(--ink2);margin-top:6px;line-height:1.5}
-.featured-browse{font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:#8b7355;text-decoration:none;border-bottom:1px solid rgba(139,115,85,0.3);padding-bottom:1px;white-space:nowrap}
-.featured-browse:hover{color:var(--ink);border-color:var(--ink)}
-.featured-cards{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
-.starter-stone-tile{appearance:none;border:0.5px solid var(--border);border-radius:10px;background:rgba(250,248,246,0.78);padding:0.65rem 0.45rem 0.7rem;min-width:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.45rem;color:inherit;font-family:'Jost',sans-serif;transition:background 0.15s,border-color 0.15s,box-shadow 0.15s,transform 0.15s}
-.starter-stone-tile:hover,.starter-stone-tile:focus-visible{background:var(--white);border-color:rgba(200,169,110,0.55);box-shadow:0 8px 22px rgba(42,37,32,0.06);transform:translateY(-1px);outline:none}
-.starter-stone-image-wrap{width:100%;height:72px;border-radius:8px;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;border:0.5px solid var(--border2)}
-.starter-stone-image{width:100%;height:100%;object-fit:contain;padding:5px;display:block}
-.starter-stone-dot{width:42px;height:42px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.12)}
-.starter-stone-name{font-family:Georgia,'Times New Roman',serif;font-size:14px;font-weight:400;color:var(--ink);line-height:1.12;min-height:31px;display:flex;align-items:center;justify-content:center}
-.starter-stone-qualities{display:flex;flex-direction:column;gap:2px;width:100%;font-size:10.5px;line-height:1.18;letter-spacing:0.03em;color:var(--ink2r)}
-.starter-stone-qualities span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mobile-sotd-section{display:none}
 /* DESKTOP STONE OF THE DAY */
 .desktop-sotd-section{padding:1.75rem 0 1.5rem;border-bottom:0.5px solid var(--border2)}
@@ -742,25 +726,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .home-pw-name{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink)}
 .home-pw-desc{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);line-height:1.6;flex:1}
 @media(max-width:900px){.home-pathways-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.content{display:flex;flex-direction:column}.homepage-hero{order:1}.mobile-sotd-section{order:2;display:block;padding:1.5rem 0 1.35rem;border-bottom:0.5px solid var(--border2)}.home-pathways{order:3}.featured-section{display:none}.desktop-sotd-section{display:none}.home-mobile-backtop-wrap{order:4}.mobile-sotd-header{display:none}.mobile-sotd-card{width:100%;border:0.5px solid var(--border);border-radius:14px;background:var(--white);overflow:hidden;box-shadow:0 4px 20px rgba(42,37,32,0.06);display:flex;flex-direction:column}.mobile-sotd-image-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border-bottom:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden}.mobile-sotd-image-wrap--fallback{aspect-ratio:16/5}.mobile-sotd-image{width:100%;height:100%;object-fit:cover;display:block}.mobile-sotd-dot{width:72px;height:72px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.12)}.mobile-sotd-copy{padding:1rem 1rem 0.75rem;display:flex;flex-direction:column;gap:0.45rem}.mobile-sotd-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:500}.mobile-sotd-name{font-family:Georgia,'Times New Roman',serif;font-size:24px;line-height:1.1;color:var(--ink)}.mobile-sotd-qualities{display:flex;flex-wrap:wrap;gap:4px}.mobile-sotd-qualities span{font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:999px;padding:3px 7px}.mobile-sotd-use{font-size:13px;line-height:1.55;color:var(--ink2)}.mobile-sotd-view-btn{appearance:none;align-self:flex-start;margin-top:0.35rem;padding:8px 18px;background:var(--ink);color:var(--white);border:none;border-radius:7px;font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer}.mobile-sotd-view-btn:hover{background:var(--accent)}.mobile-sotd-essentials-link{display:block;padding:0.65rem 1rem;border-top:0.5px solid var(--border2);font-size:11.5px;color:var(--ink3);text-decoration:none;font-family:'Jost',sans-serif;transition:color 0.12s}.mobile-sotd-essentials-link:hover{color:var(--accent)}.home-pathways-grid{grid-template-columns:repeat(2,1fr)}.home-pw-card--essentials{display:flex}.home-pathways-grid .home-pw-card:nth-child(5){grid-column:auto;min-height:auto}.home-mobile-backtop-wrap{display:flex;justify-content:center;margin:1rem 0 0}.home-mobile-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;text-decoration:none;font-family:'Jost',sans-serif}}
+@media(max-width:560px){.content{display:flex;flex-direction:column}.homepage-hero{order:1}.mobile-sotd-section{order:2;display:block;padding:1.5rem 0 1.35rem;border-bottom:0.5px solid var(--border2)}.home-pathways{order:3}.desktop-sotd-section{display:none}.home-mobile-backtop-wrap{order:4}.mobile-sotd-header{display:none}.mobile-sotd-card{width:100%;border:0.5px solid var(--border);border-radius:14px;background:var(--white);overflow:hidden;box-shadow:0 4px 20px rgba(42,37,32,0.06);display:flex;flex-direction:column}.mobile-sotd-image-wrap{width:100%;aspect-ratio:1/1;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border-bottom:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden}.mobile-sotd-image-wrap--fallback{aspect-ratio:16/5}.mobile-sotd-image{width:100%;height:100%;object-fit:cover;display:block}.mobile-sotd-dot{width:72px;height:72px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.12)}.mobile-sotd-copy{padding:1rem 1rem 0.75rem;display:flex;flex-direction:column;gap:0.45rem}.mobile-sotd-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:500}.mobile-sotd-name{font-family:Georgia,'Times New Roman',serif;font-size:24px;line-height:1.1;color:var(--ink)}.mobile-sotd-qualities{display:flex;flex-wrap:wrap;gap:4px}.mobile-sotd-qualities span{font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:999px;padding:3px 7px}.mobile-sotd-use{font-size:13px;line-height:1.55;color:var(--ink2)}.mobile-sotd-view-btn{appearance:none;align-self:flex-start;margin-top:0.35rem;padding:8px 18px;background:var(--ink);color:var(--white);border:none;border-radius:7px;font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer}.mobile-sotd-view-btn:hover{background:var(--accent)}.mobile-sotd-essentials-link{display:block;padding:0.65rem 1rem;border-top:0.5px solid var(--border2);font-size:11.5px;color:var(--ink3);text-decoration:none;font-family:'Jost',sans-serif;transition:color 0.12s}.mobile-sotd-essentials-link:hover{color:var(--accent)}.home-pathways-grid{grid-template-columns:repeat(2,1fr)}.home-pw-card--essentials{display:flex}.home-pathways-grid .home-pw-card:nth-child(5){grid-column:auto;min-height:auto}.home-mobile-backtop-wrap{display:flex;justify-content:center;margin:1rem 0 0}.home-mobile-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;text-decoration:none;font-family:'Jost',sans-serif}}
 @media(max-width:380px){.mobile-sotd-card{grid-template-columns:96px minmax(0,1fr);gap:0.65rem}.mobile-sotd-image-wrap{height:100px}.mobile-sotd-name{font-size:19px}.mobile-sotd-qualities span{font-size:9px;padding:3px 6px}}
-@media(max-width:1180px){.featured-cards{grid-template-columns:repeat(5,1fr)}.starter-stone-image-wrap{height:82px}}
-@media(max-width:900px){.featured-cards{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:560px){.featured-header{display:block}.featured-browse{margin-top:0.75rem;display:inline-block}.featured-cards{grid-template-columns:1fr;gap:8px}.starter-stone-tile{display:grid;grid-template-columns:82px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;text-align:left;gap:4px 10px;padding:0.6rem 0.65rem;min-height:82px}.starter-stone-image-wrap{grid-column:1;grid-row:1/3;width:82px;height:68px;border-radius:8px}.starter-stone-image{padding:4px}.starter-stone-name{grid-column:2;grid-row:1;font-size:16px;min-height:auto;justify-content:flex-start;align-items:flex-end}.starter-stone-qualities{grid-column:2;grid-row:2;font-size:10.5px;line-height:1.3;align-self:start}.starter-stone-qualities span{white-space:normal}}
-.featured-divider{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1.1rem;background:rgba(139,115,85,0.1);border:0.5px solid rgba(139,115,85,0.25);border-radius:8px;cursor:pointer;margin:2rem 0 0.5rem}
-.featured-divider-left{display:flex;align-items:center;gap:10px}
-.featured-divider-text{font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);font-weight:700;white-space:nowrap}
-.featured-divider-count{font-size:11px;color:var(--ink3);letter-spacing:0.05em;border-left:0.5px solid var(--border);padding-left:10px;white-space:nowrap}
-.featured-divider-arrow{font-size:13px;color:var(--accent)}
-@media(max-width:768px){.featured-title{font-size:20px}}
-
-/* FEATURED CARD — PHOTO HEADER */
-.featured-card-photo{width:100%;height:112px;object-fit:contain;display:block;background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);border-radius:8px;padding:7px}
-.featured-card.has-photo{overflow:hidden}
-.featured-card.has-photo .featured-card-photo{margin:0}
-.featured-card.has-photo .featured-card-name-row{padding:0;margin-top:0.1rem}
-.featured-card.has-photo .featured-card-use{padding:0}
-.featured-card.has-photo .featured-card-intention{padding:0}
 
 /* STARTER STONE MODAL */
 .starter-stone-modal-overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.36);z-index:300;align-items:center;justify-content:center;padding:1.5rem}
@@ -1101,10 +1068,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .intro-panel{padding:0.75rem 1rem;margin-bottom:0.75rem}
   .intro-title{display:none}
 
-  /* Reduce featured section breathing room */
-  .featured-section{padding:1.25rem 0 0.25rem}
-  .featured-header{margin-bottom:0.875rem}
-
   /* Touch targets: filter chips and collection filter chips (was ~22px, now 44px) */
   .filter-cat-btn{padding:10px 14px;min-height:44px}
   .coll-filter-cats .filter-cat-btn{padding:10px 14px;min-height:44px}
@@ -1289,17 +1252,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .mood-card::after{content:'›';position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:22px;line-height:1;opacity:0.55;pointer-events:none}
   .mood-card.active-mood::after{color:var(--accent);opacity:0.9}
 
-  /* Featured browse link: larger tap area */
-  .featured-browse{padding:6px 2px;display:inline-block}
-
   /* Browse full encyclopedia pill: full-width, below the two action buttons */
   .enc-browse-all-pill{width:100%;justify-content:center;margin-top:4px;border-radius:20px;color:var(--ink2r);letter-spacing:0.07em}
 }
 
-/* Keep starter stones browsable on very small screens */
-@media(max-width:380px){
-  .featured-cards{grid-template-columns:repeat(2,1fr)}
-}
 
 /* Use When mobile: AI search first, OR divider, Browse link last */
 @media(max-width:540px){
