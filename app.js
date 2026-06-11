@@ -554,7 +554,8 @@ function crystalToFeaturedStone(c){
     qualities:finalQualities,
     use:finalQualities.join(' Â· '),
     bestFor:c.uw || '',
-    intention:c.aff || ''
+    intention:c.aff || '',
+    tier:Number(c.tier)||0
   };
 }
 
@@ -596,6 +597,38 @@ function sotdUseSentence(s){
   return 'Use when you ' + text.charAt(0).toLowerCase() + text.slice(1);
 }
 
+const SOTD_TIER_LABELS={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
+
+function renderDesktopSotdCard(s){
+  const container=document.getElementById('desktop-sotd-wrap');
+  if(!container||!s)return;
+  const t=s.tier>=1&&s.tier<=4?s.tier:1;
+  const tierDisplay=`Tier ${t} · ${SOTD_TIER_LABELS[t]}`;
+  const photoHtml=s.photo
+    ?`<img class="desktop-sotd-photo-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy">`
+    :`<div class="desktop-sotd-photo-fallback" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div>`;
+  const roles=(s.qualities||[]).slice(0,3).map(q=>`<span class="desktop-sotd-role">${escapeAttr(q)}</span>`).join('');
+  const useSentence=sotdUseSentence(s);
+  container.innerHTML=`
+    <div class="desktop-sotd-strip">
+      <div class="desktop-sotd-photo">${photoHtml}</div>
+      <div class="desktop-sotd-body">
+        <div class="desktop-sotd-kicker">Stone of the day</div>
+        <div class="desktop-sotd-name-row">
+          <span class="desktop-sotd-name">${escapeAttr(s.name)}</span>
+          <span class="desktop-sotd-tier">${escapeAttr(tierDisplay)}</span>
+        </div>
+        ${roles?`<div class="desktop-sotd-roles">${roles}</div>`:''}
+        ${useSentence?`<div class="desktop-sotd-use">${escapeAttr(useSentence)}</div>`:''}
+        <div class="desktop-sotd-actions">
+          <a class="desktop-sotd-btn-enc" href="encyclopedia.html" data-sotd-id="${escapeAttr(String(s.id))}">View in encyclopedia</a>
+          <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}">Add to wishlist</button>
+          <span class="desktop-sotd-signin">Sign in to save stones to your collection</span>
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderMobileSotdCard(s){
   mobileSotdStone=s;
   const container=document.getElementById('mobile-sotd-card-wrap');
@@ -624,8 +657,9 @@ function renderSotd(){
   const s=deterministicSotdFallback();
   if(!s)return;
   renderMobileSotdCard(s);
+  renderDesktopSotdCard(s);
   scheduledSotdStone().then(scheduled=>{
-    if(scheduled)renderMobileSotdCard(scheduled);
+    if(scheduled){renderMobileSotdCard(scheduled);renderDesktopSotdCard(scheduled);}
   });
   // Wire up the hero "Today's stone" line
   const sotdRow=document.getElementById('hero-sotd-row');
