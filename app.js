@@ -1435,7 +1435,7 @@ function updatePagedStoneLoadMore(stateKey){
   if(!wrap)return;
   if(remaining>0){
     wrap.style.display='block';
-    wrap.innerHTML=`<button class="load-more-btn" type="button" onclick="pagedStoneListLoadMore(${jsArg(stateKey)})">Load more stones</button><div class="load-more-count">${actual} of ${state.list.length} shown &mdash; ${remaining} more</div>`;
+    wrap.innerHTML=`<button class="load-more-btn" type="button" onclick="pagedStoneListLoadMore('${stateKey}')">Load more stones</button><div class="load-more-count">${actual} of ${state.list.length} shown &mdash; ${remaining} more</div>`;
   }else{
     wrap.style.display='none';
     wrap.innerHTML='';
