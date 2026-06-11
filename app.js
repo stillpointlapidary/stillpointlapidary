@@ -47,7 +47,7 @@ let activeIntentionFilter='all';
 let activeIntentionFilterDefs=[];
 let activeIntentionBaseMatches=[];
 let activeIntentionMatches=[];
-let activeIntentionVisibleCount=30;
+let activeIntentionVisibleCount=10;
 let activeIntentionScoreMap={};
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
 let _currentUser=null;
@@ -189,7 +189,7 @@ const INTENTION_SUB_FILTERS = {
     {label:'Resilience', themes:['Vitality','Grounding'], keywords:['resilience','strength','support']}
   ]
 };
-const MOOD_RESULT_PAGE_SIZE = 30;
+function intentionPageSize(){return window.innerWidth<=768?10:12;}
 
 
 // ── IMAGE STORAGE FALLBACKS ──
@@ -1918,9 +1918,11 @@ function addFromDetail(){
 
 // ── MOOD TAB ──
 
+function filterIntentionTier(stones){return stones.filter(c=>Number(c&&c.tier)!==4);}
+
 function getIntentionGroupMatches(group){
   const themes = INTENTION_THEME_MAP[group] || [];
-  return CRYSTALS.filter(c => themes.some(t => (c.all_themes||[]).includes(t)));
+  return filterIntentionTier(CRYSTALS.filter(c => themes.some(t => (c.all_themes||[]).includes(t))));
 }
 
 function intentionFilterHaystack(c){
@@ -2052,7 +2054,7 @@ function renderIntentionStoneCards(){
   if(loadMore){
     if(activeIntentionMatches.length>activeIntentionVisibleCount){
       loadMore.style.display='block';
-      loadMore.innerHTML=`<div class="mood-load-more-text">Showing ${visible.length} of ${activeIntentionMatches.length}</div><button class="mood-load-more-btn" type="button" onclick="loadMoreIntentionStones()">Load more stones</button>`;
+      const ps=intentionPageSize();loadMore.innerHTML=`<div class="mood-load-more-text">Showing ${visible.length} of ${activeIntentionMatches.length} Tier 1–3 results</div><button class="mood-load-more-btn" type="button" onclick="loadMoreIntentionStones()">Load ${ps} more results</button>`;
     }else{
       loadMore.style.display='none';
       loadMore.innerHTML='';
@@ -2065,12 +2067,13 @@ function updateIntentionCount(){
   const titleEl = document.getElementById('mood-shared-results-title');
   if(titleEl)titleEl.textContent=intentionResultsTitle();
   if(!countEl)return;
-  countEl.textContent = activeIntentionMatches.length + ' stones' + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
+  const vis=Math.min(activeIntentionVisibleCount,activeIntentionMatches.length);
+  countEl.textContent = `Showing ${vis} of ${activeIntentionMatches.length}` + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '') + ' · Tier 1–3';
 }
 
 function setIntentionSubFilter(val){
   activeIntentionFilter=val||'all';
-  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionVisibleCount=intentionPageSize();
   activeIntentionMatches=sortIntentionMatches(
     applyIntentionSubFilter(activeIntentionBaseMatches, activeIntentionGroup, activeIntentionFilter),
     {group:activeIntentionGroup,filterLabel:activeIntentionFilter}
@@ -2081,7 +2084,7 @@ function setIntentionSubFilter(val){
 }
 
 function loadMoreIntentionStones(){
-  activeIntentionVisibleCount+=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionVisibleCount+=intentionPageSize();
   renderIntentionStoneCards();
 }
 
@@ -2125,7 +2128,7 @@ function intentionCardClick(group, el) {
   activeIntentionGroup=group;
   activeIntentionFilter='all';
   activeIntentionFilterDefs=INTENTION_SUB_FILTERS[group]||[];
-  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionVisibleCount=intentionPageSize();
   activeIntentionScoreMap={};
   const matches = sortIntentionMatches(getIntentionGroupMatches(group), {group});
   renderIntentionResults(matches, group);
@@ -2202,7 +2205,7 @@ function renderMoodGrid(group){
 
 function getMoodMatches(moodIdx,subFilter){
   const themes=MOOD_THEME_MAP[String(moodIdx)]||[];
-  let matches=CRYSTALS.filter(c=>c.all_themes&&themes.some(t=>c.all_themes.includes(t)));
+  let matches=filterIntentionTier(CRYSTALS.filter(c=>c.all_themes&&themes.some(t=>c.all_themes.includes(t))));
   if(subFilter&&subFilter!=='all'){
     const subKwMap=SUB_FILTER_KW[String(moodIdx)];
     if(subKwMap&&subKwMap[subFilter]){
@@ -2256,7 +2259,7 @@ function buildSubFilters(idx){
 function setSubFilter(val){
   activeSubFilter=(val&&val!=='all')?val:null;
   activeIntentionFilter=activeSubFilter||'all';
-  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionVisibleCount=intentionPageSize();
   document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.toggle('active',(p.dataset.subfilter||'all')===(activeSubFilter||'all')));
   renderMoodStones(activeMoodIdx,activeSubFilter);
 }
@@ -2533,15 +2536,29 @@ function intentionBestForText(stone){
   return selectedIntentionPhrase(stone);
 }
 
+function intentionTierPillHtml(c){
+  const t=Number(c&&c.tier);
+  const n=t===1?'Tier 1':t===2?'Tier 2':t===3?'Tier 3':(t===0&&FEATURED_STONES.some(s=>s.id===(c&&c.i)))?'Tier 1':'';
+  return n?`<span class="mood-tier-pill">${n}</span>`:'';
+}
+
+function isGenericBlurb(text){
+  if(!text||text.length<20)return true;
+  const t=String(text).toLowerCase();
+  return ['supports your intention','helps with energy','good for this goal','aligns with your needs','supports energy','helps with your','good for your intention','useful choice for'].some(g=>t.includes(g));
+}
+
 function intentionStoneCardHtml(c){
-  const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">Â·</span>');
+  const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
     ?`<div class="card-img-zone has-photo" onclick="openEncLightbox(${jsArg(imgSrc)},${jsArg(c.n)},event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
+  const tierPill=intentionTierPillHtml(c);
   const reason=intentionBestForText(c);
-  return `<div class="crystal-card mood-result-card">${imgZone}<div class="card-body" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})" style="cursor:pointer"><div class="card-name">${escapeAttr(c.n)}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}<div class="mood-best-for"><span>Best for:</span> ${escapeAttr(reason)}</div></div></div>`;
+  const whyHtml=reason&&!isGenericBlurb(reason)?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
+  return `<div class="crystal-card mood-result-card">${imgZone}<div class="card-body" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})" style="cursor:pointer"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div>${tierPill}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}</div></div>`;
 }
 
 function renderAIResults(matches, query){
@@ -2559,12 +2576,12 @@ function renderAIResults(matches, query){
     const c=CRYSTALS.find(s=>s.i===m.id) || CRYSTALS.find(s=>s.n===m.name);
     if(c)activeIntentionScoreMap[c.i]=(matches.length-idx)*10;
   });
-  const stones=matches.map(m=>CRYSTALS.find(s=>s.i===m.id) || CRYSTALS.find(s=>s.n===m.name)).filter(Boolean);
+  const stones=filterIntentionTier(matches.map(m=>CRYSTALS.find(s=>s.i===m.id) || CRYSTALS.find(s=>s.n===m.name)).filter(Boolean));
   activeIntentionMode='ai';
   activeIntentionQuery=query;
   activeIntentionGroup=null;
   activeIntentionFilter='all';
-  activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionVisibleCount=intentionPageSize();
   activeIntentionBaseMatches=sortIntentionMatches(stones,{});
   activeIntentionMatches=activeIntentionBaseMatches;
   activeIntentionFilterDefs=buildAiSubFilters(stones);
@@ -2636,7 +2653,7 @@ function clearMoodResults(){
   if(selectedClear)selectedClear.textContent='← Change';
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
-  activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=intentionPageSize();
 }
 
 function resetUseWhen(){
@@ -2655,7 +2672,7 @@ function resetUseWhen(){
   document.querySelectorAll('#intention-grid .intention-card').forEach(c=>c.classList.remove('active'));
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
   activeMoodIdx=null;activeSubFilter=null;
-  activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=MOOD_RESULT_PAGE_SIZE;
+  activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=intentionPageSize();
 }
 
 // ── COLLECTION ──
