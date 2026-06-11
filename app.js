@@ -601,20 +601,22 @@ function renderMobileSotdCard(s){
   const container=document.getElementById('mobile-sotd-card-wrap');
   if(!container || !s)return;
   const photoHtml=s.photo
-    ? `<span class="mobile-sotd-image-wrap"><img class="mobile-sotd-image" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy"></span>`
-    : `<span class="mobile-sotd-image-wrap"><span class="mobile-sotd-dot" style="background:${escapeAttr(s.hex||'#c8bca8')}"></span></span>`;
+    ? `<div class="mobile-sotd-image-wrap"><img class="mobile-sotd-image" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy"></div>`
+    : `<div class="mobile-sotd-image-wrap mobile-sotd-image-wrap--fallback"><div class="mobile-sotd-dot" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div></div>`;
   const qualities=featuredStoneQualities(s).slice(0,3).map(q=>`<span>${escapeAttr(q)}</span>`).join('');
   const useSentence=sotdUseSentence(s);
   container.innerHTML=`
-    <button class="mobile-sotd-card" type="button" onclick="openStarterStoneModal(0,[mobileSotdStone])" aria-label="Open today's featured stone, ${escapeAttr(s.name)}">
+    <div class="mobile-sotd-card">
       ${photoHtml}
-      <span class="mobile-sotd-copy">
-        <span class="mobile-sotd-label">Today&rsquo;s featured stone</span>
-        <span class="mobile-sotd-name">${escapeAttr(s.name)}</span>
-        <span class="mobile-sotd-qualities">${qualities}</span>
-        ${useSentence?`<span class="mobile-sotd-use">${escapeAttr(useSentence)}</span>`:''}
-      </span>
-    </button>`;
+      <div class="mobile-sotd-copy">
+        <div class="mobile-sotd-label">Stone of the Day</div>
+        <div class="mobile-sotd-name">${escapeAttr(s.name)}</div>
+        <div class="mobile-sotd-qualities">${qualities}</div>
+        ${useSentence?`<div class="mobile-sotd-use">${escapeAttr(useSentence)}</div>`:''}
+        <button class="mobile-sotd-view-btn" type="button" onclick="openStarterStoneModal(0,[mobileSotdStone])" aria-label="View ${escapeAttr(s.name)}">View stone</button>
+      </div>
+      <a class="mobile-sotd-essentials-link" href="encyclopedia.html?tab=encyclopedia&tier=1">New to crystals? Start your first shelf with the Essentials →</a>
+    </div>`;
 }
 
 function renderSotd(){
