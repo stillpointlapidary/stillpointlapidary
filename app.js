@@ -1503,7 +1503,8 @@ function encRender(){
     container:grid,
     stateKey:'enc-main',
     renderCard:encCardHtml,
-    loadMoreContainer:document.getElementById('load-more-wrap')
+    loadMoreContainer:document.getElementById('load-more-wrap'),
+    batchSize:isMobileView()?10:RESULT_BATCH_SIZE
   });
 }
 
@@ -2899,7 +2900,7 @@ function renderEncTierPreview(){
   const t1=document.getElementById('enc-tier-1-grid');
   if(t1&&!t1.dataset.rendered){
     const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
-    encTier1RenderUpTo(allT1,6,t1);
+    encTier1RenderUpTo(allT1,isMobileView()?10:6,t1);
     t1.dataset.rendered='1';
   }
 }
@@ -2959,7 +2960,8 @@ function encTierAccordionExpand(num){
       container:grid,
       stateKey:'enc-tier-'+num,
       renderCard:encCardHtml,
-      loadMoreContainer:ensureStoneListLoadMore(grid,'enc-tier-'+num+'-more')
+      loadMoreContainer:ensureStoneListLoadMore(grid,'enc-tier-'+num+'-more'),
+      batchSize:isMobileView()?10:RESULT_BATCH_SIZE
     });
   }
   body.style.display='';
