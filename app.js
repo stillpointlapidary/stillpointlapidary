@@ -622,11 +622,20 @@ function renderDesktopSotdCard(s){
         ${useSentence?`<div class="desktop-sotd-use">${escapeAttr(useSentence)}</div>`:''}
         <div class="desktop-sotd-actions">
           <a class="desktop-sotd-btn-enc" href="encyclopedia.html?stone=${encodeURIComponent(String(s.id))}&stoneName=${encodeURIComponent(s.name)}&from=sotd">View in encyclopedia</a>
-          <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}">Add to wishlist</button>
+          <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}">Add to wishlist</button>
           <span class="desktop-sotd-signin">Sign in to save stones to your collection</span>
         </div>
       </div>
     </div>`;
+  const wishBtn=container.querySelector('.desktop-sotd-btn-wish');
+  if(wishBtn){
+    wishBtn.addEventListener('click',function(){
+      const sid=this.dataset.sotdId;
+      const sname=this.dataset.sotdName||'';
+      savePendingDrawerAction('add_to_wishlist',{i:sid,n:sname});
+      window.location.href='encyclopedia.html?stone='+encodeURIComponent(sid)+'&stoneName='+encodeURIComponent(sname)+'&from=sotd';
+    });
+  }
 }
 
 function renderMobileSotdCard(s){
