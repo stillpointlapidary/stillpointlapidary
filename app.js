@@ -1470,11 +1470,17 @@ function encRender(){
   const activeCount = Object.values(filters).filter(v => v !== 'all').length +
     (encSearchValue().length > 0 ? 1 : 0);
 
-  // Results count + filter indicator
+  // Results count + filter indicator — only shown when a filter or search is active
   const cnt = document.getElementById('enc-count');
   if(cnt){
-    cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' stones';
-    if(activeCount > 0) cnt.textContent += ' · ' + activeCount + ' filter' + (activeCount > 1 ? 's' : '') + ' active';
+    if(filtersActive){
+      cnt.textContent = list.length + ' of ' + CRYSTALS.length + ' stones';
+      if(activeCount > 0) cnt.textContent += ' · ' + activeCount + ' filter' + (activeCount > 1 ? 's' : '') + ' active';
+      cnt.style.display = '';
+    } else {
+      cnt.textContent = '';
+      cnt.style.display = 'none';
+    }
   }
 
   // Show Reset only when filters are on
