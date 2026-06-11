@@ -506,6 +506,24 @@
 <section id="tab-101" style="display:none">
 
 <div class="c101-wrap">
+  <!-- Mobile-only dropdown nav (hidden on desktop) -->
+  <div class="c101-mobile-nav" id="c101-mobile-nav" aria-label="Crystals 101 sections">
+    <div class="c101-mobile-nav-label">CRYSTALS 101</div>
+    <button class="c101-mobile-nav-trigger" id="c101-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox" onclick="toggle101Dropdown(event)">
+      <span id="c101-dropdown-label">Working With Crystals</span>
+      <svg class="c101-dropdown-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="c101-mobile-nav-panel" id="c101-dropdown-panel" role="listbox" aria-label="Crystals 101 sections">
+      <div class="c101-mobile-nav-option active" role="option" aria-selected="true" data-sec="work" onclick="select101Dropdown('work','Working With Crystals',this)">Working With Crystals<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="shapes" onclick="select101Dropdown('shapes','Crystal Forms',this)">Crystal Forms<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="cleanse" onclick="select101Dropdown('cleanse','Cleansing &amp; Charging',this)">Cleansing &amp; Charging<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="chakras" onclick="select101Dropdown('chakras','Chakra Guide',this)">Chakra Guide<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="roles" onclick="select101Dropdown('roles','Energetic Roles',this)">Energetic Roles<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="families" onclick="select101Dropdown('families','Crystal Families',this)">Crystal Families<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="care" onclick="select101Dropdown('care','Choosing &amp; Care',this)">Choosing &amp; Care<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="c101-mobile-nav-option" role="option" aria-selected="false" data-sec="grids" onclick="select101Dropdown('grids','Crystal Grids',this)">Crystal Grids<svg class="c101-option-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    </div>
+  </div>
   <div class="c101-layout">
     <nav class="c101-sidebar" id="c101-nav">
       <div class="c101-sidebar-item active" onclick="show101('work',this)">Working With Crystals</div>

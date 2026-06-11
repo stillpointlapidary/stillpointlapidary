@@ -4846,11 +4846,50 @@ function show101(sec,btn){
   if(section)section.classList.add('active');
   const activeBtn=btn || (typeof event!=='undefined'&&event?event.target:null) || document.querySelector(`.c101-sidebar-item[onclick*="${sec}"]`);
   if(activeBtn)activeBtn.classList.add('active');
+  sync101Dropdown(sec);
   if(sec==='grids')init101Grids();
   if(sec==='shapes'){renderShapes();requestAnimationFrame(function(){setTimeout(function(){if(window._updateShapeArrows)window._updateShapeArrows();},100);});}
   if(sec==='families')initFamilies();
   if(sec==='roles')setupMobileRoleAccordion();
 }
+
+function sync101Dropdown(sec){
+  const opt=document.querySelector(`.c101-mobile-nav-option[data-sec="${sec}"]`);
+  if(!opt)return;
+  const label=document.getElementById('c101-dropdown-label');
+  if(label)label.textContent=opt.childNodes[0].textContent.trim();
+  document.querySelectorAll('.c101-mobile-nav-option').forEach(o=>{o.classList.remove('active');o.setAttribute('aria-selected','false');});
+  opt.classList.add('active');
+  opt.setAttribute('aria-selected','true');
+}
+
+function toggle101Dropdown(e){
+  e.stopPropagation();
+  const trigger=document.getElementById('c101-dropdown-trigger');
+  const panel=document.getElementById('c101-dropdown-panel');
+  if(!trigger||!panel)return;
+  const open=panel.classList.toggle('open');
+  trigger.setAttribute('aria-expanded',open?'true':'false');
+}
+
+function select101Dropdown(sec,label,el){
+  const panel=document.getElementById('c101-dropdown-panel');
+  const trigger=document.getElementById('c101-dropdown-trigger');
+  if(panel)panel.classList.remove('open');
+  if(trigger)trigger.setAttribute('aria-expanded','false');
+  show101(sec, document.querySelector(`.c101-sidebar-item[onclick*="${sec}"]`));
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click',function(e){
+  const nav=document.getElementById('c101-mobile-nav');
+  if(nav&&!nav.contains(e.target)){
+    const panel=document.getElementById('c101-dropdown-panel');
+    const trigger=document.getElementById('c101-dropdown-trigger');
+    if(panel)panel.classList.remove('open');
+    if(trigger)trigger.setAttribute('aria-expanded','false');
+  }
+});
 
 function jumpToStone(name){
   switchTab('encyclopedia', document.querySelector('[onclick*=encyclopedia]'));

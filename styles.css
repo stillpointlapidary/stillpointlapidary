@@ -1037,10 +1037,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   /* Crystals 101 section cards on mobile */
   .c101-layout{display:block;border:none;border-radius:0;margin-top:0;align-items:stretch}
-  .c101-sidebar{position:static;max-height:none;border:none;border-radius:0;background:transparent;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:0 0 6px;margin-bottom:0.7rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .c101-sidebar::-webkit-scrollbar{display:none}
-  .c101-sidebar-item{flex:0 0 auto;border:0.5px solid var(--border);border-radius:999px;background:var(--white);white-space:nowrap;padding:6px 10px;min-height:30px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:9.5px;line-height:1.1;letter-spacing:0.02em}
-  .c101-sidebar-item.active{border-left:0.5px solid var(--accent2);border-bottom:none;background:var(--stone2);box-shadow:inset 0 0 0 1px rgba(200,169,110,0.25);color:var(--ink);font-weight:500}
+  .c101-sidebar{display:none}
   .c101-content-pane{padding:0;border-radius:0;background:transparent}
 
   /* Center intro action buttons on mobile */
@@ -1157,17 +1154,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-cleanse.active{display:flex;flex-direction:column}
   #s101-cleanse .c101-wide-photo--cleansing{aspect-ratio:16/7.25;margin-bottom:1rem}
   #s101-cleanse .c101-block{margin-bottom:1.3rem}
-  #s101-cleanse .cleanse-quick-start{display:block;order:1}
-  #s101-cleanse .cleanse-quick-list{display:grid;gap:8px}
-  #s101-cleanse .cleanse-quick-list div{border:0.5px solid var(--border);border-radius:10px;background:var(--white);padding:0.72rem 0.85rem;font-size:12.5px;line-height:1.45;color:var(--ink2)}
-  #s101-cleanse .cleanse-quick-list div::before{content:'•';color:var(--accent);margin-right:7px}
-  #s101-cleanse .why-matters-block{order:2}
+  #s101-cleanse .cleanse-quick-start{display:none}
+  #s101-cleanse .why-matters-block{order:1}
+  #s101-cleanse .care-search-block{order:2}
   #s101-cleanse .cleanse-methods-block{order:3}
   #s101-cleanse .charging-methods-block{order:4}
   #s101-cleanse .how-often-block{order:5}
-  #s101-cleanse .care-search-block{order:6}
-  #s101-cleanse .water-warning-block{order:7}
-  #s101-cleanse .sun-warning-block{order:8}
+  #s101-cleanse .water-warning-block{order:6}
+  #s101-cleanse .sun-warning-block{order:7}
   #s101-cleanse .method-grid{display:none}
   #s101-cleanse .cleanse-method-mobile-groups{display:flex;flex-direction:column;gap:12px}
   #s101-cleanse .cleanse-method-group{display:flex;flex-direction:column;gap:8px}
@@ -1248,6 +1242,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:1.5rem}
 .method-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white)}
 .cleanse-quick-start,.cleanse-method-mobile-groups{display:none}
+.c101-mobile-nav{display:none}
 #s101-cleanse .method-grid .method-card{display:flex;flex-direction:column}
 #s101-cleanse .method-grid .method-card::before{align-self:flex-start;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;border:0.5px solid var(--border2);border-radius:999px;background:var(--stone2);color:var(--accent);padding:3px 8px;margin-bottom:8px}
 #s101-cleanse .method-grid .method-card:nth-child(1){order:1}
@@ -1534,11 +1529,22 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .main-nav .nav-tab:nth-child(6){order:5}
   .main-nav .nav-tab:nth-child(7){order:7}
   .c101-layout{display:block;border:none;border-radius:0;margin-top:0;align-items:stretch}
-  .c101-sidebar{position:static;max-height:none;border:none;border-radius:0;background:transparent;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:0 0 6px;margin-bottom:0.7rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .c101-sidebar::-webkit-scrollbar{display:none}
-  .c101-sidebar-item{flex:0 0 auto;border:0.5px solid var(--border);border-radius:999px;background:var(--white);white-space:nowrap;padding:6px 10px;min-height:30px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:9.5px;line-height:1.1;letter-spacing:0.02em}
-  .c101-sidebar-item.active{border-left:0.5px solid var(--accent2);border-bottom:none;background:var(--stone2);box-shadow:inset 0 0 0 1px rgba(200,169,110,0.25);color:var(--ink);font-weight:500}
+  .c101-sidebar{display:none}
   .c101-content-pane{padding:0;border-radius:0;background:transparent}
+  .c101-mobile-nav{display:block;position:relative;margin-bottom:1.1rem}
+  .c101-mobile-nav-label{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}
+  .c101-mobile-nav-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 16px;background:var(--white);border:0.5px solid var(--border2);border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);cursor:pointer;text-align:left;box-shadow:0 1px 4px rgba(42,37,32,0.06)}
+  .c101-mobile-nav-trigger:focus-visible{outline:1.5px solid var(--accent2);outline-offset:2px}
+  .c101-dropdown-chevron{flex-shrink:0;color:var(--accent);transition:transform 0.2s}
+  .c101-mobile-nav-trigger[aria-expanded="true"] .c101-dropdown-chevron{transform:rotate(180deg)}
+  .c101-mobile-nav-panel{display:none;flex-direction:column;background:var(--white);border:0.5px solid var(--border2);border-radius:10px;box-shadow:0 4px 16px rgba(42,37,32,0.10);overflow:hidden;margin-top:4px}
+  .c101-mobile-nav-panel.open{display:flex}
+  .c101-mobile-nav-option{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink2);cursor:pointer;min-height:48px;border-bottom:0.5px solid var(--border);transition:background 0.12s}
+  .c101-mobile-nav-option:last-child{border-bottom:none}
+  .c101-mobile-nav-option:hover{background:var(--stone)}
+  .c101-mobile-nav-option.active{background:var(--stone2);color:var(--ink);font-weight:500;border-left:2px solid var(--accent2)}
+  .c101-option-check{flex-shrink:0;color:var(--accent);opacity:0;transition:opacity 0.12s}
+  .c101-mobile-nav-option.active .c101-option-check{opacity:1}
 }
 
 @media(max-width:600px){
