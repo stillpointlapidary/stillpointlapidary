@@ -1169,10 +1169,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-cleanse .c101-block{margin-bottom:1.3rem}
   #s101-cleanse .cleanse-quick-start{display:none}
   #s101-cleanse .why-matters-block{order:1}
-  #s101-cleanse .care-search-block{order:2}
-  #s101-cleanse .cleanse-methods-block{order:3}
-  #s101-cleanse .charging-methods-block{order:4}
-  #s101-cleanse .how-often-block{order:5}
+  #s101-cleanse .cleanse-methods-block{order:2}
+  #s101-cleanse .charging-methods-block{order:3}
+  #s101-cleanse .how-often-block{order:4}
+  #s101-cleanse .care-search-block{order:5}
   #s101-cleanse .water-warning-block{order:6}
   #s101-cleanse .sun-warning-block{order:7}
   #s101-cleanse .method-grid{display:none}
@@ -1197,6 +1197,26 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-cleanse .charging-methods-table td:nth-child(n+2)::before{display:block;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
   #s101-cleanse .charging-methods-table td:nth-child(2)::before{content:'Effect'}
   #s101-cleanse .charging-methods-table td:nth-child(3)::before{content:'Notes'}
+
+  /* Charging accordion (mobile only) */
+  #s101-cleanse .charging-methods-table{display:none}
+  .charge-accordion-list{display:flex;flex-direction:column;gap:0;border:0.5px solid var(--border);border-radius:11px;overflow:hidden;margin-top:0.75rem}
+  .charge-accordion-item{border-bottom:0.5px solid var(--border2)}
+  .charge-accordion-item:last-child{border-bottom:none}
+  .charge-accordion-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink);cursor:pointer;min-height:48px;background:var(--white);transition:background 0.12s;user-select:none}
+  .charge-accordion-hdr:hover{background:var(--stone)}
+  .charge-accordion-item.open .charge-accordion-hdr{background:var(--stone2)}
+  .charge-accordion-toggle{width:20px;height:20px;border:0.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 20px;background:var(--stone);color:var(--accent);font-family:'Jost',sans-serif;font-size:13px;line-height:1;transition:content 0.1s;text-align:center}
+  .charge-accordion-item.open .charge-accordion-toggle{content:'-'}
+  .charge-accordion-body{display:none;background:var(--white)}
+  .charge-accordion-item.open .charge-accordion-body{display:block}
+  .charge-accordion-inner{padding:0.75rem 1rem 1rem}
+  .charge-effect-label,.charge-notes-label{font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:2px;margin-top:0.5rem}
+  .charge-effect-label{margin-top:0}
+  .charge-effect,.charge-notes{font-size:12.5px;line-height:1.55;color:var(--ink2)}
+
+  /* Stone Safety section heading (mobile only) */
+  .care-safety-heading{margin-bottom:0.4rem}
 
   /* Tighter drawer side padding on full-width mobile */
   .drawer-inner{padding:3.5rem 1.25rem 2.5rem}
@@ -1254,7 +1274,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Method cards */
 .method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:1.5rem}
 .method-card{border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;background:var(--white)}
-.cleanse-quick-start,.cleanse-method-mobile-groups{display:none}
+.cleanse-quick-start,.cleanse-method-mobile-groups,.charge-accordion-list,.care-safety-heading{display:none}
 .c101-mobile-nav{display:none}
 #s101-cleanse .method-grid .method-card{display:flex;flex-direction:column}
 #s101-cleanse .method-grid .method-card::before{align-self:flex-start;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;border:0.5px solid var(--border2);border-radius:999px;background:var(--stone2);color:var(--accent);padding:3px 8px;margin-bottom:8px}
@@ -1538,8 +1558,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .nav-tab::after{content:'›';font-size:18px;line-height:1;color:var(--ink3);font-family:Georgia,'Times New Roman',serif}
   .nav-tab.active{background:var(--stone2);color:var(--ink);border-bottom-color:var(--border2)}
   .nav-tab.active::after{color:var(--accent)}
-  .main-nav .nav-tab:nth-child(5){order:6}
-  .main-nav .nav-tab:nth-child(6){order:5}
   .main-nav .nav-tab:nth-child(7){order:7}
   .c101-layout{display:block;border:none;border-radius:0;margin-top:0;align-items:stretch}
   .c101-sidebar{display:none}
