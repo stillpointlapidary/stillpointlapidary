@@ -906,6 +906,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-clear:hover{color:var(--ink)}
 /* Empty / overflow */
 .id2-empty{text-align:center;padding:3rem 1rem;color:var(--ink3);font-size:13px;grid-column:1/-1}
+/* Zero-results recovery card */
+.id2-sc--zero{border-color:rgba(200,169,110,0.3);background:#faf7f3}
+.id2-sc--zero .id2-sc-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.6rem;padding:2rem 1.5rem}
+.id2-zero-icon{font-size:28px;opacity:0.3;line-height:1;margin-bottom:0.25rem}
+.id2-zero-title{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink)}
+.id2-zero-body{font-size:13px;color:var(--ink3);line-height:1.65;max-width:340px}
+.id2-zero-reset{margin-top:0.5rem;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 22px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--ink2);cursor:pointer;transition:all 0.15s}
+.id2-zero-reset:hover{border-color:var(--accent);color:var(--accent)}
 .id2-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 .id2-theme-tag{font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--stone);border:0.5px solid var(--border2);color:var(--ink3)}
 
