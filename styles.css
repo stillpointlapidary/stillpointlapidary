@@ -277,7 +277,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .mood-why-label{font-weight:500;color:var(--ink3);font-style:italic}
 .mood-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
 .mood-theme-tag{font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--stone);border:0.5px solid var(--border2);color:var(--ink3)}
-.mood-tier4-row{padding:0.4rem 0 0.6rem;font-family:'Jost',sans-serif}
+.mood-results-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:0.4rem 0 0.6rem}
+.mood-tier4-row{font-family:'Jost',sans-serif}
 .mood-tier4-label{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);cursor:pointer;user-select:none}
 .mood-tier4-label input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px;cursor:pointer}
 .mood-backtop-wrap{text-align:center;margin-top:1rem}
