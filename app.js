@@ -49,6 +49,7 @@ let activeIntentionBaseMatches=[];
 let activeIntentionMatches=[];
 let activeIntentionVisibleCount=10;
 let activeIntentionScoreMap={};
+let intentionIncludeTier4=false;
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
 let _currentUser=null;
 let addPieceReturnContext=null;
@@ -1964,7 +1965,19 @@ function addFromDetail(){
 
 // ── MOOD TAB ──
 
-function filterIntentionTier(stones){return stones.filter(c=>Number(c&&c.tier)!==4);}
+function filterIntentionTier(stones){return intentionIncludeTier4?stones:stones.filter(c=>Number(c&&c.tier)!==4);}
+
+function toggleIntentionTier4(checkbox){
+  intentionIncludeTier4=checkbox.checked;
+  if(!activeIntentionGroup)return;
+  const matches=getIntentionGroupMatches(activeIntentionGroup);
+  activeIntentionVisibleCount=intentionPageSize();
+  activeIntentionFilter='all';
+  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.toggle('active',(p.dataset.subfilter||'all')==='all'));
+  renderIntentionResults(matches,activeIntentionGroup);
+}
+
+function intentionTierRangeLabel(){return intentionIncludeTier4?'Tier 1–4':'Tier 1–3';}
 
 function getIntentionGroupMatches(group){
   const themes = INTENTION_THEME_MAP[group] || [];
@@ -2100,7 +2113,7 @@ function renderIntentionStoneCards(){
   if(loadMore){
     if(activeIntentionMatches.length>activeIntentionVisibleCount){
       loadMore.style.display='block';
-      const ps=intentionPageSize();loadMore.innerHTML=`<div class="mood-load-more-text">Showing ${visible.length} of ${activeIntentionMatches.length} Tier 1–3 results</div><button class="mood-load-more-btn" type="button" onclick="loadMoreIntentionStones()">Load ${ps} more results</button>`;
+      const ps=intentionPageSize();loadMore.innerHTML=`<div class="mood-load-more-text">Showing ${visible.length} of ${activeIntentionMatches.length} ${intentionTierRangeLabel()} results</div><button class="mood-load-more-btn" type="button" onclick="loadMoreIntentionStones()">Load ${ps} more results</button><div class="mood-backtop-wrap"><button class="mood-backtop" type="button" onclick="document.getElementById('mood-selected-view')?.scrollIntoView({behavior:'smooth',block:'start'})">Back to top</button></div>`;
     }else{
       loadMore.style.display='none';
       loadMore.innerHTML='';
@@ -2114,7 +2127,7 @@ function updateIntentionCount(){
   if(titleEl)titleEl.textContent=intentionResultsTitle();
   if(!countEl)return;
   const vis=Math.min(activeIntentionVisibleCount,activeIntentionMatches.length);
-  countEl.textContent = `Showing ${vis} of ${activeIntentionMatches.length}` + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '') + ' · Tier 1–3';
+  countEl.textContent = `Showing ${vis} of ${activeIntentionMatches.length}` + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '') + ' · ' + intentionTierRangeLabel();
 }
 
 function setIntentionSubFilter(val){
@@ -2218,6 +2231,9 @@ function renderIntentionResults(matches, group) {
   // Show the selected-view container
   const selectedView = document.getElementById('mood-selected-view');
   if (selectedView) selectedView.style.display = 'block';
+
+  const tier4Row=document.getElementById('mood-tier4-row');
+  if(tier4Row)tier4Row.style.display='block';
 
   renderIntentionStoneCards();
 }
@@ -2599,12 +2615,14 @@ function intentionStoneCardHtml(c){
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
-    ?`<div class="card-img-zone has-photo" onclick="openEncLightbox(${jsArg(imgSrc)},${jsArg(c.n)},event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
+    ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncLightbox(${jsArg(imgSrc)},${jsArg(c.n)},event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
   const tierPill=intentionTierPillHtml(c);
   const reason=intentionBestForText(c);
   const whyHtml=reason&&!isGenericBlurb(reason)?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
-  return `<div class="crystal-card mood-result-card">${imgZone}<div class="card-body" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})" style="cursor:pointer"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div>${tierPill}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}</div></div>`;
+  const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
+  const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
+  return `<div class="crystal-card mood-result-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div>${tierPill}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
 }
 
 function renderAIResults(matches, query){
@@ -2693,6 +2711,11 @@ function clearMoodResults(){
   if(oldAi)oldAi.style.display='none';
   const loadMore=document.getElementById('mood-load-more');
   if(loadMore){loadMore.style.display='none';loadMore.innerHTML='';}
+  const tier4Row=document.getElementById('mood-tier4-row');
+  if(tier4Row)tier4Row.style.display='none';
+  const tier4Check=document.getElementById('mood-tier4-check');
+  if(tier4Check)tier4Check.checked=false;
+  intentionIncludeTier4=false;
   const titleEl=document.getElementById('mood-shared-results-title');
   if(titleEl)titleEl.textContent='';
   const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');
@@ -4052,7 +4075,7 @@ function switchTab(name,btn){
   if(name==='101'){init101();setTimeout(()=>{const pane=document.querySelector('.c101-content-pane');if(pane)pane.scrollTop=0;},50);}
   if(name==='identify'){initId2();}
   if(name==='collection'){collQuickFilter='all';document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));const tc=document.getElementById('stat-cell-total');if(tc)tc.classList.add('active-stat');renderCollection();}
-  if(name==='encyclopedia'){restoreEncLanding();}
+  if(name==='encyclopedia'){if(isMobileView()){encBrowseTier(1);}else{restoreEncLanding();}}
 }
 function switchTabByName(name){
   clearInitialTabStyle();
@@ -4070,7 +4093,7 @@ function switchTabByName(name){
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
   if(name==='collection'){renderCollection();}
-  if(name==='encyclopedia'){restoreEncLanding();}
+  if(name==='encyclopedia'){if(isMobileView()){encBrowseTier(1);}else{restoreEncLanding();}}
 }
 
 function scrollToTabTop(name){
@@ -5270,6 +5293,14 @@ function id2ChangeStep(idx){
   renderId2Steps();
 }
 
+function id2CardHtml(c){
+  const base=stripInlineCardColor(encCardHtml(c)).replace(/onclick="openDetail\(/g,'onclick="openDetailFromIdentify(');
+  const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
+  if(!themes.length)return base;
+  const tags=`<div class="id2-theme-tags">${themes.map(t=>`<span class="id2-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`;
+  return base.slice(0,-12)+tags+'</div></div>';
+}
+
 function runId2Results(){
   const hasFilter=Object.values(id2State).some(v=>v!==null&&v!=='__skip__');
   const grid=document.getElementById('id2-grid');
@@ -5292,7 +5323,7 @@ function runId2Results(){
     if(id2State.hard&&id2State.hard!=='__skip__'&&HARD_FN[id2State.hard]&&!HARD_FN[id2State.hard](c))return false;
     if(id2State.heft&&id2State.heft!=='__skip__'&&HEFT_FN[id2State.heft]&&!HEFT_FN[id2State.heft](c))return false;
     return true;
-  });
+  }).sort((a,b)=>(Number(a.tier)||9)-(Number(b.tier)||9)||a.n.localeCompare(b.n));
   const n=results.length;
   const countEl=document.getElementById('id2-count');
   if(countEl)countEl.innerHTML=`Possible matches <strong style="color:var(--ink);margin-left:4px">${n}</strong>`;
@@ -5305,7 +5336,7 @@ function runId2Results(){
       stones:results,
       container:g,
       stateKey:'id2-results',
-      renderCard:encCardHtml,
+      renderCard:id2CardHtml,
       loadMoreContainer:ensureStoneListLoadMore(g,'id2-load-more')
     });
     return;
