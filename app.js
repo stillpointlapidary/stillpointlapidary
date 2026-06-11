@@ -2877,16 +2877,20 @@ function dismissEncDoorway(){
   encDoorwayDismissed=true;
   const landing=document.getElementById('enc-landing');
   const tierLanding=document.getElementById('enc-tier-landing');
+  const orDivider=document.getElementById('enc-mobile-or-divider');
   if(landing)landing.style.display='none';
   if(tierLanding)tierLanding.style.display='none';
+  if(orDivider)orDivider.style.display='none';
 }
 
 function restoreEncLanding(){
   encDoorwayDismissed=false;
   const landing=document.getElementById('enc-landing');
   const tierLanding=document.getElementById('enc-tier-landing');
+  const orDivider=document.getElementById('enc-mobile-or-divider');
   if(landing)landing.style.display='';
   if(tierLanding)tierLanding.style.display='';
+  if(orDivider)orDivider.style.display='';
   const grid=document.getElementById('crystal-grid');
   if(grid)grid.innerHTML='';
   const loadMore=document.getElementById('load-more-wrap');
@@ -2946,10 +2950,6 @@ function encTier1RenderUpTo(allStones,upTo,grid){
 }
 
 function encTier1ShowMore(currentCount,newCount){
-  if(isMobileView()){
-    encBrowseTier(1);
-    return;
-  }
   const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
   const t1=document.getElementById('enc-tier-1-grid');
   if(!t1)return;
