@@ -1296,11 +1296,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 #s101-cleanse .method-grid .method-card:nth-child(1)::before,
 #s101-cleanse .method-grid .method-card:nth-child(2)::before,
 #s101-cleanse .method-grid .method-card:nth-child(4)::before,
-#s101-cleanse .method-grid .method-card:nth-child(6)::before{content:'Safe for most stones';background:#eaf3e0;border-color:#c7dbb9;color:#3a6020}
+#s101-cleanse .method-grid .method-card:nth-child(6)::before{content:'Safe for most stones';background:#c8e6be;border-color:#a8d094;color:#2a5214}
 #s101-cleanse .method-grid .method-card:nth-child(3)::before,
-#s101-cleanse .method-grid .method-card:nth-child(7)::before{content:'Use with care';background:#fdf0dc;border-color:#e8c987;color:#7a5010}
+#s101-cleanse .method-grid .method-card:nth-child(7)::before{content:'Use with care';background:#f8d98e;border-color:#e0b84a;color:#6b4008}
 #s101-cleanse .method-grid .method-card:nth-child(5)::before,
-#s101-cleanse .method-grid .method-card:nth-child(8)::before{content:'Advanced method';background:#fde8e8;border-color:#e2b4ad;color:#7a2020}
+#s101-cleanse .method-grid .method-card:nth-child(8)::before{content:'Advanced method';background:#f5b8b4;border-color:#e08880;color:#6b1818}
 .method-icon{font-size:20px;margin-bottom:6px}
 .method-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:4px}
 .method-desc{font-size:12px;color:var(--ink2);line-height:1.6}
