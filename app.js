@@ -5444,8 +5444,12 @@ function renderId2Steps(){
     wrap.appendChild(card);
   }
 
-  // Active step
-  if(activeIdx<ID2_STEPS.length){
+  // Check for zero results before showing the next step
+  const hasAnyAnswer=Object.values(id2State).some(v=>v!==null&&v!=='__skip__');
+  const zeroResults=hasAnyAnswer&&activeIdx>0&&getId2Results().length===0;
+
+  // Active step — suppressed when current answers already yield zero results
+  if(activeIdx<ID2_STEPS.length&&!zeroResults){
     const s=ID2_STEPS[activeIdx];
     const card=document.createElement('div');
     card.className='id2-sc id2-sc--active id2-sc-slidein' + (s.type==='color' ? ' id2-sc--color' : '');
@@ -5476,6 +5480,19 @@ function renderId2Steps(){
     wrap.appendChild(card);
 
     if(s.type==='color') buildId2Colors();
+  }
+
+  // Zero-results recovery prompt
+  if(zeroResults){
+    const card=document.createElement('div');
+    card.className='id2-sc id2-sc--zero id2-sc-slidein';
+    card.innerHTML=`<div class="id2-sc-inner">
+      <div class="id2-zero-icon">✦</div>
+      <div class="id2-zero-title">No matches found</div>
+      <div class="id2-zero-body">Your current answers aren't matching anything in the library. Try changing one of your selections above, or start fresh.</div>
+      <button class="id2-zero-reset" onclick="clearId2()">Clear all and start over</button>
+    </div>`;
+    wrap.appendChild(card);
   }
 
   runId2Results();
@@ -5522,6 +5539,20 @@ function id2CardHtml(c){
   return base.slice(0,-12)+tags+'</div></div>';
 }
 
+function getId2Results(){
+  return CRYSTALS.filter(c=>{
+    if(id2State.color&&id2State.color!=='__skip__'&&!(c.col_cats&&c.col_cats.includes(id2State.color)))return false;
+    if(id2State.trans&&id2State.trans!=='__skip__'){
+      const m={Transparent:['Transparent','Transparent to Translucent'],Translucent:['Translucent','Transparent to Translucent','Translucent to Opaque'],Opaque:['Opaque','Translucent to Opaque']};
+      if(!c.tr||!m[id2State.trans].some(v=>c.tr.includes(v)))return false;
+    }
+    if(id2State.luster&&id2State.luster!=='__skip__'&&LUSTER_FN[id2State.luster]&&!LUSTER_FN[id2State.luster](c))return false;
+    if(id2State.hard&&id2State.hard!=='__skip__'&&HARD_FN[id2State.hard]&&!HARD_FN[id2State.hard](c))return false;
+    if(id2State.heft&&id2State.heft!=='__skip__'&&HEFT_FN[id2State.heft]&&!HEFT_FN[id2State.heft](c))return false;
+    return true;
+  }).sort((a,b)=>(Number(a.tier)||9)-(Number(b.tier)||9)||a.n.localeCompare(b.n));
+}
+
 function runId2Results(){
   const hasFilter=Object.values(id2State).some(v=>v!==null&&v!=='__skip__');
   const grid=document.getElementById('id2-grid');
@@ -5534,17 +5565,7 @@ function runId2Results(){
   if(grid)grid.style.display='';
   if(bar)bar.style.display='';
 
-  const results=CRYSTALS.filter(c=>{
-    if(id2State.color&&id2State.color!=='__skip__'&&!(c.col_cats&&c.col_cats.includes(id2State.color)))return false;
-    if(id2State.trans&&id2State.trans!=='__skip__'){
-      const m={Transparent:['Transparent','Transparent to Translucent'],Translucent:['Translucent','Transparent to Translucent','Translucent to Opaque'],Opaque:['Opaque','Translucent to Opaque']};
-      if(!c.tr||!m[id2State.trans].some(v=>c.tr.includes(v)))return false;
-    }
-    if(id2State.luster&&id2State.luster!=='__skip__'&&LUSTER_FN[id2State.luster]&&!LUSTER_FN[id2State.luster](c))return false;
-    if(id2State.hard&&id2State.hard!=='__skip__'&&HARD_FN[id2State.hard]&&!HARD_FN[id2State.hard](c))return false;
-    if(id2State.heft&&id2State.heft!=='__skip__'&&HEFT_FN[id2State.heft]&&!HEFT_FN[id2State.heft](c))return false;
-    return true;
-  }).sort((a,b)=>(Number(a.tier)||9)-(Number(b.tier)||9)||a.n.localeCompare(b.n));
+  const results=getId2Results();
   const n=results.length;
   const countEl=document.getElementById('id2-count');
   if(countEl)countEl.innerHTML=`Possible matches <strong style="color:var(--ink);margin-left:4px">${n}</strong>`;
