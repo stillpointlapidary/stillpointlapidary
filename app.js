@@ -413,7 +413,9 @@ const STARTER_STONE_BEST_FOR = {
 };
 
 let starterStoneModalIndex = 0;
+let starterStoneModalSource = FEATURED_STONES;
 let starterStonePreviousFocus = null;
+let mobileSotdStone = null;
 
 function featuredStoneQualities(s){
   if(s.qualities && s.qualities.length) return s.qualities;
@@ -442,12 +444,18 @@ function starterStoneQualitiesHtml(s){
   return featuredStoneQualities(s).map(q => `<span>${escapeAttr(q)}</span>`).join('');
 }
 
-function openStarterStoneModal(index){
+function activeStarterStoneList(){
+  return (Array.isArray(starterStoneModalSource) && starterStoneModalSource.length) ? starterStoneModalSource : FEATURED_STONES;
+}
+
+function openStarterStoneModal(index, source){
   const overlay = document.getElementById('starter-stone-modal-overlay');
   const content = document.getElementById('starter-stone-modal-content');
   if(!overlay || !content) return;
-  starterStoneModalIndex = (index + FEATURED_STONES.length) % FEATURED_STONES.length;
-  const s = FEATURED_STONES[starterStoneModalIndex];
+  starterStoneModalSource = (Array.isArray(source) && source.length) ? source : FEATURED_STONES;
+  const stones = activeStarterStoneList();
+  starterStoneModalIndex = (index + stones.length) % stones.length;
+  const s = stones[starterStoneModalIndex];
   const photoHtml = s.photo
     ? `<img class="starter-stone-modal-image" src="${SUPABASE_STONES}${s.photo}" alt="${escapeAttr(s.name)} crystal specimen">`
     : `<div class="starter-stone-modal-dot" style="background:${escapeAttr(s.hex)}"></div>`;
@@ -456,8 +464,8 @@ function openStarterStoneModal(index){
     <div class="starter-stone-modal-copy">
       <h2 class="starter-stone-modal-title" id="starter-stone-modal-title">${escapeAttr(s.name)}</h2>
       <div class="starter-stone-modal-qualities">${starterStoneQualitiesHtml(s)}</div>
-      <div class="starter-stone-modal-best"><span>Best for</span>${escapeAttr(STARTER_STONE_BEST_FOR[s.id] || '')}</div>
-      <div class="starter-stone-modal-intention">"${escapeAttr(s.intention)}"</div>
+      <div class="starter-stone-modal-best"><span>Best for</span>${escapeAttr(s.bestFor || STARTER_STONE_BEST_FOR[s.id] || '')}</div>
+      ${s.intention?`<div class="starter-stone-modal-intention">"${escapeAttr(s.intention)}"</div>`:''}
       <button class="starter-stone-modal-learn" type="button" onclick="learnMoreStarterStone()">View full entry →</button>
     </div>`;
   starterStonePreviousFocus = document.activeElement;
@@ -479,7 +487,7 @@ function closeStarterStoneModal(){
 }
 
 function navStarterStoneModal(dir){
-  openStarterStoneModal(starterStoneModalIndex + dir);
+  openStarterStoneModal(starterStoneModalIndex + dir, activeStarterStoneList());
 }
 
 function starterStoneOverlayClick(e){
@@ -487,14 +495,15 @@ function starterStoneOverlayClick(e){
 }
 
 function learnMoreStarterStone(){
-  const s = FEATURED_STONES[starterStoneModalIndex];
+  const s = activeStarterStoneList()[starterStoneModalIndex];
   if(!s) return;
   const identifier=s.id || normalizeStoneName(s.name).replace(/\s+/g,'-');
   const onHomepage=!document.getElementById('tab-encyclopedia');
   if(onHomepage && document.getElementById('detail-drawer')){
     const returnIndex=starterStoneModalIndex;
+    const returnSource=activeStarterStoneList().slice();
     closeStarterStoneModal();
-    detailReturnContext={type:'starterStone',index:returnIndex};
+    detailReturnContext={type:'starterStone',index:returnIndex,source:returnSource};
     if(openPendingStoneEntry(identifier,s.name))return;
     detailReturnContext=null;
   }
@@ -519,11 +528,103 @@ document.addEventListener('keydown',function(e){
   if(e.key === 'ArrowRight') navStarterStoneModal(1);
 });
 // ── STONE OF THE DAY ──
+function localDateKey(d){
+  const date=d||new Date();
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,'0');
+  const day=String(date.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function stonePhotoFile(c){
+  return (c && ENCYCLOPEDIA_PHOTOS[c.i] && ENCYCLOPEDIA_PHOTOS[c.i][0]) || '';
+}
+
+function crystalToFeaturedStone(c){
+  if(!c)return null;
+  const photo=stonePhotoFile(c);
+  const qualities=[c.er1,c.er2,c.er3].filter(Boolean).slice(0,3);
+  const fallbackThemes=(c.all_themes||[]).filter(Boolean).slice(0,3);
+  const finalQualities=(qualities.length?qualities:fallbackThemes).slice(0,3);
+  return {
+    id:c.i,
+    name:c.n,
+    hex:c.ch || '#c8bca8',
+    photo,
+    qualities:finalQualities,
+    use:finalQualities.join(' Â· '),
+    bestFor:c.uw || '',
+    intention:c.aff || ''
+  };
+}
+
+function deterministicSotdFallback(){
+  const withPhotos=CRYSTALS.filter(c=>stonePhotoFile(c));
+  const source=withPhotos.length ? withPhotos : CRYSTALS;
+  const tier0=source.filter(c=>Number(c.tier)===0);
+  const tier1=source.filter(c=>Number(c.tier)===1);
+  const eligible=(tier0.length ? tier0 : (tier1.length ? tier1 : source))
+    .slice()
+    .sort((a,b)=>String(a.i).localeCompare(String(b.i)));
+  if(!eligible.length)return FEATURED_STONES[Math.floor(Date.now()/86400000)%FEATURED_STONES.length];
+  const day=Math.floor(new Date(localDateKey()+'T00:00:00').getTime()/86400000);
+  return crystalToFeaturedStone(eligible[day%eligible.length]) || FEATURED_STONES[day%FEATURED_STONES.length];
+}
+
+async function scheduledSotdStone(){
+  if(typeof _supa==='undefined')return null;
+  try{
+    const today=localDateKey();
+    const {data,error}=await _supa
+      .from('stone_of_day_schedule')
+      .select('stone_id')
+      .eq('feature_date',today)
+      .eq('is_active',true)
+      .maybeSingle();
+    if(error || !data || !data.stone_id)return null;
+    return crystalToFeaturedStone(findStoneEntry(data.stone_id,'')) || null;
+  }catch(e){
+    console.warn('Stone of the Day schedule unavailable; using deterministic fallback.', e);
+    return null;
+  }
+}
+
+function sotdUseSentence(s){
+  const text=String(s.bestFor || STARTER_STONE_BEST_FOR[s.id] || '').trim();
+  if(!text)return '';
+  if(/^use when/i.test(text))return text;
+  return 'Use when you ' + text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+function renderMobileSotdCard(s){
+  mobileSotdStone=s;
+  const container=document.getElementById('mobile-sotd-card-wrap');
+  if(!container || !s)return;
+  const photoHtml=s.photo
+    ? `<span class="mobile-sotd-image-wrap"><img class="mobile-sotd-image" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy"></span>`
+    : `<span class="mobile-sotd-image-wrap"><span class="mobile-sotd-dot" style="background:${escapeAttr(s.hex||'#c8bca8')}"></span></span>`;
+  const qualities=featuredStoneQualities(s).slice(0,3).map(q=>`<span>${escapeAttr(q)}</span>`).join('');
+  const useSentence=sotdUseSentence(s);
+  container.innerHTML=`
+    <button class="mobile-sotd-card" type="button" onclick="openStarterStoneModal(0,[mobileSotdStone])" aria-label="Open today's featured stone, ${escapeAttr(s.name)}">
+      ${photoHtml}
+      <span class="mobile-sotd-copy">
+        <span class="mobile-sotd-label">Today&rsquo;s featured stone</span>
+        <span class="mobile-sotd-name">${escapeAttr(s.name)}</span>
+        <span class="mobile-sotd-qualities">${qualities}</span>
+        ${useSentence?`<span class="mobile-sotd-use">${escapeAttr(useSentence)}</span>`:''}
+      </span>
+    </button>`;
+}
+
 function renderSotd(){
   const container=document.getElementById('sotd-container');
-  const day=Math.floor(Date.now()/86400000);
-  const s=FEATURED_STONES[day%FEATURED_STONES.length];
+  const s=deterministicSotdFallback();
   if(!s)return;
+  renderMobileSotdCard(s);
+  scheduledSotdStone().then(scheduled=>{
+    if(scheduled)renderMobileSotdCard(scheduled);
+  });
   // Wire up the hero "Today's stone" line
   const sotdRow=document.getElementById('hero-sotd-row');
   const sotdLink=document.getElementById('hero-sotd-link');
@@ -1578,7 +1679,7 @@ function closeDrawer(){
     detailReturnContext=null;
     setTimeout(()=>{
       if(ctx&&Number.isInteger(ctx.index)){
-        openStarterStoneModal(ctx.index);
+        openStarterStoneModal(ctx.index, ctx.source);
       }else{
         scrollToPageSection('#featured-section');
       }
