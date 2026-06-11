@@ -2103,7 +2103,7 @@ function updateIntentionCount(){
   if(titleEl)titleEl.textContent=intentionResultsTitle();
   if(!countEl)return;
   const vis=Math.min(activeIntentionVisibleCount,activeIntentionMatches.length);
-  countEl.textContent = `Showing ${vis} of ${activeIntentionMatches.length}` + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '') + ' · ' + intentionTierRangeLabel();
+  countEl.textContent = `Showing ${vis} of ${activeIntentionMatches.length}` + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
 }
 
 function setIntentionSubFilter(val){
@@ -2591,14 +2591,14 @@ function intentionStoneCardHtml(c){
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
-    ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncLightbox(${jsArg(imgSrc)},${jsArg(c.n)},event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
+    ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
   const tierPill=intentionTierPillHtml(c);
   const reason=intentionBestForText(c);
   const whyHtml=reason&&!isGenericBlurb(reason)?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
   const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
   const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
-  return `<div class="crystal-card mood-result-card" onclick="detailReturnContext={type:'usewhen'};openDetail(${jsArg(c.i)})" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div>${tierPill}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
+  return `<div class="crystal-card mood-result-card" onclick="detailReturnContext={type:'usewhen'};openDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div>${tierPill}</div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
 }
 
 function renderAIResults(matches, query){
@@ -4051,7 +4051,7 @@ function switchTab(name,btn){
   if(name==='101'){init101();setTimeout(()=>{const pane=document.querySelector('.c101-content-pane');if(pane)pane.scrollTop=0;},50);}
   if(name==='identify'){initId2();}
   if(name==='collection'){collQuickFilter='all';document.querySelectorAll('.stat-clickable').forEach(el=>el.classList.remove('active-stat'));const tc=document.getElementById('stat-cell-total');if(tc)tc.classList.add('active-stat');renderCollection();}
-  if(name==='encyclopedia'){if(isMobileView()){encBrowseTier(1);}else{restoreEncLanding();}}
+  if(name==='encyclopedia'){restoreEncLanding();}
 }
 function switchTabByName(name){
   clearInitialTabStyle();
@@ -4069,7 +4069,7 @@ function switchTabByName(name){
   if(name==='101'){init101();}
   if(name==='identify'){initId2();}
   if(name==='collection'){renderCollection();}
-  if(name==='encyclopedia'){if(isMobileView()){encBrowseTier(1);}else{restoreEncLanding();}}
+  if(name==='encyclopedia'){restoreEncLanding();}
 }
 
 function scrollToTabTop(name){
@@ -5313,6 +5313,7 @@ function runId2Results(){
       container:g,
       stateKey:'id2-results',
       renderCard:id2CardHtml,
+      batchSize:10,
       loadMoreContainer:ensureStoneListLoadMore(g,'id2-load-more')
     });
     return;
@@ -6647,7 +6648,8 @@ function renderMobileShapes(container, shapeMap) {
 
     if(activeCatShapes[0]) renderMobileDetail(activeCatShapes[0], catLabel);
     if(scroll) {
-      requestAnimationFrame(() => tileGrid.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      const labelEl = mobile.querySelector('.forms-mobile-label');
+      requestAnimationFrame(() => (labelEl||tileGrid).scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
   }
 
