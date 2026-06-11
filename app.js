@@ -6476,6 +6476,10 @@ function renderMobileShapes(container, shapeMap) {
   const mobile = document.createElement('div');
   mobile.className = 'shapes-mobile';
   mobile.innerHTML = `
+    <div class="forms-mobile-prompt">
+      <div class="forms-mobile-prompt-heading">Explore by form family</div>
+      <div class="forms-mobile-prompt-sub">Choose the kind of piece you're drawn to, then browse the forms within it.</div>
+    </div>
     <div class="forms-mobile-landing">
       ${SHAPE_CATEGORIES.map((cat, i) => `
         <button class="forms-mobile-topic${i===0?' active':''}" type="button" data-cat="${cat.label}" aria-selected="${i===0?'true':'false'}">
@@ -6483,32 +6487,68 @@ function renderMobileShapes(container, shapeMap) {
           <span class="forms-mobile-topic-sub">${cat.def || ''}</span>
         </button>`).join('')}
     </div>
-    <div class="forms-mobile-label">Forms in this category</div>
+    <div class="forms-mobile-label"><span class="forms-mobile-label-name"></span><span class="forms-mobile-label-def"></span></div>
     <div class="forms-mobile-tile-grid"></div>
     <div class="forms-mobile-detail" aria-live="polite"></div>`;
 
   const tileGrid = mobile.querySelector('.forms-mobile-tile-grid');
   const detail = mobile.querySelector('.forms-mobile-detail');
+  const labelName = mobile.querySelector('.forms-mobile-label-name');
+  const labelDef = mobile.querySelector('.forms-mobile-label-def');
 
-  function renderMobileDetail(shape) {
+  let activeCatShapes = [];
+  let activeShapeIdx = 0;
+
+  const chevL = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+  const chevR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  function renderMobileDetail(shape, catLabel) {
+    const idx = activeCatShapes.findIndex(s => s.id === shape.id);
+    const total = activeCatShapes.length;
+    const pos = idx >= 0 ? idx + 1 : 1;
     detail.innerHTML = `
       <article class="mobile-form-detail-card">
-        <div class="mobile-form-detail-icon">${shape.draw()}</div>
-        <div class="mobile-form-detail-copy">
-          <div class="mobile-form-detail-name">${shape.name}</div>
-          <div class="mobile-form-detail-tagline">${shape.tagline}</div>
-          <div class="mobile-form-detail-desc">${shape.body}</div>
-          <div class="mobile-form-detail-use"><span>Best for</span>${shape.use}</div>
-          <div class="mobile-form-detail-examples">
-            ${shape.examples.map(e => `<button type="button" class="shape-pill" onclick="jumpToStone('${e}')">${e}</button>`).join('')}
+        <div class="mobile-form-detail-nav">
+          <button class="mobile-form-nav-btn" aria-label="Previous form" data-dir="-1">${chevL}</button>
+          <span class="mobile-form-nav-name">${shape.name}</span>
+          <button class="mobile-form-nav-btn" aria-label="Next form" data-dir="1">${chevR}</button>
+        </div>
+        <div class="mobile-form-detail-inner">
+          <div class="mobile-form-detail-icon">${shape.draw()}</div>
+          <div class="mobile-form-detail-copy">
+            <div class="mobile-form-detail-tagline">${shape.tagline}</div>
+            <div class="mobile-form-detail-desc">${shape.body}</div>
+            <div class="mobile-form-detail-use"><span>Best for</span>${shape.use}</div>
+            <div class="mobile-form-detail-examples">
+              ${shape.examples.map(e => `<button type="button" class="shape-pill" onclick="jumpToStone('${e}')">${e}</button>`).join('')}
+            </div>
           </div>
         </div>
+        <div class="mobile-form-nav-indicator">${catLabel} · ${pos} / ${total}</div>
       </article>`;
+
+    detail.querySelectorAll('.mobile-form-nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const dir = parseInt(btn.dataset.dir, 10);
+        activeShapeIdx = (activeShapeIdx + dir + activeCatShapes.length) % activeCatShapes.length;
+        const next = activeCatShapes[activeShapeIdx];
+        const currentCat = SHAPE_CATEGORIES.find(c => c.ids.includes(next.id)) || SHAPE_CATEGORIES[0];
+        syncActiveTile(next.id);
+        renderMobileDetail(next, currentCat.label);
+      });
+    });
+  }
+
+  function syncActiveTile(id) {
+    tileGrid.querySelectorAll('.mobile-form-tile').forEach(el => {
+      el.classList.toggle('active', el.dataset.id === id);
+    });
   }
 
   function setMobileCategory(catLabel, scroll) {
     const cat = SHAPE_CATEGORIES.find(c => c.label === catLabel) || SHAPE_CATEGORIES[0];
-    const shapes = cat.ids.map(id => shapeMap[id]).filter(Boolean);
+    activeCatShapes = cat.ids.map(id => shapeMap[id]).filter(Boolean);
+    activeShapeIdx = 0;
 
     mobile.querySelectorAll('.forms-mobile-topic').forEach(btn => {
       const isActive = btn.dataset.cat === catLabel;
@@ -6516,7 +6556,10 @@ function renderMobileShapes(container, shapeMap) {
       btn.setAttribute('aria-selected', String(isActive));
     });
 
-    tileGrid.innerHTML = shapes.map((s, i) => `
+    if(labelName) labelName.textContent = cat.label + ' Forms';
+    if(labelDef) labelDef.textContent = cat.def || '';
+
+    tileGrid.innerHTML = activeCatShapes.map((s, i) => `
       <button class="mobile-form-tile${i===0?' active':''}" type="button" data-id="${s.id}">
         <span class="mobile-form-tile-icon">${s.draw()}</span>
         <span class="mobile-form-tile-name">${s.name}</span>
@@ -6526,14 +6569,14 @@ function renderMobileShapes(container, shapeMap) {
       tile.addEventListener('click', () => {
         const shape = shapeMap[tile.dataset.id];
         if(!shape) return;
-        tileGrid.querySelectorAll('.mobile-form-tile').forEach(el => el.classList.remove('active'));
-        tile.classList.add('active');
-        renderMobileDetail(shape);
+        activeShapeIdx = activeCatShapes.findIndex(s => s.id === shape.id);
+        syncActiveTile(shape.id);
+        renderMobileDetail(shape, catLabel);
         requestAnimationFrame(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
       });
     });
 
-    if(shapes[0]) renderMobileDetail(shapes[0]);
+    if(activeCatShapes[0]) renderMobileDetail(activeCatShapes[0], catLabel);
     if(scroll) {
       requestAnimationFrame(() => tileGrid.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }

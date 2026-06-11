@@ -1066,8 +1066,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-shapes .shapes-strip-outer,
   #s101-shapes .shapes-pane{display:none}
   #s101-shapes .shapes-mobile{display:block}
-  .forms-mobile-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin:0 0 0.55rem}
-  .forms-mobile-landing{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+  /* Prompt above family cards */
+  .forms-mobile-prompt{margin-bottom:1rem}
+  .forms-mobile-prompt-heading{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:5px}
+  .forms-mobile-prompt-sub{font-size:12.5px;line-height:1.55;color:var(--ink2)}
+  /* Category label: name + def */
+  .forms-mobile-label{margin:0 0 0.65rem;display:flex;flex-direction:column;gap:2px}
+  .forms-mobile-label-name{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .forms-mobile-label-def{font-size:12px;color:var(--ink3);line-height:1.4}
+  .forms-mobile-landing{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.1rem}
   .forms-mobile-topic{min-height:84px;border:0.5px solid var(--border);border-radius:11px;background:var(--white);padding:0.8rem;text-align:left;font-family:'Jost',sans-serif;color:var(--ink2);cursor:pointer}
   .forms-mobile-topic.active{background:var(--stone2);border-color:var(--accent2);box-shadow:inset 0 0 0 1px rgba(200,169,110,0.22)}
   .forms-mobile-topic-name{display:block;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:4px}
@@ -1079,16 +1086,22 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .mobile-form-tile-icon svg{width:44px;height:44px}
   .mobile-form-tile-name{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;line-height:1.15;text-align:center}
   .forms-mobile-detail{scroll-margin-top:120px}
-  .mobile-form-detail-card{display:flex;gap:12px;align-items:flex-start;border:0.5px solid var(--border);border-radius:12px;background:var(--white);padding:0.95rem;box-shadow:0 4px 16px rgba(42,37,32,0.04)}
+  /* Detail card: new structure with nav header */
+  .mobile-form-detail-card{border:0.5px solid var(--border);border-radius:12px;background:var(--white);overflow:hidden;box-shadow:0 4px 16px rgba(42,37,32,0.04)}
+  .mobile-form-detail-nav{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;border-bottom:0.5px solid var(--border2);background:var(--stone2)}
+  .mobile-form-nav-btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--ink2);border-radius:8px;flex-shrink:0}
+  .mobile-form-nav-btn:hover{background:var(--stone);color:var(--ink)}
+  .mobile-form-nav-name{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink);text-align:center;flex:1;line-height:1.2}
+  .mobile-form-detail-inner{display:flex;gap:12px;align-items:flex-start;padding:0.95rem}
   .mobile-form-detail-icon{width:64px;height:64px;display:flex;align-items:center;justify-content:center;flex:0 0 64px;border:0.5px solid var(--border);border-radius:10px;background:var(--stone2)}
   .mobile-form-detail-icon svg{width:50px;height:50px}
   .mobile-form-detail-copy{min-width:0}
-  .mobile-form-detail-name{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:3px}
   .mobile-form-detail-tagline{font-size:10.5px;line-height:1.35;letter-spacing:0.045em;color:var(--accent);margin-bottom:7px}
   .mobile-form-detail-desc{font-size:12.5px;line-height:1.62;color:var(--ink2);margin-bottom:9px}
   .mobile-form-detail-use{font-size:12px;line-height:1.5;color:var(--ink2);margin-bottom:8px}
   .mobile-form-detail-use span{display:block;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
   .mobile-form-detail-examples{display:flex;flex-wrap:wrap;gap:5px}
+  .mobile-form-nav-indicator{text-align:center;font-size:10.5px;letter-spacing:0.06em;color:var(--ink3);padding:0.5rem 0.75rem;border-top:0.5px solid var(--border2)}
 
   /* Touch targets: drawer close button (was 34px) */
   .drawer-close{width:44px;height:44px}
