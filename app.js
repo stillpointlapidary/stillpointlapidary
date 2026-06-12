@@ -5484,15 +5484,25 @@ function renderId2Steps(){
 
   // Zero-results recovery prompt
   if(zeroResults){
+    // Build tappable chips for each answered (non-skipped) step
+    const answeredChips=ID2_STEPS.slice(0,activeIdx).map((s,i)=>{
+      const val=id2State[s.key];
+      if(!val||val==='__skip__')return '';
+      const displayVal=s.type==='color'?val:((s.options||[]).find(o=>o.val===val)?.label||val);
+      return `<button class="id2-zero-chip" onclick="id2ChangeStep(${i})">${s.name}: <strong>${displayVal}</strong> <span class="id2-zero-chip-x">×</span></button>`;
+    }).join('');
     const card=document.createElement('div');
     card.className='id2-sc id2-sc--zero id2-sc-slidein';
     card.innerHTML=`<div class="id2-sc-inner">
       <div class="id2-zero-icon">✦</div>
       <div class="id2-zero-title">No matches found</div>
-      <div class="id2-zero-body">Your current answers aren't matching anything in the library. Try changing one of your selections above, or start fresh.</div>
+      <div class="id2-zero-body">This combination isn't in the library. Tap any answer below to change it, or start over.</div>
+      ${answeredChips?`<div class="id2-zero-chips">${answeredChips}</div>`:''}
       <button class="id2-zero-reset" onclick="clearId2()">Clear all and start over</button>
     </div>`;
     wrap.appendChild(card);
+    // Scroll zero-state card into view
+    setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),60);
   }
 
   runId2Results();
@@ -5558,6 +5568,12 @@ function runId2Results(){
   const grid=document.getElementById('id2-grid');
   const bar=document.getElementById('id2-result-bar');
   if(!hasFilter){
+    if(grid)grid.style.display='none';
+    if(bar)bar.style.display='none';
+    return;
+  }
+  // If the zero-state card is showing, hide the result bar — it's redundant
+  if(document.querySelector('.id2-sc--zero')){
     if(grid)grid.style.display='none';
     if(bar)bar.style.display='none';
     return;

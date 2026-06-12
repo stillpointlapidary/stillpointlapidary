@@ -912,7 +912,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-zero-icon{font-size:28px;opacity:0.3;line-height:1;margin-bottom:0.25rem}
 .id2-zero-title{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink)}
 .id2-zero-body{font-size:13px;color:var(--ink3);line-height:1.65;max-width:340px}
-.id2-zero-reset{margin-top:0.5rem;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 22px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--ink2);cursor:pointer;transition:all 0.15s}
+.id2-zero-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0.25rem 0}
+.id2-zero-chip{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink);background:var(--white);border:0.5px solid rgba(200,169,110,0.5);border-radius:20px;padding:6px 14px;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:5px}
+.id2-zero-chip:hover{border-color:var(--accent);background:#f5f0e8}
+.id2-zero-chip strong{font-weight:500;color:var(--accent)}
+.id2-zero-chip-x{font-size:13px;color:var(--ink3);margin-left:2px}
+.id2-zero-reset{margin-top:0.25rem;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 22px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--ink2);cursor:pointer;transition:all 0.15s}
 .id2-zero-reset:hover{border-color:var(--accent);color:var(--accent)}
 .id2-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 .id2-theme-tag{font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--stone);border:0.5px solid var(--border2);color:var(--ink3)}
