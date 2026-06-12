@@ -677,35 +677,17 @@ function getStoneDailyPrompt(s){
   return _sotdLookup(_SOTD_PROMPT,q)||'Keep it nearby today as a quiet point of focus.';
 }
 
-// ── STONE OF THE DAY CARD DATA ───────────────────────────────────────────────
-// TODO: Replace static mock entries with live Supabase fields when schema lands.
-// These map to columns being added to the `stones` table:
-//   card_quality_pill, card_summary, card_use_when,
-//   primary_chakra, zodiac, stone_family, card_note
-// Selection logic: stones where sotd_enabled=true and today between
-//   sotd_start_date and sotd_end_date; fallback to sotd_order rotation.
-const SOTD_MOCK_CARD_DATA={
-  'C-0241':{
-    card_quality_pill:'Calm & Clarity',
-    card_summary:'A quieting stone for mental stillness, ease, and emotional steadiness.',
-    card_use_when:'Use when you need to soften mental noise and return to steadiness before reacting.',
-    primary_chakra:'Crown',
-    zodiac:'Gemini / Virgo',
-    stone_family:'Borate mineral',
-    card_note:'A stone of awareness and gentle perspective.'
-  }
-};
+// ── STONE OF THE DAY ─────────────────────────────────────────────────────────
 
 const SFC_CHAKRA_COLORS={
-  'Root':         {bg:'#ead5d5',text:'#6b3636'},
-  'Sacral':       {bg:'#f0e0d0',text:'#6b4a2e'},
-  'Solar Plexus': {bg:'#f0e8c8',text:'#6b5520'},
-  'Heart':        {bg:'#d8e8d8',text:'#3a5c3a'},
-  'Throat':       {bg:'#d5e2eb',text:'#2e4e5e'},
-  'Third Eye':    {bg:'#dcd5eb',text:'#4a3d6b'},
-  'Crown':        {bg:'#ded7ef',text:'#5e5080'},
-  'Earth Star':   {bg:'#e0dcd8',text:'#4a453f'},
-  'Soul Star':    {bg:'#f5f0e8',text:'#6b5e48'}
+  'Earth Star':   {bg:'#dedad6',text:'#5a5249'},
+  'Root':         {bg:'#e6d0d0',text:'#6b3636'},
+  'Sacral':       {bg:'#eeddd4',text:'#6b4530'},
+  'Solar Plexus': {bg:'#ede8d0',text:'#6b5520'},
+  'Heart':        {bg:'#d6e6d8',text:'#385838'},
+  'Throat':       {bg:'#d4e0e8',text:'#2e4858'},
+  'Third Eye':    {bg:'#dbd6e8',text:'#453868'},
+  'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
 function sfcPillStyle(chakra){
@@ -717,28 +699,24 @@ function renderDesktopSotdCard(s){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container||!s)return;
   desktopSotdStone=s;
-  // TODO: Replace SOTD_MOCK_CARD_DATA lookup with live Supabase fields
-  // (card_quality_pill, card_summary, card_use_when, primary_chakra,
-  //  zodiac, stone_family, card_note) fetched alongside the stone record.
-  const card=SOTD_MOCK_CARD_DATA[s.id]||{};
   const photoHtml=s.photo
     ?`<img class="sfc-photo-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
     :`<div class="sfc-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
-  const pillStyle=sfcPillStyle(card.primary_chakra||'');
-  const chakraRow=card.primary_chakra?`
+  const pillStyle=sfcPillStyle(s.primary_chakra||'');
+  const bestForRow=s.card_best_for?`
       <div class="sfc-detail-row">
-        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 42C15 34 11 26 14 17c6 2 9 8 10 15 1-7 4-13 10-15 3 9-1 17-10 25Z"/><path d="M24 42c-8-2-15-8-18-17 8-1 14 3 18 10 4-7 10-11 18-10-3 9-10 15-18 17Z"/></svg></div>
-        <div><p class="sfc-detail-label">Primary chakra</p><p class="sfc-detail-value">${escapeAttr(card.primary_chakra)}</p></div>
+        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M31.5 7.5c-11.8 0-21.2 8.4-21.2 19.6 0 5.4 2.2 10.3 5.9 13.9v10.8h13.2v-5.4h7.2c4.2 0 7.6-3.4 7.6-7.6v-4.1h5.6c1.7 0 2.7-1.9 1.8-3.3l-5.7-8.8C44.1 13.9 38.6 7.5 31.5 7.5Z"/><path d="M29.8 18.4c2.8-2.8 7.4-.8 7.4 3.2 0 .4 0 .8-.1 1.1 2.7.4 4.7 2.7 4.7 5.5 0 3.1-2.5 5.6-5.6 5.6h-12c-3.3 0-6-2.7-6-6 0-3 2.2-5.5 5.1-5.9.6-3.1 3.3-5.4 6.5-5.4Z"/></svg></div>
+        <div><p class="sfc-detail-label">Best for</p><p class="sfc-detail-value">${escapeAttr(s.card_best_for)}</p></div>
       </div>`:'';
-  const zodiacRow=card.zodiac?`
+  const chakraRow=s.primary_chakra?`
       <div class="sfc-detail-row">
-        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="5"/><path d="M24 3v10M24 35v10M3 24h10M35 24h10M9 9l7 7M32 32l7 7M39 9l-7 7M16 32l-7 7"/></svg></div>
-        <div><p class="sfc-detail-label">Zodiac</p><p class="sfc-detail-value">${escapeAttr(card.zodiac)}</p></div>
+        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M32 52c-9.8-8.2-14.1-17.5-10.8-28.2C28.4 27.1 31.4 35 32 45c.6-10 3.6-17.9 10.8-21.2C46.1 34.5 41.8 43.8 32 52Z"/><path d="M32 52c-10.5-2.3-19-9.2-22.8-19.8C19.1 31.3 27.1 36 32 45c4.9-9 12.9-13.7 22.8-12.8C51 42.8 42.5 49.7 32 52Z"/><path d="M32 52c-6.6-5.3-9.2-12-6.9-19.8C29.4 35.3 31.5 41.3 32 52Zm0 0c6.6-5.3 9.2-12 6.9-19.8C34.6 35.3 32.5 41.3 32 52Z"/></svg></div>
+        <div><p class="sfc-detail-label">Primary chakra</p><p class="sfc-detail-value">${escapeAttr(s.primary_chakra)}</p></div>
       </div>`:'';
-  const familyRow=card.stone_family?`
+  const pairWithRow=s.card_pair_with?`
       <div class="sfc-detail-row">
-        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4 36 22 24 44 12 22 24 4Z"/><path d="M12 22h24M24 4v40M18 22l6 22 6-22"/></svg></div>
-        <div><p class="sfc-detail-label">Stone family</p><p class="sfc-detail-value">${escapeAttr(card.stone_family)}</p></div>
+        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M32 6 43 25 32 57 21 25 32 6Z"/><path d="M21 25h22"/><path d="M32 6v51"/><path d="M16 28 25 42 16 57 7 42 16 28Z"/><path d="M48 28 57 42 48 57 39 42 48 28Z"/><path d="M7 42h18M39 42h18"/><path d="M16 28v29M48 28v29"/></svg></div>
+        <div><p class="sfc-detail-label">Pair with</p><p class="sfc-detail-value">${escapeAttr(s.card_pair_with)}</p></div>
       </div>`:'';
   container.innerHTML=`
     <article class="sfc-card">
@@ -746,9 +724,9 @@ function renderDesktopSotdCard(s){
       <section class="sfc-main">
         <p class="sfc-eyebrow">Today's Stone</p>
         <h1 class="sfc-name">${escapeAttr(s.name)}</h1>
-        ${card.card_quality_pill?`<div class="sfc-pill" style="${pillStyle}">${escapeAttr(card.card_quality_pill)}</div>`:''}
-        ${card.card_summary?`<p class="sfc-summary">${escapeAttr(card.card_summary)}</p>`:''}
-        ${card.card_use_when?`<p class="sfc-use-when">${escapeAttr(card.card_use_when)}</p>`:''}
+        ${s.card_quality_pill?`<div class="sfc-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+        ${s.card_summary?`<p class="sfc-summary">${escapeAttr(s.card_summary)}</p>`:''}
+        ${s.card_use_when?`<p class="sfc-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="sfc-actions">
           <button class="sfc-btn sfc-btn--primary sfc-btn-enc" type="button">View full entry</button>
           <button class="sfc-btn sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
@@ -758,8 +736,8 @@ function renderDesktopSotdCard(s){
       </section>
       <aside class="sfc-details">
         <h2 class="sfc-details-title">Stone Details</h2>
-        ${chakraRow}${zodiacRow}${familyRow}
-        ${card.card_note?`<p class="sfc-note">${escapeAttr(card.card_note)}</p>`:''}
+        ${bestForRow}${chakraRow}${pairWithRow}
+        ${s.card_note?`<p class="sfc-note">${escapeAttr(s.card_note)}</p>`:''}
       </aside>
     </article>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
@@ -834,26 +812,24 @@ function renderMobileSotdCard(s){
   mobileSotdStone=s;
   const container=document.getElementById('mobile-sotd-card-wrap');
   if(!container||!s)return;
-  // TODO: Replace SOTD_MOCK_CARD_DATA lookup with live Supabase fields when schema is ready.
-  const card=SOTD_MOCK_CARD_DATA[s.id]||{};
   const photoHtml=s.photo
     ?`<img class="msfc-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)}" loading="lazy">`
     :`<div class="msfc-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
-  const pillStyle=sfcPillStyle(card.primary_chakra||'');
+  const pillStyle=sfcPillStyle(s.primary_chakra||'');
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
-  const chakraRow=card.primary_chakra?`<div class="msfc-detail-row"><span class="msfc-detail-label">Chakra</span><span class="msfc-detail-value">${escapeAttr(card.primary_chakra)}</span></div>`:'';
-  const zodiacRow=card.zodiac?`<div class="msfc-detail-row"><span class="msfc-detail-label">Zodiac</span><span class="msfc-detail-value">${escapeAttr(card.zodiac)}</span></div>`:'';
-  const familyRow=card.stone_family?`<div class="msfc-detail-row"><span class="msfc-detail-label">Family</span><span class="msfc-detail-value">${escapeAttr(card.stone_family)}</span></div>`:'';
+  const bestForRow=s.card_best_for?`<div class="msfc-detail-row"><span class="msfc-detail-label">Best for</span><span class="msfc-detail-value">${escapeAttr(s.card_best_for)}</span></div>`:'';
+  const chakraRow=s.primary_chakra?`<div class="msfc-detail-row"><span class="msfc-detail-label">Chakra</span><span class="msfc-detail-value">${escapeAttr(s.primary_chakra)}</span></div>`:'';
+  const pairWithRow=s.card_pair_with?`<div class="msfc-detail-row"><span class="msfc-detail-label">Pair with</span><span class="msfc-detail-value">${escapeAttr(s.card_pair_with)}</span></div>`:'';
   container.innerHTML=`
     <article class="msfc-card">
       <div class="msfc-photo-wrap">${photoHtml}</div>
       <div class="msfc-body">
         <p class="msfc-eyebrow">Today's Stone</p>
         <h2 class="msfc-name">${sname}</h2>
-        ${card.card_quality_pill?`<div class="msfc-pill" style="${pillStyle}">${escapeAttr(card.card_quality_pill)}</div>`:''}
-        ${card.card_summary?`<p class="msfc-summary">${escapeAttr(card.card_summary)}</p>`:''}
-        ${card.card_use_when?`<p class="msfc-use-when">${escapeAttr(card.card_use_when)}</p>`:''}
+        ${s.card_quality_pill?`<div class="msfc-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+        ${s.card_summary?`<p class="msfc-summary">${escapeAttr(s.card_summary)}</p>`:''}
+        ${s.card_use_when?`<p class="msfc-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="msfc-actions">
           <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View full entry</button>
           <div class="msfc-secondary-row">
@@ -862,8 +838,8 @@ function renderMobileSotdCard(s){
             <span class="msfc-signin-hint" style="display:none">Sign in to save stones</span>
           </div>
         </div>
-        ${(chakraRow||zodiacRow||familyRow)?`<div class="msfc-details">${chakraRow}${zodiacRow}${familyRow}</div>`:''}
-        ${card.card_note?`<p class="msfc-note">${escapeAttr(card.card_note)}</p>`:''}
+        ${(bestForRow||chakraRow||pairWithRow)?`<div class="msfc-details">${bestForRow}${chakraRow}${pairWithRow}</div>`:''}
+        ${s.card_note?`<p class="msfc-note">${escapeAttr(s.card_note)}</p>`:''}
       </div>
     </article>`;
   container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
@@ -910,19 +886,39 @@ function updateMobileSotdAuth(){
   }
 }
 
-function renderSotd(){
-  const container=document.getElementById('sotd-container');
-  // TODO: Remove Howlite override once Supabase card fields are populated for all stones.
-  // Using C-0241 (Howlite) as the mock stone while front-end card layout is being reviewed.
-  const howliteC=CRYSTALS.find(c=>c.i==='C-0241');
-  const s=howliteC?crystalToFeaturedStone(howliteC):deterministicSotdFallback();
+async function renderSotd(){
+  let s=null;
+  try{
+    if(typeof _supa!=='undefined'){
+      const {data,error}=await _supa
+        .from('stones')
+        .select('id,name,card_quality_pill,card_summary,card_use_when,card_best_for,primary_chakra,card_pair_with,card_note')
+        .eq('sotd_enabled',true)
+        .order('sotd_order',{ascending:true})
+        .limit(1)
+        .single();
+      if(!error&&data){
+        const c=CRYSTALS.find(cr=>cr.i===data.id);
+        s={
+          id:data.id,
+          name:data.name,
+          photo:c?stonePhotoFile(c):'',
+          hex:c?(c.ch||'#c8bca8'):'#c8bca8',
+          card_quality_pill:data.card_quality_pill||'',
+          card_summary:data.card_summary||'',
+          card_use_when:data.card_use_when||'',
+          card_best_for:data.card_best_for||'',
+          primary_chakra:data.primary_chakra||'',
+          card_pair_with:data.card_pair_with||'',
+          card_note:data.card_note||''
+        };
+      }
+    }
+  }catch(err){console.warn('SOTD fetch failed',err);}
+  if(!s)s=deterministicSotdFallback();
   if(!s)return;
   renderMobileSotdCard(s);
   renderDesktopSotdCard(s);
-  // TODO: Re-enable scheduled override when Supabase sotd fields are live for all stones.
-  // scheduledSotdStone().then(scheduled=>{
-  //   if(scheduled){renderMobileSotdCard(scheduled);renderDesktopSotdCard(scheduled);}
-  // });
   // Wire up the hero "Today's stone" line
   const sotdRow=document.getElementById('hero-sotd-row');
   const sotdLink=document.getElementById('hero-sotd-link');
