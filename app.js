@@ -677,51 +677,94 @@ function getStoneDailyPrompt(s){
   return _sotdLookup(_SOTD_PROMPT,q)||'Keep it nearby today as a quiet point of focus.';
 }
 
+// ── STONE OF THE DAY CARD DATA ───────────────────────────────────────────────
+// TODO: Replace static mock entries with live Supabase fields when schema lands.
+// These map to columns being added to the `stones` table:
+//   card_quality_pill, card_summary, card_use_when,
+//   primary_chakra, zodiac, stone_family, card_note
+// Selection logic: stones where sotd_enabled=true and today between
+//   sotd_start_date and sotd_end_date; fallback to sotd_order rotation.
+const SOTD_MOCK_CARD_DATA={
+  'C-0241':{
+    card_quality_pill:'Calm & Clarity',
+    card_summary:'A quieting stone for mental stillness, ease, and emotional steadiness.',
+    card_use_when:'Use when you need to soften mental noise and return to steadiness before reacting.',
+    primary_chakra:'Crown',
+    zodiac:'Gemini / Virgo',
+    stone_family:'Borate mineral',
+    card_note:'A stone of awareness and gentle perspective.'
+  }
+};
+
+const SFC_CHAKRA_COLORS={
+  'Root':         {bg:'#ead5d5',text:'#6b3636'},
+  'Sacral':       {bg:'#f0e0d0',text:'#6b4a2e'},
+  'Solar Plexus': {bg:'#f0e8c8',text:'#6b5520'},
+  'Heart':        {bg:'#d8e8d8',text:'#3a5c3a'},
+  'Throat':       {bg:'#d5e2eb',text:'#2e4e5e'},
+  'Third Eye':    {bg:'#dcd5eb',text:'#4a3d6b'},
+  'Crown':        {bg:'#ded7ef',text:'#5e5080'},
+  'Earth Star':   {bg:'#e0dcd8',text:'#4a453f'},
+  'Soul Star':    {bg:'#f5f0e8',text:'#6b5e48'}
+};
+
+function sfcPillStyle(chakra){
+  const c=SFC_CHAKRA_COLORS[chakra]||{bg:'#e5dfd8',text:'#6b6258'};
+  return `background:${c.bg};color:${c.text}`;
+}
+
 function renderDesktopSotdCard(s){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container||!s)return;
   desktopSotdStone=s;
-  const t=s.tier>=1&&s.tier<=4?s.tier:1;
-  const tierDisplay=`Tier ${t} · ${SOTD_TIER_LABELS[t]}`;
+  // TODO: Replace SOTD_MOCK_CARD_DATA lookup with live Supabase fields
+  // (card_quality_pill, card_summary, card_use_when, primary_chakra,
+  //  zodiac, stone_family, card_note) fetched alongside the stone record.
+  const card=SOTD_MOCK_CARD_DATA[s.id]||{};
   const photoHtml=s.photo
-    ?`<img class="desktop-sotd-photo-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy">`
-    :`<div class="desktop-sotd-photo-fallback" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div>`;
-  const primaryQuality=(s.qualities&&s.qualities[0])||'';
-  const roles=(s.qualities||[]).slice(0,2).map(q=>`<span class="desktop-sotd-role">${escapeAttr(q)}</span>`).join('');
-  const editorial=getSotdEditorialLine(s);
-  const useSentence=sotdUseSentence(s);
-  const pairing=getStonePairing(s);
-  const prompt=getStoneDailyPrompt(s);
-  const bestFor=primaryQuality||'Daily grounding';
+    ?`<img class="sfc-photo-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
+    :`<div class="sfc-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
+  const pillStyle=sfcPillStyle(card.primary_chakra||'');
+  const chakraRow=card.primary_chakra?`
+      <div class="sfc-detail-row">
+        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 42C15 34 11 26 14 17c6 2 9 8 10 15 1-7 4-13 10-15 3 9-1 17-10 25Z"/><path d="M24 42c-8-2-15-8-18-17 8-1 14 3 18 10 4-7 10-11 18-10-3 9-10 15-18 17Z"/></svg></div>
+        <div><p class="sfc-detail-label">Primary chakra</p><p class="sfc-detail-value">${escapeAttr(card.primary_chakra)}</p></div>
+      </div>`:'';
+  const zodiacRow=card.zodiac?`
+      <div class="sfc-detail-row">
+        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="5"/><path d="M24 3v10M24 35v10M3 24h10M35 24h10M9 9l7 7M32 32l7 7M39 9l-7 7M16 32l-7 7"/></svg></div>
+        <div><p class="sfc-detail-label">Zodiac</p><p class="sfc-detail-value">${escapeAttr(card.zodiac)}</p></div>
+      </div>`:'';
+  const familyRow=card.stone_family?`
+      <div class="sfc-detail-row">
+        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4 36 22 24 44 12 22 24 4Z"/><path d="M12 22h24M24 4v40M18 22l6 22 6-22"/></svg></div>
+        <div><p class="sfc-detail-label">Stone family</p><p class="sfc-detail-value">${escapeAttr(card.stone_family)}</p></div>
+      </div>`:'';
   container.innerHTML=`
-    <div class="desktop-sotd-strip">
-      <div class="desktop-sotd-photo">${photoHtml}</div>
-      <div class="desktop-sotd-body">
-        <div class="desktop-sotd-kicker">Stone of the Day</div>
-        <div class="desktop-sotd-name-row">
-          <span class="desktop-sotd-name">${escapeAttr(s.name)}</span>
-          <span class="desktop-sotd-tier">${escapeAttr(tierDisplay)}</span>
+    <article class="sfc-card">
+      <section class="sfc-photo" aria-label="${escapeAttr(s.name)} photo">${photoHtml}</section>
+      <section class="sfc-main">
+        <p class="sfc-eyebrow">Today's Stone</p>
+        <h1 class="sfc-name">${escapeAttr(s.name)}</h1>
+        ${card.card_quality_pill?`<div class="sfc-pill" style="${pillStyle}">${escapeAttr(card.card_quality_pill)}</div>`:''}
+        ${card.card_summary?`<p class="sfc-summary">${escapeAttr(card.card_summary)}</p>`:''}
+        ${card.card_use_when?`<p class="sfc-use-when">${escapeAttr(card.card_use_when)}</p>`:''}
+        <div class="sfc-actions">
+          <button class="sfc-btn sfc-btn--primary sfc-btn-enc" type="button">View full entry</button>
+          <button class="sfc-btn sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
+          <button class="sfc-btn sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">On wishlist</button>
+          <span class="sfc-signin">Sign in to save to your collection</span>
         </div>
-        ${roles?`<div class="desktop-sotd-roles">${roles}</div>`:''}
-        ${editorial?`<div class="desktop-sotd-editorial">${escapeAttr(editorial)}</div>`:''}
-        ${useSentence?`<div class="desktop-sotd-use">${escapeAttr(useSentence)}</div>`:''}
-        <div class="desktop-sotd-actions">
-          <button class="desktop-sotd-btn-enc" type="button">View full entry</button>
-          <button class="desktop-sotd-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
-          <button class="desktop-sotd-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to wishlist</button>
-          <span class="desktop-sotd-signin">Sign in to save stones to your collection</span>
-        </div>
-      </div>
-      <div class="desktop-sotd-note">
-        <div class="desktop-sotd-note-kicker">Today's Note</div>
-        <div class="desktop-sotd-note-row"><span class="desktop-sotd-note-lbl">Best for</span><span class="desktop-sotd-note-val">${escapeAttr(bestFor)}</span></div>
-        <div class="desktop-sotd-note-row"><span class="desktop-sotd-note-lbl">Pair with</span><span class="desktop-sotd-note-val">${escapeAttr(pairing)}</span></div>
-        <div class="desktop-sotd-note-prompt">${escapeAttr(prompt)}</div>
-      </div>
-    </div>`;
-  const encBtn=container.querySelector('.desktop-sotd-btn-enc');
-  if(encBtn) encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
-  const collBtn=container.querySelector('.desktop-sotd-btn-coll');
+      </section>
+      <aside class="sfc-details">
+        <h2 class="sfc-details-title">Stone Details</h2>
+        ${chakraRow}${zodiacRow}${familyRow}
+        ${card.card_note?`<p class="sfc-note">${escapeAttr(card.card_note)}</p>`:''}
+      </aside>
+    </article>`;
+  const encBtn=container.querySelector('.sfc-btn-enc');
+  if(encBtn)encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
+  const collBtn=container.querySelector('.sfc-btn-coll');
   if(collBtn){
     collBtn.addEventListener('click',function(){
       const sid=this.dataset.sotdId;
@@ -731,7 +774,7 @@ function renderDesktopSotdCard(s){
       openAddForm(sid);
     });
   }
-  const wishBtn=container.querySelector('.desktop-sotd-btn-wish');
+  const wishBtn=container.querySelector('.sfc-btn-wish');
   if(wishBtn){
     wishBtn.addEventListener('click',function(){
       const sid=this.dataset.sotdId;
@@ -746,9 +789,9 @@ function renderDesktopSotdCard(s){
 function updateDesktopSotdAuth(){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container)return;
-  const signin=container.querySelector('.desktop-sotd-signin');
-  const collBtn=container.querySelector('.desktop-sotd-btn-coll');
-  const wishBtn=container.querySelector('.desktop-sotd-btn-wish');
+  const signin=container.querySelector('.sfc-signin');
+  const collBtn=container.querySelector('.sfc-btn-coll');
+  const wishBtn=container.querySelector('.sfc-btn-wish');
   if(_currentUser){
     if(signin)signin.style.display='none';
     if(collBtn)collBtn.style.display='';
@@ -758,7 +801,7 @@ function updateDesktopSotdAuth(){
         wishBtn.textContent='On Wishlist';
         wishBtn.disabled=true;
       } else {
-        wishBtn.textContent='Add to wishlist';
+        wishBtn.textContent='On wishlist';
         wishBtn.disabled=false;
       }
     }
@@ -771,8 +814,8 @@ function updateDesktopSotdAuth(){
 
 async function sotdWishlistDirect(stoneId){
   if(!_currentUser)return;
-  const dWishBtn=document.querySelector('#desktop-sotd-wrap .desktop-sotd-btn-wish');
-  const mWishBtn=document.querySelector('#mobile-sotd-card-wrap .mobile-sotd-wish-btn');
+  const dWishBtn=document.querySelector('#desktop-sotd-wrap .sfc-btn-wish');
+  const mWishBtn=document.querySelector('#mobile-sotd-card-wrap .msfc-btn-wish');
   if(wish[stoneId]){
     if(dWishBtn){dWishBtn.textContent='On Wishlist';dWishBtn.disabled=true;}
     if(mWishBtn){mWishBtn.textContent='On Wishlist';mWishBtn.disabled=true;}
@@ -791,57 +834,49 @@ function renderMobileSotdCard(s){
   mobileSotdStone=s;
   const container=document.getElementById('mobile-sotd-card-wrap');
   if(!container||!s)return;
+  // TODO: Replace SOTD_MOCK_CARD_DATA lookup with live Supabase fields when schema is ready.
+  const card=SOTD_MOCK_CARD_DATA[s.id]||{};
   const photoHtml=s.photo
-    ?`<div class="mobile-sotd-image-wrap"><img class="mobile-sotd-image" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal specimen" loading="lazy"></div>`
-    :`<div class="mobile-sotd-image-wrap mobile-sotd-image-wrap--fallback"><div class="mobile-sotd-dot" style="background:${escapeAttr(s.hex||'#c8bca8')}"></div></div>`;
-  const t=s.tier>=1&&s.tier<=4?s.tier:1;
-  const tierDisplay=`Tier ${t} · ${SOTD_TIER_LABELS[t]}`;
-  const primaryQ=(s.qualities&&s.qualities[0])||'';
-  const qualities=featuredStoneQualities(s).slice(0,2).map(q=>`<span>${escapeAttr(q)}</span>`).join('');
-  const editorial=getSotdEditorialLine(s);
-  const useSentence=sotdUseSentence(s);
-  const pairing=getStonePairing(s);
-  const prompt=getStoneDailyPrompt(s);
+    ?`<img class="msfc-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)}" loading="lazy">`
+    :`<div class="msfc-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
+  const pillStyle=sfcPillStyle(card.primary_chakra||'');
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
+  const chakraRow=card.primary_chakra?`<div class="msfc-detail-row"><span class="msfc-detail-label">Chakra</span><span class="msfc-detail-value">${escapeAttr(card.primary_chakra)}</span></div>`:'';
+  const zodiacRow=card.zodiac?`<div class="msfc-detail-row"><span class="msfc-detail-label">Zodiac</span><span class="msfc-detail-value">${escapeAttr(card.zodiac)}</span></div>`:'';
+  const familyRow=card.stone_family?`<div class="msfc-detail-row"><span class="msfc-detail-label">Family</span><span class="msfc-detail-value">${escapeAttr(card.stone_family)}</span></div>`:'';
   container.innerHTML=`
-    <div class="mobile-sotd-card">
-      ${photoHtml}
-      <div class="mobile-sotd-copy">
-        <div class="mobile-sotd-label">Stone of the Day</div>
-        <div class="mobile-sotd-name">${sname}</div>
-        <div class="mobile-sotd-meta-row">
-          <span class="mobile-sotd-tier-pill">${escapeAttr(tierDisplay)}</span>
-          ${primaryQ?`<span class="mobile-sotd-qual-pill">${escapeAttr(primaryQ)}</span>`:''}
-        </div>
-        ${editorial?`<div class="mobile-sotd-editorial">${escapeAttr(editorial)}</div>`:''}
-        ${useSentence?`<div class="mobile-sotd-use">${escapeAttr(useSentence)}</div>`:''}
-        <div class="mobile-sotd-note-box">
-          <div class="mobile-sotd-note-row"><span class="mobile-sotd-note-lbl">Pair with</span><span class="mobile-sotd-note-val">${escapeAttr(pairing)}</span></div>
-          <div class="mobile-sotd-note-row"><span class="mobile-sotd-note-lbl">Try this</span><span class="mobile-sotd-note-val">${escapeAttr(prompt)}</span></div>
-        </div>
-        <div class="mobile-sotd-actions">
-          <button class="mobile-sotd-view-btn" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View full entry</button>
-          <div class="mobile-sotd-secondary-actions">
-            <button class="mobile-sotd-coll-btn" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">Add to collection</button>
-            <button class="mobile-sotd-wish-btn" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">Add to wishlist</button>
-            <span class="mobile-sotd-signin-hint" style="display:none">Sign in to save stones</span>
+    <article class="msfc-card">
+      <div class="msfc-photo-wrap">${photoHtml}</div>
+      <div class="msfc-body">
+        <p class="msfc-eyebrow">Today's Stone</p>
+        <h2 class="msfc-name">${sname}</h2>
+        ${card.card_quality_pill?`<div class="msfc-pill" style="${pillStyle}">${escapeAttr(card.card_quality_pill)}</div>`:''}
+        ${card.card_summary?`<p class="msfc-summary">${escapeAttr(card.card_summary)}</p>`:''}
+        ${card.card_use_when?`<p class="msfc-use-when">${escapeAttr(card.card_use_when)}</p>`:''}
+        <div class="msfc-actions">
+          <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View full entry</button>
+          <div class="msfc-secondary-row">
+            <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">Add to collection</button>
+            <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">On wishlist</button>
+            <span class="msfc-signin-hint" style="display:none">Sign in to save stones</span>
           </div>
         </div>
+        ${(chakraRow||zodiacRow||familyRow)?`<div class="msfc-details">${chakraRow}${zodiacRow}${familyRow}</div>`:''}
+        ${card.card_note?`<p class="msfc-note">${escapeAttr(card.card_note)}</p>`:''}
       </div>
-      <a class="mobile-sotd-essentials-link" href="encyclopedia.html?tab=encyclopedia&tier=1">New to crystals? Start your first shelf with the Essentials →</a>
-    </div>`;
-  container.querySelector('.mobile-sotd-view-btn').addEventListener('click',()=>{
+    </article>`;
+  container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
     detailReturnContext={type:'home-sotd'};openDetail(s.id);
   });
-  const mCollBtn=container.querySelector('.mobile-sotd-coll-btn');
+  const mCollBtn=container.querySelector('.msfc-btn-coll');
   if(mCollBtn){
     mCollBtn.addEventListener('click',function(){
       if(!_currentUser){savePendingDrawerAction('add_to_collection',{i:sid,n:s.name});_openAuth('save-collection');return;}
       addPieceReturnContext={type:'sotd',stoneId:sid};openAddForm(sid);
     });
   }
-  const mWishBtn=container.querySelector('.mobile-sotd-wish-btn');
+  const mWishBtn=container.querySelector('.msfc-btn-wish');
   if(mWishBtn){
     mWishBtn.addEventListener('click',function(){
       if(!_currentUser){savePendingDrawerAction('add_to_wishlist',{i:sid,n:s.name});_openAuth('save-wishlist');return;}
@@ -854,9 +889,9 @@ function renderMobileSotdCard(s){
 function updateMobileSotdAuth(){
   const container=document.getElementById('mobile-sotd-card-wrap');
   if(!container)return;
-  const signin=container.querySelector('.mobile-sotd-signin-hint');
-  const collBtn=container.querySelector('.mobile-sotd-coll-btn');
-  const wishBtn=container.querySelector('.mobile-sotd-wish-btn');
+  const signin=container.querySelector('.msfc-signin-hint');
+  const collBtn=container.querySelector('.msfc-btn-coll');
+  const wishBtn=container.querySelector('.msfc-btn-wish');
   if(_currentUser){
     if(signin)signin.style.display='none';
     if(collBtn)collBtn.style.display='';
@@ -865,7 +900,7 @@ function updateMobileSotdAuth(){
       if(mobileSotdStone&&wish[mobileSotdStone.id]){
         wishBtn.textContent='On Wishlist';wishBtn.disabled=true;
       } else {
-        wishBtn.textContent='Add to wishlist';wishBtn.disabled=false;
+        wishBtn.textContent='On wishlist';wishBtn.disabled=false;
       }
     }
   } else {
@@ -877,13 +912,17 @@ function updateMobileSotdAuth(){
 
 function renderSotd(){
   const container=document.getElementById('sotd-container');
-  const s=deterministicSotdFallback();
+  // TODO: Remove Howlite override once Supabase card fields are populated for all stones.
+  // Using C-0241 (Howlite) as the mock stone while front-end card layout is being reviewed.
+  const howliteC=CRYSTALS.find(c=>c.i==='C-0241');
+  const s=howliteC?crystalToFeaturedStone(howliteC):deterministicSotdFallback();
   if(!s)return;
   renderMobileSotdCard(s);
   renderDesktopSotdCard(s);
-  scheduledSotdStone().then(scheduled=>{
-    if(scheduled){renderMobileSotdCard(scheduled);renderDesktopSotdCard(scheduled);}
-  });
+  // TODO: Re-enable scheduled override when Supabase sotd fields are live for all stones.
+  // scheduledSotdStone().then(scheduled=>{
+  //   if(scheduled){renderMobileSotdCard(scheduled);renderDesktopSotdCard(scheduled);}
+  // });
   // Wire up the hero "Today's stone" line
   const sotdRow=document.getElementById('hero-sotd-row');
   const sotdLink=document.getElementById('hero-sotd-link');
