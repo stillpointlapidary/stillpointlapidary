@@ -691,31 +691,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .mobile-stone-day-intro{display:none}
 /* STONE FEATURE CARD — desktop / tablet */
 .desktop-sotd-section{padding:2rem 0 1.75rem;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
-.sfc-card{display:grid;grid-template-columns:340px minmax(0,1fr) 300px;background:var(--white);border:0.5px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:0 8px 36px rgba(42,37,32,0.07)}
-.sfc-photo{width:340px;aspect-ratio:1/1;overflow:hidden;background:#f5ede0;flex-shrink:0}
+.sfc-card{display:grid;grid-template-columns:260px minmax(0,1fr) 220px;background:var(--white);border:0.5px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:0 8px 36px rgba(42,37,32,0.07)}
+.sfc-photo{overflow:hidden;background:#f5ede0}
 .sfc-photo-img{width:100%;height:100%;object-fit:cover;display:block}
 .sfc-photo-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--stone2)}
-.sfc-main{padding:42px 44px 36px;display:flex;flex-direction:column;justify-content:center;border-right:0.5px solid var(--border2)}
-.sfc-eyebrow{margin:0 0 10px;color:var(--accent);font-family:'Jost',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
-.sfc-name{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(40px,4.2vw,62px);line-height:0.92;font-weight:400;letter-spacing:-0.04em;color:#363230}
-.sfc-pill{align-self:flex-start;margin:14px 0 18px;padding:7px 18px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.01em}
-.sfc-summary{max-width:520px;margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.55;color:#4d4944}
-.sfc-use-when{max-width:520px;margin:0;font-family:'Jost',sans-serif;font-size:14px;line-height:1.65;color:var(--ink3)}
-.sfc-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;align-items:center}
-.sfc-btn{font-family:'Jost',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:11px 18px;border-radius:999px;border:0.5px solid rgba(42,37,32,0.25);background:transparent;color:var(--accent);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.sfc-main{padding:32px 36px 28px;display:flex;flex-direction:column;justify-content:center;border-right:0.5px solid var(--border2)}
+.sfc-eyebrow{margin:0 0 10px;color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
+.sfc-name{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(36px,3.8vw,52px);line-height:0.92;font-weight:400;letter-spacing:-0.04em;color:#363230}
+.sfc-pill{align-self:flex-start;margin:12px 0 16px;padding:6px 16px;border-radius:999px;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.01em}
+.sfc-summary{max-width:520px;margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#4d4944}
+.sfc-use-when{max-width:520px;margin:0;font-family:'Jost',sans-serif;font-size:13.5px;line-height:1.65;color:var(--ink3)}
+.sfc-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center}
+.sfc-btn{font-family:'Jost',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:9px 16px;border-radius:999px;border:0.5px solid rgba(42,37,32,0.25);background:transparent;color:var(--accent);cursor:pointer;transition:all 0.15s;white-space:nowrap}
 .sfc-btn:hover{background:#f5f0e8;border-color:var(--accent2)}
 .sfc-btn--primary{background:#7a6ba0;color:#fff;border-color:#7a6ba0}
 .sfc-btn--primary:hover{background:#6b5d8e;border-color:#6b5d8e}
 .sfc-signin{font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);font-style:italic}
-.sfc-details{padding:38px 30px 36px;display:flex;flex-direction:column;justify-content:center;background:#faf7f3}
-.sfc-details-title{margin:0 0 18px;color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
-.sfc-detail-row{display:grid;grid-template-columns:36px 1fr;gap:10px;padding:13px 0;border-bottom:0.5px solid var(--border2)}
-.sfc-detail-icon{display:grid;place-items:center;color:#b9a58c}
-.sfc-detail-icon svg{width:32px;height:32px;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.sfc-detail-label{margin:0 0 3px;color:var(--ink3);font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase}
-.sfc-detail-value{margin:0;color:#4e4944;font-family:'Jost',sans-serif;font-size:15px;line-height:1.25;font-weight:500}
-.sfc-note{margin:20px 0 0;color:var(--ink2);font-family:Georgia,'Times New Roman',serif;font-size:15px;font-style:italic;line-height:1.5}
-@media(max-width:960px){.sfc-card{grid-template-columns:260px minmax(0,1fr)}.sfc-photo{width:260px}.sfc-details{grid-column:1/-1;border-top:0.5px solid var(--border2)}.sfc-main{border-right:none;padding:32px 32px 28px}.sfc-name{font-size:46px}}
+.sfc-details{padding:28px 24px 28px;display:flex;flex-direction:column;justify-content:center;background:#faf7f3}
+.sfc-details-title{margin:0 0 16px;color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
+.sfc-detail-row{display:grid;grid-template-columns:32px 1fr;gap:10px;padding:12px 0;border-bottom:0.5px solid var(--border2)}
+.sfc-detail-icon{display:grid;place-items:center;color:#bba98d}
+.sfc-detail-icon svg{width:26px;height:26px;stroke:currentColor;stroke-width:1.4;fill:none}
+.sfc-detail-label{margin:0 0 3px;color:var(--ink3);font-family:'Jost',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase}
+.sfc-detail-value{margin:0;color:#4e4944;font-family:'Jost',sans-serif;font-size:14px;line-height:1.25;font-weight:500}
+.sfc-note{margin:18px 0 0;color:var(--ink2);font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;line-height:1.5}
+@media(max-width:960px){.sfc-card{grid-template-columns:220px minmax(0,1fr)}.sfc-details{grid-column:1/-1;border-top:0.5px solid var(--border2)}.sfc-main{border-right:none;padding:28px 28px 24px}.sfc-name{font-size:42px}}
 /* STONE FEATURE CARD — mobile (inside mobile-sotd-section, shown ≤560px) */
 .msfc-card{width:100%;border:0.5px solid var(--border);border-radius:16px;background:var(--white);overflow:hidden;box-shadow:0 4px 20px rgba(42,37,32,0.06)}
 .msfc-photo-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;border-bottom:0.5px solid var(--border2)}
