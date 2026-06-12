@@ -1351,8 +1351,10 @@ function resetCollFilters(){
   collFilters={cfam:'all',ctheme:'all',ccolor:'all',cchakra:'all',cmohs:'all',cformation:'all',cmaterial:'all',form:'all',size:'all',cshelf:'all'};
   ['cfam','ctheme','ccolor','cchakra','cmohs','cformation','cmaterial','form','size','cshelf'].forEach(k=>{
     document.querySelectorAll('#cpills-'+k+' .fpill').forEach((p,i)=>p.classList.toggle('active',i===0));
+    document.querySelectorAll('#coll-fspills-'+k+' .fpill').forEach((p,i)=>p.classList.toggle('active',i===0));
     updateBtn('cfbtn-'+k,'cfval-'+k,'all');
   });
+  updateMobileFilterValues();
   renderCollection();
 }
 
@@ -3023,15 +3025,181 @@ function resetUseWhen(){
 
 // ── COLLECTION ──
 function syncCollMobileToggle(mode){
-  const btnColl=document.getElementById('coll-toggle-collection');
-  const btnWish=document.getElementById('coll-toggle-wish');
-  if(!btnColl||!btnWish)return;
-  btnColl.classList.toggle('coll-toggle-active',mode==='all'||mode==='__family__'||mode==='tier-owned');
-  btnWish.classList.toggle('coll-toggle-active',mode==='wish'||mode==='tier-wish');
+  const isWish=mode==='wish'||mode==='tier-wish';
+  const chipColl=document.getElementById('coll-chip-collection');
+  const chipWish=document.getElementById('coll-chip-wish');
+  if(chipColl)chipColl.classList.toggle('coll-chip--active',!isWish);
+  if(chipWish)chipWish.classList.toggle('coll-chip--active',isWish);
 }
 
 function collMobileTab(mode){
   setCollQuickFilter(mode);
+  const isWish=mode==='wish'||mode==='tier-wish';
+  const chipColl=document.getElementById('coll-chip-collection');
+  const chipWish=document.getElementById('coll-chip-wish');
+  if(chipColl)chipColl.classList.toggle('coll-chip--active',!isWish);
+  if(chipWish)chipWish.classList.toggle('coll-chip--active',isWish);
+}
+
+// ── Mobile filter bottom sheet ──
+
+function openMobileFilterSheet(){
+  buildMobileFilterSheet();
+  document.getElementById('coll-fs-overlay').classList.add('open');
+  document.getElementById('coll-fs').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeMobileFilterSheet(){
+  document.getElementById('coll-fs-overlay').classList.remove('open');
+  document.getElementById('coll-fs').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function buildMobileFilterSheet(){
+  const forms=['Tumble','Palm Stone','Worry Stone','Heart','Sphere','Egg','Tower','Pyramid','Cube','Freeform','Flame','Bowl / Dish','Raw / Natural','Specimen','Point','Cluster','Geode','Druzy','Slice / Slab','Moon','Star','Mushroom','Wand','Carving','Other'];
+  const sizes=['XS','S','M','L','XL'];
+  const cfams=[...new Set(CRYSTALS.map(c=>c.fam||'').filter(Boolean))].sort();
+  const materials=[...new Set(CRYSTALS.map(c=>c.mt||'').filter(Boolean))].sort();
+  const formations=[...new Set(CRYSTALS.map(c=>c.fo||'').filter(Boolean))].sort();
+  const usedShelves=[...new Set(collection.map(p=>p.shelf||p.locCustom||'').filter(Boolean))].sort();
+  const shelfOpts=usedShelves.length?usedShelves:['Shelf 1','Shelf 2','Shelf 3','Shelf 4','Altar','Bedside','Cabinet','Office desk'];
+  const colorOpts=(typeof COLOR_OPTS!=='undefined'?COLOR_OPTS:[]);
+  const chakraOpts=(typeof CHAKRA_OPTS!=='undefined'?CHAKRA_OPTS:[]);
+  const themeOpts=(typeof THEME_OPTS!=='undefined'?THEME_OPTS:[]);
+  const mohsOpts=[{val:'soft',label:'Soft (1–4)'},{val:'medium',label:'Medium (5–6)'},{val:'hard',label:'Hard (7+)'}];
+
+  const defs={
+    ccolor: colorOpts,
+    cchakra: chakraOpts,
+    ctheme: themeOpts,
+    cfam: cfams,
+    form: forms,
+    size: sizes,
+    cshelf: shelfOpts,
+    cmohs: mohsOpts,
+    cformation: formations,
+    cmaterial: materials
+  };
+
+  Object.keys(defs).forEach(key=>{
+    const container=document.getElementById('coll-fspills-'+key);
+    if(!container||container.dataset.built==='1')return;
+    container.dataset.built='1';
+    const opts=defs[key];
+    const cur=collFilters[key]||'all';
+    container.innerHTML='<button class="fpill'+(cur==='all'?' active':'')+'" onclick="mobileSetFilter(\''+key+'\',\'all\',this)">All</button>'+
+      opts.map(o=>{
+        const val=typeof o==='object'?(o.val||o):o;
+        const lbl=typeof o==='object'?(o.label||o.val||o):o;
+        const swatch=key==='ccolor'&&o.hex?'<span class="cswatch" style="background:'+o.hex+'"></span>':'';
+        return'<button class="fpill'+(cur===String(val)?' active':'')+'" data-value="'+escapeAttr(String(val))+'" onclick="mobileSetFilter(\''+key+'\','+jsArg(String(val))+',this)">'+swatch+escapeAttr(String(lbl))+'</button>';
+      }).join('');
+  });
+  updateMobileFilterValues();
+}
+
+function mobileSetFilter(key,val,btn){
+  collFilters[key]=val;
+  document.querySelectorAll('#cpills-'+key+' .fpill').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#coll-fspills-'+key+' .fpill').forEach(p=>p.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const safeVal=val.replace(/"/g,'\\"');
+  const desktopPill=document.querySelector('#cpills-'+key+' .fpill[data-value="'+safeVal+'"]');
+  if(desktopPill)desktopPill.classList.add('active');
+  else if(val==='all'){const first=document.querySelector('#cpills-'+key+' .fpill');if(first)first.classList.add('active');}
+  updateBtn('cfbtn-'+key,'cfval-'+key,val);
+  updateMobileFilterValues();
+  updateMobileFilterBar();
+  renderCollection();
+}
+
+function toggleMobileFilterRow(key){
+  const pills=document.getElementById('coll-fspills-'+key);
+  const chev=document.getElementById('coll-fschev-'+key);
+  if(!pills)return;
+  const isOpen=pills.classList.contains('open');
+  pills.classList.toggle('open',!isOpen);
+  if(chev)chev.classList.toggle('open',!isOpen);
+}
+
+function updateMobileFilterValues(){
+  const keyToLabel={
+    ccolor:'ccolor',cchakra:'cchakra',ctheme:'ctheme',cfam:'cfam',
+    form:'form',size:'size',cshelf:'cshelf',
+    cmohs:'cmohs',cformation:'cformation',cmaterial:'cmaterial'
+  };
+  let moreActive=0;
+  Object.keys(keyToLabel).forEach(key=>{
+    const val=collFilters[key]||'all';
+    const el=document.getElementById('coll-fsval-'+key);
+    if(el){el.textContent=val==='all'?'All':String(val);el.classList.toggle('active-val',val!=='all');}
+    if(['cmohs','cformation','cmaterial'].includes(key)&&val!=='all')moreActive++;
+  });
+  const moreEl=document.getElementById('coll-fsval-more');
+  if(moreEl){moreEl.textContent=moreActive>0?moreActive+' active':'All';moreEl.classList.toggle('active-val',moreActive>0);}
+}
+
+function updateMobileFilterBar(){
+  const keys=['cfam','ctheme','ccolor','cchakra','cmohs','cformation','cmaterial','form','size','cshelf'];
+  const n=keys.filter(k=>collFilters[k]&&collFilters[k]!=='all').length;
+  const lbl=document.getElementById('coll-mfr-label');
+  const row=document.getElementById('coll-mobile-filter-row');
+  if(lbl)lbl.textContent=n===0?'Filter & Sort':n===1?'1 Filter Applied':n+' Filters Applied';
+  if(row)row.classList.toggle('has-filters',n>0);
+}
+
+function clearMobileFilters(){
+  resetCollFilters();
+  document.querySelectorAll('[id^="coll-fspills-"]').forEach(c=>c.dataset.built='');
+  buildMobileFilterSheet();
+  updateMobileFilterValues();
+  updateMobileFilterBar();
+  closeMobileFilterSheet();
+}
+
+function applyMobileFilters(){
+  closeMobileFilterSheet();
+}
+
+function renderMobileProgressCard(){
+  const container=document.getElementById('coll-progress-tiers');
+  if(!container||!CRYSTALS.length)return;
+  const displayCollection=dedupedCollectionItems(collection);
+  const ownedIds=new Set(displayCollection.map(p=>p.crystalId));
+  const wishIds=new Set(Object.keys(wish));
+  const tiers=[
+    {num:1,label:'Essentials'},
+    {num:2,label:'Builders'},
+    {num:3,label:'Favorites'},
+    {num:4,label:'Rare Finds'},
+  ];
+  container.innerHTML=tiers.map(t=>{
+    const tierStones=CRYSTALS.filter(c=>c.tier===t.num||Number(c.tier)===t.num);
+    const total=tierStones.length;
+    if(!total)return'<div class="coll-pt-col"><div class="coll-pt-label">'+t.label+'</div><div class="coll-pt-pct">—</div><div class="coll-pt-track"></div></div>';
+    const owned=tierStones.filter(c=>ownedIds.has(c.i)).length;
+    const wl=tierStones.filter(c=>wishIds.has(c.i)).length;
+    const pct=Math.round(owned/total*100);
+    const ownedW=(owned/total*100).toFixed(1);
+    const wlW=Math.min(wl/total*100,100-parseFloat(ownedW)).toFixed(1);
+    return`<div class="coll-pt-col">
+      <div class="coll-pt-label">${t.label}</div>
+      <div class="coll-pt-pct">${pct}%</div>
+      <div class="coll-pt-track"><div class="coll-pt-owned" style="width:${ownedW}%"></div><div class="coll-pt-wish" style="width:${wlW}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+let _syncToastTimer=null;
+function showCollSyncToast(msg){
+  if(!isMobileView())return;
+  const el=document.getElementById('coll-sync-toast');
+  if(!el)return;
+  el.textContent=msg;
+  el.classList.add('show');
+  if(_syncToastTimer)clearTimeout(_syncToastTimer);
+  _syncToastTimer=setTimeout(()=>el.classList.remove('show'),2200);
 }
 
 function openCollFabSheet(){
@@ -3305,9 +3473,13 @@ function renderCollection(){
   const wishCount=Object.keys(wish).length;
   if(st)st.textContent=collCount;
   if(sw)sw.textContent=wishCount;
-  const mobileCounts=document.getElementById('coll-mobile-counts');
-  if(mobileCounts)mobileCounts.textContent=collCount+' piece'+(collCount===1?'':'s')+' · '+wishCount+' wishlist';
+  const mpc=document.getElementById('coll-chip-pieces-num');
+  const mwc=document.getElementById('coll-chip-wish-num');
+  if(mpc)mpc.textContent=collCount;
+  if(mwc)mwc.textContent=wishCount;
   renderTierBars();
+  renderMobileProgressCard();
+  updateMobileFilterBar();
 
   if(!wrap)return;
 
@@ -7457,6 +7629,7 @@ async function loadSupabaseState() {
   renderCollection();
   const syncEl=document.getElementById('coll-sync-status');
   if(syncEl){const t=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});syncEl.textContent='Synced at '+t;syncEl.style.display='block';}
+  showCollSyncToast('Saved');
   // Re-apply URL tab param — auth+data load can fire after initial tab switch
   const _urlTab=(()=>{try{return new URLSearchParams(window.location.search).get('tab');}catch(e){return null;}})();
   if(_urlTab&&['mood','identify','collection','101'].includes(_urlTab)){switchTabByName(_urlTab);}
