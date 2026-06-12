@@ -96,101 +96,130 @@ const COLOR_OPTS=[
 ];
 const CHAKRA_OPTS=['Root','Sacral','Solar Plexus','Heart','Throat','Third Eye','Crown','Earth Star','All'];
 const MOOD_DATA=[
-  {group:'Grounding & Stability',label:'I feel overwhelmed or overstimulated',sub:'Nervous system · Slowing down · Finding quiet'},
-  {group:'Grounding & Stability',label:'I feel scattered or anxious',sub:'Grounding · Anchoring · Coming back to earth'},
-  {group:'Grounding & Stability',label:'I feel stuck and cannot move forward',sub:'Inertia · Resistance · Stagnation'},
-  {group:'Grounding & Stability',label:'I need better sleep',sub:'Rest · Calming the mind · Night support'},
-  {group:'Grounding & Stability',label:'I need protection',sub:'Energetic shielding · Boundary holding'},
-  {group:'Grounding & Stability',label:'I need stability through change',sub:'Steadiness · Structure · Support'},
-  {group:'Heart & Emotional',label:'I am grieving a loss',sub:'Grief · Comfort · Gentle healing · Acceptance'},
-  {group:'Heart & Emotional',label:'I need calm and peace',sub:'Anxiety relief · Nervous system · Soothing'},
-  {group:'Heart & Emotional',label:'I need to release anger or frustration',sub:'Emotional release · Letting go · Processing'},
-  {group:'Heart & Emotional',label:'My heart needs healing',sub:'Grief · Heartbreak · Forgiveness'},
-  {group:'Heart & Emotional',label:'I want joy and creative energy',sub:'Happiness · Optimism · Creative spark'},
-  {group:'Heart & Emotional',label:'I want more self-compassion',sub:'Self-love · Inner kindness · Self-worth'},
-  {group:'Heart & Emotional',label:'I want to improve a relationship',sub:'Connection · Empathy · Communication · Trust'},
-  {group:'Mind & Will',label:'I need mental clarity',sub:'Focus · Decision-making · Clear thinking'},
-  {group:'Mind & Will',label:'I need motivation and energy',sub:'Vitality · Drive · Getting unstuck · Forward motion'},
-  {group:'Mind & Will',label:'I need to communicate better',sub:'Speaking truth · Being heard · Expression'},
-  {group:'Mind & Will',label:'I want more confidence',sub:'Boldness · Action · Self-trust · Power'},
-  {group:'Mind & Will',label:'I want to attract something into my life',sub:'Manifestation · Abundance · Intention-setting'},
-  {group:'Mind & Will',label:'I want to manifest a goal',sub:'Intention · Abundance · Drawing things toward you'},
-  {group:'Mind & Will',label:'I want to set an intention',sub:'Ritual · Focused practice · Working with purpose · Beginning'},
-  {group:'Mind & Will',label:'I want to start something new',sub:'New beginnings · Fresh starts · Courage to begin'},
-  {group:'Spirit & Intuition',label:'I feel disconnected from my purpose',sub:'Clarity of path · Soul alignment · Meaning'},
-  {group:'Spirit & Intuition',label:'I want deeper intuition',sub:'Inner knowing · Psychic sensitivity · Dreams'},
-  {group:'Spirit & Intuition',label:'I want spiritual connection',sub:'Higher guidance · Meditation · Awareness'},
-  {group:'Spirit & Intuition',label:'I want to deepen my meditation',sub:'Stillness · Focus · Going inward'},
-  {group:'Spirit & Intuition',label:"I'm ready for transformation",sub:'Shadow work · Releasing patterns · Growth'},
-  {group:'Body & Vitality',label:'I am healing or recovering',sub:'Regeneration · Support · Gentle restoration'},
-  {group:'Body & Vitality',label:'I need more physical energy',sub:'Vitality · Stamina · Activation · Life force'},
-  {group:'Body & Vitality',label:'I want to clear stagnant energy',sub:'Purification · Renewal · Moving what is stuck'},
-  {group:'Body & Vitality',label:'I want to feel more present in my body',sub:'Embodiment · Grounding · Physical awareness'}
+  {group:'Grounding',label:'I feel overwhelmed or overstimulated',sub:'Nervous system · Slowing down · Finding quiet'},
+  {group:'Grounding',label:'I feel scattered or anxious',sub:'Grounding · Anchoring · Coming back to earth'},
+  {group:'Grounding',label:'I feel stuck and cannot move forward',sub:'Inertia · Resistance · Stagnation'},
+  {group:'Grounding',label:'I need better sleep',sub:'Rest · Calming the mind · Night support'},
+  {group:'Grounding',label:'I need protection',sub:'Energetic shielding · Boundary holding'},
+  {group:'Grounding',label:'I need stability through change',sub:'Steadiness · Structure · Support'},
+  {group:'Heart',label:'I am grieving a loss',sub:'Grief · Comfort · Gentle healing · Acceptance'},
+  {group:'Heart',label:'I need calm and peace',sub:'Anxiety relief · Nervous system · Soothing'},
+  {group:'Heart',label:'I need to release anger or frustration',sub:'Emotional release · Letting go · Processing'},
+  {group:'Heart',label:'My heart needs healing',sub:'Grief · Heartbreak · Forgiveness'},
+  {group:'Heart',label:'I want joy and creative energy',sub:'Happiness · Optimism · Creative spark'},
+  {group:'Heart',label:'I want more self-compassion',sub:'Self-love · Inner kindness · Self-worth'},
+  {group:'Heart',label:'I want to improve a relationship',sub:'Connection · Empathy · Communication · Trust'},
+  {group:'Mind',label:'I need mental clarity',sub:'Focus · Decision-making · Clear thinking'},
+  {group:'Mind',label:'I need motivation and energy',sub:'Vitality · Drive · Getting unstuck · Forward motion'},
+  {group:'Mind',label:'I need to communicate better',sub:'Speaking truth · Being heard · Expression'},
+  {group:'Mind',label:'I want more confidence',sub:'Boldness · Action · Self-trust · Power'},
+  {group:'Mind',label:'I want to attract something into my life',sub:'Manifestation · Abundance · Intention-setting'},
+  {group:'Mind',label:'I want to manifest a goal',sub:'Intention · Abundance · Drawing things toward you'},
+  {group:'Mind',label:'I want to set an intention',sub:'Ritual · Focused practice · Working with purpose · Beginning'},
+  {group:'Mind',label:'I want to start something new',sub:'New beginnings · Fresh starts · Courage to begin'},
+  {group:'Spirit',label:'I feel disconnected from my purpose',sub:'Clarity of path · Soul alignment · Meaning'},
+  {group:'Spirit',label:'I want deeper intuition',sub:'Inner knowing · Psychic sensitivity · Dreams'},
+  {group:'Spirit',label:'I want spiritual connection',sub:'Higher guidance · Meditation · Awareness'},
+  {group:'Spirit',label:'I want to deepen my meditation',sub:'Stillness · Focus · Going inward'},
+  {group:'Spirit',label:"I'm ready for transformation",sub:'Shadow work · Releasing patterns · Growth'},
+  {group:'Body',label:'I am healing or recovering',sub:'Regeneration · Support · Gentle restoration'},
+  {group:'Body',label:'I need more physical energy',sub:'Vitality · Stamina · Activation · Life force'},
+  {group:'Body',label:'I want to clear stagnant energy',sub:'Purification · Renewal · Moving what is stuck'},
+  {group:'Body',label:'I want to feel more present in my body',sub:'Embodiment · Grounding · Physical awareness'}
 ]
-const MOOD_GROUPS=['All','Grounding & Stability','Heart & Emotional','Mind & Will','Spirit & Intuition','Body & Vitality'];
+const MOOD_GROUPS=['All','Grounding','Heart','Mind','Spirit','Body'];
 
-// Maps each intention card group to the all_themes values used in Supabase
+// Maps each intention card group to the all_themes values used in Supabase (fallback when intention_tags not present)
 const INTENTION_THEME_MAP = {
-  'Grounding & Stability': ['Grounding', 'Protection', 'Calm & Peace'],
-  'Heart & Emotional':     ['Heart Healing', 'Emotional Balance', 'Self-Love', 'Joy'],
-  'Mind & Will':           ['Clarity & Focus', 'Communication', 'Confidence'],
-  'Spirit & Intuition':    ['Intuition', 'Spiritual Connection', 'Transformation'],
-  'Body & Vitality':       ['Vitality', 'Amplification', 'Manifestation'],
+  'Grounding': ['Grounding', 'Protection', 'Calm & Peace'],
+  'Heart':     ['Heart Healing', 'Emotional Balance', 'Self-Love', 'Joy'],
+  'Mind':      ['Clarity & Focus', 'Communication', 'Confidence'],
+  'Spirit':    ['Intuition', 'Spiritual Connection', 'Transformation'],
+  'Body':      ['Vitality', 'Amplification', 'Manifestation'],
 };
 const INTENTION_CARD_SUBS = {
-  'Grounding & Stability': 'Presence, stability, inner calm',
-  'Heart & Emotional':     'Love, compassion, forgiveness',
-  'Mind & Will':           'Clarity, focus, motivation',
-  'Spirit & Intuition':    'Intuition, inner wisdom, spiritual awareness',
-  'Body & Vitality':       'Energy, resilience, vitality',
+  'Grounding': 'Presence, stability, inner calm',
+  'Heart':     'Love, compassion, forgiveness',
+  'Mind':      'Clarity, focus, motivation',
+  'Spirit':    'Intuition, inner wisdom, spiritual awareness',
+  'Body':      'Energy, resilience, vitality',
 };
 const INTENTION_SUB_FILTERS = {
-  'Grounding & Stability': [
-    {label:'Anxiety', keywords:['anxiety','anxious','worry','overwhelm']},
-    {label:'Stability', themes:['Stability','Grounding'], keywords:['stable','stability','steady','steadiness']},
-    {label:'Protection', themes:['Protection'], keywords:['protect','shield','boundary']},
-    {label:'Overthinking', themes:['Clarity & Focus'], keywords:['overthink','racing mind','ruminate','mental clutter']},
-    {label:'Nervous System', keywords:['nervous','sensitiv','soothe','settle']},
-    {label:'Sleep', themes:['Calm & Peace'], keywords:['sleep','rest','night','insomnia']},
-    {label:'Focus', themes:['Clarity & Focus'], keywords:['focus','center','clarity']}
+  'Grounding': [
+    {label:'Anxiety',        slug:'anxiety',        keywords:['anxiety','anxious','worry','overwhelm']},
+    {label:'Stability',      slug:'stability',      themes:['Stability','Grounding'], keywords:['stable','stability','steady','steadiness']},
+    {label:'Protection',     slug:'protection',     themes:['Protection'], keywords:['protect','shield','boundary']},
+    {label:'Overthinking',   slug:'overthinking',   themes:['Clarity & Focus'], keywords:['overthink','racing mind','ruminate','mental clutter']},
+    {label:'Nervous System', slug:'nervous-system', keywords:['nervous','sensitiv','soothe','settle']},
+    {label:'Sleep',          slug:'sleep',          themes:['Calm & Peace'], keywords:['sleep','rest','night','insomnia']}
   ],
-  'Heart & Emotional': [
-    {label:'Self-Love', themes:['Self-Love'], keywords:['self-love','self love','self-worth','self-compassion']},
-    {label:'Grief', themes:['Heart Healing'], keywords:['grief','grieving','loss','mourn']},
-    {label:'Compassion', themes:['Heart Healing','Self-Love'], keywords:['compassion','kindness','empathy']},
-    {label:'Forgiveness', themes:['Heart Healing'], keywords:['forgiv','release','let go']},
-    {label:'Emotional Balance', themes:['Emotional Balance','Emotional Regulation'], keywords:['emotional balance','emotional regulation','balance']},
-    {label:'Relationships', themes:['Heart Healing','Communication'], keywords:['relationship','connection','trust','communication']},
-    {label:'Inner Child', themes:['Self-Love','Joy'], keywords:['inner child','nurtur','play','gentle']}
+  'Heart': [
+    {label:'Self-Love',        slug:'self-love',        themes:['Self-Love'], keywords:['self-love','self love','self-worth','self-compassion']},
+    {label:'Grief',            slug:'grief',            themes:['Heart Healing'], keywords:['grief','grieving','loss','mourn']},
+    {label:'Compassion',       slug:'compassion',       themes:['Heart Healing','Self-Love'], keywords:['compassion','kindness','empathy']},
+    {label:'Forgiveness',      slug:'forgiveness',      themes:['Heart Healing'], keywords:['forgiv','release','let go']},
+    {label:'Emotional Balance',slug:'emotional-balance',themes:['Emotional Balance','Emotional Regulation'], keywords:['emotional balance','emotional regulation','balance']},
+    {label:'Relationships',    slug:'relationships',    themes:['Heart Healing','Communication'], keywords:['relationship','connection','trust','communication']},
+    {label:'Inner Child',      slug:'inner-child',      themes:['Self-Love','Joy'], keywords:['inner child','nurtur','play','gentle']}
   ],
-  'Mind & Will': [
-    {label:'Clarity', themes:['Clarity & Focus'], keywords:['clarity','clear','decision']},
-    {label:'Focus', themes:['Clarity & Focus'], keywords:['focus','study','concentrat']},
-    {label:'Motivation', themes:['Vitality','Confidence'], keywords:['motivat','drive','momentum']},
-    {label:'Confidence', themes:['Confidence'], keywords:['confidence','self-trust','power']},
-    {label:'Communication', themes:['Communication'], keywords:['communicat','speak','voice']},
-    {label:'Manifestation', themes:['Manifestation'], keywords:['manifest','abundance','intention']},
-    {label:'Decision Making', themes:['Clarity & Focus'], keywords:['decision','choice','direction']}
+  'Mind': [
+    {label:'Clarity',         slug:'clarity',          themes:['Clarity & Focus'], keywords:['clarity','clear','decision']},
+    {label:'Focus',           slug:'focus',            themes:['Clarity & Focus'], keywords:['focus','study','concentrat']},
+    {label:'Motivation',      slug:'motivation',       themes:['Vitality','Confidence'], keywords:['motivat','drive','momentum']},
+    {label:'Confidence',      slug:'confidence',       themes:['Confidence'], keywords:['confidence','self-trust','power']},
+    {label:'Communication',   slug:'communication',    themes:['Communication'], keywords:['communicat','speak','voice']},
+    {label:'Decision Making', slug:'decision-making',  themes:['Clarity & Focus'], keywords:['decision','choice','direction']},
+    {label:'Creativity',      slug:'creativity',       themes:['Joy','Confidence'], keywords:['creativ','artis','expression','imagination']}
   ],
-  'Spirit & Intuition': [
-    {label:'Intuition', themes:['Intuition'], keywords:['intuition','inner knowing','psychic']},
-    {label:'Meditation', themes:['Spiritual Connection','Calm & Peace'], keywords:['meditat','stillness','quiet']},
-    {label:'Spiritual Connection', themes:['Spiritual Connection'], keywords:['spiritual','divine','guidance']},
-    {label:'Transformation', themes:['Transformation'], keywords:['transform','shadow','rebirth']},
-    {label:'Dream Work', themes:['Intuition','Spiritual Connection'], keywords:['dream','vision']},
-    {label:'Purpose', themes:['Clarity & Focus','Spiritual Connection'], keywords:['purpose','path','meaning']},
-    {label:'Higher Guidance', themes:['Spiritual Connection'], keywords:['higher guidance','divine','sacred']}
+  'Spirit': [
+    {label:'Intuition',           slug:'intuition',           themes:['Intuition'], keywords:['intuition','inner knowing','psychic']},
+    {label:'Meditation',          slug:'meditation',          themes:['Spiritual Connection','Calm & Peace'], keywords:['meditat','stillness','quiet']},
+    {label:'Spiritual Connection',slug:'spiritual-connection',themes:['Spiritual Connection'], keywords:['spiritual','divine','guidance']},
+    {label:'Transformation',      slug:'transformation',      themes:['Transformation'], keywords:['transform','shadow','rebirth']},
+    {label:'Dream Work',          slug:'dream-work',          themes:['Intuition','Spiritual Connection'], keywords:['dream','vision']},
+    {label:'Purpose',             slug:'purpose',             themes:['Clarity & Focus','Spiritual Connection'], keywords:['purpose','path','meaning']},
+    {label:'Manifestation',       slug:'manifestation',       themes:['Manifestation'], keywords:['manifest','abundance','intention']}
   ],
-  'Body & Vitality': [
-    {label:'Vitality', themes:['Vitality'], keywords:['vitality','life force','energ']},
-    {label:'Energy', themes:['Vitality','Amplification'], keywords:['energy','activation','spark']},
-    {label:'Recovery', themes:['Heart Healing','Vitality'], keywords:['recover','healing','restor']},
-    {label:'Stamina', themes:['Vitality'], keywords:['stamina','endurance','sustain']},
-    {label:'Clearing', themes:['Amplification','Transformation'], keywords:['clearing','cleanse','purif','stuck energy']},
-    {label:'Embodiment', themes:['Grounding'], keywords:['body','embodiment','somatic','presence']},
-    {label:'Resilience', themes:['Vitality','Grounding'], keywords:['resilience','strength','support']}
+  'Body': [
+    {label:'Vitality',    slug:'vitality',    themes:['Vitality'], keywords:['vitality','life force','energ']},
+    {label:'Energy',      slug:'energy',      themes:['Vitality','Amplification'], keywords:['energy','activation','spark']},
+    {label:'Recovery',    slug:'recovery',    themes:['Heart Healing','Vitality'], keywords:['recover','healing','restor']},
+    {label:'Stamina',     slug:'stamina',     themes:['Vitality'], keywords:['stamina','endurance','sustain']},
+    {label:'Clearing',    slug:'clearing',    themes:['Amplification','Transformation'], keywords:['clearing','cleanse','purif','stuck energy']},
+    {label:'Embodiment',  slug:'embodiment',  themes:['Grounding'], keywords:['body','embodiment','somatic','presence']},
+    {label:'Resilience',  slug:'resilience',  themes:['Vitality','Grounding'], keywords:['resilience','strength','support']}
   ]
 };
+// Maps group names to their intention_tags parent slug
+const INTENTION_PARENT_SLUGS = {
+  'Grounding':'grounding',
+  'Heart':'heart-support',
+  'Mind':'mental-clarity',
+  'Spirit':'intuition',
+  'Body':'body-energy',
+};
+const INTENTION_SHOWING_LABELS = {
+  'Grounding':'Grounding',
+  'Heart':'Heart support',
+  'Mind':'Mental clarity',
+  'Spirit':'Intuition',
+  'Body':'Body energy',
+};
+const intentionLabelMap = {
+  'grounding':'Grounding','heart-support':'Heart support','mental-clarity':'Mental clarity',
+  'intuition':'Intuition','body-energy':'Body energy',
+  'anxiety':'Anxiety','stability':'Stability','protection':'Protection','overthinking':'Overthinking',
+  'nervous-system':'Nervous system','sleep':'Sleep',
+  'self-love':'Self-Love','grief':'Grief','compassion':'Compassion','forgiveness':'Forgiveness',
+  'emotional-balance':'Emotional balance','relationships':'Relationships','inner-child':'Inner child',
+  'clarity':'Clarity','focus':'Focus','motivation':'Motivation','confidence':'Confidence',
+  'communication':'Communication','decision-making':'Decision making','creativity':'Creativity',
+  'meditation':'Meditation','spiritual-connection':'Spiritual connection','transformation':'Transformation',
+  'dream-work':'Dream work','purpose':'Purpose','manifestation':'Manifestation',
+  'vitality':'Vitality','energy':'Energy','recovery':'Recovery','stamina':'Stamina',
+  'clearing':'Clearing','embodiment':'Embodiment','resilience':'Resilience',
+};
+function getIntentionLabel(slug){ return intentionLabelMap[slug] || slug; }
 function intentionPageSize(){return window.innerWidth<=768?10:12;}
 
 
@@ -2169,8 +2198,14 @@ function toggleIntentionTier4(checkbox){
 function intentionTierRangeLabel(){return intentionIncludeTier4?'Tier 1–4':'Tier 1–3';}
 
 function getIntentionGroupMatches(group){
-  const themes = INTENTION_THEME_MAP[group] || [];
-  return filterIntentionTier(CRYSTALS.filter(c => themes.some(t => (c.all_themes||[]).includes(t))));
+  const parentSlug = INTENTION_PARENT_SLUGS[group];
+  return filterIntentionTier(CRYSTALS.filter(c => {
+    if(parentSlug && c.intention_tags && c.intention_tags.length > 0){
+      return c.intention_tags.includes(parentSlug);
+    }
+    const themes = INTENTION_THEME_MAP[group] || [];
+    return themes.some(t => (c.all_themes||[]).includes(t));
+  }));
 }
 
 function intentionFilterHaystack(c){
@@ -2182,9 +2217,13 @@ function intentionFilterHaystack(c){
 
 function applyIntentionSubFilter(matches, group, filterLabel){
   if(!filterLabel || filterLabel==='all')return matches;
-  const filter=((INTENTION_SUB_FILTERS[group]||[]).length ? INTENTION_SUB_FILTERS[group] : activeIntentionFilterDefs).find(f=>f.label===filterLabel);
+  const defs=(INTENTION_SUB_FILTERS[group]||[]).length ? INTENTION_SUB_FILTERS[group] : activeIntentionFilterDefs;
+  const filter=defs.find(f=>f.label===filterLabel);
   if(!filter)return matches;
   return matches.filter(c=>{
+    if(filter.slug && c.intention_tags && c.intention_tags.length > 0){
+      return c.intention_tags.includes(filter.slug);
+    }
     const themes=c.all_themes||[];
     const themeHit=(filter.themes||[]).some(t=>themes.includes(t) || c.primary_theme===t);
     if(themeHit)return true;
@@ -2237,14 +2276,7 @@ function sortIntentionMatches(matches, context){
 }
 
 function intentionCategoryDisplayName(group){
-  const map={
-    'Grounding & Stability':'Grounding',
-    'Heart & Emotional':'Heart support',
-    'Mind & Will':'Mental clarity',
-    'Spirit & Intuition':'intuition',
-    'Body & Vitality':'body energy'
-  };
-  return map[group]||group||'these stones';
+  return INTENTION_SHOWING_LABELS[group] || group || 'these stones';
 }
 
 function intentionResultsTitle(){
@@ -2779,12 +2811,33 @@ function selectedIntentionPhrase(stone){
   return theme;
 }
 
+function normalizeUseWhenToWhy(stone){
+  const compact=compactIntentionReason(stone&&stone.uw);
+  if(compact&&!isGenericBlurb(compact))return compact;
+  return selectedIntentionPhrase(stone);
+}
+
+function getStoneWhyText(stone, parentSlug, subSlug){
+  const stoneId=stone&&stone.i;
+  if(stoneId){
+    const stoneMap=stoneIntentionReasonsMap[stoneId];
+    if(stoneMap){
+      if(subSlug&&stoneMap[subSlug])return stoneMap[subSlug];
+      if(parentSlug&&stoneMap[parentSlug])return stoneMap[parentSlug];
+    }
+  }
+  return normalizeUseWhenToWhy(stone);
+}
+
 function intentionBestForText(stone){
   if(activeIntentionMode==='ai'){
     const reason=compactIntentionReason(getIntentionCardDescription(stone, activeIntentionQuery));
     if(reason)return reason;
   }
-  return selectedIntentionPhrase(stone);
+  const parentSlug=INTENTION_PARENT_SLUGS[activeIntentionGroup]||'';
+  const subDef=(INTENTION_SUB_FILTERS[activeIntentionGroup]||[]).find(f=>f.label===activeIntentionFilter);
+  const subSlug=subDef?subDef.slug:null;
+  return getStoneWhyText(stone, parentSlug, subSlug);
 }
 
 function intentionTierPillHtml(c){
@@ -4579,6 +4632,7 @@ function updateLastSaved(){
 
 // ── START ──
 async function loadStonesAndInit() {
+  loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
   const CACHE_KEY = 'spl_stones_cache';
   const CACHE_VER = 'v3';
 
@@ -4616,9 +4670,10 @@ async function loadStonesAndInit() {
       col_cat:       cats[0]             || '',
       col_cats:      cats,
       isMulti:       cats.length > 1,
-      primary_theme: r.primary_theme     || '',
-      all_themes:    r.all_themes        || [],
-      tier:          r.collection_tier   || null,
+      primary_theme:  r.primary_theme     || '',
+      all_themes:     r.all_themes       || [],
+      intention_tags: r.intention_tags   || [],
+      tier:           r.collection_tier  || null,
       man_made:      r.is_man_made       || false,
       tox:           r.toxicity_note     || '',
       o:             false,
@@ -7010,6 +7065,24 @@ const _supa = window.supabase.createClient(
     }
   }
 );
+
+// ── Stone intention reasons (per-stone Why text) ──
+let stoneIntentionReasonsMap = {};
+async function loadStoneIntentionReasons(){
+  try{
+    const {data,error}=await _supa.from('stone_intention_reasons')
+      .select('stone_slug,intention_slug,reason_text')
+      .eq('is_active',true);
+    if(error)throw error;
+    (data||[]).forEach(row=>{
+      if(!row.stone_slug||!row.intention_slug||!row.reason_text)return;
+      if(!stoneIntentionReasonsMap[row.stone_slug])stoneIntentionReasonsMap[row.stone_slug]={};
+      stoneIntentionReasonsMap[row.stone_slug][row.intention_slug]=row.reason_text;
+    });
+  }catch(e){
+    console.warn('Could not load stone intention reasons:',e);
+  }
+}
 
 // ── Load stones from Supabase, then init app ──
 function runPageAction(action, attempt){
