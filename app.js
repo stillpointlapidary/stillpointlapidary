@@ -825,20 +825,20 @@ function renderMobileSotdCard(s){
     <article class="msfc-card">
       <div class="msfc-photo-wrap">${photoHtml}</div>
       <div class="msfc-body">
-        <p class="msfc-eyebrow">Today's Stone</p>
+        <p class="msfc-eyebrow">The Daily Stone</p>
         <h2 class="msfc-name">${sname}</h2>
         ${s.card_quality_pill?`<div class="msfc-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
         ${s.card_summary?`<p class="msfc-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${s.card_use_when?`<p class="msfc-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="msfc-actions">
-          <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View full entry</button>
+          <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View Full Entry</button>
           <div class="msfc-secondary-row">
-            <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to collection</button>
-            <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">On wishlist</button>
+            <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to Collection</button>
+            <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to Wishlist</button>
           </div>
         </div>
         ${(bestForRow||chakraRow||pairWithRow)?`<div class="msfc-details">${bestForRow}${chakraRow}${pairWithRow}</div>`:''}
-        ${s.card_note?`<p class="msfc-note">${escapeAttr(s.card_note)}</p>`:''}
+        ${s.card_note?`<p class="msfc-ritual">${escapeAttr(s.card_note)}</p>`:''}
       </div>
     </article>`;
   container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
@@ -872,7 +872,7 @@ function updateMobileSotdAuth(){
     if(_currentUser&&mobileSotdStone&&wish[mobileSotdStone.id]){
       wishBtn.textContent='On Wishlist';wishBtn.disabled=true;
     } else {
-      wishBtn.textContent='On wishlist';wishBtn.disabled=false;
+      wishBtn.textContent='Add to Wishlist';wishBtn.disabled=false;
     }
   }
 }
