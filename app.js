@@ -833,9 +833,8 @@ function renderMobileSotdCard(s){
         <div class="msfc-actions">
           <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View full entry</button>
           <div class="msfc-secondary-row">
-            <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">Add to collection</button>
-            <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" style="display:none">On wishlist</button>
-            <span class="msfc-signin-hint" style="display:none">Sign in to save stones</span>
+            <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to collection</button>
+            <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">On wishlist</button>
           </div>
         </div>
         ${(bestForRow||chakraRow||pairWithRow)?`<div class="msfc-details">${bestForRow}${chakraRow}${pairWithRow}</div>`:''}
@@ -865,24 +864,16 @@ function renderMobileSotdCard(s){
 function updateMobileSotdAuth(){
   const container=document.getElementById('mobile-sotd-card-wrap');
   if(!container)return;
-  const signin=container.querySelector('.msfc-signin-hint');
   const collBtn=container.querySelector('.msfc-btn-coll');
   const wishBtn=container.querySelector('.msfc-btn-wish');
-  if(_currentUser){
-    if(signin)signin.style.display='none';
-    if(collBtn)collBtn.style.display='';
-    if(wishBtn){
-      wishBtn.style.display='';
-      if(mobileSotdStone&&wish[mobileSotdStone.id]){
-        wishBtn.textContent='On Wishlist';wishBtn.disabled=true;
-      } else {
-        wishBtn.textContent='On wishlist';wishBtn.disabled=false;
-      }
+  if(collBtn)collBtn.style.display='';
+  if(wishBtn){
+    wishBtn.style.display='';
+    if(_currentUser&&mobileSotdStone&&wish[mobileSotdStone.id]){
+      wishBtn.textContent='On Wishlist';wishBtn.disabled=true;
+    } else {
+      wishBtn.textContent='On wishlist';wishBtn.disabled=false;
     }
-  } else {
-    if(signin)signin.style.display='';
-    if(collBtn)collBtn.style.display='none';
-    if(wishBtn)wishBtn.style.display='none';
   }
 }
 
