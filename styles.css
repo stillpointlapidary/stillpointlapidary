@@ -1707,6 +1707,29 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .coll-fs-subrow:active{background:rgba(143,166,151,0.07)}
   .coll-fs-more-group .coll-fs-pills{padding-left:32px}
 
+  /* Sort sub-panel toggle */
+  .coll-fs-head--sort{display:none}
+  .coll-fs-sort-body{display:none!important}
+  .coll-fs.sort-open .coll-fs-head--main{display:none}
+  .coll-fs.sort-open .coll-fs-head--sort{display:flex}
+  .coll-fs.sort-open .coll-fs-main-body{display:none!important}
+  .coll-fs.sort-open .coll-fs-sort-body{display:block!important}
+  .coll-fs.sort-open .coll-fs-footer--main{display:none}
+
+  /* Sort sub-panel back button */
+  .coll-fs-back{background:none;border:none;padding:4px;cursor:pointer;color:var(--ink2);display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.12s;margin-right:4px}
+  .coll-fs-back:active{background:rgba(79,74,69,0.08)}
+
+  /* Sort option rows */
+  .coll-fs-sort-option{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-top:0.5px solid rgba(0,0,0,0.05);cursor:pointer;transition:background 0.1s;min-height:52px}
+  .coll-fs-sort-option:first-child{border-top:none}
+  .coll-fs-sort-option:active{background:rgba(143,166,151,0.07)}
+  .coll-fs-sort-option.active{background:rgba(143,166,151,0.07)}
+  .coll-fs-sort-label{font-family:'Jost',sans-serif;font-size:14px;color:var(--ink)}
+  .coll-fs-sort-option.active .coll-fs-sort-label{color:#8FA697;font-weight:500}
+  .coll-fs-sort-check{width:16px;height:16px;flex-shrink:0;color:#8FA697;opacity:0;transition:opacity 0.15s}
+  .coll-fs-sort-option.active .coll-fs-sort-check{opacity:1}
+
   /* Footer buttons */
   .coll-fs-footer{display:flex;gap:10px;padding:14px 20px calc(env(safe-area-inset-bottom) + 14px);border-top:0.5px solid rgba(0,0,0,0.07);flex-shrink:0;background:#FAF8F5}
   .coll-fs-btn-clear{flex:1;padding:13px;border-radius:12px;border:1px solid rgba(143,166,151,0.55);background:transparent;color:#8FA697;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.04em;cursor:pointer;transition:background 0.13s}
