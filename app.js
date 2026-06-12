@@ -3036,8 +3036,12 @@ function collMobileTab(mode){
 
 function openMobileFilterSheet(){
   buildMobileFilterSheet();
+  syncSortPanelChecks();
+  const sortValEl=document.getElementById('coll-fsval-sort');
+  if(sortValEl) sortValEl.textContent=_COLL_SORT_OPTS.find(o=>o.val===_collMobileSort)?.label||'Recently added';
   document.getElementById('coll-fs-overlay').classList.add('open');
   document.getElementById('coll-fs').classList.add('open');
+  document.getElementById('coll-fs').classList.remove('sort-open');
   document.body.style.overflow='hidden';
 }
 
@@ -3134,10 +3138,17 @@ function updateMobileFilterValues(){
 function updateMobileFilterBar(){
   const keys=['cfam','ctheme','ccolor','cchakra','cmohs','cformation','cmaterial','form','size','cshelf'];
   const n=keys.filter(k=>collFilters[k]&&collFilters[k]!=='all').length;
+  const hasCustomSort=_collMobileSort!=='recent';
+  const sortLabel=_COLL_SORT_OPTS.find(o=>o.val===_collMobileSort)?.label||'Recently added';
+  let text;
+  if(n===0&&!hasCustomSort) text='Filter & Sort';
+  else if(n>0&&!hasCustomSort) text=n===1?'1 Filter Applied':n+' Filters Applied';
+  else if(n===0&&hasCustomSort) text='Sorted: '+sortLabel;
+  else text=n+(n===1?' Filter':' Filters')+' · '+sortLabel;
   const lbl=document.getElementById('coll-mfr-label');
   const row=document.getElementById('coll-mobile-filter-row');
-  if(lbl)lbl.textContent=n===0?'Filter & Sort':n===1?'1 Filter Applied':n+' Filters Applied';
-  if(row)row.classList.toggle('has-filters',n>0);
+  if(lbl)lbl.textContent=text;
+  if(row)row.classList.toggle('has-filters',n>0||hasCustomSort);
 }
 
 function clearMobileFilters(){
@@ -3153,6 +3164,62 @@ function applyMobileFilters(){
   closeMobileFilterSheet();
 }
 
+function openSortPanel(){
+  syncSortPanelChecks();
+  document.getElementById('coll-fs').classList.add('sort-open');
+}
+
+function closeSortPanel(){
+  document.getElementById('coll-fs').classList.remove('sort-open');
+}
+
+function syncSortPanelChecks(){
+  document.querySelectorAll('.coll-fs-sort-option').forEach(el=>{
+    el.classList.toggle('active', el.dataset.sort === _collMobileSort);
+  });
+}
+
+function applyCollMobileSort(items){
+  if(_collMobileSort==='recent') return items;
+  const arr=[...items];
+  const crystalOf=p=>CRYSTALS.find(x=>x.i===p.crystalId);
+  switch(_collMobileSort){
+    case 'name-az':
+      arr.sort((a,b)=>{
+        const na=a.nickname||(crystalOf(a)?.n||'');
+        const nb=b.nickname||(crystalOf(b)?.n||'');
+        return na.localeCompare(nb);
+      });break;
+    case 'name-za':
+      arr.sort((a,b)=>{
+        const na=a.nickname||(crystalOf(a)?.n||'');
+        const nb=b.nickname||(crystalOf(b)?.n||'');
+        return nb.localeCompare(na);
+      });break;
+    case 'tier':
+      arr.sort((a,b)=>(Number(crystalOf(a)?.tier)||99)-(Number(crystalOf(b)?.tier)||99));
+      break;
+    case 'color':
+      arr.sort((a,b)=>(crystalOf(a)?.col_cat||'').localeCompare(crystalOf(b)?.col_cat||''));
+      break;
+    case 'chakra':
+      arr.sort((a,b)=>((crystalOf(a)?.chakras||[])[0]||'').localeCompare(((crystalOf(b)?.chakras||[])[0]||'')));
+      break;
+  }
+  return arr;
+}
+
+function setMobileSort(val){
+  _collMobileSort = val;
+  syncSortPanelChecks();
+  const sortLabel = _COLL_SORT_OPTS.find(o=>o.val===val)?.label || 'Recently added';
+  const valEl = document.getElementById('coll-fsval-sort');
+  if(valEl) valEl.textContent = sortLabel;
+  updateMobileFilterBar();
+  renderCollection();
+  closeSortPanel();
+}
+
 function renderMobileProgressCard(){
   const container=document.getElementById('coll-progress-tiers');
   if(!container||!CRYSTALS.length)return;
@@ -3161,7 +3228,7 @@ function renderMobileProgressCard(){
   const wishIds=new Set(Object.keys(wish));
   const tiers=[
     {num:1,label:'Essentials'},
-    {num:2,label:'Builders'},
+    {num:2,label:'Shelf Builders'},
     {num:3,label:'Favorites'},
     {num:4,label:'Rare Finds'},
   ];
@@ -3386,6 +3453,17 @@ function encTierAccordionExpand(num){
   setTimeout(()=>scrollToPageSection(document.getElementById('enc-acc-'+num)),50);
 }
 
+// ── Mobile sort state ──
+let _collMobileSort = 'recent';
+const _COLL_SORT_OPTS = [
+  {val:'recent',  label:'Recently added'},
+  {val:'name-az', label:'Stone name A–Z'},
+  {val:'name-za', label:'Stone name Z–A'},
+  {val:'tier',    label:'Collector tier'},
+  {val:'color',   label:'Color'},
+  {val:'chakra',  label:'Chakra'},
+];
+
 // ── Collection Tier Bars ──
 let _tierWishlistOn = true;
 
@@ -3583,10 +3661,11 @@ function renderCollection(){
     return;
   }
 
-  const items=displayCollection.filter(p=>{
+  let items=displayCollection.filter(p=>{
     const c=CRYSTALS.find(x=>x.i===p.crystalId);
     return passesCollStoneFilters(c)&&passesCollPieceFilters(p);
   });
+  items=applyCollMobileSort(items);
   if(!items.length){
     wrap.innerHTML=displayCollection.length?'<div class="empty-coll">No pieces match your filters.</div>':_emptyCollHtml();
     return;
