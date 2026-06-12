@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stone of the Day — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── PAGE ──────────────────────────────────────────────── */
+    :root {
+      --bg:          #f7f5f2;
+      --card-bg:     #fffdf9;
+      --ink:         #3d3a36;
+      --ink2:        #6b6560;
+      --ink3:        #9a948e;
+      --accent:      #8b7355;
+      --accent2:     #c8a96e;
+      --line:        rgba(42,37,32,0.10);
+      --line2:       rgba(42,37,32,0.07);
+      --radius:      28px;
+    }
+
+    body {
+      font-family: 'Jost', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 48px 32px 80px;
+    }
+
+    /* ─── PREVIEW LABELS ────────────────────────────────────── */
+    .preview-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 14px;
+    }
+    .preview-block { margin-bottom: 64px; }
+
+    /* ═══════════════════════════════════════════════════════════
+       STONE FEATURE CARD — DESKTOP
+    ═══════════════════════════════════════════════════════════ */
+    .sfc {
+      display: grid;
+      grid-template-columns: 420px minmax(400px, 1fr) 340px;
+      background: var(--card-bg);
+      border: 1px solid rgba(42,37,32,0.11);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(60,48,34,0.08), 0 2px 8px rgba(60,48,34,0.04);
+    }
+
+    /* ─── LEFT: Photo ───────────────────────────────────────── */
+    .sfc__photo {
+      width: 420px;
+      aspect-ratio: 1 / 1;
+      min-height: 420px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f2e8da 0%, #faf5ee 100%);
+      flex-shrink: 0;
+    }
+    .sfc__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ─── MIDDLE: Content ───────────────────────────────────── */
+    .sfc__main {
+      padding: 56px 60px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .sfc__eyebrow {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .sfc__name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(36px, 3.5vw, 52px);
+      line-height: 0.92;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: #363230;
+      margin-bottom: 26px;
+    }
+
+    /* Quality pill — background set inline via chakra color */
+    .sfc__pill {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 9px 26px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 30px;
+      /* color/background set inline */
+    }
+
+    .sfc__summary {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px;
+      line-height: 1.55;
+      color: #4a4540;
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .sfc__use-when {
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--ink3);
+      max-width: 580px;
+      margin-bottom: 0;
+    }
+
+    /* ─── Buttons ───────────────────────────────────────────── */
+    .sfc__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      align-items: center;
+    }
+
+    .sfc__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .sfc__btn--primary {
+      /* background/color set inline via chakra color */
+      box-shadow: 0 6px 16px rgba(91,75,135,0.18);
+    }
+    .sfc__btn--primary:hover { filter: brightness(0.92); }
+
+    .sfc__btn--outline {
+      background: transparent;
+      border: 1px solid rgba(42,37,32,0.22);
+      color: var(--accent);
+    }
+    .sfc__btn--outline:hover {
+      background: rgba(42,37,32,0.04);
+      border-color: var(--accent2);
+    }
+
+    /* ─── RIGHT: Details ────────────────────────────────────── */
+    .sfc__details {
+      padding: 56px 44px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(250,247,243,0.9);
+    }
+
+    .sfc__details-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .sfc__row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line2);
+    }
+    .sfc__row:first-of-type { border-top: none; }
+    .sfc__row:last-of-type  { border-bottom: 1px solid var(--line2); }
+
+    .sfc__row-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: #b9a58c;
+    }
+    .sfc__row-icon svg {
+      width: 44px;
+      height: 44px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sfc__row-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 5px;
+    }
+    .sfc__row-value {
+      font-size: 20px;
+      font-weight: 500;
+      color: #45403c;
+      line-height: 1.2;
+    }
+
+    .sfc__note {
+      margin-top: 32px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--ink2);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TABLET — details drop below (~≤1100px)
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .sfc {
+        grid-template-columns: 340px 1fr;
+      }
+      .sfc__photo {
+        width: 340px;
+        min-height: 340px;
+      }
+      .sfc__details {
+        grid-column: 1 / -1;
+        border-top: 1px solid var(--line);
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0 40px;
+        padding: 36px 44px;
+      }
+      .sfc__details-title {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+      .sfc__row {
+        flex: 1;
+        min-width: 200px;
+        padding: 16px 0;
+      }
+      .sfc__note {
+        width: 100%;
+        margin-top: 20px;
+        font-size: 18px;
+      }
+      .sfc__main {
+        border-right: none;
+        padding: 44px 48px 40px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MOBILE — full stack (≤680px)
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 680px) {
+      body { padding: 24px 16px 60px; }
+
+      .sfc {
+        grid-template-columns: 1fr;
+        border-radius: 20px;
+      }
+      .sfc__photo {
+        width: 100%;
+        min-height: unset;
+        aspect-ratio: 1 / 1;
+      }
+      .sfc__main {
+        padding: 32px 28px 28px;
+      }
+      .sfc__name {
+        font-size: 52px;
+        margin-bottom: 18px;
+      }
+      .sfc__pill {
+        font-size: 13px;
+        padding: 8px 20px;
+        margin-bottom: 22px;
+      }
+      .sfc__summary   { font-size: 17px; }
+      .sfc__use-when  { font-size: 15px; }
+      .sfc__actions   { margin-top: 28px; flex-direction: column; gap: 10px; }
+      .sfc__btn       { width: 100%; padding: 14px 20px; font-size: 11px; justify-content: center; }
+
+      .sfc__details {
+        flex-direction: column;
+        padding: 28px 28px 32px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 0;
+      }
+      .sfc__row {
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+        padding: 18px 0;
+      }
+      .sfc__row-icon { width: 36px; height: 36px; }
+      .sfc__row-icon svg { width: 28px; height: 28px; }
+      .sfc__row-value { font-size: 17px; }
+      .sfc__note { font-size: 18px; margin-top: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── DESKTOP / TABLET PREVIEW ──────────────────────── -->
+  <div class="preview-block">
+    <p class="preview-label">Desktop — Stone of the Day</p>
+
+    <article class="sfc">
+
+      <!-- LEFT: Photo -->
+      <section class="sfc__photo" aria-label="Howlite photo">
+        <img
+          src="https://images.unsplash.com/photo-1615485925763-86786288908a?auto=format&fit=crop&w=900&q=80"
+          alt="Howlite crystal specimen"
+        />
+      </section>
+
+      <!-- MIDDLE: Content -->
+      <section class="sfc__main">
+        <p class="sfc__eyebrow">Today's Stone</p>
+
+        <!-- name — stones.name -->
+        <h1 class="sfc__name">Howlite</h1>
+
+        <!-- card_quality_pill — stones.card_quality_pill -->
+        <!-- pill color driven by primary_chakra -->
+        <div class="sfc__pill" style="background:#ded7ef; color:#5e5080;">
+          Calm &amp; Clarity
+        </div>
+
+        <!-- card_summary — stones.card_summary -->
+        <p class="sfc__summary">
+          A quieting stone for mental stillness, ease, and emotional steadiness.
+        </p>
+
+        <!-- card_use_when — stones.card_use_when -->
+        <p class="sfc__use-when">
+          Use when you need to soften mental noise and return to steadiness before reacting.
+        </p>
+
+        <!-- Button row -->
+        <!-- "View full entry" opens encyclopedia drawer for this stone (stones.id / slug) -->
+        <!-- "Add to collection" / "Add to wishlist" use existing auth + collection logic -->
+        <div class="sfc__actions">
+          <button class="sfc__btn sfc__btn--primary" style="background:#8479ad; color:#fff;" type="button">
+            View full entry
+          </button>
+          <button class="sfc__btn sfc__btn--outline" type="button">
+            Add to collection
+          </button>
+          <button class="sfc__btn sfc__btn--outline" type="button">
+            Add to wishlist
+          </button>
+        </div>
+      </section>
+
+      <!-- RIGHT: Details -->
+      <aside class="sfc__details">
+        <h2 class="sfc__details-title">Stone Details</h2>
+
+        <!-- card_best_for — stones.card_best_for -->
+        <div class="sfc__row">
+          <div class="sfc__row-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path d="M31.5 7.5c-11.8 0-21.2 8.4-21.2 19.6 0 5.4 2.2 10.3 5.9 13.9v10.8h13.2v-5.4h7.2c4.2 0 7.6-3.4 7.6-7.6v-4.1h5.6c1.7 0 2.7-1.9 1.8-3.3l-5.7-8.8C44.1 13.9 38.6 7.5 31.5 7.5Z"/>
+              <path d="M29.8 18.4c2.8-2.8 7.4-.8 7.4 3.2 0 .4 0 .8-.1 1.1 2.7.4 4.7 2.7 4.7 5.5 0 3.1-2.5 5.6-5.6 5.6h-12c-3.3 0-6-2.7-6-6 0-3 2.2-5.5 5.1-5.9.6-3.1 3.3-5.4 6.5-5.4Z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="sfc__row-label">Best for</p>
+            <p class="sfc__row-value">Mental stillness</p>
+          </div>
+        </div>
+
+        <!-- primary_chakra — stones.primary_chakra -->
+        <div class="sfc__row">
+          <div class="sfc__row-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path d="M32 52c-9.8-8.2-14.1-17.5-10.8-28.2C28.4 27.1 31.4 35 32 45c.6-10 3.6-17.9 10.8-21.2C46.1 34.5 41.8 43.8 32 52Z"/>
+              <path d="M32 52c-10.5-2.3-19-9.2-22.8-19.8C19.1 31.3 27.1 36 32 45c4.9-9 12.9-13.7 22.8-12.8C51 42.8 42.5 49.7 32 52Z"/>
+              <path d="M32 52c-6.6-5.3-9.2-12-6.9-19.8C29.4 35.3 31.5 41.3 32 52Zm0 0c6.6-5.3 9.2-12 6.9-19.8C34.6 35.3 32.5 41.3 32 52Z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="sfc__row-label">Primary chakra</p>
+            <p class="sfc__row-value">Crown</p>
+          </div>
+        </div>
+
+        <!-- card_pair_with — stones.card_pair_with -->
+        <div class="sfc__row">
+          <div class="sfc__row-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path d="M32 6 43 25 32 57 21 25 32 6Z"/>
+              <path d="M21 25h22"/>
+              <path d="M32 6v51"/>
+              <path d="M16 28 25 42 16 57 7 42 16 28Z"/>
+              <path d="M48 28 57 42 48 57 39 42 48 28Z"/>
+              <path d="M7 42h18M39 42h18"/>
+              <path d="M16 28v29M48 28v29"/>
+            </svg>
+          </div>
+          <div>
+            <p class="sfc__row-label">Pair with</p>
+            <p class="sfc__row-value">Amethyst or Smoky Quartz</p>
+          </div>
+        </div>
+
+        <!-- card_note — stones.card_note -->
+        <p class="sfc__note">Hold for 60 seconds before replying, deciding, or spiraling.</p>
+      </aside>
+
+    </article>
+  </div>
+
+
+  <!-- ─── MOBILE PREVIEW ─────────────────────────────────── -->
+  <div class="preview-block" style="max-width: 420px;">
+    <p class="preview-label">Mobile — Stone of the Day</p>
+
+    <article class="sfc" style="grid-template-columns:1fr; border-radius:20px;">
+
+      <section class="sfc__photo" style="width:100%; min-height:unset; aspect-ratio:1/1;" aria-label="Howlite photo">
+        <img
+          src="https://images.unsplash.com/photo-1615485925763-86786288908a?auto=format&fit=crop&w=600&q=80"
+          alt="Howlite crystal specimen"
+        />
+      </section>
+
+      <section class="sfc__main" style="padding:32px 28px 28px; border-right:none;">
+        <p class="sfc__eyebrow">Today's Stone</p>
+        <h2 class="sfc__name" style="font-size:52px; margin-bottom:18px;">Howlite</h2>
+        <div class="sfc__pill" style="background:#ded7ef; color:#5e5080; font-size:13px; padding:8px 20px; margin-bottom:22px;">
+          Calm &amp; Clarity
+        </div>
+        <p class="sfc__summary" style="font-size:17px;">
+          A quieting stone for mental stillness, ease, and emotional steadiness.
+        </p>
+        <p class="sfc__use-when" style="font-size:15px; margin-top:10px;">
+          Use when you need to soften mental noise and return to steadiness before reacting.
+        </p>
+        <div class="sfc__actions" style="flex-direction:column; gap:10px; margin-top:28px;">
+          <button class="sfc__btn sfc__btn--primary" style="background:#8479ad; color:#fff; width:100%; justify-content:center; padding:14px 20px;" type="button">
+            View full entry
+          </button>
+          <button class="sfc__btn sfc__btn--outline" style="width:100%; justify-content:center; padding:14px 20px;" type="button">
+            Add to collection
+          </button>
+          <button class="sfc__btn sfc__btn--outline" style="width:100%; justify-content:center; padding:14px 20px;" type="button">
+            Add to wishlist
+          </button>
+        </div>
+      </section>
+
+      <aside class="sfc__details" style="flex-direction:column; padding:28px 28px 32px; border-top:1px solid rgba(42,37,32,0.10);">
+        <h2 class="sfc__details-title">Stone Details</h2>
+        <div class="sfc__row" style="grid-template-columns:40px 1fr; gap:12px; padding:18px 0;">
+          <div class="sfc__row-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path d="M31.5 7.5c-11.8 0-21.2 8.4-21.2 19.6 0 5.4 2.2 10.3 5.9 13.9v10.8h13.2v-5.4h7.2c4.2 0 7.6-3.4 7.6-7.6v-4.1h5.6c1.7 0 2.7-1.9 1.8-3.3l-5.7-8.8C44.1 13.9 38.6 7.5 31.5 7.5Z"/>
+              <path d="M29.8 18.4c2.8-2.8 7.4-.8 7.4 3.2 0 .4 0 .8-.1 1.1 2.7.4 4.7 2.7 4.7 5.5 0 3.1-2.5 5.6-5.6 5.6h-12c-3.3 0-6-2.7-6-6 0-3 2.2-5.5 5.1-5.9.6-3.1 3.3-5.4 6.5-5.4Z"/>
+            </svg>
+          </div>
+          <div><p class="sfc__row-label">Best for</p><p class="sfc__row-value" style="font-size:17px;">Mental stillness</p></div>
+        </div>
+        <div class="sfc__row" style="grid-template-columns:40px 1fr; gap:12px; padding:18px 0;">
+          <div class="sfc__row-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path d="M32 52c-9.8-8.2-14.1-17.5-10.8-28.2C28.4 27.1 31.4 35 32 45c.6-10 3.6-17.9 10.8-21.2C46.1 34.5 41.8 43.8 32 52Z"/>
+              <path d="M32 52c-10.5-2.3-19-9.2-22.8-19.8C19.1 31.3 27.1 36 32 45c4.9-9 12.9-13.7 22.8-12.8C51 42.8 42.5 49.7 32 52Z"/>
+              <path d="M32 52c-6.6-5.3-9.2-12-6.9-19.8C29.4 35.3 31.5 41.3 32 52Zm0 0c6.6-5.3 9.2-12 6.9-19.8C34.6 35.3 32.5 41.3 32 52Z"/>
+            </svg>
+          </div>
+          <div><p class="sfc__row-label">Primary chakra</p><p class="sfc__row-value" style="font-size:17px;">Crown</p></div>
+        </div>
+        <div class="sfc__row" style="grid-template-columns:40px 1fr; gap:12px; padding:18px 0;">
+          <div class="sfc__row-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path d="M32 6 43 25 32 57 21 25 32 6Z"/>
+              <path d="M21 25h22"/>
+              <path d="M32 6v51"/>
+              <path d="M16 28 25 42 16 57 7 42 16 28Z"/>
+              <path d="M48 28 57 42 48 57 39 42 48 28Z"/>
+              <path d="M7 42h18M39 42h18"/>
+              <path d="M16 28v29M48 28v29"/>
+            </svg>
+          </div>
+          <div><p class="sfc__row-label">Pair with</p><p class="sfc__row-value" style="font-size:17px;">Amethyst or Smoky Quartz</p></div>
+        </div>
+        <p class="sfc__note" style="font-size:18px; margin-top:24px;">Hold for 60 seconds before replying, deciding, or spiraling.</p>
+      </aside>
+
+    </article>
+  </div>
+
+</body>
+</html>
