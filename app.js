@@ -4234,7 +4234,6 @@ async function encAutoFill(){
     set('enc-er',[d.er1,d.er2,d.er3].filter(Boolean).join(' / '));set('enc-uw',d.uw);set('enc-chakra',Array.isArray(d.chakras)?d.chakras.join(', '):d.chakras);
     set('enc-element',d.element);set('enc-aff',d.aff);
     if(d.m){const parts=String(d.m).split(/[-–]/);set('enc-mmin',parts[0]?.trim());set('enc-mmax',parts[1]?.trim()||parts[0]?.trim());}
-    const mtEl=document.getElementById('enc-mt');if(mtEl&&d.mt)mtEl.value=d.mt;
     const syEl=document.getElementById('enc-sy');if(syEl&&d.sy)syEl.value=d.sy;
     const foEl=document.getElementById('enc-fo');if(foEl&&d.fo)foEl.value=d.fo;
     const trEl=document.getElementById('enc-tr');if(trEl&&d.tr)trEl.value=d.tr;
@@ -4279,7 +4278,6 @@ async function saveEncEntry(){
     const payload={
       id:newId,
       name,alternate_names:alt||null,family:fam||null,species:sp||null,
-      material_type:document.getElementById('enc-mt').value||null,
       crystal_system:document.getElementById('enc-sy').value||null,
       formation:document.getElementById('enc-fo').value||null,
       transparency:document.getElementById('enc-tr').value||null,
@@ -4294,7 +4292,7 @@ async function saveEncEntry(){
     if(error){alert('Error saving to database: '+error.message);return;}
     const newEntry={
       i:newId,n:name,a:alt,fam,sp,
-      mt:document.getElementById('enc-mt').value,sy:document.getElementById('enc-sy').value,
+      sy:document.getElementById('enc-sy').value,
       fo:document.getElementById('enc-fo').value,tr:document.getElementById('enc-tr').value,
       c,ch:'#c8b89a',cc,m:mohs,g,er1:er,er2:'',er3:'',uw,o:false,w:false,
       chakras,element,zodiac:'',aff,col_cats:['Multi'],all_themes:[],primary_theme:'',_search:er,
@@ -4967,7 +4965,6 @@ async function loadStonesAndInit() {
       a:             r.alternate_names   || '',
       fam:           r.family            || '',
       sp:            r.species           || '',
-      mt:            r.material_type     || '',
       sy:            r.crystal_system    || '',
       fo:            r.formation         || '',
       tr:            r.transparency      || '',
