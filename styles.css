@@ -861,48 +861,48 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     align-items:center;
     gap:14px;
     flex-wrap:wrap;
-    margin:6px 0 15px;
+    margin:6px 0 0;
   }
 
   .desktop-sotd-section .sotd-title{
     margin:0;
     font-family:Georgia,'Times New Roman',serif;
-    font-size:26px;
+    font-size:clamp(2.25rem,3vw,3.15rem);
     font-weight:400;
     letter-spacing:-.02em;
-    line-height:1;
+    line-height:1.02;
     color:#8a8078;
   }
 
   .desktop-sotd-section .sotd-quality-pill{
     align-self:center;
     margin:0;
-    padding:6px 13px;
+    padding:5px 11px;
     border-radius:999px;
     font-family:'Jost',sans-serif;
-    font-size:12px;
+    font-size:0.95rem;
     font-weight:500;
     line-height:1;
   }
 
   .desktop-sotd-section .sotd-summary{
-    max-width:640px;
-    margin:0 0 6px;
+    max-width:41rem;
+    margin:1.4rem 0 1.2rem;
     font-family:Georgia,'Times New Roman',serif;
-    font-size:17px;
+    font-size:1.32rem;
     font-weight:400;
-    line-height:1.42;
+    line-height:1.48;
     color:#514a45;
   }
 
   .desktop-sotd-section .sotd-use-when{
-    max-width:650px;
-    margin:0;
+    max-width:38rem;
+    margin:1.1rem 0 1.6rem;
     font-family:'Jost',sans-serif;
-    font-size:15px;
+    font-size:1.02rem;
     font-weight:400;
-    line-height:1.45;
-    color:#746b64;
+    line-height:1.55;
+    color:#918880;
   }
 
   .desktop-sotd-section .sotd-actions{
@@ -910,7 +910,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     grid-template-columns:1.08fr 1fr 1fr;
     align-items:stretch;
     gap:9px;
-    margin-top:18px;
+    margin-top:0;
   }
 
   .desktop-sotd-section .sotd-button{
@@ -993,7 +993,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     align-items:center;
     column-gap:11px;
     min-height:0;
-    padding:18px 0;
+    padding:25px 0;
     border-bottom:1px solid rgba(147,121,91,.14);
   }
 
@@ -1025,11 +1025,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   }
 
   .desktop-sotd-section .sotd-detail-label{
-    margin-bottom:3px;
+    margin-bottom:9px;
     font-family:'Jost',sans-serif;
-    font-size:11px;
+    font-size:10px;
     font-weight:500;
-    letter-spacing:.075em;
+    letter-spacing:.085em;
     line-height:1.2;
     text-transform:uppercase;
     color:#856844;
@@ -1037,23 +1037,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-detail-value{
     font-family:'Jost',sans-serif;
-    font-size:15px;
+    font-size:1.15rem;
     font-weight:400;
     letter-spacing:-.01em;
-    line-height:1.25;
+    line-height:1.4;
     color:#4f4944;
   }
 
   .desktop-sotd-section .sotd-practice{
     grid-column:2 / 4;
     grid-row:2;
-    padding:18px 30px 20px;
+    padding:26px 30px 20px;
     border-top:1px solid rgba(169,135,95,0.42);
     background:rgba(251,248,243,0.72);
   }
 
   .desktop-sotd-section .sotd-practice-label{
-    margin-bottom:8px;
+    margin-bottom:13px;
     font-family:'Jost',sans-serif;
     font-size:11px;
     font-weight:500;
@@ -1064,8 +1064,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   }
 
   .desktop-sotd-section .sotd-practice-text{
+    max-width:68rem;
     font-family:Georgia,'Times New Roman',serif;
-    font-size:18px;
+    font-size:clamp(1.32rem,1.7vw,1.75rem);
     font-style:italic;
     font-weight:400;
     line-height:1.4;
@@ -1079,8 +1080,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     height:310px;
   }
   .desktop-sotd-section .sotd-main{padding:22px 23px 20px}
-  .desktop-sotd-section .sotd-title{font-size:24px}
-  .desktop-sotd-section .sotd-summary{font-size:16px}
+  .desktop-sotd-section .sotd-title{font-size:clamp(1.9rem,2.6vw,2.6rem)}
+  .desktop-sotd-section .sotd-summary{font-size:1.25rem}
   .desktop-sotd-section .sotd-details{padding:22px 20px 20px}
   .desktop-sotd-section .sotd-detail-row{grid-template-columns:29px minmax(0,1fr);column-gap:9px;padding:9px 0}
   .desktop-sotd-section .sotd-detail-icon{width:25px;height:25px}
