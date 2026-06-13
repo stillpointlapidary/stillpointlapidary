@@ -7415,8 +7415,7 @@ function renderShapes() {
     const card = document.createElement('button');
     card.className = 'shapes-cat-card';
     card.type = 'button';
-    const previews = cat.ids.map(id => shapeMap[id]&&shapeMap[id].name).filter(Boolean).join(' · ');
-    card.innerHTML = `<div class="shapes-cat-card-title">${cat.label}</div><div class="shapes-cat-card-def">${cat.def}</div><div class="shapes-cat-card-previews">${previews}</div>`;
+    card.innerHTML = `<div class="shapes-cat-card-title">${cat.label}</div><div class="shapes-cat-card-def">${cat.def}</div>`;
     card.addEventListener('click', () => {
       setActiveCat(cat.label);
       showCategoryGrid(cat, pane, shapeMap, setActiveCat);

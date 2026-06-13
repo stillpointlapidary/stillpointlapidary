@@ -627,13 +627,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .shapes-cat-selector-heading{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);font-weight:400}
 .shapes-cat-selector-sub{font-size:11px;color:var(--ink3);font-style:italic}
 .shapes-cat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.shapes-cat-card{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;text-align:left;transition:all 0.15s;font-family:inherit;display:flex;flex-direction:column;gap:6px}
+.shapes-cat-card{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;transition:all 0.15s;font-family:inherit;display:flex;flex-direction:column;gap:5px}
 .shapes-cat-card:hover{background:var(--stone);border-color:rgba(42,37,32,0.22)}
 .shapes-cat-card.active{background:#f5f0e8;border-color:var(--accent2);box-shadow:0 0 0 0.5px var(--accent2)}
 .shapes-cat-card-title{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink)}
-.shapes-cat-card-def{font-size:11px;color:var(--ink2);line-height:1.45}
-.shapes-cat-card-previews{font-size:10px;color:var(--ink3);letter-spacing:0.02em;line-height:1.5;margin-top:2px}
-.shapes-strip-outer{display:flex;flex-direction:column;background:var(--stone2);border-bottom:0.5px solid var(--border)}
+.shapes-cat-card-def{font-size:11px;color:var(--ink2);line-height:1.45}.shapes-strip-outer{display:flex;flex-direction:column;background:var(--stone2);border-bottom:0.5px solid var(--border)}
 .shapes-strip-intro{font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:0.02em;padding:10px 14px 0;font-style:italic}
 .shapes-strip{flex:1;display:flex;flex-wrap:nowrap;overflow-x:auto;padding:8px 4px;gap:4px;scrollbar-width:none}
 .shapes-strip::-webkit-scrollbar{display:none}
