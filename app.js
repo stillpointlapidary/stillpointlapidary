@@ -700,45 +700,48 @@ function renderDesktopSotdCard(s){
   if(!container||!s)return;
   desktopSotdStone=s;
   const photoHtml=s.photo
-    ?`<img class="sfc-photo-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
-    :`<div class="sfc-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
+    ?`<img class="sotd-desktop-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
+    :`<div class="sotd-desktop-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
-  const bestForRow=s.card_best_for?`
-      <div class="sfc-detail-row">
-        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M31.5 7.5c-11.8 0-21.2 8.4-21.2 19.6 0 5.4 2.2 10.3 5.9 13.9v10.8h13.2v-5.4h7.2c4.2 0 7.6-3.4 7.6-7.6v-4.1h5.6c1.7 0 2.7-1.9 1.8-3.3l-5.7-8.8C44.1 13.9 38.6 7.5 31.5 7.5Z"/><path d="M29.8 18.4c2.8-2.8 7.4-.8 7.4 3.2 0 .4 0 .8-.1 1.1 2.7.4 4.7 2.7 4.7 5.5 0 3.1-2.5 5.6-5.6 5.6h-12c-3.3 0-6-2.7-6-6 0-3 2.2-5.5 5.1-5.9.6-3.1 3.3-5.4 6.5-5.4Z"/></svg></div>
-        <div><p class="sfc-detail-label">Best for</p><p class="sfc-detail-value">${escapeAttr(s.card_best_for)}</p></div>
+  const bestForItem=s.card_best_for?`
+      <div class="sotd-detail-item">
+        <p class="sotd-detail-label">Best for</p>
+        <p class="sotd-detail-value">${escapeAttr(s.card_best_for)}</p>
       </div>`:'';
-  const chakraRow=s.primary_chakra?`
-      <div class="sfc-detail-row">
-        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M32 52c-9.8-8.2-14.1-17.5-10.8-28.2C28.4 27.1 31.4 35 32 45c.6-10 3.6-17.9 10.8-21.2C46.1 34.5 41.8 43.8 32 52Z"/><path d="M32 52c-10.5-2.3-19-9.2-22.8-19.8C19.1 31.3 27.1 36 32 45c4.9-9 12.9-13.7 22.8-12.8C51 42.8 42.5 49.7 32 52Z"/><path d="M32 52c-6.6-5.3-9.2-12-6.9-19.8C29.4 35.3 31.5 41.3 32 52Zm0 0c6.6-5.3 9.2-12 6.9-19.8C34.6 35.3 32.5 41.3 32 52Z"/></svg></div>
-        <div><p class="sfc-detail-label">Primary chakra</p><p class="sfc-detail-value">${escapeAttr(s.primary_chakra)}</p></div>
+  const chakraItem=s.primary_chakra?`
+      <div class="sotd-detail-item">
+        <p class="sotd-detail-label">Primary chakra</p>
+        <p class="sotd-detail-value">${escapeAttr(s.primary_chakra)}</p>
       </div>`:'';
-  const pairWithRow=s.card_pair_with?`
-      <div class="sfc-detail-row">
-        <div class="sfc-detail-icon" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M32 6 43 25 32 57 21 25 32 6Z"/><path d="M21 25h22"/><path d="M32 6v51"/><path d="M16 28 25 42 16 57 7 42 16 28Z"/><path d="M48 28 57 42 48 57 39 42 48 28Z"/><path d="M7 42h18M39 42h18"/><path d="M16 28v29M48 28v29"/></svg></div>
-        <div><p class="sfc-detail-label">Pair with</p><p class="sfc-detail-value">${escapeAttr(s.card_pair_with)}</p></div>
+  const pairItem=s.card_pair_with?`
+      <div class="sotd-detail-item">
+        <p class="sotd-detail-label">Pair with</p>
+        <p class="sotd-detail-value">${escapeAttr(s.card_pair_with)}</p>
       </div>`:'';
+  const detailCount=[bestForItem,chakraItem,pairItem].filter(Boolean).length;
+  const detailsTray=(detailCount>0)?`
+    <div class="sotd-desktop-details" style="grid-template-columns:repeat(${detailCount},1fr)">
+      ${bestForItem}${chakraItem}${pairItem}
+    </div>`:'';
   container.innerHTML=`
-    <article class="sfc-card">
-      <section class="sfc-photo" aria-label="${escapeAttr(s.name)} photo">${photoHtml}</section>
-      <section class="sfc-main">
-        <p class="sfc-eyebrow">Today's Stone</p>
-        <h1 class="sfc-name">${escapeAttr(s.name)}</h1>
-        ${s.card_quality_pill?`<div class="sfc-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
-        ${s.card_summary?`<p class="sfc-summary">${escapeAttr(s.card_summary)}</p>`:''}
-        ${s.card_use_when?`<p class="sfc-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
-        <div class="sfc-actions">
-          <button class="sfc-btn sfc-btn--primary sfc-btn-enc" type="button">View full entry</button>
-          <button class="sfc-btn sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
-          <button class="sfc-btn sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">On wishlist</button>
-          <span class="sfc-signin">Sign in to save to your collection</span>
-        </div>
-      </section>
-      <aside class="sfc-details">
-        <h2 class="sfc-details-title">Stone Details</h2>
-        ${bestForRow}${chakraRow}${pairWithRow}
-        ${s.card_note?`<p class="sfc-note">${escapeAttr(s.card_note)}</p>`:''}
-      </aside>
+    <article class="sotd-desktop-card">
+      <div class="sotd-desktop-image-wrap">${photoHtml}</div>
+      <div class="sotd-desktop-divider"></div>
+      <div class="sotd-desktop-copy">
+        <p class="sotd-desktop-kicker">TODAY'S STONE</p>
+        <h2 class="sotd-desktop-name">${escapeAttr(s.name)}</h2>
+        ${s.card_quality_pill?`<div class="sotd-desktop-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+        ${s.card_summary?`<p class="sotd-desktop-summary">${escapeAttr(s.card_summary)}</p>`:''}
+        ${s.card_use_when?`<p class="sotd-desktop-use">${escapeAttr(s.card_use_when)}</p>`:''}
+      </div>
+      <div class="sotd-desktop-actions">
+        <button class="sfc-btn sfc-btn--primary sfc-btn-enc" type="button">View full entry</button>
+        <button class="sfc-btn sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
+        <button class="sfc-btn sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">On wishlist</button>
+        <span class="sfc-signin">Sign in to save to your collection</span>
+      </div>
+      ${detailsTray}
+      ${s.card_note?`<p class="sotd-ritual-tip">${escapeAttr(s.card_note)}</p>`:''}
     </article>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
   if(encBtn)encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
