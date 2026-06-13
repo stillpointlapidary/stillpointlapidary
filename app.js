@@ -890,7 +890,7 @@ function renderMobileSotdCard(s){
   const chakraRow=s.primary_chakra?`
     <div class="msotd-detail-row">
       <div class="msotd-badge msotd-badge--chakra">${SVG_CHAKRA}</div>
-      <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Chakra</span><span class="msotd-detail-val">${escapeAttr(s.primary_chakra)}</span></div>
+      <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Primary Chakra</span><span class="msotd-detail-val">${escapeAttr(s.primary_chakra)}</span></div>
     </div>`:'';
   const pairRow=s.card_pair_with?`
     <div class="msotd-detail-row">
@@ -917,7 +917,7 @@ function renderMobileSotdCard(s){
           <button class="msotd-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_BOOK}</span>View Full Entry</button>
           <div class="msotd-secondary-row">
             <button class="msotd-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_HEART}</span>Add to Collection</button>
-            <button class="msotd-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_BOOKMARK}</span>Wishlist</button>
+            <button class="msotd-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_BOOKMARK}</span>Add to Wishlist</button>
           </div>
         </div>
         ${detailRows}
@@ -955,7 +955,7 @@ function updateMobileSotdAuth(){
     if(_currentUser&&mobileSotdStone&&wish[mobileSotdStone.id]){
       const wt=wishBtn.querySelector('.msotd-wish-txt')||wishBtn;wt.textContent='On Wishlist';wishBtn.disabled=true;
     } else {
-      const wt=wishBtn.querySelector('.msotd-wish-txt')||wishBtn;wt.textContent='Wishlist';wishBtn.disabled=false;
+      const wt=wishBtn.querySelector('.msotd-wish-txt')||wishBtn;wt.textContent='Add to Wishlist';wishBtn.disabled=false;
     }
   }
 }

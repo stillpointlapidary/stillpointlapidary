@@ -697,7 +697,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .msfc-signin-hint{display:none!important}
 /* MOBILE SOTD — card (msotd-* selectors, mobile only) */
 .msotd-card{border:1px solid rgba(190,160,115,.22);border-radius:20px;overflow:hidden;background:#fbf9f5;box-shadow:0 4px 22px rgba(42,37,32,0.07)}
-.msotd-eyebrow{padding:14px 18px 0;text-align:center;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a}
+.msotd-eyebrow{padding:14px 18px 0;text-align:center;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a}
 .msotd-image-wrap{position:relative;margin:12px 14px 0;border-radius:14px;overflow:hidden;aspect-ratio:1/1}
 .msotd-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .msotd-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0ece4}
@@ -710,7 +710,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .msotd-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:14px}
 .msotd-summary{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;line-height:1.5;color:#474039}
 .msotd-use-when{border-left:2px solid rgba(180,143,90,.5);padding-left:13px}
-.msotd-use-label{display:block;font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#9a7d58;margin-bottom:5px}
+.msotd-use-label{display:block;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#9a7d58;margin-bottom:5px}
 .msotd-use-text{margin:0;font-family:'Jost',sans-serif;font-size:13.5px;font-weight:400;line-height:1.55;color:#5a5249}
 .msotd-actions{display:flex;flex-direction:column;gap:9px}
 .msotd-btn-primary{appearance:none;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#9688b3;color:#fff;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .15s}
@@ -729,10 +729,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .msotd-badge--chakra{background:rgba(122,107,160,.15);color:#7a6ba0}
 .msotd-badge--pair{background:rgba(197,175,140,.18);color:#9a7d5a}
 .msotd-detail-copy{display:flex;flex-direction:column;min-width:0}
-.msotd-detail-lbl{font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#9a8878;margin-bottom:3px}
+.msotd-detail-lbl{font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#9a8878;margin-bottom:3px}
 .msotd-detail-val{font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#3e3832;overflow-wrap:break-word}
 .msotd-practice{padding:16px 18px 18px;border-top:1px solid rgba(180,150,100,.28);background:rgba(248,244,237,.72);text-align:center}
-.msotd-practice-label{font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a;margin-bottom:9px}
+.msotd-practice-label{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a;margin-bottom:9px}
 .msotd-practice-text{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-style:italic;font-weight:400;line-height:1.45;color:#5f5650}
 
 /* =========================================================
