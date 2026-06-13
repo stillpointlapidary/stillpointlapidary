@@ -825,7 +825,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-photo-name{
     font-family:'Jost',sans-serif;
-    font-size:10px;
+    font-size:11px;
     font-weight:500;
     letter-spacing:.17em;
     line-height:1;
@@ -855,7 +855,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-details-title{
     margin:0;
     font-family:'Jost',sans-serif;
-    font-size:10px;
+    font-size:11px;
     font-weight:500;
     letter-spacing:.16em;
     line-height:1.2;
@@ -863,27 +863,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     color:#896c4b;
   }
 
+  .desktop-sotd-section .sotd-title-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin:6px 0 15px;
+  }
+
   .desktop-sotd-section .sotd-title{
-    margin:6px 0 10px;
+    margin:0;
     font-family:Georgia,'Times New Roman',serif;
     font-size:36px;
     font-weight:400;
     letter-spacing:-.02em;
     line-height:1;
-    color:#302d2b;
+    color:#4a443f;
   }
 
   .desktop-sotd-section .sotd-quality-pill{
-    display:inline-flex;
-    align-items:center;
-    width:fit-content;
-    max-width:100%;
-    align-self:flex-start;
-    margin:0 0 14px;
+    align-self:center;
+    margin:0;
     padding:6px 13px;
     border-radius:999px;
     font-family:'Jost',sans-serif;
-    font-size:11px;
+    font-size:12px;
     font-weight:500;
     line-height:1;
   }
@@ -902,7 +906,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     max-width:650px;
     margin:0;
     font-family:'Jost',sans-serif;
-    font-size:13px;
+    font-size:14px;
     font-weight:300;
     line-height:1.45;
     color:#8b8178;
@@ -926,7 +930,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     padding:0 11px;
     border-radius:9px;
     font-family:'Jost',sans-serif;
-    font-size:9.5px;
+    font-size:10.5px;
     font-weight:500;
     letter-spacing:.035em;
     line-height:1;
@@ -937,9 +941,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-button-primary{
     color:#fff;
-    background:#7255aa;
-    border:1px solid #7255aa;
-    box-shadow:0 8px 18px rgba(91,66,145,.16);
+    background:#8d7cb4;
+    border:1px solid #8d7cb4;
+    box-shadow:0 5px 14px rgba(99,82,139,.12);
+  }
+
+  .desktop-sotd-section .sotd-button-primary:hover{
+    background:#7f6ca8;
+    border-color:#7f6ca8;
   }
 
   .desktop-sotd-section .sotd-button-secondary{
@@ -1018,7 +1027,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-detail-label{
     margin-bottom:3px;
     font-family:'Jost',sans-serif;
-    font-size:9px;
+    font-size:10px;
     font-weight:500;
     letter-spacing:.075em;
     line-height:1.2;
@@ -1028,7 +1037,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-detail-value{
     font-family:'Jost',sans-serif;
-    font-size:15px;
+    font-size:16px;
     font-weight:400;
     letter-spacing:-.01em;
     line-height:1.25;
@@ -1036,22 +1045,22 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   }
 
   .desktop-sotd-section .sotd-note{
-    margin:auto 0 0;
-    padding-top:15px;
+    margin:18px 0 0;
+    padding-top:0;
     font-family:Georgia,'Times New Roman',serif;
-    font-size:15px;
+    font-size:16px;
     font-style:italic;
     font-weight:400;
     line-height:1.42;
-    color:#685f58;
+    color:#6e665f;
   }
 
   .desktop-sotd-section .sotd-note::before{
     content:'';
     display:block;
-    width:38px;
+    width:42px;
     height:1px;
-    margin-bottom:11px;
+    margin:0 0 18px;
     background:#a9875f;
     border-radius:999px;
   }
@@ -1065,14 +1074,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-main{padding:22px 23px 20px}
   .desktop-sotd-section .sotd-title{font-size:34px}
   .desktop-sotd-section .sotd-summary{font-size:16px}
-  .desktop-sotd-section .sotd-use-when{font-size:12px}
   .desktop-sotd-section .sotd-details{padding:22px 20px 20px}
   .desktop-sotd-section .sotd-detail-row{grid-template-columns:29px minmax(0,1fr);column-gap:9px;padding:9px 0}
   .desktop-sotd-section .sotd-detail-icon{width:25px;height:25px}
-  .desktop-sotd-section .sotd-detail-value{font-size:14px}
-  .desktop-sotd-section .sotd-note{font-size:14px}
   .desktop-sotd-section .sotd-actions{gap:7px;margin-top:15px}
-  .desktop-sotd-section .sotd-button{padding-inline:7px;font-size:8.5px;min-height:40px}
+  .desktop-sotd-section .sotd-button{padding-inline:7px;min-height:40px}
 }
 
 /* HOME EXPLORE TILES */
