@@ -865,11 +865,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-title{
     margin:6px 0 10px;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:50px;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:36px;
     font-weight:400;
-    letter-spacing:-.035em;
-    line-height:.92;
+    letter-spacing:-.02em;
+    line-height:1;
     color:#302d2b;
   }
 
@@ -891,10 +891,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-summary{
     max-width:640px;
     margin:0 0 6px;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:20px;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:17px;
     font-weight:400;
-    line-height:1.35;
+    line-height:1.42;
     color:#393431;
   }
 
@@ -1038,11 +1038,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-note{
     margin:auto 0 0;
     padding-top:15px;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:17px;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:15px;
     font-style:italic;
-    font-weight:300;
-    line-height:1.35;
+    font-weight:400;
+    line-height:1.42;
     color:#685f58;
   }
 
@@ -1063,14 +1063,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     height:310px;
   }
   .desktop-sotd-section .sotd-main{padding:22px 23px 20px}
-  .desktop-sotd-section .sotd-title{font-size:44px}
-  .desktop-sotd-section .sotd-summary{font-size:18px}
+  .desktop-sotd-section .sotd-title{font-size:34px}
+  .desktop-sotd-section .sotd-summary{font-size:16px}
   .desktop-sotd-section .sotd-use-when{font-size:12px}
   .desktop-sotd-section .sotd-details{padding:22px 20px 20px}
   .desktop-sotd-section .sotd-detail-row{grid-template-columns:29px minmax(0,1fr);column-gap:9px;padding:9px 0}
   .desktop-sotd-section .sotd-detail-icon{width:25px;height:25px}
   .desktop-sotd-section .sotd-detail-value{font-size:14px}
-  .desktop-sotd-section .sotd-note{font-size:15px}
+  .desktop-sotd-section .sotd-note{font-size:14px}
   .desktop-sotd-section .sotd-actions{gap:7px;margin-top:15px}
   .desktop-sotd-section .sotd-button{padding-inline:7px;font-size:8.5px;min-height:40px}
 }

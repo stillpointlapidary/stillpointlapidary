@@ -715,9 +715,28 @@ function renderDesktopSotdCard(s){
     ?`<img class="sotd-photo" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
     :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
-  const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 24 24"><path d="M3 8h10a3 3 0 1 0 0-6"/><path d="M3 12h14"/><path d="M3 16h8a2 2 0 1 1 0 4"/></svg>`;
-  const ICON_CHAKRA=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64"><path d="M32 52c-9.8-8.2-14.1-17.5-10.8-28.2C28.4 27.1 31.4 35 32 45c.6-10 3.6-17.9 10.8-21.2C46.1 34.5 41.8 43.8 32 52Z"/><path d="M32 52c-10.5-2.3-19-9.2-22.8-19.8C19.1 31.3 27.1 36 32 45c4.9-9 12.9-13.7 22.8-12.8C51 42.8 42.5 49.7 32 52Z"/><path d="M32 52c-6.6-5.3-9.2-12-6.9-19.8C29.4 35.3 31.5 41.3 32 52Zm0 0c6.6-5.3 9.2-12 6.9-19.8C34.6 35.3 32.5 41.3 32 52Z"/></svg>`;
-  const ICON_PAIR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg>`;
+  const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
+    <path d="M22 22c2.4-4.8 9.8-4.8 12.2 0 4.8-.2 7.1 5.7 3.4 8.7 2.2 4.4-2.4 8.8-6.7 6.6-3 3.7-8.8 1.4-8.6-3.4-4.7-.9-5.9-7.1-1.8-9.6.1-.8.6-1.6 1.5-2.3Z"/>
+    <path d="M27 18v21M20 28h16M24 22l6 6M32 22l-6 6"/>
+  </svg>`;
+  const ICON_CHAKRA=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M32 48C23 40 21 29 32 16c11 13 9 24 0 32Z"/>
+    <path d="M32 48C20 46 12 38 11 25c12 2 19 10 21 23Z"/>
+    <path d="M32 48c12-2 20-10 21-23-12 2-19 10-21 23Z"/>
+    <path d="M32 48c-8 4-17 2-23-6 9-3 17-1 23 6Z"/>
+    <path d="M32 48c8 4 17 2 23-6-9-3-17-1-23 6Z"/>
+    <path d="M16 54h32"/>
+  </svg>`;
+  const ICON_PAIR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M13 51h38"/>
+    <path d="M18 50 15 35l7-17 7 17-3 15Z"/>
+    <path d="M22 18v32M15 35h14"/>
+    <path d="M27 50 24 29 34 8l10 21-4 21Z"/>
+    <path d="M34 8v42M24 29h20"/>
+    <path d="M39 50 37 36l7-14 6 14-2 14Z"/>
+    <path d="M44 22v28M37 36h13"/>
+  </svg>`;
   const bestForRow=s.card_best_for?`
       <div class="sotd-detail-row">
         <div class="sotd-detail-icon" aria-hidden="true">${ICON_BESTFOR}</div>
