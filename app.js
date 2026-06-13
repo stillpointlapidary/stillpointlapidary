@@ -3613,7 +3613,7 @@ function renderEncTierPreview(){
   const t1=document.getElementById('enc-tier-1-grid');
   if(t1&&!t1.dataset.rendered){
     const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
-    encTier1RenderUpTo(allT1,isMobileView()?10:12,t1);
+    encTier1RenderUpTo(allT1,12,t1);
     t1.dataset.rendered='1';
   }
 }
