@@ -1089,6 +1089,170 @@ async function renderSotd(){
   </div>`;
 }
 
+// ── SOTD CALENDAR DATA LAYER ──────────────────────────────────────────────────
+/**
+ * Returns normalized SOTD data for every populated date in the requested month.
+ * Reads stone_of_day_history (resolved dates, source of truth) and
+ * stone_of_day_schedule (active editorial/special future dates).
+ * Ordinary unresolved future dates are left empty — nothing is resolved or written.
+ *
+ * @param {number} year   Full year, e.g. 2026
+ * @param {number} month  1-indexed month, e.g. 6 for June
+ * @returns {Promise<Array<SotdCalendarEntry>|null>}
+ *   null means the history query itself failed (caller should surface an error).
+ *   An empty array means Supabase is reachable but no rows exist for the month.
+ *
+ * SotdCalendarEntry shape:
+ *   date           {string}       'YYYY-MM-DD'
+ *   stoneId        {string}
+ *   source         {'history'|'schedule'}
+ *   selectionType  {string|null}
+ *   eventName      {string|null}
+ *   eventCategory  {string|null}
+ *   eventPriority  {number|null}
+ *   eventLocation  {string|null}
+ *   editorialNote  {string|null}
+ *   sourceUrl      {string|null}
+ *   isToday        {boolean}
+ *   isPast         {boolean}
+ *   isFuture       {boolean}
+ */
+async function getSotdCalendarMonth(year, month) {
+  // Build date-range strings without new Date('YYYY-MM-DD') to avoid the UTC
+  // midnight → local-timezone shift that can move a date one day backward.
+  const mm       = String(month).padStart(2, '0');
+  const firstDay = `${year}-${mm}-01`;
+  // new Date(year, month, 0) uses local-month arithmetic (month is 1-indexed here,
+  // Date() wants 0-indexed, so passing month gives month+1 day-0 = last day of month).
+  const lastDate = new Date(year, month, 0);
+  const lastDay  = `${year}-${mm}-${String(lastDate.getDate()).padStart(2, '0')}`;
+
+  // "Today" in America/Chicago — for isToday / isPast / isFuture flags only.
+  // Intl gives the correct Chicago date without an extra RPC round-trip.
+  const todayChicago = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+
+  if (typeof _supa === 'undefined') {
+    console.warn('[SOTD Calendar] Supabase client unavailable — returning empty month.');
+    return [];
+  }
+
+  // Parallel fetch: history and schedule for the month.
+  const [histResult, schedResult] = await Promise.all([
+    _supa
+      .from('stone_of_day_history')
+      .select('feature_date,stone_id,selection_type,event_name,event_category,event_location,editorial_note,source_url')
+      .gte('feature_date', firstDay)
+      .lte('feature_date', lastDay),
+    _supa
+      .from('stone_of_day_schedule')
+      .select('feature_date,stone_id,selection_type,event_name,event_category,event_priority,event_location,editorial_note,source_url')
+      .gte('feature_date', firstDay)
+      .lte('feature_date', lastDay)
+      .eq('is_active', true)
+  ]);
+
+  if (histResult.error) {
+    // History failure cannot be papered over — past dates must not silently become
+    // schedule dates. Return null so the caller can show an appropriate error state.
+    console.error('[SOTD Calendar] stone_of_day_history query failed:', histResult.error);
+    return null;
+  }
+  if (schedResult.error) {
+    // Schedule failure only affects future editorial dates. Log and continue
+    // with history-only data so past dates still render correctly.
+    console.warn('[SOTD Calendar] stone_of_day_schedule query failed:', schedResult.error);
+  }
+
+  const histRows  = histResult.data  || [];
+  const schedRows = schedResult.error ? [] : (schedResult.data || []);
+
+  // Merge into a single map keyed by 'YYYY-MM-DD'.
+  // History always wins for stone identity; schedule event metadata is merged in
+  // for dates that history already owns, filling only null fields.
+  const map = new Map();
+
+  for (const h of histRows) {
+    map.set(h.feature_date, {
+      date:          h.feature_date,
+      stoneId:       h.stone_id,
+      source:        'history',
+      selectionType: h.selection_type || null,
+      eventName:     h.event_name     || null,
+      eventCategory: h.event_category || null,
+      eventPriority: null,                     // history table has no priority column
+      eventLocation: h.event_location  || null,
+      editorialNote: h.editorial_note  || null,
+      sourceUrl:     h.source_url      || null,
+    });
+  }
+
+  for (const sc of schedRows) {
+    const d = sc.feature_date;
+    if (map.has(d)) {
+      // Date already resolved via history — preserve history stone, fill any
+      // null event-metadata fields with schedule values.
+      const e = map.get(d);
+      if (!e.eventName)     e.eventName     = sc.event_name     || null;
+      if (!e.eventCategory) e.eventCategory = sc.event_category || null;
+      if (e.eventPriority == null) e.eventPriority = sc.event_priority ?? null;
+      if (!e.eventLocation) e.eventLocation = sc.event_location || null;
+      if (!e.editorialNote) e.editorialNote = sc.editorial_note || null;
+      if (!e.sourceUrl)     e.sourceUrl     = sc.source_url     || null;
+    } else {
+      // No history row — use schedule as the source (future editorial date).
+      map.set(d, {
+        date:          d,
+        stoneId:       sc.stone_id,
+        source:        'schedule',
+        selectionType: sc.selection_type || null,
+        eventName:     sc.event_name     || null,
+        eventCategory: sc.event_category || null,
+        eventPriority: sc.event_priority ?? null,
+        eventLocation: sc.event_location || null,
+        editorialNote: sc.editorial_note || null,
+        sourceUrl:     sc.source_url     || null,
+      });
+    }
+  }
+
+  // Attach date-relative flags, then sort chronologically.
+  return Array.from(map.values())
+    .map(entry => ({
+      ...entry,
+      isToday:  entry.date === todayChicago,
+      isPast:   entry.date <  todayChicago,
+      isFuture: entry.date >  todayChicago,
+    }))
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+// ── DEV ONLY — SOTD Calendar data-layer verification ─────────────────────────
+// Remove this block before shipping the calendar UI.
+(async () => {
+  if (typeof _supa === 'undefined') return;
+  const TEST_YEAR = 2026, TEST_MONTH = 6; // June 2026: has history rows + potential schedule rows
+  const label = `[SOTD Calendar DEV] ${TEST_YEAR}-${String(TEST_MONTH).padStart(2,'0')}`;
+  console.group(label);
+  const rows = await getSotdCalendarMonth(TEST_YEAR, TEST_MONTH);
+  if (rows === null) {
+    console.error('History query failed — cannot verify data layer.');
+    console.groupEnd();
+    return;
+  }
+  const histRows  = rows.filter(r => r.source === 'history');
+  const schedRows = rows.filter(r => r.source === 'schedule');
+  console.log('History rows returned :', histRows.length);
+  console.log('Schedule rows returned:', schedRows.length);
+  console.log('Merged total          :', rows.length);
+  console.table(rows.map(r => ({
+    date: r.date, source: r.source, stoneId: r.stoneId,
+    selectionType: r.selectionType, eventName: r.eventName || '',
+    isToday: r.isToday, isPast: r.isPast, isFuture: r.isFuture,
+  })));
+  console.groupEnd();
+})();
+// ── END DEV ───────────────────────────────────────────────────────────────────
+
 // ── INIT ──
 function updateStoneCounts(){
   const n=CRYSTALS.length;
