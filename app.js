@@ -1072,6 +1072,7 @@ async function renderSotd(){
     sotdLink.onclick=(e)=>{e.preventDefault();openDetail(s.id);};
     sotdRow.style.display='flex';
   }
+  const container=document.getElementById('sotd-container');
   if(!container)return;
   const cardInner=s.photo
     ?`<img class="sotd-card-img" src="${SUPABASE_STONES}${s.photo}" alt="${s.name}" loading="lazy">`
@@ -1227,17 +1228,17 @@ async function getSotdCalendarMonth(year, month) {
 }
 
 // ── DEV ONLY — SOTD Calendar data-layer verification ─────────────────────────
-// Remove this block before shipping the calendar UI.
-(async () => {
-  if (typeof _supa === 'undefined') return;
-  const TEST_YEAR = 2026, TEST_MONTH = 6; // June 2026: has history rows + potential schedule rows
+// Call this manually from the browser console to verify Phase 1.
+// Remove before shipping the calendar UI.
+window.testSotdCalendarMonth = async () => {
+  const TEST_YEAR = 2026, TEST_MONTH = 6;
   const label = `[SOTD Calendar DEV] ${TEST_YEAR}-${String(TEST_MONTH).padStart(2,'0')}`;
   console.group(label);
   const rows = await getSotdCalendarMonth(TEST_YEAR, TEST_MONTH);
   if (rows === null) {
     console.error('History query failed — cannot verify data layer.');
     console.groupEnd();
-    return;
+    return null;
   }
   const histRows  = rows.filter(r => r.source === 'history');
   const schedRows = rows.filter(r => r.source === 'schedule');
@@ -1250,7 +1251,8 @@ async function getSotdCalendarMonth(year, month) {
     isToday: r.isToday, isPast: r.isPast, isFuture: r.isFuture,
   })));
   console.groupEnd();
-})();
+  return rows;
+};
 // ── END DEV ───────────────────────────────────────────────────────────────────
 
 // ── INIT ──
