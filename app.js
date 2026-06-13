@@ -5058,7 +5058,6 @@ function updateLastSaved(){
 // ── START ──
 async function loadStonesAndInit() {
   loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
-  loadEnergeticRoleCounts();  // non-blocking; populates stone counts on role tiles
   const CACHE_KEY = 'spl_stones_cache';
   const CACHE_VER = 'v3';
 
