@@ -700,56 +700,67 @@ function renderDesktopSotdCard(s){
   if(!container||!s)return;
   desktopSotdStone=s;
   const photoHtml=s.photo
-    ?`<img class="sotd-desktop-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
-    :`<div class="sotd-desktop-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
+    ?`<img class="sotd-photo" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
+    :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 24 24"><path d="M3 8h10a3 3 0 1 0 0-6"/><path d="M3 12h14"/><path d="M3 16h8a2 2 0 1 1 0 4"/></svg>`;
   const ICON_CHAKRA=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64"><path d="M32 52c-9.8-8.2-14.1-17.5-10.8-28.2C28.4 27.1 31.4 35 32 45c.6-10 3.6-17.9 10.8-21.2C46.1 34.5 41.8 43.8 32 52Z"/><path d="M32 52c-10.5-2.3-19-9.2-22.8-19.8C19.1 31.3 27.1 36 32 45c4.9-9 12.9-13.7 22.8-12.8C51 42.8 42.5 49.7 32 52Z"/><path d="M32 52c-6.6-5.3-9.2-12-6.9-19.8C29.4 35.3 31.5 41.3 32 52Zm0 0c6.6-5.3 9.2-12 6.9-19.8C34.6 35.3 32.5 41.3 32 52Z"/></svg>`;
   const ICON_PAIR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg>`;
-  const bestForItem=s.card_best_for?`
-      <div class="sotd-detail-item">
+  const bestForRow=s.card_best_for?`
+      <div class="sotd-detail-row">
         <div class="sotd-detail-icon" aria-hidden="true">${ICON_BESTFOR}</div>
-        <p class="sotd-detail-label">Best for</p>
-        <p class="sotd-detail-value">${escapeAttr(s.card_best_for)}</p>
+        <div class="sotd-detail-copy">
+          <span class="sotd-detail-label">Best for</span>
+          <span class="sotd-detail-value">${escapeAttr(s.card_best_for)}</span>
+        </div>
       </div>`:'';
-  const chakraItem=s.primary_chakra?`
-      <div class="sotd-detail-item">
+  const chakraRow=s.primary_chakra?`
+      <div class="sotd-detail-row">
         <div class="sotd-detail-icon" aria-hidden="true">${ICON_CHAKRA}</div>
-        <p class="sotd-detail-label">Primary chakra</p>
-        <p class="sotd-detail-value">${escapeAttr(s.primary_chakra)}</p>
+        <div class="sotd-detail-copy">
+          <span class="sotd-detail-label">Primary chakra</span>
+          <span class="sotd-detail-value">${escapeAttr(s.primary_chakra)}</span>
+        </div>
       </div>`:'';
-  const pairItem=s.card_pair_with?`
-      <div class="sotd-detail-item">
+  const pairRow=s.card_pair_with?`
+      <div class="sotd-detail-row">
         <div class="sotd-detail-icon" aria-hidden="true">${ICON_PAIR}</div>
-        <p class="sotd-detail-label">Pair with</p>
-        <p class="sotd-detail-value">${escapeAttr(s.card_pair_with)}</p>
+        <div class="sotd-detail-copy">
+          <span class="sotd-detail-label">Pair with</span>
+          <span class="sotd-detail-value">${escapeAttr(s.card_pair_with)}</span>
+        </div>
       </div>`:'';
-  const detailRows=(bestForItem||chakraItem||pairItem)?`
-      <div class="sotd-d-detail-rows">${bestForItem}${chakraItem}${pairItem}</div>`:'';
+  const hasDetails=bestForRow||chakraRow||pairRow;
   container.innerHTML=`
-    <article class="sotd-desktop-card">
-      <section class="sotd-d-photo-col" aria-label="${escapeAttr(s.name)} photo">
-        <div class="sotd-desktop-image-wrap">${photoHtml}</div>
-        <p class="sotd-d-photo-caption">${escapeAttr(s.name)}</p>
-      </section>
-      <section class="sotd-d-main-col">
-        <p class="sotd-desktop-kicker">TODAY'S STONE</p>
-        <h2 class="sotd-desktop-name">${escapeAttr(s.name)}</h2>
-        ${s.card_quality_pill?`<div class="sotd-desktop-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
-        ${s.card_summary?`<p class="sotd-desktop-summary">${escapeAttr(s.card_summary)}</p>`:''}
-        ${s.card_use_when?`<p class="sotd-desktop-use">${escapeAttr(s.card_use_when)}</p>`:''}
-        <div class="sotd-desktop-actions">
-          <button class="sfc-btn sfc-btn--primary sfc-btn-enc" type="button">View full entry</button>
-          <button class="sfc-btn sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
-          <button class="sfc-btn sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">On wishlist</button>
+    <section class="sotd-card" aria-labelledby="sotd-heading">
+      <div class="sotd-photo-panel" aria-label="${escapeAttr(s.name)} photo">
+        <div class="sotd-photo-frame">
+          ${photoHtml}
+          <div class="sotd-photo-caption">
+            <span class="sotd-photo-name">${escapeAttr(s.name)}</span>
+            <span class="sotd-photo-rule" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <div class="sotd-main">
+        <p class="sotd-eyebrow">Today's Stone</p>
+        <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
+        ${s.card_quality_pill?`<div class="sotd-quality-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+        ${s.card_summary?`<p class="sotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
+        ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
+        <div class="sotd-actions">
+          <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button">View full entry</button>
+          <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
+          <button class="sotd-button sotd-button-secondary sotd-button-wish sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none"><svg class="sotd-heart-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sotd-wish-txt">On wishlist</span></button>
           <span class="sfc-signin">Sign in to save to your collection</span>
         </div>
-      </section>
-      <aside class="sotd-d-details-col">
-        ${detailRows?`<p class="sotd-d-details-title">STONE DETAILS</p>${detailRows}`:''}
-        ${s.card_note?`<p class="sotd-ritual-tip">${escapeAttr(s.card_note)}</p>`:''}
-      </aside>
-    </article>`;
+      </div>
+      ${hasDetails||s.card_note?`
+      <aside class="sotd-details" aria-label="Stone details">
+        ${hasDetails?`<h3 class="sotd-details-title">Stone Details</h3>${bestForRow}${chakraRow}${pairRow}`:''}
+        ${s.card_note?`<p class="sotd-note">${escapeAttr(s.card_note)}</p>`:''}
+      </aside>`:''}
+    </section>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
   if(encBtn)encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
   const collBtn=container.querySelector('.sfc-btn-coll');
@@ -785,11 +796,12 @@ function updateDesktopSotdAuth(){
     if(collBtn)collBtn.style.display='';
     if(wishBtn){
       wishBtn.style.display='';
+      const wt=wishBtn.querySelector('.sotd-wish-txt');
       if(desktopSotdStone&&wish[desktopSotdStone.id]){
-        wishBtn.textContent='On Wishlist';
+        if(wt)wt.textContent='On Wishlist';else wishBtn.textContent='On Wishlist';
         wishBtn.disabled=true;
       } else {
-        wishBtn.textContent='On wishlist';
+        if(wt)wt.textContent='On wishlist';else wishBtn.textContent='On wishlist';
         wishBtn.disabled=false;
       }
     }
@@ -805,7 +817,7 @@ async function sotdWishlistDirect(stoneId){
   const dWishBtn=document.querySelector('#desktop-sotd-wrap .sfc-btn-wish');
   const mWishBtn=document.querySelector('#mobile-sotd-card-wrap .msfc-btn-wish');
   if(wish[stoneId]){
-    if(dWishBtn){dWishBtn.textContent='On Wishlist';dWishBtn.disabled=true;}
+    if(dWishBtn){const wt=dWishBtn.querySelector('.sotd-wish-txt');if(wt)wt.textContent='On Wishlist';else dWishBtn.textContent='On Wishlist';dWishBtn.disabled=true;}
     if(mWishBtn){mWishBtn.textContent='On Wishlist';mWishBtn.disabled=true;}
     return;
   }
@@ -813,7 +825,7 @@ async function sotdWishlistDirect(stoneId){
     await _supa.from('wishlist_items').insert({user_id:_currentUser.id,stone_id:stoneId});
     wish[stoneId]=true;
     localStorage.setItem('lap_wish',JSON.stringify(wish));
-    if(dWishBtn){dWishBtn.textContent='Saved to Wishlist ✓';dWishBtn.disabled=true;}
+    if(dWishBtn){const wt=dWishBtn.querySelector('.sotd-wish-txt');if(wt)wt.textContent='Saved to Wishlist ✓';else dWishBtn.textContent='Saved to Wishlist ✓';dWishBtn.disabled=true;}
     if(mWishBtn){mWishBtn.textContent='Saved to Wishlist ✓';mWishBtn.disabled=true;}
   }catch(err){console.warn('SOTD wishlist save failed',err);}
 }
