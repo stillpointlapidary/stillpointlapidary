@@ -215,11 +215,11 @@ const INTENTION_SHOWING_LABELS = {
   'Heart':'Heart support',
   'Mind':'Mental clarity',
   'Spirit':'Intuition',
-  'Body':'Body energy',
+  'Body':'Body',
 };
 const intentionLabelMap = {
   'grounding':'Grounding','heart-support':'Heart support','mental-clarity':'Mental clarity',
-  'intuition':'Intuition','body-energy':'Body energy',
+  'intuition':'Intuition','body-energy':'Body',
   'anxiety':'Anxiety','stability':'Stability','protection':'Protection','overthinking':'Overthinking',
   'nervous-system':'Nervous system','sleep':'Sleep',
   'self-love':'Self-Love','grief':'Grief','compassion':'Compassion','forgiveness':'Forgiveness',
@@ -2026,8 +2026,10 @@ function closeDrawer(){
       if(ctx.gridId) openGridModal(ctx.gridId);
     },0);
   } else if(detailReturnContext&&detailReturnContext.type==='usewhen'){
+    const ctx=detailReturnContext;
     detailReturnContext=null;
     switchTabByName('mood');
+    setTimeout(()=>{window.scrollTo({top:ctx.scrollY||0,behavior:'instant'});},0);
   } else if(detailReturnContext&&detailReturnContext.type==='starterStone'){
     const ctx=detailReturnContext;
     detailReturnContext=null;
@@ -2451,7 +2453,7 @@ function renderIntentionStoneCards(){
   const stoneGrid = document.getElementById('mood-stone-grid');
   if (!stoneGrid) return;
   stoneGrid.style.display = 'grid';
-  const visible=activeIntentionMatches.slice(0,activeIntentionVisibleCount);
+  const visible=activeCuratedSlug?activeIntentionMatches.slice():activeIntentionMatches.slice(0,activeIntentionVisibleCount);
   if (!visible.length) {
     stoneGrid.innerHTML = '<div class="empty-state">No stones found for this intention yet.</div>';
   }else{
@@ -2460,7 +2462,7 @@ function renderIntentionStoneCards(){
 
   const loadMore=document.getElementById('mood-load-more');
   if(loadMore){
-    if(activeIntentionMatches.length>activeIntentionVisibleCount){
+    if(!activeCuratedSlug&&activeIntentionMatches.length>activeIntentionVisibleCount){
       loadMore.style.display='block';
       const ps=intentionPageSize();loadMore.innerHTML=`<div class="mood-load-more-text">Showing ${visible.length} of ${activeIntentionMatches.length} ${intentionTierRangeLabel()} results</div><button class="mood-load-more-btn" type="button" onclick="loadMoreIntentionStones()">Load ${ps} more results</button><div class="mood-backtop-wrap"><button class="mood-backtop" type="button" onclick="document.getElementById('mood-selected-view')?.scrollIntoView({behavior:'smooth',block:'start'})">Back to top</button></div>`;
     }else{
@@ -2475,7 +2477,7 @@ function updateIntentionCount(){
   const titleEl = document.getElementById('mood-shared-results-title');
   if(titleEl)titleEl.textContent=intentionResultsTitle();
   if(!countEl)return;
-  const vis=Math.min(activeIntentionVisibleCount,activeIntentionMatches.length);
+  const vis=activeCuratedSlug?activeIntentionMatches.length:Math.min(activeIntentionVisibleCount,activeIntentionMatches.length);
   countEl.textContent = `Showing ${vis} of ${activeIntentionMatches.length}` + (activeIntentionFilter && activeIntentionFilter!=='all' ? ' · ' + activeIntentionFilter : '');
 }
 
@@ -2984,6 +2986,11 @@ function isGenericBlurb(text){
   return ['supports your intention','helps with energy','good for this goal','aligns with your needs','supports energy','helps with your','good for your intention','useful choice for'].some(g=>t.includes(g));
 }
 
+function openIntentionDetail(stoneId){
+  detailReturnContext={type:'usewhen',scrollY:window.scrollY};
+  openDetail(stoneId);
+}
+
 function intentionStoneCardHtml(c){
   const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
@@ -2995,7 +3002,7 @@ function intentionStoneCardHtml(c){
   const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
   const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
   const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
-  return `<div class="crystal-card mood-result-card" onclick="detailReturnContext={type:'usewhen'};openDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
+  return `<div class="crystal-card mood-result-card" onclick="openIntentionDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
 }
 
 function renderAIResults(matches, query){
