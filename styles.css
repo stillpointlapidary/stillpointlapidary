@@ -866,7 +866,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     align-items:center;
     gap:14px;
     flex-wrap:wrap;
-    margin:6px 0 0;
+    margin:6px 0 1.1rem;
   }
 
   .desktop-sotd-section .sotd-title{
@@ -902,7 +902,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-use-when{
     max-width:720px;
-    margin:0.8rem 0 1.6rem;
+    margin:0 0 2rem;
     font-family:'Jost',sans-serif;
     font-size:1.08rem;
     font-weight:400;
