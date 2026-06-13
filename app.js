@@ -1343,7 +1343,7 @@ function updateMoreFilterButtons(){
 function setFilter(key,val,btn){
   filters[key]=val;
   document.querySelectorAll('#pills-'+key+' .fpill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn)btn.classList.add('active');
   updateBtn('fbtn-'+key,'fval-'+key,val);
   closeAllPanels();
   encRender();
