@@ -864,7 +864,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     letter-spacing:.16em;
     line-height:1.2;
     text-transform:uppercase;
-    color:#896c4b;
+    color:#856844;
   }
 
   .desktop-sotd-section .sotd-title-row{
@@ -911,9 +911,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     margin:0;
     font-family:'Jost',sans-serif;
     font-size:15px;
-    font-weight:300;
+    font-weight:400;
     line-height:1.45;
-    color:#8b8178;
+    color:#746b64;
   }
 
   .desktop-sotd-section .sotd-actions{
@@ -1013,7 +1013,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     justify-content:center;
     width:28px;
     height:28px;
-    color:#ad8b61;
+    color:#a77f4f;
   }
 
   .desktop-sotd-section .sotd-detail-icon-svg{
@@ -1021,7 +1021,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     height:100%;
     fill:none;
     stroke:currentColor;
-    stroke-width:1.35;
+    stroke-width:1.55;
   }
 
   .desktop-sotd-section .sotd-detail-copy{
@@ -1038,7 +1038,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     letter-spacing:.075em;
     line-height:1.2;
     text-transform:uppercase;
-    color:#8e8780;
+    color:#856844;
   }
 
   .desktop-sotd-section .sotd-detail-value{
