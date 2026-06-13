@@ -5843,7 +5843,7 @@ function energeticRoleCardHtml(c,reasonText,slug){
   const imgZone=imgSrc
     ?`<div class="er-card-img"><img src="${imgSrc}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :`<div class="er-card-img"><div class="er-card-img-empty"></div></div>`;
-  const whyHtml=reasonText?`<div class="er-card-why"><span class="er-card-why-label">Why</span>${escapeAttr(reasonText)}</div>`:'';
+  const whyHtml=reasonText?`<div class="er-card-why"><span class="er-card-why-label">Why:</span>${escapeAttr(reasonText)}</div>`:'';
   return `<div class="er-result-card" onclick="openEnergeticRoleDetail('${escapeAttr(c.i)}','${escapeAttr(slug)}')">${imgZone}<div class="er-card-body"><div class="er-card-name">${escapeAttr(c.n)}</div>${whyHtml}</div></div>`;
 }
 
