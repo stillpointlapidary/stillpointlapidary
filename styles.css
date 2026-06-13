@@ -690,59 +690,50 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 .mobile-sotd-section{display:none}
 .mobile-stone-day-intro{display:none}
-/* SOTD mobile intro panel — hidden by default, shown in mobile media query */
-.sotd-intro-panel{display:none}
+/* SOTD mobile intro panel removed */
 
 /* MOBILE SOTD — button selectors kept for JS auth logic */
 .msfc-btn-enc,.msfc-btn-coll,.msfc-btn-wish{cursor:pointer}
 .msfc-signin-hint{display:none!important}
-/* MOBILE SOTD — intro panel */
-.sotd-intro-panel{display:none;flex-direction:column;align-items:center;text-align:center;padding:22px 24px 26px;background:rgba(255,252,248,0.97);border:1px solid #eadfce;border-radius:24px;margin-bottom:20px;position:relative}
-.sotd-star-top{color:#c6a46c;margin-bottom:12px;line-height:1}
-.sotd-intro-kicker{display:inline-flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#c8a06a;margin-bottom:10px}
-.sotd-intro-text{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.2rem,5vw,1.5rem);line-height:1.45;color:var(--ink);font-style:italic;margin-bottom:18px}
-.sotd-sparkle{color:#c6a46c;display:inline-flex;align-items:center;justify-content:center}
-.sotd-lotus-bottom{color:#c6a46c;display:flex;align-items:center;justify-content:center;position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:rgba(255,252,248,0.97);padding:0 10px}
-/* MOBILE SOTD — feature card */
-.sotd-feature-card{border:1px solid rgba(190,160,115,.24);border-radius:24px;overflow:hidden;background:var(--white);box-shadow:0 4px 24px rgba(42,37,32,0.07)}
-.sotd-feature-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;min-height:190px;border-bottom:0.5px solid rgba(190,160,115,.18);background:rgba(251,250,247,.85)}
-.sotd-image-wrap{overflow:hidden;background:#fbfaf7}
-.sotd-feature-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:150px}
-.sotd-feature-img-fallback{width:100%;height:100%;min-height:150px;display:flex;align-items:center;justify-content:center;background:var(--stone2)}
-.sotd-hero-copy{padding:18px 16px 18px 14px;display:flex;flex-direction:column;justify-content:center;border-left:0.5px solid rgba(190,160,115,.18)}
-.sotd-card-kicker{margin:0 0 4px;font-family:'Jost',sans-serif;font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:#c8a06a;font-weight:600}
-.sotd-stone-name{margin:4px 0 10px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:0.92;letter-spacing:-0.035em;color:#5a554f;font-size:clamp(2rem,9vw,3.25rem);overflow-wrap:anywhere;max-width:100%}
-.sotd-stone-name.is-long-name{font-size:clamp(1.75rem,7.5vw,2.75rem);line-height:0.95}
-.sotd-stone-name.is-very-long-name{font-size:clamp(1.5rem,6.5vw,2.25rem);line-height:1;letter-spacing:-0.02em}
-.sotd-quality-pill{display:inline-flex;align-items:center;width:fit-content;max-width:100%;padding:5px 13px;border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;margin-bottom:8px}
-.sotd-summary{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.5;color:#4d4944}
-.sotd-mini-divider{width:70%;max-width:140px;height:1px;margin:12px 0;background:linear-gradient(90deg,transparent,rgba(198,164,108,.55),transparent);position:relative}
-.sotd-mini-divider::after{content:"✦";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);background:rgba(251,250,247,.85);color:#c6a46c;padding:0 8px;font-size:10px}
-.sotd-use-when{margin:0;font-family:'Jost',sans-serif;font-size:11.5px;line-height:1.55;color:var(--ink3)}
-/* Card body (buttons + details + tip) */
-.sotd-card-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:14px}
-.sotd-actions{display:flex;flex-direction:column;align-items:stretch;gap:8px}
-.sotd-btn-view{appearance:none;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;background:var(--ink);color:var(--white);border:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.15s}
-.sotd-btn-view:hover{background:var(--accent)}
-.sotd-secondary-row{display:flex;gap:8px}
-.sotd-btn-secondary{flex:1;appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;background:transparent;color:var(--accent);border:0.5px solid rgba(139,115,85,0.4);border-radius:999px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;transition:all 0.15s}
-.sotd-btn-secondary:hover{background:#f5f0e8}
-.sotd-btn-icon{display:inline-flex;align-items:center;flex-shrink:0;width:14px;height:14px}
-.sotd-btn-icon svg{width:100%;height:100%}
-/* Detail rows */
-.sotd-detail-box{display:flex;flex-direction:column;gap:0}
-.sotd-detail-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:0.5px solid rgba(234,223,206,0.7)}
-.sotd-detail-row:last-child{border-bottom:none;padding-bottom:0}
-.sotd-badge{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sotd-badge svg{width:20px;height:20px}
-.sotd-badge--bestfor{background:rgba(197,175,140,.18);color:#9a7d5a}
-.sotd-badge--chakra{background:rgba(122,107,160,.16);color:#7a6ba0}
-.sotd-badge--pair{background:rgba(197,175,140,.18);color:#9a7d5a}
-.sotd-detail-lbl{font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);flex-shrink:0;min-width:58px}
-.sotd-detail-val{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink);font-weight:600}
-/* Ritual tip */
-.sotd-ritual-text{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.2rem,4.5vw,1.45rem);font-style:italic;line-height:1.5;color:#6b625a;text-align:center;padding-top:14px;border-top:1px dashed rgba(198,164,108,.4);display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
-.sotd-moon{color:#c6a46c;display:inline-flex;align-items:center;flex-shrink:0}
+/* MOBILE SOTD — card (msotd-* selectors, mobile only) */
+.msotd-card{border:1px solid rgba(190,160,115,.22);border-radius:20px;overflow:hidden;background:#fbf9f5;box-shadow:0 4px 22px rgba(42,37,32,0.07)}
+.msotd-eyebrow{padding:14px 18px 0;text-align:center;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a}
+.msotd-image-wrap{position:relative;margin:12px 14px 0;border-radius:14px;overflow:hidden;aspect-ratio:1/1}
+.msotd-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.msotd-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0ece4}
+.msotd-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;background:linear-gradient(to top,rgba(30,24,18,.68) 0%,rgba(30,24,18,.18) 48%,transparent 72%)}
+.msotd-name{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.6rem,7vw,2.4rem);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff;overflow-wrap:break-word;max-width:100%}
+.msotd-name--med{font-size:clamp(1.35rem,6vw,2rem)}
+.msotd-name--long{font-size:clamp(1.15rem,5vw,1.65rem)}
+.msotd-name-rule{display:block;width:32px;height:1px;margin:8px 0 7px;background:rgba(198,164,108,.75);border-radius:999px}
+.msotd-pill{display:inline-flex;align-items:center;width:fit-content;max-width:100%;padding:4px 11px;border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;line-height:1}
+.msotd-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:14px}
+.msotd-summary{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;line-height:1.5;color:#474039}
+.msotd-use-when{border-left:2px solid rgba(180,143,90,.5);padding-left:13px}
+.msotd-use-label{display:block;font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#9a7d58;margin-bottom:5px}
+.msotd-use-text{margin:0;font-family:'Jost',sans-serif;font-size:13.5px;font-weight:400;line-height:1.55;color:#5a5249}
+.msotd-actions{display:flex;flex-direction:column;gap:9px}
+.msotd-btn-primary{appearance:none;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#9688b3;color:#fff;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+.msotd-btn-primary:hover{background:#897aa8}
+.msotd-secondary-row{display:flex;gap:8px}
+.msotd-btn-secondary{flex:1;appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;background:transparent;color:#8b6f4a;border:1px solid rgba(168,135,90,.32);border-radius:10px;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+.msotd-btn-secondary:hover{background:#f5f0e8}
+.msotd-btn-icon{display:inline-flex;align-items:center;flex-shrink:0;width:15px;height:15px}
+.msotd-btn-icon svg{width:100%;height:100%}
+.msotd-details{display:flex;flex-direction:column}
+.msotd-detail-row{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid rgba(225,210,185,.55)}
+.msotd-detail-row:last-child{border-bottom:none;padding-bottom:0}
+.msotd-badge{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msotd-badge svg{width:19px;height:19px}
+.msotd-badge--bestfor{background:rgba(197,175,140,.18);color:#9a7d5a}
+.msotd-badge--chakra{background:rgba(122,107,160,.15);color:#7a6ba0}
+.msotd-badge--pair{background:rgba(197,175,140,.18);color:#9a7d5a}
+.msotd-detail-copy{display:flex;flex-direction:column;min-width:0}
+.msotd-detail-lbl{font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#9a8878;margin-bottom:3px}
+.msotd-detail-val{font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#3e3832;overflow-wrap:break-word}
+.msotd-practice{padding:16px 18px 18px;border-top:1px solid rgba(180,150,100,.28);background:rgba(248,244,237,.72);text-align:center}
+.msotd-practice-label{font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a;margin-bottom:9px}
+.msotd-practice-text{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-style:italic;font-weight:400;line-height:1.45;color:#5f5650}
 
 /* =========================================================
    STONE OF THE DAY — DESKTOP
@@ -1112,8 +1103,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .home-pw-name{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:var(--ink)}
 .home-pw-desc{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);line-height:1.6;flex:1}
 @media(max-width:900px){.home-pathways-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.content{display:flex;flex-direction:column}.homepage-hero{order:1}.mobile-sotd-section{order:2;display:block;padding:1.5rem 0 1.35rem;border-bottom:0.5px solid var(--border2)}.home-pathways{order:3}.desktop-sotd-section{display:none}.home-mobile-backtop-wrap{order:4}.mobile-sotd-header{display:none}.mobile-stone-day-intro{display:none}.sotd-intro-panel{display:flex}.home-pathways-grid{grid-template-columns:repeat(2,1fr)}.home-pw-card.home-pw-card--essentials{display:flex}.home-pathways-grid .home-pw-card:nth-child(5){grid-column:auto;min-height:auto}.home-mobile-backtop-wrap{display:flex;justify-content:center;margin:1rem 0 0}.home-mobile-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;text-decoration:none;font-family:'Jost',sans-serif}.how-to-choose-desktop{display:none}.how-to-choose-mobile{display:block;padding:0 1px}}
-@media(max-width:380px){.sotd-stone-name{font-size:clamp(1.65rem,8vw,2.2rem)}.sotd-summary{font-size:12px}.sotd-use-when{font-size:11px}.sotd-hero-copy{padding:14px 12px 14px 10px}.choose-method-card{grid-template-columns:44px 1px 68px minmax(0,1fr);column-gap:12px;padding:22px 18px}.choose-method-icon{width:62px;height:62px}.choose-method-icon svg{width:34px;height:34px}.choose-method-copy h3{font-size:24px}.choose-method-copy p{font-size:16px}}
+@media(max-width:560px){.content{display:flex;flex-direction:column}.homepage-hero{order:1}.mobile-sotd-section{order:2;display:block;padding:1.25rem 0 1.35rem;border-bottom:0.5px solid var(--border2)}.home-pathways{order:3}.desktop-sotd-section{display:none}.home-mobile-backtop-wrap{order:4}.mobile-sotd-header{display:none}.mobile-stone-day-intro{display:none}.home-pathways-grid{grid-template-columns:repeat(2,1fr)}.home-pw-card.home-pw-card--essentials{display:flex}.home-pathways-grid .home-pw-card:nth-child(5){grid-column:auto;min-height:auto}.home-mobile-backtop-wrap{display:flex;justify-content:center;margin:1rem 0 0}.home-mobile-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;text-decoration:none;font-family:'Jost',sans-serif}.how-to-choose-desktop{display:none}.how-to-choose-mobile{display:block;padding:0 1px}}
+@media(max-width:380px){.msotd-name{font-size:clamp(1.4rem,7vw,1.9rem)}.msotd-summary{font-size:15px}.msotd-use-text{font-size:12.5px}.choose-method-card{grid-template-columns:44px 1px 68px minmax(0,1fr);column-gap:12px;padding:22px 18px}.choose-method-icon{width:62px;height:62px}.choose-method-icon svg{width:34px;height:34px}.choose-method-copy h3{font-size:24px}.choose-method-copy p{font-size:16px}}
 
 /* HOW TO CHOOSE — MOBILE EDITORIAL CARDS */
 .how-to-choose-mobile{display:none}
