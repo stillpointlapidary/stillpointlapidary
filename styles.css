@@ -1649,7 +1649,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-cleanse .how-often-block{order:4}
   #s101-cleanse .care-search-block{order:5}
   #s101-cleanse .water-warning-block{order:6}
+  #s101-cleanse .water-warning-block .care-accordion-hdr{border-left-width:4px;border-left-color:#5a8aaa}
   #s101-cleanse .sun-warning-block{order:7}
+  #s101-cleanse .sun-warning-block .care-accordion-hdr{border-left-width:4px;border-left-color:#c49a3a}
   #s101-cleanse .method-grid{display:none}
   #s101-cleanse .cleanse-method-mobile-groups{display:flex;flex-direction:column;gap:12px}
   #s101-cleanse .cleanse-method-group{display:flex;flex-direction:column;gap:8px}
