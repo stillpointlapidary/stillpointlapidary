@@ -775,8 +775,10 @@ function renderDesktopSotdCard(s){
       </div>
       <div class="sotd-main">
         <p class="sotd-eyebrow">Today's Stone</p>
-        <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
-        ${s.card_quality_pill?`<div class="sotd-quality-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+        <div class="sotd-title-row">
+          <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
+          ${s.card_quality_pill?`<div class="sotd-quality-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+        </div>
         ${s.card_summary?`<p class="sotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="sotd-actions">
