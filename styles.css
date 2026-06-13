@@ -955,11 +955,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     gap:7px;
   }
 
-  .desktop-sotd-section .sotd-heart-icon{
+  .desktop-sotd-section .sotd-heart-icon,
+  .desktop-sotd-section .sotd-action-icon{
+    display:inline-flex;
+    align-items:center;
+    flex:0 0 15px;
     width:15px;
     height:15px;
-    flex:0 0 15px;
   }
+  .desktop-sotd-section .sotd-action-icon svg{width:100%;height:100%}
 
   .desktop-sotd-section .sfc-signin{
     grid-column:1/-1;
