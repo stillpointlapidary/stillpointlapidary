@@ -1747,13 +1747,15 @@ function dedupedCollectionItems(list){
 function encCardHtml(c){
   const isOwned=!!owned[c.i], isWish=!!wish[c.i];
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
-  const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>');
+  const props=(c.card_props&&c.card_props.length?c.card_props:[c.er1,c.er2,c.er3]).filter(Boolean).slice(0,3);
+  const pillsHtml=props.length?`<div class="stone-card-properties">${props.map(t=>`<span class="card-role">${t}</span>`).join('')}</div>`:'';
+  const bestForHtml=c.card_best_for?`<div class="stone-card-best-for"><span class="stone-card-best-for-label">BEST FOR</span><p>${c.card_best_for}</p></div>`:'';
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
     ?`<div class="card-img-zone has-photo" onclick="openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${imgSrc}" alt="${c.n}" loading="lazy"></div>`
     :`<div onclick="openDetail('${c.i}')">${noPhotoZoneHtml(c)}</div>`;
-  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${roles?`<div>${roles}</div>`:''}</div></div>`;
+  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${pillsHtml}${bestForHtml}</div></div>`;
 }
 
 const pagedStoneLists={};
@@ -3611,7 +3613,7 @@ function renderEncTierPreview(){
   const t1=document.getElementById('enc-tier-1-grid');
   if(t1&&!t1.dataset.rendered){
     const allT1=CRYSTALS.filter(c=>Number(c.tier)===1);
-    encTier1RenderUpTo(allT1,isMobileView()?10:6,t1);
+    encTier1RenderUpTo(allT1,isMobileView()?10:12,t1);
     t1.dataset.rendered='1';
   }
 }
@@ -5132,7 +5134,7 @@ function updateLastSaved(){
 async function loadStonesAndInit() {
   loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
   const CACHE_KEY = 'spl_stones_cache';
-  const CACHE_VER = 'v3';
+  const CACHE_VER = 'v4';
 
   function mapRow(r) {
     const cats = Array.isArray(r.color_categories) ? r.color_categories : (r.color_categories ? [r.color_categories] : []);
@@ -5173,6 +5175,8 @@ async function loadStonesAndInit() {
       tier:           r.collection_tier  || null,
       man_made:      r.is_man_made       || false,
       tox:           r.toxicity_note     || '',
+      card_props:    Array.isArray(r.card_properties) ? r.card_properties : [],
+      card_best_for: r.card_best_for     || '',
       o:             false,
       w:             false,
       _search:       [er1, er2, er3, pt, at].join(' '),
