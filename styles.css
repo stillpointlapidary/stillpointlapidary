@@ -765,7 +765,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     grid-template-columns:24% minmax(0,51%) 25%;
     width:100%;
     height:330px;
-    min-height:0;
+    min-height:356px;
     margin:0;
     overflow:hidden;
     background:#fbf8f3;
@@ -813,7 +813,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-photo-caption{
     position:absolute;
     left:50%;
-    bottom:22px;
+    bottom:38px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -878,7 +878,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     font-weight:400;
     letter-spacing:-.02em;
     line-height:1;
-    color:#4a443f;
+    color:#5b534d;
   }
 
   .desktop-sotd-section .sotd-quality-pill{
@@ -899,7 +899,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     font-size:17px;
     font-weight:400;
     line-height:1.42;
-    color:#393431;
+    color:#514a45;
   }
 
   .desktop-sotd-section .sotd-use-when{
@@ -941,14 +941,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-button-primary{
     color:#fff;
-    background:#8d7cb4;
-    border:1px solid #8d7cb4;
-    box-shadow:0 5px 14px rgba(99,82,139,.12);
+    background:#9688b3;
+    border:1px solid #9688b3;
+    box-shadow:0 4px 12px rgba(99,82,139,.10);
   }
 
   .desktop-sotd-section .sotd-button-primary:hover{
-    background:#7f6ca8;
-    border-color:#7f6ca8;
+    background:#897aa8;
+    border-color:#897aa8;
   }
 
   .desktop-sotd-section .sotd-button-secondary{
@@ -1045,8 +1045,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   }
 
   .desktop-sotd-section .sotd-note{
-    margin:18px 0 0;
+    margin:24px 0 0;
     padding-top:0;
+    padding-bottom:18px;
     font-family:Georgia,'Times New Roman',serif;
     font-size:16px;
     font-style:italic;
