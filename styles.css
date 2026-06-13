@@ -1042,10 +1042,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
   .desktop-sotd-section .sotd-detail-value{
     font-family:'Jost',sans-serif;
-    font-size:1.15rem;
+    font-size:1.07rem;
     font-weight:400;
     letter-spacing:-.01em;
-    line-height:1.4;
+    line-height:1.37;
     color:#4f4944;
   }
 
