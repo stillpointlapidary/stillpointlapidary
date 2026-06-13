@@ -774,7 +774,6 @@ function renderDesktopSotdCard(s){
           <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
           ${s.card_quality_pill?`<div class="sotd-quality-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
         </div>
-        ${s.card_summary?`<p class="sotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="sotd-actions">
           <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="sotd-action-label">View Full Entry</span></button>
@@ -945,7 +944,6 @@ function renderMobileSotdCard(s){
         </div>
       </div>
       <div class="msotd-body">
-        ${s.card_summary?`<p class="msotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${useWhenText?`<div class="msotd-use-when"><span class="msotd-use-label">Use When</span><p class="msotd-use-text">${escapeAttr(useWhenText)}</p></div>`:''}
         <div class="msotd-actions">
           <button class="msotd-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_BOOK}</span><span class="sotd-action-label">View Full Entry</span></button>
