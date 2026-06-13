@@ -777,9 +777,9 @@ function renderDesktopSotdCard(s){
         ${s.card_summary?`<p class="sotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="sotd-actions">
-          <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button">View full entry</button>
-          <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none">Add to collection</button>
-          <button class="sotd-button sotd-button-secondary sotd-button-wish sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" style="display:none"><svg class="sotd-heart-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sotd-wish-txt">On wishlist</span></button>
+          <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="sotd-action-label">View Full Entry</span></button>
+          <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><span class="sotd-action-label">Add to Collection</span></button>
+          <button class="sotd-button sotd-button-secondary sotd-button-wish sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" aria-pressed="false"><span class="sotd-action-icon" aria-hidden="true"><svg class="sotd-wish-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span><span class="sotd-action-label">Wishlist</span></button>
           <span class="sfc-signin">Sign in to save to your collection</span>
         </div>
       </div>
@@ -816,30 +816,59 @@ function renderDesktopSotdCard(s){
   updateDesktopSotdAuth();updateMobileSotdAuth();
 }
 
+// Shared helper — safely updates label span only, never clobbers icon markup
+function _sotdSetBtnLabel(btn,text){
+  if(!btn)return;
+  const lbl=btn.querySelector('.sotd-action-label');
+  if(lbl)lbl.textContent=text;
+}
+function _sotdSetWishState(btn,wishlisted){
+  if(!btn)return;
+  _sotdSetBtnLabel(btn,wishlisted?'Wishlisted':'Wishlist');
+  btn.setAttribute('aria-pressed',wishlisted?'true':'false');
+  btn.disabled=false;
+  const icon=btn.querySelector('.sotd-wish-icon');
+  if(icon){
+    if(wishlisted){icon.setAttribute('fill','currentColor');}
+    else{icon.setAttribute('fill','none');}
+  }
+}
+
 function updateDesktopSotdAuth(){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container)return;
   const signin=container.querySelector('.sfc-signin');
   const collBtn=container.querySelector('.sfc-btn-coll');
   const wishBtn=container.querySelector('.sfc-btn-wish');
-  if(_currentUser){
-    if(signin)signin.style.display='none';
-    if(collBtn)collBtn.style.display='';
-    if(wishBtn){
-      wishBtn.style.display='';
-      const wt=wishBtn.querySelector('.sotd-wish-txt');
-      if(desktopSotdStone&&wish[desktopSotdStone.id]){
-        if(wt)wt.textContent='On Wishlist';else wishBtn.textContent='On Wishlist';
-        wishBtn.disabled=true;
-      } else {
-        if(wt)wt.textContent='On wishlist';else wishBtn.textContent='On wishlist';
-        wishBtn.disabled=false;
-      }
-    }
-  } else {
-    if(signin)signin.style.display='';
-    if(collBtn)collBtn.style.display='none';
-    if(wishBtn)wishBtn.style.display='none';
+  const stone=desktopSotdStone;
+  const isOwned=stone&&!!owned[stone.id];
+  const isWished=stone&&!!wish[stone.id];
+  if(signin)signin.style.display=_currentUser?'none':'';
+  if(collBtn){
+    collBtn.style.display='';
+    _sotdSetBtnLabel(collBtn,_currentUser&&isOwned?'Add Another Piece':'Add to Collection');
+  }
+  if(wishBtn){
+    wishBtn.style.display='';
+    _sotdSetWishState(wishBtn,_currentUser&&isWished);
+  }
+}
+
+function updateMobileSotdAuth(){
+  const container=document.getElementById('mobile-sotd-card-wrap');
+  if(!container)return;
+  const collBtn=container.querySelector('.msfc-btn-coll');
+  const wishBtn=container.querySelector('.msfc-btn-wish');
+  const stone=mobileSotdStone;
+  const isOwned=stone&&!!owned[stone.id];
+  const isWished=stone&&!!wish[stone.id];
+  if(collBtn){
+    collBtn.style.display='';
+    _sotdSetBtnLabel(collBtn,_currentUser&&isOwned?'Add Another Piece':'Add to Collection');
+  }
+  if(wishBtn){
+    wishBtn.style.display='';
+    _sotdSetWishState(wishBtn,_currentUser&&isWished);
   }
 }
 
@@ -847,18 +876,23 @@ async function sotdWishlistDirect(stoneId){
   if(!_currentUser)return;
   const dWishBtn=document.querySelector('#desktop-sotd-wrap .sfc-btn-wish');
   const mWishBtn=document.querySelector('#mobile-sotd-card-wrap .msfc-btn-wish');
-  if(wish[stoneId]){
-    if(dWishBtn){const wt=dWishBtn.querySelector('.sotd-wish-txt');if(wt)wt.textContent='On Wishlist';else dWishBtn.textContent='On Wishlist';dWishBtn.disabled=true;}
-    if(mWishBtn){mWishBtn.textContent='On Wishlist';mWishBtn.disabled=true;}
-    return;
+  const alreadyWished=!!wish[stoneId];
+  if(alreadyWished){
+    // toggle off
+    try{
+      await _supa.from('wishlist_items').delete().eq('user_id',_currentUser.id).eq('stone_id',stoneId);
+      wish[stoneId]=false;
+      localStorage.setItem('lap_wish',JSON.stringify(wish));
+    }catch(err){console.warn('SOTD wishlist remove failed',err);}
+  } else {
+    try{
+      await _supa.from('wishlist_items').insert({user_id:_currentUser.id,stone_id:stoneId});
+      wish[stoneId]=true;
+      localStorage.setItem('lap_wish',JSON.stringify(wish));
+    }catch(err){console.warn('SOTD wishlist save failed',err);}
   }
-  try{
-    await _supa.from('wishlist_items').insert({user_id:_currentUser.id,stone_id:stoneId});
-    wish[stoneId]=true;
-    localStorage.setItem('lap_wish',JSON.stringify(wish));
-    if(dWishBtn){const wt=dWishBtn.querySelector('.sotd-wish-txt');if(wt)wt.textContent='Saved to Wishlist ✓';else dWishBtn.textContent='Saved to Wishlist ✓';dWishBtn.disabled=true;}
-    if(mWishBtn){mWishBtn.textContent='Saved to Wishlist ✓';mWishBtn.disabled=true;}
-  }catch(err){console.warn('SOTD wishlist save failed',err);}
+  _sotdSetWishState(dWishBtn,!!wish[stoneId]);
+  _sotdSetWishState(mWishBtn,!!wish[stoneId]);
 }
 
 function renderMobileSotdCard(s){
@@ -914,10 +948,10 @@ function renderMobileSotdCard(s){
         ${s.card_summary?`<p class="msotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${useWhenText?`<div class="msotd-use-when"><span class="msotd-use-label">Use When</span><p class="msotd-use-text">${escapeAttr(useWhenText)}</p></div>`:''}
         <div class="msotd-actions">
-          <button class="msotd-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_BOOK}</span>View Full Entry</button>
+          <button class="msotd-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_BOOK}</span><span class="sotd-action-label">View Full Entry</span></button>
           <div class="msotd-secondary-row">
-            <button class="msotd-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_HEART}</span>Add to Collection</button>
-            <button class="msotd-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="msotd-btn-icon">${SVG_BOOKMARK}</span>Add to Wishlist</button>
+            <button class="msotd-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_HEART}</span><span class="sotd-action-label">Add to Collection</span></button>
+            <button class="msotd-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" aria-pressed="false"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_BOOKMARK}</span><span class="sotd-action-label">Wishlist</span></button>
           </div>
         </div>
         ${detailRows}
@@ -942,22 +976,6 @@ function renderMobileSotdCard(s){
     });
   }
   updateMobileSotdAuth();
-}
-
-function updateMobileSotdAuth(){
-  const container=document.getElementById('mobile-sotd-card-wrap');
-  if(!container)return;
-  const collBtn=container.querySelector('.msfc-btn-coll');
-  const wishBtn=container.querySelector('.msfc-btn-wish');
-  if(collBtn)collBtn.style.display='';
-  if(wishBtn){
-    wishBtn.style.display='';
-    if(_currentUser&&mobileSotdStone&&wish[mobileSotdStone.id]){
-      const wt=wishBtn.querySelector('.msotd-wish-txt')||wishBtn;wt.textContent='On Wishlist';wishBtn.disabled=true;
-    } else {
-      const wt=wishBtn.querySelector('.msotd-wish-txt')||wishBtn;wt.textContent='Add to Wishlist';wishBtn.disabled=false;
-    }
-  }
 }
 
 async function renderSotd(){
