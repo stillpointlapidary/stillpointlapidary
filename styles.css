@@ -979,12 +979,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     grid-column:3;
     grid-row:1;
     min-width:0;
-    padding:28px 24px 26px;
+    padding:32px 24px 30px;
     background:#faf7f2;
   }
 
   .desktop-sotd-section .sotd-details-title{
-    margin-bottom:8px;
+    margin-bottom:14px;
   }
 
   .desktop-sotd-section .sotd-detail-row{
@@ -993,7 +993,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     align-items:center;
     column-gap:11px;
     min-height:0;
-    padding:14px 0;
+    padding:18px 0;
     border-bottom:1px solid rgba(147,121,91,.14);
   }
 
