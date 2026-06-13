@@ -692,6 +692,44 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 .mobile-sotd-section{display:none}
 .mobile-stone-day-intro{display:none}
+/* STONE FEATURE CARD — desktop Option B */
+.desktop-sotd-section{padding:2.5rem 0 2.25rem;background:var(--stone);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.sotd-card{display:grid;grid-template-columns:minmax(260px,24%) minmax(0,1fr) minmax(300px,26%);background:#fbf8f3;border:1px solid rgba(169,135,95,.2);border-radius:30px;overflow:hidden;box-shadow:0 18px 42px rgba(55,44,33,.08),0 3px 10px rgba(55,44,33,.04);margin:0 auto;width:min(1940px,calc(100% - 40px))}
+.sotd-photo-panel,.sotd-main{border-right:1px solid rgba(147,121,91,.16)}
+.sotd-photo-panel{padding:30px 28px;display:flex}
+.sotd-photo-frame{position:relative;width:100%;min-height:480px;overflow:hidden;background:radial-gradient(circle at 50% 36%,rgba(255,255,255,.94),rgba(248,243,236,.72) 68%,rgba(245,239,230,.92) 100%);border:1px solid rgba(169,135,95,.16);border-radius:22px}
+.sotd-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:48px 24px 116px}
+.sotd-photo-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.sotd-photo-caption{position:absolute;left:50%;bottom:48px;display:flex;flex-direction:column;align-items:center;transform:translateX(-50%);text-align:center;pointer-events:none;white-space:nowrap}
+.sotd-photo-name{font-family:'Jost',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.17em;line-height:1;text-transform:uppercase;color:#947553}
+.sotd-photo-rule{width:52px;height:1.5px;margin-top:12px;background:#a9875f;border-radius:999px;display:block}
+.sotd-main{display:flex;flex-direction:column;justify-content:center;padding:52px 52px 48px}
+.sotd-eyebrow{margin:0;font-family:'Jost',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.13em;line-height:1.2;text-transform:uppercase;color:#896c4b}
+.sotd-title{margin:12px 0 14px;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.6rem,3.8vw,5rem);font-weight:400;letter-spacing:-0.035em;line-height:.93;color:#302d2b}
+.sotd-quality-pill{align-self:flex-start;margin-bottom:20px;padding:7px 16px;border-radius:999px;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;line-height:1}
+.sotd-summary{max-width:680px;margin:0 0 12px;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1rem,1.25vw,1.45rem);font-weight:400;line-height:1.5;color:#373330}
+.sotd-use-when{max-width:700px;margin:0;font-family:'Jost',sans-serif;font-size:clamp(0.78rem,.95vw,.95rem);font-weight:400;line-height:1.55;color:#8d857e}
+.sotd-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+.sotd-button{min-height:44px;padding:0 20px;border-radius:11px;font-family:'Jost',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;line-height:1;cursor:pointer;transition:transform 160ms ease,box-shadow 160ms ease,background 160ms ease;white-space:nowrap}
+.sotd-button:hover{transform:translateY(-1px)}
+.sotd-button-primary{color:#fff;background:linear-gradient(180deg,#725da6 0%,#604a94 100%);border:1px solid rgba(93,72,144,.85);box-shadow:0 6px 16px rgba(96,74,148,.2),inset 0 1px 0 rgba(255,255,255,.18)}
+.sotd-button-secondary{color:#896b49;background:rgba(255,255,255,.35);border:1px solid rgba(169,135,95,.28)}
+.sotd-button-wish{display:inline-flex;align-items:center;gap:8px}
+.sotd-heart-icon{width:16px;height:16px;flex:0 0 16px}
+.sfc-signin{font-family:'Jost',sans-serif;font-size:11px;color:var(--ink3);font-style:italic}
+.sotd-details{display:flex;flex-direction:column;padding:44px 34px 38px;background:#faf6f0}
+.sotd-details-title{margin:0 0 18px;font-family:'Jost',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.13em;line-height:1.2;text-transform:uppercase;color:#896c4b}
+.sotd-detail-row{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;column-gap:14px;padding:14px 0;border-bottom:1px solid rgba(147,121,91,.16)}
+.sotd-detail-row:last-of-type{border-bottom:none}
+.sotd-detail-icon{width:32px;height:32px;color:#ad8b61;display:flex;align-items:center;justify-content:center}
+.sotd-detail-icon-svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.5;fill:none}
+.sotd-detail-copy{display:flex;flex-direction:column;min-width:0}
+.sotd-detail-label{margin-bottom:3px;font-family:'Jost',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.07em;line-height:1.2;text-transform:uppercase;color:#8e8780}
+.sotd-detail-value{font-family:'Jost',sans-serif;font-size:clamp(.85rem,1.1vw,1.1rem);font-weight:500;line-height:1.3;color:#383431}
+.sotd-note{margin-top:auto;padding-top:26px;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(.95rem,1.2vw,1.35rem);font-style:italic;font-weight:400;line-height:1.55;color:#67605a}
+.sotd-note::before{content:"";display:block;width:48px;height:1.5px;margin-bottom:16px;background:#a9875f;border-radius:999px}
+@media(max-width:1300px){.sotd-card{grid-template-columns:minmax(220px,22%) minmax(0,1fr) minmax(260px,27%)}.sotd-main{padding-inline:38px}.sotd-details{padding-inline:26px}.sotd-button{padding-inline:16px}}
+@media(max-width:960px){.sotd-card{grid-template-columns:minmax(180px,22%) minmax(0,1fr)}.sotd-details{display:none}}
 /* SOTD mobile intro panel — hidden by default, shown in mobile media query */
 .sotd-intro-panel{display:none}
 
@@ -745,334 +783,406 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Ritual tip */
 .sotd-ritual-text{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.2rem,4.5vw,1.45rem);font-style:italic;line-height:1.5;color:#6b625a;text-align:center;padding-top:14px;border-top:1px dashed rgba(198,164,108,.4);display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
 .sotd-moon{color:#c6a46c;display:inline-flex;align-items:center;flex-shrink:0}
-
 /* =========================================================
-   STONE OF THE DAY — DESKTOP
-   Fresh rebuild from approved visual. Mobile rules above remain untouched.
+   DESKTOP SOTD COMPACT OPTION B CORRECTION
+   Append AFTER all existing SOTD styles.
+   Do not alter the approved mobile layout.
    ========================================================= */
-.desktop-sotd-section{
-  width:100%;
-  padding:2.25rem 0 2rem;
-  background:transparent;
-  border:0;
+
+@media (min-width: 901px) {
+
+  .sotd-card {
+    display: grid;
+    grid-template-columns:
+      minmax(245px, 24%)
+      minmax(0, 1fr)
+      minmax(285px, 27%);
+
+    width: min(1220px, calc(100% - 48px));
+    min-height: 0;
+    height: auto;
+    margin: 24px auto;
+
+    overflow: hidden;
+
+    background: var(--sotd-paper);
+    border: 1px solid rgba(169, 135, 95, 0.2);
+    border-radius: 22px;
+
+    box-shadow:
+      0 14px 34px rgba(55, 44, 33, 0.075),
+      0 2px 8px rgba(55, 44, 33, 0.035);
+  }
+
+  /* LEFT PHOTO PANEL */
+
+  .sotd-photo-panel {
+    display: flex;
+    padding: 18px 18px;
+    border-right: 1px solid var(--sotd-divider);
+  }
+
+  .sotd-photo-frame {
+    position: relative;
+
+    width: 100%;
+    min-height: 0;
+    height: 315px;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 50% 34%,
+        rgba(255, 255, 255, 0.96),
+        rgba(248, 243, 236, 0.7) 68%,
+        rgba(245, 239, 230, 0.9) 100%
+      );
+
+    border: 1px solid rgba(169, 135, 95, 0.15);
+    border-radius: 18px;
+  }
+
+  .sotd-photo {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 30px 22px 88px;
+
+    object-fit: contain;
+    object-position: center 42%;
+  }
+
+  .sotd-photo-caption {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  .sotd-photo-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #947553;
+    white-space: nowrap;
+  }
+
+  .sotd-photo-rule {
+    width: 40px;
+    height: 1px;
+    margin-top: 11px;
+
+    background: var(--sotd-gold);
+    border-radius: 999px;
+  }
+
+  /* CENTER EDITORIAL PANEL */
+
+  .sotd-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    padding: 34px 38px 32px;
+
+    border-right: 1px solid var(--sotd-divider);
+  }
+
+  .sotd-eyebrow,
+  .sotd-details-title {
+    margin: 0;
+
+    font-family: "Jost", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    color: #8f6c45;
+  }
+
+  .sotd-title {
+    margin: 9px 0 14px;
+
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(56px, 4.9vw, 76px);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+
+    color: #302d2b;
+  }
+
+  .sotd-quality-pill {
+    align-self: flex-start;
+
+    margin-bottom: 22px;
+    padding: 7px 15px;
+
+    background: #ded6ef;
+    border-radius: 999px;
+
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+
+    color: #66528f;
+  }
+
+  .sotd-summary {
+    max-width: 650px;
+    margin: 0 0 11px;
+
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(20px, 1.65vw, 25px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.45;
+
+    color: #393431;
+  }
+
+  .sotd-use-when {
+    max-width: 680px;
+    margin: 0;
+
+    font-family: "Jost", sans-serif;
+    font-size: clamp(14px, 1.05vw, 16px);
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 1.55;
+
+    color: #8b8178;
+  }
+
+  .sotd-actions {
+    display: grid;
+    grid-template-columns:
+      minmax(145px, 1.12fr)
+      minmax(145px, 1fr)
+      minmax(145px, 1fr);
+
+    align-items: stretch;
+    gap: 11px;
+
+    margin-top: 31px;
+  }
+
+  .sotd-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0 14px;
+
+    border-radius: 10px;
+
+    font-family: "Jost", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.035em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sotd-button-tertiary,
+  .sotd-button-wish {
+    gap: 8px;
+  }
+
+  .sotd-heart-icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+  }
+
+  /* RIGHT DETAILS PANEL */
+
+  .sotd-details {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 34px 30px 30px;
+
+    background: #faf7f2;
+  }
+
+  .sotd-details-title {
+    margin-bottom: 18px;
+  }
+
+  .sotd-detail-row {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 16px;
+
+    min-height: 0;
+    padding: 16px 0;
+
+    border-bottom: 1px solid rgba(147, 121, 91, 0.16);
+  }
+
+  .sotd-detail-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .sotd-detail-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    color: #ad8b61;
+  }
+
+  .sotd-detail-icon-svg {
+    width: 100%;
+    height: 100%;
+
+    stroke: currentColor;
+    stroke-width: 1.35;
+    fill: none;
+  }
+
+  .sotd-detail-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .sotd-detail-label {
+    margin-bottom: 4px;
+
+    font-family: "Jost", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.075em;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    color: #8e8780;
+  }
+
+  .sotd-detail-value {
+    font-family: "Jost", sans-serif;
+    font-size: clamp(16px, 1.3vw, 20px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+
+    color: #35312e;
+  }
+
+  .sotd-note {
+    margin-top: auto;
+    padding-top: 25px;
+
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(19px, 1.55vw, 23px);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 1.5;
+
+    color: #685f58;
+  }
+
+  .sotd-note::before {
+    content: "";
+    display: block;
+
+    width: 45px;
+    height: 1px;
+    margin-bottom: 16px;
+
+    background: #a9875f;
+    border-radius: 999px;
+  }
 }
 
-@media (min-width:901px){
-  .desktop-sotd-section #desktop-sotd-wrap{width:100%}
+/* Slightly tighter desktop treatment for narrower laptops */
+@media (min-width: 901px) and (max-width: 1100px) {
 
-  .desktop-sotd-section .sotd-card{
-    display:grid;
-    grid-template-columns:24% minmax(0,51%) 25%;
-    width:100%;
-    height:330px;
-    min-height:0;
-    margin:0;
-    overflow:hidden;
-    background:#fbf8f3;
-    border:1px solid rgba(169,135,95,.20);
-    border-radius:18px;
-    box-shadow:0 14px 34px rgba(55,44,33,.07),0 2px 8px rgba(55,44,33,.03);
+  .sotd-card {
+    grid-template-columns:
+      minmax(220px, 23%)
+      minmax(0, 1fr)
+      minmax(255px, 28%);
+
+    width: calc(100% - 32px);
   }
 
-  .desktop-sotd-section .sotd-photo-panel{
-    display:flex;
-    min-width:0;
-    padding:16px;
-    border-right:1px solid rgba(147,121,91,.16);
+  .sotd-main {
+    padding: 30px 26px 28px;
   }
 
-  .desktop-sotd-section .sotd-photo-frame{
-    position:relative;
-    width:100%;
-    height:100%;
-    min-height:0;
-    overflow:hidden;
-    background:radial-gradient(circle at 50% 34%,rgba(255,255,255,.96),rgba(248,243,236,.70) 68%,rgba(245,239,230,.90) 100%);
-    border:1px solid rgba(169,135,95,.15);
-    border-radius:15px;
+  .sotd-title {
+    font-size: clamp(50px, 5.4vw, 64px);
   }
 
-  .desktop-sotd-section .sotd-photo{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    padding:24px 18px 72px;
-    object-fit:contain;
-    object-position:center 40%;
+  .sotd-summary {
+    font-size: clamp(18px, 1.9vw, 22px);
   }
 
-  .desktop-sotd-section .sotd-photo-fallback{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  .sotd-use-when {
+    font-size: 13px;
   }
 
-  .desktop-sotd-section .sotd-photo-caption{
-    position:absolute;
-    left:50%;
-    bottom:22px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    transform:translateX(-50%);
-    text-align:center;
-    pointer-events:none;
-    white-space:nowrap;
+  .sotd-details {
+    padding: 30px 22px 26px;
   }
 
-  .desktop-sotd-section .sotd-photo-name{
-    font-family:'Jost',sans-serif;
-    font-size:10px;
-    font-weight:500;
-    letter-spacing:.17em;
-    line-height:1;
-    text-transform:uppercase;
-    color:#947553;
+  .sotd-detail-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 14px 0;
   }
 
-  .desktop-sotd-section .sotd-photo-rule{
-    display:block;
-    width:38px;
-    height:1px;
-    margin-top:9px;
-    background:#a9875f;
-    border-radius:999px;
+  .sotd-detail-icon {
+    width: 29px;
+    height: 29px;
   }
 
-  .desktop-sotd-section .sotd-main{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    min-width:0;
-    padding:24px 30px 22px;
-    border-right:1px solid rgba(147,121,91,.16);
+  .sotd-detail-value {
+    font-size: 16px;
   }
 
-  .desktop-sotd-section .sotd-eyebrow,
-  .desktop-sotd-section .sotd-details-title{
-    margin:0;
-    font-family:'Jost',sans-serif;
-    font-size:10px;
-    font-weight:500;
-    letter-spacing:.16em;
-    line-height:1.2;
-    text-transform:uppercase;
-    color:#896c4b;
+  .sotd-note {
+    font-size: 18px;
   }
 
-  .desktop-sotd-section .sotd-title{
-    margin:6px 0 10px;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:50px;
-    font-weight:400;
-    letter-spacing:-.035em;
-    line-height:.92;
-    color:#302d2b;
+  .sotd-actions {
+    gap: 8px;
   }
 
-  .desktop-sotd-section .sotd-quality-pill{
-    display:inline-flex;
-    align-items:center;
-    width:fit-content;
-    max-width:100%;
-    align-self:flex-start;
-    margin:0 0 14px;
-    padding:6px 13px;
-    border-radius:999px;
-    font-family:'Jost',sans-serif;
-    font-size:11px;
-    font-weight:500;
-    line-height:1;
+  .sotd-button {
+    padding-inline: 9px;
+    font-size: 9.5px;
   }
-
-  .desktop-sotd-section .sotd-summary{
-    max-width:640px;
-    margin:0 0 6px;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:20px;
-    font-weight:400;
-    line-height:1.35;
-    color:#393431;
-  }
-
-  .desktop-sotd-section .sotd-use-when{
-    max-width:650px;
-    margin:0;
-    font-family:'Jost',sans-serif;
-    font-size:13px;
-    font-weight:300;
-    line-height:1.45;
-    color:#8b8178;
-  }
-
-  .desktop-sotd-section .sotd-actions{
-    display:grid;
-    grid-template-columns:1.08fr 1fr 1fr;
-    align-items:stretch;
-    gap:9px;
-    margin-top:18px;
-  }
-
-  .desktop-sotd-section .sotd-button{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    min-width:0;
-    min-height:42px;
-    padding:0 11px;
-    border-radius:9px;
-    font-family:'Jost',sans-serif;
-    font-size:9.5px;
-    font-weight:500;
-    letter-spacing:.035em;
-    line-height:1;
-    text-transform:uppercase;
-    white-space:nowrap;
-    cursor:pointer;
-  }
-
-  .desktop-sotd-section .sotd-button-primary{
-    color:#fff;
-    background:#7255aa;
-    border:1px solid #7255aa;
-    box-shadow:0 8px 18px rgba(91,66,145,.16);
-  }
-
-  .desktop-sotd-section .sotd-button-secondary{
-    color:#876743;
-    background:rgba(255,255,255,.38);
-    border:1px solid rgba(169,135,95,.25);
-    box-shadow:none;
-  }
-
-  .desktop-sotd-section .sotd-button-wish{
-    gap:7px;
-  }
-
-  .desktop-sotd-section .sotd-heart-icon{
-    width:15px;
-    height:15px;
-    flex:0 0 15px;
-  }
-
-  .desktop-sotd-section .sfc-signin{
-    grid-column:1/-1;
-    font-family:'Jost',sans-serif;
-    font-size:10px;
-    color:#8d857e;
-  }
-
-  .desktop-sotd-section .sotd-details{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-    padding:24px 24px 22px;
-    background:#faf7f2;
-  }
-
-  .desktop-sotd-section .sotd-details-title{
-    margin-bottom:8px;
-  }
-
-  .desktop-sotd-section .sotd-detail-row{
-    display:grid;
-    grid-template-columns:32px minmax(0,1fr);
-    align-items:center;
-    column-gap:11px;
-    min-height:0;
-    padding:11px 0;
-    border-bottom:1px solid rgba(147,121,91,.14);
-  }
-
-  .desktop-sotd-section .sotd-detail-row:last-of-type{
-    border-bottom:0;
-  }
-
-  .desktop-sotd-section .sotd-detail-icon{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:28px;
-    height:28px;
-    color:#ad8b61;
-  }
-
-  .desktop-sotd-section .sotd-detail-icon-svg{
-    width:100%;
-    height:100%;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.35;
-  }
-
-  .desktop-sotd-section .sotd-detail-copy{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-  }
-
-  .desktop-sotd-section .sotd-detail-label{
-    margin-bottom:3px;
-    font-family:'Jost',sans-serif;
-    font-size:9px;
-    font-weight:500;
-    letter-spacing:.075em;
-    line-height:1.2;
-    text-transform:uppercase;
-    color:#8e8780;
-  }
-
-  .desktop-sotd-section .sotd-detail-value{
-    font-family:'Jost',sans-serif;
-    font-size:15px;
-    font-weight:400;
-    letter-spacing:-.01em;
-    line-height:1.25;
-    color:#35312e;
-  }
-
-  .desktop-sotd-section .sotd-note{
-    margin:auto 0 0;
-    padding-top:15px;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:17px;
-    font-style:italic;
-    font-weight:300;
-    line-height:1.35;
-    color:#685f58;
-  }
-
-  .desktop-sotd-section .sotd-note::before{
-    content:'';
-    display:block;
-    width:38px;
-    height:1px;
-    margin-bottom:11px;
-    background:#a9875f;
-    border-radius:999px;
-  }
-}
-
-@media (min-width:901px) and (max-width:1100px){
-  .desktop-sotd-section .sotd-card{
-    grid-template-columns:23% minmax(0,52%) 25%;
-    height:310px;
-  }
-  .desktop-sotd-section .sotd-main{padding:22px 23px 20px}
-  .desktop-sotd-section .sotd-title{font-size:44px}
-  .desktop-sotd-section .sotd-summary{font-size:18px}
-  .desktop-sotd-section .sotd-use-when{font-size:12px}
-  .desktop-sotd-section .sotd-details{padding:22px 20px 20px}
-  .desktop-sotd-section .sotd-detail-row{grid-template-columns:29px minmax(0,1fr);column-gap:9px;padding:9px 0}
-  .desktop-sotd-section .sotd-detail-icon{width:25px;height:25px}
-  .desktop-sotd-section .sotd-detail-value{font-size:14px}
-  .desktop-sotd-section .sotd-note{font-size:15px}
-  .desktop-sotd-section .sotd-actions{gap:7px;margin-top:15px}
-  .desktop-sotd-section .sotd-button{padding-inline:7px;font-size:8.5px;min-height:40px}
 }
 
 /* HOME EXPLORE TILES */
