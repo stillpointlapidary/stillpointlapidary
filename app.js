@@ -831,8 +831,8 @@ function renderMobileSotdCard(s){
         ${s.card_summary?`<p class="msfc-summary">${escapeAttr(s.card_summary)}</p>`:''}
         ${s.card_use_when?`<p class="msfc-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="msfc-actions">
-          <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View Full Entry</button>
-          <div class="msfc-secondary-row">
+          <div class="msfc-actions-grid">
+            <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View Full Entry</button>
             <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to Collection</button>
             <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to Wishlist</button>
           </div>
