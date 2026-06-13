@@ -729,13 +729,8 @@ function renderDesktopSotdCard(s){
     <path d="M16 54h32"/>
   </svg>`;
   const ICON_PAIR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
-    <path d="M13 51h38"/>
-    <path d="M18 50 15 35l7-17 7 17-3 15Z"/>
-    <path d="M22 18v32M15 35h14"/>
-    <path d="M27 50 24 29 34 8l10 21-4 21Z"/>
-    <path d="M34 8v42M24 29h20"/>
-    <path d="M39 50 37 36l7-14 6 14-2 14Z"/>
-    <path d="M44 22v28M37 36h13"/>
+    <circle cx="25" cy="32" r="14"/>
+    <circle cx="39" cy="32" r="14"/>
   </svg>`;
   const bestForRow=s.card_best_for?`
       <div class="sotd-detail-row">
@@ -791,8 +786,11 @@ function renderDesktopSotdCard(s){
       ${hasDetails||s.card_note?`
       <aside class="sotd-details" aria-label="Stone details">
         ${hasDetails?`<h3 class="sotd-details-title">Stone Details</h3>${bestForRow}${chakraRow}${pairRow}`:''}
-        ${s.card_note?`<p class="sotd-note">${escapeAttr(s.card_note)}</p>`:''}
       </aside>`:''}
+      ${s.card_note?`<div class="sotd-practice">
+        <div class="sotd-practice-label">Today's Practice</div>
+        <div class="sotd-practice-text">${escapeAttr(s.card_note)}</div>
+      </div>`:''}
     </section>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
   if(encBtn)encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
