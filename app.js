@@ -978,36 +978,91 @@ function renderMobileSotdCard(s){
   updateMobileSotdAuth();
 }
 
+function _sotdMapStone(stone,meta){
+  const c=CRYSTALS.find(cr=>cr.i===stone.id);
+  return{
+    id:stone.id,
+    name:stone.name,
+    photo:c?stonePhotoFile(c):'',
+    hex:c?(c.ch||'#c8bca8'):(stone.color_hex||'#c8bca8'),
+    card_quality_pill:stone.card_quality_pill||'',
+    card_summary:stone.card_summary||'',
+    card_use_when:stone.card_use_when||'',
+    card_best_for:stone.card_best_for||'',
+    primary_chakra:stone.primary_chakra||'',
+    card_pair_with:stone.card_pair_with||'',
+    card_note:stone.card_note||'',
+    event_name:meta&&meta.event_name||null,
+    event_category:meta&&meta.event_category||null,
+    selection_type:meta&&meta.selection_type||null
+  };
+}
+
 async function renderSotd(){
   let s=null;
-  try{
-    if(typeof _supa!=='undefined'){
-      const {data,error}=await _supa
-        .from('stones')
-        .select('id,name,card_quality_pill,card_summary,card_use_when,card_best_for,primary_chakra,card_pair_with,card_note')
-        .eq('sotd_enabled',true)
-        .order('sotd_order',{ascending:true})
-        .limit(1)
-        .single();
-      if(!error&&data){
-        const c=CRYSTALS.find(cr=>cr.i===data.id);
-        s={
-          id:data.id,
-          name:data.name,
-          photo:c?stonePhotoFile(c):'',
-          hex:c?(c.ch||'#c8bca8'):'#c8bca8',
-          card_quality_pill:data.card_quality_pill||'',
-          card_summary:data.card_summary||'',
-          card_use_when:data.card_use_when||'',
-          card_best_for:data.card_best_for||'',
-          primary_chakra:data.primary_chakra||'',
-          card_pair_with:data.card_pair_with||'',
-          card_note:data.card_note||''
-        };
+  let isOfflineFallback=false;
+
+  if(typeof _supa!=='undefined'){
+    // Step 1 — server-side resolver (authoritative)
+    try{
+      const {data,error}=await _supa.rpc('get_stone_of_day');
+      if(!error&&data&&data.stone){
+        s=_sotdMapStone(data.stone,data);
       }
+    }catch(err){console.warn('SOTD RPC failed, trying history fallback:',err);}
+
+    // Step 2 — direct history read (RPC failed but Supabase is reachable)
+    if(!s){
+      try{
+        const today=localDateKey();
+        const {data:hRow,error:hErr}=await _supa
+          .from('stone_of_day_history')
+          .select('stone_id,selection_type,event_name,event_category')
+          .eq('feature_date',today)
+          .maybeSingle();
+        if(!hErr&&hRow&&hRow.stone_id){
+          const {data:stoneRow,error:sErr}=await _supa
+            .from('stones')
+            .select('id,name,card_quality_pill,card_summary,card_use_when,card_best_for,primary_chakra,card_pair_with,card_note,color_hex,collection_tier')
+            .eq('id',hRow.stone_id)
+            .single();
+          if(!sErr&&stoneRow){
+            s=_sotdMapStone(stoneRow,hRow);
+          }
+        }
+      }catch(err){console.warn('SOTD history fallback failed, trying schedule:',err);}
     }
-  }catch(err){console.warn('SOTD fetch failed',err);}
-  if(!s)s=deterministicSotdFallback();
+
+    // Step 3 — direct schedule read (history also failed, read-only display)
+    if(!s){
+      try{
+        const today=localDateKey();
+        const {data:sched,error:scErr}=await _supa
+          .from('stone_of_day_schedule')
+          .select('stone_id,selection_type,event_name,event_category')
+          .eq('feature_date',today)
+          .eq('is_active',true)
+          .maybeSingle();
+        if(!scErr&&sched&&sched.stone_id){
+          const {data:stoneRow,error:sErr}=await _supa
+            .from('stones')
+            .select('id,name,card_quality_pill,card_summary,card_use_when,card_best_for,primary_chakra,card_pair_with,card_note,color_hex,collection_tier')
+            .eq('id',sched.stone_id)
+            .single();
+          if(!sErr&&stoneRow){
+            s=_sotdMapStone(stoneRow,sched);
+          }
+        }
+      }catch(err){console.warn('SOTD schedule fallback failed, using offline local fallback:',err);}
+    }
+  }
+
+  // Step 4 — offline local fallback (Supabase completely unreachable)
+  if(!s){
+    isOfflineFallback=true;
+    console.warn('SOTD: Supabase unavailable — displaying local offline fallback. This stone has NOT been written to history.');
+    s=deterministicSotdFallback();
+  }
   if(!s)return;
   renderMobileSotdCard(s);
   renderDesktopSotdCard(s);
