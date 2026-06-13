@@ -1407,11 +1407,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:900px){.c101-photo-intro{grid-template-columns:1fr;gap:0.9rem}.c101-photo-slot{max-width:220px;justify-self:start}.c101-wide-photo,.c101-wide-photo--work,.c101-wide-photo--cleansing,.c101-wide-photo--chakras,.c101-wide-photo--kit,.c101-wide-photo--care{width:100%;height:auto;aspect-ratio:16/9}}
 
 /* ── Energetic Roles result view ── */
-.er-role-count{font-size:11px;color:var(--ink3);margin-top:4px}
-@media(max-width:768px){
-  #s101-roles .er-role-count{display:none}
-  #s101-roles .role-card.open .er-role-count{display:block}
-}
+.er-role-count{display:none}
 .er-result-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
 .er-result-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.35rem;font-weight:400;color:var(--ink);line-height:1.2}
 .er-result-meta{font-family:'Jost',sans-serif;font-weight:400;font-size:11.5px;color:var(--ink3);margin-top:3px;letter-spacing:0.01em}
