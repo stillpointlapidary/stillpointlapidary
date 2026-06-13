@@ -1654,9 +1654,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-cleanse .cleanse-method-mobile-groups{display:flex;flex-direction:column;gap:12px}
   #s101-cleanse .cleanse-method-group{display:flex;flex-direction:column;gap:8px}
   #s101-cleanse .cleanse-method-group-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0.1rem 0 0.1rem}
-  #s101-cleanse .method-card{padding:0.78rem 0.9rem}
-  #s101-cleanse .method-name{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;line-height:1.2}
-  #s101-cleanse .method-desc{font-size:12.5px;line-height:1.55}
+  #s101-cleanse .method-card{padding:0.75rem 0.9rem 0.75rem 0.85rem;border-left-width:4px;border-left-color:var(--accent)}
+  #s101-cleanse .cleanse-method-group:nth-child(1) .method-card{border-left-color:#4a8a5a}
+  #s101-cleanse .cleanse-method-group:nth-child(2) .method-card{border-left-color:#b08a30}
+  #s101-cleanse .cleanse-method-group:nth-child(3) .method-card{border-left-color:#8a4a4a}
+  #s101-cleanse .method-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:4px}
+  #s101-cleanse .method-desc{font-size:12.5px;line-height:1.55;color:var(--ink2)}
+  #s101-cleanse .method-caveat{font-size:11px;color:var(--ink3);margin-top:4px;font-style:italic}
   #s101-cleanse .charging-methods-table,
   #s101-cleanse .charging-methods-table tbody,
   #s101-cleanse .charging-methods-table tr,
