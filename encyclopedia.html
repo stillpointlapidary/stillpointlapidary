@@ -157,6 +157,7 @@
     <button class="filter-cat-btn" id="fbtn-tier" onclick="togglePanel('tier',event)">Tier <span class="aval" id="fval-tier"></span><span class="caret">▾</span></button>
     <button class="filter-cat-btn filter-more-btn" id="fbtn-more" onclick="togglePanel('more',event)">More <span class="caret">▾</span></button>
     <button class="reset-link" onclick="resetFilters()">Reset</button>
+    <div class="sort-wrap enc-sort-inline"><label>SORT</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
   </div>
   <div class="filter-panel" id="panel-fam"><div class="filter-panel-title" style="display:flex;align-items:center;gap:6px">Mineral family <button class="prop-help" onclick="openPopup('filter-fam');event.stopPropagation()">?</button></div><div class="filter-panel-pills" id="pills-fam"></div></div>
   <div class="filter-panel" id="panel-theme"><div class="filter-panel-title">Energetic theme</div><div class="filter-panel-pills" id="pills-theme"></div></div>
@@ -177,7 +178,7 @@
   </div>
   <div class="meta-row">
     <span class="results-count" id="enc-count"></span>
-    <div class="sort-wrap"><label>Sort</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
+    <div class="sort-wrap enc-sort-mobile"><label>SORT</label><select onchange="encSort(this.value)"><option value="tier" selected>Tier</option><option value="name">A – Z</option><option value="mohs">Mohs</option><option value="family">Family</option></select></div>
   </div>
   </div>
 

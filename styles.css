@@ -132,6 +132,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* FILTER CATEGORY BUTTONS */
 .filter-cats{display:flex;gap:6px;flex-wrap:wrap;align-items:center;position:relative;margin-bottom:0.5rem}
+.enc-sort-inline{margin-left:auto}
+.enc-sort-mobile{display:none}
 .filter-cat-btn{font-size:12px;letter-spacing:0.05em;padding:5px 14px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:var(--white);color:var(--ink2);transition:all 0.15s;white-space:nowrap;font-family:'Jost',sans-serif;display:inline-flex;align-items:center;gap:4px}
 .filter-cat-btn:hover{border-color:var(--accent2);color:var(--accent)}
 .filter-cat-btn.has-val{background:var(--ink);color:var(--white);border-color:var(--ink)}
@@ -1571,8 +1573,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #tab-encyclopedia .filter-panel-pills{gap:6px}
   #tab-encyclopedia .fpill{min-height:34px}
   #tab-encyclopedia .meta-row{align-items:flex-start;gap:0.75rem;margin-bottom:0.9rem}
-  #tab-encyclopedia .sort-wrap{width:100%;justify-content:space-between}
-  #tab-encyclopedia .sort-wrap select{min-width:140px}
+  #tab-encyclopedia .enc-sort-mobile{display:flex;width:100%;justify-content:space-between}
+  #tab-encyclopedia .enc-sort-mobile select{min-width:140px}
   .enc-tier-header{grid-template-columns:auto 1fr}
   .enc-tier-viewall{display:none}
   .enc-tier-title{font-size:22px}
