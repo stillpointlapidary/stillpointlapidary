@@ -1119,15 +1119,6 @@ async function renderSotd(){
  *   isFuture       {boolean}
  */
 async function getSotdCalendarMonth(year, month) {
-  // Build date-range strings without new Date('YYYY-MM-DD') to avoid the UTC
-  // midnight → local-timezone shift that can move a date one day backward.
-  const mm       = String(month).padStart(2, '0');
-  const firstDay = `${year}-${mm}-01`;
-  // new Date(year, month, 0) uses local-month arithmetic (month is 1-indexed here,
-  // Date() wants 0-indexed, so passing month gives month+1 day-0 = last day of month).
-  const lastDate = new Date(year, month, 0);
-  const lastDay  = `${year}-${mm}-${String(lastDate.getDate()).padStart(2, '0')}`;
-
   // "Today" in America/Chicago — for isToday / isPast / isFuture flags only.
   // Intl gives the correct Chicago date without an extra RPC round-trip.
   const todayChicago = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
@@ -1137,94 +1128,36 @@ async function getSotdCalendarMonth(year, month) {
     return [];
   }
 
-  // Parallel fetch: history and schedule for the month.
-  const [histResult, schedResult] = await Promise.all([
-    _supa
-      .from('stone_of_day_history')
-      .select('feature_date,stone_id,selection_type,event_name,event_category,event_location,editorial_note,source_url')
-      .gte('feature_date', firstDay)
-      .lte('feature_date', lastDay),
-    _supa
-      .from('stone_of_day_schedule')
-      .select('feature_date,stone_id,selection_type,event_name,event_category,event_priority,event_location,editorial_note,source_url')
-      .gte('feature_date', firstDay)
-      .lte('feature_date', lastDay)
-      .eq('is_active', true)
-  ]);
+  const { data, error } = await _supa.rpc('get_sotd_calendar_month', {
+    p_year:  year,
+    p_month: month,
+  });
 
-  if (histResult.error) {
-    // History failure cannot be papered over — past dates must not silently become
-    // schedule dates. Return null so the caller can show an appropriate error state.
-    console.error('[SOTD Calendar] stone_of_day_history query failed:', histResult.error);
+  if (error) {
+    console.error('[SOTD Calendar] get_sotd_calendar_month RPC failed:', error);
     return null;
   }
-  if (schedResult.error) {
-    // Schedule failure only affects future editorial dates. Log and continue
-    // with history-only data so past dates still render correctly.
-    console.warn('[SOTD Calendar] stone_of_day_schedule query failed:', schedResult.error);
-  }
 
-  const histRows  = histResult.data  || [];
-  const schedRows = schedResult.error ? [] : (schedResult.data || []);
+  const rows = data || [];
 
-  // Merge into a single map keyed by 'YYYY-MM-DD'.
-  // History always wins for stone identity; schedule event metadata is merged in
-  // for dates that history already owns, filling only null fields.
-  const map = new Map();
-
-  for (const h of histRows) {
-    map.set(h.feature_date, {
-      date:          h.feature_date,
-      stoneId:       h.stone_id,
-      source:        'history',
-      selectionType: h.selection_type || null,
-      eventName:     h.event_name     || null,
-      eventCategory: h.event_category || null,
-      eventPriority: null,                     // history table has no priority column
-      eventLocation: h.event_location  || null,
-      editorialNote: h.editorial_note  || null,
-      sourceUrl:     h.source_url      || null,
-    });
-  }
-
-  for (const sc of schedRows) {
-    const d = sc.feature_date;
-    if (map.has(d)) {
-      // Date already resolved via history — preserve history stone, fill any
-      // null event-metadata fields with schedule values.
-      const e = map.get(d);
-      if (!e.eventName)     e.eventName     = sc.event_name     || null;
-      if (!e.eventCategory) e.eventCategory = sc.event_category || null;
-      if (e.eventPriority == null) e.eventPriority = sc.event_priority ?? null;
-      if (!e.eventLocation) e.eventLocation = sc.event_location || null;
-      if (!e.editorialNote) e.editorialNote = sc.editorial_note || null;
-      if (!e.sourceUrl)     e.sourceUrl     = sc.source_url     || null;
-    } else {
-      // No history row — use schedule as the source (future editorial date).
-      map.set(d, {
-        date:          d,
-        stoneId:       sc.stone_id,
-        source:        'schedule',
-        selectionType: sc.selection_type || null,
-        eventName:     sc.event_name     || null,
-        eventCategory: sc.event_category || null,
-        eventPriority: sc.event_priority ?? null,
-        eventLocation: sc.event_location || null,
-        editorialNote: sc.editorial_note || null,
-        sourceUrl:     sc.source_url     || null,
-      });
-    }
-  }
-
-  // Attach date-relative flags, then sort chronologically.
-  return Array.from(map.values())
-    .map(entry => ({
-      ...entry,
-      isToday:  entry.date === todayChicago,
-      isPast:   entry.date <  todayChicago,
-      isFuture: entry.date >  todayChicago,
-    }))
-    .sort((a, b) => a.date.localeCompare(b.date));
+  // Map RPC snake_case columns to the public camelCase shape and attach
+  // date-relative flags (computed client-side against Chicago today).
+  return rows.map(r => ({
+    date:          r.feature_date,
+    stoneId:       r.stone_id,
+    source:        r.source,                    // 'history' | 'schedule'
+    selectionType: r.selection_type  || null,
+    eventName:     r.event_name      || null,
+    eventCategory: r.event_category  || null,
+    eventPriority: r.event_priority  ?? null,
+    eventLocation: r.event_location  || null,
+    editorialNote: r.editorial_note  || null,
+    sourceUrl:     r.source_url      || null,
+    isToday:       r.feature_date === todayChicago,
+    isPast:        r.feature_date <  todayChicago,
+    isFuture:      r.feature_date >  todayChicago,
+  }));
+  // Note: RPC returns rows already sorted by feature_date; no client sort needed.
 }
 
 // ── DEV ONLY — SOTD Calendar data-layer verification ─────────────────────────
