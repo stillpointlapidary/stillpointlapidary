@@ -50,6 +50,8 @@ let activeIntentionMatches=[];
 let activeIntentionVisibleCount=10;
 let activeIntentionScoreMap={};
 let intentionIncludeTier4=false;
+let curatedIntentionIndex={};
+let activeCuratedSlug=null;
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
 let _currentUser=null;
 let addPieceReturnContext=null;
@@ -182,7 +184,7 @@ const INTENTION_SUB_FILTERS = {
   ],
   'Body': [
     {label:'Vitality',    slug:'vitality',    themes:['Vitality'], keywords:['vitality','life force','energ']},
-    {label:'Energy',      slug:'energy',      themes:['Vitality','Amplification'], keywords:['energy','activation','spark']},
+    {label:'Energy',      slug:'energetic-lift',themes:['Vitality','Amplification'], keywords:['energy','activation','spark']},
     {label:'Recovery',    slug:'recovery',    themes:['Heart Healing','Vitality'], keywords:['recover','healing','restor']},
     {label:'Stamina',     slug:'stamina',     themes:['Vitality'], keywords:['stamina','endurance','sustain']},
     {label:'Clearing',    slug:'clearing',    themes:['Amplification','Transformation'], keywords:['clearing','cleanse','purif','stuck energy']},
@@ -198,6 +200,16 @@ const INTENTION_PARENT_SLUGS = {
   'Spirit':'intuition',
   'Body':'body-energy',
 };
+// All 38 slugs with curated Supabase rows. If a recognized slug returns 0 rows,
+// it signals a data/mapping error — never fall back to CRYSTALS filtering.
+const CURATED_INTENTION_SLUGS = new Set([
+  'grounding','heart-support','mental-clarity','intuition','body-energy',
+  'anxiety','stability','protection','overthinking','nervous-system','sleep',
+  'self-love','grief','compassion','forgiveness','emotional-balance','relationships','inner-child',
+  'clarity','focus','motivation','confidence','communication','decision-making','creativity',
+  'meditation','spiritual-connection','transformation','dream-work','purpose','manifestation',
+  'vitality','energetic-lift','recovery','stamina','clearing','embodiment','resilience'
+]);
 const INTENTION_SHOWING_LABELS = {
   'Grounding':'Grounding',
   'Heart':'Heart support',
@@ -216,7 +228,7 @@ const intentionLabelMap = {
   'communication':'Communication','decision-making':'Decision making','creativity':'Creativity',
   'meditation':'Meditation','spiritual-connection':'Spiritual connection','transformation':'Transformation',
   'dream-work':'Dream work','purpose':'Purpose','manifestation':'Manifestation',
-  'vitality':'Vitality','energy':'Energy','recovery':'Recovery','stamina':'Stamina',
+  'vitality':'Vitality','energetic-lift':'Energy','recovery':'Recovery','stamina':'Stamina',
   'clearing':'Clearing','embodiment':'Embodiment','resilience':'Resilience',
 };
 function getIntentionLabel(slug){ return intentionLabelMap[slug] || slug; }
@@ -2279,13 +2291,28 @@ function toggleIntentionTier4(checkbox){
 function intentionTierRangeLabel(){return intentionIncludeTier4?'Tier 1–4':'Tier 1–3';}
 
 function getIntentionGroupMatches(group){
-  const parentSlug = INTENTION_PARENT_SLUGS[group];
-  return filterIntentionTier(CRYSTALS.filter(c => {
-    if(parentSlug && c.intention_tags && c.intention_tags.length > 0){
+  const parentSlug=INTENTION_PARENT_SLUGS[group];
+  if(parentSlug&&CURATED_INTENTION_SLUGS.has(parentSlug)){
+    const rows=curatedIntentionIndex[parentSlug]||[];
+    if(rows.length===0){
+      console.error('[Intention] Recognized slug returned 0 curated rows:',parentSlug,'— check Supabase data, RLS, and loadStoneIntentionReasons()');
+      activeCuratedSlug=parentSlug;
+      return[];
+    }
+    activeCuratedSlug=parentSlug;
+    return filterIntentionTier(rows.map(r=>{
+      const stone=CRYSTALS.find(c=>c.i===r.stone_slug);
+      if(!stone)console.warn('[Intention] stone_slug not found in CRYSTALS:',r.stone_slug,'(intention:',parentSlug+')');
+      return stone;
+    }).filter(Boolean));
+  }
+  activeCuratedSlug=null;
+  return filterIntentionTier(CRYSTALS.filter(c=>{
+    if(parentSlug&&c.intention_tags&&c.intention_tags.length>0){
       return c.intention_tags.includes(parentSlug);
     }
-    const themes = INTENTION_THEME_MAP[group] || [];
-    return themes.some(t => (c.all_themes||[]).includes(t));
+    const themes=INTENTION_THEME_MAP[group]||[];
+    return themes.some(t=>(c.all_themes||[]).includes(t));
   }));
 }
 
@@ -2297,16 +2324,35 @@ function intentionFilterHaystack(c){
 }
 
 function applyIntentionSubFilter(matches, group, filterLabel){
-  if(!filterLabel || filterLabel==='all')return matches;
-  const defs=(INTENTION_SUB_FILTERS[group]||[]).length ? INTENTION_SUB_FILTERS[group] : activeIntentionFilterDefs;
+  if(!filterLabel||filterLabel==='all'){
+    const parentSlug=INTENTION_PARENT_SLUGS[group];
+    if(parentSlug&&curatedIntentionIndex[parentSlug])activeCuratedSlug=parentSlug;
+    return matches;
+  }
+  const defs=(INTENTION_SUB_FILTERS[group]||[]).length?INTENTION_SUB_FILTERS[group]:activeIntentionFilterDefs;
   const filter=defs.find(f=>f.label===filterLabel);
   if(!filter)return matches;
+  if(filter.slug&&CURATED_INTENTION_SLUGS.has(filter.slug)){
+    const rows=curatedIntentionIndex[filter.slug]||[];
+    if(rows.length===0){
+      console.error('[Intention] Recognized sub-slug returned 0 curated rows:',filter.slug,'— check Supabase data, RLS, and loadStoneIntentionReasons()');
+      activeCuratedSlug=filter.slug;
+      return[];
+    }
+    activeCuratedSlug=filter.slug;
+    return filterIntentionTier(rows.map(r=>{
+      const stone=CRYSTALS.find(c=>c.i===r.stone_slug);
+      if(!stone)console.warn('[Intention] stone_slug not found in CRYSTALS:',r.stone_slug,'(intention:',filter.slug+')');
+      return stone;
+    }).filter(Boolean));
+  }
+  activeCuratedSlug=null;
   return matches.filter(c=>{
-    if(filter.slug && c.intention_tags && c.intention_tags.length > 0){
+    if(filter.slug&&c.intention_tags&&c.intention_tags.length>0){
       return c.intention_tags.includes(filter.slug);
     }
     const themes=c.all_themes||[];
-    const themeHit=(filter.themes||[]).some(t=>themes.includes(t) || c.primary_theme===t);
+    const themeHit=(filter.themes||[]).some(t=>themes.includes(t)||c.primary_theme===t);
     if(themeHit)return true;
     const hay=intentionFilterHaystack(c);
     return (filter.keywords||[]).some(k=>hay.includes(String(k).toLowerCase()));
@@ -2347,6 +2393,7 @@ function intentionRelevanceScore(c, context){
 }
 
 function sortIntentionMatches(matches, context){
+  if(activeCuratedSlug)return(matches||[]).slice();
   return (matches||[]).slice().sort((a,b)=>{
     const scoreDiff=intentionRelevanceScore(b,context)-intentionRelevanceScore(a,context);
     if(scoreDiff)return scoreDiff;
@@ -2915,6 +2962,10 @@ function intentionBestForText(stone){
     const reason=compactIntentionReason(getIntentionCardDescription(stone, activeIntentionQuery));
     if(reason)return reason;
   }
+  if(activeCuratedSlug){
+    const stoneMap=stoneIntentionReasonsMap[stone&&stone.i];
+    if(stoneMap&&stoneMap[activeCuratedSlug])return stoneMap[activeCuratedSlug];
+  }
   const parentSlug=INTENTION_PARENT_SLUGS[activeIntentionGroup]||'';
   const subDef=(INTENTION_SUB_FILTERS[activeIntentionGroup]||[]).find(f=>f.label===activeIntentionFilter);
   const subSlug=subDef?subDef.slug:null;
@@ -2941,7 +2992,7 @@ function intentionStoneCardHtml(c){
     ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
   const reason=intentionBestForText(c);
-  const whyHtml=reason&&!isGenericBlurb(reason)?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
+  const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
   const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
   const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
   return `<div class="crystal-card mood-result-card" onclick="detailReturnContext={type:'usewhen'};openDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
@@ -3043,7 +3094,7 @@ function clearMoodResults(){
   const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');
   if(selectedClear)selectedClear.textContent='← Change';
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
-  activeMoodIdx=null;activeSubFilter=null;
+  activeMoodIdx=null;activeSubFilter=null;activeCuratedSlug=null;
   activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=intentionPageSize();
 }
 
@@ -7397,13 +7448,17 @@ let stoneIntentionReasonsMap = {};
 async function loadStoneIntentionReasons(){
   try{
     const {data,error}=await _supa.from('stone_intention_reasons')
-      .select('stone_slug,intention_slug,reason_text')
-      .eq('is_active',true);
+      .select('stone_slug,intention_slug,reason_text,display_order')
+      .eq('is_active',true)
+      .eq('reason_type','curated')
+      .order('display_order',{ascending:true});
     if(error)throw error;
     (data||[]).forEach(row=>{
       if(!row.stone_slug||!row.intention_slug||!row.reason_text)return;
       if(!stoneIntentionReasonsMap[row.stone_slug])stoneIntentionReasonsMap[row.stone_slug]={};
       stoneIntentionReasonsMap[row.stone_slug][row.intention_slug]=row.reason_text;
+      if(!curatedIntentionIndex[row.intention_slug])curatedIntentionIndex[row.intention_slug]=[];
+      curatedIntentionIndex[row.intention_slug].push({stone_slug:row.stone_slug,reason_text:row.reason_text,display_order:row.display_order});
     });
   }catch(e){
     console.warn('Could not load stone intention reasons:',e);
