@@ -2050,16 +2050,15 @@ function closeDrawer(){
     switchTabByName('101');
     setTimeout(()=>{
       show101('roles');
-      const panel=document.getElementById('s101-roles-result');
+      const tiles=document.getElementById('s101-roles-tiles');
+      const result=document.getElementById('s101-roles-result');
       const title=document.getElementById('s101-roles-result-title');
-      const grid=document.getElementById('s101-roles-result-grid');
-      if(panel&&title&&grid&&ctx.slug===_activeEnergeticRoleSlug&&_activeEnergeticRoleRows.length){
+      if(result&&title&&ctx.slug===_activeEnergeticRoleSlug&&_activeEnergeticRoleRows.length){
+        // cache is warm — re-render in place without re-fetching
+        if(tiles)tiles.style.display='none';
+        result.style.display='';
         title.textContent=ENERGETIC_ROLE_LABELS[ctx.slug]||ctx.slug;
-        grid.innerHTML=_activeEnergeticRoleRows.map(row=>{
-          const stone=CRYSTALS.find(c=>c.i===row.stone_id);
-          return stone?energeticRoleCardHtml(stone,row.reason_text,row.match_strength,ctx.slug):'';
-        }).join('');
-        panel.style.display='';
+        _renderEnergeticRoleGrid();
         setTimeout(()=>{window.scrollTo({top:ctx.scrollY||0,behavior:'instant'});},0);
       }else if(ctx.slug){
         openEnergeticRole(ctx.slug).then(()=>{
@@ -5060,6 +5059,7 @@ function updateLastSaved(){
 // ── START ──
 async function loadStonesAndInit() {
   loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
+  loadEnergeticRoleCounts();  // non-blocking; populates stone counts on role tiles
   const CACHE_KEY = 'spl_stones_cache';
   const CACHE_VER = 'v3';
 
@@ -5749,17 +5749,42 @@ const ENERGETIC_ROLE_LABELS={
 };
 let _activeEnergeticRoleSlug=null;
 let _activeEnergeticRoleRows=[];
+let _activeEnergeticRoleFilter='primary'; // 'primary' (strength=3) or 'all' (strength>=2)
+
+async function loadEnergeticRoleCounts(){
+  try{
+    const{data,error}=await _supa
+      .from('stone_energetic_roles')
+      .select('role_slug')
+      .eq('active',true);
+    if(error||!data)return;
+    const counts={};
+    data.forEach(r=>{counts[r.role_slug]=(counts[r.role_slug]||0)+1;});
+    document.querySelectorAll('.er-role-count[data-role-slug]').forEach(el=>{
+      const n=counts[el.dataset.roleSlug];
+      if(n)el.textContent=n+' stones';
+    });
+  }catch(e){}
+}
 
 async function openEnergeticRole(slug){
   _activeEnergeticRoleSlug=slug;
-  const panel=document.getElementById('s101-roles-result');
+  _activeEnergeticRoleFilter='primary';
+  const tiles=document.getElementById('s101-roles-tiles');
+  const result=document.getElementById('s101-roles-result');
   const grid=document.getElementById('s101-roles-result-grid');
   const title=document.getElementById('s101-roles-result-title');
-  if(!panel||!grid||!title)return;
+  const meta=document.getElementById('s101-roles-result-meta');
+  if(!result||!grid||!title)return;
+  if(tiles)tiles.style.display='none';
+  result.style.display='';
   title.textContent=ENERGETIC_ROLE_LABELS[slug]||slug;
-  grid.innerHTML='<div style="padding:1rem;color:var(--ink3);font-size:14px">Loading...</div>';
-  panel.style.display='';
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
+  meta.textContent='';
+  _updateErFilterUI();
+  grid.innerHTML='<div style="padding:1rem;color:var(--ink3);font-size:13px">Loading...</div>';
+  // scroll to top of the block (not result panel bottom)
+  const block=document.getElementById('s101-roles-main-block');
+  if(block){const y=block.getBoundingClientRect().top+window.scrollY-100;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
   try{
     const{data,error}=await _supa
       .from('stone_energetic_roles')
@@ -5769,26 +5794,57 @@ async function openEnergeticRole(slug){
       .order('display_order',{ascending:true});
     if(error)throw error;
     _activeEnergeticRoleRows=data||[];
-    grid.innerHTML=_activeEnergeticRoleRows.length
-      ?_activeEnergeticRoleRows.map(row=>{
-          const stone=CRYSTALS.find(c=>c.i===row.stone_id);
-          return stone?energeticRoleCardHtml(stone,row.reason_text,row.match_strength,slug):'';
-        }).join('')
-      :'<div style="padding:1rem;color:var(--ink3);font-size:14px">No stones found for this role.</div>';
+    _renderEnergeticRoleGrid();
   }catch(e){
-    grid.innerHTML='<div style="padding:1rem;color:var(--ink3);font-size:14px">Could not load stones. Please try again.</div>';
+    grid.innerHTML='<div style="padding:1rem;color:var(--ink3);font-size:13px">Could not load stones. Please try again.</div>';
   }
 }
 
-function energeticRoleCardHtml(c,reasonText,matchStrength,slug){
+function _renderEnergeticRoleGrid(){
+  const grid=document.getElementById('s101-roles-result-grid');
+  const meta=document.getElementById('s101-roles-result-meta');
+  const allBtn=document.getElementById('er-filter-all');
+  if(!grid)return;
+  const all=_activeEnergeticRoleRows;
+  const primary=all.filter(r=>r.match_strength===3);
+  const visible=_activeEnergeticRoleFilter==='primary'?primary:all;
+  if(allBtn)allBtn.textContent='All '+all.length;
+  const primaryCount=primary.length;
+  const allCount=all.length;
+  if(_activeEnergeticRoleFilter==='primary'){
+    meta.textContent=primaryCount+' primary match'+(primaryCount===1?'':'es')+' · '+allCount+' total';
+  }else{
+    meta.textContent=allCount+' stone'+(allCount===1?'':'s');
+  }
+  grid.innerHTML=visible.length
+    ?visible.map(row=>{
+        const stone=CRYSTALS.find(c=>c.i===row.stone_id);
+        return stone?energeticRoleCardHtml(stone,row.reason_text,_activeEnergeticRoleSlug):'';
+      }).join('')
+    :'<div style="padding:1rem;color:var(--ink3);font-size:13px">No stones found.</div>';
+}
+
+function _updateErFilterUI(){
+  const pBtn=document.getElementById('er-filter-primary');
+  const aBtn=document.getElementById('er-filter-all');
+  if(pBtn)pBtn.classList.toggle('active',_activeEnergeticRoleFilter==='primary');
+  if(aBtn)aBtn.classList.toggle('active',_activeEnergeticRoleFilter==='all');
+}
+
+function setEnergeticRoleFilter(filter){
+  _activeEnergeticRoleFilter=filter;
+  _updateErFilterUI();
+  _renderEnergeticRoleGrid();
+}
+
+function energeticRoleCardHtml(c,reasonText,slug){
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
-    ?`<div class="card-img-zone has-photo"><img src="${imgSrc}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
-    :`<div class="card-img-zone no-photo"></div>`;
-  const whyHtml=reasonText?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reasonText)}</div>`:'';
-  const slugAttr=escapeAttr(slug);
-  return `<div class="crystal-card mood-result-card" onclick="openEnergeticRoleDetail('${escapeAttr(c.i)}','${slugAttr}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${whyHtml}</div></div>`;
+    ?`<div class="er-card-img"><img src="${imgSrc}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
+    :`<div class="er-card-img"><div class="er-card-img-empty"></div></div>`;
+  const whyHtml=reasonText?`<div class="er-card-why"><span class="er-card-why-label">Why</span>${escapeAttr(reasonText)}</div>`:'';
+  return `<div class="er-result-card" onclick="openEnergeticRoleDetail('${escapeAttr(c.i)}','${escapeAttr(slug)}')">${imgZone}<div class="er-card-body"><div class="er-card-name">${escapeAttr(c.n)}</div>${whyHtml}</div></div>`;
 }
 
 function openEnergeticRoleDetail(stoneId,slug){
@@ -5797,12 +5853,20 @@ function openEnergeticRoleDetail(stoneId,slug){
 }
 
 function closeEnergeticRoleResults(){
-  const panel=document.getElementById('s101-roles-result');
-  if(panel)panel.style.display='none';
+  const tiles=document.getElementById('s101-roles-tiles');
+  const result=document.getElementById('s101-roles-result');
+  if(result)result.style.display='none';
+  if(tiles)tiles.style.display='';
+  const prevSlug=_activeEnergeticRoleSlug;
   _activeEnergeticRoleSlug=null;
   _activeEnergeticRoleRows=[];
-  const rolesTop=document.getElementById('s101-roles');
-  if(rolesTop)rolesTop.scrollIntoView({behavior:'smooth',block:'start'});
+  // scroll to the previously selected tile if available, else section top
+  let target=null;
+  if(prevSlug){
+    target=document.querySelector(`#s101-roles-tiles .role-card[onclick*="'${prevSlug}'"]`);
+  }
+  if(!target)target=document.getElementById('s101-roles');
+  if(target){const y=target.getBoundingClientRect().top+window.scrollY-120;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
 }
 
 
