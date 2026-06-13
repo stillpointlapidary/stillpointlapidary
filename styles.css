@@ -720,43 +720,56 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* SOTD mobile intro panel — hidden by default, shown in mobile media query */
 .sotd-intro-panel{display:none}
 
-/* MOBILE SOTD — buttons (class names kept for JS selectors) */
-.msfc-btn-primary{appearance:none;width:auto;max-width:max-content;display:inline-flex;align-items:center;justify-content:center;padding:11px 26px;background:var(--ink);color:var(--white);border:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.15s}
-.msfc-btn-primary:hover{background:var(--accent)}
-.msfc-btn-secondary{flex:0 0 auto;appearance:none;width:auto;max-width:max-content;display:inline-flex;align-items:center;justify-content:center;padding:9px 18px;background:transparent;color:var(--accent);border:0.5px solid rgba(139,115,85,0.4);border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.15s}
-.msfc-btn-secondary:hover{background:#f5f0e8}
+/* MOBILE SOTD — button selectors kept for JS auth logic */
+.msfc-btn-enc,.msfc-btn-coll,.msfc-btn-wish{cursor:pointer}
 .msfc-signin-hint{display:none!important}
 /* MOBILE SOTD — intro panel */
-.sotd-intro-panel{display:none;flex-direction:column;align-items:center;text-align:center;padding:20px 24px 22px;background:rgba(255,252,248,0.97);border:1px solid #eadfce;border-radius:24px;margin-bottom:14px}
-.sotd-star-top{color:#c6a46c;font-size:20px;line-height:1;margin-bottom:10px}
-.sotd-intro-kicker{display:inline-flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#c8a06a;margin-bottom:8px}
-.sotd-intro-text{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;color:var(--ink);font-style:italic}
+.sotd-intro-panel{display:none;flex-direction:column;align-items:center;text-align:center;padding:22px 24px 26px;background:rgba(255,252,248,0.97);border:1px solid #eadfce;border-radius:24px;margin-bottom:20px;position:relative}
+.sotd-star-top{color:#c6a46c;margin-bottom:12px;line-height:1}
+.sotd-intro-kicker{display:inline-flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#c8a06a;margin-bottom:10px}
+.sotd-intro-text{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.2rem,5vw,1.5rem);line-height:1.45;color:var(--ink);font-style:italic;margin-bottom:18px}
 .sotd-sparkle{color:#c6a46c;display:inline-flex;align-items:center;justify-content:center}
+.sotd-lotus-bottom{color:#c6a46c;display:flex;align-items:center;justify-content:center;position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:rgba(255,252,248,0.97);padding:0 10px}
 /* MOBILE SOTD — feature card */
-.sotd-feature-card{display:flex;flex-direction:column;gap:16px}
-.sotd-feature-hero{border:1px solid rgba(190,160,115,.24);border-radius:22px;overflow:hidden;background:rgba(255,255,255,.62)}
-.sotd-image-wrap{aspect-ratio:1/1;width:100%;overflow:hidden;background:#fbfaf7}
-.sotd-feature-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.sotd-feature-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--stone2)}
-.sotd-hero-copy{padding:22px 22px 24px}
-.sotd-card-kicker{margin:0 0 4px;font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:0.15em;text-transform:uppercase;color:#c8a06a;font-weight:600}
-.sotd-stone-name{margin:8px 0 14px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:0.92;letter-spacing:-0.035em;color:#5a554f;font-size:clamp(2.7rem,12vw,4.25rem);overflow-wrap:anywhere;text-wrap:balance;max-width:100%}
-.sotd-stone-name.is-long-name{font-size:clamp(2.3rem,9.5vw,3.6rem);line-height:0.96}
-.sotd-stone-name.is-very-long-name{font-size:clamp(2rem,8.2vw,3rem);line-height:1;letter-spacing:-0.025em}
-.sotd-quality-pill{display:inline-flex;align-items:center;width:fit-content;max-width:100%;padding:8px 18px;border-radius:999px;font-family:'Jost',sans-serif;font-size:12px;font-weight:700;margin-bottom:10px}
-.sotd-summary{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:14.5px;line-height:1.55;color:#4d4944}
-.sotd-mini-divider{width:70%;max-width:210px;height:1px;margin:18px 0;background:linear-gradient(90deg,transparent,rgba(198,164,108,.55),transparent);position:relative}
-.sotd-mini-divider::after{content:"✦";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);background:#fbfaf7;color:#c6a46c;padding:0 10px;font-size:11px}
-.sotd-use-when{margin:0;font-family:'Jost',sans-serif;font-size:12.5px;line-height:1.6;color:var(--ink3)}
-.sotd-actions{display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0}
-.sotd-secondary-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.sotd-detail-box{border:0.5px solid rgba(234,223,206,0.9);border-radius:14px;padding:0.85rem 1rem;display:flex;flex-direction:column;background:rgba(250,247,243,0.8)}
-.sotd-detail-row{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:0.5px solid rgba(234,223,206,0.7)}
+.sotd-feature-card{border:1px solid rgba(190,160,115,.24);border-radius:24px;overflow:hidden;background:var(--white);box-shadow:0 4px 24px rgba(42,37,32,0.07)}
+.sotd-feature-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;min-height:190px;border-bottom:0.5px solid rgba(190,160,115,.18);background:rgba(251,250,247,.85)}
+.sotd-image-wrap{overflow:hidden;background:#fbfaf7}
+.sotd-feature-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:150px}
+.sotd-feature-img-fallback{width:100%;height:100%;min-height:150px;display:flex;align-items:center;justify-content:center;background:var(--stone2)}
+.sotd-hero-copy{padding:18px 16px 18px 14px;display:flex;flex-direction:column;justify-content:center;border-left:0.5px solid rgba(190,160,115,.18)}
+.sotd-card-kicker{margin:0 0 4px;font-family:'Jost',sans-serif;font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:#c8a06a;font-weight:600}
+.sotd-stone-name{margin:4px 0 10px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:0.92;letter-spacing:-0.035em;color:#5a554f;font-size:clamp(2rem,9vw,3.25rem);overflow-wrap:anywhere;max-width:100%}
+.sotd-stone-name.is-long-name{font-size:clamp(1.75rem,7.5vw,2.75rem);line-height:0.95}
+.sotd-stone-name.is-very-long-name{font-size:clamp(1.5rem,6.5vw,2.25rem);line-height:1;letter-spacing:-0.02em}
+.sotd-quality-pill{display:inline-flex;align-items:center;width:fit-content;max-width:100%;padding:5px 13px;border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;margin-bottom:8px}
+.sotd-summary{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.5;color:#4d4944}
+.sotd-mini-divider{width:70%;max-width:140px;height:1px;margin:12px 0;background:linear-gradient(90deg,transparent,rgba(198,164,108,.55),transparent);position:relative}
+.sotd-mini-divider::after{content:"✦";position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);background:rgba(251,250,247,.85);color:#c6a46c;padding:0 8px;font-size:10px}
+.sotd-use-when{margin:0;font-family:'Jost',sans-serif;font-size:11.5px;line-height:1.55;color:var(--ink3)}
+/* Card body (buttons + details + tip) */
+.sotd-card-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:14px}
+.sotd-actions{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.sotd-btn-view{appearance:none;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;background:var(--ink);color:var(--white);border:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.15s}
+.sotd-btn-view:hover{background:var(--accent)}
+.sotd-secondary-row{display:flex;gap:8px}
+.sotd-btn-secondary{flex:1;appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;background:transparent;color:var(--accent);border:0.5px solid rgba(139,115,85,0.4);border-radius:999px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer;transition:all 0.15s}
+.sotd-btn-secondary:hover{background:#f5f0e8}
+.sotd-btn-icon{display:inline-flex;align-items:center;flex-shrink:0;width:14px;height:14px}
+.sotd-btn-icon svg{width:100%;height:100%}
+/* Detail rows */
+.sotd-detail-box{display:flex;flex-direction:column;gap:0}
+.sotd-detail-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:0.5px solid rgba(234,223,206,0.7)}
 .sotd-detail-row:last-child{border-bottom:none;padding-bottom:0}
-.sotd-detail-lbl{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);flex-shrink:0;min-width:72px}
-.sotd-detail-val{font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);font-weight:500}
-.sotd-ritual-text{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.3rem,5vw,1.65rem);font-style:italic;line-height:1.5;color:#6b625a;text-align:center;padding-top:16px;border-top:0.5px solid rgba(234,223,206,0.8)}
-@media(min-width:520px){.sotd-feature-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}.sotd-image-wrap{height:100%}.sotd-hero-copy{display:flex;flex-direction:column;justify-content:center;padding:24px}.sotd-stone-name{font-size:clamp(2.35rem,7vw,3.8rem)}.sotd-mini-divider{margin-left:0;margin-right:0}}
+.sotd-badge{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sotd-badge svg{width:20px;height:20px}
+.sotd-badge--bestfor{background:rgba(197,175,140,.18);color:#9a7d5a}
+.sotd-badge--chakra{background:rgba(122,107,160,.16);color:#7a6ba0}
+.sotd-badge--pair{background:rgba(197,175,140,.18);color:#9a7d5a}
+.sotd-detail-lbl{font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);flex-shrink:0;min-width:58px}
+.sotd-detail-val{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink);font-weight:600}
+/* Ritual tip */
+.sotd-ritual-text{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.2rem,4.5vw,1.45rem);font-style:italic;line-height:1.5;color:#6b625a;text-align:center;padding-top:14px;border-top:1px dashed rgba(198,164,108,.4);display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.sotd-moon{color:#c6a46c;display:inline-flex;align-items:center;flex-shrink:0}
 /* HOME EXPLORE TILES */
 .home-pathways{padding:2rem 0 2rem;scroll-margin-top:156px}
 .home-pathways-header{margin-bottom:1.25rem}
@@ -778,7 +791,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .home-pw-desc{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);line-height:1.6;flex:1}
 @media(max-width:900px){.home-pathways-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.content{display:flex;flex-direction:column}.homepage-hero{order:1}.mobile-sotd-section{order:2;display:block;padding:1.5rem 0 1.35rem;border-bottom:0.5px solid var(--border2)}.home-pathways{order:3}.desktop-sotd-section{display:none}.home-mobile-backtop-wrap{order:4}.mobile-sotd-header{display:none}.mobile-stone-day-intro{display:none}.sotd-intro-panel{display:flex}.home-pathways-grid{grid-template-columns:repeat(2,1fr)}.home-pw-card.home-pw-card--essentials{display:flex}.home-pathways-grid .home-pw-card:nth-child(5){grid-column:auto;min-height:auto}.home-mobile-backtop-wrap{display:flex;justify-content:center;margin:1rem 0 0}.home-mobile-backtop{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:transparent;border:0.5px solid var(--border);border-radius:999px;padding:6px 12px;text-decoration:none;font-family:'Jost',sans-serif}.how-to-choose-desktop{display:none}.how-to-choose-mobile{display:block;padding:0 1px}}
-@media(max-width:380px){.sotd-stone-name{font-size:clamp(1.9rem,9vw,2.6rem)}.sotd-summary{font-size:13.5px}.sotd-use-when{font-size:12px}.choose-method-card{grid-template-columns:44px 1px 68px minmax(0,1fr);column-gap:12px;padding:22px 18px}.choose-method-icon{width:62px;height:62px}.choose-method-icon svg{width:34px;height:34px}.choose-method-copy h3{font-size:24px}.choose-method-copy p{font-size:16px}}
+@media(max-width:380px){.sotd-stone-name{font-size:clamp(1.65rem,8vw,2.2rem)}.sotd-summary{font-size:12px}.sotd-use-when{font-size:11px}.sotd-hero-copy{padding:14px 12px 14px 10px}.choose-method-card{grid-template-columns:44px 1px 68px minmax(0,1fr);column-gap:12px;padding:22px 18px}.choose-method-icon{width:62px;height:62px}.choose-method-icon svg{width:34px;height:34px}.choose-method-copy h3{font-size:24px}.choose-method-copy p{font-size:16px}}
 
 /* HOW TO CHOOSE — MOBILE EDITORIAL CARDS */
 .how-to-choose-mobile{display:none}

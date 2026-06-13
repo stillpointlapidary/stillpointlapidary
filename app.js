@@ -829,9 +829,31 @@ function renderMobileSotdCard(s){
   const sname=escapeAttr(s.name);
   const nameLen=s.name.length;
   const nameExtraClass=nameLen>28?' is-very-long-name':nameLen>18?' is-long-name':'';
-  const bestForRow=s.card_best_for?`<div class="sotd-detail-row"><span class="sotd-detail-lbl">Best for</span><span class="sotd-detail-val">${escapeAttr(s.card_best_for)}</span></div>`:'';
-  const chakraRow=s.primary_chakra?`<div class="sotd-detail-row"><span class="sotd-detail-lbl">Chakra</span><span class="sotd-detail-val">${escapeAttr(s.primary_chakra)}</span></div>`:'';
-  const pairRow=s.card_pair_with?`<div class="sotd-detail-row"><span class="sotd-detail-lbl">Pair with</span><span class="sotd-detail-val">${escapeAttr(s.card_pair_with)}</span></div>`:'';
+  const SVG_BESTFOR=`<svg viewBox="0 0 64 64" fill="none"><path d="M31.5 7.5c-11.8 0-21.2 8.4-21.2 19.6 0 5.4 2.2 10.3 5.9 13.9v10.8h13.2v-5.4h7.2c4.2 0 7.6-3.4 7.6-7.6v-4.1h5.6c1.7 0 2.7-1.9 1.8-3.3l-5.7-8.8C44.1 13.9 38.6 7.5 31.5 7.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`;
+  const SVG_CHAKRA=`<svg viewBox="0 0 64 64" fill="none"><path d="M32 52C22 35 21 24 32 12C43 24 42 35 32 52Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 52C21 42 13 34 12 20C25 23 31 32 32 52Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 52C43 42 51 34 52 20C39 23 33 32 32 52Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`;
+  const SVG_PAIR=`<svg viewBox="0 0 64 64" fill="none"><path d="M32 6 43 25 32 57 21 25Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M21 25h22M16 28 25 42 16 57 7 42ZM48 28 57 42 48 57 39 42Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`;
+  const SVG_BOOK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`;
+  const SVG_HEART=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  const SVG_STAR=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+  const SVG_MOON=`<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  const bestForRow=s.card_best_for?`
+    <div class="sotd-detail-row">
+      <div class="sotd-badge sotd-badge--bestfor">${SVG_BESTFOR}</div>
+      <span class="sotd-detail-lbl">Best for</span>
+      <span class="sotd-detail-val">${escapeAttr(s.card_best_for)}</span>
+    </div>`:'';
+  const chakraRow=s.primary_chakra?`
+    <div class="sotd-detail-row">
+      <div class="sotd-badge sotd-badge--chakra">${SVG_CHAKRA}</div>
+      <span class="sotd-detail-lbl">Chakra</span>
+      <span class="sotd-detail-val">${escapeAttr(s.primary_chakra)}</span>
+    </div>`:'';
+  const pairRow=s.card_pair_with?`
+    <div class="sotd-detail-row">
+      <div class="sotd-badge sotd-badge--pair">${SVG_PAIR}</div>
+      <span class="sotd-detail-lbl">Pair with</span>
+      <span class="sotd-detail-val">${escapeAttr(s.card_pair_with)}</span>
+    </div>`:'';
   const detailBox=(bestForRow||chakraRow||pairRow)?`<div class="sotd-detail-box">${bestForRow}${chakraRow}${pairRow}</div>`:'';
   const miniDivider=(s.card_summary&&s.card_use_when)?`<div class="sotd-mini-divider"></div>`:'';
   container.innerHTML=`
@@ -839,7 +861,7 @@ function renderMobileSotdCard(s){
       <div class="sotd-feature-hero">
         <div class="sotd-image-wrap">${photoHtml}</div>
         <div class="sotd-hero-copy">
-          <p class="sotd-card-kicker">THE DAILY STONE</p>
+          <p class="sotd-card-kicker">· THE DAILY STONE ·</p>
           <h3 class="sotd-stone-name${nameExtraClass}">${sname}</h3>
           ${s.card_quality_pill?`<div class="sotd-quality-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
           ${s.card_summary?`<p class="sotd-summary">${escapeAttr(s.card_summary)}</p>`:''}
@@ -847,15 +869,17 @@ function renderMobileSotdCard(s){
           ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         </div>
       </div>
-      <div class="sotd-actions">
-        <button class="msfc-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">View Full Entry</button>
-        <div class="sotd-secondary-row">
-          <button class="msfc-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to Collection</button>
-          <button class="msfc-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}">Add to Wishlist</button>
+      <div class="sotd-card-body">
+        <div class="sotd-actions">
+          <button class="sotd-btn-view msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-btn-icon">${SVG_BOOK}</span>View Full Entry</button>
+          <div class="sotd-secondary-row">
+            <button class="sotd-btn-secondary msfc-btn-coll" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-btn-icon">${SVG_HEART}</span>Add to Collection</button>
+            <button class="sotd-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-btn-icon">${SVG_STAR}</span>Add to Wishlist</button>
+          </div>
         </div>
+        ${detailBox}
+        ${s.card_note?`<p class="sotd-ritual-text">${escapeAttr(s.card_note)} <span class="sotd-moon" aria-hidden="true">${SVG_MOON}</span></p>`:''}
       </div>
-      ${detailBox}
-      ${s.card_note?`<p class="sotd-ritual-text">${escapeAttr(s.card_note)}</p>`:''}
     </div>`;
   container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
     detailReturnContext={type:'home-sotd'};openDetail(s.id);
