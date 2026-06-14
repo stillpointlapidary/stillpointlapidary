@@ -877,49 +877,6 @@ function requestDrawerSaveSignIn(actionType){
 function updateDrawerStatus(id){
   const isOwned=!!owned[id];
   const isWish=!!wish[id];
-  const pillOwned=document.getElementById('drawer-pill-owned');
-  const pillWish=document.getElementById('drawer-pill-wish');
-  if(pillOwned){
-    pillOwned.textContent=isOwned?'♥ In your collection':'+ Add to collection';
-    pillOwned.classList.toggle('drawer-pill-active',isOwned);
-  }
-  if(pillWish){
-    pillWish.textContent=isWish?'♥ On your wishlist':'♡ Add to wishlist';
-    pillWish.classList.toggle('drawer-pill-active',isWish);
-  }
-  const viewLinks=document.getElementById('drawer-view-links');
-  const viewColl=document.getElementById('drawer-view-coll');
-  const viewWish=document.getElementById('drawer-view-wish');
-  if(viewLinks){
-    if(viewColl) viewColl.style.display=isOwned?'inline':'none';
-    if(viewWish) viewWish.style.display=isWish?'inline':'none';
-    viewLinks.style.display=(isOwned||isWish)?'flex':'none';
-  }
-}
-function drawerCollectionAction(){
-  if(!currentCrystal)return;
-  if(owned[currentCrystal.i]){
-    // Already owned — remove via synced toggle
-    toggleOwned();
-  } else {
-    // Not owned — open add piece form
-    addFromDetail();
-  }
-}
-function drawerWishlistAction(){
-  if(!currentCrystal)return;
-  const wasWished=!!wish[currentCrystal.i];
-  // Use synced toggleWish (saves to Supabase for logged-in users)
-  toggleWish();
-  if(!wasWished){
-    // Brief confirmation on add
-    const pill=document.getElementById('drawer-pill-wish');
-    if(pill){pill.textContent='✓ Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
-  }
-}
-function updateDrawerStatus(id){
-  const isOwned=!!owned[id];
-  const isWish=!!wish[id];
   const signedIn=!!_currentUser;
   const pillOwned=document.getElementById('drawer-pill-owned');
   const pillWish=document.getElementById('drawer-pill-wish');
