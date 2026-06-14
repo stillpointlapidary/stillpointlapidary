@@ -254,7 +254,7 @@ async function _signOut() {
   collection=[]; owned={}; wish={};
   try{ ['lap_coll','lap_owned','lap_wish'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
   _renderAuth(null);
-  encRender();
+  if(typeof encRender==='function') encRender();
 }
 
 // ── SUPABASE COLLECTION WRITE LAYER ──────────────────────────
@@ -367,8 +367,8 @@ async function loadSupabaseState() {
 
   localStorage.setItem('lap_owned', JSON.stringify(owned));
   localStorage.setItem('lap_wish', JSON.stringify(wish));
-  encRender();
-  renderCollection();
+  if(typeof encRender==='function') encRender();
+  if(typeof renderCollection==='function') renderCollection();
   const syncEl=document.getElementById('coll-sync-status');
   if(syncEl){const t=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});syncEl.textContent='Synced at '+t;syncEl.style.display='block';}
   showCollSyncToast('Saved');
@@ -550,7 +550,7 @@ window.toggleOwned = async function() {
   }
   await loadSupabaseState();
   updateDrawerStatus(stoneId);
-  encRender();
+  if(typeof encRender==='function') encRender();
 };
 
 window.toggleWish = async function() {
@@ -567,8 +567,8 @@ window.toggleWish = async function() {
   }
   localStorage.setItem('lap_wish', JSON.stringify(wish));
   updateDrawerStatus(stoneId);
-  renderCollection();
-  encRender();
+  if(typeof renderCollection==='function') renderCollection();
+  if(typeof encRender==='function') encRender();
 };
 
 _authInit();
