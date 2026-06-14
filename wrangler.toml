@@ -1,0 +1,7 @@
+name = "stillpointdfw"
+main = "index.html"
+compatibility_date = "2026-06-14"
+account_id = "398e506f5f3b79b4ea209d44b46d3886"
+
+[assets]
+directory = "."
