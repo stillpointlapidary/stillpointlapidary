@@ -2390,8 +2390,8 @@ body.sotd-cal-open{overflow:hidden}
   align-items:center;
   gap:5px;
   font-family:'Jost',sans-serif;
-  font-size:11px;
-  font-weight:600;
+  font-size:12px;
+  font-weight:500;
   letter-spacing:.15em;
   text-transform:uppercase;
   color:var(--sotd-kicker-color, #6b5e52);
@@ -2473,30 +2473,32 @@ body.sotd-cal-open{overflow:hidden}
 }
 
 
-/* ── SOTD ICON AUDITION OVERLAY (admin-only, temporary) ─────────────────── */
-.sotd-icon-audition{display:none;position:fixed;inset:0;z-index:900;background:rgba(30,24,18,.55);align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
+/* ── SITEWIDE ICON AUDITION OVERLAY (admin-only, temporary) ─────────────── */
+.sotd-icon-audition{display:none;position:fixed;inset:0;z-index:900;background:rgba(30,24,18,.55);align-items:flex-start;justify-content:center;padding:24px;box-sizing:border-box;overflow-y:auto}
 .sotd-icon-audition.open{display:flex}
-.sica-panel{position:relative;background:#faf8f4;border:1px solid rgba(169,135,95,.22);border-radius:16px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;padding:28px 32px 24px;box-shadow:0 24px 64px rgba(30,24,18,.18);box-sizing:border-box}
+.sica-panel{position:relative;background:#faf8f4;border:1px solid rgba(169,135,95,.22);border-radius:16px;max-width:940px;width:100%;margin:auto;padding:28px 32px 32px;box-shadow:0 24px 64px rgba(30,24,18,.18);box-sizing:border-box}
 .sica-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:16px;color:#8d7a68;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px}
 .sica-close:hover{background:rgba(169,135,95,.12)}
 .sica-eyebrow{font-family:'Jost',sans-serif;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#a07844;margin-bottom:5px}
 .sica-title{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:#2e2820;margin-bottom:4px}
-.sica-subhead{font-family:'Jost',sans-serif;font-size:11.5px;color:#7a7068;line-height:1.5;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(169,135,95,.18)}
-.sica-table{width:100%;border-collapse:collapse}
-.sica-table tr{border-bottom:1px solid rgba(220,205,182,.5)}
-.sica-table tr:last-child{border-bottom:none}
-.sica-table td{padding:11px 0;vertical-align:middle}
-.sica-lbl-cell{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;color:#4e453c;width:50%;padding-right:12px}
-.sica-fam{font-size:10px;font-weight:400;color:#9a8878;display:block;margin-top:1px}
-.sica-icon-cell{text-align:center}
-.sica-icon-wrap{display:inline-flex;align-items:center;justify-content:center;background:var(--sica-wash,#f4f2f6);border:1px solid rgba(169,135,95,.14);border-radius:7px;padding:5px}
-.sica-icon-wrap.sm .sotd-event-icon{width:15px;height:15px}
-.sica-icon-wrap.lg .sotd-event-icon{width:30px;height:30px}
-.sica-size-label{font-family:'Jost',sans-serif;font-size:9px;color:#b0a090;display:block;margin-top:4px;text-align:center;letter-spacing:.05em}
-.sica-footer{font-family:'Jost',sans-serif;font-size:10.5px;color:#9a8878;margin-top:20px;padding-top:14px;border-top:1px solid rgba(169,135,95,.18);line-height:1.55}
+.sica-subhead{font-family:'Jost',sans-serif;font-size:11.5px;color:#7a7068;line-height:1.5;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(169,135,95,.18)}
+/* section */
+.sica-section{margin-bottom:28px}
+.sica-section-hdr{font-family:'Jost',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a07844;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid rgba(169,135,95,.2)}
+/* option grid: 4 cards across */
+.sica-options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+/* individual card */
+.sica-card{background:#fff;border:1px solid rgba(169,135,95,.16);border-radius:10px;padding:12px 10px 10px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.sica-card-label{font-family:'Jost',sans-serif;font-size:10px;font-weight:500;color:#5e5248;text-align:center;line-height:1.3;min-height:2.4em;display:flex;align-items:center;justify-content:center}
+.sica-sizes{display:flex;align-items:flex-end;justify-content:center;gap:10px}
+.sica-sz{display:flex;flex-direction:column;align-items:center;gap:4px}
+.sica-sz-icon{display:inline-flex;align-items:center;justify-content:center;background:#f4f2f6;border:1px solid rgba(169,135,95,.13);border-radius:6px;padding:4px;color:#453868}
+.sica-sz-icon svg{display:block}
+.sica-sz-lbl{font-family:'Jost',sans-serif;font-size:8.5px;color:#b0a090;letter-spacing:.04em}
+.sica-footer{font-family:'Jost',sans-serif;font-size:10.5px;color:#9a8878;margin-top:24px;padding-top:14px;border-top:1px solid rgba(169,135,95,.18);line-height:1.55}
 .sica-footer code{background:rgba(169,135,95,.1);padding:1px 5px;border-radius:4px;font-size:10px}
-@media(max-width:600px){.sica-panel{padding:20px 18px 18px}.sica-icon-wrap.lg .sotd-event-icon{width:24px;height:24px}}
-/* ── end SOTD icon audition ─────────────────────────────────────────────── */
+@media(max-width:760px){.sica-options{grid-template-columns:repeat(2,1fr)}.sica-panel{padding:20px 16px 24px}}
+/* ── end icon audition ───────────────────────────────────────────────────── */
 
 /* Calendar event icon replaces the plain dot for editorial cells */
 .sotd-cal-event-icon{

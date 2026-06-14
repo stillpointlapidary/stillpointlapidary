@@ -1880,17 +1880,16 @@
   </div>
 </div>
 
-<!-- SOTD ICON AUDITION OVERLAY (admin-only, temporary — remove after icon set is approved) -->
-<div class="sotd-icon-audition" id="sotd-icon-audition" role="dialog" aria-modal="true" aria-label="SOTD icon audition" onclick="if(event.target===this)closeSotdIconAudition()">
+<!-- SITEWIDE ICON AUDITION OVERLAY (admin-only, temporary — remove after icon set is approved) -->
+<div class="sotd-icon-audition" id="sotd-icon-audition" role="dialog" aria-modal="true" aria-label="Icon audition" onclick="if(event.target===this)closeSotdIconAudition()">
   <div class="sica-panel">
     <button class="sica-close" onclick="closeSotdIconAudition()" aria-label="Close">✕</button>
     <div class="sica-eyebrow">Admin — Temporary Review Tool</div>
-    <div class="sica-title">SOTD Event Icon Audition</div>
-    <div class="sica-subhead">Exact production SVG at 15 px (live size) and 30 px (preview). Rendered in <code>currentColor</code> on the default header wash. Approve, replace, or keep each family below.</div>
-    <table class="sica-table" id="sica-table"></table>
+    <div class="sica-title">Sitewide Icon Audition</div>
+    <div class="sica-subhead">4 candidate options per concept. Every SVG is production-ready inline markup rendered in <code>currentColor</code>. Sizes shown: 15 px (live), 24 px (medium), 32 px (review). Do not update live icons until each concept is approved.</div>
+    <div id="sica-body"></div>
     <div class="sica-footer">
-      Icons live in <code>_SOTD_EVT_ICONS</code> (app.js). Do not update the live mapping until this set is approved.<br>
-      <strong>Remove this overlay after approval.</strong>
+      Live SOTD icons: <code>_SOTD_EVT_ICONS</code> · Library: <code>_SICA_LIB</code> (app.js) · <strong>Remove after approval.</strong>
     </div>
   </div>
 </div>

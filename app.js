@@ -1412,43 +1412,218 @@ function closeSotdCalendar() {
   document.getElementById('manage-btn')?.focus();
 }
 
-// ── SOTD Icon Audition (admin-only, temporary — remove after approval) ────────
+// ── Sitewide Icon Audition Library (admin-only, temporary) ───────────────────
+// Consistent visual system: viewBox 0 0 24 24, stroke-width 1.5, round caps/joins, fill:none.
+// All icons use currentColor. Do not update live mappings until each concept is approved.
+const _si=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+
+const _SICA_LIB=[
+
+{family:'Daily Selection',desc:'Replaces generic clock — should read "chosen / curated" not "timekeeping"',options:[
+  {label:'A — Rays (no circle)',svg:_si('<path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>')},
+  {label:'B — Sun + circle',svg:_si('<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>')},
+  {label:'C — 4-pt star',svg:_si('<path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z"/>')},
+  {label:'D — 8-ray sparkle',svg:_si('<path d="M12 2v4M12 18v4M2 12h4M18 12h4M5.64 5.64l2.83 2.83M15.54 15.54l2.83 2.83M5.64 18.36l2.83-2.83M15.54 8.46l2.83-2.83"/>')},
+]},
+
+{family:'Lunar',desc:'Must read as moon/lunar, not timekeeping. Stroke-consistent with set.',options:[
+  {label:'A — Crescent (stroke)',svg:_si('<path d="M12 3a9 9 0 1 0 0 18A7 7 0 0 1 12 3z"/>')},
+  {label:'B — Crescent + star',svg:_si('<path d="M12 3a9 9 0 1 0 0 18A7 7 0 0 1 12 3z"/><path d="M18.5 7.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>')},
+  {label:'C — Thin crescent',svg:_si('<path d="M12 4a8 8 0 0 0 0 16A6 6 0 0 1 12 4z"/>')},
+  {label:'D — Half-moon D-shape',svg:_si('<path d="M12 4a8 8 0 0 1 0 16V4z"/>')},
+]},
+
+{family:'Eclipse',desc:'Current two-circle version is promising. Three alternatives shown.',options:[
+  {label:'A — Two circles (current)',svg:_si('<circle cx="9" cy="12" r="7"/><path d="M14.9 6.3A7 7 0 0 1 14.9 17.7"/>')},
+  {label:'B — Annular ring',svg:_si('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/>')},
+  {label:'C — Offset overlap',svg:_si('<circle cx="10" cy="12" r="6.5"/><circle cx="15" cy="12" r="5.5"/>')},
+  {label:'D — Circle + corona arc',svg:_si('<circle cx="12" cy="12" r="6"/><path d="M4.93 4.93A11 11 0 0 1 19.07 19.07M19.07 4.93A11 11 0 0 1 4.93 19.07"/>')},
+]},
+
+{family:'Celestial',desc:'Must differ clearly from Tradition. Suggest comet, orbit, or hex star.',options:[
+  {label:'A — Comet + tail',svg:_si('<circle cx="7.5" cy="15.5" r="2.5"/><path d="M9.5 13.5L18 5"/><path d="M12 10.5l2-5.5M14 9.5l5.5-2.5"/>')},
+  {label:'B — Orbit ellipse',svg:_si('<ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-25 12 12)"/><circle cx="12" cy="2.5" r="2"/>')},
+  {label:'C — 6-pt star (hex)',svg:_si('<path d="M12 2l2.4 4.2 4.8.6-3.4 3.4.8 4.8L12 12.8l-4.6 2.2.8-4.8-3.4-3.4 4.8-.6z"/><path d="M8.6 17.4l-2 4.6M15.4 17.4l2 4.6M3.8 8.8l-1.8 0M22 8.8l-1.8 0"/>')},
+  {label:'D — Shooting star arc',svg:_si('<path d="M5 19L19 5"/><path d="M19 5l-4 1M19 5l-1 4"/><path d="M5 19l1-4M5 19l4-1"/><circle cx="12" cy="12" r="1.5"/>')},
+]},
+
+{family:'Meteor',desc:'Current reads as arrow. Should convey falling/impact, not direction.',options:[
+  {label:'A — Fireball + trail',svg:_si('<circle cx="7" cy="16" r="3"/><path d="M9.5 13.5L18 5"/><path d="M13 9.5l3.5-6.5M15 8.5l6-2"/>')},
+  {label:'B — Three streaks shower',svg:_si('<path d="M17 3L7 17M20 6L10 20M14 2L4 16"/>')},
+  {label:'C — Streak + impact burst',svg:_si('<path d="M18 3L8 16"/><circle cx="7.5" cy="16.5" r="2.5"/><path d="M4 14l1.5 2M3 17l2 .5M5 20l1.5-1.5M9 19l.5-2"/>')},
+  {label:'D — Radiant falling',svg:_si('<path d="M12 2l-4 16M12 2l0 16M12 2l4 16"/><path d="M7 15l-.5 1.5M12 15v1.5M17 15l.5 1.5"/>')},
+]},
+
+{family:'Tradition',desc:'Must differ from Celestial. Cultural warmth: candle, lantern, lotus.',options:[
+  {label:'A — Candle + flame',svg:_si('<rect x="9" y="9" width="6" height="13" rx="1"/><path d="M12 9V6"/><path d="M10.5 7.5C10.5 5.5 12 4 12 2c.5 2 1.5 3 1.5 5.5"/>')},
+  {label:'B — Lantern',svg:_si('<path d="M10 5h4M9 8V5M15 8V5M8 8h8a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><path d="M8 12h8M10 19v2M14 19v2"/>')},
+  {label:'C — Lotus',svg:_si('<path d="M12 18V9"/><path d="M12 9c-1-3-4-5-5-4s0 4 5 9"/><path d="M12 9c1-3 4-5 5-4s0 4-5 9"/><path d="M12 14c-3-1-5-4-4-6s3.5.5 4 6z"/><path d="M12 14c3-1 5-4 4-6s-3.5.5-4 6z"/><path d="M8 20h8"/>')},
+  {label:'D — Chalice',svg:_si('<path d="M8 4h8l-2 9H10z"/><path d="M10 13c0 2.5 2 4 2 4s2-1.5 2-4"/><path d="M9 17h6"/><path d="M12 18v3M10 21h4"/>')},
+]},
+
+{family:'Location',desc:'Pin and compass are both promising. Mountain and horizon shown as alternatives.',options:[
+  {label:'A — Pin (current)',svg:_si('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>')},
+  {label:'B — Compass',svg:_si('<circle cx="12" cy="12" r="9"/><path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36z"/><circle cx="12" cy="12" r="1.5"/>')},
+  {label:'C — Mountain peaks',svg:_si('<path d="M3 20l5-9 4 6 3-4 6 7z"/><path d="M2 20h20"/>')},
+  {label:'D — Horizon + rising',svg:_si('<path d="M2 17h20"/><path d="M7 17l5-9 5 9"/><path d="M12 5V3M8.5 6.5l-1.5-1.5M15.5 6.5l1.5-1.5M6 10H4M18 10h2"/>')},
+]},
+
+{family:'Geology',desc:'Strata and geode convey geology more precisely than crystal form.',options:[
+  {label:'A — Strata layers',svg:_si('<path d="M3 8c2.5-1.5 5.5-1.5 9 0s6.5 1.5 9 0M3 12c2.5-1.5 5.5-1.5 9 0s6.5 1.5 9 0M3 16c2.5-1.5 5.5-1.5 9 0s6.5 1.5 9 0"/>')},
+  {label:'B — Crystal (current)',svg:_si('<path d="M6 3l6 4 6-4v14l-6 4-6-4V3z"/><line x1="12" y1="7" x2="12" y2="17"/>')},
+  {label:'C — Geode half',svg:_si('<path d="M5 12a7 7 0 0 0 14 0z"/><path d="M7.5 12a4.5 4.5 0 0 0 9 0"/><path d="M10 12a2 2 0 0 0 4 0"/><path d="M4 12H2M20 12h2"/>')},
+  {label:'D — Mountain + strata',svg:_si('<path d="M3 20l5-8 4 5 4-6 5 9z"/><path d="M3 20h18"/><path d="M8.5 16l4-4"/>')},
+]},
+
+{family:'Anniversary',desc:'Radial burst is the current icon. Laurel wreath shows most distinctly celebratory.',options:[
+  {label:'A — Radial burst (current)',svg:_si('<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M19.07 4.93l-2.83 2.83M7.76 16.24l-2.83 2.83"/>')},
+  {label:'B — Star in ring',svg:_si('<circle cx="12" cy="12" r="9"/><path d="M12 6l1.5 4.5H18l-3.75 2.73 1.43 4.41L12 15.13l-3.68 2.61 1.43-4.41L6 10.5h4.5z"/>')},
+  {label:'C — Medal / badge',svg:_si('<circle cx="12" cy="9" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>')},
+  {label:'D — Laurel wreath',svg:_si('<path d="M12 19V9"/><path d="M12 9C10 7 7 7 5.5 9c2-.5 4.5.5 6.5 5"/><path d="M12 9c2-2 5-2 6.5 0-2-.5-4.5.5-6.5 5"/><path d="M12 14c-2-1-4 0-5 2 2-.5 4 .5 5 4"/><path d="M12 14c2-1 4 0 5 2-2-.5-4 .5-5 4"/><path d="M9 21h6"/>')},
+]},
+
+{family:'Crystal (single)',desc:'Single terminated crystal for stone identification and detail views.',options:[
+  {label:'A — Tall pointed',svg:_si('<path d="M12 2l3 5v12l-3 3-3-3V7z"/><path d="M9 7h6"/>')},
+  {label:'B — Faceted gem',svg:_si('<path d="M12 3l5 5.5-5 13.5-5-13.5z"/><path d="M7 8.5h10"/><path d="M9.5 8.5L12 3l2.5 5.5"/>')},
+  {label:'C — Hexagonal prism',svg:_si('<path d="M12 3l5.2 3v7l-5.2 3-5.2-3V6z"/><path d="M6.8 9l5.2 3 5.2-3"/><path d="M12 12v9"/>')},
+  {label:'D — Double terminated',svg:_si('<path d="M12 2l3 5v10l-3 5-3-5V7z"/><path d="M9 7h6M9 17h6"/>')},
+]},
+
+{family:'Crystal Cluster',desc:'Multi-point cluster for encyclopedia and collection contexts.',options:[
+  {label:'A — Three varied crystals',svg:_si('<path d="M9 20V12l3-6 3 6v8"/><path d="M5.5 20V15l2-4 2.5 3V20"/><path d="M14.5 20V14l2-4 2.5 4V20"/><path d="M4 20h16"/>')},
+  {label:'B — Radiating from base',svg:_si('<path d="M12 20V10l3-7"/><path d="M12 20l-5-4 3-4"/><path d="M12 20l5-4-3-4"/><path d="M12 20l-7-2 4-2"/><path d="M12 20l7-2-4-2"/><path d="M9 3l3 7"/>')},
+  {label:'C — Cluster + ground',svg:_si('<path d="M8 20V13l2.5-5 2.5 5v7"/><path d="M5 20v-5l2-3.5 1.5 2.5V20"/><path d="M14 20v-5.5l2-4 2 4V20"/><path d="M4 20h16"/>')},
+  {label:'D — Geode cross-section',svg:_si('<path d="M4 12a8 8 0 0 0 16 0z"/><path d="M6.5 12a5.5 5.5 0 0 0 11 0"/><path d="M9.5 12a2.5 2.5 0 0 0 5 0"/>')},
+]},
+
+{family:'Book / Reference',desc:'For encyclopedia drawer and entry view contexts.',options:[
+  {label:'A — Open book (current)',svg:_si('<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>')},
+  {label:'B — Closed book + lines',svg:_si('<path d="M4 2h13l3 3v17H4z"/><path d="M8 2v20"/><path d="M11 7h5M11 11h5M11 15h3"/>')},
+  {label:'C — Book + bookmark',svg:_si('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M14 2v8l-2-2-2 2V2"/>')},
+  {label:'D — Scroll',svg:_si('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/>')},
+]},
+
+{family:'Collection',desc:'For saved / owned stones. Should feel curated, personal.',options:[
+  {label:'A — Stones in a row',svg:_si('<circle cx="6" cy="15" r="3.5"/><circle cx="12" cy="13" r="4.5"/><circle cx="18" cy="15" r="3.5"/><path d="M2 19h20"/>')},
+  {label:'B — Cabinet shelves',svg:_si('<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18"/><path d="M9 9v6M15 9v6"/>')},
+  {label:'C — Three gems arranged',svg:_si('<path d="M5 10l2-4h4l2 4-4 8z"/><path d="M3 10h8"/><path d="M11 10l2-4h4l2 4-4 8z"/><path d="M9 10h8"/>')},
+  {label:'D — Jar with gems',svg:_si('<path d="M8 4h8l1 3H7zM7 7v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V7"/><circle cx="10" cy="13" r="1.5"/><circle cx="14" cy="11" r="1.5"/><circle cx="12" cy="15.5" r="1.5"/>')},
+]},
+
+{family:'Wishlist',desc:'For saved / wanted stones. Distinct from Collection.',options:[
+  {label:'A — Bookmark (current)',svg:_si('<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>')},
+  {label:'B — Tag / label',svg:_si('<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/>')},
+  {label:'C — Heart outline',svg:_si('<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>')},
+  {label:'D — Star',svg:_si('<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>')},
+]},
+
+{family:'Pair With',desc:'Two complementary stones. Must not be confused with Wishlist or Collection.',options:[
+  {label:'A — Two circles (current)',svg:_si('<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>')},
+  {label:'B — Two linked rings',svg:_si('<circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/>')},
+  {label:'C — Two gems faceted',svg:_si('<path d="M3 9l2-4h4l2 4-4 9z"/><path d="M1 9h8"/><path d="M13 9l2-4h4l2 4-4 9z"/><path d="M11 9h8"/>')},
+  {label:'D — Two teardrops',svg:_si('<path d="M9 4c0 0-5 5-5 9a5 5 0 0 0 10 0c0-4-5-9-5-9z"/><path d="M15 4c0 0-5 5-5 9a5 5 0 0 0 10 0c0-4-5-9-5-9z"/>')},
+]},
+
+{family:'Chakra',desc:'Energy center concept. Lotus, wheel, or concentric forms all appropriate.',options:[
+  {label:'A — 8-spoke wheel',svg:_si('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6M5.64 5.64l4.24 4.24M14.12 14.12l4.24 4.24M18.36 5.64l-4.24 4.24M9.88 14.12l-4.24 4.24"/>')},
+  {label:'B — Lotus (current paths)',svg:_si('<path d="M32 48C23 40 21 29 32 16c11 13 9 24 0 32Z" transform="scale(0.5) translate(-12 -18)"/><circle cx="12" cy="12" r="3"/><path d="M12 9V4M9 12H4M15 12h5M9.9 9.9L6.3 6.3M14.1 14.1l3.6 3.6M14.1 9.9l3.6-3.6M9.9 14.1l-3.6 3.6"/>')},
+  {label:'C — 8-petal ring',svg:_si('<circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="6.5" rx="1.5" ry="3.5"/><ellipse cx="12" cy="17.5" rx="1.5" ry="3.5"/><ellipse cx="6.5" cy="12" rx="3.5" ry="1.5"/><ellipse cx="17.5" cy="12" rx="3.5" ry="1.5"/><ellipse cx="7.87" cy="7.87" rx="1.5" ry="3.5" transform="rotate(45 7.87 7.87)"/><ellipse cx="16.13" cy="16.13" rx="1.5" ry="3.5" transform="rotate(45 16.13 16.13)"/><ellipse cx="16.13" cy="7.87" rx="1.5" ry="3.5" transform="rotate(-45 16.13 7.87)"/><ellipse cx="7.87" cy="16.13" rx="1.5" ry="3.5" transform="rotate(-45 7.87 16.13)"/>')},
+  {label:'D — Concentric rings',svg:_si('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/>')},
+]},
+
+{family:'Best For',desc:'The intended use or benefit of a stone.',options:[
+  {label:'A — Target / bullseye',svg:_si('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>')},
+  {label:'B — Lightning bolt',svg:_si('<path d="M13 2L4.5 13h7L10 22l9.5-11H13z"/>')},
+  {label:'C — Check in circle',svg:_si('<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>')},
+  {label:'D — Upward spark',svg:_si('<path d="M12 20V10"/><path d="M8 14l4-4 4 4"/><path d="M9 7l3-5 3 5"/><path d="M7 4l2 2M15 4l-2 2"/>')},
+]},
+
+{family:"Today's Practice",desc:'Ritual, meditation, or intentional use guidance.',options:[
+  {label:'A — Seated figure',svg:_si('<circle cx="12" cy="5" r="2"/><path d="M12 7v4M9 11c0 2.5-2 4-2 6h14c0-2-2-3.5-2-6"/><path d="M7 17l-1 4M17 17l1 4"/>')},
+  {label:'B — Hands cupped',svg:_si('<path d="M7 12V8a1.5 1.5 0 0 1 3 0v2M10 8V7a1.5 1.5 0 0 1 3 0v5M13 7a1.5 1.5 0 0 1 3 0v5M16 9a1.5 1.5 0 0 1 3 0v3c0 3.5-3 6-7 6s-7-2.5-7-6v-2"/>')},
+  {label:'C — Infinity loop',svg:_si('<path d="M12 12c-1.5-3.5-4-5-6-4.5S2.5 12 4.5 14 10 14 12 12c1.5 3.5 4 5 6 4.5S21.5 12 19.5 10 14 10 12 12z"/>')},
+  {label:'D — Spiral',svg:_si('<path d="M12 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM12 10a3 3 0 1 0-3 3M12 7a5 5 0 1 1-5 5M12 4a8 8 0 1 0 8 8"/>')},
+]},
+
+{family:'Identify / Camera',desc:'For the photo-based stone identification feature.',options:[
+  {label:'A — Camera',svg:_si('<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>')},
+  {label:'B — Aperture iris',svg:_si('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/>')},
+  {label:'C — Viewfinder crosshair',svg:_si('<circle cx="12" cy="12" r="5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/>')},
+  {label:'D — Magnifier + gem',svg:_si('<circle cx="10.5" cy="10.5" r="7"/><path d="M21 21l-4.5-4.5"/><path d="M8.5 8l1-2H12l1.5 2-3 7z"/><path d="M7 8h7"/>')},
+]},
+
+{family:'Search',desc:'General encyclopedia and catalog search.',options:[
+  {label:'A — Magnifier (clean)',svg:_si('<circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/>')},
+  {label:'B — Magnifier + plus',svg:_si('<circle cx="10" cy="10" r="7"/><path d="M20.5 20.5L15 15"/><path d="M10 7v6M7 10h6"/>')},
+  {label:'C — Eye outline',svg:_si('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>')},
+  {label:'D — Magnifier + star',svg:_si('<circle cx="10" cy="10" r="7"/><path d="M20.5 20.5L15 15"/><path d="M10 7l1.2 3.7H14.7l-2.9 2.1.9 3L10 13.9l-2.7 1.9.9-3L5.3 10.7H8.8z"/>')},
+]},
+
+{family:'Filter',desc:'For collection / encyclopedia filtering controls.',options:[
+  {label:'A — Funnel',svg:_si('<path d="M22 3H2l8 9.46V19l4 2v-8.54z"/>')},
+  {label:'B — Three sliders',svg:_si('<path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/>')},
+  {label:'C — Tapering lines',svg:_si('<path d="M3 6h18M6 12h12M9 18h6"/>')},
+  {label:'D — Lines with arrows',svg:_si('<path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 4l-2 2 2 2M15 10l2 2-2 2M10 16l-2 2 2 2"/>')},
+]},
+
+{family:'Forms / Shapes',desc:'Crystal habit, shape classification, mineral form.',options:[
+  {label:'A — Hexagon',svg:_si('<path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/>')},
+  {label:'B — Mixed shapes',svg:_si('<circle cx="6.5" cy="7.5" r="4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1"/><path d="M2.5 20.5l4.5-8h9l4.5 8z"/>')},
+  {label:'C — Faceted diamond',svg:_si('<path d="M12 3l5 5.5-5 13.5-5-13.5z"/><path d="M7 8.5h10"/><path d="M9.5 8.5L12 3l2.5 5.5"/>')},
+  {label:'D — Octagon',svg:_si('<path d="M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86L7.86 2z"/>')},
+]},
+
+{family:'Care / Cleansing',desc:'Stone care methods: water, sunlight, smoke, moonlight.',options:[
+  {label:'A — Water drop',svg:_si('<path d="M12 2c0 0-7 8-7 13a7 7 0 0 0 14 0c0-5-7-13-7-13z"/>')},
+  {label:'B — Flame',svg:_si('<path d="M12 22a6 6 0 0 0 6-6c0-3-2-5-2-8-1.5 2-2 3.5-4 4-1-2-1.5-4-1.5-4C9.5 11 8 14 8 16a6 6 0 0 0 4 5.66V22z"/>')},
+  {label:'C — Moon + drops',svg:_si('<path d="M14 3.5a9 9 0 1 0 0 17A7 7 0 0 1 14 3.5z"/><path d="M18 13.5c0 1-1 2.5-1 4"/><path d="M20.5 11.5c0 1-.5 2.5-.5 4"/>')},
+  {label:'D — Sun rays (sunlight)',svg:_si('<circle cx="12" cy="12" r="5"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>')},
+]},
+
+{family:'Rarity / Tier',desc:'Collection tier and rarity classification.',options:[
+  {label:'A — Crown',svg:_si('<path d="M2 20h20M3 20l2-10 4 5 3-9 3 9 4-5 2 10"/>')},
+  {label:'B — Diamond / gem',svg:_si('<path d="M5.5 8.5L12 3l6.5 5.5-6.5 13.5z"/><path d="M5.5 8.5h13"/><path d="M9 8.5L12 3l3 5.5"/>')},
+  {label:'C — Tier steps',svg:_si('<path d="M4 20h4v-4H4zM9 20h4v-8H9zM14 20h4V8h-4z"/><path d="M4 20h14"/>')},
+  {label:'D — Star in circle',svg:_si('<circle cx="12" cy="12" r="9"/><path d="M12 7l1.5 4.5H18l-3.75 2.72 1.43 4.41L12 15.9l-3.68 2.72 1.43-4.41L6 11.5h4.5z"/>')},
+]},
+
+{family:'Add Piece',desc:'Add a stone to the collection or wishlist.',options:[
+  {label:'A — Plus in circle',svg:_si('<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>')},
+  {label:'B — Plus in rounded square',svg:_si('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>')},
+  {label:'C — Gem + plus',svg:_si('<path d="M6 9l2-5h4l2 5-4 9z"/><path d="M4 9h12"/><path d="M17 5v6M14 8h6"/>')},
+  {label:'D — Crystal + plus',svg:_si('<path d="M9 20V13l3-6 3 6v7"/><path d="M8 20h8"/><path d="M18 4v7M14.5 7.5h7"/>')},
+]},
+
+{family:'Calendar',desc:'SOTD calendar and date-based scheduling.',options:[
+  {label:'A — Grid calendar (current)',svg:_si('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>')},
+  {label:'B — Calendar + moon',svg:_si('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 17a4 4 0 0 0 6.7-2.9 3 3 0 0 1-4.2.1A3 3 0 0 1 9 17z"/>')},
+  {label:'C — Calendar + star',svg:_si('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14l.9 2.7h2.8l-2.3 1.7.9 2.7L12 19.4l-2.3 1.7.9-2.7-2.3-1.7H11z"/>')},
+  {label:'D — Page / event',svg:_si('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/>')},
+]},
+
+];
+
 function openSotdIconAudition(){
   if(!isAdminUser(_currentUser))return;
-  const families=[
-    {key:'generic',     label:'Generic',     desc:'Daily Selection'},
-    {key:'lunar',       label:'Lunar',       desc:'Lunar phase'},
-    {key:'eclipse',     label:'Eclipse',     desc:'Solar / Lunar eclipse'},
-    {key:'celestial',   label:'Celestial',   desc:'Seasonal astronomy / Orbital event'},
-    {key:'meteor',      label:'Meteor',      desc:'Meteor shower / Meteorite history'},
-    {key:'tradition',   label:'Tradition',   desc:'Cultural holiday / Seasonal tradition'},
-    {key:'location',    label:'Location',    desc:'Location spotlight'},
-    {key:'geology',     label:'Geology',     desc:'Geology observance'},
-    {key:'anniversary', label:'Anniversary', desc:'Site anniversary'},
-  ];
-  const rows=families.map((f,i)=>{
-    const svg=_SOTD_EVT_ICONS[f.key]||'';
-    return`<tr>
-      <td class="sica-lbl-cell">
-        ${i+1}. ${f.label}
-        <span class="sica-fam">${f.desc}</span>
-      </td>
-      <td class="sica-icon-cell" style="width:25%;padding-right:10px">
-        <div class="sica-icon-wrap sm">
-          <span class="sotd-event-icon" style="width:15px;height:15px;color:#453868" aria-hidden="true">${svg}</span>
-        </div>
-        <span class="sica-size-label">15 px</span>
-      </td>
-      <td class="sica-icon-cell" style="width:25%">
-        <div class="sica-icon-wrap lg">
-          <span class="sotd-event-icon" style="width:30px;height:30px;color:#453868" aria-hidden="true">${svg}</span>
-        </div>
-        <span class="sica-size-label">30 px</span>
-      </td>
-    </tr>`;
+  const body=document.getElementById('sica-body');
+  if(!body)return;
+  const sizes=[{px:15,lbl:'15 px'},{px:24,lbl:'24 px'},{px:32,lbl:'32 px'}];
+  body.innerHTML=_SICA_LIB.map(sec=>{
+    const cards=sec.options.map(opt=>{
+      const szHtml=sizes.map(s=>`
+        <div class="sica-sz">
+          <div class="sica-sz-icon" style="min-width:${s.px+10}px;min-height:${s.px+10}px">
+            <span style="display:inline-flex;width:${s.px}px;height:${s.px}px" aria-hidden="true">${opt.svg}</span>
+          </div>
+          <span class="sica-sz-lbl">${s.lbl}</span>
+        </div>`).join('');
+      return`<div class="sica-card"><div class="sica-card-label">${escapeAttr(opt.label)}</div><div class="sica-sizes">${szHtml}</div></div>`;
+    }).join('');
+    return`<div class="sica-section">
+      <div class="sica-section-hdr">${escapeAttr(sec.family)}<span style="font-weight:400;letter-spacing:0;text-transform:none;margin-left:8px;color:#9a8878;font-size:9.5px">${escapeAttr(sec.desc||'')}</span></div>
+      <div class="sica-options">${cards}</div>
+    </div>`;
   }).join('');
-  const table=document.getElementById('sica-table');
-  if(table)table.innerHTML=rows;
   const overlay=document.getElementById('sotd-icon-audition');
   if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}
 }
@@ -1457,7 +1632,7 @@ function closeSotdIconAudition(){
   if(overlay){overlay.classList.remove('open');document.body.style.overflow='';}
   document.getElementById('manage-btn')?.focus();
 }
-// ── end SOTD Icon Audition ────────────────────────────────────────────────────
+// ── end Sitewide Icon Audition ────────────────────────────────────────────────
 
 async function _sotdCalRenderMonth(year, month) {
   _sotdCalYear  = year;
