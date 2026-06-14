@@ -1092,7 +1092,19 @@ function renderMobileSotdCard(s){
   const _mBanner=SFC_BANNER_COLORS[_mChakra]||'#f4f2f6';
   const _mKicker=SFC_KICKER_COLORS[_mChakra]||'#6b5e52';
   const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text};--sotd-banner-bg:${_mBanner};--sotd-banner-border:${_mBtn.border};--sotd-kicker-color:${_mKicker}`;
-  const _mEventHtml=renderSotdEventAnnouncement(s);
+  // Build mobile selection header — replaces old plain "TODAY'S STONE" eyebrow
+  let _mEyebrowHtml;
+  if(_isSotdEditorial(s)){
+    const _evtName=s.eventName||s.event_name||'';
+    const _evtCat =s.eventCategory||s.event_category||'';
+    const _pres   =getSotdEventPresentation(_evtCat);
+    const _evtIcon=_pres.icon?`<span class="sotd-event-icon" aria-hidden="true">${_pres.icon}</span>`:'';
+    _mEyebrowHtml=`<div class="msotd-eyebrow"><div class="sotd-event-kicker">${_evtIcon}<span class="sotd-event-kicker-text">Today's Selection</span></div><div class="sotd-event-heading">Chosen for ${escapeAttr(_evtName)}</div></div>`;
+  }else{
+    const _mDailyDate=new Date().toLocaleDateString('en-US',{timeZone:'America/Chicago',month:'long',day:'numeric'});
+    const _mDailyIcon=`<span class="sotd-event-icon" aria-hidden="true">${_SOTD_EVT_ICONS.generic}</span>`;
+    _mEyebrowHtml=`<div class="msotd-eyebrow"><div class="sotd-event-kicker">${_mDailyIcon}<span class="sotd-event-kicker-text">Today's Selection</span></div><div class="sotd-event-heading">Chosen for ${_mDailyDate}</div></div>`;
+  }
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
   const nameLen=s.name.length;
@@ -1125,7 +1137,7 @@ function renderMobileSotdCard(s){
     ?`<div class="msotd-details">${bestForRow}${chakraRow}${pairRow}</div>`:'';
   container.innerHTML=`
     <div class="msotd-card" style="${_mCardVars}">
-      <div class="msotd-eyebrow">✦ TODAY'S STONE ✦</div>
+      ${_mEyebrowHtml}
       <div class="msotd-image-wrap">
         ${photoHtml}
         <div class="msotd-overlay">
@@ -1135,7 +1147,6 @@ function renderMobileSotdCard(s){
         </div>
       </div>
       <div class="msotd-body">
-        ${_mEventHtml}
         ${useWhenText?`<div class="msotd-use-when"><span class="msotd-use-label">Use When</span><p class="msotd-use-text">${escapeAttr(useWhenText)}</p></div>`:''}
         <div class="msotd-actions">
           <button class="msotd-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_BOOK}</span><span class="sotd-action-label">View Full Entry</span></button>
