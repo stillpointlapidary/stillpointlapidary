@@ -1914,20 +1914,71 @@
       </button>
     </div>
 
-    <div class="sotd-cal-weekdays" aria-hidden="true">
-      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    <!-- Admin action bar (generate schedule) -->
+    <div class="sotd-cal-admin-bar">
+      <button class="sotd-cal-generate-btn" id="sotd-cal-generate-btn" type="button" onclick="_sotdBulkShowOptions()">
+        Generate schedule
+      </button>
     </div>
 
-    <div class="sotd-cal-grid" id="sotd-cal-grid" role="grid" aria-label="Stone of the Day calendar"></div>
-
-    <div class="sotd-cal-legend" aria-label="Legend">
-      <div class="sotd-cal-legend-item">
-        <span class="sotd-cal-legend-swatch sotd-cal-legend-swatch--history" aria-hidden="true"></span>
-        <span>Resolved</span>
+    <!-- Options panel (hidden until generate is clicked) -->
+    <div class="sotd-gen-options" id="sotd-gen-options" hidden>
+      <fieldset class="sotd-gen-fieldset">
+        <legend class="sotd-gen-legend">Date range</legend>
+        <label class="sotd-gen-radio-label">
+          <input type="radio" name="sotd-gen-range" value="week" checked> 1 week
+        </label>
+        <label class="sotd-gen-radio-label">
+          <input type="radio" name="sotd-gen-range" value="month"> 1 month
+        </label>
+        <label class="sotd-gen-radio-label">
+          <input type="radio" name="sotd-gen-range" value="3months"> 3 months
+        </label>
+      </fieldset>
+      <label class="sotd-gen-nophoto-label">
+        <input type="checkbox" id="sotd-gen-no-photo"> Include stones without photos
+      </label>
+      <div class="sotd-gen-actions">
+        <button class="sotd-gen-btn sotd-gen-btn--primary" id="sotd-gen-preview-btn" type="button" onclick="_sotdBulkGenerate()">Generate preview</button>
+        <button class="sotd-gen-btn sotd-gen-btn--cancel" type="button" onclick="_sotdBulkCancelOptions()">Cancel</button>
       </div>
-      <div class="sotd-cal-legend-item">
-        <span class="sotd-cal-legend-swatch sotd-cal-legend-swatch--schedule" aria-hidden="true"></span>
-        <span>Scheduled</span>
+    </div>
+
+    <!-- Calendar main body (hidden when bulk preview is open) -->
+    <div id="sotd-cal-main">
+      <div class="sotd-cal-weekdays" aria-hidden="true">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+
+      <div class="sotd-cal-grid" id="sotd-cal-grid" role="grid" aria-label="Stone of the Day calendar"></div>
+
+      <div class="sotd-cal-legend" aria-label="Legend">
+        <div class="sotd-cal-legend-item">
+          <span class="sotd-cal-legend-swatch sotd-cal-legend-swatch--history" aria-hidden="true"></span>
+          <span>Resolved</span>
+        </div>
+        <div class="sotd-cal-legend-item">
+          <span class="sotd-cal-legend-swatch sotd-cal-legend-swatch--schedule" aria-hidden="true"></span>
+          <span>Scheduled</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk preview overlay (covers panel when active) -->
+    <div class="sotd-bulk-preview" id="sotd-bulk-preview" hidden>
+      <div class="sotd-bulk-preview-header">
+        <div class="sotd-bulk-preview-title-row">
+          <span class="sotd-bulk-preview-title" id="sotd-bulk-preview-title"></span>
+          <span class="sotd-bulk-preview-meta" id="sotd-bulk-preview-meta"></span>
+        </div>
+        <div class="sotd-bulk-preview-header-actions">
+          <button class="sotd-bulk-regen-btn" id="sotd-bulk-regen-btn" type="button" onclick="_sotdBulkRegenerate()">Regenerate</button>
+        </div>
+      </div>
+      <div class="sotd-bulk-preview-body" id="sotd-bulk-preview-body"></div>
+      <div class="sotd-bulk-preview-footer">
+        <button class="sotd-bulk-footer-btn sotd-bulk-footer-btn--approve" id="sotd-bulk-approve-btn" type="button" onclick="_sotdBulkApprove()">Approve schedule</button>
+        <button class="sotd-bulk-footer-btn sotd-bulk-footer-btn--cancel" type="button" onclick="_sotdBulkCancel()">Cancel preview</button>
       </div>
     </div>
 
