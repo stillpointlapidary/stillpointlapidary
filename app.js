@@ -702,17 +702,17 @@ const SFC_CHAKRA_COLORS={
   'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
-// Pill-companion button colors — pale tint bg + matching border + dark text.
-// bg matches the quality pill background; border is a mid-tone between bg and text.
+// Pill-companion button colors — one step deeper than the quality pill bg.
+// Deepened enough to read as clearly filled; border mid-tones the bg toward the text color.
 const SFC_BUTTON_COLORS={
-  'Earth Star':   {bg:'#dedad6',border:'#b5afa8',text:'#5a5249'},
-  'Root':         {bg:'#e6d0d0',border:'#c09090',text:'#6b3636'},
-  'Sacral':       {bg:'#eeddd4',border:'#c8a890',text:'#6b4530'},
-  'Solar Plexus': {bg:'#ede8d0',border:'#c5bb8a',text:'#6b5520'},
-  'Heart':        {bg:'#d6e6d8',border:'#8ab88e',text:'#385838'},
-  'Throat':       {bg:'#d4e0e8',border:'#8ab0c8',text:'#2e4858'},
-  'Third Eye':    {bg:'#dbd6e8',border:'#a898cc',text:'#453868'},
-  'Crown':        {bg:'#ded7ef',border:'#b0a0d8',text:'#5e5080'},
+  'Earth Star':   {bg:'#cec8c0',border:'#b5afa8',text:'#5a5249'},
+  'Root':         {bg:'#d8bcbc',border:'#c09090',text:'#6b3636'},
+  'Sacral':       {bg:'#e4c9bc',border:'#c8a890',text:'#6b4530'},
+  'Solar Plexus': {bg:'#e0dabc',border:'#c5bb8a',text:'#6b5520'},
+  'Heart':        {bg:'#c2d8c4',border:'#8ab88e',text:'#385838'},
+  'Throat':       {bg:'#c0cfd8',border:'#8ab0c8',text:'#2e4858'},
+  'Third Eye':    {bg:'#cac3d8',border:'#a898cc',text:'#453868'},
+  'Crown':        {bg:'#cec4e8',border:'#b0a0d8',text:'#5e5080'},
 };
 
 function sfcPillStyle(chakra){
