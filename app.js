@@ -702,9 +702,116 @@ const SFC_CHAKRA_COLORS={
   'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
+const SFC_BUTTON_COLORS={
+  'Earth Star':   {bg:'#6b6258',text:'#fff'},
+  'Root':         {bg:'#7a3c3c',text:'#fff'},
+  'Sacral':       {bg:'#7a4c30',text:'#fff'},
+  'Solar Plexus': {bg:'#7a6222',text:'#fff'},
+  'Heart':        {bg:'#3c6c3e',text:'#fff'},
+  'Throat':       {bg:'#345874',text:'#fff'},
+  'Third Eye':    {bg:'#4c4278',text:'#fff'},
+  'Crown':        {bg:'#6a5ea0',text:'#fff'},
+};
+
 function sfcPillStyle(chakra){
   const c=SFC_CHAKRA_COLORS[chakra]||{bg:'#e5dfd8',text:'#6b6258'};
   return `background:${c.bg};color:${c.text}`;
+}
+
+// ── SOTD EVENT ANNOUNCEMENT SYSTEM ───────────────────────────────────────────
+
+const _SOTD_EVT_ICONS={
+  lunar:      `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  eclipse:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="12" r="7"/><path d="M14.9 6.3A7 7 0 0 1 14.9 17.7"/></svg>`,
+  celestial:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  meteor:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="5" x2="5" y2="19"/><polyline points="19 11 19 5 13 5"/><circle cx="7.5" cy="16.5" r="2" fill="currentColor" opacity=".35"/></svg>`,
+  tradition:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>`,
+  location:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  geology:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l6 4 6-4v14l-6 4-6-4V3z"/><line x1="12" y1="7" x2="12" y2="17"/></svg>`,
+  anniversary:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="16.24" y2="7.76"/><line x1="7.76" y1="16.24" x2="4.93" y2="19.07"/></svg>`,
+  generic:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>`,
+};
+
+const SOTD_EVENT_PRESENTATION={
+  'Lunar phase':                {family:'lunar',      categoryClass:'sotd-event--lunar',       artwork:'assets/sotd-events/lunar.webp'},
+  'Solar eclipse':              {family:'eclipse',    categoryClass:'sotd-event--eclipse',     artwork:'assets/sotd-events/eclipse.webp'},
+  'Lunar eclipse':              {family:'eclipse',    categoryClass:'sotd-event--eclipse',     artwork:'assets/sotd-events/eclipse.webp'},
+  'Lunar phase / eclipse':      {family:'eclipse',    categoryClass:'sotd-event--eclipse',     artwork:'assets/sotd-events/eclipse.webp'},
+  'Seasonal astronomy':         {family:'celestial',  categoryClass:'sotd-event--celestial',   artwork:'assets/sotd-events/celestial.webp'},
+  'Orbital event':              {family:'celestial',  categoryClass:'sotd-event--celestial',   artwork:'assets/sotd-events/celestial.webp'},
+  'Editorial astronomy':        {family:'celestial',  categoryClass:'sotd-event--celestial',   artwork:'assets/sotd-events/celestial.webp'},
+  'Meteor shower':              {family:'meteor',     categoryClass:'sotd-event--meteor',      artwork:'assets/sotd-events/meteor.webp'},
+  'Meteorite history':          {family:'meteor',     categoryClass:'sotd-event--meteor',      artwork:'assets/sotd-events/meteor.webp'},
+  'Cultural holiday':           {family:'tradition',  categoryClass:'sotd-event--tradition',   artwork:'assets/sotd-events/tradition.webp'},
+  'Seasonal tradition':         {family:'tradition',  categoryClass:'sotd-event--tradition',   artwork:'assets/sotd-events/tradition.webp'},
+  'Calendar tradition':         {family:'tradition',  categoryClass:'sotd-event--tradition',   artwork:'assets/sotd-events/tradition.webp'},
+  'Cultural / lunar tradition': {family:'tradition',  categoryClass:'sotd-event--tradition',   artwork:'assets/sotd-events/tradition.webp'},
+  'Rare calendar event':        {family:'tradition',  categoryClass:'sotd-event--tradition',   artwork:'assets/sotd-events/tradition.webp'},
+  'Location spotlight':         {family:'location',   categoryClass:'sotd-event--location',    artwork:'assets/sotd-events/location.webp'},
+  'Geology observance':         {family:'geology',    categoryClass:'sotd-event--geology',     artwork:'assets/sotd-events/geology.webp'},
+  'Site anniversary':           {family:'anniversary',categoryClass:'sotd-event--anniversary', artwork:'assets/sotd-events/anniversary.webp'},
+};
+
+function getSotdEventPresentation(eventCategory){
+  const p=SOTD_EVENT_PRESENTATION[eventCategory||''];
+  if(!p)return{family:'generic',categoryClass:'sotd-event--generic',artwork:null,icon:_SOTD_EVT_ICONS.generic};
+  return{...p,icon:_SOTD_EVT_ICONS[p.family]||_SOTD_EVT_ICONS.generic};
+}
+
+function _isSotdEditorial(entry){
+  if(!entry)return false;
+  const name=entry.eventName||entry.event_name||'';
+  const type=entry.selectionType||entry.selection_type||'';
+  return!!(name&&type!=='random'&&type!=='emergency');
+}
+
+function _isSafeUrl(url){
+  if(!url||typeof url!=='string')return false;
+  try{const u=new URL(url);return u.protocol==='https:'||u.protocol==='http:';}catch{return false;}
+}
+
+let _sotdActiveEvent=null;
+
+function renderSotdEventAnnouncement(entry){
+  const eventName =entry.eventName ||entry.event_name ||'';
+  if(!eventName)return'';
+  const eventCat  =entry.eventCategory||entry.event_category||'';
+  const editNote  =entry.editorialNote||entry.editorial_note||'';
+  const location  =entry.eventLocation||entry.event_location||'';
+  const srcUrl    =entry.sourceUrl    ||entry.source_url    ||'';
+  const pres=getSotdEventPresentation(eventCat);
+  const artworkHtml=pres.artwork
+    ?`<img class="sotd-event-artwork" src="${escapeAttr(pres.artwork)}" alt="" aria-hidden="true" onerror="this.style.display='none'" loading="lazy">`
+    :'';
+  const iconHtml=pres.icon
+    ?`<span class="sotd-event-icon" aria-hidden="true">${pres.icon}</span>`
+    :'';
+  const noteHtml=editNote?`<p class="sotd-event-note">${escapeAttr(editNote)}</p>`:'';
+  const locHtml =location?`<span class="sotd-event-location">${escapeAttr(location)}</span>`:'';
+  const srcHtml =_isSafeUrl(srcUrl)
+    ?`<a class="sotd-event-source" href="${escapeAttr(srcUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${escapeAttr(eventName)}">Learn more</a>`
+    :'';
+  const metaHtml=(locHtml||srcHtml)?`<div class="sotd-event-meta">${locHtml}${srcHtml}</div>`:'';
+  return`<div class="sotd-event-announcement ${pres.categoryClass}">
+    <div class="sotd-event-body">
+      <div class="sotd-event-kicker">${iconHtml}<span class="sotd-event-kicker-text">Stone Selection</span></div>
+      <div class="sotd-event-heading">Chosen for ${escapeAttr(eventName)}</div>
+      ${noteHtml}${metaHtml}
+    </div>
+    ${artworkHtml}
+  </div>`;
+}
+
+function _renderSotdEventBanner(){
+  const el=document.getElementById('sotd-event-banner');
+  if(!el)return;
+  if(_sotdActiveEvent&&_isSotdEditorial(_sotdActiveEvent)){
+    el.innerHTML=renderSotdEventAnnouncement(_sotdActiveEvent);
+    el.hidden=false;
+  }else{
+    el.innerHTML='';
+    el.hidden=true;
+  }
 }
 
 function renderDesktopSotdCard(s){
@@ -715,6 +822,9 @@ function renderDesktopSotdCard(s){
     ?`<img class="sotd-photo" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
     :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
+  const _dBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'#9688b3',text:'#fff'};
+  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-text:${_dBtn.text}`;
+  const _dEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
     <path d="M22 22c2.4-4.8 9.8-4.8 12.2 0 4.8-.2 7.1 5.7 3.4 8.7 2.2 4.4-2.4 8.8-6.7 6.6-3 3.7-8.8 1.4-8.6-3.4-4.7-.9-5.9-7.1-1.8-9.6.1-.8.6-1.6 1.5-2.3Z"/>
@@ -758,7 +868,7 @@ function renderDesktopSotdCard(s){
       </div>`:'';
   const hasDetails=bestForRow||chakraRow||pairRow;
   container.innerHTML=`
-    <section class="sotd-card" aria-labelledby="sotd-heading">
+    <section class="sotd-card" style="${_dCardVars}" aria-labelledby="sotd-heading">
       <div class="sotd-photo-panel" aria-label="${escapeAttr(s.name)} photo">
         <div class="sotd-photo-frame">
           ${photoHtml}
@@ -769,6 +879,7 @@ function renderDesktopSotdCard(s){
         </div>
       </div>
       <div class="sotd-main">
+        ${_dEventHtml}
         <p class="sotd-eyebrow">Today's Stone</p>
         <div class="sotd-title-row">
           <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
@@ -792,7 +903,7 @@ function renderDesktopSotdCard(s){
       </div>`:''}
     </section>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
-  if(encBtn)encBtn.addEventListener('click',()=>{detailReturnContext={type:'home-sotd'};openDetail(s.id);});
+  if(encBtn)encBtn.addEventListener('click',()=>{_sotdActiveEvent=_isSotdEditorial(s)?s:null;detailReturnContext={type:'home-sotd'};openDetail(s.id);});
   const collBtn=container.querySelector('.sfc-btn-coll');
   if(collBtn){
     collBtn.addEventListener('click',function(){
@@ -902,6 +1013,9 @@ function renderMobileSotdCard(s){
     ?`<img class="msotd-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)}" loading="lazy">`
     :`<div class="msotd-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
+  const _mBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'#9688b3',text:'#fff'};
+  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-text:${_mBtn.text}`;
+  const _mEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
   const nameLen=s.name.length;
@@ -933,7 +1047,7 @@ function renderMobileSotdCard(s){
   const detailRows=bestForRow||chakraRow||pairRow
     ?`<div class="msotd-details">${bestForRow}${chakraRow}${pairRow}</div>`:'';
   container.innerHTML=`
-    <div class="msotd-card">
+    <div class="msotd-card" style="${_mCardVars}">
       <div class="msotd-eyebrow">✦ TODAY'S STONE ✦</div>
       <div class="msotd-image-wrap">
         ${photoHtml}
@@ -944,6 +1058,7 @@ function renderMobileSotdCard(s){
         </div>
       </div>
       <div class="msotd-body">
+        ${_mEventHtml}
         ${useWhenText?`<div class="msotd-use-when"><span class="msotd-use-label">Use When</span><p class="msotd-use-text">${escapeAttr(useWhenText)}</p></div>`:''}
         <div class="msotd-actions">
           <button class="msotd-btn-primary msfc-btn-enc" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_BOOK}</span><span class="sotd-action-label">View Full Entry</span></button>
@@ -957,7 +1072,7 @@ function renderMobileSotdCard(s){
       ${s.card_note?`<div class="msotd-practice"><div class="msotd-practice-label">✦ TODAY'S PRACTICE ✦</div><p class="msotd-practice-text">${escapeAttr(s.card_note)}</p></div>`:''}
     </div>`;
   container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
-    detailReturnContext={type:'home-sotd'};openDetail(s.id);
+    _sotdActiveEvent=_isSotdEditorial(s)?s:null;detailReturnContext={type:'home-sotd'};openDetail(s.id);
   });
   const mCollBtn=container.querySelector('.msfc-btn-coll');
   if(mCollBtn){
@@ -1160,33 +1275,230 @@ async function getSotdCalendarMonth(year, month) {
   // Note: RPC returns rows already sorted by feature_date; no client sort needed.
 }
 
-// ── DEV ONLY — SOTD Calendar data-layer verification ─────────────────────────
-// Call this manually from the browser console to verify Phase 1.
-// Remove before shipping the calendar UI.
-window.testSotdCalendarMonth = async () => {
-  const TEST_YEAR = 2026, TEST_MONTH = 6;
-  const label = `[SOTD Calendar DEV] ${TEST_YEAR}-${String(TEST_MONTH).padStart(2,'0')}`;
-  console.group(label);
-  const rows = await getSotdCalendarMonth(TEST_YEAR, TEST_MONTH);
-  if (rows === null) {
-    console.error('History query failed — cannot verify data layer.');
-    console.groupEnd();
-    return null;
+// ── SOTD CALENDAR UI ─────────────────────────────────────────────────────────
+
+let _sotdCalYear  = null;
+let _sotdCalMonth = null;
+const _sotdCalCache     = new Map(); // 'YYYY-MM' → entries[] | null
+const _sotdCalEntryStore = new Map(); // 'YYYY-MM-DD' → entry — for passing full entry to drawer
+
+function _sotdCalChicagoToday() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
+}
+
+// Look up a stone name from the already-loaded CRYSTALS array.
+// Falls back to an empty string rather than exposing a raw ID.
+function _sotdCalStoneName(stoneId) {
+  const c = CRYSTALS.find(cr => cr.i === stoneId);
+  return c ? c.n : '';
+}
+
+function _sotdCalMonthLabel(month) {
+  return ['January','February','March','April','May','June',
+          'July','August','September','October','November','December'][month - 1];
+}
+
+function openSotdCalendar(year, month) {
+  const today = _sotdCalChicagoToday();
+  const [ty, tm] = today.split('-').map(Number);
+  _sotdCalYear  = year  || ty;
+  _sotdCalMonth = month || tm;
+
+  const overlay = document.getElementById('sotd-cal-overlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  document.body.classList.add('sotd-cal-open');
+
+  _sotdCalRenderMonth(_sotdCalYear, _sotdCalMonth);
+
+  // Return focus to close button after rendering settles.
+  setTimeout(() => { document.getElementById('sotd-cal-close-btn')?.focus(); }, 60);
+}
+
+function closeSotdCalendar() {
+  const overlay = document.getElementById('sotd-cal-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  document.body.classList.remove('sotd-cal-open');
+  document.getElementById('sotd-cal-trigger-row')
+    ?.querySelector('.sotd-cal-trigger-btn')?.focus();
+}
+
+async function _sotdCalRenderMonth(year, month) {
+  _sotdCalYear  = year;
+  _sotdCalMonth = month;
+
+  const key     = `${year}-${String(month).padStart(2, '0')}`;
+  const today   = _sotdCalChicagoToday();
+  const [ty, tm] = today.split('-').map(Number);
+
+  // Month title
+  const titleEl = document.getElementById('sotd-cal-title');
+  if (titleEl) {
+    titleEl.textContent = `${_sotdCalMonthLabel(month)} ${year}`;
   }
-  const histRows  = rows.filter(r => r.source === 'history');
-  const schedRows = rows.filter(r => r.source === 'schedule');
-  console.log('History rows returned :', histRows.length);
-  console.log('Schedule rows returned:', schedRows.length);
-  console.log('Merged total          :', rows.length);
-  console.table(rows.map(r => ({
-    date: r.date, source: r.source, stoneId: r.stoneId,
-    selectionType: r.selectionType, eventName: r.eventName || '',
-    isToday: r.isToday, isPast: r.isPast, isFuture: r.isFuture,
-  })));
-  console.groupEnd();
-  return rows;
-};
-// ── END DEV ───────────────────────────────────────────────────────────────────
+
+  // Today button: hidden when already on the current month
+  const todayBtn = document.getElementById('sotd-cal-today-btn');
+  if (todayBtn) todayBtn.hidden = (year === ty && month === tm);
+
+  const grid = document.getElementById('sotd-cal-grid');
+  if (!grid) return;
+
+  // Serve from cache if available
+  if (_sotdCalCache.has(key)) {
+    _sotdCalBuildGrid(_sotdCalCache.get(key), year, month, today);
+    return;
+  }
+
+  // Loading state
+  grid.innerHTML = '<div class="sotd-cal-loading" aria-live="polite" role="status">Loading…</div>';
+
+  const entries = await getSotdCalendarMonth(year, month);
+  _sotdCalCache.set(key, entries);
+
+  // Re-check: user may have navigated away while awaiting
+  if (_sotdCalYear !== year || _sotdCalMonth !== month) return;
+
+  if (entries === null) {
+    grid.innerHTML = `<div class="sotd-cal-error" role="alert">
+      <p>Unable to load stone data for this month.</p>
+      <button class="sotd-cal-retry-btn" type="button" onclick="_sotdCalRetry()">Retry</button>
+    </div>`;
+    return;
+  }
+
+  _sotdCalBuildGrid(entries, year, month, today);
+}
+
+function _sotdCalRetry() {
+  const key = `${_sotdCalYear}-${String(_sotdCalMonth).padStart(2, '0')}`;
+  _sotdCalCache.delete(key);
+  _sotdCalRenderMonth(_sotdCalYear, _sotdCalMonth);
+}
+
+function _sotdCalBuildGrid(entries, year, month, today) {
+  const grid = document.getElementById('sotd-cal-grid');
+  if (!grid) return;
+
+  // Refresh entry store for this month so _sotdCalOpenStone can pass full entry to drawer.
+  _sotdCalEntryStore.clear();
+  for (const e of entries) { _sotdCalEntryStore.set(e.date, e); }
+
+  const entryMap   = new Map(entries.map(e => [e.date, e]));
+  const firstDate  = new Date(year, month - 1, 1);
+  const startDow   = firstDate.getDay();            // 0 = Sun
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const mm          = String(month).padStart(2, '0');
+  const monthLabel  = _sotdCalMonthLabel(month);
+
+  const cells = [];
+
+  // Leading ghost cells for grid alignment
+  for (let i = 0; i < startDow; i++) {
+    cells.push('<div class="sotd-cal-cell sotd-cal-cell--outside" aria-hidden="true"></div>');
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dd      = String(d).padStart(2, '0');
+    const dateStr = `${year}-${mm}-${dd}`;
+    const entry   = entryMap.get(dateStr);
+    const isToday = dateStr === today;
+    const todayAttr = isToday ? ' aria-current="date"' : '';
+
+    if (!entry) {
+      const emptyLabel = `${isToday ? 'Today, ' : ''}${d} ${monthLabel}, no stone recorded`;
+      cells.push(
+        `<div class="sotd-cal-cell sotd-cal-cell--empty${isToday ? ' sotd-cal-cell--today' : ''}"` +
+        ` role="gridcell" aria-label="${emptyLabel}"${todayAttr}>` +
+        `<span class="sotd-cal-day-num">${d}</span></div>`
+      );
+    } else {
+      const isSchedule  = entry.source === 'schedule';
+      const isEditorial = _isSotdEditorial(entry);
+      const stoneName   = _sotdCalStoneName(entry.stoneId);
+      const pres        = isEditorial ? getSotdEventPresentation(entry.eventCategory) : null;
+      const cellClass   = [
+        'sotd-cal-cell sotd-cal-cell--populated',
+        isSchedule ? 'sotd-cal-cell--schedule' : 'sotd-cal-cell--history',
+        isToday ? 'sotd-cal-cell--today' : '',
+        pres ? `sotd-cal-cell--${pres.family}` : '',
+      ].filter(Boolean).join(' ');
+
+      const ariaLabel = [
+        isToday ? 'Today, ' : '',
+        `${d} ${monthLabel}`,
+        stoneName ? `: ${stoneName}` : '',
+        isEditorial && entry.eventName ? `, chosen for ${entry.eventName}` : '',
+      ].join('');
+
+      const markerHtml = isEditorial && pres
+        ? `<span class="sotd-cal-event-icon" aria-hidden="true">${pres.icon}</span>`
+        : (isSchedule ? '<span class="sotd-cal-sched-dot" aria-hidden="true"></span>' : '');
+
+      cells.push(
+        `<button class="${cellClass}" type="button" role="gridcell"` +
+        ` onclick="_sotdCalOpenStone('${entry.stoneId}','${dateStr}',${year},${month})"` +
+        ` aria-label="${ariaLabel.replace(/"/g,"'")}"${todayAttr}>` +
+        `<span class="sotd-cal-day-num">${d}</span>` +
+        (stoneName ? `<span class="sotd-cal-stone-name">${stoneName}</span>` : '') +
+        (entry.eventName ? `<span class="sotd-cal-event-name">${entry.eventName}</span>` : '') +
+        markerHtml +
+        `</button>`
+      );
+    }
+  }
+
+  // Trailing ghost cells to complete the last row
+  const rem = (startDow + daysInMonth) % 7;
+  if (rem > 0) {
+    for (let i = 0; i < 7 - rem; i++) {
+      cells.push('<div class="sotd-cal-cell sotd-cal-cell--outside" aria-hidden="true"></div>');
+    }
+  }
+
+  grid.innerHTML = cells.join('');
+
+  // Empty-month message sits below the grid, not inside it
+  const emptyMsg = document.querySelector('.sotd-cal-empty-msg');
+  if (emptyMsg) emptyMsg.remove();
+  if (entries.length === 0) {
+    const msg = document.createElement('p');
+    msg.className = 'sotd-cal-empty-msg';
+    msg.textContent = 'No stones have been recorded or scheduled for this month.';
+    grid.after(msg);
+  }
+}
+
+function _sotdCalNav(dir) {
+  let y = _sotdCalYear, m = _sotdCalMonth + dir;
+  if (m > 12) { y++; m = 1; }
+  if (m <  1) { y--; m = 12; }
+  _sotdCalRenderMonth(y, m);
+}
+
+function _sotdCalGoToday() {
+  const today = _sotdCalChicagoToday();
+  const [ty, tm] = today.split('-').map(Number);
+  _sotdCalRenderMonth(ty, tm);
+}
+
+function _sotdCalOpenStone(stoneId, dateStr, year, month) {
+  const entry = _sotdCalEntryStore.get(dateStr) || null;
+  _sotdActiveEvent = _isSotdEditorial(entry) ? entry : null;
+  detailReturnContext = { type: 'sotd-calendar', year, month, entry };
+  openDetail(stoneId);
+}
+
+// Keyboard: Escape closes the calendar (when the encyclopedia drawer is not open).
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Escape') return;
+  const overlay = document.getElementById('sotd-cal-overlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  const drawerOverlay = document.getElementById('drawer-overlay');
+  if (drawerOverlay && drawerOverlay.classList.contains('open')) return; // drawer takes priority
+  closeSotdCalendar();
+});
 
 // ── INIT ──
 function updateStoneCounts(){
@@ -2093,6 +2405,7 @@ function openDetail(id){
   const sb=document.getElementById('d-sib-block');
   if(sb){const fe=Object.entries(SP_FAM).find(([,ids])=>ids.includes(c.i));if(fe){const oth=fe[1].filter(id=>id!==c.i).map(id=>CRYSTALS.find(x=>x.i===id)).filter(Boolean);if(oth.length){document.getElementById('d-sibs').innerHTML=oth.map(s=>`<span class="sib-tag" onclick="openDetail('${s.i}')">${s.n}</span>`).join('');sb.style.display='';}else sb.style.display='none';}else sb.style.display='none';}
   updateDrawerStatus(c.i);
+  _renderSotdEventBanner();
   document.getElementById('drawer-overlay').classList.add('open');
   document.getElementById('detail-drawer').classList.add('open');
 }
@@ -2255,7 +2568,13 @@ function closeDrawer(){
   } else if(detailReturnContext&&detailReturnContext.type==='sotd'){
     detailReturnContext=null;
     window.location.href='index.html#desktop-sotd-section';
+  } else if(detailReturnContext&&detailReturnContext.type==='sotd-calendar'){
+    // Calendar stays open behind the drawer — nothing to re-open.
+    // Clear context so subsequent drawer closes don't re-trigger this branch.
+    detailReturnContext=null;
   }
+  _sotdActiveEvent=null;
+  _renderSotdEventBanner();
 }
 let photoLightboxSources=[];
 let photoLightboxIndex=0;
