@@ -702,7 +702,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .msfc-signin-hint{display:none!important}
 /* MOBILE SOTD — card (msotd-* selectors, mobile only) */
 .msotd-card{border:1px solid rgba(190,160,115,.22);border-radius:20px;overflow:hidden;background:#fbf9f5;box-shadow:0 4px 22px rgba(42,37,32,0.07)}
-.msotd-eyebrow{padding:14px 18px 0;text-align:center;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a}
+.msotd-eyebrow{padding:11px 18px;background:var(--sotd-banner-bg,#f3f0f8);border-bottom:1px solid var(--sotd-banner-border,rgba(147,121,91,.32))}
+.msotd-eyebrow .sotd-event-heading{font-size:14px;margin:0}
 .msotd-image-wrap{position:relative;margin:12px 14px 0;border-radius:14px;overflow:hidden;aspect-ratio:1/1}
 .msotd-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .msotd-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0ece4}
@@ -2475,9 +2476,6 @@ body.sotd-cal-open{overflow:hidden}
   .sotd-event-artwork{display:none}
 }
 
-/* Mobile card announcement — tighten heading size */
-.msotd-body .sotd-event-heading{font-size:13px}
-.msotd-body .sotd-event-announcement{margin-bottom:14px}
 
 /* Calendar event icon replaces the plain dot for editorial cells */
 .sotd-cal-event-icon{
