@@ -1869,12 +1869,53 @@
       <div class="sec-label" style="margin-bottom:0.3rem">Admin</div>
       <div style="display:flex;flex-direction:column;gap:4px">
         <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openPhotoPlan();closePopup('manage')">📷 Photo planning</button>
+        <button class="btn manage-admin-only" style="justify-content:flex-start;padding:5px 12px;display:none" onclick="openSotdCalendar();closePopup('manage')">📅 Stone of the Day Calendar</button>
       </div>
     </div>
     <div style="font-size:12px;color:var(--ink3);line-height:1.6;padding:0.6rem 0.75rem;background:var(--stone2);border-radius:6px">
       Your collection and wishlist are saved to the cloud when you're signed in.
       <div style="margin-top:6px;color:var(--ink3)" id="last-saved-display"></div>
     </div>
+  </div>
+</div>
+
+<!-- STONE CALENDAR OVERLAY (admin only) -->
+<div id="sotd-cal-overlay" class="sotd-cal-overlay" role="dialog" aria-modal="true" aria-labelledby="sotd-cal-title" onclick="if(event.target===this)closeSotdCalendar()">
+  <div class="sotd-cal-panel">
+
+    <div class="sotd-cal-header">
+      <button class="sotd-cal-nav-btn" id="sotd-cal-prev" type="button" aria-label="Previous month" onclick="_sotdCalNav(-1)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="sotd-cal-month-info">
+        <h2 class="sotd-cal-month-name" id="sotd-cal-title"></h2>
+        <button class="sotd-cal-today-btn" id="sotd-cal-today-btn" type="button" onclick="_sotdCalGoToday()" aria-label="Return to current month">Today</button>
+      </div>
+      <button class="sotd-cal-nav-btn" id="sotd-cal-next" type="button" aria-label="Next month" onclick="_sotdCalNav(1)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <button class="sotd-cal-close-btn" id="sotd-cal-close-btn" type="button" onclick="closeSotdCalendar()" aria-label="Close calendar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="sotd-cal-weekdays" aria-hidden="true">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+
+    <div class="sotd-cal-grid" id="sotd-cal-grid" role="grid" aria-label="Stone of the Day calendar"></div>
+
+    <div class="sotd-cal-legend" aria-label="Legend">
+      <div class="sotd-cal-legend-item">
+        <span class="sotd-cal-legend-swatch sotd-cal-legend-swatch--history" aria-hidden="true"></span>
+        <span>Resolved</span>
+      </div>
+      <div class="sotd-cal-legend-item">
+        <span class="sotd-cal-legend-swatch sotd-cal-legend-swatch--schedule" aria-hidden="true"></span>
+        <span>Scheduled</span>
+      </div>
+    </div>
+
   </div>
 </div>
 <!-- PHOTO PLANNING PANEL -->

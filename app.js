@@ -886,6 +886,7 @@ function renderDesktopSotdCard(s){
   const hasDetails=bestForRow||chakraRow||pairRow;
   container.innerHTML=`
     <section class="sotd-card" style="${_dCardVars}" aria-labelledby="sotd-heading">
+      <div class="sotd-event-row">${_dEventHtml}</div>
       <div class="sotd-photo-panel" aria-label="${escapeAttr(s.name)} photo">
         <div class="sotd-photo-frame">
           ${photoHtml}
@@ -896,7 +897,6 @@ function renderDesktopSotdCard(s){
         </div>
       </div>
       <div class="sotd-main">
-        ${_dEventHtml}
         <p class="sotd-eyebrow">Today's Stone</p>
         <div class="sotd-title-row">
           <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
@@ -1316,6 +1316,7 @@ function _sotdCalMonthLabel(month) {
 }
 
 function openSotdCalendar(year, month) {
+  if(!isAdminUser(_currentUser))return;
   const today = _sotdCalChicagoToday();
   const [ty, tm] = today.split('-').map(Number);
   _sotdCalYear  = year  || ty;
@@ -1337,8 +1338,7 @@ function closeSotdCalendar() {
   if (!overlay) return;
   overlay.classList.remove('open');
   document.body.classList.remove('sotd-cal-open');
-  document.getElementById('sotd-cal-trigger-row')
-    ?.querySelector('.sotd-cal-trigger-btn')?.focus();
+  document.getElementById('manage-btn')?.focus();
 }
 
 async function _sotdCalRenderMonth(year, month) {

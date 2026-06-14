@@ -152,7 +152,9 @@ begin
 end;
 $$;
 
--- Allow anonymous and authenticated visitors to call the calendar reader.
--- No direct SELECT access is granted to either SOTD table.
+-- Only authenticated users may call the calendar reader (calendar is admin-only in the UI).
+-- Revoke the previously granted anon permission.
+revoke execute on function public.get_sotd_calendar_month(integer, integer)
+  from anon;
 grant execute on function public.get_sotd_calendar_month(integer, integer)
-  to anon, authenticated;
+  to authenticated;
