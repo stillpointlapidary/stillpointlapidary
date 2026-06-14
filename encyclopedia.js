@@ -1683,11 +1683,14 @@ async function _sotdCalSaveSchedule() {
   _sotdCalRenderMonth(_sotdSchedYear, _sotdSchedMonth);
 }
 
-// Shows the inline delete confirmation row.
+// Shows the inline delete confirmation row and scrolls it into view.
 function _sotdCalConfirmDelete() {
   const confirm = document.getElementById('sotd-sched-delete-confirm');
   const deleteBtn = document.getElementById('sotd-sched-delete-btn');
-  if (confirm) confirm.hidden = false;
+  if (confirm) {
+    confirm.hidden = false;
+    confirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
   if (deleteBtn) deleteBtn.hidden = true;
 }
 
@@ -1726,23 +1729,22 @@ async function _sotdCalDeleteSchedule() {
   _sotdCalRenderMonth(_sotdSchedYear, _sotdSchedMonth);
 }
 
-// Keyboard: Escape dismisses the stone combobox first; a second Escape closes the modal.
+// Keyboard: Escape closes the stone combobox only. The scheduler modal is not closed by Escape.
 // comboKey fires before document listeners (inline onkeydown), so by the time this runs
 // the dropdown is already closed. Check e.target instead of the dropdown's class.
 document.addEventListener('keydown', function(e) {
   if (e.key !== 'Escape') return;
   const modal = document.getElementById('sotd-sched-modal');
   if (!modal || !modal.classList.contains('open')) return;
-  // If the event came from the stone input, comboKey already closed the dropdown — stay open.
+  // If the event came from the stone input, comboKey already closed the dropdown.
   const stoneInput = document.getElementById('sotd-sched-stone-input');
   if (stoneInput && e.target === stoneInput) return;
-  // Fallback: dropdown still open via some other path.
+  // Fallback: close dropdown if still open via some other path.
   const drop = document.getElementById('sotd-sched-stone-drop');
   if (drop && drop.classList.contains('open')) {
     comboClose('sotd-sched-stone-drop');
-    return;
   }
-  closeSotdScheduler();
+  // Scheduler modal is intentionally not closed by Escape.
 });
 
 // ── end SOTD Scheduler ────────────────────────────────────────────────────────
