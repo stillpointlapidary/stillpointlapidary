@@ -770,7 +770,23 @@ function _isSafeUrl(url){
   try{const u=new URL(url);return u.protocol==='https:'||u.protocol==='http:';}catch{return false;}
 }
 
-let _sotdActiveEvent=null;
+// Structured SOTD context — carries source and entry independently.
+// source: 'home' | 'calendar' | null
+// entry:  raw entry object (SOTD stone or calendar entry); null for ordinary opens
+let _sotdContext = { source: null, entry: null };
+
+function setSotdContext(source, entry) {
+  _sotdContext = { source: source || null, entry: entry || null };
+}
+
+function clearSotdContext() {
+  _sotdContext = { source: null, entry: null };
+}
+
+// Returns the entry only when it qualifies as an editorial event; null otherwise.
+function _sotdContextEvent() {
+  return _isSotdEditorial(_sotdContext.entry) ? _sotdContext.entry : null;
+}
 
 function renderSotdEventAnnouncement(entry){
   const eventName =entry.eventName ||entry.event_name ||'';
@@ -805,8 +821,9 @@ function renderSotdEventAnnouncement(entry){
 function _renderSotdEventBanner(){
   const el=document.getElementById('sotd-event-banner');
   if(!el)return;
-  if(_sotdActiveEvent&&_isSotdEditorial(_sotdActiveEvent)){
-    el.innerHTML=renderSotdEventAnnouncement(_sotdActiveEvent);
+  const evt=_sotdContextEvent();
+  if(evt){
+    el.innerHTML=renderSotdEventAnnouncement(evt);
     el.hidden=false;
   }else{
     el.innerHTML='';
@@ -903,7 +920,7 @@ function renderDesktopSotdCard(s){
       </div>`:''}
     </section>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
-  if(encBtn)encBtn.addEventListener('click',()=>{_sotdActiveEvent=_isSotdEditorial(s)?s:null;detailReturnContext={type:'home-sotd'};openDetail(s.id);});
+  if(encBtn)encBtn.addEventListener('click',()=>{setSotdContext('home',s);detailReturnContext={type:'home-sotd'};openDetail(s.id);});
   const collBtn=container.querySelector('.sfc-btn-coll');
   if(collBtn){
     collBtn.addEventListener('click',function(){
@@ -1072,7 +1089,7 @@ function renderMobileSotdCard(s){
       ${s.card_note?`<div class="msotd-practice"><div class="msotd-practice-label">✦ TODAY'S PRACTICE ✦</div><p class="msotd-practice-text">${escapeAttr(s.card_note)}</p></div>`:''}
     </div>`;
   container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
-    _sotdActiveEvent=_isSotdEditorial(s)?s:null;detailReturnContext={type:'home-sotd'};openDetail(s.id);
+    setSotdContext('home',s);detailReturnContext={type:'home-sotd'};openDetail(s.id);
   });
   const mCollBtn=container.querySelector('.msfc-btn-coll');
   if(mCollBtn){
@@ -1485,7 +1502,7 @@ function _sotdCalGoToday() {
 
 function _sotdCalOpenStone(stoneId, dateStr, year, month) {
   const entry = _sotdCalEntryStore.get(dateStr) || null;
-  _sotdActiveEvent = _isSotdEditorial(entry) ? entry : null;
+  setSotdContext('calendar', entry);
   detailReturnContext = { type: 'sotd-calendar', year, month, entry };
   openDetail(stoneId);
 }
@@ -2573,7 +2590,7 @@ function closeDrawer(){
     // Clear context so subsequent drawer closes don't re-trigger this branch.
     detailReturnContext=null;
   }
-  _sotdActiveEvent=null;
+  clearSotdContext();
   _renderSotdEventBanner();
 }
 let photoLightboxSources=[];
