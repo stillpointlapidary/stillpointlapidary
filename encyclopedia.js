@@ -1119,6 +1119,19 @@ function _sotdCalChicagoToday() {
   return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
 }
 
+// Returns a compact stone visual for use inside a calendar cell.
+// Prefers a photo thumbnail; falls back to the stone's mapped color dot.
+function _sotdCalCellThumbHTML(stoneId) {
+  const crystal = CRYSTALS.find(c => c.i === stoneId);
+  if (!crystal) return '';
+  const url = firstEncyclopediaPhoto(crystal);
+  if (url) {
+    return `<img class="sotd-cal-cell-thumb" src="${url}" alt="" aria-hidden="true" loading="lazy">`;
+  }
+  const hex = crystal.ch || '#c8bca8';
+  return `<span class="sotd-cal-cell-dot" style="background:${hex}" aria-hidden="true"></span>`;
+}
+
 // Look up a stone name from the already-loaded CRYSTALS array.
 // Falls back to an empty string rather than exposing a raw ID.
 function _sotdCalStoneName(stoneId) {
@@ -1287,6 +1300,7 @@ function _sotdCalBuildGrid(entries, year, month, today) {
         (stoneName ? `<span class="sotd-cal-stone-name">${stoneName}</span>` : '') +
         (entry.eventName ? `<span class="sotd-cal-event-name">${entry.eventName}</span>` : '') +
         markerHtml +
+        _sotdCalCellThumbHTML(entry.stoneId) +
         `</button>`
       );
     }
@@ -1713,14 +1727,19 @@ async function _sotdCalDeleteSchedule() {
 }
 
 // Keyboard: Escape dismisses the stone combobox first; a second Escape closes the modal.
+// comboKey fires before document listeners (inline onkeydown), so by the time this runs
+// the dropdown is already closed. Check e.target instead of the dropdown's class.
 document.addEventListener('keydown', function(e) {
   if (e.key !== 'Escape') return;
   const modal = document.getElementById('sotd-sched-modal');
   if (!modal || !modal.classList.contains('open')) return;
+  // If the event came from the stone input, comboKey already closed the dropdown — stay open.
+  const stoneInput = document.getElementById('sotd-sched-stone-input');
+  if (stoneInput && e.target === stoneInput) return;
+  // Fallback: dropdown still open via some other path.
   const drop = document.getElementById('sotd-sched-stone-drop');
   if (drop && drop.classList.contains('open')) {
     comboClose('sotd-sched-stone-drop');
-    e.stopPropagation();
     return;
   }
   closeSotdScheduler();
