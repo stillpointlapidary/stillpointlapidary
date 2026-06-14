@@ -1397,13 +1397,6 @@ function _printWishlistReport(f){
   window.open(URL.createObjectURL(_wishBlob),'_blank');
 }
 
-function scrollPageTop(){
-  try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
-}
-function scrollElementTop(id){
-  const el=document.getElementById(id);
-  if(el)el.scrollTop=0;
-}
 function getStickyScrollOffset(){
   const topbar=document.querySelector('.topbar');
   const nav=document.querySelector('.main-nav-wrap');

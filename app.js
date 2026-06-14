@@ -2788,6 +2788,14 @@ async function loadStonesAndInit() {
 }
 
 
+function scrollPageTop(){
+  try{window.scrollTo({top:0,left:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
+}
+function scrollElementTop(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollTop=0;
+}
+
 // ── PWA ADD TO HOME SCREEN ──
 function initPWA(){
   // Only show once per browser session (sessionStorage resets when tab closes)
