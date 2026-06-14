@@ -734,7 +734,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .msotd-badge--chakra{background:rgba(122,107,160,.15);color:#7a6ba0}
 .msotd-badge--pair{background:rgba(197,175,140,.18);color:#9a7d5a}
 .msotd-detail-copy{display:flex;flex-direction:column;min-width:0}
-.msotd-detail-lbl{font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#9a8878;margin-bottom:3px}
+.msotd-detail-lbl{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#9a8878;margin-bottom:3px}
 .msotd-detail-val{font-family:'Jost',sans-serif;font-size:14px;font-weight:500;color:#3e3832;overflow-wrap:break-word}
 .msotd-practice{padding:16px 18px 18px;border-top:1px solid rgba(180,150,100,.28);background:rgba(248,244,237,.72);text-align:center}
 .msotd-practice-label{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#b8905a;margin-bottom:9px}
@@ -868,7 +868,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-details-title{
     margin:0;
     font-family:'Jost',sans-serif;
-    font-size:11px;
+    font-size:12px;
     font-weight:500;
     letter-spacing:.16em;
     line-height:1.2;
@@ -1052,7 +1052,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-detail-label{
     margin-bottom:6px;
     font-family:'Jost',sans-serif;
-    font-size:11px;
+    font-size:12px;
     font-weight:600;
     letter-spacing:.085em;
     line-height:1.2;
@@ -1080,7 +1080,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-practice-label{
     margin-bottom:8px;
     font-family:'Jost',sans-serif;
-    font-size:11px;
+    font-size:12px;
     font-weight:500;
     letter-spacing:.15em;
     line-height:1.2;
@@ -1102,7 +1102,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media (min-width:901px) and (max-width:1100px){
   .desktop-sotd-section .sotd-card{
     grid-template-columns:23% minmax(0,52%) 25%;
-    height:310px;
   }
   .desktop-sotd-section .sotd-main{padding:22px 23px 20px}
   .desktop-sotd-section .sotd-title{font-size:clamp(1.9rem,2.6vw,2.6rem)}
@@ -2394,11 +2393,11 @@ body.sotd-cal-open{overflow:hidden}
   align-items:center;
   gap:5px;
   font-family:'Jost',sans-serif;
-  font-size:10px;
-  font-weight:500;
+  font-size:11px;
+  font-weight:600;
   letter-spacing:.15em;
   text-transform:uppercase;
-  color:var(--sotd-banner-border, #9a8070);
+  color:var(--sotd-kicker-color, #6b5e52);
   margin-bottom:9px;
 }
 .sotd-event-kicker-text{line-height:1}
@@ -2406,9 +2405,9 @@ body.sotd-cal-open{overflow:hidden}
   display:inline-flex;
   align-items:center;
   flex-shrink:0;
-  width:13px;
-  height:13px;
-  color:var(--sotd-banner-border, #9a8070);
+  width:15px;
+  height:15px;
+  color:var(--sotd-kicker-color, #6b5e52);
 }
 .sotd-event-icon svg{width:100%;height:100%}
 .sotd-event-heading{
@@ -2457,18 +2456,6 @@ body.sotd-cal-open{overflow:hidden}
   opacity:.75;
 }
 
-/* Category color variants */
-/* Category modifier classes set only the left-rule accent color.
-   Banner bg/border come from the stone's chakra via CSS vars on .sotd-card. */
-.sotd-event--lunar{--sotd-evt-accent:rgba(100,86,152,.75)}
-.sotd-event--eclipse{--sotd-evt-accent:rgba(50,40,72,.75)}
-.sotd-event--celestial{--sotd-evt-accent:rgba(72,84,145,.75)}
-.sotd-event--meteor{--sotd-evt-accent:rgba(68,58,95,.75)}
-.sotd-event--tradition{--sotd-evt-accent:rgba(140,100,50,.75)}
-.sotd-event--location{--sotd-evt-accent:rgba(55,108,82,.75)}
-.sotd-event--geology{--sotd-evt-accent:rgba(100,80,55,.75)}
-.sotd-event--anniversary{--sotd-evt-accent:rgba(140,78,100,.75)}
-.sotd-event--generic{--sotd-evt-accent:rgba(130,105,70,.75)}
 
 /* Drawer banner — sits flush in the drawer's top padding area */
 #sotd-event-banner{margin:-1rem -1.75rem 1.25rem}
