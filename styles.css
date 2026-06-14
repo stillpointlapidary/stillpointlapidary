@@ -2383,7 +2383,7 @@ body.sotd-cal-open{overflow:hidden}
   margin:0 0 18px;
   padding:15px 16px;
   border-radius:10px;
-  background:transparent;
+  background:var(--sotd-banner-bg, #f3f0f8);
   border:none;
   border-bottom:1px solid var(--sotd-banner-border, rgba(147,121,91,.32));
   overflow:hidden;

@@ -702,17 +702,17 @@ const SFC_CHAKRA_COLORS={
   'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
-// Banner colors — one clear step deeper than the quality pill, still soft and luminous.
-// Computed as approximately 12 units below each pill channel to stay within a single tonal step.
+// Banner colors — ultra-light chakra wash, barely deeper than the card ivory.
+// Derived by blending each chakra hue ~8% into white; Third Eye targets #f3f0f8.
 const SFC_BANNER_COLORS={
-  'Earth Star':   '#d2ceca',
-  'Root':         '#dac4c4',
-  'Sacral':       '#e2d1c8',
-  'Solar Plexus': '#e1dcc4',
-  'Heart':        '#c8dacc',
-  'Throat':       '#c6d2da',
-  'Third Eye':    '#cfcadc',
-  'Crown':        '#d2cbe3',
+  'Earth Star':   '#f5f4f3',
+  'Root':         '#f5f0f0',
+  'Sacral':       '#f6f3f1',
+  'Solar Plexus': '#f6f5f0',
+  'Heart':        '#f1f6f2',
+  'Throat':       '#f0f3f6',
+  'Third Eye':    '#f3f0f8',
+  'Crown':        '#f4f1fa',
 };
 
 // Button colors — pale tinted fill, ~5 units below the pill; clearly lighter than the banner.
