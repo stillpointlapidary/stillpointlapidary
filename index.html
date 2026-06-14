@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Still Point Lapidary">
   <meta name="description" content="Still Point Lapidary — a curated crystal reference library and collection tracker from Still Point {technodelic} Studio in Dallas / Fort Worth.">
@@ -165,7 +166,7 @@
     <div class="site-footer-inner">
       <div class="site-footer-eyebrow">A complimentary offering from</div>
       <a href="https://stillpointdfw.com" target="_blank" rel="noopener" class="site-footer-logo">Still Point <em>{technodelic}</em> Studio</a>
-      <div class="site-footer-tagline">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
+      <div class="site-footer-tagline">Guided sessions for nervous system regulation,<br class="footer-mobile-break"> integration, and inner&nbsp;clarity.</div>
       <div class="site-footer-location">Dallas · Fort Worth</div>
       <div class="site-footer-links">
         <a href="https://stillpointdfw.com" target="_blank" rel="noopener" class="site-footer-link site-footer-link--accent">stillpointdfw.com</a>
@@ -263,9 +264,9 @@
     <div class="form-sub">Each entry is a specific physical piece in your collection.</div>
     <div class="form-row">
       <div class="fg">
-        <label>Crystal / Stone *</label>
+        <label for="f-crystal-input">Crystal / Stone *</label>
         <div class="combobox-wrap">
-          <input type="text" class="combobox-input" id="f-crystal-input" placeholder="Type to search (e.g. amethyst)…" autocomplete="off"
+          <input type="text" class="combobox-input" id="f-crystal-input" name="crystal" placeholder="Type to search (e.g. amethyst)…" autocomplete="off"
             oninput="comboFilter('','f-crystal-input','f-crystal-drop','f-crystal-val')"
             onfocus="if(this.value.length>0){comboOpen('f-crystal-drop');comboRender('f-crystal-drop','f-crystal-val',this.value);}"
             onkeydown="comboKey(event,'f-crystal-drop','f-crystal-input','f-crystal-val')">
@@ -274,7 +275,7 @@
           <input type="hidden" id="f-crystal-val">
         </div>
       </div>
-      <div class="fg"><label>Piece nickname</label><input type="text" id="f-nick" placeholder="e.g. The Dreamer"></div>
+      <div class="fg"><label for="f-nick">Piece nickname</label><input type="text" id="f-nick" name="nickname" placeholder="e.g. The Dreamer"></div>
     </div>
     <div style="margin-bottom:10px">
       <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--ink2)"><input type="checkbox" id="f-combo" onchange="toggleCombo()"> Combo piece (multiple stones)</label>
@@ -286,37 +287,37 @@
     </div>
     <div class="form-divider"></div>
     <div class="form-row">
-      <div class="fg"><label>Form / Shape <button class="prop-help" onclick="openPopup('form')">?</button></label><select id="f-form"><option value="">Select…</option><option>Tumbled</option><option>Palm stone</option><option>Raw / Rough</option><option>Freeform</option><option>Tower</option><option>Point</option><option>Sphere</option><option>Egg</option><option>Cluster</option><option>Geode</option><option>Slice</option><option>Heart</option><option>Moon</option><option>Star</option><option>Mushroom</option><option>Wand</option><option>Skull</option><option>Carved</option><option>Other</option></select></div>
-      <div class="fg"><label>Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size"><option value="">Select…</option><option value="XS">XS — under 1" / 2.5cm</option><option value="S">S — 1–2" / 2.5–5cm</option><option value="M">M — 2–4" / 5–10cm</option><option value="L">L — 4–8" / 10–20cm</option><option value="XL">XL — over 8" / 20cm+</option></select></div>
+      <div class="fg"><label for="f-form">Form / Shape <button class="prop-help" onclick="openPopup('form')">?</button></label><select id="f-form" name="form"><option value="">Select…</option><option>Tumbled</option><option>Palm stone</option><option>Raw / Rough</option><option>Freeform</option><option>Tower</option><option>Point</option><option>Sphere</option><option>Egg</option><option>Cluster</option><option>Geode</option><option>Slice</option><option>Heart</option><option>Moon</option><option>Star</option><option>Mushroom</option><option>Wand</option><option>Skull</option><option>Carved</option><option>Other</option></select></div>
+      <div class="fg"><label for="f-size">Size <span class="helper-link" onclick="openPopup('size')">guide</span></label><select id="f-size" name="size"><option value="">Select…</option><option value="XS">XS — under 1" / 2.5cm</option><option value="S">S — 1–2" / 2.5–5cm</option><option value="M">M — 2–4" / 5–10cm</option><option value="L">L — 4–8" / 10–20cm</option><option value="XL">XL — over 8" / 20cm+</option></select></div>
     </div>
     <div class="form-row">
-      <div class="fg"><label>Treatment <button class="prop-help" onclick="openPopup('treatment')">?</button></label><select id="f-treated"><option value="Natural">Natural</option><option value="Heat Treated">Heat Treated</option><option value="Irradiated">Irradiated</option><option value="Dyed">Dyed</option><option value="Coated">Coated (Aura etc.)</option><option value="Stabilized">Stabilized</option><option value="Unknown">Unknown</option></select></div>
-      <div class="fg"><label>Condition <button class="prop-help" onclick="openPopup('condition')">?</button></label><select id="f-condition"><option value="Excellent">Excellent</option><option value="Very Good">Very Good</option><option value="Good">Good</option><option value="Fair / Visible Wear">Fair / Visible Wear</option><option value="Chipped / Minor Damage">Chipped / Minor Damage</option><option value="Damaged / Repaired">Damaged / Repaired</option><option value="Unknown">Unknown</option></select></div>
+      <div class="fg"><label for="f-treated">Treatment <button class="prop-help" onclick="openPopup('treatment')">?</button></label><select id="f-treated" name="treatment"><option value="Natural">Natural</option><option value="Heat Treated">Heat Treated</option><option value="Irradiated">Irradiated</option><option value="Dyed">Dyed</option><option value="Coated">Coated (Aura etc.)</option><option value="Stabilized">Stabilized</option><option value="Unknown">Unknown</option></select></div>
+      <div class="fg"><label for="f-condition">Condition <button class="prop-help" onclick="openPopup('condition')">?</button></label><select id="f-condition" name="condition"><option value="Excellent">Excellent</option><option value="Very Good">Very Good</option><option value="Good">Good</option><option value="Fair / Visible Wear">Fair / Visible Wear</option><option value="Chipped / Minor Damage">Chipped / Minor Damage</option><option value="Damaged / Repaired">Damaged / Repaired</option><option value="Unknown">Unknown</option></select></div>
     </div>
     <div class="form-divider"></div>
     <div class="sec-label" style="margin-bottom:10px">Acquisition Details</div>
     <div class="form-row">
-      <div class="fg"><label>Source</label><input type="text" id="f-source" placeholder="e.g. DFW Crystals"></div>
-      <div class="fg"><label>Price paid</label><input type="text" id="f-price" placeholder="e.g. $25"></div>
+      <div class="fg"><label for="f-source">Source</label><input type="text" id="f-source" name="source" placeholder="e.g. DFW Crystals"></div>
+      <div class="fg"><label for="f-price">Price paid</label><input type="text" id="f-price" name="price" placeholder="e.g. $25"></div>
     </div>
     <div class="form-row full">
-      <div class="fg"><label>Date acquired</label><input type="date" id="f-acquired"></div>
+      <div class="fg"><label for="f-acquired">Date acquired</label><input type="date" id="f-acquired" name="acquired"></div>
     </div>
     <div class="form-divider"></div>
     <div class="sec-label" style="margin-bottom:10px">Location & Status</div>
     <div class="form-row full">
-      <div class="fg"><label>Location</label><input type="text" id="f-loc-custom" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
+      <div class="fg"><label for="f-loc-custom">Location</label><input type="text" id="f-loc-custom" name="location" placeholder="e.g. Bedroom, office shelf, travel pouch…"></div>
     </div>
     <div class="form-divider"></div>
     <div class="sec-label" style="margin-bottom:10px">Notes & Photos</div>
     <div class="form-row full">
-      <div class="fg"><label>Personal notes</label><textarea id="f-notes" placeholder="Stories, intentions, what drew you to this piece…"></textarea></div>
+      <div class="fg"><label for="f-notes">Personal notes</label><textarea id="f-notes" name="notes" placeholder="Stories, intentions, what drew you to this piece…"></textarea></div>
     </div>
     <div class="fg" style="margin-bottom:10px">
-      <label>Photos</label>
+      <label for="f-photos">Photos</label>
       <div class="photo-upload-area" onclick="document.getElementById('f-photos').click()">
         <p>Tap to add photos</p><span>Select multiple at once</span>
-        <input type="file" id="f-photos" accept="image/*" multiple style="display:none" onchange="previewPhotos(this)">
+        <input type="file" id="f-photos" name="photos" accept="image/*" multiple style="display:none" onchange="previewPhotos(this)">
       </div>
       <div class="photo-preview-row" id="photo-preview-row"></div>
     </div>
@@ -334,8 +335,8 @@
     <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
     <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
     <div style="margin-bottom:1rem">
-      <label style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
-      <input type="email" id="auth-email-input" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+      <label for="auth-email-input" style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" name="email" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
     </div>
     <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
     <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
