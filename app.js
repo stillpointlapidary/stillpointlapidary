@@ -424,6 +424,13 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0416": ["utah-wildfire-bubble-opal-heart.webp"],
   "C-0418": ["yellow-calcite-sphere.webp"],
 };
+function jsArg(v){return JSON.stringify(String(v==null?'':v));}
+function escapeAttr(v){
+  return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function normalizeStoneName(v){
+  return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+}
 
 // ── TEN STONES WORTH KNOWING ──
 const SUPABASE_STONES = SUPABASE_ENC;

@@ -424,10 +424,6 @@ function stripInlineCardColor(html){
   return String(html||'').replace(/<div class="card-color">[\s\S]*?<\/div>/,'');
 }
 
-function jsArg(v){return JSON.stringify(String(v==null?'':v));}
-function escapeAttr(v){
-  return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
 function collectionPhotoUrl(photo){
   if(!photo)return'';
   if(typeof photo==='string')return photo;
@@ -854,10 +850,6 @@ function openDetailWhenReady(id,tries=0){
     return;
   }
   if(tries<20)setTimeout(()=>openDetailWhenReady(id,tries+1),150);
-}
-
-function normalizeStoneName(v){
-  return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }
 
 function stoneSlug(v){
