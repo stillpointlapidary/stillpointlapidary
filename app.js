@@ -854,7 +854,7 @@ function renderSotdEventAnnouncement(entry){
     const metaHtml=(locHtml||srcHtml)?`<div class="sotd-event-meta">${locHtml}${srcHtml}</div>`:'';
     return`<div class="sotd-event-announcement ${pres.categoryClass}">
       <div class="sotd-event-body">
-        <div class="sotd-event-kicker">${iconHtml}<span class="sotd-event-kicker-text">Stone Selection</span></div>
+        <div class="sotd-event-kicker">${iconHtml}<span class="sotd-event-kicker-text">Today's Selection</span></div>
         <div class="sotd-event-heading">Chosen for ${escapeAttr(eventName)}</div>
         ${noteHtml}${metaHtml}
       </div>
@@ -969,7 +969,7 @@ function renderDesktopSotdCard(s){
       </div>
       ${hasDetails||s.card_note?`
       <aside class="sotd-details" aria-label="Stone details">
-        ${hasDetails?`<h3 class="sotd-details-title">Stone Details</h3>${bestForRow}${chakraRow}${pairRow}`:''}
+        ${hasDetails?`${bestForRow}${chakraRow}${pairRow}`:''}
       </aside>`:''}
       ${s.card_note?`<div class="sotd-practice">
         <div class="sotd-practice-label">Today's Practice</div>

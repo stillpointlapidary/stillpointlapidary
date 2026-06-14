@@ -1005,12 +1005,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     grid-column:3;
     grid-row:2;
     min-width:0;
-    padding:24px 24px 22px;
+    padding:16px 24px 22px;
     background:#faf7f2;
-  }
-
-  .desktop-sotd-section .sotd-details-title{
-    margin-bottom:14px;
   }
 
   .desktop-sotd-section .sotd-detail-row{
@@ -1107,7 +1103,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-main{padding:22px 23px 20px}
   .desktop-sotd-section .sotd-title{font-size:clamp(1.9rem,2.6vw,2.6rem)}
   .desktop-sotd-section .sotd-summary{font-size:1.25rem}
-  .desktop-sotd-section .sotd-details{padding:22px 20px 20px}
+  .desktop-sotd-section .sotd-details{padding:14px 20px 20px}
   .desktop-sotd-section .sotd-detail-row{grid-template-columns:29px minmax(0,1fr);column-gap:9px;padding:9px 0}
   .desktop-sotd-section .sotd-detail-icon{width:25px;height:25px}
   .desktop-sotd-section .sotd-actions{gap:7px;margin-top:15px}
