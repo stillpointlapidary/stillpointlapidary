@@ -1,160 +1,164 @@
 # SOTD Calendar — Feature Handoff
 **Project:** Still Point Lapidary — Encyclopedia / Admin
 **Last updated:** 2026-06-14
-**Status:** Read-only calendar working; scheduling and editing features not yet built
+**Current HEAD:** a230fd4
+**Status:** Single-date scheduler complete and verified. Mobile my collection work not yet started.
 
 ---
 
-## What This Document Is For
+## What Was Completed This Session
 
-Starting point for a new session focused on refining and extending the Stone of the Day Calendar feature. The read-only calendar view is fully functional. The next phase is building the scheduling and editing workflow.
+### Calendar read-only (previously complete)
+Full month grid with history (blue) and scheduled (gold) cells, today highlight, month navigation, cache, legend. Entry point: admin-only button in the Manage popup.
 
----
+### SOTD Scheduler Modal — fully implemented and verified
 
-## What Exists Today
+Clicking any calendar date opens a dedicated modal. Mode depends on the date and entry type:
 
-### Entry point
-`encyclopedia.html` line 1872 — admin-only button in the Manage popup:
-```html
-<button ... onclick="openSotdCalendar();closePopup('manage')">📅 Stone of the Day Calendar</button>
-```
-Visible only to admin users (controlled by `isAdminUser(_currentUser)` check inside `openSotdCalendar`).
-
-### HTML overlay
-`encyclopedia.html` lines 1898–1933 — `#sotd-cal-overlay`
-
-Contains:
-- Month nav (`_sotdCalNav(-1)` / `_sotdCalNav(1)`)
-- Month title (`#sotd-cal-title`)
-- Today button (`_sotdCalGoToday`)
-- Close button (`closeSotdCalendar`)
-- Day-of-week header row
-- Grid container (`#sotd-cal-grid`) — filled by JS
-- Legend: history swatch, scheduled swatch
-
-### JS — `encyclopedia.js` lines 1041–1335
-
-| Function | Purpose |
+| Date type | Modal mode |
 |---|---|
-| `getSotdCalendarMonth(year, month)` | Async RPC call — reads `get_sotd_calendar_month` Supabase function; returns array of `SotdCalendarEntry` or null on error |
-| `openSotdCalendar(year, month)` | Admin-gated open; sets state, shows overlay, calls `_sotdCalRenderMonth` |
-| `closeSotdCalendar()` | Removes overlay classes, returns focus to manage button |
-| `_sotdCalRenderMonth(year, month)` | Async render coordinator — serves from cache or fetches; calls `_sotdCalBuildGrid` |
-| `_sotdCalBuildGrid(entries, year, month, today)` | Renders all day cells into `#sotd-cal-grid` |
-| `_sotdCalRetry()` | Clears cache for current month and re-renders |
-| `_sotdCalNav(dir)` | Advances month by +1 or -1 |
-| `_sotdCalGoToday()` | Jumps to current Chicago month |
-| `_sotdCalOpenStone(stoneId, dateStr, year, month)` | Opens encyclopedia detail drawer for a calendar date; sets `detailReturnContext` so back-navigation returns to the calendar at the same month |
-| `_sotdCalStoneName(stoneId)` | Looks up stone name from global `CRYSTALS` array |
-| `_sotdCalMonthLabel(month)` | Returns full month name string |
-| `_sotdCalChicagoToday()` | Returns today's date string in `YYYY-MM-DD` format, Chicago timezone |
+| Empty future date | Editable form — assign stone + optional editorial fields |
+| Existing scheduled (`source='schedule'`) | Editable form pre-filled + Remove Schedule |
+| History date (`source='history'`) | Read-only detail view + View stone button |
+| Any other populated future | Read-only detail view |
 
-### State variables
-```js
-let _sotdCalYear  = null;      // currently displayed year
-let _sotdCalMonth = null;      // currently displayed month (1-indexed)
-const _sotdCalCache     = new Map(); // 'YYYY-MM' → entries[] | null
-const _sotdCalEntryStore = new Map(); // 'YYYY-MM-DD' → entry (for passing to drawer)
-```
+**Form fields (editable mode):**
+- Stone (combobox with alias search)
+- Stone preview: photo thumbnail or color dot (mapped `crystal.ch`)
+- Optional editorial details: Event name, Event category, Event location, Editorial note
 
-### SotdCalendarEntry shape
-```js
-{
-  date:          'YYYY-MM-DD',
-  stoneId:       string,
-  source:        'history' | 'schedule',
-  selectionType: string | null,
-  eventName:     string | null,
-  eventCategory: string | null,
-  eventPriority: number | null,
-  eventLocation: string | null,
-  editorialNote: string | null,
-  sourceUrl:     string | null,
-  isToday:       boolean,
-  isPast:        boolean,
-  isFuture:      boolean,
-}
-```
+**Event category dropdown — approved labels (10 options):**
+Moon & Lunar Phases, Eclipses, Meteor Showers, Planetary & Orbital Events, Seasons & Solar Turning Points, Holidays & Traditions, Geology & Earth History, Location Spotlight, Still Point Milestone, Other Editorial
 
-### Cell rendering rules (current)
-- **Empty date** → grey non-interactive cell with day number
-- **History entry** (`source === 'history'`) → interactive button, blue-toned swatch
-- **Scheduled entry** (`source === 'schedule'`, non-editorial) → interactive button, purple/scheduled dot
-- **Editorial entry** (`_isSotdEditorial(entry)` true) → interactive button, event icon from `getSotdEventPresentation(eventCategory)`, colored by event family
+**Save behavior:**
+- INSERT uses `selection_type: 'fixed'`, `is_active: true`, `feature_date`
+- UPDATE patches the same fields on the existing row
+- Both wait for Supabase confirmation before refreshing
+- Cache for the affected month is cleared; grid re-renders
+- Plain dates (no event fields) save correctly with no editorial banner
+- `_isSotdEditorial` requires non-empty `eventName` — `fixed` + no name = ordinary cell
 
-### Dependencies from app.js (always available since app.js loads first)
-- `isAdminUser(_currentUser)` — admin gate
-- `CRYSTALS` — stone name lookup
-- `_isSotdEditorial(entry)` — editorial flag logic
-- `getSotdEventPresentation(eventCategory)` — returns `{ icon, family }` for event styling
-- `setSotdContext('calendar', entry)` — sets SOTD drawer context
-- `detailReturnContext` — global for drawer back-nav
-- `openDetail(stoneId)` — opens encyclopedia detail drawer
+**Remove Schedule:**
+- Clicking reveals inline confirmation row (scrolls into view smoothly)
+- `Keep it` hides the row again
+- `Yes, remove` DELETEs the row, clears cache, re-renders
+
+**Keyboard / focus:**
+- Escape closes the stone combobox only; does NOT close the scheduler modal
+- Calendar's own Escape listener defers when the scheduler is open
+- Close button (✕) and Cancel button dismiss the scheduler
+
+**Calendar cell visuals:**
+- Every populated cell shows a small photo thumbnail (bottom-left, 20×20) or color dot
+- Empty future cells show a `+` indicator and are interactive buttons
 
 ---
 
-## Supabase Layer
+## Supabase State
 
-### RPC used by the calendar
-`get_sotd_calendar_month(p_year, p_month)` — reads both `stone_of_day_history` and `stone_of_day_schedule`, merges them, returns sorted rows.
+### Schema confirmed
+```
+stone_of_day_schedule:
+  id            uuid PK
+  stone_id      text (references stones.id)
+  feature_date  date UNIQUE NOT NULL
+  is_active     boolean default true
+  created_at    timestamptz
+  selection_type text
+  event_name    text
+  event_category text
+  event_priority integer
+  event_location text
+  editorial_note text
+  source_url    text
+```
 
-### Tables relevant to SOTD scheduling
-| Table | Purpose |
-|---|---|
-| `stone_of_day_history` | Resolved past/present dates — source of truth for what actually ran |
-| `stone_of_day_schedule` | Future (and editorial) scheduled dates — admin edits go here |
-| `stone_of_day_context` | Editorial context for scheduled entries (event metadata) |
+All event fields (`event_priority`, `event_location`, `editorial_note`, `source_url`) are physical columns on `stone_of_day_schedule`. No separate `stone_of_day_context` table is used by any JS.
 
-### Current write path
-None in the calendar yet. The existing `renderSotd` flow in app.js writes to `stone_of_day_history` when it resolves a date. The calendar is read-only.
+### RLS — action required before first write
+RLS is enabled on `stone_of_day_schedule` but no admin write policies exist yet. Christie must add:
+
+```sql
+create policy "Admins can manage schedule"
+  on public.stone_of_day_schedule
+  for all
+  using (
+    auth.jwt() ->> 'email' in (
+      'kikiholz31@duck.com',
+      'christieholzwarth@gmail.com',
+      'dustin@stillpointdfw.com'
+    )
+  )
+  with check (
+    auth.jwt() ->> 'email' in (
+      'kikiholz31@duck.com',
+      'christieholzwarth@gmail.com',
+      'dustin@stillpointdfw.com'
+    )
+  );
+```
+
+### selection_type values
+- `fixed` — all 182 existing schedule rows; used for new scheduler inserts
+- `random` / `emergency` — written by the server-side resolver to history
+- `_isSotdEditorial` excludes `random` and `emergency`; accepts anything else with a non-empty `eventName`
+
+---
+
+## Mobile Magic-Link Fix (also complete)
+
+**File:** `auth.js` — `submitMagicLink`
+**Change:** `emailRedirectTo: window.location.href` → `window.location.origin + window.location.pathname`
+
+**Christie must also verify** in Supabase Auth → URL Configuration that both origins are whitelisted:
+- `https://stillpointlapidary.com`
+- `https://www.stillpointlapidary.com`
 
 ---
 
 ## What Is Not Built Yet
 
-### 1. Schedule a stone on a future date
-Clicking an empty future date should allow an admin to assign a stone. Currently empty cells are non-interactive divs.
+### Mobile My Collection (full spec in previous session transcript)
+Implement in this order:
 
-### 2. Edit an existing scheduled entry
-Clicking a `source === 'schedule'` cell should let an admin change the stone or add/edit event metadata.
+1. **Count spacing and wording** — `24 pieces in your collection` / `7 stones on your wishlist`
+2. **Collapsed tier summary** — slim segmented color bar preserving tier colors
+3. **Expanded tier rows** — tier name, count, percentage, color, proportional bar; handle zero collection
+4. **Report/export placement** — move to bottom section under "Reports & export" heading, not sticky
+5. **Report field audit + selection UI** — audit which fields exist on stone object vs. collection entry vs. current report generator before adding anything
+6. **Wishlist notes** — audit `wishlist_items` for a `notes` field; wire through if present, provide SQL if not
 
-### 3. Unschedule / clear a future date
-Remove a scheduled entry from `stone_of_day_schedule`.
+### Phoenix Stone alias
+Deferred. `comboRender` already searches `c.a` (alternate_names). If Phoenix Stone doesn't appear, it is a data issue — add "Phoenix Stone" to that stone's `alternate_names` in Supabase. No code change needed.
 
-### 4. Schedule an editorial / event entry
-Assign a stone to a date with event metadata (`eventName`, `eventCategory`, `eventLocation`, etc.). Currently the editorial display logic exists (`_isSotdEditorial`, `getSotdEventPresentation`) but there is no UI to create editorial entries.
-
-### 5. Cache invalidation after writes
-After any write, the relevant month's cache entry (`_sotdCalCache`) must be cleared and the grid re-rendered.
-
----
-
-## Design Decisions Still Open
-
-- **Inline editing vs. modal:** Should clicking a cell open an inline edit form inside the calendar, or a separate modal/overlay?
-- **Stone picker:** The combobox pattern (`comboRender`, `comboFilter`, `comboSelect`) from app.js is the established pattern — reuse it rather than building a new one.
-- **Optimistic vs. confirmed updates:** Re-render after confirmed Supabase write or optimistically?
-- **History dates:** Past `source === 'history'` entries probably should not be editable from the calendar (they are the resolved truth). Needs Christie's decision.
-- **Event metadata form:** How much of the `stone_of_day_context` / editorial fields should be editable from the calendar UI?
+### Next calendar phase (not designed yet)
+Bulk scheduling, sequence generation, reroll, lock/unlock, approve generated dates — not started. Design after single-date scheduler is verified in production.
 
 ---
 
-## Refactor Rules (carry forward from JS refactor phase)
+## Key File Reference
 
-- Do **not** convert to ES modules
-- Do **not** alter the Supabase schema without explicit approval
-- Do **not** add calendar write functions to app.js — they belong in encyclopedia.js
-- Do **not** push without Christie's explicit approval
-- Any new functions follow the `_sotdCal*` naming prefix
+| File | What's there |
+|---|---|
+| `encyclopedia.js` lines 1124–1147 | `_sotdCalCellThumbHTML`, `_sotdCalStoneName`, `_sotdCalMonthLabel` |
+| `encyclopedia.js` lines 1149–1350 | All calendar UI: open/close, render, build grid, nav, today, openDay |
+| `encyclopedia.js` lines 1351–1750 | Full scheduler: state, open, close, form HTML, history view, save, delete, Escape |
+| `encyclopedia.html` lines ~1898–1935 | Calendar overlay HTML |
+| `encyclopedia.html` lines ~1936–1948 | Scheduler modal shell |
+| `styles.css` lines ~2273–2540 | All calendar + scheduler CSS |
+| `app.js` line 2035 | `ADMIN_EMAILS` array |
+| `app.js` lines 1283–1314 | `SOTD_EVENT_PRESENTATION`, `getSotdEventPresentation`, `_isSotdEditorial` |
+| `auth.js` line 235 | `submitMagicLink` — magic link redirect fix |
+| `supabase/stone_of_day_schedule.sql` | Table schema + public read policy |
+| `supabase/get_sotd_calendar_month.sql` | RPC that powers the calendar read |
 
 ---
 
-## File Reference
-
-| File | Relevant lines | What's there |
-|---|---|---|
-| `encyclopedia.js` | 1041–1335 | All calendar JS |
-| `encyclopedia.html` | 1872 | Admin trigger button |
-| `encyclopedia.html` | 1898–1933 | Calendar overlay HTML + legend |
-| `app.js` | ~1097–1845 | SOTD rendering, `_isSotdEditorial`, `getSotdEventPresentation`, `setSotdContext` |
-| `HANDOFF.md` | — | Full JS refactor context; do not modify during calendar work |
+## Scope Rules (carry forward)
+- Calendar-specific JS stays in `encyclopedia.js`
+- Shared SOTD presentation (`_isSotdEditorial`, `getSotdEventPresentation`, `setSotdContext`) stays in `app.js`
+- Do not create `core.js`
+- Do not convert to ES modules
+- Do not alter `stone_of_day_schedule` schema without explicit approval
+- Do not push without Christie's explicit approval
+- Christie handles all Supabase queries, browser testing, screenshots, console review, commit, and push

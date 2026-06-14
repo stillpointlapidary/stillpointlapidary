@@ -1360,16 +1360,32 @@ document.addEventListener('keydown', function(e) {
 });
 // ── SOTD SCHEDULER MODAL ─────────────────────────────────────────────────────
 
-let _sotdSchedDate  = null;  // 'YYYY-MM-DD' of the date currently open in the scheduler
-let _sotdSchedYear  = null;  // calendar year to return to on close
-let _sotdSchedMonth = null;  // calendar month to return to on close
+let _sotdSchedDate   = null;   // 'YYYY-MM-DD' of the date currently open in the scheduler
+let _sotdSchedYear   = null;   // calendar year to return to on close
+let _sotdSchedMonth  = null;   // calendar month to return to on close
+
+// Selection source for the current scheduler form.
+// null = nothing selected yet; 'fixed' = manual combobox pick; 'random' = randomizer pick.
+// Controls selection_type on save and editorial-field visibility.
+let _sotdSchedSelectionSource = null;
+let _sotdSchedRerollNonce     = 0;    // increments on each random reroll for this date
+
+// ── SOTD BULK PREVIEW STATE ───────────────────────────────────────────────────
+let _sotdPreviewRows         = [];          // [{feature_date,stone_id,tier,primary_chakra,has_photo,row_status}]
+let _sotdPreviewLocks        = new Map();   // Map<dateStr, stoneId>
+let _sotdPreviewNonces       = new Map();   // Map<dateStr, integer> — per-date reroll counters
+let _sotdPreviewGlobalNonce  = 0;           // incremented on whole-preview regeneration
+let _sotdPreviewRange        = null;        // {start:'YYYY-MM-DD', end:'YYYY-MM-DD'}
+let _sotdPreviewIncludeNoPhoto = false;
 
 // Unified entry point for every calendar cell click.
 // Determines modal mode from the entry (or absence of one) and opens the scheduler.
 function _sotdCalOpenDay(dateStr, year, month) {
-  _sotdSchedDate  = dateStr;
-  _sotdSchedYear  = year;
-  _sotdSchedMonth = month;
+  _sotdSchedDate            = dateStr;
+  _sotdSchedYear            = year;
+  _sotdSchedMonth           = month;
+  _sotdSchedSelectionSource = null;
+  _sotdSchedRerollNonce     = 0;
 
   const entry = _sotdCalEntryStore.get(dateStr) || null;
 
@@ -1426,8 +1442,24 @@ function closeSotdScheduler() {
 // Returns the HTML string for the editable schedule form.
 // entry is null for new, or an existing SotdCalendarEntry for edits.
 function _sotdSchedFormHTML(entry) {
-  const isEdit = !!(entry && entry.source === 'schedule');
+  const isEdit   = !!(entry && entry.source === 'schedule');
   const stoneName = entry ? _sotdCalStoneName(entry.stoneId) : '';
+
+  // For an existing 'random' row: start in random mode (editorial hidden).
+  // For an existing 'fixed' row or a new date: start with source null (editorial hidden
+  // until a stone is selected; for 'fixed' edits we restore source below).
+  const isExistingRandom  = isEdit && entry.selectionType === 'random';
+  const isExistingFixed   = isEdit && entry.selectionType !== 'random';
+  // Pre-set module state to match the entry being opened
+  if (isExistingRandom) {
+    _sotdSchedSelectionSource = 'random';
+  } else if (isExistingFixed && entry.stoneId) {
+    _sotdSchedSelectionSource = 'fixed';
+  } else {
+    _sotdSchedSelectionSource = null;
+  }
+
+  const editorialHidden = (_sotdSchedSelectionSource !== 'fixed');
 
   const _SCHED_CATEGORIES = [
     'Moon & Lunar Phases',
@@ -1447,6 +1479,7 @@ function _sotdSchedFormHTML(entry) {
 
   return `
     <form class="sotd-sched-form" id="sotd-sched-form" onsubmit="return false">
+
       <div class="sotd-sched-field">
         <label class="sotd-sched-label" for="sotd-sched-stone-input">Stone</label>
         <div class="combobox-wrap" id="sotd-sched-stone-wrap">
@@ -1460,29 +1493,42 @@ function _sotdSchedFormHTML(entry) {
         <div id="sotd-sched-thumb" class="sotd-sched-thumb"></div>
       </div>
 
-      <div class="sotd-sched-divider">Optional editorial details</div>
-
-      <div class="sotd-sched-field">
-        <label class="sotd-sched-label" for="sotd-sched-event-name">Event name</label>
-        <input type="text" id="sotd-sched-event-name" class="sotd-sched-input"
-          placeholder="e.g. Winter Solstice" value="${(entry && entry.eventName || '').replace(/"/g,'&quot;')}">
+      <div class="sotd-sched-random-bar" id="sotd-sched-random-bar">
+        <button type="button" id="sotd-sched-random-btn" class="sotd-sched-btn sotd-sched-btn--ghost sotd-sched-btn--random"
+          onclick="_sotdSchedPickRandom()">
+          ${isExistingRandom ? 'Roll again' : 'Choose random stone'}
+        </button>
+        <label class="sotd-sched-no-photo-label">
+          <input type="checkbox" id="sotd-sched-no-photo">
+          Include stones without photos
+        </label>
       </div>
 
-      <div class="sotd-sched-field">
-        <label class="sotd-sched-label" for="sotd-sched-event-cat">Category</label>
-        <select id="sotd-sched-event-cat" class="sotd-sched-select">${catOptions}</select>
-      </div>
+      <div id="sotd-sched-editorial-section"${editorialHidden ? ' hidden' : ''}>
+        <div class="sotd-sched-divider">Optional editorial details</div>
 
-      <div class="sotd-sched-field">
-        <label class="sotd-sched-label" for="sotd-sched-event-loc">Location</label>
-        <input type="text" id="sotd-sched-event-loc" class="sotd-sched-input"
-          placeholder="e.g. Northern hemisphere" value="${(entry && entry.eventLocation || '').replace(/"/g,'&quot;')}">
-      </div>
+        <div class="sotd-sched-field">
+          <label class="sotd-sched-label" for="sotd-sched-event-name">Event name</label>
+          <input type="text" id="sotd-sched-event-name" class="sotd-sched-input"
+            placeholder="e.g. Winter Solstice" value="${(entry && entry.eventName || '').replace(/"/g,'&quot;')}">
+        </div>
 
-      <div class="sotd-sched-field">
-        <label class="sotd-sched-label" for="sotd-sched-editorial-note">Editorial note</label>
-        <textarea id="sotd-sched-editorial-note" class="sotd-sched-textarea"
-          placeholder="Internal note for this date…" rows="3">${entry && entry.editorialNote || ''}</textarea>
+        <div class="sotd-sched-field">
+          <label class="sotd-sched-label" for="sotd-sched-event-cat">Category</label>
+          <select id="sotd-sched-event-cat" class="sotd-sched-select">${catOptions}</select>
+        </div>
+
+        <div class="sotd-sched-field">
+          <label class="sotd-sched-label" for="sotd-sched-event-loc">Location</label>
+          <input type="text" id="sotd-sched-event-loc" class="sotd-sched-input"
+            placeholder="e.g. Northern hemisphere" value="${(entry && entry.eventLocation || '').replace(/"/g,'&quot;')}">
+        </div>
+
+        <div class="sotd-sched-field">
+          <label class="sotd-sched-label" for="sotd-sched-editorial-note">Editorial note</label>
+          <textarea id="sotd-sched-editorial-note" class="sotd-sched-textarea"
+            placeholder="Internal note for this date…" rows="3">${entry && entry.editorialNote || ''}</textarea>
+        </div>
       </div>
 
       <div id="sotd-sched-error" class="sotd-sched-error" hidden></div>
@@ -1506,6 +1552,16 @@ function _sotdSchedFormHTML(entry) {
   `;
 }
 
+// Show or hide the editorial fields section and update the random button label.
+function _sotdSchedShowEditorial(show) {
+  const section = document.getElementById('sotd-sched-editorial-section');
+  if (section) section.hidden = !show;
+  const btn = document.getElementById('sotd-sched-random-btn');
+  if (btn) {
+    btn.textContent = (_sotdSchedSelectionSource === 'random') ? 'Roll again' : 'Choose random stone';
+  }
+}
+
 // Pre-fill the stone combobox after the form has been injected into the DOM.
 // Also shows the thumbnail for the currently selected stone and starts watching for changes.
 function _sotdSchedInitCombo(entry) {
@@ -1519,15 +1575,90 @@ function _sotdSchedInitCombo(entry) {
 }
 
 // MutationObserver: when the stone combobox dropdown closes, refresh the thumbnail.
+// If the dropdown was open and a stone was selected, that constitutes a manual pick
+// → source becomes 'fixed' and editorial fields are shown.
 function _sotdSchedWatchCombo() {
   const drop = document.getElementById('sotd-sched-stone-drop');
   if (!drop) return;
+  let wasOpen = false;
   const observer = new MutationObserver(function() {
-    if (!drop.classList.contains('open')) {
+    const isOpen = drop.classList.contains('open');
+    if (wasOpen && !isOpen) {
+      // Dropdown just closed
+      const val = (document.getElementById('sotd-sched-stone-val')?.value || '').trim();
+      if (val) {
+        // A stone was selected via manual combobox pick
+        _sotdSchedSelectionSource = 'fixed';
+        _sotdSchedShowEditorial(true);
+      } else {
+        // Combobox cleared or dismissed without selection
+        _sotdSchedSelectionSource = null;
+        _sotdSchedShowEditorial(false);
+      }
       _sotdCalUpdateStoneThumb();
     }
+    wasOpen = isOpen;
   });
   observer.observe(drop, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Calls generate_sotd_preview for a single date and returns the first row, or null on error.
+async function _sotdCallGeneratePreview(dateStr, nonce, excludeStoneId, includeNoPhoto) {
+  if (typeof _supa === 'undefined') return null;
+  const photoIds = includeNoPhoto ? null : Object.keys(ENCYCLOPEDIA_PHOTOS);
+  const { data, error } = await _supa.rpc('generate_sotd_preview', {
+    p_start:             dateStr,
+    p_end:               dateStr,
+    p_include_no_photo:  includeNoPhoto,
+    p_photo_stone_ids:   photoIds,
+    p_locked_rows:       [],
+    p_context_rows:      [],
+    p_exclude_stone_id:  excludeStoneId || null,
+    p_nonce:             nonce,
+  });
+  if (error) {
+    console.error('[SOTD Random] generate_sotd_preview failed:', error);
+    return null;
+  }
+  return (data && data.length) ? data[0] : null;
+}
+
+// Random pick for the single-date scheduler.
+// Calls the shared preview RPC, updates the form stone field, and hides editorial fields.
+async function _sotdSchedPickRandom() {
+  const dateStr   = _sotdSchedDate;
+  const btn       = document.getElementById('sotd-sched-random-btn');
+  const errEl     = document.getElementById('sotd-sched-error');
+  if (!dateStr) return;
+
+  const includeNoPhoto = !!(document.getElementById('sotd-sched-no-photo')?.checked);
+  const currentStoneId = (document.getElementById('sotd-sched-stone-val')?.value || '').trim() || null;
+
+  if (errEl) { errEl.hidden = true; errEl.textContent = ''; }
+  if (btn) { btn.disabled = true; btn.textContent = 'Picking…'; }
+
+  _sotdSchedRerollNonce++;
+  const row = await _sotdCallGeneratePreview(
+    dateStr, _sotdSchedRerollNonce, currentStoneId, includeNoPhoto
+  );
+
+  if (!row || !row.stone_id) {
+    if (errEl) { errEl.textContent = 'Could not find a suitable stone. Try again or search manually.'; errEl.hidden = false; }
+    if (btn) { btn.disabled = false; btn.textContent = _sotdSchedSelectionSource === 'random' ? 'Roll again' : 'Choose random stone'; }
+    return;
+  }
+
+  // Apply selection to the form
+  const valEl   = document.getElementById('sotd-sched-stone-val');
+  const inputEl = document.getElementById('sotd-sched-stone-input');
+  if (valEl)   valEl.value   = row.stone_id;
+  if (inputEl) inputEl.value = _sotdCalStoneName(row.stone_id);
+
+  _sotdSchedSelectionSource = 'random';
+  _sotdCalUpdateStoneThumb();
+  _sotdSchedShowEditorial(false);
+
+  if (btn) { btn.disabled = false; btn.textContent = 'Roll again'; }
 }
 
 // Reads the current stone selection and updates the thumbnail zone.
@@ -1639,12 +1770,18 @@ async function _sotdCalSaveSchedule() {
 
   if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving…'; }
 
+  // Determine selection_type from the source that produced the current stone.
+  // Random picks must not carry editorial metadata regardless of field content.
+  const isRandom = (_sotdSchedSelectionSource === 'random');
+  const selType  = isRandom ? 'random' : 'fixed';
+
   const payload = {
     stone_id:       stoneId,
-    event_name:     eventName || null,
-    event_category: eventCat  || null,
-    event_location: eventLoc  || null,
-    editorial_note: editNote  || null,
+    selection_type: selType,
+    event_name:     isRandom ? null : (eventName || null),
+    event_category: isRandom ? null : (eventCat  || null),
+    event_location: isRandom ? null : (eventLoc  || null),
+    editorial_note: isRandom ? null : (editNote  || null),
   };
 
   let error;
@@ -1659,9 +1796,8 @@ async function _sotdCalSaveSchedule() {
       .from('stone_of_day_schedule')
       .insert({
         ...payload,
-        feature_date:   _sotdSchedDate,
-        is_active:      true,
-        selection_type: 'fixed',
+        feature_date: _sotdSchedDate,
+        is_active:    true,
       }));
   }
 
@@ -1748,5 +1884,420 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ── end SOTD Scheduler ────────────────────────────────────────────────────────
+
+// ── SOTD BULK SCHEDULE PREVIEW ────────────────────────────────────────────────
+
+// ── Date math helpers ─────────────────────────────────────────────────────────
+// Pure string operations on 'YYYY-MM-DD' to avoid DST/timezone pitfalls.
+
+function _sotdDatePlusDays(dateStr, n) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(y, m - 1, d + n);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+
+// Returns the last day of a month as a number.
+function _sotdMonthLastDay(year, month) {
+  return new Date(year, month, 0).getDate();
+}
+
+// Adds n calendar months to a date string, clamps to month end, then applies dayOffset.
+function _sotdDatePlusMonths(dateStr, n, dayOffset) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  let ry = y + Math.floor((m - 1 + n) / 12);
+  let rm = ((m - 1 + n) % 12) + 1;
+  let rd = Math.min(d, _sotdMonthLastDay(ry, rm));
+  if (dayOffset) {
+    const dt = new Date(ry, rm - 1, rd + dayOffset);
+    ry = dt.getFullYear(); rm = dt.getMonth() + 1; rd = dt.getDate();
+  }
+  return `${ry}-${String(rm).padStart(2,'0')}-${String(rd).padStart(2,'0')}`;
+}
+
+// Format 'YYYY-MM-DD' → 'June 15, 2026'
+function _sotdFormatDate(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return `${_sotdCalMonthLabel(m)} ${d}, ${y}`;
+}
+
+// ── Options panel ─────────────────────────────────────────────────────────────
+
+function _sotdBulkShowOptions() {
+  const panel = document.getElementById('sotd-gen-options');
+  const btn   = document.getElementById('sotd-cal-generate-btn');
+  if (!panel) return;
+  panel.hidden = false;
+  if (btn) btn.hidden = true;
+  // Reset option state
+  const radios = panel.querySelectorAll('input[name="sotd-gen-range"]');
+  if (radios.length) radios[0].checked = true;
+  const noPhoto = document.getElementById('sotd-gen-no-photo');
+  if (noPhoto) noPhoto.checked = false;
+  // Focus first radio
+  setTimeout(() => radios[0]?.focus(), 40);
+}
+
+function _sotdBulkCancelOptions() {
+  const panel = document.getElementById('sotd-gen-options');
+  const btn   = document.getElementById('sotd-cal-generate-btn');
+  if (panel) panel.hidden = true;
+  if (btn)   btn.hidden   = false;
+}
+
+// ── Generate preview ──────────────────────────────────────────────────────────
+
+async function _sotdBulkGenerate() {
+  const genBtn    = document.getElementById('sotd-gen-preview-btn');
+  const rangeEl   = document.querySelector('input[name="sotd-gen-range"]:checked');
+  const noPhotoEl = document.getElementById('sotd-gen-no-photo');
+  if (!rangeEl) return;
+
+  const range          = rangeEl.value;
+  const includeNoPhoto = !!(noPhotoEl?.checked);
+  const today          = _sotdCalChicagoToday();
+  const start          = _sotdDatePlusDays(today, 1);
+  let   end;
+  if      (range === 'week')    end = _sotdDatePlusDays(start, 6);
+  else if (range === 'month')   end = _sotdDatePlusMonths(start, 1, -1);
+  else                          end = _sotdDatePlusMonths(start, 3, -1);
+
+  if (genBtn) { genBtn.disabled = true; genBtn.textContent = 'Generating…'; }
+
+  const photoIds = includeNoPhoto ? null : Object.keys(ENCYCLOPEDIA_PHOTOS);
+  const { data, error } = await _supa.rpc('generate_sotd_preview', {
+    p_start:             start,
+    p_end:               end,
+    p_include_no_photo:  includeNoPhoto,
+    p_photo_stone_ids:   photoIds,
+    p_locked_rows:       [],
+    p_context_rows:      [],
+    p_exclude_stone_id:  null,
+    p_nonce:             0,
+  });
+
+  if (genBtn) { genBtn.disabled = false; genBtn.textContent = 'Generate preview'; }
+
+  if (error || !data) {
+    console.error('[SOTD Bulk] generate_sotd_preview failed:', error);
+    alert('Preview generation failed. See console for details.');
+    return;
+  }
+
+  // Store state
+  _sotdPreviewRows         = data;
+  _sotdPreviewLocks        = new Map();
+  _sotdPreviewNonces       = new Map();
+  _sotdPreviewGlobalNonce  = 0;
+  _sotdPreviewRange        = { start, end };
+  _sotdPreviewIncludeNoPhoto = includeNoPhoto;
+
+  // Close options panel, show preview
+  _sotdBulkCancelOptions();
+  _sotdBulkPreviewOpen();
+}
+
+// ── Preview overlay ───────────────────────────────────────────────────────────
+
+function _sotdBulkPreviewOpen() {
+  const preview = document.getElementById('sotd-bulk-preview');
+  const calMain = document.getElementById('sotd-cal-main');
+  const legend  = document.querySelector('.sotd-cal-legend');
+  if (!preview) return;
+  if (calMain) calMain.hidden = true;
+  if (legend)  legend.hidden  = true;
+  preview.hidden = false;
+  _sotdBulkPreviewRender();
+  setTimeout(() => document.getElementById('sotd-bulk-approve-btn')?.focus(), 60);
+}
+
+function _sotdBulkPreviewClose() {
+  const preview = document.getElementById('sotd-bulk-preview');
+  const calMain = document.getElementById('sotd-cal-main');
+  const legend  = document.querySelector('.sotd-cal-legend');
+  if (preview)  preview.hidden = true;
+  if (calMain)  calMain.hidden = false;
+  if (legend)   legend.hidden  = false;
+}
+
+function _sotdBulkCancel() {
+  _sotdPreviewRows        = [];
+  _sotdPreviewLocks       = new Map();
+  _sotdPreviewNonces      = new Map();
+  _sotdPreviewGlobalNonce = 0;
+  _sotdPreviewRange       = null;
+  _sotdBulkPreviewClose();
+  // Re-show the generate button
+  const btn = document.getElementById('sotd-cal-generate-btn');
+  if (btn) btn.hidden = false;
+}
+
+function _sotdBulkPreviewRender() {
+  const body = document.getElementById('sotd-bulk-preview-body');
+  if (!body) return;
+
+  const titleEl = document.getElementById('sotd-bulk-preview-title');
+  if (titleEl && _sotdPreviewRange) {
+    titleEl.textContent =
+      `Preview: ${_sotdFormatDate(_sotdPreviewRange.start)} — ${_sotdFormatDate(_sotdPreviewRange.end)}`;
+  }
+
+  // Count generated rows
+  const genCount = _sotdPreviewRows.filter(r => r.row_status === 'generated').length;
+  const metaEl = document.getElementById('sotd-bulk-preview-meta');
+  if (metaEl) {
+    metaEl.textContent = `${genCount} date${genCount !== 1 ? 's' : ''} to be added`;
+  }
+
+  // Group rows by month
+  const months = new Map();
+  for (const row of _sotdPreviewRows) {
+    const [y, m] = row.feature_date.split('-').map(Number);
+    const key = `${y}-${String(m).padStart(2,'0')}`;
+    if (!months.has(key)) months.set(key, []);
+    months.get(key).push(row);
+  }
+
+  const sections = [];
+  for (const [key, rows] of months) {
+    const [y, m] = key.split('-').map(Number);
+    const monthLabel = `${_sotdCalMonthLabel(m)} ${y}`;
+    const rowsHtml = rows.map(row => _sotdBulkRowHTML(row)).join('');
+    sections.push(`
+      <div class="sotd-bulk-month">
+        <div class="sotd-bulk-month-label">${monthLabel}</div>
+        <div class="sotd-bulk-rows">${rowsHtml}</div>
+      </div>
+    `);
+  }
+
+  body.innerHTML = sections.join('') || '<p class="sotd-bulk-empty">No dates in this range.</p>';
+}
+
+function _sotdBulkRowHTML(row) {
+  const isGenerated = row.row_status === 'generated';
+  const isLocked    = isGenerated && _sotdPreviewLocks.has(row.feature_date);
+  const stoneName   = _sotdCalStoneName(row.stone_id);
+  const thumbHtml   = _sotdCalCellThumbHTML(row.stone_id);
+
+  const statusLabel = {
+    'generated':          isLocked ? 'Locked' : 'Generated',
+    'existing_history':   'Resolved',
+    'existing_schedule':  'Scheduled',
+    'existing_editorial': 'Editorial',
+  }[row.row_status] || row.row_status;
+
+  const statusClass = {
+    'generated':          isLocked ? 'sotd-bulk-badge--locked' : 'sotd-bulk-badge--generated',
+    'existing_history':   'sotd-bulk-badge--history',
+    'existing_schedule':  'sotd-bulk-badge--schedule',
+    'existing_editorial': 'sotd-bulk-badge--editorial',
+  }[row.row_status] || '';
+
+  const [, , d] = row.feature_date.split('-').map(Number);
+  const dateLabel = `${d}`;
+
+  let actions = '';
+  if (isGenerated) {
+    const lockLabel = isLocked ? 'Unlock' : 'Lock';
+    const lockClass = isLocked ? 'sotd-bulk-action--locked' : '';
+    actions = `
+      <div class="sotd-bulk-actions">
+        ${!isLocked ? `<button type="button" class="sotd-bulk-action sotd-bulk-action--reroll"
+          onclick="_sotdBulkReroll('${row.feature_date}')" aria-label="Reroll ${row.feature_date}">
+          Reroll
+        </button>` : ''}
+        <button type="button" class="sotd-bulk-action sotd-bulk-action--lock ${lockClass}"
+          onclick="_sotdBulkToggleLock('${row.feature_date}')" aria-label="${lockLabel} ${row.feature_date}">
+          ${lockLabel}
+        </button>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="sotd-bulk-row${isLocked ? ' sotd-bulk-row--locked' : ''}${!isGenerated ? ' sotd-bulk-row--existing' : ''}"
+         id="sotd-bulk-row-${row.feature_date}">
+      <div class="sotd-bulk-row-date">${dateLabel}</div>
+      <div class="sotd-bulk-row-thumb">${thumbHtml}</div>
+      <div class="sotd-bulk-row-info">
+        <span class="sotd-bulk-row-name">${stoneName || row.stone_id}</span>
+        <span class="sotd-bulk-row-meta">
+          ${row.tier ? `T${row.tier}` : ''}
+          ${row.primary_chakra ? ` · ${row.primary_chakra}` : ''}
+        </span>
+      </div>
+      <div class="sotd-bulk-row-status">
+        <span class="sotd-bulk-badge ${statusClass}">${statusLabel}</span>
+        ${!row.has_photo && isGenerated ? '<span class="sotd-bulk-badge sotd-bulk-badge--nophoto">No photo</span>' : ''}
+      </div>
+      ${actions}
+    </div>
+  `;
+}
+
+// ── Reroll one date ───────────────────────────────────────────────────────────
+
+async function _sotdBulkReroll(dateStr) {
+  const rowEl = document.getElementById(`sotd-bulk-row-${dateStr}`);
+  if (rowEl) rowEl.classList.add('sotd-bulk-row--loading');
+
+  const currentRow    = _sotdPreviewRows.find(r => r.feature_date === dateStr);
+  const currentStone  = currentRow?.stone_id || null;
+  const nonce         = (_sotdPreviewNonces.get(dateStr) || 0) + 1;
+  _sotdPreviewNonces.set(dateStr, nonce);
+
+  // Context: all other current preview rows (locked + unlocked generated)
+  const contextRows = _sotdPreviewRows
+    .filter(r => r.feature_date !== dateStr && r.row_status === 'generated')
+    .map(r => ({ date: r.feature_date, stone_id: r.stone_id }));
+
+  const photoIds = _sotdPreviewIncludeNoPhoto ? null : Object.keys(ENCYCLOPEDIA_PHOTOS);
+  const { data, error } = await _supa.rpc('generate_sotd_preview', {
+    p_start:             dateStr,
+    p_end:               dateStr,
+    p_include_no_photo:  _sotdPreviewIncludeNoPhoto,
+    p_photo_stone_ids:   photoIds,
+    p_locked_rows:       [],
+    p_context_rows:      contextRows,
+    p_exclude_stone_id:  currentStone,
+    p_nonce:             nonce,
+  });
+
+  if (rowEl) rowEl.classList.remove('sotd-bulk-row--loading');
+
+  if (error || !data || !data.length) {
+    console.error('[SOTD Bulk] Reroll failed:', error);
+    return;
+  }
+
+  // Replace row in state
+  const idx = _sotdPreviewRows.findIndex(r => r.feature_date === dateStr);
+  if (idx !== -1) _sotdPreviewRows[idx] = data[0];
+
+  // Re-render just the changed row
+  if (rowEl) rowEl.outerHTML = _sotdBulkRowHTML(data[0]);
+}
+
+// ── Lock / unlock ─────────────────────────────────────────────────────────────
+
+function _sotdBulkToggleLock(dateStr) {
+  const row = _sotdPreviewRows.find(r => r.feature_date === dateStr);
+  if (!row || row.row_status !== 'generated') return;
+
+  if (_sotdPreviewLocks.has(dateStr)) {
+    _sotdPreviewLocks.delete(dateStr);
+  } else {
+    _sotdPreviewLocks.set(dateStr, row.stone_id);
+  }
+
+  // Re-render just this row
+  const rowEl = document.getElementById(`sotd-bulk-row-${dateStr}`);
+  if (rowEl) rowEl.outerHTML = _sotdBulkRowHTML(row);
+}
+
+// ── Approve ───────────────────────────────────────────────────────────────────
+
+async function _sotdBulkApprove() {
+  const btn = document.getElementById('sotd-bulk-approve-btn');
+
+  // Only generated rows are submitted — existing rows are never touched
+  const toInsert = _sotdPreviewRows
+    .filter(r => r.row_status === 'generated')
+    .map(r => ({ date: r.feature_date, stone_id: r.stone_id }));
+
+  if (!toInsert.length) {
+    alert('No generated dates to approve in this preview.');
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Approving…'; }
+
+  const { data, error } = await _supa.rpc('approve_sotd_preview', {
+    p_rows: toInsert,
+  });
+
+  if (btn) { btn.disabled = false; btn.textContent = 'Approve schedule'; }
+
+  if (error) {
+    console.error('[SOTD Bulk] approve_sotd_preview failed:', error);
+    alert('Approval failed. See console for details.');
+    return;
+  }
+
+  const result = data;
+
+  if (result && result.conflicts && result.conflicts.length) {
+    // Build a readable conflict message
+    const conflictDates = result.conflicts.map(c => `${_sotdFormatDate(c.date)} — ${c.reason}`).join('\n');
+    alert(
+      `Approval blocked: ${result.conflicts.length} date${result.conflicts.length !== 1 ? 's' : ''} ` +
+      `conflict with existing schedule or history.\n\nNo rows were written.\n\n${conflictDates}\n\n` +
+      'Re-generate or remove those dates from the preview, then approve again.'
+    );
+    return;
+  }
+
+  const n = result?.inserted || 0;
+
+  // Clear all caches in the affected month range and re-render current month
+  if (_sotdPreviewRange) {
+    const [sy, sm] = _sotdPreviewRange.start.split('-').map(Number);
+    const [ey, em] = _sotdPreviewRange.end.split('-').map(Number);
+    let cy = sy, cm = sm;
+    while (cy < ey || (cy === ey && cm <= em)) {
+      _sotdCalCache.delete(`${cy}-${String(cm).padStart(2,'0')}`);
+      cm++;
+      if (cm > 12) { cy++; cm = 1; }
+    }
+  }
+
+  _sotdBulkCancel();
+  _sotdCalRenderMonth(_sotdCalYear, _sotdCalMonth);
+  // Brief confirmation — no persistent banner needed
+  console.info(`[SOTD Bulk] Approved ${n} date${n !== 1 ? 's' : ''}.`);
+}
+
+// ── Whole-preview regeneration ────────────────────────────────────────────────
+
+async function _sotdBulkRegenerate() {
+  if (!_sotdPreviewRange) return;
+  const btn = document.getElementById('sotd-bulk-regen-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Regenerating…'; }
+
+  _sotdPreviewGlobalNonce++;
+
+  const lockedArr = Array.from(_sotdPreviewLocks, ([date, stone_id]) => ({ date, stone_id }));
+  const photoIds  = _sotdPreviewIncludeNoPhoto ? null : Object.keys(ENCYCLOPEDIA_PHOTOS);
+
+  const { data, error } = await _supa.rpc('generate_sotd_preview', {
+    p_start:             _sotdPreviewRange.start,
+    p_end:               _sotdPreviewRange.end,
+    p_include_no_photo:  _sotdPreviewIncludeNoPhoto,
+    p_photo_stone_ids:   photoIds,
+    p_locked_rows:       lockedArr,
+    p_context_rows:      [],
+    p_exclude_stone_id:  null,
+    p_nonce:             _sotdPreviewGlobalNonce,
+  });
+
+  if (btn) { btn.disabled = false; btn.textContent = 'Regenerate'; }
+
+  if (error || !data) {
+    console.error('[SOTD Bulk] Regeneration failed:', error);
+    return;
+  }
+
+  // Reset per-date nonces for unlocked dates (they're fresh)
+  for (const row of data) {
+    if (row.row_status === 'generated' && !_sotdPreviewLocks.has(row.feature_date)) {
+      _sotdPreviewNonces.delete(row.feature_date);
+    }
+  }
+
+  _sotdPreviewRows = data;
+  _sotdBulkPreviewRender();
+}
+
+// ── end SOTD Bulk Preview ─────────────────────────────────────────────────────
 
 // ── end SOTD Calendar ─────────────────────────────────────────────────────────
