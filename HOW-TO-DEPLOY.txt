@@ -1,0 +1,44 @@
+HOW TO UPDATE STILLPOINTDFW.COM
+================================
+
+EVERY TIME YOU WANT TO UPDATE THE SITE:
+
+1. Make your changes to files in this folder
+   (C:\Users\chris\Dropbox\Studio Website\stillpointdfw-site)
+
+2. Open Command Prompt
+   - Press Windows key
+   - Type: cmd
+   - Press Enter
+
+3. Navigate to this folder by pasting this exact line:
+   cd "C:\Users\chris\Dropbox\Studio Website\stillpointdfw-site"
+
+4. Deploy by typing:
+   wrangler deploy
+
+5. Wait about 10 seconds. Done! Changes are live at stillpointdfw.com
+
+
+ADDING A NEW IMAGE:
+- Save the image file into this folder (or an images\ subfolder)
+- Run wrangler deploy as normal
+- The image will be live at stillpointdfw.com/your-image-name.jpg
+
+
+LAPIDARY CRYSTAL PHOTO (still to do):
+- Save Christie's photo as: images\lapidary-crystals.jpg
+- Run wrangler deploy
+- It will appear in the mobile lapidary section automatically
+
+
+IF YOU GET LOGGED OUT OF CLOUDFLARE:
+- In Command Prompt, type: wrangler login
+- A browser window will open — click Authorize
+- Then run wrangler deploy as normal
+
+
+NOTES:
+- You do NOT need to use the Cloudflare dashboard uploader anymore
+- Wrangler uploads ALL file types (images, HTML, everything)
+- Only files that changed get re-uploaded — it's fast
