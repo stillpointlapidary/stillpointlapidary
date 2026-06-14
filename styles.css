@@ -2351,20 +2351,22 @@ body.sotd-cal-open{overflow:hidden}
   .sotd-cal-legend{gap:14px;margin-top:14px}
 }
 
-/* ── SOTD chakra-keyed button color — pale tinted companion to quality pill ── */
+/* ── SOTD chakra-keyed button color — deepened companion to quality pill ── */
 .desktop-sotd-section .sotd-button-primary{
-  background:var(--sotd-btn-bg,rgba(150,136,179,.18));
+  background:var(--sotd-btn-bg,#cec4e8);
   border-color:var(--sotd-btn-border,#b0a0d8);
   color:var(--sotd-btn-text,#5e5080);
+  font-weight:600;
   box-shadow:none;
 }
 .desktop-sotd-section .sotd-button-primary:hover{
   filter:brightness(.94);
 }
 .msotd-btn-primary{
-  background:var(--sotd-btn-bg,rgba(150,136,179,.18));
+  background:var(--sotd-btn-bg,#cec4e8);
   border:1px solid var(--sotd-btn-border,#b0a0d8);
   color:var(--sotd-btn-text,#5e5080);
+  font-weight:600;
 }
 .msotd-btn-primary:hover{
   filter:brightness(.94);
@@ -2372,6 +2374,7 @@ body.sotd-cal-open{overflow:hidden}
 
 /* ── SOTD event announcement panel ──────────────────────────────────────── */
 .sotd-event-announcement{
+  --sotd-evt-accent: rgba(147,121,91,.7);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -2379,9 +2382,9 @@ body.sotd-cal-open{overflow:hidden}
   margin:0 0 18px;
   padding:15px 16px;
   border-radius:10px;
-  background:rgba(147,121,91,.12);
-  border:1px solid rgba(147,121,91,.26);
-  box-shadow:inset 0 -1px 0 rgba(147,121,91,.12);
+  background:rgba(147,121,91,.19);
+  border:1px solid rgba(147,121,91,.30);
+  border-left:3px solid var(--sotd-evt-accent);
   overflow:hidden;
 }
 .sotd-event-body{flex:1;min-width:0}
@@ -2395,7 +2398,7 @@ body.sotd-cal-open{overflow:hidden}
   letter-spacing:.15em;
   text-transform:uppercase;
   color:#7a6650;
-  margin-bottom:6px;
+  margin-bottom:9px;
 }
 .sotd-event-kicker-text{line-height:1}
 .sotd-event-icon{
@@ -2410,7 +2413,7 @@ body.sotd-cal-open{overflow:hidden}
 .sotd-event-heading{
   font-family:Georgia,'Times New Roman',serif;
   font-size:16px;
-  font-weight:400;
+  font-weight:700;
   line-height:1.25;
   color:#2e2820;
   margin:0 0 5px;
@@ -2454,15 +2457,15 @@ body.sotd-cal-open{overflow:hidden}
 }
 
 /* Category color variants */
-.sotd-event--lunar{background:rgba(122,107,160,.07);border-color:rgba(122,107,160,.2)}
-.sotd-event--eclipse{background:rgba(60,50,80,.06);border-color:rgba(60,50,80,.18)}
-.sotd-event--celestial{background:rgba(90,100,150,.07);border-color:rgba(90,100,150,.2)}
-.sotd-event--meteor{background:rgba(80,70,100,.07);border-color:rgba(80,70,100,.18)}
-.sotd-event--tradition{background:rgba(160,120,80,.07);border-color:rgba(160,120,80,.2)}
-.sotd-event--location{background:rgba(80,120,100,.07);border-color:rgba(80,120,100,.18)}
-.sotd-event--geology{background:rgba(120,100,80,.07);border-color:rgba(120,100,80,.18)}
-.sotd-event--anniversary{background:rgba(160,100,120,.07);border-color:rgba(160,100,120,.2)}
-.sotd-event--generic{background:rgba(147,121,91,.08);border-color:rgba(147,121,91,.2)}
+.sotd-event--lunar{--sotd-evt-accent:rgba(100,86,152,.75);background:rgba(122,107,160,.14);border-color:rgba(122,107,160,.28)}
+.sotd-event--eclipse{--sotd-evt-accent:rgba(50,40,72,.75);background:rgba(60,50,80,.13);border-color:rgba(60,50,80,.26)}
+.sotd-event--celestial{--sotd-evt-accent:rgba(72,84,145,.75);background:rgba(90,100,150,.14);border-color:rgba(90,100,150,.28)}
+.sotd-event--meteor{--sotd-evt-accent:rgba(68,58,95,.75);background:rgba(80,70,100,.13);border-color:rgba(80,70,100,.26)}
+.sotd-event--tradition{--sotd-evt-accent:rgba(140,100,50,.75);background:rgba(160,120,80,.14);border-color:rgba(160,120,80,.28)}
+.sotd-event--location{--sotd-evt-accent:rgba(55,108,82,.75);background:rgba(80,120,100,.13);border-color:rgba(80,120,100,.26)}
+.sotd-event--geology{--sotd-evt-accent:rgba(100,80,55,.75);background:rgba(120,100,80,.13);border-color:rgba(120,100,80,.26)}
+.sotd-event--anniversary{--sotd-evt-accent:rgba(140,78,100,.75);background:rgba(160,100,120,.14);border-color:rgba(160,100,120,.28)}
+.sotd-event--generic{--sotd-evt-accent:rgba(130,105,70,.75);background:rgba(147,121,91,.14);border-color:rgba(147,121,91,.28)}
 
 /* Drawer banner — sits flush in the drawer's top padding area */
 #sotd-event-banner{margin:-1rem -1.75rem 1.25rem}
