@@ -891,7 +891,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     font-weight:400;
     letter-spacing:-.02em;
     line-height:1.02;
-    color:#8a8078;
+    color:#4b4540;
   }
 
   .desktop-sotd-section .sotd-quality-pill{
@@ -962,7 +962,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     background:var(--sotd-btn-bg,#d9d2e9);
     border:1px solid var(--sotd-btn-border,#b0a0d8);
     color:var(--sotd-btn-text,#5e5080);
-    font-weight:600;
+    font-weight:500;
     box-shadow:none;
     filter:none;
     transform:none;
@@ -2369,7 +2369,7 @@ body.sotd-cal-open{overflow:hidden}
   background:var(--sotd-btn-bg,#d9d2e9);
   border:1px solid var(--sotd-btn-border,#b0a0d8);
   color:var(--sotd-btn-text,#5e5080);
-  font-weight:600;
+  font-weight:500;
   box-shadow:none;
   filter:none;
 }
@@ -2383,7 +2383,7 @@ body.sotd-cal-open{overflow:hidden}
   margin:0 0 18px;
   padding:15px 16px;
   border-radius:10px;
-  background:var(--sotd-banner-bg, rgba(147,121,91,.16));
+  background:transparent;
   border:none;
   border-bottom:1px solid var(--sotd-banner-border, rgba(147,121,91,.32));
   overflow:hidden;
@@ -2398,7 +2398,7 @@ body.sotd-cal-open{overflow:hidden}
   font-weight:500;
   letter-spacing:.15em;
   text-transform:uppercase;
-  color:#7a6650;
+  color:var(--sotd-banner-border, #9a8070);
   margin-bottom:9px;
 }
 .sotd-event-kicker-text{line-height:1}
@@ -2408,7 +2408,7 @@ body.sotd-cal-open{overflow:hidden}
   flex-shrink:0;
   width:13px;
   height:13px;
-  color:#7a6650;
+  color:var(--sotd-banner-border, #9a8070);
 }
 .sotd-event-icon svg{width:100%;height:100%}
 .sotd-event-heading{
