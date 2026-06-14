@@ -2380,7 +2380,7 @@ body.sotd-cal-open{overflow:hidden}
   justify-content:space-between;
   gap:14px;
   margin:0 0 18px;
-  padding:15px 16px;
+  padding:11px 16px;
   border-radius:10px;
   background:var(--sotd-banner-bg, #f3f0f8);
   border:none;
@@ -2465,13 +2465,13 @@ body.sotd-cal-open{overflow:hidden}
   border-right:0;
   border-top:0;
   margin:0;
-  padding:14px 1.75rem;
+  padding:11px 1.75rem;
 }
 
 /* Mobile drawer banner padding matches mobile inner */
 @media(max-width:600px){
   #sotd-event-banner{margin:-1rem -1.25rem 1.25rem}
-  #sotd-event-banner .sotd-event-announcement{padding:12px 1.25rem}
+  #sotd-event-banner .sotd-event-announcement{padding:9px 1.25rem}
   .sotd-event-artwork{display:none}
 }
 

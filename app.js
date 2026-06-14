@@ -863,10 +863,11 @@ function renderSotdEventAnnouncement(entry){
   }
   // Ordinary day — neutral header, same structure, no editorial content
   const dailyIcon=`<span class="sotd-event-icon" aria-hidden="true">${_SOTD_EVT_ICONS.generic}</span>`;
+  const dailyDate=new Date().toLocaleDateString('en-US',{timeZone:'America/Chicago',month:'long',day:'numeric'});
   return`<div class="sotd-event-announcement">
     <div class="sotd-event-body">
       <div class="sotd-event-kicker">${dailyIcon}<span class="sotd-event-kicker-text">Daily Selection</span></div>
-      <div class="sotd-event-heading">Chosen for Today</div>
+      <div class="sotd-event-heading">Chosen for ${dailyDate}</div>
     </div>
   </div>`;
 }
