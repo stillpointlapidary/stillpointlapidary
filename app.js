@@ -728,6 +728,32 @@ const SFC_BUTTON_COLORS={
   'Crown':        {bg:'#d9d2e9',border:'#b0a0d8',text:'#5e5080'},
 };
 
+// Kicker/icon accent colors — dark enough for ≥4.5:1 on the ultra-light header wash.
+// Declared explicitly per chakra; do not derive at runtime from other palettes.
+const SFC_KICKER_COLORS={
+  'Earth Star':   '#5a5249',
+  'Root':         '#6b3636',
+  'Sacral':       '#6b4530',
+  'Solar Plexus': '#6b5520',
+  'Heart':        '#385838',
+  'Throat':       '#2e4858',
+  'Third Eye':    '#453868',
+  'Crown':        '#5e5080',
+};
+
+// ── Chakra normalization ──────────────────────────────────────────────────────
+// Canonical key list — the only values palette objects recognize.
+const _SOTD_CHAKRA_CANONICAL=['Earth Star','Root','Sacral','Solar Plexus','Heart','Throat','Third Eye','Crown'];
+// Lowercase→canonical map (pre-computed once, not rebuilt per render).
+const _SOTD_CHAKRA_NORM_MAP=Object.fromEntries(
+  _SOTD_CHAKRA_CANONICAL.map(k=>[k.toLowerCase().replace(/\s+/g,' '),k])
+);
+// Returns the canonical key, or '' for null/blank/unknown/multi-chakra values.
+function normalizeSotdChakra(raw){
+  if(!raw)return'';
+  return _SOTD_CHAKRA_NORM_MAP[String(raw).trim().replace(/\s+/g,' ').toLowerCase()]||'';
+}
+
 function sfcPillStyle(chakra){
   const c=SFC_CHAKRA_COLORS[chakra]||{bg:'#e5dfd8',text:'#6b6258'};
   return `background:${c.bg};color:${c.text}`;
@@ -865,10 +891,12 @@ function renderDesktopSotdCard(s){
   const photoHtml=s.photo
     ?`<img class="sotd-photo" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
     :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
-  const pillStyle=sfcPillStyle(s.primary_chakra||'');
-  const _dBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
-  const _dBanner=SFC_BANNER_COLORS[s.primary_chakra||'']||'#bcb2d8';
-  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text};--sotd-banner-bg:${_dBanner};--sotd-banner-border:${_dBtn.border}`;
+  const _dChakra=normalizeSotdChakra(s.primary_chakra);
+  const pillStyle=sfcPillStyle(_dChakra);
+  const _dBtn=SFC_BUTTON_COLORS[_dChakra]||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
+  const _dBanner=SFC_BANNER_COLORS[_dChakra]||'#f4f2f6';
+  const _dKicker=SFC_KICKER_COLORS[_dChakra]||'#6b5e52';
+  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text};--sotd-banner-bg:${_dBanner};--sotd-banner-border:${_dBtn.border};--sotd-kicker-color:${_dKicker}`;
   const _dEventHtml=renderSotdEventAnnouncement(s);
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
@@ -1057,10 +1085,12 @@ function renderMobileSotdCard(s){
   const photoHtml=s.photo
     ?`<img class="msotd-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)}" loading="lazy">`
     :`<div class="msotd-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
-  const pillStyle=sfcPillStyle(s.primary_chakra||'');
-  const _mBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
-  const _mBanner=SFC_BANNER_COLORS[s.primary_chakra||'']||'#bcb2d8';
-  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text};--sotd-banner-bg:${_mBanner};--sotd-banner-border:${_mBtn.border}`;
+  const _mChakra=normalizeSotdChakra(s.primary_chakra);
+  const pillStyle=sfcPillStyle(_mChakra);
+  const _mBtn=SFC_BUTTON_COLORS[_mChakra]||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
+  const _mBanner=SFC_BANNER_COLORS[_mChakra]||'#f4f2f6';
+  const _mKicker=SFC_KICKER_COLORS[_mChakra]||'#6b5e52';
+  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text};--sotd-banner-bg:${_mBanner};--sotd-banner-border:${_mBtn.border};--sotd-kicker-color:${_mKicker}`;
   const _mEventHtml=renderSotdEventAnnouncement(s);
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
