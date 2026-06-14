@@ -702,30 +702,30 @@ const SFC_CHAKRA_COLORS={
   'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
-// Banner colors — one further step deeper than the button bg, still a soft chakra tint.
-// Hierarchy: pill (lightest) → button → banner (deepest tinted surface).
+// Banner colors — one clear step deeper than the quality pill, still soft and luminous.
+// Computed as approximately 12 units below each pill channel to stay within a single tonal step.
 const SFC_BANNER_COLORS={
-  'Earth Star':   '#bfb8ae',
-  'Root':         '#c8a8a8',
-  'Sacral':       '#d4b9ac',
-  'Solar Plexus': '#d4cc9e',
-  'Heart':        '#aec8b0',
-  'Throat':       '#aabdcc',
-  'Third Eye':    '#b8b0cc',
-  'Crown':        '#bcb2d8',
+  'Earth Star':   '#d2ceca',
+  'Root':         '#dac4c4',
+  'Sacral':       '#e2d1c8',
+  'Solar Plexus': '#e1dcc4',
+  'Heart':        '#c8dacc',
+  'Throat':       '#c6d2da',
+  'Third Eye':    '#cfcadc',
+  'Crown':        '#d2cbe3',
 };
 
-// Pill-companion button colors — one step deeper than the quality pill bg.
-// Deepened enough to read as clearly filled; border mid-tones the bg toward the text color.
+// Button colors — pale tinted fill, ~5 units below the pill; clearly lighter than the banner.
+// Keeps "View Full Entry" coordinated with the pill while being clearly distinct from plain text.
 const SFC_BUTTON_COLORS={
-  'Earth Star':   {bg:'#cec8c0',border:'#b5afa8',text:'#5a5249'},
-  'Root':         {bg:'#d8bcbc',border:'#c09090',text:'#6b3636'},
-  'Sacral':       {bg:'#e4c9bc',border:'#c8a890',text:'#6b4530'},
-  'Solar Plexus': {bg:'#e0dabc',border:'#c5bb8a',text:'#6b5520'},
-  'Heart':        {bg:'#c2d8c4',border:'#8ab88e',text:'#385838'},
-  'Throat':       {bg:'#c0cfd8',border:'#8ab0c8',text:'#2e4858'},
-  'Third Eye':    {bg:'#cac3d8',border:'#a898cc',text:'#453868'},
-  'Crown':        {bg:'#cec4e8',border:'#b0a0d8',text:'#5e5080'},
+  'Earth Star':   {bg:'#d9d5d1',border:'#b5afa8',text:'#5a5249'},
+  'Root':         {bg:'#e0caca',border:'#c09090',text:'#6b3636'},
+  'Sacral':       {bg:'#e8d7ce',border:'#c8a890',text:'#6b4530'},
+  'Solar Plexus': {bg:'#e7e2ca',border:'#c5bb8a',text:'#6b5520'},
+  'Heart':        {bg:'#d0e0d2',border:'#8ab88e',text:'#385838'},
+  'Throat':       {bg:'#cedae2',border:'#8ab0c8',text:'#2e4858'},
+  'Third Eye':    {bg:'#d6d1e4',border:'#a898cc',text:'#453868'},
+  'Crown':        {bg:'#d9d2e9',border:'#b0a0d8',text:'#5e5080'},
 };
 
 function sfcPillStyle(chakra){

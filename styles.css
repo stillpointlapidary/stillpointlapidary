@@ -934,6 +934,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   }
 
   .desktop-sotd-section .sotd-button{
+    -webkit-appearance:none;
+    appearance:none;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -941,7 +943,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     width:100%;
     min-width:0;
     padding:7px 10px;
-    border-radius:10px;
+    border:1px solid transparent;
+    border-radius:15px;
     font-family:'Jost',sans-serif;
     font-size:10px;
     font-weight:500;
@@ -950,17 +953,28 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     text-transform:uppercase;
     white-space:nowrap;
     cursor:pointer;
+    box-shadow:none;
+    filter:none;
+    transform:none;
   }
 
   .desktop-sotd-section .sotd-button-primary{
-    box-shadow:0 4px 12px rgba(99,82,139,.10);
+    background:var(--sotd-btn-bg,#d9d2e9);
+    border:1px solid var(--sotd-btn-border,#b0a0d8);
+    color:var(--sotd-btn-text,#5e5080);
+    font-weight:600;
+    box-shadow:none;
+    filter:none;
+    transform:none;
   }
 
   .desktop-sotd-section .sotd-button-secondary{
     color:#876743;
     background:rgba(255,255,255,.38);
-    border:1px solid rgba(169,135,95,.25);
+    border:1px solid rgba(169,135,95,.22);
     box-shadow:none;
+    filter:none;
+    transform:none;
   }
 
   .desktop-sotd-section .sotd-button-wish{
@@ -2350,30 +2364,18 @@ body.sotd-cal-open{overflow:hidden}
   .sotd-cal-legend{gap:14px;margin-top:14px}
 }
 
-/* ── SOTD chakra-keyed button color — deepened companion to quality pill ── */
-.desktop-sotd-section .sotd-button-primary{
-  background:var(--sotd-btn-bg,#cec4e8);
-  border-color:var(--sotd-btn-border,#b0a0d8);
-  color:var(--sotd-btn-text,#5e5080);
-  font-weight:600;
-  box-shadow:none;
-}
-.desktop-sotd-section .sotd-button-primary:hover{
-  filter:brightness(.94);
-}
+/* ── SOTD mobile primary button — chakra-keyed pale fill ── */
 .msotd-btn-primary{
-  background:var(--sotd-btn-bg,#cec4e8);
+  background:var(--sotd-btn-bg,#d9d2e9);
   border:1px solid var(--sotd-btn-border,#b0a0d8);
   color:var(--sotd-btn-text,#5e5080);
   font-weight:600;
-}
-.msotd-btn-primary:hover{
-  filter:brightness(.94);
+  box-shadow:none;
+  filter:none;
 }
 
 /* ── SOTD event announcement panel ──────────────────────────────────────── */
 .sotd-event-announcement{
-  --sotd-evt-accent: rgba(147,121,91,.7);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -2381,9 +2383,9 @@ body.sotd-cal-open{overflow:hidden}
   margin:0 0 18px;
   padding:15px 16px;
   border-radius:10px;
-  background:var(--sotd-banner-bg, rgba(147,121,91,.19));
-  border:1px solid var(--sotd-banner-border, rgba(147,121,91,.30));
-  border-left:3px solid var(--sotd-evt-accent);
+  background:var(--sotd-banner-bg, rgba(147,121,91,.16));
+  border:none;
+  border-bottom:1px solid var(--sotd-banner-border, rgba(147,121,91,.32));
   overflow:hidden;
 }
 .sotd-event-body{flex:1;min-width:0}
@@ -2412,7 +2414,7 @@ body.sotd-cal-open{overflow:hidden}
 .sotd-event-heading{
   font-family:Georgia,'Times New Roman',serif;
   font-size:16px;
-  font-weight:700;
+  font-weight:400;
   line-height:1.25;
   color:#2e2820;
   margin:0 0 5px;
