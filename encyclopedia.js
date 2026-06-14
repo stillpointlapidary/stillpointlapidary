@@ -1429,9 +1429,10 @@ function _sotdSchedFormHTML(entry) {
           <div class="combobox-dropdown" id="sotd-sched-stone-drop"></div>
           <input type="hidden" id="sotd-sched-stone-val" value="${entry ? entry.stoneId : ''}">
         </div>
+        <div id="sotd-sched-thumb" class="sotd-sched-thumb"></div>
       </div>
 
-      <div class="sotd-sched-divider">Event context <span class="sotd-sched-optional">(optional)</span></div>
+      <div class="sotd-sched-divider">Optional editorial details</div>
 
       <div class="sotd-sched-field">
         <label class="sotd-sched-label" for="sotd-sched-event-name">Event name</label>
@@ -1451,21 +1452,9 @@ function _sotdSchedFormHTML(entry) {
       </div>
 
       <div class="sotd-sched-field">
-        <label class="sotd-sched-label" for="sotd-sched-event-priority">Priority</label>
-        <input type="number" id="sotd-sched-event-priority" class="sotd-sched-input sotd-sched-input--narrow"
-          min="1" max="10" placeholder="1–10" value="${entry && entry.eventPriority != null ? entry.eventPriority : ''}">
-      </div>
-
-      <div class="sotd-sched-field">
         <label class="sotd-sched-label" for="sotd-sched-editorial-note">Editorial note</label>
         <textarea id="sotd-sched-editorial-note" class="sotd-sched-textarea"
           placeholder="Internal note for this date…" rows="3">${entry && entry.editorialNote || ''}</textarea>
-      </div>
-
-      <div class="sotd-sched-field">
-        <label class="sotd-sched-label" for="sotd-sched-source-url">Source URL</label>
-        <input type="url" id="sotd-sched-source-url" class="sotd-sched-input"
-          placeholder="https://…" value="${(entry && entry.sourceUrl || '').replace(/"/g,'&quot;')}">
       </div>
 
       <div id="sotd-sched-error" class="sotd-sched-error" hidden></div>
@@ -1490,11 +1479,42 @@ function _sotdSchedFormHTML(entry) {
 }
 
 // Pre-fill the stone combobox after the form has been injected into the DOM.
+// Also shows the thumbnail for the currently selected stone and starts watching for changes.
 function _sotdSchedInitCombo(entry) {
   if (entry && entry.stoneId) {
     const name = _sotdCalStoneName(entry.stoneId);
     const inp = document.getElementById('sotd-sched-stone-input');
     if (inp) inp.value = name;
+  }
+  _sotdCalUpdateStoneThumb();
+  _sotdSchedWatchCombo();
+}
+
+// MutationObserver: when the stone combobox dropdown closes, refresh the thumbnail.
+function _sotdSchedWatchCombo() {
+  const drop = document.getElementById('sotd-sched-stone-drop');
+  if (!drop) return;
+  const observer = new MutationObserver(function() {
+    if (!drop.classList.contains('open')) {
+      _sotdCalUpdateStoneThumb();
+    }
+  });
+  observer.observe(drop, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Reads the current stone selection and updates the thumbnail zone.
+function _sotdCalUpdateStoneThumb() {
+  const stoneId = (document.getElementById('sotd-sched-stone-val')?.value || '').trim();
+  const thumbEl = document.getElementById('sotd-sched-thumb');
+  if (!thumbEl) return;
+  if (!stoneId) { thumbEl.innerHTML = ''; return; }
+  const crystal = CRYSTALS.find(c => c.i === stoneId);
+  if (!crystal) { thumbEl.innerHTML = ''; return; }
+  const url = firstEncyclopediaPhoto(crystal);
+  if (url) {
+    thumbEl.innerHTML = `<img class="sotd-sched-thumb-img" src="${url}" alt="${crystal.n}" loading="lazy">`;
+  } else {
+    thumbEl.innerHTML = `<div class="sotd-sched-thumb-none">No photo available</div>`;
   }
 }
 
@@ -1564,13 +1584,11 @@ function _sotdCalOpenStoneFromScheduler(stoneId) {
 
 // Reads the scheduler form and writes to stone_of_day_schedule.
 async function _sotdCalSaveSchedule() {
-  const stoneId     = (document.getElementById('sotd-sched-stone-val')?.value || '').trim();
-  const eventName   = (document.getElementById('sotd-sched-event-name')?.value || '').trim();
-  const eventCat    = (document.getElementById('sotd-sched-event-cat')?.value || '').trim();
-  const eventLoc    = (document.getElementById('sotd-sched-event-loc')?.value || '').trim();
-  const priorityRaw = (document.getElementById('sotd-sched-event-priority')?.value || '').trim();
-  const editNote    = (document.getElementById('sotd-sched-editorial-note')?.value || '').trim();
-  const sourceUrl   = (document.getElementById('sotd-sched-source-url')?.value || '').trim();
+  const stoneId   = (document.getElementById('sotd-sched-stone-val')?.value || '').trim();
+  const eventName = (document.getElementById('sotd-sched-event-name')?.value || '').trim();
+  const eventCat  = (document.getElementById('sotd-sched-event-cat')?.value || '').trim();
+  const eventLoc  = (document.getElementById('sotd-sched-event-loc')?.value || '').trim();
+  const editNote  = (document.getElementById('sotd-sched-editorial-note')?.value || '').trim();
 
   const errEl  = document.getElementById('sotd-sched-error');
   const saveBtn = document.getElementById('sotd-sched-save-btn');
@@ -1587,7 +1605,6 @@ async function _sotdCalSaveSchedule() {
   if (!stoneId) { showError('Please select a stone before saving.'); return; }
   if (!_sotdSchedDate) { showError('No date selected — close and reopen the calendar.'); return; }
 
-  const eventPriority = priorityRaw !== '' ? Number(priorityRaw) : null;
   const existingEntry = _sotdCalEntryStore.get(_sotdSchedDate);
   const isEdit = !!(existingEntry && existingEntry.source === 'schedule');
 
@@ -1595,12 +1612,10 @@ async function _sotdCalSaveSchedule() {
 
   const payload = {
     stone_id:       stoneId,
-    event_name:     eventName   || null,
-    event_category: eventCat    || null,
-    event_location: eventLoc    || null,
-    event_priority: eventPriority,
-    editorial_note: editNote    || null,
-    source_url:     sourceUrl   || null,
+    event_name:     eventName || null,
+    event_category: eventCat  || null,
+    event_location: eventLoc  || null,
+    editorial_note: editNote  || null,
   };
 
   let error;
@@ -1682,13 +1697,18 @@ async function _sotdCalDeleteSchedule() {
   _sotdCalRenderMonth(_sotdSchedYear, _sotdSchedMonth);
 }
 
-// Keyboard: Escape also closes the scheduler if it is open.
+// Keyboard: Escape dismisses the stone combobox first; a second Escape closes the modal.
 document.addEventListener('keydown', function(e) {
   if (e.key !== 'Escape') return;
   const modal = document.getElementById('sotd-sched-modal');
-  if (modal && modal.classList.contains('open')) {
-    closeSotdScheduler();
+  if (!modal || !modal.classList.contains('open')) return;
+  const drop = document.getElementById('sotd-sched-stone-drop');
+  if (drop && drop.classList.contains('open')) {
+    comboClose('sotd-sched-stone-drop');
+    e.stopPropagation();
+    return;
   }
+  closeSotdScheduler();
 });
 
 // ── end SOTD Scheduler ────────────────────────────────────────────────────────
