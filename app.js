@@ -702,6 +702,19 @@ const SFC_CHAKRA_COLORS={
   'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
+// Banner colors — one further step deeper than the button bg, still a soft chakra tint.
+// Hierarchy: pill (lightest) → button → banner (deepest tinted surface).
+const SFC_BANNER_COLORS={
+  'Earth Star':   '#bfb8ae',
+  'Root':         '#c8a8a8',
+  'Sacral':       '#d4b9ac',
+  'Solar Plexus': '#d4cc9e',
+  'Heart':        '#aec8b0',
+  'Throat':       '#aabdcc',
+  'Third Eye':    '#b8b0cc',
+  'Crown':        '#bcb2d8',
+};
+
 // Pill-companion button colors — one step deeper than the quality pill bg.
 // Deepened enough to read as clearly filled; border mid-tones the bg toward the text color.
 const SFC_BUTTON_COLORS={
@@ -842,7 +855,8 @@ function renderDesktopSotdCard(s){
     :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
   const _dBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
-  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text}`;
+  const _dBanner=SFC_BANNER_COLORS[s.primary_chakra||'']||'#bcb2d8';
+  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text};--sotd-banner-bg:${_dBanner};--sotd-banner-border:${_dBtn.border}`;
   const _dEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
@@ -1033,7 +1047,8 @@ function renderMobileSotdCard(s){
     :`<div class="msotd-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
   const _mBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
-  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text}`;
+  const _mBanner=SFC_BANNER_COLORS[s.primary_chakra||'']||'#bcb2d8';
+  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text};--sotd-banner-bg:${_mBanner};--sotd-banner-border:${_mBtn.border}`;
   const _mEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
