@@ -234,7 +234,7 @@ async function submitMagicLink() {
   msg.textContent = '';
   var result = await _supa.auth.signInWithOtp({
     email: email,
-    options: { emailRedirectTo: window.location.href }
+    options: { emailRedirectTo: window.location.origin + window.location.pathname }
   });
   if (result.error) {
     msg.textContent = result.error.message || 'Something went wrong. Please try again.';
