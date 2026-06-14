@@ -803,33 +803,45 @@ function _sotdContextEvent() {
   return _isSotdEditorial(_sotdContext.entry) ? _sotdContext.entry : null;
 }
 
+// Always renders a header band. Editorial days show event context; ordinary days
+// show a neutral "Daily Selection / Chosen for Today" version with no extras.
 function renderSotdEventAnnouncement(entry){
-  const eventName =entry.eventName ||entry.event_name ||'';
-  if(!eventName)return'';
-  const eventCat  =entry.eventCategory||entry.event_category||'';
-  const editNote  =entry.editorialNote||entry.editorial_note||'';
-  const location  =entry.eventLocation||entry.event_location||'';
-  const srcUrl    =entry.sourceUrl    ||entry.source_url    ||'';
-  const pres=getSotdEventPresentation(eventCat);
-  const artworkHtml=pres.artwork
-    ?`<img class="sotd-event-artwork" src="${escapeAttr(pres.artwork)}" alt="" aria-hidden="true" onerror="this.style.display='none'" loading="lazy">`
-    :'';
-  const iconHtml=pres.icon
-    ?`<span class="sotd-event-icon" aria-hidden="true">${pres.icon}</span>`
-    :'';
-  const noteHtml=editNote?`<p class="sotd-event-note">${escapeAttr(editNote)}</p>`:'';
-  const locHtml =location?`<span class="sotd-event-location">${escapeAttr(location)}</span>`:'';
-  const srcHtml =_isSafeUrl(srcUrl)
-    ?`<a class="sotd-event-source" href="${escapeAttr(srcUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${escapeAttr(eventName)}">Learn more</a>`
-    :'';
-  const metaHtml=(locHtml||srcHtml)?`<div class="sotd-event-meta">${locHtml}${srcHtml}</div>`:'';
-  return`<div class="sotd-event-announcement ${pres.categoryClass}">
+  if(!entry)return'';
+  if(_isSotdEditorial(entry)){
+    const eventName =entry.eventName ||entry.event_name ||'';
+    const eventCat  =entry.eventCategory||entry.event_category||'';
+    const editNote  =entry.editorialNote||entry.editorial_note||'';
+    const location  =entry.eventLocation||entry.event_location||'';
+    const srcUrl    =entry.sourceUrl    ||entry.source_url    ||'';
+    const pres=getSotdEventPresentation(eventCat);
+    const artworkHtml=pres.artwork
+      ?`<img class="sotd-event-artwork" src="${escapeAttr(pres.artwork)}" alt="" aria-hidden="true" onerror="this.style.display='none'" loading="lazy">`
+      :'';
+    const iconHtml=pres.icon
+      ?`<span class="sotd-event-icon" aria-hidden="true">${pres.icon}</span>`
+      :'';
+    const noteHtml=editNote?`<p class="sotd-event-note">${escapeAttr(editNote)}</p>`:'';
+    const locHtml =location?`<span class="sotd-event-location">${escapeAttr(location)}</span>`:'';
+    const srcHtml =_isSafeUrl(srcUrl)
+      ?`<a class="sotd-event-source" href="${escapeAttr(srcUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${escapeAttr(eventName)}">Learn more</a>`
+      :'';
+    const metaHtml=(locHtml||srcHtml)?`<div class="sotd-event-meta">${locHtml}${srcHtml}</div>`:'';
+    return`<div class="sotd-event-announcement ${pres.categoryClass}">
+      <div class="sotd-event-body">
+        <div class="sotd-event-kicker">${iconHtml}<span class="sotd-event-kicker-text">Stone Selection</span></div>
+        <div class="sotd-event-heading">Chosen for ${escapeAttr(eventName)}</div>
+        ${noteHtml}${metaHtml}
+      </div>
+      ${artworkHtml}
+    </div>`;
+  }
+  // Ordinary day — neutral header, same structure, no editorial content
+  const dailyIcon=`<span class="sotd-event-icon" aria-hidden="true">${_SOTD_EVT_ICONS.generic}</span>`;
+  return`<div class="sotd-event-announcement">
     <div class="sotd-event-body">
-      <div class="sotd-event-kicker">${iconHtml}<span class="sotd-event-kicker-text">Stone Selection</span></div>
-      <div class="sotd-event-heading">Chosen for ${escapeAttr(eventName)}</div>
-      ${noteHtml}${metaHtml}
+      <div class="sotd-event-kicker">${dailyIcon}<span class="sotd-event-kicker-text">Daily Selection</span></div>
+      <div class="sotd-event-heading">Chosen for Today</div>
     </div>
-    ${artworkHtml}
   </div>`;
 }
 
@@ -857,7 +869,7 @@ function renderDesktopSotdCard(s){
   const _dBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
   const _dBanner=SFC_BANNER_COLORS[s.primary_chakra||'']||'#bcb2d8';
   const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text};--sotd-banner-bg:${_dBanner};--sotd-banner-border:${_dBtn.border}`;
-  const _dEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
+  const _dEventHtml=renderSotdEventAnnouncement(s);
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
     <path d="M22 22c2.4-4.8 9.8-4.8 12.2 0 4.8-.2 7.1 5.7 3.4 8.7 2.2 4.4-2.4 8.8-6.7 6.6-3 3.7-8.8 1.4-8.6-3.4-4.7-.9-5.9-7.1-1.8-9.6.1-.8.6-1.6 1.5-2.3Z"/>
@@ -1049,7 +1061,7 @@ function renderMobileSotdCard(s){
   const _mBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
   const _mBanner=SFC_BANNER_COLORS[s.primary_chakra||'']||'#bcb2d8';
   const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text};--sotd-banner-bg:${_mBanner};--sotd-banner-border:${_mBtn.border}`;
-  const _mEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
+  const _mEventHtml=renderSotdEventAnnouncement(s);
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
   const nameLen=s.name.length;
