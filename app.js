@@ -702,15 +702,17 @@ const SFC_CHAKRA_COLORS={
   'Crown':        {bg:'#ded7ef',text:'#5e5080'}
 };
 
+// Pill-companion button colors — pale tint bg + matching border + dark text.
+// bg matches the quality pill background; border is a mid-tone between bg and text.
 const SFC_BUTTON_COLORS={
-  'Earth Star':   {bg:'#6b6258',text:'#fff'},
-  'Root':         {bg:'#7a3c3c',text:'#fff'},
-  'Sacral':       {bg:'#7a4c30',text:'#fff'},
-  'Solar Plexus': {bg:'#7a6222',text:'#fff'},
-  'Heart':        {bg:'#3c6c3e',text:'#fff'},
-  'Throat':       {bg:'#345874',text:'#fff'},
-  'Third Eye':    {bg:'#4c4278',text:'#fff'},
-  'Crown':        {bg:'#6a5ea0',text:'#fff'},
+  'Earth Star':   {bg:'#dedad6',border:'#b5afa8',text:'#5a5249'},
+  'Root':         {bg:'#e6d0d0',border:'#c09090',text:'#6b3636'},
+  'Sacral':       {bg:'#eeddd4',border:'#c8a890',text:'#6b4530'},
+  'Solar Plexus': {bg:'#ede8d0',border:'#c5bb8a',text:'#6b5520'},
+  'Heart':        {bg:'#d6e6d8',border:'#8ab88e',text:'#385838'},
+  'Throat':       {bg:'#d4e0e8',border:'#8ab0c8',text:'#2e4858'},
+  'Third Eye':    {bg:'#dbd6e8',border:'#a898cc',text:'#453868'},
+  'Crown':        {bg:'#ded7ef',border:'#b0a0d8',text:'#5e5080'},
 };
 
 function sfcPillStyle(chakra){
@@ -839,8 +841,8 @@ function renderDesktopSotdCard(s){
     ?`<img class="sotd-photo" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)} crystal" loading="lazy">`
     :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
-  const _dBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'#9688b3',text:'#fff'};
-  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-text:${_dBtn.text}`;
+  const _dBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
+  const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text}`;
   const _dEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
@@ -1030,8 +1032,8 @@ function renderMobileSotdCard(s){
     ?`<img class="msotd-img" src="${SUPABASE_STONES}${escapeAttr(s.photo)}" alt="${escapeAttr(s.name)}" loading="lazy">`
     :`<div class="msotd-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const pillStyle=sfcPillStyle(s.primary_chakra||'');
-  const _mBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'#9688b3',text:'#fff'};
-  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-text:${_mBtn.text}`;
+  const _mBtn=SFC_BUTTON_COLORS[s.primary_chakra||'']||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
+  const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text}`;
   const _mEventHtml=_isSotdEditorial(s)?renderSotdEventAnnouncement(s):'';
   const sid=String(s.id);
   const sname=escapeAttr(s.name);
