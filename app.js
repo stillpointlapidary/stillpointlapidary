@@ -2411,7 +2411,7 @@ function init(){
     }
   }
   scrollPageTop();
-  document.addEventListener('click',handleOutsideClick);
+  if(typeof handleOutsideClick==='function') document.addEventListener('click',handleOutsideClick);
   initPWA();
 }
 
