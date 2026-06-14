@@ -1412,6 +1412,53 @@ function closeSotdCalendar() {
   document.getElementById('manage-btn')?.focus();
 }
 
+// ── SOTD Icon Audition (admin-only, temporary — remove after approval) ────────
+function openSotdIconAudition(){
+  if(!isAdminUser(_currentUser))return;
+  const families=[
+    {key:'generic',     label:'Generic',     desc:'Daily Selection'},
+    {key:'lunar',       label:'Lunar',       desc:'Lunar phase'},
+    {key:'eclipse',     label:'Eclipse',     desc:'Solar / Lunar eclipse'},
+    {key:'celestial',   label:'Celestial',   desc:'Seasonal astronomy / Orbital event'},
+    {key:'meteor',      label:'Meteor',      desc:'Meteor shower / Meteorite history'},
+    {key:'tradition',   label:'Tradition',   desc:'Cultural holiday / Seasonal tradition'},
+    {key:'location',    label:'Location',    desc:'Location spotlight'},
+    {key:'geology',     label:'Geology',     desc:'Geology observance'},
+    {key:'anniversary', label:'Anniversary', desc:'Site anniversary'},
+  ];
+  const rows=families.map((f,i)=>{
+    const svg=_SOTD_EVT_ICONS[f.key]||'';
+    return`<tr>
+      <td class="sica-lbl-cell">
+        ${i+1}. ${f.label}
+        <span class="sica-fam">${f.desc}</span>
+      </td>
+      <td class="sica-icon-cell" style="width:25%;padding-right:10px">
+        <div class="sica-icon-wrap sm">
+          <span class="sotd-event-icon" style="width:15px;height:15px;color:#453868" aria-hidden="true">${svg}</span>
+        </div>
+        <span class="sica-size-label">15 px</span>
+      </td>
+      <td class="sica-icon-cell" style="width:25%">
+        <div class="sica-icon-wrap lg">
+          <span class="sotd-event-icon" style="width:30px;height:30px;color:#453868" aria-hidden="true">${svg}</span>
+        </div>
+        <span class="sica-size-label">30 px</span>
+      </td>
+    </tr>`;
+  }).join('');
+  const table=document.getElementById('sica-table');
+  if(table)table.innerHTML=rows;
+  const overlay=document.getElementById('sotd-icon-audition');
+  if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';}
+}
+function closeSotdIconAudition(){
+  const overlay=document.getElementById('sotd-icon-audition');
+  if(overlay){overlay.classList.remove('open');document.body.style.overflow='';}
+  document.getElementById('manage-btn')?.focus();
+}
+// ── end SOTD Icon Audition ────────────────────────────────────────────────────
+
 async function _sotdCalRenderMonth(year, month) {
   _sotdCalYear  = year;
   _sotdCalMonth = month;
