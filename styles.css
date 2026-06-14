@@ -2607,7 +2607,7 @@ body.sotd-sched-open{overflow:hidden}
 /* stone thumbnail */
 .sotd-sched-thumb{margin-top:8px;min-height:0}
 .sotd-sched-thumb-img{display:block;width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid rgba(169,135,95,.2)}
-.sotd-sched-thumb-none{font-family:'Jost',sans-serif;font-size:11px;color:#b0a89e;padding:4px 0}
+.sotd-sched-thumb-dot{display:inline-block;width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.1);flex-shrink:0}
 
 /* mobile */
 @media(max-width:600px){

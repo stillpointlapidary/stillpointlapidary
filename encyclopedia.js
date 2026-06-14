@@ -1340,6 +1340,8 @@ document.addEventListener('keydown', function(e) {
   if (!overlay || !overlay.classList.contains('open')) return;
   const drawerOverlay = document.getElementById('drawer-overlay');
   if (drawerOverlay && drawerOverlay.classList.contains('open')) return; // drawer takes priority
+  const schedModal = document.getElementById('sotd-sched-modal');
+  if (schedModal && schedModal.classList.contains('open')) return; // scheduler handles its own Escape
   closeSotdCalendar();
 });
 // ── SOTD SCHEDULER MODAL ─────────────────────────────────────────────────────
@@ -1413,7 +1415,19 @@ function _sotdSchedFormHTML(entry) {
   const isEdit = !!(entry && entry.source === 'schedule');
   const stoneName = entry ? _sotdCalStoneName(entry.stoneId) : '';
 
-  const catOptions = ['', ...Object.keys(SOTD_EVENT_PRESENTATION)]
+  const _SCHED_CATEGORIES = [
+    'Moon & Lunar Phases',
+    'Eclipses',
+    'Meteor Showers',
+    'Planetary & Orbital Events',
+    'Seasons & Solar Turning Points',
+    'Holidays & Traditions',
+    'Geology & Earth History',
+    'Location Spotlight',
+    'Still Point Milestone',
+    'Other Editorial',
+  ];
+  const catOptions = ['', ..._SCHED_CATEGORIES]
     .map(k => `<option value="${k}"${entry && entry.eventCategory === k ? ' selected' : ''}>${k || '— none —'}</option>`)
     .join('');
 
@@ -1514,7 +1528,8 @@ function _sotdCalUpdateStoneThumb() {
   if (url) {
     thumbEl.innerHTML = `<img class="sotd-sched-thumb-img" src="${url}" alt="${crystal.n}" loading="lazy">`;
   } else {
-    thumbEl.innerHTML = `<div class="sotd-sched-thumb-none">No photo available</div>`;
+    const hex = crystal.ch || '#c8bca8';
+    thumbEl.innerHTML = `<span class="sotd-sched-thumb-dot" style="background:${hex}" aria-hidden="true"></span>`;
   }
 }
 
