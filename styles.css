@@ -2515,3 +2515,99 @@ body.sotd-cal-open{overflow:hidden}
   flex-shrink:0;
 }
 .sotd-cal-event-icon svg{width:100%;height:100%}
+
+/* ── SOTD empty-future cell (clickable + button) ───────────────────────── */
+.sotd-cal-cell--empty-future{cursor:pointer;transition:background .12s,border-color .12s;appearance:none;font:inherit;background:transparent;border:1px dashed rgba(169,135,95,.2);text-align:left}
+.sotd-cal-cell--empty-future:hover,.sotd-cal-cell--empty-future:focus{background:rgba(200,169,110,.07);border-color:rgba(169,135,95,.36)}
+.sotd-cal-cell--empty-future:focus-visible{outline:2px solid #c8a96e;outline-offset:1px}
+.sotd-cal-cell--empty-future .sotd-cal-day-num{color:#cdc7c2}
+.sotd-cal-empty-add{position:absolute;bottom:6px;right:7px;font-size:14px;line-height:1;color:rgba(169,135,95,.35);pointer-events:none}
+.sotd-cal-cell--empty-future:hover .sotd-cal-empty-add,.sotd-cal-cell--empty-future:focus .sotd-cal-empty-add{color:rgba(169,135,95,.65)}
+
+/* ── SOTD Scheduler Modal ─────────────────────────────────────────────── */
+.sotd-sched-overlay{display:none;position:fixed;inset:0;background:rgba(42,37,32,.45);z-index:90;align-items:center;justify-content:center;padding:1.5rem;box-sizing:border-box}
+.sotd-sched-overlay.open{display:flex}
+body.sotd-sched-open{overflow:hidden}
+
+.sotd-sched-panel{position:relative;background:#fbf8f3;border:1px solid rgba(169,135,95,.2);border-radius:18px;box-shadow:0 24px 64px rgba(42,37,32,.2),0 4px 16px rgba(42,37,32,.06);width:100%;max-width:480px;max-height:88vh;overflow-y:auto;padding:24px 24px 20px;box-sizing:border-box}
+
+.sotd-sched-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px}
+.sotd-sched-date{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:#3e3830;line-height:1.2}
+.sotd-sched-close{appearance:none;background:rgba(251,248,243,.92);border:1px solid rgba(169,135,95,.22);border-radius:50%;width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#9a8070;cursor:pointer;transition:background .14s,border-color .14s,color .14s}
+.sotd-sched-close:hover{background:#f0ece4;border-color:rgba(169,135,95,.44);color:#5a4a3a}
+.sotd-sched-close:focus-visible{outline:2px solid #c8a96e;outline-offset:2px}
+
+/* form layout */
+.sotd-sched-form{display:flex;flex-direction:column;gap:14px}
+.sotd-sched-field{display:flex;flex-direction:column;gap:5px}
+.sotd-sched-label{font-family:'Jost',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9a8070}
+.sotd-sched-input{appearance:none;background:#fff;border:1px solid rgba(169,135,95,.28);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;color:#3e3830;padding:8px 10px;box-sizing:border-box;width:100%;transition:border-color .14s,box-shadow .14s}
+.sotd-sched-input:focus{outline:none;border-color:#c8a96e;box-shadow:0 0 0 3px rgba(200,169,110,.14)}
+.sotd-sched-input--narrow{max-width:120px}
+.sotd-sched-select{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a8070'/%3E%3C/svg%3E") no-repeat right 10px center;background-size:10px;border:1px solid rgba(169,135,95,.28);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;color:#3e3830;padding:8px 28px 8px 10px;box-sizing:border-box;width:100%;cursor:pointer;transition:border-color .14s}
+.sotd-sched-select:focus{outline:none;border-color:#c8a96e;box-shadow:0 0 0 3px rgba(200,169,110,.14)}
+.sotd-sched-textarea{appearance:none;background:#fff;border:1px solid rgba(169,135,95,.28);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;color:#3e3830;padding:8px 10px;box-sizing:border-box;width:100%;resize:vertical;transition:border-color .14s,box-shadow .14s}
+.sotd-sched-textarea:focus{outline:none;border-color:#c8a96e;box-shadow:0 0 0 3px rgba(200,169,110,.14)}
+.sotd-sched-divider{font-family:'Jost',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#b0a89e;padding-top:6px;border-top:1px solid rgba(169,135,95,.12);display:flex;align-items:center;gap:8px}
+.sotd-sched-optional{font-weight:400;text-transform:none;letter-spacing:0;font-size:10px}
+
+/* actions */
+.sotd-sched-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px}
+.sotd-sched-btn{appearance:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:8px 18px;transition:background .14s,border-color .14s,color .14s;white-space:nowrap}
+.sotd-sched-btn--primary{background:#9688b3;border:none;color:#fff}
+.sotd-sched-btn--primary:hover{background:#897aa8}
+.sotd-sched-btn--primary:disabled{opacity:.5;cursor:not-allowed}
+.sotd-sched-btn--primary:focus-visible{outline:2px solid #c8a96e;outline-offset:2px}
+.sotd-sched-btn--secondary{background:none;border:1px solid rgba(169,135,95,.35);color:#7a6e66}
+.sotd-sched-btn--secondary:hover{background:rgba(200,169,110,.08);border-color:rgba(169,135,95,.55)}
+.sotd-sched-btn--secondary:focus-visible{outline:2px solid #c8a96e;outline-offset:2px}
+.sotd-sched-btn--danger{background:none;border:1px solid rgba(180,60,60,.3);color:#b04040}
+.sotd-sched-btn--danger:hover{background:rgba(180,60,60,.07);border-color:rgba(180,60,60,.5)}
+.sotd-sched-btn--danger:focus-visible{outline:2px solid #c8a96e;outline-offset:2px}
+.sotd-sched-btn--ghost{background:none;border:1px solid rgba(169,135,95,.18);color:#9a8070}
+.sotd-sched-btn--ghost:hover{background:rgba(200,169,110,.07);border-color:rgba(169,135,95,.35)}
+.sotd-sched-btn--ghost:focus-visible{outline:2px solid #c8a96e;outline-offset:2px}
+
+/* delete confirmation */
+.sotd-sched-delete-confirm{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;background:rgba(180,60,60,.06);border:1px solid rgba(180,60,60,.18);border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;color:#7a4040}
+.sotd-sched-delete-confirm span{flex:1;min-width:0}
+
+/* error */
+.sotd-sched-error{font-family:'Jost',sans-serif;font-size:12px;color:#b04040;background:rgba(180,60,60,.06);border:1px solid rgba(180,60,60,.18);border-radius:7px;padding:8px 12px}
+
+/* history / read-only view */
+.sotd-sched-hist{display:flex;flex-direction:column;gap:14px}
+.sotd-sched-hist-stone{display:flex;flex-direction:column;gap:4px}
+.sotd-sched-hist-name{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-style:italic;color:#3e3830}
+.sotd-sched-hist-meta{display:flex;gap:6px;flex-wrap:wrap}
+.sotd-sched-hist-tag{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9a8070;background:rgba(169,135,95,.1);border-radius:999px;padding:3px 9px}
+.sotd-sched-hist-table{width:100%;border-collapse:collapse;font-family:'Jost',sans-serif;font-size:12px}
+.sotd-sched-hist-table th,.sotd-sched-hist-table td{text-align:left;padding:5px 0;vertical-align:top}
+.sotd-sched-hist-table th{width:38%;color:#b0a89e;font-weight:500;letter-spacing:.05em;text-transform:uppercase;font-size:10px;padding-right:10px}
+.sotd-sched-hist-table td{color:#504944}
+.sotd-sched-hist-table tr+tr th,.sotd-sched-hist-table tr+tr td{border-top:1px solid rgba(169,135,95,.1)}
+.sotd-sched-link{color:#9688b3;text-decoration:none;word-break:break-all}
+.sotd-sched-link:hover{text-decoration:underline}
+
+/* event banner in history view */
+.sotd-sched-event-banner{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.06em}
+.sotd-sched-event-banner--lunar{background:rgba(100,80,160,.08);color:#5a4898}
+.sotd-sched-event-banner--eclipse{background:rgba(60,40,100,.09);color:#3e2878}
+.sotd-sched-event-banner--celestial{background:rgba(80,100,160,.08);color:#3a5088}
+.sotd-sched-event-banner--meteor{background:rgba(120,80,40,.08);color:#6a4018}
+.sotd-sched-event-banner--tradition{background:rgba(169,135,95,.1);color:#7a5a30}
+.sotd-sched-event-banner--location{background:rgba(60,130,90,.08);color:#2a6840}
+.sotd-sched-event-banner--geology{background:rgba(100,80,60,.08);color:#5a4030}
+.sotd-sched-event-banner--anniversary{background:rgba(200,169,110,.12);color:#8a6a20}
+.sotd-sched-event-banner--generic{background:rgba(169,135,95,.08);color:#9a8070}
+.sotd-sched-event-icon{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center}
+.sotd-sched-event-icon svg{width:100%;height:100%}
+.sotd-sched-event-label{flex:1;min-width:0}
+
+/* mobile */
+@media(max-width:600px){
+  .sotd-sched-overlay{padding:0;align-items:flex-end}
+  .sotd-sched-panel{border-radius:18px 18px 0 0;max-height:92vh;max-width:100%;padding:20px 16px 20px}
+  .sotd-sched-actions{flex-direction:column;align-items:stretch}
+  .sotd-sched-btn{text-align:center}
+}

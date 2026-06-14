@@ -1933,6 +1933,19 @@
 
   </div>
 </div>
+<!-- SOTD SCHEDULER MODAL (admin only) -->
+<div id="sotd-sched-modal" class="sotd-sched-overlay" role="dialog" aria-modal="true" aria-labelledby="sotd-sched-date-label" onclick="if(event.target===this)closeSotdScheduler()">
+  <div class="sotd-sched-panel">
+    <div class="sotd-sched-hdr">
+      <div class="sotd-sched-date" id="sotd-sched-date-label"></div>
+      <button class="sotd-sched-close" type="button" onclick="closeSotdScheduler()" aria-label="Close scheduler">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="sotd-sched-body"></div>
+  </div>
+</div>
+
 <!-- PHOTO PLANNING PANEL -->
 <div class="popup-overlay" id="popup-photo-plan" onclick="if(event.target===this)closePopup('photo-plan')">
   <div class="popup-box" style="max-width:720px;width:95vw;max-height:88vh;display:flex;flex-direction:column;overflow-y:hidden">

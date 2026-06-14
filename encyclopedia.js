@@ -1240,12 +1240,22 @@ function _sotdCalBuildGrid(entries, year, month, today) {
     const todayAttr = isToday ? ' aria-current="date"' : '';
 
     if (!entry) {
-      const emptyLabel = `${isToday ? 'Today, ' : ''}${d} ${monthLabel}, no stone recorded`;
-      cells.push(
-        `<div class="sotd-cal-cell sotd-cal-cell--empty${isToday ? ' sotd-cal-cell--today' : ''}"` +
-        ` role="gridcell" aria-label="${emptyLabel}"${todayAttr}>` +
-        `<span class="sotd-cal-day-num">${d}</span></div>`
-      );
+      const isFutureDate = dateStr > today;
+      const emptyLabel = `${isToday ? 'Today, ' : ''}${d} ${monthLabel}, no stone scheduled`;
+      if (isFutureDate) {
+        cells.push(
+          `<button class="sotd-cal-cell sotd-cal-cell--empty sotd-cal-cell--empty-future" type="button" role="gridcell"` +
+          ` aria-label="${emptyLabel}" onclick="_sotdCalOpenDay('${dateStr}',${year},${month})">` +
+          `<span class="sotd-cal-day-num">${d}</span>` +
+          `<span class="sotd-cal-empty-add" aria-hidden="true">+</span></button>`
+        );
+      } else {
+        cells.push(
+          `<div class="sotd-cal-cell sotd-cal-cell--empty${isToday ? ' sotd-cal-cell--today' : ''}"` +
+          ` role="gridcell" aria-label="${emptyLabel}"${todayAttr}>` +
+          `<span class="sotd-cal-day-num">${d}</span></div>`
+        );
+      }
     } else {
       const isSchedule  = entry.source === 'schedule';
       const isEditorial = _isSotdEditorial(entry);
@@ -1271,7 +1281,7 @@ function _sotdCalBuildGrid(entries, year, month, today) {
 
       cells.push(
         `<button class="${cellClass}" type="button" role="gridcell"` +
-        ` onclick="_sotdCalOpenStone('${entry.stoneId}','${dateStr}',${year},${month})"` +
+        ` onclick="_sotdCalOpenDay('${dateStr}',${year},${month})"` +
         ` aria-label="${ariaLabel.replace(/"/g,"'")}"${todayAttr}>` +
         `<span class="sotd-cal-day-num">${d}</span>` +
         (stoneName ? `<span class="sotd-cal-stone-name">${stoneName}</span>` : '') +
@@ -1332,4 +1342,355 @@ document.addEventListener('keydown', function(e) {
   if (drawerOverlay && drawerOverlay.classList.contains('open')) return; // drawer takes priority
   closeSotdCalendar();
 });
+// ── SOTD SCHEDULER MODAL ─────────────────────────────────────────────────────
+
+let _sotdSchedDate  = null;  // 'YYYY-MM-DD' of the date currently open in the scheduler
+let _sotdSchedYear  = null;  // calendar year to return to on close
+let _sotdSchedMonth = null;  // calendar month to return to on close
+
+// Unified entry point for every calendar cell click.
+// Determines modal mode from the entry (or absence of one) and opens the scheduler.
+function _sotdCalOpenDay(dateStr, year, month) {
+  _sotdSchedDate  = dateStr;
+  _sotdSchedYear  = year;
+  _sotdSchedMonth = month;
+
+  const entry = _sotdCalEntryStore.get(dateStr) || null;
+
+  const dateEl = document.getElementById('sotd-sched-date-label');
+  if (dateEl) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    dateEl.textContent = `${_sotdCalMonthLabel(m)} ${d}, ${y}`;
+  }
+
+  const body = document.getElementById('sotd-sched-body');
+  if (!body) return;
+
+  if (!entry) {
+    // Empty future date — schedule form
+    body.innerHTML = _sotdSchedFormHTML(null);
+    _sotdSchedInitCombo(null);
+  } else if (entry.source === 'history') {
+    // Resolved history entry — read-only
+    body.innerHTML = _sotdSchedHistoryHTML(entry);
+  } else if (entry.source === 'schedule') {
+    // Existing scheduled entry — editable
+    body.innerHTML = _sotdSchedFormHTML(entry);
+    _sotdSchedInitCombo(entry);
+  } else {
+    // Any other future entry — read-only detail
+    body.innerHTML = _sotdSchedHistoryHTML(entry);
+  }
+
+  const modal = document.getElementById('sotd-sched-modal');
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.classList.add('sotd-sched-open');
+  setTimeout(() => document.querySelector('#sotd-sched-modal .sotd-sched-close')?.focus(), 60);
+}
+
+function closeSotdScheduler() {
+  const modal = document.getElementById('sotd-sched-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.classList.remove('sotd-sched-open');
+  // Return focus to the day cell that was clicked, if it is still in the grid
+  if (_sotdSchedDate) {
+    const cells = document.querySelectorAll('#sotd-cal-grid [role="gridcell"]');
+    for (const c of cells) {
+      if (c.getAttribute('aria-label') && c.getAttribute('onclick') &&
+          c.getAttribute('onclick').includes(_sotdSchedDate)) {
+        c.focus();
+        break;
+      }
+    }
+  }
+}
+
+// Returns the HTML string for the editable schedule form.
+// entry is null for new, or an existing SotdCalendarEntry for edits.
+function _sotdSchedFormHTML(entry) {
+  const isEdit = !!(entry && entry.source === 'schedule');
+  const stoneName = entry ? _sotdCalStoneName(entry.stoneId) : '';
+
+  const catOptions = ['', ...Object.keys(SOTD_EVENT_PRESENTATION)]
+    .map(k => `<option value="${k}"${entry && entry.eventCategory === k ? ' selected' : ''}>${k || '— none —'}</option>`)
+    .join('');
+
+  return `
+    <form class="sotd-sched-form" id="sotd-sched-form" onsubmit="return false">
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-stone-input">Stone</label>
+        <div class="combobox-wrap" id="sotd-sched-stone-wrap">
+          <input type="text" id="sotd-sched-stone-input" class="sotd-sched-input" autocomplete="off"
+            placeholder="Search stones…" value="${stoneName.replace(/"/g,'&quot;')}"
+            oninput="comboFilter('sotd-sched-stone-wrap','sotd-sched-stone-input','sotd-sched-stone-drop','sotd-sched-stone-val')"
+            onkeydown="comboKey(event,'sotd-sched-stone-drop','sotd-sched-stone-input','sotd-sched-stone-val')">
+          <div class="combobox-dropdown" id="sotd-sched-stone-drop"></div>
+          <input type="hidden" id="sotd-sched-stone-val" value="${entry ? entry.stoneId : ''}">
+        </div>
+      </div>
+
+      <div class="sotd-sched-divider">Event context <span class="sotd-sched-optional">(optional)</span></div>
+
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-event-name">Event name</label>
+        <input type="text" id="sotd-sched-event-name" class="sotd-sched-input"
+          placeholder="e.g. Winter Solstice" value="${(entry && entry.eventName || '').replace(/"/g,'&quot;')}">
+      </div>
+
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-event-cat">Category</label>
+        <select id="sotd-sched-event-cat" class="sotd-sched-select">${catOptions}</select>
+      </div>
+
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-event-loc">Location</label>
+        <input type="text" id="sotd-sched-event-loc" class="sotd-sched-input"
+          placeholder="e.g. Northern hemisphere" value="${(entry && entry.eventLocation || '').replace(/"/g,'&quot;')}">
+      </div>
+
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-event-priority">Priority</label>
+        <input type="number" id="sotd-sched-event-priority" class="sotd-sched-input sotd-sched-input--narrow"
+          min="1" max="10" placeholder="1–10" value="${entry && entry.eventPriority != null ? entry.eventPriority : ''}">
+      </div>
+
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-editorial-note">Editorial note</label>
+        <textarea id="sotd-sched-editorial-note" class="sotd-sched-textarea"
+          placeholder="Internal note for this date…" rows="3">${entry && entry.editorialNote || ''}</textarea>
+      </div>
+
+      <div class="sotd-sched-field">
+        <label class="sotd-sched-label" for="sotd-sched-source-url">Source URL</label>
+        <input type="url" id="sotd-sched-source-url" class="sotd-sched-input"
+          placeholder="https://…" value="${(entry && entry.sourceUrl || '').replace(/"/g,'&quot;')}">
+      </div>
+
+      <div id="sotd-sched-error" class="sotd-sched-error" hidden></div>
+
+      <div class="sotd-sched-actions">
+        <button type="button" id="sotd-sched-save-btn" class="sotd-sched-btn sotd-sched-btn--primary"
+          onclick="_sotdCalSaveSchedule()">${isEdit ? 'Save Changes' : 'Save Schedule'}</button>
+        ${isEdit
+          ? `<button type="button" id="sotd-sched-delete-btn" class="sotd-sched-btn sotd-sched-btn--danger"
+              onclick="_sotdCalConfirmDelete()">Remove Schedule</button>`
+          : ''}
+        <button type="button" class="sotd-sched-btn sotd-sched-btn--ghost"
+          onclick="closeSotdScheduler()">Cancel</button>
+      </div>
+      ${isEdit ? '<div id="sotd-sched-delete-confirm" class="sotd-sched-delete-confirm" hidden>' +
+        '<span>Remove this scheduled entry? This cannot be undone.</span>' +
+        '<button type="button" class="sotd-sched-btn sotd-sched-btn--danger" onclick="_sotdCalDeleteSchedule()">Yes, remove</button>' +
+        '<button type="button" class="sotd-sched-btn sotd-sched-btn--ghost" onclick="_sotdCalCancelDelete()">Keep it</button>' +
+        '</div>' : ''}
+    </form>
+  `;
+}
+
+// Pre-fill the stone combobox after the form has been injected into the DOM.
+function _sotdSchedInitCombo(entry) {
+  if (entry && entry.stoneId) {
+    const name = _sotdCalStoneName(entry.stoneId);
+    const inp = document.getElementById('sotd-sched-stone-input');
+    if (inp) inp.value = name;
+  }
+}
+
+// Returns the HTML string for a read-only detail view (history or generated entry).
+function _sotdSchedHistoryHTML(entry) {
+  const stoneName = _sotdCalStoneName(entry.stoneId);
+  const crystal   = CRYSTALS.find(c => c.i === entry.stoneId);
+  const tier      = crystal ? (crystal.tier || crystal.t || '') : '';
+  const chakra    = crystal ? (crystal.primary_chakra || crystal.pc || '') : '';
+
+  const isEditorial = _isSotdEditorial(entry);
+  const pres        = isEditorial ? getSotdEventPresentation(entry.eventCategory) : null;
+
+  const sourceLabel = entry.source === 'history' ? 'Resolved' : 'Scheduled';
+  const selType     = entry.selectionType || '';
+
+  let eventBanner = '';
+  if (isEditorial && pres) {
+    eventBanner = `<div class="sotd-sched-event-banner sotd-sched-event-banner--${pres.family}">` +
+      `<span class="sotd-sched-event-icon" aria-hidden="true">${pres.icon}</span>` +
+      `<span class="sotd-sched-event-label">${entry.eventName || entry.eventCategory || ''}</span></div>`;
+  }
+
+  const metaRows = [
+    entry.eventCategory  ? `<tr><th>Category</th><td>${entry.eventCategory}</td></tr>`  : '',
+    entry.eventLocation  ? `<tr><th>Location</th><td>${entry.eventLocation}</td></tr>`  : '',
+    entry.eventPriority != null ? `<tr><th>Priority</th><td>${entry.eventPriority}</td></tr>` : '',
+    entry.editorialNote  ? `<tr><th>Editorial note</th><td>${entry.editorialNote}</td></tr>` : '',
+    entry.sourceUrl && _isSafeUrl(entry.sourceUrl)
+      ? `<tr><th>Source</th><td><a href="${entry.sourceUrl}" target="_blank" rel="noopener noreferrer" class="sotd-sched-link">${entry.sourceUrl}</a></td></tr>` : '',
+  ].filter(Boolean).join('');
+
+  return `
+    <div class="sotd-sched-hist">
+      ${eventBanner}
+      <div class="sotd-sched-hist-stone">
+        <div class="sotd-sched-hist-name">${stoneName || entry.stoneId}</div>
+        <div class="sotd-sched-hist-meta">
+          ${tier   ? `<span class="sotd-sched-hist-tag">${tier}</span>` : ''}
+          ${chakra ? `<span class="sotd-sched-hist-tag">${chakra}</span>` : ''}
+        </div>
+      </div>
+      <table class="sotd-sched-hist-table">
+        <tr><th>Source</th><td>${sourceLabel}</td></tr>
+        ${selType ? `<tr><th>Selection type</th><td>${selType}</td></tr>` : ''}
+        ${metaRows}
+      </table>
+      <div class="sotd-sched-actions">
+        <button type="button" class="sotd-sched-btn sotd-sched-btn--secondary"
+          onclick="_sotdCalOpenStoneFromScheduler('${entry.stoneId}')">View stone</button>
+        <button type="button" class="sotd-sched-btn sotd-sched-btn--ghost"
+          onclick="closeSotdScheduler()">Close</button>
+      </div>
+    </div>
+  `;
+}
+
+// Opens the encyclopedia detail drawer for a stone while the scheduler is open.
+// The calendar return context is preserved so back-nav returns to the calendar.
+function _sotdCalOpenStoneFromScheduler(stoneId) {
+  const entry = _sotdSchedDate ? (_sotdCalEntryStore.get(_sotdSchedDate) || null) : null;
+  closeSotdScheduler();
+  setSotdContext('calendar', entry);
+  detailReturnContext = { type: 'sotd-calendar', year: _sotdSchedYear, month: _sotdSchedMonth, entry };
+  openDetail(stoneId);
+}
+
+// Reads the scheduler form and writes to stone_of_day_schedule.
+async function _sotdCalSaveSchedule() {
+  const stoneId     = (document.getElementById('sotd-sched-stone-val')?.value || '').trim();
+  const eventName   = (document.getElementById('sotd-sched-event-name')?.value || '').trim();
+  const eventCat    = (document.getElementById('sotd-sched-event-cat')?.value || '').trim();
+  const eventLoc    = (document.getElementById('sotd-sched-event-loc')?.value || '').trim();
+  const priorityRaw = (document.getElementById('sotd-sched-event-priority')?.value || '').trim();
+  const editNote    = (document.getElementById('sotd-sched-editorial-note')?.value || '').trim();
+  const sourceUrl   = (document.getElementById('sotd-sched-source-url')?.value || '').trim();
+
+  const errEl  = document.getElementById('sotd-sched-error');
+  const saveBtn = document.getElementById('sotd-sched-save-btn');
+
+  function showError(msg) {
+    if (errEl) { errEl.textContent = msg; errEl.hidden = false; }
+  }
+  function clearError() {
+    if (errEl) { errEl.textContent = ''; errEl.hidden = true; }
+  }
+
+  clearError();
+
+  if (!stoneId) { showError('Please select a stone before saving.'); return; }
+  if (!_sotdSchedDate) { showError('No date selected — close and reopen the calendar.'); return; }
+
+  const eventPriority = priorityRaw !== '' ? Number(priorityRaw) : null;
+  const existingEntry = _sotdCalEntryStore.get(_sotdSchedDate);
+  const isEdit = !!(existingEntry && existingEntry.source === 'schedule');
+
+  if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving…'; }
+
+  const payload = {
+    stone_id:       stoneId,
+    event_name:     eventName   || null,
+    event_category: eventCat    || null,
+    event_location: eventLoc    || null,
+    event_priority: eventPriority,
+    editorial_note: editNote    || null,
+    source_url:     sourceUrl   || null,
+  };
+
+  let error;
+  if (isEdit) {
+    ({ error } = await _supa
+      .from('stone_of_day_schedule')
+      .update(payload)
+      .eq('feature_date', _sotdSchedDate)
+      .eq('is_active', true));
+  } else {
+    ({ error } = await _supa
+      .from('stone_of_day_schedule')
+      .insert({
+        ...payload,
+        feature_date:   _sotdSchedDate,
+        is_active:      true,
+        selection_type: 'fixed',
+      }));
+  }
+
+  if (error) {
+    console.error('[SOTD Scheduler] Save failed:', error);
+    showError(`Save failed: ${error.message || 'Unknown error'}. Please try again.`);
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.textContent = isEdit ? 'Save Changes' : 'Save Schedule';
+    }
+    return;
+  }
+
+  // Invalidate cache for this month and re-render the calendar.
+  const key = `${_sotdSchedYear}-${String(_sotdSchedMonth).padStart(2,'0')}`;
+  _sotdCalCache.delete(key);
+
+  closeSotdScheduler();
+  _sotdCalRenderMonth(_sotdSchedYear, _sotdSchedMonth);
+}
+
+// Shows the inline delete confirmation row.
+function _sotdCalConfirmDelete() {
+  const confirm = document.getElementById('sotd-sched-delete-confirm');
+  const deleteBtn = document.getElementById('sotd-sched-delete-btn');
+  if (confirm) confirm.hidden = false;
+  if (deleteBtn) deleteBtn.hidden = true;
+}
+
+function _sotdCalCancelDelete() {
+  const confirm = document.getElementById('sotd-sched-delete-confirm');
+  const deleteBtn = document.getElementById('sotd-sched-delete-btn');
+  if (confirm) confirm.hidden = true;
+  if (deleteBtn) deleteBtn.hidden = false;
+}
+
+async function _sotdCalDeleteSchedule() {
+  if (!_sotdSchedDate) return;
+
+  const errEl = document.getElementById('sotd-sched-error');
+  function showError(msg) {
+    if (errEl) { errEl.textContent = msg; errEl.hidden = false; }
+  }
+
+  const { error } = await _supa
+    .from('stone_of_day_schedule')
+    .delete()
+    .eq('feature_date', _sotdSchedDate)
+    .eq('is_active', true);
+
+  if (error) {
+    console.error('[SOTD Scheduler] Delete failed:', error);
+    showError(`Remove failed: ${error.message || 'Unknown error'}. Please try again.`);
+    _sotdCalCancelDelete();
+    return;
+  }
+
+  const key = `${_sotdSchedYear}-${String(_sotdSchedMonth).padStart(2,'0')}`;
+  _sotdCalCache.delete(key);
+
+  closeSotdScheduler();
+  _sotdCalRenderMonth(_sotdSchedYear, _sotdSchedMonth);
+}
+
+// Keyboard: Escape also closes the scheduler if it is open.
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Escape') return;
+  const modal = document.getElementById('sotd-sched-modal');
+  if (modal && modal.classList.contains('open')) {
+    closeSotdScheduler();
+  }
+});
+
+// ── end SOTD Scheduler ────────────────────────────────────────────────────────
+
 // ── end SOTD Calendar ─────────────────────────────────────────────────────────
