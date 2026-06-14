@@ -315,14 +315,28 @@ footer{background:var(--bg2);border-top:0.5px solid var(--border);padding:3rem 2
   .footer-links a,.footer-contact a,.footer-contact p{font-size:0.85rem;line-height:1.8}
   .footer-bottom p,.footer-bottom a{font-size:0.7rem;color:rgba(255,255,255,0.3)}
 
-  /* CHANGE 11 — global text legibility */
-  .hero h1{font-size:2.6rem}
-  .hero-sub{font-size:1rem;line-height:1.7;color:rgba(255,255,255,0.65)}
-  .section-header p{font-size:1rem;line-height:1.7;color:rgba(255,255,255,0.65)}
-  .start-card p,.principle p,.lapidary-text p,.book-inner p{
+  /* CHANGE 11 — heading hierarchy + legibility */
+  /* Hide nav tagline on mobile */
+  .nav-logo-sub{display:none}
+
+  /* Headings: bold and commanding like desktop */
+  .hero h1{font-size:2.75rem;line-height:1.1}
+  .section-header h2{font-size:2.2rem;line-height:1.15}
+  .why-text h2{font-size:2.1rem;line-height:1.15}
+  .book-inner h2{font-size:2.4rem;line-height:1.15}
+
+  /* Body text: readable but clearly subordinate to headings */
+  .hero-sub{font-size:0.95rem;line-height:1.75;color:rgba(255,255,255,0.65)}
+  .section-header p{font-size:0.95rem;line-height:1.75;color:rgba(255,255,255,0.65)}
+  .start-card p,.principle p,.lapidary-text p{
     font-size:0.9rem;line-height:1.75;color:rgba(255,255,255,0.65);
   }
+  .book-inner p{font-size:0.95rem;line-height:1.75;color:rgba(255,255,255,0.65)}
+
   .tech-divider{display:none}
+
+  /* Hide broken lapidary image placeholder until real photo is added */
+  .lapidary-visual{display:none}
 }
 @media(max-width:480px){
   .hero h1{font-size:2.1rem}
