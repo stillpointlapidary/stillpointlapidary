@@ -1536,18 +1536,22 @@ function _sotdSchedFormHTML(entry) {
       <div class="sotd-sched-actions">
         <button type="button" id="sotd-sched-save-btn" class="sotd-sched-btn sotd-sched-btn--primary"
           onclick="_sotdCalSaveSchedule()">${isEdit ? 'Save Changes' : 'Save Schedule'}</button>
-        ${isEdit
+        ${isEdit && entry.selectionType === 'random' && !entry.eventName
           ? `<button type="button" id="sotd-sched-delete-btn" class="sotd-sched-btn sotd-sched-btn--danger"
               onclick="_sotdCalConfirmDelete()">Remove Schedule</button>`
+          : isEdit
+          ? `<span class="sotd-sched-editorial-note" style="font-size:0.82em;opacity:0.65;align-self:center">Editorial entry — remove via the schedule manager</span>`
           : ''}
         <button type="button" class="sotd-sched-btn sotd-sched-btn--ghost"
           onclick="closeSotdScheduler()">Cancel</button>
       </div>
-      ${isEdit ? '<div id="sotd-sched-delete-confirm" class="sotd-sched-delete-confirm" hidden>' +
-        '<span>Remove this scheduled entry? This cannot be undone.</span>' +
-        '<button type="button" class="sotd-sched-btn sotd-sched-btn--danger" onclick="_sotdCalDeleteSchedule()">Yes, remove</button>' +
-        '<button type="button" class="sotd-sched-btn sotd-sched-btn--ghost" onclick="_sotdCalCancelDelete()">Keep it</button>' +
-        '</div>' : ''}
+      ${isEdit && entry.selectionType === 'random' && !entry.eventName
+        ? '<div id="sotd-sched-delete-confirm" class="sotd-sched-delete-confirm" hidden>' +
+          '<span>Remove this scheduled entry? This cannot be undone.</span>' +
+          '<button type="button" class="sotd-sched-btn sotd-sched-btn--danger" onclick="_sotdCalDeleteSchedule()">Yes, remove</button>' +
+          '<button type="button" class="sotd-sched-btn sotd-sched-btn--ghost" onclick="_sotdCalCancelDelete()">Keep it</button>' +
+          '</div>'
+        : ''}
     </form>
   `;
 }
