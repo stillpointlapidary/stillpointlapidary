@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="description" content="Labradorite encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
+<meta property="og:title" content="Labradorite | Still Point Lapidary Encyclopedia">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#8b7355">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Labradorite | Still Point Lapidary Encyclopedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* ── Encyclopedia Entry Page ── */
+
+/* Chakra-keyed design tokens — Third Eye for Labradorite.
+   When this template is reused for other stones, swap these six values
+   based on the stone's primary_chakra field. */
+:root {
+  --ck-pill-bg:    #dbd6e8;
+  --ck-pill-text:  #453868;
+  --ck-btn-bg:     #d6d1e4;
+  --ck-btn-border: #a898cc;
+  --ck-btn-text:   #453868;
+  --ck-wash:       #f3f0f8;
+  --ck-wash-border:#a898cc;
+  --ck-accent:     #453868;
+
+  /* Shared page layout tokens */
+  --enc-radius: 10px;
+  --enc-border: 0.5px solid var(--border);
+  --enc-shadow: 0 6px 24px rgba(42,37,32,0.08);
+  --enc-max:    1420px;
+  --sidebar-w:  200px;
+}
+
+/* ── LAYOUT SHELL ── */
+.enc-page {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0,1fr);
+  gap: 28px;
+  max-width: var(--enc-max);
+  margin: 0 auto;
+  padding: 28px 28px 60px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ── */
+.enc-sidebar {
+  position: sticky;
+  top: 130px; /* below topbar + nav + studio banner */
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+  border-right: var(--enc-border);
+  padding-right: 20px;
+  scrollbar-width: none;
+}
+.enc-sidebar::-webkit-scrollbar { display: none; }
+
+.enc-breadcrumb {
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: 0.05em;
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+.enc-breadcrumb a { color: var(--ink3); text-decoration: none; }
+.enc-breadcrumb a:hover { color: var(--accent); }
+.enc-breadcrumb b { color: var(--ink); }
+
+.side-nav-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.side-nav {
+  display: grid;
+  gap: 2px;
+}
+.side-nav a {
+  display: block;
+  padding: 9px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: all 0.13s;
+  letter-spacing: 0.03em;
+}
+.side-nav a:hover { background: var(--stone2); color: var(--ink); }
+.side-nav a.active {
+  background: var(--ck-wash);
+  border-left: 2px solid var(--ck-accent);
+  color: var(--ck-accent);
+  font-weight: 500;
+}
+
+.sidebar-standards {
+  margin-top: 22px;
+  padding: 14px 13px;
+  border: var(--enc-border);
+  border-radius: 8px;
+  background: var(--white);
+  font-size: 11px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.sidebar-standards-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--ck-accent);
+  margin-bottom: 8px;
+  display: block;
+}
+.sidebar-standards a {
+  display: inline-block;
+  margin-top: 7px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  border-bottom: 0.5px solid var(--border);
+}
+.sidebar-standards a:hover { color: var(--ink); }
+
+/* ── MAIN CONTENT ── */
+.enc-main { min-width: 0; }
+
+/* ── HERO ── */
+.enc-hero {
+  display: grid;
+  grid-template-columns: 420px minmax(0,1fr);
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+.stone-photo-wrap {
+  border-radius: var(--enc-radius);
+  overflow: hidden;
+  box-shadow: var(--enc-shadow);
+  aspect-ratio: 1.06/1;
+  background: var(--stone2);
+}
+.stone-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-right { padding-top: 8px; }
+
+.stone-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 18px;
+}
+
+.tier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ck-pill-bg);
+  color: var(--ck-pill-text);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+.theme-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.theme-pill {
+  background: var(--white);
+  border: var(--enc-border);
+  border-radius: 999px;
+  padding: 7px 20px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(42,37,32,0.06);
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: var(--enc-border);
+  border-radius: var(--enc-radius);
+  background: var(--white);
+  overflow: hidden;
+  margin: 0 0 20px;
+  box-shadow: 0 2px 10px rgba(42,37,32,0.05);
+}
+.identity-tile {
+  padding: 16px 14px;
+  border-right: var(--enc-border);
+}
+.identity-tile:last-child { border-right: 0; }
+.tile-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ck-accent);
+  margin-bottom: 8px;
+}
+.tile-eyebrow svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.identity-tile p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.enc-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 11px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0.5px solid var(--border);
+  background: transparent;
+  color: var(--ink2);
+}
+.enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.enc-btn-primary {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.enc-btn-primary:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
+.enc-btn svg { width: 14px; height: 14px; }
+
+/* ── AT A GLANCE ── */
+.glance-panel {
+  background: var(--white);
+  border: var(--enc-border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 22px 24px 20px;
+  margin-bottom: 24px;
+}
+.panel-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent2);
+  flex-shrink: 0;
+}
+
+.glance-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+}
+.glance-item {
+  padding: 0 12px;
+  border-right: var(--enc-border);
+  text-align: center;
+}
+.glance-item:last-child { border-right: 0; }
+.glance-item:first-child { padding-left: 0; }
+
+.glance-icon-tile {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 9px;
+  border-radius: 13px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 12px rgba(42,37,32,0.07);
+}
+.glance-icon-tile svg {
+  width: 26px;
+  height: 26px;
+  color: var(--ck-accent);
+  stroke-width: 1.6;
+}
+.glance-label {
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-weight: 500;
+  color: var(--ink3);
+  margin-bottom: 6px;
+}
+.glance-value {
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ── TWO-COLUMN CONTENT GRID ── */
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1.3fr) 360px;
+  gap: 22px;
+  align-items: start;
+}
+.article-col { display: grid; gap: 20px; }
+
+/* ── ARTICLE SECTION CARDS ── */
+.enc-card {
+  background: var(--white);
+  border: var(--enc-border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 26px 28px;
+}
+.enc-card h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.enc-card h2 svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent2);
+  stroke-width: 1.6;
+  flex-shrink: 0;
+}
+.enc-card p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink2);
+  margin: 0 0 12px;
+}
+.enc-card p:last-child { margin-bottom: 0; }
+
+/* reach-for bullets */
+.reach-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.reach-list li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+.reach-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ck-accent);
+  margin-top: 7px;
+  opacity: 0.55;
+  justify-self: center;
+}
+
+/* ── MINERAL PROFILE CARD ── */
+.mineral-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 130px;
+  gap: 22px;
+  align-items: start;
+}
+.mineral-facts {
+  display: grid;
+  gap: 7px;
+}
+.mineral-fact {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  padding-bottom: 6px;
+  border-bottom: 0.5px solid var(--border2);
+  font-size: 13px;
+}
+.mineral-fact span:first-child {
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.mineral-fact span:last-child { color: var(--ink2); }
+.mineral-note {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink2);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 0.5px solid var(--border2);
+}
+.mineral-formation h4 {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  margin: 0 0 7px;
+}
+.mineral-formation p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.65;
+  margin: 0 0 12px;
+}
+.mineral-formation ul {
+  margin: 0;
+  padding-left: 16px;
+}
+.mineral-formation li {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.7;
+}
+.crystal-diagram {
+  align-self: center;
+  justify-self: center;
+  opacity: 0.38;
+}
+.crystal-diagram svg {
+  width: 110px;
+  color: var(--ck-accent);
+  stroke-width: 1.4;
+}
+
+/* ── RELATED STONES ── */
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.rel-card {
+  border: var(--enc-border);
+  border-radius: 8px;
+  padding: 16px;
+  background: var(--stone);
+}
+.rel-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  margin-bottom: 12px;
+}
+.stone-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.13s;
+}
+.stone-link-row:hover { opacity: 0.75; }
+.stone-dot-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stone-dot-moon    { background: linear-gradient(135deg,#e8e1d8,#9eb7c9); }
+.stone-dot-violet  { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
+.stone-dot-black   { background: linear-gradient(135deg,#2c2830,#5a5260); }
+.stone-dot-white   { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
+.stone-link-row b  { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 18px; font-weight: 400; color: var(--ink); }
+.stone-link-row span { font-size: 11px; color: var(--ink3); }
+
+/* ── RIGHT RAIL ── */
+.right-rail {
+  display: grid;
+  gap: 18px;
+  position: sticky;
+  top: 130px;
+}
+.rail-card {
+  background: var(--white);
+  border: var(--enc-border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 22px 22px;
+}
+.rail-card h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.rail-card h2 svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent2);
+  stroke-width: 1.6;
+  flex-shrink: 0;
+}
+
+/* In One Line */
+.one-line-wrap {
+  display: inline-flex;
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ck-accent);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.one-line-desc {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Energetic Themes */
+.theme-tier-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  margin: 16px 0 8px;
+}
+.theme-tier-label:first-child { margin-top: 0; }
+.theme-row {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 11px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+.theme-icon-tile {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 10px rgba(42,37,32,0.07);
+  flex-shrink: 0;
+}
+.theme-icon-tile svg {
+  width: 24px;
+  height: 24px;
+  color: var(--ck-accent);
+  stroke-width: 1.6;
+}
+.theme-row h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  margin: 0 0 2px;
+  color: var(--ink);
+}
+.theme-row p {
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.6;
+}
+.theme-divider {
+  border: none;
+  border-top: 0.5px solid var(--border2);
+  margin: 14px 0 8px;
+}
+
+.occasional-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.occ-tag {
+  font-size: 12px;
+  color: var(--ink2);
+  background: var(--stone);
+  border: var(--enc-border);
+  border-radius: 999px;
+  padding: 4px 11px;
+}
+
+/* Collector Notes */
+.note-list { display: grid; gap: 9px; }
+.note-row {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  background: var(--stone);
+  border: var(--enc-border);
+  border-radius: 8px;
+  padding: 11px 12px;
+  align-items: start;
+}
+.note-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.note-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--ck-accent);
+  stroke-width: 1.6;
+}
+.note-row strong {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  margin-bottom: 3px;
+}
+.note-row p {
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── ENTRY NAV ── */
+.entry-nav-wrap {
+  margin-top: 22px;
+  background: var(--white);
+  border: var(--enc-border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.entry-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: var(--enc-border);
+  border-radius: 999px;
+  background: var(--stone);
+  padding: 10px 18px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: all 0.13s;
+  box-shadow: 0 3px 10px rgba(42,37,32,0.06);
+}
+.entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.entry-nav-link small { font-size: 9px; letter-spacing: 0.13em; color: var(--ink3); display: block; margin-bottom: 1px; }
+.entry-nav-link:hover small { color: rgba(255,255,255,0.6); }
+.entry-nav-link b {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  display: block;
+}
+.entry-nav-random {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.entry-nav-random:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
+
+/* ── BOTTOM CTA ── */
+.enc-cta {
+  margin-top: 20px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--enc-radius);
+  padding: 26px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(200,169,110,0.14) 0%, transparent 50%),
+    radial-gradient(circle at 88% 20%, rgba(200,169,110,0.08) 0%, transparent 40%);
+}
+.enc-cta h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--white);
+}
+.enc-cta p {
+  font-size: 13px;
+  color: rgba(250,248,246,0.72);
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+.enc-cta button {
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 13px 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.enc-cta button:hover { background: var(--stone2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .enc-page { grid-template-columns: 1fr; }
+  .enc-sidebar { display: none; }
+  .enc-hero { grid-template-columns: 1fr; }
+  .stone-photo-wrap { aspect-ratio: 16/9; max-height: 320px; }
+  .identity-grid { grid-template-columns: repeat(2, 1fr); }
+  .content-grid { grid-template-columns: 1fr; }
+  .right-rail { position: static; }
+  .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 0; }
+  .glance-item { border-right: 0; }
+  .mineral-layout { grid-template-columns: 1fr; }
+  .crystal-diagram { display: none; }
+  .related-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .enc-page { padding: 16px 16px 48px; }
+  .stone-name { font-size: 44px; }
+  .identity-grid { grid-template-columns: 1fr 1fr; }
+  .glance-grid { grid-template-columns: repeat(3, 1fr); }
+  .enc-cta { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<!-- TOPBAR — identical to main site -->
+<header class="topbar">
+  <a href="../index.html" class="brand-home" aria-label="Return to home">
+    <div class="brand-block">
+      <img src="/assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+      <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+      </div>
+    </div>
+  </a>
+  <div class="topbar-right">
+    <a href="../encyclopedia.html" class="btn btn-sm">← Encyclopedia</a>
+  </div>
+</header>
+
+<!-- STUDIO BANNER -->
+<div class="studio-banner">
+  <div class="studio-banner-inner">
+    <span>Still Point</span>
+    <span class="studio-banner-dot"></span>
+    <span>{technodelic} Studio</span>
+    <span class="studio-banner-dot"></span>
+    <span>Dallas / Fort Worth</span>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="enc-page" id="top">
+
+  <!-- SIDEBAR NAV -->
+  <aside class="enc-sidebar">
+    <div class="enc-breadcrumb">
+      <a href="../index.html">Home</a> ›
+      <a href="../encyclopedia.html">Encyclopedia</a> ›
+      <b>Labradorite</b>
+    </div>
+    <div class="side-nav-label">On this page</div>
+    <nav class="side-nav">
+      <a href="#top"         class="active">Top</a>
+      <a href="#overview">Overview</a>
+      <a href="#reach">Why People Reach For It</a>
+      <a href="#glance">At a Glance</a>
+      <a href="#themes">Energetic Themes</a>
+      <a href="#mineral">Mineral Profile</a>
+      <a href="#notes">Collector Notes</a>
+      <a href="#related">Related Stones</a>
+    </nav>
+
+    <div class="sidebar-standards">
+      <!-- Sun / research icon -->
+      <svg class="sidebar-standards-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="32" cy="32" r="11"/>
+        <path d="M32 7v7M32 50v7M7 32h7M50 32h7M14.6 14.6l5 5M44.4 44.4l5 5M49.4 14.6l-5 5M19.6 44.4l-5 5"/>
+      </svg>
+      Entries are researched from expert books and trusted online sources.
+      <a href="#">Our Editorial Standards →</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="enc-main">
+
+    <!-- HERO -->
+    <section class="enc-hero" id="hero">
+      <div class="stone-photo-wrap">
+        <img
+          alt="Labradorite polished stone showing blue-green labradorescence"
+          src="https://images.unsplash.com/photo-1615486511262-c2e6cf68a8f3?auto=format&fit=crop&w=900&q=85"
+        />
+      </div>
+
+      <div class="hero-right">
+        <h1 class="stone-name">Labradorite</h1>
+        <div class="tier-pill">
+          <!-- gem facet icon -->
+          <svg width="12" height="12" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M32 6 52 22 32 58 12 22Z"/>
+            <path d="M12 22h40M32 6 12 22M32 6 52 22"/>
+          </svg>
+          Rare Finds
+        </div>
+
+        <div class="theme-pills">
+          <span class="theme-pill">Transformation</span>
+          <span class="theme-pill">Intuition</span>
+          <span class="theme-pill">Hidden Potential</span>
+        </div>
+
+        <div class="identity-grid">
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <!-- star icon -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
+              </svg>
+              Best For
+            </div>
+            <p>Navigating major life transitions</p>
+          </div>
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <!-- moon icon -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/>
+              </svg>
+              Use When
+            </div>
+            <p>You feel on the edge of becoming something new but aren't sure what comes next.</p>
+          </div>
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <!-- link icon -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/>
+                <path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/>
+              </svg>
+              Pairs Well With
+            </div>
+            <p>Moonstone<br>Black Tourmaline<br>Clear Quartz</p>
+          </div>
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <!-- eye icon -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
+                <circle cx="32" cy="32" r="7"/>
+              </svg>
+              Primary Chakra
+            </div>
+            <p>Third Eye</p>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="enc-btn enc-btn-primary">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
+            </svg>
+            Save to Collection
+          </button>
+          <button class="enc-btn">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
+            </svg>
+            Add to Wishlist
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AT A GLANCE -->
+    <section class="glance-panel" id="glance">
+      <h2 class="panel-title">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
+          <circle cx="32" cy="32" r="8"/>
+        </svg>
+        At a Glance
+      </h2>
+      <div class="glance-grid">
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- facet / themes -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8 52 30 32 56 12 30Z"/>
+              <path d="M12 30h40"/>
+              <path d="M22 30 32 8l10 22"/>
+              <path d="M22 30 32 56l10-26"/>
+            </svg>
+          </div>
+          <div class="glance-label">Primary Themes</div>
+          <div class="glance-value">Transformation<br>Intuition</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- eye / chakra -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
+              <circle cx="32" cy="32" r="7"/>
+              <circle cx="32" cy="32" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="glance-label">Chakras</div>
+          <div class="glance-value">Third Eye<br>Throat</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- air/water element -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 10 12 44h40Z"/>
+              <path d="M22 44c0 8 20 8 20 0"/>
+            </svg>
+          </div>
+          <div class="glance-label">Element</div>
+          <div class="glance-value">Air<br>Water</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- planet / orbit -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="32" cy="32" r="14"/>
+              <ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(-30 32 32)"/>
+            </svg>
+          </div>
+          <div class="glance-label">Planet</div>
+          <div class="glance-value">Uranus<br>Neptune</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- zodiac / constellation -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 50c18-4 28-14 36-36M38 14h12v12"/>
+              <circle cx="14" cy="50" r="2.5" fill="currentColor"/>
+              <circle cx="50" cy="14" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="glance-label">Zodiac</div>
+          <div class="glance-value">Sagittarius<br>Scorpio · Leo</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- drop / color -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
+              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
+            </svg>
+          </div>
+          <div class="glance-label">Color</div>
+          <div class="glance-value">Gray · Black<br>Blue/Green Flash</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- hexagonal / mineral group -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
+              <path d="M10 19l22 12 22-12M32 31v27"/>
+            </svg>
+          </div>
+          <div class="glance-label">Mineral Group</div>
+          <div class="glance-value">Feldspar</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- mohs / diamond -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 54 24 32 58 10 24Z"/>
+              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
+            </svg>
+          </div>
+          <div class="glance-label">Mohs Hardness</div>
+          <div class="glance-value">6 – 6.5</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- crystal system / triclinic -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 50 24 46 52 18 52 14 24Z"/>
+              <path d="M14 24h36M32 6v46M14 24l4 28M50 24l-4 28"/>
+            </svg>
+          </div>
+          <div class="glance-label">Crystal System</div>
+          <div class="glance-value">Triclinic</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN CONTENT -->
+    <div class="content-grid">
+
+      <!-- ARTICLE COLUMN -->
+      <div class="article-col">
+
+        <!-- OVERVIEW -->
+        <article class="enc-card" id="overview">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="32" cy="20" r="10"/>
+              <path d="M10 54c0-12 10-20 22-20s22 8 22 20"/>
+            </svg>
+            Overview
+          </h2>
+          <p>Labradorite is a plagioclase feldspar celebrated as much for its optical drama as for its metaphysical depth. Named for Labrador, Canada, where large deposits were first documented in the 1770s, it is recognized in crystal tradition as one of the defining stones of transformation and inner perception — a guide for thresholds, transitions, and the work of becoming.</p>
+          <p>Its signature play of color — shifting blues, greens, golds, and occasional violets visible only when light strikes the stone at just the right angle — has anchored its metaphysical identity across cultures. That hidden brilliance, present but not always apparent, is exactly how collectors and practitioners describe its energetic character: more is going on beneath the surface than what first appears.</p>
+        </article>
+
+        <!-- WHY PEOPLE REACH FOR IT -->
+        <article class="enc-card" id="reach">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
+            </svg>
+            Why People Reach For It
+          </h2>
+          <ul class="reach-list">
+            <li>
+              <span class="reach-dot"></span>
+              <span>Major life transitions — career pivots, relationship shifts, relocations — when you're between what was and what's next.</span>
+            </li>
+            <li>
+              <span class="reach-dot"></span>
+              <span>Strengthening intuition and learning to trust gut responses over rational override.</span>
+            </li>
+            <li>
+              <span class="reach-dot"></span>
+              <span>Recognizing hidden potential — in a situation, in yourself, or in what looks like an obstacle.</span>
+            </li>
+            <li>
+              <span class="reach-dot"></span>
+              <span>Protecting against energy drain and outside influence during periods of vulnerability or change.</span>
+            </li>
+            <li>
+              <span class="reach-dot"></span>
+              <span>Creative or spiritual work that benefits from expanded imagination and reduced self-censorship.</span>
+            </li>
+            <li>
+              <span class="reach-dot"></span>
+              <span>Staying grounded in personal truth while exploring unfamiliar ideas, environments, or parts of yourself.</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- MINERAL PROFILE -->
+        <article class="enc-card" id="mineral">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
+              <path d="M10 19l22 12 22-12M32 31v27"/>
+            </svg>
+            Mineral Profile
+          </h2>
+          <div class="mineral-layout">
+            <div>
+              <div class="mineral-facts">
+                <div class="mineral-fact"><span>Mineral Family</span><span>Feldspar (Plagioclase)</span></div>
+                <div class="mineral-fact"><span>Chemical Formula</span><span>(Ca,Na)(Al,Si)<sub>4</sub>O<sub>8</sub></span></div>
+                <div class="mineral-fact"><span>Crystal System</span><span>Triclinic</span></div>
+                <div class="mineral-fact"><span>Crystal Habit</span><span>Tabular, prismatic</span></div>
+                <div class="mineral-fact"><span>Mohs Hardness</span><span>6 – 6.5</span></div>
+                <div class="mineral-fact"><span>Luster</span><span>Vitreous to pearly</span></div>
+                <div class="mineral-fact"><span>Cleavage</span><span>Perfect in two directions</span></div>
+                <div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
+              </div>
+              <p class="mineral-note">Labradorite belongs to the plagioclase series of the feldspar group, occupying the labradorite–bytownite compositional range. Its iridescent color play — known as labradorescence — is caused by light scattering between thin alternating layers of two feldspar compositions with slightly different refractive indices, a phenomenon called the Schiller effect or adularescence in related feldspars.</p>
+            </div>
+            <div class="mineral-formation">
+              <h4>Formation</h4>
+              <p>Labradorite crystallizes primarily in mafic igneous rocks — gabbros, basalts, and anorthosites — formed from magmas rich in calcium, sodium, aluminum, and silica. The optical layering develops slowly as the mineral cools.</p>
+              <h4>Common Localities</h4>
+              <ul>
+                <li>Labrador, Canada (namesake deposits)</li>
+                <li>Finland — Spectrolite variety, intense vivid flash</li>
+                <li>Madagascar</li>
+                <li>Norway</li>
+                <li>United States (Oregon sunstone related)</li>
+              </ul>
+            </div>
+            <div class="crystal-diagram">
+              <svg viewBox="0 0 160 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M80 12 50 72v112l30-32 30 32V72L80 12Z"/>
+                <path d="M26 56 8 108v72l42-40V72L26 56Z"/>
+                <path d="M134 46l28 56v70l-52-34V72l24-26Z"/>
+                <path d="M80 12v132M50 72l30 20 30-20"/>
+                <path d="M26 56l22 16M134 46l-22 26"/>
+              </svg>
+            </div>
+          </div>
+        </article>
+
+        <!-- RELATED STONES -->
+        <article class="enc-card" id="related">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="32" r="9"/>
+              <circle cx="46" cy="32" r="9"/>
+              <path d="M27 32h10"/>
+            </svg>
+            Related Stones
+          </h2>
+          <div class="related-grid">
+            <div class="rel-card">
+              <div class="rel-card-head">Similar Energy <span>→</span></div>
+              <a class="stone-link-row" href="#">
+                <span class="stone-dot-circle stone-dot-moon"></span>
+                <div>
+                  <b>Moonstone</b>
+                  <span>Intuition &amp; new beginnings</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="#">
+                <span class="stone-dot-circle stone-dot-violet"></span>
+                <div>
+                  <b>Iolite</b>
+                  <span>Inner vision &amp; direction</span>
+                </div>
+              </a>
+            </div>
+            <div class="rel-card">
+              <div class="rel-card-head">Pairs Well With <span>→</span></div>
+              <a class="stone-link-row" href="#">
+                <span class="stone-dot-circle stone-dot-black"></span>
+                <div>
+                  <b>Black Tourmaline</b>
+                  <span>Grounding &amp; protection</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="#">
+                <span class="stone-dot-circle stone-dot-white"></span>
+                <div>
+                  <b>Clear Quartz</b>
+                  <span>Amplification &amp; clarity</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /article-col -->
+
+      <!-- RIGHT RAIL -->
+      <aside class="right-rail">
+
+        <!-- IN ONE LINE -->
+        <section class="rail-card">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 4 52 36H12L32 4Z"/>
+              <path d="M22 36 32 60l10-24"/>
+            </svg>
+            In One Line
+          </h2>
+          <div class="one-line-wrap">Thresholds &amp; Transformation</div>
+          <p class="one-line-desc">Labradorite is the stone for standing at the edge of change — it supports transformation, deepens intuition, and reveals what's hidden in plain sight.</p>
+        </section>
+
+        <!-- ENERGETIC THEMES -->
+        <section class="rail-card" id="themes">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
+              <circle cx="32" cy="32" r="7"/>
+            </svg>
+            Energetic Themes
+          </h2>
+
+          <div class="theme-tier-label">Primary</div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 8 52 30 32 56 12 30Z"/>
+                <path d="M12 30h40M32 8 12 30M32 8 52 30"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Transformation</h3>
+              <p>Strongest consensus across foundational books and modern crystal traditions. Tied directly to labradorescence as metaphor.</p>
+            </div>
+          </div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
+                <circle cx="32" cy="32" r="7"/>
+                <circle cx="32" cy="32" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Intuition</h3>
+              <p>Consistent across books and online sources. Associated with Third Eye activation and inner perception.</p>
+            </div>
+          </div>
+
+          <hr class="theme-divider">
+          <div class="theme-tier-label">Secondary</div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/>
+                <path d="M22 34l8 8 12-14"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Protection</h3>
+              <p>Frequently cited as protective of the aura against energy drain during times of change and vulnerability.</p>
+            </div>
+          </div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 8c0 14 18 20 18 34a18 18 0 0 1-36 0C14 28 32 22 32 8Z"/>
+                <path d="M24 44c2-4 12-4 14 0" opacity=".6"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Hidden Potential</h3>
+              <p>Tied to the stone's optical property — inner beauty not immediately visible. Moderate emphasis across sources.</p>
+            </div>
+          </div>
+
+          <hr class="theme-divider">
+          <div class="theme-tier-label">Occasional Associations</div>
+          <div class="occasional-tags">
+            <span class="occ-tag">Imagination</span>
+            <span class="occ-tag">Courage</span>
+            <span class="occ-tag">New Beginnings</span>
+            <span class="occ-tag">Balance</span>
+            <span class="occ-tag">Mystery</span>
+          </div>
+          <p style="font-size:10px;color:var(--ink3);margin:10px 0 0;letter-spacing:0.04em">Themes weighted by book &amp; source consensus.</p>
+        </section>
+
+        <!-- COLLECTOR & CURIOSITY NOTES -->
+        <section class="rail-card" id="notes">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 8h28l10 10v38H14Z"/>
+              <path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/>
+            </svg>
+            Collector &amp; Curiosity Notes
+          </h2>
+          <div class="note-list">
+
+            <div class="note-row">
+              <div class="note-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
+                  <path d="M10 19l22 12 22-12M32 31v27"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Variety Note</strong>
+                <p>Spectrolite is a vivid Finnish variety prized for unusually intense, full-spectrum color flash — considered among the finest Labradorite in the world.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 38c16-22 32-22 48 0M14 47c12-11 24-11 36 0"/>
+                  <path d="M32 6 28 20M32 6 36 20"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Historical Note</strong>
+                <p>Inuit peoples associated Labradorite with the frozen lights trapped in ancient coastal rocks — one origin of its connection to the northern lights.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
+                  <circle cx="32" cy="32" r="8"/>
+                  <path d="M28 28l8 8M36 28l-8 8" opacity=".5"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Optical Note</strong>
+                <p>Labradorescence is caused by light interference between thin internal layers — it is a structural effect, not pigment. The flash is real; the color is physics.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="32" cy="32" r="20"/>
+                  <path d="M32 18v6M32 40v6M18 32h6M40 32h6"/>
+                  <circle cx="32" cy="32" r="4"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Care Note</strong>
+                <p>Avoid prolonged direct sunlight, which can dull labradorescence over time. Clean gently with mild soap and lukewarm water; avoid ultrasonic cleaners.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </aside><!-- /right-rail -->
+
+    </div><!-- /content-grid -->
+
+    <!-- ENTRY NAV -->
+    <nav class="entry-nav-wrap" aria-label="Browse encyclopedia entries">
+      <a href="#" class="entry-nav-link">
+        <span>←</span>
+        <div>
+          <small>Previous</small>
+          <b>Lepidolite</b>
+        </div>
+      </a>
+      <a href="#" class="entry-nav-link entry-nav-random">
+        <span>✦</span>
+        <div>
+          <small>Random</small>
+          <b>Surprise me</b>
+        </div>
+      </a>
+      <a href="#" class="entry-nav-link">
+        <div>
+          <small>Next</small>
+          <b>Moonstone</b>
+        </div>
+        <span>→</span>
+      </a>
+    </nav>
+
+    <!-- BOTTOM CTA -->
+    <div class="enc-cta">
+      <div>
+        <h3>The right stone. The right moment.</h3>
+        <p>Explore 333 entries with clarity, care, and curiosity.</p>
+      </div>
+      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+    </div>
+
+  </main>
+</div><!-- /enc-page -->
+
+<!-- FOOTER — identical to main site -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="site-footer-eyebrow">A project by</span>
+    <a href="#" class="site-footer-logo">Still Point <em>Lapidary</em></a>
+    <p class="site-footer-tagline">Crystal reference library &amp; collection tracker<br>from Still Point {technodelic} Studio.</p>
+    <p class="site-footer-location">Dallas / Fort Worth, Texas</p>
+    <div class="site-footer-links">
+      <a href="../encyclopedia.html" class="site-footer-link">Encyclopedia</a>
+      <span class="site-footer-dot">·</span>
+      <a href="../encyclopedia.html?tab=identify" class="site-footer-link">Identify</a>
+      <span class="site-footer-dot">·</span>
+      <a href="../encyclopedia.html?tab=101" class="site-footer-link">Crystals 101</a>
+    </div>
+  </div>
+  <div class="site-footer-legal">
+    © 2024 – 2026 Still Point {technodelic} Studio. All rights reserved.
+  </div>
+</footer>
+
+</div><!-- /app-shell -->
+
+<script>
+/* Scroll-spy: highlight the active sidebar nav link */
+(function () {
+  const sections = ['hero', 'overview', 'reach', 'glance', 'themes', 'mineral', 'notes', 'related'];
+  const navLinks  = document.querySelectorAll('.side-nav a');
+  const hrefs     = Array.from(navLinks).map(a => a.getAttribute('href').replace('#',''));
+
+  function onScroll () {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 160) current = id;
+    });
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href').replace('#','');
+      a.classList.toggle('active', href === current || (current === 'hero' && href === 'top'));
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
