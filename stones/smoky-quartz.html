@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="description" content="Smoky Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
+<meta property="og:title" content="Smoky Quartz | Still Point Lapidary Encyclopedia">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#6b3636">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Smoky Quartz | Still Point Lapidary Encyclopedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* ── Encyclopedia Entry Page ── */
+
+/* Chakra-keyed design tokens — Root for Smoky Quartz.
+   Swap these 8 values per stone based on primary_chakra. */
+:root {
+  --ck-pill-bg:    #e6d0d0;
+  --ck-pill-text:  #6b3636;
+  --ck-btn-bg:     #e6d0d0;
+  --ck-btn-border: #c09090;
+  --ck-btn-text:   #6b3636;
+  --ck-wash:       #f6f0f0;
+  --ck-wash-border:#c09090;
+  --ck-accent:     #6b3636;
+  --ck-deep:       #512727;
+
+  /* Page layout */
+  --enc-radius: 12px;
+  --enc-border: 0.5px solid var(--border);
+  --enc-shadow: 0 4px 16px rgba(42,37,32,0.07);
+  --enc-max:    1420px;
+  --sidebar-w:  210px;
+}
+
+/* ── LAYOUT SHELL ── */
+.enc-page {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0,1fr);
+  gap: 32px;
+  max-width: var(--enc-max);
+  margin: 0 auto;
+  padding: 32px 28px 72px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ── */
+.enc-sidebar {
+  position: sticky;
+  top: 110px;
+  max-height: calc(100vh - 128px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.enc-sidebar::-webkit-scrollbar { display: none; }
+
+.enc-breadcrumb {
+  font-size: 12.5px;
+  color: var(--ink3);
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+.enc-breadcrumb a { color: var(--ink3); text-decoration: none; }
+.enc-breadcrumb a:hover { color: var(--accent); }
+.enc-breadcrumb b { color: var(--ink2); }
+
+/* Nav card — mirrors c101-layout/c101-sidebar */
+.side-nav-card {
+  background: var(--stone2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  padding: 8px 0;
+  overflow: hidden;
+}
+.side-nav-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  padding: 6px 16px 8px;
+}
+.side-nav a {
+  display: block;
+  padding: 10px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: var(--ink2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.13s;
+}
+.side-nav a:hover { background: var(--stone); color: var(--ink); }
+.side-nav a.active {
+  background: var(--white);
+  border-left-color: var(--ck-accent);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Editorial standards mini-card */
+.sidebar-standards {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  background: var(--white);
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.sidebar-standards p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.sidebar-standards a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.sidebar-standards a:hover { color: var(--ink); }
+
+/* ── MAIN CONTENT ── */
+.enc-main { min-width: 0; }
+
+/* ── HERO ── */
+.enc-hero {
+  display: grid;
+  grid-template-columns: 310px minmax(0,1fr);
+  gap: 40px;
+  align-items: stretch;
+  margin-bottom: 24px;
+  position: static;
+  overflow: visible;
+  height: auto;
+  background-image: none;
+  background-size: auto;
+  background-position: initial;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.enc-hero::after {
+  display: none;
+}
+.stone-photo-wrap {
+  border-radius: var(--enc-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(42,37,32,0.14);
+  aspect-ratio: 1/1;
+  background: var(--stone2);
+  flex-shrink: 0;
+  position: relative;
+}
+.stone-photo-wrap::after {
+  content: 'Photo coming soon';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  z-index: 0;
+}
+.stone-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-right { padding-top: 4px; display: flex; flex-direction: column; }
+
+.stone-name {
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+.theme-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+.theme-pill {
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 7px 15px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ck-accent);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  background: var(--white);
+  overflow: hidden;
+  margin: 0 0 18px;
+  box-shadow: var(--enc-shadow);
+}
+.identity-tile {
+  padding: 14px 13px;
+  border-right: 0.5px solid var(--border);
+}
+.identity-tile:last-child { border-right: 0; }
+.tile-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+.tile-eyebrow svg { width: 13px; height: 13px; flex-shrink: 0; }
+.identity-tile p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* Buttons */
+.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.enc-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0.5px solid var(--border);
+  background: transparent;
+  color: var(--ink2);
+}
+.enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.enc-btn-primary {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.enc-btn-primary:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
+.enc-btn svg { width: 13px; height: 13px; }
+
+/* ── AT A GLANCE ── */
+.glance-panel {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 20px 24px 18px;
+  margin-bottom: 20px;
+}
+.panel-title {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+
+.glance-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+.glance-item {
+  padding: 0 10px;
+  border-right: 0.5px solid var(--border);
+  text-align: center;
+}
+.glance-item:last-child { border-right: 0; }
+.glance-item:first-child { padding-left: 0; }
+
+.glance-icon-tile {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 8px;
+  border-radius: 10px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.glance-icon-tile svg {
+  width: 22px;
+  height: 22px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.glance-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 5px;
+}
+.glance-value {
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ── TWO-COLUMN CONTENT GRID ── */
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+.article-col { display: grid; gap: 16px; }
+
+/* ── ARTICLE SECTION CARDS ── */
+.enc-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 24px 26px;
+}
+.enc-card-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent2);
+  margin-bottom: 6px;
+}
+.enc-card h2 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 0.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.enc-card h2 svg {
+  width: 19px;
+  height: 19px;
+  color: var(--ck-accent);
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+.enc-card p {
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--ink2);
+  margin: 0 0 14px;
+}
+.enc-card p:last-child { margin-bottom: 0; }
+
+/* Why People Reach For It */
+.reach-rows { display: grid; gap: 0; }
+.reach-row {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--border2);
+  align-items: baseline;
+}
+.reach-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.reach-row:first-child { padding-top: 0; }
+.reach-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-top: 3px;
+}
+.reach-desc {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.68;
+}
+
+/* ── MINERAL PROFILE CARD ── */
+.mineral-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 24px;
+  align-items: start;
+}
+.mineral-facts { display: grid; gap: 0; }
+.mineral-fact {
+  display: grid;
+  grid-template-columns: minmax(0,120px) minmax(0,1fr);
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 0.5px solid var(--border2);
+  font-size: 13px;
+}
+.mineral-fact:last-of-type { border-bottom: 0; }
+.mineral-fact span:first-child {
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  padding-right: 8px;
+}
+.mineral-fact span:last-child { color: var(--ink2); }
+.mineral-note {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink2);
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 0.5px solid var(--border);
+}
+.mineral-formation h4 {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.mineral-formation h4 + h4 { margin-top: 14px; }
+.mineral-formation p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.68;
+  margin: 0 0 10px;
+}
+.mineral-formation ul {
+  margin: 0;
+  padding-left: 16px;
+}
+.mineral-formation li {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.72;
+}
+
+/* ── RELATED STONES ── */
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.rel-card {
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--stone);
+}
+.rel-card-head {
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.stone-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 0.5px solid var(--border2);
+  transition: opacity 0.13s;
+}
+.stone-link-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.stone-link-row:hover { opacity: 0.7; }
+.stone-dot-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stone-dot-black     { background: linear-gradient(135deg,#2c2830,#5a5260); }
+.stone-dot-obsidian  { background: linear-gradient(135deg,#1a1820,#3a3545); }
+.stone-dot-violet    { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
+.stone-dot-white     { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
+.stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+.stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
+
+/* ── RIGHT RAIL ── */
+.right-rail {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 110px;
+}
+.rail-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 20px;
+}
+.rail-card h2 {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.rail-card h2 svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ck-accent);
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+
+/* Known For */
+.one-line-wrap {
+  display: inline-block;
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ck-accent);
+  margin-bottom: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+.one-line-desc {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Energetic Themes */
+.theme-tier-label {
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  margin: 16px 0 10px;
+}
+.theme-tier-label:first-child { margin-top: 0; }
+.theme-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+.theme-row + .theme-row { margin-top: 16px; }
+.theme-icon-tile {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  flex-shrink: 0;
+}
+.theme-icon-tile svg {
+  width: 21px;
+  height: 21px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.theme-row h3 {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0 0 2px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.theme-row p {
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.58;
+}
+.theme-divider {
+  border: none;
+  border-top: 0.5px solid var(--border2);
+  margin: 12px 0 0;
+}
+
+.occasional-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.occ-tag {
+  font-size: 12px;
+  color: var(--ck-accent);
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.theme-source-note {
+  font-size: 10px;
+  color: var(--ink3);
+  margin: 10px 0 0;
+  letter-spacing: 0.04em;
+}
+
+/* Collector Notes */
+.note-list { display: grid; gap: 8px; }
+.note-row {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  background: var(--stone);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  align-items: start;
+}
+.note-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.note-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.note-row strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.note-row p {
+  font-size: 12.5px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.62;
+}
+
+/* ── ENTRY NAV ── */
+.entry-nav-wrap {
+  margin-top: 20px;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.entry-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--stone);
+  padding: 9px 18px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: all 0.13s;
+}
+.entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.entry-nav-link > div { text-align: center; }
+.entry-nav-link small { font-size: 9px; letter-spacing: 0.12em; color: var(--ink3); display: block; margin-bottom: 1px; }
+.entry-nav-link:hover small { color: rgba(255,255,255,0.55); }
+.entry-nav-link b {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  display: block;
+}
+.entry-nav-random {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.entry-nav-random:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
+
+/* ── BOTTOM CTA ── */
+.enc-cta {
+  margin-top: 18px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--enc-radius);
+  padding: 26px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%),
+    radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%);
+}
+.enc-cta h3 {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.enc-cta p {
+  font-size: 15px;
+  color: rgba(250,248,246,0.7);
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+.enc-cta button {
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 11px 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.enc-cta button:hover { background: var(--stone2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .enc-page { grid-template-columns: 1fr; gap: 20px; }
+  .enc-sidebar { display: none; }
+  .enc-hero { grid-template-columns: 1fr; gap: 24px; }
+  .stone-photo-wrap { aspect-ratio: 16/9; max-height: 300px; }
+  .identity-grid { grid-template-columns: repeat(2, 1fr); }
+  .content-grid { grid-template-columns: 1fr; }
+  .right-rail { position: static; }
+  .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
+  .glance-item { border-right: 0; padding: 0 8px; }
+  .mineral-layout { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .enc-page { padding: 16px 16px 48px; }
+  .stone-name { font-size: 42px; }
+  .identity-grid { grid-template-columns: 1fr 1fr; }
+  .glance-grid { grid-template-columns: repeat(3, 1fr); }
+  .enc-cta { flex-direction: column; text-align: center; }
+  .related-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="../index.html" class="brand-home" aria-label="Return to home">
+    <div class="brand-block">
+      <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+      <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+      </div>
+    </div>
+  </a>
+  <div class="topbar-right">
+    <a href="../encyclopedia.html" class="btn btn-sm">← Encyclopedia</a>
+  </div>
+</header>
+
+<!-- PAGE -->
+<div class="enc-page" id="top">
+
+  <!-- SIDEBAR NAV -->
+  <aside class="enc-sidebar">
+    <div class="enc-breadcrumb">
+      <a href="../index.html">Home</a> ›
+      <a href="../encyclopedia.html">Encyclopedia</a> ›
+      <b>Smoky Quartz</b>
+    </div>
+
+    <div class="side-nav-card">
+      <div class="side-nav-label">On this page</div>
+      <nav class="side-nav">
+        <a href="#top"      class="active">Top</a>
+        <a href="#overview">Overview</a>
+        <a href="#reach">Why People Reach For It</a>
+        <a href="#glance">At a Glance</a>
+        <a href="#themes">Energetic Themes</a>
+        <a href="#mineral">Mineral Profile</a>
+        <a href="#notes">Collector Notes</a>
+        <a href="#related">Related Stones</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-standards">
+      <p>Entries are researched from expert books and trusted online sources.</p>
+      <a href="#">Our Editorial Standards →</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="enc-main">
+
+    <!-- HERO -->
+    <section class="enc-hero" id="hero">
+      <div class="stone-photo-wrap">
+        <!-- Photo to be added when available -->
+      </div>
+
+      <div class="hero-right">
+        <h1 class="stone-name">Smoky Quartz</h1>
+
+        <div class="theme-pills">
+          <span class="theme-pill">Grounding</span>
+          <span class="theme-pill">Protection</span>
+          <span class="theme-pill">Transmutation</span>
+        </div>
+
+        <div class="identity-grid">
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
+              </svg>
+              Best For
+            </div>
+            <p>Grounded presence and practical clarity</p>
+          </div>
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/>
+              </svg>
+              Use When
+            </div>
+            <p>You feel unmoored, overstimulated, or pulled toward the abstract and want a steadier, more grounded sense of presence.</p>
+          </div>
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/>
+                <path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/>
+              </svg>
+              Pairs Well With
+            </div>
+            <p>Black Tourmaline<br>Amethyst<br>Clear Quartz</p>
+          </div>
+          <div class="identity-tile">
+            <div class="tile-eyebrow">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="32" cy="32" r="22"/>
+                <path d="M32 10v44M10 32h44"/>
+              </svg>
+              Primary Chakra
+            </div>
+            <p>Root</p>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="enc-btn enc-btn-primary">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
+            </svg>
+            Save to Collection
+          </button>
+          <button class="enc-btn">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
+            </svg>
+            Add to Wishlist
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AT A GLANCE -->
+    <section class="glance-panel" id="glance">
+      <h2 class="panel-title">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
+          <circle cx="32" cy="32" r="8"/>
+        </svg>
+        At a Glance
+      </h2>
+      <div class="glance-grid">
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8 52 30 32 56 12 30Z"/>
+              <path d="M12 30h40"/>
+              <path d="M22 30 32 8l10 22"/>
+              <path d="M22 30 32 56l10-26"/>
+            </svg>
+          </div>
+          <div class="glance-label">Primary Themes</div>
+          <div class="glance-value">Grounding<br>Protection · Transmutation</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="32" cy="32" r="22"/>
+              <path d="M32 10v44M10 32h44"/>
+              <circle cx="32" cy="32" r="6" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="glance-label">Chakra</div>
+          <div class="glance-value">Root</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- earth element -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 44h48M16 44 32 16l16 28"/>
+              <path d="M24 44l8-14 8 14"/>
+            </svg>
+          </div>
+          <div class="glance-label">Element</div>
+          <div class="glance-value">Earth</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 50c18-4 28-14 36-36M38 14h12v12"/>
+              <circle cx="14" cy="50" r="2.5" fill="currentColor"/>
+              <circle cx="50" cy="14" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="glance-label">Zodiac</div>
+          <div class="glance-value">Sagittarius<br>Capricorn</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8 54 45v5H10v-5Z"/>
+              <path d="M20 50V38l12-14 12 14v12"/>
+              <path d="M28 50v-8h8v8"/>
+            </svg>
+          </div>
+          <div class="glance-label">Formation</div>
+          <div class="glance-value">Igneous,<br>hydrothermal</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 54 24 32 58 10 24Z"/>
+              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
+            </svg>
+          </div>
+          <div class="glance-label">Hardness</div>
+          <div class="glance-value">7</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
+              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
+            </svg>
+          </div>
+          <div class="glance-label">Color Range</div>
+          <div class="glance-value">Pale tan to deep<br>chocolate brown</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN CONTENT -->
+    <div class="content-grid">
+
+      <!-- ARTICLE COLUMN -->
+      <div class="article-col">
+
+        <!-- OVERVIEW -->
+        <article class="enc-card" id="overview">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="32" cy="20" r="10"/>
+              <path d="M10 54c0-12 10-20 22-20s22 8 22 20"/>
+            </svg>
+            Overview
+          </h2>
+          <p>Smoky Quartz is known for grounding, practical awareness, and the ability to bring abstract intentions back into daily life. It is often chosen by people who feel scattered, overstimulated, or overly focused on the conceptual and want a steadier connection to the body, the present moment, and concrete action.</p>
+          <p>Its traditions also emphasize transmutation. Rather than describing this as a literal energetic mechanism, crystal practice uses Smoky Quartz as a symbol and companion for meeting heavy experiences with greater steadiness. This combination of grounding, protection, and practical follow-through gives it a distinct place among stones used for meditation, transition, and everyday stability.</p>
+        </article>
+
+        <!-- WHY PEOPLE REACH FOR IT -->
+        <article class="enc-card" id="reach">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
+            </svg>
+            Why People Reach For It
+          </h2>
+          <div class="reach-rows">
+            <div class="reach-row">
+              <span class="reach-label">Getting Grounded</span>
+              <span class="reach-desc">Chosen when energy feels scattered, unanchored, or too focused on the abstract, and a return to practical, embodied awareness is needed.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Transforming Heavy Energy</span>
+              <span class="reach-desc">Traditionally associated with shifting stagnant or heavy energy toward a steadier state, Smoky Quartz is used when other protective stones feel too passive or detached.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Manifesting Goals</span>
+              <span class="reach-desc">Connected to drawing the ethereal into physical form, Smoky Quartz is often chosen to help translate intentions and goals into organized, practical action.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Protection During Spiritual Work</span>
+              <span class="reach-desc">A traditional grounding companion during meditation or expanded-awareness practices, used to keep the practitioner anchored and clear throughout.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Daily Stability</span>
+              <span class="reach-desc">Chosen during periods of prolonged stress or overstimulation for its association with calm, steady presence rather than reactive energy.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- MINERAL PROFILE -->
+        <article class="enc-card" id="mineral">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
+              <path d="M10 19l22 12 22-12M32 31v27"/>
+            </svg>
+            Mineral Profile
+          </h2>
+          <div class="mineral-layout">
+            <div>
+              <div class="mineral-facts">
+                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
+                <div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
+                <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
+                <div class="mineral-fact"><span>Crystal Habit</span><span>Hexagonal prism</span></div>
+                <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
+                <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+                <div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
+              </div>
+            </div>
+            <div class="mineral-formation">
+              <h4>Formation</h4>
+              <p>Smoky Quartz forms in igneous and hydrothermal environments. Its color develops when natural gamma irradiation acts on trace aluminum within the crystal lattice — a process that can also be replicated artificially.</p>
+              <h4>Common Localities</h4>
+              <ul>
+                <li>Brazil</li>
+                <li>Madagascar</li>
+                <li>Switzerland</li>
+                <li>United States</li>
+                <li>Scotland (Cairngorm Mountains)</li>
+              </ul>
+            </div>
+          </div>
+          <p class="mineral-note">Smoky Quartz is found on every continent and is durable enough for most uses at hardness 7. Its color is generally stable under normal conditions, though sustained heat or prolonged direct sunlight can lighten some specimens. Clean with mild soap and water and store separately from harder minerals that could scratch the surface.</p>
+        </article>
+
+        <!-- RELATED STONES -->
+        <article class="enc-card" id="related">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="32" r="9"/>
+              <circle cx="46" cy="32" r="9"/>
+              <path d="M27 32h10"/>
+            </svg>
+            Related Stones
+          </h2>
+          <div class="related-grid">
+            <div class="rel-card">
+              <div class="rel-card-head">Similar Energy <span>→</span></div>
+              <a class="stone-link-row" href="#">
+                <span class="stone-dot-circle stone-dot-black"></span>
+                <div>
+                  <b>Black Tourmaline</b>
+                  <span>Grounding &amp; energetic boundaries</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="#">
+                <span class="stone-dot-circle stone-dot-obsidian"></span>
+                <div>
+                  <b>Obsidian</b>
+                  <span>Transmutation &amp; deep grounding</span>
+                </div>
+              </a>
+            </div>
+            <div class="rel-card">
+              <div class="rel-card-head">Pairs Well With <span>→</span></div>
+              <a class="stone-link-row" href="/stones/amethyst">
+                <span class="stone-dot-circle stone-dot-violet"></span>
+                <div>
+                  <b>Amethyst</b>
+                  <span>Grounded presence &amp; spiritual clarity</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="/stones/clear-quartz">
+                <span class="stone-dot-circle stone-dot-white"></span>
+                <div>
+                  <b>Clear Quartz</b>
+                  <span>Amplification &amp; focused intention</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /article-col -->
+
+      <!-- RIGHT RAIL -->
+      <aside class="right-rail">
+
+        <!-- KNOWN FOR -->
+        <section class="rail-card">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 4 52 36H12L32 4Z"/>
+              <path d="M22 36 32 60l10-24"/>
+            </svg>
+            Known For
+          </h2>
+          <div class="one-line-wrap">Grounding and Transmutation</div>
+          <p class="one-line-desc">Smoky Quartz is known for anchoring scattered energy into physical presence and practical awareness. In crystal traditions it is valued as a grounding companion that is also associated with transforming heavy or stagnant energy into a steadier, more settled state.</p>
+        </section>
+
+        <!-- ENERGETIC THEMES -->
+        <section class="rail-card" id="themes">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
+              <circle cx="32" cy="32" r="7"/>
+            </svg>
+            Energetic Themes
+          </h2>
+
+          <div class="theme-tier-label">Primary</div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <!-- ground / root -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 12v32M20 32l12 12 12-12"/>
+                <path d="M16 52h32"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Grounding</h3>
+              <p>Its Root Chakra association centers on embodiment, present-moment awareness, and practical engagement. Smoky Quartz is especially valued when reflection or spiritual practice needs a stronger connection to ordinary responsibilities and physical reality.</p>
+            </div>
+          </div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <!-- shield / protection -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/>
+                <path d="M22 34l8 8 12-14"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Protection &amp; Transmutation</h3>
+              <p>Smoky Quartz carries a long tradition as a protective talisman with documented ceremonial and cultural use across many centuries. Its protective quality is understood not as deflection but as transformation: traditionally associated with shifting heavy or stagnant energy toward a steadier, more settled state.</p>
+            </div>
+          </div>
+
+          <hr class="theme-divider">
+          <div class="theme-tier-label">Secondary</div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <!-- manifestation / arrow down into form -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 8v36M20 32l12 12 12-12"/>
+                <path d="M16 52h32"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Manifestation</h3>
+              <p>Connected to drawing inspiration into physical form, Smoky Quartz is linked with the Root Chakra's relationship to material reality. It is used to support the translation of spiritual intentions into concrete, organized action.</p>
+            </div>
+          </div>
+
+          <div class="theme-row">
+            <div class="theme-icon-tile">
+              <!-- checklist / organization -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 8h28l10 10v38H14Z"/>
+                <path d="M38 8v10h14M22 30h20M22 38h20M22 46h12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Practicality &amp; Organization</h3>
+              <p>A well-established secondary association connects Smoky Quartz to practical thinking, realistic planning, and the clear-headed follow-through that keeps goals from remaining abstract.</p>
+            </div>
+          </div>
+
+          <hr class="theme-divider">
+          <div class="theme-tier-label">Occasional Associations</div>
+          <div class="occasional-tags">
+            <span class="occ-tag">Purification</span>
+          </div>
+        </section>
+
+        <!-- COLLECTOR NOTES -->
+        <section class="rail-card" id="notes">
+          <h2>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 8h28l10 10v38H14Z"/>
+              <path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/>
+            </svg>
+            Collector &amp; Curiosity Notes
+          </h2>
+          <div class="note-list">
+
+            <div class="note-row">
+              <div class="note-icon">
+                <!-- map / location -->
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M32 8c-8 0-14 6-14 14 0 10 14 28 14 28s14-18 14-28c0-8-6-14-14-14Z"/>
+                  <circle cx="32" cy="22" r="4"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Scottish Heritage</strong>
+                <p>Cairngorm, a Scottish variety of Smoky Quartz, has a long association with Highland dress and decorative objects. It appears in brooches, weapon fittings, and traditional accessories, giving the material a distinctive place in Scottish lapidary and cultural history.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <!-- radiation / rays -->
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="32" cy="32" r="8"/>
+                  <path d="M32 8v10M32 46v10M8 32h10M46 32h10M16 16l7 7M41 41l7 7M16 48l7-7M41 23l7-7"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Color and Irradiation</strong>
+                <p>The smoky color develops when natural irradiation acts on trace aluminum in the quartz lattice. Similar coloration can also be produced artificially. Very dark color alone does not establish treatment, so provenance or gemological testing may be needed when natural origin matters.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <!-- dark gem -->
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M32 6 54 24 32 58 10 24Z"/>
+                  <path d="M10 24h44"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Morion</strong>
+                <p>Morion is a traditional name for very dark brown to nearly black Smoky Quartz. It shares the same mineral identity as paler material and may be naturally or artificially colored. Treatment cannot be determined reliably from darkness alone.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <!-- mountain -->
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 52 28 20l10 14 6-8 12 26Z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Cairngorm vs. Standard Smoky Quartz</strong>
+                <p>Cairngorm is a warm brownish-yellow variety specific to Scottish deposits, distinct in tone from the cooler gray-browns of Swiss and Brazilian material. It is collected for provenance as much as color, and authentic pieces command interest among Highland dress and Scottish heritage collectors.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </aside><!-- /right-rail -->
+
+    </div><!-- /content-grid -->
+
+    <!-- ENTRY NAV -->
+    <nav class="entry-nav-wrap" aria-label="Browse encyclopedia entries">
+      <a href="#" class="entry-nav-link">
+        <span>←</span>
+        <div>
+          <small>Previous</small>
+          <b>Selenite</b>
+        </div>
+      </a>
+      <a href="#" class="entry-nav-link entry-nav-random">
+        <div>
+          <small>Random</small>
+          <b>Surprise me</b>
+        </div>
+      </a>
+      <a href="#" class="entry-nav-link">
+        <div>
+          <small>Next</small>
+          <b>Tiger's Eye</b>
+        </div>
+        <span>→</span>
+      </a>
+    </nav>
+
+    <!-- BOTTOM CTA -->
+    <div class="enc-cta">
+      <div>
+        <h3>The right stone. The right moment.</h3>
+        <p>Explore 333 entries with clarity, care, and curiosity.</p>
+      </div>
+      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+    </div>
+
+  </main>
+</div><!-- /enc-page -->
+
+<footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
+  <div style="max-width:520px;margin:0 auto">
+    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+    <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+      <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
+    </div>
+  </div>
+  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+    © 2026 Still Point {technodelic} Studio
+  </div>
+</footer>
+
+</div><!-- /app-shell -->
+
+<script>
+/* Scroll-spy: highlight the active sidebar nav link */
+(function () {
+  const sections = ['hero', 'overview', 'reach', 'glance', 'themes', 'mineral', 'notes', 'related'];
+  const navLinks  = document.querySelectorAll('.side-nav a');
+
+  function onScroll () {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 160) current = id;
+    });
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href').replace('#','');
+      a.classList.toggle('active', href === current || (current === 'hero' && href === 'top'));
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
