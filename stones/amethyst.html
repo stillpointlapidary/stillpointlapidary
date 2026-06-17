@@ -346,6 +346,8 @@
 .mineral-formation h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
 .mineral-formation h4 + h4 { margin-top: 14px; }
 .mineral-formation p { font-size: 13px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
+.mineral-formation ul { margin: 0; padding-left: 16px; }
+.mineral-formation li { font-size: 13px; color: var(--ink2); line-height: 1.72; }
 
 .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .rel-card { border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; background: var(--stone); }
@@ -354,10 +356,10 @@
 .stone-link-row:last-child { border-bottom: 0; padding-bottom: 0; }
 .stone-link-row:hover { opacity: 0.7; }
 .stone-dot-circle { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
-.stone-dot-violet { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
-.stone-dot-blue   { background: linear-gradient(135deg,#c0d0e8,#6080b0); }
-.stone-dot-white  { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
-.stone-dot-rose   { background: linear-gradient(135deg,#f0d8d8,#c09090); }
+.stone-dot-violet    { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
+.stone-dot-lavender  { background: linear-gradient(135deg,#ddd4ea,#9e8fbc); }
+.stone-dot-white     { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
+.stone-dot-rose      { background: linear-gradient(135deg,#f0d8d8,#c09090); }
 .stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
 .stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
 
@@ -534,8 +536,8 @@
       <div class="hero-right">
         <h1 class="stone-name">Amethyst</h1>
         <div class="theme-pills">
-          <span class="theme-pill">Protection</span>
           <span class="theme-pill">Calm</span>
+          <span class="theme-pill">Protection</span>
           <span class="theme-pill">Intuition</span>
         </div>
         <div class="identity-grid">
@@ -544,21 +546,21 @@
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/></svg>
               Best For
             </div>
-            <p>Quieting the mind, deepening spiritual connection, and creating energetic protection</p>
+            <p>Quiet reflection and spiritual clarity</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/></svg>
               Use When
             </div>
-            <p>Your thoughts feel crowded or overstimulated, you want a clearer atmosphere for meditation or reflection, or you are working to interrupt a habit or pattern.</p>
+            <p>Your thoughts feel crowded or overstimulated and you want a calmer atmosphere for reflection, meditation, or inward focus.</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/></svg>
               Pairs Well With
             </div>
-            <p>To be finalized</p>
+            <p>Clear Quartz<br>Rose Quartz<br>Smoky Quartz</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
@@ -594,7 +596,7 @@
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 30 32 56 12 30Z"/><path d="M12 30h40"/><path d="M22 30 32 8l10 22"/><path d="M22 30 32 56l10-26"/></svg>
           </div>
           <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Protection<br>Calm · Intuition</div>
+          <div class="glance-value">Calm<br>Protection · Intuition</div>
         </div>
 
         <div class="glance-item">
@@ -607,6 +609,7 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
+            <!-- wind element -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 10 12 44h40Z"/><path d="M22 44c0 8 20 8 20 0"/></svg>
           </div>
           <div class="glance-label">Element</div>
@@ -626,7 +629,7 @@
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 54 45v5H10v-5Z"/><path d="M20 50V38l12-14 12 14v12"/><path d="M28 50v-8h8v8"/></svg>
           </div>
           <div class="glance-label">Formation</div>
-          <div class="glance-value">Volcanic cavities, hydrothermal veins</div>
+          <div class="glance-value">Volcanic cavities,<br>hydrothermal veins</div>
         </div>
 
         <div class="glance-item">
@@ -658,8 +661,8 @@
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="20" r="10"/><path d="M10 54c0-12 10-20 22-20s22 8 22 20"/></svg>
             Overview
           </h2>
-          <p>Amethyst is one of the most widely recognized stones in crystal traditions, valued across cultures for protection, purification, spiritual connection, and calm. Both The Crystal Bible and The Book of Stones identify protection and purification as its central properties, alongside Divine connection, peace, and the release of addictive or compulsive patterns.</p>
-          <p>Its calm quality is not passivity. Amethyst traditions consistently describe a stone that quiets distraction in order to make space for deeper awareness and inward focus. This makes it a natural choice for meditation, contemplative practice, and periods when mental or emotional noise needs to settle before clarity can surface.</p>
+          <p>Amethyst is one of the most widely recognized stones in crystal traditions, valued for calm, protection, purification, and spiritual awareness. Its appeal lies in the way these qualities work together: it is not simply associated with stillness, but with the kind of quiet that makes deeper reflection, intuition, and perspective easier to access.</p>
+          <p>Its connection to the Third Eye and Crown Chakras gives Amethyst a distinctly contemplative identity. People often reach for it when mental noise feels crowded, when meditation needs a clearer focus, or when emotional intensity makes it difficult to step back and see a situation with steadiness. Its long history in jewelry, ritual objects, and personal talismans has helped preserve that reputation across many eras and traditions.</p>
         </article>
 
         <!-- WHY PEOPLE REACH FOR IT -->
@@ -671,23 +674,23 @@
           <div class="reach-rows">
             <div class="reach-row">
               <span class="reach-label">Quieting Mental Noise</span>
-              <span class="reach-desc">Chosen when thoughts feel crowded or repetitive and a calmer internal atmosphere is needed for reflection, rest, or focused work.</span>
+              <span class="reach-desc">Chosen when thoughts feel crowded or repetitive and a calmer internal atmosphere would support reflection, rest, or focused work.</span>
             </div>
             <div class="reach-row">
               <span class="reach-label">Deepening Meditation</span>
-              <span class="reach-desc">Long associated with stillness and spiritual awareness, it is used in contemplative practice to support inward focus and connection with inner guidance.</span>
+              <span class="reach-desc">Long associated with contemplation and spiritual awareness, Amethyst is often used to support inward focus and connection with intuitive guidance.</span>
             </div>
             <div class="reach-row">
               <span class="reach-label">Creating Protection</span>
-              <span class="reach-desc">Traditionally used to establish an energetic boundary, especially in spiritually focused work, challenging environments, or periods of emotional vulnerability.</span>
+              <span class="reach-desc">Traditionally used to establish a sense of energetic protection, especially during meditation, ritual work, or time spent in demanding environments.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Interrupting a Pattern</span>
-              <span class="reach-desc">Both primary source books specifically name release of addictions and support for moderation, especially when working to change a compulsive habit or behavior.</span>
+              <span class="reach-label">Strengthening Discernment</span>
+              <span class="reach-desc">Chosen when a situation calls for greater perspective, thoughtful response, or the ability to separate intuition from emotional reactivity.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Settling the Emotions</span>
-              <span class="reach-desc">Used during periods of emotional strain or instability to support a steadier internal atmosphere without suppressing feeling.</span>
+              <span class="reach-label">Settling Emotional Intensity</span>
+              <span class="reach-desc">Often used during emotionally charged periods when a quieter, more reflective approach would feel supportive without suppressing what is being felt.</span>
             </div>
           </div>
         </article>
@@ -701,20 +704,29 @@
           <div class="mineral-layout">
             <div>
               <div class="mineral-facts">
-                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz (Tectosilicate)</span></div>
+                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
                 <div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub> with trace iron</span></div>
                 <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
+                <div class="mineral-fact"><span>Crystal Habit</span><span>Prismatic</span></div>
                 <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-                <div class="mineral-fact"><span>Color</span><span>Pale lilac to deep purple</span></div>
+                <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+                <div class="mineral-fact"><span>Transparency</span><span>Transparent to translucent</span></div>
               </div>
             </div>
             <div class="mineral-formation">
               <h4>Formation</h4>
-              <p>Amethyst is the purple variety of quartz, composed primarily of silicon dioxide with trace iron. It crystallizes in the trigonal system and commonly forms as prismatic crystals lining cavities in volcanic rock or in hydrothermal vein environments. Color ranges from pale lilac to deep purple and may be unevenly distributed within a single crystal.</p>
-              <p>The purple color develops through the interaction of trace iron with natural irradiation in the crystal lattice. This color is sensitive to heat: sustained warmth can shift amethyst toward yellow or orange tones, which is how much commercial citrine is produced.</p>
+              <p>Amethyst is the purple variety of quartz, composed of silicon dioxide and crystallizing in the trigonal system. It commonly forms as prismatic crystals lining cavities in volcanic rock, in geodes, and in hydrothermal veins. Its color ranges from pale lilac to deep reddish purple and may appear unevenly distributed or concentrated near crystal tips.</p>
+              <h4>Common Localities</h4>
+              <ul>
+                <li>Brazil (major deposits)</li>
+                <li>Uruguay</li>
+                <li>Zambia</li>
+                <li>Mexico</li>
+                <li>United States</li>
+              </ul>
             </div>
           </div>
-          <p class="mineral-note">With a Mohs hardness of 7, amethyst is durable for jewelry and display. Prolonged direct sunlight can fade color over time. Clean gently with mild soap, warm water, and a soft cloth; avoid sustained heat and contact with harder minerals that could scratch the surface.</p>
+          <p class="mineral-note">The purple color develops through the interaction of trace iron with natural irradiation in the quartz lattice. Amethyst has good durability at hardness 7, though pointed crystal edges can still chip. Heat may lighten or alter the color, and much commercial citrine is produced by heating Amethyst. Prolonged exposure to intense light can also cause fading in some material. Clean with mild soap, warm water, and a soft cloth; avoid steam cleaning and sustained heat.</p>
         </article>
 
         <!-- RELATED STONES -->
@@ -728,22 +740,34 @@
               <div class="rel-card-head">Similar Energy <span>→</span></div>
               <a class="stone-link-row" href="#">
                 <span class="stone-dot-circle stone-dot-violet"></span>
-                <div><b>Stone 1</b><span>Curation pending</span></div>
+                <div>
+                  <b>Purple Fluorite</b>
+                  <span>Quiet focus &amp; intuitive clarity</span>
+                </div>
               </a>
               <a class="stone-link-row" href="#">
-                <span class="stone-dot-circle stone-dot-blue"></span>
-                <div><b>Stone 2</b><span>Curation pending</span></div>
+                <span class="stone-dot-circle stone-dot-lavender"></span>
+                <div>
+                  <b>Lepidolite</b>
+                  <span>Calm reflection &amp; emotional ease</span>
+                </div>
               </a>
             </div>
             <div class="rel-card">
               <div class="rel-card-head">Pairs Well With <span>→</span></div>
-              <a class="stone-link-row" href="#">
+              <a class="stone-link-row" href="/stones/clear-quartz">
                 <span class="stone-dot-circle stone-dot-white"></span>
-                <div><b>Stone 1</b><span>Curation pending</span></div>
+                <div>
+                  <b>Clear Quartz</b>
+                  <span>Clarity, focus &amp; amplification</span>
+                </div>
               </a>
               <a class="stone-link-row" href="#">
                 <span class="stone-dot-circle stone-dot-rose"></span>
-                <div><b>Stone 2</b><span>Curation pending</span></div>
+                <div>
+                  <b>Rose Quartz</b>
+                  <span>Compassion &amp; emotional ease</span>
+                </div>
               </a>
             </div>
           </div>
@@ -754,15 +778,17 @@
       <!-- RIGHT RAIL -->
       <aside class="right-rail">
 
+        <!-- KNOWN FOR -->
         <section class="rail-card">
           <h2>
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4 52 36H12L32 4Z"/><path d="M22 36 32 60l10-24"/></svg>
             Known For
           </h2>
-          <div class="one-line-wrap">Protection &amp; Spiritual Clarity</div>
-          <p class="one-line-desc">Amethyst is known for combining protective and purifying qualities with spiritual depth. Its traditions center on quieting mental noise, supporting contemplation, and creating a steadier inner environment where clarity and discernment can emerge.</p>
+          <div class="one-line-wrap">Quiet Spiritual Clarity</div>
+          <p class="one-line-desc">Amethyst is known for combining calm, protection, and spiritual depth. Its traditions center on quieting distraction, strengthening intuitive awareness, and creating a steadier inner atmosphere for meditation, reflection, and thoughtful discernment.</p>
         </section>
 
+        <!-- ENERGETIC THEMES -->
         <section class="rail-card" id="themes">
           <h2>
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
@@ -773,21 +799,25 @@
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/><path d="M22 34l8 8 12-14"/></svg>
+              <!-- calm / stillness -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 32h24M26 24h12M26 40h12"/>
+              </svg>
             </div>
             <div>
-              <h3>Protection &amp; Purification</h3>
-              <p>Named first in both primary source books. Traditionally used to clear unwanted energies and establish a protective field, particularly in meditation spaces and spiritually focused work.</p>
+              <h3>Calm &amp; Inner Stillness</h3>
+              <p>Amethyst is widely associated with quieting distraction and creating a more settled internal atmosphere. This calm quality supports reflection, meditation, and measured response rather than emotional withdrawal.</p>
             </div>
           </div>
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
+              <!-- protection / shield -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/><path d="M22 34l8 8 12-14"/></svg>
             </div>
             <div>
-              <h3>Calm &amp; Spiritual Connection</h3>
-              <p>Associated with the Third Eye and Crown Chakras, used in practices centered on quieting distraction, supporting intuition, and deepening awareness beyond ordinary concerns.</p>
+              <h3>Protection &amp; Purification</h3>
+              <p>Its protective tradition centers on maintaining clarity and energetic boundaries during spiritually focused or emotionally demanding experiences. Purification is understood as a symbolic clearing of distraction and heaviness.</p>
             </div>
           </div>
 
@@ -796,32 +826,35 @@
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c0 14 18 20 18 34a18 18 0 0 1-36 0C14 28 32 22 32 8Z"/><path d="M24 44c2-4 12-4 14 0" opacity=".6"/></svg>
+              <!-- third eye / intuition -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
             </div>
             <div>
-              <h3>Release &amp; Moderation</h3>
-              <p>Both primary source books explicitly name release of addictions as a key property. Associated with moderation and self-control, especially when interrupting compulsive habits or patterns.</p>
+              <h3>Intuition &amp; Spiritual Connection</h3>
+              <p>Linked with the Third Eye and Crown Chakras, Amethyst is traditionally used to deepen meditation, strengthen intuitive awareness, and support a broader spiritual perspective.</p>
             </div>
           </div>
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 30 32 56 12 30Z"/><path d="M12 30h40M32 8 12 30M32 8 52 30"/></svg>
+              <!-- wisdom / scales -->
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8v44M16 52h32"/><path d="M20 24l-8 16h16ZM44 24l-8 16h16Z"/></svg>
             </div>
             <div>
               <h3>Wisdom &amp; Discernment</h3>
-              <p>Associated with the ability to reflect before reacting and to bring broader perspective to difficult emotions or circumstances. Supported across Tier A sources.</p>
+              <p>Amethyst is associated with pausing before reacting and seeing circumstances from a wider vantage point. This theme emphasizes thoughtful judgment rather than prediction or certainty.</p>
             </div>
           </div>
 
           <hr class="theme-divider">
           <div class="theme-tier-label">Occasional Associations</div>
           <div class="occasional-tags">
-            <span class="occ-tag">Grief Support</span>
             <span class="occ-tag">Dream Work</span>
+            <span class="occ-tag">Grief Support</span>
           </div>
         </section>
 
+        <!-- COLLECTOR NOTES -->
         <section class="rail-card" id="notes">
           <h2>
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h28l10 10v38H14Z"/><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/></svg>
@@ -835,17 +868,7 @@
               </div>
               <div>
                 <strong>Meaning of the Name</strong>
-                <p>The name derives from the Greek <em>amethystos</em>, meaning "not intoxicated." It reflects a widely held ancient belief that amethyst protected against drunkenness and loss of self-control, connecting to its modern associations with moderation.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><path d="M32 18v14l8 8"/></svg>
-              </div>
-              <div>
-                <strong>Bishop's Stone</strong>
-                <p>Amethyst was strongly associated with Christian religious ceremonial objects and jewelry for centuries, earning the informal name "Bishop's Stone." It appears in ecclesiastical rings, crowns, and vestments across multiple traditions.</p>
+                <p>The name comes from the Greek <em>amethystos</em>, meaning "not intoxicated." It reflects an ancient belief that Amethyst could protect against drunkenness or excess, a historical association rather than a modern treatment claim.</p>
               </div>
             </div>
 
@@ -854,8 +877,18 @@
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 19v26L32 58 10 45V19Z"/><path d="M10 19l22 12 22-12M32 31v27"/></svg>
               </div>
               <div>
-                <strong>Once a Precious Stone</strong>
-                <p>Before major deposits were discovered in Brazil in the nineteenth century, amethyst was rare enough in Europe to be grouped with ruby, sapphire, and emerald as a precious gemstone. The Brazilian finds dramatically changed its availability.</p>
+                <strong>Once Highly Prized</strong>
+                <p>Before large Brazilian deposits expanded its availability in the nineteenth century, Amethyst could command prices comparable to ruby and emerald. Its greater abundance today changed its market position without diminishing its cultural importance.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><path d="M20 44c4-8 20-8 24 0M22 26c0-4 4-8 10-8s10 4 10 8"/></svg>
+              </div>
+              <div>
+                <strong>Ancient Carved Gems</strong>
+                <p>Amethyst appears in Greek, Roman, Egyptian, and Near Eastern jewelry, beads, seals, and engraved gems. Museum collections preserve examples spanning antiquity, showing its long use as both ornament and symbolic material.</p>
               </div>
             </div>
 
@@ -865,7 +898,7 @@
               </div>
               <div>
                 <strong>Heat-Treated Citrine</strong>
-                <p>Much commercially available golden-orange citrine began as amethyst. Controlled heating changes the color centers produced by iron and irradiation. Natural citrine exists but is less common; uneven or smoky color zones are typical of the natural form.</p>
+                <p>Much commercially available golden-orange citrine began as Amethyst. Controlled heating changes the color centers produced by iron and irradiation. Natural citrine exists but is less common; uneven or smoky color zones are typical of the natural form.</p>
               </div>
             </div>
 
