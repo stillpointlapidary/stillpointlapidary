@@ -28,7 +28,6 @@
   --ck-accent:     #5e5080;
   --ck-deep:       #453961;
 
-  /* Page layout */
   --enc-radius: 12px;
   --enc-border: 0.5px solid var(--border);
   --enc-shadow: 0 4px 16px rgba(42,37,32,0.07);
@@ -36,7 +35,6 @@
   --sidebar-w:  210px;
 }
 
-/* ── LAYOUT SHELL ── */
 .enc-page {
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0,1fr);
@@ -47,7 +45,6 @@
   align-items: start;
 }
 
-/* ── SIDEBAR ── */
 .enc-sidebar {
   position: sticky;
   top: 110px;
@@ -57,83 +54,24 @@
 }
 .enc-sidebar::-webkit-scrollbar { display: none; }
 
-.enc-breadcrumb {
-  font-size: 12.5px;
-  color: var(--ink3);
-  letter-spacing: 0.05em;
-  margin-bottom: 14px;
-  line-height: 1.6;
-}
+.enc-breadcrumb { font-size: 12.5px; color: var(--ink3); letter-spacing: 0.05em; margin-bottom: 14px; line-height: 1.6; }
 .enc-breadcrumb a { color: var(--ink3); text-decoration: none; }
 .enc-breadcrumb a:hover { color: var(--accent); }
 .enc-breadcrumb b { color: var(--ink2); }
 
-.side-nav-card {
-  background: var(--stone2);
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  padding: 8px 0;
-  overflow: hidden;
-}
-.side-nav-label {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink3);
-  padding: 6px 16px 8px;
-}
-.side-nav a {
-  display: block;
-  padding: 10px 16px;
-  font-family: 'Jost', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.03em;
-  color: var(--ink2);
-  text-decoration: none;
-  border-left: 2px solid transparent;
-  transition: all 0.13s;
-}
+.side-nav-card { background: var(--stone2); border: 0.5px solid var(--border); border-radius: var(--enc-radius); padding: 8px 0; overflow: hidden; }
+.side-nav-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--ink3); padding: 6px 16px 8px; }
+.side-nav a { display: block; padding: 10px 16px; font-family: 'Jost', sans-serif; font-size: 14px; letter-spacing: 0.03em; color: var(--ink2); text-decoration: none; border-left: 2px solid transparent; transition: all 0.13s; }
 .side-nav a:hover { background: var(--stone); color: var(--ink); }
-.side-nav a.active {
-  background: var(--white);
-  border-left-color: var(--ck-accent);
-  color: var(--ink);
-  font-weight: 500;
-}
+.side-nav a.active { background: var(--white); border-left-color: var(--ck-accent); color: var(--ink); font-weight: 500; }
 
-.sidebar-standards {
-  margin-top: 12px;
-  padding: 14px 16px;
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  background: var(--white);
-  font-size: 12px;
-  color: var(--ink2);
-  line-height: 1.65;
-}
-.sidebar-standards p {
-  margin: 0 0 8px;
-  font-size: 12px;
-  color: var(--ink2);
-  line-height: 1.65;
-}
-.sidebar-standards a {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  font-weight: 500;
-}
+.sidebar-standards { margin-top: 12px; padding: 14px 16px; border: 0.5px solid var(--border); border-radius: var(--enc-radius); background: var(--white); font-size: 12px; color: var(--ink2); line-height: 1.65; }
+.sidebar-standards p { margin: 0 0 8px; font-size: 12px; color: var(--ink2); line-height: 1.65; }
+.sidebar-standards a { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); text-decoration: none; font-size: 11px; letter-spacing: 0.04em; font-weight: 500; }
 .sidebar-standards a:hover { color: var(--ink); }
 
-/* ── MAIN CONTENT ── */
 .enc-main { min-width: 0; }
 
-/* ── HERO ── */
 .enc-hero {
   display: grid;
   grid-template-columns: 310px minmax(0,1fr);
@@ -150,368 +88,80 @@
   border-radius: 0;
   box-shadow: none;
 }
-.enc-hero::after {
-  display: none;
-}
-.stone-photo-wrap {
-  border-radius: var(--enc-radius);
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(42,37,32,0.14);
-  aspect-ratio: 1/1;
-  background: var(--stone2);
-  flex-shrink: 0;
-  position: relative;
-}
-.stone-photo-wrap::after {
-  content: 'Photo coming soon';
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  z-index: 0;
-}
-.stone-photo-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 35%;
-  display: block;
-  position: relative;
-  z-index: 1;
-}
+.enc-hero::after { display: none; }
+
+.stone-photo-wrap { border-radius: var(--enc-radius); overflow: hidden; box-shadow: 0 8px 32px rgba(42,37,32,0.14); aspect-ratio: 1/1; background: var(--stone2); flex-shrink: 0; position: relative; }
+.stone-photo-wrap::after { content: 'Photo coming soon'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); z-index: 0; }
+.stone-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; position: relative; z-index: 1; }
 
 .hero-right { padding-top: 4px; display: flex; flex-direction: column; }
 
-.stone-name {
-  font-family: Georgia, serif;
-  font-size: clamp(32px, 3vw, 44px);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.005em;
-  color: var(--ink);
-  margin: 0 0 14px;
-}
+.stone-name { font-family: Georgia, serif; font-size: clamp(32px, 3vw, 44px); font-weight: 400; line-height: 1; letter-spacing: 0.005em; color: var(--ink); margin: 0 0 14px; }
 
-.theme-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 18px;
-}
-.theme-pill {
-  background: var(--ck-wash);
-  border: 0.5px solid var(--ck-wash-border);
-  border-radius: 999px;
-  padding: 7px 15px;
-  font-family: 'Jost', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ck-accent);
-  line-height: 1;
-  letter-spacing: 0.04em;
-}
+.theme-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+.theme-pill { background: var(--ck-wash); border: 0.5px solid var(--ck-wash-border); border-radius: 999px; padding: 7px 15px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; color: var(--ck-accent); line-height: 1; letter-spacing: 0.04em; }
 
-.identity-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  background: var(--white);
-  overflow: hidden;
-  margin: 0 0 18px;
-  box-shadow: var(--enc-shadow);
-}
-.identity-tile {
-  padding: 14px 13px;
-  border-right: 0.5px solid var(--border);
-}
+.identity-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 0.5px solid var(--border); border-radius: var(--enc-radius); background: var(--white); overflow: hidden; margin: 0 0 18px; box-shadow: var(--enc-shadow); }
+.identity-tile { padding: 14px 13px; border-right: 0.5px solid var(--border); }
 .identity-tile:last-child { border-right: 0; }
-.tile-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10.5px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 7px;
-}
+.tile-eyebrow { display: flex; align-items: center; gap: 5px; font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; font-weight: 600; color: var(--accent); margin-bottom: 7px; }
 .tile-eyebrow svg { width: 13px; height: 13px; flex-shrink: 0; }
-.identity-tile p {
-  margin: 0;
-  font-size: 13px;
-  color: var(--ink);
-  line-height: 1.5;
-}
+.identity-tile p { margin: 0; font-size: 13px; color: var(--ink); line-height: 1.5; }
 
 .hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
-.enc-btn {
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-  padding: 9px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 0.5px solid var(--border);
-  background: transparent;
-  color: var(--ink2);
-}
+.enc-btn { font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; padding: 9px 18px; border-radius: 6px; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; border: 0.5px solid var(--border); background: transparent; color: var(--ink2); }
 .enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
-.enc-btn-primary {
-  background: var(--ck-btn-bg);
-  border-color: var(--ck-btn-border);
-  color: var(--ck-btn-text);
-}
-.enc-btn-primary:hover {
-  background: var(--ck-accent);
-  border-color: var(--ck-accent);
-  color: var(--white);
-}
+.enc-btn-primary { background: var(--ck-btn-bg); border-color: var(--ck-btn-border); color: var(--ck-btn-text); }
+.enc-btn-primary:hover { background: var(--ck-accent); border-color: var(--ck-accent); color: var(--white); }
 .enc-btn svg { width: 13px; height: 13px; }
 
-/* ── AT A GLANCE ── */
-.glance-panel {
-  background: var(--white);
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
-  padding: 20px 24px 18px;
-  margin-bottom: 20px;
-}
-.panel-title {
-  font-family: Georgia, serif;
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-  margin: 0 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.glance-panel { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--enc-radius); box-shadow: var(--enc-shadow); padding: 20px 24px 18px; margin-bottom: 20px; }
+.panel-title { font-family: Georgia, serif; font-size: 18px; font-weight: 400; letter-spacing: 0.01em; color: var(--ink); margin: 0 0 16px; display: flex; align-items: center; gap: 8px; }
 .panel-title svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
-.glance-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0;
-}
-.glance-item {
-  padding: 0 10px;
-  border-right: 0.5px solid var(--border);
-  text-align: center;
-}
+.glance-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+.glance-item { padding: 0 10px; border-right: 0.5px solid var(--border); text-align: center; }
 .glance-item:last-child { border-right: 0; }
 .glance-item:first-child { padding-left: 0; }
+.glance-icon-tile { width: 40px; height: 40px; margin: 0 auto 8px; border-radius: 10px; background: var(--ck-wash); display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); }
+.glance-icon-tile svg { width: 22px; height: 22px; color: var(--ck-accent); stroke-width: 2; }
+.glance-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.11em; font-weight: 600; color: var(--ink3); margin-bottom: 5px; }
+.glance-value { font-size: 12px; color: var(--ink); line-height: 1.45; }
 
-.glance-icon-tile {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto 8px;
-  border-radius: 10px;
-  background: var(--ck-wash);
-  display: grid;
-  place-items: center;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
-}
-.glance-icon-tile svg {
-  width: 22px;
-  height: 22px;
-  color: var(--ck-accent);
-  stroke-width: 2;
-}
-.glance-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.11em;
-  font-weight: 600;
-  color: var(--ink3);
-  margin-bottom: 5px;
-}
-.glance-value {
-  font-size: 12px;
-  color: var(--ink);
-  line-height: 1.45;
-}
-
-/* ── TWO-COLUMN CONTENT GRID ── */
-.content-grid {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) 340px;
-  gap: 20px;
-  align-items: start;
-}
+.content-grid { display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: 20px; align-items: start; }
 .article-col { display: grid; gap: 16px; }
 
-/* ── ARTICLE SECTION CARDS ── */
-.enc-card {
-  background: var(--white);
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
-  padding: 24px 26px;
-}
-.enc-card-eyebrow {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--accent2);
-  margin-bottom: 6px;
-}
-.enc-card h2 {
-  font-family: Georgia, serif;
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-  margin: 0 0 16px;
-  padding-bottom: 12px;
-  border-bottom: 0.5px solid var(--border2);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.enc-card h2 svg {
-  width: 19px;
-  height: 19px;
-  color: var(--ck-accent);
-  stroke-width: 2.2;
-  flex-shrink: 0;
-}
-.enc-card p {
-  font-size: 15px;
-  line-height: 1.78;
-  color: var(--ink2);
-  margin: 0 0 14px;
-}
+.enc-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--enc-radius); box-shadow: var(--enc-shadow); padding: 24px 26px; }
+.enc-card h2 { font-family: Georgia, serif; font-size: 20px; font-weight: 400; letter-spacing: 0.01em; color: var(--ink); margin: 0 0 16px; padding-bottom: 12px; border-bottom: 0.5px solid var(--border2); display: flex; align-items: center; gap: 8px; }
+.enc-card h2 svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.enc-card p { font-size: 15px; line-height: 1.78; color: var(--ink2); margin: 0 0 14px; }
 .enc-card p:last-child { margin-bottom: 0; }
 
 .reach-rows { display: grid; gap: 0; }
-.reach-row {
-  display: grid;
-  grid-template-columns: 148px 1fr;
-  gap: 14px;
-  padding: 12px 0;
-  border-bottom: 0.5px solid var(--border2);
-  align-items: baseline;
-}
+.reach-row { display: grid; grid-template-columns: 148px 1fr; gap: 14px; padding: 12px 0; border-bottom: 0.5px solid var(--border2); align-items: baseline; }
 .reach-row:last-child { border-bottom: 0; padding-bottom: 0; }
 .reach-row:first-child { padding-top: 0; }
-.reach-label {
-  font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink);
-  padding-top: 3px;
-}
-.reach-desc {
-  font-size: 14px;
-  color: var(--ink2);
-  line-height: 1.68;
-}
+.reach-label { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); padding-top: 3px; }
+.reach-desc { font-size: 14px; color: var(--ink2); line-height: 1.68; }
 
-/* ── MINERAL PROFILE CARD ── */
-.mineral-layout {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-  gap: 24px;
-  align-items: start;
-}
+.mineral-layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: start; }
 .mineral-facts { display: grid; gap: 0; }
-.mineral-fact {
-  display: grid;
-  grid-template-columns: minmax(0,120px) minmax(0,1fr);
-  gap: 8px;
-  padding: 7px 0;
-  border-bottom: 0.5px solid var(--border2);
-  font-size: 13px;
-}
+.mineral-fact { display: grid; grid-template-columns: minmax(0,120px) minmax(0,1fr); gap: 8px; padding: 7px 0; border-bottom: 0.5px solid var(--border2); font-size: 13px; }
 .mineral-fact:last-of-type { border-bottom: 0; }
-.mineral-fact span:first-child {
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: 0.02em;
-  padding-right: 8px;
-}
+.mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; padding-right: 8px; }
 .mineral-fact span:last-child { color: var(--ink2); }
-.mineral-note {
-  font-size: 14px;
-  line-height: 1.75;
-  color: var(--ink2);
-  margin-top: 20px;
-  padding-top: 18px;
-  border-top: 0.5px solid var(--border);
-}
-.mineral-formation h4 {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink);
-  margin: 0 0 8px;
-}
+.mineral-note { font-size: 14px; line-height: 1.75; color: var(--ink2); margin-top: 20px; padding-top: 18px; border-top: 0.5px solid var(--border); }
+.mineral-formation h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p {
-  font-size: 13px;
-  color: var(--ink2);
-  line-height: 1.68;
-  margin: 0 0 10px;
-}
+.mineral-formation p { font-size: 13px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
 
-/* ── RELATED STONES ── */
-.related-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.rel-card {
-  border: 0.5px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  background: var(--stone);
-}
-.rel-card-head {
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink3);
-  margin-bottom: 10px;
-}
-.stone-link-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 0;
-  text-decoration: none;
-  color: inherit;
-  border-bottom: 0.5px solid var(--border2);
-  transition: opacity 0.13s;
-}
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rel-card { border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; background: var(--stone); }
+.rel-card-head { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--ink3); margin-bottom: 10px; }
+.stone-link-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; text-decoration: none; color: inherit; border-bottom: 0.5px solid var(--border2); transition: opacity 0.13s; }
 .stone-link-row:last-child { border-bottom: 0; padding-bottom: 0; }
 .stone-link-row:hover { opacity: 0.7; }
-.stone-dot-circle {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+.stone-dot-circle { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
 .stone-dot-white  { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
 .stone-dot-violet { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
 .stone-dot-moon   { background: linear-gradient(135deg,#e8e1d8,#9eb7c9); }
@@ -519,277 +169,50 @@
 .stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
 .stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
 
-/* ── RIGHT RAIL ── */
-.right-rail {
-  display: grid;
-  gap: 16px;
-  position: sticky;
-  top: 110px;
-}
-.rail-card {
-  background: var(--white);
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
-  padding: 20px;
-}
-.rail-card h2 {
-  font-family: Georgia, serif;
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-  margin: 0 0 14px;
-  padding-bottom: 10px;
-  border-bottom: 0.5px solid var(--border2);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.rail-card h2 svg {
-  width: 18px;
-  height: 18px;
-  color: var(--ck-accent);
-  stroke-width: 2.2;
-  flex-shrink: 0;
-}
+.right-rail { display: grid; gap: 16px; position: sticky; top: 110px; }
+.rail-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--enc-radius); box-shadow: var(--enc-shadow); padding: 20px; }
+.rail-card h2 { font-family: Georgia, serif; font-size: 19px; font-weight: 400; letter-spacing: 0.01em; color: var(--ink); margin: 0 0 14px; padding-bottom: 10px; border-bottom: 0.5px solid var(--border2); display: flex; align-items: center; gap: 7px; }
+.rail-card h2 svg { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
-/* Known For */
-.one-line-wrap {
-  display: inline-block;
-  background: var(--ck-wash);
-  border: 0.5px solid var(--ck-wash-border);
-  border-radius: 999px;
-  padding: 5px 13px;
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  color: var(--ck-accent);
-  margin-bottom: 11px;
-  line-height: 1.4;
-  letter-spacing: 0.03em;
-}
-.one-line-desc {
-  font-size: 13.5px;
-  color: var(--ink2);
-  line-height: 1.7;
-  margin: 0;
-}
+.one-line-wrap { display: inline-block; background: var(--ck-wash); border: 0.5px solid var(--ck-wash-border); border-radius: 999px; padding: 5px 13px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 400; color: var(--ck-accent); margin-bottom: 11px; line-height: 1.4; letter-spacing: 0.03em; }
+.one-line-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.7; margin: 0; }
 
-/* Energetic Themes */
-.theme-tier-label {
-  font-size: 11.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink3);
-  margin: 16px 0 10px;
-}
+.theme-tier-label { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--ink3); margin: 16px 0 10px; }
 .theme-tier-label:first-child { margin-top: 0; }
-.theme-row {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 10px;
-  align-items: start;
-  margin-bottom: 10px;
-}
+.theme-row { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; margin-bottom: 10px; }
 .theme-row + .theme-row { margin-top: 16px; }
-.theme-icon-tile {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--ck-wash);
-  display: grid;
-  place-items: center;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
-  flex-shrink: 0;
-}
-.theme-icon-tile svg {
-  width: 21px;
-  height: 21px;
-  color: var(--ck-accent);
-  stroke-width: 2;
-}
-.theme-row h3 {
-  font-family: Georgia, serif;
-  font-size: 17px;
-  font-weight: 400;
-  margin: 0 0 2px;
-  color: var(--ink);
-  line-height: 1.1;
-}
-.theme-row p {
-  font-size: 12px;
-  color: var(--ink2);
-  margin: 0;
-  line-height: 1.58;
-}
-.theme-divider {
-  border: none;
-  border-top: 0.5px solid var(--border2);
-  margin: 12px 0 0;
-}
+.theme-icon-tile { width: 40px; height: 40px; border-radius: 10px; background: var(--ck-wash); display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); flex-shrink: 0; }
+.theme-icon-tile svg { width: 21px; height: 21px; color: var(--ck-accent); stroke-width: 2; }
+.theme-row h3 { font-family: Georgia, serif; font-size: 17px; font-weight: 400; margin: 0 0 2px; color: var(--ink); line-height: 1.1; }
+.theme-row p { font-size: 12px; color: var(--ink2); margin: 0; line-height: 1.58; }
+.theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 12px 0 0; }
 
-.occasional-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 4px;
-}
-.occ-tag {
-  font-size: 12px;
-  color: var(--ck-accent);
-  background: var(--ck-wash);
-  border: 0.5px solid var(--ck-wash-border);
-  border-radius: 999px;
-  padding: 4px 12px;
-}
+.occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.occ-tag { font-size: 12px; color: var(--ck-accent); background: var(--ck-wash); border: 0.5px solid var(--ck-wash-border); border-radius: 999px; padding: 4px 12px; }
 
-/* Collector Notes */
 .note-list { display: grid; gap: 8px; }
-.note-row {
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 10px;
-  background: var(--stone);
-  border: 0.5px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 12px;
-  align-items: start;
-}
-.note-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: var(--ck-wash);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-.note-icon svg {
-  width: 18px;
-  height: 18px;
-  color: var(--ck-accent);
-  stroke-width: 2;
-}
-.note-row strong {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 4px;
-}
-.note-row p {
-  font-size: 12.5px;
-  color: var(--ink2);
-  margin: 0;
-  line-height: 1.62;
-}
+.note-row { display: grid; grid-template-columns: 34px 1fr; gap: 10px; background: var(--stone); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; align-items: start; }
+.note-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--ck-wash); display: grid; place-items: center; flex-shrink: 0; }
+.note-icon svg { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2; }
+.note-row strong { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.note-row p { font-size: 12.5px; color: var(--ink2); margin: 0; line-height: 1.62; }
 
-/* ── ENTRY NAV ── */
-.entry-nav-wrap {
-  margin-top: 20px;
-  background: var(--white);
-  border: 0.5px solid var(--border);
-  border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
-  padding: 14px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.entry-nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 0.5px solid var(--border);
-  border-radius: 999px;
-  background: var(--stone);
-  padding: 9px 18px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  color: var(--ink);
-  text-decoration: none;
-  transition: all 0.13s;
-}
+.entry-nav-wrap { margin-top: 20px; background: var(--white); border: 0.5px solid var(--border); border-radius: var(--enc-radius); box-shadow: var(--enc-shadow); padding: 14px 20px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
+.entry-nav-link { display: inline-flex; align-items: center; gap: 8px; border: 0.5px solid var(--border); border-radius: 999px; background: var(--stone); padding: 9px 18px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; color: var(--ink); text-decoration: none; transition: all 0.13s; }
 .entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .entry-nav-link > div { text-align: center; }
 .entry-nav-link small { font-size: 9px; letter-spacing: 0.12em; color: var(--ink3); display: block; margin-bottom: 1px; }
 .entry-nav-link:hover small { color: rgba(255,255,255,0.55); }
-.entry-nav-link b {
-  font-family: Georgia, serif;
-  font-size: 17px;
-  text-transform: none;
-  letter-spacing: 0.02em;
-  font-weight: 400;
-  display: block;
-}
-.entry-nav-random {
-  background: var(--ck-btn-bg);
-  border-color: var(--ck-btn-border);
-  color: var(--ck-btn-text);
-}
-.entry-nav-random:hover {
-  background: var(--ck-accent);
-  border-color: var(--ck-accent);
-  color: var(--white);
-}
+.entry-nav-link b { font-family: Georgia, serif; font-size: 17px; text-transform: none; letter-spacing: 0.02em; font-weight: 400; display: block; }
+.entry-nav-random { background: var(--ck-btn-bg); border-color: var(--ck-btn-border); color: var(--ck-btn-text); }
+.entry-nav-random:hover { background: var(--ck-accent); border-color: var(--ck-accent); color: var(--white); }
 
-/* ── BOTTOM CTA ── */
-.enc-cta {
-  margin-top: 18px;
-  background: var(--ink);
-  color: var(--white);
-  border-radius: var(--enc-radius);
-  padding: 26px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  background-image:
-    radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%),
-    radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%);
-}
-.enc-cta h3 {
-  font-family: Georgia, serif;
-  font-size: 26px;
-  font-weight: 400;
-  margin: 0;
-  color: var(--white);
-  letter-spacing: 0.02em;
-}
-.enc-cta p {
-  font-size: 15px;
-  color: rgba(250,248,246,0.7);
-  margin: 4px 0 0;
-  line-height: 1.6;
-}
-.enc-cta button {
-  background: var(--white);
-  color: var(--ink);
-  border: none;
-  border-radius: 6px;
-  padding: 11px 22px;
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s;
-  flex-shrink: 0;
-}
+.enc-cta { margin-top: 18px; background: var(--ink); color: var(--white); border-radius: var(--enc-radius); padding: 26px 32px; display: flex; justify-content: space-between; align-items: center; gap: 20px; background-image: radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%), radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%); }
+.enc-cta h3 { font-family: Georgia, serif; font-size: 26px; font-weight: 400; margin: 0; color: var(--white); letter-spacing: 0.02em; }
+.enc-cta p { font-size: 15px; color: rgba(250,248,246,0.7); margin: 4px 0 0; line-height: 1.6; }
+.enc-cta button { background: var(--white); color: var(--ink); border: none; border-radius: 6px; padding: 11px 22px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
 .enc-cta button:hover { background: var(--stone2); }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .enc-page { grid-template-columns: 1fr; gap: 20px; }
   .enc-sidebar { display: none; }
@@ -816,7 +239,6 @@
 <body>
 <div class="app-shell">
 
-<!-- TOPBAR -->
 <header class="topbar">
   <a href="../index.html" class="brand-home" aria-label="Return to home">
     <div class="brand-block">
@@ -832,21 +254,18 @@
   </div>
 </header>
 
-<!-- PAGE -->
 <div class="enc-page" id="top">
 
-  <!-- SIDEBAR NAV -->
   <aside class="enc-sidebar">
     <div class="enc-breadcrumb">
       <a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
       <b>Clear Quartz</b>
     </div>
-
     <div class="side-nav-card">
       <div class="side-nav-label">On this page</div>
       <nav class="side-nav">
-        <a href="#top"      class="active">Top</a>
+        <a href="#top" class="active">Top</a>
         <a href="#overview">Overview</a>
         <a href="#reach">Why People Reach For It</a>
         <a href="#glance">At a Glance</a>
@@ -856,14 +275,12 @@
         <a href="#related">Related Stones</a>
       </nav>
     </div>
-
     <div class="sidebar-standards">
       <p>Entries are researched from expert books and trusted online sources.</p>
       <a href="#">Our Editorial Standards →</a>
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="enc-main">
 
     <!-- HERO -->
@@ -874,68 +291,50 @@
           src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/clear-quartz.webp"
         />
       </div>
-
       <div class="hero-right">
         <h1 class="stone-name">Clear Quartz</h1>
-
         <div class="theme-pills">
           <span class="theme-pill">Amplification</span>
           <span class="theme-pill">Clarity</span>
           <span class="theme-pill">Intention</span>
         </div>
-
         <div class="identity-grid">
           <div class="identity-tile">
             <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/></svg>
               Best For
             </div>
-            <p>Amplifying intentions, clarifying focus, and supporting other stones</p>
+            <p>Amplifying intentions, clarifying focus, and strengthening the qualities of other stones</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/></svg>
               Use When
             </div>
-            <p>You want a versatile stone for focus, meditation, intention-setting, or strengthening the qualities of stones already in use.</p>
+            <p>You want a versatile stone to anchor an intention, support meditation, or reinforce the qualities of crystals already in use.</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/>
-                <path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/></svg>
               Pairs Well With
             </div>
             <p>To be finalized</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
-                <circle cx="32" cy="32" r="7"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
               Primary Chakra
             </div>
             <p>All Chakras</p>
           </div>
         </div>
-
         <div class="hero-actions">
           <button class="enc-btn enc-btn-primary">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
             Save to Collection
           </button>
           <button class="enc-btn">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
             Add to Wishlist
           </button>
         </div>
@@ -945,22 +344,14 @@
     <!-- AT A GLANCE -->
     <section class="glance-panel" id="glance">
       <h2 class="panel-title">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
-          <circle cx="32" cy="32" r="8"/>
-        </svg>
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/><circle cx="32" cy="32" r="8"/></svg>
         At a Glance
       </h2>
       <div class="glance-grid">
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 52 30 32 56 12 30Z"/>
-              <path d="M12 30h40"/>
-              <path d="M22 30 32 8l10 22"/>
-              <path d="M22 30 32 56l10-26"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 30 32 56 12 30Z"/><path d="M12 30h40"/><path d="M22 30 32 8l10 22"/><path d="M22 30 32 56l10-26"/></svg>
           </div>
           <div class="glance-label">Primary Themes</div>
           <div class="glance-value">Amplification<br>Intention · Clarity</div>
@@ -968,11 +359,7 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-              <circle cx="32" cy="32" r="7"/>
-              <circle cx="32" cy="32" r="2.5" fill="currentColor"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2.5" fill="currentColor"/></svg>
           </div>
           <div class="glance-label">Chakra</div>
           <div class="glance-value">All Chakras</div>
@@ -980,35 +367,23 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="32" r="20"/>
-              <path d="M32 12v40M12 32h40"/>
-              <path d="M18 18l28 28M46 18 18 46"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="20"/><path d="M32 12v40M12 32h40"/><path d="M18 18l28 28M46 18 18 46"/></svg>
           </div>
           <div class="glance-label">Element</div>
-          <div class="glance-value">Fire</div>
+          <div class="glance-value">Storm</div>
         </div>
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 50c18-4 28-14 36-36M38 14h12v12"/>
-              <circle cx="14" cy="50" r="2.5" fill="currentColor"/>
-              <circle cx="50" cy="14" r="2.5" fill="currentColor"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50c18-4 28-14 36-36M38 14h12v12"/><circle cx="14" cy="50" r="2.5" fill="currentColor"/><circle cx="50" cy="14" r="2.5" fill="currentColor"/></svg>
           </div>
           <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Aries<br>Leo</div>
+          <div class="glance-value">Aries</div>
         </div>
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 54 45v5H10v-5Z"/>
-              <path d="M20 50V38l12-14 12 14v12"/>
-              <path d="M28 50v-8h8v8"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 54 45v5H10v-5Z"/><path d="M20 50V38l12-14 12 14v12"/><path d="M28 50v-8h8v8"/></svg>
           </div>
           <div class="glance-label">Formation</div>
           <div class="glance-value">Igneous, metamorphic, and sedimentary</div>
@@ -1016,10 +391,7 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 24 32 58 10 24Z"/>
-              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 24 32 58 10 24Z"/><path d="M10 24h44M32 6 10 24M32 6 54 24"/></svg>
           </div>
           <div class="glance-label">Hardness</div>
           <div class="glance-value">7</div>
@@ -1027,10 +399,7 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
-              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/><path d="M22 42c5-4 15-4 20 0" opacity=".55"/></svg>
           </div>
           <div class="glance-label">Color Range</div>
           <div class="glance-value">Colorless to white</div>
@@ -1041,51 +410,44 @@
 
     <!-- TWO-COLUMN CONTENT -->
     <div class="content-grid">
-
-      <!-- ARTICLE COLUMN -->
       <div class="article-col">
 
         <!-- OVERVIEW -->
         <article class="enc-card" id="overview">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="20" r="10"/>
-              <path d="M10 54c0-12 10-20 22-20s22 8 22 20"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="20" r="10"/><path d="M10 54c0-12 10-20 22-20s22 8 22 20"/></svg>
             Overview
           </h2>
-          <p>Clear Quartz is one of the most recognized and widely used crystals in the world. Its reputation rests on versatility: it is associated with amplification, intention, clarity, and spiritual connection while remaining easy to combine with many stones and practices.</p>
-          <p>This breadth makes it both a common starting point for new collectors and a lasting staple in experienced collections. It is often chosen for meditation, focused intention, energetic clearing, or reinforcing the qualities of another crystal without adding a strongly contrasting character.</p>
+          <p>Clear Quartz is one of the most widely used crystals in the world, valued across traditions for its unusual combination of versatility and precision. The Crystal Bible identifies its three defining properties as amplification, programmability, and memory, describing it as the most versatile and multidimensional stone in the mineral realm. The Book of Stones emphasizes its role as an amplifier of energy and intention, and as the foundational material for energy tools including wands, grids, and layout templates.</p>
+          <p>What distinguishes Clear Quartz from other broadly useful stones is this programmability — the idea that it takes on and holds the specific intention directed into it, rather than contributing a fixed energetic character. This allows it to support nearly any other stone without competing with that stone's central qualities, making it equally suited to a beginning collector and a more experienced practice.</p>
         </article>
 
         <!-- WHY PEOPLE REACH FOR IT -->
         <article class="enc-card" id="reach">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
             Why People Reach For It
           </h2>
           <div class="reach-rows">
             <div class="reach-row">
-              <span class="reach-label">Setting Intentions</span>
-              <span class="reach-desc">Chosen when someone wants to focus on a specific goal, practice, or direction and give that intention a clear symbolic anchor.</span>
+              <span class="reach-label">Setting an Intention</span>
+              <span class="reach-desc">Chosen when someone wants to give a specific goal, practice, or direction a clear focal point and symbolic anchor, especially during meditation or personal ritual.</span>
             </div>
             <div class="reach-row">
               <span class="reach-label">Amplifying Other Stones</span>
-              <span class="reach-desc">Paired with other crystals to strengthen the qualities already being emphasized without introducing a competing energetic theme.</span>
+              <span class="reach-desc">Both primary source books identify amplification as a central property. Paired with another crystal, it strengthens that stone's qualities without introducing a competing energetic theme.</span>
             </div>
             <div class="reach-row">
               <span class="reach-label">Clarifying Focus</span>
-              <span class="reach-desc">Used when thoughts feel scattered or priorities are difficult to organize, especially during planning, reflection, or concentrated work.</span>
+              <span class="reach-desc">Used when attention feels scattered or priorities are difficult to organize, particularly during planning, reflective work, or when beginning a new practice or project.</span>
             </div>
             <div class="reach-row">
               <span class="reach-label">Supporting Meditation</span>
-              <span class="reach-desc">A flexible meditation stone that can accompany many intentions without pulling the practice toward one narrow emotional tone.</span>
+              <span class="reach-desc">A flexible meditation companion because it does not pull practice toward one emotional tone, and can accompany a wide range of intentions without redirecting them.</span>
             </div>
             <div class="reach-row">
               <span class="reach-label">Clearing a Space</span>
-              <span class="reach-desc">Traditionally placed in rooms, workspaces, or personal practices where the goal is to refresh stagnant energy and restore focus.</span>
+              <span class="reach-desc">Traditionally placed in rooms, grids, or personal practices where the goal is to refresh stagnant energy and create a cleaner, more focused environment.</span>
             </div>
           </div>
         </article>
@@ -1093,10 +455,7 @@
         <!-- MINERAL PROFILE -->
         <article class="enc-card" id="mineral">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-              <path d="M10 19l22 12 22-12M32 31v27"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 19v26L32 58 10 45V19Z"/><path d="M10 19l22 12 22-12M32 31v27"/></svg>
             Mineral Profile
           </h2>
           <div class="mineral-layout">
@@ -1112,21 +471,17 @@
             </div>
             <div class="mineral-formation">
               <h4>Formation</h4>
-              <p>Clear Quartz is the colorless to white form of quartz, a tectosilicate composed of silicon dioxide. It crystallizes in the trigonal system and occurs worldwide in igneous, metamorphic, and sedimentary environments. Amethyst, citrine, smoky quartz, and rose quartz share the same basic SiO₂ structure, with color produced by trace elements, irradiation, or structural effects.</p>
-              <p>Quartz lacks cleavage, tending instead to break with a curved, conchoidal fracture. Its tightly bonded silicon-oxygen framework also makes it piezoelectric, meaning it can generate a small electrical charge under pressure.</p>
+              <p>Clear Quartz is the colorless to white form of quartz, a tectosilicate composed of silicon dioxide. It crystallizes in the trigonal system and forms in igneous, metamorphic, and sedimentary environments. It is among the most abundant minerals on Earth and is found on every continent. Amethyst, citrine, smoky quartz, and rose quartz share the same SiO₂ structure, with each variety's color produced by different trace elements, irradiation, or structural differences.</p>
+              <p>Quartz lacks cleavage and fractures conchoidally. Its tightly bonded silicon-oxygen lattice makes it piezoelectric: it generates a small electrical charge under mechanical pressure, a property Pierre and Jacques Curie documented in 1880.</p>
             </div>
           </div>
-          <p class="mineral-note">Clear Quartz is generally durable, but sharp impacts can chip points and edges. Clean it gently with mild soap, water, and a soft cloth, and store finished pieces separately from softer minerals to avoid scratching them.</p>
+          <p class="mineral-note">Clear Quartz is generally durable, though sharp impacts can chip points and edges. Clean gently with mild soap, warm water, and a soft cloth. Store separately from softer minerals to avoid scratching them, and avoid strong chemical cleaners.</p>
         </article>
 
         <!-- RELATED STONES -->
         <article class="enc-card" id="related">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="18" cy="32" r="9"/>
-              <circle cx="46" cy="32" r="9"/>
-              <path d="M27 32h10"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="32" r="9"/><circle cx="46" cy="32" r="9"/><path d="M27 32h10"/></svg>
             Related Stones
           </h2>
           <div class="related-grid">
@@ -1134,34 +489,22 @@
               <div class="rel-card-head">Similar Energy <span>→</span></div>
               <a class="stone-link-row" href="#">
                 <span class="stone-dot-circle stone-dot-white"></span>
-                <div>
-                  <b>Stone 1</b>
-                  <span>Curation pending</span>
-                </div>
+                <div><b>Stone 1</b><span>Curation pending</span></div>
               </a>
               <a class="stone-link-row" href="#">
                 <span class="stone-dot-circle stone-dot-moon"></span>
-                <div>
-                  <b>Stone 2</b>
-                  <span>Curation pending</span>
-                </div>
+                <div><b>Stone 2</b><span>Curation pending</span></div>
               </a>
             </div>
             <div class="rel-card">
               <div class="rel-card-head">Pairs Well With <span>→</span></div>
               <a class="stone-link-row" href="#">
                 <span class="stone-dot-circle stone-dot-violet"></span>
-                <div>
-                  <b>Stone 1</b>
-                  <span>Curation pending</span>
-                </div>
+                <div><b>Stone 1</b><span>Curation pending</span></div>
               </a>
               <a class="stone-link-row" href="#">
                 <span class="stone-dot-circle stone-dot-smoke"></span>
-                <div>
-                  <b>Stone 2</b>
-                  <span>Curation pending</span>
-                </div>
+                <div><b>Stone 2</b><span>Curation pending</span></div>
               </a>
             </div>
           </div>
@@ -1172,26 +515,18 @@
       <!-- RIGHT RAIL -->
       <aside class="right-rail">
 
-        <!-- KNOWN FOR -->
         <section class="rail-card">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 4 52 36H12L32 4Z"/>
-              <path d="M22 36 32 60l10-24"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4 52 36H12L32 4Z"/><path d="M22 36 32 60l10-24"/></svg>
             Known For
           </h2>
           <div class="one-line-wrap">Amplification &amp; Versatility</div>
-          <p class="one-line-desc">Clear Quartz is known for its unusual adaptability. Across crystal traditions, it is used to amplify intention, support clarity, and work alongside nearly any other stone without competing with its purpose.</p>
+          <p class="one-line-desc">Clear Quartz is known for its unusual adaptability across practices and intentions. It amplifies whatever it is directed toward, from a personal goal to the properties of a nearby stone, without imposing a character of its own.</p>
         </section>
 
-        <!-- ENERGETIC THEMES -->
         <section class="rail-card" id="themes">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-              <circle cx="32" cy="32" r="7"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
             Energetic Themes
           </h2>
 
@@ -1199,27 +534,21 @@
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="32" cy="32" r="10"/>
-                <path d="M32 8v8M32 48v8M8 32h8M48 32h8M16 16l6 6M42 42l6 6M16 48l6-6M42 18l6-6"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="10"/><path d="M32 8v8M32 48v8M8 32h8M48 32h8M16 16l6 6M42 42l6 6M16 48l6-6M42 18l6-6"/></svg>
             </div>
             <div>
               <h3>Amplification</h3>
-              <p>Clear Quartz is most strongly associated with strengthening an intention, practice, or nearby stone, making amplification the foundation of its broad use.</p>
+              <p>The Crystal Bible names amplification first among Clear Quartz's defining properties. The Book of Stones describes it as amplifying the energies of other stones and intentions. It is the most consistently supported association across all reviewed sources.</p>
             </div>
           </div>
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8 52 30 32 56 12 30Z"/>
-                <path d="M12 30h40M32 8 12 30M32 8 52 30"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 30 32 56 12 30Z"/><path d="M12 30h40M32 8 12 30M32 8 52 30"/></svg>
             </div>
             <div>
               <h3>Intention</h3>
-              <p>Often described as programmable, it is used as a symbolic focus for a chosen goal, quality, or direction during meditation and personal practice.</p>
+              <p>The Crystal Bible specifically identifies programmability as a key property. Clear Quartz takes on and holds the intention directed into it, making it a precise tool for focused personal practice.</p>
             </div>
           </div>
 
@@ -1228,28 +557,21 @@
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-                <circle cx="32" cy="32" r="7"/>
-                <circle cx="32" cy="32" r="2" fill="currentColor"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
             </div>
             <div>
               <h3>Clarity</h3>
-              <p>Associated with cutting through mental clutter, organizing attention, and bringing greater definition to thoughts, priorities, or intentions that feel diffuse.</p>
+              <p>Associated with cutting through mental clutter and bringing sharper definition to thoughts, priorities, or intentions that feel diffuse. Strongly supported across Tier A sources.</p>
             </div>
           </div>
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8c0 14 18 20 18 34a18 18 0 0 1-36 0C14 28 32 22 32 8Z"/>
-                <path d="M24 44c2-4 12-4 14 0" opacity=".6"/>
-              </svg>
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c0 14 18 20 18 34a18 18 0 0 1-36 0C14 28 32 22 32 8Z"/><path d="M24 44c2-4 12-4 14 0" opacity=".6"/></svg>
             </div>
             <div>
               <h3>Spiritual Connection</h3>
-              <p>Commonly linked with the Crown while also associated with all chakras, especially in meditation and practices centered on awareness beyond everyday concerns.</p>
+              <p>The Crystal Bible notes that Clear Quartz aids communication with spirit guides and enhances spiritual clarity. Associated with All Chakras, with Crown as its closest alignment for spiritual use.</p>
             </div>
           </div>
 
@@ -1261,101 +583,65 @@
           </div>
         </section>
 
-        <!-- COLLECTOR NOTES -->
         <section class="rail-card" id="notes">
           <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 8h28l10 10v38H14Z"/>
-              <path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/>
-            </svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h28l10 10v38H14Z"/><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/></svg>
             Collector &amp; Curiosity Notes
           </h2>
           <div class="note-list">
 
             <div class="note-row">
               <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-                  <path d="M10 19l22 12 22-12M32 31v27"/>
-                </svg>
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 19v26L32 58 10 45V19Z"/><path d="M10 19l22 12 22-12M32 31v27"/></svg>
               </div>
               <div>
                 <strong>The Quartz Family</strong>
-                <p>Clear Quartz is the parent material of the broader quartz family. Amethyst, citrine, smoky quartz, and rose quartz share its silicon-dioxide structure but differ in color and formation details.</p>
+                <p>Clear Quartz is the parent material of the broader quartz family. Amethyst, citrine, smoky quartz, and rose quartz all share its silicon-dioxide structure, with color and character produced by different trace elements, irradiation histories, or structural differences.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="32" cy="32" r="20"/>
-                  <path d="M32 18v14l8 8"/>
-                </svg>
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="20"/><path d="M32 18v14l8 8"/></svg>
               </div>
               <div>
                 <strong>Piezoelectric Quartz</strong>
-                <p>Pierre and Jacques Curie documented quartz's piezoelectric behavior in 1880. That property later became foundational to quartz timing technology used in clocks, watches, and electronic devices.</p>
+                <p>Pierre and Jacques Curie documented quartz's piezoelectric behavior in 1880. The discovery that quartz generates electrical charge under pressure later became foundational to precision timekeeping and electronic oscillators, making it one of the most technologically significant minerals in modern use.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="32" cy="28" r="14"/>
-                  <path d="M32 42v14M22 52h20"/>
-                </svg>
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="28" r="14"/><path d="M32 42v14M22 52h20"/></svg>
               </div>
               <div>
                 <strong>Crystal Skull Folklore</strong>
-                <p>Many famous "ancient" crystal skulls were later traced to nineteenth-century European workshops rather than pre-Columbian makers, making them a notable example of folklore overtaking verified history.</p>
+                <p>Many famous "ancient" crystal skulls were later traced to nineteenth-century European lapidary workshops rather than pre-Columbian origins, making them a notable example of a popular collector story that did not hold up under materials analysis and archaeological scrutiny.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
-                  <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
-                </svg>
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/><path d="M22 42c5-4 15-4 20 0" opacity=".55"/></svg>
               </div>
               <div>
                 <strong>Ancient Ice Belief</strong>
-                <p>The Greek word <em>krystallos</em> referred to ice, and some ancient writers believed clear quartz was water frozen so completely that it could never melt.</p>
+                <p>The Greek word <em>krystallos</em> referred to ice, and classical writers including Pliny the Elder believed clear quartz was water frozen so permanently it could not melt. The belief persisted across ancient cultures and reflects the stone's appearance rather than any geological understanding.</p>
               </div>
             </div>
 
           </div>
         </section>
 
-      </aside><!-- /right-rail -->
-
+      </aside>
     </div><!-- /content-grid -->
 
-    <!-- ENTRY NAV -->
     <nav class="entry-nav-wrap" aria-label="Browse encyclopedia entries">
-      <a href="#" class="entry-nav-link">
-        <span>←</span>
-        <div>
-          <small>Previous</small>
-          <b>—</b>
-        </div>
-      </a>
-      <a href="#" class="entry-nav-link entry-nav-random">
-        <div>
-          <small>Random</small>
-          <b>Surprise me</b>
-        </div>
-      </a>
-      <a href="#" class="entry-nav-link">
-        <div>
-          <small>Next</small>
-          <b>—</b>
-        </div>
-        <span>→</span>
-      </a>
+      <a href="#" class="entry-nav-link"><span>←</span><div><small>Previous</small><b>—</b></div></a>
+      <a href="#" class="entry-nav-link entry-nav-random"><div><small>Random</small><b>Surprise me</b></div></a>
+      <a href="#" class="entry-nav-link"><div><small>Next</small><b>—</b></div><span>→</span></a>
     </nav>
 
-    <!-- BOTTOM CTA -->
     <div class="enc-cta">
       <div>
         <h3>The right stone. The right moment.</h3>
@@ -1385,12 +671,10 @@
 </div><!-- /app-shell -->
 
 <script>
-/* Scroll-spy: highlight the active sidebar nav link */
 (function () {
-  const sections = ['hero', 'overview', 'reach', 'glance', 'themes', 'mineral', 'notes', 'related'];
-  const navLinks  = document.querySelectorAll('.side-nav a');
-
-  function onScroll () {
+  const sections = ['hero','overview','reach','glance','themes','mineral','notes','related'];
+  const navLinks = document.querySelectorAll('.side-nav a');
+  function onScroll() {
     let current = 'hero';
     sections.forEach(id => {
       const el = document.getElementById(id);
@@ -1401,11 +685,9 @@
       a.classList.toggle('active', href === current || (current === 'hero' && href === 'top'));
     });
   }
-
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
 </script>
-
 </body>
 </html>
