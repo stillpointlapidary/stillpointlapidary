@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="description" content="Smoky Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
-<meta property="og:title" content="Smoky Quartz | Still Point Lapidary Encyclopedia">
+<meta name="description" content="Carnelian encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
+<meta property="og:title" content="Carnelian | Still Point Lapidary Encyclopedia">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#6b3636">
+<meta name="theme-color" content="#6b4530">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>Smoky Quartz | Still Point Lapidary Encyclopedia</title>
+<title>Carnelian | Still Point Lapidary Encyclopedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <style>
 /* ── Encyclopedia Entry Page ── */
 
-/* Chakra-keyed design tokens — Root for Smoky Quartz.
+/* Chakra-keyed design tokens — Sacral for Carnelian.
    Swap these 8 values per stone based on primary_chakra. */
 :root {
-  --ck-pill-bg:    #e6d0d0;
-  --ck-pill-text:  #6b3636;
-  --ck-btn-bg:     #e6d0d0;
-  --ck-btn-border: #c09090;
-  --ck-btn-text:   #6b3636;
-  --ck-wash:       #f6f0f0;
-  --ck-wash-border:#c09090;
-  --ck-accent:     #6b3636;
-  --ck-deep:       #512727;
+  --ck-pill-bg:    #eedbd0;
+  --ck-pill-text:  #6b4530;
+  --ck-btn-bg:     #eedbd0;
+  --ck-btn-border: #c99b7f;
+  --ck-btn-text:   #6b4530;
+  --ck-wash:       #f7f2ef;
+  --ck-wash-border:#c99b7f;
+  --ck-accent:     #6b4530;
+  --ck-deep:       #523322;
 
   /* Page layout */
   --enc-radius: 12px;
@@ -68,7 +68,6 @@
 .enc-breadcrumb a:hover { color: var(--accent); }
 .enc-breadcrumb b { color: var(--ink2); }
 
-/* Nav card — mirrors c101-layout/c101-sidebar */
 .side-nav-card {
   background: var(--stone2);
   border: 0.5px solid var(--border);
@@ -103,7 +102,6 @@
   font-weight: 500;
 }
 
-/* Editorial standards mini-card */
 .sidebar-standards {
   margin-top: 12px;
   padding: 14px 16px;
@@ -152,9 +150,7 @@
   border-radius: 0;
   box-shadow: none;
 }
-.enc-hero::after {
-  display: none;
-}
+.enc-hero::after { display: none; }
 .stone-photo-wrap {
   border-radius: var(--enc-radius);
   overflow: hidden;
@@ -253,7 +249,6 @@
   line-height: 1.5;
 }
 
-/* Buttons */
 .hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
 .enc-btn {
   font-family: 'Jost', sans-serif;
@@ -367,14 +362,6 @@
   box-shadow: var(--enc-shadow);
   padding: 24px 26px;
 }
-.enc-card-eyebrow {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--accent2);
-  margin-bottom: 6px;
-}
 .enc-card h2 {
   font-family: Georgia, serif;
   font-size: 20px;
@@ -403,7 +390,6 @@
 }
 .enc-card p:last-child { margin-bottom: 0; }
 
-/* Why People Reach For It */
 .reach-rows { display: grid; gap: 0; }
 .reach-row {
   display: grid;
@@ -525,10 +511,10 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
-.stone-dot-black     { background: linear-gradient(135deg,#2c2830,#5a5260); }
-.stone-dot-obsidian  { background: linear-gradient(135deg,#1a1820,#3a3545); }
-.stone-dot-violet    { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
-.stone-dot-white     { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
+.stone-dot-red      { background: linear-gradient(135deg,#c47060,#8b3a2a); }
+.stone-dot-sunstone { background: linear-gradient(135deg,#e8c070,#c08040); }
+.stone-dot-violet   { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
+.stone-dot-white    { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
 .stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
 .stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
 
@@ -567,7 +553,6 @@
   flex-shrink: 0;
 }
 
-/* Known For */
 .one-line-wrap {
   display: inline-block;
   background: var(--ck-wash);
@@ -590,7 +575,6 @@
   margin: 0;
 }
 
-/* Energetic Themes */
 .theme-tier-label {
   font-size: 11.5px;
   letter-spacing: 0.1em;
@@ -658,14 +642,7 @@
   border-radius: 999px;
   padding: 4px 12px;
 }
-.theme-source-note {
-  font-size: 10px;
-  color: var(--ink3);
-  margin: 10px 0 0;
-  letter-spacing: 0.04em;
-}
 
-/* Collector Notes */
 .note-list { display: grid; gap: 8px; }
 .note-row {
   display: grid;
@@ -859,7 +836,7 @@
     <div class="enc-breadcrumb">
       <a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
-      <b>Smoky Quartz</b>
+      <b>Carnelian</b>
     </div>
 
     <div class="side-nav-card">
@@ -889,18 +866,18 @@
     <section class="enc-hero" id="hero">
       <div class="stone-photo-wrap">
         <img
-          alt="Smoky Quartz tower showing deep chocolate brown color"
-          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/smoky-quartz-tower.webp"
+          alt="Carnelian star carving showing warm orange-red color"
+          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/carnelian-star.webp"
         />
       </div>
 
       <div class="hero-right">
-        <h1 class="stone-name">Smoky Quartz</h1>
+        <h1 class="stone-name">Carnelian</h1>
 
         <div class="theme-pills">
-          <span class="theme-pill">Grounding</span>
-          <span class="theme-pill">Protection</span>
-          <span class="theme-pill">Transmutation</span>
+          <span class="theme-pill">Vitality</span>
+          <span class="theme-pill">Courage</span>
+          <span class="theme-pill">Action</span>
         </div>
 
         <div class="identity-grid">
@@ -911,7 +888,7 @@
               </svg>
               Best For
             </div>
-            <p>Grounded presence and practical clarity</p>
+            <p>Creative confidence and decisive action</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
@@ -920,7 +897,7 @@
               </svg>
               Use When
             </div>
-            <p>You feel unmoored, overstimulated, or pulled toward the abstract and want a steadier, more grounded sense of presence.</p>
+            <p>You feel flat, stuck, or creatively depleted and want renewed energy and the boldness to begin moving.</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
@@ -930,17 +907,16 @@
               </svg>
               Pairs Well With
             </div>
-            <p>Black Tourmaline<br>Amethyst<br>Clear Quartz</p>
+            <p>Red Jasper<br>Citrine<br>Clear Quartz</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="32" cy="32" r="22"/>
-                <path d="M32 10v44M10 32h44"/>
+                <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
               </svg>
               Primary Chakra
             </div>
-            <p>Root</p>
+            <p>Root, Sacral,<br>Solar Plexus</p>
           </div>
         </div>
 
@@ -982,31 +958,31 @@
             </svg>
           </div>
           <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Grounding<br>Protection · Transmutation</div>
+          <div class="glance-value">Vitality<br>Courage · Action</div>
         </div>
 
         <div class="glance-item">
           <div class="glance-icon-tile">
+            <!-- sacral / water drop -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="32" r="22"/>
-              <path d="M32 10v44M10 32h44"/>
-              <circle cx="32" cy="32" r="6" fill="currentColor" stroke="none"/>
+              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
+              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
             </svg>
           </div>
           <div class="glance-label">Chakra</div>
-          <div class="glance-value">Root</div>
+          <div class="glance-value">Root · Sacral<br>Solar Plexus</div>
         </div>
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <!-- earth element -->
+            <!-- fire element -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 44h48M16 44 32 16l16 28"/>
-              <path d="M24 44l8-14 8 14"/>
+              <path d="M32 8c0 14-18 20-18 34a18 18 0 0 0 36 0C50 28 32 22 32 8Z"/>
+              <path d="M24 44c2-4 12-4 14 0" opacity=".6"/>
             </svg>
           </div>
           <div class="glance-label">Element</div>
-          <div class="glance-value">Earth</div>
+          <div class="glance-value">Fire</div>
         </div>
 
         <div class="glance-item">
@@ -1018,7 +994,7 @@
             </svg>
           </div>
           <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Sagittarius<br>Capricorn</div>
+          <div class="glance-value">Aries<br>Leo</div>
         </div>
 
         <div class="glance-item">
@@ -1030,7 +1006,7 @@
             </svg>
           </div>
           <div class="glance-label">Formation</div>
-          <div class="glance-value">Igneous,<br>hydrothermal</div>
+          <div class="glance-value">Volcanic,<br>sedimentary</div>
         </div>
 
         <div class="glance-item">
@@ -1041,7 +1017,7 @@
             </svg>
           </div>
           <div class="glance-label">Hardness</div>
-          <div class="glance-value">7</div>
+          <div class="glance-value">6.5 – 7</div>
         </div>
 
         <div class="glance-item">
@@ -1052,7 +1028,7 @@
             </svg>
           </div>
           <div class="glance-label">Color Range</div>
-          <div class="glance-value">Pale tan to deep<br>chocolate brown</div>
+          <div class="glance-value">Pale orange to<br>deep brownish-red</div>
         </div>
 
       </div>
@@ -1073,8 +1049,8 @@
             </svg>
             Overview
           </h2>
-          <p>Smoky Quartz is known for grounding, practical awareness, and the ability to bring abstract intentions back into daily life. It is often chosen by people who feel scattered, overstimulated, or overly focused on the conceptual and want a steadier connection to the body, the present moment, and concrete action.</p>
-          <p>Its traditions also emphasize transmutation. Rather than describing this as a literal energetic mechanism, crystal practice uses Smoky Quartz as a symbol and companion for meeting heavy experiences with greater steadiness. This combination of grounding, protection, and practical follow-through gives it a distinct place among stones used for meditation, transition, and everyday stability.</p>
+          <p>Carnelian is known for vitality, courage, and creative momentum. Its warm color and long-standing association with the lower chakras reflect a tradition centered on life force, assertive will, and the confidence to begin. People often reach for it when energy feels flat, self-doubt is delaying action, or a creative direction needs renewed movement.</p>
+          <p>A warm orange to brownish-red variety of chalcedony, Carnelian also carries a substantial archaeological history. It appears in Mesopotamian, Egyptian, and Roman seals, amulets, beads, and inlaid objects, while later European gemstone traditions connected it with good fortune and success. Across these settings, its enduring identity is less about force for its own sake than about directing energy toward meaningful action.</p>
         </article>
 
         <!-- WHY PEOPLE REACH FOR IT -->
@@ -1087,24 +1063,24 @@
           </h2>
           <div class="reach-rows">
             <div class="reach-row">
-              <span class="reach-label">Getting Grounded</span>
-              <span class="reach-desc">Chosen when energy feels scattered, unanchored, or too focused on the abstract, and a return to practical, embodied awareness is needed.</span>
+              <span class="reach-label">Building Confidence</span>
+              <span class="reach-desc">Chosen when self-doubt or hesitation is blocking forward movement, particularly when someone wants to take a meaningful step but cannot find the inner momentum to begin.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Transforming Heavy Energy</span>
-              <span class="reach-desc">Traditionally associated with shifting stagnant or heavy energy toward a steadier state, Smoky Quartz is used when other protective stones feel too passive or detached.</span>
+              <span class="reach-label">Igniting Creative Energy</span>
+              <span class="reach-desc">Linked to the Sacral Chakra and creative life force, Carnelian is traditionally used to reawaken passion for a project, practice, or direction that has gone flat or stagnant.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Manifesting Goals</span>
-              <span class="reach-desc">Connected to drawing the ethereal into physical form, Smoky Quartz is often chosen to help translate intentions and goals into organized, practical action.</span>
+              <span class="reach-label">Taking Action</span>
+              <span class="reach-desc">Its association with assertive will makes Carnelian a stone specifically for moving from intention into deed, particularly when someone knows what they want but needs the push to actually begin.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Protection During Spiritual Work</span>
-              <span class="reach-desc">A traditional grounding companion during meditation or expanded-awareness practices, used to keep the practitioner anchored and clear throughout.</span>
+              <span class="reach-label">Restoring Physical Vitality</span>
+              <span class="reach-desc">Traditionally associated with physical vitality, Carnelian is often chosen when energy and motivation feel depleted and a stronger sense of momentum is needed.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Daily Stability</span>
-              <span class="reach-desc">Chosen during periods of prolonged stress or overstimulation for its association with calm, steady presence rather than reactive energy.</span>
+              <span class="reach-label">Overcoming Hesitation</span>
+              <span class="reach-desc">Across many cultures and traditions, Carnelian is associated with releasing timidity, breaking habitual patterns, and approaching new situations with greater boldness.</span>
             </div>
           </div>
         </article>
@@ -1121,29 +1097,29 @@
           <div class="mineral-layout">
             <div>
               <div class="mineral-facts">
-                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
+                <div class="mineral-fact"><span>Mineral Family</span><span>Chalcedony (Quartz)</span></div>
                 <div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
                 <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
-                <div class="mineral-fact"><span>Crystal Habit</span><span>Hexagonal prism</span></div>
-                <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-                <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+                <div class="mineral-fact"><span>Color Source</span><span>Iron oxide</span></div>
+                <div class="mineral-fact"><span>Mohs Hardness</span><span>6.5 – 7</span></div>
+                <div class="mineral-fact"><span>Luster</span><span>Waxy to vitreous</span></div>
                 <div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
               </div>
             </div>
             <div class="mineral-formation">
               <h4>Formation</h4>
-              <p>Smoky Quartz forms in igneous and hydrothermal environments. Its color develops when natural gamma irradiation acts on trace aluminum within the crystal lattice — a process that can also be replicated artificially.</p>
+              <p>Chalcedony forms primarily in volcanic rocks and low-temperature sedimentary environments, filling cavities and veins in basalt and other fine-grained igneous material. Carnelian's warm color comes from iron oxide distributed throughout the microcrystalline structure.</p>
               <h4>Common Localities</h4>
               <ul>
+                <li>India</li>
                 <li>Brazil</li>
-                <li>Madagascar</li>
-                <li>Switzerland</li>
-                <li>United States</li>
-                <li>Scotland (Cairngorm Mountains)</li>
+                <li>Australia</li>
+                <li>Uruguay</li>
+                <li>New Zealand</li>
               </ul>
             </div>
           </div>
-          <p class="mineral-note">Smoky Quartz is found on every continent and is durable enough for most uses at hardness 7. Its color is generally stable under normal conditions, though sustained heat or prolonged direct sunlight can lighten some specimens. Clean with mild soap and water and store separately from harder minerals that could scratch the surface.</p>
+          <p class="mineral-note">Carnelian is durable at 6.5–7 Mohs, takes a good polish, and has been used for carved seals, beads, and jewelry since ancient Egypt and Mesopotamia. Clean with mild soap and water; Carnelian is generally stable and not sensitive to light or normal humidity. Much of the bright orange-red chalcedony sold commercially has been heat-treated or dyed to enhance color — deeply uniform orange material may be treated agate, so provenance or gemological testing matters when natural color is important.</p>
         </article>
 
         <!-- RELATED STONES -->
@@ -1160,17 +1136,17 @@
             <div class="rel-card">
               <div class="rel-card-head">Similar Energy <span>→</span></div>
               <a class="stone-link-row" href="#">
-                <span class="stone-dot-circle stone-dot-black"></span>
+                <span class="stone-dot-circle stone-dot-red"></span>
                 <div>
-                  <b>Black Tourmaline</b>
-                  <span>Grounding &amp; energetic boundaries</span>
+                  <b>Red Jasper</b>
+                  <span>Lower chakras &amp; physical vitality</span>
                 </div>
               </a>
               <a class="stone-link-row" href="#">
-                <span class="stone-dot-circle stone-dot-obsidian"></span>
+                <span class="stone-dot-circle stone-dot-sunstone"></span>
                 <div>
-                  <b>Obsidian</b>
-                  <span>Transmutation &amp; deep grounding</span>
+                  <b>Sunstone</b>
+                  <span>Energy, confidence &amp; joy</span>
                 </div>
               </a>
             </div>
@@ -1180,7 +1156,7 @@
                 <span class="stone-dot-circle stone-dot-violet"></span>
                 <div>
                   <b>Amethyst</b>
-                  <span>Grounded presence &amp; spiritual clarity</span>
+                  <span>Bold action &amp; calm direction</span>
                 </div>
               </a>
               <a class="stone-link-row" href="/stones/clear-quartz">
@@ -1208,8 +1184,8 @@
             </svg>
             Known For
           </h2>
-          <div class="one-line-wrap">Grounding and Transmutation</div>
-          <p class="one-line-desc">Smoky Quartz is known for anchoring scattered energy into physical presence and practical awareness. In crystal traditions it is valued as a grounding companion that is also associated with transforming heavy or stagnant energy into a steadier, more settled state.</p>
+          <div class="one-line-wrap">Creative Momentum</div>
+          <p class="one-line-desc">Carnelian is known for combining vitality with the confidence to act. Its traditions center on awakening creative drive, strengthening courage, and helping intention gather enough momentum to become purposeful movement.</p>
         </section>
 
         <!-- ENERGETIC THEMES -->
@@ -1226,29 +1202,28 @@
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <!-- ground / root -->
+              <!-- vitality / energy bolt -->
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 12v32M20 32l12 12 12-12"/>
-                <path d="M16 52h32"/>
+                <path d="M36 8 20 36h16L28 56 44 28H28Z"/>
               </svg>
             </div>
             <div>
-              <h3>Grounding</h3>
-              <p>Its Root Chakra association centers on embodiment, present-moment awareness, and practical engagement. Smoky Quartz is especially valued when reflection or spiritual practice needs a stronger connection to ordinary responsibilities and physical reality.</p>
+              <h3>Vitality &amp; Energy</h3>
+              <p>Carnelian is traditionally associated with life force, stamina, and embodied energy. Its lower-chakra connection gives this theme a physical, activating quality rather than a purely reflective one.</p>
             </div>
           </div>
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <!-- shield / protection -->
+              <!-- shield / courage -->
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/>
                 <path d="M22 34l8 8 12-14"/>
               </svg>
             </div>
             <div>
-              <h3>Protection &amp; Transmutation</h3>
-              <p>Smoky Quartz carries a long tradition as a protective talisman with documented ceremonial and cultural use across many centuries. Its protective quality is understood not as deflection but as transformation: traditionally associated with shifting heavy or stagnant energy toward a steadier, more settled state.</p>
+              <h3>Courage &amp; Confidence</h3>
+              <p>One of Carnelian's oldest and most consistent associations, courage appears across its full cultural and metaphysical history. It is linked with assertive will, boldness, and the capacity to act decisively rather than hesitate.</p>
             </div>
           </div>
 
@@ -1257,36 +1232,38 @@
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <!-- manifestation / arrow down into form -->
+              <!-- creative / flower -->
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8v36M20 32l12 12 12-12"/>
-                <path d="M16 52h32"/>
+                <circle cx="32" cy="32" r="7"/>
+                <circle cx="32" cy="16" r="6"/>
+                <circle cx="32" cy="48" r="6"/>
+                <circle cx="16" cy="32" r="6"/>
+                <circle cx="48" cy="32" r="6"/>
               </svg>
             </div>
             <div>
-              <h3>Manifestation</h3>
-              <p>Connected to drawing inspiration into physical form, Smoky Quartz is linked with the Root Chakra's relationship to material reality. It is used to support the translation of spiritual intentions into concrete, organized action.</p>
+              <h3>Creative Passion</h3>
+              <p>Connected to the Sacral Chakra and the generative energies associated with it, Carnelian is traditionally linked with passion, creativity, and the drive to pursue what brings meaning. It is often chosen to reawaken creative energy that has gone dormant.</p>
             </div>
           </div>
 
           <div class="theme-row">
             <div class="theme-icon-tile">
-              <!-- checklist / organization -->
+              <!-- action / arrow forward -->
               <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 8h28l10 10v38H14Z"/>
-                <path d="M38 8v10h14M22 30h20M22 38h20M22 46h12"/>
+                <path d="M12 32h40M36 18l16 14-16 14"/>
               </svg>
             </div>
             <div>
-              <h3>Practicality &amp; Organization</h3>
-              <p>A well-established secondary association connects Smoky Quartz to practical thinking, realistic planning, and the clear-headed follow-through that keeps goals from remaining abstract.</p>
+              <h3>Action &amp; Manifestation</h3>
+              <p>Carnelian is associated with moving from intention to deed. Where Courage names the quality of boldness, this theme addresses the specific drive to commit and follow through, particularly for projects or goals that have stalled.</p>
             </div>
           </div>
 
           <hr class="theme-divider">
           <div class="theme-tier-label">Occasional Associations</div>
           <div class="occasional-tags">
-            <span class="occ-tag">Purification</span>
+            <span class="occ-tag">Motivation</span>
           </div>
         </section>
 
@@ -1303,56 +1280,56 @@
 
             <div class="note-row">
               <div class="note-icon">
-                <!-- map / location -->
+                <!-- etymology / letter A -->
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 8c-8 0-14 6-14 14 0 10 14 28 14 28s14-18 14-28c0-8-6-14-14-14Z"/>
-                  <circle cx="32" cy="22" r="4"/>
+                  <path d="M12 52 32 8l20 44"/>
+                  <path d="M20 36h24"/>
                 </svg>
               </div>
               <div>
-                <strong>Scottish Heritage</strong>
-                <p>Cairngorm, a Scottish variety of Smoky Quartz, has a long association with Highland dress and decorative objects. It appears in brooches, weapon fittings, and traditional accessories, giving the material a distinctive place in Scottish lapidary and cultural history.</p>
+                <strong>The Name's Origins</strong>
+                <p>The most widely cited etymology derives Carnelian's name from the Latin <em>cornum</em>, the Cornelian cherry, whose red fruit the stone resembles in color. A secondary derivation connects it to the Latin <em>carneus</em>, meaning flesh-colored, which reflects paler orange specimens.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
-                <!-- radiation / rays -->
+                <!-- ancient / column -->
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="32" cy="32" r="8"/>
-                  <path d="M32 8v10M32 46v10M8 32h10M46 32h10M16 16l7 7M41 41l7 7M16 48l7-7M41 23l7-7"/>
+                  <path d="M20 52V20M44 52V20M14 20h36M14 52h36M14 14h36"/>
                 </svg>
               </div>
               <div>
-                <strong>Color and Irradiation</strong>
-                <p>The smoky color develops when natural irradiation acts on trace aluminum in the quartz lattice. Similar coloration can also be produced artificially. Very dark color alone does not establish treatment, so provenance or gemological testing may be needed when natural origin matters.</p>
+                <strong>A Stone of Ancient Courts</strong>
+                <p>Carnelian appears throughout Mesopotamian, Egyptian, and Roman archaeological records in seals, amulets, beads, and inlaid objects. Its extensive use across ancient courts and trade networks makes it an important material in the history of carved gemstones.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
-                <!-- dark gem -->
+                <!-- gem / message -->
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 6 54 24 32 58 10 24Z"/>
-                  <path d="M10 24h44"/>
+                  <path d="M8 16h48v32H8Z"/>
+                  <path d="M8 16l24 20 24-20"/>
                 </svg>
               </div>
               <div>
-                <strong>Morion</strong>
-                <p>Morion is a traditional name for very dark brown to nearly black Smoky Quartz. It shares the same mineral identity as paler material and may be naturally or artificially colored. Treatment cannot be determined reliably from darkness alone.</p>
+                <strong>The Language of Gems</strong>
+                <p>In nineteenth-century European society, Carnelian was part of a coded language of gems used to communicate sentiments discreetly. Wearing Carnelian conveyed a wish of good luck and success to the recipient.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
-                <!-- mountain -->
+                <!-- treatment / magnify -->
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 52 28 20l10 14 6-8 12 26Z"/>
+                  <circle cx="28" cy="28" r="18"/>
+                  <path d="M42 42l14 14"/>
                 </svg>
               </div>
               <div>
-                <strong>Cairngorm vs. Standard Smoky Quartz</strong>
-                <p>Cairngorm is a warm brownish-yellow variety specific to Scottish deposits, distinct in tone from the cooler gray-browns of Swiss and Brazilian material. It is collected for provenance as much as color, and authentic pieces command interest among Highland dress and Scottish heritage collectors.</p>
+                <strong>Natural vs. Treated Material</strong>
+                <p>Natural Carnelian may show banding or color variation when held to strong light. Deeply uniform bright-orange material may be heat-treated or dyed agate, a common commercial practice. Visual appearance alone does not prove treatment, so provenance or gemological testing is useful when natural color matters.</p>
               </div>
             </div>
 
@@ -1369,7 +1346,7 @@
         <span>←</span>
         <div>
           <small>Previous</small>
-          <b>Selenite</b>
+          <b>Calcite</b>
         </div>
       </a>
       <a href="#" class="entry-nav-link entry-nav-random">
@@ -1381,7 +1358,7 @@
       <a href="#" class="entry-nav-link">
         <div>
           <small>Next</small>
-          <b>Tiger's Eye</b>
+          <b>Celestite</b>
         </div>
         <span>→</span>
       </a>
