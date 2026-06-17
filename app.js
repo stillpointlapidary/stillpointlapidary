@@ -1193,44 +1193,46 @@ function getStoneDailyPrompt(s){
 
 // ── STONE OF THE DAY ─────────────────────────────────────────────────────────
 
+// Pill background + text (accent). Keys are canonical chakra names.
 const SFC_CHAKRA_COLORS={
   'Earth Star':   {bg:'#dedad6',text:'#5a5249'},
   'Root':         {bg:'#e6d0d0',text:'#6b3636'},
-  'Sacral':       {bg:'#eeddd4',text:'#6b4530'},
-  'Solar Plexus': {bg:'#ede8d0',text:'#6b5520'},
+  'Sacral':       {bg:'#eedbd0',text:'#6b4530'},
+  'Solar Plexus': {bg:'#eee6c8',text:'#6b5520'},
   'Heart':        {bg:'#d6e6d8',text:'#385838'},
-  'Throat':       {bg:'#d4e0e8',text:'#2e4858'},
-  'Third Eye':    {bg:'#dbd6e8',text:'#453868'},
-  'Crown':        {bg:'#ded7ef',text:'#5e5080'}
+  'Throat':       {bg:'#d4e4ec',text:'#2e4858'},
+  'Third Eye':    {bg:'#d2dcf0',text:'#273f73'},
+  'Crown':        {bg:'#ded7ef',text:'#5e5080'},
+  'Soul Star':    {bg:'#ece6d8',text:'#6c5c3f'},
 };
 
-// Banner colors — ultra-light chakra wash, barely deeper than the card ivory.
-// Derived by blending each chakra hue ~8% into white; Third Eye targets #f3f0f8.
+// Banner/wash colors — ultra-light chakra tint, barely deeper than card ivory.
 const SFC_BANNER_COLORS={
-  'Earth Star':   '#f5f4f3',
-  'Root':         '#f5f0f0',
-  'Sacral':       '#f6f3f1',
-  'Solar Plexus': '#f6f5f0',
+  'Earth Star':   '#f5f4f2',
+  'Root':         '#f6f0f0',
+  'Sacral':       '#f7f2ef',
+  'Solar Plexus': '#f7f5ee',
   'Heart':        '#f1f6f2',
-  'Throat':       '#f0f3f6',
-  'Third Eye':    '#f3f0f8',
+  'Throat':       '#f0f4f7',
+  'Third Eye':    '#eff2f8',
   'Crown':        '#f4f1fa',
+  'Soul Star':    '#f8f6f1',
 };
 
-// Button colors — pale tinted fill, ~5 units below the pill; clearly lighter than the banner.
-// Keeps "View Full Entry" coordinated with the pill while being clearly distinct from plain text.
+// Button colors — pill fill + canonical border + accent text.
 const SFC_BUTTON_COLORS={
-  'Earth Star':   {bg:'#d9d5d1',border:'#b5afa8',text:'#5a5249'},
-  'Root':         {bg:'#e0caca',border:'#c09090',text:'#6b3636'},
-  'Sacral':       {bg:'#e8d7ce',border:'#c8a890',text:'#6b4530'},
-  'Solar Plexus': {bg:'#e7e2ca',border:'#c5bb8a',text:'#6b5520'},
-  'Heart':        {bg:'#d0e0d2',border:'#8ab88e',text:'#385838'},
-  'Throat':       {bg:'#cedae2',border:'#8ab0c8',text:'#2e4858'},
-  'Third Eye':    {bg:'#d6d1e4',border:'#a898cc',text:'#453868'},
-  'Crown':        {bg:'#d9d2e9',border:'#b0a0d8',text:'#5e5080'},
+  'Earth Star':   {bg:'#dedad6',border:'#b5afa8',text:'#5a5249'},
+  'Root':         {bg:'#e6d0d0',border:'#c09090',text:'#6b3636'},
+  'Sacral':       {bg:'#eedbd0',border:'#c99b7f',text:'#6b4530'},
+  'Solar Plexus': {bg:'#eee6c8',border:'#c6b36f',text:'#6b5520'},
+  'Heart':        {bg:'#d6e6d8',border:'#8ab88e',text:'#385838'},
+  'Throat':       {bg:'#d4e4ec',border:'#83b2ca',text:'#2e4858'},
+  'Third Eye':    {bg:'#d2dcf0',border:'#7f94c4',text:'#273f73'},
+  'Crown':        {bg:'#ded7ef',border:'#b0a0d8',text:'#5e5080'},
+  'Soul Star':    {bg:'#ece6d8',border:'#cdbf9f',text:'#6c5c3f'},
 };
 
-// Kicker/icon accent colors — dark enough for ≥4.5:1 on the ultra-light header wash.
+// Kicker/icon accent colors — dark enough for ≥4.5:1 on the ultra-light wash.
 // Declared explicitly per chakra; do not derive at runtime from other palettes.
 const SFC_KICKER_COLORS={
   'Earth Star':   '#5a5249',
@@ -1239,13 +1241,28 @@ const SFC_KICKER_COLORS={
   'Solar Plexus': '#6b5520',
   'Heart':        '#385838',
   'Throat':       '#2e4858',
-  'Third Eye':    '#453868',
+  'Third Eye':    '#273f73',
   'Crown':        '#5e5080',
+  'Soul Star':    '#6c5c3f',
+};
+
+// Deep/dark accent — for hover states, focus rings, or high-contrast contexts.
+const SFC_DEEP_COLORS={
+  'Earth Star':   '#403a34',
+  'Root':         '#512727',
+  'Sacral':       '#523322',
+  'Solar Plexus': '#4f3e16',
+  'Heart':        '#293f2a',
+  'Throat':       '#203744',
+  'Third Eye':    '#1d3058',
+  'Crown':        '#453961',
+  'Soul Star':    '#4f422d',
 };
 
 // ── Chakra normalization ──────────────────────────────────────────────────────
 // Canonical key list — the only values palette objects recognize.
-const _SOTD_CHAKRA_CANONICAL=['Earth Star','Root','Sacral','Solar Plexus','Heart','Throat','Third Eye','Crown'];
+// Soul Star is canonical (palette reserved) but not surfaced in UI filters unless stone data uses it.
+const _SOTD_CHAKRA_CANONICAL=['Earth Star','Root','Sacral','Solar Plexus','Heart','Throat','Third Eye','Crown','Soul Star'];
 // Lowercase→canonical map (pre-computed once, not rebuilt per render).
 const _SOTD_CHAKRA_NORM_MAP=Object.fromEntries(
   _SOTD_CHAKRA_CANONICAL.map(k=>[k.toLowerCase().replace(/\s+/g,' '),k])

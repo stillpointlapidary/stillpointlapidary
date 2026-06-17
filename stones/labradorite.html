@@ -18,14 +18,15 @@
 /* Chakra-keyed design tokens — Third Eye for Labradorite.
    Swap these 8 values per stone based on primary_chakra. */
 :root {
-  --ck-pill-bg:    #dbd6e8;
-  --ck-pill-text:  #453868;
-  --ck-btn-bg:     #d6d1e4;
-  --ck-btn-border: #a898cc;
-  --ck-btn-text:   #453868;
-  --ck-wash:       #f3f0f8;
-  --ck-wash-border:#a898cc;
-  --ck-accent:     #453868;
+  --ck-pill-bg:    #d2dcf0;
+  --ck-pill-text:  #273f73;
+  --ck-btn-bg:     #d2dcf0;
+  --ck-btn-border: #7f94c4;
+  --ck-btn-text:   #273f73;
+  --ck-wash:       #eff2f8;
+  --ck-wash-border:#7f94c4;
+  --ck-accent:     #273f73;
+  --ck-deep:       #1d3058;
 
   /* Page layout */
   --enc-radius: 12px;
@@ -196,7 +197,7 @@
 
 .stone-name {
   font-family: Georgia, serif;
-  font-size: clamp(38px, 4vw, 52px);
+  font-size: clamp(32px, 3vw, 44px);
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.005em;
@@ -310,7 +311,7 @@
   align-items: center;
   gap: 8px;
 }
-.panel-title svg { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2; flex-shrink: 0; }
+.panel-title svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
 .glance-grid {
   display: grid;
@@ -394,10 +395,10 @@
   gap: 8px;
 }
 .enc-card h2 svg {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
   color: var(--ck-accent);
-  stroke-width: 2;
+  stroke-width: 2.2;
   flex-shrink: 0;
 }
 .enc-card p {
@@ -565,10 +566,10 @@
   gap: 7px;
 }
 .rail-card h2 svg {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   color: var(--ck-accent);
-  stroke-width: 2;
+  stroke-width: 2.2;
   flex-shrink: 0;
 }
 
@@ -971,7 +972,7 @@
     <!-- AT A GLANCE -->
     <section class="glance-panel" id="glance">
       <h2 class="panel-title">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
           <circle cx="32" cy="32" r="8"/>
         </svg>
