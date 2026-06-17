@@ -315,7 +315,7 @@
 
 .glance-grid {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 0;
 }
 .glance-item {
@@ -905,7 +905,7 @@
         <div class="theme-pills">
           <span class="theme-pill">Transformation</span>
           <span class="theme-pill">Intuition</span>
-          <span class="theme-pill">Hidden Potential</span>
+          <span class="theme-pill">Protection</span>
         </div>
 
         <div class="identity-grid">
@@ -917,7 +917,7 @@
               </svg>
               Best For
             </div>
-            <p>Navigating major life transitions</p>
+            <p>Navigating change, strengthening intuition, and exploring new possibilities</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
@@ -927,7 +927,7 @@
               </svg>
               Use When
             </div>
-            <p>You feel on the edge of becoming something new but aren't sure what comes next.</p>
+            <p>Reach for Labradorite when change feels uncertain and you want to move forward with greater awareness, confidence, and trust in your inner guidance.</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
@@ -992,7 +992,18 @@
             </svg>
           </div>
           <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Transformation<br>Intuition</div>
+          <div class="glance-value">Transformation<br>Intuition · Protection</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- star / best for -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
+            </svg>
+          </div>
+          <div class="glance-label">Best For</div>
+          <div class="glance-value">Change<br>Inner guidance<br>Exploration</div>
         </div>
 
         <div class="glance-item">
@@ -1004,32 +1015,20 @@
               <circle cx="32" cy="32" r="2.5" fill="currentColor"/>
             </svg>
           </div>
-          <div class="glance-label">Chakras</div>
-          <div class="glance-value">Third Eye<br>Throat</div>
+          <div class="glance-label">Chakra</div>
+          <div class="glance-value">Third Eye</div>
         </div>
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <!-- air/water element -->
+            <!-- air element -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
               <path d="M32 10 12 44h40Z"/>
               <path d="M22 44c0 8 20 8 20 0"/>
             </svg>
           </div>
           <div class="glance-label">Element</div>
-          <div class="glance-value">Air<br>Water</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- planet / orbit -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="32" r="14"/>
-              <ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(-30 32 32)"/>
-            </svg>
-          </div>
-          <div class="glance-label">Planet</div>
-          <div class="glance-value">Uranus<br>Neptune</div>
+          <div class="glance-value">Air</div>
         </div>
 
         <div class="glance-item">
@@ -1042,31 +1041,7 @@
             </svg>
           </div>
           <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Sagittarius<br>Scorpio · Leo</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- drop / color -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
-              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
-            </svg>
-          </div>
-          <div class="glance-label">Color</div>
-          <div class="glance-value">Gray · Black<br>Blue/Green Flash</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- hexagonal / mineral group -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-              <path d="M10 19l22 12 22-12M32 31v27"/>
-            </svg>
-          </div>
-          <div class="glance-label">Mineral Group</div>
-          <div class="glance-value">Feldspar</div>
+          <div class="glance-value">Leo<br>Sagittarius</div>
         </div>
 
         <div class="glance-item">
@@ -1077,20 +1052,33 @@
               <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
             </svg>
           </div>
-          <div class="glance-label">Mohs Hardness</div>
+          <div class="glance-label">Hardness</div>
           <div class="glance-value">6 – 6.5</div>
         </div>
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <!-- crystal system / triclinic -->
+            <!-- formation / igneous -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 50 24 46 52 18 52 14 24Z"/>
-              <path d="M14 24h36M32 6v46M14 24l4 28M50 24l-4 28"/>
+              <path d="M32 8 54 45v5H10v-5Z"/>
+              <path d="M20 50V38l12-14 12 14v12"/>
+              <path d="M28 50v-8h8v8"/>
             </svg>
           </div>
-          <div class="glance-label">Crystal System</div>
-          <div class="glance-value">Triclinic</div>
+          <div class="glance-label">Formation</div>
+          <div class="glance-value">Igneous</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- drop / color range -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
+              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
+            </svg>
+          </div>
+          <div class="glance-label">Color Range</div>
+          <div class="glance-value">Gray with blue,<br>green, gold,<br>orange, or violet flash</div>
         </div>
 
       </div>
@@ -1111,8 +1099,8 @@
             </svg>
             Overview
           </h2>
-          <p>Labradorite is a plagioclase feldspar celebrated as much for its optical drama as for its metaphysical depth. Named for Labrador, Canada, where large deposits were first documented in the 1770s, it is recognized in crystal tradition as one of the defining stones of transformation and inner perception: a guide for thresholds, transitions, and the work of becoming.</p>
-          <p>Its signature play of color (shifting blues, greens, golds, and occasional violets visible only when light strikes the stone at just the right angle) has anchored its metaphysical identity across cultures. That hidden brilliance, present but not always apparent, is exactly how collectors and practitioners describe its energetic character: more is going on beneath the surface than what first appears.</p>
+          <p>Labradorite is best known for transformation, intuition, and the sense that more may be present than first appears. Its vivid flashes of blue, green, gold, orange, and violet emerge only when light meets the stone at the right angle, making its appearance a natural counterpart to themes of hidden potential, insight, and changing perspective.</p>
+          <p>People often reach for Labradorite during periods of reinvention, spiritual exploration, or uncertain transition. Rather than emphasizing comfort alone, its traditions center on growth, protection, imagination, and the courage to enter unfamiliar territory. It is especially associated with strengthening inner guidance while remaining attentive to the possibilities unfolding beneath the obvious surface of a situation.</p>
         </article>
 
         <!-- WHY PEOPLE REACH FOR IT -->
@@ -1125,28 +1113,24 @@
           </h2>
           <div class="reach-rows">
             <div class="reach-row">
-              <span class="reach-label">Life Transitions</span>
-              <span class="reach-desc">For career pivots, relationship shifts, relocations, or seasons when you are between what was and what comes next.</span>
+              <span class="reach-label">Navigating Change</span>
+              <span class="reach-desc">Often chosen during major transitions, reinvention, or uncertain new chapters when movement feels necessary but the path is not yet fully clear.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Inner Trust</span>
-              <span class="reach-desc">For strengthening intuition and learning to rely on subtle inner signals over the impulse to rationalize them away.</span>
+              <span class="reach-label">Strengthening Intuition</span>
+              <span class="reach-desc">Associated with inner guidance, imagination, and expanded perception, especially when learning to trust subtle impressions and emerging insight.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Hidden Potential</span>
-              <span class="reach-desc">For recognizing what is developing beneath the surface of a situation, a relationship, or yourself.</span>
+              <span class="reach-label">Exploring Within</span>
+              <span class="reach-desc">Frequently used in meditation, visualization, and reflective practices that invite a deeper understanding of one's inner world and developing perspective.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Energetic Boundaries</span>
-              <span class="reach-desc">For staying steady during periods of vulnerability or change, when outside influence can drain focus and direction.</span>
+              <span class="reach-label">Energetic Protection</span>
+              <span class="reach-desc">Traditionally used as a protective companion during spiritual work, energetic exploration, and periods of significant personal or emotional change.</span>
             </div>
             <div class="reach-row">
-              <span class="reach-label">Creative Exploration</span>
-              <span class="reach-desc">For spiritual or creative work that benefits from expanded imagination and a quieter inner critic.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Personal Truth</span>
-              <span class="reach-desc">For staying grounded in your own perspective while exploring unfamiliar ideas, environments, or parts of yourself.</span>
+              <span class="reach-label">Releasing Old Limits</span>
+              <span class="reach-desc">Chosen when familiar patterns, beliefs, or roles have become restrictive and a person feels ready to recognize different possibilities for themselves.</span>
             </div>
           </div>
         </article>
@@ -1175,18 +1159,19 @@
             </div>
             <div class="mineral-formation">
               <h4>Formation</h4>
-              <p>Labradorite crystallizes primarily in mafic igneous rocks (gabbros, basalts, and anorthosites) formed from magmas rich in calcium, sodium, aluminum, and silica. The optical layering develops slowly as the mineral cools.</p>
+              <p>Labradorite is a plagioclase feldspar composed primarily of calcium-sodium aluminum silicate. It crystallizes in the triclinic system and commonly forms in igneous rocks. Its body color is often gray to dark gray, although individual specimens may vary in tone and transparency.</p>
               <h4>Common Localities</h4>
               <ul>
-                <li>Labrador, Canada (namesake deposits)</li>
-                <li>Finland: Spectrolite variety, intense vivid flash</li>
+                <li>Canada (Labrador, namesake deposits)</li>
                 <li>Madagascar</li>
-                <li>Norway</li>
-                <li>United States (Oregon Sunstone related)</li>
+                <li>Mexico</li>
+                <li>Russia</li>
+                <li>Finland (Spectrolite variety)</li>
+                <li>United States</li>
               </ul>
             </div>
           </div>
-          <p class="mineral-note">Labradorite belongs to the plagioclase series of the feldspar group, occupying the labradorite–bytownite compositional range. Its iridescent color play, known as labradorescence, is caused by light scattering between thin alternating layers of two feldspar compositions with slightly different refractive indices. This is a structural color effect, not pigment. The flash is real; the color is physics. That same principle of hidden brilliance revealed by the right angle of light is precisely what anchors labradorite's strongest metaphysical associations.</p>
+          <p class="mineral-note">Its signature optical effect, labradorescence, occurs when light reflects and scatters through microscopic internal layers. This produces shifting flashes that may appear blue, green, gold, orange, or violet depending on the angle of view. With a Mohs hardness of 6–6.5, Labradorite is durable enough for many uses but should still be protected from sharp impact and abrasion. Clean it gently with a soft cloth and store it separately from harder minerals that could scratch its surface.</p>
         </article>
 
         <!-- RELATED STONES -->
@@ -1251,8 +1236,8 @@
             </svg>
             Known For
           </h2>
-          <div class="one-line-wrap">Thresholds &amp; Transformation</div>
-          <p class="one-line-desc">Labradorite is the stone for standing at the edge of change. It supports transformation, deepens intuition, and reveals what is hidden in plain sight.</p>
+          <div class="one-line-wrap">Transformation &amp; Inner Vision</div>
+          <p class="one-line-desc">Labradorite is known for pairing transformation with heightened perception. Its shifting flashes mirror its long-standing association with looking beneath the surface, recognizing unrealized possibilities, and moving through change with greater awareness.</p>
         </section>
 
         <!-- ENERGETIC THEMES -->
@@ -1276,7 +1261,7 @@
             </div>
             <div>
               <h3>Transformation</h3>
-              <p>The same stone looks completely different depending on the angle. Labradorite is used during major transitions, reinvention, and the passage from one chapter to the next.</p>
+              <p>Strongly associated with growth, reinvention, and personal change, Labradorite is often chosen when an old identity, pattern, or direction is beginning to shift.</p>
             </div>
           </div>
 
@@ -1289,8 +1274,8 @@
               </svg>
             </div>
             <div>
-              <h3>Intuition</h3>
-              <p>Associated with the Third Eye, labradorite strengthens inner perception and trust in subtle signals. It supports reading beneath surface appearances.</p>
+              <h3>Intuition &amp; Inner Vision</h3>
+              <p>Frequently linked with the Third Eye Chakra, it is used to support imagination, insight, inner guidance, and a broader view of what may be possible.</p>
             </div>
           </div>
 
@@ -1318,16 +1303,15 @@
               </svg>
             </div>
             <div>
-              <h3>Hidden Potential</h3>
-              <p>Like the stone itself, labradorite is associated with recognizing what is present but not yet visible: in a situation, a relationship, or oneself.</p>
+              <h3>Self-Discovery</h3>
+              <p>Associated with recognizing hidden strengths, unrealized talents, and parts of the self that may become clearer during reflection or personal transition.</p>
             </div>
           </div>
 
           <hr class="theme-divider">
           <div class="theme-tier-label">Occasional Associations</div>
           <div class="occasional-tags">
-            <span class="occ-tag">Imagination</span>
-            <span class="occ-tag">Courage</span>
+            <span class="occ-tag">Spiritual Exploration</span>
             <span class="occ-tag">New Beginnings</span>
           </div>
         </section>
@@ -1346,26 +1330,13 @@
             <div class="note-row">
               <div class="note-icon">
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-                  <path d="M10 19l22 12 22-12M32 31v27"/>
+                  <path d="M12 52 32 8l20 44"/>
+                  <path d="M20 36h24"/>
                 </svg>
               </div>
               <div>
-                <strong>Variety Note</strong>
-                <p>Spectrolite is a vivid Finnish variety prized for unusually intense, full-spectrum color flash, widely considered among the finest Labradorite available.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 38c16-22 32-22 48 0M14 47c12-11 24-11 36 0"/>
-                  <path d="M32 6 28 20M32 6 36 20"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Historical Note</strong>
-                <p>Inuit peoples associated Labradorite with the frozen lights trapped in ancient coastal rocks, one origin of its longstanding connection to the northern lights.</p>
+                <strong>Named for Labrador</strong>
+                <p>Labradorite was identified in Labrador, Canada, in the late eighteenth century. The locality gave the mineral its name and remains central to its historical identity.</p>
               </div>
             </div>
 
@@ -1378,22 +1349,35 @@
                 </svg>
               </div>
               <div>
-                <strong>Optical Note</strong>
-                <p>Labradorescence is caused by light interference between thin internal layers. It is a structural effect, not pigment. The flash is real; the color is physics.</p>
+                <strong>Labradorescence</strong>
+                <p>The stone's famous color play is not produced by surface pigment. It comes from light interacting with microscopic internal layers, creating flashes that shift as the viewing angle changes.</p>
               </div>
             </div>
 
             <div class="note-row">
               <div class="note-icon">
                 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="32" cy="32" r="20"/>
-                  <path d="M32 18v6M32 40v6M18 32h6M40 32h6"/>
-                  <circle cx="32" cy="32" r="4"/>
+                  <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
+                  <path d="M10 19l22 12 22-12M32 31v27"/>
                 </svg>
               </div>
               <div>
-                <strong>Care Note</strong>
-                <p>Avoid prolonged direct sunlight, which can dull labradorescence over time. Clean gently with mild soap and lukewarm water; avoid ultrasonic cleaners.</p>
+                <strong>Finnish Spectrolite</strong>
+                <p>Spectrolite is a Finnish variety of Labradorite valued for especially vivid and broad-ranging color flashes. Its visual intensity makes it particularly recognizable among collectors.</p>
+              </div>
+            </div>
+
+            <div class="note-row">
+              <div class="note-icon">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="32" cy="32" r="22"/>
+                  <path d="M14 32h36M32 10v44"/>
+                  <path d="M18 18l28 28M46 18 18 46"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Gray Beneath the Flash</strong>
+                <p>Many specimens appear predominantly gray until they are tilted toward the light. The contrast between the subdued body color and sudden iridescence is one of Labradorite's defining features.</p>
               </div>
             </div>
 
