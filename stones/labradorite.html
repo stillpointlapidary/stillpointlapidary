@@ -143,7 +143,7 @@
   display: grid;
   grid-template-columns: 310px minmax(0,1fr);
   gap: 40px;
-  align-items: start;
+  align-items: stretch;
   margin-bottom: 24px;
   /* reset landing-page overrides */
   position: static;
@@ -193,7 +193,7 @@
   z-index: 1;
 }
 
-.hero-right { padding-top: 4px; }
+.hero-right { padding-top: 4px; display: flex; flex-direction: column; }
 
 .stone-name {
   font-family: Georgia, serif;
@@ -260,7 +260,7 @@
 }
 
 /* Buttons — aligned to site .btn system */
-.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
 .enc-btn {
   font-family: 'Jost', sans-serif;
   font-size: 12px;
@@ -315,7 +315,7 @@
 
 .glance-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 0;
 }
 .glance-item {
@@ -613,6 +613,7 @@
   align-items: start;
   margin-bottom: 10px;
 }
+.theme-row + .theme-row { margin-top: 16px; }
 .theme-icon-tile {
   width: 40px;
   height: 40px;
@@ -927,7 +928,7 @@
               </svg>
               Use When
             </div>
-            <p>Reach for Labradorite when change feels uncertain and you want to move forward with greater awareness, confidence, and trust in your inner guidance.</p>
+            <p>Change feels uncertain and you want to move forward with greater awareness, confidence, and trust in your inner guidance.</p>
           </div>
           <div class="identity-tile">
             <div class="tile-eyebrow">
@@ -997,17 +998,6 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <!-- star / best for -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
-            </svg>
-          </div>
-          <div class="glance-label">Best For</div>
-          <div class="glance-value">Change<br>Inner guidance<br>Exploration</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
             <!-- eye / chakra -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
@@ -1046,18 +1036,6 @@
 
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <!-- mohs / diamond -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 24 32 58 10 24Z"/>
-              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
-            </svg>
-          </div>
-          <div class="glance-label">Hardness</div>
-          <div class="glance-value">6 – 6.5</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
             <!-- formation / igneous -->
             <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
               <path d="M32 8 54 45v5H10v-5Z"/>
@@ -1067,6 +1045,18 @@
           </div>
           <div class="glance-label">Formation</div>
           <div class="glance-value">Igneous</div>
+        </div>
+
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <!-- mohs / diamond -->
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M32 6 54 24 32 58 10 24Z"/>
+              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
+            </svg>
+          </div>
+          <div class="glance-label">Hardness</div>
+          <div class="glance-value">6 – 6.5</div>
         </div>
 
         <div class="glance-item">
