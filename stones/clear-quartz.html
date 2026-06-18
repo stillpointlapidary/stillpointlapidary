@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-stone-slug="clear-quartz">
+
+<html data-stone-slug="clear-quartz" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="description" content="Clear Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
-<meta property="og:title" content="Clear Quartz | Still Point Lapidary Encyclopedia">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#b0a0d8">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<meta content="Clear Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
+<meta content="Clear Quartz | Still Point Lapidary Encyclopedia" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="#b0a0d8" name="theme-color"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Clear Quartz | Still Point Lapidary Encyclopedia</title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
@@ -476,261 +477,281 @@
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Bottom alignment: main article and collector rail ── */
+.content-grid {
+  align-items: stretch;
+}
+
+.article-col,
+.right-rail {
+  height: 100%;
+}
+
+.article-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-col > .enc-card:last-child {
+  flex: 1;
+}
+
+.right-rail {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-rail > .rail-card {
+  flex: 1;
+}
+
+@media (max-width: 980px) {
+  .article-col,
+  .right-rail {
+    height: auto;
+  }
+
+  .article-col > .enc-card:last-child,
+  .right-rail > .rail-card {
+    flex: none;
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="app-shell">
-
 <header class="topbar">
-  <a href="../index.html" class="brand-home" aria-label="Return to home">
-    <div class="brand-block">
-      <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
-      <div class="brand-block-text">
-        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
-        <span class="brand-block-sub">Crystal Reference Library</span>
-      </div>
-    </div>
-  </a>
-  <div class="topbar-right">
-    <a href="../encyclopedia.html" class="btn btn-sm">← Encyclopedia</a>
-  </div>
+<a aria-label="Return to home" class="brand-home" href="../index.html">
+<div class="brand-block">
+<img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+<div class="brand-block-text">
+<span class="wordmark">STILL POINT <em>Lapidary</em></span>
+<span class="brand-block-sub">Crystal Reference Library</span>
+</div>
+</div>
+</a>
+<div class="topbar-right">
+<a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+</div>
 </header>
-
 <div class="enc-page" id="top">
-
-  <aside class="enc-sidebar">
-    <div class="enc-breadcrumb">
-      <a href="../index.html">Home</a> ›
+<aside class="enc-sidebar">
+<div class="enc-breadcrumb">
+<a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
       <b>Clear Quartz</b>
-    </div>
-    <div class="side-nav-card">
-      <div class="side-nav-label">On this page</div>
-      <nav class="side-nav">
-        <a href="#top" class="active">Top</a>
-        <a href="#overview">Overview</a>
-        <a href="#reach">Why People Reach For It</a>
-        <a href="#glance">At a Glance</a>
-        <a href="#themes">Energetic Themes</a>
-        <a href="#mineral">Mineral Profile</a>
-        <a href="#notes">Collector Notes</a>
-        <a href="#related">Related Stones</a>
-      </nav>
-    </div>
-    <div class="sidebar-standards">
-      <p>Entries are researched from expert books and trusted online sources.</p>
-      <a href="#">Our Editorial Standards →</a>
-    </div>
-  </aside>
-
-  <main class="enc-main">
-
-    <!-- HERO -->
-    <section class="enc-hero" id="hero">
-      <div class="stone-photo-wrap">
-        <img
-          alt="Clear Quartz crystal point showing colorless transparent quartz"
-          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/clear-quartz-point.webp"
-        />
-      </div>
-      <div class="hero-right">
-        <h1 class="stone-name">Clear Quartz</h1>
-        <div class="theme-pills">
-          <span class="theme-pill">Amplification</span>
-          <span class="theme-pill">Clarity</span>
-          <span class="theme-pill">Intention</span>
-        </div>
-        <div class="identity-grid">
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/></svg>
+</div>
+<div class="side-nav-card">
+<div class="side-nav-label">On this page</div>
+<nav class="side-nav">
+<a class="active" href="#top">Top</a>
+<a href="#overview">Overview</a>
+<a href="#reach">Why People Reach For It</a>
+<a href="#glance">At a Glance</a>
+<a href="#themes">Energetic Themes</a>
+<a href="#mineral">Mineral Profile</a>
+<a href="#notes">Collector Notes</a>
+<a href="#related">Related Stones</a>
+</nav>
+</div>
+<div class="sidebar-standards">
+<p>Entries are researched from expert books and trusted online sources.</p>
+<a href="#">Our Editorial Standards →</a>
+</div>
+</aside>
+<main class="enc-main">
+<!-- HERO -->
+<section class="enc-hero" id="hero">
+<div class="stone-photo-wrap">
+<img alt="Clear Quartz crystal point showing colorless transparent quartz" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/clear-quartz.webp"/>
+</div>
+<div class="hero-right">
+<h1 class="stone-name">Clear Quartz</h1>
+<div class="theme-pills">
+<span class="theme-pill">Amplification</span>
+<span class="theme-pill">Clarity</span>
+<span class="theme-pill">Intention</span>
+</div>
+<div class="identity-grid">
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"></path></svg>
               Best For
             </div>
-            <p>Focused intentions and crystal pairings</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/></svg>
+<p>Focused intentions and crystal pairings</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"></path></svg>
               Use When
             </div>
-            <p>You want a versatile stone to focus an intention, support meditation, or complement the qualities of other crystals already in use.</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/></svg>
+<p>You want a versatile stone to focus an intention, support meditation, or complement the qualities of other crystals already in use.</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"></path><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"></path></svg>
               Pairs Well With
             </div>
-            <p>Amethyst<br>Smoky Quartz<br>Rose Quartz</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
+<p>Amethyst<br/>Smoky Quartz<br/>Rose Quartz</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle></svg>
               Primary Chakra
             </div>
-            <p>All Chakras</p>
-          </div>
-        </div>
-        <div class="hero-actions">
-          <button class="enc-btn enc-btn-primary">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
+<p>All Chakras</p>
+</div>
+</div>
+<div class="hero-actions">
+<button class="enc-btn enc-btn-primary">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
             Save to Collection
           </button>
-          <button class="enc-btn">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
+<button class="enc-btn">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
             Add to Wishlist
           </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- AT A GLANCE -->
-    <section class="glance-panel" id="glance">
-      <h2 class="panel-title">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/><circle cx="32" cy="32" r="8"/></svg>
+</div>
+</div>
+</section>
+<!-- AT A GLANCE -->
+<section class="glance-panel" id="glance">
+<h2 class="panel-title">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 64 64"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path><circle cx="32" cy="32" r="8"></circle></svg>
         At a Glance
       </h2>
-      <div class="glance-grid">
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 30 32 56 12 30Z"/><path d="M12 30h40"/><path d="M22 30 32 8l10 22"/><path d="M22 30 32 56l10-26"/></svg>
-          </div>
-          <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Amplification<br>Clarity · Intention</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2.5" fill="currentColor"/></svg>
-          </div>
-          <div class="glance-label">Chakra</div>
-          <div class="glance-value">All Chakras</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- storm / lightning element -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M38 8 20 34h14L26 56l22-30H34Z"/></svg>
-          </div>
-          <div class="glance-label">Element</div>
-          <div class="glance-value">Storm</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50c18-4 28-14 36-36M38 14h12v12"/><circle cx="14" cy="50" r="2.5" fill="currentColor"/><circle cx="50" cy="14" r="2.5" fill="currentColor"/></svg>
-          </div>
-          <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Aries</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 54 45v5H10v-5Z"/><path d="M20 50V38l12-14 12 14v12"/><path d="M28 50v-8h8v8"/></svg>
-          </div>
-          <div class="glance-label">Formation</div>
-          <div class="glance-value">Igneous, metamorphic,<br>sedimentary</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 24 32 58 10 24Z"/><path d="M10 24h44M32 6 10 24M32 6 54 24"/></svg>
-          </div>
-          <div class="glance-label">Hardness</div>
-          <div class="glance-value">7</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/><path d="M22 42c5-4 15-4 20 0" opacity=".55"/></svg>
-          </div>
-          <div class="glance-label">Color Range</div>
-          <div class="glance-value">Colorless to<br>milky white</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TWO-COLUMN CONTENT -->
-    <div class="content-grid">
-      <div class="article-col">
-
-        <!-- OVERVIEW -->
-        <article class="enc-card" id="overview">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="20" r="10"/><path d="M10 54c0-12 10-20 22-20s22 8 22 20"/></svg>
+<div class="glance-grid">
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 52 30 32 56 12 30Z"></path><path d="M12 30h40"></path><path d="M22 30 32 8l10 22"></path><path d="M22 30 32 56l10-26"></path></svg>
+</div>
+<div class="glance-label">Primary Themes</div>
+<div class="glance-value">Amplification<br/>Clarity · Intention</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle><circle cx="32" cy="32" fill="currentColor" r="2.5"></circle></svg>
+</div>
+<div class="glance-label">Chakras</div>
+<div class="glance-value">All Chakras</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- storm / lightning element -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M38 8 20 34h14L26 56l22-30H34Z"></path></svg>
+</div>
+<div class="glance-label">Element</div>
+<div class="glance-value">Storm</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M14 50c18-4 28-14 36-36M38 14h12v12"></path><circle cx="14" cy="50" fill="currentColor" r="2.5"></circle><circle cx="50" cy="14" fill="currentColor" r="2.5"></circle></svg>
+</div>
+<div class="glance-label">Zodiac</div>
+<div class="glance-value">Aries</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 54 45v5H10v-5Z"></path><path d="M20 50V38l12-14 12 14v12"></path><path d="M28 50v-8h8v8"></path></svg>
+</div>
+<div class="glance-label">Formation</div>
+<div class="glance-value">Igneous, metamorphic,<br/>sedimentary</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 24 32 58 10 24Z"></path><path d="M10 24h44M32 6 10 24M32 6 54 24"></path></svg>
+</div>
+<div class="glance-label">Hardness</div>
+<div class="glance-value">7</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"></path><path d="M22 42c5-4 15-4 20 0" opacity=".55"></path></svg>
+</div>
+<div class="glance-label">Color Range</div>
+<div class="glance-value">Colorless to<br/>milky white</div>
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN CONTENT -->
+<div class="content-grid">
+<div class="article-col">
+<!-- OVERVIEW -->
+<article class="enc-card" id="overview">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="20" r="10"></circle><path d="M10 54c0-12 10-20 22-20s22 8 22 20"></path></svg>
             Overview
           </h2>
-          <p>Clear Quartz is one of the most widely used stones in crystal practice, valued for amplification, clarity, and intention-setting. Its broad chakra association and comparatively neutral energetic identity make it adaptable: it can stand alone as a focal stone or work alongside crystals with more specialized emotional, grounding, or spiritual themes.</p>
-          <p>Its traditions often describe it as responsive to the purpose brought to it. Rather than treating this as literal memory storage, Still Point understands Clear Quartz as a symbolic anchor for sustained attention and deliberate practice. This makes it useful in meditation, crystal grids, personal rituals, and paired-stone work where the goal is to reinforce a clearly chosen direction.</p>
-        </article>
-
-        <!-- WHY PEOPLE REACH FOR IT -->
-        <article class="enc-card" id="reach">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
+<p>Clear Quartz is the great generalist of the mineral world: structurally simple, visually variable, and capable of carrying the focus of almost any practice. Its six-sided crystals, internal veils, and bright clarity make each piece feel precise without ever being quite identical.</p>
+<p>Rather than assigning it one narrow purpose, people use Clear Quartz to sharpen attention and strengthen an existing intention or pairing. Its All Chakras association reflects that versatility, while its real-world role in timekeeping and electronics gives its reputation for precision an unusually grounded echo.</p>
+</article>
+<!-- WHY PEOPLE REACH FOR IT -->
+<article class="enc-card" id="reach">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
             Why People Reach For It
           </h2>
-          <div class="reach-rows">
-            <div class="reach-row">
-              <span class="reach-label">Focusing an Intention</span>
-              <span class="reach-desc">Chosen when a goal, practice, or transition needs a clear symbolic focal point and a consistent reminder of the direction being cultivated.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Amplifying Other Stones</span>
-              <span class="reach-desc">Often paired with another crystal to emphasize that stone's central qualities without introducing a strongly contrasting energetic theme.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Clarifying Priorities</span>
-              <span class="reach-desc">Used when ideas or intentions feel diffuse and a simpler, more focused approach would support planning, reflection, or decision-making.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Supporting Meditation</span>
-              <span class="reach-desc">A versatile meditation companion that can accompany many intentions while keeping attention centered on the purpose of the practice.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Refreshing a Space</span>
-              <span class="reach-desc">Traditionally placed in rooms, grids, or personal practice areas to support a clearer, more intentional atmosphere.</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- MINERAL PROFILE -->
-        <article class="enc-card" id="mineral">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 19v26L32 58 10 45V19Z"/><path d="M10 19l22 12 22-12M32 31v27"/></svg>
+<div class="reach-rows">
+<div class="reach-row">
+<span class="reach-label">Focusing Intention</span>
+<span class="reach-desc">Chosen when a goal or transition needs a clear focal point and a consistent reminder of direction.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Amplifying Pairings</span>
+<span class="reach-desc">Often paired with another crystal to emphasize that stone’s central qualities without adding a competing theme.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Clarifying Priorities</span>
+<span class="reach-desc">Used when ideas feel diffuse and a simpler, more focused approach would support reflection or planning.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Supporting Meditation</span>
+<span class="reach-desc">A versatile companion that keeps attention connected to the purpose of a practice.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Refreshing a Space</span>
+<span class="reach-desc">Traditionally placed in rooms or practice areas to reinforce a clear, intentional atmosphere.</span>
+</div>
+</div>
+</article>
+<!-- MINERAL PROFILE -->
+<article class="enc-card" id="mineral">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 19v26L32 58 10 45V19Z"></path><path d="M10 19l22 12 22-12M32 31v27"></path></svg>
             Mineral Profile
           </h2>
-          <div class="mineral-layout">
-            <div>
-              <div class="mineral-facts">
-                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
-                <div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
-                <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
-                <div class="mineral-fact"><span>Crystal Habit</span><span>Prismatic, six-sided</span></div>
-                <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-                <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
-                <div class="mineral-fact"><span>Transparency</span><span>Transparent to opaque</span></div>
-              </div>
-            </div>
-            <div class="mineral-formation">
-              <h4>Formation</h4>
-              <p>Clear Quartz, also called rock crystal when transparent, is the colorless to milky-white variety of crystalline quartz. It forms six-sided prismatic crystals with pyramidal terminations and occurs across igneous, metamorphic, and sedimentary environments. It is one of the most abundant minerals in Earth's continental crust.</p>
-              <h4>Common Localities</h4>
-              <ul>
-                <li>Brazil</li>
-                <li>Madagascar</li>
-                <li>United States (Arkansas)</li>
-                <li>China</li>
-                <li>Alps (Europe)</li>
-              </ul>
-            </div>
-          </div>
-          <p class="mineral-note">Quartz has a Mohs hardness of 7, no true cleavage, and a conchoidal fracture. Transparent material may contain veils, fractures, fluid inclusions, mineral inclusions, or growth features. Clear Quartz can also be synthetically grown for industrial use, and natural pieces may be coated or treated for decorative effects. Quartz is piezoelectric — mechanical pressure creates an electrical charge — a documented physical property used in clocks, watches, and electronics. This should not be treated as scientific proof of metaphysical amplification. Clean with mild soap, warm water, and a soft cloth; avoid strong impacts, sustained high heat, and harsh chemicals.</p>
-        </article>
-
-        <!-- RELATED STONES -->
-        <article class="enc-card" id="related">
+<div class="mineral-layout">
+<div>
+<div class="mineral-facts">
+<div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
+<div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
+<div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
+<div class="mineral-fact"><span>Crystal Habit</span><span>Prismatic, six-sided</span></div>
+<div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
+<div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+<div class="mineral-fact"><span>Transparency</span><span>Transparent to opaque</span></div>
+</div>
+</div>
+<div class="mineral-formation">
+<h4>Formation</h4>
+<p>Clear Quartz is colorless to milky crystalline quartz composed of silicon dioxide. It forms six-sided prismatic crystals in igneous, metamorphic, and sedimentary environments. Veils, fractures, and mineral or fluid inclusions may affect clarity.</p>
+<h4>Common Localities</h4>
+<ul>
+<li>Brazil</li>
+<li>Madagascar</li>
+<li>United States (Arkansas)</li>
+<li>China</li>
+<li>Alps (Europe)</li>
+</ul>
+</div>
+</div>
+<p class="mineral-note">Quartz has a Mohs hardness of 7, no true cleavage, and conchoidal fracture. Natural, synthetic, coated, and treated material all occur. Its piezoelectric property supports electronic uses but does not prove metaphysical claims. Clean with mild soap and water; avoid impact, high heat, and harsh chemicals.</p>
+</article>
+<!-- RELATED STONES -->
+<article class="enc-card" id="related">
 <h2>
 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="18" cy="32" r="9"></circle><circle cx="46" cy="32" r="9"></circle><path d="M27 32h10"></path></svg>
             Related Stones
@@ -742,14 +763,14 @@
 <span class="stone-dot-circle stone-dot-selenite"></span>
 <div>
 <b>Selenite</b>
-<span>Clarity &amp; spiritual cleansing</span>
+<span>Both support clarity and spiritual awareness; Selenite feels lighter and more cleansing, while Clear Quartz is more adaptable.</span>
 </div>
 </a>
 <a class="stone-link-row" href="herkimer-diamond.html">
 <span class="stone-dot-circle stone-dot-herkimer"></span>
 <div>
 <b>Herkimer Diamond</b>
-<span>Sharp clarity &amp; amplification</span>
+<span>Both emphasize clarity and amplification; Herkimer Diamond feels sharper and more concentrated, while Clear Quartz is broader.</span>
 </div>
 </a>
 </div>
@@ -759,187 +780,154 @@
 <span class="stone-dot-circle stone-dot-violet"></span>
 <div>
 <b>Amethyst</b>
-<span>Meditation &amp; spiritual clarity</span>
+<span>Clear Quartz emphasizes Amethyst’s contemplative and intuitive qualities.</span>
 </div>
 </a>
 <a class="stone-link-row" href="smoky-quartz.html">
 <span class="stone-dot-circle stone-dot-smoky"></span>
 <div>
 <b>Smoky Quartz</b>
-<span>Grounding &amp; practical integration</span>
+<span>Smoky Quartz adds grounding and practical follow-through to Clear Quartz’s focused intention.</span>
 </div>
 </a>
 </div>
 </div>
 </article>
-
-      </div><!-- /article-col -->
-
-      <!-- RIGHT RAIL -->
-      <aside class="right-rail">
-
-        <!-- KNOWN FOR -->
-        <section class="rail-card">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4 52 36H12L32 4Z"/><path d="M22 36 32 60l10-24"/></svg>
+</div><!-- /article-col -->
+<!-- RIGHT RAIL -->
+<aside class="right-rail">
+<!-- KNOWN FOR -->
+<section class="rail-card">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 4 52 36H12L32 4Z"></path><path d="M22 36 32 60l10-24"></path></svg>
             Known For
           </h2>
-          <div class="one-line-wrap">Focused Amplification</div>
-          <p class="one-line-desc">Clear Quartz is known for its versatility and its traditional association with amplification. It is commonly used to give an intention a clear focal point, sharpen awareness, and complement other stones without adding a strongly competing energetic character.</p>
-        </section>
-
-        <!-- ENERGETIC THEMES -->
-        <section class="rail-card" id="themes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
+<div class="one-line-wrap">Focused Amplification</div>
+<p class="one-line-desc">Clear Quartz is known for versatility, clarity, and amplification. Its comparatively neutral character makes it useful as a focal stone, a meditation companion, or a partner for crystals with more specialized themes.</p>
+</section>
+<!-- ENERGETIC THEMES -->
+<section class="rail-card" id="themes">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle></svg>
             Energetic Themes
           </h2>
-
-          <div class="theme-tier-label">Primary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- amplification / signal -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 32m-4 0a4 4 0 1 0 8 0 4 4 0 1 0-8 0"/><path d="M20 44a18 18 0 0 1 0-24M44 44a18 18 0 0 0 0-24"/><path d="M12 52a28 28 0 0 1 0-40M52 52a28 28 0 0 0 0-40"/></svg>
-            </div>
-            <div>
-              <h3>Amplification</h3>
-              <p>Clear Quartz is consistently associated with strengthening the focus of an intention or crystal pairing. This theme describes emphasis and direction within practice, not a scientifically measurable increase in metaphysical energy.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- intention / target -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="4" fill="currentColor" stroke="none"/></svg>
-            </div>
-            <div>
-              <h3>Intention &amp; Focus</h3>
-              <p>Its adaptable character makes Clear Quartz a common symbolic anchor for goals, meditation, and ritual work. The stone's role is to help keep attention connected to a deliberately chosen purpose.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Secondary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- clarity / lens -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="30" r="18"/><path d="M43 43l12 12"/></svg>
-            </div>
-            <div>
-              <h3>Clarity</h3>
-              <p>Clear Quartz is widely linked with mental and spiritual clarity, particularly when priorities feel scattered or a practice would benefit from greater simplicity and definition.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- spiritual connection / crown -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 48 20 20l12 16 12-16 8 28Z"/><path d="M32 8v12"/></svg>
-            </div>
-            <div>
-              <h3>Spiritual Connection</h3>
-              <p>Its All Chakras association and frequent use in meditation give Clear Quartz a broad spiritual identity centered on awareness, alignment, and openness rather than one specific tradition.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Occasional Associations</div>
-          <div class="occasional-tags">
-            <span class="occ-tag">Cleansing</span>
-            <span class="occ-tag">Memory</span>
-          </div>
-        </section>
-
-        <!-- COLLECTOR NOTES -->
-        <section class="rail-card" id="notes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h28l10 10v38H14Z"/><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/></svg>
+<div class="theme-tier-label">Primary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- amplification / signal -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 32m-4 0a4 4 0 1 0 8 0 4 4 0 1 0-8 0"></path><path d="M20 44a18 18 0 0 1 0-24M44 44a18 18 0 0 0 0-24"></path><path d="M12 52a28 28 0 0 1 0-40M52 52a28 28 0 0 0 0-40"></path></svg>
+</div>
+<div>
+<h3>Amplification</h3>
+<p>Clear Quartz is associated with strengthening the focus of an intention or pairing, emphasizing direction rather than measurable metaphysical force.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- intention / target -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="32" r="22"></circle><circle cx="32" cy="32" r="13"></circle><circle cx="32" cy="32" fill="currentColor" r="4" stroke="none"></circle></svg>
+</div>
+<div>
+<h3>Intention and Focus</h3>
+<p>Its adaptable character makes it a symbolic anchor for goals, meditation, ritual, and sustained attention.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Secondary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- clarity / lens -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="30" cy="30" r="18"></circle><path d="M43 43l12 12"></path></svg>
+</div>
+<div>
+<h3>Clarity</h3>
+<p>Clear Quartz is linked with mental and spiritual clarity when priorities feel scattered or overly complicated.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- spiritual connection / crown -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M12 48 20 20l12 16 12-16 8 28Z"></path><path d="M32 8v12"></path></svg>
+</div>
+<div>
+<h3>Spiritual Connection</h3>
+<p>Its All Chakras association gives it a broad identity centered on awareness, alignment, and openness.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Occasional Associations</div>
+<div class="occasional-tags">
+<span class="occ-tag">Cleansing</span>
+<span class="occ-tag">Memory</span>
+</div>
+</section>
+<!-- COLLECTOR NOTES -->
+<section class="rail-card" id="notes">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M14 8h28l10 10v38H14Z"></path><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"></path></svg>
             Collector &amp; Curiosity Notes
           </h2>
-          <div class="note-list">
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/></svg>
-              </div>
-              <div>
-                <strong>Rock Crystal</strong>
-                <p>Transparent colorless quartz is traditionally called rock crystal. The term distinguishes clear crystalline material from milky quartz and from colored varieties such as Amethyst, Citrine, Smoky Quartz, and Rose Quartz.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M38 8 20 34h14L26 56l22-30H34Z"/></svg>
-              </div>
-              <div>
-                <strong>Quartz in Technology</strong>
-                <p>Pierre and Paul-Jacques Curie documented piezoelectricity in quartz and other crystals in 1880. Quartz's stable vibration under electrical stimulation later made it important in clocks, watches, radios, pressure instruments, and electronic frequency control.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="20"/><path d="M22 32c0-4 2-10 10-10s10 6 10 10c0 8-10 10-10 18"/><circle cx="32" cy="52" r="2" fill="currentColor" stroke="none"/></svg>
-              </div>
-              <div>
-                <strong>Crystal Skull Claims</strong>
-                <p>Quartz crystal skulls were often promoted as pre-Columbian artifacts, but studied examples lack secure archaeological provenance. Smithsonian research indicates that known specimens were manufactured in the nineteenth century or later using modern lapidary tools.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10 32h44M32 10v44M16 16l32 32M48 16 16 48"/></svg>
-              </div>
-              <div>
-                <strong>Ancient Ice Belief</strong>
-                <p>The Greek word <em>krystallos</em> referred to ice, and some classical writers believed rock crystal was water frozen so completely that it could never melt. The idea reflects its icy transparency rather than geological knowledge.</p>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-      </aside>
-    </div><!-- /content-grid -->
-
-    <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
+<div class="note-list">
+<div class="note-row">
+<div class="note-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M38 8 20 34h14L26 56l22-30H34Z"></path></svg>
+</div>
+<div>
+<strong>Quartz in Technology</strong>
+<p>Quartz’s piezoelectric behavior made it important in clocks, watches, radios, oscillators, and electronic frequency control.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="32" r="20"></circle><path d="M22 32c0-4 2-10 10-10s10 6 10 10c0 8-10 10-10 18"></path><circle cx="32" cy="52" fill="currentColor" r="2" stroke="none"></circle></svg>
+</div>
+<div>
+<strong>Crystal Skull Claims</strong>
+<p>Studied quartz skulls lack secure pre-Columbian provenance. Smithsonian research indicates known examples were made in the nineteenth century or later.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M10 32h44M32 10v44M16 16l32 32M48 16 16 48"></path></svg>
+</div>
+<div>
+<strong>Ancient Ice Belief</strong>
+<p>The Greek word krystallos referred to ice, and some classical writers believed rock crystal was permanently frozen water.</p>
+</div>
+</div>
+</div>
+</section>
+</aside>
+</div><!-- /content-grid -->
+<nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
 <a class="entry-nav-link" href="clear-fluorite.html"><span>←</span><div><small>Previous</small><b>Clear Fluorite</b></div></a>
 <a class="entry-nav-link entry-nav-random" href="#"><div><small>Random</small><b>Surprise me</b></div></a>
 <a class="entry-nav-link" href="cobaltoan-calcite.html"><div><small>Next</small><b>Cobaltoan Calcite</b></div><span>→</span></a>
 </nav>
-
-    <div class="enc-cta">
-      <div>
-        <h3>The right stone. The right moment.</h3>
-        <p>Explore 333 entries with clarity, care, and curiosity.</p>
-      </div>
-      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
-    </div>
-
-  </main>
+<div class="enc-cta">
+<div>
+<h3>The right stone. The right moment.</h3>
+<p>Explore 333 entries with clarity, care, and curiosity.</p>
+</div>
+<button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+</div>
+</main>
 </div><!-- /enc-page -->
-
 <footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
-  <div style="max-width:520px;margin:0 auto">
-    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
-    <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
-    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
-    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
-    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
-      <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
-    </div>
-  </div>
-  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+<div style="max-width:520px;margin:0 auto">
+<div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+<a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+<div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
+<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+<div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+<a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
+</div>
+</div>
+<div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
     © 2026 Still Point {technodelic} Studio
   </div>
 </footer>
-
 </div><!-- /app-shell -->
-
 <script>
 (function () {
   const sections = ['hero','overview','reach','glance','themes','mineral','notes','related'];

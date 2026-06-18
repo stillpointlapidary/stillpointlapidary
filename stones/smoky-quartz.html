@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-stone-slug="smoky-quartz">
+
+<html data-stone-slug="smoky-quartz" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="description" content="Smoky Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
-<meta property="og:title" content="Smoky Quartz | Still Point Lapidary Encyclopedia">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#6b3636">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<meta content="Smoky Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
+<meta content="Smoky Quartz | Still Point Lapidary Encyclopedia" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="#6b3636" name="theme-color"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Smoky Quartz | Still Point Lapidary Encyclopedia</title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
@@ -830,324 +831,337 @@
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Bottom alignment: main article and collector rail ── */
+.content-grid {
+  align-items: stretch;
+}
+
+.article-col,
+.right-rail {
+  height: 100%;
+}
+
+.article-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-col > .enc-card:last-child {
+  flex: 1;
+}
+
+.right-rail {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-rail > .rail-card {
+  flex: 1;
+}
+
+@media (max-width: 980px) {
+  .article-col,
+  .right-rail {
+    height: auto;
+  }
+
+  .article-col > .enc-card:last-child,
+  .right-rail > .rail-card {
+    flex: none;
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="app-shell">
-
 <!-- TOPBAR -->
 <header class="topbar">
-  <a href="../index.html" class="brand-home" aria-label="Return to home">
-    <div class="brand-block">
-      <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
-      <div class="brand-block-text">
-        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
-        <span class="brand-block-sub">Crystal Reference Library</span>
-      </div>
-    </div>
-  </a>
-  <div class="topbar-right">
-    <a href="../encyclopedia.html" class="btn btn-sm">← Encyclopedia</a>
-  </div>
+<a aria-label="Return to home" class="brand-home" href="../index.html">
+<div class="brand-block">
+<img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+<div class="brand-block-text">
+<span class="wordmark">STILL POINT <em>Lapidary</em></span>
+<span class="brand-block-sub">Crystal Reference Library</span>
+</div>
+</div>
+</a>
+<div class="topbar-right">
+<a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+</div>
 </header>
-
 <!-- PAGE -->
 <div class="enc-page" id="top">
-
-  <!-- SIDEBAR NAV -->
-  <aside class="enc-sidebar">
-    <div class="enc-breadcrumb">
-      <a href="../index.html">Home</a> ›
+<!-- SIDEBAR NAV -->
+<aside class="enc-sidebar">
+<div class="enc-breadcrumb">
+<a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
       <b>Smoky Quartz</b>
-    </div>
-
-    <div class="side-nav-card">
-      <div class="side-nav-label">On this page</div>
-      <nav class="side-nav">
-        <a href="#top"      class="active">Top</a>
-        <a href="#overview">Overview</a>
-        <a href="#reach">Why People Reach For It</a>
-        <a href="#glance">At a Glance</a>
-        <a href="#themes">Energetic Themes</a>
-        <a href="#mineral">Mineral Profile</a>
-        <a href="#notes">Collector Notes</a>
-        <a href="#related">Related Stones</a>
-      </nav>
-    </div>
-
-    <div class="sidebar-standards">
-      <p>Entries are researched from expert books and trusted online sources.</p>
-      <a href="#">Our Editorial Standards →</a>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="enc-main">
-
-    <!-- HERO -->
-    <section class="enc-hero" id="hero">
-      <div class="stone-photo-wrap">
-        <img
-          alt="Smoky Quartz tower showing deep chocolate brown color"
-          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/smoky-quartz-tower.webp"
-        />
-      </div>
-
-      <div class="hero-right">
-        <h1 class="stone-name">Smoky Quartz</h1>
-
-        <div class="theme-pills">
-          <span class="theme-pill">Grounding</span>
-          <span class="theme-pill">Protection</span>
-          <span class="theme-pill">Transmutation</span>
-        </div>
-
-        <div class="identity-grid">
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
-              </svg>
+</div>
+<div class="side-nav-card">
+<div class="side-nav-label">On this page</div>
+<nav class="side-nav">
+<a class="active" href="#top">Top</a>
+<a href="#overview">Overview</a>
+<a href="#reach">Why People Reach For It</a>
+<a href="#glance">At a Glance</a>
+<a href="#themes">Energetic Themes</a>
+<a href="#mineral">Mineral Profile</a>
+<a href="#notes">Collector Notes</a>
+<a href="#related">Related Stones</a>
+</nav>
+</div>
+<div class="sidebar-standards">
+<p>Entries are researched from expert books and trusted online sources.</p>
+<a href="#">Our Editorial Standards →</a>
+</div>
+</aside>
+<!-- MAIN -->
+<main class="enc-main">
+<!-- HERO -->
+<section class="enc-hero" id="hero">
+<div class="stone-photo-wrap">
+<img alt="Smoky Quartz tower showing deep chocolate brown color" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/smoky-quartz.webp"/>
+</div>
+<div class="hero-right">
+<h1 class="stone-name">Smoky Quartz</h1>
+<div class="theme-pills">
+<span class="theme-pill">Grounding</span>
+<span class="theme-pill">Protection</span>
+<span class="theme-pill">Transmutation</span>
+</div>
+<div class="identity-grid">
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
+<path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"></path>
+</svg>
               Best For
             </div>
-            <p>Grounded presence and practical clarity</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/>
-              </svg>
+<p>Grounded presence and practical clarity</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
+<path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"></path>
+</svg>
               Use When
             </div>
-            <p>You feel unmoored, overstimulated, or pulled toward the abstract and want a steadier, more grounded sense of presence.</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/>
-                <path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/>
-              </svg>
+<p>You feel unmoored, overstimulated, or pulled toward the abstract and want a steadier, more grounded sense of presence.</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
+<path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"></path>
+<path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"></path>
+</svg>
               Pairs Well With
             </div>
-            <p>Black Tourmaline<br>Amethyst<br>Clear Quartz</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="32" cy="32" r="22"/>
-                <path d="M32 10v44M10 32h44"/>
-              </svg>
+<p>Black Tourmaline<br/>Amethyst<br/>Clear Quartz</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
+<circle cx="32" cy="32" r="22"></circle>
+<path d="M32 10v44M10 32h44"></path>
+</svg>
               Primary Chakra
             </div>
-            <p>Root</p>
-          </div>
-        </div>
-
-        <div class="hero-actions">
-          <button class="enc-btn enc-btn-primary">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+<p>Root</p>
+</div>
+</div>
+<div class="hero-actions">
+<button class="enc-btn enc-btn-primary">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
+<path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path>
+</svg>
             Save to Collection
           </button>
-          <button class="enc-btn">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+<button class="enc-btn">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
+<path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path>
+</svg>
             Add to Wishlist
           </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- AT A GLANCE -->
-    <section class="glance-panel" id="glance">
-      <h2 class="panel-title">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
-          <circle cx="32" cy="32" r="8"/>
-        </svg>
+</div>
+</div>
+</section>
+<!-- AT A GLANCE -->
+<section class="glance-panel" id="glance">
+<h2 class="panel-title">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 64 64">
+<path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path>
+<circle cx="32" cy="32" r="8"></circle>
+</svg>
         At a Glance
       </h2>
-      <div class="glance-grid">
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 52 30 32 56 12 30Z"/>
-              <path d="M12 30h40"/>
-              <path d="M22 30 32 8l10 22"/>
-              <path d="M22 30 32 56l10-26"/>
-            </svg>
-          </div>
-          <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Grounding<br>Protection · Transmutation</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="32" r="22"/>
-              <path d="M32 10v44M10 32h44"/>
-              <circle cx="32" cy="32" r="6" fill="currentColor" stroke="none"/>
-            </svg>
-          </div>
-          <div class="glance-label">Chakra</div>
-          <div class="glance-value">Root</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- earth element -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 44h48M16 44 32 16l16 28"/>
-              <path d="M24 44l8-14 8 14"/>
-            </svg>
-          </div>
-          <div class="glance-label">Element</div>
-          <div class="glance-value">Earth</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 50c18-4 28-14 36-36M38 14h12v12"/>
-              <circle cx="14" cy="50" r="2.5" fill="currentColor"/>
-              <circle cx="50" cy="14" r="2.5" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Sagittarius<br>Capricorn</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 54 45v5H10v-5Z"/>
-              <path d="M20 50V38l12-14 12 14v12"/>
-              <path d="M28 50v-8h8v8"/>
-            </svg>
-          </div>
-          <div class="glance-label">Formation</div>
-          <div class="glance-value">Igneous,<br>hydrothermal</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 24 32 58 10 24Z"/>
-              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
-            </svg>
-          </div>
-          <div class="glance-label">Hardness</div>
-          <div class="glance-value">7</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
-              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
-            </svg>
-          </div>
-          <div class="glance-label">Color Range</div>
-          <div class="glance-value">Pale tan to deep<br>chocolate brown</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TWO-COLUMN CONTENT -->
-    <div class="content-grid">
-
-      <!-- ARTICLE COLUMN -->
-      <div class="article-col">
-
-        <!-- OVERVIEW -->
-        <article class="enc-card" id="overview">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="20" r="10"/>
-              <path d="M10 54c0-12 10-20 22-20s22 8 22 20"/>
-            </svg>
+<div class="glance-grid">
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 8 52 30 32 56 12 30Z"></path>
+<path d="M12 30h40"></path>
+<path d="M22 30 32 8l10 22"></path>
+<path d="M22 30 32 56l10-26"></path>
+</svg>
+</div>
+<div class="glance-label">Primary Themes</div>
+<div class="glance-value">Grounding<br/>Protection · Transmutation</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<circle cx="32" cy="32" r="22"></circle>
+<path d="M32 10v44M10 32h44"></path>
+<circle cx="32" cy="32" fill="currentColor" r="6" stroke="none"></circle>
+</svg>
+</div>
+<div class="glance-label">Chakras</div>
+<div class="glance-value">Root</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- earth element -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M8 44h48M16 44 32 16l16 28"></path>
+<path d="M24 44l8-14 8 14"></path>
+</svg>
+</div>
+<div class="glance-label">Element</div>
+<div class="glance-value">Earth</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M14 50c18-4 28-14 36-36M38 14h12v12"></path>
+<circle cx="14" cy="50" fill="currentColor" r="2.5"></circle>
+<circle cx="50" cy="14" fill="currentColor" r="2.5"></circle>
+</svg>
+</div>
+<div class="glance-label">Zodiac</div>
+<div class="glance-value">Sagittarius,<br/>Capricorn</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 8 54 45v5H10v-5Z"></path>
+<path d="M20 50V38l12-14 12 14v12"></path>
+<path d="M28 50v-8h8v8"></path>
+</svg>
+</div>
+<div class="glance-label">Formation</div>
+<div class="glance-value">Igneous,<br/>hydrothermal</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 6 54 24 32 58 10 24Z"></path>
+<path d="M10 24h44M32 6 10 24M32 6 54 24"></path>
+</svg>
+</div>
+<div class="glance-label">Hardness</div>
+<div class="glance-value">7</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"></path>
+<path d="M22 42c5-4 15-4 20 0" opacity=".55"></path>
+</svg>
+</div>
+<div class="glance-label">Color Range</div>
+<div class="glance-value">Pale tan to deep<br/>chocolate brown</div>
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN CONTENT -->
+<div class="content-grid">
+<!-- ARTICLE COLUMN -->
+<div class="article-col">
+<!-- OVERVIEW -->
+<article class="enc-card" id="overview">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<circle cx="32" cy="20" r="10"></circle>
+<path d="M10 54c0-12 10-20 22-20s22 8 22 20"></path>
+</svg>
             Overview
           </h2>
-          <p>Smoky Quartz is known for grounding, practical awareness, and the ability to bring abstract intentions back into daily life. It is often chosen by people who feel scattered, overstimulated, or overly focused on the conceptual and want a steadier connection to the body, the present moment, and concrete action.</p>
-          <p>Its traditions also emphasize transmutation. Rather than describing this as a literal energetic mechanism, crystal practice uses Smoky Quartz as a symbol and companion for meeting heavy experiences with greater steadiness. This combination of grounding, protection, and practical follow-through gives it a distinct place among stones used for meditation, transition, and everyday stability.</p>
-        </article>
-
-        <!-- WHY PEOPLE REACH FOR IT -->
-        <article class="enc-card" id="reach">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+<p>Smoky Quartz is clear quartz darkened by natural irradiation, with color ranging from translucent tea-brown to near-black Morion. That smoky veil gives it a distinctive character: less about retreating from difficulty than standing inside it with both feet on the ground.</p>
+<p>People reach for it when spiritual work feels too abstract, daily life feels overstimulating, or a goal needs practical structure. Its Root association and long protective tradition make it especially suited to steadiness, integration, and turning emotional weight into usable next steps.</p>
+</article>
+<!-- WHY PEOPLE REACH FOR IT -->
+<article class="enc-card" id="reach">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path>
+</svg>
             Why People Reach For It
           </h2>
-          <div class="reach-rows">
-            <div class="reach-row">
-              <span class="reach-label">Getting Grounded</span>
-              <span class="reach-desc">Chosen when energy feels scattered, unanchored, or too focused on the abstract, and a return to practical, embodied awareness is needed.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Transforming Heavy Energy</span>
-              <span class="reach-desc">Traditionally associated with shifting stagnant or heavy energy toward a steadier state, Smoky Quartz is used when other protective stones feel too passive or detached.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Manifesting Goals</span>
-              <span class="reach-desc">Connected to drawing the ethereal into physical form, Smoky Quartz is often chosen to help translate intentions and goals into organized, practical action.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Protection During Spiritual Work</span>
-              <span class="reach-desc">A traditional grounding companion during meditation or expanded-awareness practices, used to keep the practitioner anchored and clear throughout.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Daily Stability</span>
-              <span class="reach-desc">Chosen during periods of prolonged stress or overstimulation for its association with calm, steady presence rather than reactive energy.</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- MINERAL PROFILE -->
-        <article class="enc-card" id="mineral">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-              <path d="M10 19l22 12 22-12M32 31v27"/>
-            </svg>
+<div class="reach-rows">
+<div class="reach-row">
+<span class="reach-label">Getting Grounded</span>
+<span class="reach-desc">Chosen when attention feels scattered or overly abstract and a return to practical awareness is needed.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Shifting Heaviness</span>
+<span class="reach-desc">Traditionally used as a symbol for meeting heavy or stagnant experiences with greater steadiness.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Manifesting Goals</span>
+<span class="reach-desc">Associated with translating intentions into organized, practical steps connected to everyday life.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Anchoring Practice</span>
+<span class="reach-desc">Used during meditation or spiritual work to maintain a grounded sense of presence.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Daily Stability</span>
+<span class="reach-desc">Chosen during demanding periods for its association with calm, steady engagement rather than reactive energy.</span>
+</div>
+</div>
+</article>
+<!-- MINERAL PROFILE -->
+<article class="enc-card" id="mineral">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 6 54 19v26L32 58 10 45V19Z"></path>
+<path d="M10 19l22 12 22-12M32 31v27"></path>
+</svg>
             Mineral Profile
           </h2>
-          <div class="mineral-layout">
-            <div>
-              <div class="mineral-facts">
-                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
-                <div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
-                <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
-                <div class="mineral-fact"><span>Crystal Habit</span><span>Hexagonal prism</span></div>
-                <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-                <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
-                <div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
-              </div>
-            </div>
-            <div class="mineral-formation">
-              <h4>Formation</h4>
-              <p>Smoky Quartz forms in igneous and hydrothermal environments. Its color develops when natural gamma irradiation acts on trace aluminum within the crystal lattice — a process that can also be replicated artificially.</p>
-              <h4>Common Localities</h4>
-              <ul>
-                <li>Brazil</li>
-                <li>Madagascar</li>
-                <li>Switzerland</li>
-                <li>United States</li>
-                <li>Scotland (Cairngorm Mountains)</li>
-              </ul>
-            </div>
-          </div>
-          <p class="mineral-note">Smoky Quartz is found on every continent and is durable enough for most uses at hardness 7. Its color is generally stable under normal conditions, though sustained heat or prolonged direct sunlight can lighten some specimens. Clean with mild soap and water and store separately from harder minerals that could scratch the surface.</p>
-        </article>
-
-        <!-- RELATED STONES -->
-        <article class="enc-card" id="related">
+<div class="mineral-layout">
+<div>
+<div class="mineral-facts">
+<div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
+<div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
+<div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
+<div class="mineral-fact"><span>Crystal Habit</span><span>Hexagonal prism</span></div>
+<div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
+<div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+<div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
+</div>
+</div>
+<div class="mineral-formation">
+<h4>Formation</h4>
+<p>Smoky Quartz is brown to gray quartz colored by natural irradiation acting on trace aluminum. It crystallizes in the trigonal system and may range from pale tan to nearly black. Similar color can also be produced artificially.</p>
+<h4>Common Localities</h4>
+<ul>
+<li>Brazil</li>
+<li>Madagascar</li>
+<li>Switzerland</li>
+<li>United States</li>
+<li>Scotland (Cairngorm Mountains)</li>
+</ul>
+</div>
+</div>
+<p class="mineral-note">With a Mohs hardness of 7, Smoky Quartz is durable for most uses. Morion names very dark material, while Cairngorm refers to a warm Scottish variety. Clean with mild soap and water; avoid sustained heat and prolonged direct sunlight, which may lighten some specimens.</p>
+</article>
+<!-- RELATED STONES -->
+<article class="enc-card" id="related">
 <h2>
 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
 <circle cx="18" cy="32" r="9"></circle>
@@ -1163,14 +1177,14 @@
 <span class="stone-dot-circle stone-dot-black"></span>
 <div>
 <b>Black Tourmaline</b>
-<span>Grounding &amp; energetic boundaries</span>
+<span>Both are grounding and protective; Black Tourmaline emphasizes boundaries, while Smoky Quartz emphasizes transformation and integration.</span>
 </div>
 </a>
-<a class="stone-link-row" href="obsidian.html">
+<a class="stone-link-row" href="black-obsidian.html">
 <span class="stone-dot-circle stone-dot-obsidian"></span>
 <div>
-<b>Obsidian</b>
-<span>Transmutation &amp; deep grounding</span>
+<b>Black Obsidian</b>
+<span>Both share grounding and transmutation; Black Obsidian feels sharper, while Smoky Quartz is steadier for daily use.</span>
 </div>
 </a>
 </div>
@@ -1180,191 +1194,158 @@
 <span class="stone-dot-circle stone-dot-violet"></span>
 <div>
 <b>Amethyst</b>
-<span>Grounded presence &amp; spiritual clarity</span>
+<span>Amethyst adds spiritual clarity while Smoky Quartz keeps reflection grounded and practical.</span>
 </div>
 </a>
 <a class="stone-link-row" href="clear-quartz.html">
 <span class="stone-dot-circle stone-dot-white"></span>
 <div>
 <b>Clear Quartz</b>
-<span>Amplification &amp; focused intention</span>
+<span>Clear Quartz sharpens Smoky Quartz’s grounding and manifestation focus.</span>
 </div>
 </a>
 </div>
 </div>
 </article>
-
-      </div><!-- /article-col -->
-
-      <!-- RIGHT RAIL -->
-      <aside class="right-rail">
-
-        <!-- KNOWN FOR -->
-        <section class="rail-card">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 4 52 36H12L32 4Z"/>
-              <path d="M22 36 32 60l10-24"/>
-            </svg>
+</div><!-- /article-col -->
+<!-- RIGHT RAIL -->
+<aside class="right-rail">
+<!-- KNOWN FOR -->
+<section class="rail-card">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 4 52 36H12L32 4Z"></path>
+<path d="M22 36 32 60l10-24"></path>
+</svg>
             Known For
           </h2>
-          <div class="one-line-wrap">Grounding and Transmutation</div>
-          <p class="one-line-desc">Smoky Quartz is known for anchoring scattered energy into physical presence and practical awareness. In crystal traditions it is valued as a grounding companion that is also associated with transforming heavy or stagnant energy into a steadier, more settled state.</p>
-        </section>
-
-        <!-- ENERGETIC THEMES -->
-        <section class="rail-card" id="themes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-              <circle cx="32" cy="32" r="7"/>
-            </svg>
+<div class="one-line-wrap">Grounding and Transmutation</div>
+<p class="one-line-desc">Smoky Quartz is known for grounding, protection, and practical integration. It is often chosen when scattered attention, overstimulation, or abstract thinking needs to return to a steadier sense of presence.</p>
+</section>
+<!-- ENERGETIC THEMES -->
+<section class="rail-card" id="themes">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path>
+<circle cx="32" cy="32" r="7"></circle>
+</svg>
             Energetic Themes
           </h2>
-
-          <div class="theme-tier-label">Primary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- ground / root -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 12v32M20 32l12 12 12-12"/>
-                <path d="M16 52h32"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Grounding</h3>
-              <p>Its Root Chakra association centers on embodiment, present-moment awareness, and practical engagement. Smoky Quartz is especially valued when reflection or spiritual practice needs a stronger connection to ordinary responsibilities and physical reality.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- shield / protection -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/>
-                <path d="M22 34l8 8 12-14"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Protection &amp; Transmutation</h3>
-              <p>Smoky Quartz carries a long tradition as a protective talisman with documented ceremonial and cultural use across many centuries. Its protective quality is understood not as deflection but as transformation: traditionally associated with shifting heavy or stagnant energy toward a steadier, more settled state.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Secondary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- manifestation / arrow down into form -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8v36M20 32l12 12 12-12"/>
-                <path d="M16 52h32"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Manifestation</h3>
-              <p>Connected to drawing inspiration into physical form, Smoky Quartz is linked with the Root Chakra's relationship to material reality. It is used to support the translation of spiritual intentions into concrete, organized action.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- checklist / organization -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 8h28l10 10v38H14Z"/>
-                <path d="M38 8v10h14M22 30h20M22 38h20M22 46h12"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Practicality &amp; Organization</h3>
-              <p>A well-established secondary association connects Smoky Quartz to practical thinking, realistic planning, and the clear-headed follow-through that keeps goals from remaining abstract.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Occasional Associations</div>
-          <div class="occasional-tags">
-            <span class="occ-tag">Purification</span>
-          </div>
-        </section>
-
-        <!-- COLLECTOR NOTES -->
-        <section class="rail-card" id="notes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 8h28l10 10v38H14Z"/>
-              <path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/>
-            </svg>
+<div class="theme-tier-label">Primary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- ground / root -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 12v32M20 32l12 12 12-12"></path>
+<path d="M16 52h32"></path>
+</svg>
+</div>
+<div>
+<h3>Grounding</h3>
+<p>Its Root Chakra association emphasizes embodiment, present-moment awareness, and practical engagement with ordinary responsibilities.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- shield / protection -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"></path>
+<path d="M22 34l8 8 12-14"></path>
+</svg>
+</div>
+<div>
+<h3>Protection and Transmutation</h3>
+<p>Smoky Quartz is traditionally associated with protection and with shifting heavy energy toward a steadier, more settled state.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Secondary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- manifestation / arrow down into form -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 8v36M20 32l12 12 12-12"></path>
+<path d="M16 52h32"></path>
+</svg>
+</div>
+<div>
+<h3>Manifestation</h3>
+<p>Its grounding identity connects inspiration with material reality, organized action, and practical follow-through.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- checklist / organization -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M14 8h28l10 10v38H14Z"></path>
+<path d="M38 8v10h14M22 30h20M22 38h20M22 46h12"></path>
+</svg>
+</div>
+<div>
+<h3>Practicality and Organization</h3>
+<p>Smoky Quartz is associated with realistic planning and the clear-headed structure that keeps goals from remaining abstract.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Occasional Associations</div>
+<div class="occasional-tags">
+<span class="occ-tag">Purification</span>
+</div>
+</section>
+<!-- COLLECTOR NOTES -->
+<section class="rail-card" id="notes">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M14 8h28l10 10v38H14Z"></path>
+<path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"></path>
+</svg>
             Collector &amp; Curiosity Notes
           </h2>
-          <div class="note-list">
-
-            <div class="note-row">
-              <div class="note-icon">
-                <!-- map / location -->
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 8c-8 0-14 6-14 14 0 10 14 28 14 28s14-18 14-28c0-8-6-14-14-14Z"/>
-                  <circle cx="32" cy="22" r="4"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Scottish Heritage</strong>
-                <p>Cairngorm, a Scottish variety of Smoky Quartz, has a long association with Highland dress and decorative objects. It appears in brooches, weapon fittings, and traditional accessories, giving the material a distinctive place in Scottish lapidary and cultural history.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <!-- radiation / rays -->
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="32" cy="32" r="8"/>
-                  <path d="M32 8v10M32 46v10M8 32h10M46 32h10M16 16l7 7M41 41l7 7M16 48l7-7M41 23l7-7"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Color and Irradiation</strong>
-                <p>The smoky color develops when natural irradiation acts on trace aluminum in the quartz lattice. Similar coloration can also be produced artificially. Very dark color alone does not establish treatment, so provenance or gemological testing may be needed when natural origin matters.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <!-- dark gem -->
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 6 54 24 32 58 10 24Z"/>
-                  <path d="M10 24h44"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Morion</strong>
-                <p>Morion is a traditional name for very dark brown to nearly black Smoky Quartz. It shares the same mineral identity as paler material and may be naturally or artificially colored. Treatment cannot be determined reliably from darkness alone.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <!-- mountain -->
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 52 28 20l10 14 6-8 12 26Z"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Cairngorm vs. Standard Smoky Quartz</strong>
-                <p>Cairngorm is a warm brownish-yellow variety specific to Scottish deposits, distinct in tone from the cooler gray-browns of Swiss and Brazilian material. It is collected for provenance as much as color, and authentic pieces command interest among Highland dress and Scottish heritage collectors.</p>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-      </aside><!-- /right-rail -->
-
-    </div><!-- /content-grid -->
-
-    <!-- ENTRY NAV -->
-    <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
+<div class="note-list">
+<div class="note-row">
+<div class="note-icon">
+<!-- map / location -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 8c-8 0-14 6-14 14 0 10 14 28 14 28s14-18 14-28c0-8-6-14-14-14Z"></path>
+<circle cx="32" cy="22" r="4"></circle>
+</svg>
+</div>
+<div>
+<strong>Scottish Heritage</strong>
+<p>Cairngorm has a long association with Highland dress, brooches, weapon fittings, and decorative objects in Scottish lapidary history.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<!-- dark gem -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M32 6 54 24 32 58 10 24Z"></path>
+<path d="M10 24h44"></path>
+</svg>
+</div>
+<div>
+<strong>Morion</strong>
+<p>Morion is a traditional name for very dark brown to nearly black Smoky Quartz. Darkness alone does not establish whether color is natural or treated.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<!-- mountain -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M8 52 28 20l10 14 6-8 12 26Z"></path>
+</svg>
+</div>
+<div>
+<strong>Cairngorm</strong>
+<p>Cairngorm is a warm brownish-yellow Scottish variety collected for provenance as well as color, distinct from cooler gray-brown material.</p>
+</div>
+</div>
+</div>
+</section>
+</aside><!-- /right-rail -->
+</div><!-- /content-grid -->
+<!-- ENTRY NAV -->
+<nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
 <a class="entry-nav-link" href="smoky-citrine.html">
 <span>←</span>
 <div>
@@ -1386,36 +1367,31 @@
 <span>→</span>
 </a>
 </nav>
-
-    <!-- BOTTOM CTA -->
-    <div class="enc-cta">
-      <div>
-        <h3>The right stone. The right moment.</h3>
-        <p>Explore 333 entries with clarity, care, and curiosity.</p>
-      </div>
-      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
-    </div>
-
-  </main>
+<!-- BOTTOM CTA -->
+<div class="enc-cta">
+<div>
+<h3>The right stone. The right moment.</h3>
+<p>Explore 333 entries with clarity, care, and curiosity.</p>
+</div>
+<button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+</div>
+</main>
 </div><!-- /enc-page -->
-
 <footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
-  <div style="max-width:520px;margin:0 auto">
-    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
-    <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
-    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
-    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
-    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
-      <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
-    </div>
-  </div>
-  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+<div style="max-width:520px;margin:0 auto">
+<div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+<a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+<div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
+<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+<div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+<a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
+</div>
+</div>
+<div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
     © 2026 Still Point {technodelic} Studio
   </div>
 </footer>
-
 </div><!-- /app-shell -->
-
 <script>
 /* Scroll-spy: highlight the active sidebar nav link */
 (function () {
@@ -1439,6 +1415,5 @@
 })();
 </script>
 <script src="enc-nav.js"></script>
-
 </body>
 </html>

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-stone-slug="amethyst">
+
+<html data-stone-slug="amethyst" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="description" content="Amethyst encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
-<meta property="og:title" content="Amethyst | Still Point Lapidary Encyclopedia">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#7f94c4">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<meta content="Amethyst encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
+<meta content="Amethyst | Still Point Lapidary Encyclopedia" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="#7f94c4" name="theme-color"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Amethyst | Still Point Lapidary Encyclopedia</title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
@@ -476,261 +477,281 @@
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Bottom alignment: main article and collector rail ── */
+.content-grid {
+  align-items: stretch;
+}
+
+.article-col,
+.right-rail {
+  height: 100%;
+}
+
+.article-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-col > .enc-card:last-child {
+  flex: 1;
+}
+
+.right-rail {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-rail > .rail-card {
+  flex: 1;
+}
+
+@media (max-width: 980px) {
+  .article-col,
+  .right-rail {
+    height: auto;
+  }
+
+  .article-col > .enc-card:last-child,
+  .right-rail > .rail-card {
+    flex: none;
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="app-shell">
-
 <header class="topbar">
-  <a href="../index.html" class="brand-home" aria-label="Return to home">
-    <div class="brand-block">
-      <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
-      <div class="brand-block-text">
-        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
-        <span class="brand-block-sub">Crystal Reference Library</span>
-      </div>
-    </div>
-  </a>
-  <div class="topbar-right">
-    <a href="../encyclopedia.html" class="btn btn-sm">← Encyclopedia</a>
-  </div>
+<a aria-label="Return to home" class="brand-home" href="../index.html">
+<div class="brand-block">
+<img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+<div class="brand-block-text">
+<span class="wordmark">STILL POINT <em>Lapidary</em></span>
+<span class="brand-block-sub">Crystal Reference Library</span>
+</div>
+</div>
+</a>
+<div class="topbar-right">
+<a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+</div>
 </header>
-
 <div class="enc-page" id="top">
-
-  <aside class="enc-sidebar">
-    <div class="enc-breadcrumb">
-      <a href="../index.html">Home</a> ›
+<aside class="enc-sidebar">
+<div class="enc-breadcrumb">
+<a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
       <b>Amethyst</b>
-    </div>
-    <div class="side-nav-card">
-      <div class="side-nav-label">On this page</div>
-      <nav class="side-nav">
-        <a href="#top" class="active">Top</a>
-        <a href="#overview">Overview</a>
-        <a href="#reach">Why People Reach For It</a>
-        <a href="#glance">At a Glance</a>
-        <a href="#themes">Energetic Themes</a>
-        <a href="#mineral">Mineral Profile</a>
-        <a href="#notes">Collector Notes</a>
-        <a href="#related">Related Stones</a>
-      </nav>
-    </div>
-    <div class="sidebar-standards">
-      <p>Entries are researched from expert books and trusted online sources.</p>
-      <a href="#">Our Editorial Standards →</a>
-    </div>
-  </aside>
-
-  <main class="enc-main">
-
-    <!-- HERO -->
-    <section class="enc-hero" id="hero">
-      <div class="stone-photo-wrap">
-        <img
-          alt="Amethyst crystal cluster showing deep purple quartz points"
-          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/amethyst-specimen.webp"
-        />
-      </div>
-      <div class="hero-right">
-        <h1 class="stone-name">Amethyst</h1>
-        <div class="theme-pills">
-          <span class="theme-pill">Calm</span>
-          <span class="theme-pill">Protection</span>
-          <span class="theme-pill">Intuition</span>
-        </div>
-        <div class="identity-grid">
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/></svg>
+</div>
+<div class="side-nav-card">
+<div class="side-nav-label">On this page</div>
+<nav class="side-nav">
+<a class="active" href="#top">Top</a>
+<a href="#overview">Overview</a>
+<a href="#reach">Why People Reach For It</a>
+<a href="#glance">At a Glance</a>
+<a href="#themes">Energetic Themes</a>
+<a href="#mineral">Mineral Profile</a>
+<a href="#notes">Collector Notes</a>
+<a href="#related">Related Stones</a>
+</nav>
+</div>
+<div class="sidebar-standards">
+<p>Entries are researched from expert books and trusted online sources.</p>
+<a href="#">Our Editorial Standards →</a>
+</div>
+</aside>
+<main class="enc-main">
+<!-- HERO -->
+<section class="enc-hero" id="hero">
+<div class="stone-photo-wrap">
+<img alt="Amethyst crystal cluster showing deep purple quartz points" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/amethyst.webp"/>
+</div>
+<div class="hero-right">
+<h1 class="stone-name">Amethyst</h1>
+<div class="theme-pills">
+<span class="theme-pill">Calm</span>
+<span class="theme-pill">Protection</span>
+<span class="theme-pill">Intuition</span>
+</div>
+<div class="identity-grid">
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"></path></svg>
               Best For
             </div>
-            <p>Quiet reflection and spiritual clarity</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/></svg>
+<p>Quiet reflection and spiritual clarity</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"></path></svg>
               Use When
             </div>
-            <p>Your thoughts feel crowded or overstimulated and you want a calmer atmosphere for reflection, meditation, or inward focus.</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/></svg>
+<p>Your thoughts feel crowded or overstimulated and you want a calmer atmosphere for reflection, meditation, or inward focus.</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"></path><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"></path></svg>
               Pairs Well With
             </div>
-            <p>Clear Quartz<br>Rose Quartz<br>Smoky Quartz</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
+<p>Clear Quartz<br/>Rose Quartz<br/>Smoky Quartz</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle></svg>
               Primary Chakra
             </div>
-            <p>Third Eye, Crown</p>
-          </div>
-        </div>
-        <div class="hero-actions">
-          <button class="enc-btn enc-btn-primary">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
+<p>Third Eye</p>
+</div>
+</div>
+<div class="hero-actions">
+<button class="enc-btn enc-btn-primary">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
             Save to Collection
           </button>
-          <button class="enc-btn">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
+<button class="enc-btn">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
             Add to Wishlist
           </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- AT A GLANCE -->
-    <section class="glance-panel" id="glance">
-      <h2 class="panel-title">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/><circle cx="32" cy="32" r="8"/></svg>
+</div>
+</div>
+</section>
+<!-- AT A GLANCE -->
+<section class="glance-panel" id="glance">
+<h2 class="panel-title">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 64 64"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path><circle cx="32" cy="32" r="8"></circle></svg>
         At a Glance
       </h2>
-      <div class="glance-grid">
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 30 32 56 12 30Z"/><path d="M12 30h40"/><path d="M22 30 32 8l10 22"/><path d="M22 30 32 56l10-26"/></svg>
-          </div>
-          <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Calm<br>Protection · Intuition</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2.5" fill="currentColor"/></svg>
-          </div>
-          <div class="glance-label">Chakra</div>
-          <div class="glance-value">Third Eye<br>Crown</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- wind element -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 10 12 44h40Z"/><path d="M22 44c0 8 20 8 20 0"/></svg>
-          </div>
-          <div class="glance-label">Element</div>
-          <div class="glance-value">Wind</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50c18-4 28-14 36-36M38 14h12v12"/><circle cx="14" cy="50" r="2.5" fill="currentColor"/><circle cx="50" cy="14" r="2.5" fill="currentColor"/></svg>
-          </div>
-          <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Pisces, Virgo<br>Aquarius, Capricorn</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 54 45v5H10v-5Z"/><path d="M20 50V38l12-14 12 14v12"/><path d="M28 50v-8h8v8"/></svg>
-          </div>
-          <div class="glance-label">Formation</div>
-          <div class="glance-value">Volcanic cavities,<br>hydrothermal veins</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 24 32 58 10 24Z"/><path d="M10 24h44M32 6 10 24M32 6 54 24"/></svg>
-          </div>
-          <div class="glance-label">Hardness</div>
-          <div class="glance-value">7</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/><path d="M22 42c5-4 15-4 20 0" opacity=".55"/></svg>
-          </div>
-          <div class="glance-label">Color Range</div>
-          <div class="glance-value">Pale lilac to<br>deep purple</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TWO-COLUMN CONTENT -->
-    <div class="content-grid">
-      <div class="article-col">
-
-        <!-- OVERVIEW -->
-        <article class="enc-card" id="overview">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="20" r="10"/><path d="M10 54c0-12 10-20 22-20s22 8 22 20"/></svg>
+<div class="glance-grid">
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 52 30 32 56 12 30Z"></path><path d="M12 30h40"></path><path d="M22 30 32 8l10 22"></path><path d="M22 30 32 56l10-26"></path></svg>
+</div>
+<div class="glance-label">Primary Themes</div>
+<div class="glance-value">Calm<br/>Protection · Intuition</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle><circle cx="32" cy="32" fill="currentColor" r="2.5"></circle></svg>
+</div>
+<div class="glance-label">Chakras</div>
+<div class="glance-value">Third Eye, Crown</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- wind element -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 10 12 44h40Z"></path><path d="M22 44c0 8 20 8 20 0"></path></svg>
+</div>
+<div class="glance-label">Element</div>
+<div class="glance-value">Wind</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M14 50c18-4 28-14 36-36M38 14h12v12"></path><circle cx="14" cy="50" fill="currentColor" r="2.5"></circle><circle cx="50" cy="14" fill="currentColor" r="2.5"></circle></svg>
+</div>
+<div class="glance-label">Zodiac</div>
+<div class="glance-value">Pisces, Virgo,<br/>Aquarius, Capricorn</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 54 45v5H10v-5Z"></path><path d="M20 50V38l12-14 12 14v12"></path><path d="M28 50v-8h8v8"></path></svg>
+</div>
+<div class="glance-label">Formation</div>
+<div class="glance-value">Volcanic cavities,<br/>hydrothermal veins</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 24 32 58 10 24Z"></path><path d="M10 24h44M32 6 10 24M32 6 54 24"></path></svg>
+</div>
+<div class="glance-label">Hardness</div>
+<div class="glance-value">7</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"></path><path d="M22 42c5-4 15-4 20 0" opacity=".55"></path></svg>
+</div>
+<div class="glance-label">Color Range</div>
+<div class="glance-value">Pale lilac to<br/>deep purple</div>
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN CONTENT -->
+<div class="content-grid">
+<div class="article-col">
+<!-- OVERVIEW -->
+<article class="enc-card" id="overview">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="20" r="10"></circle><path d="M10 54c0-12 10-20 22-20s22 8 22 20"></path></svg>
             Overview
           </h2>
-          <p>Amethyst is one of the most widely recognized stones in crystal traditions, valued for calm, protection, purification, and spiritual awareness. Its appeal lies in the way these qualities work together: it is not simply associated with stillness, but with the kind of quiet that makes deeper reflection, intuition, and perspective easier to access.</p>
-          <p>Its connection to the Third Eye and Crown Chakras gives Amethyst a distinctly contemplative identity. People often reach for it when mental noise feels crowded, when meditation needs a clearer focus, or when emotional intensity makes it difficult to step back and see a situation with steadiness. Its long history in jewelry, ritual objects, and personal talismans has helped preserve that reputation across many eras and traditions.</p>
-        </article>
-
-        <!-- WHY PEOPLE REACH FOR IT -->
-        <article class="enc-card" id="reach">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/></svg>
+<p>Amethyst is quartz turned violet by trace iron and natural irradiation, but its identity has always reached beyond color. From ancient carved gems to modern meditation spaces, it has become the classic stone of quiet authority: calming without feeling passive, protective without feeling severe.</p>
+<p>People reach for Amethyst when they need enough stillness to hear themselves think. Its Third Eye and Crown associations suit reflection, discernment, and inward work, especially when emotion is loud but the answer requires patience rather than escape.</p>
+</article>
+<!-- WHY PEOPLE REACH FOR IT -->
+<article class="enc-card" id="reach">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
             Why People Reach For It
           </h2>
-          <div class="reach-rows">
-            <div class="reach-row">
-              <span class="reach-label">Quieting Mental Noise</span>
-              <span class="reach-desc">Chosen when thoughts feel crowded or repetitive and a calmer internal atmosphere would support reflection, rest, or focused work.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Deepening Meditation</span>
-              <span class="reach-desc">Long associated with contemplation and spiritual awareness, Amethyst is often used to support inward focus and connection with intuitive guidance.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Creating Protection</span>
-              <span class="reach-desc">Traditionally used to establish a sense of energetic protection, especially during meditation, ritual work, or time spent in demanding environments.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Strengthening Discernment</span>
-              <span class="reach-desc">Chosen when a situation calls for greater perspective, thoughtful response, or the ability to separate intuition from emotional reactivity.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Settling Emotional Intensity</span>
-              <span class="reach-desc">Often used during emotionally charged periods when a quieter, more reflective approach would feel supportive without suppressing what is being felt.</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- MINERAL PROFILE -->
-        <article class="enc-card" id="mineral">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 19v26L32 58 10 45V19Z"/><path d="M10 19l22 12 22-12M32 31v27"/></svg>
+<div class="reach-rows">
+<div class="reach-row">
+<span class="reach-label">Quieting Mental Noise</span>
+<span class="reach-desc">Chosen when crowded or repetitive thoughts make it difficult to reflect, rest, or concentrate.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Deepening Meditation</span>
+<span class="reach-desc">Used to create a calmer setting for inward focus, contemplation, and intuitive awareness.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Creating Protection</span>
+<span class="reach-desc">Traditionally carried during meditation, ritual, or demanding environments as a symbol of energetic boundaries.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Strengthening Discernment</span>
+<span class="reach-desc">Helpful when a situation calls for perspective, measured response, and separation of intuition from emotional reaction.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Settling Intensity</span>
+<span class="reach-desc">Chosen during emotionally charged periods when a quieter, more reflective approach feels supportive.</span>
+</div>
+</div>
+</article>
+<!-- MINERAL PROFILE -->
+<article class="enc-card" id="mineral">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 19v26L32 58 10 45V19Z"></path><path d="M10 19l22 12 22-12M32 31v27"></path></svg>
             Mineral Profile
           </h2>
-          <div class="mineral-layout">
-            <div>
-              <div class="mineral-facts">
-                <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
-                <div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub> with trace iron</span></div>
-                <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
-                <div class="mineral-fact"><span>Crystal Habit</span><span>Prismatic</span></div>
-                <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-                <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
-                <div class="mineral-fact"><span>Transparency</span><span>Transparent to translucent</span></div>
-              </div>
-            </div>
-            <div class="mineral-formation">
-              <h4>Formation</h4>
-              <p>Amethyst is the purple variety of quartz, composed of silicon dioxide and crystallizing in the trigonal system. It commonly forms as prismatic crystals lining cavities in volcanic rock, in geodes, and in hydrothermal veins. Its color ranges from pale lilac to deep reddish purple and may appear unevenly distributed or concentrated near crystal tips.</p>
-              <h4>Common Localities</h4>
-              <ul>
-                <li>Brazil (major deposits)</li>
-                <li>Uruguay</li>
-                <li>Zambia</li>
-                <li>Mexico</li>
-                <li>United States</li>
-              </ul>
-            </div>
-          </div>
-          <p class="mineral-note">The purple color develops through the interaction of trace iron with natural irradiation in the quartz lattice. Amethyst has good durability at hardness 7, though pointed crystal edges can still chip. Heat may lighten or alter the color, and much commercial citrine is produced by heating Amethyst. Prolonged exposure to intense light can also cause fading in some material. Clean with mild soap, warm water, and a soft cloth; avoid steam cleaning and sustained heat.</p>
-        </article>
-
-        <!-- RELATED STONES -->
-        <article class="enc-card" id="related">
+<div class="mineral-layout">
+<div>
+<div class="mineral-facts">
+<div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
+<div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub> with trace iron</span></div>
+<div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
+<div class="mineral-fact"><span>Crystal Habit</span><span>Prismatic</span></div>
+<div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
+<div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+<div class="mineral-fact"><span>Transparency</span><span>Transparent to translucent</span></div>
+</div>
+</div>
+<div class="mineral-formation">
+<h4>Formation</h4>
+<p>Amethyst is the purple variety of quartz. Trace iron and natural irradiation create colors from pale lilac to deep reddish purple, often concentrated near crystal tips. It forms in volcanic cavities, geodes, and hydrothermal veins.</p>
+<h4>Common Localities</h4>
+<ul>
+<li>Brazil (major deposits)</li>
+<li>Uruguay</li>
+<li>Zambia</li>
+<li>Mexico</li>
+<li>United States</li>
+</ul>
+</div>
+</div>
+<p class="mineral-note">With a Mohs hardness of 7, Amethyst is durable for jewelry and display, though points can chip. Heat may alter its color, and prolonged intense light can cause fading. Clean with mild soap, warm water, and a soft cloth; avoid steam and sustained heat.</p>
+</article>
+<!-- RELATED STONES -->
+<article class="enc-card" id="related">
 <h2>
 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="18" cy="32" r="9"></circle><circle cx="46" cy="32" r="9"></circle><path d="M27 32h10"></path></svg>
             Related Stones
@@ -742,14 +763,14 @@
 <span class="stone-dot-circle stone-dot-violet"></span>
 <div>
 <b>Purple Fluorite</b>
-<span>Quiet focus &amp; intuitive clarity</span>
+<span>Both support quiet focus and intuition; Purple Fluorite is more analytical, while Amethyst is more contemplative and protective.</span>
 </div>
 </a>
 <a class="stone-link-row" href="lepidolite.html">
 <span class="stone-dot-circle stone-dot-lavender"></span>
 <div>
 <b>Lepidolite</b>
-<span>Calm reflection &amp; emotional ease</span>
+<span>Both encourage calm reflection; Lepidolite feels softer and more emotionally soothing, while Amethyst emphasizes spiritual clarity.</span>
 </div>
 </a>
 </div>
@@ -759,189 +780,156 @@
 <span class="stone-dot-circle stone-dot-white"></span>
 <div>
 <b>Clear Quartz</b>
-<span>Clarity, focus &amp; amplification</span>
+<span>Clear Quartz adds focus and amplification to Amethyst’s meditative qualities.</span>
 </div>
 </a>
 <a class="stone-link-row" href="rose-quartz.html">
 <span class="stone-dot-circle stone-dot-rose"></span>
 <div>
 <b>Rose Quartz</b>
-<span>Compassion &amp; emotional ease</span>
+<span>Rose Quartz adds heart-centered softness, compassion, and emotional ease to Amethyst’s reflective calm.</span>
 </div>
 </a>
 </div>
 </div>
 </article>
-
-      </div><!-- /article-col -->
-
-      <!-- RIGHT RAIL -->
-      <aside class="right-rail">
-
-        <!-- KNOWN FOR -->
-        <section class="rail-card">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 4 52 36H12L32 4Z"/><path d="M22 36 32 60l10-24"/></svg>
+</div><!-- /article-col -->
+<!-- RIGHT RAIL -->
+<aside class="right-rail">
+<!-- KNOWN FOR -->
+<section class="rail-card">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 4 52 36H12L32 4Z"></path><path d="M22 36 32 60l10-24"></path></svg>
             Known For
           </h2>
-          <div class="one-line-wrap">Quiet Spiritual Clarity</div>
-          <p class="one-line-desc">Amethyst is known for combining calm, protection, and spiritual depth. Its traditions center on quieting distraction, strengthening intuitive awareness, and creating a steadier inner atmosphere for meditation, reflection, and thoughtful discernment.</p>
-        </section>
-
-        <!-- ENERGETIC THEMES -->
-        <section class="rail-card" id="themes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/></svg>
+<div class="one-line-wrap">Quiet Spiritual Clarity</div>
+<p class="one-line-desc">Amethyst is known for calm, protection, and intuitive clarity. Its contemplative character makes it a natural companion for meditation, reflection, and moments that call for steadier perspective.</p>
+</section>
+<!-- ENERGETIC THEMES -->
+<section class="rail-card" id="themes">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle></svg>
             Energetic Themes
           </h2>
-
-          <div class="theme-tier-label">Primary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- calm / stillness -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 32h24M26 24h12M26 40h12"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Calm &amp; Inner Stillness</h3>
-              <p>Amethyst is widely associated with quieting distraction and creating a more settled internal atmosphere. This calm quality supports reflection, meditation, and measured response rather than emotional withdrawal.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- protection / shield -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/><path d="M22 34l8 8 12-14"/></svg>
-            </div>
-            <div>
-              <h3>Protection &amp; Purification</h3>
-              <p>Its protective tradition centers on maintaining clarity and energetic boundaries during spiritually focused or emotionally demanding experiences. Purification is understood as a symbolic clearing of distraction and heaviness.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Secondary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- third eye / intuition -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/><circle cx="32" cy="32" r="7"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
-            </div>
-            <div>
-              <h3>Intuition &amp; Spiritual Connection</h3>
-              <p>Linked with the Third Eye and Crown Chakras, Amethyst is traditionally used to deepen meditation, strengthen intuitive awareness, and support a broader spiritual perspective.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <!-- wisdom / scales -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8v44M16 52h32"/><path d="M20 24l-8 16h16ZM44 24l-8 16h16Z"/></svg>
-            </div>
-            <div>
-              <h3>Wisdom &amp; Discernment</h3>
-              <p>Amethyst is associated with pausing before reacting and seeing circumstances from a wider vantage point. This theme emphasizes thoughtful judgment rather than prediction or certainty.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Occasional Associations</div>
-          <div class="occasional-tags">
-            <span class="occ-tag">Dream Work</span>
-            <span class="occ-tag">Grief Support</span>
-          </div>
-        </section>
-
-        <!-- COLLECTOR NOTES -->
-        <section class="rail-card" id="notes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h28l10 10v38H14Z"/><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/></svg>
+<div class="theme-tier-label">Primary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- calm / stillness -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
+<path d="M20 32h24M26 24h12M26 40h12"></path>
+</svg>
+</div>
+<div>
+<h3>Calm and Inner Stillness</h3>
+<p>Amethyst is associated with quieting distraction and creating a settled atmosphere for reflection, meditation, and measured response.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- protection / shield -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"></path><path d="M22 34l8 8 12-14"></path></svg>
+</div>
+<div>
+<h3>Protection and Purification</h3>
+<p>Its protective tradition centers on maintaining clarity and symbolic energetic boundaries during spiritually focused or emotionally demanding experiences.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Secondary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- third eye / intuition -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle><circle cx="32" cy="32" fill="currentColor" r="2"></circle></svg>
+</div>
+<div>
+<h3>Intuition and Spiritual Connection</h3>
+<p>Linked with the Third Eye and Crown, Amethyst is used to support meditation, intuitive awareness, and broader perspective.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<!-- wisdom / scales -->
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8v44M16 52h32"></path><path d="M20 24l-8 16h16ZM44 24l-8 16h16Z"></path></svg>
+</div>
+<div>
+<h3>Wisdom and Discernment</h3>
+<p>Amethyst encourages pausing before reacting and viewing circumstances from a wider, more thoughtful vantage point.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Occasional Associations</div>
+<div class="occasional-tags">
+<span class="occ-tag">Dream Work</span>
+<span class="occ-tag">Grief Support</span>
+</div>
+</section>
+<!-- COLLECTOR NOTES -->
+<section class="rail-card" id="notes">
+<h2>
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M14 8h28l10 10v38H14Z"></path><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"></path></svg>
             Collector &amp; Curiosity Notes
           </h2>
-          <div class="note-list">
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 52 32 8l20 44"/><path d="M20 36h24"/></svg>
-              </div>
-              <div>
-                <strong>Meaning of the Name</strong>
-                <p>The name comes from the Greek <em>amethystos</em>, meaning "not intoxicated." It reflects an ancient belief that Amethyst could protect against drunkenness or excess, a historical association rather than a modern treatment claim.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 54 19v26L32 58 10 45V19Z"/><path d="M10 19l22 12 22-12M32 31v27"/></svg>
-              </div>
-              <div>
-                <strong>Once Highly Prized</strong>
-                <p>Before large Brazilian deposits expanded its availability in the nineteenth century, Amethyst could command prices comparable to ruby and emerald. Its greater abundance today changed its market position without diminishing its cultural importance.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><path d="M20 44c4-8 20-8 24 0M22 26c0-4 4-8 10-8s10 4 10 8"/></svg>
-              </div>
-              <div>
-                <strong>Ancient Carved Gems</strong>
-                <p>Amethyst appears in Greek, Roman, Egyptian, and Near Eastern jewelry, beads, seals, and engraved gems. Museum collections preserve examples spanning antiquity, showing its long use as both ornament and symbolic material.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50c18-36 36-36 36 0"/><path d="M14 50h36"/><circle cx="32" cy="28" r="6"/></svg>
-              </div>
-              <div>
-                <strong>Heat-Treated Citrine</strong>
-                <p>Much commercially available golden-orange citrine began as Amethyst. Controlled heating changes the color centers produced by iron and irradiation. Natural citrine exists but is less common; uneven or smoky color zones are typical of the natural form.</p>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-      </aside>
-    </div><!-- /content-grid -->
-
-    <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
+<div class="note-list">
+<div class="note-row">
+<div class="note-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M12 52 32 8l20 44"></path><path d="M20 36h24"></path></svg>
+</div>
+<div>
+<strong>Meaning of the Name</strong>
+<p>The name comes from the Greek <em>amethystos</em>, meaning "not intoxicated." It reflects an ancient belief that Amethyst could protect against drunkenness or excess, a historical association rather than a modern treatment claim.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 19v26L32 58 10 45V19Z"></path><path d="M10 19l22 12 22-12M32 31v27"></path></svg>
+</div>
+<div>
+<strong>Once Highly Prized</strong>
+<p>Before large Brazilian deposits expanded its availability in the nineteenth century, Amethyst could command prices comparable to ruby and emerald. Its greater abundance today changed its market position without diminishing its cultural importance.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="32" r="22"></circle><path d="M20 44c4-8 20-8 24 0M22 26c0-4 4-8 10-8s10 4 10 8"></path></svg>
+</div>
+<div>
+<strong>Ancient Carved Gems</strong>
+<p>Amethyst appears in Greek, Roman, Egyptian, and Near Eastern jewelry, beads, seals, and engraved gems. Museum collections preserve examples spanning antiquity, showing its long use as both ornament and symbolic material.</p>
+</div>
+</div>
+</div>
+</section>
+</aside>
+</div><!-- /content-grid -->
+<nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
 <a class="entry-nav-link" href="amegreen.html"><span>←</span><div><small>Previous</small><b>Amegreen</b></div></a>
 <a class="entry-nav-link entry-nav-random" href="#"><div><small>Random</small><b>Surprise me</b></div></a>
 <a class="entry-nav-link" href="ametrine.html"><div><small>Next</small><b>Ametrine</b></div><span>→</span></a>
 </nav>
-
-    <div class="enc-cta">
-      <div>
-        <h3>The right stone. The right moment.</h3>
-        <p>Explore 333 entries with clarity, care, and curiosity.</p>
-      </div>
-      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
-    </div>
-
-  </main>
+<div class="enc-cta">
+<div>
+<h3>The right stone. The right moment.</h3>
+<p>Explore 333 entries with clarity, care, and curiosity.</p>
+</div>
+<button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+</div>
+</main>
 </div><!-- /enc-page -->
-
 <footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
-  <div style="max-width:520px;margin:0 auto">
-    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
-    <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
-    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
-    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
-    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
-      <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
-    </div>
-  </div>
-  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+<div style="max-width:520px;margin:0 auto">
+<div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+<a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+<div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
+<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+<div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+<a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
+</div>
+</div>
+<div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
     © 2026 Still Point {technodelic} Studio
   </div>
 </footer>
-
 </div><!-- /app-shell -->
-
 <script>
 (function () {
   const sections = ['hero','overview','reach','glance','themes','mineral','notes','related'];
