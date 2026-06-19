@@ -75,7 +75,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   background-image:
     linear-gradient(to right,rgba(20,30,42,0.78) 0%,rgba(20,30,42,0.58) 28%,rgba(20,30,42,0.24) 52%,rgba(20,30,42,0.08) 100%),
     linear-gradient(to bottom,rgba(20,30,42,0.08) 0%,rgba(20,30,42,0) 34%,rgba(20,30,42,0.18) 100%),
-    url('images/stillpoint-hero-placeholder.webp');
+    url('assets/home-hero-lyra-june8.png');
   background-size:auto,auto,cover;
   background-position:left center,left center,center center;
   background-repeat:no-repeat,no-repeat,no-repeat;
