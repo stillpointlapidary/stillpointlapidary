@@ -130,3 +130,10 @@ docs/encyclopedia/*-v*.md
 # Local archive folder
 /local-archive/
 docs/encyclopedia/GOLD-STANDARD-STONE-PAGE.html
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
