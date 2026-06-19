@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 
-<html data-stone-slug="clear-quartz" lang="en">
+<html data-stone-slug="{{STONE_SLUG}}" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
-<meta content="Clear Quartz encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
-<meta content="Clear Quartz | Still Point Lapidary Encyclopedia" property="og:title"/>
+<meta content="{{STONE_NAME}} encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
+<meta content="{{STONE_NAME}} | Still Point Lapidary Encyclopedia" property="og:title"/>
 <meta content="website" property="og:type"/>
-<meta content="#b0a0d8" name="theme-color"/>
+<meta content="{{THEME_COLOR}}" name="theme-color"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
-<title>Clear Quartz | Still Point Lapidary Encyclopedia</title>
+<title>{{STONE_NAME}} | Still Point Lapidary Encyclopedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
 <link href="../styles.css" rel="stylesheet"/><link href="enc-icons.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
-/* Chakra-keyed design tokens — Crown for Clear Quartz (All Chakras; Crown used for styling). */
+/* Chakra-keyed design tokens.
+   Replace only from the approved chakra palette. */
 :root {
-  --ck-pill-bg:    #ded7ef;
-  --ck-pill-text:  #5e5080;
-  --ck-btn-bg:     #ded7ef;
-  --ck-btn-border: #b0a0d8;
-  --ck-btn-text:   #5e5080;
-  --ck-wash:       #f4f1fa;
-  --ck-wash-border:#b0a0d8;
-  --ck-accent:     #5e5080;
-  --ck-deep:       #453961;
+  --ck-pill-bg:    {{CK_PILL_BG}};
+  --ck-pill-text:  {{CK_PILL_TEXT}};
+  --ck-btn-bg:     {{CK_BTN_BG}};
+  --ck-btn-border: {{CK_BTN_BORDER}};
+  --ck-btn-text:   {{CK_BTN_TEXT}};
+  --ck-wash:       {{CK_WASH}};
+  --ck-wash-border:{{CK_WASH_BORDER}};
+  --ck-accent:     {{CK_ACCENT}};
+  --ck-deep:       {{CK_DEEP}};
 
+  /* Page layout */
   --enc-radius: 12px;
   --enc-border: 0.5px solid var(--border);
   --enc-shadow: 0 4px 16px rgba(42,37,32,0.07);
@@ -35,6 +37,7 @@
   --sidebar-w:  210px;
 }
 
+/* ── LAYOUT SHELL ── */
 .enc-page {
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0,1fr);
@@ -45,6 +48,7 @@
   align-items: start;
 }
 
+/* ── SIDEBAR ── */
 .enc-sidebar {
   position: sticky;
   top: 110px;
@@ -65,6 +69,7 @@
 .enc-breadcrumb a:hover { color: var(--accent); }
 .enc-breadcrumb b { color: var(--ink2); }
 
+/* Nav card — mirrors c101-layout/c101-sidebar */
 .side-nav-card {
   background: var(--stone2);
   border: 0.5px solid var(--border);
@@ -99,6 +104,7 @@
   font-weight: 500;
 }
 
+/* Editorial standards mini-card */
 .sidebar-standards {
   margin-top: 12px;
   padding: 14px 16px;
@@ -109,7 +115,12 @@
   color: var(--ink2);
   line-height: 1.65;
 }
-.sidebar-standards p { margin: 0 0 8px; font-size: 12px; color: var(--ink2); line-height: 1.65; }
+.sidebar-standards p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
 .sidebar-standards a {
   display: inline-flex;
   align-items: center;
@@ -122,14 +133,20 @@
 }
 .sidebar-standards a:hover { color: var(--ink); }
 
+/* ── MAIN CONTENT ── */
 .enc-main { min-width: 0; }
 
+/* ── HERO ── */
+/* Override styles.css .enc-hero which is scoped to the encyclopedia landing page
+   and injects a white gradient ::after overlay + height:400px + overflow:hidden
+   that would wash over the stone entry hero content. */
 .enc-hero {
   display: grid;
   grid-template-columns: 310px minmax(0,1fr);
   gap: 40px;
   align-items: stretch;
   margin-bottom: 24px;
+  /* reset landing-page overrides */
   position: static;
   overflow: visible;
   height: auto;
@@ -140,8 +157,10 @@
   border-radius: 0;
   box-shadow: none;
 }
-.enc-hero::after { display: none; }
-
+/* kill the white gradient overlay from styles.css */
+.enc-hero::after {
+  display: none;
+}
 .stone-photo-wrap {
   border-radius: var(--enc-radius);
   overflow: hidden;
@@ -187,7 +206,13 @@
   margin: 0 0 14px;
 }
 
-.theme-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+
+.theme-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 18px;
+}
 .theme-pill {
   background: var(--ck-wash);
   border: 0.5px solid var(--ck-wash-border);
@@ -211,7 +236,10 @@
   margin: 0 0 18px;
   box-shadow: var(--enc-shadow);
 }
-.identity-tile { padding: 14px 13px; border-right: 0.5px solid var(--border); }
+.identity-tile {
+  padding: 14px 13px;
+  border-right: 0.5px solid var(--border);
+}
 .identity-tile:last-child { border-right: 0; }
 .tile-eyebrow {
   display: flex;
@@ -226,8 +254,14 @@
 }
 .tile-eyebrow svg,
 .tile-eyebrow .enc-icon { width: 13px; height: 13px; flex-shrink: 0; }
-.identity-tile p { margin: 0; font-size: 13px; color: var(--ink); line-height: 1.5; }
+.identity-tile p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
 
+/* Buttons — aligned to site .btn system */
 .hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
 .enc-btn {
   font-family: 'Jost', sans-serif;
@@ -247,11 +281,20 @@
   color: var(--ink2);
 }
 .enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
-.enc-btn-primary { background: var(--ck-btn-bg); border-color: var(--ck-btn-border); color: var(--ck-btn-text); }
-.enc-btn-primary:hover { background: var(--ck-accent); border-color: var(--ck-accent); color: var(--white); }
+.enc-btn-primary {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.enc-btn-primary:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
 .enc-btn svg,
 .enc-btn .enc-icon { width: 13px; height: 13px; }
 
+/* ── AT A GLANCE ── */
 .glance-panel {
   background: var(--white);
   border: 0.5px solid var(--border);
@@ -274,8 +317,16 @@
 .panel-title svg,
 .panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
-.glance-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
-.glance-item { padding: 0 10px; border-right: 0.5px solid var(--border); text-align: center; }
+.glance-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+.glance-item {
+  padding: 0 10px;
+  border-right: 0.5px solid var(--border);
+  text-align: center;
+}
 .glance-item:last-child { border-right: 0; }
 .glance-item:first-child { padding-left: 0; }
 
@@ -290,10 +341,27 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
 .glance-icon-tile svg,
-.glance-icon-tile .enc-icon { width: 22px; height: 22px; color: var(--ck-accent); stroke-width: 2; }
-.glance-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.11em; font-weight: 600; color: var(--ink3); margin-bottom: 5px; }
-.glance-value { font-size: 12px; color: var(--ink); line-height: 1.45; }
+.glance-icon-tile .enc-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.glance-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 5px;
+}
+.glance-value {
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.45;
+}
 
+/* ── TWO-COLUMN CONTENT GRID ── */
 .content-grid {
   display: grid;
   grid-template-columns: minmax(0,1fr) 340px;
@@ -302,12 +370,21 @@
 }
 .article-col { display: grid; gap: 16px; }
 
+/* ── ARTICLE SECTION CARDS ── */
 .enc-card {
   background: var(--white);
   border: 0.5px solid var(--border);
   border-radius: var(--enc-radius);
   box-shadow: var(--enc-shadow);
   padding: 24px 26px;
+}
+.enc-card-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent2);
+  margin-bottom: 6px;
 }
 .enc-card h2 {
   font-family: Georgia, serif;
@@ -323,10 +400,22 @@
   gap: 8px;
 }
 .enc-card h2 svg,
-.enc-card h2 .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
-.enc-card p { font-size: 15px; line-height: 1.78; color: var(--ink2); margin: 0 0 14px; }
+.enc-card h2 .enc-icon {
+  width: 19px;
+  height: 19px;
+  color: var(--ck-accent);
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+.enc-card p {
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--ink2);
+  margin: 0 0 14px;
+}
 .enc-card p:last-child { margin-bottom: 0; }
 
+/* Why People Reach For It — label+desc rows */
 .reach-rows { display: grid; gap: 0; }
 .reach-row {
   display: grid;
@@ -338,39 +427,137 @@
 }
 .reach-row:last-child { border-bottom: 0; padding-bottom: 0; }
 .reach-row:first-child { padding-top: 0; }
-.reach-label { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); padding-top: 3px; }
-.reach-desc { font-size: 14px; color: var(--ink2); line-height: 1.68; }
+.reach-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-top: 3px;
+}
+.reach-desc {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.68;
+}
 
-.mineral-layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: start; }
+/* ── MINERAL PROFILE CARD ── */
+.mineral-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 24px;
+  align-items: start;
+}
 .mineral-facts { display: grid; gap: 0; }
-.mineral-fact { display: grid; grid-template-columns: minmax(0,120px) minmax(0,1fr); gap: 8px; padding: 7px 0; border-bottom: 0.5px solid var(--border2); font-size: 13px; }
+.mineral-fact {
+  display: grid;
+  grid-template-columns: minmax(0,120px) minmax(0,1fr);
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 0.5px solid var(--border2);
+  font-size: 13px;
+}
 .mineral-fact:last-of-type { border-bottom: 0; }
-.mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; padding-right: 8px; }
+.mineral-fact span:first-child {
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  padding-right: 8px;
+}
 .mineral-fact span:last-child { color: var(--ink2); }
-.mineral-note { font-size: 14px; line-height: 1.75; color: var(--ink2); margin-top: 20px; padding-top: 18px; border-top: 0.5px solid var(--border); }
-.mineral-formation h4 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
+.mineral-note {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink2);
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 0.5px solid var(--border);
+}
+.mineral-formation h4 {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p { font-size: 13px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
-.mineral-formation ul { margin: 0; padding-left: 16px; }
-.mineral-formation li { font-size: 13px; color: var(--ink2); line-height: 1.72; }
+.mineral-formation p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.68;
+  margin: 0 0 10px;
+}
+.mineral-formation ul {
+  margin: 0;
+  padding-left: 16px;
+}
+.mineral-formation li {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.72;
+}
 
-.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.rel-card { border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; background: var(--stone); }
-.rel-card-head { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--ink3); margin-bottom: 10px; }
-.stone-link-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; text-decoration: none; color: inherit; border-bottom: 0.5px solid var(--border2); transition: opacity 0.13s; }
+/* ── RELATED STONES ── */
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.rel-card {
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--stone);
+}
+.rel-card-head {
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.stone-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 0.5px solid var(--border2);
+  transition: opacity 0.13s;
+}
 .stone-link-row:last-child { border-bottom: 0; padding-bottom: 0; }
 .stone-link-row:hover { opacity: 0.7; }
-.stone-dot-circle { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
-.stone-dot-white     { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); border: 0.5px solid #ccc; }
-.stone-dot-selenite  { background: linear-gradient(135deg,#f5f3ee,#dddad4); border: 0.5px solid #ccc; }
-.stone-dot-herkimer  { background: linear-gradient(135deg,#eef4fa,#c8d8e8); border: 0.5px solid #bbb; }
-.stone-dot-violet    { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
-.stone-dot-smoky     { background: linear-gradient(135deg,#b8a898,#7a6858); }
+.stone-dot-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stone-dot-moon   { background: linear-gradient(135deg,#e8e1d8,#9eb7c9); }
+.stone-dot-violet { background: linear-gradient(135deg,#c6bede,#7d6ea0); }
+.stone-dot-black  { background: linear-gradient(135deg,#2c2830,#5a5260); }
+.stone-dot-white  { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
 .stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
 .stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
 
-.right-rail { display: grid; gap: 16px; position: sticky; top: 110px; }
-.rail-card { background: var(--white); border: 0.5px solid var(--border); border-radius: var(--enc-radius); box-shadow: var(--enc-shadow); padding: 20px; }
+/* ── RIGHT RAIL ── */
+.right-rail {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 110px;
+}
+.rail-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 20px;
+}
 .rail-card h2 {
   font-family: Georgia, serif;
   font-size: 19px;
@@ -385,8 +572,15 @@
   gap: 7px;
 }
 .rail-card h2 svg,
-.rail-card h2 .enc-icon { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.rail-card h2 .enc-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--ck-accent);
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
 
+/* Known For */
 .one-line-wrap {
   display: inline-block;
   background: var(--ck-wash);
@@ -395,36 +589,141 @@
   padding: 5px 13px;
   font-family: 'Jost', sans-serif;
   font-size: 12px;
+  font-style: normal;
   font-weight: 400;
   color: var(--ck-accent);
   margin-bottom: 11px;
   line-height: 1.4;
   letter-spacing: 0.03em;
 }
-.one-line-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.7; margin: 0; }
+.one-line-desc {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin: 0;
+}
 
-.theme-tier-label { font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--ink3); margin: 16px 0 10px; }
+/* Energetic Themes */
+.theme-tier-label {
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  margin: 16px 0 10px;
+}
 .theme-tier-label:first-child { margin-top: 0; }
-.theme-row { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; margin-bottom: 10px; }
+.theme-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
+}
 .theme-row + .theme-row { margin-top: 16px; }
-.theme-icon-tile { width: 40px; height: 40px; border-radius: 10px; background: var(--ck-wash); display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); flex-shrink: 0; }
+.theme-icon-tile {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  flex-shrink: 0;
+}
 .theme-icon-tile svg,
-.theme-icon-tile .enc-icon { width: 21px; height: 21px; color: var(--ck-accent); stroke-width: 2; }
-.theme-row h3 { font-family: Georgia, serif; font-size: 17px; font-weight: 400; margin: 0 0 2px; color: var(--ink); line-height: 1.1; }
-.theme-row p { font-size: 12px; color: var(--ink2); margin: 0; line-height: 1.58; }
-.theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 12px 0 0; }
+.theme-icon-tile .enc-icon {
+  width: 21px;
+  height: 21px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.theme-row h3 {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0 0 2px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.theme-row p {
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.58;
+}
+.theme-divider {
+  border: none;
+  border-top: 0.5px solid var(--border2);
+  margin: 12px 0 0;
+}
 
-.occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
-.occ-tag { font-size: 12px; color: var(--ck-accent); background: var(--ck-wash); border: 0.5px solid var(--ck-wash-border); border-radius: 999px; padding: 4px 12px; }
+.occasional-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.occ-tag {
+  font-size: 12px;
+  color: var(--ck-accent);
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.theme-source-note {
+  font-size: 10px;
+  color: var(--ink3);
+  margin: 10px 0 0;
+  letter-spacing: 0.04em;
+}
 
+/* Collector Notes */
 .note-list { display: grid; gap: 8px; }
-.note-row { display: grid; grid-template-columns: 34px 1fr; gap: 10px; background: var(--stone); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; align-items: start; }
-.note-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--ck-wash); display: grid; place-items: center; flex-shrink: 0; }
+.note-row {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  background: var(--stone);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  align-items: start;
+}
+.note-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
 .note-icon svg,
-.note-icon .enc-icon { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2; }
-.note-row strong { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
-.note-row p { font-size: 12.5px; color: var(--ink2); margin: 0; line-height: 1.62; }
+.note-icon .enc-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.note-row strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.note-row p {
+  font-size: 12.5px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.62;
+}
 
+/* ── ENTRY NAV ── */
 .entry-nav-wrap {
   margin-top: 20px;
   background: var(--white);
@@ -438,15 +737,46 @@
   gap: 10px;
   flex-wrap: wrap;
 }
-.entry-nav-link { display: inline-flex; align-items: center; gap: 8px; border: 0.5px solid var(--border); border-radius: 999px; background: var(--stone); padding: 9px 18px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; color: var(--ink); text-decoration: none; transition: all 0.13s; }
+.entry-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--stone);
+  padding: 9px 18px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: all 0.13s;
+}
 .entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .entry-nav-link > div { text-align: center; }
 .entry-nav-link small { font-size: 9px; letter-spacing: 0.12em; color: var(--ink3); display: block; margin-bottom: 1px; }
 .entry-nav-link:hover small { color: rgba(255,255,255,0.55); }
-.entry-nav-link b { font-family: Georgia, serif; font-size: 17px; text-transform: none; letter-spacing: 0.02em; font-weight: 400; display: block; }
-.entry-nav-random { background: var(--ck-btn-bg); border-color: var(--ck-btn-border); color: var(--ck-btn-text); }
-.entry-nav-random:hover { background: var(--ck-accent); border-color: var(--ck-accent); color: var(--white); }
+.entry-nav-link b {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  display: block;
+}
+.entry-nav-random {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.entry-nav-random:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
 
+/* ── BOTTOM CTA ── */
 .enc-cta {
   margin-top: 18px;
   background: var(--ink);
@@ -457,14 +787,44 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  background-image: radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%), radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%);
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%),
+    radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%);
 }
-.enc-cta h3 { font-family: Georgia, serif; font-size: 24px; font-weight: 400; margin: 0; color: var(--white); letter-spacing: 0.02em; }
-.enc-cta p { font-size: 15px;
-  font-weight: 400; color: rgba(250,248,246,0.84); margin: 4px 0 0; line-height: 1.6; }
-.enc-cta button { background: var(--white); color: var(--ink); border: none; border-radius: 6px; padding: 11px 22px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
+.enc-cta h3 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.enc-cta p {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(250,248,246,0.84);
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+.enc-cta button {
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 11px 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
 .enc-cta button:hover { background: var(--stone2); }
 
+/* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .enc-page { grid-template-columns: 1fr; gap: 20px; }
   .enc-sidebar { display: none; }
@@ -486,52 +846,11 @@
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
 }
-
-/* ── Bottom alignment: main article and collector rail ── */
-.content-grid {
-  align-items: stretch;
-}
-
-.article-col,
-.right-rail {
-  height: 100%;
-}
-
-.article-col {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.article-col > .enc-card:last-child {
-  flex: 1;
-}
-
-.right-rail {
-  display: flex;
-  flex-direction: column;
-}
-
-.right-rail > .rail-card:last-child {
-  flex: 1;
-}
-
-@media (max-width: 980px) {
-  .article-col,
-  .right-rail {
-    height: auto;
-  }
-
-  .article-col > .enc-card:last-child,
-  .right-rail > .rail-card:last-child {
-    flex: none;
-  }
-}
-
 </style>
 </head>
-<body>
+<body><!-- Approved SVGs are embedded inline from the locked 57-icon library. Replace only with exact approved SVG markup according to ENCYCLOPEDIA-ICON-MAP.md. Do not draw or improvise SVG paths. -->
 <div class="app-shell">
+<!-- TOPBAR — identical to main site -->
 <header class="topbar">
 <a aria-label="Return to home" class="brand-home" href="../index.html">
 <div class="brand-block">
@@ -546,12 +865,14 @@
 <a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
 </div>
 </header>
+<!-- PAGE -->
 <div class="enc-page" id="top">
+<!-- SIDEBAR NAV -->
 <aside class="enc-sidebar">
 <div class="enc-breadcrumb">
 <a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
-      <b>Clear Quartz</b>
+      <b>{{STONE_NAME}}</b>
 </div>
 <div class="side-nav-card">
 <div class="side-nav-label">On this page</div>
@@ -571,47 +892,52 @@
 <a href="#">Our Editorial Standards →</a>
 </div>
 </aside>
+<!-- MAIN -->
 <main class="enc-main">
 <!-- HERO -->
 <section class="enc-hero" id="hero">
 <div class="stone-photo-wrap">
-<img alt="Clear Quartz crystal point showing colorless transparent quartz" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/clear-quartz.webp"/>
+<img alt="{{IMAGE_ALT}}" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/{{STONE_SLUG}}.webp"/>
 </div>
 <div class="hero-right">
-<h1 class="stone-name">Clear Quartz</h1>
+<h1 class="stone-name">{{STONE_NAME}}</h1>
 <div class="theme-pills">
-<span class="theme-pill">Amplification</span>
-<span class="theme-pill">Clarity</span>
-<span class="theme-pill">Intention</span>
+<span class="theme-pill">{{PROPERTY_PILL_1}}</span>
+<span class="theme-pill">{{PROPERTY_PILL_2}}</span>
+<span class="theme-pill">{{PROPERTY_PILL_3}}</span>
 </div>
 <div class="identity-grid">
 <div class="identity-tile">
 <div class="tile-eyebrow">
+<!-- star icon -->
 <span aria-hidden="true" class="enc-icon icon-best-for"></span>
               Best For
             </div>
-<p>Focused intentions and crystal pairings</p>
+<p>{{BEST_FOR}}</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
+<!-- moon icon -->
 <span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
               Use When
             </div>
-<p>You want a versatile stone to focus an intention, support meditation, or complement the qualities of other crystals already in use.</p>
+<p>{{USE_WHEN}}</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
+<!-- link icon -->
 <span aria-hidden="true" class="enc-icon icon-pair-with"></span>
               Pairs Well With
             </div>
-<p>Amethyst<br/>Smoky Quartz<br/>Rose Quartz</p>
+<p>{{PAIRS_WITH_HTML}}</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
+<!-- eye icon -->
 <span aria-hidden="true" class="enc-icon icon-chakra"></span>
               Primary Chakra
             </div>
-<p>All Chakras</p>
+<p>{{PRIMARY_CHAKRA}}</p>
 </div>
 </div>
 <div class="hero-actions">
@@ -635,58 +961,65 @@
 <div class="glance-grid">
 <div class="glance-item">
 <div class="glance-icon-tile">
+<!-- facet / themes -->
 <span aria-hidden="true" class="enc-icon icon-tag-label"></span>
 </div>
 <div class="glance-label">Primary Themes</div>
-<div class="glance-value">Amplification<br/>Clarity · Intention</div>
+<div class="glance-value">{{GLANCE_PRIMARY_THEMES}}</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
+<!-- eye / chakra -->
 <span aria-hidden="true" class="enc-icon icon-chakra"></span>
 </div>
-<div class="glance-label">Chakras</div>
-<div class="glance-value">All Chakras</div>
+<div class="glance-label">Primary Chakra</div>
+<div class="glance-value">{{GLANCE_PRIMARY_CHAKRA}}</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<!-- storm / lightning element -->
+<!-- air element -->
 <span aria-hidden="true" class="enc-icon icon-element"></span>
 </div>
 <div class="glance-label">Element</div>
-<div class="glance-value">Storm</div>
+<div class="glance-value">{{GLANCE_ELEMENT}}</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
+<!-- zodiac / constellation -->
 <span aria-hidden="true" class="enc-icon icon-zodiac"></span>
 </div>
 <div class="glance-label">Zodiac</div>
-<div class="glance-value">Aries</div>
+<div class="glance-value">{{GLANCE_ZODIAC}}</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
+<!-- formation / igneous -->
 <span aria-hidden="true" class="enc-icon icon-geology"></span>
 </div>
 <div class="glance-label">Formation</div>
-<div class="glance-value">Igneous, metamorphic,<br/>sedimentary</div>
+<div class="glance-value">{{GLANCE_FORMATION}}</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
+<!-- mohs / diamond -->
 <span aria-hidden="true" class="enc-icon icon-crystal-single"></span>
 </div>
 <div class="glance-label">Hardness</div>
-<div class="glance-value">7</div>
+<div class="glance-value">{{GLANCE_HARDNESS}}</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
+<!-- drop / color range -->
 <span aria-hidden="true" class="enc-icon icon-color-range"></span>
 </div>
 <div class="glance-label">Color Range</div>
-<div class="glance-value">Colorless to<br/>milky white</div>
+<div class="glance-value">{{GLANCE_COLOR_RANGE}}</div>
 </div>
 </div>
 </section>
 <!-- TWO-COLUMN CONTENT -->
 <div class="content-grid">
+<!-- ARTICLE COLUMN -->
 <div class="article-col">
 <!-- OVERVIEW -->
 <article class="enc-card" id="overview">
@@ -694,8 +1027,8 @@
 <span aria-hidden="true" class="enc-icon icon-book-reference"></span>
             Overview
           </h2>
-<p>Clear Quartz is the great generalist of the mineral world: structurally simple, visually variable, and capable of carrying the focus of almost any practice. Its six-sided crystals, internal veils, and bright clarity make each piece feel precise without ever being quite identical.</p>
-<p>Rather than assigning it one narrow purpose, people use Clear Quartz to sharpen attention and strengthen an existing intention or pairing. Its All Chakras association reflects that versatility, while its real-world role in timekeeping and electronics gives its reputation for precision an unusually grounded echo.</p>
+<p>{{OVERVIEW_PARAGRAPH_1}}</p>
+<p>{{OVERVIEW_PARAGRAPH_2}}</p>
 </article>
 <!-- WHY PEOPLE REACH FOR IT -->
 <article class="enc-card" id="reach">
@@ -705,24 +1038,24 @@
           </h2>
 <div class="reach-rows">
 <div class="reach-row">
-<span class="reach-label">Focusing Intention</span>
-<span class="reach-desc">Chosen when a goal or transition needs a clear focal point and a consistent reminder of direction.</span>
+<span class="reach-label">{{REACH_1_LABEL}}</span>
+<span class="reach-desc">{{REACH_1_DESCRIPTION}}</span>
 </div>
 <div class="reach-row">
-<span class="reach-label">Amplifying Pairings</span>
-<span class="reach-desc">Often paired with another crystal to emphasize that stone’s central qualities without adding a competing theme.</span>
+<span class="reach-label">{{REACH_2_LABEL}}</span>
+<span class="reach-desc">{{REACH_2_DESCRIPTION}}</span>
 </div>
 <div class="reach-row">
-<span class="reach-label">Clarifying Priorities</span>
-<span class="reach-desc">Used when ideas feel diffuse and a simpler, more focused approach would support reflection or planning.</span>
+<span class="reach-label">{{REACH_3_LABEL}}</span>
+<span class="reach-desc">{{REACH_3_DESCRIPTION}}</span>
 </div>
 <div class="reach-row">
-<span class="reach-label">Supporting Meditation</span>
-<span class="reach-desc">A versatile companion that keeps attention connected to the purpose of a practice.</span>
+<span class="reach-label">{{REACH_4_LABEL}}</span>
+<span class="reach-desc">{{REACH_4_DESCRIPTION}}</span>
 </div>
 <div class="reach-row">
-<span class="reach-label">Refreshing a Space</span>
-<span class="reach-desc">Traditionally placed in rooms or practice areas to reinforce a clear, intentional atmosphere.</span>
+<span class="reach-label">{{REACH_5_LABEL}}</span>
+<span class="reach-desc">{{REACH_5_DESCRIPTION}}</span>
 </div>
 </div>
 </article>
@@ -732,32 +1065,8 @@
 <span aria-hidden="true" class="enc-icon icon-geology"></span>
             Mineral Profile
           </h2>
-<div class="mineral-layout">
-<div>
-<div class="mineral-facts">
-<div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
-<div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
-<div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
-<div class="mineral-fact"><span>Crystal Habit</span><span>Prismatic, six-sided</span></div>
-<div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-<div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
-<div class="mineral-fact"><span>Transparency</span><span>Transparent to opaque</span></div>
-</div>
-</div>
-<div class="mineral-formation">
-<h4>Formation</h4>
-<p>Clear Quartz is colorless to milky crystalline quartz composed of silicon dioxide. It forms six-sided prismatic crystals in igneous, metamorphic, and sedimentary environments. Veils, fractures, and mineral or fluid inclusions may affect clarity.</p>
-<h4>Common Localities</h4>
-<ul>
-<li>Brazil</li>
-<li>Madagascar</li>
-<li>United States (Arkansas)</li>
-<li>China</li>
-<li>Alps (Europe)</li>
-</ul>
-</div>
-</div>
-<p class="mineral-note">Quartz has a Mohs hardness of 7, no true cleavage, and conchoidal fracture. Natural, synthetic, coated, and treated material all occur. Its piezoelectric property supports electronic uses but does not prove metaphysical claims. Clean with mild soap and water; avoid impact, high heat, and harsh chemicals.</p>
+{{MINERAL_PROFILE_HTML}}
+<p class="mineral-note">Its signature optical effect, labradorescence, occurs when light reflects and scatters through microscopic internal layers. This produces shifting flashes that may appear blue, green, gold, orange, or violet depending on the angle of view. With a Mohs hardness of 6–6.5, Labradorite is durable enough for many uses but should still be protected from sharp impact and abrasion. Clean it gently with a soft cloth and store it separately from harder minerals that could scratch its surface.</p>
 </article>
 <!-- RELATED STONES -->
 <article class="enc-card" id="related">
@@ -765,54 +1074,19 @@
 <span aria-hidden="true" class="enc-icon icon-stones-row"></span>
             Related Stones
           </h2>
-<div class="related-grid">
-<div class="rel-card">
-<div class="rel-card-head">Similar Energy <span>→</span></div>
-<a class="stone-link-row" href="selenite.html">
-<span class="stone-dot-circle stone-dot-selenite"></span>
-<div>
-<b>Selenite</b>
-<span>Both support clarity; Selenite feels lighter and more cleansing, while Clear Quartz remains broader and more adaptable.</span>
-</div>
-</a>
-<a class="stone-link-row" href="herkimer-diamond.html">
-<span class="stone-dot-circle stone-dot-herkimer"></span>
-<div>
-<b>Herkimer Diamond</b>
-<span>Both amplify clarity; Herkimer Diamond feels sharper and more concentrated, while Clear Quartz is broader and more versatile.</span>
-</div>
-</a>
-</div>
-<div class="rel-card">
-<div class="rel-card-head">Pairs Well With <span>→</span></div>
-<a class="stone-link-row" href="amethyst.html">
-<span class="stone-dot-circle stone-dot-violet"></span>
-<div>
-<b>Amethyst</b>
-<span>Clear Quartz sharpens Amethyst’s contemplative focus while reinforcing its intuitive, reflective character.</span>
-</div>
-</a>
-<a class="stone-link-row" href="smoky-quartz.html">
-<span class="stone-dot-circle stone-dot-smoky"></span>
-<div>
-<b>Smoky Quartz</b>
-<span>Smoky Quartz grounds Clear Quartz’s focused intention and carries it toward practical, steady follow-through.</span>
-</div>
-</a>
-</div>
-</div>
+{{RELATED_STONES_HTML}}
 </article>
 </div><!-- /article-col -->
 <!-- RIGHT RAIL -->
 <aside class="right-rail">
-<!-- KNOWN FOR -->
+<!-- CORE MEANING -->
 <section class="rail-card">
 <h2>
 <span aria-hidden="true" class="enc-icon icon-star"></span>
             Known For
           </h2>
-<div class="one-line-wrap">Focused Amplification</div>
-<p class="one-line-desc">Clear Quartz is known for versatility, clarity, and amplification. Its comparatively neutral character makes it useful as a focal stone, a meditation companion, or a partner for crystals with more specialized themes.</p>
+<div class="one-line-wrap">{{KNOWN_FOR_LABEL}}</div>
+<p class="one-line-desc">{{KNOWN_FOR_DESCRIPTION}}</p>
 </section>
 <!-- ENERGETIC THEMES -->
 <section class="rail-card" id="themes">
@@ -823,54 +1097,50 @@
 <div class="theme-tier-label">Primary</div>
 <div class="theme-row">
 <div class="theme-icon-tile">
-<!-- amplification / signal -->
-<span aria-hidden="true" class="enc-icon icon-amplification"></span>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
 </div>
 <div>
-<h3>Amplification</h3>
-<p>Clear Quartz is associated with strengthening the focus of an intention or pairing, emphasizing direction rather than measurable metaphysical force.</p>
+<h3>{{ENERGETIC_THEME_1_NAME}}</h3>
+<p>{{ENERGETIC_THEME_1_DESCRIPTION}}</p>
 </div>
 </div>
 <div class="theme-row">
 <div class="theme-icon-tile">
-<!-- intention / target -->
-<span aria-hidden="true" class="enc-icon icon-clarity-focus"></span>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
 </div>
 <div>
-<h3>Intention and Focus</h3>
-<p>Its adaptable character makes it a symbolic anchor for goals, meditation, ritual, and sustained attention.</p>
+<h3>{{ENERGETIC_THEME_2_NAME}}</h3>
+<p>{{ENERGETIC_THEME_2_DESCRIPTION}}</p>
 </div>
 </div>
 <hr class="theme-divider"/>
 <div class="theme-tier-label">Secondary</div>
 <div class="theme-row">
 <div class="theme-icon-tile">
-<!-- clarity / lens -->
-<span aria-hidden="true" class="enc-icon icon-clarity-focus"></span>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
 </div>
 <div>
-<h3>Clarity</h3>
-<p>Clear Quartz is linked with mental and spiritual clarity when priorities feel scattered or overly complicated.</p>
+<h3>{{ENERGETIC_THEME_3_NAME}}</h3>
+<p>{{ENERGETIC_THEME_3_DESCRIPTION}}</p>
 </div>
 </div>
 <div class="theme-row">
 <div class="theme-icon-tile">
-<!-- spiritual connection / crown -->
-<span aria-hidden="true" class="enc-icon icon-spiritual-connection"></span>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
 </div>
 <div>
-<h3>Spiritual Connection</h3>
-<p>Its All Chakras association gives it a broad identity centered on awareness, alignment, and openness.</p>
+<h3>{{ENERGETIC_THEME_4_NAME}}</h3>
+<p>{{ENERGETIC_THEME_4_DESCRIPTION}}</p>
 </div>
 </div>
 <hr class="theme-divider"/>
 <div class="theme-tier-label">Occasional Associations</div>
 <div class="occasional-tags">
-<span class="occ-tag">Cleansing</span>
-<span class="occ-tag">Memory</span>
+<span class="occ-tag">Spiritual Exploration</span>
+<span class="occ-tag">New Beginnings</span>
 </div>
 </section>
-<!-- COLLECTOR NOTES -->
+<!-- COLLECTOR & CURIOSITY NOTES -->
 <section class="rail-card" id="notes">
 <h2>
 <span aria-hidden="true" class="enc-icon icon-bookmark"></span>
@@ -882,46 +1152,65 @@
 <span aria-hidden="true" class="enc-icon icon-bookmark"></span>
 </div>
 <div>
-<strong>Quartz in Technology</strong>
-<p>Quartz’s piezoelectric behavior made it important in clocks, watches, radios, oscillators, and electronic frequency control.</p>
+<strong>{{COLLECTOR_NOTE_1_TITLE}}</strong>
+<p>{{COLLECTOR_NOTE_1_COPY}}</p>
 </div>
 </div>
 <div class="note-row">
 <div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-crystal-cluster"></span>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
 </div>
 <div>
-<strong>Crystal Skull Claims</strong>
-<p>Studied quartz skulls lack secure pre-Columbian provenance. Smithsonian research indicates known examples were made in the nineteenth century or later.</p>
+<strong>{{COLLECTOR_NOTE_2_TITLE}}</strong>
+<p>{{COLLECTOR_NOTE_2_COPY}}</p>
 </div>
 </div>
 <div class="note-row">
 <div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
 </div>
 <div>
-<strong>Ancient Ice Belief</strong>
-<p>The Greek word krystallos referred to ice, and some classical writers believed rock crystal was permanently frozen water.</p>
+<strong>{{COLLECTOR_NOTE_3_TITLE}}</strong>
+<p>{{COLLECTOR_NOTE_3_COPY}}</p>
 </div>
 </div>
 <div class="note-row">
 <div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-aperture-iris"></span>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
 </div>
 <div>
-<strong>Internal Landscapes</strong>
-<p>Veils, fractures, fluid pockets, and mineral inclusions can create rainbows and miniature landscapes inside otherwise clear crystals, making optical character as collectible as perfect transparency.</p>
+<strong>{{COLLECTOR_NOTE_4_TITLE}}</strong>
+<p>{{COLLECTOR_NOTE_4_COPY}}</p>
 </div>
 </div>
 </div>
 </section>
-</aside>
+</aside><!-- /right-rail -->
 </div><!-- /content-grid -->
+<!-- ENTRY NAV -->
 <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
-<a class="entry-nav-link" href="clear-fluorite.html"><span>←</span><div><small>Previous</small><b>Clear Fluorite</b></div></a>
-<a class="entry-nav-link entry-nav-random" href="#"><div><small>Random</small><b>Surprise me</b></div></a>
-<a class="entry-nav-link" href="cobaltoan-calcite.html"><div><small>Next</small><b>Cobaltoan Calcite</b></div><span>→</span></a>
+<a class="entry-nav-link" href="{{PREVIOUS_SLUG}}.html">
+<span>←</span>
+<div>
+<small>Previous</small>
+<b>{{PREVIOUS_NAME}}</b>
+</div>
+</a>
+<a class="entry-nav-link entry-nav-random" href="#">
+<div>
+<small>Random</small>
+<b>Surprise me</b>
+</div>
+</a>
+<a class="entry-nav-link" href="{{NEXT_SLUG}}.html">
+<div>
+<small>Next</small>
+<b>{{NEXT_NAME}}</b>
+</div>
+<span>→</span>
+</a>
 </nav>
+<!-- BOTTOM CTA -->
 <div class="enc-cta">
 <div>
 <h3>The right stone. The right moment.</h3>
@@ -947,10 +1236,13 @@
 </footer>
 </div><!-- /app-shell -->
 <script>
+/* Scroll-spy: highlight the active sidebar nav link */
 (function () {
-  const sections = ['hero','overview','reach','glance','themes','mineral','notes','related'];
-  const navLinks = document.querySelectorAll('.side-nav a');
-  function onScroll() {
+  const sections = ['hero', 'overview', 'reach', 'glance', 'themes', 'mineral', 'notes', 'related'];
+  const navLinks  = document.querySelectorAll('.side-nav a');
+  const hrefs     = Array.from(navLinks).map(a => a.getAttribute('href').replace('#',''));
+
+  function onScroll () {
     let current = 'hero';
     sections.forEach(id => {
       const el = document.getElementById(id);
@@ -961,6 +1253,7 @@
       a.classList.toggle('active', href === current || (current === 'hero' && href === 'top'));
     });
   }
+
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();

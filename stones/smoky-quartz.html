@@ -12,7 +12,7 @@
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Smoky Quartz | Still Point Lapidary Encyclopedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
-<link href="../styles.css" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/><link href="enc-icons.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
@@ -246,7 +246,8 @@
   color: var(--accent);
   margin-bottom: 7px;
 }
-.tile-eyebrow svg { width: 13px; height: 13px; flex-shrink: 0; }
+.tile-eyebrow svg,
+.tile-eyebrow .enc-icon { width: 13px; height: 13px; flex-shrink: 0; }
 .identity-tile p {
   margin: 0;
   font-size: 13px;
@@ -284,7 +285,8 @@
   border-color: var(--ck-accent);
   color: var(--white);
 }
-.enc-btn svg { width: 13px; height: 13px; }
+.enc-btn svg,
+.enc-btn .enc-icon { width: 13px; height: 13px; }
 
 /* ── AT A GLANCE ── */
 .glance-panel {
@@ -306,7 +308,8 @@
   align-items: center;
   gap: 8px;
 }
-.panel-title svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.panel-title svg,
+.panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
 .glance-grid {
   display: grid;
@@ -331,7 +334,8 @@
   place-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
-.glance-icon-tile svg {
+.glance-icon-tile svg,
+.glance-icon-tile .enc-icon {
   width: 22px;
   height: 22px;
   color: var(--ck-accent);
@@ -389,7 +393,8 @@
   align-items: center;
   gap: 8px;
 }
-.enc-card h2 svg {
+.enc-card h2 svg,
+.enc-card h2 .enc-icon {
   width: 19px;
   height: 19px;
   color: var(--ck-accent);
@@ -560,7 +565,8 @@
   align-items: center;
   gap: 7px;
 }
-.rail-card h2 svg {
+.rail-card h2 svg,
+.rail-card h2 .enc-icon {
   width: 18px;
   height: 18px;
   color: var(--ck-accent);
@@ -619,7 +625,8 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
   flex-shrink: 0;
 }
-.theme-icon-tile svg {
+.theme-icon-tile svg,
+.theme-icon-tile .enc-icon {
   width: 21px;
   height: 21px;
   color: var(--ck-accent);
@@ -687,7 +694,8 @@
   place-items: center;
   flex-shrink: 0;
 }
-.note-icon svg {
+.note-icon svg,
+.note-icon .enc-icon {
   width: 18px;
   height: 18px;
   color: var(--ck-accent);
@@ -779,7 +787,7 @@
 }
 .enc-cta h3 {
   font-family: Georgia, serif;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 400;
   margin: 0;
   color: var(--white);
@@ -787,7 +795,8 @@
 }
 .enc-cta p {
   font-size: 15px;
-  color: rgba(250,248,246,0.7);
+  font-weight: 400;
+  color: rgba(250,248,246,0.84);
   margin: 4px 0 0;
   line-height: 1.6;
 }
@@ -936,38 +945,28 @@
 <div class="identity-grid">
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
-<path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-best-for"></span>
               Best For
             </div>
 <p>Grounded presence and practical clarity</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
-<path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
               Use When
             </div>
 <p>You feel unmoored, overstimulated, or pulled toward the abstract and want a steadier, more grounded sense of presence.</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
-<path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"></path>
-<path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-pair-with"></span>
               Pairs Well With
             </div>
 <p>Black Tourmaline<br/>Amethyst<br/>Clear Quartz</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
-<circle cx="32" cy="32" r="22"></circle>
-<path d="M32 10v44M10 32h44"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
               Primary Chakra
             </div>
 <p>Root</p>
@@ -975,15 +974,11 @@
 </div>
 <div class="hero-actions">
 <button class="enc-btn enc-btn-primary">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
-<path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-add-piece"></span>
             Save to Collection
           </button>
 <button class="enc-btn">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64">
-<path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-wishlist"></span>
             Add to Wishlist
           </button>
 </div>
@@ -992,32 +987,20 @@
 <!-- AT A GLANCE -->
 <section class="glance-panel" id="glance">
 <h2 class="panel-title">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 64 64">
-<path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path>
-<circle cx="32" cy="32" r="8"></circle>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
         At a Glance
       </h2>
 <div class="glance-grid">
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 8 52 30 32 56 12 30Z"></path>
-<path d="M12 30h40"></path>
-<path d="M22 30 32 8l10 22"></path>
-<path d="M22 30 32 56l10-26"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-tag-label"></span>
 </div>
 <div class="glance-label">Primary Themes</div>
 <div class="glance-value">Grounding<br/>Protection · Transmutation</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<circle cx="32" cy="32" r="22"></circle>
-<path d="M32 10v44M10 32h44"></path>
-<circle cx="32" cy="32" fill="currentColor" r="6" stroke="none"></circle>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
 </div>
 <div class="glance-label">Chakras</div>
 <div class="glance-value">Root</div>
@@ -1025,52 +1008,35 @@
 <div class="glance-item">
 <div class="glance-icon-tile">
 <!-- earth element -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M8 44h48M16 44 32 16l16 28"></path>
-<path d="M24 44l8-14 8 14"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-element"></span>
 </div>
 <div class="glance-label">Element</div>
 <div class="glance-value">Earth</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M14 50c18-4 28-14 36-36M38 14h12v12"></path>
-<circle cx="14" cy="50" fill="currentColor" r="2.5"></circle>
-<circle cx="50" cy="14" fill="currentColor" r="2.5"></circle>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-zodiac"></span>
 </div>
 <div class="glance-label">Zodiac</div>
 <div class="glance-value">Sagittarius,<br/>Capricorn</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 8 54 45v5H10v-5Z"></path>
-<path d="M20 50V38l12-14 12 14v12"></path>
-<path d="M28 50v-8h8v8"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
 </div>
 <div class="glance-label">Formation</div>
 <div class="glance-value">Igneous,<br/>hydrothermal</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 6 54 24 32 58 10 24Z"></path>
-<path d="M10 24h44M32 6 10 24M32 6 54 24"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-crystal-single"></span>
 </div>
 <div class="glance-label">Hardness</div>
 <div class="glance-value">7</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"></path>
-<path d="M22 42c5-4 15-4 20 0" opacity=".55"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-color-range"></span>
 </div>
 <div class="glance-label">Color Range</div>
 <div class="glance-value">Pale tan to deep<br/>chocolate brown</div>
@@ -1084,10 +1050,7 @@
 <!-- OVERVIEW -->
 <article class="enc-card" id="overview">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<circle cx="32" cy="20" r="10"></circle>
-<path d="M10 54c0-12 10-20 22-20s22 8 22 20"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
             Overview
           </h2>
 <p>Smoky Quartz is clear quartz darkened by natural irradiation, with color ranging from translucent tea-brown to near-black Morion. That smoky veil gives it a distinctive character: less about retreating from difficulty than standing inside it with both feet on the ground.</p>
@@ -1096,9 +1059,7 @@
 <!-- WHY PEOPLE REACH FOR IT -->
 <article class="enc-card" id="reach">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-target-bullseye"></span>
             Why People Reach For It
           </h2>
 <div class="reach-rows">
@@ -1127,10 +1088,7 @@
 <!-- MINERAL PROFILE -->
 <article class="enc-card" id="mineral">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 6 54 19v26L32 58 10 45V19Z"></path>
-<path d="M10 19l22 12 22-12M32 31v27"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
             Mineral Profile
           </h2>
 <div class="mineral-layout">
@@ -1163,11 +1121,7 @@
 <!-- RELATED STONES -->
 <article class="enc-card" id="related">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<circle cx="18" cy="32" r="9"></circle>
-<circle cx="46" cy="32" r="9"></circle>
-<path d="M27 32h10"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-stones-row"></span>
             Related Stones
           </h2>
 <div class="related-grid">
@@ -1213,10 +1167,7 @@
 <!-- KNOWN FOR -->
 <section class="rail-card">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 4 52 36H12L32 4Z"></path>
-<path d="M22 36 32 60l10-24"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-star"></span>
             Known For
           </h2>
 <div class="one-line-wrap">Grounding and Transmutation</div>
@@ -1225,20 +1176,14 @@
 <!-- ENERGETIC THEMES -->
 <section class="rail-card" id="themes">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path>
-<circle cx="32" cy="32" r="7"></circle>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
             Energetic Themes
           </h2>
 <div class="theme-tier-label">Primary</div>
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- ground / root -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 12v32M20 32l12 12 12-12"></path>
-<path d="M16 52h32"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-grounding"></span>
 </div>
 <div>
 <h3>Grounding</h3>
@@ -1248,10 +1193,7 @@
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- shield / protection -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"></path>
-<path d="M22 34l8 8 12-14"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-protection"></span>
 </div>
 <div>
 <h3>Protection and Transmutation</h3>
@@ -1263,10 +1205,7 @@
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- manifestation / arrow down into form -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 8v36M20 32l12 12 12-12"></path>
-<path d="M16 52h32"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-manifestation"></span>
 </div>
 <div>
 <h3>Manifestation</h3>
@@ -1276,10 +1215,7 @@
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- checklist / organization -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M14 8h28l10 10v38H14Z"></path>
-<path d="M38 8v10h14M22 30h20M22 38h20M22 46h12"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-clarity-focus"></span>
 </div>
 <div>
 <h3>Practicality and Organization</h3>
@@ -1295,19 +1231,14 @@
 <!-- COLLECTOR NOTES -->
 <section class="rail-card" id="notes">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M14 8h28l10 10v38H14Z"></path>
-<path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
             Collector &amp; Curiosity Notes
           </h2>
 <div class="note-list">
 <div class="note-row">
 <div class="note-icon">
 <!-- mountain / provenance -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M8 52 28 20l10 14 6-8 12 26Z"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-location"></span>
 </div>
 <div>
 <strong>From Mountain to Luxury</strong>
@@ -1317,10 +1248,7 @@
 <div class="note-row">
 <div class="note-icon">
 <!-- dark gem -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M32 6 54 24 32 58 10 24Z"></path>
-<path d="M10 24h44"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-aperture-iris"></span>
 </div>
 <div>
 <strong>Morion Is a Color Name</strong>
@@ -1330,10 +1258,7 @@
 <div class="note-row">
 <div class="note-icon">
 <!-- sun / irradiation -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<circle cx="32" cy="32" r="9"></circle>
-<path d="M32 8v10M32 46v10M8 32h10M46 32h10M15 15l7 7M42 42l7 7M49 15l-7 7M22 42l-7 7"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
 </div>
 <div>
 <strong>Natural or Induced?</strong>
@@ -1342,10 +1267,7 @@
 </div>
 <div class="note-row">
 <div class="note-icon">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M14 50h36M18 42l8-18 7 10 5-8 8 16"></path>
-<path d="M22 18c7-6 13-6 20 0"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-location"></span>
 </div>
 <div>
 <strong>Alpine Pocket Crystals</strong>

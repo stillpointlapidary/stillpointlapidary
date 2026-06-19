@@ -1,0 +1,303 @@
+/* Still Point Lapidary encyclopedia icon system.
+   SVG artwork is hosted in Supabase and centrally replaceable.
+   Do not embed custom SVG paths in stone pages. */
+
+.enc-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  vertical-align: -0.125em;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+.icon-add-piece {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/add-piece.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/add-piece.svg");
+}
+
+.icon-amplification {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/amplification.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/amplification.svg");
+}
+
+.icon-anniversary {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/anniversary.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/anniversary.svg");
+}
+
+.icon-aperture-iris {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/aperture-iris.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/aperture-iris.svg");
+}
+
+.icon-best-for {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/best-for.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/best-for.svg");
+}
+
+.icon-book-reference {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/book-reference.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/book-reference.svg");
+}
+
+.icon-bookmark {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/bookmark.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/bookmark.svg");
+}
+
+.icon-cabinet-shelves {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/cabinet-shelves.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/cabinet-shelves.svg");
+}
+
+.icon-calendar {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/calendar.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/calendar.svg");
+}
+
+.icon-calm-peace {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/calm-peace.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/calm-peace.svg");
+}
+
+.icon-camera {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/camera.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/camera.svg");
+}
+
+.icon-care-cleansing {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
+}
+
+.icon-celestial {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/celestial.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/celestial.svg");
+}
+
+.icon-chakra {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/chakra.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/chakra.svg");
+}
+
+.icon-check-circle {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/check-circle.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/check-circle.svg");
+}
+
+.icon-clarity-focus {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/clarity-focus.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/clarity-focus.svg");
+}
+
+.icon-collection {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/collection.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/collection.svg");
+}
+
+.icon-color-range {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/color-range.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/color-range.svg");
+}
+
+.icon-crystal-cluster {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/crystal-cluster.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/crystal-cluster.svg");
+}
+
+.icon-crystal-single {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/crystal-single.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/crystal-single.svg");
+}
+
+.icon-daily-selection {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/daily-selection.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/daily-selection.svg");
+}
+
+.icon-eclipse {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/eclipse.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/eclipse.svg");
+}
+
+.icon-element {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/element.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/element.svg");
+}
+
+.icon-emotional-regulation {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/emotional-regulation.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/emotional-regulation.svg");
+}
+
+.icon-encyclopedia {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/encyclopedia.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/encyclopedia.svg");
+}
+
+.icon-filter {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/filter.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/filter.svg");
+}
+
+.icon-forms-shapes {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/forms-shapes.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/forms-shapes.svg");
+}
+
+.icon-geology {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/geology.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/geology.svg");
+}
+
+.icon-grounding {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/grounding.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/grounding.svg");
+}
+
+.icon-heart-healing {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/heart-healing.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/heart-healing.svg");
+}
+
+.icon-identify {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/identify.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/identify.svg");
+}
+
+.icon-intuition {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/intuition.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/intuition.svg");
+}
+
+.icon-jar-gems {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/jar-gems.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/jar-gems.svg");
+}
+
+.icon-lightning-bolt {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/lightning-bolt.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/lightning-bolt.svg");
+}
+
+.icon-location {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/location.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/location.svg");
+}
+
+.icon-lunar {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/lunar.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/lunar.svg");
+}
+
+.icon-magnifier-gem {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/magnifier-gem.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/magnifier-gem.svg");
+}
+
+.icon-manifestation {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/manifestation.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/manifestation.svg");
+}
+
+.icon-meteor {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/meteor.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/meteor.svg");
+}
+
+.icon-pair-with {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/pair-with.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/pair-with.svg");
+}
+
+.icon-protection {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/protection.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/protection.svg");
+}
+
+.icon-rarity-tier {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/rarity-tier.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/rarity-tier.svg");
+}
+
+.icon-search {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/search.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/search.svg");
+}
+
+.icon-spiritual-connection {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/spiritual-connection.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/spiritual-connection.svg");
+}
+
+.icon-star {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/star.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/star.svg");
+}
+
+.icon-stones-row {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/stones-row.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/stones-row.svg");
+}
+
+.icon-tag-label {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/tag-label.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/tag-label.svg");
+}
+
+.icon-target-bullseye {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/target-bullseye.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/target-bullseye.svg");
+}
+
+.icon-three-gems-arranged {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/three-gems-arranged.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/three-gems-arranged.svg");
+}
+
+.icon-todays-practice {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/todays-practice.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/todays-practice.svg");
+}
+
+.icon-tradition {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/tradition.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/tradition.svg");
+}
+
+.icon-transformation {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/transformation.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/transformation.svg");
+}
+
+.icon-upward-spark {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/upward-spark.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/upward-spark.svg");
+}
+
+.icon-viewfinder-crosshair {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/viewfinder-crosshair.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/viewfinder-crosshair.svg");
+}
+
+.icon-vitality {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/vitality.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/vitality.svg");
+}
+
+.icon-wishlist {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/wishlist.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/wishlist.svg");
+}
+
+.icon-zodiac {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/zodiac.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/zodiac.svg");
+}

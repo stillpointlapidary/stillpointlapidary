@@ -1,0 +1,71 @@
+{
+  "system": "Still Point Lapidary Icon System",
+  "version": "Final complete set v1",
+  "icon_count": 42,
+  "viewBox": "0 0 24 24",
+  "color": "currentColor",
+  "approved_replacements": {
+    "chakra-five-petal-lotus.svg": "chakra.svg",
+    "tradition-woven-diamond.svg": "tradition.svg",
+    "anniversary-radiant-seal.svg": "anniversary.svg",
+    "todays-practice-cupped-hands.svg": "todays-practice.svg"
+  },
+  "categories": {
+    "SOTD Event Language": [
+      "daily-selection.svg",
+      "lunar.svg",
+      "eclipse.svg",
+      "celestial.svg",
+      "meteor.svg",
+      "tradition.svg",
+      "location.svg",
+      "geology.svg",
+      "anniversary.svg"
+    ],
+    "Core Site Actions": [
+      "search.svg",
+      "filter.svg",
+      "identify.svg",
+      "add-piece.svg",
+      "calendar.svg",
+      "book-reference.svg",
+      "collection.svg",
+      "wishlist.svg"
+    ],
+    "Stone Detail & Editorial": [
+      "chakra.svg",
+      "best-for.svg",
+      "todays-practice.svg",
+      "pair-with.svg",
+      "crystal-single.svg",
+      "crystal-cluster.svg",
+      "rarity-tier.svg"
+    ],
+    "Taxonomy & Care": [
+      "forms-shapes.svg",
+      "care-cleansing.svg"
+    ],
+    "Identification & Camera": [
+      "camera.svg",
+      "aperture-iris.svg",
+      "viewfinder-crosshair.svg",
+      "magnifier-gem.svg"
+    ],
+    "Reference & Collection Contexts": [
+      "encyclopedia.svg",
+      "bookmark.svg",
+      "tag-label.svg",
+      "stones-row.svg",
+      "cabinet-shelves.svg",
+      "three-gems-arranged.svg",
+      "jar-gems.svg"
+    ],
+    "Supporting Symbols": [
+      "target-bullseye.svg",
+      "lightning-bolt.svg",
+      "check-circle.svg",
+      "star.svg",
+      "upward-spark.svg"
+    ]
+  }
+}
