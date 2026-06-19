@@ -1300,15 +1300,7 @@ function scrollToPageSection(target){
 }
 
 // ── PHOTO PLANNING ──
-const PP_PRIORITIES=[
-  {val:'',label:'—'},
-  {val:'0',label:'★ 10 Stones'},
-  {val:'1',label:'Essentials'},
-  {val:'2',label:'Shelf Builders'},
-  {val:'3',label:'Collector Favorites'},
-  {val:'4',label:'Rare Finds'},
-];
-let _ppData={};    // id → {internal_tier, photo_batch}
+let _ppData={};    // id → {photo_batch}
 let _ppFilter='all';
 let _ppSaveTimer=null;
 let _ppReadOnly=false;
@@ -1322,16 +1314,16 @@ async function openPhotoPlan(){
 
   _ppReadOnly=false;
   let data=null;
-  const {data:planData,error}=await _supa.from('stones').select('id,name,tier,internal_tier,photo_batch').order('tier').order('name');
+  const {data:planData,error}=await _supa.from('stones').select('id,name,tier,collection_tier,photo_batch').order('tier').order('name');
   if(error||!planData){
     _ppReadOnly=true;
-    data=CRYSTALS.map(c=>({id:c.i,name:c.n,tier:c.tier,internal_tier:'',photo_batch:''}))
+    data=CRYSTALS.map(c=>({id:c.i,name:c.n,tier:c.tier,collection_tier:null,photo_batch:''}))
       .sort((a,b)=>(Number(a.tier)||99)-(Number(b.tier)||99)||String(a.name).localeCompare(String(b.name)));
   }else{
     data=planData;
   }
 
-  data.forEach(s=>{ _ppData[s.id]={internal_tier:s.internal_tier??'',photo_batch:s.photo_batch??''}; });
+  data.forEach(s=>{ _ppData[s.id]={photo_batch:s.photo_batch??''}; });
   _ppFilter='all';
   renderPhotoPlanFilters(data);
   if(_ppReadOnly){
@@ -1341,12 +1333,12 @@ async function openPhotoPlan(){
 }
 
 function renderPhotoPlanFilters(data){
-  const assigned=data.filter(s=>_ppData[s.id].internal_tier!==''||_ppData[s.id].photo_batch!=='');
+  const assigned=data.filter(s=>_ppData[s.id].photo_batch!=='');
   const unassigned=data.length-assigned.length;
-  document.getElementById('pp-summary').textContent=`${data.length} stones · ${assigned.length} assigned · ${unassigned} unassigned`;
+  document.getElementById('pp-summary').textContent=`${data.length} stones · ${assigned.length} batched · ${unassigned} unbatched`;
 
   const batches=[...new Set(data.map(s=>_ppData[s.id].photo_batch).filter(b=>b!==''))].sort((a,b)=>a-b);
-  const filters=[{val:'all',label:'All'},{val:'starred',label:'★ 10 Stones'},{val:'unassigned',label:'Unassigned'},...batches.map(b=>({val:'batch'+b,label:'Batch '+b}))];
+  const filters=[{val:'all',label:'All'},{val:'unassigned',label:'Unbatched'},...batches.map(b=>({val:'batch'+b,label:'Batch '+b}))];
   const wrap=document.getElementById('pp-filters');
   wrap.innerHTML='';
   filters.forEach(f=>{
@@ -1360,8 +1352,7 @@ function renderPhotoPlanFilters(data){
 
 function renderPhotoPlanRows(data){
   let rows=data;
-  if(_ppFilter==='starred') rows=data.filter(s=>_ppData[s.id].internal_tier==='0');
-  else if(_ppFilter==='unassigned') rows=data.filter(s=>_ppData[s.id].internal_tier===''&&_ppData[s.id].photo_batch==='');
+  if(_ppFilter==='unassigned') rows=data.filter(s=>_ppData[s.id].photo_batch==='');
   else if(_ppFilter.startsWith('batch')) rows=data.filter(s=>String(_ppData[s.id].photo_batch)===_ppFilter.slice(5));
 
   const TIER_COLORS={1:'#8b7355',2:'#7a9e8a',3:'#7a7aaa',4:'#aa7a7a'};
@@ -1371,15 +1362,14 @@ function renderPhotoPlanRows(data){
   wrap.innerHTML=rows.map(s=>{
     const d=_ppData[s.id];
     const hex=(CRYSTALS.find(c=>c.i===s.id)||{}).ch||'#c8b89a';
-    const tierDot=s.tier?`<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${TIER_COLORS[s.tier]||'#ccc'};flex-shrink:0;margin-right:6px"></span>`:'';
-    const priorityOpts=PP_PRIORITIES.map(p=>`<option value="${p.val}"${p.val===String(d.internal_tier??'')?' selected':''}>${p.label}</option>`).join('');
+    const ct=Number(s.collection_tier||s.tier||0);
+    const tierDot=ct?`<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${TIER_COLORS[ct]||'#ccc'};flex-shrink:0;margin-right:6px"></span>`:'';
     return`<div class="pp-row" data-id="${s.id}">
       <div style="display:flex;align-items:center;gap:6px;min-width:0">
         <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${hex};flex-shrink:0"></span>
         <span style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name||s.id}</span>
       </div>
       <div style="text-align:center">${tierDot}</div>
-      <div><select class="pp-priority-sel" data-id="${s.id}" onchange="ppSaveRow('${s.id}')" style="width:100%;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 4px;background:var(--white);color:var(--ink)">${priorityOpts}</select></div>
       <div><input type="number" class="pp-batch-inp" data-id="${s.id}" value="${d.photo_batch??''}" min="1" max="99" placeholder="—" onchange="ppSaveRow('${s.id}')" style="width:52px;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white);color:var(--ink)"></div>
     </div>`;
   }).join('');
@@ -1391,16 +1381,14 @@ async function ppSaveRow(id){
     if(status)status.textContent='Planning fields unavailable.';
     return;
   }
-  const sel=document.querySelector(`.pp-priority-sel[data-id="${id}"]`);
   const inp=document.querySelector(`.pp-batch-inp[data-id="${id}"]`);
-  if(!sel||!inp)return;
-  const internal_tier=sel.value===''?null:sel.value;
+  if(!inp)return;
   const photo_batch=inp.value===''?null:parseInt(inp.value,10);
-  _ppData[id]={internal_tier:internal_tier??'',photo_batch:photo_batch??''};
+  _ppData[id]={photo_batch:photo_batch??''};
 
   const status=document.getElementById('pp-status');
   status.textContent='Saving…';
-  const {error}=await _supa.from('stones').update({internal_tier,photo_batch}).eq('id',id);
+  const {error}=await _supa.from('stones').update({photo_batch}).eq('id',id);
   status.textContent=error?'Error saving.':'Saved.';
   setTimeout(()=>{if(status.textContent==='Saved.')status.textContent='';},2000);
 }
