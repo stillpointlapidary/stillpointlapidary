@@ -55,6 +55,19 @@ Treat the mineral-data row as the factual baseline for:
 
 Research may add nuance, but it may not contradict the canonical row silently. Report a conflict before drafting.
 
+### Mineral Identity and Relationship Fields
+These are workbook research fields, not live CSV columns. Populate them during research before drafting.
+
+- `identity_type` — controlled vocabulary: Mineral, Mineral variety, Rock, Mineraloid, Volcanic glass, Organic material, Trade name, Composite material, Man-made material
+- `parent_material` — the broader mineral, species, or material this subject belongs to or derives from
+- `parent_page_slug` — slug of the parent encyclopedia page if one exists
+- `relationship_note` — one sentence describing the relationship for Overview paragraph 1 framing
+- `related_varieties` — other catalog entries that share the same parent material
+- `trade_name_status` — whether this entry is a trade name and for what
+- `man_made_status` — whether this entry is wholly or partly manufactured
+
+Overview paragraph 1 must state the physical identity and relevant relationship clearly. Do not present a variety, trade name, rock, composite, or manufactured material as a distinct mineral species.
+
 ## Allowed Work
 
 Claude may:
@@ -93,6 +106,9 @@ Before drafting, report:
 - Hero pairings complete: yes/no
 - Related stones complete: yes/no
 - Book sources received: yes/no
+- Identity type confirmed: yes/no
+- Mineral relationship framing ready for Overview paragraph 1: yes/no/not applicable
+- Sibling pages identified: yes/no/not applicable
 
 If any required answer is `no`, stop. Do not draft and do not guess.
 
