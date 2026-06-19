@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-stone-slug="labradorite">
+
+<html data-stone-slug="labradorite" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="description" content="Labradorite encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.">
-<meta property="og:title" content="Labradorite | Still Point Lapidary Encyclopedia">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#8b7355">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<meta content="Labradorite encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
+<meta content="Labradorite | Still Point Lapidary Encyclopedia" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="#8b7355" name="theme-color"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Labradorite | Still Point Lapidary Encyclopedia</title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/><link href="enc-icons.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
@@ -251,7 +252,8 @@
   color: var(--accent);
   margin-bottom: 7px;
 }
-.tile-eyebrow svg { width: 13px; height: 13px; flex-shrink: 0; }
+.tile-eyebrow svg,
+.tile-eyebrow .enc-icon { width: 13px; height: 13px; flex-shrink: 0; }
 .identity-tile p {
   margin: 0;
   font-size: 13px;
@@ -289,7 +291,8 @@
   border-color: var(--ck-accent);
   color: var(--white);
 }
-.enc-btn svg { width: 13px; height: 13px; }
+.enc-btn svg,
+.enc-btn .enc-icon { width: 13px; height: 13px; }
 
 /* ── AT A GLANCE ── */
 .glance-panel {
@@ -311,7 +314,8 @@
   align-items: center;
   gap: 8px;
 }
-.panel-title svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.panel-title svg,
+.panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
 .glance-grid {
   display: grid;
@@ -336,7 +340,8 @@
   place-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
-.glance-icon-tile svg {
+.glance-icon-tile svg,
+.glance-icon-tile .enc-icon {
   width: 22px;
   height: 22px;
   color: var(--ck-accent);
@@ -394,7 +399,8 @@
   align-items: center;
   gap: 8px;
 }
-.enc-card h2 svg {
+.enc-card h2 svg,
+.enc-card h2 .enc-icon {
   width: 19px;
   height: 19px;
   color: var(--ck-accent);
@@ -565,7 +571,8 @@
   align-items: center;
   gap: 7px;
 }
-.rail-card h2 svg {
+.rail-card h2 svg,
+.rail-card h2 .enc-icon {
   width: 18px;
   height: 18px;
   color: var(--ck-accent);
@@ -624,7 +631,8 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
   flex-shrink: 0;
 }
-.theme-icon-tile svg {
+.theme-icon-tile svg,
+.theme-icon-tile .enc-icon {
   width: 21px;
   height: 21px;
   color: var(--ck-accent);
@@ -692,7 +700,8 @@
   place-items: center;
   flex-shrink: 0;
 }
-.note-icon svg {
+.note-icon svg,
+.note-icon .enc-icon {
   width: 18px;
   height: 18px;
   color: var(--ck-accent);
@@ -784,7 +793,7 @@
 }
 .enc-cta h3 {
   font-family: Georgia, serif;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 400;
   margin: 0;
   color: var(--white);
@@ -792,7 +801,8 @@
 }
 .enc-cta p {
   font-size: 15px;
-  color: rgba(250,248,246,0.7);
+  font-weight: 400;
+  color: rgba(250,248,246,0.84);
   margin: 4px 0 0;
   line-height: 1.6;
 }
@@ -840,338 +850,254 @@
 </head>
 <body>
 <div class="app-shell">
-
 <!-- TOPBAR — identical to main site -->
 <header class="topbar">
-  <a href="../index.html" class="brand-home" aria-label="Return to home">
-    <div class="brand-block">
-      <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
-      <div class="brand-block-text">
-        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
-        <span class="brand-block-sub">Crystal Reference Library</span>
-      </div>
-    </div>
-  </a>
-  <div class="topbar-right">
-    <a href="../encyclopedia.html" class="btn btn-sm">← Encyclopedia</a>
-  </div>
+<a aria-label="Return to home" class="brand-home" href="../index.html">
+<div class="brand-block">
+<img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+<div class="brand-block-text">
+<span class="wordmark">STILL POINT <em>Lapidary</em></span>
+<span class="brand-block-sub">Crystal Reference Library</span>
+</div>
+</div>
+</a>
+<div class="topbar-right">
+<a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+</div>
 </header>
-
 <!-- PAGE -->
 <div class="enc-page" id="top">
-
-  <!-- SIDEBAR NAV -->
-  <aside class="enc-sidebar">
-    <div class="enc-breadcrumb">
-      <a href="../index.html">Home</a> ›
+<!-- SIDEBAR NAV -->
+<aside class="enc-sidebar">
+<div class="enc-breadcrumb">
+<a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
       <b>Labradorite</b>
-    </div>
-
-    <div class="side-nav-card">
-      <div class="side-nav-label">On this page</div>
-      <nav class="side-nav">
-        <a href="#top"      class="active">Top</a>
-        <a href="#overview">Overview</a>
-        <a href="#reach">Why People Reach For It</a>
-        <a href="#glance">At a Glance</a>
-        <a href="#themes">Energetic Themes</a>
-        <a href="#mineral">Mineral Profile</a>
-        <a href="#notes">Collector Notes</a>
-        <a href="#related">Related Stones</a>
-      </nav>
-    </div>
-
-    <div class="sidebar-standards">
-      <p>Entries are researched from expert books and trusted online sources.</p>
-      <a href="#">Our Editorial Standards →</a>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="enc-main">
-
-    <!-- HERO -->
-    <section class="enc-hero" id="hero">
-      <div class="stone-photo-wrap">
-        <img
-          alt="Labradorite polished stone showing blue-green labradorescence"
-          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp"
-        />
-      </div>
-
-      <div class="hero-right">
-        <h1 class="stone-name">Labradorite</h1>
-
-        <div class="theme-pills">
-          <span class="theme-pill">Transformation</span>
-          <span class="theme-pill">Intuition</span>
-          <span class="theme-pill">Protection</span>
-        </div>
-
-        <div class="identity-grid">
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <!-- star icon -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"/>
-              </svg>
+</div>
+<div class="side-nav-card">
+<div class="side-nav-label">On this page</div>
+<nav class="side-nav">
+<a class="active" href="#top">Top</a>
+<a href="#overview">Overview</a>
+<a href="#reach">Why People Reach For It</a>
+<a href="#glance">At a Glance</a>
+<a href="#themes">Energetic Themes</a>
+<a href="#mineral">Mineral Profile</a>
+<a href="#notes">Collector Notes</a>
+<a href="#related">Related Stones</a>
+</nav>
+</div>
+<div class="sidebar-standards">
+<p>Entries are researched from expert books and trusted online sources.</p>
+<a href="#">Our Editorial Standards →</a>
+</div>
+</aside>
+<!-- MAIN -->
+<main class="enc-main">
+<!-- HERO -->
+<section class="enc-hero" id="hero">
+<div class="stone-photo-wrap">
+<img alt="Labradorite polished stone showing blue-green labradorescence" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/labradorite.webp"/>
+</div>
+<div class="hero-right">
+<h1 class="stone-name">Labradorite</h1>
+<div class="theme-pills">
+<span class="theme-pill">Transformation</span>
+<span class="theme-pill">Intuition</span>
+<span class="theme-pill">Protection</span>
+</div>
+<div class="identity-grid">
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<!-- star icon -->
+<span aria-hidden="true" class="enc-icon icon-best-for"></span>
               Best For
             </div>
-            <p>Navigating change, strengthening intuition, and exploring new possibilities</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <!-- moon icon -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"/>
-              </svg>
+<p>Navigating change, strengthening intuition, and exploring new possibilities</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<!-- moon icon -->
+<span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
               Use When
             </div>
-            <p>Change feels uncertain and you want to move forward with greater awareness, confidence, and trust in your inner guidance.</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <!-- link icon -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"/>
-                <path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"/>
-              </svg>
+<p>Change feels uncertain and you want to move forward with greater awareness, confidence, and trust in your inner guidance.</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<!-- link icon -->
+<span aria-hidden="true" class="enc-icon icon-pair-with"></span>
               Pairs Well With
             </div>
-            <p>Moonstone<br>Black Tourmaline<br>Clear Quartz</p>
-          </div>
-          <div class="identity-tile">
-            <div class="tile-eyebrow">
-              <!-- eye icon -->
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
-                <circle cx="32" cy="32" r="7"/>
-              </svg>
+<p>Moonstone<br/>Black Tourmaline<br/>Clear Quartz</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<!-- eye icon -->
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
               Primary Chakra
             </div>
-            <p>Third Eye</p>
-          </div>
-        </div>
-
-        <div class="hero-actions">
-          <button class="enc-btn enc-btn-primary">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+<p>Third Eye</p>
+</div>
+</div>
+<div class="hero-actions">
+<button class="enc-btn enc-btn-primary">
+<span aria-hidden="true" class="enc-icon icon-add-piece"></span>
             Save to Collection
           </button>
-          <button class="enc-btn">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+<button class="enc-btn">
+<span aria-hidden="true" class="enc-icon icon-wishlist"></span>
             Add to Wishlist
           </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- AT A GLANCE -->
-    <section class="glance-panel" id="glance">
-      <h2 class="panel-title">
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"/>
-          <circle cx="32" cy="32" r="8"/>
-        </svg>
+</div>
+</div>
+</section>
+<!-- AT A GLANCE -->
+<section class="glance-panel" id="glance">
+<h2 class="panel-title">
+<span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
         At a Glance
       </h2>
-      <div class="glance-grid">
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- facet / themes -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 52 30 32 56 12 30Z"/>
-              <path d="M12 30h40"/>
-              <path d="M22 30 32 8l10 22"/>
-              <path d="M22 30 32 56l10-26"/>
-            </svg>
-          </div>
-          <div class="glance-label">Primary Themes</div>
-          <div class="glance-value">Transformation<br>Intuition · Protection</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- eye / chakra -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-              <circle cx="32" cy="32" r="7"/>
-              <circle cx="32" cy="32" r="2.5" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="glance-label">Primary Chakra</div>
-          <div class="glance-value">Third Eye</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- air element -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 10 12 44h40Z"/>
-              <path d="M22 44c0 8 20 8 20 0"/>
-            </svg>
-          </div>
-          <div class="glance-label">Element</div>
-          <div class="glance-value">Air</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- zodiac / constellation -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 50c18-4 28-14 36-36M38 14h12v12"/>
-              <circle cx="14" cy="50" r="2.5" fill="currentColor"/>
-              <circle cx="50" cy="14" r="2.5" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="glance-label">Zodiac</div>
-          <div class="glance-value">Leo<br>Sagittarius</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- formation / igneous -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8 54 45v5H10v-5Z"/>
-              <path d="M20 50V38l12-14 12 14v12"/>
-              <path d="M28 50v-8h8v8"/>
-            </svg>
-          </div>
-          <div class="glance-label">Formation</div>
-          <div class="glance-value">Igneous</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- mohs / diamond -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 24 32 58 10 24Z"/>
-              <path d="M10 24h44M32 6 10 24M32 6 54 24"/>
-            </svg>
-          </div>
-          <div class="glance-label">Hardness</div>
-          <div class="glance-value">6 – 6.5</div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon-tile">
-            <!-- drop / color range -->
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"/>
-              <path d="M22 42c5-4 15-4 20 0" opacity=".55"/>
-            </svg>
-          </div>
-          <div class="glance-label">Color Range</div>
-          <div class="glance-value">Gray with blue,<br>green, gold,<br>orange, or violet flash</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TWO-COLUMN CONTENT -->
-    <div class="content-grid">
-
-      <!-- ARTICLE COLUMN -->
-      <div class="article-col">
-
-        <!-- OVERVIEW -->
-        <article class="enc-card" id="overview">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="20" r="10"/>
-              <path d="M10 54c0-12 10-20 22-20s22 8 22 20"/>
-            </svg>
+<div class="glance-grid">
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- facet / themes -->
+<span aria-hidden="true" class="enc-icon icon-tag-label"></span>
+</div>
+<div class="glance-label">Primary Themes</div>
+<div class="glance-value">Transformation<br/>Intuition · Protection</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- eye / chakra -->
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
+</div>
+<div class="glance-label">Primary Chakra</div>
+<div class="glance-value">Third Eye</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- air element -->
+<span aria-hidden="true" class="enc-icon icon-element"></span>
+</div>
+<div class="glance-label">Element</div>
+<div class="glance-value">Air</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- zodiac / constellation -->
+<span aria-hidden="true" class="enc-icon icon-zodiac"></span>
+</div>
+<div class="glance-label">Zodiac</div>
+<div class="glance-value">Leo<br/>Sagittarius</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- formation / igneous -->
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
+</div>
+<div class="glance-label">Formation</div>
+<div class="glance-value">Igneous</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- mohs / diamond -->
+<span aria-hidden="true" class="enc-icon icon-crystal-single"></span>
+</div>
+<div class="glance-label">Hardness</div>
+<div class="glance-value">6 – 6.5</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<!-- drop / color range -->
+<span aria-hidden="true" class="enc-icon icon-color-range"></span>
+</div>
+<div class="glance-label">Color Range</div>
+<div class="glance-value">Gray with blue,<br/>green, gold,<br/>orange, or violet flash</div>
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN CONTENT -->
+<div class="content-grid">
+<!-- ARTICLE COLUMN -->
+<div class="article-col">
+<!-- OVERVIEW -->
+<article class="enc-card" id="overview">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
             Overview
           </h2>
-          <p>Labradorite is best known for transformation, intuition, and the sense that more may be present than first appears. Its vivid flashes of blue, green, gold, orange, and violet emerge only when light meets the stone at the right angle, making its appearance a natural counterpart to themes of hidden potential, insight, and changing perspective.</p>
-          <p>People often reach for Labradorite during periods of reinvention, spiritual exploration, or uncertain transition. Rather than emphasizing comfort alone, its traditions center on growth, protection, imagination, and the courage to enter unfamiliar territory. It is especially associated with strengthening inner guidance while remaining attentive to the possibilities unfolding beneath the obvious surface of a situation.</p>
-        </article>
-
-        <!-- WHY PEOPLE REACH FOR IT -->
-        <article class="enc-card" id="reach">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"/>
-            </svg>
+<p>Labradorite is best known for transformation, intuition, and the sense that more may be present than first appears. Its vivid flashes of blue, green, gold, orange, and violet emerge only when light meets the stone at the right angle, making its appearance a natural counterpart to themes of hidden potential, insight, and changing perspective.</p>
+<p>People often reach for Labradorite during periods of reinvention, spiritual exploration, or uncertain transition. Rather than emphasizing comfort alone, its traditions center on growth, protection, imagination, and the courage to enter unfamiliar territory. It is especially associated with strengthening inner guidance while remaining attentive to the possibilities unfolding beneath the obvious surface of a situation.</p>
+</article>
+<!-- WHY PEOPLE REACH FOR IT -->
+<article class="enc-card" id="reach">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-target-bullseye"></span>
             Why People Reach For It
           </h2>
-          <div class="reach-rows">
-            <div class="reach-row">
-              <span class="reach-label">Navigating Change</span>
-              <span class="reach-desc">Often chosen during major transitions, reinvention, or uncertain new chapters when movement feels necessary but the path is not yet fully clear.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Strengthening Intuition</span>
-              <span class="reach-desc">Associated with inner guidance, imagination, and expanded perception, especially when learning to trust subtle impressions and emerging insight.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Exploring Within</span>
-              <span class="reach-desc">Frequently used in meditation, visualization, and reflective practices that invite a deeper understanding of one's inner world and developing perspective.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Energetic Protection</span>
-              <span class="reach-desc">Traditionally used as a protective companion during spiritual work, energetic exploration, and periods of significant personal or emotional change.</span>
-            </div>
-            <div class="reach-row">
-              <span class="reach-label">Releasing Old Limits</span>
-              <span class="reach-desc">Chosen when familiar patterns, beliefs, or roles have become restrictive and a person feels ready to recognize different possibilities for themselves.</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- MINERAL PROFILE -->
-        <article class="enc-card" id="mineral">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-              <path d="M10 19l22 12 22-12M32 31v27"/>
-            </svg>
+<div class="reach-rows">
+<div class="reach-row">
+<span class="reach-label">Navigating Change</span>
+<span class="reach-desc">Often chosen during major transitions, reinvention, or uncertain new chapters when movement feels necessary but the path is not yet fully clear.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Strengthening Intuition</span>
+<span class="reach-desc">Associated with inner guidance, imagination, and expanded perception, especially when learning to trust subtle impressions and emerging insight.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Exploring Within</span>
+<span class="reach-desc">Frequently used in meditation, visualization, and reflective practices that invite a deeper understanding of one's inner world and developing perspective.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Energetic Protection</span>
+<span class="reach-desc">Traditionally used as a protective companion during spiritual work, energetic exploration, and periods of significant personal or emotional change.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Releasing Old Limits</span>
+<span class="reach-desc">Chosen when familiar patterns, beliefs, or roles have become restrictive and a person feels ready to recognize different possibilities for themselves.</span>
+</div>
+</div>
+</article>
+<!-- MINERAL PROFILE -->
+<article class="enc-card" id="mineral">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
             Mineral Profile
           </h2>
-          <div class="mineral-layout">
-            <div>
-              <div class="mineral-facts">
-                <div class="mineral-fact"><span>Mineral Family</span><span>Feldspar (Plagioclase)</span></div>
-                <div class="mineral-fact"><span>Chemical Formula</span><span>(Ca,Na)(Al,Si)<sub>4</sub>O<sub>8</sub></span></div>
-                <div class="mineral-fact"><span>Crystal System</span><span>Triclinic</span></div>
-                <div class="mineral-fact"><span>Crystal Habit</span><span>Tabular, prismatic</span></div>
-                <div class="mineral-fact"><span>Mohs Hardness</span><span>6 – 6.5</span></div>
-                <div class="mineral-fact"><span>Luster</span><span>Vitreous to pearly</span></div>
-                <div class="mineral-fact"><span>Cleavage</span><span>Perfect in two directions</span></div>
-                <div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
-              </div>
-            </div>
-            <div class="mineral-formation">
-              <h4>Formation</h4>
-              <p>Labradorite is a plagioclase feldspar composed primarily of calcium-sodium aluminum silicate. It crystallizes in the triclinic system and commonly forms in igneous rocks. Its body color is often gray to dark gray, although individual specimens may vary in tone and transparency.</p>
-              <h4>Common Localities</h4>
-              <ul>
-                <li>Canada (Labrador, namesake deposits)</li>
-                <li>Madagascar</li>
-                <li>Mexico</li>
-                <li>Russia</li>
-                <li>Finland (Spectrolite variety)</li>
-                <li>United States</li>
-              </ul>
-            </div>
-          </div>
-          <p class="mineral-note">Its signature optical effect, labradorescence, occurs when light reflects and scatters through microscopic internal layers. This produces shifting flashes that may appear blue, green, gold, orange, or violet depending on the angle of view. With a Mohs hardness of 6–6.5, Labradorite is durable enough for many uses but should still be protected from sharp impact and abrasion. Clean it gently with a soft cloth and store it separately from harder minerals that could scratch its surface.</p>
-        </article>
-
-        <!-- RELATED STONES -->
-        <article class="enc-card" id="related">
+<div class="mineral-layout">
+<div>
+<div class="mineral-facts">
+<div class="mineral-fact"><span>Mineral Family</span><span>Feldspar (Plagioclase)</span></div>
+<div class="mineral-fact"><span>Chemical Formula</span><span>(Ca,Na)(Al,Si)<sub>4</sub>O<sub>8</sub></span></div>
+<div class="mineral-fact"><span>Crystal System</span><span>Triclinic</span></div>
+<div class="mineral-fact"><span>Crystal Habit</span><span>Tabular, prismatic</span></div>
+<div class="mineral-fact"><span>Mohs Hardness</span><span>6 – 6.5</span></div>
+<div class="mineral-fact"><span>Luster</span><span>Vitreous to pearly</span></div>
+<div class="mineral-fact"><span>Cleavage</span><span>Perfect in two directions</span></div>
+<div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
+</div>
+</div>
+<div class="mineral-formation">
+<h4>Formation</h4>
+<p>Labradorite is a plagioclase feldspar composed primarily of calcium-sodium aluminum silicate. It crystallizes in the triclinic system and commonly forms in igneous rocks. Its body color is often gray to dark gray, although individual specimens may vary in tone and transparency.</p>
+<h4>Common Localities</h4>
+<ul>
+<li>Canada (Labrador, namesake deposits)</li>
+<li>Madagascar</li>
+<li>Mexico</li>
+<li>Russia</li>
+<li>Finland (Spectrolite variety)</li>
+<li>United States</li>
+</ul>
+</div>
+</div>
+<p class="mineral-note">Its signature optical effect, labradorescence, occurs when light reflects and scatters through microscopic internal layers. This produces shifting flashes that may appear blue, green, gold, orange, or violet depending on the angle of view. With a Mohs hardness of 6–6.5, Labradorite is durable enough for many uses but should still be protected from sharp impact and abrasion. Clean it gently with a soft cloth and store it separately from harder minerals that could scratch its surface.</p>
+</article>
+<!-- RELATED STONES -->
+<article class="enc-card" id="related">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<circle cx="18" cy="32" r="9"></circle>
-<circle cx="46" cy="32" r="9"></circle>
-<path d="M27 32h10"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-stones-row"></span>
             Related Stones
           </h2>
 <div class="related-grid">
@@ -1211,175 +1137,119 @@
 </div>
 </div>
 </article>
-
-      </div><!-- /article-col -->
-
-      <!-- RIGHT RAIL -->
-      <aside class="right-rail">
-
-        <!-- CORE MEANING -->
-        <section class="rail-card">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 4 52 36H12L32 4Z"/>
-              <path d="M22 36 32 60l10-24"/>
-            </svg>
+</div><!-- /article-col -->
+<!-- RIGHT RAIL -->
+<aside class="right-rail">
+<!-- CORE MEANING -->
+<section class="rail-card">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-star"></span>
             Known For
           </h2>
-          <div class="one-line-wrap">Transformation &amp; Inner Vision</div>
-          <p class="one-line-desc">Labradorite is known for pairing transformation with heightened perception. Its shifting flashes mirror its long-standing association with looking beneath the surface, recognizing unrealized possibilities, and moving through change with greater awareness.</p>
-        </section>
-
-        <!-- ENERGETIC THEMES -->
-        <section class="rail-card" id="themes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-              <circle cx="32" cy="32" r="7"/>
-            </svg>
+<div class="one-line-wrap">Transformation &amp; Inner Vision</div>
+<p class="one-line-desc">Labradorite is known for pairing transformation with heightened perception. Its shifting flashes mirror its long-standing association with looking beneath the surface, recognizing unrealized possibilities, and moving through change with greater awareness.</p>
+</section>
+<!-- ENERGETIC THEMES -->
+<section class="rail-card" id="themes">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
             Energetic Themes
           </h2>
-
-          <div class="theme-tier-label">Primary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8 52 30 32 56 12 30Z"/>
-                <path d="M12 30h40M32 8 12 30M32 8 52 30"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Transformation</h3>
-              <p>Strongly associated with growth, reinvention, and personal change, Labradorite is often chosen when an old identity, pattern, or direction is beginning to shift.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-                <circle cx="32" cy="32" r="7"/>
-                <circle cx="32" cy="32" r="2" fill="currentColor"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Intuition &amp; Inner Vision</h3>
-              <p>Frequently linked with the Third Eye Chakra, it is used to support imagination, insight, inner guidance, and a broader view of what may be possible.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Secondary</div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"/>
-                <path d="M22 34l8 8 12-14"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Protection</h3>
-              <p>Traditionally used as a protective stone during spiritual work, energetic exploration, and periods when change may leave a person feeling more open or exposed.</p>
-            </div>
-          </div>
-
-          <div class="theme-row">
-            <div class="theme-icon-tile">
-              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8c0 14 18 20 18 34a18 18 0 0 1-36 0C14 28 32 22 32 8Z"/>
-                <path d="M24 44c2-4 12-4 14 0" opacity=".6"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Self-Discovery</h3>
-              <p>Associated with recognizing hidden strengths, unrealized talents, and parts of the self that may become clearer during reflection or personal transition.</p>
-            </div>
-          </div>
-
-          <hr class="theme-divider">
-          <div class="theme-tier-label">Occasional Associations</div>
-          <div class="occasional-tags">
-            <span class="occ-tag">Spiritual Exploration</span>
-            <span class="occ-tag">New Beginnings</span>
-          </div>
-        </section>
-
-        <!-- COLLECTOR & CURIOSITY NOTES -->
-        <section class="rail-card" id="notes">
-          <h2>
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 8h28l10 10v38H14Z"/>
-              <path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"/>
-            </svg>
+<div class="theme-tier-label">Primary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-transformation"></span>
+</div>
+<div>
+<h3>Transformation</h3>
+<p>Strongly associated with growth, reinvention, and personal change, Labradorite is often chosen when an old identity, pattern, or direction is beginning to shift.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-intuition"></span>
+</div>
+<div>
+<h3>Intuition &amp; Inner Vision</h3>
+<p>Frequently linked with the Third Eye Chakra, it is used to support imagination, insight, inner guidance, and a broader view of what may be possible.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Secondary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-protection"></span>
+</div>
+<div>
+<h3>Protection</h3>
+<p>Traditionally used as a protective stone during spiritual work, energetic exploration, and periods when change may leave a person feeling more open or exposed.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-transformation"></span>
+</div>
+<div>
+<h3>Self-Discovery</h3>
+<p>Associated with recognizing hidden strengths, unrealized talents, and parts of the self that may become clearer during reflection or personal transition.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Occasional Associations</div>
+<div class="occasional-tags">
+<span class="occ-tag">Spiritual Exploration</span>
+<span class="occ-tag">New Beginnings</span>
+</div>
+</section>
+<!-- COLLECTOR & CURIOSITY NOTES -->
+<section class="rail-card" id="notes">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
             Collector &amp; Curiosity Notes
           </h2>
-          <div class="note-list">
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 52 32 8l20 44"/>
-                  <path d="M20 36h24"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Named for Labrador</strong>
-                <p>Labradorite was identified in Labrador, Canada, in the late eighteenth century. The locality gave the mineral its name and remains central to its historical identity.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"/>
-                  <circle cx="32" cy="32" r="8"/>
-                  <path d="M28 28l8 8M36 28l-8 8" opacity=".5"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Labradorescence</strong>
-                <p>The stone's famous color play is not produced by surface pigment. It comes from light interacting with microscopic internal layers, creating flashes that shift as the viewing angle changes.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M32 6 54 19v26L32 58 10 45V19Z"/>
-                  <path d="M10 19l22 12 22-12M32 31v27"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Finnish Spectrolite</strong>
-                <p>Spectrolite is a Finnish variety of Labradorite valued for especially vivid and broad-ranging color flashes. Its visual intensity makes it particularly recognizable among collectors.</p>
-              </div>
-            </div>
-
-            <div class="note-row">
-              <div class="note-icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="32" cy="32" r="22"/>
-                  <path d="M14 32h36M32 10v44"/>
-                  <path d="M18 18l28 28M46 18 18 46"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Gray Beneath the Flash</strong>
-                <p>Many specimens appear predominantly gray until they are tilted toward the light. The contrast between the subdued body color and sudden iridescence is one of Labradorite's defining features.</p>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-      </aside><!-- /right-rail -->
-
-    </div><!-- /content-grid -->
-
-    <!-- ENTRY NAV -->
-    <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
+<div class="note-list">
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-location"></span>
+</div>
+<div>
+<strong>Named for Labrador</strong>
+<p>Labradorite was identified in Labrador, Canada, in the late eighteenth century. The locality gave the mineral its name and remains central to its historical identity.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-location"></span>
+</div>
+<div>
+<strong>Labradorescence</strong>
+<p>The stone's famous color play is not produced by surface pigment. It comes from light interacting with microscopic internal layers, creating flashes that shift as the viewing angle changes.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-rarity-tier"></span>
+</div>
+<div>
+<strong>Finnish Spectrolite</strong>
+<p>Spectrolite is a Finnish variety of Labradorite valued for especially vivid and broad-ranging color flashes. Its visual intensity makes it particularly recognizable among collectors.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-aperture-iris"></span>
+</div>
+<div>
+<strong>Gray Beneath the Flash</strong>
+<p>Many specimens appear predominantly gray until they are tilted toward the light. The contrast between the subdued body color and sudden iridescence is one of Labradorite's defining features.</p>
+</div>
+</div>
+</div>
+</section>
+</aside><!-- /right-rail -->
+</div><!-- /content-grid -->
+<!-- ENTRY NAV -->
+<nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
 <a class="entry-nav-link" href="kunzite.html">
 <span>←</span>
 <div>
@@ -1401,36 +1271,31 @@
 <span>→</span>
 </a>
 </nav>
-
-    <!-- BOTTOM CTA -->
-    <div class="enc-cta">
-      <div>
-        <h3>The right stone. The right moment.</h3>
-        <p>Explore 333 entries with clarity, care, and curiosity.</p>
-      </div>
-      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
-    </div>
-
-  </main>
+<!-- BOTTOM CTA -->
+<div class="enc-cta">
+<div>
+<h3>The right stone. The right moment.</h3>
+<p>Explore 333 entries with clarity, care, and curiosity.</p>
+</div>
+<button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+</div>
+</main>
 </div><!-- /enc-page -->
-
 <footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
-  <div style="max-width:520px;margin:0 auto">
-    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
-    <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
-    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
-    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
-    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
-      <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
-    </div>
-  </div>
-  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+<div style="max-width:520px;margin:0 auto">
+<div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+<a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+<div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
+<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+<div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+<a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
+</div>
+</div>
+<div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
     © 2026 Still Point {technodelic} Studio
   </div>
 </footer>
-
 </div><!-- /app-shell -->
-
 <script>
 /* Scroll-spy: highlight the active sidebar nav link */
 (function () {
@@ -1455,6 +1320,5 @@
 })();
 </script>
 <script src="enc-nav.js"></script>
-
 </body>
 </html>

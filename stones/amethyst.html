@@ -12,7 +12,7 @@
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Amethyst | Still Point Lapidary Encyclopedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
-<link href="../styles.css" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/><link href="enc-icons.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page ── */
 
@@ -225,7 +225,8 @@
   color: var(--accent);
   margin-bottom: 7px;
 }
-.tile-eyebrow svg { width: 13px; height: 13px; flex-shrink: 0; }
+.tile-eyebrow svg,
+.tile-eyebrow .enc-icon { width: 13px; height: 13px; flex-shrink: 0; }
 .identity-tile p { margin: 0; font-size: 13px; color: var(--ink); line-height: 1.5; }
 
 .hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
@@ -249,7 +250,8 @@
 .enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .enc-btn-primary { background: var(--ck-btn-bg); border-color: var(--ck-btn-border); color: var(--ck-btn-text); }
 .enc-btn-primary:hover { background: var(--ck-accent); border-color: var(--ck-accent); color: var(--white); }
-.enc-btn svg { width: 13px; height: 13px; }
+.enc-btn svg,
+.enc-btn .enc-icon { width: 13px; height: 13px; }
 
 .glance-panel {
   background: var(--white);
@@ -270,7 +272,8 @@
   align-items: center;
   gap: 8px;
 }
-.panel-title svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.panel-title svg,
+.panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
 .glance-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
 .glance-item { padding: 0 10px; border-right: 0.5px solid var(--border); text-align: center; }
@@ -287,7 +290,8 @@
   place-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
-.glance-icon-tile svg { width: 22px; height: 22px; color: var(--ck-accent); stroke-width: 2; }
+.glance-icon-tile svg,
+.glance-icon-tile .enc-icon { width: 22px; height: 22px; color: var(--ck-accent); stroke-width: 2; }
 .glance-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.11em; font-weight: 600; color: var(--ink3); margin-bottom: 5px; }
 .glance-value { font-size: 12px; color: var(--ink); line-height: 1.45; }
 
@@ -319,7 +323,8 @@
   align-items: center;
   gap: 8px;
 }
-.enc-card h2 svg { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.enc-card h2 svg,
+.enc-card h2 .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 .enc-card p { font-size: 15px; line-height: 1.78; color: var(--ink2); margin: 0 0 14px; }
 .enc-card p:last-child { margin-bottom: 0; }
 
@@ -379,7 +384,8 @@
   align-items: center;
   gap: 7px;
 }
-.rail-card h2 svg { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.rail-card h2 svg,
+.rail-card h2 .enc-icon { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
 
 .one-line-wrap {
   display: inline-block;
@@ -402,7 +408,8 @@
 .theme-row { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; margin-bottom: 10px; }
 .theme-row + .theme-row { margin-top: 16px; }
 .theme-icon-tile { width: 40px; height: 40px; border-radius: 10px; background: var(--ck-wash); display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); flex-shrink: 0; }
-.theme-icon-tile svg { width: 21px; height: 21px; color: var(--ck-accent); stroke-width: 2; }
+.theme-icon-tile svg,
+.theme-icon-tile .enc-icon { width: 21px; height: 21px; color: var(--ck-accent); stroke-width: 2; }
 .theme-row h3 { font-family: Georgia, serif; font-size: 17px; font-weight: 400; margin: 0 0 2px; color: var(--ink); line-height: 1.1; }
 .theme-row p { font-size: 12px; color: var(--ink2); margin: 0; line-height: 1.58; }
 .theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 12px 0 0; }
@@ -413,7 +420,8 @@
 .note-list { display: grid; gap: 8px; }
 .note-row { display: grid; grid-template-columns: 34px 1fr; gap: 10px; background: var(--stone); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; align-items: start; }
 .note-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--ck-wash); display: grid; place-items: center; flex-shrink: 0; }
-.note-icon svg { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2; }
+.note-icon svg,
+.note-icon .enc-icon { width: 18px; height: 18px; color: var(--ck-accent); stroke-width: 2; }
 .note-row strong { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
 .note-row p { font-size: 12.5px; color: var(--ink2); margin: 0; line-height: 1.62; }
 
@@ -451,8 +459,9 @@
   gap: 20px;
   background-image: radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%), radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%);
 }
-.enc-cta h3 { font-family: Georgia, serif; font-size: 26px; font-weight: 400; margin: 0; color: var(--white); letter-spacing: 0.02em; }
-.enc-cta p { font-size: 15px; color: rgba(250,248,246,0.7); margin: 4px 0 0; line-height: 1.6; }
+.enc-cta h3 { font-family: Georgia, serif; font-size: 24px; font-weight: 400; margin: 0; color: var(--white); letter-spacing: 0.02em; }
+.enc-cta p { font-size: 15px;
+  font-weight: 400; color: rgba(250,248,246,0.84); margin: 4px 0 0; line-height: 1.6; }
 .enc-cta button { background: var(--white); color: var(--ink); border: none; border-radius: 6px; padding: 11px 22px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
 .enc-cta button:hover { background: var(--stone2); }
 
@@ -578,28 +587,28 @@
 <div class="identity-grid">
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 6l5 14h15l-12 9 5 14-13-9-13 9 5-14-12-9h15Z"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-best-for"></span>
               Best For
             </div>
 <p>Quiet reflection and spiritual clarity</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M42 10a22 22 0 1 1-22 22 16 16 0 0 0 22-22Z"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
               Use When
             </div>
 <p>Your thoughts feel crowded or overstimulated and you want a calmer atmosphere for reflection, meditation, or inward focus.</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M28 36a10 10 0 0 0 14.1 0l8-8a10 10 0 0 0-14.1-14.1l-4 4"></path><path d="M36 28a10 10 0 0 0-14.1 0l-8 8a10 10 0 0 0 14.1 14.1l4-4"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-pair-with"></span>
               Pairs Well With
             </div>
 <p>Clear Quartz<br/>Rose Quartz<br/>Smoky Quartz</p>
 </div>
 <div class="identity-tile">
 <div class="tile-eyebrow">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle></svg>
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
               Primary Chakra
             </div>
 <p>Third Eye</p>
@@ -607,11 +616,11 @@
 </div>
 <div class="hero-actions">
 <button class="enc-btn enc-btn-primary">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-add-piece"></span>
             Save to Collection
           </button>
 <button class="enc-btn">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-wishlist"></span>
             Add to Wishlist
           </button>
 </div>
@@ -620,20 +629,20 @@
 <!-- AT A GLANCE -->
 <section class="glance-panel" id="glance">
 <h2 class="panel-title">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 64 64"><path d="M4 32s12-20 28-20 28 20 28 20-12 20-28 20S4 32 4 32Z"></path><circle cx="32" cy="32" r="8"></circle></svg>
+<span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
         At a Glance
       </h2>
 <div class="glance-grid">
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 52 30 32 56 12 30Z"></path><path d="M12 30h40"></path><path d="M22 30 32 8l10 22"></path><path d="M22 30 32 56l10-26"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-tag-label"></span>
 </div>
 <div class="glance-label">Primary Themes</div>
 <div class="glance-value">Calm<br/>Protection · Intuition</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle><circle cx="32" cy="32" fill="currentColor" r="2.5"></circle></svg>
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
 </div>
 <div class="glance-label">Chakras</div>
 <div class="glance-value">Third Eye, Crown</div>
@@ -641,35 +650,35 @@
 <div class="glance-item">
 <div class="glance-icon-tile">
 <!-- wind element -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 10 12 44h40Z"></path><path d="M22 44c0 8 20 8 20 0"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-element"></span>
 </div>
 <div class="glance-label">Element</div>
 <div class="glance-value">Wind</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M14 50c18-4 28-14 36-36M38 14h12v12"></path><circle cx="14" cy="50" fill="currentColor" r="2.5"></circle><circle cx="50" cy="14" fill="currentColor" r="2.5"></circle></svg>
+<span aria-hidden="true" class="enc-icon icon-zodiac"></span>
 </div>
 <div class="glance-label">Zodiac</div>
 <div class="glance-value">Pisces, Virgo,<br/>Aquarius, Capricorn</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 54 45v5H10v-5Z"></path><path d="M20 50V38l12-14 12 14v12"></path><path d="M28 50v-8h8v8"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
 </div>
 <div class="glance-label">Formation</div>
 <div class="glance-value">Volcanic cavities,<br/>hydrothermal veins</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 24 32 58 10 24Z"></path><path d="M10 24h44M32 6 10 24M32 6 54 24"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-crystal-single"></span>
 </div>
 <div class="glance-label">Hardness</div>
 <div class="glance-value">7</div>
 </div>
 <div class="glance-item">
 <div class="glance-icon-tile">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8c-1 2-18 20-18 30a18 18 0 0 0 36 0C50 28 33 10 32 8Z"></path><path d="M22 42c5-4 15-4 20 0" opacity=".55"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-color-range"></span>
 </div>
 <div class="glance-label">Color Range</div>
 <div class="glance-value">Pale lilac to<br/>deep purple</div>
@@ -682,7 +691,7 @@
 <!-- OVERVIEW -->
 <article class="enc-card" id="overview">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="20" r="10"></circle><path d="M10 54c0-12 10-20 22-20s22 8 22 20"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
             Overview
           </h2>
 <p>Amethyst is quartz turned violet by trace iron and natural irradiation, but its identity has always reached beyond color. From ancient carved gems to modern meditation spaces, it has become the classic stone of quiet authority: calming without feeling passive, protective without feeling severe.</p>
@@ -691,7 +700,7 @@
 <!-- WHY PEOPLE REACH FOR IT -->
 <article class="enc-card" id="reach">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 54 8 30a14 14 0 0 1 24-10 14 14 0 0 1 24 10Z"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-target-bullseye"></span>
             Why People Reach For It
           </h2>
 <div class="reach-rows">
@@ -720,7 +729,7 @@
 <!-- MINERAL PROFILE -->
 <article class="enc-card" id="mineral">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 19v26L32 58 10 45V19Z"></path><path d="M10 19l22 12 22-12M32 31v27"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
             Mineral Profile
           </h2>
 <div class="mineral-layout">
@@ -753,7 +762,7 @@
 <!-- RELATED STONES -->
 <article class="enc-card" id="related">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="18" cy="32" r="9"></circle><circle cx="46" cy="32" r="9"></circle><path d="M27 32h10"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-stones-row"></span>
             Related Stones
           </h2>
 <div class="related-grid">
@@ -799,7 +808,7 @@
 <!-- KNOWN FOR -->
 <section class="rail-card">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 4 52 36H12L32 4Z"></path><path d="M22 36 32 60l10-24"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-star"></span>
             Known For
           </h2>
 <div class="one-line-wrap">Quiet Spiritual Clarity</div>
@@ -808,16 +817,14 @@
 <!-- ENERGETIC THEMES -->
 <section class="rail-card" id="themes">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle></svg>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
             Energetic Themes
           </h2>
 <div class="theme-tier-label">Primary</div>
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- calm / stillness -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64">
-<path d="M20 32h24M26 24h12M26 40h12"></path>
-</svg>
+<span aria-hidden="true" class="enc-icon icon-calm-peace"></span>
 </div>
 <div>
 <h3>Calm and Inner Stillness</h3>
@@ -827,7 +834,7 @@
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- protection / shield -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8 52 22v14c0 14-8 22-20 26C20 56 12 48 12 36V22Z"></path><path d="M22 34l8 8 12-14"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-protection"></span>
 </div>
 <div>
 <h3>Protection and Purification</h3>
@@ -839,7 +846,7 @@
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- third eye / intuition -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M4 32s12-18 28-18 28 18 28 18-12 18-28 18S4 32 4 32Z"></path><circle cx="32" cy="32" r="7"></circle><circle cx="32" cy="32" fill="currentColor" r="2"></circle></svg>
+<span aria-hidden="true" class="enc-icon icon-intuition"></span>
 </div>
 <div>
 <h3>Intuition and Spiritual Connection</h3>
@@ -849,7 +856,7 @@
 <div class="theme-row">
 <div class="theme-icon-tile">
 <!-- wisdom / scales -->
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 8v44M16 52h32"></path><path d="M20 24l-8 16h16ZM44 24l-8 16h16Z"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-clarity-focus"></span>
 </div>
 <div>
 <h3>Wisdom and Discernment</h3>
@@ -866,13 +873,13 @@
 <!-- COLLECTOR NOTES -->
 <section class="rail-card" id="notes">
 <h2>
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M14 8h28l10 10v38H14Z"></path><path d="M38 8v10h14M22 28h20M22 36h20M22 44h12"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
             Collector &amp; Curiosity Notes
           </h2>
 <div class="note-list">
 <div class="note-row">
 <div class="note-icon">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M12 52 32 8l20 44"></path><path d="M20 36h24"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
 </div>
 <div>
 <strong>Meaning of the Name</strong>
@@ -881,7 +888,7 @@
 </div>
 <div class="note-row">
 <div class="note-icon">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><path d="M32 6 54 19v26L32 58 10 45V19Z"></path><path d="M10 19l22 12 22-12M32 31v27"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
 </div>
 <div>
 <strong>Once Highly Prized</strong>
@@ -890,7 +897,7 @@
 </div>
 <div class="note-row">
 <div class="note-icon">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 64 64"><circle cx="32" cy="32" r="22"></circle><path d="M20 44c4-8 20-8 24 0M22 26c0-4 4-8 10-8s10 4 10 8"></path></svg>
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
 </div>
 <div>
 <strong>Ancient Carved Gems</strong>

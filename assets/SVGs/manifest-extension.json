@@ -1,0 +1,30 @@
+{
+  "system": "Still Point Lapidary Icon System",
+  "extension": "Encyclopedia and Energetic Roles",
+  "version": "Draft v1",
+  "icon_count": 15,
+  "viewBox": "0 0 24 24",
+  "color": "currentColor",
+  "stroke_width": "1.5",
+  "categories": {
+    "Encyclopedia Glance": [
+      "element.svg",
+      "zodiac.svg",
+      "color-range.svg"
+    ],
+    "Energetic Roles": [
+      "grounding.svg",
+      "protection.svg",
+      "vitality.svg",
+      "heart-healing.svg",
+      "calm-peace.svg",
+      "emotional-regulation.svg",
+      "clarity-focus.svg",
+      "intuition.svg",
+      "spiritual-connection.svg",
+      "transformation.svg",
+      "manifestation.svg",
+      "amplification.svg"
+    ]
+  }
+}
