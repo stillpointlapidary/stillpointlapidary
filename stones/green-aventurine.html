@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+
+<html data-stone-slug="green-aventurine" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<meta content="Green Aventurine encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
+<meta content="Green Aventurine | Still Point Lapidary Encyclopedia" property="og:title"/>
+<meta content="website" property="og:type"/>
+<meta content="#4a8a5a" name="theme-color"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<title>Green Aventurine | Still Point Lapidary Encyclopedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/><link href="enc-icons.css" rel="stylesheet"/>
+<style>
+/* ── Encyclopedia Entry Page ── */
+
+/* Chakra-keyed design tokens — Heart */
+:root {
+  --ck-pill-bg:    #cce5d4;
+  --ck-pill-text:  #2a5a3a;
+  --ck-btn-bg:     #cce5d4;
+  --ck-btn-border: #6aab7e;
+  --ck-btn-text:   #2a5a3a;
+  --ck-wash:       #edf6f0;
+  --ck-wash-border:#6aab7e;
+  --ck-accent:     #2a5a3a;
+  --ck-deep:       #1e4029;
+
+  /* Page layout */
+  --enc-radius: 12px;
+  --enc-border: 0.5px solid var(--border);
+  --enc-shadow: 0 4px 16px rgba(42,37,32,0.07);
+  --enc-max:    1420px;
+  --sidebar-w:  210px;
+}
+
+/* ── LAYOUT SHELL ── */
+.enc-page {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0,1fr);
+  gap: 32px;
+  max-width: var(--enc-max);
+  margin: 0 auto;
+  padding: 32px 28px 72px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ── */
+.enc-sidebar {
+  position: sticky;
+  top: 110px;
+  max-height: calc(100vh - 128px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.enc-sidebar::-webkit-scrollbar { display: none; }
+
+.enc-breadcrumb {
+  font-size: 12.5px;
+  color: var(--ink3);
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+.enc-breadcrumb a { color: var(--ink3); text-decoration: none; }
+.enc-breadcrumb a:hover { color: var(--accent); }
+.enc-breadcrumb b { color: var(--ink2); }
+
+.side-nav-card {
+  background: var(--stone2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  padding: 8px 0;
+  overflow: hidden;
+}
+.side-nav-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  padding: 6px 16px 8px;
+}
+.side-nav a {
+  display: block;
+  padding: 10px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: var(--ink2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.13s;
+}
+.side-nav a:hover { background: var(--stone); color: var(--ink); }
+.side-nav a.active {
+  background: var(--white);
+  border-left-color: var(--ck-accent);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.sidebar-standards {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  background: var(--white);
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.sidebar-standards p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.sidebar-standards a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.sidebar-standards a:hover { color: var(--ink); }
+
+/* ── MAIN CONTENT ── */
+.enc-main { min-width: 0; }
+
+/* ── HERO ── */
+.enc-hero {
+  display: grid;
+  grid-template-columns: 310px minmax(0,1fr);
+  gap: 40px;
+  align-items: stretch;
+  margin-bottom: 24px;
+  position: static;
+  overflow: visible;
+  height: auto;
+  background-image: none;
+  background-size: auto;
+  background-position: initial;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.enc-hero::after {
+  display: none;
+}
+.stone-photo-wrap {
+  border-radius: var(--enc-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(42,37,32,0.14);
+  aspect-ratio: 1/1;
+  background: var(--stone2);
+  flex-shrink: 0;
+  position: relative;
+}
+.stone-photo-wrap::after {
+  content: 'Photo coming soon';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  z-index: 0;
+}
+.stone-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-right { padding-top: 4px; display: flex; flex-direction: column; }
+
+.stone-name {
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+.theme-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+.theme-pill {
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 7px 15px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ck-accent);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  background: var(--white);
+  overflow: hidden;
+  margin: 0 0 18px;
+  box-shadow: var(--enc-shadow);
+}
+.identity-tile {
+  padding: 14px 13px;
+  border-right: 0.5px solid var(--border);
+}
+.identity-tile:last-child { border-right: 0; }
+.tile-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+.tile-eyebrow .enc-icon { width: 13px; height: 13px; flex-shrink: 0; }
+.identity-tile p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.enc-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0.5px solid var(--border);
+  background: transparent;
+  color: var(--ink2);
+}
+.enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.enc-btn-primary {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.enc-btn-primary:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
+.enc-btn .enc-icon { width: 13px; height: 13px; }
+
+/* ── AT A GLANCE ── */
+.glance-panel {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 20px 24px 18px;
+  margin-bottom: 20px;
+}
+.panel-title {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+
+.glance-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+.glance-item {
+  padding: 0 10px;
+  border-right: 0.5px solid var(--border);
+  text-align: center;
+}
+.glance-item:last-child { border-right: 0; }
+.glance-item:first-child { padding-left: 0; }
+
+.glance-icon-tile {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 8px;
+  border-radius: 10px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.glance-icon-tile .enc-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.glance-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 5px;
+}
+.glance-value {
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ── TWO-COLUMN CONTENT GRID ── */
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+.article-col { display: grid; gap: 16px; }
+
+/* ── ARTICLE SECTION CARDS ── */
+.enc-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 24px 26px;
+}
+.enc-card-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent2);
+  margin-bottom: 6px;
+}
+.enc-card h2 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 0.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.enc-card h2 .enc-icon {
+  width: 19px;
+  height: 19px;
+  color: var(--ck-accent);
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+.enc-card p {
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--ink2);
+  margin: 0 0 14px;
+}
+.enc-card p:last-child { margin-bottom: 0; }
+
+/* Why People Reach For It */
+.reach-rows { display: grid; gap: 0; }
+.reach-row {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--border2);
+  align-items: baseline;
+}
+.reach-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.reach-row:first-child { padding-top: 0; }
+.reach-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-top: 3px;
+}
+.reach-desc {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.68;
+}
+
+/* ── MINERAL PROFILE ── */
+.mineral-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 24px;
+  align-items: start;
+}
+.mineral-facts { display: grid; gap: 0; }
+.mineral-fact {
+  display: grid;
+  grid-template-columns: minmax(0,120px) minmax(0,1fr);
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 0.5px solid var(--border2);
+  font-size: 13px;
+}
+.mineral-fact:last-of-type { border-bottom: 0; }
+.mineral-fact span:first-child {
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  padding-right: 8px;
+}
+.mineral-fact span:last-child { color: var(--ink2); }
+.mineral-note {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink2);
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 0.5px solid var(--border);
+}
+.mineral-formation h4 {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.mineral-formation h4 + h4 { margin-top: 14px; }
+.mineral-formation p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.68;
+  margin: 0 0 10px;
+}
+.mineral-formation ul {
+  margin: 0;
+  padding-left: 16px;
+}
+.mineral-formation li {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.72;
+}
+
+.mineral-formation .common-localities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 0;
+  padding-left: 18px;
+}
+
+/* ── RELATED STONES ── */
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.rel-card {
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--stone);
+}
+.rel-card-head {
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.stone-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 0.5px solid var(--border2);
+  transition: opacity 0.13s;
+}
+.stone-link-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.stone-link-row:hover { opacity: 0.7; }
+.stone-dot-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stone-dot-moss      { background: linear-gradient(135deg,#b8cca0,#5a7a4a); }
+.stone-dot-peridot   { background: linear-gradient(135deg,#c8d870,#8a9a30); }
+.stone-dot-malachite { background: linear-gradient(135deg,#50a860,#1e5e30); }
+.stone-dot-white     { background: linear-gradient(135deg,#f8f8f8,#d0ccd8); }
+.stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
+.stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
+
+/* ── RIGHT RAIL ── */
+.right-rail {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 110px;
+}
+.rail-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 20px;
+}
+.rail-card h2 {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.rail-card h2 .enc-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--ck-accent);
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+
+/* Known For */
+.one-line-wrap {
+  display: inline-block;
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ck-accent);
+  margin-bottom: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+.one-line-desc {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Energetic Themes */
+.theme-tier-label {
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink3);
+  margin: 16px 0 10px;
+}
+.theme-tier-label:first-child { margin-top: 0; }
+.theme-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+.theme-row + .theme-row { margin-top: 16px; }
+.theme-icon-tile {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  flex-shrink: 0;
+}
+.theme-icon-tile .enc-icon {
+  width: 21px;
+  height: 21px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.theme-row h3 {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0 0 2px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.theme-row p {
+  font-size: 12px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.58;
+}
+.theme-divider {
+  border: none;
+  border-top: 0.5px solid var(--border2);
+  margin: 12px 0 0;
+}
+
+.occasional-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.occ-tag {
+  font-size: 12px;
+  color: var(--ck-accent);
+  background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+/* Collector Notes */
+.note-list { display: grid; gap: 8px; }
+.note-row {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  background: var(--stone);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  align-items: start;
+}
+.note-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--ck-wash);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.note-icon .enc-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--ck-accent);
+  stroke-width: 2;
+}
+.note-row strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.note-row p {
+  font-size: 12.5px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1.62;
+}
+
+/* ── ENTRY NAV ── */
+.entry-nav-wrap {
+  margin-top: 20px;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--enc-radius);
+  box-shadow: var(--enc-shadow);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.entry-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--stone);
+  padding: 9px 18px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: all 0.13s;
+}
+.entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.entry-nav-link > div { text-align: center; }
+.entry-nav-link small { font-size: 9px; letter-spacing: 0.12em; color: var(--ink3); display: block; margin-bottom: 1px; }
+.entry-nav-link:hover small { color: rgba(255,255,255,0.55); }
+.entry-nav-link b {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  display: block;
+}
+.entry-nav-random {
+  background: var(--ck-btn-bg);
+  border-color: var(--ck-btn-border);
+  color: var(--ck-btn-text);
+}
+.entry-nav-random:hover {
+  background: var(--ck-accent);
+  border-color: var(--ck-accent);
+  color: var(--white);
+}
+
+/* ── BOTTOM CTA ── */
+.enc-cta {
+  margin-top: 18px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--enc-radius);
+  padding: 26px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(200,169,110,0.13) 0%, transparent 50%),
+    radial-gradient(circle at 88% 20%, rgba(200,169,110,0.07) 0%, transparent 40%);
+}
+.enc-cta h3 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.enc-cta p {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(250,248,246,0.84);
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+.enc-cta button {
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 11px 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.enc-cta button:hover { background: var(--stone2); }
+
+/* ── DESKTOP COLUMN ALIGNMENT ── */
+.content-grid {
+  align-items: stretch;
+}
+
+.article-col,
+.right-rail {
+  height: 100%;
+}
+
+.article-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-col > .enc-card:last-child {
+  flex: 1;
+}
+
+.right-rail {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-rail > .rail-card:last-child {
+  flex: 1;
+}
+
+@media (max-width: 980px) {
+  .article-col,
+  .right-rail {
+    height: auto;
+  }
+
+  .article-col > .enc-card:last-child,
+  .right-rail > .rail-card:last-child {
+    flex: none;
+  }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .enc-page { grid-template-columns: 1fr; gap: 20px; }
+  .enc-sidebar { display: none; }
+  .enc-hero { grid-template-columns: 1fr; gap: 24px; }
+  .stone-photo-wrap { aspect-ratio: 16/9; max-height: 300px; }
+  .identity-grid { grid-template-columns: repeat(2, 1fr); }
+  .content-grid { grid-template-columns: 1fr; }
+  .right-rail { position: static; }
+  .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
+  .glance-item { border-right: 0; padding: 0 8px; }
+  .mineral-layout { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+
+  .mineral-formation .common-localities {
+    grid-template-columns: 1fr;
+  }
+  .enc-page { padding: 16px 16px 48px; }
+  .stone-name { font-size: 42px; }
+  .identity-grid { grid-template-columns: 1fr 1fr; }
+  .glance-grid { grid-template-columns: repeat(3, 1fr); }
+  .enc-cta { flex-direction: column; text-align: center; }
+  .related-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+<!-- TOPBAR -->
+<header class="topbar">
+<a aria-label="Return to home" class="brand-home" href="../index.html">
+<div class="brand-block">
+<img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+<div class="brand-block-text">
+<span class="wordmark">STILL POINT <em>Lapidary</em></span>
+<span class="brand-block-sub">Crystal Reference Library</span>
+</div>
+</div>
+</a>
+<div class="topbar-right">
+<a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+</div>
+</header>
+<!-- PAGE -->
+<div class="enc-page" id="top">
+<!-- SIDEBAR NAV -->
+<aside class="enc-sidebar">
+<div class="enc-breadcrumb">
+<a href="../index.html">Home</a> ›
+      <a href="../encyclopedia.html">Encyclopedia</a> ›
+      <b>Green Aventurine</b>
+</div>
+<div class="side-nav-card">
+<div class="side-nav-label">On this page</div>
+<nav class="side-nav">
+<a class="active" href="#top">Top</a>
+<a href="#overview">Overview</a>
+<a href="#reach">Why People Reach For It</a>
+<a href="#glance">At a Glance</a>
+<a href="#themes">Energetic Themes</a>
+<a href="#mineral">Mineral Profile</a>
+<a href="#notes">Collector Notes</a>
+<a href="#related">Related Stones</a>
+</nav>
+</div>
+<div class="sidebar-standards">
+<p>Entries are researched from expert books and trusted online sources.</p>
+<a href="#">Our Editorial Standards →</a>
+</div>
+</aside>
+<!-- MAIN -->
+<main class="enc-main">
+<!-- HERO -->
+<section class="enc-hero" id="hero">
+<div class="stone-photo-wrap">
+<img alt="Green Aventurine polished stone" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/green-aventurine.webp"/>
+</div>
+<div class="hero-right">
+<h1 class="stone-name">Green Aventurine</h1>
+<div class="theme-pills">
+<span class="theme-pill">Growth</span>
+<span class="theme-pill">Optimism</span>
+<span class="theme-pill">Prosperity</span>
+</div>
+<div class="identity-grid">
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<span aria-hidden="true" class="enc-icon icon-best-for"></span>
+              Best For
+            </div>
+<p>Fresh starts, renewed hope, and opportunity</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
+              Use When
+            </div>
+<p>You are ready to move forward with more confidence, openness, and emotional lightness.</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<span aria-hidden="true" class="enc-icon icon-pair-with"></span>
+              Pairs Well With
+            </div>
+<p>Rose Quartz, Citrine, Moonstone</p>
+</div>
+<div class="identity-tile">
+<div class="tile-eyebrow">
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
+              Primary Chakra
+            </div>
+<p>Heart</p>
+</div>
+</div>
+<div class="hero-actions">
+<button class="enc-btn enc-btn-primary">
+<span aria-hidden="true" class="enc-icon icon-add-piece"></span>
+            Save to Collection
+          </button>
+<button class="enc-btn">
+<span aria-hidden="true" class="enc-icon icon-wishlist"></span>
+            Add to Wishlist
+          </button>
+</div>
+</div>
+</section>
+<!-- AT A GLANCE -->
+<section class="glance-panel" id="glance">
+<h2 class="panel-title">
+<span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
+        At a Glance
+      </h2>
+<div class="glance-grid">
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-tag-label"></span>
+</div>
+<div class="glance-label">Primary Themes</div>
+<div class="glance-value">Growth · Optimism<br/>· Prosperity</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-chakra"></span>
+</div>
+<div class="glance-label">Chakras</div>
+<div class="glance-value">Heart</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-element"></span>
+</div>
+<div class="glance-label">Element</div>
+<div class="glance-value">Water</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-zodiac"></span>
+</div>
+<div class="glance-label">Zodiac</div>
+<div class="glance-value">Aries,<br/>Taurus, Virgo</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
+</div>
+<div class="glance-label">Formation</div>
+<div class="glance-value">Metamorphic quartz-rich rock</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-crystal-single"></span>
+</div>
+<div class="glance-label">Hardness</div>
+<div class="glance-value">About 7</div>
+</div>
+<div class="glance-item">
+<div class="glance-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-color-range"></span>
+</div>
+<div class="glance-label">Color Range</div>
+<div class="glance-value">Pale to deep green</div>
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN CONTENT -->
+<div class="content-grid">
+<!-- ARTICLE COLUMN -->
+<div class="article-col">
+<!-- OVERVIEW -->
+<article class="enc-card" id="overview">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
+            Overview
+          </h2>
+<p>Green Aventurine is associated with favorable openings, emotional buoyancy, and the courage to try again. Its Heart Chakra connection gives these themes a softer quality, encouraging receptivity, perspective, and forward movement without carrying every old disappointment into what comes next.</p>
+<p>Geologically, Green Aventurine is a fine-grained, polycrystalline quartz-rich material, often described as aventurine quartz or quartzite. Tiny plates of fuchsite or related mica create its green color and subtle glitter. It is durable enough for beads, carvings, and polished stones, though commercial material may be treated or misidentified.</p>
+</article>
+<!-- WHY PEOPLE REACH FOR IT -->
+<article class="enc-card" id="reach">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-target-bullseye"></span>
+            Why People Reach For It
+          </h2>
+<div class="reach-rows">
+<div class="reach-row">
+<span class="reach-label">Starting Again</span>
+<span class="reach-desc">Often chosen at the start of a new chapter, especially when encouragement and a steadier sense of possibility are needed.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Inviting Good Fortune</span>
+<span class="reach-desc">Traditionally linked with luck, prosperity, and favorable circumstances around new ventures, decisions, and opportunities.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Recovering Perspective</span>
+<span class="reach-desc">Chosen when disappointment has narrowed the outlook and a more hopeful, balanced perspective is needed.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Strengthening Confidence</span>
+<span class="reach-desc">Associated with self-trust in unfamiliar situations, helping new steps feel more approachable when hesitation takes over.</span>
+</div>
+<div class="reach-row">
+<span class="reach-label">Letting Go of What Stalled</span>
+<span class="reach-desc">Its forward-looking quality supports releasing outdated expectations, old attachments, and patterns that keep a new phase from beginning.</span>
+</div>
+</div>
+</article>
+<!-- MINERAL PROFILE -->
+<article class="enc-card" id="mineral">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
+            Mineral Profile
+          </h2>
+<div class="mineral-layout">
+<div>
+<div class="mineral-facts">
+<div class="mineral-fact"><span>Mineral Family</span><span>Quartz-rich material (aventurine quartzite)</span></div>
+<div class="mineral-fact"><span>Chemical Formula</span><span>SiO<sub>2</sub></span></div>
+<div class="mineral-fact"><span>Crystal Structure</span><span>Polycrystalline aggregate of trigonal quartz grains</span></div>
+<div class="mineral-fact"><span>Color Source</span><span>Fuchsite (chromium mica) inclusions</span></div>
+<div class="mineral-fact"><span>Mohs Hardness</span><span>~7</span></div>
+<div class="mineral-fact"><span>Luster</span><span>Vitreous to waxy</span></div>
+<div class="mineral-fact"><span>Transparency</span><span>Translucent to opaque</span></div>
+</div>
+</div>
+<div class="mineral-formation">
+<h4>Formation</h4>
+<p>Green Aventurine forms in metamorphic settings where quartz-rich rock contains reflective mica. Fuchsite plates within the aggregate create its green color and shimmer.</p>
+<h4>Common Localities</h4>
+<ul class="common-localities">
+<li>India</li>
+<li>Brazil</li>
+<li>Russia</li>
+<li>Austria</li>
+<li>Tanzania</li>
+<li>Canada</li>
+<li>United States</li>
+</ul>
+</div>
+</div>
+<p class="mineral-note">With a Mohs hardness of about 7, Green Aventurine takes a good polish and is widely used for beads, carvings, and cabochons. Commercial material may be oiled, dyed, or treated with polymer to improve color or translucency. Clean with mild soap, lukewarm water, and a soft cloth.</p>
+</article>
+<!-- RELATED STONES -->
+<article class="enc-card" id="related">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-stones-row"></span>
+            Related Stones
+          </h2>
+<div class="related-grid">
+<div class="rel-card">
+<div class="rel-card-head">Similar Energy <span>→</span></div>
+<a class="stone-link-row" href="moss-agate.html">
+<span class="stone-dot-circle stone-dot-moss"></span>
+<div>
+<b>Moss Agate</b>
+<span>Both support growth and renewal; Moss Agate feels earthier and slower, while Green Aventurine emphasizes optimism and opportunity.</span>
+</div>
+</a>
+<a class="stone-link-row" href="peridot.html">
+<span class="stone-dot-circle stone-dot-peridot"></span>
+<div>
+<b>Peridot</b>
+<span>Both connect with heart-centered renewal and abundance; Peridot leans toward release, while Green Aventurine emphasizes confidence and opportunity.</span>
+</div>
+</a>
+</div>
+<div class="rel-card">
+<div class="rel-card-head">Pairs Well With <span>→</span></div>
+<a class="stone-link-row" href="malachite.html">
+<span class="stone-dot-circle stone-dot-malachite"></span>
+<div>
+<b>Malachite</b>
+<span>Malachite supports deeper transformation, while Green Aventurine directs that change toward hope, possibility, and a more open next step.</span>
+</div>
+</a>
+<a class="stone-link-row" href="clear-quartz.html">
+<span class="stone-dot-circle stone-dot-white"></span>
+<div>
+<b>Clear Quartz</b>
+<span>Clear Quartz sharpens and amplifies intentions around growth, confidence, and opportunity without duplicating Green Aventurine's heart-centered tone.</span>
+</div>
+</a>
+</div>
+</div>
+</article>
+</div><!-- /article-col -->
+<!-- RIGHT RAIL -->
+<aside class="right-rail">
+<!-- KNOWN FOR -->
+<section class="rail-card">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-star"></span>
+            Known For
+          </h2>
+<div class="one-line-wrap">The Stone of Opportunity</div>
+<p class="one-line-desc">Known for pairing heart-centered optimism with traditions of luck and prosperity, Green Aventurine is a familiar choice for fresh starts and renewed confidence.</p>
+</section>
+<!-- ENERGETIC THEMES -->
+<section class="rail-card" id="themes">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
+            Energetic Themes
+          </h2>
+<div class="theme-tier-label">Primary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-transformation"></span>
+</div>
+<div>
+<h3>Growth and New Beginnings</h3>
+<p>Associated with renewal and the willingness to begin again, Green Aventurine encourages openness to what may develop next.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-manifestation"></span>
+</div>
+<div>
+<h3>Good Fortune and Prosperity</h3>
+<p>Its best-known tradition centers on luck, opportunity, and favorable outcomes, especially when possibility needs to stay grounded in practical action.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Secondary</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-heart-healing"></span>
+</div>
+<div>
+<h3>Emotional Optimism and Resilience</h3>
+<p>Connected with the Heart Chakra, Green Aventurine is associated with recovering perspective and maintaining hope through difficulty.</p>
+</div>
+</div>
+<div class="theme-row">
+<div class="theme-icon-tile">
+<span aria-hidden="true" class="enc-icon icon-clarity-focus"></span>
+</div>
+<div>
+<h3>Confidence and Self-Trust</h3>
+<p>Chosen when a new situation calls for steadier self-belief, it helps forward movement feel less burdened by hesitation.</p>
+</div>
+</div>
+<hr class="theme-divider"/>
+<div class="theme-tier-label">Occasional Associations</div>
+<div class="occasional-tags">
+<span class="occ-tag">Leadership</span>
+</div>
+</section>
+<!-- COLLECTOR & CURIOSITY NOTES -->
+<section class="rail-card" id="notes">
+<h2>
+<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
+            Collector &amp; Curiosity Notes
+          </h2>
+<div class="note-list">
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
+</div>
+<div>
+<strong>A Name Born by Chance</strong>
+<p>Aventurine takes its name from the Italian phrase <em>a ventura</em>, meaning "by chance." The term first described glittering glass, then natural stone with a similar sparkle.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-geology"></span>
+</div>
+<div>
+<strong>What Makes It Sparkle</strong>
+<p>Its shimmer comes from reflective mineral plates within the quartz-rich material. In green aventurine, fuchsite mica commonly contributes both color and aventurescence.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+</div>
+<div>
+<strong>Natural Color Can Be Enhanced</strong>
+<p>Commercial green aventurine may be oiled, dyed, or polymer-treated to deepen color or improve translucency. Treatment is not universal, but unusually even color deserves scrutiny.</p>
+</div>
+</div>
+<div class="note-row">
+<div class="note-icon">
+<span aria-hidden="true" class="enc-icon icon-aperture-iris"></span>
+</div>
+<div>
+<strong>Often Confused With Jade</strong>
+<p>Green aventurine may resemble jade, green glass, or other ornamental stones. Granular texture and mica sparkle offer clues, while gemological testing provides the most reliable identification.</p>
+</div>
+</div>
+</div>
+</section>
+</aside><!-- /right-rail -->
+</div><!-- /content-grid -->
+<!-- ENTRY NAV -->
+<nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
+<a class="entry-nav-link" href="green-aragonite.html">
+<span>←</span>
+<div>
+<small>Previous</small>
+<b>Green Aragonite</b>
+</div>
+</a>
+<a class="entry-nav-link entry-nav-random" href="#">
+<div>
+<small>Random</small>
+<b>Surprise me</b>
+</div>
+</a>
+<a class="entry-nav-link" href="green-calcite.html">
+<div>
+<small>Next</small>
+<b>Green Calcite</b>
+</div>
+<span>→</span>
+</a>
+</nav>
+<!-- BOTTOM CTA -->
+<div class="enc-cta">
+<div>
+<h3>The right stone. The right moment.</h3>
+<p>Explore 333 entries with clarity, care, and curiosity.</p>
+</div>
+<button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+</div>
+</main>
+</div><!-- /enc-page -->
+<footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
+<div style="max-width:520px;margin:0 auto">
+<div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+<a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+<div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
+<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+<div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+<a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
+</div>
+</div>
+<div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+    © 2026 Still Point {technodelic} Studio
+  </div>
+</footer>
+</div><!-- /app-shell -->
+<script>
+/* Scroll-spy: highlight the active sidebar nav link */
+(function () {
+  const sections = ['hero', 'overview', 'reach', 'glance', 'themes', 'mineral', 'notes', 'related'];
+  const navLinks  = document.querySelectorAll('.side-nav a');
+  const hrefs     = Array.from(navLinks).map(a => a.getAttribute('href').replace('#',''));
+
+  function onScroll () {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 160) current = id;
+    });
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href').replace('#','');
+      a.classList.toggle('active', href === current || (current === 'hero' && href === 'top'));
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+<script src="enc-nav.js"></script>
+</body>
+</html>
