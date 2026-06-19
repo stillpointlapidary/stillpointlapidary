@@ -5,7 +5,8 @@
     'carnelian',
     'clear-quartz',
     'labradorite',
-    'smoky-quartz'
+    'smoky-quartz',
+    'green-aventurine'
   ];
 
   var current = document.documentElement.dataset.stoneSlug || '';
