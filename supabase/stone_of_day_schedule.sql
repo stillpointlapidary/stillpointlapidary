@@ -27,7 +27,7 @@ create policy "Stone of day schedule is publicly readable"
   using (is_active = true);
 
 -- Optional convenience function for simple database-side schedule generation.
--- This prioritizes internal Tier 0, then collection Tier 1, then the rest.
+-- This prioritizes collection Tier 1, then the rest.
 -- For image-aware scheduling, use generate_stone_of_day_seed.js instead.
 create or replace function public.generate_stone_of_day_schedule(
   start_date date default current_date,
@@ -48,7 +48,6 @@ begin
       id as stone_id,
       row_number() over (
         order by
-          case when coalesce(internal_tier::text, '') = '0' then 0 else 1 end,
           case when coalesce(collection_tier, 99) in (0, 1) then 0 else 1 end,
           coalesce(collection_tier, 99),
           name,

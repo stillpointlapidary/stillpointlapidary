@@ -57,7 +57,7 @@ async function main() {
   const supabase = createClient(supabaseUrl, supabaseKey);
   const { data, error } = await supabase
     .from('stones')
-    .select('id,name,collection_tier,internal_tier')
+    .select('id,name,collection_tier')
     .order('name');
 
   if (error) throw error;
@@ -67,9 +67,6 @@ async function main() {
   if (requireImage && withImages.length) stones = withImages;
 
   stones.sort((a, b) => {
-    const ai = String(a.internal_tier ?? '') === '0' ? 0 : 1;
-    const bi = String(b.internal_tier ?? '') === '0' ? 0 : 1;
-    if (ai !== bi) return ai - bi;
     const at = Number(a.collection_tier ?? 99);
     const bt = Number(b.collection_tier ?? 99);
     const ar = (at === 0 || at === 1) ? 0 : 1;
