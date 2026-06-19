@@ -499,6 +499,20 @@
   line-height: 1.72;
 }
 
+/* Common Localities — two-column layout (desktop only) */
+.mineral-formation .common-localities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 0;
+  padding-left: 18px;
+}
+@media (max-width: 600px) {
+  .mineral-formation .common-localities {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── RELATED STONES ── */
 .related-grid {
   display: grid;
@@ -1065,6 +1079,9 @@
 <span aria-hidden="true" class="enc-icon icon-geology"></span>
             Mineral Profile
           </h2>
+<!-- Canonical mineral layout: mineral-facts rows (left) + mineral-formation (right).
+     Common Localities list must use <ul class="common-localities"> — one semantic <ul>,
+     two-column grid on desktop, single column on mobile. Do not use <br> or two <ul> elements. -->
 {{MINERAL_PROFILE_HTML}}
 <p class="mineral-note">Its signature optical effect, labradorescence, occurs when light reflects and scatters through microscopic internal layers. This produces shifting flashes that may appear blue, green, gold, orange, or violet depending on the angle of view. With a Mohs hardness of 6–6.5, Labradorite is durable enough for many uses but should still be protected from sharp impact and abrasion. Clean it gently with a soft cloth and store it separately from harder minerals that could scratch its surface.</p>
 </article>
