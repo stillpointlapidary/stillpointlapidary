@@ -3,6 +3,7 @@
   var STONES = [
     'amethyst',
     'carnelian',
+    'citrine',
     'clear-quartz',
     'labradorite',
     'smoky-quartz',

@@ -139,7 +139,11 @@ Citrine’s warm character is traditionally associated with lightness, encourage
 
 Citrine is a macrocrystalline variety of quartz with the composition SiO₂, a trigonal crystal system, and a Mohs hardness of 7. It has no true cleavage and typically shows conchoidal fracture. Its yellow to amber color is linked to iron-related color centers. Natural citrine occurs in igneous and metamorphic rocks and in hydrothermal veins, while most commercial material is produced by heating amethyst. Deep orange-red material sold as Madeira Citrine is usually heat-treated and valued for saturation rather than natural color origin.
 
-Citrine is stable under ordinary conditions, but prolonged intense light may fade some material and sustained heat can alter color. Clean with mild soap, lukewarm water, and a soft cloth. Avoid steam, harsh chemicals, sudden temperature changes, and sharp impacts that could chip crystal points or edges.
+Look for lively, even color, good transparency, and crystal surfaces or cutting that show the material clearly. Most citrine on the market is heat-treated amethyst, which is accepted and generally affordable, but sellers should disclose treatment rather than price it as rare natural-color citrine; visible damage, heavy color zoning, and misleading claims should weigh against a premium price.
+
+Citrine is yellow-to-orange quartz with a Mohs hardness of 7, and it is sometimes confused with yellow topaz, glass, or other golden stones. Topaz is harder, heavier, and usually more expensive, while glass may show rounded wear, bubbles, or a less natural-looking surface; color alone cannot reliably prove that citrine is untreated.
+
+Commercial citrine is widely available because much of it is produced by heating amethyst, and large polished pieces, carvings, and faceted stones can remain relatively affordable. Natural-color crystals are much less common, with collectible material appearing from localities including Zambia, the Democratic Republic of the Congo, Madagascar, and Brazil; confirmed natural color, strong form, clarity, condition, and documented provenance can raise the price substantially.
 
 ### Common Localities
 - Brazil
@@ -159,7 +163,7 @@ Citrine is stable under ordinary conditions, but prolonged intense light may fad
 Citrine’s enduring association with commerce and prosperity earned it the popular name Merchant’s Stone. The label belongs to modern crystal tradition rather than mineralogy, but it captures the stone’s long-standing use in shops, offices, financial rituals, and goal-oriented practices.
 
 #### Most Commercial Citrine Is Treated
-Natural pale yellow citrine is relatively uncommon. Much of the gold and orange material sold commercially begins as amethyst and is heated to alter its color centers. The treatment is stable and widely accepted, but responsible sellers should disclose it.
+Natural pale yellow citrine is relatively uncommon. Much of the gold and orange material sold commercially begins as amethyst and is heated to alter its color centers.
 
 #### Madeira Citrine
 Madeira Citrine is a trade name for deeply saturated orange to reddish-orange quartz, usually produced by heating dark amethyst. The name refers to the color of Madeira wine, not to a geographic source, and finer saturated examples often command higher prices.

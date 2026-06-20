@@ -215,11 +215,12 @@
 
 /* Signature Line — unlabeled, no icon, no prefix */
 .stone-signature {
-  font-family: 'Jost', sans-serif;
-  font-size: 15.5px;
-  font-weight: 300;
-  color: var(--ink2);
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 400;
   line-height: 1.5;
+  color: var(--ink2);
   margin: 0 0 18px;
 }
 
@@ -376,7 +377,7 @@
 }
 .glance-value {
   font-family: 'Jost', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink);
   line-height: 1.45;
 }
@@ -389,28 +390,76 @@
   letter-spacing: 0.02em;
 }
 
-/* ── TWO-COLUMN CONTENT GRID — named grid-template-areas per §1.1 (locked 2026-06-19) ── */
+/* ── TWO-COLUMN CONTENT LAYOUT — independent flex stacks ── */
 .content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  grid-template-areas:
-    "overview themes"
-    "reach    themes"
-    "mineral  notes"
-    "related  care";
-  gap: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
   align-items: stretch;
 }
-
-#overview { grid-area: overview; }
-#reach    { grid-area: reach; }
-#themes   { grid-area: themes;  align-self: start; }
-#mineral  { grid-area: mineral; align-self: start; }
-#notes    { grid-area: notes;   align-self: start; }
-#care     { grid-area: care;    align-self: start; }
-#related  { grid-area: related; }
-#care h2 { font-size: 15px; letter-spacing: 0.04em; }
-#care .care-list { font-size: 13px; line-height: 1.6; color: var(--ink2); }
+.content-stack-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  height: 100%;
+}
+.content-stack-right {
+  width: 340px;
+  flex: 0 0 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.care-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ck-wash);
+}
+.care-cell {
+  padding: 14px 16px;
+  border-right: 0.5px solid var(--ck-wash-border);
+  border-bottom: 0.5px solid var(--ck-wash-border);
+}
+.care-cell:nth-child(even) {
+  border-right: none;
+}
+.care-cell:nth-child(n+3) {
+  border-bottom: none;
+}
+.care-cell-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.care-cell-head .enc-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--ck-accent);
+  flex-shrink: 0;
+}
+.care-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.care-cell p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink2);
+  margin: 0;
+}
 
 /* ── ARTICLE SECTION CARDS ── */
 .enc-card {
@@ -479,7 +528,7 @@
   gap: 8px;
   padding: 7px 0;
   border-bottom: 0.5px solid var(--border2);
-  font-size: 13px;
+  font-size: 14px;
 }
 .mineral-fact:last-of-type { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
@@ -489,12 +538,15 @@
   line-height: 1.75;
   color: var(--ink2);
   margin-top: 20px;
-  padding-top: 18px;
-  border-top: 0.5px solid var(--border);
+}
+.mineral-note + .mineral-note {
+  margin-top: 14px;
+  padding-top: 0;
+  border-top: none;
 }
 .mineral-formation h4 {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
@@ -502,7 +554,7 @@
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p { font-size: 13px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
+.mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 12px; }
 
 /* Common Localities — canonical two-column desktop layout */
 .mineral-formation .common-localities {
@@ -512,8 +564,9 @@
   row-gap: 0;
   padding-left: 18px;
   margin: 0;
+  margin-bottom: 16px;
 }
-.mineral-formation .common-localities li { font-size: 13px; color: var(--ink2); line-height: 1.72; }
+.mineral-formation .common-localities li { font-size: 14px; color: var(--ink2); line-height: 1.72; }
 
 /* Related Stones */
 .related-grid {
@@ -540,7 +593,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 7px 0;
+  padding: 12px 0;
   text-decoration: none;
   color: inherit;
   border-bottom: 0.5px solid var(--border2);
@@ -568,10 +621,11 @@
   font-size: 17px;
   font-weight: 400;
   color: var(--ink);
+  margin-bottom: 10px;
 }
 .stone-reason {
   display: block;
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--ink2);
   line-height: 1.42;
 }
@@ -586,12 +640,9 @@
   display: flex;
   flex-direction: column;
 }
-/* Flex body distributes leftover height across tier groups / note rows */
 .rail-card-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .rail-card h2 {
   font-family: Georgia, serif;
@@ -624,9 +675,8 @@
   grid-template-columns: 40px 1fr;
   gap: 10px;
   align-items: start;
-  margin-bottom: 10px;
 }
-.theme-row + .theme-row { margin-top: 10px; }
+.theme-row + .theme-row { margin-top: 16px; }
 .theme-icon-tile {
   width: 40px;
   height: 40px;
@@ -647,7 +697,7 @@
   color: var(--ink);
   line-height: 1.1;
 }
-.theme-row p { font-size: 12px; color: var(--ink2); margin: 0; line-height: 1.58; }
+.theme-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.58; }
 .theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 14px 0 0; }
 .occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .occ-tag {
@@ -662,10 +712,9 @@
 
 /* Collector & Curiosity Notes */
 .note-list {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 8px;
 }
 .note-row {
   display: grid;
@@ -691,14 +740,14 @@
 .note-row strong {
   display: block;
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
   color: var(--ink);
   margin-bottom: 4px;
 }
-.note-row p { font-size: 12.5px; color: var(--ink2); margin: 0; line-height: 1.62; }
+.note-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.62; }
 
 /* ── ENTRY NAV ── */
 .entry-nav-wrap {
@@ -813,16 +862,21 @@
   .enc-hero { grid-template-columns: 1fr; gap: 24px; }
   .stone-photo-wrap { aspect-ratio: 16 / 9; max-height: 300px; }
   .content-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "overview"
-      "reach"
-      "themes"
-      "mineral"
-      "notes"
-      "care"
-      "related";
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
   }
+  .content-stack-left,
+  .content-stack-right {
+    display: contents;
+  }
+  #overview { order: 1; }
+  #reach    { order: 2; }
+  #themes   { order: 3; }
+  #mineral  { order: 4; }
+  #notes    { order: 5; }
+  #care     { order: 6; }
+  #related  { order: 7; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
   .glance-item { border-right: 0; padding: 0 8px; }
   .mineral-layout { grid-template-columns: 1fr; }
@@ -1042,11 +1096,14 @@
 
 
     <!-- ═══════════════════════════════════════
-         TWO-COLUMN CONTENT GRID
-         DOM order (§1, §1.1, locked 2026-06-19):
-         Overview · Why People Reach For It · Energetic Themes · Mineral Profile · Collector Notes · Related Stones
+         TWO-COLUMN CONTENT LAYOUT
+         Left stack: Overview · Why People Reach For It · Mineral Profile · Related Stones
+         Right stack: Energetic Themes · Collector Notes · Care & Cleansing
+         Mobile order via CSS order property (display:contents on stacks)
          ═══════════════════════════════════════ -->
     <div class="content-grid">
+
+      <div class="content-stack-left">
 
         <!-- ═══════════════════════════════════
              SECTION 3 — OVERVIEW
@@ -1093,6 +1150,98 @@
           </div>
         </article>
 
+        <!-- ═══════════════════════════════════
+             SECTION 6 — MINERAL PROFILE
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="mineral">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-geology"></span>
+            Mineral Profile
+          </h2>
+          <div class="mineral-layout">
+            <div class="mineral-facts">
+              <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
+              <div class="mineral-fact"><span>Chemical Formula</span><span>SiO₂</span></div>
+              <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
+              <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
+              <div class="mineral-fact"><span>Cleavage</span><span>None</span></div>
+              <div class="mineral-fact"><span>Fracture</span><span>Conchoidal</span></div>
+              <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
+              <div class="mineral-fact"><span>Transparency</span><span>Transparent to translucent</span></div>
+            </div>
+            <div class="mineral-formation">
+              <h4>Formation</h4>
+              <p>Citrine is a macrocrystalline variety of quartz colored by iron-related color centers. It occurs naturally in igneous and metamorphic rocks and in hydrothermal veins. Most commercial material is produced by heating amethyst, which shifts its color from purple to yellow-orange. Deep orange-red material sold as Madeira Citrine is usually heat-treated and valued for saturation rather than natural color origin.</p>
+              <h4>Common Localities</h4>
+              <ul class="common-localities">
+                <li>Brazil</li>
+                <li>Madagascar</li>
+                <li>Russia</li>
+                <li>Scotland</li>
+                <li>Spain</li>
+                <li>United States</li>
+              </ul>
+            </div>
+          </div>
+          <p class="mineral-note">Look for lively, even color, good transparency, and crystal surfaces or cutting that show the material clearly. Most citrine on the market is heat-treated amethyst, which is accepted and generally affordable, but sellers should disclose treatment rather than price it as rare natural-color citrine; visible damage, heavy color zoning, and misleading claims should weigh against a premium price.</p>
+
+          <p class="mineral-note">Citrine is yellow-to-orange quartz with a Mohs hardness of 7, and it is sometimes confused with yellow topaz, glass, or other golden stones. Topaz is harder, heavier, and usually more expensive, while glass may show rounded wear, bubbles, or a less natural-looking surface; color alone cannot reliably prove that citrine is untreated.</p>
+
+          <p class="mineral-note">Commercial citrine is widely available because much of it is produced by heating amethyst, and large polished pieces, carvings, and faceted stones can remain relatively affordable. Natural-color crystals are much less common, with collectible material appearing from localities including Zambia, the Democratic Republic of the Congo, Madagascar, and Brazil; confirmed natural color, strong form, clarity, condition, and documented provenance can raise the price substantially.</p>
+        </article>
+
+        <!-- ═══════════════════════════════════
+             SECTION 9 — RELATED STONES
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="related">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-stones-row"></span>
+            Related Stones
+          </h2>
+          <div class="related-grid">
+
+            <div class="rel-card">
+              <div class="rel-card-head">Similar Energy</div>
+              <a class="stone-link-row" href="sunstone.html">
+                <span class="stone-dot-circle stone-dot-sunstone"></span>
+                <div>
+                  <b>Sunstone</b>
+                  <span class="stone-reason">Both support confidence and outward momentum; Sunstone emphasizes radiance and vitality, while Citrine centers more directly on abundance and purposeful action.</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="yellow-aventurine.html">
+                <span class="stone-dot-circle stone-dot-yellow-aventurine"></span>
+                <div>
+                  <b>Yellow Aventurine</b>
+                  <span class="stone-reason">Both carry warm, optimistic energy; Yellow Aventurine feels gentler and growth-oriented, while Citrine is more activating and closely tied to prosperity.</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="rel-card">
+              <div class="rel-card-head">Pairs Well With</div>
+              <a class="stone-link-row" href="green-aventurine.html">
+                <span class="stone-dot-circle stone-dot-green-aventurine"></span>
+                <div>
+                  <b>Green Aventurine</b>
+                  <span class="stone-reason">Combines Citrine's confidence and manifestation focus with Green Aventurine's associations with growth, opportunity, and steady prosperity.</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="tigers-eye.html">
+                <span class="stone-dot-circle stone-dot-tigers-eye"></span>
+                <div>
+                  <b>Tiger's Eye</b>
+                  <span class="stone-reason">Adds grounding, discernment, and follow-through to Citrine's expansive momentum, helping ambition stay practical and sustained.</span>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </article>
+
+      </div><!-- /content-stack-left -->
+
+      <div class="content-stack-right">
 
         <!-- ═══════════════════════════════════
              SECTION 5 — ENERGETIC THEMES
@@ -1151,7 +1300,7 @@
                 </div>
                 <div>
                   <h3>Optimism and Positive Energy</h3>
-                  <p>Citrine's warm character is traditionally associated with lightness, encouragement, and renewed engagement, especially when discouragement has made effort feel heavier than necessary.</p>
+                  <p>Citrine's warm character is associated with lightness, encouragement, and renewed engagement, especially when discouragement has made effort feel heavier than necessary.</p>
                 </div>
               </div>
             </div><!-- /theme-tier-group Secondary -->
@@ -1170,44 +1319,6 @@
 
         </section><!-- /ENERGETIC THEMES -->
 
-
-        <!-- ═══════════════════════════════════
-             SECTION 6 — MINERAL PROFILE
-             ═══════════════════════════════════ -->
-        <article class="enc-card" id="mineral">
-          <h2>
-            <span aria-hidden="true" class="enc-icon icon-geology"></span>
-            Mineral Profile
-          </h2>
-          <div class="mineral-layout">
-            <div class="mineral-facts">
-              <div class="mineral-fact"><span>Mineral Family</span><span>Quartz</span></div>
-              <div class="mineral-fact"><span>Chemical Formula</span><span>SiO₂</span></div>
-              <div class="mineral-fact"><span>Crystal System</span><span>Trigonal</span></div>
-              <div class="mineral-fact"><span>Mohs Hardness</span><span>7</span></div>
-              <div class="mineral-fact"><span>Cleavage</span><span>None</span></div>
-              <div class="mineral-fact"><span>Fracture</span><span>Conchoidal</span></div>
-              <div class="mineral-fact"><span>Luster</span><span>Vitreous</span></div>
-              <div class="mineral-fact"><span>Transparency</span><span>Transparent to translucent</span></div>
-            </div>
-            <div class="mineral-formation">
-              <h4>Formation</h4>
-              <p>Citrine is a macrocrystalline variety of quartz colored by iron-related color centers. It occurs naturally in igneous and metamorphic rocks and in hydrothermal veins. Most commercial material is produced by heating amethyst, which shifts its color from purple to yellow-orange. Deep orange-red material sold as Madeira Citrine is usually heat-treated and valued for saturation rather than natural color origin.</p>
-              <h4>Common Localities</h4>
-              <ul class="common-localities">
-                <li>Brazil</li>
-                <li>Madagascar</li>
-                <li>Russia</li>
-                <li>Scotland</li>
-                <li>Spain</li>
-                <li>United States</li>
-              </ul>
-            </div>
-          </div>
-          <p class="mineral-note">Citrine is stable under ordinary conditions, but prolonged intense light may fade some material and sustained heat can alter color. Clean with mild soap, lukewarm water, and a soft cloth. Avoid steam, harsh chemicals, sudden temperature changes, and sharp impacts that could chip crystal points or edges.</p>
-        </article>
-
-
         <!-- ═══════════════════════════════════
              SECTION 7 — COLLECTOR & CURIOSITY NOTES
              ═══════════════════════════════════ -->
@@ -1225,7 +1336,7 @@
                 </div>
                 <div>
                   <strong>The Merchant's Stone</strong>
-                  <p>Citrine's enduring association with commerce and prosperity earned it the popular name Merchant's Stone. The label belongs to modern crystal tradition rather than mineralogy, but it captures the stone's long-standing use in shops, offices, financial rituals, and goal-oriented practices.</p>
+                  <p>Citrine's enduring association with commerce and prosperity earned it the popular name Merchant's Stone. The label belongs to modern crystal tradition rather than mineralogy, but it captures the stone's long-standing use in shops, offices, and financial rituals.</p>
                 </div>
               </div>
 
@@ -1235,7 +1346,7 @@
                 </div>
                 <div>
                   <strong>Most Commercial Citrine Is Treated</strong>
-                  <p>Natural pale yellow citrine is relatively uncommon. Much of the gold and orange material sold commercially begins as amethyst and is heated to alter its color centers. The treatment is stable and widely accepted, but responsible sellers should disclose it.</p>
+                  <p>Natural pale yellow citrine is relatively uncommon. Much of the gold and orange material sold commercially begins as amethyst and is heated to alter its color centers.</p>
                 </div>
               </div>
 
@@ -1245,7 +1356,7 @@
                 </div>
                 <div>
                   <strong>Madeira Citrine</strong>
-                  <p>Madeira Citrine is a trade name for deeply saturated orange to reddish-orange quartz, usually produced by heating dark amethyst. The name refers to the color of Madeira wine, not to a geographic source, and finer saturated examples often command higher prices.</p>
+                  <p>Madeira Citrine is a trade name for deeply saturated orange to reddish-orange quartz, usually produced by heating dark amethyst. The name refers to the color of Madeira wine, not a geographic source, and finer examples often command higher prices.</p>
                 </div>
               </div>
 
@@ -1273,64 +1384,40 @@
             Care &amp; Cleansing
           </h2>
           <div class="rail-card-body">
-            <ul class="care-list">
-              <li>Safe to clean with mild soap and lukewarm water; dry thoroughly</li>
-              <li>Avoid steam, harsh chemicals, and sudden temperature changes</li>
-              <li>Prolonged intense light or sustained heat may fade color</li>
-              <li>Mohs hardness 7 — avoid sharp impacts that could chip points or edges</li>
-            </ul>
+            <div class="care-grid">
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+                  <span class="care-label">Cleaning</span>
+                </div>
+                <p>Wipe with a soft cloth; mild soap and lukewarm water when needed. Dry thoroughly.</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-element"></span>
+                  <span class="care-label">Water</span>
+                </div>
+                <p>Brief water contact is safe. Avoid soaking, steam, and ultrasonic cleaners.</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-celestial"></span>
+                  <span class="care-label">Light &amp; Heat</span>
+                </div>
+                <p>Prolonged intense light or sustained heat may fade color. Avoid extended sun exposure.</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-geology"></span>
+                  <span class="care-label">Storage</span>
+                </div>
+                <p>Mohs 7 — store away from harder stones and abrasive surfaces. Wrap or pouch separately.</p>
+              </div>
+            </div>
           </div>
         </section><!-- /CARE & CLEANSING -->
 
-
-        <!-- ═══════════════════════════════════
-             SECTION 9 — RELATED STONES
-             ═══════════════════════════════════ -->
-        <article class="enc-card" id="related">
-          <h2>
-            <span aria-hidden="true" class="enc-icon icon-stones-row"></span>
-            Related Stones
-          </h2>
-          <div class="related-grid">
-
-            <div class="rel-card">
-              <div class="rel-card-head">Similar Energy</div>
-              <a class="stone-link-row" href="sunstone.html">
-                <span class="stone-dot-circle stone-dot-sunstone"></span>
-                <div>
-                  <b>Sunstone</b>
-                  <span class="stone-reason">Both support confidence and outward momentum; Sunstone emphasizes radiance and vitality, while Citrine centers more directly on abundance and purposeful action.</span>
-                </div>
-              </a>
-              <a class="stone-link-row" href="yellow-aventurine.html">
-                <span class="stone-dot-circle stone-dot-yellow-aventurine"></span>
-                <div>
-                  <b>Yellow Aventurine</b>
-                  <span class="stone-reason">Both carry warm, optimistic energy; Yellow Aventurine feels gentler and growth-oriented, while Citrine is more activating and closely tied to prosperity.</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="rel-card">
-              <div class="rel-card-head">Pairs Well With</div>
-              <a class="stone-link-row" href="green-aventurine.html">
-                <span class="stone-dot-circle stone-dot-green-aventurine"></span>
-                <div>
-                  <b>Green Aventurine</b>
-                  <span class="stone-reason">Combines Citrine's confidence and manifestation focus with Green Aventurine's associations with growth, opportunity, and steady prosperity.</span>
-                </div>
-              </a>
-              <a class="stone-link-row" href="tigers-eye.html">
-                <span class="stone-dot-circle stone-dot-tigers-eye"></span>
-                <div>
-                  <b>Tiger's Eye</b>
-                  <span class="stone-reason">Adds grounding, discernment, and follow-through to Citrine's expansive momentum, helping ambition stay practical and sustained.</span>
-                </div>
-              </a>
-            </div>
-
-          </div>
-        </article>
+      </div><!-- /content-stack-right -->
 
     </div><!-- /content-grid -->
 
@@ -1398,7 +1485,7 @@
 
 <script>
 /* Scroll-spy: highlight the active sidebar nav link.
-   Section order: hero, glance, overview, reach, themes, mineral, notes, related */
+   Section order: hero, glance, overview, reach, themes, mineral, notes, care, related */
 (function () {
   var sections = ['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'care', 'related'];
   var navLinks  = document.querySelectorAll('.side-nav a');

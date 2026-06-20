@@ -217,11 +217,12 @@
 
 /* Signature Line — unlabeled, no icon, no prefix */
 .stone-signature {
-  font-family: 'Jost', sans-serif;
-  font-size: 15.5px;
-  font-weight: 300;
-  color: var(--ink2);
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 400;
   line-height: 1.5;
+  color: var(--ink2);
   margin: 0 0 18px;
 }
 
@@ -378,7 +379,7 @@
 }
 .glance-value {
   font-family: 'Jost', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink);
   line-height: 1.45;
 }
@@ -391,30 +392,77 @@
   letter-spacing: 0.02em;
 }
 
-/* ── TWO-COLUMN CONTENT GRID — named grid-template-areas per §1.1 (locked 2026-06-19) ──
-   All 6 sections are siblings in one grid, in §1 DOM order.
-   Desktop two-column visual is achieved via CSS Grid placement only — no wrapper elements. */
+/* ── TWO-COLUMN CONTENT LAYOUT — independent flex stacks ── */
 .content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  grid-template-areas:
-    "overview themes"
-    "reach    themes"
-    "mineral  notes"
-    "related  care";
-  gap: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
   align-items: stretch;
 }
-
-#overview { grid-area: overview; }
-#reach    { grid-area: reach; }
-#themes   { grid-area: themes;  align-self: start; }
-#mineral  { grid-area: mineral; align-self: start; }
-#notes    { grid-area: notes;   align-self: start; }
-#care     { grid-area: care;    align-self: start; }
-#related  { grid-area: related; }
-#care h2 { font-size: 15px; letter-spacing: 0.04em; }
-#care .care-list { font-size: 13px; line-height: 1.6; color: var(--ink2); }
+.content-stack-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  height: 100%;
+}
+.content-stack-right {
+  width: 340px;
+  flex: 0 0 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#care { margin-top: 16px; }
+.care-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ck-wash);
+}
+.care-cell {
+  padding: 14px 16px;
+  border-right: 0.5px solid var(--ck-wash-border);
+  border-bottom: 0.5px solid var(--ck-wash-border);
+}
+.care-cell:nth-child(even) {
+  border-right: none;
+}
+.care-cell:nth-child(n+3) {
+  border-bottom: none;
+}
+.care-cell-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.care-cell-head .enc-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--ck-accent);
+  flex-shrink: 0;
+}
+.care-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.care-cell p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink2);
+  margin: 0;
+}
 
 /* ── ARTICLE SECTION CARDS ── */
 .enc-card {
@@ -483,7 +531,7 @@
   gap: 8px;
   padding: 7px 0;
   border-bottom: 0.5px solid var(--border2);
-  font-size: 13px;
+  font-size: 14px;
 }
 .mineral-fact:last-of-type { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
@@ -493,12 +541,15 @@
   line-height: 1.75;
   color: var(--ink2);
   margin-top: 20px;
-  padding-top: 18px;
-  border-top: 0.5px solid var(--border);
+}
+.mineral-note + .mineral-note {
+  margin-top: 14px;
+  padding-top: 0;
+  border-top: none;
 }
 .mineral-formation h4 {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
@@ -506,7 +557,7 @@
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p { font-size: 13px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
+.mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
 
 /* Common Localities — canonical two-column desktop layout */
 .mineral-formation .common-localities {
@@ -516,8 +567,9 @@
   row-gap: 0;
   padding-left: 18px;
   margin: 0;
+  margin-bottom: 16px;
 }
-.mineral-formation .common-localities li { font-size: 13px; color: var(--ink2); line-height: 1.72; }
+.mineral-formation .common-localities li { font-size: 14px; color: var(--ink2); line-height: 1.72; }
 
 /* Related Stones */
 .related-grid {
@@ -544,7 +596,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 7px 0;
+  padding: 12px 0;
   text-decoration: none;
   color: inherit;
   border-bottom: 0.5px solid var(--border2);
@@ -565,10 +617,11 @@
   font-size: 17px;
   font-weight: 400;
   color: var(--ink);
+  margin-bottom: 10px;
 }
 .stone-reason {
   display: block;
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--ink2);
   line-height: 1.42;
 }
@@ -583,12 +636,9 @@
   display: flex;
   flex-direction: column;
 }
-/* Flex body distributes leftover height across tier groups / note rows */
 .rail-card-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .rail-card h2 {
   font-family: Georgia, serif;
@@ -621,9 +671,8 @@
   grid-template-columns: 40px 1fr;
   gap: 10px;
   align-items: start;
-  margin-bottom: 10px;
 }
-.theme-row + .theme-row { margin-top: 10px; }
+.theme-row + .theme-row { margin-top: 16px; }
 .theme-icon-tile {
   width: 40px;
   height: 40px;
@@ -644,7 +693,7 @@
   color: var(--ink);
   line-height: 1.1;
 }
-.theme-row p { font-size: 12px; color: var(--ink2); margin: 0; line-height: 1.58; }
+.theme-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.58; }
 .theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 14px 0 0; }
 .occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .occ-tag {
@@ -659,10 +708,9 @@
 
 /* Collector & Curiosity Notes */
 .note-list {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 8px;
 }
 .note-row {
   display: grid;
@@ -688,14 +736,14 @@
 .note-row strong {
   display: block;
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
   color: var(--ink);
   margin-bottom: 4px;
 }
-.note-row p { font-size: 12.5px; color: var(--ink2); margin: 0; line-height: 1.62; }
+.note-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.62; }
 
 /* ── ENTRY NAV ── */
 .entry-nav-wrap {
@@ -810,16 +858,20 @@
   .enc-hero { grid-template-columns: 1fr; gap: 24px; }
   .stone-photo-wrap { aspect-ratio: 16 / 9; max-height: 300px; }
   .content-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "overview"
-      "reach"
-      "themes"
-      "mineral"
-      "notes"
-      "care"
-      "related";
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
   }
+  .content-stack-left,
+  .content-stack-right {
+    display: contents;
+  }
+  #overview { order: 1; }
+  #reach    { order: 2; }
+  #themes   { order: 3; }
+  #mineral  { order: 4; }
+  #notes    { order: 5; }
+  #related  { order: 6; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
   .glance-item { border-right: 0; padding: 0 8px; }
   .mineral-layout { grid-template-columns: 1fr; }
@@ -1057,12 +1109,14 @@
 
 
     <!-- ═══════════════════════════════════════
-         TWO-COLUMN CONTENT GRID
-         DOM order (§1, §1.1, locked 2026-06-19):
-         Overview · Why People Reach For It · Energetic Themes · Mineral Profile · Collector Notes · Related Stones
-         Desktop two-column visual achieved via grid-template-areas — no wrapper elements.
+         TWO-COLUMN CONTENT LAYOUT
+         Left stack: Overview · Why People Reach For It · Mineral Profile · Related Stones
+         Right stack: Energetic Themes · Collector Notes · Care & Cleansing
+         Mobile order via CSS order property (display:contents on stacks)
          ═══════════════════════════════════════ -->
     <div class="content-grid">
+
+      <div class="content-stack-left">
 
         <!-- ═══════════════════════════════════
              SECTION 3 — OVERVIEW
@@ -1115,6 +1169,103 @@
           </div>
         </article>
 
+        <!-- ═══════════════════════════════════
+             SECTION 6 — MINERAL PROFILE
+             Architecture contract §7
+             Formation paragraph + lower note + Common Localities
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="mineral">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-geology"></span>
+            Mineral Profile
+          </h2>
+          <div class="mineral-layout">
+            <!-- Fact rows — include rows relevant to this stone; remove inapplicable rows -->
+            <div class="mineral-facts">
+              <div class="mineral-fact"><span>Mineral Family</span><span>{{MINERAL_FAMILY}}</span></div>
+              <div class="mineral-fact"><span>Chemical Formula</span><span>{{CHEMICAL_FORMULA}}</span></div>
+              <div class="mineral-fact"><span>Crystal System</span><span>{{CRYSTAL_SYSTEM}}</span></div>
+              <div class="mineral-fact"><span>Mohs Hardness</span><span>{{MOHS_HARDNESS}}</span></div>
+              <div class="mineral-fact"><span>Cleavage</span><span>{{CLEAVAGE}}</span></div>
+              <div class="mineral-fact"><span>Fracture</span><span>{{FRACTURE}}</span></div>
+              <div class="mineral-fact"><span>Luster</span><span>{{LUSTER}}</span></div>
+              <div class="mineral-fact"><span>Transparency</span><span>{{TRANSPARENCY}}</span></div>
+            </div>
+            <!-- Formation paragraph and localities -->
+            <div class="mineral-formation">
+              <h4>Formation</h4>
+              <p>{{FORMATION_PARAGRAPH}}</p>
+              <h4>Common Localities</h4>
+              <!-- Two-column desktop layout per contract canonical pattern -->
+              <ul class="common-localities">
+                <li>{{LOCALITY_1}}</li>
+                <li>{{LOCALITY_2}}</li>
+                <li>{{LOCALITY_3}}</li>
+                <li>{{LOCALITY_4}}</li>
+                <li>{{LOCALITY_5}}</li>
+                <li>{{LOCALITY_6}}</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Lower note: care, treatments, additional mineralogical detail -->
+          <p class="mineral-note">{{LOWER_MINERAL_NOTE}}</p>
+        </article>
+
+        <!-- ═══════════════════════════════════
+             SECTION 9 — RELATED STONES
+             Architecture contract §9
+             Exactly 2 Similar Energy + 2 Pairs Well With (all 4 unique)
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="related">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-stones-row"></span>
+            Related Stones
+          </h2>
+          <div class="related-grid">
+
+            <div class="rel-card">
+              <div class="rel-card-head">Similar Energy</div>
+              <a class="stone-link-row" href="{{SIMILAR_1_SLUG}}.html">
+                <!-- {{SIMILAR_1_DOT_CLASS}}: a gradient class matching this stone's color, e.g. stone-dot-gold -->
+                <span class="stone-dot-circle {{SIMILAR_1_DOT_CLASS}}"></span>
+                <div>
+                  <b>{{SIMILAR_1_NAME}}</b>
+                  <span class="stone-reason">{{SIMILAR_1_REASON}}</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="{{SIMILAR_2_SLUG}}.html">
+                <span class="stone-dot-circle {{SIMILAR_2_DOT_CLASS}}"></span>
+                <div>
+                  <b>{{SIMILAR_2_NAME}}</b>
+                  <span class="stone-reason">{{SIMILAR_2_REASON}}</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="rel-card">
+              <div class="rel-card-head">Pairs Well With</div>
+              <a class="stone-link-row" href="{{PAIRS_1_SLUG}}.html">
+                <span class="stone-dot-circle {{PAIRS_1_DOT_CLASS}}"></span>
+                <div>
+                  <b>{{PAIRS_1_NAME}}</b>
+                  <span class="stone-reason">{{PAIRS_1_REASON}}</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="{{PAIRS_2_SLUG}}.html">
+                <span class="stone-dot-circle {{PAIRS_2_DOT_CLASS}}"></span>
+                <div>
+                  <b>{{PAIRS_2_NAME}}</b>
+                  <span class="stone-reason">{{PAIRS_2_REASON}}</span>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </article>
+
+      </div><!-- /content-stack-left -->
+
+      <div class="content-stack-right">
 
         <!-- ═══════════════════════════════════
              SECTION 5 — ENERGETIC THEMES
@@ -1200,50 +1351,6 @@
 
         </section><!-- /ENERGETIC THEMES -->
 
-
-        <!-- ═══════════════════════════════════
-             SECTION 6 — MINERAL PROFILE
-             Architecture contract §7
-             Formation paragraph + lower note + Common Localities
-             ═══════════════════════════════════ -->
-        <article class="enc-card" id="mineral">
-          <h2>
-            <span aria-hidden="true" class="enc-icon icon-geology"></span>
-            Mineral Profile
-          </h2>
-          <div class="mineral-layout">
-            <!-- Fact rows — include rows relevant to this stone; remove inapplicable rows -->
-            <div class="mineral-facts">
-              <div class="mineral-fact"><span>Mineral Family</span><span>{{MINERAL_FAMILY}}</span></div>
-              <div class="mineral-fact"><span>Chemical Formula</span><span>{{CHEMICAL_FORMULA}}</span></div>
-              <div class="mineral-fact"><span>Crystal System</span><span>{{CRYSTAL_SYSTEM}}</span></div>
-              <div class="mineral-fact"><span>Mohs Hardness</span><span>{{MOHS_HARDNESS}}</span></div>
-              <div class="mineral-fact"><span>Cleavage</span><span>{{CLEAVAGE}}</span></div>
-              <div class="mineral-fact"><span>Fracture</span><span>{{FRACTURE}}</span></div>
-              <div class="mineral-fact"><span>Luster</span><span>{{LUSTER}}</span></div>
-              <div class="mineral-fact"><span>Transparency</span><span>{{TRANSPARENCY}}</span></div>
-            </div>
-            <!-- Formation paragraph and localities -->
-            <div class="mineral-formation">
-              <h4>Formation</h4>
-              <p>{{FORMATION_PARAGRAPH}}</p>
-              <h4>Common Localities</h4>
-              <!-- Two-column desktop layout per contract canonical pattern -->
-              <ul class="common-localities">
-                <li>{{LOCALITY_1}}</li>
-                <li>{{LOCALITY_2}}</li>
-                <li>{{LOCALITY_3}}</li>
-                <li>{{LOCALITY_4}}</li>
-                <li>{{LOCALITY_5}}</li>
-                <li>{{LOCALITY_6}}</li>
-              </ul>
-            </div>
-          </div>
-          <!-- Lower note: care, treatments, additional mineralogical detail -->
-          <p class="mineral-note">{{LOWER_MINERAL_NOTE}}</p>
-        </article>
-
-
         <!-- ═══════════════════════════════════
              SECTION 7 — COLLECTOR & CURIOSITY NOTES
              Architecture contract §8
@@ -1314,81 +1421,52 @@
              No new editorial content. Items are short and scannable — one line each.
              DOM position: after Collector Notes, visually placed in right rail via grid-area: care
              ═══════════════════════════════════ -->
-        <section class="rail-card" id="care">
-          <h2>
-            <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
-            Care &amp; Cleansing
-          </h2>
-          <div class="rail-card-body">
-            <ul class="care-list">
-              <!--
-                Replace {{CARE_ITEMS}} with 3–4 bullet items drawn from the stone's
-                Mineral Profile care note. Do not invent new content.
-                Example items (from citrine.html):
-                  <li>Safe to clean with mild soap and lukewarm water; dry thoroughly</li>
-                  <li>Avoid steam, harsh chemicals, and sudden temperature changes</li>
-                  <li>Prolonged intense light or sustained heat may fade color</li>
-                  <li>Mohs hardness 7 — avoid sharp impacts that could chip points or edges</li>
-              -->
-              {{CARE_ITEMS}}
-            </ul>
-          </div>
-        </section><!-- /CARE & CLEANSING -->
-
-
-        <!-- ═══════════════════════════════════
-             SECTION 9 — RELATED STONES
-             Architecture contract §9
-             Exactly 2 Similar Energy + 2 Pairs Well With (all 4 unique)
-             ═══════════════════════════════════ -->
-        <article class="enc-card" id="related">
-          <h2>
-            <span aria-hidden="true" class="enc-icon icon-stones-row"></span>
-            Related Stones
-          </h2>
-          <div class="related-grid">
-
-            <div class="rel-card">
-              <div class="rel-card-head">Similar Energy</div>
-              <a class="stone-link-row" href="{{SIMILAR_1_SLUG}}.html">
-                <!-- {{SIMILAR_1_DOT_CLASS}}: a gradient class matching this stone's color, e.g. stone-dot-gold -->
-                <span class="stone-dot-circle {{SIMILAR_1_DOT_CLASS}}"></span>
-                <div>
-                  <b>{{SIMILAR_1_NAME}}</b>
-                  <span class="stone-reason">{{SIMILAR_1_REASON}}</span>
-                </div>
-              </a>
-              <a class="stone-link-row" href="{{SIMILAR_2_SLUG}}.html">
-                <span class="stone-dot-circle {{SIMILAR_2_DOT_CLASS}}"></span>
-                <div>
-                  <b>{{SIMILAR_2_NAME}}</b>
-                  <span class="stone-reason">{{SIMILAR_2_REASON}}</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="rel-card">
-              <div class="rel-card-head">Pairs Well With</div>
-              <a class="stone-link-row" href="{{PAIRS_1_SLUG}}.html">
-                <span class="stone-dot-circle {{PAIRS_1_DOT_CLASS}}"></span>
-                <div>
-                  <b>{{PAIRS_1_NAME}}</b>
-                  <span class="stone-reason">{{PAIRS_1_REASON}}</span>
-                </div>
-              </a>
-              <a class="stone-link-row" href="{{PAIRS_2_SLUG}}.html">
-                <span class="stone-dot-circle {{PAIRS_2_DOT_CLASS}}"></span>
-                <div>
-                  <b>{{PAIRS_2_NAME}}</b>
-                  <span class="stone-reason">{{PAIRS_2_REASON}}</span>
-                </div>
-              </a>
-            </div>
-
-          </div>
-        </article>
+      </div><!-- /content-stack-right -->
 
     </div><!-- /content-grid -->
+
+    <section class="rail-card" id="care">
+      <h2>
+        <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+        Care &amp; Cleansing
+      </h2>
+      <div class="rail-card-body">
+        <div class="care-grid">
+          <div class="care-cell">
+            <div class="care-cell-head">
+              <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+              <!-- Cell 1: Cleaning method — brief water + cloth instruction -->
+              <span class="care-label">Cleaning</span>
+            </div>
+            <p>{{CARE_CELL_1_CONTENT}}</p>
+          </div>
+          <div class="care-cell">
+            <div class="care-cell-head">
+              <span aria-hidden="true" class="enc-icon icon-element"></span>
+              <!-- Cell 2: Water safety — whether soaking, steam, or ultrasonic is safe -->
+              <span class="care-label">Water</span>
+            </div>
+            <p>{{CARE_CELL_2_CONTENT}}</p>
+          </div>
+          <div class="care-cell">
+            <div class="care-cell-head">
+              <span aria-hidden="true" class="enc-icon icon-celestial"></span>
+              <!-- Cell 3: Light & heat sensitivity — fading, color change risk -->
+              <span class="care-label">Light &amp; Heat</span>
+            </div>
+            <p>{{CARE_CELL_3_CONTENT}}</p>
+          </div>
+          <div class="care-cell">
+            <div class="care-cell-head">
+              <span aria-hidden="true" class="enc-icon icon-geology"></span>
+              <!-- Cell 4: Storage — hardness, scratch risk, pouching guidance -->
+              <span class="care-label">Storage</span>
+            </div>
+            <p>{{CARE_CELL_4_CONTENT}}</p>
+          </div>
+        </div>
+      </div>
+    </section><!-- /CARE & CLEANSING -->
 
 
     <!-- ═══════════════════════════════════════
@@ -1455,7 +1533,7 @@
 
 <script>
 /* Scroll-spy: highlight the active sidebar nav link.
-   Section order matches contract §1: hero, glance, overview, reach, themes, mineral, notes, related */
+   Section order matches contract §1: hero, glance, overview, reach, themes, mineral, notes, care, related */
 (function () {
   var sections = ['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'care', 'related'];
   var navLinks  = document.querySelectorAll('.side-nav a');
