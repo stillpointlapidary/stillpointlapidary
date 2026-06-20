@@ -301,3 +301,9 @@
   mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/zodiac.svg");
   -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/zodiac.svg");
 }
+
+
+.icon-care-cleansing {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
+}

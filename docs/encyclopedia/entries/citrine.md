@@ -321,3 +321,10 @@ Natural and heat-treated citrine are both quartz, but they reach their color thr
 - **Pairing slugs verified:** PASS — sunstone, yellow-aventurine, green-aventurine, tigers-eye
 - **Energetic Role icon resolves:** PASS — Manifestation → `manifestation.svg`
 - **HTML generation:** NOT AUTHORIZED — Christie must approve this MD first
+
+## Care & Cleansing
+
+- Safe to clean with mild soap and lukewarm water; dry thoroughly
+- Avoid steam, harsh chemicals, and sudden temperature changes
+- Prolonged intense light or sustained heat may fade color
+- Mohs hardness 7 — avoid sharp impacts that could chip points or edges

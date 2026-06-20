@@ -282,11 +282,7 @@
   color: var(--ink);
   line-height: 1.58;
 }
-/*
-  Affirmation visual treatment — italic + chakra accent color.
-  PILOT REVIEW ITEM: Christie to confirm this treatment.
-  No icon is assigned to Affirmation in the approved icon map (§12.1).
-*/
+/* Affirmation visual treatment — italic + chakra accent color. */
 .hero-section-affirmation {
   font-style: italic;
   color: var(--ck-accent);
@@ -307,14 +303,14 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 1.5px solid var(--ink3);
+  border: 1px solid var(--border);
   background: transparent;
   color: var(--ink2);
 }
 .enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .enc-btn-primary {
   background: var(--ck-btn-bg);
-  border: 1.5px solid var(--ck-accent);
+  border: 1px solid var(--ck-wash-border);
   color: var(--ck-deep);
 }
 .enc-btn-primary:hover {
@@ -405,17 +401,20 @@
     "overview themes"
     "reach    themes"
     "mineral  notes"
-    "related  notes";
+    "related  care";
   gap: 16px 20px;
   align-items: stretch;
 }
 
 #overview { grid-area: overview; }
 #reach    { grid-area: reach; }
-#themes   { grid-area: themes; }
-#mineral  { grid-area: mineral; }
-#notes    { grid-area: notes; }
+#themes   { grid-area: themes;  align-self: start; }
+#mineral  { grid-area: mineral; align-self: start; }
+#notes    { grid-area: notes;   align-self: start; }
+#care     { grid-area: care;    align-self: start; }
 #related  { grid-area: related; }
+#care h2 { font-size: 15px; letter-spacing: 0.04em; }
+#care .care-list { font-size: 13px; line-height: 1.6; color: var(--ink2); }
 
 /* ── ARTICLE SECTION CARDS ── */
 .enc-card {
@@ -818,6 +817,7 @@
       "themes"
       "mineral"
       "notes"
+      "care"
       "related";
   }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
@@ -879,6 +879,7 @@
         <a href="#themes">Energetic Themes</a>
         <a href="#mineral">Mineral Profile</a>
         <a href="#notes">Collector Notes</a>
+        <a href="#care">Care &amp; Cleansing</a>
         <a href="#related">Related Stones</a>
       </nav>
     </div>
@@ -944,11 +945,11 @@
           </div>
 
           <div class="hero-section">
-            <!--
-              Affirmation label has no icon in the approved icon map (enc-architecture-contract §12.1).
-              PILOT REVIEW ITEM: Christie to confirm label styling and whether an icon is needed.
-            -->
-            <div class="hero-section-label">Affirmation</div>
+            <div class="hero-section-label">
+              <!-- Replace {{ENERGETIC_ROLE_ICON}} with the stone's locked Energetic Role icon slug, e.g. icon-manifestation -->
+              <span aria-hidden="true" class="enc-icon {{ENERGETIC_ROLE_ICON}}"></span>
+              Affirmation
+            </div>
             <p class="hero-section-body hero-section-affirmation">{{AFFIRMATION}}</p>
           </div>
 
@@ -1307,7 +1308,36 @@
 
 
         <!-- ═══════════════════════════════════
-             SECTION 8 — RELATED STONES
+             SECTION 8 — CARE & CLEANSING
+             Architecture contract §8a
+             3–4 items drawn from the stone's Mineral Profile care information only.
+             No new editorial content. Items are short and scannable — one line each.
+             DOM position: after Collector Notes, visually placed in right rail via grid-area: care
+             ═══════════════════════════════════ -->
+        <section class="rail-card" id="care">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+            Care &amp; Cleansing
+          </h2>
+          <div class="rail-card-body">
+            <ul class="care-list">
+              <!--
+                Replace {{CARE_ITEMS}} with 3–4 bullet items drawn from the stone's
+                Mineral Profile care note. Do not invent new content.
+                Example items (from citrine.html):
+                  <li>Safe to clean with mild soap and lukewarm water; dry thoroughly</li>
+                  <li>Avoid steam, harsh chemicals, and sudden temperature changes</li>
+                  <li>Prolonged intense light or sustained heat may fade color</li>
+                  <li>Mohs hardness 7 — avoid sharp impacts that could chip points or edges</li>
+              -->
+              {{CARE_ITEMS}}
+            </ul>
+          </div>
+        </section><!-- /CARE & CLEANSING -->
+
+
+        <!-- ═══════════════════════════════════
+             SECTION 9 — RELATED STONES
              Architecture contract §9
              Exactly 2 Similar Energy + 2 Pairs Well With (all 4 unique)
              ═══════════════════════════════════ -->
@@ -1427,7 +1457,7 @@
 /* Scroll-spy: highlight the active sidebar nav link.
    Section order matches contract §1: hero, glance, overview, reach, themes, mineral, notes, related */
 (function () {
-  var sections = ['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'related'];
+  var sections = ['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'care', 'related'];
   var navLinks  = document.querySelectorAll('.side-nav a');
 
   function onScroll() {
