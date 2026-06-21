@@ -439,9 +439,9 @@ function parseMD(mdText) {
 // HTML SECTION BUILDERS
 // ────────────────────────────────────────────────────────────────────────────
 
-function buildThemesBody(data) {
-  const { primaryThemes, secondaryThemes, occasionalTags, energeticRole } = data;
-  const roleIcon = ENERGETIC_ROLE_ICONS[energeticRole] || 'icon-upward-spark';
+function buildThemesBody(data, resolvedRoleIcon) {
+  const { primaryThemes, secondaryThemes, occasionalTags } = data;
+  const roleIcon = resolvedRoleIcon;
 
   function themeRow(theme, iconClass) {
     return (
@@ -642,7 +642,7 @@ function generate(mdPath, dryRun) {
   }
 
   // ── Build section HTML ──
-  const themesBodyHtml    = buildThemesBody(data);
+  const themesBodyHtml    = buildThemesBody(data, resolvedRoleIcon);
   const notesBodyHtml     = buildNotesBody(noteBlocks);
   const localitiesHtml    = localities.map(l => '\n                <li>' + escapeHtml(l) + '</li>').join('');
   const dotGradientsCss   = buildDotGradientsCss(name, allRelated);
