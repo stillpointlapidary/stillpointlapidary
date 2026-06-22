@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- ARCHITECTURE VERSION: 2026-06-19-provisional | CANONICAL TEMPLATE -->
+<!-- ARCHITECTURE VERSION: 2026-06-20-canonical | CANONICAL TEMPLATE — derived from final citrine.html -->
 
 <html data-stone-slug="{{STONE_SLUG}}" lang="en">
 <head>
@@ -8,7 +8,7 @@
 <meta content="{{STONE_NAME}} encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
 <meta content="{{STONE_NAME}} | Still Point Lapidary Encyclopedia" property="og:title"/>
 <meta content="website" property="og:type"/>
-<meta content="{{THEME_COLOR}}" name="theme-color"/>
+<meta content="{{THEME_COLOR_HEX}}" name="theme-color"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>{{STONE_NAME}} | Still Point Lapidary Encyclopedia</title>
@@ -16,12 +16,10 @@
 <link href="../styles.css" rel="stylesheet"/>
 <link href="enc-icons.css" rel="stylesheet"/>
 <style>
-/* ── Encyclopedia Entry Page — Architecture 2026-06-19-provisional ── */
+/* ── Encyclopedia Entry Page — Architecture 2026-06-20-canonical ── */
 
 /*
-  Chakra-keyed design tokens.
-  Replace all 9 values per stone from the approved chakra palette.
-  Do not invent values.
+  Chakra-keyed design tokens — {{CHAKRA_NAME}} ({{CHAKRA_PALETTE_DESCRIPTION}}).
 */
 :root {
   --ck-pill-bg:     {{CK_PILL_BG}};
@@ -177,9 +175,9 @@
   width: 100%;
   height: 100%;
   max-width: none;
-  /* object-fit: cover — approved by Christie after Citrine pilot visual review (supersedes prior contain provisional language) */
+  /* object-fit: cover — approved by Christie after Citrine pilot visual review */
   object-fit: cover;
-  /* object-position defaults to center; override per-stone via --stone-photo-position without editing this file */
+  /* object-position defaults to center; override per-stone via --stone-photo-position */
   object-position: var(--stone-photo-position, center);
   display: block;
 }
@@ -193,7 +191,7 @@
   z-index: 1;
 }
 
-/* Collection label — small, muted, above stone name */
+/* Collection label */
 .collection-label {
   font-family: 'Jost', sans-serif;
   font-size: 10.5px;
@@ -204,7 +202,7 @@
   margin: 0 0 5px;
 }
 
-/* Stone name — primary heading */
+/* Stone name */
 .stone-name {
   font-family: Georgia, serif;
   font-size: clamp(32px, 3vw, 44px);
@@ -321,7 +319,7 @@
 }
 .enc-btn .enc-icon { width: 13px; height: 13px; }
 
-/* ── AT A GLANCE — 6 boxes ── */
+/* ── AT A GLANCE — 6 boxes — Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy ── */
 .glance-panel {
   background: var(--white);
   border: 0.5px solid var(--border);
@@ -383,7 +381,7 @@
   color: var(--ink);
   line-height: 1.45;
 }
-/* Secondary chakra line — display block below primary */
+/* Secondary chakra line */
 .chakra-secondary {
   display: block;
   font-size: 10.5px;
@@ -416,7 +414,6 @@
   flex-direction: column;
   gap: 16px;
 }
-#care { margin-top: 16px; }
 .care-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -451,7 +448,7 @@
 }
 .care-label {
   font-family: 'Jost', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -557,7 +554,7 @@
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 10px; }
+.mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 12px; }
 
 /* Common Localities — canonical two-column desktop layout */
 .mineral-formation .common-localities {
@@ -611,6 +608,13 @@
   flex-shrink: 0;
   margin-top: 2px;
 }
+
+/* Stone dot gradients for {{STONE_NAME}}'s related stones */
+.stone-dot-{{RELATED_STONE_1_SLUG}}          { background: {{RELATED_STONE_1_GRADIENT}}; }
+.stone-dot-{{RELATED_STONE_2_SLUG}} { background: {{RELATED_STONE_2_GRADIENT}}; }
+.stone-dot-{{RELATED_STONE_3_SLUG}}  { background: {{RELATED_STONE_3_GRADIENT}}; }
+.stone-dot-{{RELATED_STONE_4_SLUG}}        { background: {{RELATED_STONE_4_GRADIENT}}; }
+
 .stone-link-row b {
   display: block;
   font-family: Georgia, serif;
@@ -871,7 +875,8 @@
   #themes   { order: 3; }
   #mineral  { order: 4; }
   #notes    { order: 5; }
-  #related  { order: 6; }
+  #care     { order: 6; }
+  #related  { order: 7; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
   .glance-item { border-right: 0; padding: 0 8px; }
   .mineral-layout { grid-template-columns: 1fr; }
@@ -924,7 +929,7 @@
     <div class="side-nav-card">
       <div class="side-nav-label">On this page</div>
       <nav class="side-nav">
-        <a class="active" href="#top">Top</a>
+        <a class="active" href="#top">Introduction</a>
         <a href="#glance">At a Glance</a>
         <a href="#overview">Overview</a>
         <a href="#reach">Why People Reach For It</a>
@@ -953,31 +958,27 @@
       <!-- Stone photo -->
       <div class="stone-photo-wrap">
         <img
-          alt="{{STONE_NAME}} — {{STONE_ALT_DESCRIPTION}}"
-          src="{{IMAGE_URL}}"
+          alt="{{STONE_IMAGE_ALT}}"
+          src="{{STONE_IMAGE_URL}}"
         />
       </div>
 
       <!-- Hero right column -->
       <div class="hero-right">
 
-        <!-- §2.1 Collection label -->
         <div class="collection-label">{{COLLECTION_LABEL}}</div>
 
-        <!-- §2.2 Stone name -->
         <h1 class="stone-name">{{STONE_NAME}}</h1>
 
-        <!-- §2.3 Signature Line — unlabeled, no icon, no label prefix -->
-        <p class="stone-signature">{{SIGNATURE_LINE}}</p>
+        <p class="stone-signature">{{STONE_SIGNATURE}}</p>
 
-        <!-- §2.4 Property pills — exactly 3 -->
         <div class="theme-pills">
-          <span class="theme-pill">{{PROPERTY_1}}</span>
-          <span class="theme-pill">{{PROPERTY_2}}</span>
-          <span class="theme-pill">{{PROPERTY_3}}</span>
+          <span class="theme-pill">{{PILL_1}}</span>
+          <span class="theme-pill">{{PILL_2}}</span>
+          <span class="theme-pill">{{PILL_3}}</span>
         </div>
 
-        <!-- §2.5 Hero content sections — exactly 3, in this order -->
+        <!-- §2.5 Hero content sections — exactly 3, in this order: Best For · Use When · Affirmation -->
         <div class="hero-sections">
 
           <div class="hero-section">
@@ -998,7 +999,7 @@
 
           <div class="hero-section">
             <div class="hero-section-label">
-              <!-- Replace {{ENERGETIC_ROLE_ICON}} with the stone's locked Energetic Role icon slug, e.g. icon-manifestation -->
+              <!-- Affirmation icon always matches the stone's Energetic Role icon: use {{ENERGETIC_ROLE_ICON}} -->
               <span aria-hidden="true" class="enc-icon {{ENERGETIC_ROLE_ICON}}"></span>
               Affirmation
             </div>
@@ -1007,7 +1008,6 @@
 
         </div><!-- /hero-sections -->
 
-        <!-- Action buttons -->
         <div class="hero-actions">
           <button class="enc-btn enc-btn-primary">
             <span aria-hidden="true" class="enc-icon icon-add-piece"></span>
@@ -1025,87 +1025,79 @@
 
     <!-- ═══════════════════════════════════════
          SECTION 2 — AT A GLANCE
-         Architecture contract §3 (order revised 2026-06-19)
-         Exactly 6 boxes in this order:
-         Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy
+         Architecture contract §3
+         Display order (revised 2026-06-19): Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy
          ═══════════════════════════════════════ -->
-    <section class="glance-panel" id="glance">
+    <div class="glance-panel" id="glance">
       <h2 class="panel-title">
         <span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
         At a Glance
       </h2>
       <div class="glance-grid">
 
-        <!-- Box 1: Energetic Role — icon resolved dynamically from locked role value per §12.3 -->
-        <!--
-          Replace {{ENERGETIC_ROLE_ICON_CLASS}} with the correct icon-{slug} class
-          by looking up the stone's locked Energetic Role value in §12.3 table.
-          Example: "Manifestation" → icon-manifestation
-          If the value is not in the §12.3 table, stop and flag to Christie.
-        -->
+        <!-- Box 1: Energetic Role — icon is dynamic per stone (e.g. icon-manifestation, icon-protection, icon-heart-healing) -->
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <span aria-hidden="true" class="enc-icon {{ENERGETIC_ROLE_ICON_CLASS}}"></span>
+            <span aria-hidden="true" class="enc-icon {{ENERGETIC_ROLE_ICON}}"></span>
           </div>
           <div class="glance-label">Energetic Role</div>
-          <div class="glance-value">{{ENERGETIC_ROLE_VALUE}}</div>
+          <div class="glance-value">{{ENERGETIC_ROLE}}</div>
         </div>
 
-        <!-- Box 2: Chakra — §3.1 display rules -->
+        <!-- Box 2: Chakra — static icon-chakra -->
         <div class="glance-item">
           <div class="glance-icon-tile">
             <span aria-hidden="true" class="enc-icon icon-chakra"></span>
           </div>
           <div class="glance-label">Chakra</div>
           <div class="glance-value">
-            {{CHAKRA_VALUE}}
-            <!--
-              Include the line below ONLY when secondary chakras exist.
-              Delete it entirely (including the span) when no secondary chakras are present.
-              Format: Also: [Secondary] · [Secondary]
-            -->
-            <span class="chakra-secondary">Also: {{SECONDARY_CHAKRAS}}</span>
+            {{CHAKRA_PRIMARY}}
+            <!-- Secondary chakra is optional.
+                 If a secondary chakra is supported by the research, include the span below.
+                 If no secondary chakra exists, remove the entire .chakra-secondary span.
+                 Do not leave it blank. Do not invent a secondary chakra. -->
+            <span class="chakra-secondary">{{CHAKRA_SECONDARY}}</span>
           </div>
         </div>
 
-        <!-- Box 3: Element -->
+        <!-- Box 3: Element — static icon-element -->
         <div class="glance-item">
           <div class="glance-icon-tile">
             <span aria-hidden="true" class="enc-icon icon-element"></span>
           </div>
           <div class="glance-label">Element</div>
-          <div class="glance-value">{{ELEMENT_VALUE}}</div>
+          <div class="glance-value">{{ELEMENT}}</div>
         </div>
 
-        <!-- Box 4: Planet — icon-celestial (static assignment per §12.2) -->
+        <!-- Box 4: Planet — static icon-celestial -->
         <div class="glance-item">
           <div class="glance-icon-tile">
             <span aria-hidden="true" class="enc-icon icon-celestial"></span>
           </div>
           <div class="glance-label">Planet</div>
-          <div class="glance-value">{{PLANET_VALUE}}</div>
+          <div class="glance-value">{{PLANET}}</div>
         </div>
 
-        <!-- Box 5: Zodiac -->
+        <!-- Box 5: Zodiac — static icon-zodiac -->
         <div class="glance-item">
           <div class="glance-icon-tile">
             <span aria-hidden="true" class="enc-icon icon-zodiac"></span>
           </div>
           <div class="glance-label">Zodiac</div>
-          <div class="glance-value">{{ZODIAC_VALUE}}</div>
+          <div class="glance-value">{{ZODIAC}}</div>
         </div>
 
-        <!-- Box 6: Color Energy — icon-color-range artwork reassigned per §12.4 -->
+        <!-- Box 6: Color Energy — reassigned icon-color-range artwork (§12.4) -->
         <div class="glance-item">
           <div class="glance-icon-tile">
             <span aria-hidden="true" class="enc-icon icon-color-range"></span>
           </div>
           <div class="glance-label">Color Energy</div>
-          <div class="glance-value">{{COLOR_ENERGY_VALUE}}</div>
+          <div class="glance-value">{{COLOR_ENERGY}}</div>
         </div>
 
       </div><!-- /glance-grid -->
-    </section><!-- /AT A GLANCE -->
+    </div><!-- /AT A GLANCE -->
 
 
     <!-- ═══════════════════════════════════════
@@ -1120,25 +1112,19 @@
 
         <!-- ═══════════════════════════════════
              SECTION 3 — OVERVIEW
-             Architecture contract §4
-             Exactly 2 paragraphs — P1 physical, P2 metaphysical
              ═══════════════════════════════════ -->
         <article class="enc-card" id="overview">
           <h2>
             <span aria-hidden="true" class="enc-icon icon-book-reference"></span>
             Overview
           </h2>
-          <!-- P1: Physical and mineralogical identity -->
-          <p>{{OVERVIEW_P1}}</p>
-          <!-- P2: Metaphysical identity and nuance -->
-          <p>{{OVERVIEW_P2}}</p>
+          <p>{{OVERVIEW_PARAGRAPH_1}}</p>
+          <p>{{OVERVIEW_PARAGRAPH_2}}</p>
         </article>
 
 
         <!-- ═══════════════════════════════════
              SECTION 4 — WHY PEOPLE REACH FOR IT
-             Architecture contract §5
-             Exactly 5 rows
              ═══════════════════════════════════ -->
         <article class="enc-card" id="reach">
           <h2>
@@ -1171,8 +1157,6 @@
 
         <!-- ═══════════════════════════════════
              SECTION 6 — MINERAL PROFILE
-             Architecture contract §7
-             Formation paragraph + lower note + Common Localities
              ═══════════════════════════════════ -->
         <article class="enc-card" id="mineral">
           <h2>
@@ -1180,41 +1164,50 @@
             Mineral Profile
           </h2>
           <div class="mineral-layout">
-            <!-- Fact rows — include rows relevant to this stone; remove inapplicable rows -->
             <div class="mineral-facts">
-              <div class="mineral-fact"><span>Mineral Family</span><span>{{MINERAL_FAMILY}}</span></div>
-              <div class="mineral-fact"><span>Chemical Formula</span><span>{{CHEMICAL_FORMULA}}</span></div>
-              <div class="mineral-fact"><span>Crystal System</span><span>{{CRYSTAL_SYSTEM}}</span></div>
-              <div class="mineral-fact"><span>Mohs Hardness</span><span>{{MOHS_HARDNESS}}</span></div>
-              <div class="mineral-fact"><span>Cleavage</span><span>{{CLEAVAGE}}</span></div>
-              <div class="mineral-fact"><span>Fracture</span><span>{{FRACTURE}}</span></div>
-              <div class="mineral-fact"><span>Luster</span><span>{{LUSTER}}</span></div>
-              <div class="mineral-fact"><span>Transparency</span><span>{{TRANSPARENCY}}</span></div>
+              <!-- Exactly eight fact rows. Labels and values are adaptable per entry.
+                   Default labels for true minerals: Mineral Family · Chemical Formula ·
+                   Crystal System · Mohs Hardness · Cleavage · Fracture · Luster · Transparency.
+                   For rocks, composites, mineraloids, organic, synthetic, or trade-name materials,
+                   substitute scientifically appropriate labels. Keep exactly eight rows.
+                   See enc-editorial-schema.md §Mineral Profile for the full adaptable-label rule. -->
+              <div class="mineral-fact"><span>{{MINERAL_FACT_1_LABEL}}</span><span>{{MINERAL_FACT_1_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_2_LABEL}}</span><span>{{MINERAL_FACT_2_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_3_LABEL}}</span><span>{{MINERAL_FACT_3_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_4_LABEL}}</span><span>{{MINERAL_FACT_4_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_5_LABEL}}</span><span>{{MINERAL_FACT_5_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_6_LABEL}}</span><span>{{MINERAL_FACT_6_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_7_LABEL}}</span><span>{{MINERAL_FACT_7_VALUE}}</span></div>
+              <div class="mineral-fact"><span>{{MINERAL_FACT_8_LABEL}}</span><span>{{MINERAL_FACT_8_VALUE}}</span></div>
             </div>
-            <!-- Formation paragraph and localities -->
             <div class="mineral-formation">
               <h4>Formation</h4>
               <p>{{FORMATION_PARAGRAPH}}</p>
               <h4>Common Localities</h4>
-              <!-- Two-column desktop layout per contract canonical pattern -->
+              <!-- Common Localities has no fixed minimum or maximum.
+                   {{COMMON_LOCALITIES_ITEMS}} must contain the complete approved set of
+                   <li>...</li> elements for this stone.
+                   Include only the most commercially important, historically significant,
+                   or collector-relevant localities supported by the research.
+                   Do not create an exhaustive occurrence list.
+                   — A stone with two dominant sources may list only two.
+                   — A broadly distributed mineral may list more when each locality is meaningful.
+                   — Do not pad the list.
+                   — Do not list every country where the mineral has ever been reported. -->
               <ul class="common-localities">
-                <li>{{LOCALITY_1}}</li>
-                <li>{{LOCALITY_2}}</li>
-                <li>{{LOCALITY_3}}</li>
-                <li>{{LOCALITY_4}}</li>
-                <li>{{LOCALITY_5}}</li>
-                <li>{{LOCALITY_6}}</li>
+                {{COMMON_LOCALITIES_ITEMS}}
               </ul>
             </div>
           </div>
-          <!-- Lower note: care, treatments, additional mineralogical detail -->
-          <p class="mineral-note">{{LOWER_MINERAL_NOTE}}</p>
+          <p class="mineral-note">{{MINERAL_NOTE_1}}</p>
+
+          <p class="mineral-note">{{MINERAL_NOTE_2}}</p>
+
+          <p class="mineral-note">{{MINERAL_NOTE_3}}</p>
         </article>
 
         <!-- ═══════════════════════════════════
              SECTION 9 — RELATED STONES
-             Architecture contract §9
-             Exactly 2 Similar Energy + 2 Pairs Well With (all 4 unique)
              ═══════════════════════════════════ -->
         <article class="enc-card" id="related">
           <h2>
@@ -1225,37 +1218,36 @@
 
             <div class="rel-card">
               <div class="rel-card-head">Similar Energy</div>
-              <a class="stone-link-row" href="{{SIMILAR_1_SLUG}}.html">
-                <!-- {{SIMILAR_1_DOT_CLASS}}: a gradient class matching this stone's color, e.g. stone-dot-gold -->
-                <span class="stone-dot-circle {{SIMILAR_1_DOT_CLASS}}"></span>
+              <a class="stone-link-row" href="{{RELATED_STONE_1_SLUG}}.html">
+                <span class="stone-dot-circle stone-dot-{{RELATED_STONE_1_SLUG}}"></span>
                 <div>
-                  <b>{{SIMILAR_1_NAME}}</b>
-                  <span class="stone-reason">{{SIMILAR_1_REASON}}</span>
+                  <b>{{RELATED_STONE_1_NAME}}</b>
+                  <span class="stone-reason">{{RELATED_STONE_1_REASON}}</span>
                 </div>
               </a>
-              <a class="stone-link-row" href="{{SIMILAR_2_SLUG}}.html">
-                <span class="stone-dot-circle {{SIMILAR_2_DOT_CLASS}}"></span>
+              <a class="stone-link-row" href="{{RELATED_STONE_2_SLUG}}.html">
+                <span class="stone-dot-circle stone-dot-{{RELATED_STONE_2_SLUG}}"></span>
                 <div>
-                  <b>{{SIMILAR_2_NAME}}</b>
-                  <span class="stone-reason">{{SIMILAR_2_REASON}}</span>
+                  <b>{{RELATED_STONE_2_NAME}}</b>
+                  <span class="stone-reason">{{RELATED_STONE_2_REASON}}</span>
                 </div>
               </a>
             </div>
 
             <div class="rel-card">
               <div class="rel-card-head">Pairs Well With</div>
-              <a class="stone-link-row" href="{{PAIRS_1_SLUG}}.html">
-                <span class="stone-dot-circle {{PAIRS_1_DOT_CLASS}}"></span>
+              <a class="stone-link-row" href="{{RELATED_STONE_3_SLUG}}.html">
+                <span class="stone-dot-circle stone-dot-{{RELATED_STONE_3_SLUG}}"></span>
                 <div>
-                  <b>{{PAIRS_1_NAME}}</b>
-                  <span class="stone-reason">{{PAIRS_1_REASON}}</span>
+                  <b>{{RELATED_STONE_3_NAME}}</b>
+                  <span class="stone-reason">{{RELATED_STONE_3_REASON}}</span>
                 </div>
               </a>
-              <a class="stone-link-row" href="{{PAIRS_2_SLUG}}.html">
-                <span class="stone-dot-circle {{PAIRS_2_DOT_CLASS}}"></span>
+              <a class="stone-link-row" href="{{RELATED_STONE_4_SLUG}}.html">
+                <span class="stone-dot-circle stone-dot-{{RELATED_STONE_4_SLUG}}"></span>
                 <div>
-                  <b>{{PAIRS_2_NAME}}</b>
-                  <span class="stone-reason">{{PAIRS_2_REASON}}</span>
+                  <b>{{RELATED_STONE_4_NAME}}</b>
+                  <span class="stone-reason">{{RELATED_STONE_4_REASON}}</span>
                 </div>
               </a>
             </div>
@@ -1269,9 +1261,6 @@
 
         <!-- ═══════════════════════════════════
              SECTION 5 — ENERGETIC THEMES
-             Architecture contract §6
-             Exactly 2 Primary + 2 Secondary + 0–2 Occasional
-             DOM position: after Why People Reach For It, visually placed in right column via grid-area
              ═══════════════════════════════════ -->
         <section class="rail-card" id="themes">
           <h2>
@@ -1281,69 +1270,84 @@
 
           <div class="rail-card-body">
 
-            <!-- Group 1: Primary -->
+            <!-- ─── ENERGETIC ROLE vs ENERGETIC THEMES ───────────────────────
+                 Energetic Role: exactly 1 per stone. Appears in At a Glance and
+                 drives the Affirmation icon. Never split into primary/secondary.
+
+                 Energetic Themes: separate from Energetic Role.
+                 Primary: 1 or 2, evidence-supported. At least 1 required.
+                 Secondary: 0, 1, or 2, evidence-supported.
+                 Occasional: 0, 1, or 2, evidence-supported.
+                 Never invent a theme to fill the template.
+                 Remove unused rows or groups cleanly — see comments below.
+                 ──────────────────────────────────────────────────────────── -->
+
+            <!-- Group 1: Primary (1–2 themes) -->
             <div class="theme-tier-group">
               <div class="theme-tier-label">Primary</div>
 
-              <!--
-                Theme icons are chosen from the approved 57-icon set based on theme content.
-                Replace {{PRIMARY_THEME_N_ICON}} with the appropriate icon-{slug} class.
-              -->
               <div class="theme-row">
                 <div class="theme-icon-tile">
-                  <span aria-hidden="true" class="enc-icon {{PRIMARY_THEME_1_ICON}}"></span>
+                  <span aria-hidden="true" class="enc-icon {{THEME_PRIMARY_1_ICON}}"></span>
                 </div>
                 <div>
-                  <h3>{{PRIMARY_THEME_1_HEADING}}</h3>
-                  <p>{{PRIMARY_THEME_1_DESC}}</p>
+                  <h3>{{THEME_PRIMARY_1_TITLE}}</h3>
+                  <p>{{THEME_PRIMARY_1_DESC}}</p>
                 </div>
               </div>
 
+              <!-- Second Primary theme: include if evidence supports a second primary theme.
+                   If only 1 Primary theme is supported, remove this entire .theme-row block. -->
               <div class="theme-row">
                 <div class="theme-icon-tile">
-                  <span aria-hidden="true" class="enc-icon {{PRIMARY_THEME_2_ICON}}"></span>
+                  <span aria-hidden="true" class="enc-icon {{THEME_PRIMARY_2_ICON}}"></span>
                 </div>
                 <div>
-                  <h3>{{PRIMARY_THEME_2_HEADING}}</h3>
-                  <p>{{PRIMARY_THEME_2_DESC}}</p>
+                  <h3>{{THEME_PRIMARY_2_TITLE}}</h3>
+                  <p>{{THEME_PRIMARY_2_DESC}}</p>
                 </div>
               </div>
             </div><!-- /theme-tier-group Primary -->
 
-            <!-- Group 2: Secondary -->
+            <!-- Group 2: Secondary (0–2 themes)
+                 If 0 Secondary themes are supported, remove this entire group
+                 including the <hr> and the theme-tier-label.
+                 If only 1 Secondary theme is supported, remove the second .theme-row block. -->
             <div class="theme-tier-group">
               <hr class="theme-divider"/>
               <div class="theme-tier-label">Secondary</div>
 
               <div class="theme-row">
                 <div class="theme-icon-tile">
-                  <span aria-hidden="true" class="enc-icon {{SECONDARY_THEME_1_ICON}}"></span>
+                  <span aria-hidden="true" class="enc-icon {{THEME_SECONDARY_1_ICON}}"></span>
                 </div>
                 <div>
-                  <h3>{{SECONDARY_THEME_1_HEADING}}</h3>
-                  <p>{{SECONDARY_THEME_1_DESC}}</p>
+                  <h3>{{THEME_SECONDARY_1_TITLE}}</h3>
+                  <p>{{THEME_SECONDARY_1_DESC}}</p>
                 </div>
               </div>
 
               <div class="theme-row">
                 <div class="theme-icon-tile">
-                  <span aria-hidden="true" class="enc-icon {{SECONDARY_THEME_2_ICON}}"></span>
+                  <span aria-hidden="true" class="enc-icon {{THEME_SECONDARY_2_ICON}}"></span>
                 </div>
                 <div>
-                  <h3>{{SECONDARY_THEME_2_HEADING}}</h3>
-                  <p>{{SECONDARY_THEME_2_DESC}}</p>
+                  <h3>{{THEME_SECONDARY_2_TITLE}}</h3>
+                  <p>{{THEME_SECONDARY_2_DESC}}</p>
                 </div>
               </div>
             </div><!-- /theme-tier-group Secondary -->
 
-            <!-- Group 3: Occasional Associations — include only when supported; delete if no Occasional associations -->
+            <!-- Group 3: Occasional Associations (0–2 associations)
+                 If 0 Occasional associations are supported, remove this entire group
+                 including the <hr> and the theme-tier-label.
+                 If only 1 Occasional association is supported, remove the second .occ-tag span. -->
             <div class="theme-tier-group">
               <hr class="theme-divider"/>
               <div class="theme-tier-label">Occasional Associations</div>
               <div class="occasional-tags">
-                <span class="occ-tag">{{OCCASIONAL_1}}</span>
-                <!-- Add or remove occ-tag spans to match the approved MD count (0–2) -->
-                <span class="occ-tag">{{OCCASIONAL_2}}</span>
+                <span class="occ-tag">{{OCCASIONAL_TAG_1}}</span>
+                <span class="occ-tag">{{OCCASIONAL_TAG_2}}</span>
               </div>
             </div><!-- /theme-tier-group Occasional -->
 
@@ -1353,9 +1357,6 @@
 
         <!-- ═══════════════════════════════════
              SECTION 7 — COLLECTOR & CURIOSITY NOTES
-             Architecture contract §8
-             Exactly 4 notes
-             DOM position: after Mineral Profile, visually placed in right column via grid-area
              ═══════════════════════════════════ -->
         <section class="rail-card" id="notes">
           <h2>
@@ -1365,16 +1366,21 @@
           <div class="rail-card-body">
             <div class="note-list">
 
-              <!--
-                Note icons are chosen per note from the approved 57-icon set.
-                Replace {{NOTE_N_ICON}} with an appropriate icon-{slug} class.
-              -->
+              <!-- Collector Notes count rule:
+                   Research target: collect 4 strong, distinct note candidates.
+                   Published page: 3 or 4 notes.
+                   — Publish 4 when all four are distinct and useful.
+                   — Publish 3 when the fourth is weak, repetitive, or creates poor page balance.
+                   — Do not fabricate or pad a fourth note.
+                   — The final count may also reflect an editorial layout-balancing decision
+                     after visual review. -->
+
               <div class="note-row">
                 <div class="note-icon">
                   <span aria-hidden="true" class="enc-icon {{NOTE_1_ICON}}"></span>
                 </div>
                 <div>
-                  <strong>{{NOTE_1_HEADING}}</strong>
+                  <strong>{{NOTE_1_TITLE}}</strong>
                   <p>{{NOTE_1_BODY}}</p>
                 </div>
               </div>
@@ -1384,7 +1390,7 @@
                   <span aria-hidden="true" class="enc-icon {{NOTE_2_ICON}}"></span>
                 </div>
                 <div>
-                  <strong>{{NOTE_2_HEADING}}</strong>
+                  <strong>{{NOTE_2_TITLE}}</strong>
                   <p>{{NOTE_2_BODY}}</p>
                 </div>
               </div>
@@ -1394,17 +1400,19 @@
                   <span aria-hidden="true" class="enc-icon {{NOTE_3_ICON}}"></span>
                 </div>
                 <div>
-                  <strong>{{NOTE_3_HEADING}}</strong>
+                  <strong>{{NOTE_3_TITLE}}</strong>
                   <p>{{NOTE_3_BODY}}</p>
                 </div>
               </div>
 
+              <!-- Fourth note: include when all four notes are distinct and useful.
+                   Remove this entire .note-row block when only three notes are approved. -->
               <div class="note-row">
                 <div class="note-icon">
                   <span aria-hidden="true" class="enc-icon {{NOTE_4_ICON}}"></span>
                 </div>
                 <div>
-                  <strong>{{NOTE_4_HEADING}}</strong>
+                  <strong>{{NOTE_4_TITLE}}</strong>
                   <p>{{NOTE_4_BODY}}</p>
                 </div>
               </div>
@@ -1416,70 +1424,69 @@
 
         <!-- ═══════════════════════════════════
              SECTION 8 — CARE & CLEANSING
-             Architecture contract §8a
-             3–4 items drawn from the stone's Mineral Profile care information only.
-             No new editorial content. Items are short and scannable — one line each.
-             DOM position: after Collector Notes, visually placed in right rail via grid-area: care
              ═══════════════════════════════════ -->
+        <section class="rail-card" id="care">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+            Care &amp; Cleansing
+          </h2>
+          <div class="rail-card-body">
+            <!-- Care & Cleansing always uses exactly these four categories in this order:
+                 1. Cleaning  2. Water  3. Light & Heat  4. Storage
+                 Category labels and four-tile layout are fixed. Do not make categories optional
+                 or interchangeable. The guidance inside each tile must:
+                 — change according to the stone's verified mineral properties
+                 — remain practical and evidence-based
+                 — avoid invented spiritual cleansing instructions
+                 — avoid unsupported warnings
+                 — state ordinary stability where no unusual precaution applies -->
+            <div class="care-grid">
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+                  <span class="care-label">Cleaning</span>
+                </div>
+                <p>{{CARE_CLEANING}}</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-element"></span>
+                  <span class="care-label">Water</span>
+                </div>
+                <p>{{CARE_WATER}}</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-celestial"></span>
+                  <span class="care-label">Light &amp; Heat</span>
+                </div>
+                <p>{{CARE_LIGHT_HEAT}}</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-geology"></span>
+                  <span class="care-label">Storage</span>
+                </div>
+                <p>{{CARE_STORAGE}}</p>
+              </div>
+            </div>
+          </div>
+        </section><!-- /CARE & CLEANSING -->
+
       </div><!-- /content-stack-right -->
 
     </div><!-- /content-grid -->
 
-    <section class="rail-card" id="care">
-      <h2>
-        <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
-        Care &amp; Cleansing
-      </h2>
-      <div class="rail-card-body">
-        <div class="care-grid">
-          <div class="care-cell">
-            <div class="care-cell-head">
-              <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
-              <!-- Cell 1: Cleaning method — brief water + cloth instruction -->
-              <span class="care-label">Cleaning</span>
-            </div>
-            <p>{{CARE_CELL_1_CONTENT}}</p>
-          </div>
-          <div class="care-cell">
-            <div class="care-cell-head">
-              <span aria-hidden="true" class="enc-icon icon-element"></span>
-              <!-- Cell 2: Water safety — whether soaking, steam, or ultrasonic is safe -->
-              <span class="care-label">Water</span>
-            </div>
-            <p>{{CARE_CELL_2_CONTENT}}</p>
-          </div>
-          <div class="care-cell">
-            <div class="care-cell-head">
-              <span aria-hidden="true" class="enc-icon icon-celestial"></span>
-              <!-- Cell 3: Light & heat sensitivity — fading, color change risk -->
-              <span class="care-label">Light &amp; Heat</span>
-            </div>
-            <p>{{CARE_CELL_3_CONTENT}}</p>
-          </div>
-          <div class="care-cell">
-            <div class="care-cell-head">
-              <span aria-hidden="true" class="enc-icon icon-geology"></span>
-              <!-- Cell 4: Storage — hardness, scratch risk, pouching guidance -->
-              <span class="care-label">Storage</span>
-            </div>
-            <p>{{CARE_CELL_4_CONTENT}}</p>
-          </div>
-        </div>
-      </div>
-    </section><!-- /CARE & CLEANSING -->
-
 
     <!-- ═══════════════════════════════════════
          SECTION 9 — PREVIOUS / NEXT NAVIGATION
-         Architecture contract §10
-         Do not add slug to enc-nav.js until Gate 4 passes
          ═══════════════════════════════════════ -->
     <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
-      <a class="entry-nav-link" href="{{PREV_SLUG}}.html">
+      <a class="entry-nav-link" href="{{NAV_PREV_SLUG}}.html">
         <span>←</span>
         <div>
           <small>Previous</small>
-          <b>{{PREV_NAME}}</b>
+          <b>{{NAV_PREV_NAME}}</b>
         </div>
       </a>
       <a class="entry-nav-link entry-nav-random" href="#">
@@ -1488,10 +1495,10 @@
           <b>Surprise me</b>
         </div>
       </a>
-      <a class="entry-nav-link" href="{{NEXT_SLUG}}.html">
+      <a class="entry-nav-link" href="{{NAV_NEXT_SLUG}}.html">
         <div>
           <small>Next</small>
-          <b>{{NEXT_NAME}}</b>
+          <b>{{NAV_NEXT_NAME}}</b>
         </div>
         <span>→</span>
       </a>
@@ -1533,7 +1540,7 @@
 
 <script>
 /* Scroll-spy: highlight the active sidebar nav link.
-   Section order matches contract §1: hero, glance, overview, reach, themes, mineral, notes, care, related */
+   Section order: hero, glance, overview, reach, themes, mineral, notes, care, related */
 (function () {
   var sections = ['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'care', 'related'];
   var navLinks  = document.querySelectorAll('.side-nav a');
