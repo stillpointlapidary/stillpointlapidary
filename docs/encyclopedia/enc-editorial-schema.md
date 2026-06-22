@@ -1,374 +1,253 @@
-# [STONE NAME] — Encyclopedia Entry
+# enc-editorial-schema.md
+# Still Point Lapidary — Encyclopedia Editorial Schema
+# Version: 2026-06-22 | Aligned to CANONICAL-STONE-PAGE-TEMPLATE.html
 
-<!-- ARCHITECTURE VERSION: 2026-06-19-provisional | Status: PROVISIONALLY APPROVED FOR CITRINE PILOT | Hero: 3 sections (limits provisional) | AtaGlance: 6 boxes | Icon path: VERIFIED — Gate 3 CLOSED -->
-<!-- SCHEMA: enc-editorial-schema.md | Conforms to: enc-architecture-contract.md -->
-
----
-
-## ◼ SECTION A — PRODUCTION DATA
-*Locked values from the approved production workbook or CSV. Do not edit during copy writing. Flag any discrepancy to Christie before proceeding.*
-
-### Name
-[Stone Name]
-
-### Slug
-[stone-slug]
-
-### Tier
-[1 / 2 / 3 / 4]
-
-### Collection Tier
-[Essentials / Shelf Builders / Collector Favorites / Rare Finds]
-
-### Image URL
-[https://...]
-
-### Navigation
-
-#### Previous Stone
-- Name: [Previous Stone Name]
-- Slug: [previous-stone-slug]
-
-#### Next Stone
-- Name: [Next Stone Name]
-- Slug: [next-stone-slug]
+This document defines the content rules, field counts, and editorial constraints for every
+encyclopedia stone page. All rules here must match the canonical HTML template exactly.
+Do not update one without updating the other.
 
 ---
 
-## ◼ SECTION B — HERO COPY
-*Compact fields. These limits are PROVISIONAL until the Citrine pilot is built and visually approved — see enc-architecture-contract.md §2.5 and §0. Write to the provisional target; do not treat it as immovable before pilot calibration. These fields are set during Synthesis (Phase 4) and locked before MD drafting begins.*
+## Identity & Metadata
 
-### Collection Label
-[Essentials / Shelf Builders / Collector Favorites / Rare Finds]
-> Comes from locked production data. Must match Section A.
-
-### Signature Line
-[One sentence.]
-> **Limit: 1 sentence, maximum 20 words.**
-> States the memorable essence of this stone. Specific — not generic.
-> Must not repeat Best For, Use When, or Affirmation verbatim.
-> Supported by the locked property pills and research synthesis.
-
-### Property Pills
-- [Pill 1]
-- [Pill 2]
-- [Pill 3]
-> **Exactly 3 pills. 1–3 words each.**
-> Values come from the locked production workbook. Do not invent.
-
-### Best For
-[Gerund or noun phrase describing the primary use case.]
-> **Provisional limit: 15–20 words. 1–2 rendered lines at desktop width.** Subject to recalibration after Citrine pilot.
-> Opens with a gerund (e.g., "Focusing…") or a noun phrase — not a full sentence with a subject.
-> Must not duplicate Use When or Affirmation language.
-
-### Use When
-[One or two sentences describing the inner state or circumstance.]
-> **Provisional limit: 20–25 words. 1–2 rendered lines at desktop width.** Subject to recalibration after Citrine pilot.
-> Full sentences are acceptable here.
-> Must not duplicate Best For or Affirmation language.
-
-### Affirmation
-[I ______.]
-> **Provisional limit: 1 sentence, maximum 15 words. First-person present tense.** Subject to recalibration after Citrine pilot.
-> Must be specific to this stone's central theme.
-> Must not be a generic affirmation applicable to any stone.
-
----
-
-## ◼ SECTION C — AT A GLANCE
-*All six values must be locked in the production workbook before MD approval. Missing values must be researched and approved, never invented during writing. If a value is missing or uncertain, flag it to Christie before writing copy. Display order revised 2026-06-19 — see enc-architecture-contract.md §3.*
-
-| Category | Value |
+| Field | Rule |
 |---|---|
-| Energetic Role | [Role — 1 to 3 words] |
-| Chakra | [Primary Chakra] |
-| Element | [Element] |
-| Planet | [Planet] |
-| Zodiac | [Sign(s)] |
-| Color Energy | [Color Energy] |
-
-> **Icon note:** Chakra, Element, Planet, and Zodiac use static icons. Color Energy uses the reassigned `color-range.svg` artwork. Energetic Role resolves its icon dynamically from the locked value above (e.g., "Amplification" → `amplification.svg`) per enc-architecture-contract.md §12.3, using the full 12-role mapping table. If the locked Energetic Role value has no corresponding icon in the approved set, flag to Christie before MD approval — do not proceed with HTML generation on an unresolved icon mapping. Rendering implementation (CSS mask vs. `<img>`) is governed by enc-architecture-contract.md §12.7 and is an HTML-build concern, not an MD concern.
-
-### Chakra Display Note
-> If secondary chakras exist, note them here for the HTML builder:
-> Primary: [Primary Chakra]
-> Secondary: [Secondary Chakra 1] · [Secondary Chakra 2] (delete as needed)
-> Format in HTML: `Also: [Secondary] · [Secondary]`
-> If no secondary chakras exist, delete this note entirely.
+| `STONE_SLUG` | URL-safe lowercase slug (e.g. `tigers-eye`). Matches filename and `data-stone-slug`. |
+| `STONE_NAME` | Display name as it appears in the page title, h1, breadcrumb, and meta. |
+| `THEME_COLOR_HEX` | Hex color for `<meta name="theme-color">`. Should match `--ck-accent`. |
 
 ---
 
-## ◼ SECTION D — OVERVIEW
-*Rich section. Preserve specific geology, naming nuance, treatment context, and metaphysical detail. Do not flatten to generic prose. Target 80–120 words per paragraph.*
+## Chakra Design Tokens (CSS)
 
-### Overview
+One set of `--ck-*` CSS custom properties per stone, keyed to the stone's primary chakra.
+All nine token values are required. Derive from the chakra's canonical palette.
 
-[Paragraph 1 — Physical and mineralogical identity.]
-
-[Cover: what the material actually is; parent mineral, variety, rock, trade name, composite, synthetic, or organic identity; appearance and formation; treatments, trade-name issues, or authenticity distinctions when relevant; the most important distinguishing physical facts. Do not include bullet points or subheadings.]
-
-[Paragraph 2 — Metaphysical identity and nuance.]
-
-[Cover: principal traditional associations; how the main themes fit together; relevant nuance or common misconceptions; treatment or naming implications when they affect metaphysical understanding. Do not repeat Paragraph 1 facts unless the metaphysical angle is genuinely different. Do not repeat the Signature Line verbatim.]
-
-> **Exactly 2 paragraphs. No subheadings within this section.**
-> P1 covers physical identity. P2 covers metaphysical identity and nuance.
-> The Overview supports the Signature Line — it does not repeat it.
-> **Target: 80–120 words per paragraph; target 160–220 words total.** No rigid minimum beyond exactly two substantive paragraphs that fulfill their assigned jobs — don't pad a paragraph to hit a count.
-
----
-
-## ◼ SECTION E — WHY PEOPLE REACH FOR IT
-*Practical, specific rows. Each row is distinct. Not affirmation language.*
-
-### Why People Reach For It
-
-#### [Row Heading 1]
-[One to two sentences explaining this specific use case or intention.]
-
-#### [Row Heading 2]
-[One to two sentences explaining this specific use case or intention.]
-
-#### [Row Heading 3]
-[One to two sentences explaining this specific use case or intention.]
-
-#### [Row Heading 4]
-[One to two sentences explaining this specific use case or intention.]
-
-#### [Row Heading 5]
-[One to two sentences explaining this specific use case or intention.]
-
-> **Exactly 5 rows.**
-> **Limit per row: approximately 20–30 words of body copy.**
-> Headings describe a practical intention or use case — not a theme label.
-> Rows must be distinct from each other and from Best For / Use When.
+| Token | Purpose |
+|---|---|
+| `--ck-pill-bg` | Background for property pills |
+| `--ck-pill-text` | Text color for property pills |
+| `--ck-btn-bg` | Primary button background |
+| `--ck-btn-border` | Primary button border |
+| `--ck-btn-text` | Primary button text |
+| `--ck-wash` | Wash background (glance tiles, care grid, theme tiles) |
+| `--ck-wash-border` | Wash border |
+| `--ck-accent` | Primary accent color (icons, active states, affirmation text) |
+| `--ck-deep` | Deep text color for primary button text |
 
 ---
 
-## ◼ SECTION F — ENERGETIC THEMES
-*Theme placement must follow evidence confidence from the synthesis workbook. Do not invent themes or place themes higher than their evidence supports.*
+## Hero Section
 
-### Energetic Themes
-
-#### Primary
-
-##### [Primary Theme 1 Heading]
-[Description paragraph — specific, evidence-supported, 2–3 sentences.]
-
-##### [Primary Theme 2 Heading]
-[Description paragraph — specific, evidence-supported, 2–3 sentences.]
-
-#### Secondary
-
-##### [Secondary Theme 1 Heading]
-[Description paragraph — specific, evidence-supported, 2–3 sentences.]
-
-##### [Secondary Theme 2 Heading]
-[Description paragraph — specific, evidence-supported, 2–3 sentences.]
-
-#### Occasional Associations
-- [Occasional Theme 1] *(delete if not supported)*
-- [Occasional Theme 2] *(delete if not supported)*
-
-> **Exactly 2 Primary. Exactly 2 Secondary.**
-> **0, 1, or 2 Occasional associations — only when supported by the approved source set.**
-> **Limit: 3 visual lines at desktop reference width per Primary or Secondary description.**
-> Occasional associations are pill labels only — no description paragraphs.
-> Do not add a fourth Primary or Secondary theme.
-> Do not list an Occasional association without source support.
+| Field | Rule |
+|---|---|
+| `STONE_IMAGE_URL` | Supabase storage URL for the stone's `.webp` image. |
+| `STONE_IMAGE_ALT` | Descriptive alt text for the stone photo. |
+| `COLLECTION_LABEL` | Short label above the stone name (e.g. `Essentials`). |
+| `STONE_SIGNATURE` | One italic sentence. The stone's defining character in plain terms. No metaphysical mechanism language. |
+| `PILL_1`, `PILL_2`, `PILL_3` | Exactly 3 property pills. Single words or short phrases. |
+| `BEST_FOR` | One concise gerund phrase or noun phrase describing the stone's primary uses. A complete sentence is not required. |
+| `USE_WHEN` | One sentence. Begins with the situation, not with the stone name. Does not start "Reach for [Stone] when…". |
+| `AFFIRMATION` | One sentence, first person, italic. Icon matches `ENERGETIC_ROLE_ICON` exactly. |
 
 ---
 
-## ◼ SECTION G — MINERAL PROFILE
-*Rich section. Preserve specific geological detail. Do not repeat facts already covered in Overview unless the angle is genuinely different.*
+## At a Glance
 
-### Mineral Profile
+Six fixed boxes in this order: Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy.
+Layout is fixed. Do not reorder or remove boxes.
 
-[Formation paragraph — geological context, crystal system, chemical composition, physical properties including hardness, cleavage, and fracture. Include piezoelectricity or other relevant physical properties when they apply. Specific localities can follow as a list.]
+| Field | Rule |
+|---|---|
+| `ENERGETIC_ROLE_ICON` | Icon class for the Energetic Role. Dynamic per stone (e.g. `icon-manifestation`, `icon-protection`, `icon-heart-healing`). Also drives the Affirmation icon. |
+| `ENERGETIC_ROLE` | Exactly 1 value. A single role label (e.g. `Manifestation`, `Protection`, `Grounding`). Never split into primary/secondary. |
+| `CHAKRA_PRIMARY` | The stone's primary chakra. Required. |
+| `CHAKRA_SECONDARY` | **Optional.** Secondary chakra(s), displayed in a smaller span. If no secondary chakra is supported by the research, remove the entire `.chakra-secondary` span. Do not leave it blank. Do not invent a secondary chakra. |
+| `ELEMENT` | Classical element association. |
+| `PLANET` | Primary planetary association. |
+| `ZODIAC` | Primary zodiac sign(s). |
+| `COLOR_ENERGY` | Color energy label. |
 
-[Lower note — care, treatments, imitations, trade-name issues, or additional mineralogical detail not covered above. Include one paragraph or a short structured note.]
+---
+
+## Overview
+
+Two paragraphs. Required.
+
+- **Paragraph 1:** Mineral and physical description. Factual. Covers composition, color origin, natural vs treated material.
+- **Paragraph 2:** Metaphysical tradition, energetic associations, editorial framing. Manifestation and similar claims must be framed as directed effort or tradition, not as literal mechanisms.
+
+Avoid repetitive stone-name openings. The first clear mineral-identity sentence may use the canonical stone name when doing so improves clarity or precision. Use natural alternatives elsewhere when they read naturally.
+
+---
+
+## Why People Reach For It
+
+Exactly 5 rows. Each row has a short label and a one-to-two sentence description.
+Rows are keyed to distinct use cases, not to theme repetition.
+Avoid repeating the stone name across rows. Prefer direct constructions and natural alternatives.
+
+---
+
+## Mineral Profile
+
+### Facts Table
+
+Exactly eight rows. The label and value in each row are adaptable per entry.
+
+**Standard default labels for true minerals (use whenever they accurately apply):**
+
+1. Mineral Family
+2. Chemical Formula
+3. Crystal System
+4. Mohs Hardness
+5. Cleavage
+6. Fracture
+7. Luster
+8. Transparency
+
+**Adaptable labels rule:** Use the standard eight labels whenever they accurately apply. For rocks, composites, mineraloids, organic materials, synthetic materials, or trade-name mixtures, substitute scientifically appropriate labels while keeping exactly eight rows. Do not force a single chemical formula, crystal system, or mineral-family label when the material does not have one.
+
+Examples of acceptable label substitutions (select according to the verified identity of each entry):
+- Material Type
+- Composition
+- Primary Components
+- Structure
+- Origin
+- Manufacturing Status
+- Treatment Status
+
+Do not prescribe one universal alternate set. Labels must be selected according to the verified identity of each entry.
+
+The rendered structure, classes, order, styling, and number of rows remain fixed at eight on every page.
+
+### Formation
+
+One paragraph. Covers how the stone forms, color origin, any treatment common in the trade.
 
 ### Common Localities
-- [Locality 1]
-- [Locality 2]
-- [Locality 3]
-*(Add or remove localities as warranted by the research.)*
 
-> **Rich section — preserve useful geological and care information.**
-> One focused formation paragraph + one focused lower note.
-> Do not repeat hardness, care, locality, treatment, or formation facts from Overview or Collector Notes unless the angle is genuinely different.
-> Technical framing: physical properties are physical properties. Do not present them as proof of metaphysical claims.
+`COMMON_LOCALITIES_ITEMS` is a repeatable HTML block containing the complete approved set of `<li>...</li>` elements for that stone. The number of items is editorially determined per entry.
 
----
+**No fixed minimum or maximum.**
+Include only the most commercially important, historically significant, or collector-relevant localities supported by the research.
 
-## ◼ SECTION H — COLLECTOR & CURIOSITY NOTES
-*Rich section. Each note must be accurate, sourced, and distinct. Do not fabricate curiosities.*
+- A stone with two dominant sources may list only two.
+- A broadly distributed mineral may list more when each locality is meaningful.
+- Do not pad the list.
+- Do not list every country where the mineral has ever been reported.
 
-### Collector & Curiosity Notes
+### Collector-Context Paragraphs
 
-#### [Note Heading 1]
-[Body paragraph — 35–55 words. Covers one specific historical, scientific, cultural, or collector fact.]
+Exactly 3 paragraphs below the mineral layout (`mineral-note` class):
 
-#### [Note Heading 2]
-[Body paragraph — 35–55 words. Covers one specific historical, scientific, cultural, or collector fact.]
-
-#### [Note Heading 3]
-[Body paragraph — 35–55 words. Covers one specific historical, scientific, cultural, or collector fact.]
-
-#### [Note Heading 4]
-[Body paragraph — 35–55 words. Covers one specific historical, scientific, cultural, or collector fact.]
-
-> **Exactly 4 notes.**
-> **Limit: 35–55 words per note. 60-word hard maximum.**
-> Notes must cover distinct topics — no two notes on the same subject.
-> Acceptable topics: historical naming, cultural context, scientific discovery, geological curiosity, authenticity or trade-name history, collector distinctions, notable specimens or localities.
-> Notes must be accurate. Do not fabricate curiosities or attribution.
+1. What to look for / quality and value indicators.
+2. Identification / potential confusion with other stones.
+3. Market availability and pricing context.
 
 ---
 
-## ◼ SECTION I — RELATED STONES
-*All slugs must be verified against the live stone roster before MD approval.*
+## Energetic Themes
 
-### Related Stones
+### Energetic Role vs Energetic Themes
 
-#### Similar Energy
+These are distinct fields.
 
-##### [Stone Name 1]
-- Slug: [stone-slug-1]
-- Reason: [One sentence distinguishing or connecting these two stones.]
+**Energetic Role** (At a Glance):
+- Exactly 1 per stone.
+- A single locked role label.
+- Drives the Affirmation icon.
+- Never split into primary or secondary.
 
-##### [Stone Name 2]
-- Slug: [stone-slug-2]
-- Reason: [One sentence distinguishing or connecting these two stones.]
+**Energetic Themes** (right rail section):
+- Separate from Energetic Role.
+- Never invent a theme to fill the template.
+- Remove unused rows or groups cleanly.
 
-#### Pairs Well With
+### Theme Counts
 
-##### [Stone Name 3]
-- Slug: [stone-slug-3]
-- Reason: [One sentence explaining why these two stones work well together.]
+| Group | Count rule |
+|---|---|
+| Primary | 1 or 2, evidence-supported. At least 1 required. |
+| Secondary | 0, 1, or 2, evidence-supported. If 0: remove entire Secondary group including divider and label. If 1: remove unused second `.theme-row`. |
+| Occasional Associations | 0, 1, or 2, evidence-supported. If 0: remove entire Occasional group including divider and label. If 1: remove unused second `.occ-tag` span. |
 
-##### [Stone Name 4]
-- Slug: [stone-slug-4]
-- Reason: [One sentence explaining why these two stones work well together.]
-
-> **Exactly 2 Similar Energy. Exactly 2 Pairs Well With. All 4 must be different stones.**
-> **Reason limit: 30 words maximum each.**
-> Similar Energy reasons explain how the stones relate and how they differ.
-> Pairs Well With reasons explain the complementary dynamic.
-> All paired stone slugs must exist on the live site.
+Each theme row has an icon, a title, and a description paragraph.
 
 ---
 
+## Collector & Curiosity Notes
+
+**Research target:** Collect 4 strong, distinct note candidates.
+**Published page:** 3 or 4 notes.
+
+| Condition | Action |
+|---|---|
+| All 4 notes are distinct and useful | Publish 4 |
+| Fourth note is weak, repetitive, or creates poor balance | Publish 3; remove the fourth `.note-row` block |
+| Fewer than 3 strong notes found | Do not publish; return to research |
+
+Do not fabricate or pad a fourth note. The final count may also reflect an editorial layout-balancing decision after visual review.
+
+Each note row has an icon, a bold title, and a body paragraph.
+
 ---
 
-# ◼ RESEARCH NOTES — NOT FOR PUBLICATION
+## Care & Cleansing
 
-*Everything below this line is internal production documentation. It must not appear in any public-facing section of the page. Remove or clearly mark before final HTML review.*
+Always exactly **4 fixed categories** in this order:
+
+1. **Cleaning** — Physical cleaning method. Evidence-based.
+2. **Water** — Water safety. Derived from mineral properties (hardness, solubility, cleavage).
+3. **Light & Heat** — Sensitivity to light or heat. State ordinary stability if no unusual precaution applies.
+4. **Storage** — Storage guidance. Keyed to Mohs hardness and cleavage.
+
+Category labels and four-tile layout are fixed on every page. Do not make categories optional or interchangeable.
+
+Content rules:
+- Change guidance according to the stone's verified mineral properties.
+- Remain practical and evidence-based.
+- Avoid invented spiritual cleansing instructions.
+- Avoid unsupported warnings.
+- State ordinary stability where no unusual precaution applies.
 
 ---
 
-## Complete Metaphysical Source List
+## Related Stones
 
-| Source | Tier | Key Contributions |
+Always exactly 4 related stones in 2 groups:
+
+| Group | Label | Count |
 |---|---|---|
-| The Crystal Bible | A+ | |
-| The Book of Stones | A+ | |
-| Crystal Vaults | A | |
-| Crystal Council | A | |
-| Moonrise Crystals | A | |
-| Crystals.com | A | |
-| Crystal Almanac | A | |
-*(Add Tier B sources below only when used. Note why.)*
+| Left card | Similar Energy | 2 stones |
+| Right card | Pairs Well With | 2 stones |
 
-> Research minimum: 6 qualified metaphysical sources, all Tier A or A+.
-> Tier B sources may support but may not establish a major disputed claim.
+Each stone has: slug (for href and dot class), name, reason, dot gradient CSS class.
+Reasons must avoid stone-name repetition. Use "this stone", "the emphasis here", etc.
 
 ---
 
-## Complete Geological and Technical Source List
+## Navigation
 
-| Source | Type | Key Contributions |
-|---|---|---|
-| Mindat.org | Authoritative mineralogy database | |
-| Handbook of Mineralogy | Core mineralogical reference | |
-| Encyclopaedia Britannica | Scientific reference | |
-| [Museum / institutional source] | Museum and scientific education | |
-
----
-
-## Theme Decisions
-
-| Theme | Placement | Reason |
-|---|---|---|
-| [Theme] | Primary / Secondary / Occasional / Omitted | |
+| Field | Rule |
+|---|---|
+| `NAV_PREV_SLUG` | Slug of the previous encyclopedia entry. |
+| `NAV_PREV_NAME` | Display name of the previous entry. |
+| `NAV_NEXT_SLUG` | Slug of the next encyclopedia entry. |
+| `NAV_NEXT_NAME` | Display name of the next entry. |
 
 ---
 
-## At a Glance Decisions
+## Stone-Name Repetition Control
 
-- Chakra: [value] — [brief note if non-obvious]
-- Element: [value] — [source]
-- Planet: [value] — [source]
-- Zodiac: [value] — [source]
-- Energetic Role: [value] — [reason]
-- Color Energy: [value] — [reason]
+Do not repeatedly begin nearby paragraphs, rows, cards, or notes with the stone name. The first clear mineral-identity sentence may use the canonical stone name when doing so improves clarity or precision. Avoid forced alternatives such as "this material" when the name is the clearest construction.
+The `Use When` field must begin with the situation, not with "Reach for [Stone] when…".
+
+See `EDITORIAL-RESEARCH-STANDARDS.md` §Stone-Name Repetition Control for the full 10-rule set.
 
 ---
 
-## Pairing Decisions
+## Sidebar Navigation
 
-### Similar Energy
-- [Stone]: [reason for placement here vs. Pairs Well With]
-- [Stone]: [reason for placement here vs. Pairs Well With]
-
-### Pairs Well With
-- [Stone]: [reason]
-- [Stone]: [reason]
-
----
-
-## Treatments, Trade Names, Imitations, and Care
-
-[Notes on any relevant treatment, enhancement, imitation, trade-name issue, or care consideration. These inform the Mineral Profile and Overview — they are not public copy themselves.]
-
----
-
-## Claims Rejected or Reframed
-
-| Claim | Disposition | Reason |
-|---|---|---|
-| [Claim] | Rejected / Reframed / Retained | |
-
----
-
-## COMPLIANCE REPORT
-
-*Complete before submitting this MD for Christie approval. Every item must show PASS or FAIL. Do not submit with FAILs or blanks.*
-
-- **Architecture version:** [2026-06-19-draft]
-- **Current Hero architecture:** [PASS / FAIL] — Collection Label, Signature Line, 3 Property Pills, Best For, Use When, Affirmation
-- **Hero content sections:** [PASS / FAIL] — exactly 3
-- **Known For section:** [PASS / FAIL] — must be absent
-- **At a Glance:** [PASS / FAIL] — exactly 6 boxes, all values from locked workbook
-- **Overview:** [PASS / FAIL] — exactly 2 paragraphs
-- **Why People Reach For It:** [PASS / FAIL] — exactly 5 rows
-- **Energetic Themes:** [PASS / FAIL] — 2 Primary, 2 Secondary, 0–2 Occasional
-- **Collector & Curiosity Notes:** [PASS / FAIL] — exactly 4
-- **Related Stones:** [PASS / FAIL] — exactly 2 Similar Energy and 2 Pairs Well With
-- **Related-stone uniqueness:** [PASS / FAIL] — all 4 are different stones
-- **Related-stone reasons:** [PASS / FAIL] — ≤30 words each
-- **Signature Line limit:** [PASS / FAIL] — ≤20 words
-- **Best For limit:** [PASS / FAIL] — ≤20 words
-- **Use When limit:** [PASS / FAIL] — ≤25 words
-- **Affirmation limit:** [PASS / FAIL] — ≤15 words, first-person present tense
-- **Collector Notes limits:** [PASS / FAIL] — 35–55 words each, ≤60-word hard maximum
-- **Research minimums:** [PASS / FAIL] — 6 qualified metaphysical sources, Tier A or A+
-- **Technical framing:** [PASS / FAIL] — mineral facts and metaphysical associations not conflated
-- **Medical-claim scan:** [PASS / FAIL]
-- **Placeholder scan:** [PASS / FAIL] — no placeholder text remains in public sections
-- **Research notes scan:** [PASS / FAIL] — no internal notes in public sections
-- **Navigation:** [PASS / FAIL] — [Previous Stone] → [This Stone] → [Next Stone]
-- **Pairing slugs verified:** [PASS / FAIL] — all 4 slugs confirmed against live roster
-- **Energetic Role icon resolves:** [PASS / FAIL] — locked value has a corresponding icon in the approved set
-- **HTML generation:** NOT AUTHORIZED — MD requires Christie approval first
+The sidebar nav label for the top anchor reads `Introduction`.
+The `href` remains `#top`. Do not change either.

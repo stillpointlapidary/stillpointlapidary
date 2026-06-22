@@ -30,23 +30,45 @@ const TEMPLATE_PATH = path.join(__dirname, '..', 'docs', 'encyclopedia', 'CANONI
 const ROSTER_PATH   = path.join(__dirname, '..', 'docs', 'encyclopedia', 'Stones Catalog with Previous - Next Slugs.csv');
 const OUTPUT_DIR    = __dirname; // stones/
 
-// ── Load canonical slug roster ────────────────────────────────────────────────
-// Parsed once at startup. Keys are slugs; presence is the only check needed.
-function loadRoster() {
+// ── Load canonical slug roster and nav data ──────────────────────────────────
+// Both parsed once at startup from the same CSV.
+// CSV columns (0-based): id, name, slug, display_order,
+//   previous_stone, previous_slug, next_stone, next_slug
+function loadRosterAndNav() {
   if (!fs.existsSync(ROSTER_PATH)) {
     process.stderr.write('ERROR: Canonical roster not found: ' + ROSTER_PATH + '\n');
     process.exit(1);
   }
   const lines  = fs.readFileSync(ROSTER_PATH, 'utf8').split('\n').slice(1); // skip header
   const roster = new Set();
+  const navMap = new Map(); // slug → { prevName, prevSlug, nextName, nextSlug }
+  const seen   = new Set(); // for duplicate-slug detection
+
   for (const line of lines) {
-    const slug = line.split(',')[2]?.trim();
-    if (slug) roster.add(slug);
+    if (!line.trim()) continue;
+    const cols      = line.split(',');
+    const slug      = cols[2]?.trim();
+    if (!slug) continue;
+
+    roster.add(slug);
+
+    if (seen.has(slug)) {
+      process.stderr.write('ERROR: Duplicate slug "' + slug + '" found in canonical roster CSV.\n');
+      process.exit(1);
+    }
+    seen.add(slug);
+
+    navMap.set(slug, {
+      prevName: cols[4]?.trim() || '',
+      prevSlug: cols[5]?.trim() || '',
+      nextName: cols[6]?.trim() || '',
+      nextSlug: cols[7]?.trim() || '',
+    });
   }
-  return roster;
+  return { roster, navMap };
 }
 
-const CANONICAL_ROSTER = loadRoster();
+const { roster: CANONICAL_ROSTER, navMap: NAV_MAP } = loadRosterAndNav();
 
 // ────────────────────────────────────────────────────────────────────────────
 // LOOKUP TABLES
@@ -161,6 +183,10 @@ const STONE_DOT_GRADIENTS = {
   'apache-tears':      'linear-gradient(135deg, #5c4a42, #2a1e1a)',
   'selenite':          'linear-gradient(135deg, #f5f2ee, #d8d4ce)',
   'clear-quartz':      'linear-gradient(135deg, #f0eeec, #c8c8d0)',
+  // Clear Quartz
+  'herkimer-diamond':  'linear-gradient(135deg, #f0eef8, #c8c4e0)',
+  'amethyst':          'linear-gradient(135deg, #c8a0d8, #7a4090)',
+  'smoky-quartz':      'linear-gradient(135deg, #8a7870, #4a3830)',
 };
 
 /**
@@ -561,7 +587,6 @@ function generate(mdPath, dryRun) {
 
   const {
     name, slug, collectionLabel, imageUrl, imageAlt,
-    navPrevName, navPrevSlug, navNextName, navNextSlug,
     signature, pills, bestFor, useWhen, affirmation,
     energeticRole, chakraPrimary, chakraSecondary, stylingChakra,
     element, planet, zodiac, colorEnergy,
@@ -572,6 +597,44 @@ function generate(mdPath, dryRun) {
     careCleaning, careWater, careLightHeat, careStorage,
     similarStones, pairsStones,
   } = data;
+
+  // ── Source Previous/Next navigation from CSV (sole authority) ──
+  if (!NAV_MAP.has(slug)) {
+    process.stderr.write('ERROR: Slug "' + slug + '" is absent from the canonical nav CSV.\n');
+    process.exit(1);
+  }
+  const navEntry = NAV_MAP.get(slug);
+  // Duplicate-slug check already done at startup in loadRosterAndNav().
+  const navPrevName = navEntry.prevName;
+  const navPrevSlug = navEntry.prevSlug;
+  const navNextName = navEntry.nextName;
+  const navNextSlug = navEntry.nextSlug;
+
+  if (!navPrevSlug && navPrevName && navPrevName.toLowerCase() !== 'null') {
+    process.stderr.write('ERROR: Previous stone name is present but previous slug is missing for "' + slug + '" in the nav CSV.\n');
+    process.exit(1);
+  }
+  if (!navNextSlug && navNextName && navNextName.toLowerCase() !== 'null') {
+    process.stderr.write('ERROR: Next stone name is present but next slug is missing for "' + slug + '" in the nav CSV.\n');
+    process.exit(1);
+  }
+  // For stones that are not at the edges of the catalog, both prev and next are required.
+  if (navPrevName && navPrevName.toLowerCase() !== 'null' && !navPrevSlug) {
+    process.stderr.write('ERROR: Missing previous slug for "' + slug + '" in the nav CSV.\n');
+    process.exit(1);
+  }
+  if (navNextName && navNextName.toLowerCase() !== 'null' && !navNextSlug) {
+    process.stderr.write('ERROR: Missing next slug for "' + slug + '" in the nav CSV.\n');
+    process.exit(1);
+  }
+  if (navPrevSlug && navPrevSlug.toLowerCase() !== 'null' && !CANONICAL_ROSTER.has(navPrevSlug)) {
+    process.stderr.write('ERROR: Previous nav slug "' + navPrevSlug + '" is referenced in nav CSV but is not present in the 333-stone roster.\n');
+    process.exit(1);
+  }
+  if (navNextSlug && navNextSlug.toLowerCase() !== 'null' && !CANONICAL_ROSTER.has(navNextSlug)) {
+    process.stderr.write('ERROR: Next nav slug "' + navNextSlug + '" is referenced in nav CSV but is not present in the 333-stone roster.\n');
+    process.exit(1);
+  }
 
   // ── Validate required lookups ──
   const palette = CHAKRA_PALETTES[stylingChakra];
@@ -632,10 +695,6 @@ function generate(mdPath, dryRun) {
   // ── Canonical roster slug validation ──
   if (!CANONICAL_ROSTER.has(slug))
     hardFail('Slug "' + slug + '" is not in the canonical roster (' + ROSTER_PATH + ').');
-  if (navPrevSlug && !CANONICAL_ROSTER.has(navPrevSlug))
-    hardFail('Previous nav slug "' + navPrevSlug + '" is not in the canonical roster.');
-  if (navNextSlug && !CANONICAL_ROSTER.has(navNextSlug))
-    hardFail('Next nav slug "' + navNextSlug + '" is not in the canonical roster.');
   for (const stone of allRelated) {
     if (stone.slug && !CANONICAL_ROSTER.has(stone.slug))
       hardFail('Related stone slug "' + stone.slug + '" is not in the canonical roster.');

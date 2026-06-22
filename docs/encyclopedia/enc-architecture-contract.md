@@ -1,8 +1,8 @@
 # Still Point Lapidary — Encyclopedia Architecture Contract
 
-**Version:** 2026-06-19-provisional  
-**Status:** PROVISIONALLY APPROVED FOR CITRINE PILOT — Hero copy limits in §2.5 remain provisional pending pilot visual review. Gate 3 icon-path verification is CLOSED (see §12.5).  
-**Pre-lock amendments:** Hero tile visual layout locked (§2.5); section DOM-order rule locked across breakpoints (§1.1). Both added 2026-06-19, prior to Citrine pilot build, per Christie's direct instruction — see amendment log in §19.  
+**Version:** 2026-06-22-canonical  
+**Status:** LOCKED — Citrine pilot approved and published 2026-06-20. All architectural rules are canonical and apply to all subsequent production.  
+**Post-lock amendment process:** All further amendments must follow §19 and include Christie's explicit approval. See amendment log in §19 for full history.  
 **Supersedes:** All prior architecture documents, including `GOLD-STANDARD-STONE-PAGE.html` and any file named `*_NEW_FORMAT.*`
 
 ---
@@ -12,10 +12,10 @@
 This contract moves through three states. The current state is recorded above and must be updated as the project progresses.
 
 1. **DRAFT** — under review, not yet used for production.
-2. **PROVISIONALLY APPROVED FOR CITRINE PILOT** — Christie has approved this contract as the basis for building one pilot page. Hero copy limits in §2.5 are provisional at this stage and will be calibrated against the rendered pilot, not treated as final. *(current state, approved 2026-06-19)*
-3. **LOCKED** — Christie has approved the rendered Citrine pilot. The contract, including final calibrated Hero limits, governs all subsequent production. Amendments after this point follow §19.
+2. **PROVISIONALLY APPROVED FOR CITRINE PILOT** — Christie approved this contract as the basis for building the Citrine pilot page. *(completed 2026-06-19)*
+3. **LOCKED** — Christie approved the rendered Citrine pilot 2026-06-20. The contract governs all subsequent production. Amendments follow §19. *(current state)*
 
-<!-- ARCHITECTURE VERSION: 2026-06-19-provisional | Status: PROVISIONALLY APPROVED FOR CITRINE PILOT | Hero: 3 sections (limits provisional) | AtaGlance: 6 boxes | Icon path: VERIFIED — Gate 3 CLOSED -->
+<!-- ARCHITECTURE VERSION: 2026-06-22-canonical | Status: LOCKED | Hero: 3 sections | AtaGlance: 6 boxes | Icon path: VERIFIED — Gate 3 CLOSED -->
 
 ---
 
@@ -42,72 +42,52 @@ Every encyclopedia entry page uses this exact section order, top to bottom:
 5. Energetic Themes
 6. Mineral Profile
 7. Collector & Curiosity Notes
-8. Related Stones
-9. Previous / Next Navigation
-10. Bottom CTA
+8. Care & Cleansing
+9. Related Stones
+10. Previous / Random / Next Navigation
+11. Bottom CTA
 
 No sections may be added, removed, reordered, or renamed without a new approved version of this contract.
 
-### 1.1 Section Order Is a DOM Rule, Not Just a Visual Rule (locked 2026-06-19)
+### 1.1 Two-Column Flex Stack Layout (canonical 2026-06-20)
 
-The order in §1 governs the **document order** of sections 3–8 (Overview through Related Stones) — not merely their visual appearance on any one breakpoint. This order must be identical in:
+The page sections listed in §1 must appear in that order in the document, in screen-reader reading order, and in the sidebar navigation and scroll-spy arrays. Desktop visual two-column layout is achieved via two independent flex stacks inside a single `.content-grid` container.
 
-- the DOM (source order in the HTML)
-- screen-reader reading order
-- scroll-spy navigation order
-- visual reading order at every breakpoint: desktop, tablet, and mobile
-
-**Desktop two-column visual layout is permitted, but only via CSS Grid placement on elements that remain in true DOM order.** Energetic Themes and Collector & Curiosity Notes may be visually placed in a right-hand column on desktop using explicit `grid-column` / `grid-row` placement or named grid areas, while Overview, Why People Reach For It, Mineral Profile, and Related Stones occupy the left column — provided all six sections remain siblings in one shared grid container, in the §1 DOM order, with no reordering wrapper elements.
-
-#### Preferred Implementation (locked 2026-06-19)
-Named `grid-template-areas` is the preferred technique, since it is self-documenting and requires no row/column arithmetic. Use this structure unless a documented technical conflict prevents it:
-
+**Container:**
 ```css
 .content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  grid-template-areas:
-    "overview themes"
-    "reach themes"
-    "mineral notes"
-    "related notes";
-  gap: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
   align-items: stretch;
 }
-
-#overview { grid-area: overview; }
-#reach    { grid-area: reach; }
-#themes   { grid-area: themes; }
-#mineral  { grid-area: mineral; }
-#notes    { grid-area: notes; }
-#related  { grid-area: related; }
 ```
 
-At the single-column breakpoint:
+**Left stack** (`.content-stack-left`, `flex: 1`):
+Overview · Why People Reach For It · Mineral Profile · Related Stones
 
+**Right stack** (`.content-stack-right`, `width: 340px; flex: 0 0 340px`):
+Energetic Themes · Collector & Curiosity Notes · Care & Cleansing
+
+The two stacks are independent of each other. A card in one stack does not determine the vertical position of a card in the other. Unequal total stack heights are expected and acceptable.
+
+**Care & Cleansing is a direct child of `.content-stack-right`**, positioned below Collector & Curiosity Notes. It is not a full-width section and does not appear outside the right stack.
+
+**Responsive behavior** (`max-width: 1100px`): Both `.content-stack-left` and `.content-stack-right` apply `display: contents`, collapsing the stack wrappers and making all seven child sections direct participants in the `.content-grid` flex context. CSS `order` values then control the single-column reading sequence.
+
+**Approved mobile order:**
 ```css
-.content-grid {
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "overview"
-    "reach"
-    "themes"
-    "mineral"
-    "notes"
-    "related";
-}
+#overview { order: 1; }
+#reach    { order: 2; }
+#themes   { order: 3; }
+#mineral  { order: 4; }
+#notes    { order: 5; }
+#care     { order: 6; }
+#related  { order: 7; }
 ```
 
-This preserves the locked DOM order from §1 and gives deterministic desktop alignment. The visual pairing of Energetic Themes alongside Overview + Why People Reach For It, and Collector Notes alongside Mineral Profile + Related Stones, is a row-height assumption to confirm visually once real Citrine content populates the template — if one column runs meaningfully longer than its paired column, the row spans may need adjustment at pilot review.
-
-**CSS `order` must not be used to create a visual order that differs from DOM order.** `order` makes visual position diverge from DOM position, which breaks screen-reader and keyboard-navigation order — exactly the failure mode this rule exists to prevent.
-
-At narrower breakpoints (tablet and mobile):
-- All sections collapse to a single column
-- Any explicit `grid-row` placement used for the desktop two-column layout is removed or reset
-- The visual reading order matches the DOM order exactly — no exceptions
-
-Sidebar navigation links and scroll-spy section-id arrays must list sections in this same §1 order.
+Sidebar navigation links and scroll-spy section-id arrays must follow this same sequence. The canonical scroll-spy array is:
+`['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'care', 'related']`
 
 ---
 
@@ -159,13 +139,13 @@ The three Hero content sections display as **three equal-width tiles in a single
 
 #### Best For
 - Describes the practical use case or intention category
-- **Provisional limit: 1–2 lines at desktop reference width; approximately 15–20 words**
+- **Up to 20 words**
 - Begins with a gerund (e.g., "Focusing intentions…") or a noun phrase — not a full sentence with a subject
 - Must not duplicate Affirmation or Use When language
 
 #### Use When
 - Describes the circumstances or inner state that makes reaching for this stone appropriate
-- **Provisional limit: 1–2 lines at desktop reference width; approximately 20–25 words**
+- **Up to 25 words**
 - May use full sentences
 - Must not duplicate Best For or Affirmation language
 
@@ -250,7 +230,7 @@ Cover:
 - Does not repeat facts that belong exclusively to the Mineral Profile
 - Does not contain bullet points or subheadings
 - Preserves specific, interesting geology, naming nuance, and treatment context — do not flatten to generic prose
-- **Target: 80–120 words per paragraph; target 160–220 words total.** There is no rigid minimum beyond exactly two substantive paragraphs that fulfill their assigned jobs (§4 Paragraph 1 and Paragraph 2) — a paragraph that does its job at 75 words is acceptable; a paragraph padded to hit a word count is not.
+- **Up to approximately 120 words per paragraph.** There is no minimum beyond exactly two substantive paragraphs that fulfill their assigned jobs (§4 Paragraph 1 and Paragraph 2).
 
 ---
 
@@ -260,7 +240,7 @@ Cover:
 - Each row has a short heading and one to two sentences of explanation
 - Headings describe practical intentions or use cases
 - Copy is specific and actionable — not generic affirmation language
-- **Limit per row: approximately 20–30 words of body copy**
+- **Limit per row: up to 30 words of body copy**
 - Rows must be distinct from one another and from Best For / Use When
 
 ---
@@ -303,7 +283,7 @@ Cover:
 - Exactly 4 notes
 - Each note has a short heading and a body paragraph
 - Notes cover distinct topics — no two notes on the same subject
-- **Word limit: 35–55 words per note; 60-word hard maximum**
+- **Word limit: up to 55 words per note**
 - Notes may cover: historical naming, cultural context, scientific discovery, geological curiosity, authenticity or trade-name history, collector distinctions, notable specimens or localities
 - Notes must be accurate and sourced; do not fabricate curiosities
 
@@ -377,6 +357,7 @@ Icons are assigned per section using the approved 57-icon system.
 | Related Stones (section) | `stones-row` |
 | Energetic Themes | `upward-spark` |
 | Collector & Curiosity Notes | `bookmark` |
+| Care & Cleansing | `care-cleansing` — SVG: `https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg` |
 
 ### 12.2 At a Glance Icon Assignments
 
@@ -533,11 +514,11 @@ The following fields must fit their visual component without overflow. Write to 
 
 - Signature Line (20 words max)
 - Property pills (1–3 words each)
-- Best For (15–20 words — **provisional**, subject to recalibration after Citrine pilot; see §2.5)
-- Use When (20–25 words — **provisional**, subject to recalibration after Citrine pilot; see §2.5)
+- Best For (up to 20 words)
+- Use When (up to 25 words)
 - Affirmation (15 words max — **provisional**, subject to recalibration after Citrine pilot; see §2.5)
 - All six At a Glance values (1–4 words each)
-- Why People Reach For It row copy (20–30 words per row)
+- Why People Reach For It row copy (up to 30 words per row)
 - Energetic Theme descriptions (3 visual lines per Primary or Secondary)
 - Related Stone reasons (30 words max)
 
@@ -620,7 +601,7 @@ All of the following must pass:
 - [ ] Why People Reach For It: exactly 5 rows, each distinct
 - [ ] Energetic Themes: exactly 2 Primary, exactly 2 Secondary, 0–2 Occasional
 - [ ] Mineral Profile: formation paragraph + lower note + localities
-- [ ] Collector & Curiosity Notes: exactly 4, each 35–55 words
+- [ ] Collector & Curiosity Notes: 3 or 4 notes, each ≤55 words
 - [ ] Related Stones: exactly 2 Similar Energy, exactly 2 Pairs Well With, all 4 different
 - [ ] Related Stone reasons: ≤30 words each
 - [ ] No Known For section present
@@ -708,9 +689,10 @@ This contract follows the three-state sequence defined in §0: DRAFT → PROVISI
 1. Complete the Citrine pilot HTML
 2. Christie approves the rendered page, including Hero copy line behavior at actual desktop/tablet/mobile widths
 3. Calibrate §2.5 Hero limits from provisional to final based on what the rendered pilot actually required
-4. Update the version token from `2026-06-19-draft` to the approval date
+4. Update the version token to the approval date
 5. Update the Status field to `LOCKED`
 6. Reconcile `enc-editorial-schema.md` to match any changes made during the pilot
+*(This step was completed 2026-06-20 — see amendment log and current Status field)*
 
 **To amend a LOCKED contract:**
 1. Christie identifies the change needed
@@ -725,17 +707,19 @@ This contract follows the three-state sequence defined in §0: DRAFT → PROVISI
 | Date | Change | Section(s) | Authorized by |
 |---|---|---|---|
 | 2026-06-19 | Locked Hero tile visual layout (3 equal-width tiles in a horizontal row at desktop) | §2.5, §2.6 | Christie |
-| 2026-06-19 | Locked section DOM-order rule: Overview through Related Stones must share one DOM order across all breakpoints, screen readers, and scroll-spy; desktop two-column layout via CSS Grid placement only, `order` property prohibited | §1.1 | Christie, instruction drafted by Lyra |
+| 2026-06-19 | Locked section DOM-order rule: Overview through Related Stones must share one DOM order across all breakpoints, screen readers, and scroll-spy; desktop two-column layout via CSS Grid placement only, `order` property prohibited. *(Superseded by 2026-06-20 canonical consolidation — see final entry)* | §1.1 | Christie, instruction drafted by Lyra |
 | 2026-06-19 | Refined Hero wrap behavior: binary 3-across-or-fully-stacked only, no 2+1 intermediate wrap state, unless pilot review later justifies an exception | §2.5 | Christie, refinement proposed by Lyra |
-| 2026-06-19 | Locked preferred desktop grid implementation as named `grid-template-areas` (specific CSS provided) | §1.1 | Christie, implementation proposed by Lyra |
+| 2026-06-19 | Locked preferred desktop grid implementation as named `grid-template-areas` (specific CSS provided). *(Superseded by 2026-06-20 canonical consolidation — flex stacks replace grid-template-areas)* | §1.1 | Christie, implementation proposed by Lyra |
 | 2026-06-19 | Revised At a Glance box order: Energetic Role, Chakra, Element, Planet, Zodiac, Color Energy (was: Chakra, Element, Planet, Zodiac, Energetic Role, Color Energy). Field values, icon assignments, and all other rules unchanged — display order only. | §3, §12.2 | Christie |
 | 2026-06-19 | Right-rail vertical space distribution (closes pilot review item #5 — row-height balance). `.rail-card` made a flex column (`display: flex; flex-direction: column`). New `.rail-card-body` wrapper (`flex: 1; display: flex; flex-direction: column; justify-content: space-between`) holds all card content below `<h2>`, distributing leftover height evenly across tier groups or note rows instead of pooling at the bottom. For `#themes`: content grouped into three `<div class="theme-tier-group">` siblings (Primary, Secondary, Occasional), each a flex child receiving equal leftover space. For `#notes`: `.note-list` changed from `display: grid; gap: 8px` to `flex: 1; display: flex; flex-direction: column; justify-content: space-between`, distributing space across the 4 note rows. `<h2>` remains a direct child of `.rail-card`, outside `.rail-card-body`, and keeps its existing position and border-bottom. Applies to all future stone pages. | §6 (`#themes`), §8 (`#notes`) | Christie |
 | 2026-06-19 | Replaced named `grid-template-areas` layout with two independent vertical flex stacks. `.content-grid` is now `display: flex; flex-direction: row; gap: 20px; align-items: flex-start`. Left stack (`.content-stack-left`, `flex: 1`): Overview, Why People Reach For It, Mineral Profile, Related Stones. Right stack (`.content-stack-right`, `width: 340px; flex: 0 0 340px`): Energetic Themes, Collector & Curiosity Notes, Care & Cleansing. Stacks are independent — a card in one stack never determines the vertical position of a card in the other. Unequal total stack heights are expected and acceptable. At `max-width: 1100px`, stacks flatten with `display: contents` and sections follow canonical mobile reading order via explicit CSS `order` values (1–7: Overview, Reach, Themes, Mineral, Notes, Care, Related). No fixed heights, balancing spacers, min-height values, or JS height matching are permitted. | §1.1 | Christie |
 | 2026-06-19 | Layout and typography reset (locked canonical behavior). (1) Natural content flow: `align-items: stretch` removed from `.content-grid`; `flex: 1` and `justify-content: space-between` removed from `.rail-card-body` and `.note-list`. Each card sizes to its own content; right rail finishing above left column bottom is acceptable and expected. (2) Energetic Themes item spacing: consistent `margin-top: 16px` via `.theme-row + .theme-row`; section labels retain their existing top margin for visual grouping but no large empty zones between items. (3) Signature Line typography restored to `Georgia, serif; italic; 17px; weight 400`. (4) Care & Cleansing heading uses identical typography to all other rail card headings — `#care h2` size override removed. (5) Page-wide minimum body text size set to 14px (matching `.reach-desc`), applied to: `.glance-value`, `.theme-row p`, `.mineral-fact`, `.note-row p`, `#care .care-list`, `.stone-reason`. | §1.1, §2 (signature line), §3 (glance), §6 (themes), §7 (mineral), §8 (notes), §8a (care), §9 (related) | Christie |
 | 2026-06-19 | Added Care & Cleansing as a permanent right-rail section. Section ID: `#care`. Grid area name: `care`. Position: right rail, below Collector & Curiosity Notes — `grid-template-areas` row added: `"related care"`. Icon: `icon-care-cleansing` (SVG at `icons/encyclopedia/care-cleansing.svg` in `stone-images` Supabase bucket; local source at `assets/SVGs/care-cleansing.svg`). Content rule: 3–4 items drawn from the stone's Mineral Profile care information only — no new editorial content; items are short and scannable, one line each. Sidebar nav: `<a href="#care">Care & Cleansing</a>` added after Collector Notes. Scroll-spy sections array updated to include `'care'` after `'notes'`. Mobile single-column `grid-template-areas` updated to include `"care"` after `"notes"`. Affirmation icon rule also added this session: Affirmation tile uses the stone's locked Energetic Role icon (canonical template uses `{{ENERGETIC_ROLE_ICON}}` placeholder). | §1.1 (grid), §8a (new section), sidebar nav, scroll-spy | Christie |
-| 2026-06-19 | Care & Cleansing moved to full-width utility section. `#care` removed from `.content-stack-right` and placed as a direct sibling of `.content-grid`, immediately after its closing tag and before `.entry-nav-wrap`. CSS: `#care { margin-top: 16px; }` added; `#care { order: 6; }` removed from the mobile responsive block (section is outside `.content-grid` so `order` has no effect). `.rail-card` styling retained as-is — the card renders full-width in the document flow. `#related` mobile order value updated from 7 to 6. Care & Cleansing is not part of either stack and carries no `grid-area` assignment. | §1.1, §8a | Christie |
+| 2026-06-19 | Care & Cleansing moved to full-width utility section. `#care` removed from `.content-stack-right` and placed as a direct sibling of `.content-grid`, immediately after its closing tag and before `.entry-nav-wrap`. CSS: `#care { margin-top: 16px; }` added; `#care { order: 6; }` removed from the mobile responsive block (section is outside `.content-grid` so `order` has no effect). `.rail-card` styling retained as-is — the card renders full-width in the document flow. `#related` mobile order value updated from 7 to 6. Care & Cleansing is not part of either stack and carries no `grid-area` assignment. *(Superseded by 2026-06-20 canonical consolidation — Care & Cleansing is confirmed inside .content-stack-right)* | §1.1, §8a | Christie |
+| 2026-06-20 | Canonical architecture reconciliation and lock. Replaces §1.1 body entirely with the approved two-column flex-stack implementation. All earlier conflicting §1.1 rules are superseded, including: named `grid-template-areas` as preferred implementation (2026-06-19); prohibition on CSS `order` property (2026-06-19); full-width Care & Cleansing placement outside `.content-stack-right` (2026-06-19). Confirms `#care` as a permanent direct child of `.content-stack-right`, below Collector & Curiosity Notes. Inserts Care & Cleansing as page section 8 in the §1 master list; Related Stones renumbered to 9; Previous / Random / Next Navigation to 10; Bottom CTA to 11. Updates contract version from `2026-06-19-provisional` to `2026-06-20-canonical` and status from PROVISIONALLY APPROVED to LOCKED, following Christie's approval of the Citrine pilot. | §0, §1, §1.1 | Christie |
+| 2026-06-22 | Removed word-count floors from all prose fields. Only ceilings remain. Affected: Collector Notes (≤55 words), Why People Reach For It rows (≤30 words), Hero Best For (≤20 words), Hero Use When (≤25 words), Overview (≤~120 words per paragraph). Rationale: natural brevity is preferable to padded copy. | §2.5, §4, §5, §8, §13 | Christie |
 | 2026-06-19 | Hero photo fit and frame confinement. Stone photo `object-fit` changed from provisional `contain` to locked `cover`, approved by Christie after visual review of the Citrine pilot (matches established treatment on prior pages like Clear Quartz). `object-position` defaults to `center`, overridable per-stone via `--stone-photo-position` (e.g., `#hero .stone-photo-wrap { --stone-photo-position: center 30%; }`) without editing this file or the canonical template. Concurrently fixed: the global `styles.css` rule (line 1821: `.enc-hero { position: relative; overflow: hidden; }`) was causing the stone photo to bleed outside `.stone-photo-wrap` into the Hero content area when the stone page reset `.enc-hero` to `position: static; overflow: visible` — removing the containment context `.stone-photo-wrap` was implicitly relying on. Resolved with a scoped reset confined to `.enc-hero .stone-photo-wrap`: added `position: relative; isolation: isolate; overflow: hidden` on the wrapper; added `position: static; inset: auto; transform: none; max-width: none` on the img; added `position: relative; z-index: 1` on `.hero-right`. | §2, photo frame | Christie |
 
 ---
 
-*Draft prepared for Christie's review — June 19, 2026*
+*Contract locked 2026-06-20. Prepared from Citrine pilot review — June 19–20, 2026.*
