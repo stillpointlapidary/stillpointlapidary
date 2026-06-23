@@ -2,12 +2,15 @@
 (function () {
   var STONES = [
     'amethyst',
+    'black-tourmaline',
     'carnelian',
     'citrine',
     'clear-quartz',
+    'green-aventurine',
     'labradorite',
-    'smoky-quartz',
-    'green-aventurine'
+    'rose-quartz',
+    'selenite',
+    'smoky-quartz'
   ];
 
   var current = document.documentElement.dataset.stoneSlug || '';
