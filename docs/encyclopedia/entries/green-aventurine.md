@@ -5,40 +5,29 @@
 ## Page Data
 
 ### Name
-
 Green Aventurine
 
 ### Slug
-
 green-aventurine
 
 ### Tier
-
 1
 
-### Collection Tier
-
+### Collection Label
 Essentials
 
 ### Image URL
-
 https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/green-aventurine.webp
 
-### Navigation
-
-#### Previous Stone
-
-- Name: Green Aragonite
-- Slug: green-aragonite
-
-#### Next Stone
-
-- Name: Green Calcite
-- Slug: green-calcite
+### Image Alt
+Polished Green Aventurine showing pale to deep green color with subtle mica sparkle
 
 ---
 
 ## Hero
+
+### Signature Line
+Green quartz-rich stone for meeting new possibilities with hope, confidence, and practical openness.
 
 ### Property Pills
 - Growth
@@ -46,59 +35,13 @@ https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/e
 - Prosperity
 
 ### Best For
-Fresh starts, hopeful momentum, and opening to opportunity
+Fresh starts, hopeful momentum, and opening to practical opportunity
 
 ### Use When
-You are ready to move beyond a difficult stretch and meet what comes next with greater confidence, openness, and emotional lightness.
+You are ready to move beyond disappointment and meet what comes next with greater openness.
 
-### Pairs With
-Rose Quartz, Citrine, Moonstone
-
-### Primary Chakra
-Heart
-
-### Secondary Chakras
-None
-
-### Styling Chakra
-Heart
-
----
-
-## Known For
-
-### Label
-The Stone of Opportunity
-
-### Description
-Green Aventurine is best known for pairing heart-centered optimism with traditions of luck and prosperity, making it a familiar choice for fresh starts, new ventures, and renewed confidence.
-
----
-
-## Overview
-
-Green Aventurine has long been associated with favorable openings, emotional buoyancy, and the courage to try again. Its Heart Chakra connection gives these themes a softer character: less about forcing an outcome and more about becoming receptive to possibility, regaining perspective, and moving forward without carrying every old disappointment into the next chapter.
-
-Geologically, Green Aventurine is a fine-grained, polycrystalline quartz-rich material, commonly described as aventurine quartz or aventurine quartzite. Tiny plates of fuchsite or related mica create its green color and may produce the subtle glitter known as aventurescence. The material is durable enough for beads, carvings, and polished stones, but commercial pieces may be oiled, dyed, or confused with other green ornamental materials.
-
----
-
-## Why People Reach For It
-
-### Starting Again
-Green Aventurine is often chosen at the beginning of a new chapter, especially when someone wants encouragement without pressure and a steadier sense of possibility.
-
-### Inviting Good Fortune
-Its strongest traditional association is with luck, prosperity, and favorable circumstances, particularly around new ventures, decisions, and opportunities for growth.
-
-### Recovering Perspective
-People reach for it when disappointment has narrowed their outlook and they want to reconnect with hope, proportion, and a more generous view of what may still unfold.
-
-### Strengthening Confidence
-Green Aventurine is associated with self-trust in unfamiliar situations, helping new steps feel more approachable when hesitation or self-doubt has taken over.
-
-### Letting Go of What Stalled
-Its forward-looking quality makes it a natural companion for releasing outdated expectations, old attachments, or patterns that keep a new phase from fully beginning.
+### Affirmation
+I welcome growth with hope, confidence, and an open heart.
 
 ---
 
@@ -106,13 +49,40 @@ Its forward-looking quality makes it a natural companion for releasing outdated 
 
 | Category | Detail |
 |---|---|
-| Primary Themes | Growth, Optimism, Prosperity |
-| Chakras | Heart |
+| Energetic Role | Manifestation |
+| Chakra | Heart |
+| Styling Chakra | Heart |
 | Element | Water |
-| Zodiac | Aries, Taurus, Virgo |
-| Formation | Metamorphic quartz-rich rock |
-| Hardness | About 7 |
-| Color Range | Pale to deep green |
+| Planet | Venus |
+| Zodiac | Taurus · Virgo |
+| Color Energy | Leaf Green |
+
+---
+
+## Overview
+
+Green Aventurine is a fine-grained, quartz-rich aggregate commonly described as aventurine quartz or aventurine quartzite. Tiny plates of fuchsite or related mica contribute its green color and may create the reflective glitter called aventurescence. Because it is polycrystalline rather than a single crystal, the material should not be described as one trigonal crystal. Commercial pieces may be oiled, dyed, polymer impregnated, or confused with jade and glass.
+
+Crystal traditions associate this green material with growth, optimism, prosperity, confidence, and favorable openings. Its Heart Chakra emphasis softens the prosperity theme, framing opportunity as receptivity, renewed perspective, and willingness to try again rather than guaranteed luck. The stone is often chosen at beginnings, especially when hope needs to become practical movement.
+
+---
+
+## Why People Reach For It
+
+### Beginning Again
+Chosen when a new chapter needs encouragement without pressure or forced positivity.
+
+### Welcoming Opportunity
+Traditionally associated with favorable openings, prosperity, and practical growth.
+
+### Recovering Perspective
+Used when disappointment has narrowed the outlook and hope needs room to return.
+
+### Strengthening Self-Trust
+Often selected when unfamiliar situations require steadier confidence and openness.
+
+### Releasing What Stalled
+Supports moving beyond old expectations, attachments, or patterns that no longer fit.
 
 ---
 
@@ -121,53 +91,91 @@ Its forward-looking quality makes it a natural companion for releasing outdated 
 ### Primary
 
 #### Growth and New Beginnings
-- Icon: `transformation`
-Green Aventurine is strongly associated with renewal, forward movement, and the willingness to begin again. Its energy is described as encouraging rather than forceful, supporting openness to what may develop next.
+Associated with renewal, forward movement, and the willingness to begin again after disappointment or delay.
 
 #### Good Fortune and Prosperity
-- Icon: `manifestation`
-Its best-known tradition centers on luck, opportunity, and favorable outcomes. Green Aventurine is commonly used when someone wants to welcome possibility while remaining grounded in practical action.
+Traditionally linked with opportunity, favorable circumstances, and practical abundance supported by participation and action.
 
 ### Secondary
 
 #### Emotional Optimism and Resilience
-- Icon: `heart-healing`
-Connected with the Heart Chakra, Green Aventurine is associated with recovering perspective after discouragement and maintaining hope without denying difficulty.
+Its Heart Chakra association supports renewed perspective, hope, and openness without denying difficulty.
 
 #### Confidence and Self-Trust
-- Icon: `clarity-focus`
-Green Aventurine is often chosen when a new situation calls for steadier self-belief. Its traditional role is to make forward movement feel more natural and less burdened by hesitation.
+Often chosen when a new situation calls for steadier self-belief and less hesitation.
 
-### Occasional
+### Occasional Associations
 - Leadership
 
 ---
 
 ## Mineral Profile
 
-Green Aventurine is a fine-grained, polycrystalline quartz-rich material, often classified as aventurine quartz or aventurine quartzite. It is composed primarily of quartz, while small plates of mica, commonly chromium-bearing fuchsite, create the green color and may produce a reflective glitter called aventurescence. Because it is an aggregate of many quartz grains rather than a single crystal, describing the finished material itself as one trigonal crystal would be misleading, although the quartz grains belong to the trigonal crystal system.
+### Mineral Facts
 
-Aventurine forms in metamorphic settings where quartz-rich material contains reflective mineral inclusions. With a Mohs hardness of about 7, it takes a good polish and is widely used for beads, carvings, cabochons, and decorative objects. Green aventurine is found in several localities worldwide, including India, Brazil, Russia, Austria, Tanzania, Canada, and the United States. Commercial material may be oiled to deepen its appearance, dyed to strengthen the green color, or polymer impregnated. Clean with mild soap, lukewarm water, and a soft cloth; avoid harsh chemicals and prolonged soaking when treatment status is unknown.
+| Property | Detail |
+|---|---|
+| Material Type | Quartz-rich aggregate |
+| Primary Component | Quartz |
+| Structure | Polycrystalline |
+| Mohs Hardness | About 7 |
+| Cleavage | None as an aggregate |
+| Fracture | Uneven to conchoidal |
+| Luster | Vitreous to granular |
+| Transparency | Translucent to opaque |
+
+### Formation
+
+Green Aventurine forms in metamorphic quartz-rich rocks containing reflective mica inclusions, commonly chromium-bearing fuchsite. These inclusions become distributed through the aggregate and create its green color and aventurescence.
+
+### Common Localities
+- India
+- Brazil
+- Russia
+- Austria
+- Tanzania
+- Canada
+- United States
+
+### Collector Context
+
+Look for attractive green color, visible but balanced mica sparkle, a clean polish, and translucency appropriate to the piece. Strong aventurescence can add interest, but excessive fractures, dull surfaces, or muddy color reduce appeal.
+
+Jade, green glass, serpentine, and other ornamental stones may resemble Green Aventurine. Granular texture and mica sparkle can offer clues, while formal gemological testing provides more reliable identification.
+
+The material is widely available in beads, carvings, tumbles, cabochons, and decorative objects. Common pieces are affordable, while fine color, strong sparkle, translucency, size, clean polish, and documented provenance can raise value.
 
 ---
 
-## Collector Notes
+## Collector & Curiosity Notes
 
 ### A Name Born by Chance
-- Icon: `book-reference`
-Aventurine takes its name from the Italian phrase *a ventura*, meaning “by chance.” The term was first associated with glittering glass made accidentally, then applied to natural stone with a similar sparkling effect.
+Aventurine takes its name from the Italian *a ventura*, meaning “by chance.” The term was first associated with glittering glass before being applied to natural stone with a similar effect.
 
 ### What Makes It Sparkle
-- Icon: `geology`
-Its shimmer comes from reflective mineral plates within the quartz-rich material. In green aventurine, these are commonly fuchsite mica, which contributes both color and the optical effect called aventurescence.
+Reflective mica plates within the quartz-rich material create aventurescence. In green material, fuchsite commonly contributes both color and shimmer.
 
 ### Natural Color Can Be Enhanced
-- Icon: `treatment`
-Commercial green aventurine may be oiled, dyed, or polymer impregnated to deepen color or improve translucency. Treatment is not universal, but unusually even color deserves a closer look.
+Commercial pieces may be oiled, dyed, or polymer impregnated. Treatment is not universal, but unusually even saturation deserves closer examination.
 
 ### Often Confused With Jade
-- Icon: `aperture-iris`
-Green aventurine may resemble jade, green glass, or other ornamental stones. A granular texture and mica sparkle can offer clues, while formal gemological testing provides the most reliable identification.
+Green Aventurine may resemble jade, glass, or other green ornamental stones. Texture and mica sparkle help, but they are not substitutes for gemological identification.
+
+---
+
+## Care & Cleansing
+
+### Cleaning
+Wash with mild soap, lukewarm water, and a soft cloth; avoid harsh chemicals and aggressive scrubbing.
+
+### Water
+Brief water contact is usually safe. Avoid prolonged soaking when dye, oil, polymer, glue, or fracture filling may be present.
+
+### Light & Heat
+Ordinary light is generally safe. Avoid strong heat and sudden temperature changes, especially when treatment status is unknown.
+
+### Storage
+Store separately from softer stones and protect polished surfaces from harder minerals and sharp impact.
 
 ---
 
@@ -177,115 +185,110 @@ Green aventurine may resemble jade, green glass, or other ornamental stones. A g
 
 #### Moss Agate
 - Slug: moss-agate
-- Reason: Both are linked with growth and renewal; Moss Agate feels earthier and slower, while Green Aventurine emphasizes optimism and favorable openings.
+- Reason: Both support growth and renewal; Moss Agate feels earthier and slower, while the emphasis here is optimism and favorable openings.
 
 #### Peridot
 - Slug: peridot
-- Reason: Both connect with heart-centered renewal and abundance; Peridot leans toward release and clearing, while Green Aventurine emphasizes confidence and opportunity.
+- Reason: Both connect with heart-centered renewal and abundance; Peridot emphasizes release, while this stone emphasizes confidence and opportunity.
 
 ### Pairs Well With
 
 #### Malachite
 - Slug: malachite
-- Reason: Malachite supports deeper transformation, while Green Aventurine helps orient that change toward hope, possibility, and a more open next step.
+- Reason: Adds deeper transformation and pattern change, while the green quartz emphasis keeps attention on hope and possibility.
 
 #### Clear Quartz
 - Slug: clear-quartz
-- Reason: Clear Quartz can sharpen and amplify intentions related to growth, confidence, and opportunity without duplicating Green Aventurine’s heart-centered tone.
+- Reason: Adds clarity and focus to intentions involving growth, confidence, and opportunity without duplicating the heart-centered tone.
 
 ---
 
-# RESEARCH NOTES (not for publication)
+# RESEARCH NOTES — NOT FOR PUBLICATION
 
 ## Complete Metaphysical Source List
 
 | Source | Tier | Key Contributions |
 |---|---|---|
-| The Book of Stones, Robert Simmons and Naisha Ahsian | A+ | Growth, vitality, confidence, Heart Chakra, Water element, optimism, good fortune, manifestation, prosperity |
-| Unidentified supplied book excerpt | B | Growth, optimism, prosperity, Heart Chakra, Aries/Taurus/Virgo, releasing attachments, accepting difficulty |
+| The Book of Stones | A+ | Growth, vitality, confidence, Heart Chakra, Water, optimism, good fortune, prosperity |
 | Crystal Vaults | A | Growth, prosperity, Heart Chakra, luck, leadership |
-| Crystal Council | A | Confidence, optimism, opportunity, heart-centered emotional support |
-| Moonrise Crystals | A | Compassion, perseverance, good fortune, Heart Chakra, nature connection |
+| Crystal Council | A | Confidence, optimism, opportunity, heart-centered support |
+| Moonrise Crystals | A | Compassion, perseverance, good fortune, Heart Chakra |
 | Crystals.com | A | Abundance, growth, Heart Chakra, confidence |
+| Crystal Almanac | A | Opportunity, renewal, prosperity, optimism |
 
 ## Complete Geological and Technical Source List
 
-| Source | Role | Key Contributions |
+| Source | Type | Key Contributions |
 |---|---|---|
-| Mindat.org, Aventurine | Technical | Classifies aventurine as a quartzite variety with reflective mica such as fuchsite; documents oiling and dyeing of commercial beads; distinguishes it from aventurine glass |
-| GIA, Structures Behind the Spectacle: A Review of Optical Effects in Phenomenal Gemstones and Their Underlying Nanotextures | Gemological | Describes aventurine quartz as quartzite composed predominantly of polycrystalline quartz with glimmering mica |
-| GIA, Polymer-Impregnated Aventurine Quartz, a New Imitation of “Ice Jade” | Gemological | Documents polymer-impregnated aventurine quartz and confusion with jadeite |
-| Smithsonian NMNH, All Sorts of Quartz | Museum | Confirms aventurine among gem materials associated with quartz |
+| Mindat — Aventurine | Core geological source | Quartzite classification, fuchsite, oiling, dyeing, aventurine glass distinction |
+| GIA — Aventurine quartz | Core gemological source | Polycrystalline quartz structure, mica inclusions, aventurescence |
+| GIA — Polymer-impregnated aventurine quartz | Core gemological source | Polymer treatment and jade confusion |
 
 ## Theme Decisions
 
 | Theme | Placement | Reason |
 |---|---|---|
-| Growth and New Beginnings | Primary | Strong consensus across supplied books and approved online sources |
-| Good Fortune and Prosperity | Primary | One of the most consistent traditional associations across the source set |
-| Emotional Optimism and Resilience | Secondary | Supported by The Book of Stones and multiple approved online sources |
-| Confidence and Self-Trust | Secondary | Supported by The Book of Stones, Crystal Council, and Crystals.com |
-| Leadership | Occasional | Supported by Crystal Vaults but less central than the four main themes |
-| Manifestation | Subsumed | Folded into Good Fortune and Prosperity to avoid duplication |
-| Vitality and Life Force | Omitted as a public theme | Present in The Book of Stones, but less broadly supported and too close to physical-energy framing |
+| Growth and New Beginnings | Primary | Strong consensus across approved sources |
+| Good Fortune and Prosperity | Primary | One of the most consistent associations |
+| Emotional Optimism and Resilience | Secondary | Supported across the core set |
+| Confidence and Self-Trust | Secondary | Meaningful agreement across multiple sources |
+| Leadership | Occasional | Supported but narrower |
+
+## At a Glance Decisions
+
+- Energetic Role: Manifestation
+- Chakra: Heart
+- Styling Chakra: Heart
+- Element: Water
+- Planet: Venus
+- Zodiac: Taurus, Virgo
+- Color Energy: Leaf Green
+
+### Decision Notes
+- Venus is proposed because it best fits growth, receptivity, prosperity, and Heart Chakra associations. Confirm in production data before final approval.
+- Taurus and Virgo are retained as the strongest concise pair from the broader researched set.
 
 ## Pairing Decisions
 
-Hero Pairings: Rose Quartz, Citrine, and Moonstone are retained as strong, distinct combinations for compassion, prosperity, and new beginnings.
-
-Similar Energy: Moss Agate and Peridot are retained for related growth, renewal, and heart-centered themes.
-
-Pairs Well With: Malachite and Clear Quartz are retained for complementary transformation and amplification.
-
-All names and slugs must still be checked against the canonical catalog index before HTML production.
+- Similar Energy: Moss Agate, Peridot
+- Pairs Well With: Malachite, Clear Quartz
+- All four stones are unique.
 
 ## Historical and Cultural Verification
 
-The Italian name origin and the connection to aventurine glass are supported by Mindat and GIA.
-
-Detailed claims about Rajasthan, Karnataka, centuries of Indian building inlay use, and Indian material being the global quality benchmark were removed because the cited sources did not directly substantiate them.
+- Italian name origin and connection to aventurine glass retained.
+- Unsupported India-dominance and architectural-use claims remain omitted.
+- No unapproved museum source remains in the counted research set.
 
 ## Treatments, Trade Names, Imitations, and Care
 
-Commercial green aventurine may be oiled to deepen color, dyed to improve or standardize green color, or polymer impregnated. These treatments are documented by Mindat and GIA. Aventurine glass or goldstone is a manufactured glass material and should not be confused with natural aventurine. Green aventurine may also be mistaken for jade or other green ornamental stones.
+- Oiling, dyeing, and polymer impregnation are documented.
+- Aventurine glass is a manufactured imitation.
+- Jade and other green ornamental stones may be confused with it.
+- Conservative care reflects possible treatments.
 
-The prior sunlight-fading claim was removed because adequate direct support was not established. Mild soap, lukewarm water, and a soft cloth are the conservative care recommendation, especially when treatment status is unknown.
+## Claims Rejected or Reframed
 
-## Chakra and Styling Decision
-
-Primary Chakra: Heart.
-Secondary Chakras: None.
-Styling Chakra: Heart.
-
-## Element and Zodiac
-
-Element: Water, following The Book of Stones as the A+ source.
-Zodiac: Aries, Taurus, Virgo, following the supplied book excerpt with partial online corroboration.
-
-## Claims Rejected or Omitted
-
-- Specific cardiovascular or circulation claims
-- Claims that India is the dominant global source without direct supporting evidence
-- Claims that Rajasthan and Karnataka supply most commercial material
-- Claims of centuries of Indian architectural inlay use
-- Claims that Indian material is the global quality benchmark
-- Claims that sunlight fading is established for this material
-- Claims that translucent material is universally preferred by collectors
-- Gambling-specific luck claims
-- Geopathic stress claims
+- Gambling-specific luck claims omitted.
+- Cardiovascular and circulation claims omitted.
+- Guaranteed-prosperity language reframed as opportunity plus practical action.
+- Unidentified supplied book excerpt removed from the counted source set.
 
 ---
 
 ## COMPLIANCE REPORT
 
-- **Tier data:** PASS. Green Aventurine is confirmed as Tier 1 / Essentials.
-- **Navigation:** PASS. Previous: Green Aragonite (`green-aragonite`). Next: Green Calcite (`green-calcite`).
-- **Required counts:** PASS. Exactly 3 property pills, 3 Hero pairings, 2 Overview paragraphs, 5 Why People Reach For It rows, 2 Primary themes, 2 Secondary themes, 1 Occasional association, 4 Collector Notes, 2 Similar Energy stones, and 2 Pairs Well With stones.
-- **Mineral classification:** PASS. Public copy now identifies Green Aventurine as fine-grained polycrystalline quartz-rich material or aventurine quartzite and avoids treating the aggregate as one crystal.
-- **Treatments and imitations:** PASS. Oiling, dyeing, polymer impregnation, jade confusion, and aventurine glass are addressed.
-- **Unsupported claims:** PASS. Unverified India, quality-benchmark, sunlight-fading, and collector-preference claims were removed.
-- **Theme distinction:** PASS. Manifestation was subsumed into prosperity; Vitality was removed as a public theme; Confidence and Self-Trust was added as the second Secondary theme.
-- **Repetition:** PASS WITH EDITORIAL REVIEW. Repetition was substantially reduced, but final browser rendering remains required.
-- **Medical claims:** PASS. No treatment, cure, diagnostic, cardiovascular, or other medical promises appear in public copy.
-- **Em dash scan:** PASS. No em dashes are used.
-- **HTML status:** NOT GENERATED. This MD remains in the review stage.
+- **Current Hero architecture:** PASS
+- **At a Glance:** PASS — six canonical values plus separate Styling Chakra field
+- **Overview:** PASS — exactly two paragraphs
+- **Why People Reach For It:** PASS — exactly five distinct rows
+- **Energetic Themes:** PASS — 2 Primary, 2 Secondary, 1 Occasional
+- **Mineral Facts:** PASS — exactly eight adaptable rows
+- **Collector Context:** PASS — exactly three paragraphs
+- **Collector Notes:** PASS — four strong candidates retained
+- **Care & Cleansing:** PASS — four fixed H3 fields
+- **Related Stones:** PASS — 2 Similar Energy, 2 Pairs Well With, all unique
+- **Approved-source hierarchy:** PASS
+- **Navigation fields:** OMITTED — generator resolves catalog navigation
+- **Outstanding production-data check:** Planet `Venus`
+- **HTML generation:** NOT AUTHORIZED
