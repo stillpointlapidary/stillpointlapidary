@@ -183,9 +183,9 @@ Natural and heat-treated material are both quartz, but they reach their color th
 - Slug: sunstone
 - Reason: Both support confidence and outward momentum; Sunstone emphasizes radiance and vitality, while the emphasis here is abundance and purposeful action.
 
-##### Yellow Aventurine
-- Slug: yellow-aventurine
-- Reason: Both carry warm, optimistic energy; Yellow Aventurine feels gentler and growth-oriented, while this stone is more activating and closely tied to prosperity.
+##### Golden Healer Quartz
+- Slug: golden-healer-quartz
+- Reason: Both carry warm, optimistic Solar Plexus energy; Golden Healer emphasizes energetic restoration and wholeness, while the emphasis here is abundance and purposeful action.
 
 #### Pairs Well With
 
@@ -251,7 +251,7 @@ Natural and heat-treated material are both quartz, but they reach their color th
 
 ### Similar Energy
 - Sunstone: warm confidence and outward momentum, with greater emphasis on radiance and vitality
-- Yellow Aventurine: warm optimism and confidence, with a gentler growth-oriented quality
+- Golden Healer Quartz: warm Solar Plexus energy with emphasis on energetic restoration and wholeness
 
 ### Pairs Well With
 - Green Aventurine: growth, opportunity, and prosperity complement Citrine’s manifestation focus
@@ -322,7 +322,7 @@ Natural and heat-treated material are both quartz, but they reach their color th
 - **Placeholder scan:** PASS — no placeholder text remains in public sections
 - **Research notes scan:** PASS — internal notes are separated below the publication boundary
 - **Navigation:** PASS — Cinnabrite → Citrine → Clear Fluorite
-- **Pairing slugs verified:** PASS — sunstone, yellow-aventurine, green-aventurine, tigers-eye
+- **Pairing slugs verified:** PASS — sunstone, golden-healer-quartz, green-aventurine, tigers-eye (Yellow Aventurine replaced with Golden Healer Quartz per Work Order 2026-06-22-C; yellow-aventurine confirmed off-roster)
 - **Energetic Role icon resolves:** PASS — Manifestation → `manifestation.svg`
 - **HTML generation:** COMPLETE — Gate 4 CLOSED. HTML generated, approved by Christie, and published as `stones/citrine.html`. MD reverse-synced to final approved HTML copy 2026-06-20.
 

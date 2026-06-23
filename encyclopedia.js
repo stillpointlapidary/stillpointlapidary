@@ -385,13 +385,17 @@ function colorDotsHtml(c){
   const hexMap=COLOR_HEX_MAP;
   const cats=(c.col_cats&&c.col_cats.length>0)?c.col_cats:[];
   if(cats.length>1){
-    const cols=cats.slice(0,4).map(x=>hexMap[x]||c.ch||'#aaa');
-    const pct=100/cols.length;
-    const stops=cols.map((col,i)=>`${col} ${i*pct}% ${(i+1)*pct}%`).join(', ');
-    return`<span class="color-dot" style="background:conic-gradient(${stops});margin-right:2px" title="${cats.join(', ')}"></span>`;
+    const col1=hexMap[cats[0]]||c.ch||'#aaa';
+    const col2=hexMap[cats[1]]||c.ch||'#aaa';
+    return`<span class="color-dot" style="background:linear-gradient(135deg,${col1},${col2});margin-right:2px" title="${cats.join(', ')}"></span>`;
   }
-  const col=hexMap[cats[0]]||c.ch||'#aaa';
-  return`<span class="color-dot" style="background:${col};margin-right:2px"></span>`;
+  const hex=c.ch||(hexMap[cats[0]])||null;
+  if(hex){
+    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    const tint='#'+[r,g,b].map(v=>Math.round(v+(255-v)*0.6).toString(16).padStart(2,'0')).join('');
+    return`<span class="color-dot" style="background:linear-gradient(135deg,${tint},${hex});margin-right:2px"></span>`;
+  }
+  return`<span class="color-dot" style="background:#c8c8c8;margin-right:2px"></span>`;
 }
 
 

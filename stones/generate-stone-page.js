@@ -11,18 +11,23 @@
  *
  * The generator reads the canonical template, parses the approved MD, and
  * substitutes all content fields. It makes no editorial decisions. All content,
- * chakra palette tokens, Energetic Role icons, and stone-dot gradients must be
- * registered in the lookup tables below before a page can be generated.
+ * chakra palette tokens, and Energetic Role icons must be registered in the
+ * lookup tables below before a page can be generated.
+ *
+ * Stone dot gradients are auto-derived from Supabase color_hex at startup.
+ * Stones absent from Supabase or requiring a fixed gradient are listed in
+ * GRADIENT_OVERRIDES below.
  *
  * To add a new chakra palette:   extend CHAKRA_PALETTES
  * To add a new Energetic Role:   extend ENERGETIC_ROLE_ICONS
- * To add a new related stone:    extend STONE_DOT_GRADIENTS
+ * To override a stone gradient:  extend GRADIENT_OVERRIDES
  */
 
 'use strict';
 
-const fs   = require('fs');
-const path = require('path');
+const fs    = require('fs');
+const path  = require('path');
+const https = require('https');
 
 // ── PATHS ────────────────────────────────────────────────────────────────────
 
@@ -30,8 +35,29 @@ const TEMPLATE_PATH = path.join(__dirname, '..', 'docs', 'encyclopedia', 'CANONI
 const ROSTER_PATH   = path.join(__dirname, '..', 'docs', 'encyclopedia', 'Stones Catalog with Previous - Next Slugs.csv');
 const OUTPUT_DIR    = __dirname; // stones/
 
-// ── Load canonical slug roster and nav data ──────────────────────────────────
-// Both parsed once at startup from the same CSV.
+// ── Supabase credentials (anon key — read-only, already public in codebase) ──
+const SUPABASE_URL  = 'https://vxujlgyhgnihnqrxzefw.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4dWpsZ3loZ25paG5xcnh6ZWZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMjQwNDQsImV4cCI6MjA5NDkwMDA0NH0.1qWY2MsxbiNsS6zzJ1y9amD_KIVwxvoFzODbH5RJoI8';
+
+// ── Stone color maps (populated at startup) ───────────────────────────────────
+// STONE_COLOR_MAP: auto-derived from Supabase color_hex. slug → CSS gradient string.
+const STONE_COLOR_MAP = new Map();
+
+// GRADIENT_OVERRIDES: manual entries that cannot be auto-derived.
+// Override takes precedence over STONE_COLOR_MAP for the same slug.
+const GRADIENT_OVERRIDES = {
+  // Slug confirmed post-rename from "Gold Tiger's Eye" → "Tiger's Eye" (Work Order 2026-06-22-C).
+  // Supabase has this stone as "Tiger's Eye" after rename; kept manual until Supabase entry is verified.
+  'tigers-eye':           'linear-gradient(135deg, #c8a040, #7a5018)',
+  // Yellow Aventurine is off-roster: absent from the 333-stone catalog.
+  // Pending Gate 0 formal addition decision. Do not move to auto-derivation until roster status is resolved.
+  'yellow-aventurine':    'linear-gradient(135deg, #f0e080, #c0a830)',
+  // Golden Healer Quartz: added for Citrine page swap (Work Order 2026-06-22-C).
+  'golden-healer-quartz': 'linear-gradient(135deg, #f7e4a0, #d4a820)',
+};
+
+// ── Load canonical slug roster, nav data, and slug→display-name map ──────────
+// All three parsed once at startup from the same CSV.
 // CSV columns (0-based): id, name, slug, display_order,
 //   previous_stone, previous_slug, next_stone, next_slug
 function loadRosterAndNav() {
@@ -39,15 +65,17 @@ function loadRosterAndNav() {
     process.stderr.write('ERROR: Canonical roster not found: ' + ROSTER_PATH + '\n');
     process.exit(1);
   }
-  const lines  = fs.readFileSync(ROSTER_PATH, 'utf8').split('\n').slice(1); // skip header
-  const roster = new Set();
-  const navMap = new Map(); // slug → { prevName, prevSlug, nextName, nextSlug }
-  const seen   = new Set(); // for duplicate-slug detection
+  const lines    = fs.readFileSync(ROSTER_PATH, 'utf8').split('\n').slice(1); // skip header
+  const roster   = new Set();
+  const navMap   = new Map(); // slug → { prevName, prevSlug, nextName, nextSlug }
+  const slugName = new Map(); // slug → display name (for Supabase cross-reference)
+  const seen     = new Set(); // for duplicate-slug detection
 
   for (const line of lines) {
     if (!line.trim()) continue;
     const cols      = line.split(',');
     const slug      = cols[2]?.trim();
+    const name      = cols[1]?.trim();
     if (!slug) continue;
 
     roster.add(slug);
@@ -58,6 +86,8 @@ function loadRosterAndNav() {
     }
     seen.add(slug);
 
+    if (name) slugName.set(slug, name);
+
     navMap.set(slug, {
       prevName: cols[4]?.trim() || '',
       prevSlug: cols[5]?.trim() || '',
@@ -65,10 +95,81 @@ function loadRosterAndNav() {
       nextSlug: cols[7]?.trim() || '',
     });
   }
-  return { roster, navMap };
+  return { roster, navMap, slugName };
 }
 
-const { roster: CANONICAL_ROSTER, navMap: NAV_MAP } = loadRosterAndNav();
+const { roster: CANONICAL_ROSTER, navMap: NAV_MAP, slugName: SLUG_NAME } = loadRosterAndNav();
+
+// ── Supabase HTTP helper ──────────────────────────────────────────────────────
+function httpsGetJson(urlStr, headers) {
+  return new Promise((resolve, reject) => {
+    const u = new URL(urlStr);
+    https.get(
+      { hostname: u.hostname, path: u.pathname + u.search, headers },
+      res => {
+        let data = '';
+        res.on('data', chunk => { data += chunk; });
+        res.on('end', () => {
+          try { resolve(JSON.parse(data)); }
+          catch (e) { reject(new Error('Supabase JSON parse error: ' + e.message)); }
+        });
+      }
+    ).on('error', reject);
+  });
+}
+
+// ── Tint derivation: blend hex color 60% toward white ────────────────────────
+function tintHex(hex) {
+  const r  = parseInt(hex.slice(1, 3), 16);
+  const g  = parseInt(hex.slice(3, 5), 16);
+  const b  = parseInt(hex.slice(5, 7), 16);
+  const tr = Math.round(r + (255 - r) * 0.60);
+  const tg = Math.round(g + (255 - g) * 0.60);
+  const tb = Math.round(b + (255 - b) * 0.60);
+  return '#' + [tr, tg, tb].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
+// ── initStoneColors: fetch color_hex from Supabase, build STONE_COLOR_MAP ────
+// Must be awaited before generate() is called.
+async function initStoneColors() {
+  process.stdout.write('🔍  Fetching stone color_hex from Supabase...\n');
+  let rows;
+  try {
+    rows = await httpsGetJson(
+      SUPABASE_URL + '/rest/v1/stones?select=name,color_hex&limit=400',
+      { apikey: SUPABASE_ANON, Authorization: 'Bearer ' + SUPABASE_ANON }
+    );
+  } catch (err) {
+    process.stderr.write(
+      'WARN: Supabase color fetch failed (' + err.message + '). ' +
+      'Dot gradients will fall back to GRADIENT_OVERRIDES only.\n'
+    );
+    return;
+  }
+
+  // Build name → hex map from Supabase response
+  const nameToHex = new Map();
+  for (const row of rows) {
+    if (row.name && row.color_hex) nameToHex.set(row.name, row.color_hex);
+  }
+
+  // Cross-reference: slug → display name → hex, then derive gradient
+  let derived = 0;
+  for (const [slug, displayName] of SLUG_NAME) {
+    if (GRADIENT_OVERRIDES[slug]) continue; // manual override takes precedence
+    const hex = nameToHex.get(displayName);
+    if (!hex) continue; // stone not in Supabase or missing color_hex
+    const tint = tintHex(hex);
+    STONE_COLOR_MAP.set(slug, 'linear-gradient(135deg, ' + tint + ', ' + hex + ')');
+    derived++;
+  }
+  process.stdout.write('   ' + derived + ' stone gradients auto-derived from Supabase.\n');
+}
+
+// ── Gradient lookup (override → Supabase → missing) ─────────────────────────
+function getGradient(slug) {
+  return GRADIENT_OVERRIDES[slug] || STONE_COLOR_MAP.get(slug) || null;
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // LOOKUP TABLES
@@ -168,26 +269,8 @@ const ENERGETIC_ROLE_ICONS = {
   'Amplification':         'icon-amplification',
 };
 
-/**
- * Stone slug → CSS gradient for the Related Stones dot circles.
- * Extend with each new stone's slug before generating pages that reference it.
- */
-const STONE_DOT_GRADIENTS = {
-  // Citrine pilot
-  'sunstone':          'linear-gradient(135deg, #f5c87a, #d4832a)',
-  'yellow-aventurine': 'linear-gradient(135deg, #f0e080, #c0a830)',
-  'green-aventurine':  'linear-gradient(135deg, #a8d8a0, #5a9c60)',
-  'tigers-eye':        'linear-gradient(135deg, #c8a040, #7a5018)',
-  // Black Tourmaline
-  'shungite':          'linear-gradient(135deg, #5a5a5a, #1a1a1a)',
-  'apache-tears':      'linear-gradient(135deg, #5c4a42, #2a1e1a)',
-  'selenite':          'linear-gradient(135deg, #f5f2ee, #d8d4ce)',
-  'clear-quartz':      'linear-gradient(135deg, #f0eeec, #c8c8d0)',
-  // Clear Quartz
-  'herkimer-diamond':  'linear-gradient(135deg, #f0eef8, #c8c4e0)',
-  'amethyst':          'linear-gradient(135deg, #c8a0d8, #7a4090)',
-  'smoky-quartz':      'linear-gradient(135deg, #8a7870, #4a3830)',
-};
+// (Stone dot gradients are now auto-derived from Supabase via initStoneColors().
+//  Manual overrides remain in GRADIENT_OVERRIDES above.)
 
 /**
  * Theme icon assignments by group position (0-based across all theme groups).
@@ -543,9 +626,9 @@ function buildNotesBody(noteBlocks) {
 function buildDotGradientsCss(stoneName, allRelated) {
   let css = '/* Stone dot gradients for ' + stoneName + "'s related stones */\n";
   allRelated.forEach(stone => {
-    const gradient = STONE_DOT_GRADIENTS[stone.slug];
+    const gradient = getGradient(stone.slug);
     if (!gradient) {
-      warn('No dot gradient registered for slug "' + stone.slug + '". Add it to STONE_DOT_GRADIENTS in the generator.');
+      warn('No dot gradient for slug "' + stone.slug + '". Add to GRADIENT_OVERRIDES or verify Supabase color_hex for that stone.');
       css += '/* WARNING: gradient for ' + stone.slug + ' not registered */\n';
     } else {
       css += '.stone-dot-' + stone.slug + ' { background: ' + gradient + '; }\n';
@@ -801,10 +884,10 @@ function generate(mdPath, dryRun) {
     '{{RELATED_STONE_4_NAME}}':   escapeHtml(pairsStones[1]?.name     || ''),
     '{{RELATED_STONE_4_REASON}}': escapeHtml(pairsStones[1]?.reason   || ''),
     // Gradient placeholders in CSS (handled by block replacement below, but included as safety)
-    '{{RELATED_STONE_1_GRADIENT}}': STONE_DOT_GRADIENTS[similarStones[0]?.slug] || '',
-    '{{RELATED_STONE_2_GRADIENT}}': STONE_DOT_GRADIENTS[similarStones[1]?.slug] || '',
-    '{{RELATED_STONE_3_GRADIENT}}': STONE_DOT_GRADIENTS[pairsStones[0]?.slug]   || '',
-    '{{RELATED_STONE_4_GRADIENT}}': STONE_DOT_GRADIENTS[pairsStones[1]?.slug]   || '',
+    '{{RELATED_STONE_1_GRADIENT}}': getGradient(similarStones[0]?.slug) || '',
+    '{{RELATED_STONE_2_GRADIENT}}': getGradient(similarStones[1]?.slug) || '',
+    '{{RELATED_STONE_3_GRADIENT}}': getGradient(pairsStones[0]?.slug)   || '',
+    '{{RELATED_STONE_4_GRADIENT}}': getGradient(pairsStones[1]?.slug)   || '',
   };
 
   // ── Apply simple token substitutions (outside HTML comments only) ──
@@ -896,7 +979,7 @@ function generate(mdPath, dryRun) {
 // ENTRY POINT
 // ────────────────────────────────────────────────────────────────────────────
 
-(function main() {
+(async function main() {
   const args    = process.argv.slice(2).filter(a => a !== '--dry-run');
   const dryRun  = process.argv.includes('--dry-run');
   const mdPath  = args[0];
@@ -911,6 +994,8 @@ function generate(mdPath, dryRun) {
     );
     process.exit(1);
   }
+
+  await initStoneColors();
 
   process.stdout.write('📖  Reading ' + path.basename(mdPath) + '...\n');
 
