@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- ARCHITECTURE VERSION: 2026-06-20-canonical | SELENITE -->
 
 <html data-stone-slug="selenite" lang="en">
 <head>
@@ -7,28 +8,30 @@
 <meta content="Selenite encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary." name="description"/>
 <meta content="Selenite | Still Point Lapidary Encyclopedia" property="og:title"/>
 <meta content="website" property="og:type"/>
-<meta content="#4a3a7a" name="theme-color"/>
+<meta content="#7B5CC8" name="theme-color"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
 <title>Selenite | Still Point Lapidary Encyclopedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
-<link href="../styles.css" rel="stylesheet"/><link href="enc-icons.css" rel="stylesheet"/>
+<link href="../styles.css" rel="stylesheet"/>
+<link href="enc-icons.css" rel="stylesheet"/>
 <style>
-/* ── Encyclopedia Entry Page ── */
+/* ── Encyclopedia Entry Page — Architecture 2026-06-20-canonical ── */
 
-/* Chakra-keyed design tokens — Crown for Selenite. */
+/*
+  Chakra-keyed design tokens — Crown (violet/purple palette).
+*/
 :root {
-  --ck-pill-bg:    #e8e4f2;
-  --ck-pill-text:  #4a3a7a;
-  --ck-btn-bg:     #e8e4f2;
-  --ck-btn-border: #8b7bc4;
-  --ck-btn-text:   #4a3a7a;
-  --ck-wash:       #f4f2f9;
-  --ck-wash-border:#8b7bc4;
-  --ck-accent:     #4a3a7a;
-  --ck-deep:       #362a5e;
+  --ck-pill-bg:     #F5F0FF;
+  --ck-pill-text:   #5B3FA0;
+  --ck-btn-bg:      #EDE8FF;
+  --ck-btn-border:  #9B80D4;
+  --ck-btn-text:    #3A2070;
+  --ck-wash:        #F8F5FF;
+  --ck-wash-border: #C4B0E8;
+  --ck-accent:      #7B5CC8;
+  --ck-deep:        #2D1860;
 
-  /* Page layout */
   --enc-radius: 12px;
   --enc-border: 0.5px solid var(--border);
   --enc-shadow: 0 4px 16px rgba(42,37,32,0.07);
@@ -112,12 +115,7 @@
   color: var(--ink2);
   line-height: 1.65;
 }
-.sidebar-standards p {
-  margin: 0 0 8px;
-  font-size: 12px;
-  color: var(--ink2);
-  line-height: 1.65;
-}
+.sidebar-standards p { margin: 0 0 8px; font-size: 12px; color: var(--ink2); line-height: 1.65; }
 .sidebar-standards a {
   display: inline-flex;
   align-items: center;
@@ -134,6 +132,11 @@
 .enc-main { min-width: 0; }
 
 /* ── HERO ── */
+/*
+  styles.css defines .enc-hero for the encyclopedia landing page:
+  it sets height:400px, overflow:hidden, and a ::after white gradient overlay.
+  The rules below reset those landing-page overrides for stone entry pages.
+*/
 .enc-hero {
   display: grid;
   grid-template-columns: 310px minmax(0,1fr);
@@ -152,44 +155,54 @@
 }
 .enc-hero::after { display: none; }
 
-.stone-photo-wrap {
-  max-height: 310px;
+/* ── STONE PHOTO FRAME — confinement + fit (revised 2026-06-19) ── */
+.enc-hero .stone-photo-wrap {
   border-radius: var(--enc-radius);
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(42,37,32,0.14);
-  aspect-ratio: 1/1;
-  background: #fcfcfd;
+  aspect-ratio: 1 / 1;
+  background: var(--stone2);
   flex-shrink: 0;
   position: relative;
+  isolation: isolate;
+  /* align-self: start prevents grid stretch from overriding aspect-ratio and making the frame non-square */
+  align-self: start;
 }
-.stone-photo-wrap::after {
-  content: 'Photo coming soon';
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  z-index: 0;
-}
-.stone-photo-wrap img {
+.enc-hero .stone-photo-wrap img {
+  position: static;
+  inset: auto;
+  transform: none;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  max-width: none;
+  /* object-fit: cover — approved by Christie after Citrine pilot visual review */
+  object-fit: cover;
+  /* object-position defaults to center; override per-stone via --stone-photo-position */
+  object-position: var(--stone-photo-position, center);
   display: block;
-  position: relative;
-  z-index: 1;
-  padding: 8px;
-  box-sizing: border-box;
 }
 
-.hero-right { padding-top: 4px; display: flex; flex-direction: column; }
+/* Hero right column */
+.hero-right {
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
 
+/* Collection label */
+.collection-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  margin: 0 0 5px;
+}
+
+/* Stone name */
 .stone-name {
   font-family: Georgia, serif;
   font-size: clamp(32px, 3vw, 44px);
@@ -197,18 +210,21 @@
   line-height: 1;
   letter-spacing: 0.005em;
   color: var(--ink);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
-.stone-tagline {
+/* Signature Line — unlabeled, no icon, no prefix */
+.stone-signature {
   font-family: Georgia, serif;
   font-style: italic;
-  font-size: 15px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--ink2);
-  margin: 0 0 14px;
-  line-height: 1.45;
+  margin: 0 0 18px;
 }
 
+/* Property pills */
 .theme-pills {
   display: flex;
   flex-wrap: wrap;
@@ -228,54 +244,51 @@
   letter-spacing: 0.04em;
 }
 
-.identity-grid {
+/* Hero content sections: 3 equal-width tiles in one horizontal row (§2.5, locked 2026-06-19) */
+.hero-sections {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--white);
   border: 0.5px solid var(--border);
   border-radius: var(--enc-radius);
-  background: var(--white);
   overflow: hidden;
-  margin: 0 0 14px;
+  margin-bottom: 16px;
   box-shadow: var(--enc-shadow);
+  flex: 1;
 }
-.identity-tile {
-  padding: 14px 13px;
-  border-right: 0.5px solid var(--border);
+.hero-section {
+  padding: 13px 16px;
+  border-right: 0.5px solid var(--border2);
 }
-.identity-tile:last-child { border-right: 0; }
-.tile-eyebrow {
+.hero-section:last-child { border-right: none; }
+.hero-section-label {
   display: flex;
   align-items: center;
   gap: 5px;
+  font-family: 'Jost', sans-serif;
   font-size: 10.5px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--accent);
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
-.tile-eyebrow .enc-icon { width: 13px; height: 13px; flex-shrink: 0; }
-.identity-tile p {
+.hero-section-label .enc-icon { width: 12px; height: 12px; flex-shrink: 0; }
+.hero-section-body {
   margin: 0;
-  font-size: 13px;
-  color: var(--ink);
-  line-height: 1.5;
-}
-
-.hero-affirmation {
-  font-family: Georgia, serif;
-  font-style: italic;
+  font-family: 'Jost', sans-serif;
   font-size: 13.5px;
-  color: var(--ink2);
-  line-height: 1.65;
-  margin: 0 0 14px;
-  padding: 10px 14px;
-  border-left: 2px solid var(--ck-wash-border);
-  background: var(--ck-wash);
-  border-radius: 0 6px 6px 0;
+  color: var(--ink);
+  line-height: 1.58;
+}
+/* Affirmation visual treatment — italic + chakra accent color. */
+.hero-section-affirmation {
+  font-style: italic;
+  color: var(--ck-accent);
 }
 
-.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+/* Hero action buttons */
+.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .enc-btn {
   font-family: 'Jost', sans-serif;
   font-size: 12px;
@@ -289,15 +302,15 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   background: transparent;
   color: var(--ink2);
 }
 .enc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .enc-btn-primary {
   background: var(--ck-btn-bg);
-  border-color: var(--ck-btn-border);
-  color: var(--ck-btn-text);
+  border: 1px solid var(--ck-wash-border);
+  color: var(--ck-deep);
 }
 .enc-btn-primary:hover {
   background: var(--ck-accent);
@@ -306,7 +319,7 @@
 }
 .enc-btn .enc-icon { width: 13px; height: 13px; }
 
-/* ── AT A GLANCE ── */
+/* ── AT A GLANCE — 6 boxes — Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy ── */
 .glance-panel {
   background: var(--white);
   border: 0.5px solid var(--border);
@@ -326,11 +339,11 @@
   align-items: center;
   gap: 8px;
 }
-.panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); stroke-width: 2.2; flex-shrink: 0; }
+.panel-title .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); flex-shrink: 0; }
 
 .glance-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 0;
 }
 .glance-item {
@@ -347,17 +360,14 @@
   margin: 0 auto 8px;
   border-radius: 10px;
   background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
   display: grid;
   place-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
-.glance-icon-tile .enc-icon {
-  width: 22px;
-  height: 22px;
-  color: var(--ck-accent);
-  stroke-width: 2;
-}
+.glance-icon-tile .enc-icon { width: 22px; height: 22px; color: var(--ck-accent); }
 .glance-label {
+  font-family: 'Jost', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.11em;
@@ -366,25 +376,90 @@
   margin-bottom: 5px;
 }
 .glance-value {
-  font-size: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
   color: var(--ink);
   line-height: 1.45;
 }
+/* Secondary chakra line */
+.chakra-secondary {
+  display: block;
+  font-size: 10.5px;
+  color: var(--ink3);
+  margin-top: 3px;
+  letter-spacing: 0.02em;
+}
 
-/* ── TWO-COLUMN CONTENT GRID ── */
+/* ── TWO-COLUMN CONTENT LAYOUT — independent flex stacks ── */
 .content-grid {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) 340px;
+  display: flex;
+  flex-direction: row;
   gap: 20px;
   align-items: stretch;
 }
-
-.article-col {
+.content-stack-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+  height: 100%;
+}
+.content-stack-right {
+  width: 340px;
+  flex: 0 0 340px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.article-col > .enc-card:last-child { flex: 1; }
+.care-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 0.5px solid var(--ck-wash-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ck-wash);
+}
+.care-cell {
+  padding: 14px 16px;
+  border-right: 0.5px solid var(--ck-wash-border);
+  border-bottom: 0.5px solid var(--ck-wash-border);
+}
+.care-cell:nth-child(even) {
+  border-right: none;
+}
+.care-cell:nth-child(n+3) {
+  border-bottom: none;
+}
+.care-cell-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.care-cell-head .enc-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--ck-accent);
+  flex-shrink: 0;
+}
+.care-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.care-cell p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink2);
+  margin: 0;
+}
 
 /* ── ARTICLE SECTION CARDS ── */
 .enc-card {
@@ -407,13 +482,7 @@
   align-items: center;
   gap: 8px;
 }
-.enc-card h2 .enc-icon {
-  width: 19px;
-  height: 19px;
-  color: var(--ck-accent);
-  stroke-width: 2.2;
-  flex-shrink: 0;
-}
+.enc-card h2 .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); flex-shrink: 0; }
 .enc-card p {
   font-size: 15px;
   line-height: 1.78;
@@ -443,13 +512,9 @@
   color: var(--ink);
   padding-top: 3px;
 }
-.reach-desc {
-  font-size: 14px;
-  color: var(--ink2);
-  line-height: 1.68;
-}
+.reach-desc { font-size: 14px; color: var(--ink2); line-height: 1.68; }
 
-/* ── MINERAL PROFILE CARD ── */
+/* Mineral Profile */
 .mineral-layout {
   display: grid;
   grid-template-columns: minmax(0,1fr) minmax(0,1fr);
@@ -459,30 +524,29 @@
 .mineral-facts { display: grid; gap: 0; }
 .mineral-fact {
   display: grid;
-  grid-template-columns: minmax(0,120px) minmax(0,1fr);
+  grid-template-columns: minmax(0,130px) minmax(0,1fr);
   gap: 8px;
   padding: 7px 0;
   border-bottom: 0.5px solid var(--border2);
-  font-size: 13px;
+  font-size: 14px;
 }
 .mineral-fact:last-of-type { border-bottom: 0; }
-.mineral-fact span:first-child {
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: 0.02em;
-  padding-right: 8px;
-}
+.mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
 .mineral-note {
   font-size: 14px;
   line-height: 1.75;
   color: var(--ink2);
   margin-top: 20px;
-  padding-top: 18px;
-  border-top: 0.5px solid var(--border);
+}
+.mineral-note + .mineral-note {
+  margin-top: 14px;
+  padding-top: 0;
+  border-top: none;
 }
 .mineral-formation h4 {
-  font-size: 11px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
@@ -490,30 +554,21 @@
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p {
-  font-size: 13px;
-  color: var(--ink2);
-  line-height: 1.68;
-  margin: 0 0 10px;
-}
-.mineral-formation ul {
-  margin: 0;
-  padding-left: 16px;
-}
-.mineral-formation li {
-  font-size: 13px;
-  color: var(--ink2);
-  line-height: 1.72;
-}
+.mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 12px; }
+
+/* Common Localities — canonical two-column desktop layout */
 .mineral-formation .common-localities {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 24px;
   row-gap: 0;
   padding-left: 18px;
+  margin: 0;
+  margin-bottom: 16px;
 }
+.mineral-formation .common-localities li { font-size: 14px; color: var(--ink2); line-height: 1.72; }
 
-/* ── RELATED STONES ── */
+/* Related Stones */
 .related-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -526,6 +581,7 @@
   background: var(--stone);
 }
 .rel-card-head {
+  font-family: 'Jost', sans-serif;
   font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -535,9 +591,9 @@
 }
 .stone-link-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  padding: 7px 0;
+  padding: 12px 0;
   text-decoration: none;
   color: inherit;
   border-bottom: 0.5px solid var(--border2);
@@ -550,31 +606,43 @@
   height: 26px;
   border-radius: 50%;
   flex-shrink: 0;
+  margin-top: 2px;
 }
-.stone-dot-sky    { background: linear-gradient(135deg,#c8e0f0,#7ab0d8); }
-.stone-dot-angel  { background: linear-gradient(135deg,#d8e8f4,#9abcd0); }
-.stone-dot-black  { background: linear-gradient(135deg,#2c2830,#5a5260); }
-.stone-dot-rose   { background: linear-gradient(135deg,#f0d0d8,#d08090); }
-.stone-link-row b { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 400; color: var(--ink); }
-.stone-link-row span { font-size: 13px; color: var(--ink2); line-height: 1.35; }
 
-/* ── RIGHT RAIL ── */
-.right-rail {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  position: sticky;
-  top: 110px;
-  height: 100%;
+/* Stone dot gradients for Selenite's related stones */
+.stone-dot-celestite { background: linear-gradient(135deg, #b7cadd, #4a7aaa); }
+.stone-dot-angelite { background: linear-gradient(135deg, #b7cadd, #4a7aaa); }
+.stone-dot-black-tourmaline { background: linear-gradient(135deg, #b0aeac, #3a3530); }
+.stone-dot-rose-quartz { background: linear-gradient(135deg, #eecdd7, #d4839a); }
+
+.stone-link-row b {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 10px;
 }
-.right-rail > .rail-card:last-child { flex: 1; }
+.stone-reason {
+  display: block;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.42;
+}
 
+/* ── RIGHT RAIL CARDS ── */
 .rail-card {
   background: var(--white);
   border: 0.5px solid var(--border);
   border-radius: var(--enc-radius);
   box-shadow: var(--enc-shadow);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.rail-card-body {
+  display: flex;
+  flex-direction: column;
 }
 .rail-card h2 {
   font-family: Georgia, serif;
@@ -589,16 +657,11 @@
   align-items: center;
   gap: 7px;
 }
-.rail-card h2 .enc-icon {
-  width: 18px;
-  height: 18px;
-  color: var(--ck-accent);
-  stroke-width: 2.2;
-  flex-shrink: 0;
-}
+.rail-card h2 .enc-icon { width: 18px; height: 18px; color: var(--ck-accent); flex-shrink: 0; }
 
 /* Energetic Themes */
 .theme-tier-label {
+  font-family: 'Jost', sans-serif;
   font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -612,7 +675,6 @@
   grid-template-columns: 40px 1fr;
   gap: 10px;
   align-items: start;
-  margin-bottom: 10px;
 }
 .theme-row + .theme-row { margin-top: 16px; }
 .theme-icon-tile {
@@ -620,17 +682,13 @@
   height: 40px;
   border-radius: 10px;
   background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
   display: grid;
   place-items: center;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
   flex-shrink: 0;
 }
-.theme-icon-tile .enc-icon {
-  width: 21px;
-  height: 21px;
-  color: var(--ck-accent);
-  stroke-width: 2;
-}
+.theme-icon-tile .enc-icon { width: 21px; height: 21px; color: var(--ck-accent); }
 .theme-row h3 {
   font-family: Georgia, serif;
   font-size: 17px;
@@ -639,24 +697,11 @@
   color: var(--ink);
   line-height: 1.1;
 }
-.theme-row p {
-  font-size: 12px;
-  color: var(--ink2);
-  margin: 0;
-  line-height: 1.58;
-}
-.theme-divider {
-  border: none;
-  border-top: 0.5px solid var(--border2);
-  margin: 12px 0 0;
-}
-.occasional-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 4px;
-}
+.theme-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.58; }
+.theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 14px 0 0; }
+.occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .occ-tag {
+  font-family: 'Jost', sans-serif;
   font-size: 12px;
   color: var(--ck-accent);
   background: var(--ck-wash);
@@ -665,8 +710,12 @@
   padding: 4px 12px;
 }
 
-/* Collector Notes */
-.note-list { display: grid; gap: 8px; }
+/* Collector & Curiosity Notes */
+.note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .note-row {
   display: grid;
   grid-template-columns: 34px 1fr;
@@ -682,31 +731,23 @@
   height: 34px;
   border-radius: 8px;
   background: var(--ck-wash);
+  border: 0.5px solid var(--ck-wash-border);
   display: grid;
   place-items: center;
   flex-shrink: 0;
 }
-.note-icon .enc-icon {
-  width: 18px;
-  height: 18px;
-  color: var(--ck-accent);
-  stroke-width: 2;
-}
+.note-icon .enc-icon { width: 18px; height: 18px; color: var(--ck-accent); }
 .note-row strong {
   display: block;
-  font-size: 11px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
   color: var(--ink);
   margin-bottom: 4px;
 }
-.note-row p {
-  font-size: 12.5px;
-  color: var(--ink2);
-  margin: 0;
-  line-height: 1.62;
-}
+.note-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.62; }
 
 /* ── ENTRY NAV ── */
 .entry-nav-wrap {
@@ -740,7 +781,13 @@
 }
 .entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .entry-nav-link > div { text-align: center; }
-.entry-nav-link small { font-size: 9px; letter-spacing: 0.12em; color: var(--ink3); display: block; margin-bottom: 1px; }
+.entry-nav-link small {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink3);
+  display: block;
+  margin-bottom: 1px;
+}
 .entry-nav-link:hover small { color: rgba(255,255,255,0.55); }
 .entry-nav-link b {
   font-family: Georgia, serif;
@@ -765,7 +812,6 @@
 .enc-cta {
   margin-top: 18px;
   background: var(--ink);
-  color: var(--white);
   border-radius: var(--enc-radius);
   padding: 26px 32px;
   display: flex;
@@ -814,468 +860,663 @@
   .enc-page { grid-template-columns: 1fr; gap: 20px; }
   .enc-sidebar { display: none; }
   .enc-hero { grid-template-columns: 1fr; gap: 24px; }
-  .stone-photo-wrap { aspect-ratio: 1/1; width: min(100%, 310px); max-height: 310px; justify-self: center; }
-  .identity-grid { grid-template-columns: repeat(2, 1fr); }
-  .content-grid { grid-template-columns: 1fr; }
-  .right-rail { position: static; height: auto; }
-  .right-rail > .rail-card:last-child { flex: none; }
+  .stone-photo-wrap { aspect-ratio: 16 / 9; max-height: 300px; }
+  .content-grid {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+  .content-stack-left,
+  .content-stack-right {
+    display: contents;
+  }
+  #overview { order: 1; }
+  #reach    { order: 2; }
+  #themes   { order: 3; }
+  #mineral  { order: 4; }
+  #notes    { order: 5; }
+  #care     { order: 6; }
+  #related  { order: 7; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
   .glance-item { border-right: 0; padding: 0 8px; }
   .mineral-layout { grid-template-columns: 1fr; }
   .related-grid { grid-template-columns: 1fr; }
 }
+
 @media (max-width: 600px) {
-  .mineral-formation .common-localities { grid-template-columns: 1fr; }
   .enc-page { padding: 16px 16px 48px; }
-  .stone-name { font-size: 42px; }
-  .identity-grid { grid-template-columns: 1fr 1fr; }
+  .stone-name { font-size: 38px; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); }
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
+  .mineral-formation .common-localities { grid-template-columns: 1fr; }
+  /* Hero tiles stack to 1 column — binary rule: no 2+1 intermediate state (§2.5) */
+  .hero-sections { grid-template-columns: 1fr; }
+  .hero-section { border-right: none; border-bottom: 0.5px solid var(--border2); }
+  .hero-section:last-child { border-bottom: none; }
 }
 </style>
 </head>
 <body>
 <div class="app-shell">
-<!-- TOPBAR -->
+
+<!-- ═══ TOPBAR ═══ -->
 <header class="topbar">
-<a aria-label="Return to home" class="brand-home" href="../index.html">
-<div class="brand-block">
-<img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
-<div class="brand-block-text">
-<span class="wordmark">STILL POINT <em>Lapidary</em></span>
-<span class="brand-block-sub">Crystal Reference Library</span>
-</div>
-</div>
-</a>
-<div class="topbar-right">
-<a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
-</div>
+  <a aria-label="Return to home" class="brand-home" href="../index.html">
+    <div class="brand-block">
+      <img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+      <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+      </div>
+    </div>
+  </a>
+  <div class="topbar-right">
+    <a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+  </div>
 </header>
-<!-- PAGE -->
+
+<!-- ═══ PAGE GRID ═══ -->
 <div class="enc-page" id="top">
-<!-- SIDEBAR NAV -->
-<aside class="enc-sidebar">
-<div class="enc-breadcrumb">
-<a href="../index.html">Home</a> ›
+
+  <!-- SIDEBAR -->
+  <aside class="enc-sidebar">
+    <div class="enc-breadcrumb">
+      <a href="../index.html">Home</a> ›
       <a href="../encyclopedia.html">Encyclopedia</a> ›
       <b>Selenite</b>
-</div>
-<div class="side-nav-card">
-<div class="side-nav-label">On this page</div>
-<nav class="side-nav">
-<a class="active" href="#top">Top</a>
-<a href="#overview">Overview</a>
-<a href="#reach">Why People Reach For It</a>
-<a href="#glance">At a Glance</a>
-<a href="#themes">Energetic Themes</a>
-<a href="#mineral">Mineral Profile</a>
-<a href="#notes">Collector Notes</a>
-<a href="#related">Related Stones</a>
-</nav>
-</div>
-<div class="sidebar-standards">
-<p>Entries are researched from expert books and trusted online sources.</p>
-<a href="#">Our Editorial Standards →</a>
-</div>
-</aside>
-<!-- MAIN -->
-<main class="enc-main">
-<!-- HERO -->
-<section class="enc-hero" id="hero">
-<div class="stone-photo-wrap">
-<img alt="Selenite wand showing translucent white fibrous gypsum" src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/selenite.webp"/>
-</div>
-<div class="hero-right">
-<h1 class="stone-name">Selenite</h1><p class="stone-tagline">Luminous gypsum for clearing the atmosphere and restoring quiet clarity.</p>
-<div class="theme-pills">
-<span class="theme-pill">Purification</span>
-<span class="theme-pill">Clarity</span>
-<span class="theme-pill">Peace</span>
-</div>
-<div class="identity-grid">
-<div class="identity-tile">
-<div class="tile-eyebrow">
-<span aria-hidden="true" class="enc-icon icon-best-for"></span>
+    </div>
+    <div class="side-nav-card">
+      <div class="side-nav-label">On this page</div>
+      <nav class="side-nav">
+        <a class="active" href="#top">Introduction</a>
+        <a href="#glance">At a Glance</a>
+        <a href="#overview">Overview</a>
+        <a href="#reach">Why People Reach For It</a>
+        <a href="#themes">Energetic Themes</a>
+        <a href="#mineral">Mineral Profile</a>
+        <a href="#notes">Collector Notes</a>
+        <a href="#care">Care &amp; Cleansing</a>
+        <a href="#related">Related Stones</a>
+      </nav>
+    </div>
+    <div class="sidebar-standards">
+      <p>Entries are researched from expert books and trusted online sources.</p>
+      <a href="#">Our Editorial Standards →</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="enc-main">
+
+    <!-- ═══════════════════════════════════════
+         SECTION 1 — HERO
+         Architecture contract §2
+         ═══════════════════════════════════════ -->
+    <section class="enc-hero" id="hero">
+
+      <!-- Stone photo -->
+      <div class="stone-photo-wrap">
+        <img
+          alt="White fibrous gypsum sold as Selenite with a soft silky glow"
+          src="https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/selenite.webp"
+        />
+      </div>
+
+      <!-- Hero right column -->
+      <div class="hero-right">
+
+        <div class="collection-label">Essentials</div>
+
+        <h1 class="stone-name">Selenite</h1>
+
+        <p class="stone-signature">Luminous gypsum for creating a lighter atmosphere and returning attention to quiet clarity.</p>
+
+        <div class="theme-pills">
+          <span class="theme-pill">Purification</span>
+          <span class="theme-pill">Clarity</span>
+          <span class="theme-pill">Peace</span>
+        </div>
+
+        <!-- §2.5 Hero content sections — exactly 3, in this order: Best For · Use When · Affirmation -->
+        <div class="hero-sections">
+
+          <div class="hero-section">
+            <div class="hero-section-label">
+              <span aria-hidden="true" class="enc-icon icon-best-for"></span>
               Best For
             </div>
-<p>Purification, stillness, and clear spiritual focus</p>
-</div>
-<div class="identity-tile">
-<div class="tile-eyebrow">
-<span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
+            <p class="hero-section-body">Creating stillness, refreshing a space, and supporting quiet spiritual awareness</p>
+          </div>
+
+          <div class="hero-section">
+            <div class="hero-section-label">
+              <span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
               Use When
             </div>
-<p>Your space feels heavy or your mind needs a quieter, cleaner baseline.</p>
-</div>
-<div class="identity-tile">
-<div class="tile-eyebrow">
-<span aria-hidden="true" class="enc-icon icon-pair-with"></span>
-              Pairs Well With
+            <p class="hero-section-body">Your environment feels heavy or noisy and you want a calmer, clearer baseline.</p>
+          </div>
+
+          <div class="hero-section">
+            <div class="hero-section-label">
+              <!-- Affirmation icon always matches the stone's Energetic Role icon: use {{ENERGETIC_ROLE_ICON}} -->
+              <span aria-hidden="true" class="enc-icon icon-spiritual-connection"></span>
+              Affirmation
             </div>
-<p>Clear Quartz<br/>Amethyst<br/>Labradorite</p>
-</div>
-<div class="identity-tile">
-<div class="tile-eyebrow">
-<span aria-hidden="true" class="enc-icon icon-chakra"></span>
-              Primary Chakra
-            </div>
-<p>Crown</p>
-</div>
-</div>
-<div class="hero-affirmation">I return to clarity, stillness, and an open awareness.</div>
-<div class="hero-actions">
-<button class="enc-btn enc-btn-primary">
-<span aria-hidden="true" class="enc-icon icon-add-piece"></span>
+            <p class="hero-section-body hero-section-affirmation">I return to quiet clarity and remain open to peaceful awareness.</p>
+          </div>
+
+        </div><!-- /hero-sections -->
+
+        <div class="hero-actions">
+          <button class="enc-btn enc-btn-primary">
+            <span aria-hidden="true" class="enc-icon icon-add-piece"></span>
             Save to Collection
           </button>
-<button class="enc-btn">
-<span aria-hidden="true" class="enc-icon icon-wishlist"></span>
+          <button class="enc-btn">
+            <span aria-hidden="true" class="enc-icon icon-wishlist"></span>
             Add to Wishlist
           </button>
-</div>
-</div>
-</section>
-<!-- AT A GLANCE -->
-<section class="glance-panel" id="glance">
-<h2 class="panel-title">
-<span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
+        </div>
+
+      </div><!-- /hero-right -->
+    </section><!-- /HERO -->
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 2 — AT A GLANCE
+         Architecture contract §3
+         Display order (revised 2026-06-19): Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy
+         ═══════════════════════════════════════ -->
+    <div class="glance-panel" id="glance">
+      <h2 class="panel-title">
+        <span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
         At a Glance
       </h2>
-<div class="glance-grid">
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-tag-label"></span>
-</div>
-<div class="glance-label">Primary Themes</div>
-<div class="glance-value">Purification<br/>Clarity · Peace</div>
-</div>
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-chakra"></span>
-</div>
-<div class="glance-label">Chakras</div>
-<div class="glance-value">Crown<br/>Third Eye</div>
-</div>
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-element"></span>
-</div>
-<div class="glance-label">Element</div>
-<div class="glance-value">Wind</div>
-</div>
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-zodiac"></span>
-</div>
-<div class="glance-label">Zodiac</div>
-<div class="glance-value">Taurus<br/>Cancer</div>
-</div>
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-geology"></span>
-</div>
-<div class="glance-label">Formation</div>
-<div class="glance-value">Evaporite deposits; hydrothermal veins</div>
-</div>
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-crystal-single"></span>
-</div>
-<div class="glance-label">Hardness</div>
-<div class="glance-value">2</div>
-</div>
-<div class="glance-item">
-<div class="glance-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-color-range"></span>
-</div>
-<div class="glance-label">Color Range</div>
-<div class="glance-value">Colorless to white; pale grey, beige, or peach</div>
-</div>
-</div>
-</section>
-<!-- TWO-COLUMN CONTENT -->
-<div class="content-grid">
-<!-- ARTICLE COLUMN -->
-<div class="article-col">
-<!-- OVERVIEW -->
-<article class="enc-card" id="overview">
-<h2>
-<span aria-hidden="true" class="enc-icon icon-book-reference"></span>
+      <div class="glance-grid">
+
+        <!-- Box 1: Energetic Role — icon is dynamic per stone (e.g. icon-manifestation, icon-protection, icon-heart-healing) -->
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-spiritual-connection"></span>
+          </div>
+          <div class="glance-label">Energetic Role</div>
+          <div class="glance-value">Spiritual Connection</div>
+        </div>
+
+        <!-- Box 2: Chakra — static icon-chakra -->
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-chakra"></span>
+          </div>
+          <div class="glance-label">Chakra</div>
+          <div class="glance-value">
+            Crown
+            <!-- Secondary chakra is optional.
+                 If a secondary chakra is supported by the research, include the span below.
+                 If no secondary chakra exists, remove the entire .chakra-secondary span.
+                 Do not leave it blank. Do not invent a secondary chakra. -->
+          </div>
+        </div>
+
+        <!-- Box 3: Element — static icon-element -->
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-element"></span>
+          </div>
+          <div class="glance-label">Element</div>
+          <div class="glance-value">Wind</div>
+        </div>
+
+        <!-- Box 4: Planet — static icon-celestial -->
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-celestial"></span>
+          </div>
+          <div class="glance-label">Planet</div>
+          <div class="glance-value">Moon</div>
+        </div>
+
+        <!-- Box 5: Zodiac — static icon-zodiac -->
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-zodiac"></span>
+          </div>
+          <div class="glance-label">Zodiac</div>
+          <div class="glance-value">Taurus · Cancer</div>
+        </div>
+
+        <!-- Box 6: Color Energy — reassigned icon-color-range artwork (§12.4) -->
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-color-range"></span>
+          </div>
+          <div class="glance-label">Color Energy</div>
+          <div class="glance-value">Luminous White</div>
+        </div>
+
+      </div><!-- /glance-grid -->
+    </div><!-- /AT A GLANCE -->
+
+
+    <!-- ═══════════════════════════════════════
+         TWO-COLUMN CONTENT LAYOUT
+         Left stack: Overview · Why People Reach For It · Mineral Profile · Related Stones
+         Right stack: Energetic Themes · Collector Notes · Care & Cleansing
+         Mobile order via CSS order property (display:contents on stacks)
+         ═══════════════════════════════════════ -->
+    <div class="content-grid">
+
+      <div class="content-stack-left">
+
+        <!-- ═══════════════════════════════════
+             SECTION 3 — OVERVIEW
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="overview">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-book-reference"></span>
             Overview
           </h2>
-<p>Selenite is a transparent crystalline form of gypsum. Most polished wands, towers, and plates sold as selenite are actually satin spar, the fibrous, silky form of the same mineral. The retail name is broad, but the distinction matters.</p>
-<p>Its traditions center on purification, peaceful clarity, and Crown Chakra awareness. Selenite is commonly used before meditation, around other stones, or in rooms where a lighter and more settled atmosphere is desired.</p>
-</article>
-<!-- WHY PEOPLE REACH FOR IT -->
-<article class="enc-card" id="reach">
-<h2>
-<span aria-hidden="true" class="enc-icon icon-target-bullseye"></span>
+          <p>Selenite is a transparent crystalline habit of gypsum, the hydrous calcium sulfate mineral CaSO₄·2H₂O. Most commercial wands, towers, and plates sold under the name are actually satin spar, the fibrous chatoyant habit of the same mineral species. Both are gypsum, but their structures and appearances differ. The retail use of “selenite” for both forms is widespread and worth explaining rather than treating as a simple error.</p>
+          <p>Crystal traditions associate gypsum sold as Selenite with purification, clarity, peace, meditation, and spiritual awareness. Its Crown emphasis gives the stone a light, elevated identity, while the Third Eye adds quiet perception. Cleansing language is framed here as a symbolic and practitioner-based tradition, not a literal mechanism or scientific property.</p>
+        </article>
+
+
+        <!-- ═══════════════════════════════════
+             SECTION 4 — WHY PEOPLE REACH FOR IT
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="reach">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-target-bullseye"></span>
             Why People Reach For It
           </h2>
-<div class="reach-rows">
-<div class="reach-row">
-<span class="reach-label">Clear a Space</span>
-<span class="reach-desc">Traditionally placed in rooms or work areas to refresh the atmosphere.</span>
-</div>
-<div class="reach-row">
-<span class="reach-label">Cleanse Other Stones</span>
-<span class="reach-desc">Often used as a resting surface for stones between practices.</span>
-</div>
-<div class="reach-row">
-<span class="reach-label">Settle the Mind</span>
-<span class="reach-desc">Supports quiet reflection when mental noise makes stillness difficult.</span>
-</div>
-<div class="reach-row">
-<span class="reach-label">Support Meditation</span>
-<span class="reach-desc">Pairs calm attention with Crown and Third Eye awareness.</span>
-</div>
-<div class="reach-row">
-<span class="reach-label">Create Peace</span>
-<span class="reach-desc">Chosen for bedrooms, studios, and ritual spaces that need a softer tone.</span>
-</div>
-</div>
-</article>
-<!-- MINERAL PROFILE -->
-<article class="enc-card" id="mineral">
-<h2>
-<span aria-hidden="true" class="enc-icon icon-geology"></span>
+          <div class="reach-rows">
+            <div class="reach-row">
+              <span class="reach-label">Refreshing Other Stones</span>
+              <span class="reach-desc">Traditionally used as a resting surface when people want to symbolically reset a crystal collection.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Clearing a Space</span>
+              <span class="reach-desc">Often placed in rooms, studios, or practice areas to encourage a lighter, calmer atmosphere.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Supporting Meditation</span>
+              <span class="reach-desc">Chosen when stillness and quiet attention matter more than stimulation or intensity.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Opening Perspective</span>
+              <span class="reach-desc">Associated with Crown and Third Eye awareness during reflection, journaling, and spiritual practice.</span>
+            </div>
+            <div class="reach-row">
+              <span class="reach-label">Creating Peaceful Surroundings</span>
+              <span class="reach-desc">Kept nearby for its sustained association with softness, clarity, and environmental calm.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ═══════════════════════════════════
+             SECTION 6 — MINERAL PROFILE
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="mineral">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-geology"></span>
             Mineral Profile
           </h2>
-<div class="mineral-layout">
-<div>
-<div class="mineral-facts">
-<div class="mineral-fact"><span>Mineral Species</span><span>Gypsum</span></div>
-<div class="mineral-fact"><span>Chemical Formula</span><span>CaSO<sub>4</sub>·2H<sub>2</sub>O</span></div>
-<div class="mineral-fact"><span>Crystal System</span><span>Monoclinic</span></div>
-<div class="mineral-fact"><span>Mohs Hardness</span><span>2</span></div>
-<div class="mineral-fact"><span>Commercial Form</span><span>Satin spar (fibrous habit)</span></div>
-</div>
-</div>
-<div class="mineral-formation">
-<h4>Formation</h4>
-<p>Gypsum forms in evaporite deposits, hydrothermal veins, caves, and clay-rich settings. Transparent selenite and fibrous satin spar share the same chemistry but differ in crystal habit and optical texture.</p>
-<h4>Common Localities</h4>
-<ul class="common-localities">
-<li>Mexico (primary source for large clear selenite)</li>
-<li>Morocco</li>
-<li>Algeria</li>
-<li>Brazil</li>
-<li>Australia</li>
-<li>Poland</li>
-<li>United States</li>
-<li>United Kingdom</li>
-</ul>
-</div>
-</div>
-<p class="mineral-note">Gypsum is Mohs 2, water-sensitive, and slightly soluble. Do not soak it. Clean with a dry or barely damp soft cloth and store it separately from harder minerals.</p>
-</article>
-<!-- RELATED STONES -->
-<article class="enc-card" id="related">
-<h2>
-<span aria-hidden="true" class="enc-icon icon-stones-row"></span>
+          <div class="mineral-layout">
+            <div class="mineral-facts">
+              <!-- Exactly eight fact rows. Labels and values are adaptable per entry.
+                   Default labels for true minerals: Mineral Family · Chemical Formula ·
+                   Crystal System · Mohs Hardness · Cleavage · Fracture · Luster · Transparency.
+                   For rocks, composites, mineraloids, organic, synthetic, or trade-name materials,
+                   substitute scientifically appropriate labels. Keep exactly eight rows.
+                   See enc-editorial-schema.md §Mineral Profile for the full adaptable-label rule. -->
+              <div class="mineral-fact"><span>Mineral Family</span><span>Gypsum</span></div>
+              <div class="mineral-fact"><span>Chemical Formula</span><span>CaSO₄·2H₂O</span></div>
+              <div class="mineral-fact"><span>Crystal System</span><span>Monoclinic</span></div>
+              <div class="mineral-fact"><span>Mohs Hardness</span><span>2</span></div>
+              <div class="mineral-fact"><span>Cleavage</span><span>Perfect in one direction</span></div>
+              <div class="mineral-fact"><span>Fracture</span><span>Uneven to splintery</span></div>
+              <div class="mineral-fact"><span>Luster</span><span>Vitreous to silky</span></div>
+              <div class="mineral-fact"><span>Transparency</span><span>Transparent to translucent</span></div>
+            </div>
+            <div class="mineral-formation">
+              <h4>Formation</h4>
+              <p>Gypsum forms when mineral-rich water evaporates and deposits calcium sulfate dihydrate, most commonly in evaporite basins. It may also crystallize in hydrothermal veins, caves, and clay-rich sedimentary environments as transparent selenite or fibrous satin spar.</p>
+              <h4>Common Localities</h4>
+              <!-- Common Localities has no fixed minimum or maximum.
+                   {{COMMON_LOCALITIES_ITEMS}} must contain the complete approved set of
+                   <li>...</li> elements for this stone.
+                   Include only the most commercially important, historically significant,
+                   or collector-relevant localities supported by the research.
+                   Do not create an exhaustive occurrence list.
+                   — A stone with two dominant sources may list only two.
+                   — A broadly distributed mineral may list more when each locality is meaningful.
+                   — Do not pad the list.
+                   — Do not list every country where the mineral has ever been reported. -->
+              <ul class="common-localities">
+                
+                <li>Mexico</li>
+                <li>Morocco</li>
+                <li>Algeria</li>
+                <li>Brazil</li>
+                <li>Australia</li>
+                <li>Poland</li>
+                <li>United States</li>
+                <li>United Kingdom</li>
+              </ul>
+            </div>
+          </div>
+          <p class="mineral-note">Look for intact surfaces, an attractive silky glow or transparency, clean shaping, and minimal bruising. Because gypsum is very soft, scratches and chipped edges are common and should affect value.</p>
+
+          <p class="mineral-note">Satin spar, true sheet selenite, alabaster, calcite, acrylic, and plastic may be confused in the market. Habit, hardness, texture, and provenance help clarify identity, while destructive testing should be avoided on finished pieces.</p>
+
+          <p class="mineral-note">Commercial satin spar is widely available and affordable in wands, towers, plates, bowls, and carvings. True transparent selenite crystals, notable locality specimens, unusual size, clarity, or provenance may command more collector interest.</p>
+        </article>
+
+        <!-- ═══════════════════════════════════
+             SECTION 9 — RELATED STONES
+             ═══════════════════════════════════ -->
+        <article class="enc-card" id="related">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-stones-row"></span>
             Related Stones
           </h2>
-<div class="related-grid">
-<div class="rel-card">
-<div class="rel-card-head">Similar Energy <span>→</span></div>
-<a class="stone-link-row" href="celestite.html">
-<span class="stone-dot-circle stone-dot-sky">Shares calm Crown energy, with a stronger angelic and devotional tone.</span>
-<div>
-<b>Celestite</b>
-<span>Offers gentle spiritual openness with more emphasis on communication.</span>
-</div>
-</a>
-<a class="stone-link-row" href="angelite.html">
-<span class="stone-dot-circle stone-dot-angel">Balances Selenite’s elevated clarity with deep grounding and protection.</span>
-<div>
-<b>Angelite</b>
-<span>Adds heart-centered softness to Selenite’s cool, peaceful clarity.</span>
-</div>
-</a>
-</div>
-<div class="rel-card">
-<div class="rel-card-head">Pairs Well With <span>→</span></div>
-<a class="stone-link-row" href="black-tourmaline.html">
-<span class="stone-dot-circle stone-dot-black"></span>
-<div>
-<b>Black Tourmaline</b>
-<span>Combines Selenite's Crown-centered clarity and cleansing with Black Tourmaline's grounding protection, addressing energetic anchoring below and illuminating clarity above in a single complementary pairing.</span>
-</div>
-</a>
-<a class="stone-link-row" href="rose-quartz.html">
-<span class="stone-dot-circle stone-dot-rose"></span>
-<div>
-<b>Rose Quartz</b>
-<span>Rose Quartz brings heart-centered warmth and emotional gentleness to Selenite's clear, elevated calm, creating a pairing that supports both compassion and spiritual clarity at once.</span>
-</div>
-</a>
-</div>
-</div>
-</article>
-</div><!-- /article-col -->
-<!-- RIGHT RAIL -->
-<aside class="right-rail">
-<!-- ENERGETIC THEMES -->
-<section class="rail-card" id="themes">
-<h2>
-<span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
+          <div class="related-grid">
+
+            <div class="rel-card">
+              <div class="rel-card-head">Similar Energy</div>
+              <a class="stone-link-row" href="celestite.html">
+                <span class="stone-dot-circle stone-dot-celestite"></span>
+                <div>
+                  <b>Celestite</b>
+                  <span class="stone-reason">Both support calm spiritual openness; Celestite leans toward angelic traditions, while the emphasis here is cleansing and environmental clarity.</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="angelite.html">
+                <span class="stone-dot-circle stone-dot-angelite"></span>
+                <div>
+                  <b>Angelite</b>
+                  <span class="stone-reason">Both carry gentle, elevated calm; Angelite emphasizes communication, while this stone has a broader purification identity.</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="rel-card">
+              <div class="rel-card-head">Pairs Well With</div>
+              <a class="stone-link-row" href="black-tourmaline.html">
+                <span class="stone-dot-circle stone-dot-black-tourmaline"></span>
+                <div>
+                  <b>Black Tourmaline</b>
+                  <span class="stone-reason">Adds grounding and boundary support to a pairing otherwise centered on elevated clarity and spiritual openness.</span>
+                </div>
+              </a>
+              <a class="stone-link-row" href="rose-quartz.html">
+                <span class="stone-dot-circle stone-dot-rose-quartz"></span>
+                <div>
+                  <b>Rose Quartz</b>
+                  <span class="stone-reason">Adds heart-centered warmth and compassion to the stone’s cool, quiet, and spiritually oriented character.</span>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </article>
+
+      </div><!-- /content-stack-left -->
+
+      <div class="content-stack-right">
+
+        <!-- ═══════════════════════════════════
+             SECTION 5 — ENERGETIC THEMES
+             ═══════════════════════════════════ -->
+        <section class="rail-card" id="themes">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
             Energetic Themes
           </h2>
-<div class="theme-tier-label">Primary</div>
-<div class="theme-row">
-<div class="theme-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-aperture-iris"></span>
-</div>
-<div>
-<h3>Purification</h3>
-<p>Traditionally used to clear accumulated energy from spaces, tools, and stones.</p>
-</div>
-</div>
-<div class="theme-row">
-<div class="theme-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-clarity-focus"></span>
-</div>
-<div>
-<h3>Peaceful Clarity</h3>
-<p>Supports a quiet, open quality of attention rather than sharp analysis.</p>
-</div>
-</div>
-<hr class="theme-divider"/>
-<div class="theme-tier-label">Secondary</div>
-<div class="theme-row">
-<div class="theme-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-transformation"></span>
-</div>
-<div>
-<h3>Higher Awareness</h3>
-<p>Connects Crown Chakra practice with perspective, receptivity, and reflection.</p>
-</div>
-</div>
-<div class="theme-row">
-<div class="theme-icon-tile">
-<span aria-hidden="true" class="enc-icon icon-intuition"></span>
-</div>
-<div>
-<h3>Inner Perception</h3>
-<p>Associated with subtle awareness, dream work, and Third Eye traditions.</p>
-</div>
-</div>
-<hr class="theme-divider"/>
-<div class="theme-tier-label">Occasional Associations</div>
-<div class="occasional-tags">
-<span class="occ-tag">Angelic Connection</span>
-<span class="occ-tag">Protection of Spaces</span>
-</div>
-</section>
-<!-- COLLECTOR & CURIOSITY NOTES -->
-<section class="rail-card" id="notes">
-<h2>
-<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
+
+          <div class="rail-card-body">
+
+            <div class="theme-tier-group">
+              <div class="theme-tier-label">Primary</div>
+              <div class="theme-row">
+                <div class="theme-icon-tile">
+                  <span aria-hidden="true" class="enc-icon icon-spiritual-connection"></span>
+                </div>
+                <div>
+                  <h3>Purification and Cleansing</h3>
+                  <p>Its most consistent tradition centers on symbolically clearing accumulated heaviness from stones, spaces, and personal practice.</p>
+                </div>
+              </div>
+              <div class="theme-row">
+                <div class="theme-icon-tile">
+                  <span aria-hidden="true" class="enc-icon icon-upward-spark"></span>
+                </div>
+                <div>
+                  <h3>Clarity and Peaceful Stillness</h3>
+                  <p>Associated with a quiet, open kind of clarity that supports meditation, reflection, and spiritual awareness.</p>
+                </div>
+              </div>
+            </div><!-- /theme-tier-group Primary -->
+            <div class="theme-tier-group">
+              <hr class="theme-divider"/>
+              <div class="theme-tier-label">Secondary</div>
+              <div class="theme-row">
+                <div class="theme-icon-tile">
+                  <span aria-hidden="true" class="enc-icon icon-todays-practice"></span>
+                </div>
+                <div>
+                  <h3>Crown Chakra and Higher Guidance</h3>
+                  <p>Its Crown association connects it with elevated perspective, receptivity, and awareness beyond immediate concerns.</p>
+                </div>
+              </div>
+              <div class="theme-row">
+                <div class="theme-icon-tile">
+                  <span aria-hidden="true" class="enc-icon icon-best-for"></span>
+                </div>
+                <div>
+                  <h3>Third Eye and Inner Perception</h3>
+                  <p>Traditionally used to support quiet intuition, dream awareness, and reflective perception without forceful activation.</p>
+                </div>
+              </div>
+            </div><!-- /theme-tier-group Secondary -->
+            <div class="theme-tier-group">
+              <hr class="theme-divider"/>
+              <div class="theme-tier-label">Occasional Associations</div>
+              <div class="occasional-tags">
+                <span class="occ-tag">Angelic Connection</span>
+                <span class="occ-tag">Protection of Spaces</span>
+              </div>
+            </div><!-- /theme-tier-group Occasional -->
+
+          </div><!-- /rail-card-body -->
+
+        </section><!-- /ENERGETIC THEMES -->
+
+        <!-- ═══════════════════════════════════
+             SECTION 7 — COLLECTOR & CURIOSITY NOTES
+             ═══════════════════════════════════ -->
+        <section class="rail-card" id="notes">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-bookmark"></span>
             Collector &amp; Curiosity Notes
           </h2>
-<div class="note-list">
-<div class="note-row">
-<div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-location"></span>
-</div>
-<div>
-<strong>Selenite or Satin Spar?</strong>
-<p>Transparent sheet-like crystals are true selenite. Most familiar white wands and towers are satin spar, a fibrous gypsum form sold under the same retail name.</p>
-</div>
-</div>
-<div class="note-row">
-<div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-aperture-iris"></span>
-</div>
-<div>
-<strong>Named for the Moon</strong>
-<p>The name comes from Selene, the Greek moon figure, reflecting the mineral’s pale glow and translucent appearance.</p>
-</div>
-</div>
-<div class="note-row">
-<div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-rarity-tier"></span>
-</div>
-<div>
-<strong>The Naica Giants</strong>
-<p>Mexico’s Naica caves contain extraordinary gypsum crystals reaching monumental sizes, formed in hot mineral-rich water over immense spans of time.</p>
-</div>
-</div>
-<div class="note-row">
-<div class="note-icon">
-<span aria-hidden="true" class="enc-icon icon-bookmark"></span>
-</div>
-<div>
-<strong>Handle Gently</strong>
-<p>Gypsum is only Mohs 2 and is water-sensitive. Keep it dry, avoid soaking, and store it away from harder stones that can scratch it.</p>
-</div>
-</div>
-</div>
-</section>
-</aside><!-- /right-rail -->
-</div><!-- /content-grid -->
-<!-- ENTRY NAV -->
-<nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
-<a class="entry-nav-link" href="scolecite.html">
-<span>←</span>
-<div>
-<small>Previous</small>
-<b>Scolecite</b>
-</div>
-</a>
-<a class="entry-nav-link entry-nav-random" href="#">
-<div>
-<small>Random</small>
-<b>Surprise me</b>
-</div>
-</a>
-<a class="entry-nav-link" href="septarian.html">
-<div>
-<small>Next</small>
-<b>Septarian</b>
-</div>
-<span>→</span>
-</a>
-</nav>
-<!-- BOTTOM CTA -->
-<div class="enc-cta">
-<div>
-<h3>The right stone. The right moment.</h3>
-<p>Explore 333 entries with clarity, care, and curiosity.</p>
-</div>
-<button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
-</div>
-</main>
+          <div class="rail-card-body">
+            <div class="note-list">
+
+              <div class="note-row">
+                <div class="note-icon">
+                  <span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
+                </div>
+                <div>
+                  <strong>Named for the Moon</strong>
+                  <p>The name comes from the Greek *selene*, meaning moon, reflecting the material’s luminous and translucent appearance.</p>
+                </div>
+              </div>
+              <div class="note-row">
+                <div class="note-icon">
+                  <span aria-hidden="true" class="enc-icon icon-geology"></span>
+                </div>
+                <div>
+                  <strong>Satin Spar, Not True Selenite</strong>
+                  <p>Most commercial wands, towers, and plates are fibrous satin spar rather than transparent sheet selenite. Both are gypsum.</p>
+                </div>
+              </div>
+              <div class="note-row">
+                <div class="note-icon">
+                  <span aria-hidden="true" class="enc-icon icon-bookmark"></span>
+                </div>
+                <div>
+                  <strong>Naica’s Giant Crystals</strong>
+                  <p>The Cave of Crystals in Naica, Mexico, contains enormous gypsum crystals formed under rare hydrothermal conditions.</p>
+                </div>
+              </div>
+              <div class="note-row">
+                <div class="note-icon">
+                  <span aria-hidden="true" class="enc-icon icon-book-reference"></span>
+                </div>
+                <div>
+                  <strong>Unusually Soft</strong>
+                  <p>With a Mohs hardness of 2, gypsum scratches easily and can even be marked by a fingernail.</p>
+                </div>
+              </div>
+
+            </div><!-- /note-list -->
+          </div><!-- /rail-card-body -->
+        </section><!-- /COLLECTOR NOTES -->
+
+
+        <!-- ═══════════════════════════════════
+             SECTION 8 — CARE & CLEANSING
+             ═══════════════════════════════════ -->
+        <section class="rail-card" id="care">
+          <h2>
+            <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+            Care &amp; Cleansing
+          </h2>
+          <div class="rail-card-body">
+            <!-- Care & Cleansing always uses exactly these four categories in this order:
+                 1. Cleaning  2. Water  3. Light & Heat  4. Storage
+                 Category labels and four-tile layout are fixed. Do not make categories optional
+                 or interchangeable. The guidance inside each tile must:
+                 — change according to the stone's verified mineral properties
+                 — remain practical and evidence-based
+                 — avoid invented spiritual cleansing instructions
+                 — avoid unsupported warnings
+                 — state ordinary stability where no unusual precaution applies -->
+            <div class="care-grid">
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+                  <span class="care-label">Cleaning</span>
+                </div>
+                <p>Use a dry or barely damp soft cloth; do not scrub, soak, or use chemical cleaners.</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-element"></span>
+                  <span class="care-label">Water</span>
+                </div>
+                <p>Avoid soaking or submerging. Gypsum is slightly soluble and prolonged moisture can damage the surface.</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-celestial"></span>
+                  <span class="care-label">Light &amp; Heat</span>
+                </div>
+                <p>Ordinary light is generally safe. Avoid sustained heat, steam, and humid storage conditions.</p>
+              </div>
+              <div class="care-cell">
+                <div class="care-cell-head">
+                  <span aria-hidden="true" class="enc-icon icon-geology"></span>
+                  <span class="care-label">Storage</span>
+                </div>
+                <p>Store separately from harder minerals and protect edges and surfaces from pressure, abrasion, and impact.</p>
+              </div>
+            </div>
+          </div>
+        </section><!-- /CARE & CLEANSING -->
+
+      </div><!-- /content-stack-right -->
+
+    </div><!-- /content-grid -->
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 9 — PREVIOUS / NEXT NAVIGATION
+         ═══════════════════════════════════════ -->
+    <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
+      <a class="entry-nav-link" href="scolecite.html">
+        <span>←</span>
+        <div>
+          <small>Previous</small>
+          <b>Scolecite</b>
+        </div>
+      </a>
+      <a class="entry-nav-link entry-nav-random" href="#">
+        <div>
+          <small>Random</small>
+          <b>Surprise me</b>
+        </div>
+      </a>
+      <a class="entry-nav-link" href="septarian.html">
+        <div>
+          <small>Next</small>
+          <b>Septarian</b>
+        </div>
+        <span>→</span>
+      </a>
+    </nav>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 10 — BOTTOM CTA
+         ═══════════════════════════════════════ -->
+    <div class="enc-cta">
+      <div>
+        <h3>The right stone. The right moment.</h3>
+        <p>Explore 333 entries with clarity, care, and curiosity.</p>
+      </div>
+      <button onclick="window.location='../encyclopedia.html'">Browse the Encyclopedia</button>
+    </div>
+
+  </main><!-- /enc-main -->
+
 </div><!-- /enc-page -->
+
+<!-- ═══ FOOTER ═══ -->
 <footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
-<div style="max-width:520px;margin:0 auto">
-<div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
-<a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
-<div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
-<div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
-<div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
-<a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
-</div>
-</div>
-<div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+  <div style="max-width:520px;margin:0 auto">
+    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+    <a href="https://stillpointdfw.com" rel="noopener" style="display:block;font-family:Georgia,serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none" target="_blank">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner clarity.</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+      <a href="https://stillpointdfw.com" rel="noopener" style="color:var(--accent2);text-decoration:none" target="_blank">stillpointdfw.com</a>
+    </div>
+  </div>
+  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
     © 2026 Still Point {technodelic} Studio
   </div>
 </footer>
-</div><!-- /app-shell -->
-<script>
-(function () {
-  const sections = ['hero', 'overview', 'reach', 'glance', 'themes', 'mineral', 'notes', 'related'];
-  const navLinks  = document.querySelectorAll('.side-nav a');
 
-  function onScroll () {
-    let current = 'hero';
-    sections.forEach(id => {
-      const el = document.getElementById(id);
+</div><!-- /app-shell -->
+
+<script>
+/* Scroll-spy: highlight the active sidebar nav link.
+   Section order: hero, glance, overview, reach, themes, mineral, notes, care, related */
+(function () {
+  var sections = ['hero', 'glance', 'overview', 'reach', 'themes', 'mineral', 'notes', 'care', 'related'];
+  var navLinks  = document.querySelectorAll('.side-nav a');
+
+  function onScroll() {
+    var current = 'hero';
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
       if (el && window.scrollY >= el.offsetTop - 160) current = id;
     });
-    navLinks.forEach(a => {
-      const href = a.getAttribute('href').replace('#','');
+    navLinks.forEach(function (a) {
+      var href = a.getAttribute('href').replace('#', '');
       a.classList.toggle('active', href === current || (current === 'hero' && href === 'top'));
     });
   }
@@ -1285,5 +1526,6 @@
 })();
 </script>
 <script src="enc-nav.js"></script>
+
 </body>
 </html>
