@@ -123,7 +123,7 @@ The rendered structure, classes, order, styling, and number of rows remain fixed
 
 ### Formation
 
-One paragraph. Covers how the stone forms, color origin, any treatment common in the trade.
+**Formation:** One focused paragraph explaining only how the material forms geologically, including the relevant environment, natural process, and resulting structure or habit. Natural color origin may be included only when it is part of the formation process. Do not include artificial treatments, commercial processing, dyeing, heating, coating, irradiation, impregnation, stabilization, filling, care or cleaning, market availability or pricing, imitations or identification guidance, collector-quality advice, or trade-name discussion unless the name describes a natural formation habit essential to explaining formation.
 
 ### Common Localities
 

@@ -201,8 +201,12 @@ The following fields must never appear in At a Glance:
 ### 3.3 Invented Values Are Forbidden
 Do not assign a Planet, Zodiac, Energetic Role, or Color Energy value to fill a box. If a value is not locked or defensible from the approved source set, flag it to Christie before proceeding.
 
+Exception: Christie has delegated routine planetary assignment to Lyra when the value is defensible from the approved source set and no meaningful conflict exists. Lyra must stop and flag Christie before assigning a planet when: approved sources materially conflict; support is weak or absent; multiple substantially different values are equally defensible; the assignment would change an existing locked production value; or the choice has unusual catalog-wide, architectural, or identity implications. Christie retains final authority and may revise any assignment.
+
 ### 3.4 At a Glance Source Rule
 All six values must be locked in the production workbook before MD approval. Missing values must be researched and approved, never invented during writing.
+
+Planet values may be locked by Lyra without separate Christie approval when the value meets the delegation criteria in §3.3.
 
 ---
 
@@ -248,8 +252,8 @@ Cover:
 ## 6. Energetic Themes
 
 ### Structure
-- Exactly 2 Primary themes
-- Exactly 2 Secondary themes
+- 1 or 2 Primary themes, evidence-supported. At least 1 required.
+- 0, 1, or 2 Secondary themes, evidence-supported. If 0: remove entire Secondary group including divider and label.
 - 1 or 2 Occasional associations, only when supported by the approved source set
 - 0 Occasional associations is acceptable; do not invent to fill the pattern
 
@@ -579,7 +583,7 @@ All of the following must be locked in the production workbook:
 - [ ] Primary chakra
 - [ ] Secondary chakras (or confirmed absent)
 - [ ] Element
-- [ ] Planet
+- [ ] Planet (locked by Christie or by Lyra under the §3.3 delegation rule)
 - [ ] Zodiac
 - [ ] Energetic Role
 - [ ] Color Energy
@@ -599,7 +603,7 @@ All of the following must pass:
 - [ ] At a Glance: exactly 6 boxes, all values from locked workbook
 - [ ] Overview: exactly 2 paragraphs; P1 physical, P2 metaphysical
 - [ ] Why People Reach For It: exactly 5 rows, each distinct
-- [ ] Energetic Themes: exactly 2 Primary, exactly 2 Secondary, 0–2 Occasional
+- [ ] Energetic Themes: 1–2 Primary (at least 1 required), 0–2 Secondary, 0–2 Occasional — all evidence-supported
 - [ ] Mineral Profile: formation paragraph + lower note + localities
 - [ ] Collector & Curiosity Notes: 3 or 4 notes, each ≤55 words
 - [ ] Related Stones: exactly 2 Similar Energy, exactly 2 Pairs Well With, all 4 different
@@ -717,6 +721,9 @@ This contract follows the three-state sequence defined in §0: DRAFT → PROVISI
 | 2026-06-19 | Added Care & Cleansing as a permanent right-rail section. Section ID: `#care`. Grid area name: `care`. Position: right rail, below Collector & Curiosity Notes — `grid-template-areas` row added: `"related care"`. Icon: `icon-care-cleansing` (SVG at `icons/encyclopedia/care-cleansing.svg` in `stone-images` Supabase bucket; local source at `assets/SVGs/care-cleansing.svg`). Content rule: 3–4 items drawn from the stone's Mineral Profile care information only — no new editorial content; items are short and scannable, one line each. Sidebar nav: `<a href="#care">Care & Cleansing</a>` added after Collector Notes. Scroll-spy sections array updated to include `'care'` after `'notes'`. Mobile single-column `grid-template-areas` updated to include `"care"` after `"notes"`. Affirmation icon rule also added this session: Affirmation tile uses the stone's locked Energetic Role icon (canonical template uses `{{ENERGETIC_ROLE_ICON}}` placeholder). | §1.1 (grid), §8a (new section), sidebar nav, scroll-spy | Christie |
 | 2026-06-19 | Care & Cleansing moved to full-width utility section. `#care` removed from `.content-stack-right` and placed as a direct sibling of `.content-grid`, immediately after its closing tag and before `.entry-nav-wrap`. CSS: `#care { margin-top: 16px; }` added; `#care { order: 6; }` removed from the mobile responsive block (section is outside `.content-grid` so `order` has no effect). `.rail-card` styling retained as-is — the card renders full-width in the document flow. `#related` mobile order value updated from 7 to 6. Care & Cleansing is not part of either stack and carries no `grid-area` assignment. *(Superseded by 2026-06-20 canonical consolidation — Care & Cleansing is confirmed inside .content-stack-right)* | §1.1, §8a | Christie |
 | 2026-06-20 | Canonical architecture reconciliation and lock. Replaces §1.1 body entirely with the approved two-column flex-stack implementation. All earlier conflicting §1.1 rules are superseded, including: named `grid-template-areas` as preferred implementation (2026-06-19); prohibition on CSS `order` property (2026-06-19); full-width Care & Cleansing placement outside `.content-stack-right` (2026-06-19). Confirms `#care` as a permanent direct child of `.content-stack-right`, below Collector & Curiosity Notes. Inserts Care & Cleansing as page section 8 in the §1 master list; Related Stones renumbered to 9; Previous / Random / Next Navigation to 10; Bottom CTA to 11. Updates contract version from `2026-06-19-provisional` to `2026-06-20-canonical` and status from PROVISIONALLY APPROVED to LOCKED, following Christie's approval of the Citrine pilot. | §0, §1, §1.1 | Christie |
+| 2026-06-22 | Locked Formation field scope: Formation contains only geological formation information. Treatments, commercial processing, care, market practices, imitations, and collector guidance must not appear in the Formation paragraph. Natural color-producing processes may be included only when they are part of natural formation. | §7 | Christie |
+| 2026-06-22 | Christie delegates routine planetary assignment to Lyra under defined criteria. Lyra must flag Christie when sources conflict, support is weak, multiple values are equally defensible, an existing locked value would change, or the assignment has catalog-wide implications. Christie retains final authority. | §3.3, §3.4, §16 Gate 1 | Christie |
+| 2026-06-22 | Aligned §6 and §16 Gate 2 theme counts to schema evidence-based ranges: Primary 1–2 (at least 1 required), Secondary 0–2. Contract previously hard-coded exactly 2 Primary and exactly 2 Secondary. Schema controls field counts; contract now matches. | §6, §16 | Christie |
 | 2026-06-22 | Removed word-count floors from all prose fields. Only ceilings remain. Affected: Collector Notes (≤55 words), Why People Reach For It rows (≤30 words), Hero Best For (≤20 words), Hero Use When (≤25 words), Overview (≤~120 words per paragraph). Rationale: natural brevity is preferable to padded copy. | §2.5, §4, §5, §8, §13 | Christie |
 | 2026-06-19 | Hero photo fit and frame confinement. Stone photo `object-fit` changed from provisional `contain` to locked `cover`, approved by Christie after visual review of the Citrine pilot (matches established treatment on prior pages like Clear Quartz). `object-position` defaults to `center`, overridable per-stone via `--stone-photo-position` (e.g., `#hero .stone-photo-wrap { --stone-photo-position: center 30%; }`) without editing this file or the canonical template. Concurrently fixed: the global `styles.css` rule (line 1821: `.enc-hero { position: relative; overflow: hidden; }`) was causing the stone photo to bleed outside `.stone-photo-wrap` into the Hero content area when the stone page reset `.enc-hero` to `position: static; overflow: visible` — removing the containment context `.stone-photo-wrap` was implicitly relying on. Resolved with a scoped reset confined to `.enc-hero .stone-photo-wrap`: added `position: relative; isolation: isolate; overflow: hidden` on the wrapper; added `position: static; inset: auto; transform: none; max-width: none` on the img; added `position: relative; z-index: 1` on `.hero-right`. | §2, photo frame | Christie |
 
