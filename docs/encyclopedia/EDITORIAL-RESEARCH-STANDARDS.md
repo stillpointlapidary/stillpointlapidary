@@ -95,6 +95,12 @@ Rules:
 9. Treat excessive name repetition as an editorial failure, even when all individual sentences are factually correct.
 10. Preserve concise, natural prose. Do not replace repeated names with bloated abstractions.
 
+### Clarification: Core Identity Words
+
+Repetition control targets mechanical name repetition only — the stone's proper name (e.g., "Malachite," "Hematite") repeated as a sentence opener across consecutive prose units.
+
+Core identity words that are central to the stone's meaning (e.g., love, protection, grounding, transformation, clarity) may recur naturally throughout an entry when the content requires them. Do not force artificial synonyms for these words in an attempt to avoid repetition. The goal is natural variation in sentence construction, not vocabulary avoidance.
+
 ### Use When — Hero Rule
 - Begin directly with the situation or need.
 - Never start with "Use [stone] when," "Reach for [stone] when," or equivalent phrasing.
