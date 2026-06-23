@@ -245,7 +245,6 @@ Store separately from softer stones and protect polished surfaces from harder mi
 - Color Energy: Leaf Green
 
 ### Decision Notes
-- Venus is proposed because it best fits growth, receptivity, prosperity, and Heart Chakra associations. Confirm in production data before final approval.
 - Taurus and Virgo are retained as the strongest concise pair from the broader researched set.
 
 ## Pairing Decisions
@@ -286,7 +285,6 @@ Store separately from softer stones and protect polished surfaces from harder mi
 
 ### Normalization Notes
 
-- Planet `Venus` remains flagged for confirmation in canonical production data.
 - All four Related Stone entries are unique; retain the approved pairings unless Christie directs otherwise.
 - Canonical navigation shown in the current HTML is Previous Green Aragonite (`green-aragonite`); Next Green Calcite (`green-calcite`).
 - The existence of generated HTML does not by itself assign approval or publication status.

@@ -250,7 +250,6 @@ Store separately from harder minerals and protect edges and surfaces from pressu
 - Color Energy: Luminous White
 
 ### Decision Notes
-- Moon is proposed because it aligns with the name origin, luminous visual identity, receptivity, and quiet spiritual awareness. Confirm in production data before final approval.
 - Luminous White reflects the dominant commercial appearance.
 
 ## Pairing Decisions
@@ -290,7 +289,6 @@ Store separately from harder minerals and protect edges and surfaces from pressu
 
 ### Normalization Notes
 
-- Planet `Moon` remains flagged for confirmation in canonical production data.
 - All four Related Stone entries are unique; retain the approved pairings unless Christie directs otherwise.
 - Canonical navigation shown in the current HTML is Previous Scolecite (`scolecite`); Next Septarian (`septarian`).
 - The existence of generated HTML does not by itself assign approval or publication status.
