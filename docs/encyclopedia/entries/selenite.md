@@ -64,7 +64,7 @@ I return to quiet clarity and remain open to peaceful awareness.
 
 Selenite is a transparent crystalline habit of gypsum, the hydrous calcium sulfate mineral CaSO₄·2H₂O. Most commercial wands, towers, and plates sold under the name are actually satin spar, the fibrous chatoyant habit of the same mineral species. Both are gypsum, but their structures and appearances differ. The retail use of “selenite” for both forms is widespread and worth explaining rather than treating as a simple error.
 
-Crystal traditions associate gypsum sold as Selenite with purification, clarity, peace, meditation, and spiritual awareness. Its Crown emphasis gives the stone a light, elevated identity, while the Third Eye adds quiet perception. Cleansing language is framed here as a symbolic and practitioner-based tradition, not a literal mechanism or scientific property.
+Selenite is the stone of purification, clarity, peace, meditation, and spiritual awareness. Its Crown emphasis gives it a light, elevated identity, while the Third Eye adds quiet perception. Its cleansing tradition is symbolic and practitioner-based rather than a scientific property.
 
 ---
 
@@ -80,7 +80,7 @@ Often placed in rooms, studios, or practice areas to encourage a lighter, calmer
 Chosen when stillness and quiet attention matter more than stimulation or intensity.
 
 ### Opening Perspective
-Associated with Crown and Third Eye awareness during reflection, journaling, and spiritual practice.
+Chosen for Crown and Third Eye awareness during reflection, journaling, and spiritual practice.
 
 ### Creating Peaceful Surroundings
 Kept nearby for its sustained association with softness, clarity, and environmental calm.
@@ -95,7 +95,7 @@ Kept nearby for its sustained association with softness, clarity, and environmen
 Its most consistent tradition centers on symbolically clearing accumulated heaviness from stones, spaces, and personal practice.
 
 #### Clarity and Peaceful Stillness
-Associated with a quiet, open kind of clarity that supports meditation, reflection, and spiritual awareness.
+Creates a quiet, open clarity for meditation, reflection, and spiritual awareness.
 
 ### Secondary
 
@@ -103,7 +103,7 @@ Associated with a quiet, open kind of clarity that supports meditation, reflecti
 Its Crown association connects it with elevated perspective, receptivity, and awareness beyond immediate concerns.
 
 #### Third Eye and Inner Perception
-Traditionally used to support quiet intuition, dream awareness, and reflective perception without forceful activation.
+Encourages quiet intuition, dream awareness, and reflective perception without forceful activation.
 
 ### Occasional Associations
 - Angelic Connection
@@ -282,17 +282,15 @@ Store separately from harder minerals and protect edges and surfaces from pressu
 
 ## COMPLIANCE REPORT
 
-- **Current Hero architecture:** PASS
-- **At a Glance:** PASS — six canonical values plus separate Styling Chakra field
-- **Overview:** PASS — exactly two paragraphs
-- **Why People Reach For It:** PASS — exactly five distinct rows
-- **Energetic Themes:** PASS — 2 Primary, 2 Secondary, 2 Occasional
-- **Mineral Facts:** PASS — exactly eight rows
-- **Collector Context:** PASS — exactly three paragraphs
-- **Collector Notes:** PASS — four strong candidates retained
-- **Care & Cleansing:** PASS — four fixed H3 fields
-- **Related Stones:** PASS — 2 Similar Energy, 2 Pairs Well With, all unique
-- **Approved-source hierarchy:** PASS
-- **Navigation fields:** OMITTED — generator resolves catalog navigation
-- **Outstanding production-data check:** Planet `Moon`
-- **HTML generation:** NOT AUTHORIZED
+- **RESEARCH COMPLETE**
+- **MD DRAFT COMPLETE**
+- **GATE 0 NORMALIZATION PENDING**
+- **APPROVED FOR HTML** — not yet assigned by Christie
+- **PUBLISHED** — not yet assigned
+
+### Normalization Notes
+
+- Planet `Moon` remains flagged for confirmation in canonical production data.
+- All four Related Stone entries are unique; retain the approved pairings unless Christie directs otherwise.
+- Canonical navigation shown in the current HTML is Previous Scolecite (`scolecite`); Next Septarian (`septarian`).
+- The existence of generated HTML does not by itself assign approval or publication status.

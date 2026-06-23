@@ -63,7 +63,7 @@ I welcome growth with hope, confidence, and an open heart.
 
 Green Aventurine is a fine-grained, quartz-rich aggregate commonly described as aventurine quartz or aventurine quartzite. Tiny plates of fuchsite or related mica contribute its green color and may create the reflective glitter called aventurescence. Because it is polycrystalline rather than a single crystal, the material should not be described as one trigonal crystal. Commercial pieces may be oiled, dyed, polymer impregnated, or confused with jade and glass.
 
-Crystal traditions associate this green material with growth, optimism, prosperity, confidence, and favorable openings. Its Heart Chakra emphasis softens the prosperity theme, framing opportunity as receptivity, renewed perspective, and willingness to try again rather than guaranteed luck. The stone is often chosen at beginnings, especially when hope needs to become practical movement.
+Green Aventurine is the stone of growth, optimism, prosperity, confidence, and favorable openings. Its Heart Chakra emphasis gives the prosperity theme a receptive, grounded character: opportunity begins with renewed perspective and the willingness to try again. It is especially suited to beginnings, when hope needs to become practical movement.
 
 ---
 
@@ -73,7 +73,7 @@ Crystal traditions associate this green material with growth, optimism, prosperi
 Chosen when a new chapter needs encouragement without pressure or forced positivity.
 
 ### Welcoming Opportunity
-Traditionally associated with favorable openings, prosperity, and practical growth.
+Chosen for favorable openings, prosperity, and practical growth.
 
 ### Recovering Perspective
 Used when disappointment has narrowed the outlook and hope needs room to return.
@@ -82,7 +82,7 @@ Used when disappointment has narrowed the outlook and hope needs room to return.
 Often selected when unfamiliar situations require steadier confidence and openness.
 
 ### Releasing What Stalled
-Supports moving beyond old expectations, attachments, or patterns that no longer fit.
+Encourages movement beyond old expectations, attachments, or patterns that no longer fit.
 
 ---
 
@@ -91,18 +91,18 @@ Supports moving beyond old expectations, attachments, or patterns that no longer
 ### Primary
 
 #### Growth and New Beginnings
-Associated with renewal, forward movement, and the willingness to begin again after disappointment or delay.
+Centers renewal, forward movement, and the willingness to begin again after disappointment or delay.
 
 #### Good Fortune and Prosperity
-Traditionally linked with opportunity, favorable circumstances, and practical abundance supported by participation and action.
+Brings opportunity, favorable circumstances, and practical abundance into focus while keeping participation and action at the center.
 
 ### Secondary
 
 #### Emotional Optimism and Resilience
-Its Heart Chakra association supports renewed perspective, hope, and openness without denying difficulty.
+Its Heart Chakra identity restores perspective, hope, and openness without denying difficulty.
 
 #### Confidence and Self-Trust
-Often chosen when a new situation calls for steadier self-belief and less hesitation.
+Chosen when a new situation calls for steadier self-belief and less hesitation.
 
 ### Occasional Associations
 - Leadership
@@ -278,17 +278,15 @@ Store separately from softer stones and protect polished surfaces from harder mi
 
 ## COMPLIANCE REPORT
 
-- **Current Hero architecture:** PASS
-- **At a Glance:** PASS — six canonical values plus separate Styling Chakra field
-- **Overview:** PASS — exactly two paragraphs
-- **Why People Reach For It:** PASS — exactly five distinct rows
-- **Energetic Themes:** PASS — 2 Primary, 2 Secondary, 1 Occasional
-- **Mineral Facts:** PASS — exactly eight adaptable rows
-- **Collector Context:** PASS — exactly three paragraphs
-- **Collector Notes:** PASS — four strong candidates retained
-- **Care & Cleansing:** PASS — four fixed H3 fields
-- **Related Stones:** PASS — 2 Similar Energy, 2 Pairs Well With, all unique
-- **Approved-source hierarchy:** PASS
-- **Navigation fields:** OMITTED — generator resolves catalog navigation
-- **Outstanding production-data check:** Planet `Venus`
-- **HTML generation:** NOT AUTHORIZED
+- **RESEARCH COMPLETE**
+- **MD DRAFT COMPLETE**
+- **GATE 0 NORMALIZATION PENDING**
+- **APPROVED FOR HTML** — not yet assigned by Christie
+- **PUBLISHED** — not yet assigned
+
+### Normalization Notes
+
+- Planet `Venus` remains flagged for confirmation in canonical production data.
+- All four Related Stone entries are unique; retain the approved pairings unless Christie directs otherwise.
+- Canonical navigation shown in the current HTML is Previous Green Aragonite (`green-aragonite`); Next Green Calcite (`green-calcite`).
+- The existence of generated HTML does not by itself assign approval or publication status.

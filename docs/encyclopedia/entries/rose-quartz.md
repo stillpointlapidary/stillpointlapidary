@@ -63,7 +63,7 @@ I offer myself and others compassion, respect, and steady care.
 
 Rose Quartz is the translucent pink variety of quartz, usually found as massive material rather than well-formed crystals. Microscopic fibrous inclusions create its cloudy appearance and much of its color, which ranges from nearly white to medium pink. Some specimens show a six-rayed star when cut as spheres or cabochons. Dyed quartz, glass, and other pink stones may imitate its appearance.
 
-Crystal traditions associate this quartz with love, compassion, self-acceptance, forgiveness, and emotional gentleness. Its Heart Chakra identity includes romantic love but is not limited to it; the stronger consensus emphasizes how people give and receive care across relationships, families, friendships, and their inner lives. Here, heart healing means reflective and symbolic support, not treatment of emotional or medical conditions.
+Rose Quartz has a long tradition as the stone of love, compassion, self-acceptance, forgiveness, and emotional gentleness. Its Heart Chakra identity includes romantic love but is not limited to it; the stronger consensus emphasizes how people give and receive care across relationships, families, friendships, and their inner lives. Here, heart healing means reflective and symbolic support, not treatment of emotional or medical conditions.
 
 ---
 
@@ -91,18 +91,18 @@ Kept in bedrooms, shared rooms, or reflection areas to encourage a softer atmosp
 ### Primary
 
 #### Love and Compassion
-Associated with giving and receiving care through tenderness, empathy, patience, and respect.
+Encourages giving and receiving care through tenderness, empathy, patience, and respect.
 
 #### Self-Acceptance
-Linked with meeting personal imperfections more honestly and replacing harsh judgment with steadier regard.
+Invites a more honest relationship with personal imperfections, replacing harsh judgment with steadier regard.
 
 ### Secondary
 
 #### Forgiveness and Emotional Release
-Traditionally chosen when resentment or old disappointment needs thoughtful acknowledgment and gradual loosening.
+Chosen when resentment or old disappointment needs thoughtful acknowledgment and gradual loosening.
 
 #### Relationship Harmony
-Supports intentions involving listening, mutual care, reconciliation, and warmer communication without promising a particular outcome.
+Strengthens intentions involving listening, mutual care, reconciliation, and warmer communication.
 
 ### Occasional Associations
 - Calm
@@ -227,7 +227,7 @@ Rose Quartz is not present in the supplied `ENCYCLOPEDIA-PRODUCTION-DATA.csv`. T
 - Property Pills: Love, Compassion, Self-Worth
 - Similar Energy: Morganite, Rhodonite
 - Pairs Well With: Amethyst, Green Aventurine
-- Navigation: unresolved; generator should use the canonical catalog after the production row is created
+- Navigation: Previous Rhyolite (`rhyolite`); Next Ruby (`ruby`), verified against the canonical catalog
 
 ## Complete Metaphysical Source List
 
@@ -312,26 +312,16 @@ Rose Quartz is not present in the supplied `ENCYCLOPEDIA-PRODUCTION-DATA.csv`. T
 
 ## COMPLIANCE REPORT
 
-- **Gate 0 production data:** PENDING NORMALIZATION — Rose Quartz row is absent from the supplied pilot CSV, so proposed structured values still need to be entered into canonical production data
-- **Research minimums:** PASS — 8 approved metaphysical sources, including both A+ books and a Tier A online consensus core; 2 core technical sources
-- **Current Hero architecture:** PASS
-- **At a Glance:** PROVISIONAL — six defensible proposed values; not yet locked in production data
-- **Overview:** PASS — exactly two paragraphs
-- **Why People Reach For It:** PASS — exactly five distinct rows
-- **Energetic Themes:** PASS — 2 Primary, 2 Secondary, 2 Occasional
-- **Mineral Facts:** PASS — exactly eight rows
-- **Formation boundary:** PASS — geological formation only
-- **Collector Context:** PASS — exactly three paragraphs
-- **Collector Notes:** PASS — four strong candidates retained
-- **Care & Cleansing:** PASS — four fixed H3 fields
-- **Related Stones:** PASS — 2 Similar Energy and 2 Pairs Well With, all unique; all four slugs confirmed against the 333-stone canonical roster
-- **Approved-source hierarchy:** PASS
-- **Stone-name repetition:** PASS
-- **Medical and psychological claims:** PASS
-- **Compact-field word limits:** PASS
-- **Navigation:** OMITTED — unresolved until canonical production data is created
-- **Roster verification:** PASS — all four related slugs confirmed against the canonical roster
-- **Canonical navigation:** Previous: Rhyolite (`rhyolite`); Next: Ruby (`ruby`)
-- **Standards broken:** NONE
-- **Canonical MD approval:** NOT YET ELIGIBLE until the proposed structured values are entered into canonical production data
-- **HTML generation:** NOT AUTHORIZED
+- **RESEARCH COMPLETE**
+- **MD DRAFT COMPLETE**
+- **GATE 0 NORMALIZATION PENDING**
+- **APPROVED FOR HTML** — not yet assigned by Christie
+- **PUBLISHED** — not yet assigned
+
+### Normalization Notes
+
+- Rose Quartz is absent from the supplied `ENCYCLOPEDIA-PRODUCTION-DATA.csv`.
+- Proposed structured values must be entered and verified in canonical production data.
+- All four Related Stone slugs are unique and verified against the 333-stone canonical roster.
+- Canonical navigation is verified: Previous Rhyolite (`rhyolite`); Next Ruby (`ruby`).
+- No HTML approval or publication status should be inferred until Christie assigns it explicitly.

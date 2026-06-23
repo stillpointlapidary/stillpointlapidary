@@ -1,6 +1,6 @@
 # Citrine — Encyclopedia Entry
 
-<!-- ARCHITECTURE VERSION: 2026-06-19-provisional | Status: PROVISIONALLY APPROVED FOR CITRINE PILOT | Hero: 3 sections (limits provisional) | AtaGlance: 6 boxes | Icon path: VERIFIED — Gate 3 CLOSED -->
+<!-- ARCHITECTURE VERSION: 2026-06-20-canonical | Status: PUBLISHED -->
 <!-- SCHEMA: enc-editorial-schema.md | Conforms to: enc-architecture-contract.md -->
 
 ---
@@ -82,7 +82,7 @@ I move toward abundance with confidence, purpose, and steady creative energy.
 
 Citrine is the yellow to amber variety of crystalline quartz, composed of silicon dioxide and colored by iron-related color centers. Natural material is usually pale and relatively uncommon, while much of the deeper golden and orange material on the market is heat-treated amethyst. Both are quartz, though their color origin, zoning, and typical appearance may differ. Transparent pieces can show internal veils, fractures, or color zoning that give individual specimens their character.
 
-Traditionally associated with abundance, confidence, motivation, and self-expression, it is often linked with Solar Plexus energy and the outward movement of personal will. Its Merchant’s Stone reputation reflects a long-standing role in prosperity and business-oriented crystal traditions. Here, manifestation is framed as directed effort supported by confidence and clarity, not as a promise of material results. Heat-treated material remains genuine quartz, but treatment should be disclosed honestly.
+Citrine is the stone of abundance, confidence, motivation, and self-expression, with a strong Solar Plexus identity rooted in personal will and purposeful action. Its Merchant’s Stone reputation reflects a long-standing place in prosperity and business-oriented crystal traditions. Its manifestation tradition calls for directed effort, confidence, and clarity rather than passive wishing. Heat-treated material remains genuine quartz, but treatment should be disclosed honestly.
 
 ---
 
@@ -100,7 +100,7 @@ Used when self-doubt or hesitation interrupts progress, especially when a person
 Reached for when creative projects, career efforts, or personal goals have stalled and renewed momentum matters more than waiting for perfect certainty.
 
 #### Supporting Creative Expression
-Associated with generative thinking, enthusiasm, and the willingness to move ideas into form instead of keeping them suspended in possibility.
+Chosen for generative thinking, enthusiasm, and the willingness to move ideas into form instead of keeping them suspended in possibility.
 
 #### Lifting the Atmosphere
 Chosen for its bright, outward-facing character when a workspace, ritual, or daily routine feels heavy, flat, or disconnected from purposeful energy.
@@ -114,10 +114,10 @@ Chosen for its bright, outward-facing character when a workspace, ritual, or dai
 #### Primary
 
 ##### Abundance and Manifestation
-Associated with prosperity, opportunity, and directing personal will toward tangible goals. Its manifestation tradition emphasizes participation, confidence, and sustained action.
+Centers prosperity, opportunity, and the direction of personal will toward tangible goals. Its manifestation tradition emphasizes participation, confidence, and sustained action.
 
 ##### Confidence and Personal Power
-Linked to Solar Plexus energy, this theme centers on capability, readiness, and forward movement without slipping into forced positivity.
+Solar Plexus energy gives this theme its focus on capability, readiness, and forward movement without slipping into forced positivity.
 
 #### Secondary
 
@@ -125,7 +125,7 @@ Linked to Solar Plexus energy, this theme centers on capability, readiness, and 
 Sacral and Solar Plexus associations connect it with generative thinking, expressive courage, and bringing ideas into visible form.
 
 ##### Optimism and Positive Energy
-Its warm character is associated with encouragement and renewed engagement when discouragement has made effort feel heavier than necessary.
+Its warm character brings encouragement and renewed engagement when discouragement has made effort feel heavier than necessary.
 
 #### Occasional Associations
 - Business Goals and Career Focus
@@ -299,32 +299,17 @@ Natural and heat-treated material are both quartz, but they reach their color th
 
 ## COMPLIANCE REPORT
 
-- **Architecture version:** PASS — 2026-06-19-provisional
-- **Current Hero architecture:** PASS — Collection Label, Signature Line, 3 Property Pills, Best For, Use When, Affirmation
-- **Hero content sections:** PASS — exactly 3
-- **Known For section:** PASS — absent
-- **At a Glance:** PASS — exactly 6 boxes
-- **Overview:** PASS — exactly 2 paragraphs
-- **Why People Reach For It:** PASS — exactly 5 rows
-- **Energetic Themes:** PASS — 2 Primary, 2 Secondary, 2 Occasional
-- **Collector & Curiosity Notes:** PASS — exactly 4
-- **Related Stones:** PASS — exactly 2 Similar Energy and 2 Pairs Well With
-- **Related-stone uniqueness:** PASS — all 4 are different stones
-- **Related-stone reasons:** PASS — 30 words maximum each
-- **Signature Line limit:** PASS — 8 words
-- **Best For limit:** PASS — 11 words
-- **Use When limit:** PASS — 23 words
-- **Affirmation limit:** PASS — 11 words, first-person present tense
-- **Collector Notes limits:** PASS — each note is 35–55 words
-- **Research minimums:** PASS — 6 qualified metaphysical sources, all Tier A or A+
-- **Technical framing:** PASS — mineral facts and metaphysical associations are not conflated
-- **Medical-claim scan:** PASS
-- **Placeholder scan:** PASS — no placeholder text remains in public sections
-- **Research notes scan:** PASS — internal notes are separated below the publication boundary
-- **Navigation:** PASS — Cinnabrite → Citrine → Clear Fluorite
-- **Pairing slugs verified:** PASS — sunstone, golden-healer-quartz, green-aventurine, tigers-eye (Yellow Aventurine replaced with Golden Healer Quartz per Work Order 2026-06-22-C; yellow-aventurine confirmed off-roster)
-- **Energetic Role icon resolves:** PASS — Manifestation → `manifestation.svg`
-- **HTML generation:** COMPLETE — Gate 4 CLOSED. HTML generated, approved by Christie, and published as `stones/citrine.html`. MD reverse-synced to final approved HTML copy 2026-06-20.
+- **RESEARCH COMPLETE**
+- **MD DRAFT COMPLETE**
+- **APPROVED FOR HTML**
+- **PUBLISHED**
+
+### Publication Notes
+
+- Canonical architecture version: `2026-06-20-canonical`.
+- Related Stone slugs are unique and verified: `sunstone`, `golden-healer-quartz`, `green-aventurine`, `tigers-eye`.
+- Canonical navigation is verified: Previous Cinnabrite (`cinnabrite`); Next Clear Fluorite (`clear-fluorite`).
+- Public MD and HTML copy are synchronized.
 
 ## Care & Cleansing
 
