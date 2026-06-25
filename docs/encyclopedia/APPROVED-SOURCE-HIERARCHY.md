@@ -15,14 +15,12 @@ Use only the sources and rules below unless Christie explicitly approves an addi
 
 Use as foundational book sources when the relevant stone is covered.
 
-- *Crystalpedia* — Athena Perrakis, PhD
-- *The Book of Stones* — Robert Simmons & Naisha Ahsian *(currently unavailable — do not cite until Christie confirms copy is in hand)*
-- *The Crystal Bible, Vol. 1* — Judy Hall *(ordered, not yet in hand — do not cite until Christie confirms receipt)*
-- *The Crystal Bible, Vol. 2* — Judy Hall *(ordered, not yet in hand — do not cite until Christie confirms receipt)*
-- *The Crystal Bible, Vol. 3* — Judy Hall *(ordered, not yet in hand — do not cite until Christie confirms receipt)*
-- *The Crystal Encyclopedia* — Judy Hall *(ordered, not yet in hand — do not cite until Christie confirms receipt)*
-
-When a stone has no A+ book coverage available from confirmed sources, Lyra should flag it rather than proceeding on Tier A sources alone.
+- *Crystalpedia* (Athena Perrakis, PhD)
+- *The Crystal Bible* (Judy Hall)
+- *The Crystal Bible Vol. 2* (Judy Hall)
+- *The Crystal Bible Vol. 3* (Judy Hall)
+- *Crystal Encyclopedia* (Judy Hall)
+- *The Book of Stones* (Simmons & Ahsian)
 
 ### Tier A
 
@@ -43,6 +41,15 @@ Use as supporting sources only.
 
 Tier B may support an established consensus, but it may not independently establish, override, or resolve a disputed major claim.
 
+### Planet Field — Sourcing Rule
+
+Planet is a Tier A consensus field. A+ books do not systematically assign planetary correspondences.
+
+Rules:
+- Require support from at least two approved Tier A sources
+- Conflicts between sources must be flagged
+- A+ confirmation is not required for this field
+
 ---
 
 ## 2. Not Approved for Routine Encyclopedia Research
@@ -56,6 +63,29 @@ The following sources are not approved for encyclopedia research unless Christie
 - Rock Paradise
 
 These sources do not count toward source minimums or consensus thresholds.
+
+---
+
+## 2a. Field Provenance
+
+Each At a Glance field draws from a defined source tier.
+
+| Field | Primary Source |
+|---|---|
+| Energetic Role | Cohort-wide metaphysical consensus |
+| Chakra | Tier A+ plus Tier A consensus |
+| Element | Book of Stones plus Tier A normalization |
+| Planet | Minimum two Tier A sources |
+| Zodiac | Crystalpedia plus Tier A confirmation where available |
+| Color Energy | Physical appearance plus approved catalog vocabulary |
+
+---
+
+## 2b. Element Vocabulary
+
+Air is the canonical public-facing term for the Air element.
+
+Book of Stones uses Wind as an equivalent term. Normalize Wind to Air in all production data and public copy. Preserve the original Book of Stones wording in internal research notes only.
 
 ---
 
