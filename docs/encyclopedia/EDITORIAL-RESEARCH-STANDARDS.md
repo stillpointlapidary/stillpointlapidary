@@ -98,6 +98,15 @@ Treatment and authenticity information belongs in the Collector Context paragrap
 
 This is a hard separation. Do not end a Formation paragraph with a treatment sentence even when the transition feels natural.
 
+## Overview Paragraph Order
+
+**Locked rule: metaphysical first, mineral second.** This applies to all 333 entries.
+
+- **Paragraph 1:** Lead with the stone's name and defining role. "Hematite is the stone of grounding..." Develop the metaphysical identity, tradition, and energetic purpose from there. Compelling and readable — not a property list.
+- **Paragraph 2:** Mineral and physical identity. Composition, formation, appearance, treatments, trade-name distinctions.
+
+Do not revert to mineral-first order. Do not write a generic mineral description as P1 and add metaphysical content as an afterthought.
+
 ## Editing
 - Preserve approved copy during structural updates.
 - Report factual concerns separately before changing public copy.

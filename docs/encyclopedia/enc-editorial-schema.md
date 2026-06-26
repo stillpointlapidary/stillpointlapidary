@@ -74,10 +74,12 @@ Layout is fixed. Do not reorder or remove boxes.
 
 Two paragraphs. Required.
 
-- **Paragraph 1:** Mineral and physical description. Factual. Covers composition, color origin, natural vs treated material.
-- **Paragraph 2:** Metaphysical tradition, energetic associations, editorial framing. Manifestation and similar claims must be framed as directed effort or tradition, not as literal mechanisms.
+- **Paragraph 1:** Metaphysical identity. Who this stone is, what tradition says about it, what it is for. Lead with the stone's character and central energetic purpose. Manifestation and similar claims must be framed as directed effort or tradition, not as literal mechanisms. This paragraph should be compelling and readable — not a list of properties, but a clear statement of the stone's identity and role.
+- **Paragraph 2:** Mineral and physical identity. What it is made of, how it forms, appearance, treatments, trade-name issues, and authenticity distinctions that matter to a reader.
 
-Avoid repetitive stone-name openings. The first clear mineral-identity sentence may use the canonical stone name when doing so improves clarity or precision. Use natural alternatives elsewhere when they read naturally.
+**Order is locked: metaphysical first, mineral second.** This applies to all encyclopedia entries including the approved pilot stones.
+
+Avoid repetitive stone-name openings. The first sentence of P1 should lead with the stone's name and its defining role — e.g. "Hematite is the stone of grounding..." — then develop from there. Use natural alternatives elsewhere when they read naturally.
 
 ---
 

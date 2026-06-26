@@ -47,8 +47,8 @@ The primary content table. One row per stone. The dynamic template (`stone.html`
 | `use_when` | text | Hero Use When. One sentence. Max 25 words. |
 | `affirmation` | text | Hero Affirmation. First person. Max 15 words. |
 | `image_alt` | text | Alt text for the stone photo |
-| `overview_p1` | text | Overview paragraph 1 — physical and mineralogical identity |
-| `overview_p2` | text | Overview paragraph 2 — metaphysical tradition and associations |
+| `overview_p1` | text | Overview paragraph 1 — metaphysical identity. Who the stone is, what tradition says, what it is for. Leads with stone name and defining role. |
+| `overview_p2` | text | Overview paragraph 2 — mineral and physical identity. Composition, formation, appearance, treatments, trade names. |
 | `formation` | text | Formation paragraph. Geological context only. See Formation Rule below. |
 | `collector_context_p1` | text | Mineral Profile collector context paragraph 1 — quality and value indicators |
 | `collector_context_p2` | text | Mineral Profile collector context paragraph 2 — identification and confusion |

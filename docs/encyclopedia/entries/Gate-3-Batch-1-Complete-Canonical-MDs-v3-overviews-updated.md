@@ -89,9 +89,9 @@ I am grounded, steady, and fully present in my life.
 
 ## Overview
 
-Hematite is an iron oxide mineral known for its substantial weight, metallic gray surface, and diagnostic reddish-brown streak. It forms in settings ranging from sedimentary iron formations and hydrothermal veins to metamorphic rocks and volcanic environments. Collector material may be mirror-bright, botryoidal, earthy, or shaped into polished beads and carvings. Natural specimens are generally untreated, but strongly magnetic products sold as “magnetic hematite” are commonly manufactured iron-based material rather than natural hematite.
+Hematite is the stone of grounding, embodiment, and practical steadiness. Its tradition draws attention out of mental overactivity and back toward the body, present circumstances, and concrete responsibilities. Root Chakra and Earth associations reinforce stability, while its Mars correspondence adds resolve and purposeful action. The emphasis is not passive stillness, but becoming centered enough to think clearly, hold a position, maintain firm boundaries, and take the next realistic step.
 
-Hematite is the stone of grounding, embodiment, and practical steadiness. Its tradition centers on drawing attention out of mental overactivity and back toward the body, present circumstances, and concrete responsibilities. Root Chakra and Earth associations reinforce stability, while its Mars correspondence adds resolve and purposeful action. The emphasis is not passive stillness, but becoming centered enough to think clearly, hold a position, and take the next realistic step.
+An iron oxide mineral known for its substantial weight, metallic gray surface, and diagnostic reddish-brown streak, Hematite forms in sedimentary iron formations, hydrothermal veins, metamorphic rocks, volcanic settings, and oxidation zones. Collector material may be mirror-bright, botryoidal, earthy, or polished into beads and carvings. Natural specimens are generally untreated. Strongly magnetic products sold as "magnetic hematite" are commonly manufactured iron-based material marketed as hematine rather than natural Hematite.
 
 ---
 
@@ -427,9 +427,9 @@ I trust my inner rhythm and welcome what is unfolding.
 
 ## Overview
 
-Moonstone is a feldspar variety defined by adularescence, the floating light effect created when illumination scatters through fine internal layers. Traditional material is commonly associated with alkali feldspar, while commercial “moonstone” can span different feldspar hosts. Body color may be colorless, cream, peach, gray, or brown, with a white or blue sheen. Most material is untreated, although fracture filling and assembled imitations have been documented. Rainbow Moonstone is usually white Labradorite and should not be treated as identical to traditional Moonstone.
+Moonstone is the stone of intuition, cycles, and receptive change. Its tradition encourages listening for timing, recognizing recurring patterns, and allowing insight to emerge without forcing certainty. Crown and Third Eye associations support inward perception, while the Heart adds emotional balance and self-trust. New beginnings are central here, but not as abrupt reinvention. The emphasis is on moving with change, honoring what is ending, and beginning again in a way that feels aligned with one's deeper rhythm.
 
-Moonstone is the stone of intuition, cycles, and receptive change. Its tradition encourages listening for timing, recognizing recurring patterns, and allowing insight to emerge without forcing certainty. Crown and Third Eye associations support inward perception, while the Heart adds emotional balance and self-trust. New beginnings are central here, but not as abrupt reinvention. The emphasis is on moving with change, honoring what is ending, and beginning again in a way that feels aligned with one’s deeper rhythm.
+A feldspar variety defined by adularescence, Moonstone displays a floating glow created when light scatters through fine internal layers. Traditional material is commonly associated with alkali feldspar, while commercial Moonstone may span different feldspar hosts. Body color can be colorless, cream, peach, gray, or brown, usually with a white or blue sheen. Most material is untreated, although fracture filling and assembled imitations have been documented. Rainbow Moonstone is usually white Labradorite and should not be treated as identical to traditional Moonstone.
 
 ---
 
@@ -768,9 +768,9 @@ My mind is clear, and I speak with truth and purpose.
 
 ## Overview
 
-Sodalite is a sodium-rich aluminosilicate mineral best known for deep blue color broken by white calcite veining. It forms primarily in silica-poor alkaline igneous rocks such as nepheline syenite and may occur with other feldspathoid minerals. Most natural material is opaque to translucent and has a vitreous to greasy luster. Ordinary Sodalite is generally untreated, but dyed pale materials and other blue substitutes can enter the market. It is often confused with Lapis Lazuli, which is a multi-mineral rock and commonly includes visible Pyrite.
+Sodalite is the stone of mental synthesis, logical-intuitive integration, and truthful communication. Its Clarity & Focus role brings analysis, observation, intuition, and pattern recognition into a coherent understanding. The Third Eye supports insight and the ability to perceive how separate ideas connect, while the Throat Chakra carries that understanding outward through clear, honest expression. Its center is not concentration alone, but the disciplined movement from information, to insight, to language precise enough to communicate what has been understood.
 
-Sodalite is the stone of mental synthesis, logical-intuitive integration, and truthful communication. Its Clarity & Focus role is expressed through bringing analysis, observation, intuition, and pattern recognition into a coherent understanding. The Third Eye supports insight and the ability to perceive how separate ideas connect, while the Throat Chakra carries that understanding outward through clear, honest expression. Its center is not concentration alone, but the disciplined movement from information, to insight, to language precise enough to communicate what has been understood.
+A sodium-rich aluminosilicate mineral best known for deep blue color broken by white Calcite veining, Sodalite forms primarily in silica-poor alkaline igneous rocks such as nepheline syenite. It may occur with other feldspathoid minerals and is usually opaque to translucent with a vitreous to greasy luster. Ordinary material is generally untreated, although dyed pale stones and other blue substitutes enter the market. It is often confused with Lapis Lazuli, a multi-mineral rock that commonly includes visible Pyrite.
 
 ---
 
@@ -1104,9 +1104,9 @@ I meet change with courage and choose the path of growth.
 
 ## Overview
 
-Malachite is a copper carbonate hydroxide mineral recognized by vivid green color and curved, concentric, or fibrous banding. It forms in the oxidized zones of copper deposits, often with Azurite, Chrysocolla, Cuprite, and native Copper. Natural material is soft and may be porous or fractured. Wax, oil, resin, or polymer impregnation may improve durability or finish, while reconstructed powder, molded resin composites, and dyed substitutes are common enough that pattern, weight, polish, and disclosure all matter.
+Malachite is the stone of transformation through courageous right action, personal responsibility, and conscious leadership. Its tradition centers on recognizing what must change, strengthening the will to respond, and choosing actions aligned with emotional truth rather than avoidance or impulse. The Heart Chakra keeps transformation connected to values and integrity, while the Solar Plexus adds confidence, resolve, and accountability. Protection appears here as discernment and self-command, helping difficult circumstances become opportunities for deliberate, responsible growth.
 
-Malachite is the stone of transformation through courageous right action, personal responsibility, and conscious leadership. Its tradition centers on recognizing what must change, strengthening the will to respond, and choosing actions aligned with emotional truth rather than avoidance or impulse. The Heart Chakra keeps transformation connected to values and integrity, while the Solar Plexus adds confidence, resolve, and accountability. Protection is present as discernment and self-command, helping a person meet difficult circumstances with greater clarity, responsibility, and purpose.
+A copper carbonate hydroxide mineral recognized by vivid green color and curved, concentric, or fibrous banding, Malachite forms in the oxidized zones of copper deposits, often with Azurite, Chrysocolla, Cuprite, and native Copper. Natural material is soft and may be porous or fractured. Wax, oil, resin, or polymer impregnation may improve durability or finish. Reconstructed powder, molded resin composites, and dyed substitutes are common enough that natural pattern variation, weight, polish, and clear treatment disclosure all matter.
 
 ---
 
@@ -1441,9 +1441,9 @@ I act with confidence, warmth, and joyful purpose.
 
 ## Overview
 
-Sunstone is a feldspar variety whose reflective aventurescence comes from oriented inclusions such as Hematite, Ilmenite, or native Copper. The commercial name can apply to several feldspar hosts, including Oligoclase and Labradorite, so no single formula or crystal system describes every specimen. Oregon Sunstone is commonly copper-bearing Labradorite and may display red, green, peach, or bicolored zones. Most ordinary material is untreated, but diffusion-treated feldspar, irradiation-colored stones, fracture filling, and manufactured Goldstone create important identification and disclosure concerns.
+Sunstone is the stone of vitality, confidence, and independent action. Its tradition encourages a warmer relationship with visibility, leadership, pleasure, and personal authority. Sacral Chakra associations bring creative movement and wholehearted engagement, while the Solar Plexus adds resolve and self-direction. Joy here is not passive cheerfulness. It is the willingness to participate, choose, initiate, and take up appropriate space without waiting for perfect certainty or external permission.
 
-Sunstone is the stone of vitality, confidence, and independent action. Its tradition encourages a warmer relationship with visibility, leadership, pleasure, and personal authority. Sacral Chakra associations bring creative movement and engagement, while the Solar Plexus adds resolve and self-direction. Joy here is not passive cheerfulness. It is the willingness to participate, choose, initiate, and take up appropriate space without waiting for perfect certainty or external permission.
+A feldspar variety whose reflective aventurescence comes from oriented inclusions such as Hematite, Ilmenite, or native Copper, Sunstone may occur in several feldspar hosts, including Oligoclase and Labradorite. No single formula or crystal system therefore describes every specimen. Oregon Sunstone is commonly copper-bearing Labradorite and may show red, green, peach, or bicolored zones. Most ordinary material is untreated, but diffusion-treated feldspar, irradiation-related color modification, fracture filling, and manufactured Goldstone require careful identification and disclosure.
 
 ---
 
