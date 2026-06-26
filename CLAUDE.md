@@ -20,13 +20,29 @@ These five files are the authoritative sources for all encyclopedia production. 
 - `citrine.html` controls approved visual implementation
 - The canonical template controls reusable DOM/CSS structure
 - The editorial schema controls fields and counts
-- Production data (workbook/CSV) controls locked stone-specific values
+- Production data and Supabase `enc_` tables control locked stone-specific values
 - Approved research controls factual and metaphysical claims
 - Older stone MD or HTML files do not override these canonical documents where they conflict
 
+## Supabase Table Naming Convention
+All encyclopedia content tables use the `enc_` prefix.
+
+| Table | Purpose |
+|---|---|
+| `enc_stone_content` | Flat editorial fields per stone |
+| `enc_themes` | Repeating theme rows |
+| `enc_collector_notes` | Repeating collector note rows |
+| `enc_mineral_facts` | Mineral fact table rows |
+| `enc_localities` | Locality list rows |
+| `enc_related_stones` | Related stone pairings |
+| `enc_care` | Care & Cleansing rows |
+| `enc_reach_for` | Why People Reach For It rows |
+
+All `enc_` tables reference `stones.id` as a foreign key. Do not modify the `stones` table or any other existing table.
+
 ## Task-Specific Reference Files
-- Navigation: `docs/encyclopedia/Stones Catalog with Previous - Next Slugs.csv`
-- Random navigation: `stones/enc-nav.js`
+- Navigation: sourced from `enc_stone_content` (`nav_prev_slug`, `nav_prev_name`, `nav_next_slug`, `nav_next_name`)
+- Random navigation: `stones/enc-nav.js` — retained for the 10 existing static pages only
 
 ## Production Workflow — Gates 0–7
 
@@ -58,34 +74,35 @@ All scaled encyclopedia production follows this gate sequence. Do not skip or re
 **Gate 3 — MD Review and Approval**
 
 - Dustin or Christie reviews and explicitly approves canonical MD.
-- No HTML generation may begin before approval.
+- No Supabase data entry may begin before approval.
 
-**Gate 4 — Scripted HTML Generation and Technical Validation**
+**Gate 4 — Supabase Data Entry and Verification**
 
-- Claude Code performs repository execution only.
-- HTML generation uses the approved MD, locked production data, and canonical template.
-- The canonical generator must be used once it exists and has been validated.
-- Manual construction or patching of individual stone HTML is not the intended scaled workflow.
-- Claude Code must report if the canonical generator is missing, incomplete, or unable to process the approved inputs.
-- Claude Code makes no independent content decisions during generation.
+- Claude Code enters approved content into the `enc_` Supabase tables.
+- Source is the approved canonical MD only — do not invent, infer, or substitute values.
+- Every field must map to its exact column as specified in the MD.
+- After entry, verify every field is populated correctly by querying the relevant tables.
+- Confirm the dynamic page renders without missing data or structural errors.
+- Report any field that could not be mapped or populated.
+- Claude Code makes no independent content decisions during data entry.
 
 **Gate 5 — Visual and Editorial QA**
 
-- Dustin or Christie performs final visual and editorial QA.
+- Dustin or Christie performs final visual and editorial QA against the live dynamic page.
 - Lyra or Claude Chat may assist with implementation and content review.
 
-**Gate 6 — Controlled Correction and Regeneration**
+**Gate 6 — Controlled Correction**
 
-- Corrections must be made in the authoritative source: canonical MD, locked production data, generator, or template.
-- Regenerate HTML after correction.
-- Public MD and HTML must match before publication.
+- Corrections must be made in both the canonical MD and Supabase together in one controlled pass.
+- The canonical MD and Supabase must always match after any correction.
+- Do not update Supabase without also updating the canonical MD, and vice versa.
 
 **Gate 7 — Publication**
 
-- Publish the approved HTML.
-- Verify the live page.
-- Add the slug to `stones/enc-nav.js` only after the page is approved and publish-ready.
-- Update production status and close the gate.
+- Set `published = true` in `enc_stone_content` for the approved stone.
+- Verify the live dynamic page is rendering correctly.
+- Update production status to PUBLISHED and close the gate.
+- Do not update `enc-nav.js` — navigation is handled by the dynamic template via Supabase.
 
 ## Production Status Values
 
@@ -93,7 +110,7 @@ All scaled encyclopedia production follows this gate sequence. Do not skip or re
 RESEARCH COMPLETE
 MD DRAFT COMPLETE
 GATE 0 NORMALIZATION PENDING
-APPROVED FOR HTML
+APPROVED FOR SUPABASE ENTRY
 PUBLISHED
 ```
 
@@ -118,7 +135,7 @@ Only one assistant should own a cohort or stone's editorial cycle at a time.
 
 **Claude Code**
 - Repository inspection
-- Approved file writes
+- Supabase data entry and verification
 - Scripts and generation
 - Technical validation
 - Commits and deployment when explicitly instructed
@@ -150,28 +167,41 @@ Non-standard materials must be flagged before drafting, including:
 
 Do not force these entries through true-mineral assumptions.
 
-## HTML Generation
+## Supabase Data Entry
 
-Scaled HTML production is intended to be script-driven using a canonical generator.
+All encyclopedia content is entered into the `enc_` tables after Gate 3 approval.
 
-Before generating HTML, Claude Code must confirm whether the canonical generator exists and is production-ready. When it exists, Claude Code runs it using: (1) approved canonical MD, (2) locked production data, and (3) the canonical template.
+Before entering data, Claude Code must:
+1. Confirm the approved canonical MD is the source being used
+2. Confirm all `enc_` tables exist and are accessible
+3. Map every MD field to its exact Supabase column before writing any data
+4. Report any field that cannot be cleanly mapped before proceeding
 
-If no validated generator exists, report that as a prerequisite gap. Do not silently substitute manual HTML production as the permanent workflow.
+During entry:
+- Enter data exactly as written in the approved MD
+- Do not paraphrase, trim, or reformat content
+- Do not make content decisions
+- Populate `published = false` on initial entry — publication is a Gate 7 action
+
+After entry:
+- Query each table to verify all rows are present and correctly populated
+- Report exact tables and row counts written
+- Flag any missing or malformed values
 
 ## Standing Rules
 - Never infer, fabricate, or silently substitute missing values.
 - Stop and ask when required data is unavailable, unclear, or contradictory.
 - Preserve approved public copy unless Christie explicitly authorizes a rewrite.
-- Do not change existing HTML layout, styling, classes, spacing, or order.
+- Do not modify existing tables, columns, or data outside the `enc_` tables.
 - Use only sources allowed by `APPROVED-SOURCE-HIERARCHY.md`.
-- Read the navigation CSV before assigning previous or next values.
-- Never infer navigation order from memory or alphabetical sorting.
+- Never infer navigation order from memory or alphabetical sorting — use `nav_prev_slug` and `nav_next_slug` from the approved MD.
 - Use the canonical Supabase encyclopedia image URL based on the stone slug.
 - Do not claim PASS unless every required check was actually completed.
-- Report exact files changed and exact fields added or modified.
+- Report exact tables changed and exact fields added or modified.
+- The canonical MD and Supabase must always match. Never update one without the other.
 
 ## Session Preflight
-Before any encyclopedia MD or HTML work:
+Before any encyclopedia work:
 1. Confirm these instructions are loaded.
 2. State the exact task.
 3. Confirm all five canonical documents have been consulted:
