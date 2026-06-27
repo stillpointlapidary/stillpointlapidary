@@ -1,6 +1,6 @@
 # DATABASE-SCHEMA.md
 # Still Point Lapidary — Supabase Database Schema Reference
-# Version: 2026-06-26 | Status: CANONICAL
+# Version: 2026-06-27 | Status: CANONICAL
 
 This document maps every table and column in the Still Point Lapidary Supabase database.
 Use this as the authoritative reference before writing any SQL query or data entry instruction.
@@ -50,9 +50,11 @@ The primary content table. One row per stone. The dynamic template (`stone.html`
 | `overview_p1` | text | Overview paragraph 1 — metaphysical identity. Who the stone is, what tradition says, what it is for. Leads with stone name and defining role. |
 | `overview_p2` | text | Overview paragraph 2 — mineral and physical identity. Composition, formation, appearance, treatments, trade names. |
 | `formation` | text | Formation paragraph. Geological context only. See Formation Rule below. |
-| `collector_context_p1` | text | Mineral Profile collector context paragraph 1 — quality and value indicators |
-| `collector_context_p2` | text | Mineral Profile collector context paragraph 2 — identification and confusion |
-| `collector_context_p3` | text | Mineral Profile collector context paragraph 3 — market availability and pricing |
+| `collector_context_p1` | text | Collector's Guide M1 — quality and value indicators |
+| `collector_context_p2` | text | Collector's Guide M2 — identification and confusion stones |
+| `collector_context_p3` | text | Collector's Guide M3 — market availability and pricing |
+| `collector_context_p4` | text | Collector's Guide M4 — locality variations. Nullable. Omit when not meaningful. |
+| `collector_context_p5` | text | Collector's Guide M5 — physical handling notes. Nullable. Omit when not compelling. |
 | `chakra_primary` | text | Primary chakra |
 | `chakra_secondary` | text | Secondary chakra(s), or null if none |
 | `element` | text | Classical element |
@@ -85,7 +87,7 @@ The 8-row mineral facts table displayed in the Mineral Profile section. One row 
 | `display_order` | integer | Controls render order. 1–8. |
 | `created_at` | timestamptz | Auto-set on insert |
 
-**Standard default labels (in order):** Mineral Family · Chemical Formula · Crystal System · Mohs Hardness · Cleavage · Fracture · Luster · Transparency. Labels are adaptable for non-minerals — see `enc-editorial-schema.md`.
+**Standard default labels (in order):** Mineral Family · Chemical Formula · Crystal System · Mohs Hardness · Cleavage · Specific Gravity · Luster · Transparency. Labels are adaptable for non-minerals — see `enc-editorial-schema.md`.
 
 **RLS Policy:** Open anon SELECT.
 
@@ -222,7 +224,7 @@ The child table policies are safe because the browser can only reach them after 
 
 - Cover: how the stone forms, geological environment, color origin, crystal habits, relevant physical context.
 - Do not include: treatment disclosures, market authenticity warnings, imitation or fraud notes.
-- Treatment and authenticity information belongs in `collector_context_p1`, `collector_context_p2`, or `collector_context_p3`, or in `enc_collector_notes`.
+- Treatment and authenticity information belongs in Collector's Guide M2 (`collector_context_p2`) or `enc_collector_notes`.
 
 This rule applies to the `formation` column in `enc_stone_content` and to the Formation paragraph in every canonical MD.
 

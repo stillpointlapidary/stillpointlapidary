@@ -194,7 +194,7 @@
 /* Collection label */
 .collection-label {
   font-family: 'Jost', sans-serif;
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 500;
@@ -234,14 +234,15 @@
 .theme-pill {
   background: var(--ck-wash);
   border: 0.5px solid var(--ck-wash-border);
-  border-radius: 999px;
+  border-radius: 20px;
   padding: 7px 15px;
   font-family: 'Jost', sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--ck-accent);
   line-height: 1;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 /* Hero content sections: 3 equal-width tiles in one horizontal row (§2.5, locked 2026-06-19) */
@@ -330,9 +331,9 @@
 }
 .panel-title {
   font-family: Georgia, serif;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0 0 16px;
   display: flex;
@@ -471,9 +472,9 @@
 }
 .enc-card h2 {
   font-family: Georgia, serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0 0 16px;
   padding-bottom: 12px;
@@ -485,7 +486,7 @@
 .enc-card h2 .enc-icon { width: 19px; height: 19px; color: var(--ck-accent); flex-shrink: 0; }
 .enc-card p {
   font-size: 15px;
-  line-height: 1.78;
+  line-height: 1.7;
   color: var(--ink2);
   margin: 0 0 14px;
 }
@@ -505,14 +506,14 @@
 .reach-row:first-child { padding-top: 0; }
 .reach-label {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
   color: var(--ink);
   padding-top: 3px;
 }
-.reach-desc { font-size: 14px; color: var(--ink2); line-height: 1.68; }
+.reach-desc { font-size: 15px; color: var(--ink2); line-height: 1.7; }
 
 /* Mineral Profile */
 .mineral-layout {
@@ -528,14 +529,14 @@
   gap: 8px;
   padding: 7px 0;
   border-bottom: 0.5px solid var(--border2);
-  font-size: 14px;
+  font-size: 13px;
 }
 .mineral-fact:last-of-type { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
 .mineral-note {
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--ink2);
   margin-top: 20px;
 }
@@ -546,15 +547,15 @@
 }
 .mineral-formation h4 {
   font-family: 'Jost', sans-serif;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ink);
+  font-weight: 500;
+  color: var(--ink3);
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
-.mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 12px; }
+.mineral-formation p { font-size: 15px; color: var(--ink2); line-height: 1.7; margin: 0 0 12px; }
 
 /* Common Localities — canonical two-column desktop layout */
 .mineral-formation .common-localities {
@@ -582,10 +583,10 @@
 }
 .rel-card-head {
   font-family: 'Jost', sans-serif;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink3);
   margin-bottom: 10px;
 }
@@ -617,17 +618,17 @@
 
 .stone-link-row b {
   display: block;
-  font-family: Georgia, serif;
-  font-size: 17px;
-  font-weight: 400;
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--ink);
   margin-bottom: 10px;
 }
 .stone-reason {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink2);
-  line-height: 1.42;
+  line-height: 1.7;
 }
 
 /* ── RIGHT RAIL CARDS ── */
@@ -646,9 +647,9 @@
 }
 .rail-card h2 {
   font-family: Georgia, serif;
-  font-size: 19px;
+  font-size: 22px;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0 0 14px;
   padding-bottom: 10px;
@@ -672,16 +673,16 @@
 .theme-tier-label:first-child { margin-top: 0; }
 .theme-row {
   display: grid;
-  grid-template-columns: 40px 1fr;
+  grid-template-columns: 36px 1fr;
   gap: 10px;
   align-items: start;
 }
 .theme-row + .theme-row { margin-top: 16px; }
 .theme-icon-tile {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
-  background: var(--ck-wash);
+  background: color-mix(in srgb, var(--ck-wash) 70%, transparent);
   border: 0.5px solid var(--ck-wash-border);
   display: grid;
   place-items: center;
@@ -690,14 +691,14 @@
 }
 .theme-icon-tile .enc-icon { width: 21px; height: 21px; color: var(--ck-accent); }
 .theme-row h3 {
-  font-family: Georgia, serif;
-  font-size: 17px;
-  font-weight: 400;
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
   margin: 0 0 2px;
   color: var(--ink);
   line-height: 1.1;
 }
-.theme-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.58; }
+.theme-row p { font-size: 15px; color: var(--ink2); margin: 0; line-height: 1.7; }
 .theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 14px 0 0; }
 .occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .occ-tag {
@@ -718,7 +719,7 @@
 }
 .note-row {
   display: grid;
-  grid-template-columns: 34px 1fr;
+  grid-template-columns: 30px 1fr;
   gap: 10px;
   background: var(--stone);
   border: 0.5px solid var(--border);
@@ -727,10 +728,10 @@
   align-items: start;
 }
 .note-icon {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border-radius: 8px;
-  background: var(--ck-wash);
+  background: color-mix(in srgb, var(--ck-wash) 70%, transparent);
   border: 0.5px solid var(--ck-wash-border);
   display: grid;
   place-items: center;
@@ -740,14 +741,14 @@
 .note-row strong {
   display: block;
   font-family: 'Jost', sans-serif;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
 }
-.note-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.62; }
+.note-row p { font-size: 15px; color: var(--ink2); margin: 0; line-height: 1.7; }
 
 /* ── ENTRY NAV ── */
 .entry-nav-wrap {

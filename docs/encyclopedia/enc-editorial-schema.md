@@ -1,6 +1,6 @@
 # enc-editorial-schema.md
 # Still Point Lapidary — Encyclopedia Editorial Schema
-# Version: 2026-06-22 | Aligned to CANONICAL-STONE-PAGE-TEMPLATE.html
+# Version: 2026-06-27 | Aligned to CANONICAL-STONE-PAGE-TEMPLATE.html
 
 This document defines the content rules, field counts, and editorial constraints for every
 encyclopedia stone page. All rules here must match the canonical HTML template exactly.
@@ -104,7 +104,7 @@ Exactly eight rows. The label and value in each row are adaptable per entry.
 3. Crystal System
 4. Mohs Hardness
 5. Cleavage
-6. Fracture
+6. Specific Gravity
 7. Luster
 8. Transparency
 
@@ -125,9 +125,16 @@ The rendered structure, classes, order, styling, and number of rows remain fixed
 
 ### Formation
 
-One paragraph. Covers how the stone forms, color origin, geological environment, and crystal habits.
+Two to three sentences maximum. Tells a quick, vivid geological story — not a list of environments.
 
-**Formation describes geology only. Do not include treatment disclosures, authenticity warnings, or imitation notes.** Treatment and market authenticity information belongs in the Collector Context paragraphs or Collector & Curiosity Notes. Do not end a Formation paragraph with a treatment sentence even when the transition feels natural.
+**Formula:**
+1. Open with the most interesting or specific geological fact about how and where this stone forms. Do not open with "X forms in many environments."
+2. Explain the color or appearance origin if there is a compelling story in the chemistry or structure.
+3. Optional third sentence only if the crystal habit or physical form is genuinely interesting.
+
+**Voice:** Specific and a little delighted. Smart friend who just came back from a geology field trip. Not a textbook entry. Not a list.
+
+**Formation describes geology only. Do not include treatment disclosures, authenticity warnings, or imitation notes.** Treatment and market authenticity information belongs in the Collector's Guide paragraphs. Do not end a Formation paragraph with a treatment sentence even when the transition feels natural.
 
 ### Common Localities
 
@@ -141,13 +148,23 @@ Include only the most commercially important, historically significant, or colle
 - Do not pad the list.
 - Do not list every country where the mineral has ever been reported.
 
-### Collector-Context Paragraphs
+### Collector's Guide Paragraphs (M1–M5)
 
-Exactly 3 paragraphs below the mineral layout (`mineral-note` class):
+Five paragraphs below the mineral layout, rendered as flowing prose under a single COLLECTOR'S GUIDE sub-label. No individual sub-labels for M4 or M5. All five continue as one unbroken prose section.
 
-1. What to look for / quality and value indicators.
-2. Identification / potential confusion with other stones.
-3. Market availability and pricing context.
+M4 and M5 are optional — render only when content exists. M1, M2, and M3 are always required.
+
+| Paragraph | Job |
+|---|---|
+| M1 | Quality and value indicators. What makes a great specimen versus a mediocre one. Color, clarity, optical effect, crystal habit, origin — whatever is genuinely relevant to this stone. |
+| M2 | Identity and confusion. What this stone gets mistaken for. Lookalikes, known imitations, treatments, misrepresentations. How to spot the difference. |
+| M3 | Market and access. Availability, price range, what drives value up, what to expect when shopping. |
+| M4 | Locality variations. Optional. Only include when meaningful differences exist between sources — color, quality, crystal habit, or collector reputation. Do not pad. |
+| M5 | Physical handling. Weight, feel, surface texture, tactile experience. Useful for online shoppers who cannot hold the stone. Only include when there is something genuinely worth saying. |
+
+**Voice for all M paragraphs:** Knowledgeable friend at the shop. Direct, a little opinionated, honest. Not a warning label. Not a product description.
+
+**Supabase columns:** `collector_context_p1` (M1) · `collector_context_p2` (M2) · `collector_context_p3` (M3) · `collector_context_p4` (M4, nullable) · `collector_context_p5` (M5, nullable)
 
 ---
 
