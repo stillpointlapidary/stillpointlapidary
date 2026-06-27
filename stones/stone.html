@@ -178,6 +178,7 @@
   overflow: hidden;
   display: block;
   width: 100%;
+  border: 1px solid rgba(42,37,32,0.12);
 }
 
 /* Hero right column */
@@ -480,6 +481,7 @@
   margin: 0 0 14px;
 }
 .enc-card p:last-child { margin-bottom: 0; }
+#overview p { max-width: 680px; }
 
 .reach-rows { display: grid; gap: 0; }
 .reach-row {
@@ -677,15 +679,23 @@
   flex-shrink: 0;
 }
 .theme-icon-tile .enc-icon { width: 21px; height: 21px; color: var(--ck-accent); }
+/* FONT UPDATE v1 — revert candidates */
+/* .theme-row h3: was 17px */
+/* .theme-row p: was 14px */
+/* .note-row strong: was 11.5px / uppercase */
+/* .note-row p: was 14px */
+/* .hero-section-label: was 10.5px (changed to 12px in prior pass) */
+/* .hero-section-body: was 13.5px (changed to 15px in prior pass) */
+/* .glance-label: was 11px (changed to 12px in prior pass) */
 .theme-row h3 {
   font-family: Georgia, serif;
-  font-size: 17px;
+  font-size: 16px; /* was 17px */
   font-weight: 400;
   margin: 0 0 2px;
   color: var(--ink);
   line-height: 1.1;
 }
-.theme-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.58; }
+.theme-row p { font-size: 15px; color: var(--ink2); margin: 0; line-height: 1.58; } /* was 14px */
 .theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 14px 0 0; }
 .occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .occ-tag {
@@ -727,14 +737,14 @@
 .note-row strong {
   display: block;
   font-family: 'Jost', sans-serif;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
+  font-size: 14px; /* was 11.5px / uppercase */
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
 }
-.note-row p { font-size: 14px; color: var(--ink2); margin: 0; line-height: 1.62; }
+.note-row p { font-size: 15px; color: var(--ink2); margin: 0; line-height: 1.62; } /* was 14px */
 
 /* ── ENTRY NAV ── */
 .entry-nav-wrap {
