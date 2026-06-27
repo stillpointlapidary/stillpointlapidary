@@ -214,20 +214,23 @@ Planet values may be locked by Lyra without separate Christie approval when the 
 
 - Exactly two paragraphs
 - No heading beyond the section label `Overview`
+- **Order is locked: metaphysical first (P1), mineral second (P2). Do not revert under any circumstances.**
 
-### Paragraph 1 — Physical and Mineralogical Identity
+### Paragraph 1 — Metaphysical Identity
+Cover:
+- Principal traditional associations
+- How the main themes fit together
+- Relevant nuance or common misconceptions
+- Treatment or naming implications when they affect metaphysical understanding
+
+### Paragraph 2 — Physical and Mineralogical Identity
 Cover, as relevant to the stone:
 - What the material actually is (mineral, rock, mineraloid, variety, trade name, composite, synthetic, or organic)
 - Appearance, color, and formation
 - Treatments, trade-name issues, or authenticity distinctions
 - The most important distinguishing physical facts
 
-### Paragraph 2 — Metaphysical Identity
-Cover:
-- Principal traditional associations
-- How the main themes fit together
-- Relevant nuance or common misconceptions
-- Treatment or naming implications when they affect metaphysical understanding
+**P2 rule:** Must not open with the stone name. Open with a descriptive noun phrase (e.g., "A sodium-rich aluminosilicate mineral best known for..." not "Sodalite is a sodium-rich...").
 
 ### Overview Rules
 - Supports the Signature Line; does not repeat it verbatim
@@ -272,10 +275,10 @@ Cover:
 
 ## 7. Mineral Profile
 
-- One focused formation paragraph covering geological context, crystal system, chemical composition, and physical properties
-- One focused lower note covering care, treatments, and any additional mineralogical detail not covered above
+- Formation: 2–3 sentences covering geological environment, crystal system, chemical composition, and color origin. **Geology only — no treatment disclosures, authenticity warnings, or imitation notes in Formation.**
+- Collector's Guide: M1 (quality), M2 (identification), M3 (market) always required; M4 (locality variations) and M5 (physical handling) optional — include only when content earns its place. Treatment disclosures and authenticity warnings belong in M2, not in Formation.
 - Major localities listed (bulleted list is acceptable here)
-- Mohs hardness, cleavage, and fracture included
+- Standard facts table: Mineral Family · Chemical Formula · Crystal System · Mohs Hardness · Cleavage · **Specific Gravity** · Luster · Transparency (labels adaptable for non-minerals — see `enc-editorial-schema.md`)
 - Piezoelectricity or other relevant physical properties included when they apply
 - **Mineral facts must not be repeated across Mineral Profile and Overview** unless the angle is genuinely different
 - Technical framing: physical properties are presented as physical properties, not as proof of metaphysical claims
@@ -284,7 +287,7 @@ Cover:
 
 ## 8. Collector & Curiosity Notes
 
-- Exactly 4 notes
+- **3 or 4 notes.** Publish 4 when all four are distinct and strong. Publish 3 when the fourth note is weak, repetitive, or creates poor balance — remove the fourth `.note-row` block cleanly. Fewer than 3 strong notes must not be published; return to research.
 - Each note has a short heading and a body paragraph
 - Notes cover distinct topics — no two notes on the same subject
 - **Word limit: up to 55 words per note**
@@ -725,6 +728,9 @@ This contract follows the three-state sequence defined in §0: DRAFT → PROVISI
 | 2026-06-22 | Christie delegates routine planetary assignment to Lyra under defined criteria. Lyra must flag Christie when sources conflict, support is weak, multiple values are equally defensible, an existing locked value would change, or the assignment has catalog-wide implications. Christie retains final authority. | §3.3, §3.4, §16 Gate 1 | Christie |
 | 2026-06-22 | Aligned §6 and §16 Gate 2 theme counts to schema evidence-based ranges: Primary 1–2 (at least 1 required), Secondary 0–2. Contract previously hard-coded exactly 2 Primary and exactly 2 Secondary. Schema controls field counts; contract now matches. | §6, §16 | Christie |
 | 2026-06-22 | Removed word-count floors from all prose fields. Only ceilings remain. Affected: Collector Notes (≤55 words), Why People Reach For It rows (≤30 words), Hero Best For (≤20 words), Hero Use When (≤25 words), Overview (≤~120 words per paragraph). Rationale: natural brevity is preferable to padded copy. | §2.5, §4, §5, §8, §13 | Christie |
+| 2026-06-27 | Corrected §4 Overview paragraph order. P1 is now Metaphysical Identity; P2 is Physical and Mineralogical Identity. Added locked-order rule and P2 must-not-open-with-stone-name rule. Prior §4 had the paragraphs in reverse order (physical first, metaphysical second), which contradicted `enc-editorial-schema.md` and `EDITORIAL-RESEARCH-STANDARDS.md`. | §4 | Christie |
+| 2026-06-27 | Updated §7 Mineral Profile: Formation is now 2–3 sentences, geology only (no treatment or authenticity content). Collector's Guide updated to M1–M5 model with M4 and M5 optional. Standard facts table now uses Specific Gravity in position 6 (was Fracture). Treatment disclosures and authenticity warnings locked to M2. | §7 | Christie |
+| 2026-06-27 | Corrected §8 Collector & Curiosity Notes count from "Exactly 4" to "3 or 4." Publish 4 when all four are strong; publish 3 when the fourth is weak or repetitive. Aligned to `enc-editorial-schema.md` which already specified 3 or 4. | §8 | Christie |
 | 2026-06-19 | Hero photo fit and frame confinement. Stone photo `object-fit` changed from provisional `contain` to locked `cover`, approved by Christie after visual review of the Citrine pilot (matches established treatment on prior pages like Clear Quartz). `object-position` defaults to `center`, overridable per-stone via `--stone-photo-position` (e.g., `#hero .stone-photo-wrap { --stone-photo-position: center 30%; }`) without editing this file or the canonical template. Concurrently fixed: the global `styles.css` rule (line 1821: `.enc-hero { position: relative; overflow: hidden; }`) was causing the stone photo to bleed outside `.stone-photo-wrap` into the Hero content area when the stone page reset `.enc-hero` to `position: static; overflow: visible` — removing the containment context `.stone-photo-wrap` was implicitly relying on. Resolved with a scoped reset confined to `.enc-hero .stone-photo-wrap`: added `position: relative; isolation: isolate; overflow: hidden` on the wrapper; added `position: static; inset: auto; transform: none; max-width: none` on the img; added `position: relative; z-index: 1` on `.hero-right`. | §2, photo frame | Christie |
 
 ---

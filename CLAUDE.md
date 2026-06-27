@@ -29,7 +29,7 @@ All encyclopedia content tables use the `enc_` prefix.
 
 | Table | Purpose |
 |---|---|
-| `enc_stone_content` | Flat editorial fields per stone |
+| `enc_stone_content` | Flat editorial fields per stone. Includes `collector_context_p1`–`p3` (always required) and `collector_context_p4`–`p5` (nullable, M4/M5 — omit INSERT when not used) |
 | `enc_themes` | Repeating theme rows |
 | `enc_collector_notes` | Repeating collector note rows |
 | `enc_mineral_facts` | Mineral fact table rows |
@@ -182,6 +182,7 @@ During entry:
 - Do not paraphrase, trim, or reformat content
 - Do not make content decisions
 - Populate `published = false` on initial entry — publication is a Gate 7 action
+- For `collector_context_p4` and `collector_context_p5`: only INSERT when the approved MD includes M4 or M5 content. If absent from the MD, omit the column from the INSERT statement entirely (do not insert NULL explicitly).
 
 After entry:
 - Query each table to verify all rows are present and correctly populated
@@ -199,6 +200,8 @@ After entry:
 - Do not claim PASS unless every required check was actually completed.
 - Report exact tables changed and exact fields added or modified.
 - The canonical MD and Supabase must always match. Never update one without the other.
+- Formation describes geology only. Do not include treatment disclosures, authenticity warnings, or imitation notes in the `formation` field. That content belongs in M2 (`collector_context_p2`) or `enc_collector_notes`.
+- The standard mineral facts label in position 6 is Specific Gravity, not Fracture.
 
 ## Session Preflight
 Before any encyclopedia work:

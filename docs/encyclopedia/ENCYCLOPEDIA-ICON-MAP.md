@@ -13,7 +13,7 @@
 | Overview | `book-reference` |
 | Why People Reach For It | `target-bullseye` |
 | Mineral Profile | `geology` |
-| Related Stones | `stones-row` |
+| Related Stones | `three-gems-arranged` |
 | Known For | `star` |
 | Energetic Themes | `upward-spark` |
 | Collector & Curiosity Notes | `bookmark` |

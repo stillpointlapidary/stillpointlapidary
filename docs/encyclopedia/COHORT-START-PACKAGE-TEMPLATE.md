@@ -110,7 +110,7 @@ Record the version of each canonical document in use for this cohort.
 | `CANONICAL-STONE-PAGE-TEMPLATE.html` | |
 | `enc-editorial-schema.md` | |
 | `enc-architecture-contract.md` | |
-| `EDITORIAL-RESEARCH-STANDARDS.md` | v1.0 / 2026-06-22 |
+| `EDITORIAL-RESEARCH-STANDARDS.md` | v2.0 / 2026-06-27 |
 | `APPROVED-SOURCE-HIERARCHY.md` | 2026-06-20-canonical |
 | Generator (`generate-stone-page.js`) | |
 | Production CSV | |

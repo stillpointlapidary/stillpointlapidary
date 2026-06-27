@@ -11,7 +11,7 @@
 - Prefer: `associated with`, `traditionally used`, `often chosen`, `commonly linked`.
 - Do not present metaphysical claims as measured scientific mechanisms.
 - Do not name sources in public copy.
-- Do not use `magic`, guru language, promotional superlatives, or em dashes.
+- Do not use `magic`, guru language, promotional superlatives, or em dashes anywhere in public copy, including examples, reasons, and comparison notes.
 - The goal on every page: reader finishes and wants to read the next stone.
 
 ---
@@ -155,6 +155,7 @@ Five paragraphs rendered as flowing prose under a single COLLECTOR'S GUIDE label
 **M1 — Quality Indicators**
 **Job:** Help the reader buy well. What separates an exceptional specimen from a mediocre one? Name the things that actually matter — color, clarity, optical effect, cut, origin, size, crystal habit, whatever is genuinely relevant to this stone.
 **Voice:** Knowledgeable friend at the shop. Direct, a little opinionated. "What you want is..." energy.
+**Rule:** When a stone comes in meaningfully distinct forms where quality criteria differ by form, open M1 by naming that complexity first. Give the reader orientation before criteria. They should understand the frame before they get the checklist.
 
 **M2 — Identification and Confusion Stones**
 **Job:** Help the reader not get fooled. What does this stone get mistaken for? What are the telltale differences? What are the known imitations, treatments, or misrepresentations in the market?
@@ -218,9 +219,9 @@ Five paragraphs rendered as flowing prose under a single COLLECTOR'S GUIDE label
 
 **Job:** Tell the reader what this stone is missing and how the pairing fills it. Answer the question: "Why would I use both?"
 **Voice:** Practical and specific. Names the gap and the complement.
-**Formula:** What this stone does + what it lacks + what the pairing adds.
-**Rule:** Never just list qualities the paired stone has. Always explain the relationship.
-**Example:** "Moonstone is receptive and inward. Rose Quartz brings warmth and relational energy outward — intuition paired with compassion."
+**Formula:** What this stone does + what the pairing adds.
+**Rule:** Explain why the pairing is useful — what the paired stone brings that completes or extends the picture. Do not open with the primary stone's name. Do not force a contrast or gap framing when the relationship is additive rather than compensatory.
+**Example:** "Adds warmth and relational energy, useful when intuitive clarity needs a more outward, compassionate expression."
 
 ---
 
