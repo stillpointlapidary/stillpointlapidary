@@ -135,6 +135,7 @@ Energetic Themes rows. One row per theme per stone.
 | `title` | text | Theme heading |
 | `description` | text | Theme description paragraph. 3 visual lines max for primary/secondary. Null for occasional (pills only). |
 | `display_order` | integer | Controls render order within tier |
+| `icon_slug` | text | Icon class for the theme (e.g. icon-grounding). Nullable. Defaults to icon-upward-spark in the template. |
 | `created_at` | timestamptz | Auto-set on insert |
 
 **Counts:** 1–2 primary · 0–2 secondary · 0–2 occasional. See `enc-editorial-schema.md`.
