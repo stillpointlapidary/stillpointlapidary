@@ -165,26 +165,19 @@
 
 /* ── STONE PHOTO FRAME ── */
 .enc-hero .stone-photo-wrap {
-  border-radius: var(--enc-radius);
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(42,37,32,0.14);
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(42,37,32,0.35), 0 4px 12px rgba(42,37,32,0.2);
   aspect-ratio: 1 / 1;
-  background: var(--stone2);
   flex-shrink: 0;
-  position: relative;
-  isolation: isolate;
   align-self: start;
 }
 .enc-hero .stone-photo-wrap img {
-  position: static;
-  inset: auto;
-  transform: none;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: var(--stone-photo-position, center);
+  border-radius: 8px;
+  overflow: hidden;
   display: block;
+  width: 100%;
 }
 
 /* Hero right column */
@@ -266,7 +259,7 @@
   align-items: center;
   gap: 5px;
   font-family: 'Jost', sans-serif;
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   font-weight: 600;
@@ -277,7 +270,7 @@
 .hero-section-body {
   margin: 0;
   font-family: 'Jost', sans-serif;
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--ink);
   line-height: 1.58;
 }
@@ -366,7 +359,7 @@
 .glance-icon-tile .enc-icon { width: 22px; height: 22px; color: var(--ck-accent); }
 .glance-label {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.11em;
   font-weight: 600;
@@ -433,7 +426,7 @@
 }
 .care-cell-head {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 5px;
   padding-top: 1px;
 }
@@ -528,6 +521,20 @@
 .mineral-fact:last-of-type { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
+.mineral-guide-divider {
+  border: none;
+  border-top: 0.5px solid var(--border);
+  margin: 20px 0 16px;
+}
+.mineral-guide-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 600;
+  color: var(--ink3);
+  margin: 0 0 4px;
+}
 .mineral-note {
   font-size: 14px;
   line-height: 1.75;
@@ -552,10 +559,6 @@
 .mineral-formation p { font-size: 14px; color: var(--ink2); line-height: 1.68; margin: 0 0 12px; }
 
 .mineral-formation .common-localities {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 24px;
-  row-gap: 0;
   padding-left: 18px;
   margin: 0;
   margin-bottom: 16px;
@@ -1399,10 +1402,11 @@ function buildMineralProfile(facts, localities, c) {
 
   const localityItems = localities.map(l => `<li>${esc(l.locality)}</li>`).join('');
 
-  const notes = [c.collector_context_p1, c.collector_context_p2, c.collector_context_p3]
+  const noteParas = [c.collector_context_p1, c.collector_context_p2, c.collector_context_p3]
     .filter(Boolean)
     .map(p => `<p class="mineral-note">${esc(p)}</p>`)
     .join('');
+  const notes = noteParas ? `<hr class="mineral-guide-divider"><h4 class="mineral-guide-label">Collector's Guide</h4>${noteParas}` : '';
 
   return `
     <article class="enc-card" id="mineral">
