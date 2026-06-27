@@ -168,7 +168,8 @@
   background: #ffffff;
   padding: 10px;
   border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(42,37,32,0.35), 0 4px 12px rgba(42,37,32,0.2);
+  box-shadow: 0 4px 16px rgba(42,37,32,0.10);
+  border: 1px solid rgba(42,37,32,0.10);
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
   align-self: start;
@@ -498,7 +499,7 @@
 .reach-label {
   font-family: 'Jost', sans-serif;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
   color: var(--ink);
@@ -507,12 +508,21 @@
 .reach-desc { font-size: 15px; color: var(--ink2); line-height: 1.7; }
 
 .mineral-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mineral-facts {
   display: grid;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.mineral-geo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
   align-items: start;
 }
-.mineral-facts { display: grid; gap: 0; }
 .mineral-fact {
   display: grid;
   grid-template-columns: minmax(0,130px) minmax(0,1fr);
@@ -521,7 +531,7 @@
   border-bottom: 0.5px solid var(--border2);
   font-size: 13px;
 }
-.mineral-fact:last-of-type { border-bottom: 0; }
+.mineral-fact:nth-last-child(-n+2) { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
 .mineral-guide-divider {
@@ -691,7 +701,7 @@
 .theme-row h3 {
   font-family: 'Jost', sans-serif;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 0 2px;
   color: var(--ink);
   line-height: 1.1;
@@ -741,7 +751,7 @@
   font-size: 15px;
   letter-spacing: 0;
   text-transform: none;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
   margin-bottom: 4px;
 }
@@ -877,7 +887,7 @@
   #related  { order: 7; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
   .glance-item { border-right: 0; padding: 0 8px; }
-  .mineral-layout { grid-template-columns: 1fr; }
+  .mineral-geo { grid-template-columns: 1fr; }
   .related-grid { grid-template-columns: 1fr; }
 }
 
@@ -1191,8 +1201,8 @@ async function init() {
   document.getElementById('sidebar-stone-name').textContent = stoneName;
 
   /* 6. Group related stones */
-  const similar = related.filter(r => r.group === 'similar');
-  const pairs   = related.filter(r => r.group === 'pairs');
+  const similar = related.filter(r => r.group === 'similar_energy');
+  const pairs   = related.filter(r => r.group === 'pairs_well_with');
 
   /* 7. Build image URL — use Supabase storage pattern if image_url missing */
   const imageUrl = stone.image_url
@@ -1427,11 +1437,15 @@ function buildMineralProfile(facts, localities, c) {
       </h2>
       <div class="mineral-layout">
         <div class="mineral-facts">${factRows}</div>
-        <div class="mineral-formation">
-          <h4>Formation</h4>
-          <p>${esc(c.formation || '')}</p>
-          <h4>Common Localities</h4>
-          <ul class="common-localities">${localityItems}</ul>
+        <div class="mineral-geo">
+          <div class="mineral-formation">
+            <h4>Formation</h4>
+            <p>${esc(c.formation || '')}</p>
+          </div>
+          <div class="mineral-formation">
+            <h4>Common Localities</h4>
+            <ul class="common-localities">${localityItems}</ul>
+          </div>
         </div>
       </div>
       ${notes}

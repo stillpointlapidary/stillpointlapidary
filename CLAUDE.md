@@ -189,6 +189,15 @@ After entry:
 - Report exact tables and row counts written
 - Flag any missing or malformed values
 
+When verifying multiple enc_ tables in one pass, use a single UNION ALL query with a consistent four-column shape. Place ORDER BY once at the end only — never inside an individual SELECT block. Example structure:
+
+```sql
+SELECT 'table_name' AS tbl, col1, col2, col3 FROM enc_table WHERE stone_id = '[id]'
+UNION ALL
+SELECT 'table_name', col1, col2, col3 FROM enc_table WHERE stone_id = '[id]'
+ORDER BY tbl, col1;
+```
+
 ## Standing Rules
 - Never infer, fabricate, or silently substitute missing values.
 - Stop and ask when required data is unavailable, unclear, or contradictory.
@@ -202,6 +211,7 @@ After entry:
 - The canonical MD and Supabase must always match. Never update one without the other.
 - Formation describes geology only. Do not include treatment disclosures, authenticity warnings, or imitation notes in the `formation` field. That content belongs in M2 (`collector_context_p2`) or `enc_collector_notes`.
 - The standard mineral facts label in position 6 is Specific Gravity, not Fracture.
+- The `group` column in `enc_related_stones` is a reserved word in PostgreSQL. Always wrap it in double quotes: `"group"`. This applies to all INSERT, UPDATE, SELECT, and DELETE statements referencing that column.
 
 ## Session Preflight
 Before any encyclopedia work:
