@@ -573,8 +573,7 @@
   display: grid;
   grid-template-columns: minmax(0, 130px) minmax(0, 1fr);
   gap: 8px;
-  padding: 0;
-  margin: 0;
+  padding: 8px 0 0;
   font-size: 13.5px;
   line-height: 1.6;
 }
@@ -589,9 +588,14 @@
 .phase-divider {
   border: none;
   border-top: 0.5px solid var(--border2);
-  margin: 24px 0;
+  margin: 16px 0;
 }
-.mineral-facts { margin-bottom: 0; }
+
+/* ── MINERAL PROFILE — localities spacing (scoped) ── */
+.mineral-profile .mineral-facts { margin-bottom: 0; }
+.mineral-profile .facts-localities-divider { margin: 7px 0; }
+.mineral-profile .localities-row { margin: 0; padding: 7px 0; }
+.mineral-profile .localities-phase-divider { margin: 7px 0; }
 
 /* ── MINERAL PROFILE PHASE 2 SUBSECTIONS ── */
 .m-sub {
@@ -1555,12 +1559,12 @@ function buildMineralProfile(facts, localities, c) {
   /* Common Localities — dot-separated, full-width row */
   const localityVal = localities.slice(0, 8).map(l => esc(l.locality)).join(' · ');
   const localitiesRow = localityVal ? `
-    <hr class="phase-divider"/>
+    <hr class="phase-divider facts-localities-divider"/>
     <div class="localities-row">
       <span class="localities-lbl">Common Localities</span>
       <span class="localities-val">${localityVal}</span>
     </div>
-    <hr class="phase-divider"/>
+    <hr class="phase-divider localities-phase-divider"/>
   ` : '';
 
   /* Phase 2 subsections — Formation, Quality Indicators, Identification,
@@ -1584,7 +1588,7 @@ function buildMineralProfile(facts, localities, c) {
     `).join('');
 
   return `
-    <article class="enc-card" id="mineral">
+    <article class="enc-card mineral-profile" id="mineral">
       <h2>
         <span aria-hidden="true" class="enc-icon icon-geology"></span>
         Mineral Profile
