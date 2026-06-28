@@ -366,7 +366,7 @@
   text-transform: uppercase;
   letter-spacing: 0.11em;
   font-weight: 600;
-  color: var(--ink3);
+  color: var(--ink2);
   margin-bottom: 5px;
 }
 .glance-value {
@@ -517,12 +517,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 0;
 }
-.mineral-geo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-}
+.mineral-geo { display: flex; flex-direction: column; gap: 16px; }
 .mineral-fact {
   display: grid;
   grid-template-columns: minmax(0,130px) minmax(0,1fr);
@@ -559,24 +554,31 @@
   padding-top: 0;
   border-top: none;
 }
-.mineral-formation h4 {
+.mineral-formation h4,
+.mineral-localities h4 {
   font-family: 'Jost', sans-serif;
   font-size: 11px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  font-weight: 500;
-  color: var(--ink3);
+  font-weight: 600;
+  color: var(--ink2);
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
 .mineral-formation p { font-size: 15px; color: var(--ink2); line-height: 1.7; margin: 0 0 12px; }
 
-.mineral-formation .common-localities {
-  padding-left: 18px;
-  margin: 0;
-  margin-bottom: 16px;
+.common-localities { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding-left: 18px; margin: 0; }
+.common-localities li { font-size: 14px; color: var(--ink2); line-height: 1.72; }
+.mineral-note-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin: 20px 0 6px;
 }
-.mineral-formation .common-localities li { font-size: 14px; color: var(--ink2); line-height: 1.72; }
+.mineral-note-block:first-of-type .mineral-note-label { margin-top: 16px; }
 
 .related-grid {
   display: grid;
@@ -667,7 +669,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--ink3);
+  color: var(--ink2);
   margin: 16px 0 10px;
 }
 .theme-tier-label:first-child { margin-top: 0; }
@@ -707,7 +709,7 @@
   line-height: 1.1;
 }
 .theme-row p { font-size: 15px; color: var(--ink2); margin: 0; line-height: 1.7; }
-.theme-divider { border: none; border-top: 0.5px solid var(--border2); margin: 14px 0 0; }
+.theme-divider { border: none; border-top: 0.5px solid rgba(42,37,32,0.18); margin: 14px 0 0; }
 .occasional-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .occ-tag {
   font-family: 'Jost', sans-serif;
@@ -897,7 +899,7 @@
   .glance-grid { grid-template-columns: repeat(3, 1fr); }
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
-  .mineral-formation .common-localities { grid-template-columns: 1fr; }
+  .common-localities { grid-template-columns: 1fr; }
   .hero-sections { grid-template-columns: 1fr; }
   .hero-section { border-right: none; border-bottom: 0.5px solid var(--border2); }
   .hero-section:last-child { border-bottom: none; }
@@ -1423,9 +1425,11 @@ function buildMineralProfile(facts, localities, c) {
 
   const localityItems = localities.map(l => `<li>${esc(l.locality)}</li>`).join('');
 
-  const noteParas = [c.collector_context_p1, c.collector_context_p2, c.collector_context_p3, c.collector_context_p4, c.collector_context_p5]
+  const COLLECTOR_LABELS = ['Quality Indicators', 'Identification', 'Market & Pricing', 'Locality Variations', 'Physical Handling'];
+  const collectorFields = [c.collector_context_p1, c.collector_context_p2, c.collector_context_p3, c.collector_context_p4, c.collector_context_p5];
+  const noteParas = collectorFields
+    .map((p, i) => p ? `<div class="mineral-note-block"><h4 class="mineral-note-label">${COLLECTOR_LABELS[i]}</h4><p class="mineral-note">${esc(p)}</p></div>` : '')
     .filter(Boolean)
-    .map(p => `<p class="mineral-note">${esc(p)}</p>`)
     .join('');
   const notes = noteParas ? `<hr class="mineral-guide-divider"><h4 class="mineral-guide-label">Collector's Guide</h4>${noteParas}` : '';
 
@@ -1442,7 +1446,7 @@ function buildMineralProfile(facts, localities, c) {
             <h4>Formation</h4>
             <p>${esc(c.formation || '')}</p>
           </div>
-          <div class="mineral-formation">
+          <div class="mineral-localities">
             <h4>Common Localities</h4>
             <ul class="common-localities">${localityItems}</ul>
           </div>
