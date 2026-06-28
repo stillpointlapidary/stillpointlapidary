@@ -1476,7 +1476,7 @@ function buildMineralProfile(facts, localities, c) {
     .map((p, i) => p ? `<div class="mineral-note-block"><h4 class="mineral-note-label">${COLLECTOR_LABELS[i]}</h4><p class="mineral-note">${esc(p)}</p></div>` : '')
     .filter(Boolean)
     .join('');
-  const notes = noteParas ? `<hr class="mineral-guide-divider"><h4 class="mineral-guide-label">Collector's Guide</h4>${noteParas}` : '';
+  const notes = noteParas ? noteParas : '';
 
   return `
     <article class="enc-card" id="mineral">
