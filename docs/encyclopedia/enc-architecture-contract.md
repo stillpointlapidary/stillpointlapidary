@@ -1,6 +1,6 @@
 # Still Point Lapidary — Encyclopedia Architecture Contract
 
-**Version:** 2026-06-22-canonical  
+**Version:** 2026-06-28-canonical  
 **Status:** LOCKED — Citrine pilot approved and published 2026-06-20. All architectural rules are canonical and apply to all subsequent production.  
 **Post-lock amendment process:** All further amendments must follow §19 and include Christie's explicit approval. See amendment log in §19 for full history.  
 **Supersedes:** All prior architecture documents, including `GOLD-STANDARD-STONE-PAGE.html` and any file named `*_NEW_FORMAT.*`
@@ -15,7 +15,7 @@ This contract moves through three states. The current state is recorded above an
 2. **PROVISIONALLY APPROVED FOR CITRINE PILOT** — Christie approved this contract as the basis for building the Citrine pilot page. *(completed 2026-06-19)*
 3. **LOCKED** — Christie approved the rendered Citrine pilot 2026-06-20. The contract governs all subsequent production. Amendments follow §19. *(current state)*
 
-<!-- ARCHITECTURE VERSION: 2026-06-22-canonical | Status: LOCKED | Hero: 3 sections | AtaGlance: 6 boxes | Icon path: VERIFIED — Gate 3 CLOSED -->
+<!-- ARCHITECTURE VERSION: 2026-06-28-canonical | Status: LOCKED | Hero: 3 sections | AtaGlance: 6 boxes | Icon path: VERIFIED — Gate 3 CLOSED -->
 
 ---
 
@@ -682,6 +682,14 @@ The following files are deprecated and must not be used as architecture sources:
 
 ---
 
+## 19a. SVG Icon Library — Future Controlled Project
+
+> The current icon assignments are temporary pending a cohesive custom SVG library. The approved architecture for that future library: individual canonical SVG source files in the repository; consistent viewBox, stroke language, line weight, corner treatment, and sizing; `currentColor` stroke for chakra/accent color inheritance; stable semantic filenames; a build script compiles source files into a generated sprite for delivery; source files are the truth, the sprite is output. The library will cover all fixed section icons, all six At a Glance fields, all 12 Energetic Roles, Care & Cleansing categories, collection/wishlist actions, navigation, and recurring theme and collector note concepts. No icon should be designed ad hoc during ordinary stone production. When the library is ready, `icon-encyclopedia` on Material Type can be replaced centrally. Do not attempt to build the custom library during this pass.
+
+See `docs/design/SVG-ICON-LIBRARY-PLAN.md` for the full inventory and architecture plan.
+
+---
+
 ## 19. Version and Amendment Process
 
 This contract follows the three-state sequence defined in §0: DRAFT → PROVISIONALLY APPROVED FOR CITRINE PILOT → LOCKED.
@@ -732,6 +740,15 @@ This contract follows the three-state sequence defined in §0: DRAFT → PROVISI
 | 2026-06-27 | Updated §7 Mineral Profile: Formation is now 2–3 sentences, geology only (no treatment or authenticity content). Collector's Guide updated to M1–M5 model with M4 and M5 optional. Standard facts table now uses Specific Gravity in position 6 (was Fracture). Treatment disclosures and authenticity warnings locked to M2. | §7 | Christie |
 | 2026-06-27 | Corrected §8 Collector & Curiosity Notes count from "Exactly 4" to "3 or 4." Publish 4 when all four are strong; publish 3 when the fourth is weak or repetitive. Aligned to `enc-editorial-schema.md` which already specified 3 or 4. | §8 | Christie |
 | 2026-06-19 | Hero photo fit and frame confinement. Stone photo `object-fit` changed from provisional `contain` to locked `cover`, approved by Christie after visual review of the Citrine pilot (matches established treatment on prior pages like Clear Quartz). `object-position` defaults to `center`, overridable per-stone via `--stone-photo-position` (e.g., `#hero .stone-photo-wrap { --stone-photo-position: center 30%; }`) without editing this file or the canonical template. Concurrently fixed: the global `styles.css` rule (line 1821: `.enc-hero { position: relative; overflow: hidden; }`) was causing the stone photo to bleed outside `.stone-photo-wrap` into the Hero content area when the stone page reset `.enc-hero` to `position: static; overflow: visible` — removing the containment context `.stone-photo-wrap` was implicitly relying on. Resolved with a scoped reset confined to `.enc-hero .stone-photo-wrap`: added `position: relative; isolation: isolate; overflow: hidden` on the wrapper; added `position: static; inset: auto; transform: none; max-width: none` on the img; added `position: relative; z-index: 1` on `.hero-right`. | §2, photo frame | Christie |
+| 2026-06-28 | `object-fit: contain` supersedes the 2026-06-19 `object-fit: cover` approval. Hybrid photo container CSS is now canonical: `aspect-ratio: 1/1; background: #FAF7F2; border: 1px solid rgba(92,76,62,0.12); border-radius: 12px; box-shadow: 0 3px 12px rgba(42,37,32,0.045); overflow: hidden; padding: 0`. Image: `width: 100%; height: 100%; display: block; object-fit: contain; object-position: center`. No inner image border. No padding on the wrap. No double-frame. | §2, §11 | Christie |
+| 2026-06-28 | `font-weight: 600` prohibited throughout the encyclopedia design system. 500 is the maximum weight permitted. Affected: `.side-nav-label`, `.hero-section-label`, `.glance-label`, `.care-label`, `.mineral-formation h4`, `.mineral-localities h4`, `.mineral-note-label`, `.theme-tier-label`. | §2, §3, §7, §8a | Christie |
+| 2026-06-28 | Material Type replaces Planet as the sixth At a Glance field. Planet column preserved in Supabase but no longer displayed. Material Type static icon: `icon-encyclopedia` (temporary — see SVG Icon Library note below). Controlled vocabulary: Mineral · Mineral variety · Rock · Mineraloid · Organic material · Composite · Synthetic · Fossil · Trade name. New At a Glance field order: Energetic Role · Chakra · Element · Zodiac · Color Energy · Material Type. | §3, §12.2 | Christie |
+| 2026-06-28 | Market & Buying Notes is a standalone right-rail card, not part of Mineral Profile. Sourced from `collector_context_p3`. Rendered only if non-null. Right-rail section order locked: Energetic Themes · Collector & Curiosity Notes · Market & Buying Notes · Care & Cleansing. Mobile order updated accordingly. | §1.1, §7, §8 | Christie |
+| 2026-06-28 | Collector Notes render as divider-separated rows without individual card borders or backgrounds. `.note-row` is borderless and transparent; separation is a 0.5px bottom border only. | §8 | Christie |
+| 2026-06-28 | Care & Cleansing renders as stacked icon rows (26px icon + label + body), not a 2×2 grid. No wash background on outer container. `.care-cell` uses `grid-template-columns: 26px 1fr`. | §8a | Christie |
+| 2026-06-28 | Common Localities renders as a full-width label/value row beneath the 4×2 facts grid, followed by a hairline divider. Separator: centered dot ·. Not a bullet list. Target 3–6 entries; up to 8 by justified exception. | §7 | Christie |
+| 2026-06-28 | Mineral Profile Phase 2 subsection headings: Jost 500 / 11.5px / uppercase / `--ink2` color. No COLLECTOR'S GUIDE label. No M1–M5 uppercase heading labels. Subsection order: Formation · Quality Indicators · Identification · Locality Variations (optional) · Physical Handling (optional). Market & Pricing removed from Mineral Profile; moved to right-rail Market & Buying Notes card. | §7 | Christie |
+| 2026-06-28 | Georgia is the encyclopedia serif. Lora must not appear anywhere. Signature line typography confirmed: `Georgia, serif; italic; 400; 17px; line-height 1.5; color var(--ink2)`. | §2 | Christie |
 
 ---
 

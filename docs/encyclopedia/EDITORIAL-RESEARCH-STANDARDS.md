@@ -314,3 +314,15 @@ The stone name must not be repeated mechanically throughout an entry.
 - Never leave placeholders or unresolved notes.
 - Every section must earn its place. If it isn't genuinely interesting or useful, revise it — don't pad it.
 
+---
+
+## Photography Standards
+
+- Source images: 1254×1254px WebP
+- Background: matte white sweep for capture; background-replacement color #FAF7F2 (provisional — test across stones before final lock)
+- Shadow: preserve or recreate soft grounding shadow
+- Specimen occupancy: 68–74% of canvas; adjust per shape
+- `object-fit: contain` — full specimen must be visible
+- No cropping of towers, clusters, fossils, matrix, or specimen edges by default
+- Neutral presentation — no props, colored backgrounds, or styled environments
+

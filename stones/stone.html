@@ -85,8 +85,8 @@
 .enc-breadcrumb b { color: var(--ink2); }
 
 .side-nav-card {
-  background: var(--stone2);
-  border: 0.5px solid var(--border);
+  background: var(--stone);
+  border: 0.5px solid var(--border2);
   border-radius: var(--enc-radius);
   padding: 8px 0;
   overflow: hidden;
@@ -95,7 +95,7 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink3);
   padding: 6px 16px 8px;
 }
@@ -108,12 +108,13 @@
   color: var(--ink2);
   text-decoration: none;
   border-left: 2px solid transparent;
+  background: transparent;
   transition: all 0.13s;
 }
 .side-nav a:hover { background: var(--stone); color: var(--ink); }
 .side-nav a.active {
   background: var(--white);
-  border-left-color: var(--ck-accent);
+  border-left: 2px solid var(--ck-accent);
   color: var(--ink);
   font-weight: 500;
 }
@@ -165,21 +166,22 @@
 
 /* ── STONE PHOTO FRAME ── */
 .enc-hero .stone-photo-wrap {
-  background: #ffffff;
-  padding: 10px;
-  border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(42,37,32,0.10);
-  border: 1px solid rgba(42,37,32,0.10);
   aspect-ratio: 1 / 1;
+  background: #FAF7F2;
+  border: 1px solid rgba(92, 76, 62, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(42, 37, 32, 0.045);
+  overflow: hidden;
+  padding: 0;
   flex-shrink: 0;
   align-self: start;
 }
 .enc-hero .stone-photo-wrap img {
-  border-radius: 8px;
-  overflow: hidden;
-  display: block;
   width: 100%;
-  border: 1px solid rgba(42,37,32,0.12);
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
 }
 
 /* Hero right column */
@@ -265,7 +267,7 @@
   font-size: 12px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--accent);
   margin-bottom: 5px;
 }
@@ -316,9 +318,9 @@
 /* ── AT A GLANCE ── */
 .glance-panel {
   background: var(--white);
-  border: 0.5px solid var(--border);
+  border: 0.5px solid var(--border2);
   border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
+  box-shadow: 0 1px 4px rgba(42,37,32,0.06);
   padding: 20px 24px 18px;
   margin-bottom: 20px;
 }
@@ -365,7 +367,7 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.11em;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink2);
   margin-bottom: 5px;
 }
@@ -411,45 +413,43 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 0.5px solid var(--ck-wash-border);
-  border-radius: 8px;
-  overflow: hidden;
 }
 .care-cell {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  align-items: start;
-  padding: 10px 13px;
-  border-bottom: 0.5px solid var(--ck-wash-border);
-  background: var(--ck-wash);
-  gap: 10px;
+  grid-template-columns: 26px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--border2);
+  align-items: flex-start;
+  background: transparent;
 }
-.care-cell:last-child {
-  border-bottom: none;
-}
+.care-cell:first-child { padding-top: 0; }
+.care-cell:last-child { border-bottom: none; padding-bottom: 0; }
 .care-cell-head {
   display: flex;
-  align-items: start;
-  gap: 5px;
+  flex-direction: column;
+  align-items: center;
   padding-top: 1px;
+  gap: 4px;
 }
 .care-cell-head .enc-icon {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   color: var(--ck-accent);
   flex-shrink: 0;
 }
 .care-label {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: var(--ink3);
+  color: var(--ink2);
+  margin-bottom: 4px;
 }
 .care-cell p {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--ink2);
   margin: 0;
 }
@@ -457,9 +457,9 @@
 /* ── ARTICLE SECTION CARDS ── */
 .enc-card {
   background: var(--white);
-  border: 0.5px solid var(--border);
+  border: 0.5px solid var(--border2);
   border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
+  box-shadow: 0 1px 4px rgba(42,37,32,0.06);
   padding: 24px 26px;
 }
 .enc-card h2 {
@@ -530,20 +530,6 @@
 .mineral-fact:nth-last-child(-n+2) { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
-.mineral-guide-divider {
-  border: none;
-  border-top: 0.5px solid var(--border);
-  margin: 20px 0 16px;
-}
-.mineral-guide-label {
-  font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.10em;
-  font-weight: 500;
-  color: var(--ink3);
-  margin: 0 0 4px;
-}
 .mineral-note {
   font-size: 15px;
   line-height: 1.7;
@@ -561,25 +547,79 @@
   font-size: 11px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink2);
   margin: 0 0 8px;
 }
 .mineral-formation h4 + h4 { margin-top: 14px; }
 .mineral-formation p { font-size: 15px; color: var(--ink2); line-height: 1.7; margin: 0 0 12px; }
 
-.common-localities { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding-left: 18px; margin: 0; }
-.common-localities li { font-size: 14px; color: var(--ink2); line-height: 1.72; }
 .mineral-note-label {
   font-family: 'Jost', sans-serif;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink2);
   margin: 20px 0 6px;
 }
-.mineral-note-block:first-of-type .mineral-note-label { margin-top: 16px; }
+
+/* ── COMMON LOCALITIES ROW (Phase 1) ── */
+.localities-row {
+  display: grid;
+  grid-template-columns: minmax(0, 130px) minmax(0, 1fr);
+  gap: 8px;
+  padding: 8px 0 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.localities-lbl {
+  font-weight: 500;
+  color: var(--ink);
+  padding-top: 1px;
+}
+.localities-val {
+  color: var(--ink2);
+}
+.phase-divider {
+  border: none;
+  border-top: 0.5px solid var(--border2);
+  margin: 16px 0;
+}
+
+/* ── MINERAL PROFILE PHASE 2 SUBSECTIONS ── */
+.m-sub {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+.m-sub:first-child { margin-top: 0; }
+.m-section {
+  margin-bottom: 16px;
+}
+.m-section:last-child {
+  margin-bottom: 0;
+}
+.m-section p {
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── MARKET & BUYING NOTES ── */
+.market-body {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink2);
+  margin: 0;
+}
 
 .related-grid {
   display: grid;
@@ -587,10 +627,10 @@
   gap: 12px;
 }
 .rel-card {
-  border: 0.5px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
+  border-radius: 8px;
+  padding: 12px;
   background: var(--stone);
+  border: none;
 }
 .rel-card-head {
   font-family: 'Jost', sans-serif;
@@ -614,17 +654,17 @@
 .stone-link-row:last-child { border-bottom: 0; padding-bottom: 0; }
 .stone-link-row:hover { opacity: 0.7; }
 .stone-dot-circle {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 .stone-link-row b {
   display: block;
   font-family: 'Jost', sans-serif;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 14.5px;
+  font-weight: 500;
   color: var(--ink);
   margin-bottom: 10px;
 }
@@ -638,9 +678,9 @@
 /* ── RIGHT RAIL CARDS ── */
 .rail-card {
   background: var(--white);
-  border: 0.5px solid var(--border);
+  border: 0.5px solid var(--border2);
   border-radius: var(--enc-radius);
-  box-shadow: var(--enc-shadow);
+  box-shadow: 0 1px 4px rgba(42,37,32,0.06);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -669,7 +709,7 @@
   font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink2);
   margin: 16px 0 10px;
 }
@@ -725,23 +765,24 @@
 .note-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 .note-row {
   display: grid;
-  grid-template-columns: 30px 1fr;
-  gap: 10px;
-  background: var(--stone);
-  border: 0.5px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 12px;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--border2);
   align-items: start;
+  background: transparent;
+  border-radius: 0;
 }
+.note-row:first-child { padding-top: 0; }
+.note-row:last-child { border-bottom: none; padding-bottom: 0; }
 .note-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--ck-wash) 70%, transparent);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--ck-wash);
   border: 0.5px solid var(--ck-wash-border);
   display: grid;
   place-items: center;
@@ -776,8 +817,10 @@
 }
 .entry-nav-link {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  text-align: center;
+  gap: 2px;
   border: 0.5px solid var(--border);
   border-radius: 999px;
   background: var(--stone);
@@ -791,21 +834,20 @@
   transition: all 0.13s;
 }
 .entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
-.entry-nav-link > div { text-align: center; }
 .entry-nav-link small {
   font-size: 9px;
-  letter-spacing: 0.12em;
+  font-weight: 400;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
   color: var(--ink3);
   display: block;
-  margin-bottom: 1px;
 }
 .entry-nav-link:hover small { color: rgba(255,255,255,0.55); }
 .entry-nav-link b {
   font-family: Georgia, serif;
-  font-size: 17px;
-  text-transform: none;
-  letter-spacing: 0.02em;
   font-weight: 400;
+  font-size: 16px;
+  text-transform: none;
   display: block;
 }
 .entry-nav-random {
@@ -881,13 +923,14 @@
   .content-stack-right {
     display: contents;
   }
-  #overview { order: 1; }
-  #reach    { order: 2; }
-  #themes   { order: 3; }
-  #mineral  { order: 4; }
-  #notes    { order: 5; }
-  #care     { order: 6; }
-  #related  { order: 7; }
+  #overview      { order: 1; }
+  #reach         { order: 2; }
+  #themes        { order: 3; }
+  #mineral       { order: 4; }
+  #notes         { order: 5; }
+  #market-notes  { order: 6; }
+  #care          { order: 7; }
+  #related       { order: 8; }
   .glance-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 0; }
   .glance-item { border-right: 0; padding: 0 8px; }
   .mineral-geo { grid-template-columns: 1fr; }
@@ -913,8 +956,7 @@
   .glance-grid { grid-template-columns: repeat(3, 1fr); }
   .enc-cta { flex-direction: column; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
-  .common-localities { grid-template-columns: 1fr; }
-  .hero-sections { grid-template-columns: 1fr; }
+.hero-sections { grid-template-columns: 1fr; }
   .hero-section { border-right: none; border-bottom: 0.5px solid var(--border2); }
   .hero-section:last-child { border-bottom: none; }
   .topbar-right { display: none; }
@@ -996,6 +1038,7 @@
           <a href="#themes">Energetic Themes</a>
           <a href="#mineral">Mineral Profile</a>
           <a href="#notes">Collector Notes</a>
+          <a href="#market-notes">Market &amp; Buying Notes</a>
           <a href="#care">Care &amp; Cleansing</a>
           <a href="#related">Related Stones</a>
         </nav>
@@ -1301,6 +1344,7 @@ function buildMain({ c, stone, stoneName, slug, imageUrl,
       <div class="content-stack-right">
         ${buildThemes(themes)}
         ${buildCollectorNotes(notes)}
+        ${buildMarketNotes(c)}
         ${buildCare(care)}
       </div>
     </div>
@@ -1375,6 +1419,15 @@ function buildAtAGlance(c) {
   const roleIcon     = esc(c.energetic_role_icon || 'icon-manifestation');
   const secondaryChk = c.chakra_secondary
     ? `<span class="chakra-secondary">${esc(c.chakra_secondary)}</span>` : '';
+  /* Material Type: renders if column exists and has a value; degrades gracefully if null */
+  const materialTypeItem = c.material_type ? `
+        <div class="glance-item">
+          <div class="glance-icon-tile">
+            <span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
+          </div>
+          <div class="glance-label">Material Type</div>
+          <div class="glance-value">${esc(c.material_type)}</div>
+        </div>` : '';
   return `
     <div class="glance-panel" id="glance">
       <h2 class="panel-title">
@@ -1405,13 +1458,6 @@ function buildAtAGlance(c) {
         </div>
         <div class="glance-item">
           <div class="glance-icon-tile">
-            <span aria-hidden="true" class="enc-icon icon-celestial"></span>
-          </div>
-          <div class="glance-label">Planet</div>
-          <div class="glance-value">${esc(c.planet || '')}</div>
-        </div>
-        <div class="glance-item">
-          <div class="glance-icon-tile">
             <span aria-hidden="true" class="enc-icon icon-zodiac"></span>
           </div>
           <div class="glance-label">Zodiac</div>
@@ -1424,6 +1470,7 @@ function buildAtAGlance(c) {
           <div class="glance-label">Color Energy</div>
           <div class="glance-value">${esc(c.color_energy || '')}</div>
         </div>
+        ${materialTypeItem}
       </div>
     </div>
   `;
@@ -1468,15 +1515,35 @@ function buildMineralProfile(facts, localities, c) {
     <div class="mineral-fact"><span>${esc(f.label)}</span><span>${esc(f.value)}</span></div>
   `).join('');
 
-  const localityItems = localities.map(l => `<li>${esc(l.locality)}</li>`).join('');
+  /* Common Localities — dot-separated, full-width row */
+  const localityVal = localities.slice(0, 8).map(l => esc(l.locality)).join(' · ');
+  const localitiesRow = localityVal ? `
+    <div class="localities-row">
+      <span class="localities-lbl">Common Localities</span>
+      <span class="localities-val">${localityVal}</span>
+    </div>
+    <hr class="phase-divider"/>
+  ` : '';
 
-  const COLLECTOR_LABELS = ['Quality Indicators', 'Identification', 'Market & Pricing', 'Locality Variations', 'Physical Handling'];
-  const collectorFields = [c.collector_context_p1, c.collector_context_p2, c.collector_context_p3, c.collector_context_p4, c.collector_context_p5];
-  const noteParas = collectorFields
-    .map((p, i) => p ? `<div class="mineral-note-block"><h4 class="mineral-note-label">${COLLECTOR_LABELS[i]}</h4><p class="mineral-note">${esc(p)}</p></div>` : '')
-    .filter(Boolean)
-    .join('');
-  const notes = noteParas ? noteParas : '';
+  /* Phase 2 subsections — Formation, Quality Indicators, Identification,
+     Locality Variations (optional), Physical Handling (optional).
+     collector_context_p3 (Market & Pricing) moves to right-rail Market & Buying Notes. */
+  const subsections = [
+    { label: 'Formation',           content: c.formation },
+    { label: 'Quality Indicators',  content: c.collector_context_p1 },
+    { label: 'Identification',      content: c.collector_context_p2 },
+    { label: 'Locality Variations', content: c.collector_context_p4 },
+    { label: 'Physical Handling',   content: c.collector_context_p5 },
+  ];
+
+  const subsectionHTML = subsections
+    .filter(s => s.content)
+    .map(s => `
+      <div class="m-section">
+        <div class="m-sub">${s.label}</div>
+        <p>${esc(s.content)}</p>
+      </div>
+    `).join('');
 
   return `
     <article class="enc-card" id="mineral">
@@ -1486,18 +1553,9 @@ function buildMineralProfile(facts, localities, c) {
       </h2>
       <div class="mineral-layout">
         <div class="mineral-facts">${factRows}</div>
-        <div class="mineral-geo">
-          <div class="mineral-formation">
-            <h4>Formation</h4>
-            <p>${esc(c.formation || '')}</p>
-          </div>
-          <div class="mineral-localities">
-            <h4>Common Localities</h4>
-            <ul class="common-localities">${localityItems}</ul>
-          </div>
-        </div>
       </div>
-      ${notes}
+      ${localitiesRow}
+      ${subsectionHTML}
     </article>
   `;
 }
@@ -1582,6 +1640,22 @@ function buildCollectorNotes(notes) {
   `;
 }
 
+/* ── MARKET & BUYING NOTES ── */
+function buildMarketNotes(c) {
+  if (!c.collector_context_p3) return '';
+  return `
+    <section class="rail-card" id="market-notes">
+      <h2>
+        <span aria-hidden="true" class="enc-icon icon-bookmark"></span>
+        Market &amp; Buying Notes
+      </h2>
+      <div class="rail-card-body">
+        <p class="market-body">${esc(c.collector_context_p3)}</p>
+      </div>
+    </section>
+  `;
+}
+
 /* ── CARE & CLEANSING ── */
 function buildCare(care) {
   const CARE_ICONS = {
@@ -1594,9 +1668,11 @@ function buildCare(care) {
     <div class="care-cell">
       <div class="care-cell-head">
         <span aria-hidden="true" class="enc-icon ${CARE_ICONS[cell.category] || 'icon-care-cleansing'}"></span>
-        <span class="care-label">${esc(cell.category)}</span>
       </div>
-      <p>${esc(cell.body)}</p>
+      <div>
+        <div class="care-label">${esc(cell.category)}</div>
+        <p>${esc(cell.body)}</p>
+      </div>
     </div>
   `).join('');
   return `
@@ -1647,21 +1723,15 @@ function buildRelatedStones(similar, pairs) {
 function buildEntryNav(prevSlug, prevName, nextSlug, nextName) {
   const prevLink = prevSlug ? `
     <a class="entry-nav-link" href="stone.html?slug=${esc(prevSlug)}">
-      <span>←</span>
-      <div>
-        <small>Previous</small>
-        <b>${esc(prevName || prevSlug)}</b>
-      </div>
+      <small>← Previous</small>
+      <b>${esc(prevName || prevSlug)}</b>
     </a>
   ` : '';
 
   const nextLink = nextSlug ? `
     <a class="entry-nav-link" href="stone.html?slug=${esc(nextSlug)}">
-      <div>
-        <small>Next</small>
-        <b>${esc(nextName || nextSlug)}</b>
-      </div>
-      <span>→</span>
+      <small>Next →</small>
+      <b>${esc(nextName || nextSlug)}</b>
     </a>
   ` : '';
 
@@ -1669,10 +1739,8 @@ function buildEntryNav(prevSlug, prevName, nextSlug, nextName) {
     <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
       ${prevLink}
       <a class="entry-nav-link entry-nav-random" href="#" id="random-nav-btn">
-        <div>
-          <small>Random</small>
-          <b>Surprise me</b>
-        </div>
+        <small>Random</small>
+        <b>Surprise me</b>
       </a>
       ${nextLink}
     </nav>
@@ -1683,7 +1751,7 @@ function buildEntryNav(prevSlug, prevName, nextSlug, nextName) {
    SCROLL-SPY
    ───────────────────────────────────────────── */
 function initScrollSpy() {
-  const sections = ['hero','glance','overview','reach','themes','mineral','notes','care','related'];
+  const sections = ['hero','glance','overview','reach','themes','mineral','notes','market-notes','care','related'];
   const navLinks = document.querySelectorAll('.side-nav a');
 
   function onScroll() {

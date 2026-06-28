@@ -1,6 +1,6 @@
 # enc-editorial-schema.md
 # Still Point Lapidary — Encyclopedia Editorial Schema
-# Version: 2026-06-27 | Aligned to CANONICAL-STONE-PAGE-TEMPLATE.html
+# Version: 2026-06-28 | Aligned to CANONICAL-STONE-PAGE-TEMPLATE.html
 
 This document defines the content rules, field counts, and editorial constraints for every
 encyclopedia stone page. All rules here must match the canonical HTML template exactly.
@@ -54,7 +54,7 @@ All nine token values are required. Derive from the chakra's canonical palette.
 
 ## At a Glance
 
-Six fixed boxes in this order: Energetic Role · Chakra · Element · Planet · Zodiac · Color Energy.
+Six fixed boxes in this order: Energetic Role · Chakra · Element · Zodiac · Color Energy · Material Type.
 Layout is fixed. Do not reorder or remove boxes.
 
 | Field | Rule |
@@ -64,9 +64,11 @@ Layout is fixed. Do not reorder or remove boxes.
 | `CHAKRA_PRIMARY` | The stone's primary chakra. Required. |
 | `CHAKRA_SECONDARY` | **Optional.** Secondary chakra(s), displayed in a smaller span. If no secondary chakra is supported by the research, remove the entire `.chakra-secondary` span. Do not leave it blank. Do not invent a secondary chakra. |
 | `ELEMENT` | Classical element association. |
-| `PLANET` | Primary planetary association. |
 | `ZODIAC` | Primary zodiac sign(s). |
 | `COLOR_ENERGY` | Color energy label. |
+| `MATERIAL_TYPE` | Sixth field; replaces Planet in display. Static icon: `icon-encyclopedia` (temporary — see architecture contract §19a). Controlled vocabulary: Mineral · Mineral variety · Rock · Mineraloid · Organic material · Composite · Synthetic · Fossil · Trade name. Value describes fundamental identity, not treatment status. |
+
+**Planet field:** The `planet` column is preserved in Supabase but is no longer displayed in At a Glance. Do not remove existing planet data.
 
 ---
 
@@ -148,9 +150,19 @@ Include only the most commercially important, historically significant, or colle
 - Do not pad the list.
 - Do not list every country where the mineral has ever been reported.
 
+### Mineral Profile Structure
+
+- **Phase 1:** 4×2 facts grid + Common Localities full-width row + hairline divider
+- **Phase 2 subsections in order:** Formation · Quality Indicators · Identification · Locality Variations (optional, render only if non-null) · Physical Handling (optional, render only if non-null)
+- Market & Pricing does NOT appear inside Mineral Profile — it renders in the right rail as Market & Buying Notes
+
+**Common Localities rule:** Target 3–6 entries; up to 8 only by justified exception. Separator: centered dot ·. Rendered as a full-width label/value row beneath the facts grid, not a bullet list.
+
+**Mineral Profile subsection headings:** Jost 500 / 11.5px / uppercase / `--ink2` color. No COLLECTOR'S GUIDE label. No M1–M5 uppercase heading labels.
+
 ### Collector's Guide Paragraphs (M1–M5)
 
-Five paragraphs below the mineral layout, rendered as flowing prose under a single COLLECTOR'S GUIDE sub-label. No individual sub-labels for M4 or M5. All five continue as one unbroken prose section.
+Rendered as flowing prose subsections under individual headings (see subsection heading style above). No COLLECTOR'S GUIDE label. M4 and M5 optional.
 
 M4 and M5 are optional — render only when content exists. M1, M2, and M3 are always required.
 
@@ -167,6 +179,22 @@ M4 and M5 are optional — render only when content exists. M1, M2, and M3 are a
 **Supabase columns:** `collector_context_p1` (M1) · `collector_context_p2` (M2) · `collector_context_p3` (M3) · `collector_context_p4` (M4, nullable) · `collector_context_p5` (M5, nullable)
 
 ---
+
+## Market & Buying Notes
+
+Standalone right-rail card. Sourced from `collector_context_p3`. Render only if non-null. Not part of Mineral Profile.
+
+## Right-Rail Section Order
+
+**Locked order:** Energetic Themes · Collector & Curiosity Notes · Market & Buying Notes · Care & Cleansing
+
+## Collector Notes Rendering
+
+Unboxed divider-separated rows. No individual card borders or backgrounds. `.note-row` uses a bottom border divider only. The outer `.rail-card` is the container.
+
+## Care & Cleansing Rendering
+
+Stacked icon rows (26px icon + label + body). Not a 2×2 grid. No wash background on outer container.
 
 ## Energetic Themes
 

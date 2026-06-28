@@ -1,6 +1,6 @@
 # DATABASE-SCHEMA.md
 # Still Point Lapidary — Supabase Database Schema Reference
-# Version: 2026-06-27 | Status: CANONICAL
+# Version: 2026-06-28 | Status: CANONICAL
 
 This document maps every table and column in the Still Point Lapidary Supabase database.
 Use this as the authoritative reference before writing any SQL query or data entry instruction.
@@ -52,13 +52,14 @@ The primary content table. One row per stone. The dynamic template (`stone.html`
 | `formation` | text | Formation paragraph. Geological context only. See Formation Rule below. |
 | `collector_context_p1` | text | Collector's Guide M1 — quality and value indicators |
 | `collector_context_p2` | text | Collector's Guide M2 — identification and confusion stones |
-| `collector_context_p3` | text | Collector's Guide M3 — market availability and pricing |
+| `collector_context_p3` | text | Collector's Guide M3 — market availability and pricing. **Rendered in the right rail as Market & Buying Notes (2026-06-28), not inside Mineral Profile.** |
 | `collector_context_p4` | text | Collector's Guide M4 — locality variations. Nullable. Omit when not meaningful. |
 | `collector_context_p5` | text | Collector's Guide M5 — physical handling notes. Nullable. Omit when not compelling. |
 | `chakra_primary` | text | Primary chakra |
 | `chakra_secondary` | text | Secondary chakra(s), or null if none |
 | `element` | text | Classical element |
-| `planet` | text | Planetary association |
+| `planet` | text | Planetary association. **Column preserved but display-label superseded by Material Type in the rendered template (2026-06-28).** |
+| `material_type` | text | Material Type. **Pending column — see Phase 2 note below.** Controlled vocabulary: Mineral · Mineral variety · Rock · Mineraloid · Organic material · Composite · Synthetic · Fossil · Trade name. |
 | `zodiac` | text | Zodiac sign(s) |
 | `energetic_role` | text | Exactly 1 locked Energetic Role value |
 | `energetic_role_icon` | text | Icon slug for the Energetic Role (e.g. `grounding`) |
@@ -72,6 +73,8 @@ The primary content table. One row per stone. The dynamic template (`stone.html`
 | `updated_at` | timestamptz | Update manually or via trigger when content changes |
 
 **RLS Policy:** anon SELECT restricted to `published = true`. Unpublished rows are invisible to the browser.
+
+**Phase 2 note (2026-06-28):** A `material_type` column is pending addition to `enc_stone_content`. If not yet added, Dustin must run: `ALTER TABLE enc_stone_content ADD COLUMN material_type text;` before Phase 3F (Material Type At a Glance rendering) can be implemented. Planet column must not be renamed or dropped.
 
 ---
 
@@ -135,7 +138,7 @@ Energetic Themes rows. One row per theme per stone.
 | `title` | text | Theme heading |
 | `description` | text | Theme description paragraph. 3 visual lines max for primary/secondary. Null for occasional (pills only). |
 | `display_order` | integer | Controls render order within tier |
-| `icon_slug` | text | Icon class for the theme (e.g. icon-grounding). Nullable. Defaults to icon-upward-spark in the template. |
+| `icon_slug` | text | Icon class for the theme (e.g. icon-grounding). Nullable. Defaults to icon-upward-spark in the template. **Column confirmed added 2026-06-28 per Session 4 handoff.** |
 | `created_at` | timestamptz | Auto-set on insert |
 
 **Counts:** 1–2 primary · 0–2 secondary · 0–2 occasional. See `enc-editorial-schema.md`.
