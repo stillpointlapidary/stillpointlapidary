@@ -516,12 +516,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
+  column-gap: 24px;
 }
 .mineral-geo { display: flex; flex-direction: column; gap: 16px; }
 .mineral-fact {
   display: grid;
-  grid-template-columns: minmax(0,160px) minmax(0,1fr);
-  gap: 8px;
+  grid-template-columns: minmax(0,130px) minmax(0,1fr);
+  gap: 12px;
   padding: 7px 0;
   border-bottom: 0.5px solid var(--border2);
   font-size: 13px;
@@ -623,7 +624,7 @@
   display: block;
   font-family: 'Jost', sans-serif;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--ink);
   margin-bottom: 10px;
 }
