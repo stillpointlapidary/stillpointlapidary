@@ -498,7 +498,7 @@
 .reach-row:first-child { padding-top: 0; }
 .reach-label {
   font-family: 'Jost', sans-serif;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -892,6 +892,19 @@
   .glance-item { border-right: 0; padding: 0 8px; }
   .mineral-geo { grid-template-columns: 1fr; }
   .related-grid { grid-template-columns: 1fr; }
+  .mineral-facts {
+    grid-template-columns: 1fr;
+  }
+  .mineral-fact {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .mineral-fact span:first-child {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
 }
 
 @media (max-width: 600px) {
@@ -904,6 +917,37 @@
   .hero-sections { grid-template-columns: 1fr; }
   .hero-section { border-right: none; border-bottom: 0.5px solid var(--border2); }
   .hero-section:last-child { border-bottom: none; }
+  .topbar-right { display: none; }
+  .enc-hero .stone-photo-wrap {
+    aspect-ratio: 1 / 1;
+    max-height: 260px;
+    width: 260px;
+    margin: 0 auto;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-actions .enc-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-section-body { font-size: 15px; }
+  .reach-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .reach-label {
+    font-size: 12px;
+    padding-top: 0;
+  }
+  .entry-nav-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .entry-nav-link {
+    justify-content: center;
+  }
 }
 </style>
 </head>
