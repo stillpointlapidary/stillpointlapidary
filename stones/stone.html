@@ -514,7 +514,7 @@
 .mineral-layout {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 .mineral-facts {
   display: grid;
@@ -593,7 +593,7 @@
 
 /* ── MINERAL PROFILE — localities spacing (scoped) ── */
 .mineral-profile .mineral-facts { margin-bottom: 0; }
-.mineral-profile .localities-row { margin: 0; padding: 7px 0; }
+.mineral-profile .localities-row { margin: 0; padding: 7px 0; border-top: 0.5px solid var(--border2); }
 .mineral-profile .localities-phase-divider { margin: 7px 0; }
 
 /* ── MINERAL PROFILE PHASE 2 SUBSECTIONS ── */
@@ -1558,7 +1558,6 @@ function buildMineralProfile(facts, localities, c) {
   /* Common Localities — dot-separated, full-width row */
   const localityVal = localities.slice(0, 8).map(l => esc(l.locality)).join(' · ');
   const localitiesRow = localityVal ? `
-    <hr class="phase-divider"/>
     <div class="localities-row">
       <span class="localities-lbl">Common Localities</span>
       <span class="localities-val">${localityVal}</span>
