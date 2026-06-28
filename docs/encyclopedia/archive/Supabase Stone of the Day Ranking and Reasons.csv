@@ -1,0 +1,501 @@
+intention_slug,display_order,match_strength,stone_slug,stone_name,collection_tier,reason_text,reason_type,is_active
+anxiety,1,3,C-0254,Lepidolite,1,Helps soften anxious tension and restore calm when fear or unease keeps building.,curated,true
+anxiety,2,3,C-0119,Amethyst,1,Quiets anxious mental noise and creates a calmer inner space during stress.,curated,true
+anxiety,3,3,C-0103,Smoky Quartz,1,Grounds fear and overwhelm so you can feel steadier and more present.,curated,true
+anxiety,4,3,C-0129,Black Tourmaline,1,Creates a stronger sense of energetic safety when your surroundings feel stressful or threatening.,curated,true
+anxiety,5,3,C-0001,Aragonite,2,Steadies scattered energy when stress or sudden change leaves you feeling overwhelmed.,curated,true
+anxiety,6,3,C-0007,Blue Calcite,1,Cools emotional intensity and encourages a gentler response to stress and overwhelm.,curated,true
+anxiety,7,3,C-0069,Blue Lace Agate,2,Soothes anxious tension and helps you breathe more calmly through emotionally charged moments.,curated,true
+anxiety,8,3,C-0325,Lithium Quartz,3,Gently settles emotional activation when anxiety leaves your nerves feeling frayed.,curated,true
+anxiety,9,2,C-0241,Howlite,1,Calms restless agitation when anxiety keeps your mind and body from settling.,curated,true
+anxiety,10,2,C-0171,Angelite,2,Offers gentle reassurance when anxiety leaves you feeling vulnerable or emotionally unsteady.,curated,true
+anxiety,11,2,C-0221,Celestite,2,Encourages peaceful surrender when worry makes it difficult to relax or feel supported.,curated,true
+anxiety,12,2,C-0021,Aquamarine,2,Calms fear and overwhelm so you can respond without becoming swept up in panic.,curated,true
+anxiety,13,2,C-0132,Kambaba Jasper,2,Brings deep grounding and emotional stillness when stress has left you unsettled.,curated,true
+anxiety,14,2,C-0014,Mangano Calcite,2,Offers soft emotional comfort when anxiety is tangled with hurt or self-criticism.,curated,true
+body-energy,1,3,C-0153,Carnelian,1,"Awakens physical energy, sensual confidence, and the desire to move and engage with life.",curated,true
+body-energy,2,3,C-0016,Orange Calcite,1,"Releases sluggish bodily energy and restores movement, pleasure, and creative physical expression.",curated,true
+body-energy,3,3,C-0017,Red Calcite,2,Activates the lower body centers and restores a stronger sense of physical drive and movement.,curated,true
+body-energy,4,3,C-0048,Garnet,2,"Rekindles passion and life-force when the body feels depleted, disconnected, or uninspired.",curated,true
+body-energy,5,3,C-0038,Ruby,2,Stimulates embodied passion and encourages wholehearted engagement with physical life.,curated,true
+body-energy,6,3,C-0151,Bloodstone,2,Strengthens connection with physical life-force and encourages active participation in the body.,curated,true
+body-energy,7,3,C-0306,Fire Opal,3,"Ignites sensual aliveness, creative fire, and joyful expression through the physical self.",curated,true
+body-energy,8,3,C-0298,Cuprite,4,"Draws awareness into the lower body and restores warmth, instinct, and physical vitality.",curated,true
+body-energy,9,3,C-0342,Sphalerite,3,Combines grounding with vigorous activation when bodily energy feels scattered or dormant.,curated,true
+body-energy,10,2,C-0200,Shiva Lingam,2,Integrates physical and energetic awareness while encouraging sensual presence and inner movement.,curated,true
+body-energy,11,2,C-0068,Orange Kyanite,3,"Encourages pleasure, creativity, and freer movement through the body without losing alignment.",curated,true
+body-energy,12,2,C-0051,Serpentine,2,Supports the natural flow of bodily energy and helps release tension that restricts movement.,curated,true
+body-energy,13,2,C-0272,Almandine Garnet,3,Restores grounded physical strength and helps awareness reconnect with the body’s deeper reserves.,curated,true
+body-energy,14,2,C-0336,Pyrope Garnet,3,"Kindles passion, charisma, and the physical confidence to participate fully in life.",curated,true
+body-energy,15,2,C-0131,Spessartine Garnet,3,Sparks playful physical momentum and creative energy when the body feels flat or disengaged.,curated,true
+body-energy,16,2,C-0196,Ruby Zoisite,2,Links renewed physical energy with growth so passion can become constructive movement.,curated,true
+body-energy,17,2,C-0362,Zincite,3,Delivers concentrated creative and physical activation when stronger embodied momentum is needed.,curated,true
+clarity,1,3,C-0015,Optical Calcite,2,Helps you separate what is real from assumption and view the situation from a clearer angle.,curated,true
+clarity,2,3,C-0295,Clear Fluorite,2,Clears confusion and supports an unbiased view when competing thoughts cloud the issue.,curated,true
+clarity,3,3,C-0218,Sodalite,1,Helps sort meaningful facts from mental noise so the truth becomes easier to recognize.,curated,true
+clarity,4,3,C-0006,Azurite,3,Brings hidden patterns into view and encourages deeper examination of what is really happening.,curated,true
+clarity,5,3,C-0105,Clear Quartz,1,Illuminates the central issue and brings your true intention into sharper view.,curated,true
+clarity,6,3,C-0039,Sapphire,3,Supports wise discernment and helps you remain faithful to what you know is true.,curated,true
+clarity,7,3,C-9003,Silver Sheen Obsidian,2,Reflects hidden patterns and helps you see through illusion without losing perspective.,curated,true
+clarity,8,2,C-0354,Ulexite,3,Helps you look beneath appearances and recognize the central truth of a situation.,curated,true
+clarity,9,2,C-0167,Blue Tiger's Eye,2,Encourages calm observation so you can see clearly before deciding how to respond.,curated,true
+clarity,10,2,C-0035,Rainbow Fluorite,1,Organizes conflicting information so the larger pattern becomes easier to recognize.,curated,true
+clarity,11,2,C-0260,Muscovite,3,Encourages reflection and helps you reconsider a situation with greater objectivity.,curated,true
+clarity,12,2,C-0097,Picture Jasper,2,Offers a broader perspective when you are too close to a problem to see it clearly.,curated,true
+clearing,1,3,C-0175,Selenite,1,"Sweeps away lingering energy and restores a clean, light atmosphere around you.",curated,true
+clearing,2,3,C-0063,Black Kyanite,2,Cuts through stagnant energy and helps release unwanted energetic attachments.,curated,true
+clearing,3,3,C-0201,Shungite,2,Absorbs dense environmental energy and helps clear what has accumulated over time.,curated,true
+clearing,4,3,C-0129,Black Tourmaline,1,Draws off unwanted energy and strengthens boundaries against further absorption.,curated,true
+clearing,5,3,C-0139,Black Obsidian,1,Brings buried or stagnant energy forward so it can be released rather than retained.,curated,true
+clearing,6,3,C-0240,Halite,3,Purifies lingering energy and restores a fresher energetic atmosphere.,curated,true
+clearing,7,3,C-0105,Clear Quartz,1,Clarifies and refreshes energy while helping disperse stagnant energetic buildup.,curated,true
+clearing,8,3,C-0103,Smoky Quartz,1,Grounds away heavy residue and helps unwanted energy leave the system steadily.,curated,true
+clearing,9,2,C-0302,Elite Shungite,3,Provides concentrated absorption and clearing for dense or persistent energetic residue.,curated,true
+clearing,10,2,C-0067,White Kyanite,3,Clears subtle energetic congestion and restores a smoother flow through the field.,curated,true
+clearing,11,2,C-0246,Apophyllite,2,"Lifts stale energy from a space and invites a clearer, lighter atmosphere.",curated,true
+clearing,12,2,C-0172,Desert Rose,2,Gently disperses stagnant energy while restoring calm and spaciousness.,curated,true
+clearing,13,2,C-0173,Orange Selenite,2,"Clears sluggish energy with a warmer, more grounding form of purification.",curated,true
+communication,1,3,C-0025,Amazonite,1,Encourages honest self-expression while strengthening boundaries around what must be said.,curated,true
+communication,2,3,C-0069,Blue Lace Agate,2,"Softens tension so sensitive words can be expressed calmly, gently, and clearly.",curated,true
+communication,3,3,C-0021,Aquamarine,2,Calms fear around speaking and helps important words emerge with composure and honesty.,curated,true
+communication,4,3,C-0188,Lapis Lazuli,1,"Strengthens truthful expression rooted in wisdom, conviction, and inner understanding.",curated,true
+communication,5,3,C-0064,Blue Kyanite,2,Aligns thought with speech and encourages direct communication without unnecessary confusion.,curated,true
+communication,6,3,C-0218,Sodalite,1,Organizes scattered thoughts so ideas can be expressed logically and understood more easily.,curated,true
+communication,7,3,C-0052,Chrysocolla,2,"Helps communicate emotional truth with compassion rather than silence, blame, or harshness.",curated,true
+communication,8,3,C-0082,Blue Chalcedony,2,Encourages patient listening and kind expression during tender or emotionally delicate exchanges.,curated,true
+communication,9,3,C-0283,Blue Topaz,3,"Promotes articulate, confident speech when your message needs precision and clear direction.",curated,true
+communication,10,2,C-0044,Blue Apatite,2,Helps organize ideas into clear language and express them with greater confidence.,curated,true
+communication,11,2,C-0228,Turquoise,2,Supports honest expression while strengthening the courage to speak with calm authority.,curated,true
+communication,12,2,C-0253,Larimar,3,Cools emotional reactivity so difficult feelings can be expressed without escalating conflict.,curated,true
+communication,13,2,C-0130,Shattuckite,3,Strengthens intuitive communication when subtle impressions need to be spoken or interpreted.,curated,true
+communication,14,2,C-0171,Angelite,2,Encourages peaceful communication and a gentler tone when emotions make words feel difficult.,curated,true
+communication,15,2,C-0318,Hemimorphite,3,Connects empathy with honest expression so emotional truth can be shared constructively.,curated,true
+communication,16,2,C-0212,Purpurite,3,Builds conviction and vocal confidence when fear has made you hesitant to speak openly.,curated,true
+compassion,1,3,C-0108,Rose Quartz,1,Opens the heart to greater kindness and compassion toward yourself and other people.,curated,true
+compassion,2,3,C-0214,Rhodonite,2,Balances hurt with empathy so compassion can guide your response without erasing boundaries.,curated,true
+compassion,3,3,C-0213,Rhodochrosite,2,Deepens compassionate understanding for wounded or rejected parts of yourself and others.,curated,true
+compassion,4,3,C-0155,Chrysoprase,2,Encourages forgiveness and compassionate understanding toward both yourself and others.,curated,true
+compassion,5,3,C-0223,Stichtite,3,"Softens rigid emotional reactions and encourages patience, empathy, and gentle understanding.",curated,true
+compassion,6,3,C-0024,Morganite,3,Encourages tender understanding and a compassionate response to emotional vulnerability.,curated,true
+compassion,7,3,C-0014,Mangano Calcite,2,Nurtures self-compassion and helps replace harsh judgment with gentler understanding.,curated,true
+compassion,8,2,C-0133,Atlantisite,3,Combines emotional insight with compassion when old wounds shape present reactions.,curated,true
+compassion,9,2,C-0019,Dioptase,3,Opens the heart to deeper empathy while releasing pain that limits compassionate response.,curated,true
+compassion,10,2,C-0271,Ajoite,4,Encourages profound compassion while helping old emotional pain release without bitterness.,curated,true
+compassion,11,2,C-9001,Pink Amethyst,2,Promotes gentle understanding when emotional pain makes kindness difficult to access.,curated,true
+compassion,12,2,C-0395,Peach Moonstone,2,"Encourages self-compassion when sensitivity, overwhelm, or guilt turns inward.",curated,true
+compassion,13,2,C-0033,Pink Fluorite,2,"Helps examine emotional situations with greater kindness, clarity, and humane perspective.",curated,true
+compassion,14,2,C-0171,Angelite,2,Encourages peaceful empathy and kinder communication during emotionally sensitive exchanges.,curated,true
+compassion,15,2,C-0082,Blue Chalcedony,2,Supports considerate speech and patient listening when tenderness is needed most.,curated,true
+compassion,16,2,C-0318,Hemimorphite,3,Connects empathy with honest expression so compassion can be communicated clearly.,curated,true
+confidence,1,3,C-0168,Gold Tiger's Eye,1,"Builds grounded self-confidence while strengthening judgment, resolve, and personal authority.",curated,true
+confidence,2,3,C-0153,Carnelian,1,Strengthens bold self-belief and encourages confident action despite fear or hesitation.,curated,true
+confidence,3,3,C-0121,Citrine,1,Reinforces personal power and confidence in your ability to create successful outcomes.,curated,true
+confidence,4,3,C-0029,Sunstone,2,"Restores self-worth and encourages you to show up with warmth, optimism, and assurance.",curated,true
+confidence,5,3,C-0248,Bronzite,2,"Cultivates calm, grounded confidence that remains steady under pressure or scrutiny.",curated,true
+confidence,6,3,C-0137,Pyrite,1,Strengthens personal authority and confidence in your ability to produce tangible results.,curated,true
+confidence,7,3,C-0013,Honey Calcite,2,"Builds self-trust, personal will, and confidence in handling demanding responsibilities.",curated,true
+confidence,8,3,C-0169,Red Tiger's Eye,2,Strengthens confidence and self-esteem when fear of failure keeps you holding back.,curated,true
+confidence,9,3,C-0038,Ruby,2,"Counters timidity with self-confidence, determination, and a stronger sense of personal power.",curated,true
+confidence,10,2,C-0016,Orange Calcite,1,"Rebuilds self-belief and encourages freer, more confident personal expression.",curated,true
+confidence,11,2,C-0292,Chalcopyrite,2,Helps release fear of failure and strengthens confidence in your abilities and potential.,curated,true
+confidence,12,2,C-0336,Pyrope Garnet,3,"Fuels self-confidence and a more positive, empowered view of your own capabilities.",curated,true
+confidence,13,2,C-0321,Imperial Topaz,4,Cultivates inner authority and confidence in recognizing and claiming your own worth.,curated,true
+confidence,14,2,C-0099,Red Jasper,1,Builds grounded self-assurance when fear or hesitation weakens your resolve.,curated,true
+confidence,15,2,C-0101,Yellow Jasper,2,Encourages steady self-confidence without pushing you toward bravado or impulsive action.,curated,true
+confidence,16,2,C-0046,Yellow Apatite,3,"Strengthens self-trust and confidence in your intelligence, goals, and personal potential.",curated,true
+confidence,17,2,C-0023,Heliodor,4,Encourages bright self-assurance and confidence in your judgment and capabilities.,curated,true
+confidence,18,2,C-0008,Bumblebee Jasper,3,Challenges self-doubt and encourages confidence in pursuing unfamiliar possibilities.,curated,true
+confidence,19,2,C-0131,Spessartine Garnet,3,Inspires expressive confidence and greater trust in your talents and creative abilities.,curated,true
+creativity,1,3,C-0153,Carnelian,1,Stimulates creative energy and helps new ideas move into confident expression.,curated,true
+creativity,2,3,C-0016,Orange Calcite,1,Releases creative blocks and restores a freer flow of imagination and expression.,curated,true
+creativity,3,3,C-0163,Opal,3,Amplifies imagination and helps the inner world emerge through expressive creative work.,curated,true
+creativity,4,3,C-0306,Fire Opal,3,"Ignites passion, spontaneity, and the creative fire needed for bold expression.",curated,true
+creativity,5,3,C-0131,Spessartine Garnet,3,"Awakens artistic, mental, and physical creativity with joyful expressive energy.",curated,true
+creativity,6,3,C-0044,Blue Apatite,2,"Stimulates original ideas and helps communicate them through writing, art, or movement.",curated,true
+creativity,7,3,C-0036,Yellow Fluorite,2,Stimulates inventive thinking and helps original ideas develop with greater clarity.,curated,true
+creativity,8,3,C-0109,Tangerine Quartz,2,Restores creative flow when discouragement or emotional heaviness has muted inspiration.,curated,true
+creativity,9,2,C-0121,Citrine,1,Brightens imagination and helps creative ideas develop into productive expression.,curated,true
+creativity,10,2,C-0221,Celestite,2,Encourages inspired artistic expression and receptivity to subtle creative ideas.,curated,true
+creativity,11,2,C-0068,Orange Kyanite,3,Clears hesitation around creating and encourages ideas to move into active expression.,curated,true
+creativity,12,2,C-0028,Labradorite,1,Awakens imagination and encourages original ideas beyond familiar patterns.,curated,true
+creativity,13,2,C-0119,Amethyst,1,Opens imaginative awareness and encourages inspiration beyond habitual ways of thinking.,curated,true
+creativity,14,2,C-0029,Sunstone,2,Restores playfulness and enthusiasm when creative expression feels inhibited or dull.,curated,true
+creativity,15,2,C-0218,Sodalite,1,"Organizes ideas and encourages clear, authentic expression in writing and other creative work.",curated,true
+creativity,16,2,C-0035,Rainbow Fluorite,1,"Brings varied ideas together and encourages flexible, imaginative creative thinking.",curated,true
+creativity,17,2,C-0232,Wulfenite,4,Rekindles creative inspiration and helps release blocks around bringing ideas into form.,curated,true
+creativity,18,2,C-0362,Zincite,3,Supplies intense creative energy when inspiration needs activation and direction.,curated,true
+decision-making,1,3,C-0168,Gold Tiger's Eye,1,Balances practical judgment with confidence so you can choose without being ruled by fear.,curated,true
+decision-making,2,3,C-0036,Yellow Fluorite,2,"Helps resolve uncertainty through logic, discernment, and a clearer view of the options.",curated,true
+decision-making,3,3,C-0015,Optical Calcite,2,Clarifies perspective and helps you examine a choice from a less distorted angle.,curated,true
+decision-making,4,3,C-0039,Sapphire,3,Encourages wise judgment and helps you choose in alignment with truth and integrity.,curated,true
+decision-making,5,2,C-0120,Ametrine,3,Combines clear discernment with the momentum needed to move forward once you decide.,curated,true
+decision-making,6,2,C-0032,Green Fluorite,2,Clears emotional buildup so your feelings can inform a choice without controlling it.,curated,true
+dream-work,1,3,C-0301,Dream Quartz,3,Heightens dream awareness and supports lucid recognition within vivid or symbolic dreams.,curated,true
+dream-work,2,3,C-0119,Amethyst,1,Encourages dream recall and helps nighttime imagery carry clearer spiritual or emotional meaning.,curated,true
+dream-work,3,3,C-0162,Moonstone,1,Strengthens receptivity to symbolic dreams and the intuitive messages carried through sleep.,curated,true
+dream-work,4,3,C-0030,Rainbow Moonstone,1,"Supports vivid dreaming, stronger recall, and intuitive insight from the dream state.",curated,true
+dream-work,5,3,C-0028,Labradorite,1,Encourages lucid awareness and helps hidden dream imagery reveal deeper intuitive meaning.,curated,true
+dream-work,6,3,C-0006,Azurite,3,Sharpens symbolic perception and helps dream messages become easier to recognize and interpret.,curated,true
+dream-work,7,3,C-0188,Lapis Lazuli,1,Supports dream recall and helps translate symbolic imagery into conscious understanding.,curated,true
+dream-work,8,3,C-0218,Sodalite,1,Helps organize dream impressions so their patterns and messages can be remembered more clearly.,curated,true
+dream-work,9,2,C-0221,Celestite,2,"Encourages peaceful, vivid dreaming and gentle receptivity to guidance received during sleep.",curated,true
+dream-work,10,2,C-0115,Lodolite Quartz,2,Supports immersive inner journeys and helps visionary dream imagery feel more accessible.,curated,true
+dream-work,11,2,C-0009,Caribbean Calcite,2,"Creates a relaxed, receptive state that encourages vivid dreams and sleep-based insight.",curated,true
+dream-work,12,2,C-0159,Black Moonstone,2,Supports exploration of hidden emotions and unconscious material revealed through dreams.,curated,true
+dream-work,13,2,C-0254,Lepidolite,1,Calms nighttime mental activity so dreams can be remembered with greater continuity and detail.,curated,true
+embodiment,1,3,C-0041,Hematite,1,Draws scattered awareness back into the physical body and the immediate present moment.,curated,true
+embodiment,2,3,C-0099,Red Jasper,1,Strengthens connection with physical presence and the steady reality of being here now.,curated,true
+embodiment,3,3,C-0103,Smoky Quartz,1,Settles excess mental or emotional energy so awareness can return to the body.,curated,true
+embodiment,4,3,C-0272,Almandine Garnet,3,Reinforces physical presence and helps depleted awareness feel rooted within the body again.,curated,true
+embodiment,5,3,C-0200,Shiva Lingam,2,"Integrates physical, emotional, and spiritual awareness into a more fully inhabited sense of self.",curated,true
+embodiment,6,2,C-0248,Bronzite,2,Encourages calm bodily presence and helps attention remain anchored during pressure or uncertainty.,curated,true
+embodiment,7,2,C-0199,Shaman Stone,3,Supports centered awareness within the body while maintaining connection with the surrounding world.,curated,true
+emotional-balance,1,3,C-0254,Lepidolite,1,Restores emotional equilibrium when stress or change pushes feelings toward extremes.,curated,true
+emotional-balance,2,3,C-0214,Rhodonite,2,Balances intense emotional reactions and helps restore composure after conflict or hurt.,curated,true
+emotional-balance,3,3,C-0162,Moonstone,1,Moderates emotional fluctuations and encourages a steadier response to changing moods.,curated,true
+emotional-balance,4,3,C-0012,Green Calcite,2,"Gently releases emotional buildup and restores a calmer, more balanced inner state.",curated,true
+emotional-balance,5,3,C-0052,Chrysocolla,2,Balances emotional intensity with compassion so feelings can move without taking over.,curated,true
+emotional-balance,6,3,C-0218,Sodalite,1,Brings logic and emotion into better alignment when reactions become difficult to manage.,curated,true
+emotional-balance,7,3,C-0325,Lithium Quartz,3,Settles emotional volatility and encourages a smoother return to inner equilibrium.,curated,true
+emotional-balance,8,2,C-0025,Amazonite,1,Balances emotional expression with clear boundaries when feelings become overwhelming.,curated,true
+emotional-balance,9,2,C-0021,Aquamarine,2,Cools emotional reactivity and supports a more measured response under pressure.,curated,true
+emotional-balance,10,2,C-0007,Blue Calcite,1,Softens emotional intensity and helps restore calm after overwhelm or agitation.,curated,true
+emotional-balance,11,2,C-0069,Blue Lace Agate,2,Eases emotional tension and encourages gentler reactions during charged situations.,curated,true
+emotional-balance,12,2,C-0070,Botswana Agate,2,Stabilizes emotional swings and supports calm perspective during periods of stress.,curated,true
+emotional-balance,13,2,C-0095,Ocean Jasper,2,Encourages emotional flexibility and helps opposing feelings coexist more peacefully.,curated,true
+emotional-balance,14,2,C-0060,Unakite,2,Balances emotional patterns by integrating difficult feelings with patience and perspective.,curated,true
+emotional-balance,15,2,C-0395,Peach Moonstone,2,Soothes emotional sensitivity and encourages steadier self-compassion during overwhelm.,curated,true
+emotional-balance,16,2,C-9001,Pink Amethyst,2,Calms emotional turbulence and supports gentle equilibrium without suppressing feeling.,curated,true
+emotional-balance,17,2,C-0030,Rainbow Moonstone,1,Balances emotional sensitivity with intuition so changing feelings remain easier to navigate.,curated,true
+emotional-balance,18,2,C-0253,Larimar,3,"Cools emotional extremes and encourages calm, compassionate responses during conflict.",curated,true
+energetic-lift,1,3,C-0121,Citrine,1,Brightens depleted energy and restores optimism when everything feels dull or weighed down.,curated,true
+energetic-lift,2,3,C-0029,Sunstone,2,"Lifts emotional heaviness and restores warmth, enthusiasm, and a brighter sense of possibility.",curated,true
+energetic-lift,3,3,C-0016,Orange Calcite,1,"Moves sluggish energy and replaces heaviness with warmth, playfulness, and creative momentum.",curated,true
+energetic-lift,4,3,C-0145,Amber,2,"Brings warm, sunlike energy that clears dullness and encourages a brighter inner atmosphere.",curated,true
+energetic-lift,5,3,C-0071,Crazy Lace Agate,2,Shifts heavy moods toward cheerfulness while keeping the renewed energy steady and grounded.,curated,true
+energetic-lift,6,3,C-0088,Dalmatian Jasper,2,"Breaks up emotional stagnation through playfulness, spontaneity, and a lighter perspective.",curated,true
+energetic-lift,7,3,C-0351,Titanium Aura Quartz,2,Delivers a vivid burst of uplifting energy when the atmosphere feels flat or depleted.,curated,true
+energetic-lift,8,3,C-0306,Fire Opal,3,Rekindles joyful fire and creative enthusiasm when life has begun to feel colorless or stale.,curated,true
+energetic-lift,9,2,C-0344,Spinel,3,Refreshes depleted energy and restores enthusiasm without relying on force or intensity.,curated,true
+energetic-lift,10,2,C-0362,Zincite,3,Provides concentrated activation when stagnant energy needs a stronger upward shift.,curated,true
+energetic-lift,11,2,C-0173,Orange Selenite,2,Clears stagnant energy gently while replacing heaviness with warmth and creative brightness.,curated,true
+energetic-lift,12,2,C-0124,Crackle Quartz,2,Creates a quick energetic reset when dullness or stagnation has muted your natural spark.,curated,true
+energetic-lift,13,2,C-0073,Druzy Agate,2,Adds gentle brightness and sparkle when the emotional or energetic atmosphere feels flat.,curated,true
+energetic-lift,14,2,C-0331,Peacock Ore,2,Encourages colorful optimism and renewed possibility when energy has become heavy or uninspired.,curated,true
+focus,1,3,C-0054,Dumortierite,2,"Strengthens concentration, mental discipline, and the patience to stay with a difficult task.",curated,true
+focus,2,3,C-0036,Yellow Fluorite,2,Sharpens concentration and supports focused learning when details demand your attention.,curated,true
+focus,3,3,C-0229,Vanadinite,3,Channels scattered energy into sustained attention and steady progress on one clear goal.,curated,true
+focus,4,3,C-0013,Honey Calcite,2,"Builds motivation, concentration, and the follow-through needed to finish what you begin.",curated,true
+focus,5,3,C-0035,Rainbow Fluorite,1,Organizes scattered mental energy so your attention can settle on the task in front of you.,curated,true
+focus,6,3,C-0340,Scapolite,3,Helps clear distractions and keeps your attention aligned with a chosen goal.,curated,true
+focus,7,3,C-0044,Blue Apatite,2,"Energizes the mind and helps turn ideas into purposeful, focused action.",curated,true
+focus,8,3,C-0113,Hematoid Quartz,2,Grounds mental overload and steadies your attention when too many things compete for it.,curated,true
+focus,9,2,C-0295,Clear Fluorite,2,Clears background mental clutter so you can concentrate without unnecessary distraction.,curated,true
+focus,10,2,C-0218,Sodalite,1,Brings order to busy thoughts and supports steady concentration during study or planning.,curated,true
+focus,11,2,C-0103,Smoky Quartz,1,Grounds nervous energy so you can return your attention to practical tasks and priorities.,curated,true
+focus,12,2,C-0167,Blue Tiger's Eye,2,Encourages calm alertness and steady attention without pushing the mind into overdrive.,curated,true
+focus,13,2,C-0120,Ametrine,3,Combines clear thinking with momentum when you need to concentrate and keep moving.,curated,true
+focus,14,2,C-0039,Sapphire,3,Supports disciplined thought and the commitment to stay attentive to what truly matters.,curated,true
+forgiveness,1,3,C-0155,Chrysoprase,2,Helps release resentment and blame so forgiveness can replace lingering bitterness.,curated,true
+forgiveness,2,3,C-0214,Rhodonite,2,Supports forgiveness after hurt while preserving self-respect and healthy boundaries.,curated,true
+forgiveness,3,3,C-0019,Dioptase,3,Releases deeply held heart pain and attachment to wounds that resist forgiveness.,curated,true
+forgiveness,4,3,C-0213,Rhodochrosite,2,Encourages self-forgiveness and compassion for the wounded choices of the past.,curated,true
+forgiveness,5,2,C-0223,Stichtite,3,Softens rigid hurt and encourages forgiveness without dismissing what happened.,curated,true
+forgiveness,6,2,C-0060,Unakite,2,Helps old emotional patterns loosen so past harm no longer governs the present.,curated,true
+forgiveness,7,2,C-0271,Ajoite,4,Encourages gentle release of old pain without carrying bitterness into what comes next.,curated,true
+forgiveness,8,2,C-0024,Morganite,3,Brings compassionate perspective to hurt so the heart can gradually release blame.,curated,true
+forgiveness,9,2,C-0133,Atlantisite,3,Combines compassion with insight to loosen the hold of old emotional grievances.,curated,true
+forgiveness,10,2,C-0108,Rose Quartz,1,Softens the heart around old wounds and encourages forgiveness rooted in compassion.,curated,true
+grief,1,3,C-0138,Apache Tears,2,"Provides gentle grounding and comfort while sorrow, shock, or mourning moves through you.",curated,true
+grief,2,3,C-0204,Jet,3,"Offers steady protection and grounding during mourning, sadness, and emotional heaviness.",curated,true
+grief,3,3,C-0142,Rainbow Obsidian,2,Helps bring buried sorrow into awareness while protecting the heart during release.,curated,true
+grief,4,3,C-0108,Rose Quartz,1,"Offers gentle heart comfort when loss leaves you feeling tender, empty, or emotionally exposed.",curated,true
+grief,5,3,C-0214,Rhodonite,2,Supports emotional repair and steadiness while the heart adjusts to loss.,curated,true
+grief,6,3,C-0103,Smoky Quartz,1,Grounds the heaviness of grief and helps you remain present while sorrow moves through.,curated,true
+grief,7,3,C-0011,Cobaltoan Calcite,4,Surrounds heartbreak and profound sorrow with concentrated tenderness and compassion.,curated,true
+grief,8,2,C-0040,Goethite,3,Grounds deep sorrow and supports the difficult inner work that grief can uncover.,curated,true
+grief,9,2,C-0324,Lepidocrocite,3,Helps lingering grief and emotional residue loosen gradually without forcing release.,curated,true
+grief,10,2,C-0107,Lavender Rose Quartz,2,"Brings peaceful heart comfort during mourning, emotional exhaustion, or tender remembrance.",curated,true
+grief,11,2,C-0070,Botswana Agate,2,Offers quiet stability and patient comfort through prolonged sadness and gradual healing.,curated,true
+grief,12,2,C-9001,Pink Amethyst,2,Creates a gentle space for sorrow to be felt without becoming emotionally overwhelming.,curated,true
+grief,13,2,C-0314,Green Opal,3,Encourages emotional renewal when grief has left the heart tired or closed to hope.,curated,true
+grief,14,2,C-0002,Blue Aragonite,3,"Provides gentle emotional support when sadness feels heavy, private, or difficult to express.",curated,true
+grounding,1,3,C-0041,Hematite,1,Draws scattered awareness back into the body and restores a firm sense of presence.,curated,true
+grounding,2,3,C-0103,Smoky Quartz,1,Channels excess energy downward and reconnects you with the present physical moment.,curated,true
+grounding,3,3,C-0099,Red Jasper,1,Roots attention in the body and Earth when stress leaves you unfocused or unmoored.,curated,true
+grounding,4,3,C-0129,Black Tourmaline,1,Creates strong energetic weight and containment when your surroundings feel overwhelming.,curated,true
+grounding,5,3,C-0164,Petrified Wood,2,"Deepens patience and Earth connection, helping you feel rooted through slow change.",curated,true
+grounding,6,3,C-0053,Brown Tourmaline,3,Settles restless energy into the body and restores a grounded sense of safety.,curated,true
+grounding,7,3,C-0139,Black Obsidian,1,"Pulls awareness beneath surface noise and anchors you in immediate, physical reality.",curated,true
+grounding,8,2,C-0158,Onyx,2,Strengthens energetic boundaries and keeps you centered in the body under pressure.,curated,true
+grounding,9,2,C-0001,Aragonite,2,"Collects scattered energy and helps you regain a centered, grounded internal state.",curated,true
+grounding,10,2,C-0248,Bronzite,2,Combines steadiness with embodied confidence when stress threatens to knock you off center.,curated,true
+grounding,11,2,C-0201,Shungite,2,"Provides dense energetic anchoring when you feel scattered, overstimulated, or unprotected.",curated,true
+grounding,12,2,C-0077,Moss Agate,1,"Reconnects you with natural rhythms and a slower, more rooted sense of presence.",curated,true
+grounding,13,2,C-0141,Mahogany Obsidian,2,Grounds difficult emotions and restores physical resolve when old patterns resurface.,curated,true
+grounding,14,2,C-0138,Apache Tears,2,Offers gentle grounding when grief or emotional pain makes harsher stones feel overwhelming.,curated,true
+grounding,15,1,C-0079,Tree Agate,2,Encourages quiet Earth connection and a calm return to the body after stress.,curated,true
+grounding,16,1,C-0204,Jet,3,"Provides steady, protective grounding during grief, heaviness, or emotionally draining periods.",curated,true
+grounding,17,1,C-0184,Boji Stones,4,Balances opposing energetic forces and brings awareness back into physical alignment.,curated,true
+grounding,18,1,C-0199,Shaman Stone,3,Centers awareness in the body and environment during spiritual or energetic work.,curated,true
+heart-support,1,3,C-0108,Rose Quartz,1,Surrounds emotional hurt with gentle comfort and encourages the heart to soften again.,curated,true
+heart-support,2,3,C-0024,Morganite,3,Offers tender reassurance and helps the heart reopen gradually after emotional pain.,curated,true
+heart-support,3,3,C-0055,Pink Tourmaline,3,Nurtures a wounded heart and restores a sense of emotional safety after hurt.,curated,true
+heart-support,4,3,C-0014,Mangano Calcite,2,"Comforts emotional tenderness and encourages softness after criticism, rejection, or loss.",curated,true
+heart-support,5,3,C-0213,Rhodochrosite,2,Comforts deep emotional wounds and helps tenderness return after hurt or rejection.,curated,true
+heart-support,6,3,C-0214,Rhodonite,2,Supports emotional repair by bringing compassion and steadiness to a wounded heart.,curated,true
+heart-support,7,3,C-0245,Kunzite,3,Gently lowers emotional defenses so love and comfort can reach the heart again.,curated,true
+heart-support,8,3,C-0165,Pink Opal,2,Soothes old emotional pain and encourages a softer relationship with vulnerable feelings.,curated,true
+heart-support,9,3,C-0011,Cobaltoan Calcite,4,"Brings concentrated compassion and comfort to grief, heartbreak, and emotional injury.",curated,true
+heart-support,10,3,C-0019,Dioptase,3,Helps release deeply held heart pain so emotional renewal and openness can begin.,curated,true
+heart-support,11,3,C-0271,Ajoite,4,Encourages profound but gentle emotional release while surrounding the heart with peace.,curated,true
+heart-support,12,3,C-0107,Lavender Rose Quartz,2,"Blends heart comfort with peaceful calm during grief, tenderness, or emotional fatigue.",curated,true
+heart-support,13,2,C-0179,Pink Aventurine,2,Encourages gentle emotional healing without overwhelming a sensitive or guarded heart.,curated,true
+heart-support,14,2,C-9001,Pink Amethyst,2,Creates a peaceful space for emotional pain to soften without forcing the heart open.,curated,true
+heart-support,15,2,C-0012,Green Calcite,2,Softens emotional heaviness and encourages the heart to release pain gradually.,curated,true
+heart-support,16,2,C-0060,Unakite,2,Helps old emotional pain surface gently so the heart can integrate and release it.,curated,true
+heart-support,17,2,C-9004,Blue Rose Quartz,3,Soothes heart tension and supports calmer expression of vulnerable emotional needs.,curated,true
+heart-support,18,2,C-0288,Bustamite,4,Offers warm emotional nurturing when hurt has created distance or protective armor.,curated,true
+heart-support,19,2,C-0324,Lepidocrocite,3,Helps loosen lingering sorrow and emotional residue so the heart can welcome renewal.,curated,true
+heart-support,20,2,C-0314,Green Opal,3,Refreshes a tired emotional heart and encourages hope after disappointment or sadness.,curated,true
+heart-support,21,2,C-0356,Variscite,3,Brings quiet acceptance and gentle peace when the heart feels weary or emotionally burdened.,curated,true
+heart-support,22,2,C-0346,Stilbite,2,"Creates a soft, reassuring atmosphere that helps emotional defenses relax naturally.",curated,true
+heart-support,23,2,C-0178,Green Aventurine,1,Gently restores hope and emotional openness after disappointment or heartache.,curated,true
+inner-child,1,3,C-0213,Rhodochrosite,2,"Helps revisit childhood pain with compassion while restoring joy, innocence, and emotional warmth.",curated,true
+inner-child,2,3,C-0165,Pink Opal,2,Gently soothes old childhood hurt and creates safety for vulnerable feelings to be acknowledged.,curated,true
+inner-child,3,3,C-0014,Mangano Calcite,2,"Offers soft emotional reassurance to younger parts still carrying fear, shame, or unmet needs.",curated,true
+inner-child,4,3,C-0214,Rhodonite,2,Helps process early emotional wounds without losing the boundaries and strength needed for healing.,curated,true
+inner-child,5,3,C-0060,Unakite,2,Brings buried childhood patterns into awareness so they can be integrated with patience and care.,curated,true
+inner-child,6,3,C-0019,Dioptase,3,Supports release of deeply rooted childhood pain and the beliefs formed around early hurt.,curated,true
+inner-child,7,3,C-0108,Rose Quartz,1,Creates a steady sense of love and comfort for younger parts that once felt unseen or unprotected.,curated,true
+inner-child,8,3,C-0088,Dalmatian Jasper,2,"Reawakens playfulness, spontaneity, and lightness when adulthood has crowded out simple joy.",curated,true
+inner-child,9,2,C-0155,Chrysoprase,2,"Encourages emotional renewal and helps the inner child loosen shame, resentment, and old rejection.",curated,true
+inner-child,10,2,C-0395,Peach Moonstone,2,Nurtures tender younger parts and helps unmet emotional needs surface without overwhelming the heart.,curated,true
+inner-child,11,2,C-0095,Ocean Jasper,2,Invites curiosity and cheerful play while easing the emotional heaviness carried from the past.,curated,true
+inner-child,12,2,C-0055,Pink Tourmaline,3,Strengthens self-compassion around early wounds and reassures parts that learned to expect rejection.,curated,true
+inner-child,13,2,C-0011,Cobaltoan Calcite,4,Brings warmth and tenderness to deeply hurt younger parts that still need emotional reassurance.,curated,true
+inner-child,14,2,C-0245,Kunzite,3,"Helps guarded younger parts feel safe enough to receive affection, softness, and emotional support.",curated,true
+intuition,1,3,C-0028,Labradorite,1,Awakens subtle perception and helps inner signals become easier to notice and trust.,curated,true
+intuition,2,3,C-0162,Moonstone,1,Deepens receptivity to instinctive guidance while encouraging trust in natural inner rhythms.,curated,true
+intuition,3,3,C-0222,Iolite,3,Sharpens inner vision and helps distinguish genuine guidance from distraction or projection.,curated,true
+intuition,4,3,C-0006,Azurite,3,Opens intuitive perception and helps hidden patterns become clearer to conscious awareness.,curated,true
+intuition,5,3,C-0218,Sodalite,1,Brings logic and intuition together so inner knowing can be understood without being dismissed.,curated,true
+intuition,6,3,C-0188,Lapis Lazuli,1,Strengthens trust in inner truth and helps intuitive insight become conscious understanding.,curated,true
+intuition,7,3,C-0119,Amethyst,1,Quiets mental interference so subtle guidance can rise into clearer awareness.,curated,true
+intuition,8,3,C-0030,Rainbow Moonstone,1,"Heightens intuitive receptivity and helps guidance emerge through feelings, signs, and cycles.",curated,true
+intuition,9,2,C-0320,Hypersthene,3,Sharpens instinctive perception while keeping intuitive impressions grounded and practical.,curated,true
+intuition,10,2,C-0328,Merlinite,3,Encourages exploration of hidden inner knowledge and the messages held beneath conscious thought.,curated,true
+intuition,11,2,C-0130,Shattuckite,3,Helps intuitive messages become clearer and easier to interpret or express truthfully.,curated,true
+intuition,12,2,C-0354,Ulexite,3,"Reveals what lies beneath appearances and supports direct, perceptive intuitive reading.",curated,true
+intuition,13,2,C-0226,Tanzanite,4,Links intuitive awareness with clear understanding so insight can be recognized and integrated.,curated,true
+intuition,14,2,C-0135,Covellite,4,Draws attention inward and strengthens awareness of subtle guidance during periods of change.,curated,true
+intuition,15,2,C-0281,Black Opal,4,Illuminates hidden emotional patterns and strengthens the courage to trust what is sensed.,curated,true
+intuition,16,2,C-0359,White Opal,3,Encourages receptive awareness and helps emotional impressions reveal deeper intuitive meaning.,curated,true
+intuition,17,2,C-0034,Purple Fluorite,2,Organizes subtle impressions so intuitive insight can emerge without becoming mentally scattered.,curated,true
+intuition,18,2,C-0187,Indigo Gabbro,2,Supports grounded intuitive exploration while bringing unconscious patterns into awareness.,curated,true
+intuition,19,2,C-0211,Prehnite,2,Encourages calm inner listening and helps quiet guidance feel more recognizable and trustworthy.,curated,true
+intuition,20,2,C-0166,Spectrolite,3,Heightens awareness of concealed possibilities and subtle signals within changing circumstances.,curated,true
+intuition,21,2,C-0159,Black Moonstone,2,Supports intuitive awareness during uncertain beginnings while keeping deeper feelings grounded.,curated,true
+manifestation,1,3,C-0121,Citrine,1,Strengthens belief in possibility and encourages confident action toward desired outcomes.,curated,true
+manifestation,2,3,C-0105,Clear Quartz,1,Amplifies a clearly stated intention and keeps attention aligned with the chosen outcome.,curated,true
+manifestation,3,3,C-0137,Pyrite,1,Builds the confidence and practical drive needed to turn intention into tangible progress.,curated,true
+manifestation,4,3,C-0178,Green Aventurine,1,Encourages openness to opportunity while supporting action toward growth and abundance.,curated,true
+manifestation,5,3,C-0168,Gold Tiger's Eye,1,Combines focused intention with courage and disciplined movement toward a chosen goal.,curated,true
+manifestation,6,3,C-0114,Rutilated Quartz,2,Accelerates intention and helps direct energy toward the outcome being consciously created.,curated,true
+manifestation,7,3,C-0042,Lodestone,3,Magnetizes attention toward a specific desire and strengthens commitment to drawing it closer.,curated,true
+manifestation,8,2,C-0360,White Topaz,3,Clarifies the desired outcome and reinforces focused belief without conflicting energetic themes.,curated,true
+manifestation,9,2,C-0292,Chalcopyrite,2,Encourages confidence in possibility and readiness to act when opportunities begin appearing.,curated,true
+manifestation,10,2,C-0269,Adamite,4,Aligns heartfelt desire with inspired action so intentions move beyond wishful thinking.,curated,true
+manifestation,11,2,C-0321,Imperial Topaz,4,Strengthens personal authority and the belief that a desired outcome can be claimed responsibly.,curated,true
+manifestation,12,2,C-0335,Pyromorphite,4,Directs manifestation toward tangible material results and practical forms of prosperity.,curated,true
+manifestation,13,2,C-0128,Smoky Citrine,3,"Grounds ambitious intentions so progress remains practical, steady, and connected to reality.",curated,true
+meditation,1,3,C-0119,Amethyst,1,Quiets mental noise and supports steady inward attention during contemplative practice.,curated,true
+meditation,2,3,C-0241,Howlite,1,Settles restless thought patterns so the mind can remain present without constant distraction.,curated,true
+meditation,3,3,C-0175,Selenite,1,"Creates a clear, peaceful atmosphere that supports stillness and receptive awareness.",curated,true
+meditation,4,3,C-0105,Clear Quartz,1,Strengthens focused intention and helps maintain clear awareness throughout meditation.,curated,true
+meditation,5,3,C-0218,Sodalite,1,Organizes mental activity and supports calm concentration during inward reflection.,curated,true
+meditation,6,3,C-0034,Purple Fluorite,2,"Combines mental focus with intuitive openness for structured, sustained meditation.",curated,true
+meditation,7,3,C-0246,Apophyllite,2,"Encourages a clear, receptive state while helping attention turn gently inward.",curated,true
+meditation,8,3,C-0216,Scolecite,2,Softens mental activity and supports deep quiet without making the practice feel forced.,curated,true
+meditation,9,2,C-0103,Smoky Quartz,1,Grounds awareness in the present moment so meditation feels steady and embodied.,curated,true
+meditation,10,2,C-0254,Lepidolite,1,Eases mental overload and helps the mind transition into a calmer contemplative rhythm.,curated,true
+meditation,11,2,C-0221,Celestite,2,Creates a peaceful inner atmosphere that supports gentle stillness and receptive reflection.,curated,true
+meditation,12,2,C-0007,Blue Calcite,1,Calms emotional and mental agitation so attention can settle more naturally.,curated,true
+meditation,13,2,C-0115,Lodolite Quartz,2,Supports immersive inner journeying and sustained attention during reflective meditation.,curated,true
+meditation,14,2,C-0126,Prasiolite,2,"Encourages calm, heart-centered contemplation and balanced spiritual reflection.",curated,true
+meditation,15,2,C-0357,Vera Cruz Amethyst,3,Supports refined awareness and gentle access to deeper contemplative states.,curated,true
+meditation,16,2,C-0210,Phosphosiderite,3,"Helps create a soft, undisturbed state for quiet reflection and inward listening.",curated,true
+mental-clarity,1,3,C-0035,Rainbow Fluorite,1,Brings scattered thoughts into order so you can think clearly and see the whole picture.,curated,true
+mental-clarity,2,3,C-0218,Sodalite,1,"Calms mental noise and helps organize thoughts into rational, coherent patterns.",curated,true
+mental-clarity,3,3,C-0295,Clear Fluorite,2,"Clears mental clutter and supports clean, unbiased thinking when confusion sets in.",curated,true
+mental-clarity,4,3,C-0031,Blue Fluorite,2,"Brings calm structure to busy thoughts, especially when emotions complicate the facts.",curated,true
+mental-clarity,5,3,C-0054,Dumortierite,2,"Strengthens mental discipline, patience, and the ability to work through a difficult problem.",curated,true
+mental-clarity,6,3,C-0015,Optical Calcite,2,Helps separate assumptions from facts so you can view a situation from a clearer angle.,curated,true
+mental-clarity,7,3,C-0105,Clear Quartz,1,Amplifies focused thought and brings a scattered mind back to one clear intention.,curated,true
+mental-clarity,8,3,C-0119,Amethyst,1,Quiets overthinking so insight can surface without being drowned out by mental noise.,curated,true
+mental-clarity,9,2,C-0044,Blue Apatite,2,Clears mental sluggishness and helps connect fresh insight with purposeful action.,curated,true
+mental-clarity,10,2,C-0036,Yellow Fluorite,2,"Supports learning, discernment, and confident thinking when details feel tangled.",curated,true
+mental-clarity,11,2,C-0006,Azurite,3,Illuminates hidden patterns and helps reveal what lies beneath a confusing situation.,curated,true
+mental-clarity,12,2,C-0120,Ametrine,3,Pairs clear discernment with forward momentum when you need to think and then act.,curated,true
+mental-clarity,13,2,C-0039,Sapphire,3,"Encourages disciplined thought, wise judgment, and loyalty to what you know is true.",curated,true
+mental-clarity,14,2,C-0113,Hematoid Quartz,2,Grounds mental overload so scattered thoughts can settle into practical clarity.,curated,true
+motivation,1,3,C-0153,Carnelian,1,Ignites motivation and helps overcome procrastination so purposeful action can begin.,curated,true
+motivation,2,3,C-0169,Red Tiger's Eye,2,Stimulates drive and determination when hesitation or low momentum delays action.,curated,true
+motivation,3,3,C-0229,Vanadinite,3,Promotes focused action and the determination to bring demanding projects to completion.,curated,true
+motivation,4,3,C-0046,Yellow Apatite,3,Counters lethargy and strengthens the motivation to pursue goals with renewed purpose.,curated,true
+motivation,5,3,C-0044,Blue Apatite,2,"Turns inspiration into action by stimulating mental energy, ambition, and forward movement.",curated,true
+motivation,6,3,C-0016,Orange Calcite,1,"Rekindles inner drive and helps break through apathy, lethargy, or procrastination.",curated,true
+motivation,7,3,C-0029,Sunstone,2,Restores enthusiasm and encourages positive action when discouragement stalls progress.,curated,true
+motivation,8,3,C-0008,Bumblebee Jasper,3,Breaks through stagnation and supplies an energizing push toward change and possibility.,curated,true
+motivation,9,3,C-0121,Citrine,1,Brightens ambition and strengthens the drive to pursue goals and create visible progress.,curated,true
+motivation,10,2,C-0168,Gold Tiger's Eye,1,Combines practical judgment with the willpower to stop hesitating and take useful action.,curated,true
+motivation,11,2,C-0137,Pyrite,1,Strengthens ambition and encourages decisive effort toward practical or professional goals.,curated,true
+motivation,12,2,C-0186,Goldstone,1,"Encourages ambition, optimism, and the persistence to keep working toward visible results.",curated,true
+motivation,13,2,C-0180,Red Aventurine,2,Stimulates grounded drive and helps maintain forward movement toward demanding goals.,curated,true
+motivation,14,2,C-0340,Scapolite,3,Clarifies personal goals and strengthens the determination to act rather than drift.,curated,true
+motivation,15,2,C-0342,Sphalerite,3,Restores grounded physical drive when low energy makes beginning a task feel difficult.,curated,true
+motivation,16,2,C-0120,Ametrine,3,Combines clear thinking with forward momentum to move from indecision into action.,curated,true
+motivation,17,2,C-0149,Banded Carnelian,2,Offers steady motivation when action is needed without emotional urgency or impulsiveness.,curated,true
+motivation,18,2,C-0017,Red Calcite,2,Revives drive and physical momentum when sluggishness makes it difficult to get started.,curated,true
+nervous-system,1,3,C-0254,Lepidolite,1,"Settles overstimulation and helps frayed, reactive energy return to a calmer baseline.",curated,true
+nervous-system,2,3,C-0001,Aragonite,2,Grounds scattered activation and helps the body regain a steadier internal rhythm.,curated,true
+nervous-system,3,3,C-0256,Magnesite,2,Releases nervous tension and encourages a less reactive response to stimulation.,curated,true
+nervous-system,4,3,C-0041,Hematite,1,Anchors awareness in the body when overstimulation leaves you scattered or unsteady.,curated,true
+nervous-system,5,2,C-0103,Smoky Quartz,1,"Draws excess activation downward, helping the body feel anchored and contained.",curated,true
+nervous-system,6,2,C-0241,Howlite,1,Softens physical agitation and encourages the body to release accumulated tension.,curated,true
+nervous-system,7,2,C-0007,Blue Calcite,1,Cools sensory and emotional intensity when the system feels flooded or overloaded.,curated,true
+nervous-system,8,2,C-0325,Lithium Quartz,3,Gently settles heightened sensitivity and smooths erratic emotional energy.,curated,true
+nervous-system,9,2,C-0217,Smithsonite,3,Creates a deeply soothing sense of containment when the system feels tender or raw.,curated,true
+nervous-system,10,1,C-0079,Tree Agate,2,"Restores a slow, grounded steadiness after prolonged stress or sensory overload.",curated,true
+nervous-system,11,1,C-0132,Kambaba Jasper,2,"Encourages slow, earthy regulation when the body feels strained or overstimulated.",curated,true
+nervous-system,12,1,C-0273,Amblygonite,4,Eases overwound reactivity and invites a gentler transition back toward calm.,curated,true
+overthinking,1,3,C-0254,Lepidolite,1,Helps quiet repetitive worry and soften the mental tension that keeps thoughts circling.,curated,true
+overthinking,2,3,C-0119,Amethyst,1,Creates calm space between thoughts so overthinking does not take over the whole mind.,curated,true
+overthinking,3,3,C-0241,Howlite,1,Slows an overactive mind and helps loosen the grip of thoughts that will not settle.,curated,true
+overthinking,4,3,C-0218,Sodalite,1,Brings looping thoughts back into rational order when your mind keeps chasing every possibility.,curated,true
+overthinking,5,2,C-0103,Smoky Quartz,1,Grounds runaway thoughts and brings your attention back to the present moment.,curated,true
+overthinking,6,2,C-0007,Blue Calcite,1,"Softens mental intensity and encourages a slower, quieter pace of thought.",curated,true
+overthinking,7,1,C-0206,Barite,3,"Encourages mental spaciousness when your thoughts feel crowded, repetitive, or difficult to release.",curated,true
+protection,1,3,C-0129,Black Tourmaline,1,Creates a strong energetic boundary against unwanted influence and environmental heaviness.,curated,true
+protection,2,3,C-0139,Black Obsidian,1,Absorbs and confronts heavy energy while exposing harmful patterns or hidden influence.,curated,true
+protection,3,3,C-0028,Labradorite,1,"Shields sensitive energy during change, spiritual work, or emotionally charged environments.",curated,true
+protection,4,3,C-0063,Black Kyanite,2,Cuts through lingering energetic attachments while helping prevent further accumulation.,curated,true
+protection,5,3,C-0112,Tourmaline Quartz,2,Combines tourmaline shielding with quartz clarity to protect without clouding awareness.,curated,true
+protection,6,3,C-0250,Chiastolite,3,Traditionally used as a protective talisman for remaining centered through conflict or challenge.,curated,true
+protection,7,3,C-0119,Amethyst,1,Offers traditional spiritual protection while maintaining a calm and clear inner atmosphere.,curated,true
+protection,8,2,C-0201,Shungite,2,Filters dense environmental energy and reinforces a grounded sense of energetic containment.,curated,true
+protection,9,2,C-0137,Pyrite,1,Forms a reflective energetic shield associated with deflecting negativity and harmful intent.,curated,true
+protection,10,2,C-0248,Bronzite,2,Strengthens grounded boundaries and helps return unwanted energy without absorbing it.,curated,true
+protection,11,2,C-0074,Fire Agate,3,"Creates a protective field of grounded courage when facing conflict, pressure, or intimidation.",curated,true
+protection,12,2,C-0158,Onyx,2,Reinforces energetic boundaries and helps you remain self-contained under pressure.,curated,true
+protection,13,2,C-0103,Smoky Quartz,1,Grounds and disperses heavy energy before it can overwhelm your emotional field.,curated,true
+protection,14,2,C-0204,Jet,3,"Provides quiet protective grounding during grief, emotional heaviness, or draining encounters.",curated,true
+protection,15,2,C-0191,Nuumite,4,Offers deep protective containment during shadow work or encounters with difficult inner material.,curated,true
+protection,16,2,C-0150,Black Amethyst,3,Combines amethyst calm with grounding protection during spiritually or emotionally intense periods.,curated,true
+protection,17,1,C-0350,Tibetan Quartz,3,Helps maintain spiritual boundaries and clarity during meditation or intensive energy work.,curated,true
+purpose,1,3,C-0239,Eudialyte,3,Acts as an inner compass when you feel disconnected from your calling or meaningful direction.,curated,true
+purpose,2,3,C-0247,Astrophylite,3,Helps reveal the larger path of your life and the potential you are meant to develop.,curated,true
+purpose,3,3,C-0044,Blue Apatite,2,Clarifies what inspires you and helps translate meaningful direction into purposeful action.,curated,true
+purpose,4,3,C-0222,Iolite,3,Strengthens your inner compass so choices remain aligned with the path that feels truly yours.,curated,true
+purpose,5,3,C-0188,Lapis Lazuli,1,Connects inner truth with conscious direction so your path reflects what matters most deeply.,curated,true
+purpose,6,3,C-0028,Labradorite,1,Illuminates emerging possibilities and encourages trust in the path of personal becoming.,curated,true
+purpose,7,2,C-0218,Sodalite,1,Organizes competing thoughts so meaningful priorities and long-term direction become clearer.,curated,true
+purpose,8,2,C-0075,Flower Agate,2,Encourages growth toward unrealized potential and the life you feel called to create.,curated,true
+purpose,9,2,C-0340,Scapolite,3,Keeps attention aligned with meaningful goals rather than distractions that pull you off course.,curated,true
+purpose,10,2,C-0036,Yellow Fluorite,2,Clarifies personal direction and supports confidence in the purpose behind your decisions.,curated,true
+purpose,11,2,C-0224,Sugilite,4,Encourages commitment to a spiritually meaningful path even when it differs from expectations.,curated,true
+purpose,12,2,C-0130,Shattuckite,3,Helps recognize and express the deeper truth that points toward your meaningful contribution.,curated,true
+recovery,1,3,C-0304,Faden Quartz,3,"Helps restore continuity and wholeness after strain, separation, or difficult disruption.",curated,true
+recovery,2,3,C-0151,Bloodstone,2,Supports steady rebuilding and replenishment after stress has depleted your reserves.,curated,true
+recovery,3,3,C-0265,Seraphinite,3,Encourages deep restoration and gentle renewal when body and spirit feel depleted.,curated,true
+recovery,4,3,C-0012,Green Calcite,2,Creates a calm restorative space for releasing strain and allowing fresh energy to return.,curated,true
+recovery,5,3,C-0211,Prehnite,2,Promotes quiet replenishment and gentle rebuilding after emotional or energetic exhaustion.,curated,true
+recovery,6,3,C-0077,Moss Agate,1,Supports gradual renewal and steady restoration through a grounded connection with nature.,curated,true
+recovery,7,3,C-0178,Green Aventurine,1,Encourages balanced renewal and helps depleted energy rebuild without force or urgency.,curated,true
+recovery,8,2,C-0252,Fuchsite,2,Lightens emotional fatigue and supports compassionate renewal after prolonged giving.,curated,true
+recovery,9,2,C-0122,Golden Healer Quartz,3,Surrounds depleted energy with gentle warmth while supporting cleansing and restoration.,curated,true
+recovery,10,2,C-0060,Unakite,2,"Helps emotional strength rebuild gradually after stress, loss, or difficult change.",curated,true
+recovery,11,2,C-0007,Blue Calcite,1,Soothes overworked energy and encourages the quiet rest needed for reserves to return.,curated,true
+recovery,12,2,C-0254,Lepidolite,1,Settles nervous strain and supports restorative rest when exhaustion makes recovery difficult.,curated,true
+recovery,13,2,C-0107,Lavender Rose Quartz,2,Offers softness and emotional rest while a tender heart regains strength and balance.,curated,true
+recovery,14,2,C-0004,Pink Aragonite,3,Provides gentle comfort and stabilization when recovery requires softness rather than effort.,curated,true
+recovery,15,2,C-0314,Green Opal,3,Refreshes emotional energy and encourages hopeful renewal after a draining period.,curated,true
+recovery,16,2,C-0142,Rainbow Obsidian,2,Protects tender emotional healing while helping hope return after pain or discouragement.,curated,true
+relationships,1,3,C-0214,Rhodonite,2,"Encourages reconciliation, mutual understanding, and healthier responses after conflict.",curated,true
+relationships,2,3,C-0108,Rose Quartz,1,Nurtures affection and emotional openness so loving connections can deepen gently.,curated,true
+relationships,3,3,C-0022,Emerald,3,"Strengthens loyalty, unity, and the enduring bonds that support committed relationships.",curated,true
+relationships,4,3,C-0025,Amazonite,1,Encourages honest communication and clearer understanding of each person’s emotional needs.,curated,true
+relationships,5,3,C-0060,Unakite,2,Helps old emotional patterns heal so they no longer undermine present relationships.,curated,true
+relationships,6,3,C-0052,Chrysocolla,2,Supports compassionate truth-telling when emotional honesty is needed without blame or cruelty.,curated,true
+relationships,7,2,C-0024,Morganite,3,"Encourages tenderness, patience, and a more loving response to emotional vulnerability.",curated,true
+relationships,8,2,C-0213,Rhodochrosite,2,"Helps build connection through emotional honesty, compassion, and healthier self-respect.",curated,true
+relationships,9,2,C-0082,Blue Chalcedony,2,Encourages patient listening and considerate speech during sensitive conversations.,curated,true
+relationships,10,2,C-0069,Blue Lace Agate,2,Softens tense conversations so both people can listen and respond more thoughtfully.,curated,true
+relationships,11,2,C-0253,Larimar,3,Cools emotional reactivity and encourages calmer communication during relationship tension.,curated,true
+relationships,12,2,C-0318,Hemimorphite,3,Connects empathy with honest expression when important emotional needs must be discussed.,curated,true
+relationships,13,2,C-0314,Green Opal,3,"Helps restore emotional openness after conflict, separation, or a painful disagreement.",curated,true
+relationships,14,2,C-0155,Chrysoprase,2,Supports trust and forgiveness when disappointment has strained an important connection.,curated,true
+relationships,15,2,C-0165,Pink Opal,2,"Offers gentle emotional support through separation, heartbreak, or distance in a relationship.",curated,true
+resilience,1,3,C-0151,Bloodstone,2,Builds courageous steadiness and helps strength return after stress or hardship.,curated,true
+resilience,2,3,C-0158,Onyx,2,Strengthens inner stability so pressure can be endured without losing your center.,curated,true
+resilience,3,3,C-0099,Red Jasper,1,Provides grounded strength for remaining steady through prolonged difficulty.,curated,true
+resilience,4,3,C-0129,Black Tourmaline,1,Reinforces energetic boundaries and stability when difficult conditions feel overwhelming.,curated,true
+resilience,5,3,C-0103,Smoky Quartz,1,Grounds emotional strain and helps composure return after destabilizing experiences.,curated,true
+resilience,6,3,C-0248,Bronzite,2,Restores grounded confidence and resolve after circumstances have worn you down.,curated,true
+resilience,7,3,C-0041,Hematite,1,Anchors scattered energy and rebuilds steadiness when disruption has shaken your footing.,curated,true
+resilience,8,3,C-0087,Brecciated Jasper,2,"Helps you regain momentum and grounded strength after exhaustion, stress, or setbacks.",curated,true
+resilience,9,3,C-0164,Petrified Wood,2,"Encourages patience, adaptability, and deeply rooted strength through long-term change.",curated,true
+resilience,10,3,C-0250,Chiastolite,3,Keeps energy centered and protected while you move through challenge or instability.,curated,true
+resilience,11,2,C-0089,Dragon's Blood Jasper,2,Strengthens heart-led courage and the resolve to rise again after difficult experiences.,curated,true
+resilience,12,2,C-0141,Mahogany Obsidian,2,Helps break entrenched patterns and rebuild strength after fear or setbacks take hold.,curated,true
+resilience,13,2,C-0249,Charoite,3,Supports courage and emotional adaptation when upheaval requires profound inner change.,curated,true
+resilience,14,2,C-0219,Staurolite,3,"Encourages endurance, faith, and grounded perseverance through testing circumstances.",curated,true
+resilience,15,2,C-0060,Unakite,2,Supports gradual emotional rebuilding and steadier adaptation after painful disruption.,curated,true
+resilience,16,2,C-0092,Leopard Skin Jasper,2,Offers earthy support for regaining balance and strength during change or recovery.,curated,true
+self-love,1,3,C-0108,Rose Quartz,1,Encourages unconditional self-love and a gentler relationship with your own heart.,curated,true
+self-love,2,3,C-0213,Rhodochrosite,2,Directs love inward to heal self-rejection and restore a sense of inherent worth.,curated,true
+self-love,3,3,C-0214,Rhodonite,2,Rebuilds self-value after hurt and encourages respect for your needs and boundaries.,curated,true
+self-love,4,3,C-0014,Mangano Calcite,2,"Replaces harsh self-criticism with softness, patience, and compassionate self-regard.",curated,true
+self-love,5,3,C-0055,Pink Tourmaline,3,Strengthens self-worth and encourages tenderness toward parts of yourself that feel wounded.,curated,true
+self-love,6,3,C-0165,Pink Opal,2,Softens shame and self-judgment so vulnerable feelings can be met with kindness.,curated,true
+self-love,7,3,C-0029,Sunstone,2,Restores self-worth and encourages you to embrace your individuality without apology.,curated,true
+self-love,8,2,C-0024,Morganite,3,Encourages gentle self-respect and recognition that your emotional needs deserve care.,curated,true
+self-love,9,2,C-0395,Peach Moonstone,2,Nurtures self-compassion when sensitivity or overwhelm turns into inward criticism.,curated,true
+self-love,10,2,C-0179,Pink Aventurine,2,Supports quiet self-worth and a more accepting view of your emotional nature.,curated,true
+self-love,11,2,C-0267,Thulite,3,Promotes self-acceptance and the confidence to show your authentic personality openly.,curated,true
+self-love,12,2,C-0155,Chrysoprase,2,Encourages self-acceptance and a kinder relationship with perceived flaws or failures.,curated,true
+self-love,13,2,C-0245,Kunzite,3,Helps the heart remain open to receiving care rather than withholding love from yourself.,curated,true
+self-love,14,2,C-0107,Lavender Rose Quartz,2,Blends Rose Quartz tenderness with calm acceptance during emotional fatigue or self-doubt.,curated,true
+self-love,15,2,C-0011,Cobaltoan Calcite,4,Strengthens self-worth while surrounding emotional vulnerability with compassion.,curated,true
+sleep,1,3,C-0119,Amethyst,1,Quiets nighttime mental activity and creates a peaceful atmosphere for deeper rest.,curated,true
+sleep,2,3,C-0254,Lepidolite,1,Settles mental overload and helps the mind transition more gently into sleep.,curated,true
+sleep,3,3,C-0241,Howlite,1,Slows persistent bedtime thoughts and encourages the mental stillness needed for rest.,curated,true
+sleep,4,3,C-0221,Celestite,2,Creates a serene bedtime atmosphere when worry or mental noise keeps sleep at a distance.,curated,true
+sleep,5,2,C-0007,Blue Calcite,1,Cools emotional and mental intensity so the mind can soften before sleep.,curated,true
+sleep,6,2,C-0162,Moonstone,1,Encourages restful surrender by aligning bedtime with gentler emotional and lunar rhythms.,curated,true
+sleep,7,2,C-0175,Selenite,1,"Clears the bedroom atmosphere and encourages a lighter, quieter transition into rest.",curated,true
+sleep,8,2,C-0103,Smoky Quartz,1,Grounds lingering stress and helps the body release the day before sleep.,curated,true
+sleep,9,2,C-0256,Magnesite,2,Releases accumulated tension and helps the body soften into a more restful state.,curated,true
+sleep,10,1,C-0325,Lithium Quartz,3,Gently smooths emotional activation when sensitivity makes it difficult to settle at night.,curated,true
+sleep,11,1,C-0069,Blue Lace Agate,2,Eases bedtime tension and creates a quieter emotional atmosphere for rest.,curated,true
+sleep,12,1,C-0108,Rose Quartz,1,Brings gentle emotional comfort when loneliness or heartache interferes with sleep.,curated,true
+sleep,13,1,C-0210,Phosphosiderite,3,Softens emotional heaviness and encourages peaceful inward quiet before sleep.,curated,true
+spiritual-connection,1,3,C-0175,Selenite,1,Opens awareness to higher guidance and strengthens a felt connection with the spiritual realm.,curated,true
+spiritual-connection,2,3,C-0221,Celestite,2,"Encourages receptivity to divine presence, angelic guidance, and a larger spiritual perspective.",curated,true
+spiritual-connection,3,3,C-0171,Angelite,2,Supports connection with spiritual guides and a sense of being heard beyond the physical world.,curated,true
+spiritual-connection,4,3,C-0246,Apophyllite,2,Bridges ordinary awareness with subtler spiritual dimensions and higher guidance.,curated,true
+spiritual-connection,5,3,C-0234,Danburite,3,Links the heart with higher consciousness and a loving sense of divine presence.,curated,true
+spiritual-connection,6,3,C-0104,Spirit Quartz,2,Encourages communion with collective spiritual energy and a sense of sacred belonging.,curated,true
+spiritual-connection,7,3,C-0323,Lemurian Seed Crystal,3,Invites connection with ancient spiritual wisdom and guidance beyond ordinary memory.,curated,true
+spiritual-connection,8,3,C-0243,Petalite,3,Supports gentle spiritual expansion and receptivity to higher consciousness.,curated,true
+spiritual-connection,9,3,C-0119,Amethyst,1,Deepens spiritual awareness and receptivity to meaning beyond everyday concerns.,curated,true
+spiritual-connection,10,3,C-0332,Phenakite,4,Expands awareness toward higher states of consciousness and direct spiritual attunement.,curated,true
+spiritual-connection,11,2,C-0216,Scolecite,2,Creates peaceful receptivity to subtle spiritual presence without overwhelming the senses.,curated,true
+spiritual-connection,12,2,C-0276,Angel Aura Quartz,2,"Encourages a luminous sense of divine support, angelic presence, and spiritual uplift.",curated,true
+spiritual-connection,13,2,C-0358,White Heulandite,3,Opens awareness to spiritual guidance while preserving clarity and receptivity.,curated,true
+spiritual-connection,14,2,C-0226,Tanzanite,4,Bridges intuitive insight with higher consciousness so spiritual guidance can be understood.,curated,true
+spiritual-connection,15,2,C-0284,Brandberg Amethyst,3,Deepens connection with spiritual wisdom and helps profound inner experiences feel meaningful.,curated,true
+spiritual-connection,16,2,C-0296,Creedite,4,Encourages expanded awareness and stronger connection with higher spiritual realms.,curated,true
+stability,1,3,C-0041,Hematite,1,Anchors scattered energy and helps you remain steady when circumstances feel unsettled.,curated,true
+stability,2,3,C-0099,Red Jasper,1,Builds grounded endurance and helps you hold firm through stress or prolonged uncertainty.,curated,true
+stability,3,3,C-0158,Onyx,2,Strengthens inner discipline and steadiness when outside pressures threaten your footing.,curated,true

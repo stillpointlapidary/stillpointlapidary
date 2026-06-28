@@ -70,8 +70,8 @@
 /* ── SIDEBAR ── */
 .enc-sidebar {
   position: sticky;
-  top: 110px;
-  max-height: calc(100vh - 128px);
+  top: 150px;
+  max-height: calc(100vh - 170px);
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -963,8 +963,6 @@
 .hero-sections { grid-template-columns: 1fr; }
   .hero-section { border-right: none; border-bottom: 0.5px solid var(--border2); }
   .hero-section:last-child { border-bottom: none; }
-  .topbar-right { display: flex; }
-  .topbar-right .btn { font-size: 11px; padding: 6px 12px; }
   .enc-hero .stone-photo-wrap {
     aspect-ratio: 1 / 1;
     max-height: 260px;
@@ -1001,11 +999,11 @@
 <body>
 <div class="app-shell">
 
-<!-- ═══ TOPBAR ═══ -->
+<!-- ═══ GLOBAL HEADER ═══ -->
 <header class="topbar">
-  <a aria-label="Return to home" class="brand-home" href="../index.html">
+  <a href="../index.html" class="brand-home" aria-label="Return to home">
     <div class="brand-block">
-      <img alt="Still Point Lapidary" class="brand-logo" src="../assets/still-point-lapidary-logo.png"/>
+      <img src="/assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo"/>
       <div class="brand-block-text">
         <span class="wordmark">STILL POINT <em>Lapidary</em></span>
         <span class="brand-block-sub">Crystal Reference Library</span>
@@ -1013,9 +1011,25 @@
     </div>
   </a>
   <div class="topbar-right">
-    <a class="btn btn-sm" href="../encyclopedia.html">← Encyclopedia</a>
+    <span class="stone-count" id="stone-count">333 entries</span>
+    <div class="topbar-auth" id="topbar-auth"><button class="btn btn-sm" onclick="window.location='../encyclopedia.html'">Sign in</button></div>
+    <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
+    <a class="btn btn-sm" id="request-entry-btn" href="../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
+    <a class="btn btn-sm" id="guide-btn" href="../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
+    <a class="btn btn-sm" id="manage-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
+    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<div class="main-nav-wrap"><nav class="main-nav">
+  <a class="nav-tab" href="../index.html">Home</a>
+  <a class="nav-tab" href="../encyclopedia.html?tab=mood">Choose by Intention</a>
+  <a class="nav-tab active" href="../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+  <a class="nav-tab" href="../encyclopedia.html?tab=identify">Identify</a>
+  <a class="nav-tab" href="../encyclopedia.html?tab=collection">My Collection</a>
+  <a class="nav-tab" href="../encyclopedia.html?tab=101">Crystals 101</a>
+</nav></div>
 
 <!-- Loading indicator — replaced by page content after fetch -->
 <div id="page-loading">Loading…</div>
@@ -1079,6 +1093,22 @@
 
 </div><!-- /app-shell -->
 
+<script>
+/* Mobile nav toggle — mirrors app.js setMobileMenuOpen / toggleMobileNav */
+function setMobileMenuOpen(open){
+  document.body.classList.toggle('mobile-nav-open', !!open);
+  document.querySelectorAll('.mobile-menu-toggle').forEach(function(btn){
+    btn.classList.toggle('active', !!open);
+    btn.setAttribute('aria-expanded', String(!!open));
+    btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  });
+}
+function toggleMobileNav(btn){
+  var open = !document.body.classList.contains('mobile-nav-open');
+  setMobileMenuOpen(open);
+  if(btn) btn.setAttribute('aria-expanded', String(open));
+}
+</script>
 <script type="module">
 /* ─────────────────────────────────────────────────────────────────────────
    Dynamic Encyclopedia Template
@@ -1523,6 +1553,7 @@ function buildMineralProfile(facts, localities, c) {
   /* Common Localities — dot-separated, full-width row */
   const localityVal = localities.slice(0, 8).map(l => esc(l.locality)).join(' · ');
   const localitiesRow = localityVal ? `
+    <hr class="phase-divider"/>
     <div class="localities-row">
       <span class="localities-lbl">Common Localities</span>
       <span class="localities-val">${localityVal}</span>
@@ -1651,7 +1682,7 @@ function buildMarketNotes(c) {
   return `
     <section class="rail-card" id="market-notes">
       <h2>
-        <span aria-hidden="true" class="enc-icon icon-bookmark"></span>
+        <span aria-hidden="true" class="enc-icon icon-encyclopedia"></span>
         Market &amp; Buying Notes
       </h2>
       <div class="rail-card-body">
