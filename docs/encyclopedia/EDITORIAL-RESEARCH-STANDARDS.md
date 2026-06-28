@@ -193,7 +193,9 @@ Five paragraphs rendered as flowing prose under a single COLLECTOR'S GUIDE label
 
 ---
 
-### Care & Cleansing
+### Care & Cleaning
+
+*Note: Database table name (`enc_care`) and internal category labels (Cleaning, Water, Light & Heat, Storage) are unchanged. Only the public section heading has been renamed from "Care & Cleansing."*
 
 **Job:** Give the reader a quick, confident heads-up on how to care for this stone. Same information as any care guide — but written like a friend telling you before you walk out the door, not a warning label.
 **Voice:** Direct, warm, a little conversational. One clean sentence per category.

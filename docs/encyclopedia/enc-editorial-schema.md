@@ -186,13 +186,13 @@ Standalone right-rail card. Sourced from `collector_context_p3`. Render only if 
 
 ## Right-Rail Section Order
 
-**Locked order:** Energetic Themes · Collector & Curiosity Notes · Market & Buying Notes · Care & Cleansing
+**Locked order:** Energetic Themes · Collector & Curiosity Notes · Market & Buying Notes · Care & Cleaning
 
 ## Collector Notes Rendering
 
 Unboxed divider-separated rows. No individual card borders or backgrounds. `.note-row` uses a bottom border divider only. The outer `.rail-card` is the container.
 
-## Care & Cleansing Rendering
+## Care & Cleaning Rendering
 
 Stacked icon rows (26px icon + label + body). Not a 2×2 grid. No wash background on outer container.
 
@@ -242,7 +242,7 @@ Each note row has an icon, a bold title, and a body paragraph.
 
 ---
 
-## Care & Cleansing
+## Care & Cleaning
 
 Always exactly **4 fixed categories** in this order:
 
@@ -259,6 +259,8 @@ Content rules:
 - Avoid invented spiritual cleansing instructions.
 - Avoid unsupported warnings.
 - State ordinary stability where no unusual precaution applies.
+
+*Note: Database table name (`enc_care`) and internal category labels (Cleaning, Water, Light & Heat, Storage) are unchanged.*
 
 ---
 

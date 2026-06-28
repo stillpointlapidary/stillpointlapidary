@@ -59,7 +59,7 @@ The primary content table. One row per stone. The dynamic template (`stone.html`
 | `chakra_secondary` | text | Secondary chakra(s), or null if none |
 | `element` | text | Classical element |
 | `planet` | text | Planetary association. **Column preserved but display-label superseded by Material Type in the rendered template (2026-06-28).** |
-| `material_type` | text | Material Type. **Pending column — see Phase 2 note below.** Controlled vocabulary: Mineral · Mineral variety · Rock · Mineraloid · Organic material · Composite · Synthetic · Fossil · Trade name. |
+| `material_type` | text | Material Type. Controlled vocabulary: Mineral · Mineral variety · Rock · Mineraloid · Organic material · Composite · Synthetic · Fossil · Trade name. Column confirmed added 2026-06-28. |
 | `zodiac` | text | Zodiac sign(s) |
 | `energetic_role` | text | Exactly 1 locked Energetic Role value |
 | `energetic_role_icon` | text | Icon slug for the Energetic Role (e.g. `grounding`) |
@@ -74,7 +74,7 @@ The primary content table. One row per stone. The dynamic template (`stone.html`
 
 **RLS Policy:** anon SELECT restricted to `published = true`. Unpublished rows are invisible to the browser.
 
-**Phase 2 note (2026-06-28):** A `material_type` column is pending addition to `enc_stone_content`. If not yet added, Dustin must run: `ALTER TABLE enc_stone_content ADD COLUMN material_type text;` before Phase 3F (Material Type At a Glance rendering) can be implemented. Planet column must not be renamed or dropped.
+**material_type column confirmed added and populated as of 2026-06-28.** Column exists in `enc_stone_content`. Hematite value: `Mineral`. No further SQL action required. Planet column preserved and must not be renamed or dropped.
 
 ---
 
@@ -167,7 +167,7 @@ Collector & Curiosity Notes. One row per note per stone.
 ---
 
 ### `enc_care`
-Care & Cleansing section. One row per category per stone. Always exactly 4 rows.
+Care & Cleaning section. One row per category per stone. Always exactly 4 rows. *(Table name unchanged — public section heading renamed from "Care & Cleansing" to "Care & Cleaning" on 2026-06-28.)*
 
 | Column | Type | Notes |
 |---|---|---|

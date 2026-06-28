@@ -440,7 +440,7 @@
 }
 .care-label {
   font-family: 'Jost', sans-serif;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -835,7 +835,7 @@
 }
 .entry-nav-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .entry-nav-link small {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -846,7 +846,7 @@
 .entry-nav-link b {
   font-family: Georgia, serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   text-transform: none;
   display: block;
 }
@@ -959,7 +959,8 @@
 .hero-sections { grid-template-columns: 1fr; }
   .hero-section { border-right: none; border-bottom: 0.5px solid var(--border2); }
   .hero-section:last-child { border-bottom: none; }
-  .topbar-right { display: none; }
+  .topbar-right { display: flex; }
+  .topbar-right .btn { font-size: 11px; padding: 6px 12px; }
   .enc-hero .stone-photo-wrap {
     aspect-ratio: 1 / 1;
     max-height: 260px;
@@ -1039,7 +1040,7 @@
           <a href="#mineral">Mineral Profile</a>
           <a href="#notes">Collector Notes</a>
           <a href="#market-notes">Market &amp; Buying Notes</a>
-          <a href="#care">Care &amp; Cleansing</a>
+          <a href="#care">Care &amp; Cleaning</a>
           <a href="#related">Related Stones</a>
         </nav>
       </div>
@@ -1656,7 +1657,7 @@ function buildMarketNotes(c) {
   `;
 }
 
-/* ── CARE & CLEANSING ── */
+/* ── CARE & CLEANING ── */
 function buildCare(care) {
   const CARE_ICONS = {
     'Cleaning':    'icon-care-cleansing',
@@ -1679,7 +1680,7 @@ function buildCare(care) {
     <section class="rail-card" id="care">
       <h2>
         <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
-        Care &amp; Cleansing
+        Care &amp; Cleaning
       </h2>
       <div class="rail-card-body">
         <div class="care-grid">${cells}</div>
