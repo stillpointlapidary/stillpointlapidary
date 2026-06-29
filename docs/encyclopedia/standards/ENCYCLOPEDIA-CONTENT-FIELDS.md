@@ -332,6 +332,8 @@ Possible substitutes include:
 
 Do not force a chemical formula or crystal system onto a material that does not have one.
 
+Specific Gravity values must use the verified value or range directly. Do not prefix the value with `Approximately` in canonical MD or Supabase content.
+
 ### 8.2 Common Localities
 
 - target 3–6 entries
