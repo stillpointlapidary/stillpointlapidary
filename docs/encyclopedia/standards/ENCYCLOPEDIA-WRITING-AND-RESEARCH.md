@@ -151,7 +151,7 @@ Research is conducted horizontally across a cohort by domain.
 Cover:
 
 - accepted identity
-- mineral species, variety, rock, composite, fossil, organic, synthetic, or trade-name status
+- mineral species, variety, rock, mineral aggregate, composite, fossil, organic, synthetic, or trade-name status
 - composition
 - crystal system or structure where applicable
 - hardness, cleavage, specific gravity, luster, transparency
@@ -517,7 +517,7 @@ Voice:
 
 No editorial flourish inside the facts table.
 
-Do not force true-mineral labels onto rocks, composites, organics, fossils, synthetics, mineraloids, or trade-name mixtures.
+Do not force true-mineral labels onto rocks, mineral aggregates, composites, organics, fossils, synthetics, mineraloids, or trade-name mixtures.
 
 ---
 
@@ -803,6 +803,7 @@ Do not force every entry through true-mineral assumptions.
 Flag before drafting:
 
 - rocks
+- mineral aggregates
 - composites
 - mineraloids
 - organics

@@ -194,10 +194,13 @@ Use exactly one value from this controlled vocabulary:
 - Rock
 - Mineraloid
 - Organic material
+- Mineral aggregate
 - Composite
 - Synthetic
 - Fossil
 - Trade name
+
+`Mineral aggregate` describes a naturally occurring multi-mineral material without sufficient coherence or standardization to be classified as a defined rock type. It is distinct from `Composite`, which in gemological usage refers to manufactured assembled stones.
 
 Material Type describes fundamental identity, not treatment status.
 
@@ -318,7 +321,7 @@ Default labels for true minerals:
 7. Luster
 8. Transparency
 
-For rocks, composites, mineraloids, organics, synthetics, fossils, or trade-name materials, labels may be adapted to the verified identity.
+For rocks, mineral aggregates, composites, mineraloids, organics, synthetics, fossils, or trade-name materials, labels may be adapted to the verified identity.
 
 Possible substitutes include:
 

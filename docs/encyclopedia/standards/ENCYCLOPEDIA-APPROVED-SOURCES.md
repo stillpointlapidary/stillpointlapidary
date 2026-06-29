@@ -260,6 +260,7 @@ Record why the source was used.
 Use the strongest relevant technical source for:
 
 - mineral versus rock classification
+- mineral aggregate classification
 - composite materials
 - treated quartz
 - synthetics

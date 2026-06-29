@@ -154,12 +154,13 @@ Every approved catalog entry may retain its own encyclopedia page whether it is:
 - a mineral species
 - a mineral variety
 - a rock
-- a composite
 - a mineraloid
 - an organic material
-- a fossil
+- a mineral aggregate
+- a composite
 - a synthetic material
 - a treated material
+- a fossil
 - a trade name
 - a locality designation
 - a commercial grouping
@@ -168,7 +169,7 @@ A familiar market name may remain the page title when approved.
 
 The encyclopedia must still state the actual physical identity clearly and early.
 
-Overview Paragraph 2 must not present a variety, trade name, rock, composite, synthetic, fossil, or treated material as a separate natural mineral species.
+Overview Paragraph 2 must not present a variety, trade name, rock, mineral aggregate, composite, synthetic, fossil, or treated material as a separate natural mineral species.
 
 ---
 

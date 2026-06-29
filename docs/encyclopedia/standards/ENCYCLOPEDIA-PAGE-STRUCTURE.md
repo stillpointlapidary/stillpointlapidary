@@ -253,10 +253,13 @@ Material Type uses this controlled vocabulary:
 - Rock
 - Mineraloid
 - Organic material
+- Mineral aggregate
 - Composite
 - Synthetic
 - Fossil
 - Trade name
+
+`Mineral aggregate` describes a naturally occurring multi-mineral material without sufficient coherence or standardization to be classified as a defined rock type. It is distinct from `Composite`, which in gemological usage refers to manufactured assembled stones.
 
 Material Type describes the material’s fundamental identity, not treatment status.
 
