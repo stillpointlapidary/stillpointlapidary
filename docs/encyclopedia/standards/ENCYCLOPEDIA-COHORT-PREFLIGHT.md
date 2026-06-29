@@ -96,7 +96,7 @@ Possible flags:
 - Mineraloid
 - Organic material
 - Mineral aggregate
-- Synthetic
+- Man-made
 - Fossil
 - Treated material
 - Trade name

@@ -255,7 +255,7 @@ Material Type uses this controlled vocabulary:
 - Organic material
 - Mineral aggregate
 - Composite
-- Synthetic
+- Man-made
 - Fossil
 - Trade name
 

@@ -296,7 +296,7 @@ The following corrections are locked in principle and must guide research and pu
 
 ### Directly Established
 
-- Opalite is Synthetic
+- Opalite is Man-made
 - Dalmatian Jasper is a Rock
 - Dalmatian Stone is an alternate name for Dalmatian Jasper
 

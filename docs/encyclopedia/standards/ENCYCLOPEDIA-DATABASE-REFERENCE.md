@@ -118,7 +118,7 @@ Rules:
 - `collector_context_p4` and `collector_context_p5` are omitted when unused
 - do not overwrite existing Planet data, but do not research or require new Planet values
 - `material_type` is required for new production
-- allowed values are `Mineral`, `Mineral variety`, `Rock`, `Mineraloid`, `Organic material`, `Mineral aggregate`, `Composite`, `Synthetic`, `Fossil`, and `Trade name`
+- allowed values are `Mineral`, `Mineral variety`, `Rock`, `Mineraloid`, `Organic material`, `Mineral aggregate`, `Composite`, `Man-made`, `Fossil`, and `Trade name`
 - `Mineral aggregate` describes a naturally occurring multi-mineral material without sufficient coherence or standardization to be classified as a defined rock type
 - `Composite` is reserved for manufactured assembled stones
 

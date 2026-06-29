@@ -11,7 +11,7 @@ It may:
 - inspect repository files
 - perform approved edits
 - create or run scripts
-- prepare verified Supabase SQL for Dustin or Christie to run manually
+- inspect Supabase schemas and data, prepare SQL, and execute SQL when Christie explicitly authorizes
 - validate outputs
 - commit or deploy when instructed
 - report exact changes
@@ -118,7 +118,7 @@ No Supabase SQL preparation begins before approval.
 
 ### Gate 4 — Supabase SQL Preparation and Verification
 
-Dustin or Christie runs all Supabase SQL manually. Claude Code prepares verified SQL statements and reports them. It does not execute queries.
+Dustin or Christie normally runs SQL. Claude Code prepares verified SQL statements and reports them. Claude Code may execute SQL when Christie explicitly authorizes the exact task or migration step.
 
 Claude Code:
 
@@ -221,7 +221,7 @@ Do not recite every governing document when only one or two are relevant.
 
 ## 6. Supabase Rules
 
-Claude Code does not execute Supabase queries. It prepares SQL and reports it for Dustin or Christie to run manually.
+Claude Code may inspect Supabase schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie explicitly authorizes the task or exact change. Claude Code must not independently invent schema design, editorial values, catalog values, destructive data changes, or business rules. Unexpected findings and any material deviation from an approved plan must be reported to Christie before corrective or destructive action is taken.
 
 All encyclopedia content tables use the `enc_` prefix.
 

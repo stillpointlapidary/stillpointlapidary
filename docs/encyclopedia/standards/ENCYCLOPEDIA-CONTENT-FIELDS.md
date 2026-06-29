@@ -196,7 +196,7 @@ Use exactly one value from this controlled vocabulary:
 - Organic material
 - Mineral aggregate
 - Composite
-- Synthetic
+- Man-made
 - Fossil
 - Trade name
 
