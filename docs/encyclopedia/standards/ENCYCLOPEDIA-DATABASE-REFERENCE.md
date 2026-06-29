@@ -420,7 +420,7 @@ Authority rules:
 
 ## 13. Claude Code Supabase Authority
 
-Claude Code may inspect live schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie explicitly authorizes the task or exact change. Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, destructive changes, or corrective business rules. Unexpected findings must be reported to Christie before proceeding.
+Claude Code may inspect live schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie explicitly authorizes the task or exact change. Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, destructive changes, or corrective business rules. Unexpected findings must be reported to Christie before proceeding. Production Master writes are also owned exclusively by Claude Code. See ENCYCLOPEDIA-COHORT-EXECUTION-PROTOCOL.md for the full lane assignment and workflow sequencing rules.
 
 ---
 
