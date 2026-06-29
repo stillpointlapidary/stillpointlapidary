@@ -299,6 +299,10 @@ The following corrections are locked in principle and must guide research and pu
 - Opalite is Man-made
 - Dalmatian Jasper is a Rock
 - Dalmatian Stone is an alternate name for Dalmatian Jasper
+- Moldavite is a Mineraloid
+- Tektite is a Mineraloid
+- Libyan Desert Glass is a Mineraloid
+- Biotite is a Mineral
 
 ### Research-Dependent or Exception Entries
 
@@ -313,9 +317,9 @@ The following corrections are locked in principle and must guide research and pu
 | Quantum Quattro | Trade-named copper-mineral association |
 | Phoenix Stone | Trade-named copper-mineral composite; usage not fully standardized |
 | Blue Rose Quartz | Do not classify as synthetic or dyed without evidence |
-| Unicorn Stone | Trade-named composite or pegmatitic rock; Unicorn Jasper is misleading |
+| Unicorn Stone | Rock — trade-named pegmatitic rock; Unicorn Jasper is misleading |
 | Green Moonstone | Identify as Garnierite; not true Moonstone |
-| Rainbow Moonstone | Trade name for white Labradorite |
+| Rainbow Moonstone | Mineral variety — trade-name framing: popular market name for white Labradorite |
 | Black Moonstone | Labradorite-related commercial name; distinguish from true Moonstone |
 | Larvikite | Syenitic rock from Norway; commercial moonstone and Labradorite names are misleading |
 | Hypersthene | Orthopyroxene; Velvet Labradorite is a commercial misnomer |
@@ -335,10 +339,15 @@ The following corrections are locked in principle and must guide research and pu
 | Smoky Citrine | Transitional or treated material; verify origin by specimen and source |
 | Amegreen | Amethyst and Prasiolite zoning or combination |
 | Aegirine | Full encyclopedia identity to be established during research |
-| Tiffany Stone | Mixed mineral rock; verify composition and trade usage |
+| Meteorite | Rock — broad-category exception: spans multiple meteorite types; Rock is an editorial simplification |
+| Tiffany Stone | Rock — mixed mineral rock; verify composition and trade usage |
 | Goshenite | Colorless Beryl variety |
 
 Do not apply a simplified identity merely because it fits a familiar page pattern.
+
+`Composite` is reserved for manufactured assembled stones only. Multi-mineral natural materials are not Composite.
+
+The following five entries remain classified as Composite pending separate approved research decisions: Cinnabrite, Que Sera Stone, Phoenix Stone, Shaman Stone, Boji Stones. Do not reclassify these without an explicit approved review.
 
 ---
 

@@ -800,6 +800,8 @@ Rules:
 
 Do not force every entry through true-mineral assumptions.
 
+The structured Material Type value for manufactured materials is `Man-made`. `Synthetic` is not the controlled term. Trade-name status belongs in identity and exception handling, not in Material Type.
+
 Flag before drafting:
 
 - rocks

@@ -198,7 +198,8 @@ Use exactly one value from this controlled vocabulary:
 - Composite
 - Man-made
 - Fossil
-- Trade name
+
+`Trade name` is a valid identity or exception flag, not a Material Type. Editorial prose may describe synthetic or manufactured materials descriptively; the structured field value is `Man-made`.
 
 `Mineral aggregate` describes a naturally occurring multi-mineral material without sufficient coherence or standardization to be classified as a defined rock type. It is distinct from `Composite`, which in gemological usage refers to manufactured assembled stones.
 
@@ -558,15 +559,16 @@ Do not pad short, effective copy to approach a maximum.
 
 ## 17. Production Status Values
 
-Use these statuses:
+Use these six statuses, in this order:
 
-- RESEARCH COMPLETE
-- MD DRAFT COMPLETE
-- GATE 0 NORMALIZATION PENDING
-- APPROVED FOR SUPABASE ENTRY
-- PUBLISHED
+- Not Started
+- Foundation Live
+- Research Complete
+- MD Approved
+- Supabase Entered
+- Full Entry Live
 
-A separate operational tracker may record additional workflow detail, but these are the standard public production statuses.
+These values correspond to `stones.enc_production_status` in Supabase and control public visibility, catalog links, sitemap inclusion, and SEO indexability. Do not use legacy values such as RESEARCH COMPLETE, MD DRAFT COMPLETE, GATE 0 NORMALIZATION PENDING, APPROVED FOR SUPABASE ENTRY, or PUBLISHED.
 
 ---
 

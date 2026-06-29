@@ -257,7 +257,8 @@ Material Type uses this controlled vocabulary:
 - Composite
 - Man-made
 - Fossil
-- Trade name
+
+`Trade name` is a valid identity or exception flag, not a Material Type. Editorial prose may describe synthetic or manufactured materials descriptively; the structured field value is `Man-made`.
 
 `Mineral aggregate` describes a naturally occurring multi-mineral material without sufficient coherence or standardization to be classified as a defined rock type. It is distinct from `Composite`, which in gemological usage refers to manufactured assembled stones.
 

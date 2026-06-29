@@ -51,7 +51,21 @@ All encyclopedia child tables reference `stones.id` through `stone_id`.
 |---|---|---|
 | `id` | text | Stable stone ID, for example `C-0041`. Primary key. |
 | `name` | text | Canonical display name. |
+| `slug` | text | Canonical URL slug. UNIQUE, NOT NULL after backfill. Authoritative slug location. `enc_stone_content.slug` is a synchronized convenience copy. |
+| `enc_production_status` | text | Six-value production status. NOT NULL after backfill. Primary public visibility gate. See approved values below. |
+| `enc_energetic_role` | text, nullable | Approved Energetic Role. Twelve-value controlled vocabulary. |
+| `color_energy` | text, nullable | Approved Color Energy value. |
+| `styling_chakra` | text | Design token selector. NOT NULL after backfill. |
 | additional columns | varies | Existing roster data. Do not modify without approval. |
+
+Approved `enc_production_status` values, in order:
+
+- `Not Started`
+- `Foundation Live`
+- `Research Complete`
+- `MD Approved`
+- `Supabase Entered`
+- `Full Entry Live`
 
 Rules:
 
@@ -59,6 +73,7 @@ Rules:
 - do not infer missing IDs
 - do not modify unrelated roster columns during encyclopedia work
 - use `stones.id` as the foreign-key value in all `enc_` tables
+- `stones.slug` is the authoritative slug; keep `enc_stone_content.slug` synchronized
 
 ---
 
@@ -68,7 +83,7 @@ Rules:
 
 One row per stone.
 
-The dynamic page uses this table as the primary publication gate.
+A live stone page requires two conditions simultaneously: `stones.enc_production_status = 'Full Entry Live'` AND a matching row in this table with `published = true`. Neither condition alone is sufficient.
 
 | Column | Type | Purpose |
 |---|---|---|
@@ -105,20 +120,21 @@ The dynamic page uses this table as the primary publication gate.
 | `nav_prev_name` | text | Previous stone display name |
 | `nav_next_slug` | text | Next stone slug |
 | `nav_next_name` | text | Next stone display name |
-| `published` | boolean | Public visibility gate |
+| `published` | boolean | Secondary publication lock. Must be `true` for a live page. Not the sole gate — see §11. |
 | `created_at` | timestamptz | Creation timestamp |
 | `updated_at` | timestamptz | Last update timestamp |
 
 Rules:
 
 - `stone_id` must match `stones.id`
-- `slug` must match the canonical slug in the production master (`stones` has no slug column)
+- `enc_stone_content.slug` must match `stones.slug`; `stones.slug` is the authoritative location
 - initial entry uses `published = false`
 - publication occurs only at Gate 7
 - `collector_context_p4` and `collector_context_p5` are omitted when unused
 - do not overwrite existing Planet data, but do not research or require new Planet values
 - `material_type` is required for new production
-- allowed values are `Mineral`, `Mineral variety`, `Rock`, `Mineraloid`, `Organic material`, `Mineral aggregate`, `Composite`, `Man-made`, `Fossil`, and `Trade name`
+- allowed values are `Mineral`, `Mineral variety`, `Rock`, `Mineraloid`, `Organic material`, `Mineral aggregate`, `Composite`, `Man-made`, and `Fossil`
+- `Trade name` is not a Material Type value; it is a valid identity and exception flag
 - `Mineral aggregate` describes a naturally occurring multi-mineral material without sufficient coherence or standardization to be classified as a defined rock type
 - `Composite` is reserved for manufactured assembled stones
 
@@ -338,16 +354,28 @@ Rules:
 
 ### Publication Gate
 
-`enc_stone_content.published` controls public page visibility.
+A live stone page requires both conditions to be true simultaneously:
 
-Required sequence:
+- `stones.enc_production_status = 'Full Entry Live'`
+- a matching `enc_stone_content` row with `published = true`
+
+Neither condition alone is sufficient.
+
+**Mismatch behavior:**
+
+- If `enc_production_status = 'Full Entry Live'` but the content row is missing or `published` is not `true`: render **Error** state, apply `noindex, nofollow`, and log the mismatch. Do not expose partial content.
+- If `enc_stone_content.published = true` but `enc_production_status` is not `Full Entry Live`: render **Coming Soon** state, apply `noindex, follow`, and log the mismatch.
+
+Any mismatch must be reported to Christie before corrective SQL is run.
+
+Required Gate 7 sequence:
 
 1. insert or update approved content with `published = false`
 2. verify all child-table rows
 3. review the dynamic page
 4. complete visual and editorial QA
 5. apply controlled corrections to both MD and Supabase
-6. set `published = true`
+6. set `stones.enc_production_status = 'Full Entry Live'` and `enc_stone_content.published = true` together
 7. verify the live page
 
 ### RLS Expectations
@@ -390,7 +418,13 @@ Authority rules:
 
 ---
 
-## 13. Supabase Entry Rules
+## 13. Claude Code Supabase Authority
+
+Claude Code may inspect live schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie explicitly authorizes the task or exact change. Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, destructive changes, or corrective business rules. Unexpected findings must be reported to Christie before proceeding.
+
+---
+
+## 14. Supabase Entry Rules
 
 Before writing:
 
@@ -421,7 +455,7 @@ After writing:
 
 ---
 
-## 14. Safe Verification Pattern
+## 15. Safe Verification Pattern
 
 When checking multiple child tables in one query, use `UNION ALL` with a consistent output shape and a single final `ORDER BY`.
 
@@ -455,7 +489,7 @@ Use only the columns needed for the verification task.
 
 ---
 
-## 15. Useful Queries
+## 16. Useful Queries
 
 ### Check publication status
 
@@ -505,7 +539,7 @@ WHERE stone_id = 'C-0041';
 
 ---
 
-## 16. Database Change Control
+## 17. Database Change Control
 
 Database changes include:
 
@@ -535,7 +569,7 @@ Do not modify `stones` or unrelated tables during encyclopedia work.
 
 ---
 
-## 17. Validation Checklist
+## 18. Validation Checklist
 
 Before declaring a stone ready to publish, verify:
 
@@ -561,7 +595,7 @@ Do not report PASS unless every relevant check was actually completed.
 
 ---
 
-## 18. Change History
+## 19. Change History
 
 This document reflects the current database model only.
 
