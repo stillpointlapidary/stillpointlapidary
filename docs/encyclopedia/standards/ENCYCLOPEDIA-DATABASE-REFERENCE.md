@@ -51,12 +51,11 @@ All encyclopedia child tables reference `stones.id` through `stone_id`.
 |---|---|---|
 | `id` | text | Stable stone ID, for example `C-0041`. Primary key. |
 | `name` | text | Canonical display name. |
-| `slug` | text | Canonical URL-safe slug. |
 | additional columns | varies | Existing roster data. Do not modify without approval. |
 
 Rules:
 
-- do not create duplicate IDs or slugs
+- do not create duplicate IDs
 - do not infer missing IDs
 - do not modify unrelated roster columns during encyclopedia work
 - use `stones.id` as the foreign-key value in all `enc_` tables
@@ -113,7 +112,7 @@ The dynamic page uses this table as the primary publication gate.
 Rules:
 
 - `stone_id` must match `stones.id`
-- `slug` must match `stones.slug`
+- `slug` must match the canonical slug in the production master (`stones` has no slug column)
 - initial entry uses `published = false`
 - publication occurs only at Gate 7
 - `collector_context_p4` and `collector_context_p5` are omitted when unused
@@ -475,9 +474,9 @@ WHERE slug = 'hematite';
 ### Confirm roster identity
 
 ```sql
-SELECT id, name, slug
+SELECT id, name
 FROM stones
-WHERE slug = 'hematite';
+WHERE id = 'C-0041';
 ```
 
 ### Read mineral facts
@@ -538,7 +537,7 @@ Do not modify `stones` or unrelated tables during encyclopedia work.
 Before declaring a stone ready to publish, verify:
 
 - one `enc_stone_content` row exists
-- stone ID and slug match the roster
+- stone ID and name match the roster
 - exactly 8 mineral facts
 - exactly 5 reach-for rows
 - 1–2 Primary themes
