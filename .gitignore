@@ -21,13 +21,14 @@ social-preview.html
 # Claude Code workspace files
 .claude/
 
-# Dev/handoff notes — internal only
-HANDOFF*.md
+# Dev/handoff notes — internal only (root-level scratch only; docs/handoffs/ is tracked)
+/HANDOFF*.md
 *.docx
 
 # Backup files — never deploy these
 *.bak
 *.xlsx
+!docs/catalog/reviews/Rarity_Review.xlsx
 index backup*.html
 index_backup*.html
 
@@ -44,7 +45,6 @@ supabase/rarity_first_pass.sql
 docs/encyclopedia/entries/clear-quartz.md
 docs/encyclopedia/MASTER-STONE-PAGE-CONTRACT.md
 docs/encyclopedia/entries/smoky-quartz.md
-docs/encyclopedia/Stones Catalog with Previous - Next Slugs.csv
 docs/INSTALL-INSTRUCTIONS.md
 docs/encyclopedia/APPROVED-EXEMPLAR-LABRADORITE.md
 docs/encyclopedia/APPROVED-MD-SCHEMA.md

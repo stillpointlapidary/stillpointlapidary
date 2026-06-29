@@ -32,7 +32,7 @@ const https = require('https');
 // ── PATHS ────────────────────────────────────────────────────────────────────
 
 const TEMPLATE_PATH = path.join(__dirname, '..', 'docs', 'encyclopedia', 'CANONICAL-STONE-PAGE-TEMPLATE.html');
-const ROSTER_PATH   = path.join(__dirname, '..', 'docs', 'encyclopedia', 'Stones Catalog with Previous - Next Slugs.csv');
+const ROSTER_PATH   = path.join(__dirname, '..', 'data', 'navigation', 'Stones Catalog with Previous - Next Slugs.csv');
 const OUTPUT_DIR    = __dirname; // stones/
 
 // ── Supabase credentials (anon key — read-only, already public in codebase) ──

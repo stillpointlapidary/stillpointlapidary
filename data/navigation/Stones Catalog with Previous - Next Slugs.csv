@@ -1,0 +1,334 @@
+id,name,slug,display_order,previous_stone,previous_slug,next_stone,next_slug
+C-0269,Adamite,adamite,0,null,null,Aegirine,aegirine
+C-0402,Aegirine,aegirine,0,Adamite,adamite,Ajoite,ajoite
+C-0271,Ajoite,ajoite,0,Aegirine,aegirine,Alexandrite,alexandrite
+C-0144,Alexandrite,alexandrite,144,Ajoite,ajoite,Amazonite,amazonite
+C-0025,Amazonite,amazonite,25,Alexandrite,alexandrite,Amber,amber
+C-0145,Amber,amber,145,Amazonite,amazonite,Amblygonite,amblygonite
+C-0273,Amblygonite,amblygonite,0,Amber,amber,Amegreen,amegreen
+C-0274,Amegreen,amegreen,274,Amblygonite,amblygonite,Amethyst,amethyst
+C-0119,Amethyst,amethyst,119,Amegreen,amegreen,Ametrine,ametrine
+C-0120,Ametrine,ametrine,120,Amethyst,amethyst,Ammolite,ammolite
+C-0146,Ammolite,ammolite,146,Ametrine,ametrine,Ammonite,ammonite
+C-0147,Ammonite,ammonite,147,Ammolite,ammolite,Andalusite,andalusite
+C-0148,Andalusite,andalusite,148,Ammonite,ammonite,Andradite Garnet,andradite-garnet
+C-0275,Andradite Garnet,andradite-garnet,0,Andalusite,andalusite,Angel Aura Quartz,angel-aura-quartz
+C-0276,Angel Aura Quartz,angel-aura-quartz,276,Andradite Garnet,andradite-garnet,Angelite,angelite
+C-0171,Angelite,angelite,171,Angel Aura Quartz,angel-aura-quartz,Apache Tears,apache-tears
+C-0138,Apache Tears,apache-tears,138,Angelite,angelite,Apophyllite,apophyllite
+C-0246,Apophyllite,apophyllite,246,Apache Tears,apache-tears,Aqua Aura Quartz,aqua-aura-quartz
+C-0277,Aqua Aura Quartz,aqua-aura-quartz,277,Apophyllite,apophyllite,Aquamarine,aquamarine
+C-0021,Aquamarine,aquamarine,21,Aqua Aura Quartz,aqua-aura-quartz,Aragonite,aragonite
+C-0001,Aragonite,aragonite,1,Aquamarine,aquamarine,Arkansas Quartz,arkansas-quartz
+C-0106,Arkansas Quartz,arkansas-quartz,106,Aragonite,aragonite,Astrophyllite,astrophyllite
+C-0247,Astrophyllite,astrophyllite,247,Arkansas Quartz,arkansas-quartz,Atlantisite,atlantisite
+C-0133,Atlantisite,atlantisite,133,Astrophyllite,astrophyllite,Auralite 23,auralite-23
+C-0182,Auralite 23,auralite-23,182,Atlantisite,atlantisite,Axinite,axinite
+C-0278,Axinite,axinite,278,Auralite 23,auralite-23,Azurite,azurite
+C-0006,Azurite,azurite,6,Axinite,axinite,Banded Carnelian,banded-carnelian
+C-0149,Banded Carnelian,banded-carnelian,149,Azurite,azurite,Barite,barite
+C-0206,Barite,barite,206,Banded Carnelian,banded-carnelian,Biotite,biotite
+C-0400,Biotite,biotite,0,Barite,barite,Bismuth,bismuth
+C-0208,Bismuth,bismuth,208,Biotite,biotite,Black Amethyst,black-amethyst
+C-0150,Black Amethyst,black-amethyst,150,Bismuth,bismuth,Black Chalcedony,black-chalcedony
+C-0081,Black Chalcedony,black-chalcedony,81,Black Amethyst,black-amethyst,Black Kyanite,black-kyanite
+C-0063,Black Kyanite,black-kyanite,63,Black Chalcedony,black-chalcedony,Black Moonstone,black-moonstone
+C-0159,Black Moonstone,black-moonstone,159,Black Kyanite,black-kyanite,Black Obsidian,black-obsidian
+C-0139,Black Obsidian,black-obsidian,139,Black Moonstone,black-moonstone,Black Opal,black-opal
+C-0281,Black Opal,black-opal,0,Black Obsidian,black-obsidian,Black Tourmaline,black-tourmaline
+C-0129,Black Tourmaline,black-tourmaline,129,Black Opal,black-opal,Bloodstone,bloodstone
+C-0151,Bloodstone,bloodstone,151,Black Tourmaline,black-tourmaline,Blue Apatite,blue-apatite
+C-0044,Blue Apatite,blue-apatite,44,Bloodstone,bloodstone,Blue Aragonite,blue-aragonite
+C-0002,Blue Aragonite,blue-aragonite,2,Blue Apatite,blue-apatite,Blue Aventurine,blue-aventurine
+C-0177,Blue Aventurine,blue-aventurine,177,Blue Aragonite,blue-aragonite,Blue Calcite,blue-calcite
+C-0007,Blue Calcite,blue-calcite,7,Blue Aventurine,blue-aventurine,Blue Chalcedony,blue-chalcedony
+C-0082,Blue Chalcedony,blue-chalcedony,82,Blue Calcite,blue-calcite,Blue Chert,blue-chert
+C-0152,Blue Chert,blue-chert,152,Blue Chalcedony,blue-chalcedony,Blue Fluorite,blue-fluorite
+C-0031,Blue Fluorite,blue-fluorite,31,Blue Chert,blue-chert,Blue Halite,blue-halite
+C-0282,Blue Halite,blue-halite,0,Blue Fluorite,blue-fluorite,Blue Kyanite,blue-kyanite
+C-0064,Blue Kyanite,blue-kyanite,64,Blue Halite,blue-halite,Blue Lace Agate,blue-lace-agate
+C-0069,Blue Lace Agate,blue-lace-agate,69,Blue Kyanite,blue-kyanite,Blue Opal,blue-opal
+C-0160,Blue Opal,blue-opal,160,Blue Lace Agate,blue-lace-agate,Blue Rose Quartz,blue-rose-quartz
+C-9004,Blue Rose Quartz,blue-rose-quartz,0,Blue Opal,blue-opal,Blue Tiger's Eye,blue-tiger-s-eye
+C-0167,Blue Tiger's Eye,blue-tiger-s-eye,167,Blue Rose Quartz,blue-rose-quartz,Blue Topaz,blue-topaz
+C-0283,Blue Topaz,blue-topaz,0,Blue Tiger's Eye,blue-tiger-s-eye,Blue Tourmaline,blue-tourmaline
+C-0058,Blue Tourmaline,blue-tourmaline,58,Blue Topaz,blue-topaz,Boji Stones,boji-stones
+C-0184,Boji Stones,boji-stones,184,Blue Tourmaline,blue-tourmaline,Bornite,bornite
+C-0331,Bornite,bornite,331,Boji Stones,boji-stones,Botswana Agate,botswana-agate
+C-0070,Botswana Agate,botswana-agate,70,Bornite,bornite,Brandberg Amethyst,brandberg-amethyst
+C-0284,Brandberg Amethyst,brandberg-amethyst,0,Botswana Agate,botswana-agate,Brecciated Jasper,brecciated-jasper
+C-0087,Brecciated Jasper,brecciated-jasper,87,Brandberg Amethyst,brandberg-amethyst,Bronzite,bronzite
+C-0248,Bronzite,bronzite,248,Brecciated Jasper,brecciated-jasper,Brookite,brookite
+C-0286,Brookite,brookite,0,Bronzite,bronzite,Brown Tourmaline,brown-tourmaline
+C-0053,Brown Tourmaline,brown-tourmaline,53,Brookite,brookite,Buddstone,buddstone
+C-0287,Buddstone,buddstone,287,Brown Tourmaline,brown-tourmaline,Bumblebee Jasper,bumblebee-jasper
+C-0008,Bumblebee Jasper,bumblebee-jasper,8,Buddstone,buddstone,Bustamite,bustamite
+C-0288,Bustamite,bustamite,0,Bumblebee Jasper,bumblebee-jasper,Cacoxenite,cacoxenite
+C-0289,Cacoxenite,cacoxenite,0,Bustamite,bustamite,Calligraphy Stone,calligraphy-stone
+C-0363,Calligraphy Stone,calligraphy-stone,363,Cacoxenite,cacoxenite,Caribbean Calcite,caribbean-calcite
+C-0009,Caribbean Calcite,caribbean-calcite,9,Calligraphy Stone,calligraphy-stone,Carnelian,carnelian
+C-0153,Carnelian,carnelian,153,Caribbean Calcite,caribbean-calcite,Cavansite,cavansite
+C-0220,Cavansite,cavansite,220,Carnelian,carnelian,Celestite,celestite
+C-0221,Celestite,celestite,221,Cavansite,cavansite,Chalcopyrite,chalcopyrite
+C-0292,Chalcopyrite,chalcopyrite,292,Celestite,celestite,Charoite,charoite
+C-0249,Charoite,charoite,249,Chalcopyrite,chalcopyrite,Chevron Amethyst,chevron-amethyst
+C-0154,Chevron Amethyst,chevron-amethyst,154,Charoite,charoite,Chiastolite,chiastolite
+C-0250,Chiastolite,chiastolite,250,Chevron Amethyst,chevron-amethyst,Chocolate Calcite,chocolate-calcite
+C-9002,Chocolate Calcite,chocolate-calcite,0,Chiastolite,chiastolite,Chrysanthemum Stone,chrysanthemum-stone
+C-0185,Chrysanthemum Stone,chrysanthemum-stone,185,Chocolate Calcite,chocolate-calcite,Chrysoberyl,chrysoberyl
+C-0294,Chrysoberyl,chrysoberyl,0,Chrysanthemum Stone,chrysanthemum-stone,Chrysocolla,chrysocolla
+C-0052,Chrysocolla,chrysocolla,52,Chrysoberyl,chrysoberyl,Chrysoprase,chrysoprase
+C-0155,Chrysoprase,chrysoprase,155,Chrysocolla,chrysocolla,Cinnabrite,cinnabrite
+C-0251,Cinnabrite,cinnabrite,251,Chrysoprase,chrysoprase,Citrine,citrine
+C-0121,Citrine,citrine,121,Cinnabrite,cinnabrite,Clear Fluorite,clear-fluorite
+C-0295,Clear Fluorite,clear-fluorite,0,Citrine,citrine,Clear Quartz,clear-quartz
+C-0105,Clear Quartz,clear-quartz,105,Clear Fluorite,clear-fluorite,Cobaltoan Calcite,cobaltoan-calcite
+C-0011,Cobaltoan Calcite,cobaltoan-calcite,11,Clear Quartz,clear-quartz,Copper,copper
+C-0037,Copper,copper,37,Cobaltoan Calcite,cobaltoan-calcite,Covellite,covellite
+C-0135,Covellite,covellite,135,Copper,copper,Crackle Quartz,crackle-quartz
+C-0124,Crackle Quartz,crackle-quartz,124,Covellite,covellite,Crazy Lace Agate,crazy-lace-agate
+C-0071,Crazy Lace Agate,crazy-lace-agate,71,Crackle Quartz,crackle-quartz,Creedite,creedite
+C-0296,Creedite,creedite,0,Crazy Lace Agate,crazy-lace-agate,Cuprite,cuprite
+C-0298,Cuprite,cuprite,298,Creedite,creedite,Dalmatian Jasper,dalmatian-jasper
+C-0088,Dalmatian Jasper,dalmatian-jasper,88,Cuprite,cuprite,Danburite,danburite
+C-0234,Danburite,danburite,234,Dalmatian Jasper,dalmatian-jasper,Dendritic Agate,dendritic-agate
+C-0072,Dendritic Agate,dendritic-agate,72,Danburite,danburite,Desert Rose,desert-rose
+C-0172,Desert Rose,desert-rose,172,Dendritic Agate,dendritic-agate,Diaspore,diaspore
+C-0235,Diaspore,diaspore,235,Desert Rose,desert-rose,Diopside,diopside
+C-0236,Diopside,diopside,236,Diaspore,diaspore,Dioptase,dioptase
+C-0019,Dioptase,dioptase,19,Diopside,diopside,Dolomite,dolomite
+C-0237,Dolomite,dolomite,237,Dioptase,dioptase,Dragon's Blood Jasper,dragon-s-blood-jasper
+C-0089,Dragon's Blood Jasper,dragon-s-blood-jasper,89,Dolomite,dolomite,Dream Quartz,dream-quartz
+C-0301,Dream Quartz,dream-quartz,0,Dragon's Blood Jasper,dragon-s-blood-jasper,Druzy Agate,druzy-agate
+C-0073,Druzy Agate,druzy-agate,73,Dream Quartz,dream-quartz,Dumortierite,dumortierite
+C-0054,Dumortierite,dumortierite,54,Druzy Agate,druzy-agate,Elestial Quartz,elestial-quartz
+C-0366,Elestial Quartz,elestial-quartz,0,Dumortierite,dumortierite,Elite Shungite,elite-shungite
+C-0302,Elite Shungite,elite-shungite,302,Elestial Quartz,elestial-quartz,Emerald,emerald
+C-0022,Emerald,emerald,22,Elite Shungite,elite-shungite,Enhydro Quartz,enhydro-quartz
+C-0367,Enhydro Quartz,enhydro-quartz,0,Emerald,emerald,Epidote,epidote
+C-0238,Epidote,epidote,238,Enhydro Quartz,enhydro-quartz,Eudialyte,eudialyte
+C-0239,Eudialyte,eudialyte,239,Epidote,epidote,Faden Quartz,faden-quartz
+C-0304,Faden Quartz,faden-quartz,0,Eudialyte,eudialyte,Fancy Jasper,fancy-jasper
+C-0305,Fancy Jasper,fancy-jasper,0,Faden Quartz,faden-quartz,Fire Agate,fire-agate
+C-0074,Fire Agate,fire-agate,74,Fancy Jasper,fancy-jasper,Fire Opal,fire-opal
+C-0306,Fire Opal,fire-opal,306,Fire Agate,fire-agate,Flower Agate,flower-agate
+C-0075,Flower Agate,flower-agate,75,Fire Opal,fire-opal,Fossilized Coral,fossilized-coral
+C-0308,Fossilized Coral,fossilized-coral,308,Flower Agate,flower-agate,Fuchsite,fuchsite
+C-0252,Fuchsite,fuchsite,252,Fossilized Coral,fossilized-coral,Fulgurite,fulgurite
+C-0156,Fulgurite,fulgurite,156,Fuchsite,fuchsite,Galena,galena
+C-0136,Galena,galena,136,Fulgurite,fulgurite,Garnet,garnet
+C-0048,Garnet,garnet,48,Galena,galena,Gaspeite,gaspeite
+C-0310,Gaspeite,gaspeite,0,Garnet,garnet,Goethite,goethite
+C-0040,Goethite,goethite,40,Gaspeite,gaspeite,Gold Sheen Obsidian,gold-sheen-obsidian
+C-0140,Gold Sheen Obsidian,gold-sheen-obsidian,140,Goethite,goethite,Tiger's Eye,tigers-eye
+C-0168,Tiger's Eye,tigers-eye,168,Gold Sheen Obsidian,gold-sheen-obsidian,Golden Healer Quartz,golden-healer-quartz
+C-0122,Golden Healer Quartz,golden-healer-quartz,122,Tiger's Eye,tigers-eye,Golden Labradorite,golden-labradorite
+C-0311,Golden Labradorite,golden-labradorite,311,Golden Healer Quartz,golden-healer-quartz,Goldstone,goldstone
+C-0186,Goldstone,goldstone,186,Golden Labradorite,golden-labradorite,Goshenite,goshenite
+C-0404,Goshenite,goshenite,0,Goldstone,goldstone,Grape Agate,grape-agate
+C-0076,Grape Agate,grape-agate,76,Goshenite,goshenite,Green Apatite,green-apatite
+C-0045,Green Apatite,green-apatite,45,Grape Agate,grape-agate,Green Aragonite,green-aragonite
+C-0003,Green Aragonite,green-aragonite,3,Green Apatite,green-apatite,Green Aventurine,green-aventurine
+C-0178,Green Aventurine,green-aventurine,178,Green Aragonite,green-aragonite,Green Calcite,green-calcite
+C-0012,Green Calcite,green-calcite,12,Green Aventurine,green-aventurine,Green Fluorite,green-fluorite
+C-0032,Green Fluorite,green-fluorite,32,Green Calcite,green-calcite,Green Heulandite,green-heulandite
+C-0313,Green Heulandite,green-heulandite,0,Green Fluorite,green-fluorite,Green Kyanite,green-kyanite
+C-0065,Green Kyanite,green-kyanite,65,Green Heulandite,green-heulandite,Green Moonstone,green-moonstone
+C-0399,Green Moonstone,green-moonstone,399,Green Kyanite,green-kyanite,Green Opal,green-opal
+C-0314,Green Opal,green-opal,314,Green Moonstone,green-moonstone,Green Tourmaline,green-tourmaline
+C-0057,Green Tourmaline,green-tourmaline,57,Green Opal,green-opal,Greenstone,greenstone
+C-0315,Greenstone,greenstone,0,Green Tourmaline,green-tourmaline,Grossular Garnet,grossular-garnet
+C-0061,Grossular Garnet,grossular-garnet,61,Greenstone,greenstone,Hackmanite,hackmanite
+C-0364,Hackmanite,hackmanite,364,Grossular Garnet,grossular-garnet,Halite,halite
+C-0240,Halite,halite,240,Hackmanite,hackmanite,Healer's Gold,healer-s-gold
+C-0317,Healer's Gold,healer-s-gold,317,Halite,halite,Healerite,healerite
+C-0049,Healerite,healerite,49,Healer's Gold,healer-s-gold,Heliodor,heliodor
+C-0023,Heliodor,heliodor,23,Healerite,healerite,Hematite,hematite
+C-0041,Hematite,hematite,41,Heliodor,heliodor,Hematoid Quartz,hematoid-quartz
+C-0113,Hematoid Quartz,hematoid-quartz,113,Hematite,hematite,Hemimorphite,hemimorphite
+C-0318,Hemimorphite,hemimorphite,318,Hematoid Quartz,hematoid-quartz,Herkimer Diamond,herkimer-diamond
+C-0123,Herkimer Diamond,herkimer-diamond,123,Hemimorphite,hemimorphite,Hiddenite,hiddenite
+C-0161,Hiddenite,hiddenite,161,Herkimer Diamond,herkimer-diamond,Honey Calcite,honey-calcite
+C-0013,Honey Calcite,honey-calcite,13,Hiddenite,hiddenite,Howlite,howlite
+C-0241,Howlite,howlite,241,Honey Calcite,honey-calcite,Hypersthene,hypersthene
+C-0320,Hypersthene,hypersthene,320,Howlite,howlite,Imperial Topaz,imperial-topaz
+C-0321,Imperial Topaz,imperial-topaz,0,Hypersthene,hypersthene,Indigo Gabbro,indigo-gabbro
+C-0187,Indigo Gabbro,indigo-gabbro,187,Imperial Topaz,imperial-topaz,Infinite,infinite
+C-0050,Infinite,infinite,50,Indigo Gabbro,indigo-gabbro,Iolite,iolite
+C-0222,Iolite,iolite,222,Infinite,infinite,Jadeite,jadeite
+C-0062,Jadeite,jadeite,62,Iolite,iolite,Jet,jet
+C-0204,Jet,jet,204,Jadeite,jadeite,K2 Jasper,k2-jasper
+C-0059,K2 Jasper,k2-jasper,59,Jet,jet,Kambaba Jasper,kambaba-jasper
+C-0132,Kambaba Jasper,kambaba-jasper,132,K2 Jasper,k2-jasper,Kiwi Jasper,kiwi-jasper
+C-0398,Kiwi Jasper,kiwi-jasper,398,Kambaba Jasper,kambaba-jasper,Kunzite,kunzite
+C-0245,Kunzite,kunzite,245,Kiwi Jasper,kiwi-jasper,Labradorite,labradorite
+C-0028,Labradorite,labradorite,28,Kunzite,kunzite,Laguna Jasper,laguna-jasper
+C-0091,Laguna Jasper,laguna-jasper,91,Labradorite,labradorite,Lapis Lazuli,lapis-lazuli
+C-0188,Lapis Lazuli,lapis-lazuli,188,Laguna Jasper,laguna-jasper,Larimar,larimar
+C-0253,Larimar,larimar,253,Lapis Lazuli,lapis-lazuli,Larvikite,larvikite
+C-0396,Larvikite,larvikite,396,Larimar,larimar,Lavender Rose Quartz,lavender-rose-quartz
+C-0107,Lavender Rose Quartz,lavender-rose-quartz,107,Larvikite,larvikite,Lazulite,lazulite
+C-0242,Lazulite,lazulite,242,Lavender Rose Quartz,lavender-rose-quartz,Lemurian Aquatine Calcite,lemurian-aquatine-calcite
+C-0322,Lemurian Aquatine Calcite,lemurian-aquatine-calcite,322,Lazulite,lazulite,Lemurian Seed Crystal,lemurian-seed-crystal
+C-0323,Lemurian Seed Crystal,lemurian-seed-crystal,323,Lemurian Aquatine Calcite,lemurian-aquatine-calcite,Leopard Skin Jasper,leopard-skin-jasper
+C-0092,Leopard Skin Jasper,leopard-skin-jasper,92,Lemurian Seed Crystal,lemurian-seed-crystal,Lepidocrocite,lepidocrocite
+C-0324,Lepidocrocite,lepidocrocite,0,Leopard Skin Jasper,leopard-skin-jasper,Lepidolite,lepidolite
+C-0254,Lepidolite,lepidolite,254,Lepidocrocite,lepidocrocite,Libyan Desert Glass,libyan-desert-glass
+C-0255,Libyan Desert Glass,libyan-desert-glass,255,Lepidolite,lepidolite,Lithium Quartz,lithium-quartz
+C-0325,Lithium Quartz,lithium-quartz,325,Libyan Desert Glass,libyan-desert-glass,Lodestone,lodestone
+C-0042,Lodestone,lodestone,42,Lithium Quartz,lithium-quartz,Lodolite Quartz,lodolite-quartz
+C-0115,Lodolite Quartz,lodolite-quartz,115,Lodestone,lodestone,Magnesite,magnesite
+C-0256,Magnesite,magnesite,256,Lodolite Quartz,lodolite-quartz,Magnetite,magnetite
+C-0043,Magnetite,magnetite,43,Magnesite,magnesite,Mahogany Obsidian,mahogany-obsidian
+C-0141,Mahogany Obsidian,mahogany-obsidian,141,Magnetite,magnetite,Malachite,malachite
+C-0020,Malachite,malachite,20,Mahogany Obsidian,mahogany-obsidian,Mangano Calcite,mangano-calcite
+C-0014,Mangano Calcite,mangano-calcite,14,Malachite,malachite,Marcasite,marcasite
+C-0327,Marcasite,marcasite,327,Mangano Calcite,mangano-calcite,Merlinite,merlinite
+C-0328,Merlinite,merlinite,328,Marcasite,marcasite,Meteorite,meteorite
+C-0257,Meteorite,meteorite,257,Merlinite,merlinite,Milky Quartz,milky-quartz
+C-0125,Milky Quartz,milky-quartz,125,Meteorite,meteorite,Moldavite,moldavite
+C-0259,Moldavite,moldavite,259,Milky Quartz,milky-quartz,Mookaite Jasper,mookaite-jasper
+C-0094,Mookaite Jasper,mookaite-jasper,94,Moldavite,moldavite,Moonstone,moonstone
+C-0162,Moonstone,moonstone,162,Mookaite Jasper,mookaite-jasper,Morganite,morganite
+C-0024,Morganite,morganite,24,Moonstone,moonstone,Moss Agate,moss-agate
+C-0077,Moss Agate,moss-agate,77,Morganite,morganite,Muscovite,muscovite
+C-0260,Muscovite,muscovite,260,Moss Agate,moss-agate,Natrolite,natrolite
+C-0261,Natrolite,natrolite,261,Muscovite,muscovite,Nephrite Jade,nephrite-jade
+C-0047,Nephrite Jade,nephrite-jade,47,Natrolite,natrolite,Nuumite,nuumite
+C-0191,Nuumite,nuumite,191,Nephrite Jade,nephrite-jade,Ocean Jasper,ocean-jasper
+C-0095,Ocean Jasper,ocean-jasper,95,Nuumite,nuumite,Onyx,onyx
+C-0158,Onyx,onyx,158,Ocean Jasper,ocean-jasper,Opal,opal
+C-0163,Opal,opal,163,Onyx,onyx,Opalite,opalite
+C-0262,Opalite,opalite,262,Opal,opal,Optical Calcite,optical-calcite
+C-0015,Optical Calcite,optical-calcite,15,Opalite,opalite,Orange Calcite,orange-calcite
+C-0016,Orange Calcite,orange-calcite,16,Optical Calcite,optical-calcite,Orange Kyanite,orange-kyanite
+C-0068,Orange Kyanite,orange-kyanite,68,Orange Calcite,orange-calcite,Orange Selenite,orange-selenite
+C-0173,Orange Selenite,orange-selenite,173,Orange Kyanite,orange-kyanite,Orca Agate,orca-agate
+C-0078,Orca Agate,orca-agate,78,Orange Selenite,orange-selenite,Orthoceras,orthoceras
+C-0205,Orthoceras,orthoceras,205,Orca Agate,orca-agate,Papagoite,papagoite
+C-0330,Papagoite,papagoite,0,Orthoceras,orthoceras,Peach Moonstone,peach-moonstone
+C-0395,Peach Moonstone,peach-moonstone,0,Papagoite,papagoite,Peridot,peridot
+C-0263,Peridot,peridot,263,Peach Moonstone,peach-moonstone,Petalite,petalite
+C-0243,Petalite,petalite,243,Peridot,peridot,Petrified Wood,petrified-wood
+C-0164,Petrified Wood,petrified-wood,164,Petalite,petalite,Phantom Quartz,phantom-quartz
+C-0117,Phantom Quartz,phantom-quartz,117,Petrified Wood,petrified-wood,Phenakite,phenakite
+C-0332,Phenakite,phenakite,0,Phantom Quartz,phantom-quartz,Phoenix Stone,phoenix-stone
+C-0397,Phoenix Stone,phoenix-stone,397,Phenakite,phenakite,Phosphosiderite,phosphosiderite
+C-0210,Phosphosiderite,phosphosiderite,210,Phoenix Stone,phoenix-stone,Picasso Stone,picasso-stone
+C-0096,Picasso Stone,picasso-stone,96,Phosphosiderite,phosphosiderite,Picture Jasper,picture-jasper
+C-0097,Picture Jasper,picture-jasper,97,Picasso Stone,picasso-stone,Pietersite,pietersite
+C-0192,Pietersite,pietersite,192,Picture Jasper,picture-jasper,Pink Amethyst,pink-amethyst
+C-9001,Pink Amethyst,pink-amethyst,0,Pietersite,pietersite,Pink Aragonite,pink-aragonite
+C-0004,Pink Aragonite,pink-aragonite,4,Pink Amethyst,pink-amethyst,Pink Aventurine,pink-aventurine
+C-0179,Pink Aventurine,pink-aventurine,179,Pink Aragonite,pink-aragonite,Pink Chalcedony,pink-chalcedony
+C-0084,Pink Chalcedony,pink-chalcedony,84,Pink Aventurine,pink-aventurine,Pink Fluorite,pink-fluorite
+C-0033,Pink Fluorite,pink-fluorite,33,Pink Chalcedony,pink-chalcedony,Pink Halite,pink-halite
+C-0334,Pink Halite,pink-halite,334,Pink Fluorite,pink-fluorite,Pink Opal,pink-opal
+C-0165,Pink Opal,pink-opal,165,Pink Halite,pink-halite,Pink Tourmaline,pink-tourmaline
+C-0055,Pink Tourmaline,pink-tourmaline,55,Pink Opal,pink-opal,Polychrome Jasper,polychrome-jasper
+C-0098,Polychrome Jasper,polychrome-jasper,98,Pink Tourmaline,pink-tourmaline,Prasiolite,prasiolite
+C-0126,Prasiolite,prasiolite,126,Polychrome Jasper,polychrome-jasper,Prehnite,prehnite
+C-0211,Prehnite,prehnite,211,Prasiolite,prasiolite,Prophecy Stone,prophecy-stone
+C-0193,Prophecy Stone,prophecy-stone,193,Prehnite,prehnite,Purple Chalcedony,purple-chalcedony
+C-0085,Purple Chalcedony,purple-chalcedony,85,Prophecy Stone,prophecy-stone,Purple Fluorite,purple-fluorite
+C-0034,Purple Fluorite,purple-fluorite,34,Purple Chalcedony,purple-chalcedony,Purpurite,purpurite
+C-0212,Purpurite,purpurite,212,Purple Fluorite,purple-fluorite,Pyrite,pyrite
+C-0137,Pyrite,pyrite,137,Purpurite,purpurite,Pyromorphite,pyromorphite
+C-0335,Pyromorphite,pyromorphite,335,Pyrite,pyrite,Pyrope Garnet,pyrope-garnet
+C-0336,Pyrope Garnet,pyrope-garnet,0,Pyromorphite,pyromorphite,Quantum Quattro,quantum-quattro
+C-0368,Quantum Quattro,quantum-quattro,0,Pyrope Garnet,pyrope-garnet,Que Sera Stone,que-sera-stone
+C-0189,Que Sera Stone,que-sera-stone,189,Quantum Quattro,quantum-quattro,Rainbow Fluorite,rainbow-fluorite
+C-0035,Rainbow Fluorite,rainbow-fluorite,35,Que Sera Stone,que-sera-stone,Rainbow Moonstone,rainbow-moonstone
+C-0030,Rainbow Moonstone,rainbow-moonstone,30,Rainbow Fluorite,rainbow-fluorite,Rainbow Obsidian,rainbow-obsidian
+C-0142,Rainbow Obsidian,rainbow-obsidian,142,Rainbow Moonstone,rainbow-moonstone,Red Aventurine,red-aventurine
+C-0180,Red Aventurine,red-aventurine,180,Rainbow Obsidian,rainbow-obsidian,Red Calcite,red-calcite
+C-0017,Red Calcite,red-calcite,17,Red Aventurine,red-aventurine,Red Jasper,red-jasper
+C-0099,Red Jasper,red-jasper,99,Red Calcite,red-calcite,Red Tiger's Eye,red-tiger-s-eye
+C-0169,Red Tiger's Eye,red-tiger-s-eye,169,Red Jasper,red-jasper,Rhodochrosite,rhodochrosite
+C-0213,Rhodochrosite,rhodochrosite,213,Red Tiger's Eye,red-tiger-s-eye,Rhodonite,rhodonite
+C-0214,Rhodonite,rhodonite,214,Rhodochrosite,rhodochrosite,Rhyolite,rhyolite
+C-0264,Rhyolite,rhyolite,264,Rhodonite,rhodonite,Rose Quartz,rose-quartz
+C-0108,Rose Quartz,rose-quartz,108,Rhyolite,rhyolite,Ruby,ruby
+C-0038,Ruby,ruby,38,Rose Quartz,rose-quartz,Ruby Fuchsite,ruby-fuchsite
+C-0195,Ruby Fuchsite,ruby-fuchsite,195,Ruby,ruby,Ruby in Kyanite,ruby-in-kyanite
+C-0066,Ruby in Kyanite,ruby-in-kyanite,66,Ruby Fuchsite,ruby-fuchsite,Ruby Zoisite,ruby-zoisite
+C-0196,Ruby Zoisite,ruby-zoisite,196,Ruby in Kyanite,ruby-in-kyanite,Rutilated Quartz,rutilated-quartz
+C-0114,Rutilated Quartz,rutilated-quartz,114,Ruby Zoisite,ruby-zoisite,Rutile,rutile
+C-0339,Rutile,rutile,0,Rutilated Quartz,rutilated-quartz,Sapphire,sapphire
+C-0039,Sapphire,sapphire,39,Rutile,rutile,Scapolite,scapolite
+C-0340,Scapolite,scapolite,0,Sapphire,sapphire,Scheelite,scheelite
+C-0215,Scheelite,scheelite,215,Scapolite,scapolite,Scolecite,scolecite
+C-0216,Scolecite,scolecite,216,Scheelite,scheelite,Selenite,selenite
+C-0175,Selenite,selenite,175,Scolecite,scolecite,Septarian,septarian
+C-0198,Septarian,septarian,198,Selenite,selenite,Seraphinite,seraphinite
+C-0265,Seraphinite,seraphinite,265,Septarian,septarian,Serpentine,serpentine
+C-0051,Serpentine,serpentine,51,Seraphinite,seraphinite,Shaman Stone,shaman-stone
+C-0199,Shaman Stone,shaman-stone,199,Serpentine,serpentine,Shattuckite,shattuckite
+C-0130,Shattuckite,shattuckite,130,Shaman Stone,shaman-stone,Shiva Lingam,shiva-lingam
+C-0200,Shiva Lingam,shiva-lingam,200,Shattuckite,shattuckite,Shungite,shungite
+C-0201,Shungite,shungite,201,Shiva Lingam,shiva-lingam,Silver Sheen Obsidian,silver-sheen-obsidian
+C-9003,Silver Sheen Obsidian,silver-sheen-obsidian,0,Shungite,shungite,Smithsonite,smithsonite
+C-0217,Smithsonite,smithsonite,217,Silver Sheen Obsidian,silver-sheen-obsidian,Smoky Citrine,smoky-citrine
+C-0128,Smoky Citrine,smoky-citrine,128,Smithsonite,smithsonite,Smoky Quartz,smoky-quartz
+C-0103,Smoky Quartz,smoky-quartz,103,Smoky Citrine,smoky-citrine,Snowflake Obsidian,snowflake-obsidian
+C-0143,Snowflake Obsidian,snowflake-obsidian,143,Smoky Quartz,smoky-quartz,Sodalite,sodalite
+C-0218,Sodalite,sodalite,218,Snowflake Obsidian,snowflake-obsidian,Spectrolite,spectrolite
+C-0166,Spectrolite,spectrolite,166,Sodalite,sodalite,Spessartine Garnet,spessartine-garnet
+C-0131,Spessartine Garnet,spessartine-garnet,131,Spectrolite,spectrolite,Sphalerite,sphalerite
+C-0342,Sphalerite,sphalerite,342,Spessartine Garnet,spessartine-garnet,Sphene,sphene
+C-0343,Sphene,sphene,0,Sphalerite,sphalerite,Spinel,spinel
+C-0344,Spinel,spinel,0,Sphene,sphene,Spirit Quartz,spirit-quartz
+C-0104,Spirit Quartz,spirit-quartz,104,Spinel,spinel,Star Aragonite,star-aragonite
+C-0005,Star Aragonite,star-aragonite,5,Spirit Quartz,spirit-quartz,Star Jasper,star-jasper
+C-0100,Star Jasper,star-jasper,100,Star Aragonite,star-aragonite,Staurolite,staurolite
+C-0219,Staurolite,staurolite,219,Star Jasper,star-jasper,Stibnite,stibnite
+C-0345,Stibnite,stibnite,0,Staurolite,staurolite,Stichtite,stichtite
+C-0223,Stichtite,stichtite,223,Stibnite,stibnite,Stilbite,stilbite
+C-0346,Stilbite,stilbite,346,Stichtite,stichtite,Strawberry Quartz,strawberry-quartz
+C-0110,Strawberry Quartz,strawberry-quartz,110,Stilbite,stilbite,Stromatolite,stromatolite
+C-0202,Stromatolite,stromatolite,202,Strawberry Quartz,strawberry-quartz,Sugilite,sugilite
+C-0224,Sugilite,sugilite,224,Stromatolite,stromatolite,Sulfur,sulfur
+C-0225,Sulfur,sulfur,225,Sugilite,sugilite,Sunstone,sunstone
+C-0029,Sunstone,sunstone,29,Sulfur,sulfur,Super Seven,super-seven
+C-0365,Super Seven,super-seven,0,Sunstone,sunstone,Tangerine Quartz,tangerine-quartz
+C-0109,Tangerine Quartz,tangerine-quartz,109,Super Seven,super-seven,Tanzan Aura Quartz,tanzan-aura-quartz
+C-0369,Tanzan Aura Quartz,tanzan-aura-quartz,0,Tangerine Quartz,tangerine-quartz,Tanzanite,tanzanite
+C-0226,Tanzanite,tanzanite,226,Tanzan Aura Quartz,tanzan-aura-quartz,Tektite,tektite
+C-0266,Tektite,tektite,266,Tanzanite,tanzanite,Thulite,thulite
+C-0267,Thulite,thulite,267,Tektite,tektite,Thunderegg,thunderegg
+C-0349,Thunderegg,thunderegg,349,Thulite,thulite,Tibetan Quartz,tibetan-quartz
+C-0350,Tibetan Quartz,tibetan-quartz,350,Thunderegg,thunderegg,Tiffany Stone,tiffany-stone
+C-0403,Tiffany Stone,tiffany-stone,0,Tibetan Quartz,tibetan-quartz,Titanium Aura Quartz,titanium-aura-quartz
+C-0351,Titanium Aura Quartz,titanium-aura-quartz,351,Tiffany Stone,tiffany-stone,Topaz,topaz
+C-0227,Topaz,topaz,227,Titanium Aura Quartz,titanium-aura-quartz,Tourmaline Quartz,tourmaline-quartz
+C-0112,Tourmaline Quartz,tourmaline-quartz,112,Topaz,topaz,Tree Agate,tree-agate
+C-0079,Tree Agate,tree-agate,79,Tourmaline Quartz,tourmaline-quartz,Tremolite,tremolite
+C-0352,Tremolite,tremolite,352,Tree Agate,tree-agate,Trolleite,trolleite
+C-0268,Trolleite,trolleite,268,Tremolite,tremolite,Turquoise,turquoise
+C-0228,Turquoise,turquoise,228,Trolleite,trolleite,Turritella Agate,turritella-agate
+C-0080,Turritella Agate,turritella-agate,80,Turquoise,turquoise,Ulexite,ulexite
+C-0354,Ulexite,ulexite,354,Turritella Agate,turritella-agate,Unakite,unakite
+C-0060,Unakite,unakite,60,Ulexite,ulexite,Unicorn Stone,unicorn-stone
+C-0401,Unicorn Stone,unicorn-stone,0,Unakite,unakite,Uvarovite,uvarovite
+C-0355,Uvarovite,uvarovite,0,Unicorn Stone,unicorn-stone,Vanadinite,vanadinite
+C-0229,Vanadinite,vanadinite,229,Uvarovite,uvarovite,Variscite,variscite
+C-0356,Variscite,variscite,356,Vanadinite,vanadinite,Vera Cruz Amethyst,vera-cruz-amethyst
+C-0357,Vera Cruz Amethyst,vera-cruz-amethyst,357,Variscite,variscite,Vesuvianite,vesuvianite
+C-0230,Vesuvianite,vesuvianite,230,Vera Cruz Amethyst,vera-cruz-amethyst,Vivianite,vivianite
+C-0231,Vivianite,vivianite,231,Vesuvianite,vesuvianite,Watermelon Tourmaline,watermelon-tourmaline
+C-0056,Watermelon Tourmaline,watermelon-tourmaline,56,Vivianite,vivianite,White Chalcedony,white-chalcedony
+C-0086,White Chalcedony,white-chalcedony,86,Watermelon Tourmaline,watermelon-tourmaline,White Dolomite,white-dolomite
+C-0176,White Dolomite,white-dolomite,176,White Chalcedony,white-chalcedony,White Heulandite,white-heulandite
+C-0358,White Heulandite,white-heulandite,0,White Dolomite,white-dolomite,White Kyanite,white-kyanite
+C-0067,White Kyanite,white-kyanite,67,White Heulandite,white-heulandite,White Opal,white-opal
+C-0359,White Opal,white-opal,359,White Kyanite,white-kyanite,White Topaz,white-topaz
+C-0360,White Topaz,white-topaz,0,White Opal,white-opal,Wulfenite,wulfenite
+C-0232,Wulfenite,wulfenite,232,White Topaz,white-topaz,Yellow Apatite,yellow-apatite
+C-0046,Yellow Apatite,yellow-apatite,46,Wulfenite,wulfenite,Yellow Fluorite,yellow-fluorite
+C-0036,Yellow Fluorite,yellow-fluorite,36,Yellow Apatite,yellow-apatite,Yellow Jasper,yellow-jasper
+C-0101,Yellow Jasper,yellow-jasper,101,Yellow Fluorite,yellow-fluorite,Yooperlite,yooperlite
+C-0203,Yooperlite,yooperlite,203,Yellow Jasper,yellow-jasper,Zebra Calcite,zebra-calcite
+C-0018,Zebra Calcite,zebra-calcite,18,Yooperlite,yooperlite,Zebra Jasper,zebra-jasper
+C-0102,Zebra Jasper,zebra-jasper,102,Zebra Calcite,zebra-calcite,Zincite,zincite
+C-0362,Zincite,zincite,0,Zebra Jasper,zebra-jasper,Zircon,zircon
+C-0233,Zircon,zircon,233,Zincite,zincite,null,null

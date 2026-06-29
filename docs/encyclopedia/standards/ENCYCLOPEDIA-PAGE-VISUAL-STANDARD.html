@@ -22,8 +22,8 @@
   - Modify without matching the change in stones/stone.html
 
   DEPENDENCIES
-  - ../../styles.css (site-wide tokens and base styles)
-  - ../../stones/enc-icons.css (SVG mask icon definitions)
+  - ../../../styles.css (site-wide tokens and base styles)
+  - ../../../stones/enc-icons.css (SVG mask icon definitions)
   - Google Fonts: Jost (weights 300, 400, 500)
 
   CHAKRA SHOWN: Solar Plexus (default :root values — no JS override required)
@@ -34,8 +34,8 @@
 <meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
 <title>Reference Stone | Visual Standard — Still Point Lapidary Encyclopedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link href="../../styles.css" rel="stylesheet"/>
-<link href="../../stones/enc-icons.css" rel="stylesheet"/>
+<link href="../../../styles.css" rel="stylesheet"/>
+<link href="../../../stones/enc-icons.css" rel="stylesheet"/>
 <style>
 /* ── Encyclopedia Entry Page — Architecture 2026-06-20-canonical ── */
 
@@ -982,7 +982,7 @@
 
 <!-- ═══ GLOBAL HEADER ═══ -->
 <header class="topbar">
-  <a href="../../index.html" class="brand-home" aria-label="Return to home">
+  <a href="../../../index.html" class="brand-home" aria-label="Return to home">
     <div class="brand-block">
       <img src="/assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo"/>
       <div class="brand-block-text">
@@ -995,23 +995,23 @@
     <!-- stone-count: populated by app.js in production; static here for reference -->
     <span class="stone-count" id="stone-count">333 entries</span>
     <!-- topbar-auth: auth.js signed-out state; onclick deferred — redirects to encyclopedia until auth plumbing is added to stone pages -->
-    <div class="topbar-auth" id="topbar-auth"><button class="btn btn-sm" onclick="window.location='../../encyclopedia.html'">Sign in</button></div>
-    <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
-    <a class="btn btn-sm" id="request-entry-btn" href="../../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
-    <a class="btn btn-sm" id="guide-btn" href="../../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
-    <a class="btn btn-sm" id="manage-btn" style="display:none" href="../../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
+    <div class="topbar-auth" id="topbar-auth"><button class="btn btn-sm" onclick="window.location='../../../encyclopedia.html'">Sign in</button></div>
+    <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../../../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
+    <a class="btn btn-sm" id="request-entry-btn" href="../../../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
+    <a class="btn btn-sm" id="guide-btn" href="../../../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
+    <a class="btn btn-sm" id="manage-btn" style="display:none" href="../../../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
     <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 <div class="main-nav-wrap"><nav class="main-nav">
-  <a class="nav-tab" href="../../index.html">Home</a>
-  <a class="nav-tab" href="../../encyclopedia.html?tab=mood">Choose by Intention</a>
-  <a class="nav-tab active" href="../../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
-  <a class="nav-tab" href="../../encyclopedia.html?tab=identify">Identify</a>
-  <a class="nav-tab" href="../../encyclopedia.html?tab=collection">My Collection</a>
-  <a class="nav-tab" href="../../encyclopedia.html?tab=101">Crystals 101</a>
+  <a class="nav-tab" href="../../../index.html">Home</a>
+  <a class="nav-tab" href="../../../encyclopedia.html?tab=mood">Choose by Intention</a>
+  <a class="nav-tab active" href="../../../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+  <a class="nav-tab" href="../../../encyclopedia.html?tab=identify">Identify</a>
+  <a class="nav-tab" href="../../../encyclopedia.html?tab=collection">My Collection</a>
+  <a class="nav-tab" href="../../../encyclopedia.html?tab=101">Crystals 101</a>
 </nav></div>
 
 <!-- ═══ PAGE GRID ═══ -->
@@ -1020,8 +1020,8 @@
   <!-- ─── SIDEBAR ─── -->
   <aside class="enc-sidebar">
     <div class="enc-breadcrumb">
-      <a href="../../index.html">Home</a> ›
-      <a href="../../encyclopedia.html">Encyclopedia</a> ›
+      <a href="../../../index.html">Home</a> ›
+      <a href="../../../encyclopedia.html">Encyclopedia</a> ›
       <b>Reference Stone</b>
     </div>
     <!-- Sidebar nav — order matches scroll-spy array and page section order -->
@@ -1304,14 +1304,14 @@
           <div class="related-grid">
             <div class="rel-card">
               <div class="rel-card-head">Similar Energy</div>
-              <a class="stone-link-row" href="../../stones/stone.html?slug=black-tourmaline">
+              <a class="stone-link-row" href="../../../stones/stone.html?slug=black-tourmaline">
                 <span class="stone-dot-circle" style="background: linear-gradient(135deg, #b0aeac, #3a3530);"></span>
                 <div>
                   <b>Black Tourmaline</b>
                   <span class="stone-reason">Shares grounding and protective qualities; similarly anchoring in felt sense, though Tourmaline is more associated with boundary-setting than clarifying will.</span>
                 </div>
               </a>
-              <a class="stone-link-row" href="../../stones/stone.html?slug=smoky-quartz">
+              <a class="stone-link-row" href="../../../stones/stone.html?slug=smoky-quartz">
                 <span class="stone-dot-circle" style="background: linear-gradient(135deg, #8a7870, #4a3830);"></span>
                 <div>
                   <b>Smoky Quartz</b>
@@ -1321,14 +1321,14 @@
             </div>
             <div class="rel-card">
               <div class="rel-card-head">Pairs Well With</div>
-              <a class="stone-link-row" href="../../stones/stone.html?slug=clear-quartz">
+              <a class="stone-link-row" href="../../../stones/stone.html?slug=clear-quartz">
                 <span class="stone-dot-circle" style="background: linear-gradient(135deg, #f6f4f2, #e8e4de);"></span>
                 <div>
                   <b>Clear Quartz</b>
                   <span class="stone-reason">Amplifies Reference Stone's clarifying influence; the combination is used to sharpen intention before goal-setting practices or visualization work.</span>
                 </div>
               </a>
-              <a class="stone-link-row" href="../../stones/stone.html?slug=citrine">
+              <a class="stone-link-row" href="../../../stones/stone.html?slug=citrine">
                 <span class="stone-dot-circle" style="background: linear-gradient(135deg, #f7e090, #c89020);"></span>
                 <div>
                   <b>Citrine</b>
@@ -1538,7 +1538,7 @@
          flex-direction: column on each link — <small> label above <b> stone name
          ══════════════════════════════════════════ -->
     <nav aria-label="Browse encyclopedia entries" class="entry-nav-wrap">
-      <a class="entry-nav-link" href="../../stones/stone.html?slug=example-previous">
+      <a class="entry-nav-link" href="../../../stones/stone.html?slug=example-previous">
         <small>← Previous</small>
         <b>Example Previous</b>
       </a>
@@ -1546,7 +1546,7 @@
         <small>Random</small>
         <b>Surprise me</b>
       </a>
-      <a class="entry-nav-link" href="../../stones/stone.html?slug=example-next">
+      <a class="entry-nav-link" href="../../../stones/stone.html?slug=example-next">
         <small>Next →</small>
         <b>Example Next</b>
       </a>
@@ -1560,7 +1560,7 @@
         <h3>The right stone. The right moment.</h3>
         <p>Explore 333 entries with clarity, care, and curiosity.</p>
       </div>
-      <button onclick="window.location='../../encyclopedia.html'">Browse the Encyclopedia</button>
+      <button onclick="window.location='../../../encyclopedia.html'">Browse the Encyclopedia</button>
     </div>
 
   </main>
