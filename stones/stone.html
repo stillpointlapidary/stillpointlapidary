@@ -531,7 +531,6 @@
   border-bottom: 0.5px solid var(--border2);
   font-size: 13px;
 }
-.mineral-fact:nth-last-child(-n+2) { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
 .mineral-note {
@@ -576,6 +575,7 @@
   padding: 8px 0 0;
   font-size: 13.5px;
   line-height: 1.6;
+  align-items: start;
 }
 .localities-lbl {
   font-weight: 500;
@@ -593,8 +593,8 @@
 
 /* ── MINERAL PROFILE — localities spacing (scoped) ── */
 .mineral-profile .mineral-facts { margin-bottom: 0; }
-.mineral-profile .localities-row { margin: 0; padding: 7px 0; border-top: 0.5px solid var(--border2); }
-.mineral-profile .localities-phase-divider { margin: 7px 0; }
+.mineral-profile .localities-row { margin: 0; padding: 7px 0; }
+.mineral-profile .localities-phase-divider { margin: 0 0 28px; border: none; border-top: 0.5px solid var(--border2); }
 
 /* ── MINERAL PROFILE PHASE 2 SUBSECTIONS ── */
 .m-sub {

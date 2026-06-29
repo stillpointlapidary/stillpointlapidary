@@ -542,7 +542,7 @@
 .mineral-layout {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 .mineral-facts {
   display: grid;
@@ -558,7 +558,6 @@
   border-bottom: 0.5px solid var(--border2);
   font-size: 13px;
 }
-.mineral-fact:nth-last-child(-n+2) { border-bottom: 0; }
 .mineral-fact span:first-child { font-weight: 500; color: var(--ink); letter-spacing: 0.02em; }
 .mineral-fact span:last-child { color: var(--ink2); }
 
@@ -570,6 +569,7 @@
   padding: 8px 0 0;
   font-size: 13.5px;
   line-height: 1.6;
+  align-items: start;
 }
 .localities-lbl {
   font-weight: 500;
@@ -585,9 +585,8 @@
 
 /* ── MINERAL PROFILE — localities spacing (scoped) ── */
 .mineral-profile .mineral-facts { margin-bottom: 0; }
-.mineral-profile .facts-localities-divider { margin: 12px 0; }
-.mineral-profile .localities-row { margin: 0; padding: 0; }
-.mineral-profile .localities-phase-divider { margin: 12px 0 16px; }
+.mineral-profile .localities-row { margin: 0; padding: 7px 0; }
+.mineral-profile .localities-phase-divider { margin: 0 0 28px; border: none; border-top: 0.5px solid var(--border2); }
 
 /* ── MINERAL PROFILE PHASE 2 SUBSECTIONS ── */
 .m-sub {
@@ -1264,15 +1263,15 @@
               <div class="mineral-fact"><span>Transparency</span><span>Opaque</span></div>
               <div class="mineral-fact"><span>Fracture</span><span>Uneven to subconchoidal</span></div>
             </div>
-          </div>
-          <hr class="phase-divider facts-localities-divider"/>
 
-          <!-- Common Localities: dot-separated row, full-width, up to 8 entries -->
-          <div class="localities-row">
-            <span class="localities-lbl">Common Localities</span>
-            <span class="localities-val">Brazil · Morocco · Australia · South Africa · United Kingdom · India · China · United States</span>
+            <!-- Common Localities: dot-separated row, full-width, up to 8 entries -->
+            <div class="localities-row">
+              <span class="localities-lbl">Common Localities</span>
+              <span class="localities-val">Brazil · Morocco · Australia · South Africa · United Kingdom · India · China · United States</span>
+            </div>
+
+            <hr class="phase-divider localities-phase-divider"/>
           </div>
-          <hr class="phase-divider localities-phase-divider"/>
 
           <!-- Phase 2 subsections: Formation, Quality Indicators, Identification are required.
                Locality Variations and Physical Handling are optional (omit if not in approved MD). -->
