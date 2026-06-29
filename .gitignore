@@ -34,7 +34,6 @@ index_backup*.html
 
 # Node / migration scripts
 node_modules/
-package.json
 package-lock.json
 supabase/migrate_stones.js
 supabase/patch_index.js
@@ -121,6 +120,9 @@ docs/encyclopedia/VALIDATION-REPORT.md
 *-updated.html
 *-revised.html
 docs/encyclopedia/*-v*.md
+
+# Generated Netlify deployment output
+/dist/
 
 # Local archive folder
 /local-archive/
