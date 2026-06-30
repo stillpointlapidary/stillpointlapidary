@@ -1328,7 +1328,7 @@ async function init() {
   document.getElementById('enc-main').innerHTML = buildMain({
     c, stone, stoneName, slug, imageUrl,
     chakra, themes, notes, facts, localities,
-    similar, pairs, care, reach,
+    similar, pairs, swatchMap, care, reach,
     prevSlug, prevName, nextSlug, nextName,
   });
 
@@ -1348,7 +1348,7 @@ async function init() {
    ───────────────────────────────────────────── */
 function buildMain({ c, stone, stoneName, slug, imageUrl,
     chakra, themes, notes, facts, localities,
-    similar, pairs, care, reach,
+    similar, pairs, swatchMap, care, reach,
     prevSlug, prevName, nextSlug, nextName }) {
 
   return `
