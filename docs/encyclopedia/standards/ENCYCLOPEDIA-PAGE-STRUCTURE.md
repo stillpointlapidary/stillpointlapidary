@@ -25,20 +25,18 @@ This document does **not** control:
 - final approved public copy
 - exact implementation code beyond required behavior
 
-Authority by purpose:
+For questions outside this document's scope, defer to:
 
-1. Christie-approved project governance and explicit decisions
-2. `ENCYCLOPEDIA-PAGE-STRUCTURE.md` for structure and responsive behavior
-3. `ENCYCLOPEDIA-CONTENT-FIELDS.md` for fields, counts, and optionality
-4. `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md` for research, evidence, and prose
-5. `ENCYCLOPEDIA-APPROVED-SOURCES.md` for source eligibility
-6. `ENCYCLOPEDIA-DATABASE-REFERENCE.md` for Supabase storage and mapping
-7. `ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html` for approved visual and DOM reference
-8. Locked production data for stone-specific structured values
-9. Approved canonical MD for public copy
-10. `stones/stone.html` and Supabase for live operational rendering
+- field definitions, counts, and optionality — `ENCYCLOPEDIA-CONTENT-FIELDS.md`
+- prose style and research evidence standards — `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md`
+- source eligibility — `ENCYCLOPEDIA-APPROVED-SOURCES.md`
+- database schema, columns, and SQL — `ENCYCLOPEDIA-DATABASE-REFERENCE.md`
+- approved visual and DOM reference — `ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html`
+- stone-specific structured values — locked production data
+- approved public copy — approved canonical MD
+- live operational rendering — `stones/stone.html` and Supabase
 
-When two sources conflict within the same authority area, stop and ask Christie. Do not choose silently.
+When two sources conflict within the same domain, stop and ask Christie. Do not choose silently.
 
 ---
 

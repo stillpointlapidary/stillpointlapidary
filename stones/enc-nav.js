@@ -8,9 +8,14 @@
     'clear-quartz',
     'green-aventurine',
     'labradorite',
+    'rainbow-fluorite',
+    'rainbow-moonstone',
+    'red-jasper',
     'rose-quartz',
     'selenite',
-    'smoky-quartz'
+    'smoky-quartz',
+    'tigers-eye',
+    'unakite'
   ];
 
   var current = document.documentElement.dataset.stoneSlug || '';

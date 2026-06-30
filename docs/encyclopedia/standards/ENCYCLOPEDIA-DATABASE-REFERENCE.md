@@ -56,8 +56,8 @@ All encyclopedia child tables reference `stones.id` through `stone_id`.
 | `enc_energetic_role` | text, nullable | Approved Energetic Role. Twelve-value controlled vocabulary. |
 | `color_energy` | text, nullable | Approved Color Energy value. |
 | `styling_chakra` | text | Design token selector. NOT NULL after backfill. |
-| `swatch_color_start` | text, nullable | Light hex color for the Related Stones dot-circle gradient (e.g. `#f6f4f2`). |
-| `swatch_color_end` | text, nullable | Dark hex color for the Related Stones dot-circle gradient (e.g. `#d8d4ce`). |
+| `color_hex` | text, nullable | Primary hex color for the stone (e.g. `#d4839a`). Used by the listing page and `stone.html` Related Stones dots. 331 of 333 populated. |
+| `color_categories` | text[], nullable | Ordered array of semantic color labels (e.g. `["Pink","White"]`). Drives multi-color gradient dots via `COLOR_HEX_MAP`. 329 of 333 populated. |
 | additional columns | varies | Existing roster data. Do not modify without approval. |
 
 Approved `enc_production_status` values, in order:
@@ -77,13 +77,14 @@ Rules:
 - use `stones.id` as the foreign-key value in all `enc_` tables
 - `stones.slug` is the authoritative slug; keep `enc_stone_content.slug` synchronized
 
-Swatch color rules:
+Color dot rules:
 
-- `swatch_color_start` and `swatch_color_end` are the sole source of truth for Related Stones dot-circle colors. The `stone.html` template reads them directly from Supabase at render time.
-- Both columns must be populated before a stone can appear as a related stone on any published page.
-- If either column is null for a related stone slug, the template logs a console error and renders a visible red fallback — this is a pre-publish validation failure, not a silent degradation.
-- Swatch colors are assigned as a catalog-wide Gate 0 batch pass (one pass covers all stones), not per-cohort. Schedule the full backfill for all remaining stones before Cohort 4 production begins.
-- Do not use the former `STONE_DOT_GRADIENTS` JS object as a reference — it has been removed from `stone.html` and is no longer authoritative.
+- `color_hex` and `color_categories` are the consolidated source for all color-dot rendering across the site: listing page dots, catalog card orbs, and `stone.html` Related Stones dots all read these two columns.
+- `color_hex` is a single hex string. `color_categories` is an ordered array of semantic labels (`"Pink"`, `"Blue"`, etc.) mapped to hex at render time via the `COLOR_HEX_MAP` constant in `app.js`.
+- When `color_categories` has 2 or more entries, the dot renders as a two-color linear gradient using the first two categories. A third category is valid data but is not expressed in the two-color dot treatment.
+- When `color_categories` has 1 entry or is empty, the dot renders as a single-color gradient from a computed tint down to `color_hex`.
+- Missing `color_hex` and `color_categories` produce a gray `#c8c8c8` fallback — not a red error. Stones missing these columns are not pre-publish blocking, but should be backfilled for visual completeness.
+- Known gaps as of 2026-06-30: `color_hex` missing for C-0400 Biotite and C-0401 Unicorn Stone; `color_categories` missing for C-0395 Peach Moonstone, C-0402 Aegirine, C-0403 Tiffany Stone, and C-0404 Goshenite.
 
 ---
 
@@ -432,7 +433,7 @@ Authority rules:
 
 Claude Code may inspect live schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie or Dustin explicitly authorizes the task in a session brief. An explicit brief from Christie or Dustin is the controlling authority and supersedes any stale gate-status markers in MD files or batch notes. Claude Code does not require additional per-table or per-stone confirmation once a brief authorizes an entry run.
 
-Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, or destructive changes. Unexpected findings — including missing slugs, unmapped fields, or schema mismatches — must be reported to Christie before proceeding. Production Master writes are also owned exclusively by Claude Code. See ENCYCLOPEDIA-COHORT-EXECUTION-PROTOCOL.md for full lane assignment and workflow sequencing rules.
+Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, or destructive changes. Unexpected findings — including missing slugs, unmapped fields, or schema mismatches — must be reported to Christie before proceeding. Production Master writes are also owned exclusively by Claude Code. See `ENCYCLOPEDIA-COHORT-EXECUTION-PROTOCOL.md` (in this `standards/` folder) for full lane assignment and workflow sequencing rules.
 
 ---
 

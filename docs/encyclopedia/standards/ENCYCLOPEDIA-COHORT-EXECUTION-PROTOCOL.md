@@ -58,18 +58,28 @@ Cohort 2 = 7 stones:
 
 ---
 
-## 3. AUTHORITY HIERARCHY (UPDATED)
+## 3. SCOPE OF THIS DOCUMENT
 
-If conflicts exist:
+This document controls:
 
-1. ENCYCLOPEDIA-WRITING-AND-RESEARCH.md
-2. ENCYCLOPEDIA-CONTENT-FIELDS.md
-3. ENCYCLOPEDIA-APPROVED-SOURCES.md
-4. ENCYCLOPEDIA-DATABASE-REFERENCE.md
-5. CATALOG-LOCK (333 roster)
-6. This protocol (execution sequencing only)
+- cohort intake and sequencing
+- pass order and pass rules (Passes 1–4)
+- gate flow and blocking conditions
+- escalation triggers and escalation targets
+- concurrency rules between cohorts
+- submission and delivery format standards
 
-👉 This protocol never overrides structural truth sources.
+This document does not control:
+
+- page sections, layout behavior, or implementation — see `ENCYCLOPEDIA-PAGE-STRUCTURE.md`
+- field definitions, counts, or optionality — see `ENCYCLOPEDIA-CONTENT-FIELDS.md`
+- prose style or research evidence standards — see `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md`
+- source eligibility — see `ENCYCLOPEDIA-APPROVED-SOURCES.md`
+- database schema, columns, or SQL — see `ENCYCLOPEDIA-DATABASE-REFERENCE.md`
+- stone-specific structured values — see locked production data
+- approved public copy — see approved canonical MD
+
+When two sources conflict within the same domain, stop and escalate to Christie. Do not resolve silently.
 
 ---
 

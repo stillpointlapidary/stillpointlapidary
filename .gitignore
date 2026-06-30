@@ -8,7 +8,6 @@ logo-set/
 # Working/scratch files
 tmp-visual/
 *.docx
-*.py
 _fonts_embedded.txt
 _logo_data.txt
 
@@ -23,12 +22,9 @@ social-preview.html
 
 # Dev/handoff notes — internal only (root-level scratch only; docs/handoffs/ is tracked)
 /HANDOFF*.md
-*.docx
 
 # Backup files — never deploy these
 *.bak
-*.xlsx
-!docs/catalog/reviews/Rarity_Review.xlsx
 index backup*.html
 index_backup*.html
 
@@ -41,15 +37,10 @@ supabase/fix_loader.js
 supabase/extract_files.js
 supabase/patch_split.js
 supabase/rarity_first_pass.sql
-docs/encyclopedia/entries/clear-quartz.md
 docs/encyclopedia/MASTER-STONE-PAGE-CONTRACT.md
-docs/encyclopedia/entries/smoky-quartz.md
 docs/INSTALL-INSTRUCTIONS.md
 docs/encyclopedia/APPROVED-EXEMPLAR-LABRADORITE.md
 docs/encyclopedia/APPROVED-MD-SCHEMA.md
-docs/brand/chakra-color-system.md
-docs/brand/chakra-color-system.md
-docs/encyclopedia/entries/carnelian.md
 docs/brand/chakra-color-system.md
 assets/SVGs/add-piece.svg
 assets/SVGs/all-57-svgs.zip

@@ -1,0 +1,52 @@
+{
+  "energeticRoles": {
+    "Grounding": "icon-grounding",
+    "Protection": "icon-protection",
+    "Vitality": "icon-vitality",
+    "Heart Healing": "icon-heart-healing",
+    "Calm & Peace": "icon-calm-peace",
+    "Emotional Regulation": "icon-emotional-regulation",
+    "Clarity & Focus": "icon-clarity-focus",
+    "Intuition": "icon-intuition",
+    "Spiritual Connection": "icon-spiritual-connection",
+    "Transformation": "icon-transformation",
+    "Manifestation": "icon-manifestation",
+    "Amplification": "icon-amplification"
+  },
+  "atAGlance": {
+    "Chakra": "icon-chakra",
+    "Element": "icon-element",
+    "Zodiac": "icon-zodiac",
+    "Color Energy": "icon-color-range",
+    "Material Type": "icon-encyclopedia"
+  },
+  "care": {
+    "Cleaning": "icon-care-cleansing",
+    "Water": "icon-element",
+    "Light & Heat": "icon-celestial",
+    "Storage": "icon-geology"
+  },
+  "sections": {
+    "Best For": "icon-best-for",
+    "Use When": "icon-todays-practice",
+    "Save to Collection": "icon-add-piece",
+    "Add to Wishlist": "icon-wishlist",
+    "At a Glance": "icon-encyclopedia",
+    "Overview": "icon-book-reference",
+    "Why People Reach For It": "icon-target-bullseye",
+    "Mineral Profile": "icon-geology",
+    "Related Stones": "icon-stones-row",
+    "Energetic Themes": "icon-upward-spark",
+    "Collector & Curiosity Notes": "icon-bookmark",
+    "Market & Buying Notes": "icon-encyclopedia",
+    "Care & Cleaning": "icon-care-cleansing"
+  },
+  "knownSlugs": [
+    "best-for", "todays-practice", "add-piece", "wishlist", "encyclopedia",
+    "book-reference", "target-bullseye", "geology", "stones-row", "upward-spark",
+    "bookmark", "care-cleansing", "chakra", "element", "zodiac", "color-range",
+    "celestial", "grounding", "protection", "vitality", "heart-healing",
+    "calm-peace", "emotional-regulation", "clarity-focus", "intuition",
+    "spiritual-connection", "transformation", "manifestation", "amplification"
+  ]
+}

@@ -1,8 +1,17 @@
 {
   "scripts": {
-    "build": "node scripts/build-site.js"
+    "build": "node scripts/build-site.js",
+    "pipeline:generate": "node pipeline/generate-packet.js",
+    "pipeline:validate": "node pipeline/validate-packet.js",
+    "pipeline:import": "node pipeline/import-stone.js",
+    "pipeline:verify": "node pipeline/verify-stone.js",
+    "pipeline:smoke": "node pipeline/smoke-test.js",
+    "pipeline:rehearse": "node pipeline/rehearse-cohort3.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.107.0"
+  },
+  "devDependencies": {
+    "puppeteer": "^22.0.0"
   }
 }
