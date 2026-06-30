@@ -56,6 +56,8 @@ All encyclopedia child tables reference `stones.id` through `stone_id`.
 | `enc_energetic_role` | text, nullable | Approved Energetic Role. Twelve-value controlled vocabulary. |
 | `color_energy` | text, nullable | Approved Color Energy value. |
 | `styling_chakra` | text | Design token selector. NOT NULL after backfill. |
+| `swatch_color_start` | text, nullable | Light hex color for the Related Stones dot-circle gradient (e.g. `#f6f4f2`). |
+| `swatch_color_end` | text, nullable | Dark hex color for the Related Stones dot-circle gradient (e.g. `#d8d4ce`). |
 | additional columns | varies | Existing roster data. Do not modify without approval. |
 
 Approved `enc_production_status` values, in order:
@@ -74,6 +76,14 @@ Rules:
 - do not modify unrelated roster columns during encyclopedia work
 - use `stones.id` as the foreign-key value in all `enc_` tables
 - `stones.slug` is the authoritative slug; keep `enc_stone_content.slug` synchronized
+
+Swatch color rules:
+
+- `swatch_color_start` and `swatch_color_end` are the sole source of truth for Related Stones dot-circle colors. The `stone.html` template reads them directly from Supabase at render time.
+- Both columns must be populated before a stone can appear as a related stone on any published page.
+- If either column is null for a related stone slug, the template logs a console error and renders a visible red fallback — this is a pre-publish validation failure, not a silent degradation.
+- Swatch colors are assigned as a catalog-wide Gate 0 batch pass (one pass covers all stones), not per-cohort. Schedule the full backfill for all remaining stones before Cohort 4 production begins.
+- Do not use the former `STONE_DOT_GRADIENTS` JS object as a reference — it has been removed from `stone.html` and is no longer authoritative.
 
 ---
 

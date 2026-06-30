@@ -1200,49 +1200,16 @@ function applyChakraTokens(chakraName) {
 
 /* ── Deterministic dot gradient from slug ── */
 /* ── Stone dot gradient map — curated from static stone pages ── */
-const STONE_DOT_GRADIENTS = {
-  'amethyst':             'linear-gradient(135deg, #cabdd7, #7a5a9a)',
-  'angelite':             'linear-gradient(135deg, #b7cadd, #4a7aaa)',
-  'apache-tears':         'linear-gradient(135deg, #5c4a42, #2a1e1a)',
-  'black-obsidian':       'linear-gradient(135deg, #b0aeac, #3a3530)',
-  'black-tourmaline':     'linear-gradient(135deg, #b0aeac, #3a3530)',
-  'carnelian':            'linear-gradient(135deg, #e8a070, #b04a20)',
-  'celestite':            'linear-gradient(135deg, #b7cadd, #4a7aaa)',
-  'citrine':              'linear-gradient(135deg, #f7e090, #c89020)',
-  'clear-quartz':         'linear-gradient(135deg, #f6f4f2, #e8e4de)',
-  'golden-healer-quartz': 'linear-gradient(135deg, #f7e4a0, #d4a820)',
-  'green-aventurine':     'linear-gradient(135deg, #b7d0bd, #4a8a5a)',
-  'herkimer-diamond':     'linear-gradient(135deg, #f0eef8, #c8c4e0)',
-  'iolite':               'linear-gradient(135deg, #cabdd7, #7a5a9a)',
-  'labradorite':          'linear-gradient(135deg, #8a9aac, #3a5070)',
-  'lepidolite':           'linear-gradient(135deg, #cabdd7, #7a5a9a)',
-  'malachite':            'linear-gradient(135deg, #b7d0bd, #4a8a5a)',
-  'moonstone':            'linear-gradient(135deg, #b7cadd, #4a7aaa)',
-  'morganite':            'linear-gradient(135deg, #eecdd7, #d4839a)',
-  'moss-agate':           'linear-gradient(135deg, #b7d0bd, #4a8a5a)',
-  'peridot':              'linear-gradient(135deg, #b7d0bd, #4a8a5a)',
-  'purple-fluorite':      'linear-gradient(135deg, #cabdd7, #7a5a9a)',
-  'red-jasper':           'linear-gradient(135deg, #dfb7b7, #b04a4a)',
-  'rhodonite':            'linear-gradient(135deg, #eecdd7, #d4839a)',
-  'rose-quartz':          'linear-gradient(135deg, #eecdd7, #d4839a)',
-  'selenite':             'linear-gradient(135deg, #f5f2ee, #d8d4ce)',
-  'shungite':             'linear-gradient(135deg, #5a5a5a, #1a1a1a)',
-  'smoky-quartz':         'linear-gradient(135deg, #8a7870, #4a3830)',
-  'sunstone':             'linear-gradient(135deg, #f5c87a, #d4832a)',
-  'tigers-eye':           'linear-gradient(135deg, #c8a040, #7a5018)',
-  /* ── Batch 1 additions: colors approved by Christie pending ── */
-  'blue-lace-agate':      'linear-gradient(135deg, #b7d0e8, #5a8ab0)',
-  'lapis-lazuli':         'linear-gradient(135deg, #8090c0, #283870)',
-  'moldavite':            'linear-gradient(135deg, #90c890, #286828)',
-  'rainbow-moonstone':    'linear-gradient(135deg, #d8e4f0, #8090b8)',
-};
-
-function slugGradient(slug) {
-  if (STONE_DOT_GRADIENTS[slug]) return STONE_DOT_GRADIENTS[slug];
-  let h = 0;
-  for (const c of slug) h = (h * 31 + c.charCodeAt(0)) & 0xFFFFFF;
-  const hue = h % 360;
-  return `linear-gradient(135deg, hsl(${hue},45%,72%), hsl(${hue},55%,46%))`;
+/* ── Swatch gradient from live Supabase data.
+   swatchMap: { slug -> { swatch_color_start, swatch_color_end } }
+   Missing entries fail visibly — no silent hash fallback. ── */
+function swatchGradient(slug, swatchMap) {
+  const entry = swatchMap[slug];
+  if (entry && entry.swatch_color_start && entry.swatch_color_end) {
+    return `linear-gradient(135deg, ${entry.swatch_color_start}, ${entry.swatch_color_end})`;
+  }
+  console.error(`[swatch] Missing swatch colors for slug: "${slug}" — add swatch_color_start/swatch_color_end to stones table before publishing.`);
+  return 'linear-gradient(135deg, #ff4444, #aa0000)';
 }
 
 /* ── Escape HTML entities ── */
@@ -1295,7 +1262,7 @@ async function init() {
     reachRes,
     publishedSlugsRes,
   ] = await Promise.all([
-    db.from('stones').select('id,name,image_url,color_hex').eq('id', stoneId).limit(1),
+    db.from('stones').select('id,name,image_url,color_hex,swatch_color_start,swatch_color_end').eq('id', stoneId).limit(1),
     db.from('enc_themes').select('*').eq('stone_id', stoneId).order('display_order'),
     db.from('enc_collector_notes').select('*').eq('stone_id', stoneId).order('display_order'),
     db.from('enc_mineral_facts').select('*').eq('stone_id', stoneId).order('display_order'),
@@ -1333,6 +1300,19 @@ async function init() {
   /* 6. Group related stones */
   const similar = related.filter(r => r.group === 'similar_energy');
   const pairs   = related.filter(r => r.group === 'pairs_well_with');
+
+  /* 6a. Fetch swatch colors for all related stone slugs from Supabase */
+  const relatedSlugs = [...new Set(related.map(r => r.related_slug).filter(Boolean))];
+  let swatchMap = {};
+  if (relatedSlugs.length > 0) {
+    const { data: swatchRows } = await db
+      .from('stones')
+      .select('slug,swatch_color_start,swatch_color_end')
+      .in('slug', relatedSlugs);
+    if (swatchRows) {
+      for (const row of swatchRows) swatchMap[row.slug] = row;
+    }
+  }
 
   /* 7. Build image URL — use Supabase storage pattern if image_url missing */
   const imageUrl = stone.image_url
@@ -1379,7 +1359,7 @@ function buildMain({ c, stone, stoneName, slug, imageUrl,
         ${buildOverview(c)}
         ${buildReachFor(reach)}
         ${buildMineralProfile(facts, localities, c)}
-        ${buildRelatedStones(similar, pairs)}
+        ${buildRelatedStones(similar, pairs, swatchMap)}
       </div>
       <div class="content-stack-right">
         ${buildThemes(themes)}
@@ -1729,10 +1709,10 @@ function buildCare(care) {
 }
 
 /* ── RELATED STONES ── */
-function buildRelatedStones(similar, pairs) {
+function buildRelatedStones(similar, pairs, swatchMap) {
   const stoneLink = s => `
     <a class="stone-link-row" href="stone.html?slug=${esc(s.related_slug)}">
-      <span class="stone-dot-circle" style="background:${slugGradient(s.related_slug)}"></span>
+      <span class="stone-dot-circle" style="background:${swatchGradient(s.related_slug, swatchMap)}"></span>
       <div>
         <b>${esc(s.related_name)}</b>
         <span class="stone-reason">${esc(s.reason)}</span>
