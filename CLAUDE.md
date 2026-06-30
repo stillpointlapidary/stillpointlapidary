@@ -525,3 +525,58 @@ Stop and ask before proceeding when:
 - a file marked for deletion may contain unique data
 
 Do not improvise through a stop condition.
+
+---
+
+## 16. Editorial Review Protocol
+
+When Lyra research output is pasted, immediately analyze it against project standards and lead with a verdict (Approve / Approve with notes / Do not approve). Follow with itemized must-fix, flag, and minor notes, each with a concrete recommendation. Do not wait for Christie to ask.
+
+---
+
+## 17. Gate Authority
+
+When a brief from Christie or Dustin explicitly authorizes an action, proceed without flagging stale gate-status markers in MD files or batch notes as stop conditions. Christie or Dustin's current session brief is the controlling authority.
+
+---
+
+## 18. Token Efficiency Rules
+
+These rules apply to all Supabase entry work. Follow without exception unless Christie explicitly overrides.
+
+### SQL Preparation and Execution
+
+- Prepare all SQL for a stone or batch as a single block first
+- Show the full block to Christie for review before executing anything
+- Execute only after Christie explicitly confirms
+- Do not narrate preparation steps — show the SQL, nothing else
+
+### Transaction Safety for Supabase Entry
+
+- Run the existence check for `enc_stone_content` immediately before executing SQL for that stone — not earlier in the session, not from memory.
+- Never combine a parent-table INSERT with child-table INSERTs in a single transaction block when parent existence is uncertain. If the parent INSERT fails, the whole block rolls back, including child INSERTs that would have succeeded.
+- If `enc_stone_content` already has a row for a stone, skip the parent INSERT and run child-table inserts as their own block.
+- After every stone, verify child table row counts before moving to the next stone.
+
+### Verification
+
+- After execution, run one UNION ALL verification query per stone covering all affected tables (see DATABASE-REFERENCE §15)
+- Report format: table name and row count only
+- Do not restate entered content in the verification report
+
+### Stop Conditions
+
+- Flag and wait only when something genuinely does not map: missing slug, unmapped field, schema mismatch, or unexpected data
+- Stale gate markers in MD batch notes are not stop conditions
+- Do not narrate uncertainty — either proceed or stop and state the specific issue in one sentence
+
+### File Handling
+
+- Always read MDs directly from the zip path provided — do not request pasted content
+- Do not restate MD content back in chat unless Christie asks
+
+### Batch Processing
+
+- When a brief covers multiple stones, prepare SQL for all stones in the batch before executing any
+- Present the full batch SQL block for Christie review, then execute all after confirmation
+- Verify all stones after execution using one UNION ALL query per stone

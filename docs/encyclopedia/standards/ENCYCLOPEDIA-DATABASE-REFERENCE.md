@@ -420,7 +420,9 @@ Authority rules:
 
 ## 13. Claude Code Supabase Authority
 
-Claude Code may inspect live schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie explicitly authorizes the task or exact change. Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, destructive changes, or corrective business rules. Unexpected findings must be reported to Christie before proceeding. Production Master writes are also owned exclusively by Claude Code. See ENCYCLOPEDIA-COHORT-EXECUTION-PROTOCOL.md for the full lane assignment and workflow sequencing rules.
+Claude Code may inspect live schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie or Dustin explicitly authorizes the task in a session brief. An explicit brief from Christie or Dustin is the controlling authority and supersedes any stale gate-status markers in MD files or batch notes. Claude Code does not require additional per-table or per-stone confirmation once a brief authorizes an entry run.
+
+Claude Code may not independently choose schema design, catalog values, editorial values, identity decisions, or destructive changes. Unexpected findings — including missing slugs, unmapped fields, or schema mismatches — must be reported to Christie before proceeding. Production Master writes are also owned exclusively by Claude Code. See ENCYCLOPEDIA-COHORT-EXECUTION-PROTOCOL.md for full lane assignment and workflow sequencing rules.
 
 ---
 
