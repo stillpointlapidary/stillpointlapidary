@@ -114,7 +114,7 @@ A live stone page requires two conditions simultaneously: `stones.enc_production
 | `material_type` | text | Controlled Material Type value |
 | `zodiac` | text | One or two zodiac signs |
 | `energetic_role` | text | Exactly one approved Energetic Role |
-| `energetic_role_icon` | text | Icon slug matching the role |
+| `energetic_role_icon` | text | Full CSS class name: `icon-{slug}` — e.g., `icon-grounding`, not `grounding` |
 | `color_energy` | text | Approved Color Energy value |
 | `nav_prev_slug` | text | Previous stone slug |
 | `nav_prev_name` | text | Previous stone display name |
@@ -239,7 +239,7 @@ One row per theme or occasional association.
 | `title` | text | Theme title or occasional label |
 | `description` | text, nullable | Theme description; null for occasional associations |
 | `display_order` | integer | Order within tier |
-| `icon_slug` | text, nullable | Theme icon slug |
+| `icon_slug` | text, nullable | Full CSS class name: `icon-{slug}` — e.g., `icon-transformation`; null for occasional associations |
 | `created_at` | timestamptz | Creation timestamp |
 
 Count rules:
@@ -269,7 +269,7 @@ Rules:
 | `stone_id` | text | References `stones.id` |
 | `title` | text | Note title |
 | `body` | text | Note body |
-| `icon_slug` | text | Note icon slug |
+| `icon_slug` | text | Full CSS class name: `icon-{slug}` — e.g., `icon-geology`, not `geology` |
 | `display_order` | integer | Render order |
 | `created_at` | timestamptz | Creation timestamp |
 
