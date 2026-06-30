@@ -177,6 +177,20 @@ Rules:
 - no metaphysical escalation
 - no role assignment
 
+---
+
+## 6a. OUTPUT AND SUBMISSION STANDARDS
+
+### Gate Submission Format
+
+Final pass submissions must contain only: locked values table, documented conflicts with resolution rationale, and open escalations. Internal working notes, omit/narrow lists, and per-stone evidence breakdowns are not included in submissions.
+
+### Pass 3 and Beyond — File Delivery
+
+Pass 3 output and all subsequent pass outputs must be delivered as downloadable files. Do not paste full pass output into the chat. Claude Chat will analyze files directly.
+
+---
+
 ### PASS 4 — NORMALIZATION + ROLE RESOLUTION (CRITICAL LOCK)
 
 Inputs:
