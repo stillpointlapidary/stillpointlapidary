@@ -119,3 +119,4 @@ docs/encyclopedia/*-v*.md
 /local-archive/
 docs/encyclopedia/GOLD-STANDARD-STONE-PAGE.html
 docs/encyclopedia/CLAUDE-CODE-HANDOFF-2026-06-19-session2.md
+.env
