@@ -1,10 +1,10 @@
-# Moonstone — Encyclopedia Entry
+# Sodalite — Encyclopedia Entry
 
-**Status:** MD APPROVED · GATE 3 COMPLETE · SUPABASE ENTRY COMPLETE · PUBLISHED  
-**Stone ID:** C-0162  
-**Slug:** `moonstone`
+**Status:** MD APPROVED · GATE 3 COMPLETE · SUPABASE ENTRY COMPLETE · PUBLISHED
+**Stone ID:** C-0218
+**Slug:** `sodalite`
 
-*Lunar feldspar for trusting inner rhythms, honoring change, and beginning again with intuition.*
+*Deep-blue clarity for organizing thought, integrating logic with intuition, and speaking what is true.*
 
 ---
 
@@ -12,11 +12,11 @@
 
 ### Name
 
-Moonstone
+Sodalite
 
 ### Slug
 
-moonstone
+sodalite
 
 ### Collection Label
 
@@ -24,27 +24,23 @@ Essentials
 
 ### Material Type
 
-Mineral variety
-
-### Image URL
-
-https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/moonstone.webp
+Mineral
 
 ### Image Alt
 
-Polished Moonstone with a creamy translucent body and a soft floating blue-white sheen
+Polished Sodalite with deep blue color, white Calcite veining, and a softly mottled surface
 
 ### Navigation
 
 #### Previous Stone
 
-- Name: Mookaite Jasper
-- Slug: mookaite-jasper
+- Name: Snowflake Obsidian
+- Slug: snowflake-obsidian
 
 #### Next Stone
 
-- Name: Morganite
-- Slug: morganite
+- Name: Spectrolite
+- Slug: spectrolite
 
 ---
 
@@ -52,25 +48,25 @@ Polished Moonstone with a creamy translucent body and a soft floating blue-white
 
 ### Signature Line
 
-Lunar feldspar for trusting inner rhythms, honoring change, and beginning again with intuition.
+Deep-blue clarity for organizing thought, integrating logic with intuition, and speaking what is true.
 
 ### Property Pills
 
-- Intuition
-- Balance
-- Dreams
+- Clarity
+- Communication
+- Truth
 
 ### Best For
 
-Strengthening intuition, honoring natural cycles, and navigating change with greater inner trust
+Organizing thoughts, communicating clearly, and balancing logic with intuitive understanding
 
 ### Use When
 
-Life is shifting and you need to listen inward rather than force an immediate answer.
+Your thoughts feel tangled or you need to express a difficult idea with precision and honesty.
 
 ### Affirmation
 
-I trust my inner rhythm and welcome what is unfolding.
+My mind is clear, and I speak with truth and purpose.
 
 ---
 
@@ -78,45 +74,45 @@ I trust my inner rhythm and welcome what is unfolding.
 
 | Category | Detail |
 |---|---|
-| Energetic Role | Intuition |
-| Chakra | Crown |
-| Secondary Chakra | Third Eye · Heart |
-| Element | Water |
-| Zodiac | Cancer · Libra |
-| Color Energy | Cream / Ivory |
-| Material Type | Mineral variety |
+| Energetic Role | Clarity & Focus |
+| Chakra | Throat |
+| Secondary Chakra | Third Eye |
+| Element | Air |
+| Zodiac | Sagittarius |
+| Color Energy | Deep Blue |
+| Material Type | Mineral |
 
 ---
 
 ## Overview
 
-Moonstone is the stone of intuition, cycles, and receptive change. Its tradition encourages listening for timing, recognizing recurring patterns, and allowing insight to emerge without forcing certainty. Crown and Third Eye associations support inward perception, while the Heart adds emotional balance and self-trust. New beginnings are central here, but not as abrupt reinvention. The emphasis is on moving with change, honoring what is ending, and beginning again in a way that feels aligned with a deeper inner rhythm.
+Sodalite is the stone of mental synthesis, logical-intuitive integration, and truthful communication. Its Clarity & Focus role brings analysis, observation, intuition, and pattern recognition into a coherent understanding. The Third Eye supports insight and the ability to perceive how separate ideas connect, while the Throat Chakra carries that understanding outward through clear, honest expression. Its center is not concentration alone, but the disciplined movement from information, to insight, to language precise enough to communicate what has been understood.
 
-A feldspar variety defined by adularescence, this material displays a floating glow created when light scatters through fine internal layers. Traditional Moonstone is commonly associated with alkali feldspar, while commercial material may span more than one feldspar host. Body color can be colorless, cream, peach, gray, or brown, usually with a white or blue sheen. Most specimens are untreated, although fracture filling and assembled imitations have been documented. Rainbow Moonstone is usually white Labradorite and should not be treated as identical to traditional Moonstone.
+A sodium-rich aluminosilicate mineral best known for deep blue color broken by white Calcite veining, Sodalite forms primarily in silica-poor alkaline igneous rocks such as nepheline syenite. It may occur with other feldspathoid minerals and is usually opaque to translucent with a vitreous to greasy luster. Ordinary material is generally untreated, although dyed pale stones and other blue substitutes enter the market. It is often confused with Lapis Lazuli, a multi-mineral rock that commonly includes visible Pyrite.
 
 ---
 
 ## Why People Reach For It
 
-### Trusting Inner Guidance
+### Organizing Thoughts
 
-Chosen when quiet intuition needs room to surface beneath competing opinions, pressure, or excessive analysis.
+Chosen when information feels scattered and a clearer structure is needed before speaking, writing, studying, or deciding.
 
-### Navigating Change
+### Speaking Clearly
 
-Used during transitions to support patience, emotional balance, and a more receptive relationship with uncertainty.
+Supports direct communication when an idea is important but difficult to express with accuracy and composure.
 
-### Honoring Natural Cycles
+### Seeking Truth
 
-Encourages awareness of recurring patterns, changing energy, and the difference between necessary rest and stalled momentum.
+Encourages honest examination of assumptions, motives, and conclusions before presenting them as settled facts.
 
-### Beginning Again
+### Studying Complex Ideas
 
-Often selected at the start of a new chapter when openness and timing matter more than immediate control.
+Often used during research or learning that requires logic, pattern recognition, and the integration of multiple viewpoints.
 
-### Deepening Dream Awareness
+### Balancing Logic and Intuition
 
-Kept near reflective practices that explore dreams, symbolism, imagination, and the subtler language of the inner world.
+Helps hold analytical reasoning and inward perception together without allowing either one to dominate automatically.
 
 ---
 
@@ -124,28 +120,27 @@ Kept near reflective practices that explore dreams, symbolism, imagination, and 
 
 ### Primary
 
-#### Intuition and Inner Guidance
+#### Mental Synthesis and Integration
 
-Turns attention inward when an answer cannot be reached through analysis alone, making space for quieter forms of knowing.
+Brings analysis, intuition, observation, and creativity together so scattered information can become a coherent understanding.
 
-#### Cyclical Awareness and Change
+#### Logical-Intuitive Insight
 
-Frames transitions, endings, and beginnings as phases within an unfolding rhythm rather than isolated disruptions.
+Treats reason and intuition as complementary tools, allowing each to test, refine, and deepen the other.
 
 ### Secondary
 
-#### Emotional Balance
+#### Truthful Communication
 
-Brings a softer, more responsive quality to periods when emotions shift quickly or feel difficult to interpret.
+Carries inward understanding into clear expression, especially when honesty, precision, and thoughtful language all matter.
 
-#### New Beginnings
+#### Self-Understanding
 
-Supports entering a new phase with openness, patience, and trust in timing rather than forcing dramatic reinvention.
+Supports a more dispassionate view of personal motives, strengths, habits, and contradictions without immediate defensiveness.
 
 ### Occasional Associations
 
-- Dreams
-- Feminine Wisdom
+- Group Harmony
 
 ---
 
@@ -155,65 +150,59 @@ Supports entering a new phase with openness, patience, and trust in timing rathe
 
 | Category | Detail |
 |---|---|
-| Variety Type | Feldspar variety |
-| Typical Composition | Intergrowths commonly involving orthoclase and albite |
-| Feldspar Hosts | Alkali feldspar and related feldspar material |
-| Crystal Structure | Monoclinic or triclinic, depending on host |
-| Mohs Hardness | 6 to 6.5 |
-| Cleavage | Perfect in two directions, near 90 degrees |
-| Luster | Vitreous; pearly on cleavage surfaces |
-| Optical Effect | Adularescence |
+| Mineral Family | Feldspathoid; sodalite group |
+| Chemical Formula | Na₈(Al₆Si₆O₂₄)Cl₂ |
+| Crystal System | Isometric |
+| Mohs Hardness | 5.5 to 6 |
+| Cleavage | Poor; commonly described on dodecahedral directions |
+| Specific Gravity | 2.1 to 2.3 |
+| Luster | Vitreous to greasy |
+| Transparency | Opaque to translucent |
 
 ### Common Localities
 
-- Sri Lanka
-- India
-- Myanmar
-- Madagascar
-- Tanzania
-- Virginia, United States
+- Bahia, Brazil
+- Ontario, Canada
+- Ilímaussaq complex, Greenland
+- Namibia
+- Kola Peninsula, Russia
+- Bolivia
 
 ### Formation
 
-Moonstone develops when feldspar separates into fine internal layers during slow cooling. Light scattering through those layers creates adularescence, the floating sheen that defines the variety. Because commercial Moonstone may come from more than one feldspar host, no single formula or crystal system applies universally.
-
-### Quality Indicators
-
-Look for a strong, centered sheen that moves cleanly across the surface, pleasing body color, and a cut oriented to display the optical effect. Transparency, attractive color, and minimal distracting fractures can raise value, but a bright, well-positioned glow matters more than size alone.
-
-### Identification
-
-Rainbow Moonstone is commonly white Labradorite with multicolored labradorescence, while traditional Moonstone usually shows softer white or blue adularescence. Glass, assembled material, and other feldspars may imitate the effect. Host identity and treatment status can be difficult to determine from appearance alone.
-
-### Locality Variations
-
-Sri Lankan material is especially prized for transparent bodies and strong blue sheen, while Indian material is widely available in cream, peach, gray, and darker body colors with softer adularescence.
-
----
-
-## Market & Buying Notes
-
-Commercial Moonstone ranges from affordable pale cabochons to fine transparent stones with vivid blue sheen. Value rises sharply with clarity, orientation, intensity, centered movement of the glow, and documented locality. Ask whether material sold as Rainbow Moonstone is white Labradorite and whether fracture filling or assembly has been disclosed.
+Sodalite forms mainly in silica-undersaturated alkaline igneous rocks, especially nepheline syenites, and in related metasomatic environments. Its blue color is tied to sulfur-bearing components within the crystal structure, while white areas are commonly Calcite.
 
 ---
 
 ## Collector & Curiosity Notes
 
-### A Feldspar Effect
+### Princess Sodalite
 
-Moonstone is defined by adularescence, the floating glow created by light scattering through thin feldspar layers rather than by one fixed mineral species.
+Ontario's famous material gained its nickname after the Princess of Wales admired it in 1901 and stone was quarried for decoration at Marlborough House.
 
-### Rainbow Moonstone Is Different
+### Not Lapis Lazuli
 
-Material sold as Rainbow Moonstone is commonly transparent white Labradorite. Its multicolored labradorescence differs from traditional Moonstone’s softer blue-white adularescence.
+Sodalite usually shows white Calcite veining and lacks the abundant Pyrite flecks typical of Lapis Lazuli, though both belong to the wider Sodalite mineral family.
 
-### A Sacred Stone of India
+### Hackmanite Connection
 
-Moonstone has a long history in Indian jewelry and spiritual tradition, while Western Art Nouveau jewelers helped popularize its dreamlike sheen.
+Hackmanite is a sulfur-bearing Sodalite variety known for tenebrescence, a reversible color change triggered by ultraviolet exposure.
 
-### Quality Lives in the Glow
+### A Useful White Streak
 
-Collector value rises with a strong, centered sheen, pleasing body color, transparency, and a cut oriented to display the optical effect without obvious fractures.
+Despite its blue body color, Sodalite leaves a white streak. This can help separate it from some blue pigments, dyed materials, and look-alikes.
+
+---
+
+## Collector Context
+
+Look for saturated blue color, pleasing contrast with white veining, a sound polish, and patterning that feels natural rather than mechanically uniform. Large decorative material is common, so quality depends more on color, pattern, finish, locality, and unusual associated minerals than on size alone.
+
+Lapis Lazuli is the most familiar look-alike, but it is a rock rather than a single mineral and often contains Pyrite. Dyed Howlite, Magnesite, Calcite, and pale porous materials may imitate Sodalite. Hackmanite is a sulfur-bearing Sodalite variety known for reversible color change under ultraviolet exposure.
+
+Commercial Sodalite is widely available as tumbles, beads, carvings, slabs, and ornamental stone. Most material is affordable. Collector premiums may apply to vivid blue specimens, distinct crystal form, tenebrescent Hackmanite, historic localities, or attractive associations from alkaline mineral complexes. Be cautious with unnaturally uniform blue material or pieces sold as Lapis without Pyrite or rock texture.
+
+Ontario material is historically associated with Princess Sodalite and ornamental use, while Greenland and Kola Peninsula specimens may interest collectors for their alkaline-complex mineral associations.
 
 ---
 
@@ -221,19 +210,19 @@ Collector value rises with a strong, centered sheen, pleasing body color, transp
 
 ### Cleaning
 
-Clean with warm water, mild soap, and a soft cloth or brush; avoid ultrasonic and steam cleaning.
+Clean with lukewarm water, mild soap, and a soft cloth; avoid harsh chemicals, ultrasonic cleaners, and steam.
 
 ### Water
 
-Brief gentle washing is suitable, but do not soak fracture-filled, assembled, or heavily included pieces.
+Brief washing is acceptable for untreated material, but avoid soaking because Calcite-rich areas and dyed or composite pieces may respond unevenly.
 
 ### Light & Heat
 
-Protect from high heat and thermal shock; feldspar cleavage makes sudden temperature change risky.
+Avoid high heat and sudden temperature changes; keep tenebrescent varieties away from prolonged intense light.
 
 ### Storage
 
-Store in a padded compartment away from harder gems and protect rings from knocks along cleavage directions.
+Store separately from harder stones to reduce scratching and protect polished surfaces and Calcite-rich veins from impact.
 
 ---
 
@@ -241,88 +230,24 @@ Store in a padded compartment away from harder gems and protect rings from knock
 
 ### Similar Energy
 
-#### Labradorite
+#### Lapis Lazuli
 
-- Slug: labradorite
-- Reason: Shares feldspar shimmer and intuitive depth, but expresses it through transformation and protective mystery rather than lunar cycles.
+- Slug: lapis-lazuli
+- Reason: Shares truth and clear expression, but places greater weight on wisdom, symbolism, and articulate insight.
 
-#### Rainbow Moonstone
+#### Blue Lace Agate
 
-- Slug: rainbow-moonstone
-- Reason: Provides a brighter, multicolored feldspar counterpart with similar intuitive and transitional associations.
+- Slug: blue-lace-agate
+- Reason: Offers a softer communication-centered alternative when reassurance and calm matter more than logical integration.
 
 ### Pairs Well With
 
-#### Rose Quartz
+#### Clear Quartz
 
-- Slug: rose-quartz
-- Reason: Softens the inward, cyclical quality here with compassion, self-kindness, and relational warmth.
+- Slug: clear-quartz
+- Reason: Sharpens focus and helps carry a clear intention through study, planning, or communication work.
 
-#### Sunstone
+#### Carnelian
 
-- Slug: sunstone
-- Reason: Balances receptive lunar awareness with confidence, vitality, independence, and outward action.
-
----
-
-# Research Notes — Not for Publication
-
-## Approved Metaphysical Sources
-
-| Source | Tier | Key Contributions |
-|---|---|---|
-| The Book of Stones | A+ | Intuition, inward exploration, self-discovery, lunar cycles, receptivity |
-| Crystal Vaults | A | Intuition, cycles, Water, Moon, new beginnings |
-| Crystal Council | A | Intuition, emotional balance, transitions, dreams |
-| Moonrise Crystals | A | Cycles, self-trust, change, receptive awareness |
-| Crystals.com | A | Intuition, beginnings, lunar symbolism |
-| Energy Muse | B | New beginnings, feminine symbolism, inner guidance |
-| Healing Crystals | B | Dreams, emotional balance, transition support |
-
-## Geological and Technical Sources
-
-| Source | Type | Key Contributions |
-|---|---|---|
-| Mindat.org — Moonstone | Core mineralogical source | Variety identity, feldspar context, locality information |
-| GIA — Moonstone Care and Cleaning | Core gemological source | Hardness, cleavage, cleaning, heat precautions |
-| GIA — Imitation Moonstone Assemblage | Core gemological source | Assembled imitations and market identification |
-| Gate 1B approved technical record | Locked cohort research | Host variability, treatment status, adapted profile labels |
-
-## Theme Decisions
-
-| Theme | Placement | Reason |
-|---|---|---|
-| Intuition and Inner Guidance | Primary | Strong A+ and Tier A consensus |
-| Cyclical Awareness and Change | Primary | Consistent lunar and transition emphasis |
-| Emotional Balance | Secondary | Supported across approved sources |
-| New Beginnings | Secondary | Repeated but subordinate to intuition and cycles |
-| Dreams | Occasional | Common and situational |
-| Feminine Wisdom | Occasional | Traditional association, but not identity-defining |
-
-## Structured Decisions
-
-- Energetic Role: Intuition
-- Primary Chakra: Crown
-- Secondary Chakras: Third Eye · Heart
-- Styling Chakra: Crown
-- Element: Water
-- Legacy Planet value: Moon
-- Zodiac: Cancer · Libra
-- Color Energy: Cream / Ivory
-- Material Type: Mineral variety
-
-## Identity and Treatment Notes
-
-- Identity type: Feldspar variety
-- Parent material: Feldspar group
-- Trade-name issue: Rainbow Moonstone commonly refers to white Labradorite
-- Treatments: Usually untreated; fracture filling has been documented
-- Imitations: Glass, assembled material, white Labradorite, and other feldspars
-
-## Compliance
-
-- RESEARCH COMPLETE
-- MD APPROVED
-- GATE 3 COMPLETE
-- SUPABASE ENTRY COMPLETE
-- PUBLISHED
+- Slug: carnelian
+- Reason: Adds courage and outward momentum when clear thinking must become confident speech or decisive action.
