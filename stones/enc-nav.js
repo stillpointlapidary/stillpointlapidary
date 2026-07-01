@@ -1,6 +1,7 @@
 // Encyclopedia random navigation — add new slugs here as pages are published.
 (function () {
   var STONES = [
+    'amazonite',
     'amethyst',
     'black-tourmaline',
     'carnelian',
