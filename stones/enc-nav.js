@@ -8,13 +8,18 @@
     'citrine',
     'clear-quartz',
     'green-aventurine',
+    'hematite',
     'labradorite',
+    'malachite',
+    'moonstone',
     'rainbow-fluorite',
     'rainbow-moonstone',
     'red-jasper',
     'rose-quartz',
     'selenite',
     'smoky-quartz',
+    'sodalite',
+    'sunstone',
     'tigers-eye',
     'unakite'
   ];

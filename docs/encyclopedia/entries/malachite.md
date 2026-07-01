@@ -3,7 +3,7 @@
 **Status:** MD APPROVED · GATE 3 COMPLETE · SUPABASE ENTRY COMPLETE · PUBLISHED  
 **Slug:** `malachite`
 
-*Banded green transformation for confronting old patterns and choosing courageous change.*
+*Banded transformation for confronting old patterns and choosing courageous change.*
 
 ---
 
@@ -51,7 +51,7 @@ Polished Malachite with vivid green concentric banding and dark curved patternin
 
 ### Signature Line
 
-Banded green transformation for confronting old patterns and choosing courageous change.
+Banded transformation for confronting old patterns and choosing courageous change.
 
 ### Property Pills
 
