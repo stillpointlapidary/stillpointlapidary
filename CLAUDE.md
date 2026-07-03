@@ -1,22 +1,28 @@
-# Still Point Lapidary — Encyclopedia Production Instructions
+# Still Point Lapidary — Claude Code Instructions
 
-## 1. Purpose
+**Status:** Canonical
+**Purpose:** Defines how Claude Code executes approved work for Still Point Lapidary.
 
-This file tells Claude Code how to work safely and efficiently on the Still Point Lapidary encyclopedia.
+> This repo-local CLAUDE.md is a working mirror of `Documents\Still Point Lapidary\Project Rules\CLAUDE.md`. The Project Rules copy is canonical. Keep this file synced only so Claude Code sessions launched from the Website repo receive current instructions.
+
+---
+
+## 1. Core Role
 
 Claude Code is execution-only.
 
-It may:
+Claude Code may:
 
-- inspect repository files
+- inspect repository files and local project files
 - perform approved edits
 - create or run scripts
-- inspect Supabase schemas and data, prepare SQL, and execute SQL when Christie explicitly authorizes
 - validate outputs
+- inspect Supabase schemas and data
+- execute approved database work when Christie or Dustin explicitly authorizes it
 - commit or deploy when instructed
-- report exact changes
+- report exact changes and unresolved issues
 
-It must not independently choose or invent:
+Claude Code must not independently choose or invent:
 
 - claims
 - themes
@@ -25,278 +31,324 @@ It must not independently choose or invent:
 - pairings
 - localities
 - mineral identities
-- wording
+- treatment conclusions
+- editorial wording
 - architecture
 - source policy
+- catalog values
 - production status
+- visual direction
 
-When required information is missing or contradictory, stop and ask Christie or Dustin.
+When required information is missing or contradictory, stop only when the issue is genuinely blocking or falls within a listed stop condition.
 
 ---
 
-## 2. Authority by Purpose
+## 2. Authority
 
-Use the controlling source for the exact task.
+Christie Holzwarth and Dustin have equal authority.
 
-| Question | Controlling source |
+Either may approve:
+
+- structured production values
+- canonical MD
+- architecture
+- documentation
+- database changes
+- visual implementation
+- publication
+- commits and deployment
+- execution briefs for Claude Code
+
+Lyra is the project manager, design director, editorial and documentation lead, sequencing owner, and QA coordinator.
+
+Claude Chat independently audits Lyra's work for:
+
+- formatting
+- compliance
+- factual accuracy
+- evidence support
+- contradictions
+- implementation readiness
+
+Only one assistant owns a stone or research cohort's editorial cycle at a time.
+
+---
+
+## 3. Controlling Sources
+
+Use the source that controls the exact domain.
+
+| Domain | Controlling source |
 |---|---|
-| Who may approve or change direction? | Christie or Dustin |
-| What sections exist and where? | `ENCYCLOPEDIA-PAGE-STRUCTURE.md` |
-| What fields, counts, and limits are required? | `ENCYCLOPEDIA-CONTENT-FIELDS.md` |
-| How should research and public copy be written? | `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md` |
-| Which sources are allowed? | `ENCYCLOPEDIA-APPROVED-SOURCES.md` |
-| What tables and columns exist? | `ENCYCLOPEDIA-DATABASE-REFERENCE.md` |
-| What should the approved page look like? | `ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html` |
-| What values belong to a specific stone? | locked production data |
-| What public copy is approved? | approved canonical MD |
-| What renders live? | `stones/stone.html` and Supabase |
+| Top-level project rules | `Project Rules/Still-Point-Lapidary-Project-Rules.docx` |
+| Page structure and responsive behavior | `ENCYCLOPEDIA-PAGE-STRUCTURE.md` |
+| Fields, counts, ranges, and optionality | `ENCYCLOPEDIA-CONTENT-FIELDS.md` |
+| Research method, evidence, and public-copy standards | `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md` |
+| Approved source eligibility and precedence | `ENCYCLOPEDIA-APPROVED-SOURCES.md` |
+| Database schema, columns, and storage behavior | `ENCYCLOPEDIA-DATABASE-REFERENCE.md` |
+| Icon assignments and mapping rules | `ENCYCLOPEDIA-ICON-REGISTRY.md` |
+| Photography standards | `ENCYCLOPEDIA-PHOTO-STANDARD.md` |
+| Approved visual and DOM reference | `ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html` |
+| Generator-readable MD format | `MD-SCHEMA-REFERENCE.md` |
+| Stone-specific structured values, production status, cohort state, blockers, and next actions | Canonical Production Master |
+| Approved public copy | Approved canonical MD |
+| Live runtime implementation | `stones/stone.html`, runtime assets, and Supabase |
 
-Do not assume one document controls another document’s domain.
+Do not treat generated HTML, old examples, archived files, chat history, or exported CSVs as independent authority.
 
-When two authorities conflict within the same domain, stop and ask.
-
----
-
-## 3. Current Production Model
-
-The encyclopedia uses:
-
-- one shared dynamic template: `stones/stone.html`
-- Supabase `enc_` tables for operational content
-- canonical MD as the approved source for public copy
-- locked production data for stone-specific structured values
-- one approved HTML visual standard for visual and DOM reference
-
-Do not treat individual published stone pages as reusable standards.
-
-Do not use Citrine or any other stone-specific page as the canonical implementation reference.
+When two current authorities conflict within the same domain, report the contradiction and stop before changing either.
 
 ---
 
-## 4. Workflow Gates
+## 4. Canonical Storage Model
 
-### Gate 0 — Catalog and Cohort Preflight
+The approved local structure is:
 
-Confirm or flag:
+```text
+Documents\Still Point Lapidary
+├── Website
+├── Encyclopedia
+├── Project Rules
+├── Working Images
+├── Archive
+└── README.md
+```
 
-- stone ID
-- canonical name
-- slug
-- collection tier
+### Website
+
+Contains only what is needed to build, operate, test, maintain, or reproduce the public website.
+
+### Encyclopedia
+
+Contains:
+
+- Canonical MDs
+- Production Data
+- approved research records
+- source notes
+- cohort records
+- validation outputs that must be retained
+
+### Project Rules
+
+Contains the current approved operating and editorial standards.
+
+### Working Images
+
+Contains source photography, working edits, rejected versions, and non-runtime visual work.
+
+### Archive
+
+Contains superseded files, old handoffs, historical standards, duplicate references, and retired working material.
+
+Do not place internal canonical files in Git merely for convenience.
+
+Do not place working or archival material in Netlify or Supabase unless the website actually consumes it.
+
+---
+
+## 5. Production Master
+
+The canonical Production Master is the operational spine for all 333 stones.
+
+It controls every non-editorial structured value, including:
+
+- IDs
+- names
+- slugs
+- tiers
+- Material Types
+- primary, secondary, and styling chakras
+- Energetic Roles
+- property pills
+- image paths and image status
+- previous and next navigation
+- identity and treatment flags
+- exception types
+- production status
+- cohort assignment
+- blockers
+- next action
+- research and production tracking fields approved for the workbook
+
+Rules:
+
+- Claude Code is the only writer unless Christie or Dustin explicitly approves another method.
+- A workbook task is incomplete until the file is updated, saved locally, reopened, and the changed rows are reread.
+- Do not maintain the same structured value in multiple independently editable files.
+- CSVs are generated exports only unless explicitly designated otherwise.
+- Do not casually change catalog-wide values during a single-stone task.
+
+`PROJECT-STATUS.md` is retired. Do not recreate a separate project-status tracker.
+
+---
+
+## 6. Workflow
+
+### Gate 0 — Cohort Preflight
+
+Use the Production Master to confirm:
+
+- roster
+- IDs, names, and slugs
+- tier
 - Material Type
-- primary chakra
-- secondary chakra, if any
-- styling chakra
+- chakra values
 - Energetic Role
 - Color Energy
 - image status
-- navigation
-- exception status
-- production-data version
+- navigation status
+- identity and treatment exceptions
+- blockers
+- production-data snapshot
 
-Do not invent missing values.
+Research cohorts may contain up to 20 stones.
 
-Planet is not required and must not be researched for new production.
+MD drafting, review, and import batches contain no more than 5 stones.
 
 ### Gate 1 — Cohort Research
 
-Research is performed by Lyra or Claude Chat.
+Lyra or Claude Chat conducts horizontal research across the cohort in four passes:
 
-Claude Code does not conduct editorial research unless explicitly assigned a narrow technical verification task.
+1. geological, mineralogical, identity, formation, treatment, locality, and collector-market research
+2. metaphysical consensus, use cases, associations, and themes
+3. care, related stones, pairings, collector notes, and market-confusion research
+4. cohort normalization and evidence audit
+
+Research and evidence records remain separate from public copy.
 
 ### Gate 2 — Canonical MD Drafting
 
-Lyra or Claude Chat drafts canonical MD.
+Lyra or Claude Chat drafts canonical MDs from:
 
-Claude Code does not independently draft public copy.
+- locked Production Master values
+- approved cohort research
+- current field rules
+- current writing standards
+- current source policy
+- current MD schema
 
-### Gate 3 — MD Approval
+No new unsupported research is invented during drafting.
 
-Christie or Dustin explicitly approves the canonical MD.
+### Gate 3 — Independent Audit and Approval
 
-No Supabase SQL preparation begins before approval.
+Claude Chat performs one independent audit for:
 
-### Gate 4 — Supabase SQL Preparation and Verification
+- factual accuracy
+- evidence support
+- identity
+- claim framing
+- repetition
+- required counts and optional ranges
+- schema compliance
+- contradictions
+- locked structured values
 
-Dustin or Christie normally runs SQL. Claude Code prepares verified SQL statements and reports them. Claude Code may execute SQL when Christie explicitly authorizes the exact task or migration step.
+Christie or Dustin then approves the canonical MD.
+
+### Gate 4 — Automated Validation and Atomic Import
 
 Claude Code:
 
-1. maps every approved MD field to its exact table and column
-2. prepares SQL containing the approved content exactly as written
-3. sets `published = false` in the prepared SQL
-4. prepares verification queries for every affected table
-5. reports expected row counts and fields
-6. flags any field that does not map cleanly
+1. reads the approved canonical MD
+2. reads locked structured values from the Production Master or approved runtime source
+3. validates the MD schema and controlled values
+4. generates the complete import packet
+5. validates all parent and child rows
+6. performs the approved import atomically
+7. verifies the resulting database state
 
-After Dustin or Christie runs the SQL, Claude Code may review the returned results or screenshots and compare them with the expected values.
+Never pre-create or partially populate `enc_stone_content`.
+
+The complete parent row and all child rows must be created or updated together through the approved importer.
+
+Do not use the old workaround of separately inserting child rows after a failed parent insert.
 
 ### Gate 5 — Visual and Editorial QA
 
-Christie or Dustin reviews the dynamic page.
+Christie or Dustin reviews the rendered page.
 
-Lyra or Claude Chat may assist with editorial or implementation review.
+Lyra or Claude Chat may assist with:
+
+- responsive behavior
+- visual balance
+- copy presentation
+- implementation compliance
+- screenshot review
+- factual spot checks
 
 ### Gate 6 — Controlled Correction
 
-Any approved correction must update:
+Editorial corrections must be made in the canonical MD first, or applied to canonical MD and Supabase in the same controlled pass.
 
-- canonical MD
-- the prepared Supabase SQL, followed by manual execution by Dustin or Christie
+Structured corrections must be made in the Production Master first, or applied to the Production Master and runtime data in the same controlled pass.
 
-Both must match at the end of the same controlled pass.
-
-Do not update one and defer the other.
+Never leave reverse synchronization for later.
 
 ### Gate 7 — Publication
 
-Claude Code:
+After approval, Claude Code:
 
-1. confirms approval to publish
-2. prepares the SQL that sets `published = true`
-3. provides the SQL to Dustin or Christie for manual execution
-4. verifies the live page after execution
-5. updates production status where instructed
-6. reports completion
-
-Claude Code does not execute the publication query.
-
-Do not update `enc-nav.js` for dynamic page navigation.
+1. publishes through the approved mechanism
+2. verifies the live page
+3. verifies publication state
+4. confirms navigation behavior
+5. updates Production Master status
+6. saves and rereads the updated Production Master rows
+7. reports completion
 
 ---
 
-## 5. Task Preflight
+## 7. Database Rules
 
-Use the lightest preflight that safely fits the task.
-
-### Full Preflight
-
-Required for:
-
-- new stone production
-- new cohort setup
-- architecture changes
-- field-model changes
-- database changes
-- publication
-- broad documentation rewrites
-
-Report only:
-
-- exact task
-- controlling files
-- missing or conflicting inputs
-- intended files or tables to change
-
-### Targeted Preflight
-
-Use for:
-
-- CSS changes
-- label updates
-- parser updates
-- scoped documentation corrections
-- controlled copy synchronization
-
-Report only:
-
-- exact task
-- exact files affected
-- one relevant risk or dependency check, if any
-
-### No Ceremonial Preflight
-
-For:
-
-- read-only inspection
-- grep or search
-- verification query
-- current-state report
-
-Perform the check and report the result.
-
-Do not recite every governing document when only one or two are relevant.
-
----
-
-## 6. Supabase Rules
-
-Claude Code may inspect Supabase schemas and data, run read-only queries, prepare migrations, validate results, and execute SQL when Christie explicitly authorizes the task or exact change. Claude Code must not independently invent schema design, editorial values, catalog values, destructive data changes, or business rules. Unexpected findings and any material deviation from an approved plan must be reported to Christie before corrective or destructive action is taken.
-
-All encyclopedia content tables use the `enc_` prefix.
-
-Primary tables:
-
-- `enc_stone_content`
-- `enc_mineral_facts`
-- `enc_localities`
-- `enc_reach_for`
-- `enc_themes`
-- `enc_collector_notes`
-- `enc_care`
-- `enc_related_stones`
-
-All child tables reference `stones.id` through `stone_id`.
+Claude Code may inspect and execute database work when Christie or Dustin explicitly authorizes the exact task.
 
 Rules:
 
 - do not modify unrelated tables
-- do not modify `stones` without explicit approval
+- do not change schema design independently
 - do not paraphrase approved copy
-- do not trim approved copy
 - do not insert placeholders
-- do not infer navigation
-- do not add Planet as a completion requirement
-- do not change Material Type without approved source data
+- do not infer names, slugs, or navigation
+- query identity by canonical name when asked to confirm a stone record, unless instructed otherwise
+- never treat a slug as a substitute for the canonical name
+- do not introduce a color-qualified stone name unless that exact canonical name exists on the roster
+- use full CSS classes for icon fields, such as `icon-grounding`, not bare slugs
+- quote the `enc_related_stones."group"` column in SQL
+- report unexpected data before destructive or corrective action
 
-The `group` column in `enc_related_stones` must always be quoted in SQL:
-
-```sql
-"group"
-```
-
----
-
-## 7. Canonical MD to Supabase SQL Mapping
-
-The approved canonical MD is the source for public copy.
-
-Before entry:
-
-- confirm the correct approved MD
-- confirm stone ID and slug
-- map each field
-- identify unmapped or contradictory fields
-
-During SQL preparation:
-
-- preserve exact approved wording
-- preserve punctuation
-- use `published = false`
-- omit optional p4 and p5 fields when absent
-
-After Dustin or Christie runs the SQL:
-
-- review the results of verification queries for every affected table
-- verify row counts
-- verify display order
-- verify exact text
-- verify stone ID and slug
-- report exact tables changed
-
-Do not claim PASS unless the relevant checks were completed.
+Database credentials, secrets, and service keys must never be committed or copied into documentation.
 
 ---
 
-## 8. Structural Rules That Must Not Regress
+## 8. Planet Removal
+
+Planet is removed from the encyclopedia system.
+
+Claude Code must not:
+
+- research Planet
+- display Planet
+- require Planet
+- preserve Planet as a current production field
+- add legacy-preservation language for Planet to current standards
+- use Planet in preflight, MD schema, Production Master production fields, validation, or publication logic
+
+When editing current documentation or implementation, remove Planet references within the approved scope.
+
+Historical archived files may retain old text because they are historical records.
+
+---
+
+## 9. Structural Rules That Must Not Regress
 
 Do not reintroduce:
 
-- Planet in At a Glance
 - Known For
 - a fourth Hero tile
 - Pairs Well With in the Hero
 - Primary Chakra in the Hero
+- Planet
 - seven-box At a Glance
 - old Collector Note cards
 - 2×2 Care tiles
@@ -306,7 +358,7 @@ Do not reintroduce:
 - `font-weight: 600`
 - Lora
 - `object-fit: cover`
-- Citrine as visual authority
+- a stone-specific page as visual authority
 
 Current At a Glance order:
 
@@ -321,262 +373,221 @@ Current right-rail order:
 
 1. Energetic Themes
 2. Collector & Curiosity Notes
-3. Market & Buying Notes
+3. Market & Buying Notes, when present
 4. Care & Cleaning
 
 ---
 
-## 9. Image Rules
+## 10. Task Preflight
 
-Canonical image behavior:
+Use the lightest preflight that safely fits the task.
 
-- square frame
-- `object-fit: contain`
-- `object-position: center`
-- full specimen visible
-- no default edge cropping
-- no inner image border
-- no padding inside the frame
-- neutral background treatment
+### Full preflight
 
-Do not switch to `cover` without explicit approval.
+Use for:
+
+- new cohort setup
+- production workflow changes
+- architecture changes
+- field-model changes
+- schema changes
+- publication-system changes
+- broad documentation rewrites
+- file migrations
+
+Report:
+
+- exact task
+- controlling files
+- missing or conflicting inputs
+- intended files, scripts, or tables to change
+- rollback or preservation concern when relevant
+
+### Targeted preflight
+
+Use for:
+
+- scoped documentation corrections
+- parser changes
+- CSS changes
+- label changes
+- narrow data corrections
+- controlled synchronization
+
+Report:
+
+- exact task
+- exact files or records affected
+- one material dependency or risk, when present
+
+### No ceremonial preflight
+
+For:
+
+- read-only inspection
+- grep or search
+- verification
+- inventory
+- current-state reporting
+
+Perform the work and report the result.
 
 ---
 
-## 10. Icon Rules
+## 11. Validation
 
-Use the centralized mapping layer:
+Validate only what is relevant, but validate every relevant item.
 
-- `stones/enc-icons.css`
+### Canonical MD and packet validation
 
-Use:
+Check:
 
-- external SVG assets
-- CSS masking
-- `currentColor`
+- schema
+- required sections
+- field counts
+- controlled vocabularies
+- icon classes
+- related names and slugs
+- optional-section removal
+- no unknown headings
+- no placeholders
 
-Do not:
+### Database validation
 
-- inline repeated SVG markup
-- hard-code full icon URLs into individual cards
-- invent icon slugs
-- silently substitute missing icons
+Check:
 
-Missing mappings must fail visibly during validation.
+- one complete parent row
+- required child-row counts
+- display order
+- exact approved text
+- ID and slug alignment
+- no orphaned or partial rows
+- intended publication state
 
----
+### Production Master validation
 
-## 11. Validation Rules
+Check:
 
-Use only checks relevant to the task.
+- file saved locally
+- file opens
+- target rows contain the approved values
+- formulas and validation remain intact
+- changed rows are reread
+- no accidental unrelated changes
 
-### For a narrow CSS or label change
+### Visual validation
 
-Verify:
-
-- affected selector or section
-- nearest relevant breakpoint
-- one representative rendered page
-- no unintended shared-token regression
-
-### For a full page or template change
-
-Verify:
+For broad changes, check:
 
 - desktop
 - tablet
 - mobile
-- sidebar order
-- responsive order
-- scroll-spy order
+- section order
+- sidebar and scroll behavior
 - image containment
-- divider visibility
-- no horizontal overflow
-- no placeholders
-- navigation behavior
+- icons
+- dividers
+- overflow
+- navigation
+- missing-data behavior
 
-### For Supabase SQL preparation and manual entry
+For narrow changes, check the affected component, nearest breakpoint, and one representative page.
 
-Verify:
-
-- SQL prepared for one primary content row
-- 8 mineral facts
-- 5 reach-for rows
-- valid theme counts
-- 3 or 4 collector notes
-- 4 care rows
-- 4 related rows
-- locality rows match approved content
-- Material Type populated
-- navigation populated
-- prepared published state intentional
-- MD and Supabase match
-
-Do not run unrelated checks merely to complete a checklist.
+Do not perform unrelated ceremonial checks.
 
 ---
 
-## 12. Documentation Rules
+## 12. Stop Conditions
 
-When updating standards:
+Stop and ask only when:
 
-- update the controlling document
-- do not duplicate the full rule in multiple files
-- use references instead of restating unrelated rules
-- keep current rules in the document body
-- do not maintain amendment archives inside living standards
-- use version control for history
-- remove stale file references
+- current approved sources conflict within the same domain
+- a locked value would change without approval
+- a required canonical input is missing
+- an identity, treatment, or source question requires editorial judgment
+- a field does not map to the approved schema
+- a schema or architecture change appears necessary
+- a destructive change is not explicitly authorized
+- a file marked for deletion may contain unique information
+- database state is inconsistent with the approved atomic-import model
+- a move or rename would break an unresolved dependency
+
+Do not stop for:
+
+- stale status text in an old MD
+- ordinary optional-field omission
+- expected generated-file replacement
+- harmless formatting differences
+- issues the approved brief already resolves
+
+---
+
+## 13. Documentation Rules
+
+When updating project rules or standards:
+
+- edit the controlling document
+- remove superseded text instead of keeping amendment appendices
+- use cross-references instead of duplicating full rules
+- remove stale paths and filenames
 - update renamed-file references everywhere
+- remove `PROJECT-STATUS.md` references
+- remove Planet references
+- use Christie and Dustin as equal authorities
+- preserve current approved terminology
+- save every approved canonical file locally
+- verify the saved file
+- report exact changed files
 
-The approved standards set is:
+Do not use the word `governance` as the name of the top-level rules document. Its canonical name is:
 
-- `CLAUDE.md`
-- `ENCYCLOPEDIA-PAGE-STRUCTURE.md`
-- `ENCYCLOPEDIA-CONTENT-FIELDS.md`
-- `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md`
-- `ENCYCLOPEDIA-APPROVED-SOURCES.md`
-- `ENCYCLOPEDIA-DATABASE-REFERENCE.md`
-- `ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html`
-
----
-
-## 13. Roles
-
-### Christie or Dustin
-
-May approve:
-
-- canonical MD
-- structural changes
-- field changes
-- source-policy changes
-- database changes
-- visual implementation
-- publication
-
-### Lyra
-
-May handle:
-
-- strategy
-- research synthesis
-- canonical MD drafting
-- editorial review
-- documentation
-- QA
-- implementation instructions
-
-### Claude Chat
-
-May handle:
-
-- strategy
-- research synthesis
-- canonical MD drafting
-- editorial review
-- documentation review
-- implementation briefs
-
-Only one assistant should own a stone or cohort editorial cycle at a time.
-
-### Claude Code
-
-Execution-only.
-
-Claude Code must not independently choose or invent editorial content or architecture.
+`Still-Point-Lapidary-Project-Rules.docx`
 
 ---
 
-## 14. Reporting
+## 14. File Migration Rules
 
-Completion reports should be brief and exact.
+During the approved file cleanup:
+
+1. copy first
+2. verify checksums or byte identity
+3. update path dependencies
+4. run tests
+5. verify the website build
+6. archive or delete superseded copies only after verification
+
+Do not perform a broad move before the rewritten documentation set is approved.
+
+Canonical MDs, the Production Master, research records, and project rules belong outside the Website Git repository.
+
+Runtime code, runtime assets, pipeline code, tests, and required technical configuration remain inside Website.
+
+---
+
+## 15. Reporting
+
+Completion reports must be brief and exact.
 
 Include:
 
-- files changed
-- tables changed
-- fields or selectors changed
+- files created, changed, moved, archived, or deleted
+- scripts or tables changed
 - validation performed
+- database or publication state changed
 - unresolved issues
-- whether publication state changed
+- confirmation of local canonical saves when required
 
 Do not include:
 
-- long narrative summaries
-- repeated restatement of instructions
-- speculative recommendations not requested
-- claims of success without evidence
+- long narrative restatements
+- speculative changes not requested
+- claims of success without verification
+- hidden assumptions
 
 ---
 
-## 15. Stop Conditions
+## 16. Current Rule
 
-Stop and ask before proceeding when:
+A current brief from Christie or Dustin overrides stale gate markers, old batch notes, archived instructions, and historical handoffs.
 
-- approved files conflict
-- a required field is missing
-- a locked value would change
-- a schema change appears necessary
-- a migration affects unrelated data
-- a source or identity question requires editorial judgment
-- a content field does not map cleanly
-- a visual change would alter approved architecture
-- a file marked for deletion may contain unique data
-
-Do not improvise through a stop condition.
-
----
-
-## 16. Editorial Review Protocol
-
-When Lyra research output is pasted, immediately analyze it against project standards and lead with a verdict (Approve / Approve with notes / Do not approve). Follow with itemized must-fix, flag, and minor notes, each with a concrete recommendation. Do not wait for Christie to ask.
-
----
-
-## 17. Gate Authority
-
-When a brief from Christie or Dustin explicitly authorizes an action, proceed without flagging stale gate-status markers in MD files or batch notes as stop conditions. Christie or Dustin's current session brief is the controlling authority.
-
----
-
-## 18. Token Efficiency Rules
-
-These rules apply to all Supabase entry work. Follow without exception unless Christie explicitly overrides.
-
-### SQL Preparation and Execution
-
-- Prepare all SQL for a stone or batch as a single block first
-- Show the full block to Christie for review before executing anything
-- Execute only after Christie explicitly confirms
-- Do not narrate preparation steps — show the SQL, nothing else
-
-### Transaction Safety for Supabase Entry
-
-- Run the existence check for `enc_stone_content` immediately before executing SQL for that stone — not earlier in the session, not from memory.
-- Never combine a parent-table INSERT with child-table INSERTs in a single transaction block when parent existence is uncertain. If the parent INSERT fails, the whole block rolls back, including child INSERTs that would have succeeded.
-- If `enc_stone_content` already has a row for a stone, skip the parent INSERT and run child-table inserts as their own block.
-- After every stone, verify child table row counts before moving to the next stone.
-
-### Verification
-
-- After execution, run one UNION ALL verification query per stone covering all affected tables (see DATABASE-REFERENCE §15)
-- Report format: table name and row count only
-- Do not restate entered content in the verification report
-
-### Stop Conditions
-
-- Flag and wait only when something genuinely does not map: missing slug, unmapped field, schema mismatch, or unexpected data
-- Stale gate markers in MD batch notes are not stop conditions
-- Do not narrate uncertainty — either proceed or stop and state the specific issue in one sentence
-
-### File Handling
-
-- Always read MDs directly from the zip path provided — do not request pasted content
-- Do not restate MD content back in chat unless Christie asks
-
-### Batch Processing
-
-- When a brief covers multiple stones, prepare SQL for all stones in the batch before executing any
-- Present the full batch SQL block for Christie review, then execute all after confirmation
-- Verify all stones after execution using one UNION ALL query per stone
+It does not override a current controlling standard unless the brief explicitly changes that standard.

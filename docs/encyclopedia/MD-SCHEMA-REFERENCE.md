@@ -2,6 +2,8 @@
 
 **Purpose:** Defines the exact file format that the Cohort 4 packet generator reads. Every canonical MD file the generator processes must conform to this schema. Deviations that do not match a recognized optional pattern are validation failures, not silent skips.
 
+> This file is implementation-facing documentation for the Website pipeline only. The canonical authority is `Documents\Still Point Lapidary\Project Rules\MD-SCHEMA-REFERENCE.md`. This file must not contradict the Project Rules copy. Where the two ever disagree, the Project Rules copy controls and this file is out of date.
+
 ---
 
 ## 1. Authority and Scope
@@ -28,11 +30,19 @@ When this schema and a governing editorial document conflict, stop and ask Chris
 
 ## 2. File Location
 
-Canonical production MD files must live at:
+The canonical long-term home for approved MD is:
+
+```
+Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\{stone-slug}.md
+```
+
+**Transitional pipeline rule:** until the packet generator is updated (or confirmed) to read that external path, the pipeline may temporarily read MD files staged inside the repository at:
 
 ```
 docs/encyclopedia/entries/{stone-slug}.md
 ```
+
+Files at this repo-local path are working mirrors or staging inputs for the pipeline only. They are not an independent canonical source, and any conflict with the external canonical file resolves in favor of the external file. Do not treat this transitional path as permanent.
 
 Automated test fixtures must live at:
 
@@ -65,6 +75,8 @@ production_data_version: "1.0"
 | `production_data_version` | string | Yes | Version tag for the production data snapshot this MD was generated against, e.g. `"1.0"`. |
 
 Do not add any other fields to front matter. Chakras, energetic role, navigation, icons, swatches, tier, zodiac, element, color energy, and material type are not front matter fields — they come from canonical structured sources (Supabase `stones` table and `enc_stone_content`).
+
+Planet does not appear in front matter or anywhere else in the current MD schema.
 
 ---
 
@@ -455,3 +467,19 @@ The following are never present in a generator-readable MD file:
 - Amendment histories
 
 These belong in separate research documents. If the parser encounters a `# RESEARCH NOTES` or `## COMPLIANCE REPORT` heading, it is a validation failure (unrecognized top-level heading).
+
+---
+
+## 18. Change Control
+
+Changes to front matter, section names, section order, subheading patterns, count rules, optionality, icon syntax, slug syntax, validation-failure behavior, or canonical file location require:
+
+1. Christie or Dustin approval
+2. update to `Documents\Still Point Lapidary\Project Rules\MD-SCHEMA-REFERENCE.md` (canonical)
+3. matching update to this file
+4. parser and validator review
+5. fixture updates
+6. targeted tests
+7. review of active canonical MDs
+
+This file must never disagree with the Project Rules copy. If a discrepancy is found, this file is wrong and must be corrected to match.
