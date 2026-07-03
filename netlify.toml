@@ -1,3 +1,65 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Legacy static stone pages retired in favor of the dynamic stones/stone.html?slug= template.
+# Redirects preserve old public URLs. See DOCUMENTATION-CLEANUP-IMPLEMENTATION-HANDOFF.md.
+[[redirects]]
+  from = "/stones/amethyst.html"
+  to = "/stones/stone.html?slug=amethyst"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/black-tourmaline.html"
+  to = "/stones/stone.html?slug=black-tourmaline"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/carnelian.html"
+  to = "/stones/stone.html?slug=carnelian"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/citrine.html"
+  to = "/stones/stone.html?slug=citrine"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/clear-quartz.html"
+  to = "/stones/stone.html?slug=clear-quartz"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/green-aventurine.html"
+  to = "/stones/stone.html?slug=green-aventurine"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/labradorite.html"
+  to = "/stones/stone.html?slug=labradorite"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/rose-quartz.html"
+  to = "/stones/stone.html?slug=rose-quartz"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/selenite.html"
+  to = "/stones/stone.html?slug=selenite"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/smoky-quartz.html"
+  to = "/stones/stone.html?slug=smoky-quartz"
+  status = 301
+  force = true

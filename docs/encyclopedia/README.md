@@ -4,28 +4,14 @@ This directory contains the active documentation and editorial workspace for the
 
 ## Quick Navigation
 
-- [`standards/`](standards/) — current approved encyclopedia standards
-- [`workflow/`](workflow/) — repeatable cohort and editorial workflow tools
+- Canonical Project Rules (standards, database reference, page structure, content fields, writing/research, approved sources, catalog decisions, photo standard, icon registry, visual standard) now live in `Documents\Still Point Lapidary\Project Rules` — not in this repository. See `CLAUDE.md` §2 for the authority table.
 - [`entries/`](entries/) — canonical stone MD files
 - [`batches/`](batches/) — combined batch records and review packages
 - [`archive/`](archive/) — superseded standards, historical handoffs, snapshots, and retained reference files
 
-## Current Standards
-
-- [`standards/ENCYCLOPEDIA-PAGE-STRUCTURE.md`](standards/ENCYCLOPEDIA-PAGE-STRUCTURE.md)
-- [`standards/ENCYCLOPEDIA-CONTENT-FIELDS.md`](standards/ENCYCLOPEDIA-CONTENT-FIELDS.md)
-- [`standards/ENCYCLOPEDIA-WRITING-AND-RESEARCH.md`](standards/ENCYCLOPEDIA-WRITING-AND-RESEARCH.md)
-- [`standards/ENCYCLOPEDIA-APPROVED-SOURCES.md`](standards/ENCYCLOPEDIA-APPROVED-SOURCES.md)
-- [`standards/ENCYCLOPEDIA-CATALOG-DECISIONS.md`](standards/ENCYCLOPEDIA-CATALOG-DECISIONS.md)
-- [`standards/ENCYCLOPEDIA-DATABASE-REFERENCE.md`](standards/ENCYCLOPEDIA-DATABASE-REFERENCE.md)
-- [`standards/ENCYCLOPEDIA-PHOTO-STANDARD.md`](standards/ENCYCLOPEDIA-PHOTO-STANDARD.md)
-- [`standards/ENCYCLOPEDIA-ICON-REGISTRY.md`](standards/ENCYCLOPEDIA-ICON-REGISTRY.md)
-- [`standards/ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html`](standards/ENCYCLOPEDIA-PAGE-VISUAL-STANDARD.html)
-
 ## Workflow Files
 
-- [`workflow/ENCYCLOPEDIA-COHORT-PREFLIGHT.md`](workflow/ENCYCLOPEDIA-COHORT-PREFLIGHT.md)
-- [`workflow/stone-md-planner.csv`](workflow/stone-md-planner.csv)
+- [`workflow/stone-md-planner.csv`](workflow/stone-md-planner.csv) — unreferenced by current tooling; pending classification for archive or removal
 
 ## Live Implementation
 
