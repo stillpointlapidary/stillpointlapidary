@@ -83,7 +83,7 @@ BEGIN
     VALUES (v_stone_id, loc ->> 'locality', (loc ->> 'display_order')::int);
   END LOOP;
 
-  -- enc_reach_for (exactly 5 rows)
+  -- enc_reach_for (approved row count from packet; see ENCYCLOPEDIA-CONTENT-FIELDS.md)
   FOR reach IN SELECT * FROM jsonb_array_elements(packet -> 'enc_reach_for') LOOP
     INSERT INTO enc_reach_for (stone_id, label, description, display_order)
     VALUES (v_stone_id, reach ->> 'label', reach ->> 'description', (reach ->> 'display_order')::int);

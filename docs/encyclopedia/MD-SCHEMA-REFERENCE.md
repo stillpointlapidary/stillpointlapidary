@@ -231,13 +231,13 @@ A fourth and fifth block may be added.
 
 Rules:
 
-- 3 to 5 `##` blocks. Fewer than 3 or more than 5 is a validation failure.
+- Block count is controlled by `ENCYCLOPEDIA-CONTENT-FIELDS.md` §6. The Markdown structure uses one `## {Label}` block per approved row, and validation enforces the approved minimum and maximum from the content-field rule.
 - each block requires a non-empty label and description
 - blocks map in order to `enc_reach_for`
 - duplicate labels should fail validation
 - an empty block fails validation
 
-Do not add weak filler merely to reach 5.
+Do not add weak filler merely to reach the maximum.
 
 ---
 
