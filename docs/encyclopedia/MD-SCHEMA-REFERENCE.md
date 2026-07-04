@@ -163,19 +163,18 @@ Rules:
 
 ## {Label}
 {Description}
-
-## {Label}
-{Description}
-
-## {Label}
-{Description}
 ```
+
+A fourth and fifth block may be added.
 
 Rules:
 
-- Exactly five `## ` blocks. Fewer or more is a validation failure.
+- 3 to 5 `## ` blocks. Fewer than 3 or more than 5 is a validation failure.
 - Each block has a label (the `## ` heading text) and a description (the paragraph body).
 - Labels and descriptions map in order to `enc_reach_for` rows 1–5.
+- Duplicate labels fail validation.
+- An empty block fails validation.
+- Do not add weak filler merely to reach 5.
 
 ---
 

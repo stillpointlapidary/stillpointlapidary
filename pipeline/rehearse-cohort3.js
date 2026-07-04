@@ -8,7 +8,9 @@
  * Do not run any import path against Cohort 3 records.
  *
  * What this does:
- *   1. Generates packets for all Cohort 3 stones from their canonical MDs
+ *   1. Generates packets for all Cohort 3 stones from their staged MDs
+ *      (working mirrors of the canonical MDs at
+ *      Documents\Still Point Lapidary\Encyclopedia\Canonical MDs)
  *   2. Runs full schema and roster validation on the generated packets
  *   3. Compares generated packet values field-by-field against live Supabase records
  *      (text, order, slugs, icon classes, nullable fields) — read comparison only
@@ -31,10 +33,16 @@
  *   SUPABASE_URL
  *   SUPABASE_SERVICE_KEY
  *
- * Required files (canonical MDs must be in new schema format before rehearsal):
+ * Required files (staged MDs must be in new schema format before rehearsal):
  *   docs/encyclopedia/entries/{slug}.md for each Cohort 3 stone
  *
- * NOTE: The Cohort 3 canonical MDs in docs/encyclopedia/entries/ are currently in
+ * Canonical MDs live at Documents\Still Point Lapidary\Encyclopedia\Canonical MDs.
+ * The files under docs/encyclopedia/entries/ are working mirrors / staging inputs for
+ * the pipeline only — they are not an independent canonical source, and any conflict
+ * resolves in favor of the external canonical file. The pipeline should be updated to
+ * read the external canonical MD path from one approved configuration source.
+ *
+ * NOTE: The Cohort 3 MDs staged in docs/encyclopedia/entries/ are currently in
  * the OLD format (no YAML front matter, research notes mixed in, old heading structure).
  * They must be converted to the new MD schema (MD-SCHEMA-REFERENCE.md) before this
  * rehearsal can run. This conversion is a prerequisite — do not attempt to auto-convert;
@@ -249,7 +257,7 @@ async function main() {
   const packets = [];
 
   // Step 1 & 2: Generate and validate packets
-  console.log('--- Step 1: Generate packets from canonical MDs ---');
+  console.log('--- Step 1: Generate packets from staged MDs ---');
   for (const slug of COHORT3_STONES) {
     const mdPath = path.join(mdDir, `${slug}.md`);
     if (!fs.existsSync(mdPath)) {

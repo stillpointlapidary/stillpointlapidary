@@ -83,9 +83,15 @@ READ-ONLY rehearsal against live Cohort 3 data. Generates packets from canonical
 validates them, compares against live Supabase records, and runs the smoke test.
 No writes, no imports, no publication changes.
 
-**PREREQUISITE:** Cohort 3 canonical MDs must be converted to the new schema format
+Canonical MDs live at `Documents\Still Point Lapidary\Encyclopedia\Canonical MDs`. The
+repo-local files under `docs/encyclopedia/entries/` are working mirrors / staging inputs
+for the pipeline only — they are not an independent canonical source, and any conflict
+resolves in favor of the external canonical file. The pipeline should be updated to read
+the external canonical MD path from one approved configuration source.
+
+**PREREQUISITE:** Cohort 3 MDs must be converted to the new schema format
 (see `docs/encyclopedia/MD-SCHEMA-REFERENCE.md`) before this rehearsal can run.
-The current MDs in `docs/encyclopedia/entries/` are in the old format and must be
+The current staged MDs in `docs/encyclopedia/entries/` are in the old format and must be
 converted and reviewed by Christie before the rehearsal executes.
 
 ---
@@ -93,7 +99,8 @@ converted and reviewed by Christie before the rehearsal executes.
 ## Typical batch workflow
 
 ```bash
-# For each stone in the batch:
+# For each stone in the batch (docs/encyclopedia/entries/ is a staging mirror;
+# canonical MDs live at Documents\Still Point Lapidary\Encyclopedia\Canonical MDs):
 node pipeline/generate-packet.js --md docs/encyclopedia/entries/stone-slug.md --out stone-slug.packet.json
 
 # Validate all before importing any:
