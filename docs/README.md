@@ -1,14 +1,10 @@
 # Still Point Lapidary Documentation
 
-This directory contains project standards, workflows, design references, historical records, and operational documentation.
+This directory contains implementation-facing encyclopedia documentation for the Website repo: the MD schema reference and repo-local staging mirrors of canonical stone MDs.
 
 ## Current Documentation Areas
 
-- [`encyclopedia/`](encyclopedia/) — encyclopedia standards, workflow files, canonical stone MDs, batch records, and historical materials
-- [`design/`](design/) — cross-project design and icon-system planning
-- [`handoffs/`](handoffs/) — dated session handoffs
-- [`catalog/`](catalog/) — catalog reviews and noncanonical review workbooks
-- [`archive/`](archive/) — retained files that are not part of the active documentation system
+- [`encyclopedia/`](encyclopedia/) — MD schema reference and repo-local canonical MD staging mirrors (see `encyclopedia/README.md`)
 
 ## Runtime Files
 
@@ -22,11 +18,15 @@ Important runtime locations include:
 - `../assets/`
 - `../supabase/`
 
-## Active Structured Data
+## Current Authority Lives Outside This Repo
 
-Active catalog and navigation datasets live under:
+This repo is not where structured production values, canonical MDs, project rules, or historical/archival material live. Current authority:
 
-- `../data/catalog/`
-- `../data/navigation/`
+- **Production Master** (stone IDs, canonical names, slugs, collection tiers, Material Types, navigation, production statuses, and all other structured production values): `C:\Users\chris\Documents\Still Point Lapidary\Encyclopedia\Production Data\Still-Point-Lapidary-Production-Master.xlsx`
+- **Canonical MDs** (approved public copy): `C:\Users\chris\Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\`
+- **Project Rules** (standards, database reference, page structure, content fields, writing/research, approved sources, photo standard, icon registry, visual standard): `C:\Users\chris\Documents\Still Point Lapidary\Project Rules\`
+- **Historical/archival material** (old handoffs, superseded standards, old review workbooks, old CSV exports, retired planning docs): `C:\Users\chris\Documents\Still Point Lapidary\Archive\`
 
-Do not treat files under `docs/archive/` or `docs/encyclopedia/archive/` as current authority unless a current standard explicitly points to them.
+The `data/catalog/` and `data/navigation/` CSV exports that used to live in this repo are not active structured data. They were historical exports only — audited against the Production Master and found fully superseded by it — and have been removed from this repo and preserved in the external Archive above. Do not reactivate a CSV as authority unless Christie or Dustin explicitly does so.
+
+Repo-local MDs under `docs/encyclopedia/entries/` are temporary staging mirrors for the pipeline only, not authority — see `docs/encyclopedia/README.md`.

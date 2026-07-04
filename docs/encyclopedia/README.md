@@ -1,17 +1,21 @@
 # Still Point Lapidary Encyclopedia Workspace
 
-This directory contains the active documentation and editorial workspace for the Still Point Lapidary encyclopedia.
+This directory contains implementation-facing encyclopedia documentation: the MD schema reference and repo-local staging mirrors of canonical stone MDs used by the pipeline.
 
 ## Quick Navigation
 
-- Canonical Project Rules (standards, database reference, page structure, content fields, writing/research, approved sources, catalog decisions, photo standard, icon registry, visual standard) now live in `Documents\Still Point Lapidary\Project Rules` — not in this repository. See `CLAUDE.md` §2 for the authority table.
-- [`entries/`](entries/) — canonical stone MD files
-- [`batches/`](batches/) — combined batch records and review packages
-- [`archive/`](archive/) — superseded standards, historical handoffs, snapshots, and retained reference files
+- Canonical Project Rules (standards, database reference, page structure, content fields, writing/research, approved sources, catalog decisions, photo standard, icon registry, visual standard) live in `Documents\Still Point Lapidary\Project Rules` — not in this repository. See `CLAUDE.md` §2 for the authority table.
+- [`MD-SCHEMA-REFERENCE.md`](MD-SCHEMA-REFERENCE.md) — generator-readable MD schema definition
+- [`entries/`](entries/) — repo-local staging mirrors of canonical stone MDs, kept temporarily because `pipeline/rehearse-cohort3.js` still reads this path. **Not authority.** The approved canonical MDs live in `Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\`; any conflict resolves in favor of that external copy.
 
-## Workflow Files
+## Current Structured and Canonical Authority
 
-- [`workflow/stone-md-planner.csv`](workflow/stone-md-planner.csv) — unreferenced by current tooling; pending classification for archive or removal
+- **Production Master** (stone IDs, canonical names, slugs, collection tiers, Material Types, navigation, production statuses, and all other structured production values) is no longer stored in this repo. It lives at `C:\Users\chris\Documents\Still Point Lapidary\Encyclopedia\Production Data\Still-Point-Lapidary-Production-Master.xlsx`.
+- **Canonical MDs** (approved public copy) live at `C:\Users\chris\Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\`.
+
+## Historical Material
+
+Historical handoffs, superseded standards, old exemplar/schema/source-hierarchy docs, old review workbooks, old CSV exports, retired batch records, and retired planning docs are no longer stored in this repo. They were copied and SHA256-verified into `C:\Users\chris\Documents\Still Point Lapidary\Archive\GitHub Cleanup Preservation\Website docs cleanup 2026-07-04\` before removal and are preserved there for reference only — not current authority.
 
 ## Live Implementation
 
@@ -22,16 +26,10 @@ The live encyclopedia implementation remains outside this documentation director
 - `../../stones/` — published or retained stone-page files
 - `../../supabase/` — database migrations, functions, queries, and verification files
 
-## Active Structured Data
-
-- `../../data/catalog/final-tier-roster-06.19.2026.csv`
-- `../../data/navigation/Stones Catalog with Previous - Next Slugs.csv`
-
 ## Working Rules
 
 - Do not place live runtime files in `docs/`.
 - Do not place active production datasets in `docs/`.
-- Do not save canonical single-stone MDs outside `entries/`.
-- Do not save combined cohort or batch packages inside `entries/`.
+- Do not save canonical single-stone MDs outside `entries/`; `entries/` itself is a staging mirror only, not authority.
 - Do not use archived standards as current authority.
 - Do not move or rename runtime files without a separate approved implementation change.

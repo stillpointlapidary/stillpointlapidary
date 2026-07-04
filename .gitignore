@@ -20,7 +20,8 @@ social-preview.html
 # Claude Code workspace files
 .claude/
 
-# Dev/handoff notes — internal only (root-level scratch only; docs/handoffs/ is tracked)
+# Dev/handoff notes — internal only (root-level scratch only; dated session handoffs
+# are no longer tracked in this repo — see docs/README.md for the external Archive location)
 /HANDOFF*.md
 
 # Backup files — never deploy these
@@ -37,10 +38,10 @@ supabase/fix_loader.js
 supabase/extract_files.js
 supabase/patch_split.js
 supabase/rarity_first_pass.sql
-docs/encyclopedia/MASTER-STONE-PAGE-CONTRACT.md
+docs/encyclopedia/archive/MASTER-STONE-PAGE-CONTRACT.md
 docs/INSTALL-INSTRUCTIONS.md
-docs/encyclopedia/APPROVED-EXEMPLAR-LABRADORITE.md
-docs/encyclopedia/APPROVED-MD-SCHEMA.md
+docs/encyclopedia/archive/APPROVED-EXEMPLAR-LABRADORITE.md
+docs/encyclopedia/archive/APPROVED-MD-SCHEMA.md
 docs/brand/chakra-color-system.md
 assets/SVGs/add-piece.svg
 assets/SVGs/all-57-svgs.zip
@@ -102,7 +103,7 @@ assets/SVGs/emotional-regulation.svg
 assets/SVGs/viewfinder-crosshair.svg
 assets/SVGs/crystal-cluster.svg
 assets/SVGs/chakra.svg
-docs/encyclopedia/VALIDATION-REPORT.md
+docs/encyclopedia/archive/VALIDATION-REPORT.md
 
 # Local exports and obsolete encyclopedia drafts
 *.zip
@@ -117,8 +118,8 @@ docs/encyclopedia/*-v*.md
 
 # Local archive folder
 /local-archive/
-docs/encyclopedia/GOLD-STANDARD-STONE-PAGE.html
-docs/encyclopedia/CLAUDE-CODE-HANDOFF-2026-06-19-session2.md
+docs/encyclopedia/archive/GOLD-STANDARD-STONE-PAGE.html
+docs/encyclopedia/archive/CLAUDE-CODE-HANDOFF-2026-06-19-session2.md
 .env
 
 # Generated pipeline output
