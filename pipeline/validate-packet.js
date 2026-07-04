@@ -251,13 +251,17 @@ async function main() {
     }
   }
 
-  process.exit(allPass ? 0 : 1);
+  // Set the exit code and let Node drain naturally instead of calling
+  // process.exit(): forcing exit immediately after a Supabase fetch response
+  // races an in-flight socket teardown on Windows and crashes with a libuv
+  // assertion (UV_HANDLE_CLOSING) even though validation already completed.
+  process.exitCode = allPass ? 0 : 1;
 }
 
 if (require.main === module) {
   main().catch(err => {
     console.error('Unexpected error:', err.message);
-    process.exit(1);
+    process.exitCode = 1;
   });
 }
 
