@@ -117,10 +117,10 @@ async function verifyStone(supabase, packet) {
     .eq('stone_id', stoneId)
     .order('display_order');
 
-  if (!reach || reach.length !== 5) {
-    errors.push(`enc_reach_for: expected 5 rows, found ${reach?.length ?? 0}`);
+  if (!reach || reach.length !== packet.enc_reach_for.length) {
+    errors.push(`enc_reach_for: expected ${packet.enc_reach_for.length} rows, found ${reach?.length ?? 0}`);
   } else {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < packet.enc_reach_for.length; i++) {
       compareField(errors, `enc_reach_for[${i + 1}].label`, packet.enc_reach_for[i].label, reach[i].label);
       compareField(errors, `enc_reach_for[${i + 1}].description`, packet.enc_reach_for[i].description, reach[i].description);
     }

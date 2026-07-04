@@ -152,10 +152,10 @@ async function comparePacketToSupabase(supabase, packet) {
     .select('label, description, display_order')
     .eq('stone_id', stoneId)
     .order('display_order');
-  if (!reach || reach.length !== 5) {
-    mismatches.push(`enc_reach_for: expected 5, found ${reach?.length ?? 0}`);
+  if (!reach || reach.length !== packet.enc_reach_for.length) {
+    mismatches.push(`enc_reach_for: expected ${packet.enc_reach_for.length}, found ${reach?.length ?? 0}`);
   } else {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < packet.enc_reach_for.length; i++) {
       cmp(`enc_reach_for[${i + 1}].label`, packet.enc_reach_for[i]?.label, reach[i].label);
       cmp(`enc_reach_for[${i + 1}].description`, packet.enc_reach_for[i]?.description, reach[i].description);
     }

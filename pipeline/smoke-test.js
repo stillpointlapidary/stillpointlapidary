@@ -106,9 +106,9 @@ async function smokeTestStone(page, stoneSlug, stoneName, baseUrl) {
   const glanceCount = await page.$$eval('.glance-field', els => els.length).catch(() => 0);
   if (glanceCount !== 6) errors.push(`At a Glance fields: expected 6, found ${glanceCount}`);
 
-  // Why People Reach For It: exactly 5 rows
+  // Why People Reach For It: 3-5 rows
   const reachCount = await page.$$eval('.reach-row', els => els.length).catch(() => 0);
-  if (reachCount !== 5) errors.push(`Why People Reach For It rows: expected 5, found ${reachCount}`);
+  if (reachCount < 3 || reachCount > 5) errors.push(`Why People Reach For It rows: expected 3-5, found ${reachCount}`);
 
   // Mineral facts: exactly 8 rows
   const factCount = await page.$$eval('.mineral-fact', els => els.length).catch(() => 0);
