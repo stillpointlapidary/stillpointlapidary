@@ -1,62 +1,97 @@
 # Still Point Lapidary — Encyclopedia MD Schema Reference
 
-**Purpose:** Defines the exact file format that the Cohort 4 packet generator reads. Every canonical MD file the generator processes must conform to this schema. Deviations that do not match a recognized optional pattern are validation failures, not silent skips.
-
-> This file is implementation-facing documentation for the Website pipeline only. The canonical authority is `Documents\Still Point Lapidary\Project Rules\MD-SCHEMA-REFERENCE.md`. This file must not contradict the Project Rules copy. Where the two ever disagree, the Project Rules copy controls and this file is out of date.
+**Status:** Canonical  
+**Purpose:** Defines the exact generator-readable Markdown format for canonical encyclopedia entries.
 
 ---
 
-## 1. Authority and Scope
+## 1. Scope
 
 This document controls:
 
 - front matter field names and types
-- top-level section headings and their order
-- required internal subheadings and patterns within each section
-- optionality rules for optional sections and blocks
-- validation failure definitions
-- exception stone rules
+- top-level section headings and order
+- required subheadings and block patterns
+- optional-section behavior
+- count validation
+- icon and slug formatting
+- validation failures
+- exception-stone schema behavior
 
-This document does **not** control:
+This document does not control:
 
-- editorial voice or prose content — see `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md`
-- field counts and optionality beyond what the parser must enforce — see `ENCYCLOPEDIA-CONTENT-FIELDS.md`
-- database columns — see `ENCYCLOPEDIA-DATABASE-REFERENCE.md`
-- what structured values the generator reads from Supabase — see the generator implementation
+- editorial voice
+- research quality
+- field meaning
+- database design
+- stone-specific structured values
+- page layout
+- publication approval
 
-When this schema and a governing editorial document conflict, stop and ask Christie. Do not resolve silently.
+Use:
+
+- `ENCYCLOPEDIA-CONTENT-FIELDS.md` for counts, ranges, and optionality
+- `ENCYCLOPEDIA-WRITING-AND-RESEARCH.md` for prose standards
+- `ENCYCLOPEDIA-DATABASE-REFERENCE.md` for storage mapping
+- the Production Master for locked structured values
+- the approved parser and validator for implementation behavior
+
+When this schema conflicts with another current governing document, stop and ask Christie or Dustin.
 
 ---
 
-## 2. File Location
+## 2. Canonical File Location
 
-The canonical long-term home for approved MD is:
+Canonical MD files live outside the Website repository under:
 
-```
+```text
 Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\{stone-slug}.md
 ```
 
-**Transitional pipeline rule:** until the packet generator is updated (or confirmed) to read that external path, the pipeline may temporarily read MD files staged inside the repository at:
+This is the canonical long-term home for all approved MD.
 
-```
-docs/encyclopedia/entries/{stone-slug}.md
-```
+Automated test fixtures remain inside the Website repository under:
 
-Files at this repo-local path are working mirrors or staging inputs for the pipeline only. They are not an independent canonical source, and any conflict with the external canonical file resolves in favor of the external file. Do not treat this transitional path as permanent.
-
-Automated test fixtures must live at:
-
-```
+```text
 tests/fixtures/{stone-slug}.md
 ```
 
-Do not place research notes, compliance reports, or approval markers in the generator-readable file. Those belong in separate research documents. The generator reads only the sections defined in this schema and treats any unrecognized heading as a validation failure.
+Pipeline code must read the canonical MD directory from one approved configuration source.
+
+Do not hard-code the same canonical path independently in multiple scripts.
+
+### Transitional Pipeline Rule
+
+If the Website pipeline currently requires MD files inside the repository (for example `docs/encyclopedia/entries/`) because it has not yet been updated to read the external canonical path, those repo-local files are **working mirrors or staging inputs only**. They are not an independent canonical source and do not carry authority of their own.
+
+Any conflict between a repo-local mirror and the canonical file above is resolved in favor of the canonical file. Update the pipeline to read the external path as soon as this is confirmed safe; do not extend the transitional exception indefinitely.
 
 ---
 
-## 3. Front Matter
+## 3. File Boundaries
 
-Every MD file begins with a YAML front matter block.
+Generator-readable MD contains public copy only.
+
+Do not place these inside the canonical MD:
+
+- research notes
+- source tables
+- evidence records
+- compliance reports
+- gate markers
+- approval notes
+- audit notes
+- amendment history
+- session handoffs
+- current project status
+
+The parser must reject unrecognized top-level headings rather than silently ignoring them.
+
+---
+
+## 4. Front Matter
+
+Every canonical MD begins with YAML front matter.
 
 ```yaml
 ---
@@ -67,22 +102,36 @@ production_data_version: "1.0"
 ---
 ```
 
-| Field | Type | Required | Notes |
+| Field | Type | Required | Rule |
 |---|---|---|---|
-| `stone_id` | string | Yes | Stable ID from the `stones` table, e.g. `C-0108`. Must match the live `stones` table. |
-| `stone_name` | string | Yes | Canonical display name. Must match `stones.name` exactly. |
-| `stone_slug` | string | Yes | Canonical URL slug. Must match `stones.slug` exactly. |
-| `production_data_version` | string | Yes | Version tag for the production data snapshot this MD was generated against, e.g. `"1.0"`. |
+| `stone_id` | string | Yes | Must match the canonical roster. |
+| `stone_name` | string | Yes | Must match the canonical display name exactly. |
+| `stone_slug` | string | Yes | Must match the canonical slug exactly. |
+| `production_data_version` | string | Yes | Identifies the Production Master snapshot used. |
 
-Do not add any other fields to front matter. Chakras, energetic role, navigation, icons, swatches, tier, zodiac, element, color energy, and material type are not front matter fields — they come from canonical structured sources (Supabase `stones` table and `enc_stone_content`).
+Do not add structured production fields to front matter.
+
+The following come from the Production Master or approved runtime source:
+
+- collection tier
+- Material Type
+- chakra values
+- Styling Chakra
+- Energetic Role
+- Color Energy
+- property pills
+- image path
+- navigation
+- exception flags
+- production status
 
 Planet does not appear in front matter or anywhere else in the current MD schema.
 
 ---
 
-## 4. Top-Level Sections
+## 5. Top-Level Sections
 
-Top-level sections use `#` headings. They must appear in this exact order:
+Top-level sections use `#` headings in this exact order:
 
 1. `# Hero`
 2. `# Overview`
@@ -90,15 +139,23 @@ Top-level sections use `#` headings. They must appear in this exact order:
 4. `# Energetic Themes`
 5. `# Mineral Profile`
 6. `# Collector & Curiosity Notes`
-7. `# Market & Buying Notes` — optional; omit the heading entirely when absent
+7. `# Market & Buying Notes` — optional
 8. `# Care & Cleaning`
 9. `# Related Stones`
 
-The parser validates section order. A missing required section is a validation failure. A renamed section is a validation failure. An empty required section is a validation failure. An omitted optional section (`# Market & Buying Notes`) is a valid skip.
+Rules:
+
+- required sections must be present
+- section order is fixed
+- renamed sections fail validation
+- empty required sections fail validation
+- optional sections must be omitted entirely when unused
+- empty optional sections fail validation
+- unknown top-level sections fail validation
 
 ---
 
-## 5. Hero
+## 6. Hero
 
 ```markdown
 # Hero
@@ -123,34 +180,39 @@ The parser validates section order. A missing required section is a validation f
 
 Rules:
 
-- Exactly three property pills. A list of two or four is a validation failure.
-- All five subheadings are required. A missing or renamed subheading is a validation failure.
-- Subheadings must appear in the order above.
+- all five subheadings are required
+- subheading order is fixed
+- exactly 3 property pills
+- missing or renamed subheadings fail validation
+- empty values fail validation
+
+The validator also checks compact-field limits from `ENCYCLOPEDIA-CONTENT-FIELDS.md`.
 
 ---
 
-## 6. Overview
+## 7. Overview
 
 ```markdown
 # Overview
 
 ## Paragraph 1
-{Metaphysical identity paragraph. Opens with the stone's name and defining role.}
+{Metaphysical identity paragraph}
 
 ## Paragraph 2
-{Mineral and physical identity paragraph. Opens with a descriptive noun phrase, not the stone name.}
+{Mineral and physical identity paragraph}
 ```
 
 Rules:
 
-- Both paragraphs are required.
-- `## Paragraph 1` maps to `enc_stone_content.overview_p1`.
-- `## Paragraph 2` maps to `enc_stone_content.overview_p2`.
-- A missing or renamed subheading is a validation failure.
+- both subheadings are required
+- order is fixed
+- both paragraphs must be non-empty
+- `Paragraph 1` maps to `overview_p1`
+- `Paragraph 2` maps to `overview_p2`
 
 ---
 
-## 7. Why People Reach For It
+## 8. Why People Reach For It
 
 ```markdown
 # Why People Reach For It
@@ -169,16 +231,17 @@ A fourth and fifth block may be added.
 
 Rules:
 
-- 3 to 5 `## ` blocks. Fewer than 3 or more than 5 is a validation failure.
-- Each block has a label (the `## ` heading text) and a description (the paragraph body).
-- Labels and descriptions map in order to `enc_reach_for` rows 1–5.
-- Duplicate labels fail validation.
-- An empty block fails validation.
-- Do not add weak filler merely to reach 5.
+- 3 to 5 `##` blocks. Fewer than 3 or more than 5 is a validation failure.
+- each block requires a non-empty label and description
+- blocks map in order to `enc_reach_for`
+- duplicate labels should fail validation
+- an empty block fails validation
+
+Do not add weak filler merely to reach 5.
 
 ---
 
-## 8. Energetic Themes
+## 9. Energetic Themes
 
 ```markdown
 # Energetic Themes
@@ -190,17 +253,7 @@ Rules:
 
 {Description}
 
-### {Theme Title}
-**Icon:** `icon-{slug}`
-
-{Description}
-
 ## Secondary
-
-### {Theme Title}
-**Icon:** `icon-{slug}`
-
-{Description}
 
 ### {Theme Title}
 **Icon:** `icon-{slug}`
@@ -215,19 +268,23 @@ Rules:
 
 Rules:
 
-- `## Primary` is required. `## Secondary` and `## Occasional Associations` are optional.
-- `## Primary` must contain 1 or 2 `### ` theme blocks. Zero or three or more is a validation failure.
-- `## Secondary` must contain 1 or 2 `### ` theme blocks when present.
-- `## Occasional Associations` contains a bullet list of label-only items when present.
-- Each `### ` block requires an `**Icon:** \`icon-{slug}\`` line immediately after the heading and before the description paragraph.
-- Missing icon line is a validation failure.
-- Icon slugs must begin with `icon-`. A bare slug (e.g. `heart-healing`) is a validation failure.
-- Occasional association items do not have icons.
-- An omitted optional tier (`## Secondary`, `## Occasional Associations`) is a valid skip. A renamed or empty tier is a validation failure.
+- `## Primary` is required
+- `## Secondary` is optional
+- `## Occasional Associations` is optional
+- Primary contains 1–2 `###` blocks
+- Secondary contains 1–2 `###` blocks when present
+- Occasional Associations contains 1–2 bullets when present
+- each Primary and Secondary block requires one icon line
+- icon values must be full CSS classes beginning with `icon-`
+- descriptions are required for Primary and Secondary
+- Occasional Associations have no descriptions or icons
+- empty optional groups fail validation
+- renamed groups fail validation
+- group order is fixed
 
 ---
 
-## 9. Mineral Profile
+## 10. Mineral Profile
 
 ```markdown
 # Mineral Profile
@@ -273,17 +330,27 @@ Rules:
 
 Rules:
 
-- `## Mineral Facts` is required. Its table must have exactly 8 data rows (not counting the header row). Fewer or more is a validation failure.
-- Table column headers must be `Label` and `Value` exactly.
-- `## Common Localities` is required. It contains a bullet list of locality strings. At least one locality is required.
-- `## Formation`, `## Quality Indicators`, and `## Identification` are required.
-- `## Locality Variations` and `## Physical Handling` are optional. An omitted optional subheading is a valid skip. An empty one is a validation failure.
-- Required subheadings must appear in the order above.
-- Exception stones use the same outer structure and the same heading names. Only the Label values inside the `## Mineral Facts` table adapt. The schema does not bend for exception stones.
+- `## Mineral Facts` is required
+- the table must use exact headers `Label` and `Value`
+- the table must contain exactly 8 data rows
+- `## Common Localities` is required
+- Common Localities contains 1–8 bullets
+- `## Formation` is required
+- `## Quality Indicators` is required
+- `## Identification` is required
+- `## Locality Variations` is optional
+- `## Physical Handling` is optional
+- required subheading order is fixed
+- optional subheadings appear only after Identification and in the order shown
+- empty optional subheadings fail validation
+
+Exception stones use the same outer structure.
+
+Only the fact labels adapt to the verified material identity.
 
 ---
 
-## 10. Collector & Curiosity Notes
+## 11. Collector & Curiosity Notes
 
 ```markdown
 # Collector & Curiosity Notes
@@ -291,35 +358,35 @@ Rules:
 ## {Title}
 **Icon:** `icon-{slug}`
 
-{Body paragraph}
+{Body}
 
 ## {Title}
 **Icon:** `icon-{slug}`
 
-{Body paragraph}
+{Body}
 
 ## {Title}
 **Icon:** `icon-{slug}`
 
-{Body paragraph}
-
-## {Title}
-**Icon:** `icon-{slug}`
-
-{Body paragraph}
+{Body}
 ```
+
+A fourth note may be added.
 
 Rules:
 
-- 3 or 4 `## ` blocks. Fewer than 3 or more than 4 is a validation failure.
-- Each block requires an `**Icon:** \`icon-{slug}\`` line immediately after the heading and before the body paragraph.
-- Missing icon line is a validation failure.
-- Icon slugs must begin with `icon-`.
-- Body paragraph must be non-empty.
+- 3 or 4 note blocks
+- each note requires a non-empty title
+- each note requires an icon line
+- icon values must be full CSS classes beginning with `icon-`
+- each body must be non-empty
+- duplicate titles should fail validation
+
+Research records may preserve 4–5 candidates, but only 3–4 appear in canonical MD.
 
 ---
 
-## 11. Market & Buying Notes
+## 12. Market & Buying Notes
 
 ```markdown
 # Market & Buying Notes
@@ -329,13 +396,15 @@ Rules:
 
 Rules:
 
-- This section is optional. Omit the heading entirely when no market content is present.
-- When present, exactly one paragraph. An empty heading is a validation failure.
-- Maps to `enc_stone_content.collector_context_p3`.
+- optional section
+- omit the heading entirely when unused
+- exactly 1 paragraph when present
+- empty section fails validation
+- additional subheadings are not allowed
 
 ---
 
-## 12. Care & Cleaning
+## 13. Care & Cleaning
 
 ```markdown
 # Care & Cleaning
@@ -355,13 +424,14 @@ Rules:
 
 Rules:
 
-- All four subheadings are required in this order.
-- Each subheading body must be non-empty.
-- Missing, renamed, or reordered subheadings are validation failures.
+- all four subheadings are required
+- order is fixed
+- each body must be non-empty
+- renamed or reordered subheadings fail validation
 
 ---
 
-## 13. Related Stones
+## 14. Related Stones
 
 ```markdown
 # Related Stones
@@ -371,114 +441,196 @@ Rules:
 ### {Stone Name}
 **Slug:** `{slug}`
 
-{Reason sentence}
+{Reason}
 
 ### {Stone Name}
 **Slug:** `{slug}`
 
-{Reason sentence}
+{Reason}
 
 ## Pairs Well With
 
 ### {Stone Name}
 **Slug:** `{slug}`
 
-{Reason sentence}
+{Reason}
 
 ### {Stone Name}
 **Slug:** `{slug}`
 
-{Reason sentence}
+{Reason}
 ```
 
 Rules:
 
-- `## Similar Energy` and `## Pairs Well With` are both required.
-- Each group requires exactly 2 `### ` stone blocks.
-- Each block requires a `**Slug:** \`{slug}\`` line immediately after the heading and before the reason.
-- Missing slug line is a validation failure.
-- Slug values must not include backtick characters — the parser strips them. The slug must resolve against the live `stones` roster or the packet generation halts with a named error.
-- All 4 related stone entries must be unique slugs.
+- both groups are required
+- each group contains exactly 2 stone blocks
+- each block requires:
+  - canonical stone name
+  - slug line
+  - non-empty reason
+- all 4 names and slugs must resolve against the canonical roster
+- all 4 slugs must be unique
+- the rostered canonical name must match the slug
+- color-qualified or market-qualified names fail when not present on the roster
+- group order is fixed
 
 ---
 
-## 14. Validation Failure vs. Valid Skip
+## 15. Validation Failure vs. Valid Omission
 
-| Situation | Classification |
+| Situation | Result |
 |---|---|
 | Required section missing | Validation failure |
 | Required section renamed | Validation failure |
-| Required section present but empty | Validation failure |
-| Optional section omitted entirely | Valid skip |
-| Optional section present but renamed | Validation failure |
+| Required section empty | Validation failure |
+| Required subheading missing | Validation failure |
+| Required block count outside range | Validation failure |
+| Optional section omitted | Valid omission |
+| Optional group omitted | Valid omission |
 | Optional section present but empty | Validation failure |
-| Required subheading count wrong | Validation failure |
-| Icon line missing on required block | Validation failure |
-| Icon slug does not start with `icon-` | Validation failure |
-| Slug does not resolve against roster | Generation halt (named error) |
-| Source disagrees on a field value | Generation halt (named error) |
+| Optional section renamed | Validation failure |
+| Unknown top-level heading | Validation failure |
+| Icon line missing | Validation failure |
+| Icon value missing `icon-` prefix | Validation failure |
+| Related slug unresolved | Generation halt |
+| Related name and slug mismatch | Generation halt |
+| Front matter conflicts with roster | Generation halt |
+| Structured value conflicts with Production Master | Generation halt |
 
-The parser does not silently skip unrecognized content. Any unrecognized top-level `# ` heading causes a validation failure.
+The parser must not silently skip unrecognized content.
 
 ---
 
-## 15. Conflict Resolution
+## 16. Named Error Format
 
-When sources disagree (for example, the MD names a related stone one way and the roster resolves its slug to a different canonical name), the generator halts for that stone with this output:
+When generation halts, report:
 
-```
-[Stone Name]:
-[Field] mismatch
-MD value: [x]
-Canonical value: [y]
-Source: [which canonical source]
+```text
+[Stone Name]
+[Field or section]: [error type]
+MD value: [value]
+Canonical value: [value, when applicable]
+Source: [controlling source]
 Generation stopped.
 ```
 
-The generator never silently picks one source over another.
+Errors must identify the affected stone and field.
+
+Do not silently choose one source over another.
 
 ---
 
-## 16. Test Fixtures
+## 17. Exception Stones
 
-The canonical test fixture is:
+Exception stones use the same canonical MD structure.
 
-```
+The schema does not create separate outer formats for:
+
+- rocks
+- mineraloids
+- mineral aggregates
+- organics
+- fossils
+- composites
+- man-made materials
+- treated materials
+- trade names
+- locality varieties
+
+Adapt:
+
+- Mineral Fact labels
+- identity wording
+- treatment wording
+- Identification
+- Market & Buying Notes
+
+Do not adapt:
+
+- top-level section names
+- section order
+- required Hero structure
+- Care categories
+- Related Stones structure
+- icon-class syntax
+
+---
+
+## 18. Test Fixtures
+
+The clean-path fixture remains:
+
+```text
 tests/fixtures/rose-quartz.md
 ```
 
-This fixture represents the standard clean-path case: a single true mineral, no exception flags, all optional sections present, all icon slugs confirmed from published Supabase data.
+Add fixtures when needed for:
 
-Additional fixtures are added when the first exception-case stone is routed through the pipeline. Exception fixtures must be placed in the same directory with a clearly labeled filename.
+- an exception material
+- optional Market omission
+- 3-row Why People Reach For It
+- omitted Secondary themes
+- omitted Occasional Associations
+- omitted Locality Variations
+- omitted Physical Handling
+- 3-note Collector section
+- validation-failure cases
 
----
-
-## 17. Content Not Present in This File
-
-The following are never present in a generator-readable MD file:
-
-- Research notes
-- Source evidence tables
-- Compliance checklists
-- Gate status markers
-- Approval notes
-- Internal decision logs
-- Amendment histories
-
-These belong in separate research documents. If the parser encounters a `# RESEARCH NOTES` or `## COMPLIANCE REPORT` heading, it is a validation failure (unrecognized top-level heading).
+Fixtures remain test data, not public-copy authority.
 
 ---
 
-## 18. Change Control
+## 19. Parser and Validator Requirements
 
-Changes to front matter, section names, section order, subheading patterns, count rules, optionality, icon syntax, slug syntax, validation-failure behavior, or canonical file location require:
+The approved parser and validator must:
+
+- read the configured canonical MD directory
+- validate front matter
+- validate section order
+- validate required and optional blocks
+- validate counts and ranges
+- validate compact-field limits where implemented
+- validate icon classes
+- validate related names and slugs
+- reject unknown headings
+- reject empty required content
+- produce named errors
+- generate no packet when validation fails
+
+Do not weaken validation to accommodate malformed legacy MD.
+
+Convert legacy MD to the current schema first.
+
+---
+
+## 20. Change Control
+
+Changes to:
+
+- front matter
+- section names
+- section order
+- subheading patterns
+- count rules
+- optionality
+- icon syntax
+- slug syntax
+- validation-failure behavior
+- canonical file location
+
+require:
 
 1. Christie or Dustin approval
-2. update to `Documents\Still Point Lapidary\Project Rules\MD-SCHEMA-REFERENCE.md` (canonical)
-3. matching update to this file
+2. update to this document (`Project Rules\MD-SCHEMA-REFERENCE.md`)
+3. matching update to the Website repo's implementation-facing copy (`docs/encyclopedia/MD-SCHEMA-REFERENCE.md`)
 4. parser and validator review
 5. fixture updates
 6. targeted tests
 7. review of active canonical MDs
 
-This file must never disagree with the Project Rules copy. If a discrepancy is found, this file is wrong and must be corrected to match.
+The two `MD-SCHEMA-REFERENCE.md` copies must never disagree. This document is canonical; the repo copy is implementation-facing documentation and must not contradict it.
+
+This document contains only the current schema.
+
+Use version history and Archive for prior formats.
