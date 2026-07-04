@@ -21,7 +21,7 @@
     "Material Type": "icon-encyclopedia"
   },
   "care": {
-    "Cleaning": "icon-care-cleansing",
+    "Cleaning": "icon-care-cleaning",
     "Water": "icon-element",
     "Light & Heat": "icon-celestial",
     "Storage": "icon-geology"
@@ -35,19 +35,19 @@
     "Overview": "icon-book-reference",
     "Why People Reach For It": "icon-target-bullseye",
     "Mineral Profile": "icon-geology",
-    "Related Stones": "icon-stones-row",
+    "Related Stones": "icon-three-gems-arranged",
     "Energetic Themes": "icon-upward-spark",
     "Collector & Curiosity Notes": "icon-bookmark",
     "Market & Buying Notes": "icon-encyclopedia",
-    "Care & Cleaning": "icon-care-cleansing"
+    "Care & Cleaning": "icon-care-cleaning"
   },
   "knownSlugs": [
     "best-for", "todays-practice", "add-piece", "wishlist", "encyclopedia",
-    "book-reference", "target-bullseye", "geology", "stones-row", "upward-spark",
-    "bookmark", "care-cleansing", "chakra", "element", "zodiac", "color-range",
-    "celestial", "grounding", "protection", "vitality", "heart-healing",
+    "book-reference", "target-bullseye", "geology", "stones-row", "three-gems-arranged",
+    "upward-spark", "bookmark", "care-cleaning", "chakra", "element", "zodiac",
+    "color-range", "celestial", "grounding", "protection", "vitality", "heart-healing",
     "calm-peace", "emotional-regulation", "clarity-focus", "intuition",
     "spiritual-connection", "transformation", "manifestation", "amplification",
-    "magnifier-gem", "rarity-tier"
+    "magnifier-gem", "rarity-tier", "location", "tradition", "forms-shapes", "pair-with"
   ]
 }

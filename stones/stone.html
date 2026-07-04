@@ -1687,7 +1687,7 @@ function buildMarketNotes(c) {
 /* ── CARE & CLEANING ── */
 function buildCare(care) {
   const CARE_ICONS = {
-    'Cleaning':    'icon-care-cleansing',
+    'Cleaning':    'icon-care-cleaning',
     'Water':       'icon-element',
     'Light & Heat':'icon-celestial',
     'Storage':     'icon-geology',
@@ -1695,7 +1695,7 @@ function buildCare(care) {
   const cells = care.map(cell => `
     <div class="care-cell">
       <div class="care-cell-head">
-        <span aria-hidden="true" class="enc-icon ${CARE_ICONS[cell.category] || 'icon-care-cleansing'}"></span>
+        <span aria-hidden="true" class="enc-icon ${CARE_ICONS[cell.category] || 'icon-care-cleaning'}"></span>
       </div>
       <div>
         <div class="care-label">${esc(cell.category)}</div>
@@ -1706,7 +1706,7 @@ function buildCare(care) {
   return `
     <section class="rail-card" id="care">
       <h2>
-        <span aria-hidden="true" class="enc-icon icon-care-cleansing"></span>
+        <span aria-hidden="true" class="enc-icon icon-care-cleaning"></span>
         Care &amp; Cleaning
       </h2>
       <div class="rail-card-body">

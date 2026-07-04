@@ -72,9 +72,9 @@
   -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/camera.svg");
 }
 
-.icon-care-cleansing {
-  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
-  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
+.icon-care-cleaning {
+  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleaning.svg");
+  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleaning.svg");
 }
 
 .icon-celestial {
@@ -300,10 +300,4 @@
 .icon-zodiac {
   mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/zodiac.svg");
   -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/zodiac.svg");
-}
-
-
-.icon-care-cleansing {
-  mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
-  -webkit-mask-image: url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/care-cleansing.svg");
 }

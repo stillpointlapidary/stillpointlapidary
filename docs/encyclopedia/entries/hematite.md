@@ -193,7 +193,7 @@ Long before metallic specimens became popular in jewelry and mineral collections
 
 ---
 
-## Care & Cleansing
+## Care & Cleaning
 
 ### Cleaning
 
