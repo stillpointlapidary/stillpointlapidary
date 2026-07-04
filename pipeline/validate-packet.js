@@ -135,7 +135,9 @@ function validatePacket(packet, rosterSlugs) {
   const reach = packet.enc_reach_for;
   if (!reach) { errors.push('enc_reach_for block missing'); }
   else {
-    if (reach.length !== 5) errors.push(`enc_reach_for: expected 5 rows, found ${reach.length}`);
+    if (reach.length < 3 || reach.length > 5) errors.push(`enc_reach_for: expected 3-5 rows, found ${reach.length}`);
+    const reachLabels = reach.map(r => r.label);
+    if (new Set(reachLabels).size !== reachLabels.length) errors.push('enc_reach_for: duplicate label values');
     for (const r of reach) {
       if (!r.label || !r.description) errors.push(`enc_reach_for row ${r.display_order}: label or description is empty`);
     }
@@ -252,7 +254,11 @@ async function main() {
   process.exit(allPass ? 0 : 1);
 }
 
-main().catch(err => {
-  console.error('Unexpected error:', err.message);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error('Unexpected error:', err.message);
+    process.exit(1);
+  });
+}
+
+module.exports = { validatePacket };

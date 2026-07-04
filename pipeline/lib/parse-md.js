@@ -122,17 +122,39 @@ function parseOverview(text) {
   };
 }
 
-function parseReachFor(text) {
-  const subs = splitSubsections(text);
-  const entries = Object.entries(subs);
-  if (entries.length !== 5) {
-    throw new Error(`Why People Reach For It: expected 5 rows, found ${entries.length}`);
+function splitSubsectionList(text, level = '##') {
+  const pattern = new RegExp(`^${level} (.+)$`, 'gm');
+  const matches = [...text.matchAll(pattern)];
+  const list = [];
+  for (let i = 0; i < matches.length; i++) {
+    const heading = matches[i][1].trim();
+    const start = matches[i].index + matches[i][0].length;
+    const end = i + 1 < matches.length ? matches[i + 1].index : text.length;
+    list.push([heading, text.slice(start, end).trim()]);
   }
-  return entries.map(([label, desc], i) => ({
-    label: label.trim(),
-    description: desc.trim(),
-    display_order: i + 1,
-  }));
+  return list;
+}
+
+function parseReachFor(text) {
+  // Uses a list (not splitSubsections' object) so duplicate labels remain visible
+  // instead of silently collapsing into one entry.
+  const entries = splitSubsectionList(text);
+  if (entries.length < 3 || entries.length > 5) {
+    throw new Error(`Why People Reach For It: expected 3-5 rows, found ${entries.length}`);
+  }
+  const seenLabels = new Set();
+  for (const [label] of entries) {
+    if (seenLabels.has(label)) {
+      throw new Error(`Why People Reach For It: duplicate label "${label}"`);
+    }
+    seenLabels.add(label);
+  }
+  return entries.map(([label, desc], i) => {
+    if (!label || !desc) {
+      throw new Error(`Why People Reach For It row ${i + 1}: label or description is empty`);
+    }
+    return { label, description: desc, display_order: i + 1 };
+  });
 }
 
 function parseEnergeticThemes(text) {
@@ -265,4 +287,4 @@ function parseMD(fileText) {
   };
 }
 
-module.exports = { parseMD };
+module.exports = { parseMD, parseReachFor };
