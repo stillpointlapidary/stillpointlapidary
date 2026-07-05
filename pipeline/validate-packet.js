@@ -88,6 +88,11 @@ function validatePacket(packet, rosterSlugs) {
   const sc = packet.enc_stone_content;
   if (!sc) { errors.push('enc_stone_content block missing'); }
   else {
+    // TODO (future enhancement): this block checks presence/vocabulary only.
+    // It does not lint prose content (e.g. Signature Line color-adjacent
+    // imagery, Energetic Theme opening phrasing) per the Gate 2 Known-Issue
+    // Lint in ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md. That check is currently
+    // manual.
     const required_sc = [
       'stone_id', 'slug', 'signature_line', 'pill_1', 'pill_2', 'pill_3',
       'best_for', 'use_when', 'affirmation',
