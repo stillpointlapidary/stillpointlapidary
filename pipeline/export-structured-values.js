@@ -26,6 +26,14 @@ const DEFAULT_SOURCE = 'C:\\Users\\chris\\Documents\\Still Point Lapidary\\Encyc
 const DEFAULT_OUT = path.join(__dirname, 'data', 'structured-values.generated.json');
 const SHEET_NAME = 'Catalog Master';
 
+// Fixed sentinel value for production_data_version. The MD is tied to "the
+// canonical Production Master" as a whole, not to a dated or numbered
+// snapshot of it — the safety check that matters is that this export is
+// regenerated immediately before packet generation, not that a per-stone
+// version string matches. Do not derive this from a Production Master
+// column; the "Production Data Version" column is no longer consumed here.
+const PRODUCTION_DATA_VERSION = 'production-master';
+
 // Documented in Encyclopedia/Production Data/PRODUCTION-DATA-README.md section 4
 // ("Catalog Counts"). This is a fixed, documented mapping — not inferred.
 const COLLECTION_TIER_LABELS = {
@@ -36,6 +44,8 @@ const COLLECTION_TIER_LABELS = {
 };
 
 // Column names as they appear after the "Group X — Label | " prefix is stripped.
+// "Production Data Version" is intentionally not required here — see
+// PRODUCTION_DATA_VERSION above.
 const REQUIRED_COLUMNS = [
   'Stone ID',
   'Canonical Name',
@@ -50,7 +60,6 @@ const REQUIRED_COLUMNS = [
   'Previous Slug',
   'Next Stone',
   'Next Slug',
-  'Production Data Version',
 ];
 
 function parseArgs() {
@@ -157,7 +166,7 @@ function exportStructuredValues(opts) {
       nav_prev_name: normalize(row[col['Previous Stone']]),
       nav_next_slug: normalize(row[col['Next Slug']]),
       nav_next_name: normalize(row[col['Next Stone']]),
-      production_data_version: normalize(row[col['Production Data Version']]),
+      production_data_version: PRODUCTION_DATA_VERSION,
     };
   }
 

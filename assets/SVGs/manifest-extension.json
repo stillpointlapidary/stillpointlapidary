@@ -2,7 +2,7 @@
   "system": "Still Point Lapidary Icon System",
   "extension": "Encyclopedia and Energetic Roles",
   "version": "Draft v1",
-  "icon_count": 15,
+  "icon_count": 22,
   "viewBox": "0 0 24 24",
   "color": "currentColor",
   "stroke_width": "1.5",
@@ -25,6 +25,15 @@
       "transformation.svg",
       "manifestation.svg",
       "amplification.svg"
+    ],
+    "Row-Level Topic Icons": [
+      "nature-growth.svg",
+      "inclusions-patterns.svg",
+      "treatment-enhancement.svg",
+      "balance-harmony.svg",
+      "color-optical-effect.svg",
+      "handling-fragility.svg",
+      "release-clearing.svg"
     ]
   }
 }

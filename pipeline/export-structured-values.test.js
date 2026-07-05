@@ -59,7 +59,7 @@ test('exportStructuredValues produces a stone_id-keyed, gitignore-friendly expor
       nav_prev_name: 'Prev Stone',
       nav_next_slug: 'next-stone',
       nav_next_name: 'Next Stone',
-      production_data_version: 'v1',
+      production_data_version: 'production-master',
     });
     assert.equal(Object.keys(written.stones).length, 1);
   } finally {

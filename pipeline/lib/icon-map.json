@@ -48,6 +48,9 @@
     "color-range", "celestial", "grounding", "protection", "vitality", "heart-healing",
     "calm-peace", "emotional-regulation", "clarity-focus", "intuition",
     "spiritual-connection", "transformation", "manifestation", "amplification",
-    "magnifier-gem", "rarity-tier", "location", "tradition", "forms-shapes", "pair-with"
+    "magnifier-gem", "rarity-tier", "location", "tradition", "forms-shapes", "pair-with",
+    "identify", "tag-label", "nature-growth", "inclusions-patterns",
+    "treatment-enhancement", "balance-harmony", "color-optical-effect",
+    "handling-fragility", "release-clearing"
   ]
 }
