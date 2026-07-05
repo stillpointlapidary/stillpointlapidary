@@ -25,6 +25,44 @@ const { parseMD } = require('./lib/parse-md');
 const iconMap = require('./lib/icon-map.json');
 
 // ---------------------------------------------------------------------------
+// Structured Production Master export (generated, gitignored)
+// ---------------------------------------------------------------------------
+const STRUCTURED_EXPORT_PATH = path.join(__dirname, 'data', 'structured-values.generated.json');
+
+// Fields locked by the Production Master. These may also exist in
+// enc_stone_content for previously-imported stones; the export is the
+// required source of truth and existing DB values are only ever compared
+// for conflicts, never silently preferred.
+const STRUCTURED_FIELDS = [
+  'collection_label', 'chakra_primary', 'chakra_secondary', 'element', 'zodiac', 'material_type',
+  'nav_prev_slug', 'nav_prev_name', 'nav_next_slug', 'nav_next_name',
+];
+const HARD_REQUIRED_STRUCTURED_FIELDS = [
+  'collection_label', 'chakra_primary', 'element', 'zodiac', 'material_type',
+  'nav_prev_slug', 'nav_prev_name', 'nav_next_slug', 'nav_next_name',
+];
+
+function loadStructuredExport() {
+  if (!fs.existsSync(STRUCTURED_EXPORT_PATH)) {
+    console.error(`Structured values export not found at ${STRUCTURED_EXPORT_PATH}.\nRun "npm run pipeline:export-structured-values" first.\nGeneration stopped.`);
+    process.exit(2);
+  }
+  const raw = JSON.parse(fs.readFileSync(STRUCTURED_EXPORT_PATH, 'utf8'));
+  return raw.stones || {};
+}
+
+function versionMismatch(stoneName, mdVersion, exportVersion) {
+  console.error(`
+${stoneName}:
+production_data_version mismatch
+MD front matter: ${mdVersion}
+Production Master export: ${exportVersion}
+Generation stopped. Re-run the structured-values export or confirm the canonical MD version, then retry.
+`);
+  process.exit(2);
+}
+
+// ---------------------------------------------------------------------------
 // Args
 // ---------------------------------------------------------------------------
 function parseArgs() {
@@ -76,7 +114,7 @@ async function fetchStoneRecord(supabase, stoneId, stoneName) {
 async function fetchExistingContent(supabase, stoneId) {
   const { data } = await supabase
     .from('enc_stone_content')
-    .select('chakra_primary, chakra_secondary, element, zodiac, material_type, nav_prev_slug, nav_prev_name, nav_next_slug, nav_next_name')
+    .select('collection_label, chakra_primary, chakra_secondary, element, zodiac, material_type, nav_prev_slug, nav_prev_name, nav_next_slug, nav_next_name')
     .eq('stone_id', stoneId)
     .single();
   return data; // null if no row exists yet
@@ -139,6 +177,29 @@ async function main() {
   const stoneId = frontMatter.stone_id;
   const stoneSlug = frontMatter.stone_slug;
 
+  // Load the Production Master structured-values export (required source for
+  // locked structured fields — see pipeline/README.md Gate 4 order).
+  const structuredExport = loadStructuredExport();
+  const exportRow = structuredExport[stoneId];
+  if (!exportRow) {
+    console.error(`${stoneName}:\nNo Production Master export row found for stone_id "${stoneId}".\nGeneration stopped.`);
+    process.exit(2);
+  }
+
+  // Cross-check slug/name against the Production Master export
+  if (exportRow.slug !== stoneSlug) {
+    conflict(stoneName, 'slug', stoneSlug, exportRow.slug, 'Production Master export');
+  }
+  if (exportRow.stone_name !== frontMatter.stone_name) {
+    conflict(stoneName, 'stone_name', frontMatter.stone_name, exportRow.stone_name, 'Production Master export');
+  }
+
+  // Staleness protection: MD front matter and export must be generated
+  // against the exact same production data version. No inference or bypass.
+  if (frontMatter.production_data_version !== exportRow.production_data_version) {
+    versionMismatch(stoneName, frontMatter.production_data_version, exportRow.production_data_version);
+  }
+
   // Fetch canonical structured data from Supabase
   const stoneRow = await fetchStoneRecord(supabase, stoneId, stoneName);
   const existingContent = await fetchExistingContent(supabase, stoneId);
@@ -149,6 +210,25 @@ async function main() {
   }
   if (stoneRow.name !== frontMatter.stone_name) {
     conflict(stoneName, 'stone_name', frontMatter.stone_name, stoneRow.name, 'stones table');
+  }
+
+  // Resolve locked structured fields: Production Master export is the
+  // required source. If enc_stone_content already has a conflicting value,
+  // halt — never silently prefer Supabase over the Production Master.
+  const structured = {};
+  for (const field of STRUCTURED_FIELDS) {
+    const exportValue = exportRow[field] ?? null;
+    const existingValue = existingContent ? (existingContent[field] ?? null) : null;
+    if (existingValue !== null && existingValue !== exportValue) {
+      conflict(stoneName, field, existingValue, exportValue, 'enc_stone_content vs Production Master export');
+    }
+    structured[field] = exportValue;
+  }
+  for (const field of HARD_REQUIRED_STRUCTURED_FIELDS) {
+    if (!structured[field]) {
+      console.error(`${stoneName}:\nRequired structured field "${field}" is missing or blank in the Production Master export.\nGeneration stopped.`);
+      process.exit(2);
+    }
   }
 
   // Energetic role icon
@@ -204,18 +284,19 @@ async function main() {
       ...overview,
       ...mineralProfile,
       collector_context_p3: marketNotes || null,
-      chakra_primary: existingContent?.chakra_primary || null,
-      chakra_secondary: existingContent?.chakra_secondary || null,
-      element: existingContent?.element || null,
-      zodiac: existingContent?.zodiac || null,
-      material_type: existingContent?.material_type || null,
+      collection_label: structured.collection_label,
+      chakra_primary: structured.chakra_primary,
+      chakra_secondary: structured.chakra_secondary,
+      element: structured.element,
+      zodiac: structured.zodiac,
+      material_type: structured.material_type,
       energetic_role: energeticRole,
       energetic_role_icon: energeticRoleIcon,
       color_energy: stoneRow.color_energy,
-      nav_prev_slug: existingContent?.nav_prev_slug || null,
-      nav_prev_name: existingContent?.nav_prev_name || null,
-      nav_next_slug: existingContent?.nav_next_slug || null,
-      nav_next_name: existingContent?.nav_next_name || null,
+      nav_prev_slug: structured.nav_prev_slug,
+      nav_prev_name: structured.nav_prev_name,
+      nav_next_slug: structured.nav_next_slug,
+      nav_next_name: structured.nav_next_name,
       published: false,
     },
     enc_mineral_facts: mineralProfile.mineralFacts,
@@ -226,17 +307,6 @@ async function main() {
     enc_care: care.map(c => ({ ...c, stone_id: stoneId })),
     enc_related_stones: relatedStones.map(rs => ({ ...rs, stone_id: stoneId })),
   };
-
-  // Warn if structured values from Supabase are null (only matters for new stones)
-  const nullWarnings = [];
-  for (const field of ['chakra_primary', 'element', 'zodiac', 'material_type', 'nav_prev_slug', 'nav_next_slug']) {
-    if (!packet.enc_stone_content[field]) nullWarnings.push(field);
-  }
-  if (nullWarnings.length > 0) {
-    console.warn(`\nWARNING [${stoneName}]: The following fields are null in the generated packet because they are not yet in enc_stone_content or stones table:`);
-    console.warn('  ' + nullWarnings.join(', '));
-    console.warn('These must be resolved before import. Do not import a packet with null required fields.\n');
-  }
 
   // Output
   const outPath = opts.out || path.join(path.dirname(opts.md), `${stoneSlug}.packet.json`);

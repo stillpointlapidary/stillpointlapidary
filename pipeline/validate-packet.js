@@ -35,6 +35,10 @@ const VALID_MATERIAL_TYPES = new Set([
   'Mineral aggregate', 'Composite', 'Man-made', 'Fossil',
 ]);
 
+const VALID_COLLECTION_LABELS = new Set([
+  'Essentials', 'Shelf Builders', 'Collector Favorites', 'Rare Finds',
+]);
+
 const VALID_STATUSES = new Set([
   'Not Started', 'Foundation Live', 'Research Complete',
   'MD Approved', 'Supabase Entered', 'Full Entry Live',
@@ -89,7 +93,7 @@ function validatePacket(packet, rosterSlugs) {
       'best_for', 'use_when', 'affirmation',
       'overview_p1', 'overview_p2', 'formation',
       'collector_context_p1', 'collector_context_p2',
-      'chakra_primary', 'element', 'zodiac', 'material_type',
+      'collection_label', 'chakra_primary', 'element', 'zodiac', 'material_type',
       'energetic_role', 'energetic_role_icon', 'color_energy',
       'nav_prev_slug', 'nav_prev_name', 'nav_next_slug', 'nav_next_name',
     ];
@@ -102,6 +106,9 @@ function validatePacket(packet, rosterSlugs) {
     }
     if (sc.material_type && !VALID_MATERIAL_TYPES.has(sc.material_type)) {
       errors.push(`enc_stone_content.material_type "${sc.material_type}" is not in the controlled vocabulary`);
+    }
+    if (sc.collection_label && !VALID_COLLECTION_LABELS.has(sc.collection_label)) {
+      errors.push(`enc_stone_content.collection_label "${sc.collection_label}" is not in the controlled vocabulary`);
     }
     if (sc.energetic_role_icon) {
       validateIconSlug(sc.energetic_role_icon, 'enc_stone_content.energetic_role_icon', errors);

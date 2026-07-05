@@ -52,3 +52,25 @@ test('validatePacket rejects an empty reach-for label or description', () => {
   const errors = reachErrors(rows);
   assert.ok(errors.some(e => e.includes('label or description is empty')));
 });
+
+function scErrors(overrides) {
+  const packet = { enc_stone_content: { published: false, ...overrides } };
+  return validatePacket(packet, null).filter(e => e.startsWith('enc_stone_content.collection_label'));
+}
+
+test('validatePacket rejects a missing collection_label', () => {
+  const errors = scErrors({ collection_label: null });
+  assert.ok(errors.some(e => e.includes('is null or missing')));
+});
+
+test('validatePacket rejects a collection_label outside the controlled vocabulary', () => {
+  const errors = scErrors({ collection_label: 'Bargain Bin' });
+  assert.ok(errors.some(e => e.includes('is not in the controlled vocabulary')));
+});
+
+test('validatePacket accepts each of the four valid collection_label values', () => {
+  for (const label of ['Essentials', 'Shelf Builders', 'Collector Favorites', 'Rare Finds']) {
+    const errors = scErrors({ collection_label: label });
+    assert.deepEqual(errors, []);
+  }
+});

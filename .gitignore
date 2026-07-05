@@ -124,3 +124,6 @@ docs/encyclopedia/archive/CLAUDE-CODE-HANDOFF-2026-06-19-session2.md
 
 # Generated pipeline output
 pipeline/output/
+
+# Generated structured-values export (non-authoritative, regenerate from Production Master)
+pipeline/data/structured-values.generated.json
