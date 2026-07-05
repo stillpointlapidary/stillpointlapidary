@@ -22,14 +22,27 @@ const fs = require('fs');
 function parseArgs() {
   const args = process.argv.slice(2);
   const packets = [];
+  // Default true: default Gate 4 publishes in the same pass, so the packet's
+  // baked-in `published: false` (always true for a freshly generated packet)
+  // is expected to differ from the post-publication live value. Pass
+  // --expected-published false only for an explicit unpublished hold.
+  let expectedPublished = true;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--packet') packets.push(args[++i]);
+    if (args[i] === '--expected-published') {
+      const val = args[++i];
+      if (val !== 'true' && val !== 'false') {
+        console.error(`--expected-published must be "true" or "false", got "${val}"`);
+        process.exit(1);
+      }
+      expectedPublished = val === 'true';
+    }
   }
   if (packets.length === 0) {
-    console.error('Usage: node pipeline/verify-stone.js --packet <path> [--packet <path> ...]');
+    console.error('Usage: node pipeline/verify-stone.js --packet <path> [--packet <path> ...] [--expected-published true|false]');
     process.exit(1);
   }
-  return packets;
+  return { packets, expectedPublished };
 }
 
 function mismatch(field, expected, actual) {
@@ -43,7 +56,7 @@ function compareField(errors, field, expected, actual) {
   }
 }
 
-async function verifyStone(supabase, packet) {
+async function verifyStone(supabase, packet, expectedPublished) {
   const name = packet.meta.stone_name;
   const stoneId = packet.meta.stone_id;
   const errors = [];
@@ -73,7 +86,7 @@ async function verifyStone(supabase, packet) {
   for (const f of scFields) {
     compareField(errors, `enc_stone_content.${f}`, scExpected[f] ?? null, sc[f] ?? null);
   }
-  if (sc.published !== false) errors.push('enc_stone_content.published should be false');
+  if (sc.published !== expectedPublished) errors.push(`enc_stone_content.published should be ${expectedPublished}`);
 
   // --- enc_mineral_facts ---
   const { data: facts } = await supabase
@@ -213,7 +226,7 @@ async function verifyStone(supabase, packet) {
 }
 
 async function main() {
-  const packetPaths = parseArgs();
+  const { packets: packetPaths, expectedPublished } = parseArgs();
 
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
     console.error('SUPABASE_URL and SUPABASE_SERVICE_KEY env vars are required.');
@@ -226,7 +239,7 @@ async function main() {
 
   for (const packetPath of packetPaths) {
     const packet = JSON.parse(fs.readFileSync(packetPath, 'utf8'));
-    const result = await verifyStone(supabase, packet);
+    const result = await verifyStone(supabase, packet, expectedPublished);
 
     if (result.status === 'PASS') {
       console.log(`PASS  ${result.stone}`);

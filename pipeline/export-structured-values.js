@@ -190,4 +190,15 @@ if (require.main === module) {
   exportStructuredValues(opts);
 }
 
-module.exports = { exportStructuredValues, stripGroupPrefix };
+module.exports = {
+  exportStructuredValues,
+  stripGroupPrefix,
+  buildColumnIndex,
+  normalize,
+  resolveCollectionLabel,
+  loadWorkbook,
+  DEFAULT_SOURCE,
+  SHEET_NAME,
+  REQUIRED_COLUMNS,
+  PRODUCTION_DATA_VERSION,
+};

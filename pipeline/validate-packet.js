@@ -19,7 +19,40 @@
  */
 
 const fs = require('fs');
+const path = require('path');
 const iconMap = require('./lib/icon-map.json');
+
+// ---------------------------------------------------------------------------
+// Runtime icon-mapping cross-checks (ENCYCLOPEDIA-ICON-REGISTRY.md §16)
+//
+// icon-map.json's knownSlugs is only the validator allowlist. The thing that
+// actually determines whether an icon renders live is (a) a CSS class in
+// stones/enc-icons.css and (b) the matching SVG object existing in the
+// Supabase Storage bucket the CSS points at. A slug can pass the old
+// knownSlugs-only check and still render blank if either of those drifts.
+// ---------------------------------------------------------------------------
+const ENC_ICONS_CSS_PATH = path.join(__dirname, '..', 'stones', 'enc-icons.css');
+const STORAGE_BUCKET = 'stone-images';
+const STORAGE_PREFIX = 'icons/encyclopedia';
+
+function loadCssIconClasses() {
+  const css = fs.readFileSync(ENC_ICONS_CSS_PATH, 'utf8');
+  return new Set([...css.matchAll(/\.icon-([a-z0-9-]+)\s*\{/g)].map(m => m[1]));
+}
+
+async function loadStorageIconFiles(supabase) {
+  const { data, error } = await supabase.storage.from(STORAGE_BUCKET).list(STORAGE_PREFIX, { limit: 1000 });
+  if (error || !data) {
+    console.warn(`WARNING: Could not list Supabase Storage ${STORAGE_BUCKET}/${STORAGE_PREFIX}. SVG-existence check will be skipped: ${error?.message || 'no data'}`);
+    return null;
+  }
+  return new Set(data.map(f => f.name.replace(/\.svg$/i, '')));
+}
+
+// Icons reserved for one fixed use and explicitly barred elsewhere
+// (ENCYCLOPEDIA-ICON-REGISTRY.md §8.4, §8.3.2, §11).
+const THEME_FORBIDDEN_ICONS = new Set(['icon-care-cleaning', 'icon-pair-with', 'icon-tag-label']);
+const COLLECTOR_NOTE_FORBIDDEN_ICONS = new Set(['icon-care-cleaning']);
 
 // ---------------------------------------------------------------------------
 // Controlled vocabularies
@@ -63,18 +96,25 @@ function parseArgs() {
 // ---------------------------------------------------------------------------
 // Validation
 // ---------------------------------------------------------------------------
-function validateIconSlug(slug, context, errors) {
+function validateIconSlug(slug, context, errors, cssClasses, storageFiles) {
   if (typeof slug !== 'string' || !slug.startsWith('icon-')) {
     errors.push(`${context}: icon slug must start with "icon-", got "${slug}"`);
     return;
   }
   const bare = slug.slice(5);
   if (!iconMap.knownSlugs.includes(bare)) {
-    errors.push(`${context}: unknown icon slug "${slug}"`);
+    errors.push(`${context}: unknown icon slug "${slug}" — not in pipeline/lib/icon-map.json knownSlugs`);
+    return;
+  }
+  if (cssClasses && !cssClasses.has(bare)) {
+    errors.push(`${context}: "${slug}" has no matching class in stones/enc-icons.css — will not render`);
+  }
+  if (storageFiles && !storageFiles.has(bare)) {
+    errors.push(`${context}: "${slug}" has no SVG in Supabase Storage ${STORAGE_BUCKET}/${STORAGE_PREFIX}/ — will render blank`);
   }
 }
 
-function validatePacket(packet, rosterSlugs) {
+function validatePacket(packet, rosterSlugs, cssClasses, storageFiles) {
   const name = packet.meta?.stone_name || 'UNKNOWN';
   const errors = [];
 
@@ -116,7 +156,10 @@ function validatePacket(packet, rosterSlugs) {
       errors.push(`enc_stone_content.collection_label "${sc.collection_label}" is not in the controlled vocabulary`);
     }
     if (sc.energetic_role_icon) {
-      validateIconSlug(sc.energetic_role_icon, 'enc_stone_content.energetic_role_icon', errors);
+      validateIconSlug(sc.energetic_role_icon, 'enc_stone_content.energetic_role_icon', errors, cssClasses, storageFiles);
+      if (sc.energetic_role && iconMap.energeticRoles[sc.energetic_role] !== sc.energetic_role_icon) {
+        errors.push(`enc_stone_content.energetic_role_icon "${sc.energetic_role_icon}" does not match the approved icon for role "${sc.energetic_role}" (expected "${iconMap.energeticRoles[sc.energetic_role]}")`);
+      }
     }
     // Slug cross-check
     if (sc.slug !== packet.meta?.stone_slug) {
@@ -172,7 +215,10 @@ function validatePacket(packet, rosterSlugs) {
         errors.push(`enc_themes: unknown tier "${t.tier}"`);
       }
       if ((t.tier === 'primary' || t.tier === 'secondary') && t.icon_slug) {
-        validateIconSlug(t.icon_slug, `enc_themes > ${t.title}`, errors);
+        validateIconSlug(t.icon_slug, `enc_themes > ${t.title}`, errors, cssClasses, storageFiles);
+        if (THEME_FORBIDDEN_ICONS.has(t.icon_slug)) {
+          errors.push(`enc_themes > ${t.title}: "${t.icon_slug}" is reserved for a different section and must not be used on an Energetic Theme (ENCYCLOPEDIA-ICON-REGISTRY.md §8.3.2/§8.4/§11)`);
+        }
       }
     }
   }
@@ -186,7 +232,12 @@ function validatePacket(packet, rosterSlugs) {
     }
     for (const n of notes) {
       if (!n.title || !n.body) errors.push(`enc_collector_notes row ${n.display_order}: title or body is empty`);
-      if (n.icon_slug) validateIconSlug(n.icon_slug, `enc_collector_notes > ${n.title}`, errors);
+      if (n.icon_slug) {
+        validateIconSlug(n.icon_slug, `enc_collector_notes > ${n.title}`, errors, cssClasses, storageFiles);
+        if (COLLECTOR_NOTE_FORBIDDEN_ICONS.has(n.icon_slug)) {
+          errors.push(`enc_collector_notes > ${n.title}: "${n.icon_slug}" is reserved for the fixed Care & Cleaning row and must not be used on a Collector Note (ENCYCLOPEDIA-ICON-REGISTRY.md §8.4)`);
+        }
+      }
     }
   }
 
@@ -233,26 +284,30 @@ function validatePacket(packet, rosterSlugs) {
 async function main() {
   const packetPaths = parseArgs();
 
-  // Load Supabase to get roster
+  const cssClasses = loadCssIconClasses();
+
+  // Load Supabase to get roster + Storage icon listing
   let rosterSlugs = null;
+  let storageFiles = null;
   if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY) {
     try {
       const { createClient } = require('@supabase/supabase-js');
       const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
       const { data } = await supabase.from('stones').select('slug');
       if (data) rosterSlugs = new Set(data.map(s => s.slug));
+      storageFiles = await loadStorageIconFiles(supabase);
     } catch (_) {
       console.warn('WARNING: Could not load stones roster from Supabase. Slug resolution will be skipped.');
     }
   } else {
-    console.warn('WARNING: SUPABASE_URL/SUPABASE_SERVICE_KEY not set. Slug resolution against live roster skipped.');
+    console.warn('WARNING: SUPABASE_URL/SUPABASE_SERVICE_KEY not set. Slug resolution against live roster and Supabase Storage icon-existence check skipped.');
   }
 
   let allPass = true;
 
   for (const packetPath of packetPaths) {
     const packet = JSON.parse(fs.readFileSync(packetPath, 'utf8'));
-    const errors = validatePacket(packet, rosterSlugs);
+    const errors = validatePacket(packet, rosterSlugs, cssClasses, storageFiles);
     const name = packet.meta?.stone_name || packetPath;
     if (errors.length === 0) {
       console.log(`PASS  ${name}`);
@@ -277,4 +332,11 @@ if (require.main === module) {
   });
 }
 
-module.exports = { validatePacket };
+module.exports = {
+  validatePacket,
+  validateIconSlug,
+  loadCssIconClasses,
+  loadStorageIconFiles,
+  THEME_FORBIDDEN_ICONS,
+  COLLECTOR_NOTE_FORBIDDEN_ICONS,
+};

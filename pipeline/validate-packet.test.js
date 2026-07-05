@@ -74,3 +74,80 @@ test('validatePacket accepts each of the four valid collection_label values', ()
     assert.deepEqual(errors, []);
   }
 });
+
+// ---------------------------------------------------------------------------
+// Hard icon validation: CSS existence, Storage existence, retired assignments
+// ---------------------------------------------------------------------------
+
+function themeIconErrors(iconSlug, cssClasses, storageFiles) {
+  const packet = {
+    enc_stone_content: { published: false },
+    enc_themes: [{ tier: 'primary', title: 'Test Theme', icon_slug: iconSlug, display_order: 1 }],
+  };
+  return validatePacket(packet, null, cssClasses, storageFiles).filter(e => e.startsWith('enc_themes'));
+}
+
+function collectorNoteIconErrors(iconSlug, cssClasses, storageFiles) {
+  const packet = {
+    enc_stone_content: { published: false },
+    enc_collector_notes: [{ title: 'Test Note', body: 'Body', icon_slug: iconSlug, display_order: 1 }],
+  };
+  return validatePacket(packet, null, cssClasses, storageFiles).filter(e => e.startsWith('enc_collector_notes > Test Note'));
+}
+
+test('validatePacket rejects a known icon slug missing from enc-icons.css', () => {
+  const cssClasses = new Set(['grounding']); // 'manifestation' deliberately absent
+  const errors = themeIconErrors('icon-manifestation', cssClasses, null);
+  assert.ok(errors.some(e => e.includes('no matching class in stones/enc-icons.css')));
+});
+
+test('validatePacket accepts a known icon slug present in enc-icons.css', () => {
+  const cssClasses = new Set(['manifestation']);
+  const errors = themeIconErrors('icon-manifestation', cssClasses, null);
+  assert.deepEqual(errors, []);
+});
+
+test('validatePacket rejects a known icon slug missing from Supabase Storage', () => {
+  const cssClasses = new Set(['manifestation']);
+  const storageFiles = new Set(['grounding']); // 'manifestation' deliberately absent
+  const errors = themeIconErrors('icon-manifestation', cssClasses, storageFiles);
+  assert.ok(errors.some(e => e.includes('will render blank')));
+});
+
+test('validatePacket accepts a known icon slug present in Supabase Storage', () => {
+  const cssClasses = new Set(['manifestation']);
+  const storageFiles = new Set(['manifestation']);
+  const errors = themeIconErrors('icon-manifestation', cssClasses, storageFiles);
+  assert.deepEqual(errors, []);
+});
+
+test('validatePacket rejects icon-care-cleaning on an Energetic Theme', () => {
+  const errors = themeIconErrors('icon-care-cleaning', null, null);
+  assert.ok(errors.some(e => e.includes('reserved for a different section')));
+});
+
+test('validatePacket rejects icon-pair-with on an Energetic Theme', () => {
+  const errors = themeIconErrors('icon-pair-with', null, null);
+  assert.ok(errors.some(e => e.includes('reserved for a different section')));
+});
+
+test('validatePacket rejects icon-tag-label on an Energetic Theme', () => {
+  const errors = themeIconErrors('icon-tag-label', null, null);
+  assert.ok(errors.some(e => e.includes('reserved for a different section')));
+});
+
+test('validatePacket rejects icon-care-cleaning on a Collector Note', () => {
+  const errors = collectorNoteIconErrors('icon-care-cleaning', null, null);
+  assert.ok(errors.some(e => e.includes('reserved for the fixed Care & Cleaning row')));
+});
+
+test('validatePacket accepts an approved topic icon on a Collector Note', () => {
+  const errors = collectorNoteIconErrors('icon-tradition', null, null);
+  assert.deepEqual(errors, []);
+});
+
+test('validatePacket rejects an energetic_role_icon that does not match the approved role mapping', () => {
+  const packet = { enc_stone_content: { published: false, energetic_role: 'Manifestation', energetic_role_icon: 'icon-grounding' } };
+  const errors = validatePacket(packet, null).filter(e => e.startsWith('enc_stone_content.energetic_role_icon'));
+  assert.ok(errors.some(e => e.includes('does not match the approved icon for role')));
+});

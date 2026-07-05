@@ -24,6 +24,16 @@ const path = require('path');
 const { parseMD } = require('./lib/parse-md');
 const iconMap = require('./lib/icon-map.json');
 
+// Fail as early as possible when an MD-authored icon has no backing CSS
+// class, so a broken icon is never discovered only after packet validation
+// or, worse, only after publication (see ENCYCLOPEDIA-ICON-REGISTRY.md §16).
+// The deeper Supabase-Storage existence check lives in validate-packet.js,
+// which already runs against a live batch and can afford the network call.
+const ENC_ICONS_CSS_PATH = path.join(__dirname, '..', 'stones', 'enc-icons.css');
+const cssIconClasses = new Set(
+  [...fs.readFileSync(ENC_ICONS_CSS_PATH, 'utf8').matchAll(/\.icon-([a-z0-9-]+)\s*\{/g)].map(m => m[1])
+);
+
 // ---------------------------------------------------------------------------
 // Structured Production Master export (generated, gitignored)
 // ---------------------------------------------------------------------------
@@ -144,6 +154,9 @@ function validateIconSlug(slug, context) {
   const bare = slug.slice(5);
   if (!iconMap.knownSlugs.includes(bare)) {
     throw new Error(`Icon slug "${slug}" is not in the known-slugs list. Update icon-map.json or check for a typo. Context: ${context}`);
+  }
+  if (!cssIconClasses.has(bare)) {
+    throw new Error(`Icon slug "${slug}" has no matching class in stones/enc-icons.css — it would render blank. Context: ${context}`);
   }
 }
 
