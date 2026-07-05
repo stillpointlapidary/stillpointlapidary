@@ -119,11 +119,12 @@ The following come from the Production Master or approved runtime source:
 - Styling Chakra
 - Energetic Role
 - Color Energy
-- property pills
 - image path
 - navigation
 - exception flags
 - production status
+
+Property Pills are not in this list. They are authored directly in the canonical MD (`# Hero > ## Property Pills`) and are not a Production Master field.
 
 Planet does not appear in front matter or anywhere else in the current MD schema.
 

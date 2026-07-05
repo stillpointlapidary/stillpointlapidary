@@ -8,8 +8,23 @@
  * database-ready JSON packet for one stone. Never hand-edit the output.
  * Regenerate fresh on every run; the packet is transport only.
  *
+ * Default Gate 4 behavior is to publish in the same pass, per
+ * ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §2 and CLAUDE.md §6 (Gate 4): the
+ * packet's enc_stone_content.published defaults to true. Pass --hold only
+ * when Christie or Dustin has explicitly requested an unpublished
+ * preview/import hold for this stone; that sets published: false.
+ *
+ * image_alt interim behavior (Christie-approved 2026-07-05, see
+ * ENCYCLOPEDIA-CONTENT-FIELDS.md §14 and ENCYCLOPEDIA-PHOTO-STANDARD.md §17):
+ * the canonical MD does not carry image_alt (no schema change made for this).
+ * If an approved image-specific alt already exists on the current
+ * enc_stone_content row (a correction/reimport), it is preserved. Otherwise
+ * a generic fallback is used and a WARN is printed — this is intentional and
+ * must not become a Gate 0/2/4 blocker. Real specimen-specific alt text is
+ * written during photo/image QA (ENCYCLOPEDIA-PHOTO-STANDARD.md), not Gate 4.
+ *
  * Usage:
- *   node pipeline/generate-packet.js --md <path> [--out <path>]
+ *   node pipeline/generate-packet.js --md <path> [--out <path>] [--hold]
  *
  * Required env vars:
  *   SUPABASE_URL
@@ -37,7 +52,7 @@ const cssIconClasses = new Set(
 // ---------------------------------------------------------------------------
 // Structured Production Master export (generated, gitignored)
 // ---------------------------------------------------------------------------
-const STRUCTURED_EXPORT_PATH = path.join(__dirname, 'data', 'structured-values.generated.json');
+const { STRUCTURED_EXPORT_PATH } = require('./lib/paths');
 
 // Fields locked by the Production Master. These may also exist in
 // enc_stone_content for previously-imported stones; the export is the
@@ -45,10 +60,12 @@ const STRUCTURED_EXPORT_PATH = path.join(__dirname, 'data', 'structured-values.g
 // for conflicts, never silently preferred.
 const STRUCTURED_FIELDS = [
   'collection_label', 'chakra_primary', 'chakra_secondary', 'element', 'zodiac', 'material_type',
+  'energetic_role', 'color_energy',
   'nav_prev_slug', 'nav_prev_name', 'nav_next_slug', 'nav_next_name',
 ];
 const HARD_REQUIRED_STRUCTURED_FIELDS = [
   'collection_label', 'chakra_primary', 'element', 'zodiac', 'material_type',
+  'energetic_role', 'color_energy',
   'nav_prev_slug', 'nav_prev_name', 'nav_next_slug', 'nav_next_name',
 ];
 
@@ -75,18 +92,26 @@ Generation stopped. Re-run the structured-values export or confirm the canonical
 // ---------------------------------------------------------------------------
 // Args
 // ---------------------------------------------------------------------------
-function parseArgs() {
-  const args = process.argv.slice(2);
-  const opts = {};
+function parseArgs(argv) {
+  const args = argv || process.argv.slice(2);
+  const opts = { hold: false };
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--md') opts.md = args[++i];
     if (args[i] === '--out') opts.out = args[++i];
+    if (args[i] === '--hold') opts.hold = true;
   }
   if (!opts.md) {
-    console.error('Usage: node pipeline/generate-packet.js --md <path> [--out <path>]');
+    console.error('Usage: node pipeline/generate-packet.js --md <path> [--out <path>] [--hold]');
     process.exit(1);
   }
   return opts;
+}
+
+// Default Gate 4 path publishes in the same pass; --hold is the explicit,
+// Christie/Dustin-requested unpublished preview/import exception
+// (ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §2). Exported for unit testing.
+function resolvePublished(opts) {
+  return !opts.hold;
 }
 
 // ---------------------------------------------------------------------------
@@ -107,10 +132,15 @@ Generation stopped.
 // ---------------------------------------------------------------------------
 // Supabase lookup
 // ---------------------------------------------------------------------------
+// Identity cross-check only (name/slug). Energetic role and color energy are
+// researched, locked structured values and must come from the Production
+// Master export like the rest of STRUCTURED_FIELDS, never read live from
+// Supabase — see ENCYCLOPEDIA-DATABASE-REFERENCE.md §2 ("Supabase is
+// operational output only, never structured or editorial authority").
 async function fetchStoneRecord(supabase, stoneId, stoneName) {
   const { data, error } = await supabase
     .from('stones')
-    .select('id, name, slug, enc_energetic_role, color_energy, styling_chakra, color_hex, color_categories')
+    .select('id, name, slug')
     .eq('id', stoneId)
     .single();
 
@@ -124,10 +154,21 @@ async function fetchStoneRecord(supabase, stoneId, stoneName) {
 async function fetchExistingContent(supabase, stoneId) {
   const { data } = await supabase
     .from('enc_stone_content')
-    .select('collection_label, chakra_primary, chakra_secondary, element, zodiac, material_type, nav_prev_slug, nav_prev_name, nav_next_slug, nav_next_name')
+    .select('collection_label, chakra_primary, chakra_secondary, element, zodiac, material_type, energetic_role, color_energy, image_alt, nav_prev_slug, nav_prev_name, nav_next_slug, nav_next_name')
     .eq('stone_id', stoneId)
     .single();
   return data; // null if no row exists yet
+}
+
+// image_alt interim behavior (Christie-approved 2026-07-05): the canonical
+// MD does not carry image_alt. An already-approved image-specific value on
+// an existing row (a correction/reimport) is preserved; a first-time import
+// has no existing row, so it gets the generic fallback below. This is not a
+// blocker at any gate — real alt text is written during photo QA, once the
+// final specimen photo is uploaded (ENCYCLOPEDIA-PHOTO-STANDARD.md §17).
+function resolveImageAlt(stoneName, existingImageAlt) {
+  if (existingImageAlt) return { value: existingImageAlt, isFallback: false };
+  return { value: `${stoneName} specimen for the Still Point Lapidary encyclopedia.`, isFallback: true };
 }
 
 async function fetchRelatedStoneColor(supabase, slug, stoneName) {
@@ -244,12 +285,14 @@ async function main() {
     }
   }
 
-  // Energetic role icon
-  const energeticRole = stoneRow.enc_energetic_role;
-  if (!energeticRole) {
-    console.error(`${stoneName}:\nstones.enc_energetic_role is null — must be set before generation\nGeneration stopped.`);
-    process.exit(2);
-  }
+  // Energetic role icon — energetic_role itself is a structured field
+  // resolved above from the Production Master export (already checked for
+  // presence by HARD_REQUIRED_STRUCTURED_FIELDS). The icon is not an
+  // independent value: it is derived deterministically from energetic_role
+  // through the fixed mapping in icon-map.json / ENCYCLOPEDIA-ICON-REGISTRY.md
+  // §6, never read from Supabase or the Production Master's own denormalized
+  // "Energetic Role Icon" column.
+  const energeticRole = structured.energetic_role;
   const energeticRoleIcon = iconMap.energeticRoles[energeticRole];
   if (!energeticRoleIcon) {
     console.error(`${stoneName}:\nEnergetic role "${energeticRole}" has no icon mapping in icon-map.json\nGeneration stopped.`);
@@ -281,6 +324,12 @@ async function main() {
     await fetchRelatedStoneColor(supabase, rs.related_slug, stoneName);
   }
 
+  // image_alt: not a blocker. See resolveImageAlt above.
+  const imageAlt = resolveImageAlt(stoneName, existingContent ? existingContent.image_alt : null);
+  if (imageAlt.isFallback) {
+    console.warn(`WARN: ${stoneName} image_alt uses generic fallback; update during final photo QA.`);
+  }
+
   // Build the packet
   const packet = {
     meta: {
@@ -297,6 +346,7 @@ async function main() {
       ...overview,
       ...mineralProfile,
       collector_context_p3: marketNotes || null,
+      image_alt: imageAlt.value,
       collection_label: structured.collection_label,
       chakra_primary: structured.chakra_primary,
       chakra_secondary: structured.chakra_secondary,
@@ -305,12 +355,12 @@ async function main() {
       material_type: structured.material_type,
       energetic_role: energeticRole,
       energetic_role_icon: energeticRoleIcon,
-      color_energy: stoneRow.color_energy,
+      color_energy: structured.color_energy,
       nav_prev_slug: structured.nav_prev_slug,
       nav_prev_name: structured.nav_prev_name,
       nav_next_slug: structured.nav_next_slug,
       nav_next_name: structured.nav_next_name,
-      published: false,
+      published: resolvePublished(opts),
     },
     enc_mineral_facts: mineralProfile.mineralFacts,
     enc_localities: mineralProfile.localities.map(l => ({ ...l, stone_id: stoneId })),
@@ -325,9 +375,16 @@ async function main() {
   const outPath = opts.out || path.join(path.dirname(opts.md), `${stoneSlug}.packet.json`);
   fs.writeFileSync(outPath, JSON.stringify(packet, null, 2));
   console.log(`Packet generated: ${outPath}`);
+  console.log(opts.hold
+    ? `published: false (--hold passed — explicit unpublished import)`
+    : `published: true (default Gate 4 path — publishes in this pass)`);
 }
 
-main().catch(err => {
-  console.error('Unexpected error:', err.message);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error('Unexpected error:', err.message);
+    process.exit(1);
+  });
+}
+
+module.exports = { parseArgs, resolvePublished, resolveImageAlt };

@@ -9,8 +9,12 @@
  * Row counts alone are not sufficient — this checks every field value.
  * Uses the UNION ALL pattern from DATABASE-REFERENCE §15.
  *
+ * Also confirms stones.enc_production_status agrees with enc_stone_content.published
+ * (both are set together, in the same transaction, by import_stone_atomic.sql):
+ * published: true <-> 'Full Entry Live'; published: false (explicit hold) <-> 'Supabase Entered'.
+ *
  * Usage:
- *   node pipeline/verify-stone.js --packet <path> [--packet <path> ...]
+ *   node pipeline/verify-stone.js --packet <path> [--packet <path> ...] [--expected-published true|false]
  *
  * Required env vars:
  *   SUPABASE_URL
@@ -56,6 +60,14 @@ function compareField(errors, field, expected, actual) {
   }
 }
 
+// import_stone_atomic.sql sets these two fields together in the same
+// transaction, driven by one publish flag, so they must never disagree:
+// published: true <-> 'Full Entry Live'; published: false (explicit hold)
+// <-> 'Supabase Entered' (ENCYCLOPEDIA-CONTENT-FIELDS.md §17).
+function expectedProductionStatus(expectedPublished) {
+  return expectedPublished ? 'Full Entry Live' : 'Supabase Entered';
+}
+
 async function verifyStone(supabase, packet, expectedPublished) {
   const name = packet.meta.stone_name;
   const stoneId = packet.meta.stone_id;
@@ -87,6 +99,20 @@ async function verifyStone(supabase, packet, expectedPublished) {
     compareField(errors, `enc_stone_content.${f}`, scExpected[f] ?? null, sc[f] ?? null);
   }
   if (sc.published !== expectedPublished) errors.push(`enc_stone_content.published should be ${expectedPublished}`);
+
+  // --- stones.enc_production_status (Gate 4 step 8; must agree with published) ---
+  const { data: stoneRow } = await supabase
+    .from('stones')
+    .select('enc_production_status')
+    .eq('id', stoneId)
+    .single();
+
+  const expectedStatus = expectedProductionStatus(expectedPublished);
+  if (!stoneRow) {
+    errors.push('stones: no row found');
+  } else if (stoneRow.enc_production_status !== expectedStatus) {
+    errors.push(`stones.enc_production_status should be '${expectedStatus}', found '${stoneRow.enc_production_status}'`);
+  }
 
   // --- enc_mineral_facts ---
   const { data: facts } = await supabase
@@ -253,7 +279,11 @@ async function main() {
   process.exit(allPass ? 0 : 1);
 }
 
-main().catch(err => {
-  console.error('Unexpected error:', err.message);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error('Unexpected error:', err.message);
+    process.exit(1);
+  });
+}
+
+module.exports = { parseArgs, mismatch, compareField, expectedProductionStatus, verifyStone };

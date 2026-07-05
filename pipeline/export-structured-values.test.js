@@ -28,15 +28,17 @@ const HEADER = [
   'Group B | Collection Tier', 'Group C | Previous Stone', 'Group C | Previous Slug',
   'Group C | Next Stone', 'Group C | Next Slug',
   'Group F | Primary Chakra', 'Group F | Secondary Chakra', 'Group F | Element',
-  'Group F | Zodiac', 'Group F | Material Type', 'Group K | Production Data Version',
+  'Group F | Zodiac', 'Group F | Material Type',
+  'Group F | Encyclopedia Energetic Role', 'Group F | Color Energy',
+  'Group K | Production Data Version',
 ];
 
 test('exportStructuredValues produces a stone_id-keyed, gitignore-friendly export', () => {
   const rows = [
     HEADER,
     ['C-0001', 'Test Stone', 'test-stone', 1, 'Prev Stone', 'prev-stone', 'Next Stone', 'next-stone',
-      'Root', null, 'Earth', 'Aries', 'Mineral', 'v1'],
-    [null, null, null, null, null, null, null, null, null, null, null, null, null, null], // blank spacer row
+      'Root', null, 'Earth', 'Aries', 'Mineral', 'Grounding', 'Earthy Brown', 'v1'],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], // blank spacer row
   ];
   const { dir, file } = writeFixtureWorkbook(rows);
   const out = path.join(dir, 'out.json');
@@ -55,6 +57,8 @@ test('exportStructuredValues produces a stone_id-keyed, gitignore-friendly expor
       element: 'Earth',
       zodiac: 'Aries',
       material_type: 'Mineral',
+      energetic_role: 'Grounding',
+      color_energy: 'Earthy Brown',
       nav_prev_slug: 'prev-stone',
       nav_prev_name: 'Prev Stone',
       nav_next_slug: 'next-stone',
@@ -70,7 +74,7 @@ test('exportStructuredValues produces a stone_id-keyed, gitignore-friendly expor
 test('exportStructuredValues halts on an unmapped Collection Tier', () => {
   const rows = [
     HEADER,
-    ['C-0002', 'Bad Tier Stone', 'bad-tier', 99, 'A', 'a', 'B', 'b', 'Root', null, 'Earth', 'Aries', 'Mineral', 'v1'],
+    ['C-0002', 'Bad Tier Stone', 'bad-tier', 99, 'A', 'a', 'B', 'b', 'Root', null, 'Earth', 'Aries', 'Mineral', 'Grounding', 'Earthy Brown', 'v1'],
   ];
   const { dir, file } = writeFixtureWorkbook(rows);
   const out = path.join(dir, 'out.json');

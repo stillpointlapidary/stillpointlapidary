@@ -1,49 +1,31 @@
--- Atomic stone import function for the Cohort 4 pipeline.
--- Called via Supabase RPC: supabase.rpc('import_stone_atomic', { packet: ... })
--- All inserts execute in a single transaction. If any INSERT fails, the entire
--- stone rolls back at the database level — no partial writes.
---
--- Publication: default Gate 4 behavior is to import AND publish in the same
--- controlled pass (ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §2, §11; CLAUDE.md §6
--- Gate 4). published is taken from packet.enc_stone_content.published, which
--- pipeline/generate-packet.js sets to true by default and to false only when
--- --hold was passed for an explicit Christie/Dustin-requested unpublished
--- hold. If the packet omits the field, this function defaults to true rather
--- than silently holding a stone back.
---
--- Gate 4 step 8 (CLAUDE.md §6) also requires stones.enc_production_status to
--- move to 'Full Entry Live' in the same pass. This function now sets it
--- together with enc_stone_content.published, driven by the same v_published
--- flag: 'Full Entry Live' when publishing, 'Supabase Entered' (an imported,
--- unpublished state — ENCYCLOPEDIA-CONTENT-FIELDS.md §17) for an explicit
--- unpublished hold. Both fields must never disagree about publish state.
+-- ROLLBACK SNAPSHOT — exact live import_stone_atomic definition captured via
+-- Supabase Management API (pg_get_functiondef) on 2026-07-05, immediately
+-- before applying the publish-flow + enc_production_status correction.
+-- This is the byte-for-byte deployed version at that moment, not just the
+-- prior git-tracked copy. To roll back, run this file's CREATE OR REPLACE
+-- FUNCTION statement (unchanged below) followed by the same GRANT EXECUTE
+-- statement from import_stone_atomic.sql (identical in both versions).
 
-CREATE OR REPLACE FUNCTION import_stone_atomic(packet jsonb)
-RETURNS jsonb
-LANGUAGE plpgsql
-SECURITY DEFINER
-AS $$
+CREATE OR REPLACE FUNCTION public.import_stone_atomic(packet jsonb)
+ RETURNS jsonb
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+AS $function$
 DECLARE
-  v_stone_id           text;
-  v_slug               text;
-  v_sc                 jsonb;
-  v_published          boolean;
-  v_production_status  text;
-  fact                 jsonb;
-  loc                  jsonb;
-  reach                jsonb;
-  theme                jsonb;
-  note                 jsonb;
-  care_row             jsonb;
-  rs                   jsonb;
+  v_stone_id text;
+  v_slug     text;
+  v_sc       jsonb;
+  fact       jsonb;
+  loc        jsonb;
+  reach      jsonb;
+  theme      jsonb;
+  note       jsonb;
+  care_row   jsonb;
+  rs         jsonb;
 BEGIN
-  v_stone_id  := packet -> 'meta' ->> 'stone_id';
-  v_slug      := packet -> 'meta' ->> 'stone_slug';
-  v_sc        := packet -> 'enc_stone_content';
-  -- Default true: default Gate 4 publishes in the same pass. false only for
-  -- an explicit unpublished hold; a missing field is not treated as a hold.
-  v_published := COALESCE((v_sc ->> 'published')::boolean, true);
-  v_production_status := CASE WHEN v_published THEN 'Full Entry Live' ELSE 'Supabase Entered' END;
+  v_stone_id := packet -> 'meta' ->> 'stone_id';
+  v_slug     := packet -> 'meta' ->> 'stone_slug';
+  v_sc       := packet -> 'enc_stone_content';
 
   IF v_stone_id IS NULL THEN
     RAISE EXCEPTION 'packet.meta.stone_id is null';
@@ -88,14 +70,8 @@ BEGIN
     v_sc ->> 'color_energy',
     v_sc ->> 'nav_prev_slug', v_sc ->> 'nav_prev_name',
     v_sc ->> 'nav_next_slug', v_sc ->> 'nav_next_name',
-    v_published
+    false  -- always false; publication happens only at Gate 7
   );
-
-  -- Gate 4 step 8: move the roster status in lockstep with published, in the
-  -- same transaction, so the two fields can never disagree.
-  UPDATE stones
-  SET enc_production_status = v_production_status
-  WHERE id = v_stone_id;
 
   -- enc_mineral_facts (exactly 8 rows)
   FOR fact IN SELECT * FROM jsonb_array_elements(packet -> 'enc_mineral_facts') LOOP
@@ -109,7 +85,7 @@ BEGIN
     VALUES (v_stone_id, loc ->> 'locality', (loc ->> 'display_order')::int);
   END LOOP;
 
-  -- enc_reach_for (approved row count from packet; see ENCYCLOPEDIA-CONTENT-FIELDS.md)
+  -- enc_reach_for (exactly 5 rows)
   FOR reach IN SELECT * FROM jsonb_array_elements(packet -> 'enc_reach_for') LOOP
     INSERT INTO enc_reach_for (stone_id, label, description, display_order)
     VALUES (v_stone_id, reach ->> 'label', reach ->> 'description', (reach ->> 'display_order')::int);
@@ -167,17 +143,12 @@ BEGIN
   RETURN jsonb_build_object(
     'success', true,
     'stone_id', v_stone_id,
-    'stone_name', packet -> 'meta' ->> 'stone_name',
-    'published', v_published,
-    'production_status', v_production_status
+    'stone_name', packet -> 'meta' ->> 'stone_name'
   );
 
 EXCEPTION WHEN OTHERS THEN
   -- The entire transaction rolls back. Re-raise so the caller sees the error.
   RAISE;
 END;
-$$;
+$function$
 
--- Grant execute to the authenticated role so the Supabase client can call it.
--- Adjust role if using anon or a custom role.
-GRANT EXECUTE ON FUNCTION import_stone_atomic(jsonb) TO authenticated;

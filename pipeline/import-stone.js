@@ -9,6 +9,13 @@
  * Per-stone atomicity: if any insert fails, that stone rolls back entirely.
  * Stones that fail validation are held and skipped. Valid stones proceed independently.
  *
+ * Publication is driven entirely by the packet (set at generate-packet.js
+ * time via --hold). The SQL function sets enc_stone_content.published and
+ * stones.enc_production_status together in the same transaction: default
+ * path publishes ('Full Entry Live'); an explicit hold leaves the stone
+ * imported but unpublished ('Supabase Entered'). This script does not decide
+ * publish state — it only reports what the function did.
+ *
  * --all-or-nothing flag: NOT implemented in v1. True cohort-wide rollback would
  * require all stones to commit inside a single transaction scope, which is not
  * achievable with sequential per-stone RPC calls once earlier stones have committed.
@@ -50,7 +57,19 @@ async function importStone(supabase, packet) {
   if (!data?.success) {
     return { stone: name, status: 'held', reason: 'RPC returned success=false with no error' };
   }
-  return { stone: name, status: 'imported and verified pending', stone_id: data.stone_id };
+  return {
+    stone: name,
+    status: 'imported and verified pending',
+    stone_id: data.stone_id,
+    published: data.published,
+    production_status: data.production_status,
+  };
+}
+
+// Exported for testing; the two fields are set together in the same
+// transaction (import_stone_atomic.sql) and must always agree.
+function describePublishState(published, productionStatus) {
+  return `published=${published}, stones.enc_production_status='${productionStatus}'`;
 }
 
 async function main() {
@@ -82,7 +101,7 @@ async function main() {
   console.log('\n--- Import Report ---');
   for (const r of results) {
     if (r.status === 'imported and verified pending') {
-      console.log(`imported and verified pending  ${r.stone}  (${r.stone_id})`);
+      console.log(`imported and verified pending  ${r.stone}  (${r.stone_id})  [${describePublishState(r.published, r.production_status)}]`);
     } else {
       console.error(`held: ${r.reason}  ${r.stone}`);
     }
@@ -97,7 +116,11 @@ async function main() {
   console.log('\nAll stones imported. Run verify-stone.js next to confirm field-by-field accuracy.');
 }
 
-main().catch(err => {
-  console.error('Unexpected error:', err.message);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error('Unexpected error:', err.message);
+    process.exit(1);
+  });
+}
+
+module.exports = { describePublishState };

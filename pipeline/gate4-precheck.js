@@ -44,7 +44,7 @@ function parseArgs() {
   return opts;
 }
 
-const REQUIRED_STRUCTURED = ['Primary Chakra', 'Element', 'Zodiac', 'Material Type'];
+const REQUIRED_STRUCTURED = ['Primary Chakra', 'Element', 'Zodiac', 'Material Type', 'Encyclopedia Energetic Role', 'Color Energy'];
 const REQUIRED_NAV = ['Previous Stone', 'Previous Slug', 'Next Stone', 'Next Slug'];
 
 function findProductionMasterRow(source, stoneId) {
@@ -161,23 +161,47 @@ async function main() {
 
   const { data: stoneRow, error: stoneErr } = await supabase
     .from('stones')
-    .select('id, name, slug, enc_energetic_role, color_energy')
+    .select('id, name, slug, enc_energetic_role, color_energy, enc_production_status')
     .eq('id', stoneId)
     .single();
+
+  // generate-packet.js reads energetic_role and color_energy from the
+  // Production Master export (STRUCTURED_FIELDS), never from Supabase — see
+  // ENCYCLOPEDIA-DATABASE-REFERENCE.md §2. Supabase's stones.enc_energetic_role
+  // and stones.color_energy are legacy/denormalized copies; checked here only
+  // for drift against the Production Master, not as the Gate 4 source.
+  const pmEnergeticRole = normalize(row[col['Encyclopedia Energetic Role']]);
+  const pmColorEnergy = normalize(row[col['Color Energy']]);
+
   if (stoneErr || !stoneRow) {
     result.blocker.push(`No Supabase stones row found for stone_id "${stoneId}"`);
   } else {
     if (stoneRow.name !== stoneName) result.blocker.push(`Supabase stones.name "${stoneRow.name}" does not match MD stone_name "${stoneName}"`);
     if (stoneRow.slug !== stoneSlug) result.blocker.push(`Supabase stones.slug "${stoneRow.slug}" does not match MD stone_slug "${stoneSlug}"`);
-    if (!stoneRow.enc_energetic_role) {
-      result.blocker.push('Supabase stones.enc_energetic_role is null (current pipeline reads this at Gate 4 — pending source-authority redesign)');
-    } else {
-      result.pass.push(`Supabase stones.enc_energetic_role = "${stoneRow.enc_energetic_role}"`);
+    if (pmEnergeticRole && stoneRow.enc_energetic_role && stoneRow.enc_energetic_role !== pmEnergeticRole) {
+      result.warn.push(`Supabase stones.enc_energetic_role ("${stoneRow.enc_energetic_role}") differs from Production Master "Encyclopedia Energetic Role" ("${pmEnergeticRole}") — Gate 4 will use the Production Master value`);
     }
-    if (!stoneRow.color_energy) {
-      result.warn.push('Supabase stones.color_energy is null (read by current pipeline at Gate 4; not in HARD_REQUIRED list but will render blank on the live page)');
-    } else {
-      result.pass.push(`Supabase stones.color_energy = "${stoneRow.color_energy}"`);
+    if (pmColorEnergy && stoneRow.color_energy && stoneRow.color_energy !== pmColorEnergy) {
+      result.warn.push(`Supabase stones.color_energy ("${stoneRow.color_energy}") differs from Production Master "Color Energy" ("${pmColorEnergy}") — Gate 4 will use the Production Master value`);
+    }
+  }
+
+  // --- First-time-import safety: import_stone_atomic.sql only handles a
+  // fresh insert. Both of these would make Gate 4 fail (or, worse, publish a
+  // stone that already has content the current MD wasn't audited against). ---
+  const { data: existingContent } = await supabase
+    .from('enc_stone_content')
+    .select('stone_id, published')
+    .eq('stone_id', stoneId)
+    .single();
+  if (existingContent) {
+    result.blocker.push(`enc_stone_content row already exists for "${stoneId}" (published=${existingContent.published}) — import_stone_atomic.sql only supports a first-time insert and will raise "row already exists"; this stone needs the update/correction path, not a fresh Gate 4 import`);
+  } else {
+    result.pass.push('No existing enc_stone_content row — safe for a first-time Gate 4 import');
+    if (stoneRow && stoneRow.enc_production_status === 'Full Entry Live') {
+      result.blocker.push(`Supabase stones.enc_production_status is already "Full Entry Live" but no enc_stone_content row exists — inconsistent state, resolve before importing`);
+    } else if (stoneRow) {
+      result.pass.push(`Supabase stones.enc_production_status = "${stoneRow.enc_production_status}" (will become "Full Entry Live" on default Gate 4 publish, or "Supabase Entered" if --hold is used)`);
     }
   }
 
@@ -200,7 +224,7 @@ async function main() {
   const storageFiles = await loadStorageIconFiles(supabase);
   const iconErrors = [];
 
-  const energeticRole = stoneRow?.enc_energetic_role;
+  const energeticRole = pmEnergeticRole;
   if (energeticRole) {
     const expectedIcon = iconMap.energeticRoles[energeticRole];
     if (!expectedIcon) {

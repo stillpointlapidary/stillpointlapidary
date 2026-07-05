@@ -21,9 +21,10 @@
 const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
+const { PRODUCTION_MASTER_PATH, STRUCTURED_EXPORT_PATH } = require('./lib/paths');
 
-const DEFAULT_SOURCE = 'C:\\Users\\chris\\Documents\\Still Point Lapidary\\Encyclopedia\\Production Data\\Still-Point-Lapidary-Production-Master.xlsx';
-const DEFAULT_OUT = path.join(__dirname, 'data', 'structured-values.generated.json');
+const DEFAULT_SOURCE = PRODUCTION_MASTER_PATH;
+const DEFAULT_OUT = STRUCTURED_EXPORT_PATH;
 const SHEET_NAME = 'Catalog Master';
 
 // Fixed sentinel value for production_data_version. The MD is tied to "the
@@ -56,6 +57,8 @@ const REQUIRED_COLUMNS = [
   'Element',
   'Zodiac',
   'Material Type',
+  'Encyclopedia Energetic Role',
+  'Color Energy',
   'Previous Stone',
   'Previous Slug',
   'Next Stone',
@@ -162,6 +165,8 @@ function exportStructuredValues(opts) {
       element: normalize(row[col['Element']]),
       zodiac: normalize(row[col['Zodiac']]),
       material_type: normalize(row[col['Material Type']]),
+      energetic_role: normalize(row[col['Encyclopedia Energetic Role']]),
+      color_energy: normalize(row[col['Color Energy']]),
       nav_prev_slug: normalize(row[col['Previous Slug']]),
       nav_prev_name: normalize(row[col['Previous Stone']]),
       nav_next_slug: normalize(row[col['Next Slug']]),

@@ -22,7 +22,63 @@ supabase/migrations/import_stone_atomic.sql
 
 ---
 
+## Canonical paths
+
+`pipeline/lib/paths.js` is the single source for canonical paths outside this
+repo (Production Master, Canonical MDs root, Research root) and for the two
+generated/working pipeline paths (`pipeline/data/structured-values.generated.json`,
+`pipeline/output/`). Scripts import from there instead of hard-coding a second
+copy — see Project Rules/CLAUDE.md §4 for the paths themselves. Canonical MD
+paths are still passed explicitly per invocation (`--md <path>`), per the MD
+handoff rule; `paths.js` does not guess which MD to use.
+
+---
+
 ## Scripts
+
+### Gate 0 — Cohort/stone preflight (research readiness)
+
+```
+npm run pipeline:gate0 -- --stone ocean-jasper
+npm run pipeline:gate0 -- --stone "Ocean Jasper"
+npm run pipeline:gate0 -- --stones ocean-jasper,moss-agate
+```
+
+Read-only. Production-Master-only — no Supabase, no other files, no broad
+filesystem search. Opens the canonical Production Master workbook directly
+(via the `xlsx` package; this project's Node pipeline has no Python/openpyxl
+dependency, so `xlsx` is the equivalent direct, read-only, header-mapped
+open), maps columns by header name (not fixed position), and reports whether
+a stone is ready for **Gate 1 research** — not whether it is ready to
+publish (that's `gate4-precheck.js`, below).
+
+Identify a stone by canonical name or slug, case-insensitively. Accepts one
+`--stone` per flag (repeatable) or a comma-separated `--stones` list.
+
+Checks: duplicate Stone ID/name/slug, missing identity fields, Material Type
+and Encyclopedia Energetic Role against their controlled vocabularies,
+chakra/Color Energy presence, navigation pointer completeness, image
+status/path (informational only — never a blocker), Exception/Identity Flag
+and Structured Data Status (informational), and the Blocker/Notes fields —
+which only become a `BLOCKER` if they contain actual stop-research or
+identity-contradiction language (e.g. "do not proceed"), not ordinary status
+prose (e.g. "restart under current workflow"). Planet is not a Gate 0 field
+and is never read.
+
+**PASS / WARN / BLOCKER:**
+- `PASS` — present, valid, no action needed before research.
+- `WARN` — needs awareness (e.g. a field pending research, a non-final
+  image) but does not stop Gate 1.
+- `BLOCKER` — research should not begin. Each blocker reports what failed,
+  where it was checked, why it matters, and a fix target.
+
+If a stone can't be found by the given name/slug, Gate 0 reports the exact
+lookup failure and any roster entries that substring-match the query — it
+does not guess an identity. If the workbook is missing an expected header,
+Gate 0 reports the missing header(s) and the full Gate 0 field map (Gate 0
+field -> Production Master header) instead of guessing a column.
+
+Exit code is `0` when no stone in the run has a blocker, `1` otherwise.
 
 ### 0. Export structured values from the Production Master (Gate 4)
 
@@ -55,6 +111,19 @@ doesn't exactly match the canonical MD's front matter. If `enc_stone_content`
 already holds a value for one of these fields and it conflicts with the export,
 generation halts rather than guessing which source is right.
 
+`enc_stone_content.published` defaults to `true` — default Gate 4 imports and
+publishes in the same controlled pass (ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §2).
+Pass `--hold` only when Christie or Dustin has explicitly requested an
+unpublished preview/import hold for that stone; that sets `published: false`.
+
+`enc_stone_content.image_alt` (Christie-approved 2026-07-05, see
+ENCYCLOPEDIA-CONTENT-FIELDS.md §14): the canonical MD does not carry alt text.
+An existing approved value on the current row is preserved; otherwise a
+generic fallback ("{Stone Name} specimen for the Still Point Lapidary
+encyclopedia.") is used and a `WARN` is printed. This is never a blocker —
+real specimen-specific alt text is written during photo QA once the final
+photo is uploaded, not during drafting or import.
+
 The packet is transport only — never hand-edit it. Regenerate fresh on every run.
 
 ### 2. Validate a packet (2C)
@@ -74,7 +143,10 @@ node pipeline/import-stone.js --packet rose-quartz.packet.json
 
 Imports atomically via the `import_stone_atomic` Postgres function.
 Per-stone atomicity: if any insert fails, the entire stone rolls back at the database level.
-`published` is always set to `false`. Publication only happens at Gate 7.
+`published` is written from the packet's `enc_stone_content.published` value (default `true`,
+so the default Gate 4 path imports and publishes in this same pass). It is `false` only when
+the packet was generated with `--hold` for an explicit Christie/Dustin-requested unpublished
+hold — that stone remains unpublished until Gate 7.
 
 **`--all-or-nothing` flag is not implemented in v1.** True cohort-wide rollback requires all
 stones to commit in a single transaction scope. This is not achievable with sequential per-stone
@@ -134,11 +206,14 @@ node pipeline/generate-packet.js --md docs/encyclopedia/entries/stone-slug.md --
 # 3. Validate all packets before importing any:
 node pipeline/validate-packet.js --packet stone1.packet.json --packet stone2.packet.json ...
 
-# 4. Import atomically, then verify database state:
+# 4. Import atomically (publishes in this same pass by default; pass --hold on
+#    step 2's generate-packet.js call for an explicit unpublished hold instead),
+#    then verify database state:
 node pipeline/import-stone.js --packet stone1.packet.json
 node pipeline/verify-stone.js --packet stone1.packet.json
 
-# Smoke test after Gate 7 publication:
+# Smoke test once the stone is live (default path: right after step 4;
+# explicit-hold path: after the Gate 7 publish step):
 node pipeline/smoke-test.js --packet stone1.packet.json --base-url https://stillpointlapidary.com
 ```
 
@@ -148,7 +223,9 @@ node pipeline/smoke-test.js --packet stone1.packet.json --base-url https://still
 
 ```
 pipeline/
+  gate0.js              Gate 0: read-only stone/cohort research-readiness preflight
   export-structured-values.js  Gate 4: Production Master → generated structured-values JSON
+  gate4-precheck.js     Gate 4: read-only import/publication-readiness preflight
   generate-packet.js    2B: MD + structured-values export + Supabase → JSON packet
   validate-packet.js    2C: Packet validation
   import-stone.js       2D: Atomic import via Postgres RPC
@@ -156,6 +233,7 @@ pipeline/
   smoke-test.js         2F: Rendered-page deterministic checks
   rehearse-cohort3.js   2G: Read-only Cohort 3 rehearsal
   lib/
+    paths.js            Single source for canonical paths (see "Canonical paths" above)
     parse-md.js         MD schema parser
     icon-map.json       Structured icon map (source of truth for generator)
   data/

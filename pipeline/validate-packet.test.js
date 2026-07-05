@@ -151,3 +151,32 @@ test('validatePacket rejects an energetic_role_icon that does not match the appr
   const errors = validatePacket(packet, null).filter(e => e.startsWith('enc_stone_content.energetic_role_icon'));
   assert.ok(errors.some(e => e.includes('does not match the approved icon for role')));
 });
+
+// ---------------------------------------------------------------------------
+// published: default Gate 4 publishes in the same pass; false is valid only
+// for an explicit unpublished hold. Only a missing/non-boolean value errors.
+// ---------------------------------------------------------------------------
+
+function publishedErrors(published) {
+  const packet = { enc_stone_content: { published } };
+  return validatePacket(packet, null).filter(e => e.startsWith('enc_stone_content.published'));
+}
+
+test('validatePacket accepts published: true (default Gate 4 publish path)', () => {
+  assert.deepEqual(publishedErrors(true), []);
+});
+
+test('validatePacket accepts published: false (explicit unpublished hold)', () => {
+  assert.deepEqual(publishedErrors(false), []);
+});
+
+test('validatePacket rejects a missing published field', () => {
+  const packet = { enc_stone_content: {} };
+  const errors = validatePacket(packet, null).filter(e => e.startsWith('enc_stone_content.published'));
+  assert.ok(errors.some(e => e.includes('must be a boolean')));
+});
+
+test('validatePacket rejects a non-boolean published value', () => {
+  const errors = publishedErrors('false');
+  assert.ok(errors.some(e => e.includes('must be a boolean')));
+});

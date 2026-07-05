@@ -145,7 +145,13 @@ function validatePacket(packet, rosterSlugs, cssClasses, storageFiles) {
     for (const f of required_sc) {
       if (!sc[f]) errors.push(`enc_stone_content.${f} is null or missing`);
     }
-    if (sc.published !== false) errors.push('enc_stone_content.published must be false for new imports');
+    // Default Gate 4 path publishes in the same pass (published: true).
+    // published: false is valid only for an explicit Christie/Dustin-requested
+    // unpublished hold (ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §2). Either value
+    // is a legitimate packet; only a missing/non-boolean value is an error.
+    if (typeof sc.published !== 'boolean') {
+      errors.push('enc_stone_content.published must be a boolean (true = default publish, false = explicit unpublished hold)');
+    }
     if (sc.energetic_role && !VALID_ENERGETIC_ROLES.has(sc.energetic_role)) {
       errors.push(`enc_stone_content.energetic_role "${sc.energetic_role}" is not in the 12-value set`);
     }
