@@ -6,8 +6,17 @@
  *
  * Takes validated packet(s) and imports each stone atomically via the
  * import_stone_atomic Postgres function (called through Supabase RPC).
- * Per-stone atomicity: if any insert fails, that stone rolls back entirely.
- * Stones that fail validation are held and skipped. Valid stones proceed independently.
+ * Per-stone atomicity: if any insert/update fails, that stone rolls back
+ * entirely. Stones that fail validation are held and skipped. Valid stones
+ * proceed independently.
+ *
+ * Create-or-update: the SQL function inserts a first-time stone_id (no
+ * existing enc_stone_content row) and updates a previously-imported/
+ * previously-live stone_id (existing row) in place, fully resynchronizing
+ * every child table from the packet either way
+ * (ENCYCLOPEDIA-DATABASE-REFERENCE.md §12). This script does not decide
+ * which path runs — it only reports what the function did, via the
+ * returned `operation` field ('insert' or 'update').
  *
  * Publication is driven entirely by the packet (set at generate-packet.js
  * time via --hold). The SQL function sets enc_stone_content.published and
@@ -61,6 +70,7 @@ async function importStone(supabase, packet) {
     stone: name,
     status: 'imported and verified pending',
     stone_id: data.stone_id,
+    operation: data.operation,
     published: data.published,
     production_status: data.production_status,
   };
@@ -101,7 +111,7 @@ async function main() {
   console.log('\n--- Import Report ---');
   for (const r of results) {
     if (r.status === 'imported and verified pending') {
-      console.log(`imported and verified pending  ${r.stone}  (${r.stone_id})  [${describePublishState(r.published, r.production_status)}]`);
+      console.log(`imported and verified pending  ${r.stone}  (${r.stone_id})  [${r.operation}]  [${describePublishState(r.published, r.production_status)}]`);
     } else {
       console.error(`held: ${r.reason}  ${r.stone}`);
     }

@@ -135,6 +135,25 @@ node pipeline/validate-packet.js --packet rose-quartz.packet.json
 Validates field counts, required fields, controlled vocabularies, icon slugs, and roster slug resolution.
 Run across the full batch before any import.
 
+### 2a. Reconcile structured fields on an existing-live row (pre-Gate-4)
+
+```
+node pipeline/reconcile-structured-fields.js --stone red-jasper
+node pipeline/reconcile-structured-fields.js --stone red-jasper --apply
+node pipeline/reconcile-structured-fields.js --all [--apply]
+```
+
+For a stone that already has an `enc_stone_content` row (a correction or reimport),
+compares only the PM-controlled structured fields (`chakra_primary`, `chakra_secondary`,
+`element`, `zodiac`, `material_type`, `energetic_role`, `energetic_role_icon`, `color_energy`,
+`nav_prev_slug`, `nav_prev_name`, `nav_next_slug`, `nav_next_name`) against the structured-values
+export and reports drift. `energetic_role_icon` is derived from `energetic_role` via `icon-map.json`,
+not read as an independent Production Master column. Never reads or writes public-copy fields.
+
+Dry-run by default — run `pipeline:export-structured-values` first, then this. Apply only with
+`--apply`. A stone with no existing `enc_stone_content` row is skipped (use the normal Gate 4
+packet/import path for a first-time import instead).
+
 ### 3. Import a stone (2D)
 
 ```
@@ -142,7 +161,11 @@ node pipeline/import-stone.js --packet rose-quartz.packet.json
 ```
 
 Imports atomically via the `import_stone_atomic` Postgres function.
-Per-stone atomicity: if any insert fails, the entire stone rolls back at the database level.
+Per-stone atomicity: if any insert/update fails, the entire stone rolls back at the database level.
+Create-or-update: a first-time `stone_id` (no existing `enc_stone_content` row) inserts; a
+previously-imported/previously-live `stone_id` (existing row) updates the parent row in place and
+fully resynchronizes every child table from the packet. The report line shows which path ran
+(`[insert]` or `[update]`).
 `published` is written from the packet's `enc_stone_content.published` value (default `true`,
 so the default Gate 4 path imports and publishes in this same pass). It is `false` only when
 the packet was generated with `--hold` for an explicit Christie/Dustin-requested unpublished
@@ -226,9 +249,10 @@ pipeline/
   gate0.js              Gate 0: read-only stone/cohort research-readiness preflight
   export-structured-values.js  Gate 4: Production Master → generated structured-values JSON
   gate4-precheck.js     Gate 4: read-only import/publication-readiness preflight
+  reconcile-structured-fields.js  Pre-Gate-4: existing-live PM-controlled field drift check/fix
   generate-packet.js    2B: MD + structured-values export + Supabase → JSON packet
   validate-packet.js    2C: Packet validation
-  import-stone.js       2D: Atomic import via Postgres RPC
+  import-stone.js       2D: Atomic create-or-update import via Postgres RPC
   verify-stone.js       2E: Round-trip field-by-field verification
   smoke-test.js         2F: Rendered-page deterministic checks
   rehearse-cohort3.js   2G: Read-only Cohort 3 rehearsal
@@ -248,5 +272,5 @@ docs/encyclopedia/
   MD-SCHEMA-REFERENCE.md    Formal schema definition
 
 supabase/migrations/
-  import_stone_atomic.sql   Postgres function for atomic import
+  import_stone_atomic.sql   Postgres function for atomic create-or-update import
 ```

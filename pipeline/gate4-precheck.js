@@ -186,18 +186,21 @@ async function main() {
     }
   }
 
-  // --- First-time-import safety: import_stone_atomic.sql only handles a
-  // fresh insert. Both of these would make Gate 4 fail (or, worse, publish a
-  // stone that already has content the current MD wasn't audited against). ---
+  // --- Create-or-update path: import_stone_atomic.sql inserts a first-time
+  // stone_id and updates a previously-imported/previously-live stone_id in
+  // place, fully resynchronizing child rows either way
+  // (ENCYCLOPEDIA-DATABASE-REFERENCE.md §12). Both branches below are
+  // informational, not blockers — only a genuinely inconsistent roster state
+  // (Full Entry Live with no content row) still stops Gate 4. ---
   const { data: existingContent } = await supabase
     .from('enc_stone_content')
     .select('stone_id, published')
     .eq('stone_id', stoneId)
     .single();
   if (existingContent) {
-    result.blocker.push(`enc_stone_content row already exists for "${stoneId}" (published=${existingContent.published}) — import_stone_atomic.sql only supports a first-time insert and will raise "row already exists"; this stone needs the update/correction path, not a fresh Gate 4 import`);
+    result.pass.push(`enc_stone_content row already exists for "${stoneId}" (published=${existingContent.published}) — Gate 4 will use the update path: import_stone_atomic.sql will update the parent row and fully resynchronize all child tables from this packet`);
   } else {
-    result.pass.push('No existing enc_stone_content row — safe for a first-time Gate 4 import');
+    result.pass.push('No existing enc_stone_content row — Gate 4 will use the first-time insert path');
     if (stoneRow && stoneRow.enc_production_status === 'Full Entry Live') {
       result.blocker.push(`Supabase stones.enc_production_status is already "Full Entry Live" but no enc_stone_content row exists — inconsistent state, resolve before importing`);
     } else if (stoneRow) {
