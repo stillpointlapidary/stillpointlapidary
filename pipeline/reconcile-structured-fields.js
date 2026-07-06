@@ -92,12 +92,27 @@ function expectedValues(exportRow) {
   return expected;
 }
 
+function isBlank(value) {
+  return value === null || value === undefined || value === '';
+}
+
+// A blank Production Master value must never overwrite a populated live
+// Supabase value — that would silently erase good live data (see the
+// Unakite reconciliation risk this guard closes). Such a diff is flagged
+// `blocked` and reconcileStone() refuses to apply it.
 function diffFields(existing, expected) {
   const diffs = [];
   for (const field of RECONCILE_FIELDS) {
     const current = existing[field] ?? null;
     const target = expected[field];
-    if (current !== target) diffs.push({ field, current, expected: target });
+    if (current !== target) {
+      diffs.push({
+        field,
+        current,
+        expected: target,
+        blocked: isBlank(target) && !isBlank(current),
+      });
+    }
   }
   return diffs;
 }
@@ -126,6 +141,23 @@ async function reconcileStone(supabase, stoneId, exportRow, apply) {
   if (diffs.length === 0) {
     return { stoneId, status: 'in-sync' };
   }
+
+  const blocked = diffs.filter(d => d.blocked);
+  if (blocked.length > 0) {
+    // Refuse the whole stone, not just the blocked field(s) — the
+    // PM-controlled fields for a stone should land together, and applying
+    // the non-blocked fields while withholding the blank one would leave
+    // the row in a half-reconciled state that's easy to lose track of.
+    return {
+      stoneId,
+      status: 'blocked',
+      slug: exportRow.slug,
+      stoneName: exportRow.stone_name,
+      blocked,
+      diffs: diffs.filter(d => !d.blocked),
+    };
+  }
+
   if (!apply) {
     return { stoneId, status: 'diff', diffs };
   }
@@ -143,16 +175,37 @@ async function reconcileStone(supabase, stoneId, exportRow, apply) {
   return { stoneId, status: 'applied', diffs };
 }
 
+function stoneLabel(r) {
+  const parts = [r.slug, r.stoneName].filter(Boolean);
+  return parts.length ? ` (${parts.join(' / ')})` : '';
+}
+
 function report(results, apply) {
   console.log(`\n=== Structured-Field Reconciliation (${apply ? 'APPLY' : 'DRY RUN'}) ===\n`);
   let hasUnresolvedDiff = false;
   let hasError = false;
+  let hasBlocked = false;
 
   for (const r of results) {
     if (r.status === 'skipped') {
       console.log(`SKIP       ${r.stoneId}  — ${r.reason}`);
     } else if (r.status === 'in-sync') {
       console.log(`IN-SYNC    ${r.stoneId}`);
+    } else if (r.status === 'blocked') {
+      hasBlocked = true;
+      const label = stoneLabel(r);
+      console.log(`BLOCKED    ${r.stoneId}${label}`);
+      for (const d of r.blocked) {
+        console.log(`             ${d.field}: production-master=${JSON.stringify(d.expected)} (BLANK)  current-supabase=${JSON.stringify(d.current)}`);
+        console.log(`             -> blank Production Master value cannot overwrite the populated live Supabase value for "${d.field}".`);
+      }
+      if (r.diffs.length > 0) {
+        console.log('             (other non-blocking diffs on this stone are withheld until the field(s) above are resolved):');
+        for (const d of r.diffs) {
+          console.log(`             ${d.field}: current=${JSON.stringify(d.current)}  production-master=${JSON.stringify(d.expected)}`);
+        }
+      }
+      console.log(`             Next step: update/confirm the Production Master for ${r.stoneId}${label} from approved research, or get a Christie/Dustin decision, then re-run "npm run pipeline:export-structured-values" before reconciliation can apply.`);
     } else if (r.status === 'diff') {
       hasUnresolvedDiff = true;
       console.log(`DIFF       ${r.stoneId}`);
@@ -173,8 +226,11 @@ function report(results, apply) {
   if (!apply && hasUnresolvedDiff) {
     console.log('\nDry run found drift against the Production Master export. Re-run with --apply to write the PM-controlled fields listed above. Re-run "npm run pipeline:export-structured-values" first if the Production Master changed since the export was generated.');
   }
+  if (hasBlocked) {
+    console.log('\nOne or more stones are BLOCKED and were not applied: a Production Master field is blank while the corresponding live Supabase value is populated. See the Next step line above for each blocked stone.');
+  }
 
-  process.exitCode = (hasError || (!apply && hasUnresolvedDiff)) ? 1 : 0;
+  process.exitCode = (hasError || hasBlocked || (!apply && hasUnresolvedDiff)) ? 1 : 0;
 }
 
 async function main() {
@@ -222,5 +278,7 @@ module.exports = {
   expectedValues,
   diffFields,
   resolveStoneId,
+  reconcileStone,
+  isBlank,
   RECONCILE_FIELDS,
 };
