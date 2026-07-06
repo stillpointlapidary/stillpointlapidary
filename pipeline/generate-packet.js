@@ -52,7 +52,7 @@ const cssIconClasses = new Set(
 // ---------------------------------------------------------------------------
 // Structured Production Master export (generated, gitignored)
 // ---------------------------------------------------------------------------
-const { STRUCTURED_EXPORT_PATH } = require('./lib/paths');
+const { STRUCTURED_EXPORT_PATH, PIPELINE_OUTPUT_DIR } = require('./lib/paths');
 
 // Fields locked by the Production Master. These may also exist in
 // enc_stone_content for previously-imported stones; the export is the
@@ -112,6 +112,14 @@ function parseArgs(argv) {
 // (ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §2). Exported for unit testing.
 function resolvePublished(opts) {
   return !opts.hold;
+}
+
+// Defaults to the gitignored pipeline/output/ working directory, never next
+// to the source MD or wherever the command happened to be run from, so a
+// plain no-flag run never produces repo-root packet debris. Exported for
+// unit testing.
+function resolveOutPath(opts, stoneSlug) {
+  return opts.out || path.join(PIPELINE_OUTPUT_DIR, `${stoneSlug}.packet.json`);
 }
 
 // ---------------------------------------------------------------------------
@@ -371,8 +379,9 @@ async function main() {
     enc_related_stones: relatedStones.map(rs => ({ ...rs, stone_id: stoneId })),
   };
 
-  // Output
-  const outPath = opts.out || path.join(path.dirname(opts.md), `${stoneSlug}.packet.json`);
+  // Output — see resolveOutPath above and pipeline/README.md.
+  const outPath = resolveOutPath(opts, stoneSlug);
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(packet, null, 2));
   console.log(`Packet generated: ${outPath}`);
   console.log(opts.hold
@@ -387,4 +396,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { parseArgs, resolvePublished, resolveImageAlt };
+module.exports = { parseArgs, resolvePublished, resolveImageAlt, resolveOutPath };

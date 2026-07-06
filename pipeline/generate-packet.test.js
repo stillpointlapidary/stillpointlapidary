@@ -2,7 +2,9 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { parseArgs, resolvePublished, resolveImageAlt } = require('./generate-packet');
+const path = require('path');
+const { parseArgs, resolvePublished, resolveImageAlt, resolveOutPath } = require('./generate-packet');
+const { PIPELINE_OUTPUT_DIR } = require('./lib/paths');
 
 // ---------------------------------------------------------------------------
 // Default Gate 4 path publishes in the same pass; --hold is the explicit,
@@ -61,4 +63,19 @@ test('resolveImageAlt falls back to a generic description when no existing value
 test('resolveImageAlt falls back when existing value is undefined', () => {
   const result = resolveImageAlt('Ocean Jasper', undefined);
   assert.equal(result.isFallback, true);
+});
+
+// ---------------------------------------------------------------------------
+// Output path (2026-07-06 cleanup): default output must never land next to
+// the source MD or the repo root — only explicit --out should override it.
+// ---------------------------------------------------------------------------
+
+test('resolveOutPath defaults to pipeline/output/, not the MD directory or repo root', () => {
+  const result = resolveOutPath({}, 'red-jasper');
+  assert.equal(result, path.join(PIPELINE_OUTPUT_DIR, 'red-jasper.packet.json'));
+});
+
+test('resolveOutPath honors an explicit --out over the default', () => {
+  const result = resolveOutPath({ out: 'somewhere/else.json' }, 'red-jasper');
+  assert.equal(result, 'somewhere/else.json');
 });
