@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "stone_id": "C-0095",
+    "stone_name": "Ocean Jasper",
+    "stone_slug": "ocean-jasper",
+    "production_data_version": "production-master",
+    "generated_at": "2026-07-06T01:19:45.575Z"
+  },
+  "enc_stone_content": {
+    "stone_id": "C-0095",
+    "slug": "ocean-jasper",
+    "signature_line": "Helps old heaviness move with patience, leaving room for ordinary joy to return.",
+    "pill_1": "Joyful Presence",
+    "pill_2": "Emotional Flow",
+    "pill_3": "Patient Change",
+    "best_for": "Emotional release, patient change, and returning to joy without forcing it",
+    "use_when": "Old feelings are surfacing, and you want to stay open, steady, and kind.",
+    "affirmation": "I meet my feelings with patience and make room for joy.",
+    "overview_p1": "Ocean Jasper is the stone of emotional steadiness when old feelings are ready to move. Its energy centers on patience, self-acceptance, and the return of ordinary joy after a heavy season. Rather than pushing sadness away or dressing it up too quickly, Ocean Jasper helps you stay present with what is surfacing while still remembering that pleasure, humor, and warmth belong in the room too.",
+    "overview_p2": "A Madagascar orbicular trade material best known for rounded patterns, agate-like bands, and occasional druzy pockets, this stone is sold as Ocean Jasper but should not be treated as a separate mineral species. It is a silica-rich orbicular material associated with chalcedony, quartz, and silicified volcanic rock, with collector value shaped by pattern, polish, locality, and provenance.",
+    "formation": "Ocean Jasper forms in silica-rich volcanic material where chalcedony, quartz, feldspar, and trace minerals create orbicular or spherulitic patterns inside a hardened matrix. The rounded eyes and bands come from mineral growth and replacement processes rather than from a separate mineral species, while small cavities may later develop druzy quartz surfaces.",
+    "collector_context_p1": "Strong Ocean Jasper pieces usually show distinct orbicular patterning, appealing contrast, clean polish, and a balanced mix of bands, eyes, color zones, or druzy openings. Collector interest rises when the pattern is crisp, the surface is well finished, and the locality or old-stock context is credible.",
+    "collector_context_p2": "Ocean Jasper is a commercial name, so identification depends on locality, pattern, matrix, and seller documentation rather than color alone. Orbicular jasper from other places may resemble it, and not every patterned jasper-like stone should automatically be treated as Madagascar Ocean Jasper.",
+    "collector_context_p4": "Marovato material is the classic locality most strongly tied to the Ocean Jasper name, while Kabamby material is also sold under Ocean Jasper market language and can show its own color and pattern range. Because locality matters to collectors, vague labels such as \"orbicular jasper\" and \"Ocean Jasper\" should be read carefully when provenance is important.",
+    "collector_context_p5": null,
+    "mineralFacts": [
+      {
+        "label": "Material Identity",
+        "value": "Orbicular jasper trade material associated with chalcedony and silicified volcanic rock",
+        "display_order": 1
+      },
+      {
+        "label": "Primary Components",
+        "value": "Chalcedony, quartz, feldspar, and trace minerals in a silica-rich matrix",
+        "display_order": 2
+      },
+      {
+        "label": "Structure",
+        "value": "Cryptocrystalline quartz with orbicular or spherulitic patterning",
+        "display_order": 3
+      },
+      {
+        "label": "Mohs Hardness",
+        "value": "6.5-7",
+        "display_order": 4
+      },
+      {
+        "label": "Cleavage",
+        "value": "None in the quartz or chalcedony component; fractures conchoidally to uneven",
+        "display_order": 5
+      },
+      {
+        "label": "Specific Gravity",
+        "value": "Variable; chalcedony component is commonly 2.58-2.64",
+        "display_order": 6
+      },
+      {
+        "label": "Luster",
+        "value": "Waxy to vitreous; druzy pockets are vitreous",
+        "display_order": 7
+      },
+      {
+        "label": "Transparency",
+        "value": "Opaque to translucent in thinner agate-like areas",
+        "display_order": 8
+      }
+    ],
+    "localities": [
+      {
+        "locality": "Marovato, Ambolobozo, Analalava District, Sofia Region, Madagascar",
+        "display_order": 1
+      },
+      {
+        "locality": "Kabamby area, Ambolobozo, Analalava District, Sofia Region, Madagascar",
+        "display_order": 2
+      }
+    ],
+    "collector_context_p3": "Look for clear orbicular patterning, a good polish, and honest locality language. Ocean Jasper is often priced by visual character and provenance, so be cautious with vague listings that use the name for any colorful orbicular jasper-like material without explaining where it came from.",
+    "image_alt": "Ocean Jasper specimen for the Still Point Lapidary encyclopedia.",
+    "collection_label": "Essentials",
+    "chakra_primary": "Heart",
+    "chakra_secondary": "Solar Plexus, Throat",
+    "element": "Earth",
+    "zodiac": "Cancer, Capricorn",
+    "material_type": "Mineral",
+    "energetic_role": "Emotional Regulation",
+    "energetic_role_icon": "icon-emotional-regulation",
+    "color_energy": "Earthy green, cream, and rose",
+    "nav_prev_slug": "nuumite",
+    "nav_prev_name": "Nuumite",
+    "nav_next_slug": "onyx",
+    "nav_next_name": "Onyx",
+    "published": true
+  },
+  "enc_mineral_facts": [
+    {
+      "label": "Material Identity",
+      "value": "Orbicular jasper trade material associated with chalcedony and silicified volcanic rock",
+      "display_order": 1
+    },
+    {
+      "label": "Primary Components",
+      "value": "Chalcedony, quartz, feldspar, and trace minerals in a silica-rich matrix",
+      "display_order": 2
+    },
+    {
+      "label": "Structure",
+      "value": "Cryptocrystalline quartz with orbicular or spherulitic patterning",
+      "display_order": 3
+    },
+    {
+      "label": "Mohs Hardness",
+      "value": "6.5-7",
+      "display_order": 4
+    },
+    {
+      "label": "Cleavage",
+      "value": "None in the quartz or chalcedony component; fractures conchoidally to uneven",
+      "display_order": 5
+    },
+    {
+      "label": "Specific Gravity",
+      "value": "Variable; chalcedony component is commonly 2.58-2.64",
+      "display_order": 6
+    },
+    {
+      "label": "Luster",
+      "value": "Waxy to vitreous; druzy pockets are vitreous",
+      "display_order": 7
+    },
+    {
+      "label": "Transparency",
+      "value": "Opaque to translucent in thinner agate-like areas",
+      "display_order": 8
+    }
+  ],
+  "enc_localities": [
+    {
+      "locality": "Marovato, Ambolobozo, Analalava District, Sofia Region, Madagascar",
+      "display_order": 1,
+      "stone_id": "C-0095"
+    },
+    {
+      "locality": "Kabamby area, Ambolobozo, Analalava District, Sofia Region, Madagascar",
+      "display_order": 2,
+      "stone_id": "C-0095"
+    }
+  ],
+  "enc_reach_for": [
+    {
+      "label": "Emotional Surfacing",
+      "description": "Old feelings are rising, and you want to meet them without collapsing into the story around them.",
+      "display_order": 1,
+      "stone_id": "C-0095"
+    },
+    {
+      "label": "Joy After Heaviness",
+      "description": "A difficult season has made pleasure feel far away, and you are ready to remember ordinary lightness.",
+      "display_order": 2,
+      "stone_id": "C-0095"
+    },
+    {
+      "label": "Patient Change",
+      "description": "Life is moving in cycles, and you need steadiness while something slowly works itself through.",
+      "display_order": 3,
+      "stone_id": "C-0095"
+    },
+    {
+      "label": "Speaking With Warmth",
+      "description": "You need to tell the truth without hardening your heart or losing your kindness.",
+      "display_order": 4,
+      "stone_id": "C-0095"
+    },
+    {
+      "label": "Service Without Self-Erasure",
+      "description": "You care deeply, but you need your generosity to stay rooted in self-respect.",
+      "display_order": 5,
+      "stone_id": "C-0095"
+    }
+  ],
+  "enc_themes": [
+    {
+      "title": "Emotional Steadiness",
+      "icon_slug": "icon-emotional-regulation",
+      "description": "Helps feelings rise at a human pace, so release can happen without overwhelm or emotional shutdown.",
+      "display_order": 1,
+      "tier": "primary",
+      "stone_id": "C-0095"
+    },
+    {
+      "title": "Joyful Presence",
+      "icon_slug": "icon-vitality",
+      "description": "Encourages lightness, play, and simple pleasure after a season that has made joy feel distant.",
+      "display_order": 2,
+      "tier": "primary",
+      "stone_id": "C-0095"
+    },
+    {
+      "title": "Gentle Expression",
+      "icon_slug": "icon-clarity-focus",
+      "description": "Supports honest communication that stays warm, clear, and connected to the heart.",
+      "display_order": 1,
+      "tier": "secondary",
+      "stone_id": "C-0095"
+    },
+    {
+      "title": "Patient Renewal",
+      "icon_slug": "icon-transformation",
+      "description": "Reminds you that change often moves in cycles, not straight lines, and still deserves trust.",
+      "display_order": 2,
+      "tier": "secondary",
+      "stone_id": "C-0095"
+    }
+  ],
+  "enc_collector_notes": [
+    {
+      "title": "Not a Separate Mineral",
+      "icon_slug": "icon-identify",
+      "body": "Ocean Jasper is a trade name, not a mineral species, so the page should explain the material clearly instead of treating the name as a scientific category.",
+      "display_order": 1,
+      "stone_id": "C-0095"
+    },
+    {
+      "title": "Madagascar Provenance Matters",
+      "icon_slug": "icon-location",
+      "body": "Collector value is closely tied to Madagascar locality, especially Marovato and Kabamby material, because the name has been used more loosely in the wider market.",
+      "display_order": 2,
+      "stone_id": "C-0095"
+    },
+    {
+      "title": "Orbs, Bands, and Druzy Pockets",
+      "icon_slug": "icon-inclusions-patterns",
+      "body": "The rounded eyes, layered bands, and tiny sparkling cavities are part of what makes Ocean Jasper visually recognizable and collectible.",
+      "display_order": 3,
+      "stone_id": "C-0095"
+    },
+    {
+      "title": "Old-Stock Language Needs Context",
+      "icon_slug": "icon-tag-label",
+      "body": "Listings may mention old stock, limited supply, or named localities, but those claims are strongest when paired with credible provenance rather than decorative sales language.",
+      "display_order": 4,
+      "stone_id": "C-0095"
+    }
+  ],
+  "enc_care": [
+    {
+      "category": "Cleaning",
+      "body": "Wipe with a soft cloth, or use mild soap and brief rinsing when needed.",
+      "display_order": 1,
+      "icon_slug": "icon-care-cleaning",
+      "stone_id": "C-0095"
+    },
+    {
+      "category": "Water",
+      "body": "Brief water contact is usually safe, but avoid long soaking, harsh cleaners, or saltwater.",
+      "display_order": 2,
+      "icon_slug": "icon-element",
+      "stone_id": "C-0095"
+    },
+    {
+      "category": "Light & Heat",
+      "body": "Keep out of prolonged direct sun and high heat to protect surface polish and color balance.",
+      "display_order": 3,
+      "icon_slug": "icon-celestial",
+      "stone_id": "C-0095"
+    },
+    {
+      "category": "Storage",
+      "body": "Store separately from harder stones and rough edges to prevent scratches or chips.",
+      "display_order": 4,
+      "icon_slug": "icon-geology",
+      "stone_id": "C-0095"
+    }
+  ],
+  "enc_related_stones": [
+    {
+      "related_name": "Rhodonite",
+      "related_slug": "rhodonite",
+      "reason": "Shares Ocean Jasper's emotional repair theme, but leans more toward relational wounds and boundary repair than broad emotional surfacing.",
+      "group": "similar_energy",
+      "display_order": 1,
+      "stone_id": "C-0095"
+    },
+    {
+      "related_name": "Green Aventurine",
+      "related_slug": "green-aventurine",
+      "reason": "Brings a lighter heart presence, with more emphasis on fresh opportunity and optimism than Ocean Jasper's deeper emotional release.",
+      "group": "similar_energy",
+      "display_order": 2,
+      "stone_id": "C-0095"
+    },
+    {
+      "related_name": "Lepidolite",
+      "related_slug": "lepidolite",
+      "reason": "Softens emotional surfacing with calm, making Ocean Jasper's release work feel gentler.",
+      "group": "pairs_well_with",
+      "display_order": 1,
+      "stone_id": "C-0095"
+    },
+    {
+      "related_name": "Smoky Quartz",
+      "related_slug": "smoky-quartz",
+      "reason": "Adds grounding when Ocean Jasper brings older feelings or unfinished cycles into awareness.",
+      "group": "pairs_well_with",
+      "display_order": 2,
+      "stone_id": "C-0095"
+    }
+  ]
+}
