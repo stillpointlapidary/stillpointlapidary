@@ -1190,69 +1190,72 @@ function getStoneDailyPrompt(s){
 // ── STONE OF THE DAY ─────────────────────────────────────────────────────────
 
 // Pill background + text (accent). Keys are canonical chakra names.
+// Mineral Ink palette (approved 2026-07-06). 'Soul Star' has no approved
+// entry of its own; it uses the Crown tokens, mirroring the existing
+// 'All Chakras' → Crown fallback pattern used in stones/stone.html.
 const SFC_CHAKRA_COLORS={
-  'Earth Star':   {bg:'#dedad6',text:'#5a5249'},
-  'Root':         {bg:'#e6d0d0',text:'#6b3636'},
-  'Sacral':       {bg:'#eedbd0',text:'#6b4530'},
-  'Solar Plexus': {bg:'#eee6c8',text:'#6b5520'},
-  'Heart':        {bg:'#d6e6d8',text:'#385838'},
-  'Throat':       {bg:'#d4e4ec',text:'#2e4858'},
-  'Third Eye':    {bg:'#d2dcf0',text:'#273f73'},
-  'Crown':        {bg:'#ded7ef',text:'#5e5080'},
-  'Soul Star':    {bg:'#ece6d8',text:'#6c5c3f'},
+  'Earth Star':   {bg:'#F1EEEB',text:'#2E2621'},
+  'Root':         {bg:'#F7EFEC',text:'#4A1513'},
+  'Sacral':       {bg:'#F8F0E9',text:'#5A2815'},
+  'Solar Plexus': {bg:'#F8F3E7',text:'#5B4214'},
+  'Heart':        {bg:'#EEF3EE',text:'#283C2C'},
+  'Throat':       {bg:'#EDF3F5',text:'#1F3A44'},
+  'Third Eye':    {bg:'#F0F0F6',text:'#25223F'},
+  'Crown':        {bg:'#F3F0F5',text:'#352B40'},
+  'Soul Star':    {bg:'#F3F0F5',text:'#352B40'},
 };
 
 // Banner/wash colors — ultra-light chakra tint, barely deeper than card ivory.
 const SFC_BANNER_COLORS={
-  'Earth Star':   '#f5f4f2',
-  'Root':         '#f6f0f0',
-  'Sacral':       '#f7f2ef',
-  'Solar Plexus': '#f7f5ee',
-  'Heart':        '#f1f6f2',
-  'Throat':       '#f0f4f7',
-  'Third Eye':    '#eff2f8',
-  'Crown':        '#f4f1fa',
-  'Soul Star':    '#f8f6f1',
+  'Earth Star':   '#F1EEEB',
+  'Root':         '#F7EFEC',
+  'Sacral':       '#F8F0E9',
+  'Solar Plexus': '#F8F3E7',
+  'Heart':        '#EEF3EE',
+  'Throat':       '#EDF3F5',
+  'Third Eye':    '#F0F0F6',
+  'Crown':        '#F3F0F5',
+  'Soul Star':    '#F3F0F5',
 };
 
 // Button colors — pill fill + canonical border + accent text.
 const SFC_BUTTON_COLORS={
-  'Earth Star':   {bg:'#dedad6',border:'#b5afa8',text:'#5a5249'},
-  'Root':         {bg:'#e6d0d0',border:'#c09090',text:'#6b3636'},
-  'Sacral':       {bg:'#eedbd0',border:'#c99b7f',text:'#6b4530'},
-  'Solar Plexus': {bg:'#eee6c8',border:'#c6b36f',text:'#6b5520'},
-  'Heart':        {bg:'#d6e6d8',border:'#8ab88e',text:'#385838'},
-  'Throat':       {bg:'#d4e4ec',border:'#83b2ca',text:'#2e4858'},
-  'Third Eye':    {bg:'#d2dcf0',border:'#7f94c4',text:'#273f73'},
-  'Crown':        {bg:'#ded7ef',border:'#b0a0d8',text:'#5e5080'},
-  'Soul Star':    {bg:'#ece6d8',border:'#cdbf9f',text:'#6c5c3f'},
+  'Earth Star':   {bg:'#F1EEEB',border:'#5A4B42',text:'#2E2621'},
+  'Root':         {bg:'#F7EFEC',border:'#8A2F2B',text:'#4A1513'},
+  'Sacral':       {bg:'#F8F0E9',border:'#A9562A',text:'#5A2815'},
+  'Solar Plexus': {bg:'#F8F3E7',border:'#A77A1E',text:'#5B4214'},
+  'Heart':        {bg:'#EEF3EE',border:'#55775A',text:'#283C2C'},
+  'Throat':       {bg:'#EDF3F5',border:'#3F7284',text:'#1F3A44'},
+  'Third Eye':    {bg:'#F0F0F6',border:'#4A477F',text:'#25223F'},
+  'Crown':        {bg:'#F3F0F5',border:'#746284',text:'#352B40'},
+  'Soul Star':    {bg:'#F3F0F5',border:'#746284',text:'#352B40'},
 };
 
 // Kicker/icon accent colors — dark enough for ≥4.5:1 on the ultra-light wash.
 // Declared explicitly per chakra; do not derive at runtime from other palettes.
 const SFC_KICKER_COLORS={
-  'Earth Star':   '#5a5249',
-  'Root':         '#6b3636',
-  'Sacral':       '#6b4530',
-  'Solar Plexus': '#6b5520',
-  'Heart':        '#385838',
-  'Throat':       '#2e4858',
-  'Third Eye':    '#273f73',
-  'Crown':        '#5e5080',
-  'Soul Star':    '#6c5c3f',
+  'Earth Star':   '#5A4B42',
+  'Root':         '#8A2F2B',
+  'Sacral':       '#A9562A',
+  'Solar Plexus': '#A77A1E',
+  'Heart':        '#55775A',
+  'Throat':       '#3F7284',
+  'Third Eye':    '#4A477F',
+  'Crown':        '#746284',
+  'Soul Star':    '#746284',
 };
 
 // Deep/dark accent — for hover states, focus rings, or high-contrast contexts.
 const SFC_DEEP_COLORS={
-  'Earth Star':   '#403a34',
-  'Root':         '#512727',
-  'Sacral':       '#523322',
-  'Solar Plexus': '#4f3e16',
-  'Heart':        '#293f2a',
-  'Throat':       '#203744',
-  'Third Eye':    '#1d3058',
-  'Crown':        '#453961',
-  'Soul Star':    '#4f422d',
+  'Earth Star':   '#2E2621',
+  'Root':         '#4A1513',
+  'Sacral':       '#5A2815',
+  'Solar Plexus': '#5B4214',
+  'Heart':        '#283C2C',
+  'Throat':       '#1F3A44',
+  'Third Eye':    '#25223F',
+  'Crown':        '#352B40',
+  'Soul Star':    '#352B40',
 };
 
 // ── Chakra normalization ──────────────────────────────────────────────────────

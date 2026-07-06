@@ -23,15 +23,15 @@
   Defaults to Solar Plexus until JS overwrites on :root.
 */
 :root {
-  --ck-pill-bg:     #FFF8E1;
-  --ck-pill-text:   #8B6314;
-  --ck-btn-bg:      #FEF3C7;
-  --ck-btn-border:  #D4A017;
-  --ck-btn-text:    #7A5200;
-  --ck-wash:        #FFFAED;
-  --ck-wash-border: #E2C960;
-  --ck-accent:      #C89B0A;
-  --ck-deep:        #7A5500;
+  --ck-pill-bg:     #F8F3E7;
+  --ck-pill-text:   #5B4214;
+  --ck-btn-bg:      #F8F3E7;
+  --ck-btn-border:  #A77A1E;
+  --ck-btn-text:    #5B4214;
+  --ck-wash:        #F8F3E7;
+  --ck-wash-border: #DCCAA5;
+  --ck-accent:      #A77A1E;
+  --ck-deep:        #5B4214;
 
   --enc-radius: 12px;
   --enc-border: 0.5px solid var(--border);
@@ -1128,55 +1128,55 @@ const SUPABASE_KEY  = 'sb_publishable_LfVL1UL-_8_8hXQktiF1BQ_UgbWvAPb';
 
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* ── Chakra token map — values from approved static stone pages ── */
+/* ── Chakra token map — Mineral Ink palette (approved 2026-07-06) ── */
 const CHAKRA_TOKENS = {
   'Root': {
-    pillBg:'#FFF0F0', pillText:'#8B1A1A',
-    btnBg:'#FFE4E4', btnBorder:'#D45050', btnText:'#6A1010',
-    wash:'#FFF4F4', washBorder:'#E89090',
-    accent:'#B83030', deep:'#580808'
+    pillBg:'#F7EFEC', pillText:'#4A1513',
+    btnBg:'#F7EFEC', btnBorder:'#8A2F2B', btnText:'#4A1513',
+    wash:'#F7EFEC', washBorder:'#D0ACAA',
+    accent:'#8A2F2B', deep:'#4A1513'
   },
   'Sacral': {
-    pillBg:'#FFF3E8', pillText:'#8B4410',
-    btnBg:'#FEECD8', btnBorder:'#D4820A', btnText:'#6A3008',
-    wash:'#FFF6EE', washBorder:'#E8B060',
-    accent:'#C06818', deep:'#5A2800'
+    pillBg:'#F8F0E9', pillText:'#5A2815',
+    btnBg:'#F8F0E9', btnBorder:'#A9562A', btnText:'#5A2815',
+    wash:'#F8F0E9', washBorder:'#DDBBAA',
+    accent:'#A9562A', deep:'#5A2815'
   },
   'Solar Plexus': {
-    pillBg:'#FFF8E1', pillText:'#8B6314',
-    btnBg:'#FEF3C7', btnBorder:'#D4A017', btnText:'#7A5200',
-    wash:'#FFFAED', washBorder:'#E2C960',
-    accent:'#C89B0A', deep:'#7A5500'
+    pillBg:'#F8F3E7', pillText:'#5B4214',
+    btnBg:'#F8F3E7', btnBorder:'#A77A1E', btnText:'#5B4214',
+    wash:'#F8F3E7', washBorder:'#DCCAA5',
+    accent:'#A77A1E', deep:'#5B4214'
   },
   'Heart': {
-    pillBg:'#F0FAF0', pillText:'#2D7A3A',
-    btnBg:'#E4F5E4', btnBorder:'#68B870', btnText:'#1A5222',
-    wash:'#F4FBF4', washBorder:'#9FD4A4',
-    accent:'#3A9445', deep:'#1A4820'
+    pillBg:'#EEF3EE', pillText:'#283C2C',
+    btnBg:'#EEF3EE', btnBorder:'#55775A', btnText:'#283C2C',
+    wash:'#EEF3EE', washBorder:'#BBC9BD',
+    accent:'#55775A', deep:'#283C2C'
   },
   'Throat': {
-    pillBg:'#EBF5FF', pillText:'#1A5276',
-    btnBg:'#D4EEFF', btnBorder:'#4A90C8', btnText:'#0E3A5A',
-    wash:'#F0F8FF', washBorder:'#94C8E8',
-    accent:'#2472A4', deep:'#0A2840'
+    pillBg:'#EDF3F5', pillText:'#1F3A44',
+    btnBg:'#EDF3F5', btnBorder:'#3F7284', btnText:'#1F3A44',
+    wash:'#EDF3F5', washBorder:'#B2C7CE',
+    accent:'#3F7284', deep:'#1F3A44'
   },
   'Third Eye': {
-    pillBg:'#EEF0FF', pillText:'#3A3890',
-    btnBg:'#E4E6FF', btnBorder:'#7A78D4', btnText:'#28268A',
-    wash:'#F2F4FF', washBorder:'#B0AEED',
-    accent:'#5552B8', deep:'#1E1C6A'
+    pillBg:'#F0F0F6', pillText:'#25223F',
+    btnBg:'#F0F0F6', btnBorder:'#4A477F', btnText:'#25223F',
+    wash:'#F0F0F6', washBorder:'#B7B5CC',
+    accent:'#4A477F', deep:'#25223F'
   },
   'Crown': {
-    pillBg:'#F5F0FF', pillText:'#5B3FA0',
-    btnBg:'#EDE8FF', btnBorder:'#9B80D4', btnText:'#3A2070',
-    wash:'#F8F5FF', washBorder:'#C4B0E8',
-    accent:'#7B5CC8', deep:'#2D1860'
+    pillBg:'#F3F0F5', pillText:'#352B40',
+    btnBg:'#F3F0F5', btnBorder:'#746284', btnText:'#352B40',
+    wash:'#F3F0F5', washBorder:'#C7C0CE',
+    accent:'#746284', deep:'#352B40'
   },
   'Earth Star': {
-    pillBg:'#F2F0EE', pillText:'#3D3530',
-    btnBg:'#EDEAE7', btnBorder:'#8C7F74', btnText:'#2E2824',
-    wash:'#F5F3F1', washBorder:'#C0B8B0',
-    accent:'#4A3F38', deep:'#1A1614'
+    pillBg:'#F1EEEB', pillText:'#2E2621',
+    btnBg:'#F1EEEB', btnBorder:'#5A4B42', btnText:'#2E2621',
+    wash:'#F1EEEB', washBorder:'#BDB7B3',
+    accent:'#5A4B42', deep:'#2E2621'
   },
 };
 /* Fallbacks for alternate names */
