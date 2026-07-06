@@ -1273,7 +1273,7 @@ function normalizeSotdChakra(raw){
 }
 
 function sfcPillStyle(chakra){
-  const c=SFC_CHAKRA_COLORS[chakra]||{bg:'#e5dfd8',text:'#6b6258'};
+  const c=SFC_CHAKRA_COLORS[chakra]||{bg:'#F1EFED',text:'#524D47'};
   return `background:${c.bg};color:${c.text}`;
 }
 
@@ -1412,9 +1412,9 @@ function renderDesktopSotdCard(s){
     :`<div class="sotd-photo-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const _dChakra=normalizeSotdChakra(s.primary_chakra);
   const pillStyle=sfcPillStyle(_dChakra);
-  const _dBtn=SFC_BUTTON_COLORS[_dChakra]||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
-  const _dBanner=SFC_BANNER_COLORS[_dChakra]||'#f4f2f6';
-  const _dKicker=SFC_KICKER_COLORS[_dChakra]||'#6b5e52';
+  const _dBtn=SFC_BUTTON_COLORS[_dChakra]||{bg:'#F1EFED',border:'#8B7355',text:'#524D47'};
+  const _dBanner=SFC_BANNER_COLORS[_dChakra]||'#F1EFED';
+  const _dKicker=SFC_KICKER_COLORS[_dChakra]||'#8B7355';
   const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text};--sotd-banner-bg:${_dBanner};--sotd-banner-border:${_dBtn.border};--sotd-kicker-color:${_dKicker}`;
   const _dEventHtml=renderSotdEventAnnouncement(s);
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
@@ -1606,9 +1606,9 @@ function renderMobileSotdCard(s){
     :`<div class="msotd-img-fallback"><span class="no-photo-orb" style="--orb:${escapeAttr(s.hex||'#c8bca8')};background:${escapeAttr(s.hex||'#c8bca8')}"></span></div>`;
   const _mChakra=normalizeSotdChakra(s.primary_chakra);
   const pillStyle=sfcPillStyle(_mChakra);
-  const _mBtn=SFC_BUTTON_COLORS[_mChakra]||{bg:'rgba(150,136,179,.18)',border:'#b0a0d8',text:'#5e5080'};
-  const _mBanner=SFC_BANNER_COLORS[_mChakra]||'#f4f2f6';
-  const _mKicker=SFC_KICKER_COLORS[_mChakra]||'#6b5e52';
+  const _mBtn=SFC_BUTTON_COLORS[_mChakra]||{bg:'#F1EFED',border:'#8B7355',text:'#524D47'};
+  const _mBanner=SFC_BANNER_COLORS[_mChakra]||'#F1EFED';
+  const _mKicker=SFC_KICKER_COLORS[_mChakra]||'#8B7355';
   const _mCardVars=`--sotd-btn-bg:${_mBtn.bg};--sotd-btn-border:${_mBtn.border};--sotd-btn-text:${_mBtn.text};--sotd-banner-bg:${_mBanner};--sotd-banner-border:${_mBtn.border};--sotd-kicker-color:${_mKicker}`;
   // Build mobile selection header — replaces old plain "TODAY'S STONE" eyebrow
   let _mEyebrowHtml;
