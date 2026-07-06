@@ -53,6 +53,10 @@ Encyclopedia Energetic Role
 Energetic Role Icon
 Color Energy
 Encyclopedia Production Status
+Research Status
+Canonical MD Status
+Supabase Status
+Structured Data Status
 Blocker
 Notes
 ```
