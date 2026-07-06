@@ -72,9 +72,12 @@ const VALID_COLLECTION_LABELS = new Set([
   'Essentials', 'Shelf Builders', 'Collector Favorites', 'Rare Finds',
 ]);
 
+// Not Started / MD Approved / Full Entry Live are the default production path;
+// Supabase Entered is the exception-only unpublished-hold value
+// (ENCYCLOPEDIA-CONTENT-FIELDS.md §17). Foundation Live and Research Complete
+// are retired and must not validate as current.
 const VALID_STATUSES = new Set([
-  'Not Started', 'Foundation Live', 'Research Complete',
-  'MD Approved', 'Supabase Entered', 'Full Entry Live',
+  'Not Started', 'MD Approved', 'Supabase Entered', 'Full Entry Live',
 ]);
 
 // ---------------------------------------------------------------------------

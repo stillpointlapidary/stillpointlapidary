@@ -5,14 +5,14 @@
  * 2F — Rendered-Page Smoke Test
  *
  * Deterministic checks only — no subjective layout judgment:
- *   - required selectors exist
+ *   - required selectors exist (matched against the current stones/stone.html DOM)
  *   - required text fields are non-blank
  *   - expected row/section counts render
  *   - all images load (HTTP 200)
  *   - no console errors
  *   - no null, undefined, or fallback states visible
  *   - icon mask URLs resolve
- *   - swatch tokens resolve (no red-dot fallback triggered)
+ *   - related-stone color dots resolve (no gray fallback triggered)
  *
  * Requires: npm install puppeteer
  *
@@ -56,21 +56,19 @@ async function smokeTestStone(page, stoneSlug, stoneName, baseUrl) {
 
   // Required selectors
   const requiredSelectors = [
-    '.hero-image img',
-    '.hero-name',
-    '.hero-signature',
-    '.property-pill',
-    '.hero-tile.best-for',
-    '.hero-tile.use-when',
-    '.hero-tile.affirmation',
+    '.stone-photo-wrap img',
+    '.stone-name',
+    '.stone-signature',
+    '.theme-pill',
+    '.hero-section',
     '.glance-grid',
-    '[data-section="overview"]',
-    '[data-section="reach"]',
-    '[data-section="themes"]',
-    '[data-section="mineral"]',
-    '[data-section="notes"]',
-    '[data-section="care"]',
-    '[data-section="related"]',
+    '#overview',
+    '#reach',
+    '#themes',
+    '#mineral',
+    '#notes',
+    '#care',
+    '#related',
   ];
 
   for (const sel of requiredSelectors) {
@@ -80,10 +78,8 @@ async function smokeTestStone(page, stoneSlug, stoneName, baseUrl) {
 
   // Required text fields non-blank
   const textChecks = [
-    { sel: '.hero-name', label: 'hero name' },
-    { sel: '.hero-signature', label: 'signature line' },
-    { sel: '.overview-p1', label: 'overview paragraph 1' },
-    { sel: '.overview-p2', label: 'overview paragraph 2' },
+    { sel: '.stone-name', label: 'hero name' },
+    { sel: '.stone-signature', label: 'signature line' },
   ];
 
   for (const { sel, label } of textChecks) {
@@ -94,16 +90,29 @@ async function smokeTestStone(page, stoneSlug, stoneName, baseUrl) {
     }
   }
 
+  // Overview: exactly 2 paragraphs, both non-blank
+  const overviewParagraphs = await page.$$eval('#overview p', els => els.map(el => el.textContent?.trim() || ''))
+    .catch(() => []);
+  if (overviewParagraphs.length !== 2) {
+    errors.push(`Overview paragraphs: expected 2, found ${overviewParagraphs.length}`);
+  }
+  overviewParagraphs.forEach((text, i) => {
+    if (!text) errors.push(`Overview paragraph ${i + 1} is blank`);
+    if (text.includes('null') || text.includes('undefined')) {
+      errors.push(`Overview paragraph ${i + 1} contains literal "null" or "undefined"`);
+    }
+  });
+
   // Property pills: exactly 3
-  const pillCount = await page.$$eval('.property-pill', els => els.length).catch(() => 0);
+  const pillCount = await page.$$eval('.theme-pill', els => els.length).catch(() => 0);
   if (pillCount !== 3) errors.push(`Property pills: expected 3, found ${pillCount}`);
 
-  // Hero tiles: exactly 3
-  const tileCount = await page.$$eval('.hero-tile', els => els.length).catch(() => 0);
-  if (tileCount !== 3) errors.push(`Hero tiles: expected 3, found ${tileCount}`);
+  // Hero sections (Best For / Use When / Affirmation): exactly 3
+  const heroSectionCount = await page.$$eval('.hero-section', els => els.length).catch(() => 0);
+  if (heroSectionCount !== 3) errors.push(`Hero sections: expected 3, found ${heroSectionCount}`);
 
   // At a Glance: exactly 6 fields
-  const glanceCount = await page.$$eval('.glance-field', els => els.length).catch(() => 0);
+  const glanceCount = await page.$$eval('.glance-item', els => els.length).catch(() => 0);
   if (glanceCount !== 6) errors.push(`At a Glance fields: expected 6, found ${glanceCount}`);
 
   // Why People Reach For It: 3-5 rows
@@ -115,21 +124,20 @@ async function smokeTestStone(page, stoneSlug, stoneName, baseUrl) {
   if (factCount !== 8) errors.push(`Mineral fact rows: expected 8, found ${factCount}`);
 
   // Care rows: exactly 4
-  const careCount = await page.$$eval('.care-row', els => els.length).catch(() => 0);
+  const careCount = await page.$$eval('.care-cell', els => els.length).catch(() => 0);
   if (careCount !== 4) errors.push(`Care rows: expected 4, found ${careCount}`);
 
   // Related stones: exactly 4
-  const relatedCount = await page.$$eval('.related-stone-card', els => els.length).catch(() => 0);
+  const relatedCount = await page.$$eval('.stone-link-row', els => els.length).catch(() => 0);
   if (relatedCount !== 4) errors.push(`Related stones: expected 4, found ${relatedCount}`);
 
-  // No red-dot swatch fallback
-  const hasRedDot = await page.evaluate(() => {
-    return [...document.querySelectorAll('.swatch-dot, .related-dot')].some(el => {
-      const bg = getComputedStyle(el).backgroundColor;
-      return bg === 'rgb(255, 0, 0)' || bg === 'red';
-    });
+  // No gray fallback on related-stone color dots (indicates missing color_hex/color_categories)
+  const hasGrayFallback = await page.evaluate(() => {
+    return [...document.querySelectorAll('.stone-dot-circle')].some(el =>
+      (el.getAttribute('style') || '').includes('#c8c8c8')
+    );
   }).catch(() => false);
-  if (hasRedDot) errors.push('Red-dot swatch fallback detected — missing swatch values for at least one stone');
+  if (hasGrayFallback) errors.push('Related-stone color dot using gray fallback — missing color_hex/color_categories for at least one related stone');
 
   // Icon mask URLs: at least one icon must have a mask-image set (not empty)
   const iconsMissing = await page.evaluate(() => {

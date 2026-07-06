@@ -351,27 +351,6 @@ node pipeline/smoke-test.js --packet pipeline/output/rose-quartz.packet.json --b
 
 Deterministic rendered-page checks using Puppeteer. Requires `npm install --save-dev puppeteer`.
 
-### 6. Cohort 3 rehearsal (2G)
-
-```
-node pipeline/rehearse-cohort3.js --base-url https://stillpointlapidary.com
-```
-
-READ-ONLY rehearsal against live Cohort 3 data. Generates packets from canonical MDs,
-validates them, compares against live Supabase records, and runs the smoke test.
-No writes, no imports, no publication changes.
-
-Canonical MDs live at `Documents\Still Point Lapidary\Encyclopedia\Canonical MDs`. The
-repo-local files under `docs/encyclopedia/entries/` are working mirrors / staging inputs
-for the pipeline only — they are not an independent canonical source, and any conflict
-resolves in favor of the external canonical file. The pipeline should be updated to read
-the external canonical MD path from one approved configuration source.
-
-**PREREQUISITE:** Cohort 3 MDs must be converted to the new schema format
-(see `docs/encyclopedia/MD-SCHEMA-REFERENCE.md`) before this rehearsal can run.
-The current staged MDs in `docs/encyclopedia/entries/` are in the old format and must be
-converted and reviewed by Christie before the rehearsal executes.
-
 ---
 
 ## Approved Stone → Gate 4 (standard single-stone flow)
@@ -438,7 +417,6 @@ pipeline/
   import-stone.js       2D: Atomic create-or-update import via Postgres RPC
   verify-stone.js       2E: Round-trip field-by-field verification
   smoke-test.js         2F: Rendered-page deterministic checks
-  rehearse-cohort3.js   2G: Read-only Cohort 3 rehearsal
   lib/
     paths.js            Single source for canonical paths (see "Canonical paths" above)
     parse-md.js         MD schema parser

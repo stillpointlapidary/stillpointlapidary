@@ -6,7 +6,7 @@ This directory contains implementation-facing encyclopedia documentation: the MD
 
 - Canonical Project Rules (standards, database reference, page structure, content fields, writing/research, approved sources, catalog decisions, photo standard, icon registry, visual standard) live in `Documents\Still Point Lapidary\Project Rules` — not in this repository. See `CLAUDE.md` §2 for the authority table.
 - [`MD-SCHEMA-REFERENCE.md`](MD-SCHEMA-REFERENCE.md) — generator-readable MD schema definition
-- [`entries/`](entries/) — repo-local staging mirrors of canonical stone MDs, kept temporarily because `pipeline/rehearse-cohort3.js` still reads this path. **Not authority.** The approved canonical MDs live in `Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\`; any conflict resolves in favor of that external copy.
+- [`entries/`](entries/) — repo-local staging mirrors of canonical stone MDs. No active pipeline script currently reads this path. **Not authority.** The approved canonical MDs live in `Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\`; any conflict resolves in favor of that external copy.
 
 ## Current Structured and Canonical Authority
 

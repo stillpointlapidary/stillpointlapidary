@@ -60,11 +60,13 @@ Pipeline code must read the canonical MD directory from one approved configurati
 
 Do not hard-code the same canonical path independently in multiple scripts.
 
-### Transitional Pipeline Rule
+### Repo-Local MD Files
 
-If the Website pipeline currently requires MD files inside the repository (for example `docs/encyclopedia/entries/`) because it has not yet been updated to read the external canonical path, those repo-local files are **working mirrors or staging inputs only**. They are not an independent canonical source and do not carry authority of their own.
+Canonical MDs live outside the Website repository, at the path in §2 above. That is their only authoritative home.
 
-Any conflict between a repo-local mirror and the canonical file above is resolved in favor of the canonical file. Update the pipeline to read the external path as soon as this is confirmed safe; do not extend the transitional exception indefinitely.
+Any MD file that also exists inside the Website repository (for example under `docs/encyclopedia/entries/` or `tests/fixtures/`) is a staging or test fixture only. It carries no authority of its own, regardless of how the pipeline currently reads MD input.
+
+Any conflict between a repo-local file and the canonical file resolves in favor of the canonical file.
 
 ---
 
@@ -84,8 +86,19 @@ Do not place these inside the canonical MD:
 - amendment history
 - session handoffs
 - current project status
+- Related Stones candidate logs, ranked alternates, or rejected/deferred candidates
+
+Research records are required companion files but must not be placed inside generator-readable MD.
+
+Related Stones candidate logs belong in the research record. Only the final approved Related Stones appear in the canonical MD.
+
+Before presenting a canonical MD draft for audit or approval, run the Gate 2 Drafting Guardrail and Gate 2 MD Draft Preflight Checklist in `ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md`.
 
 The parser must reject unrecognized top-level headings rather than silently ignoring them.
+
+### MD Handoff Rule
+
+A chat-approved MD is not execution-ready until Claude Code has either the exact canonical MD file path, or the complete save-ready MD content pasted in full. Claude Code must not reconstruct canonical MD content from partial chat excerpts, summaries, or memory of an earlier draft. Missing both is a stop condition, not something to infer or reassemble.
 
 ---
 
@@ -98,7 +111,7 @@ Every canonical MD begins with YAML front matter.
 stone_id: C-XXXX
 stone_name: Rose Quartz
 stone_slug: rose-quartz
-production_data_version: "1.0"
+production_data_version: "production-master"
 ---
 ```
 
@@ -107,7 +120,7 @@ production_data_version: "1.0"
 | `stone_id` | string | Yes | Must match the canonical roster. |
 | `stone_name` | string | Yes | Must match the canonical display name exactly. |
 | `stone_slug` | string | Yes | Must match the canonical slug exactly. |
-| `production_data_version` | string | Yes | Identifies the Production Master snapshot used. |
+| `production_data_version` | string | Yes | Fixed value `production-master`. Not date-stamped or version-numbered — it indicates the MD is tied to the canonical Production Master as a whole. Must match exactly what the structured-values export currently reports, which is regenerated immediately before packet generation. |
 
 Do not add structured production fields to front matter.
 
@@ -124,7 +137,7 @@ The following come from the Production Master or approved runtime source:
 - exception flags
 - production status
 
-Property Pills are not in this list. They are authored directly in the canonical MD (`# Hero > ## Property Pills`) and are not a Production Master field.
+Property Pills are not in this list. They are authored directly in the canonical MD (§6, `# Hero > ## Property Pills`) and are not a Production Master field.
 
 Planet does not appear in front matter or anywhere else in the current MD schema.
 
