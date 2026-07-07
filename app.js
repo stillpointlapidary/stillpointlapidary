@@ -248,13 +248,13 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0013": ["honey-calcite-raw.webp", "honey-calcite-sphere.webp"],
   "C-0014": ["mangano-calcite-tumble.webp"],
   "C-0018": ["zebra-calcite-specimen.webp"],
-  "C-0020": ["malachite-tumble.webp", "malachite-slab.webp", "malachite-specimen.webp"],
+  "C-0020": ["malachite.webp"],
   "C-0021": ["aquamarine-specimen.webp"],
   "C-0024": ["morganite-tumble-family.webp"],
-  "C-0025": ["amazonite-slab.webp", "amazonite-tower.webp", "amazonite-heart.webp"],
+  "C-0025": ["amazonite.webp"],
   "C-0028": ["labradorite.webp", "labradorite-freeform.webp", "labradorite-raw.webp"],
-  "C-0030": ["rainbow-moonstone-specimen.webp"],
-  "C-0031": ["blue-fluorite-specimen.webp"],
+  "C-0030": ["rainbow-moonstone.webp"],
+  "C-0031": ["blue-fluorite.webp"],
   "C-0032": ["green-fluorite-heart.webp"],
   "C-0035": ["fluorite-pyramid.webp"],
   "C-0037": ["copper-specimen.webp"],
@@ -267,14 +267,14 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0054": ["dumortierite-tumble.webp"],
   "C-0055": ["pink-tourmaline-specimen.webp"],
   "C-0060": ["unakite-pyramid.webp", "unakite-tumble.webp"],
-  "C-0064": ["blue-kyanite-specimen.webp"],
+  "C-0064": ["blue-kyanite.webp"],
   "C-0068": ["orange-kyanite-specimen.webp"],
   "C-0070": ["botswana-agate-tumble-family.webp", "botswana-agate-tumble.webp", "botswana-agate-tumble-2.webp", "botswana-agate-egg.webp"],
   "C-0071": ["crazy-lace-agate-freeform.webp", "crazy-lace-agate-tumble.webp", "crazy-lace-agate-star.webp"],
   "C-0074": ["fire-agate-tumble.webp", "fire-agate-heart.webp"],
   "C-0075": ["flower-agate-palm.webp"],
   "C-0076": ["grape-agate-specimen.webp", "grape-agate-sphere.webp", "grape-agate-tumble-family.webp", "grape-agate-tower.webp"],
-  "C-0077": ["moss-agate-moon.webp", "moss-agate-moon-2.webp", "moss-agate-tower.webp", "moss-agate-sphere.webp", "moss-agate-freeform.webp"],
+  "C-0077": ["moss-agate.webp"],
   "C-0078": ["orca-agate.webp", "orca-agate-freeform.webp"],
   "C-0079": ["tree-agate-tumble.webp"],
   "C-0080": ["turritella-agate-tumble.webp", "turritella-agate-tumble-2.webp"],
@@ -284,7 +284,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0095": ["ocean-jasper-freeform.webp", "ocean-jasper-freeform-2.webp", "ocean-jasper-sphere.webp", "ocean-jasper-tumble-2.webp", "ocean-jasper-tumble-3.webp", "ocean-jasper-tumble.webp", "ocean-jasper-palm.webp"],
   "C-0097": ["picture-jasper-tumble.webp", "picture-jasper-tumble-2.webp", "picture-jasper-raw.webp"],
   "C-0098": ["polychrome-jasper-flame.webp", "polychrome-jasper-sphere.webp"],
-  "C-0099": ["red-jasper-specimen.webp"],
+  "C-0099": ["red-jasper.webp"],
   "C-0101": ["yellow-jasper-tumble.webp", "yellow-jasper-tumble-2.webp"],
   "C-0102": ["zebra-jasper-tumble.webp"],
   "C-0103": ["smoky-quartz-specimen.webp", "smoky-quartz-tower.webp", "smoky-quartz-sphere.webp", "smoky-quartz specimen-2.webp"],
@@ -300,21 +300,21 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0132": ["kambaba-jasper-large-sphere.webp", "kambaba-jasper-tumble.webp"],
   "C-0133": ["atlantisite-tumble.webp", "atlantisite-freeform.webp"],
   "C-0136": ["galena-specimen.webp"],
-  "C-0137": ["pyrite-cube.webp", "pyrite-tumble.webp", "pyrite-sun-specimen.webp"],
+  "C-0137": ["pyrite.webp"],
   "C-0140": ["gold-sheen-obsidian-large-sphere.webp"],
   "C-0141": ["mahogany-obsidian-tumble.webp"],
   "C-0143": ["snowflake-obsidian-tumble.webp"],
   "C-0146": ["ammolite-specimen.webp"],
-  "C-0151": ["bloodstone-sphere.webp"],
+  "C-0151": ["bloodstone.webp"],
   "C-0152": ["blue-chert-tumble.webp"],
   "C-0153": ["carnelian-star.webp", "carnelian.webp", "carnelian-heart.webp"],
   "C-0154": ["chevron-amethyst-tower.webp", "chevron-amethyst-freeform.webp"],
   "C-0156": ["fulgurite-specimen.webp"],
-  "C-0159": ["black-moonstone-freeform.webp"],
+  "C-0159": ["black-moonstone.webp"],
   "C-0162": ["moonstone-freeform.webp", "moonstone-tumble.webp"],
   "C-0164": ["petrified-wood-tumble.webp"],
   "C-0165": ["pink-opal-tumble.webp", "pink-opal-tumble-2.webp"],
-  "C-0171": ["angelite-raw-family.webp"],
+  "C-0171": ["angelite.webp"],
   "C-0172": ["desert-rose-specimen.webp"],
   "C-0175": ["selenite.webp"],
   "C-0177": ["blue-aventurine-tower.webp"],
@@ -322,7 +322,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0180": ["red-aventurine-tumble.webp"],
   "C-0186": ["goldstone-star.webp"],
   "C-0187": ["indigo-gabbro-palm.webp"],
-  "C-0188": ["lapis-lazuli-carving.webp"],
+  "C-0188": ["lapis-lazuli.webp"],
   "C-0191": ["nuumite-freeform.webp"],
   "C-0192": ["pietersite-tumble-family.webp", "pietersite-tumble.webp", "pietersite-tower.webp"],
   "C-0193": ["prophecy-stone-tumble.webp"],
@@ -347,12 +347,12 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0229": ["vanadinite-specimen.webp"],
   "C-0238": ["epidote-sphere.webp", "epidote-tumble.webp"],
   "C-0239": ["eudialyte-tumble.webp"],
-  "C-0241": ["howlite-tumble-family.webp"],
+  "C-0241": ["howlite.webp"],
   "C-0246": ["apophyllite-specimen.webp"],
   "C-0248": ["bronzite-tumble.webp"],
   "C-0250": ["chiastolite-tumble.webp"],
   "C-0253": ["larimar-tumble.webp", "larimar-slab-1.webp", "larimar-heart.webp"],
-  "C-0254": ["lepidolite-tumble.webp", "lepidolite-tower.webp", "lepidolite-mica.webp", "lepidolite-botryoidal.webp"],
+  "C-0254": ["lepidolite.webp"],
   "C-0256": ["magnesite-tumble.webp"],
   "C-0266": ["tektite-tumble.webp", "tektite-tumble-2.webp"],
   "C-0268": ["trolleite-tumble.webp", "trolleite-tower.webp"],
@@ -370,11 +370,6 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0354": ["ulexite-specimen.webp"],
   "C-0356": ["variscite-tumble.webp"],
   "C-0363": ["calligraphy-stone-tumble.webp", "calligraphy-stone-tumble-2.webp"],
-  "C-0365": ["afghanite-heart.webp"],
-  "C-0366": ["agate-mushroom.webp", "agate-sphere.webp"],
-  "C-0367": ["asbolane-specimen.webp"],
-  "C-0368": ["banded-agate-mushroom.webp"],
-  "C-0369": ["banded-calcite-tumble.webp"],
   "C-0370": ["black-and-peach-moonstone-heart.webp"],
   "C-0371": ["brown-zebra-jasper-tumble.webp"],
   "C-0372": ["chalcedony-druzy-botryoidal-raw.webp"],
@@ -425,19 +420,23 @@ function normalizeStoneName(v){
 
 const COLOR_HEX_MAP={'Purple':'#7a5a9a','Blue':'#4a7aaa','Green':'#4a8a5a','Pink':'#d4839a','Red':'#b04a4a','Orange':'#c4683a','Yellow':'#c9a832','Black':'#3a3530','White':'#d8d4ce','Brown':'#8b6f47','Gray':'#8a8a8a','Multi':'#9a7a8a'};
 
+function stoneDotGradient(colorHex, colorCategories) {
+  const cats = Array.isArray(colorCategories) ? colorCategories : [];
+  if (cats.length >= 2) {
+    const col1 = COLOR_HEX_MAP[cats[0]] || colorHex || '#c8c8c8';
+    const col2 = COLOR_HEX_MAP[cats[1]] || colorHex || '#c8c8c8';
+    return `linear-gradient(135deg, ${col1}, ${col2})`;
+  }
+  const hex = colorHex || (cats.length === 1 ? COLOR_HEX_MAP[cats[0]] : null) || '#c8c8c8';
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  const tint = '#' + [r,g,b].map(v => Math.round(v+(255-v)*0.6).toString(16).padStart(2,'0')).join('');
+  return `linear-gradient(135deg, ${tint}, ${hex})`;
+}
+
 function noPhotoZoneHtml(c){
   const cats=(c.col_cats&&c.col_cats.length>0)?c.col_cats:[];
-  const hexMap=COLOR_HEX_MAP;
-  let orb=c.ch||'#d8d4ce';
-  let extra='';
-  if(cats.length>1){
-    const cols=cats.slice(0,4).map(x=>hexMap[x]||c.ch||'#d8d4ce');
-    const pct=100/cols.length;
-    const stops=cols.map((col,i)=>`${col} ${i*pct}% ${(i+1)*pct}%`).join(', ');
-    orb=`conic-gradient(${stops})`;
-    extra=' multi';
-  }
-  return`<div class="card-img-zone no-photo"><span class="no-photo-orb${extra}" style="--orb:${orb};background:${orb}"></span></div>`;
+  const orb=stoneDotGradient(c.ch, cats);
+  return`<div class="card-img-zone no-photo"><span class="no-photo-orb" style="--orb:${orb};background:${orb}"></span></div>`;
 }
 
 function collectionPhotoUrl(photo){
