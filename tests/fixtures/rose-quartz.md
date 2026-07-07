@@ -2,7 +2,7 @@
 stone_id: C-0108
 stone_name: Rose Quartz
 stone_slug: rose-quartz
-production_data_version: "1.0"
+production_data_version: "production-master"
 ---
 
 # Hero
