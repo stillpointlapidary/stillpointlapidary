@@ -166,7 +166,7 @@ function syncSortPanelChecks(){
 function applyCollMobileSort(items){
   if(_collMobileSort==='recent') return items;
   const arr=[...items];
-  const crystalOf=p=>CRYSTALS.find(x=>x.i===p.crystalId);
+  const crystalOf=p=>resolveStoneById(p.crystalId);
   switch(_collMobileSort){
     case 'name-az':
       arr.sort((a,b)=>{
@@ -377,6 +377,9 @@ function renderTierBars(){
 }
 
 function renderCollection(){
+  if(typeof ensureRetiredTermsLoaded==='function' && !_retiredTermsLoadPromise){
+    ensureRetiredTermsLoaded().then(()=>renderCollection());
+  }
   const wrap=document.getElementById('coll-wrap');
   const collectionTab=document.getElementById('tab-collection');
   const isSignedOut=!_currentUser;
@@ -420,7 +423,7 @@ function renderCollection(){
     const backBtn=`<div style="margin-bottom:1rem;padding:8px 12px;background:var(--stone2);border-radius:8px;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:10px"><button onclick="setCollQuickFilter('all')" style="background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);padding:0">← All</button><span style="color:var(--ink3)">·</span><span>${tLabel} ${isTierWish?'Wishlist':'Owned'}</span></div>`;
     if(isTierWish){
       const wishIds=Object.keys(wish);
-      const items=CRYSTALS.filter(c=>wishIds.includes(c.i)&&(Number(c.tier)===tNum));
+      const items=wishIds.map(id=>resolveStoneById(id)).filter(c=>c&&Number(c.tier)===tNum);
       if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No wishlist items in '+tLabel+'.</div>';return;}
       wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(c=>`<div class="coll-card" onclick="viewEncyclopediaFromWishlist('${c.i}')">
         ${wishlistCardPhotoHtml(c)}
@@ -428,10 +431,10 @@ function renderCollection(){
         <div class="coll-card-meta">${escapeAttr([c.er1,c.er2,c.er3].filter(Boolean).join(' · '))}</div>
       </div>`).join('')+'</div>';
     } else {
-      const items=displayCollection.filter(p=>{const c=CRYSTALS.find(x=>x.i===p.crystalId);return c&&Number(c.tier)===tNum&&passesCollPieceFilters(p);});
+      const items=displayCollection.filter(p=>{const c=resolveStoneById(p.crystalId);return c&&Number(c.tier)===tNum&&passesCollPieceFilters(p);});
       if(!items.length){wrap.innerHTML=backBtn+'<div class="empty-coll">No owned pieces in '+tLabel+'.</div>';return;}
       wrap.innerHTML=backBtn+'<div class="coll-grid">'+items.map(p=>{
-        const c=CRYSTALS.find(x=>x.i===p.crystalId);
+        const c=resolveStoneById(p.crystalId);
         const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
         const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
         const loc=locParts.slice(0,2).join(' · ');
@@ -445,7 +448,7 @@ function renderCollection(){
 
   if(collQuickFilter==='wish'){
     const wishIds=Object.keys(wish);
-    let wishCrystals=CRYSTALS.filter(c=>wishIds.includes(c.i));
+    let wishCrystals=wishIds.map(id=>resolveStoneById(id)).filter(Boolean);
     wishCrystals=wishCrystals.filter(c=>passesCollStoneFilters(c));
     if(!wishCrystals.length){
       wrap.innerHTML=wishIds.length?'<div class="empty-coll">No wishlist items match your filters.</div>':_emptyWishHtml();
@@ -462,7 +465,7 @@ function renderCollection(){
   if(collQuickFilter==='families'){
     const groups={};
     displayCollection.forEach(p=>{
-      const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      const c=resolveStoneById(p.crystalId);
       if(!c||!passesCollStoneFilters(c)||!passesCollPieceFilters(p))return;
       const fam=c?.fam||c?.sp||'Other';
       if(!groups[fam])groups[fam]=[];
@@ -493,7 +496,7 @@ function renderCollection(){
   if(collQuickFilter==='__family__'){
     const fam=collActiveFamilyName;
     const items=displayCollection.filter(p=>{
-      const c=CRYSTALS.find(x=>x.i===p.crystalId);
+      const c=resolveStoneById(p.crystalId);
       return (c?.fam===fam||c?.sp===fam)&&passesCollPieceFilters(p);
     });
     if(!items.length){
@@ -509,7 +512,7 @@ function renderCollection(){
       </div>
       <div class="coll-grid">`+
       items.map(p=>{
-        const c=CRYSTALS.find(x=>x.i===p.crystalId);
+        const c=resolveStoneById(p.crystalId);
         const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
         const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
         const loc=locParts.slice(0,2).join(' · ');
@@ -522,7 +525,7 @@ function renderCollection(){
   }
 
   let items=displayCollection.filter(p=>{
-    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    const c=resolveStoneById(p.crystalId);
     return passesCollStoneFilters(c)&&passesCollPieceFilters(p);
   });
   items=applyCollMobileSort(items);
@@ -531,7 +534,7 @@ function renderCollection(){
     return;
   }
   wrap.innerHTML='<div class="coll-grid">'+items.map(p=>{
-    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    const c=resolveStoneById(p.crystalId);
     const name=p.nickname||(p.isCombo?'Combo piece':(c?.n||'Unknown'));
     const locParts=[p.locCustom,p.shelf,p.tier,p.pos].filter(Boolean);
     const loc=locParts.slice(0,2).join(' · ');
@@ -582,10 +585,10 @@ function collRow(label,value){
 function openCollDetail(idx){
   const p=collection[idx];if(!p)return;
   currentCollDetailIdx=idx;
-  const c=CRYSTALS.find(x=>x.i===p.crystalId);
+  const c=resolveStoneById(p.crystalId);
   const name=collPieceName(p,c);
   const loc=collPieceLocation(p);
-  const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+  const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>resolveStoneById(id)?.n||'').filter(Boolean));
   const detail=document.getElementById('coll-detail-content');if(!detail)return;
   const refLine=c?.uw||[c?.er1,c?.er2,c?.er3].filter(Boolean).join(' · ')||'';
   detail.innerHTML=`
@@ -679,7 +682,7 @@ function editCollPiece(idx){
 function setFormVal(id,val){const el=document.getElementById(id);if(el)el.value=val;}
 async function deleteCollPiece(idx){
   const p=collection[idx];if(!p)return;
-  const c=CRYSTALS.find(x=>x.i===p.crystalId);
+  const c=resolveStoneById(p.crystalId);
   const name=collPieceName(p,c);
   if(!confirm(`Delete ${name} from your collection?`))return;
   collDetailReturnFamily=null;
@@ -1037,8 +1040,8 @@ function exportCollectionCSV(){
   const rows=[['Piece ID','Crystal ID','Crystal','Nickname','Combo','Combo Stones','Form','Size','Treatment','Condition','Location','Acquired','Source','Price Paid','Primary Photo','Photo Count','Photo URLs','Notes']];
   const exportItems=dedupedCollectionItems(collection);
   exportItems.forEach(p=>{
-    const c=CRYSTALS.find(x=>x.i===p.crystalId);
-    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+    const c=resolveStoneById(p.crystalId);
+    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>resolveStoneById(id)?.n||'').filter(Boolean));
     const photos=normalizePhotoList(p);
     rows.push([
       p.id||'',
@@ -1066,7 +1069,7 @@ function exportCollectionCSV(){
 function exportWishlistCSV(){
   const rows=[['Crystal ID','Crystal','Alternate Names','Family','Species','Material Type','Crystal System','Dominant Color','Mohs','Energetic Role','Use When','Chakras','Primary Theme','All Themes']];
   const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
-  CRYSTALS.filter(c=>wishIds.includes(c.i)).forEach(c=>{
+  wishIds.map(id=>resolveStoneById(id)).filter(Boolean).forEach(c=>{
     rows.push([
       c.i||'',
       c.n||'',
@@ -1217,13 +1220,13 @@ async function _printCollectionReport(f){
   const items=dedupedCollectionItems(collection);
   if(!items.length){alert('Your collection is empty.');return;}
   const cards=await Promise.all(items.map(async p=>{
-    const c=CRYSTALS.find(x=>x.i===p.crystalId);
+    const c=resolveStoneById(p.crystalId);
     const name=c?.n||'Unknown';
     const photoUrl=firstCollectionPhoto(p);
     const encFallbackFile=ENCYCLOPEDIA_PHOTOS[p.crystalId]?.[0];
     const encFallback=encFallbackFile?SUPABASE_ENC+encFallbackFile:null;
     const nickname=p.nickname?` <span style="color:#8a7e72;font-style:italic">"${p.nickname}"</span>`:'';
-    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>CRYSTALS.find(x=>x.i===id)?.n||'').filter(Boolean));
+    const comboNames=(p.comboCrystalNames&&p.comboCrystalNames.length?p.comboCrystalNames:(p.comboCrystals||[]).map(id=>resolveStoneById(id)?.n||'').filter(Boolean));
     const formParts=[f.form&&p.form?`Form: ${p.form}`:'',f.form&&p.size?`Size: ${p.size}`:''].filter(Boolean).join(' · ');
     const treatLine=f.condition&&p.treated?`Treatment: ${p.treated}`:'';
     const condLine=f.condition&&p.condition?`Condition: ${p.condition}`:'';
@@ -1254,7 +1257,7 @@ async function _printCollectionReport(f){
 function _printWishlistReport(f){
   const layout=f.layout||'standard';
   const wishIds=Object.keys(wish||{}).filter(id=>wish[id]);
-  const items=CRYSTALS.filter(c=>wishIds.includes(c.i));
+  const items=wishIds.map(id=>resolveStoneById(id)).filter(Boolean);
   if(!items.length){alert('Your wishlist is empty.');return;}
   const cards=items.map(c=>{
     const encFile=ENCYCLOPEDIA_PHOTOS[c.i]?.[0];

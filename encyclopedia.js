@@ -219,6 +219,9 @@ function encScrollToSearchArea(smooth=true){
 
 function encEnterSearchMode(scroll=true){
   dismissEncDoorway();
+  if(typeof ensureRetiredTermsLoaded==='function'){
+    ensureRetiredTermsLoaded().then(()=>encRender());
+  }
   encRender();
   if(scroll!==false)setTimeout(()=>encScrollToSearchArea(true),40);
 }
@@ -378,6 +381,12 @@ function getFiltered(){
     if(sortBy==='family')return(a.fam+a.n).localeCompare(b.fam+b.n);
     return a.i.localeCompare(b.i);
   });
+}
+
+function getRetiredMatches(){
+  const q=encSearchValue().toLowerCase();
+  if(!q||!Array.isArray(RETIRED_TERMS)||!RETIRED_TERMS.length)return[];
+  return RETIRED_TERMS.filter(t=>t.old_name&&t.old_name.toLowerCase().includes(q));
 }
 
 
@@ -563,6 +572,23 @@ function encCardHtml(c){
   return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${pillsHtml}${bestForHtml}</div></div>`;
 }
 
+function encRetiredResultHtml(t){
+  let actionHtml='';
+  if(t.redirect_type==='single'&&t.redirect_stone_id){
+    actionHtml=`<button type="button" class="enc-retired-link" onclick="openDetail('${escapeAttr(t.redirect_stone_id)}')">See ${escapeAttr(t.redirect_slug||'')}</button>`;
+  }else if(t.redirect_type==='family'&&Array.isArray(t.redirect_family_member_slugs)&&t.redirect_family_member_slugs.length){
+    const chips=t.redirect_family_member_slugs.map(slug=>{
+      const match=CRYSTALS.find(c=>c.slug===slug);
+      if(!match)return'';
+      return`<button type="button" class="enc-retired-link" onclick="openDetail('${escapeAttr(match.i)}')">${escapeAttr(match.n)}</button>`;
+    }).filter(Boolean).join('');
+    actionHtml=`<div class="enc-retired-family-label">${escapeAttr(t.redirect_family_label||'')}</div><div class="enc-retired-family-chips">${chips}</div>`;
+  }else{
+    actionHtml=`<div class="enc-retired-message">${escapeAttr(t.helper_message||'No longer part of our active collection.')}</div>`;
+  }
+  return`<div class="enc-retired-card"><div class="enc-retired-name">${escapeAttr(t.old_name)}</div><div class="enc-retired-note">No longer part of our active collection.</div>${actionHtml}</div>`;
+}
+
 const pagedStoneLists={};
 
 function ensureStoneListLoadMore(container,id){
@@ -618,6 +644,7 @@ function pagedStoneListLoadMore(stateKey){
 
 function encRender(){
   const list = getFiltered();
+  const retiredMatches = getRetiredMatches();
 
   const filtersActive = Object.values(filters).some(v => v !== 'all') ||
     encSearchValue().length > 0;
@@ -654,6 +681,18 @@ function encRender(){
 
   const grid = document.getElementById('crystal-grid');
   if(!grid) return;
+
+  let retiredPanel=document.getElementById('enc-retired-terms-panel');
+  if(!retiredPanel){
+    retiredPanel=document.createElement('div');
+    retiredPanel.id='enc-retired-terms-panel';
+    grid.parentNode.insertBefore(retiredPanel,grid);
+  }
+  retiredPanel.innerHTML=retiredMatches.length
+    ?`<div class="enc-retired-panel-label">Preserved terms</div>${retiredMatches.map(encRetiredResultHtml).join('')}`
+    :'';
+  retiredPanel.style.display=retiredMatches.length?'':'none';
+
   if(!list.length){
     grid.innerHTML = '<div class="empty-coll-state"><div class="empty-coll-icon">✦</div><div class="empty-coll-title">No stones found</div><div class="empty-coll-text">Try adjusting your filters or search for something different.</div><button class="empty-coll-btn" onclick="resetFilters()">Clear filters</button></div>';
     document.getElementById('load-more-wrap').style.display = 'none';

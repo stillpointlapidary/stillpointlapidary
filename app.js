@@ -1,5 +1,7 @@
 ﻿/* ── Main App JS (from lines 1949–6252) ── */
 let CRYSTALS = [];  // populated async from Supabase
+let RETIRED_TERMS = [];
+let _retiredTermsLoadPromise = null;
 const RESULT_BATCH_SIZE = 30;
 let MOOD_THEME_MAP={}, SUB_FILTERS={}, SUB_FILTER_KW={};
 // ── STATE ──
@@ -454,6 +456,75 @@ function escapeAttr(v){
 }
 function normalizeStoneName(v){
   return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function mapRow(r) {
+  const cats = Array.isArray(r.color_categories) ? r.color_categories : (r.color_categories ? [r.color_categories] : []);
+  const er1  = (r.energetic_role_1 || '').toLowerCase();
+  const er2  = (r.energetic_role_2 || '').toLowerCase();
+  const er3  = (r.energetic_role_3 || '').toLowerCase();
+  const pt   = (r.primary_theme   || '').toLowerCase();
+  const at   = (r.all_themes      || []).map(t => t.toLowerCase()).join(' ');
+  return {
+    i:             r.id,
+    slug:          r.slug              || '',
+    n:             r.name              || '',
+    a:             r.alternate_names   || '',
+    fam:           r.family            || '',
+    sp:            r.species           || '',
+    sy:            r.crystal_system    || '',
+    fo:            r.formation         || '',
+    tr:            r.transparency      || '',
+    c:             r.color             || '',
+    ch:            r.color_hex         || '',
+    cc:            r.color_cause       || '',
+    m:             r.mohs              || '',
+    g:             r.geo_notes         || '',
+    er1:           r.energetic_role_1  || '',
+    er2:           r.energetic_role_2  || '',
+    er3:           r.energetic_role_3  || '',
+    uw:            r.use_when          || '',
+    chakras:       r.chakras           || [],
+    element:       r.element           || '',
+    zodiac:        r.zodiac            || '',
+    aff:           r.affirmation       || '',
+    col_cat:       cats[0]             || '',
+    col_cats:      cats,
+    isMulti:       cats.length > 1,
+    primary_theme:  r.primary_theme     || '',
+    all_themes:     r.all_themes       || [],
+    intention_tags: r.intention_tags   || [],
+    tier:           r.collection_tier  || null,
+    man_made:      r.is_man_made       || false,
+    tox:           r.toxicity_note     || '',
+    card_props:    Array.isArray(r.card_properties) ? r.card_properties : [],
+    card_best_for: r.card_best_for     || '',
+    o:             false,
+    w:             false,
+    _search:       [er1, er2, er3, pt, at].join(' '),
+  };
+}
+
+function ensureRetiredTermsLoaded(){
+  if(_retiredTermsLoadPromise) return _retiredTermsLoadPromise;
+  if(typeof _supa==='undefined'){ return Promise.resolve([]); }
+  _retiredTermsLoadPromise = _supa.from('retired_stone_terms').select('*').then(({data,error})=>{
+    RETIRED_TERMS = (!error && data) ? data : [];
+    return RETIRED_TERMS;
+  }).catch(()=>{ RETIRED_TERMS=[]; return RETIRED_TERMS; });
+  return _retiredTermsLoadPromise;
+}
+
+function resolveStoneById(id){
+  const live=CRYSTALS.find(x=>x.i===id);
+  if(live)return live;
+  const t=RETIRED_TERMS.find(x=>x.old_stone_id===id);
+  if(t && t.legacy_runtime_snapshot){
+    const mapped=mapRow(t.legacy_runtime_snapshot);
+    mapped.archived=true;
+    return mapped;
+  }
+  return null;
 }
 
 const COLOR_HEX_MAP={'Purple':'#7a5a9a','Blue':'#4a7aaa','Green':'#4a8a5a','Pink':'#d4839a','Red':'#b04a4a','Orange':'#c4683a','Yellow':'#c9a832','Black':'#3a3530','White':'#d8d4ce','Brown':'#8b6f47','Gray':'#8a8a8a','Multi':'#9a7a8a'};
@@ -2163,53 +2234,6 @@ async function loadStonesAndInit() {
   loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
   const CACHE_KEY = 'spl_stones_cache';
   const CACHE_VER = 'v4';
-
-  function mapRow(r) {
-    const cats = Array.isArray(r.color_categories) ? r.color_categories : (r.color_categories ? [r.color_categories] : []);
-    const er1  = (r.energetic_role_1 || '').toLowerCase();
-    const er2  = (r.energetic_role_2 || '').toLowerCase();
-    const er3  = (r.energetic_role_3 || '').toLowerCase();
-    const pt   = (r.primary_theme   || '').toLowerCase();
-    const at   = (r.all_themes      || []).map(t => t.toLowerCase()).join(' ');
-    return {
-      i:             r.id,
-      slug:          r.slug              || '',
-      n:             r.name              || '',
-      a:             r.alternate_names   || '',
-      fam:           r.family            || '',
-      sp:            r.species           || '',
-      sy:            r.crystal_system    || '',
-      fo:            r.formation         || '',
-      tr:            r.transparency      || '',
-      c:             r.color             || '',
-      ch:            r.color_hex         || '',
-      cc:            r.color_cause       || '',
-      m:             r.mohs              || '',
-      g:             r.geo_notes         || '',
-      er1:           r.energetic_role_1  || '',
-      er2:           r.energetic_role_2  || '',
-      er3:           r.energetic_role_3  || '',
-      uw:            r.use_when          || '',
-      chakras:       r.chakras           || [],
-      element:       r.element           || '',
-      zodiac:        r.zodiac            || '',
-      aff:           r.affirmation       || '',
-      col_cat:       cats[0]             || '',
-      col_cats:      cats,
-      isMulti:       cats.length > 1,
-      primary_theme:  r.primary_theme     || '',
-      all_themes:     r.all_themes       || [],
-      intention_tags: r.intention_tags   || [],
-      tier:           r.collection_tier  || null,
-      man_made:      r.is_man_made       || false,
-      tox:           r.toxicity_note     || '',
-      card_props:    Array.isArray(r.card_properties) ? r.card_properties : [],
-      card_best_for: r.card_best_for     || '',
-      o:             false,
-      w:             false,
-      _search:       [er1, er2, er3, pt, at].join(' '),
-    };
-  }
 
   function fetchFresh() {
     return _supa.from('stones').select('*').order('id').then(({ data, error }) => {
