@@ -1214,7 +1214,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* PHOTO CARDS - clean white fade for real photos, soft wash only for placeholders */
 .card-img-zone.has-photo{background:linear-gradient(180deg,#ffffff 0%,#ffffff 62%,#fbfaf8 100%)}
-.card-img-zone.has-photo img{width:100%;height:100%;max-width:100%;max-height:110px;object-fit:cover;padding:0}
+.card-img-zone.has-photo img{width:100%;height:100%;max-width:100%;max-height:110px;object-fit:contain;padding:8px}
 .card-img-zone.no-photo{background:linear-gradient(180deg,#ffffff 0%,#fbfaf8 100%);position:relative}
 .no-photo-orb{width:46px;height:46px;border-radius:50%;display:block;background:var(--orb,#d8d4ce);opacity:0.78;box-shadow:0 0 0 12px color-mix(in srgb,var(--orb,#d8d4ce) 16%,transparent),0 10px 24px rgba(42,37,32,0.08)}
 .no-photo-orb.multi{background:var(--orb,#d8d4ce)}
