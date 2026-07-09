@@ -491,8 +491,10 @@ function buildId2Colors(){
   ID2_COLORS.forEach(col=>{
     const btn=document.createElement('button');
     btn.className='id2-color-btn'; btn.title=col.val;
-    btn.style.cssText=`background:${col.hex};border:2.5px solid ${col.val==='White'?'var(--border)':'transparent'}`;
-    if(id2State.color===col.val){btn.classList.add('active');btn.style.border=`2.5px solid var(--ink)`;}
+    const gradient=(typeof stoneDotGradient==='function')?stoneDotGradient(col.hex,[]):col.hex;
+    const borderColor=col.val==='White'?'var(--border)':'rgba(42,37,32,0.14)';
+    btn.style.cssText=`background:${gradient};border-color:${borderColor}`;
+    if(id2State.color===col.val){btn.classList.add('active');}
     btn.onclick=()=>{
       id2State.color=col.val;
       renderId2Steps();
