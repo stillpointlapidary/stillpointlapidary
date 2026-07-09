@@ -203,6 +203,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .d-id{font-size:10px;letter-spacing:0.08em;color:var(--ink2r);text-transform:uppercase;margin-bottom:5px}
 .d-name{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:4px}
 .d-alt{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-style:italic;color:var(--ink2r);margin-bottom:5px}
+.drawer-full-entry-link{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;letter-spacing:0.02em;color:var(--accent);text-decoration:none;border:none;background:none;padding:0;margin-bottom:6px;transition:color 0.15s}
+.drawer-full-entry-link:hover,.drawer-full-entry-link:focus{color:#7a6547;text-decoration:underline}
+.drawer-full-entry-icon{width:13px;height:13px;flex-shrink:0}
 .fam-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 12px;border:0.5px solid var(--accent2);border-radius:20px;color:var(--accent);margin-bottom:1.25rem;cursor:pointer;background:var(--stone2);transition:all 0.15s}
 .fam-tag:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
 .fam-tag::after{content:"→";font-size:10px;opacity:0.7}

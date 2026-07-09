@@ -670,6 +670,7 @@ function openDetail(id){
   document.getElementById('d-id').textContent=c.i;
   document.getElementById('d-name').textContent=c.n;
   document.getElementById('d-alt').textContent=c.a?'Also known as: '+c.a:'';
+  updateDrawerFullEntryLink(c);
   document.getElementById('d-fam').textContent=c.fam+(c.sp&&c.sp!==c.fam?' · '+c.sp:'');
 
   document.getElementById('d-uw').textContent=c.uw||'—';
@@ -739,6 +740,47 @@ function findStoneEntry(identifier,name){
 }
 
 let pendingDirectStoneOpen=null;
+
+// ── Published full-entry slugs (for drawer "View full encyclopedia entry" link) ──
+let _publishedFullEntrySlugs=null;
+let _publishedFullEntrySlugsPromise=null;
+function loadPublishedFullEntrySlugs(){
+  if(_publishedFullEntrySlugsPromise)return _publishedFullEntrySlugsPromise;
+  _publishedFullEntrySlugsPromise=(async()=>{
+    if(typeof _supa==='undefined'){_publishedFullEntrySlugs=new Set();return _publishedFullEntrySlugs;}
+    try{
+      const {data,error}=await _supa.from('enc_stone_content').select('slug').eq('published',true);
+      _publishedFullEntrySlugs=new Set(!error&&data?data.map(r=>String(r.slug||'').trim().toLowerCase()).filter(Boolean):[]);
+    }catch(err){
+      console.warn('Failed to load published full-entry slugs:',err);
+      _publishedFullEntrySlugs=new Set();
+    }
+    return _publishedFullEntrySlugs;
+  })();
+  return _publishedFullEntrySlugsPromise;
+}
+function updateDrawerFullEntryLink(c){
+  const link=document.getElementById('d-full-entry-link');
+  if(!link||!c)return;
+  const slug=String(c.slug||'').trim().toLowerCase();
+  const applyIfCurrent=(set)=>{
+    if(!currentCrystal||currentCrystal.i!==c.i)return;
+    if(slug&&set.has(slug)){
+      link.href=`stones/stone.html?slug=${encodeURIComponent(slug)}`;
+      link.style.display='';
+    }else{
+      link.style.display='none';
+      link.removeAttribute('href');
+    }
+  };
+  link.style.display='none';
+  if(!slug)return;
+  if(_publishedFullEntrySlugs){
+    applyIfCurrent(_publishedFullEntrySlugs);
+  }else{
+    loadPublishedFullEntrySlugs().then(applyIfCurrent);
+  }
+}
 
 function openPendingStoneEntry(identifier,name){
   const found=findStoneEntry(identifier,name);
@@ -1949,6 +1991,7 @@ function updateStoneCounts(){
 
 function init(){
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
+  loadPublishedFullEntrySlugs();
   renderSotd();
   // Load custom encyclopedia entries
   customEntries.forEach(e=>{if(!CRYSTALS.find(c=>c.i===e.i))CRYSTALS.push(e);});
