@@ -622,6 +622,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .grid-modal-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid var(--border);background:transparent;cursor:pointer;font-size:16px;color:var(--ink2);display:flex;align-items:center;justify-content:center}
 .grid-modal-close:hover{background:var(--stone2)}
 .grid-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin:-0.25rem 2.25rem 1rem 0}
+@media(max-width:600px){.grid-modal{padding:1.25rem}.grid-modal-layout{grid-template-columns:1fr!important;gap:1.25rem!important}}
 @media print{body>*:not(.app-shell){display:none!important}.topbar,.main-nav,.studio-banner,footer,.grid-modal-close,.grid-modal-actions{display:none!important}.grid-modal-overlay{display:block!important;position:static!important;background:white!important;padding:0!important}.grid-modal{box-shadow:none!important;width:100%!important;max-height:none!important;overflow:visible!important;padding:0!important}.grid-modal *{color:#2a2520!important}}
 @media(max-width:900px){.grid-cards-container{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.grid-card{flex-direction:column}.grid-card-swatch{width:100%;height:100px}.grid-cards-container{grid-template-columns:1fr}}
 @media(max-width:900px){.grid-intro-main{grid-template-columns:1fr}.grid-intro-photo{min-height:220px;max-height:300px}}

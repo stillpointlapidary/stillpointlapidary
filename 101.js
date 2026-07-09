@@ -988,11 +988,11 @@ function openGridModal(gridId) {
       <p style="font-size:13px;color:var(--ink2);line-height:1.7">${grid.intro}</p>
     </div>
     
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.5rem">
-      <div>
+    <div class="grid-modal-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.5rem">
+      <div style="min-width:0">
         <svg viewBox="0 0 200 220" width="100%" id="modal-svg-${grid.id}" style="max-width:240px;display:block;margin:0 auto"></svg>
       </div>
-      <div>
+      <div style="min-width:0">
         <div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Stones</div>
         <table style="width:100%;border-collapse:collapse">
           ${stoneRows}
