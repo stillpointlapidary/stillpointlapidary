@@ -131,7 +131,7 @@ function show101(sec,btn){
   if(sec==='grids')init101Grids();
   if(sec==='shapes'){renderShapes();requestAnimationFrame(function(){setTimeout(function(){if(window._updateShapeArrows)window._updateShapeArrows();},100);});}
   if(sec==='families')initFamilies();
-  if(sec==='roles')setupMobileRoleAccordion();
+  if(sec==='roles'){setupMobileRoleAccordion();if(typeof equalizeKitCardHeights==='function')requestAnimationFrame(equalizeKitCardHeights);}
 }
 
 function sync101Dropdown(sec){

@@ -1410,21 +1410,46 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .kit-role{font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:400;color:var(--ink);margin-bottom:5px}
 .kit-stones{font-size:11px;color:var(--ink2);line-height:1.75}
 .kit-stone{display:block}
+.kit-stone--clickable{cursor:pointer}
+.kit-stone--clickable:hover,.kit-stone--clickable:focus-visible{text-decoration:underline}
 .kit-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:0.04em;color:var(--ink2);border:0.5px solid var(--border);border-radius:6px;padding:9px 16px;background:var(--white);cursor:pointer;font-family:'Jost',sans-serif}
 .kit-cta:hover{background:var(--stone2);border-color:var(--accent2)}
+.kit-icon-wrap,.kit-desc,.kit-divider{display:none}
+.enc-icon{display:inline-block;width:1em;height:1em;flex:0 0 auto;background-color:currentColor;vertical-align:-0.125em;mask-repeat:no-repeat;mask-position:center;mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain}
+.icon-grounding{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/grounding.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/grounding.svg")}
+.icon-protection{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/protection.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/protection.svg")}
+.icon-heart-healing{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/heart-healing.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/heart-healing.svg")}
+.icon-clarity-focus{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/clarity-focus.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/clarity-focus.svg")}
+.icon-spiritual-connection{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/spiritual-connection.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/spiritual-connection.svg")}
 @media(min-width:701px){
-  #s101-roles .kit-grid{gap:14px;margin-bottom:1.4rem}
-  #s101-roles .kit-card{border-color:var(--border2);border-radius:12px;background:var(--white);box-shadow:0 1px 3px rgba(42,37,32,0.05),0 6px 16px rgba(42,37,32,0.045)}
-  #s101-roles .kit-stripe{width:5px}
-  #s101-roles .kit-card-body{padding:1.15rem 1.25rem 1.3rem}
-  #s101-roles .kit-role{font-size:16px;letter-spacing:0.01em;margin-bottom:11px;padding-bottom:9px;border-bottom:0.5px solid var(--border2)}
-  #s101-roles .kit-stones{display:flex;flex-direction:column;gap:6px;line-height:1.3}
-  #s101-roles .kit-stone{display:inline-flex;align-items:center;width:fit-content;font-size:11.5px;letter-spacing:0.01em;color:var(--ink);background:var(--stone2);border-radius:20px;padding:4px 11px}
+  #s101-roles .kit-grid{gap:14px;margin-bottom:1.4rem;align-items:stretch}
+  #s101-roles .kit-card{flex-direction:column;border-color:var(--border2);border-radius:12px;background:var(--white);box-shadow:0 1px 3px rgba(42,37,32,0.05),0 6px 16px rgba(42,37,32,0.045);text-align:center}
+  #s101-roles .kit-stripe{width:100%;height:4px}
+  #s101-roles .kit-card-body{display:flex;flex-direction:column;align-items:center;padding:1.5rem 1.1rem 1.35rem;width:100%}
+  #s101-roles .kit-icon-wrap{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:42px;height:42px;border-radius:50%;margin-bottom:12px}
+  #s101-roles .kit-icon{width:20px;height:20px}
+  #s101-roles .kit-role{display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1.25;letter-spacing:0.01em;min-height:2.5em;margin-bottom:6px}
+  #s101-roles .kit-desc{display:block;font-size:12px;line-height:1.55;color:var(--ink2);margin-bottom:14px;max-width:210px;min-height:4.65em}
+  #s101-roles .kit-divider{display:block;flex-shrink:0;width:30px;height:1px;background:var(--border2);margin-bottom:14px}
+  #s101-roles .kit-stones{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+  #s101-roles .kit-stone{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;white-space:nowrap;font-size:11px;letter-spacing:0.005em;color:var(--ink);background:var(--stone2);border-radius:20px;padding:4px 11px;box-sizing:border-box}
+  #s101-roles .kit-stone--clickable{cursor:pointer;transition:filter 0.15s}
+  #s101-roles .kit-stone--clickable:hover,#s101-roles .kit-stone--clickable:focus-visible{filter:brightness(0.94)}
   #s101-roles .kit-grid .kit-card:nth-child(1) .kit-stone{background:rgba(139,111,71,0.14);color:#6b5636}
+  #s101-roles .kit-grid .kit-card:nth-child(1) .kit-icon-wrap{background:rgba(139,111,71,0.14)}
+  #s101-roles .kit-grid .kit-card:nth-child(1) .kit-icon{color:#6b5636}
   #s101-roles .kit-grid .kit-card:nth-child(2) .kit-stone{background:rgba(58,53,48,0.09);color:#3a3530}
+  #s101-roles .kit-grid .kit-card:nth-child(2) .kit-icon-wrap{background:rgba(58,53,48,0.09)}
+  #s101-roles .kit-grid .kit-card:nth-child(2) .kit-icon{color:#3a3530}
   #s101-roles .kit-grid .kit-card:nth-child(3) .kit-stone{background:rgba(176,74,106,0.13);color:#8a3a53}
+  #s101-roles .kit-grid .kit-card:nth-child(3) .kit-icon-wrap{background:rgba(176,74,106,0.13)}
+  #s101-roles .kit-grid .kit-card:nth-child(3) .kit-icon{color:#8a3a53}
   #s101-roles .kit-grid .kit-card:nth-child(4) .kit-stone{background:rgba(74,122,138,0.13);color:#3a5f6d}
+  #s101-roles .kit-grid .kit-card:nth-child(4) .kit-icon-wrap{background:rgba(74,122,138,0.13)}
+  #s101-roles .kit-grid .kit-card:nth-child(4) .kit-icon{color:#3a5f6d}
   #s101-roles .kit-grid .kit-card:nth-child(5) .kit-stone{background:rgba(122,106,154,0.14);color:#5f4f7d}
+  #s101-roles .kit-grid .kit-card:nth-child(5) .kit-icon-wrap{background:rgba(122,106,154,0.14)}
+  #s101-roles .kit-grid .kit-card:nth-child(5) .kit-icon{color:#5f4f7d}
 }
 @media(max-width:700px){.kit-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){

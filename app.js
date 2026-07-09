@@ -1989,6 +1989,49 @@ function updateStoneCounts(){
   ['intro-stone-count','browse-stone-count','divider-stone-count','hero-stone-count','explore-stone-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
 }
 
+// ── "Build a Balanced Working Kit" stone pills — open the encyclopedia drawer ──
+// Resolves only on an exact normalized-name match (against CRYSTALS.n or a single
+// comma-split alternate name in CRYSTALS.a). Ambiguous or unmatched names are left
+// as plain, non-clickable text rather than guessing.
+function resolveKitStoneEntry(name){
+  const norm=normalizeStoneName(name);
+  if(!norm)return null;
+  const nameMatches=CRYSTALS.filter(c=>normalizeStoneName(c.n)===norm);
+  const altMatches=CRYSTALS.filter(c=>String(c.a||'').split(/\s*,\s*/).some(a=>normalizeStoneName(a)===norm));
+  const unique=[...new Set([...nameMatches,...altMatches])];
+  return unique.length===1?unique[0]:null;
+}
+// Desktop-only; equalizes role-title and description block heights across the
+// five kit cards so titles/descriptions/dividers/stone-pills line up in a row,
+// regardless of how many lines any individual title or description wraps to.
+function equalizeKitCardHeights(){
+  const cards=document.querySelectorAll('#s101-roles .kit-card');
+  if(!cards.length)return;
+  ['.kit-role','.kit-desc'].forEach(sel=>{
+    const els=Array.from(cards).map(c=>c.querySelector(sel)).filter(Boolean);
+    if(!els.length)return;
+    els.forEach(el=>{el.style.minHeight='';});
+    const max=Math.max(...els.map(el=>el.getBoundingClientRect().height));
+    els.forEach(el=>{el.style.minHeight=max+'px';});
+  });
+}
+let _kitResizeTimer=null;
+window.addEventListener('resize',()=>{clearTimeout(_kitResizeTimer);_kitResizeTimer=setTimeout(equalizeKitCardHeights,150);});
+
+function wireKitStoneLinks(){
+  document.querySelectorAll('#s101-roles .kit-stone').forEach(el=>{
+    if(el.dataset.kitWired)return;
+    el.dataset.kitWired='1';
+    const entry=resolveKitStoneEntry(el.textContent);
+    if(!entry){console.warn('Kit stone pill could not be safely resolved to a single encyclopedia entry:',el.textContent.trim());return;}
+    el.classList.add('kit-stone--clickable');
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.addEventListener('click',()=>openDetail(entry.i));
+    el.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDetail(entry.i);}});
+  });
+}
+
 function init(){
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
   loadPublishedFullEntrySlugs();
@@ -1999,6 +2042,8 @@ function init(){
   // Encyclopedia-only initialisation (skipped on homepage)
   const isEncyclopediaPage=!!document.getElementById('crystal-grid');
   if(isEncyclopediaPage){
+    wireKitStoneLinks();
+    requestAnimationFrame(equalizeKitCardHeights);
     buildEncPanels();
     renderEncTierPreview();
     renderEncTierCounts();
