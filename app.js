@@ -437,7 +437,6 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0375": ["cotton-candy-agate-specimen.webp"],
   "C-0376": ["ferruginous-quartz-obelisk.webp"],
   "C-0377": ["fluorite-with-pyrite-specimen.webp"],
-  "C-0378": ["gobi-mushroom-family.webp", "gobi-agate-green-mushroom.webp", "gobi-agate-red-mushroom.webp"],
   "C-0379": ["green-chalcedony-tumble.webp"],
   "C-0380": ["green-flower-sakura-jasper-heart.webp"],
   "C-0382": ["heulandite-and-calcite-specimen.webp"],
