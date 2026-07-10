@@ -26,6 +26,32 @@ create policy "Stone of day schedule is publicly readable"
   for select
   using (is_active = true);
 
+-- Admin write access for the admin-only SOTD Calendar UI (encyclopedia.js:
+-- _sotdCalSaveSchedule, _sotdCalDeleteSchedule, and the approve_sotd_preview
+-- RPC all rely on this policy for insert/update/delete).
+-- Email list must match ADMIN_EMAILS in app.js exactly.
+drop policy if exists "Admins can manage schedule"
+  on public.stone_of_day_schedule;
+
+create policy "Admins can manage schedule"
+  on public.stone_of_day_schedule
+  for all
+  to authenticated
+  using (
+    lower(auth.jwt() ->> 'email') = any (array[
+      'kikiholz31@duck.com',
+      'christieholzwarth@gmail.com',
+      'dustin@stillpointdfw.com'
+    ])
+  )
+  with check (
+    lower(auth.jwt() ->> 'email') = any (array[
+      'kikiholz31@duck.com',
+      'christieholzwarth@gmail.com',
+      'dustin@stillpointdfw.com'
+    ])
+  );
+
 -- Optional convenience function for simple database-side schedule generation.
 -- This prioritizes collection Tier 1, then the rest.
 -- For image-aware scheduling, use generate_stone_of_day_seed.js instead.
