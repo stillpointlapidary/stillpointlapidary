@@ -1667,10 +1667,6 @@ function renderDesktopSotdCard(s){
       <div class="sotd-photo-panel" aria-label="${escapeAttr(s.name)} photo">
         <div class="sotd-photo-frame">
           ${photoHtml}
-          <div class="sotd-photo-caption">
-            <span class="sotd-photo-name">${escapeAttr(s.name)}</span>
-            <span class="sotd-photo-rule" aria-hidden="true"></span>
-          </div>
         </div>
       </div>
       <div class="sotd-main">
@@ -1679,7 +1675,7 @@ function renderDesktopSotdCard(s){
           <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
           ${s.sotd_essence?`<div class="sotd-essence-pill" style="${pillStyle}">${escapeAttr(s.sotd_essence)}</div>`:''}
         </div>
-        ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
+        ${s.card_use_when?`<div class="sotd-use-when-block"><span class="sotd-use-label">Use When</span><p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p></div>`:''}
         <div class="sotd-actions">
           <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="sotd-action-label">View Full Entry</span></button>
           <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><span class="sotd-action-label">Add to Collection</span></button>

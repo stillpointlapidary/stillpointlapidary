@@ -805,10 +805,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .desktop-sotd-section .sotd-photo-frame{
     position:relative;
     width:100%;
-    height:100%;
+    aspect-ratio:1/1;
     min-height:0;
     overflow:hidden;
-    background:radial-gradient(circle at 50% 34%,rgba(255,255,255,.96),rgba(248,243,236,.70) 68%,rgba(245,239,230,.90) 100%);
     border:1px solid rgba(169,135,95,.15);
     border-radius:15px;
   }
@@ -818,9 +817,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     inset:0;
     width:100%;
     height:100%;
-    padding:24px 18px 52px;
-    object-fit:contain;
-    object-position:center 40%;
+    object-fit:cover;
+    object-position:center 38%;
   }
 
   .desktop-sotd-section .sotd-photo-fallback{
@@ -829,38 +827,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     display:flex;
     align-items:center;
     justify-content:center;
-  }
-
-  .desktop-sotd-section .sotd-photo-caption{
-    position:absolute;
-    left:50%;
-    bottom:38px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    transform:translateX(-50%);
-    text-align:center;
-    pointer-events:none;
-    white-space:nowrap;
-  }
-
-  .desktop-sotd-section .sotd-photo-name{
-    font-family:'Jost',sans-serif;
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:.17em;
-    line-height:1;
-    text-transform:uppercase;
-    color:#947553;
-  }
-
-  .desktop-sotd-section .sotd-photo-rule{
-    display:block;
-    width:38px;
-    height:1px;
-    margin-top:9px;
-    background:rgba(147,121,91,.32);
-    border-radius:999px;
+    background:radial-gradient(circle at 50% 34%,rgba(255,255,255,.96),rgba(248,243,236,.70) 68%,rgba(245,239,230,.90) 100%);
   }
 
   .desktop-sotd-section .sotd-main{
@@ -924,9 +891,24 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
     color:#514a45;
   }
 
-  .desktop-sotd-section .sotd-use-when{
+  .desktop-sotd-section .sotd-use-when-block{
     max-width:720px;
     margin:0 0 1.1rem;
+  }
+
+  .desktop-sotd-section .sotd-use-label{
+    display:block;
+    margin-bottom:6px;
+    font-family:'Jost',sans-serif;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#9a7d58;
+  }
+
+  .desktop-sotd-section .sotd-use-when{
+    margin:0;
     font-family:'Jost',sans-serif;
     font-size:0.95rem;
     font-weight:400;
