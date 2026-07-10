@@ -1863,9 +1863,10 @@ function renderMobileSotdCard(s){
       <div class="msotd-image-wrap">
         ${photoHtml}
         <div class="msotd-overlay">
-          <h3 class="msotd-name ${nameSizeClass}">${sname}</h3>
-          <span class="msotd-name-rule" aria-hidden="true"></span>
-          ${s.sotd_essence?`<div class="msotd-pill" style="${pillStyle}">${escapeAttr(s.sotd_essence)}</div>`:''}
+          <div class="msotd-caption-row">
+            <h3 class="msotd-name ${nameSizeClass}">${sname}</h3>
+            ${s.sotd_essence?`<div class="msotd-pill" style="${pillStyle}">${escapeAttr(s.sotd_essence)}</div>`:''}
+          </div>
         </div>
       </div>
       <div class="msotd-body">
