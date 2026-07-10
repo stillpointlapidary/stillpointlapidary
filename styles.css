@@ -1512,8 +1512,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
 .fam-card{border:0.5px solid var(--border);border-radius:10px;overflow:hidden;background:var(--white);cursor:pointer;transition:all 0.15s}
 .fam-card:hover{border-color:var(--accent2);transform:translateY(-2px);box-shadow:0 4px 16px rgba(42,37,32,0.1)}
-.fam-photo{height:110px;width:100%;position:relative;overflow:hidden;flex-shrink:0}
-.fam-photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.fam-photo{height:110px;width:100%;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--stone2)}
+.fam-photo-img{max-width:70%;max-height:78%;width:auto;height:auto;object-fit:contain;display:block}
 .fam-photo-placeholder{position:absolute;inset:0}
 .fam-body{padding:0.85rem 0.9rem}
 /* ENC PHOTO LIGHTBOX */
@@ -1545,8 +1545,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #s101-families .fam-grid{grid-template-columns:1fr;gap:8px;margin-bottom:1.2rem}
   #s101-families .fam-card{display:grid;grid-template-columns:9px minmax(0,1fr);border-radius:10px;min-height:0}
   #s101-families .fam-card:hover{transform:none}
-  #s101-families .fam-photo{grid-column:1;grid-row:1;width:9px;height:auto;min-height:100%;border-right:0.5px solid rgba(42,37,32,0.08)}
-  #s101-families .fam-photo-img{width:100%;height:100%;object-fit:cover}
+  #s101-families .fam-photo{grid-column:1;grid-row:1;width:9px;height:auto;min-height:100%;border-right:0.5px solid rgba(42,37,32,0.08);display:block;background:none}
+  #s101-families .fam-photo-img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
   #s101-families .fam-photo-placeholder{position:absolute;inset:0}
   #s101-families .fam-body{grid-column:2;padding:0.75rem 0.85rem}
   #s101-families .fam-name{font-size:16px;margin-bottom:1px}
