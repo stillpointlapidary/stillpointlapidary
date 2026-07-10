@@ -42,6 +42,19 @@
 --   • No photo-approval column exists on stones yet; image filtering is not
 --     enforced server-side. Add a boolean column (e.g. sotd_photo_approved)
 --     and uncomment the [IMAGE] line below when ready.
+--   • card_quality_pill and card_pair_with are intentionally NOT selected below
+--     — retired from SOTD display (still used elsewhere, e.g. encyclopedia
+--     cards). card_best_for IS selected again — approved for the SOTD right
+--     rail / mobile detail rows (right-rail-only, not the old inline row).
+--   • sotd_essence, sotd_energy_label, sotd_question, sotd_takeaway are the
+--     SOTD-only display fields (see supabase/migrations/sotd_pilot_add_fields.sql
+--     and sotd_pilot_add_takeaway.sql). sotd_worth_noticing exists on the table
+--     but is intentionally NOT selected — retired from SOTD display, column kept.
+--   • card_use_when and card_note are reused as-is for Use When / Today's Practice.
+--   • sotd_energy_label is parsed client-side into Energetic Role / Chakra for
+--     the right rail — see parseSotdEnergyLabel() in app.js. No separate role
+--     column is stored; Chakra falls back to primary_chakra when the label is
+--     absent, Energetic Role has no fallback and is omitted in that case.
 -- ─────────────────────────────────────────────────────────────────────────────
 
 create or replace function public.get_stone_of_day()
@@ -89,9 +102,9 @@ begin
 
   if found then
     select row_to_json(s) into v_result from (
-      select id, name, card_quality_pill, card_summary, card_use_when,
-             card_best_for, primary_chakra, card_pair_with, card_note,
-             color_hex, collection_tier
+      select id, name, card_summary, card_use_when, primary_chakra,
+             card_note, color_hex, collection_tier, sotd_essence,
+             sotd_energy_label, sotd_question, sotd_takeaway, card_best_for
       from   public.stones
       where  id = v_stone_id
     ) s;
@@ -149,9 +162,9 @@ begin
     where  h.feature_date = v_date;
 
     select row_to_json(s) into v_result from (
-      select id, name, card_quality_pill, card_summary, card_use_when,
-             card_best_for, primary_chakra, card_pair_with, card_note,
-             color_hex, collection_tier
+      select id, name, card_summary, card_use_when, primary_chakra,
+             card_note, color_hex, collection_tier, sotd_essence,
+             sotd_energy_label, sotd_question, sotd_takeaway, card_best_for
       from   public.stones
       where  id = v_stone_id
     ) s;
@@ -247,9 +260,9 @@ begin
 
   -- ── 7. Return the committed history row ───────────────────────────────────
   select row_to_json(s) into v_result from (
-    select id, name, card_quality_pill, card_summary, card_use_when,
-           card_best_for, primary_chakra, card_pair_with, card_note,
-           color_hex, collection_tier
+    select id, name, card_summary, card_use_when, primary_chakra,
+           card_note, color_hex, collection_tier, sotd_essence,
+           sotd_energy_label, sotd_question, sotd_takeaway, card_best_for
     from   public.stones
     where  id = v_stone_id
   ) s;

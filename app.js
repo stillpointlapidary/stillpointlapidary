@@ -1573,6 +1573,18 @@ function _renderSotdEventBanner(){
   }
 }
 
+// sotd_energy_label is display-ready text like "Grounding · Root Chakra" or
+// "Vitality · Sacral / Solar Plexus". Split on the delimiter for the rail's
+// separate Energetic Role / Chakra rows; strip a trailing "Chakra" word from
+// the chakra portion only (never invents a role/chakra value).
+function parseSotdEnergyLabel(label){
+  if(!label)return{role:'',chakra:''};
+  const parts=String(label).split(' · ');
+  const role=(parts[0]||'').trim();
+  const chakra=(parts[1]||'').trim().replace(/\s*Chakra\s*$/i,'').trim();
+  return{role,chakra};
+}
+
 function renderDesktopSotdCard(s){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container||!s)return;
@@ -1587,6 +1599,7 @@ function renderDesktopSotdCard(s){
   const _dKicker=SFC_KICKER_COLORS[_dChakra]||'#8B7355';
   const _dCardVars=`--sotd-btn-bg:${_dBtn.bg};--sotd-btn-border:${_dBtn.border};--sotd-btn-text:${_dBtn.text};--sotd-banner-bg:${_dBanner};--sotd-banner-border:${_dBtn.border};--sotd-kicker-color:${_dKicker}`;
   const _dEventHtml=renderSotdEventAnnouncement(s);
+  // Reused verbatim from the previous SOTD Best For / Chakra rows.
   const ICON_BESTFOR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
     <path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/>
     <path d="M22 22c2.4-4.8 9.8-4.8 12.2 0 4.8-.2 7.1 5.7 3.4 8.7 2.2 4.4-2.4 8.8-6.7 6.6-3 3.7-8.8 1.4-8.6-3.4-4.7-.9-5.9-7.1-1.8-9.6.1-.8.6-1.6 1.5-2.3Z"/>
@@ -1600,10 +1613,13 @@ function renderDesktopSotdCard(s){
     <path d="M32 48c8 4 17 2 23-6-9-3-17-1-23 6Z"/>
     <path d="M16 54h32"/>
   </svg>`;
-  const ICON_PAIR=`<svg class="sotd-detail-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
-    <circle cx="25" cy="32" r="14"/>
-    <circle cx="39" cy="32" r="14"/>
+  // Approved — assets/SVGs/lightning-bolt.svg, used for Energetic Role.
+  const ICON_ROLE=`<svg class="sotd-detail-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M13.5 2.8L6.8 13h4.8L10.5 21l6.7-10.2h-4.8z"/>
   </svg>`;
+  const _energy=parseSotdEnergyLabel(s.sotd_energy_label);
+  const roleValue=_energy.role;
+  const chakraValue=_energy.chakra||s.primary_chakra||'';
   const bestForRow=s.card_best_for?`
       <div class="sotd-detail-row">
         <div class="sotd-detail-icon" aria-hidden="true">${ICON_BESTFOR}</div>
@@ -1612,23 +1628,39 @@ function renderDesktopSotdCard(s){
           <span class="sotd-detail-value">${escapeAttr(s.card_best_for)}</span>
         </div>
       </div>`:'';
-  const chakraRow=s.primary_chakra?`
+  const roleRow=roleValue?`
+      <div class="sotd-detail-row">
+        <div class="sotd-detail-icon" aria-hidden="true">${ICON_ROLE}</div>
+        <div class="sotd-detail-copy">
+          <span class="sotd-detail-label">Energetic role</span>
+          <span class="sotd-detail-value">${escapeAttr(roleValue)}</span>
+        </div>
+      </div>`:'';
+  const chakraRow=chakraValue?`
       <div class="sotd-detail-row">
         <div class="sotd-detail-icon" aria-hidden="true">${ICON_CHAKRA}</div>
         <div class="sotd-detail-copy">
-          <span class="sotd-detail-label">Primary chakra</span>
-          <span class="sotd-detail-value">${escapeAttr(s.primary_chakra)}</span>
+          <span class="sotd-detail-label">Chakra</span>
+          <span class="sotd-detail-value">${escapeAttr(chakraValue)}</span>
         </div>
       </div>`:'';
-  const pairRow=s.card_pair_with?`
-      <div class="sotd-detail-row">
-        <div class="sotd-detail-icon" aria-hidden="true">${ICON_PAIR}</div>
-        <div class="sotd-detail-copy">
-          <span class="sotd-detail-label">Pair with</span>
-          <span class="sotd-detail-value">${escapeAttr(s.card_pair_with)}</span>
-        </div>
+  const hasRail=bestForRow||roleRow||chakraRow;
+  const practiceNote=s.card_note?`
+      <div class="sotd-note">
+        <div class="sotd-note-label">Today's Practice</div>
+        <div class="sotd-note-text">${escapeAttr(s.card_note)}</div>
       </div>`:'';
-  const hasDetails=bestForRow||chakraRow||pairRow;
+  const questionNote=s.sotd_question?`
+      <div class="sotd-note">
+        <div class="sotd-note-label">Today's Question</div>
+        <div class="sotd-note-text">${escapeAttr(s.sotd_question)}</div>
+      </div>`:'';
+  const takeawayNote=s.sotd_takeaway?`
+      <div class="sotd-note">
+        <div class="sotd-note-label">Today's Takeaway</div>
+        <div class="sotd-note-text sotd-note-text--takeaway">${escapeAttr(s.sotd_takeaway)}</div>
+      </div>`:'';
+  const hasDaily=practiceNote||questionNote||takeawayNote;
   container.innerHTML=`
     <section class="sotd-card" style="${_dCardVars}" aria-labelledby="sotd-heading">
       <div class="sotd-event-row">${_dEventHtml}</div>
@@ -1645,23 +1677,24 @@ function renderDesktopSotdCard(s){
         <p class="sotd-eyebrow">Today's Stone</p>
         <div class="sotd-title-row">
           <h2 id="sotd-heading" class="sotd-title">${escapeAttr(s.name)}</h2>
-          ${s.card_quality_pill?`<div class="sotd-quality-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+          ${s.sotd_essence?`<div class="sotd-essence-pill" style="${pillStyle}">${escapeAttr(s.sotd_essence)}</div>`:''}
         </div>
         ${s.card_use_when?`<p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p>`:''}
         <div class="sotd-actions">
           <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="sotd-action-label">View Full Entry</span></button>
           <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><span class="sotd-action-label">Add to Collection</span></button>
           <button class="sotd-button sotd-button-secondary sotd-button-wish sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" aria-pressed="false"><span class="sotd-action-icon" aria-hidden="true"><svg class="sotd-wish-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span><span class="sotd-action-label">Wishlist</span></button>
-          <span class="sfc-signin">Sign in to save to your collection</span>
         </div>
       </div>
-      ${hasDetails||s.card_note?`
-      <aside class="sotd-details" aria-label="Stone details">
-        ${hasDetails?`${bestForRow}${chakraRow}${pairRow}`:''}
+      ${hasRail?`
+      <aside class="sotd-rail" aria-label="Stone details">
+        ${bestForRow}${roleRow}${chakraRow}
       </aside>`:''}
-      ${s.card_note?`<div class="sotd-practice">
-        <div class="sotd-practice-label">Today's Practice</div>
-        <div class="sotd-practice-text">${escapeAttr(s.card_note)}</div>
+      ${hasDaily?`
+      <div class="sotd-daily">
+        <div class="sotd-daily-grid">
+          ${practiceNote}${questionNote}${takeawayNote}
+        </div>
       </div>`:''}
     </section>`;
   const encBtn=container.querySelector('.sfc-btn-enc');
@@ -1709,13 +1742,11 @@ function _sotdSetWishState(btn,wishlisted){
 function updateDesktopSotdAuth(){
   const container=document.getElementById('desktop-sotd-wrap');
   if(!container)return;
-  const signin=container.querySelector('.sfc-signin');
   const collBtn=container.querySelector('.sfc-btn-coll');
   const wishBtn=container.querySelector('.sfc-btn-wish');
   const stone=desktopSotdStone;
   const isOwned=stone&&!!owned[stone.id];
   const isWished=stone&&!!wish[stone.id];
-  if(signin)signin.style.display=_currentUser?'none':'';
   if(collBtn){
     collBtn.style.display='';
     _sotdSetBtnLabel(collBtn,_currentUser&&isOwned?'Add Another Piece':'Add to Collection');
@@ -1803,26 +1834,33 @@ function renderMobileSotdCard(s){
   const SVG_BOOK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`;
   const SVG_HEART=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
   const SVG_BOOKMARK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
+  // Reused verbatim from the previous SOTD Best For / Chakra rows.
   const SVG_BESTFOR=`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/><path d="M22 22c2.4-4.8 9.8-4.8 12.2 0 4.8-.2 7.1 5.7 3.4 8.7 2.2 4.4-2.4 8.8-6.7 6.6-3 3.7-8.8 1.4-8.6-3.4-4.7-.9-5.9-7.1-1.8-9.6.1-.8.6-1.6 1.5-2.3Z"/></svg>`;
   const SVG_CHAKRA=`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 52C22 35 21 24 32 12C43 24 42 35 32 52Z"/><path d="M32 52C21 42 13 34 12 20C25 23 31 32 32 52Z"/><path d="M32 52C43 42 51 34 52 20C39 23 33 32 32 52Z"/></svg>`;
-  const SVG_PAIR=`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="25" cy="32" r="14"/><circle cx="39" cy="32" r="14"/></svg>`;
+  // Approved — assets/SVGs/lightning-bolt.svg, used for Energetic Role.
+  const SVG_ROLE=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.8L6.8 13h4.8L10.5 21l6.7-10.2h-4.8z"/></svg>`;
+  const _energy=parseSotdEnergyLabel(s.sotd_energy_label);
+  const roleValue=_energy.role;
+  const chakraValue=_energy.chakra||s.primary_chakra||'';
   const bestForRow=s.card_best_for?`
     <div class="msotd-detail-row">
       <div class="msotd-badge msotd-badge--bestfor">${SVG_BESTFOR}</div>
       <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Best For</span><span class="msotd-detail-val">${escapeAttr(s.card_best_for)}</span></div>
     </div>`:'';
-  const chakraRow=s.primary_chakra?`
+  const roleRow=roleValue?`
+    <div class="msotd-detail-row">
+      <div class="msotd-badge msotd-badge--role">${SVG_ROLE}</div>
+      <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Energetic Role</span><span class="msotd-detail-val">${escapeAttr(roleValue)}</span></div>
+    </div>`:'';
+  const chakraRow=chakraValue?`
     <div class="msotd-detail-row">
       <div class="msotd-badge msotd-badge--chakra">${SVG_CHAKRA}</div>
-      <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Primary Chakra</span><span class="msotd-detail-val">${escapeAttr(s.primary_chakra)}</span></div>
+      <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Chakra</span><span class="msotd-detail-val">${escapeAttr(chakraValue)}</span></div>
     </div>`:'';
-  const pairRow=s.card_pair_with?`
-    <div class="msotd-detail-row">
-      <div class="msotd-badge msotd-badge--pair">${SVG_PAIR}</div>
-      <div class="msotd-detail-copy"><span class="msotd-detail-lbl">Pair With</span><span class="msotd-detail-val">${escapeAttr(s.card_pair_with)}</span></div>
-    </div>`:'';
-  const detailRows=bestForRow||chakraRow||pairRow
-    ?`<div class="msotd-details">${bestForRow}${chakraRow}${pairRow}</div>`:'';
+  const detailBlock=(bestForRow||roleRow||chakraRow)?`<div class="msotd-details">${bestForRow}${roleRow}${chakraRow}</div>`:'';
+  const practiceNote=s.card_note?`<div class="msotd-note"><div class="msotd-note-label">Today's Practice</div><p class="msotd-note-text">${escapeAttr(s.card_note)}</p></div>`:'';
+  const questionNote=s.sotd_question?`<div class="msotd-note"><div class="msotd-note-label">Today's Question</div><p class="msotd-note-text">${escapeAttr(s.sotd_question)}</p></div>`:'';
+  const takeawayNote=s.sotd_takeaway?`<div class="msotd-note"><div class="msotd-note-label">Today's Takeaway</div><p class="msotd-note-text msotd-note-text--takeaway">${escapeAttr(s.sotd_takeaway)}</p></div>`:'';
   container.innerHTML=`
     <div class="msotd-card" style="${_mCardVars}">
       ${_mEyebrowHtml}
@@ -1831,7 +1869,7 @@ function renderMobileSotdCard(s){
         <div class="msotd-overlay">
           <h3 class="msotd-name ${nameSizeClass}">${sname}</h3>
           <span class="msotd-name-rule" aria-hidden="true"></span>
-          ${s.card_quality_pill?`<div class="msotd-pill" style="${pillStyle}">${escapeAttr(s.card_quality_pill)}</div>`:''}
+          ${s.sotd_essence?`<div class="msotd-pill" style="${pillStyle}">${escapeAttr(s.sotd_essence)}</div>`:''}
         </div>
       </div>
       <div class="msotd-body">
@@ -1843,9 +1881,11 @@ function renderMobileSotdCard(s){
             <button class="msotd-btn-secondary msfc-btn-wish" type="button" data-sotd-id="${sid}" data-sotd-name="${sname}" aria-pressed="false"><span class="sotd-action-icon msotd-btn-icon" aria-hidden="true">${SVG_BOOKMARK}</span><span class="sotd-action-label">Wishlist</span></button>
           </div>
         </div>
-        ${detailRows}
+        ${detailBlock}
+        ${practiceNote}
+        ${questionNote}
+        ${takeawayNote}
       </div>
-      ${s.card_note?`<div class="msotd-practice"><div class="msotd-practice-label">✦ TODAY'S PRACTICE ✦</div><p class="msotd-practice-text">${escapeAttr(s.card_note)}</p></div>`:''}
     </div>`;
   container.querySelector('.msfc-btn-enc').addEventListener('click',()=>{
     setSotdContext('home',s);detailReturnContext={type:'home-sotd'};openDetail(s.id);
@@ -1874,13 +1914,15 @@ function _sotdMapStone(stone,meta){
     name:stone.name,
     photo:c?stonePhotoFile(c):'',
     hex:c?(c.ch||'#c8bca8'):(stone.color_hex||'#c8bca8'),
-    card_quality_pill:stone.card_quality_pill||'',
     card_summary:stone.card_summary||'',
     card_use_when:stone.card_use_when||'',
-    card_best_for:stone.card_best_for||'',
     primary_chakra:stone.primary_chakra||'',
-    card_pair_with:stone.card_pair_with||'',
     card_note:stone.card_note||'',
+    card_best_for:stone.card_best_for||'',
+    sotd_essence:stone.sotd_essence||'',
+    sotd_energy_label:stone.sotd_energy_label||'',
+    sotd_question:stone.sotd_question||'',
+    sotd_takeaway:stone.sotd_takeaway||'',
     event_name:meta&&meta.event_name||null,
     event_category:meta&&meta.event_category||null,
     selection_type:meta&&meta.selection_type||null
@@ -1912,7 +1954,7 @@ async function renderSotd(){
         if(!hErr&&hRow&&hRow.stone_id){
           const {data:stoneRow,error:sErr}=await _supa
             .from('stones')
-            .select('id,name,card_quality_pill,card_summary,card_use_when,card_best_for,primary_chakra,card_pair_with,card_note,color_hex,collection_tier')
+            .select('id,name,card_summary,card_use_when,primary_chakra,card_note,color_hex,collection_tier,sotd_essence,sotd_energy_label,sotd_question,sotd_takeaway,card_best_for')
             .eq('id',hRow.stone_id)
             .single();
           if(!sErr&&stoneRow){
@@ -1935,7 +1977,7 @@ async function renderSotd(){
         if(!scErr&&sched&&sched.stone_id){
           const {data:stoneRow,error:sErr}=await _supa
             .from('stones')
-            .select('id,name,card_quality_pill,card_summary,card_use_when,card_best_for,primary_chakra,card_pair_with,card_note,color_hex,collection_tier')
+            .select('id,name,card_summary,card_use_when,primary_chakra,card_note,color_hex,collection_tier,sotd_essence,sotd_energy_label,sotd_question,sotd_takeaway,card_best_for')
             .eq('id',sched.stone_id)
             .single();
           if(!sErr&&stoneRow){
