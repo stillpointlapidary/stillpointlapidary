@@ -68,20 +68,6 @@ let detailReturnContext=null;
 let batchEntries=[];
 let customEntries=JSON.parse(localStorage.getItem('lap_enc_custom')||'[]');
 
-// ── SPECIES FAMILIES ──
-const SP_FAM={
-  'Aragonite':['C-0001','C-0002','C-0003','C-0004','C-0005'],
-  'Calcite':['C-0007','C-0009','C-0010','C-0011','C-0012','C-0013','C-0014','C-0015','C-0016','C-0017','C-0018'],
-  'Fluorite':['C-0031','C-0032','C-0033','C-0034','C-0035','C-0036'],
-  'Kyanite':['C-0063','C-0064','C-0065','C-0066','C-0068'],
-  'Beryl':['C-0021','C-0022','C-0023','C-0024'],
-  'Plagioclase':['C-0028','C-0029','C-0030'],
-  'Antigorite':['C-0049','C-0050','C-0051'],
-  'Elbaite':['C-0055','C-0056','C-0057'],
-  'Apatite':['C-0044'],
-  'Gypsum':['C-0173','C-0174','C-0175'],
-};
-
 const FAM_OPTS=['Aggregate','Apatite','Aragonite','Beryl','Calcite','Copper Minerals','Feldspar','Fluorite','Fossil Material','Garnet','Gypsum','Iron Minerals','Kyanite','Obsidian','Opal','Organic Material','Quartz','Serpentine','Silicates','Synthetic Material','Tourmaline'];
 const THEME_OPTS=['Grounding','Protection','Heart Healing','Emotional Regulation','Calm & Peace','Self-Love','Joy','Clarity & Focus','Communication','Intuition','Spiritual Connection','Vitality','Amplification','Transformation','Manifestation','Confidence'];
 const THEME_GROUPS=[
@@ -505,9 +491,13 @@ function mapRow(r) {
     er3:           r.energetic_role_3  || '',
     uw:            r.use_when          || '',
     chakras:       r.chakras           || [],
+    primaryChakra: r.primary_chakra    || '',
     element:       r.element           || '',
     zodiac:        r.zodiac            || '',
     aff:           r.affirmation       || '',
+    pmRole:        r.enc_energetic_role|| '',
+    colorEnergy:   r.color_energy      || '',
+    mt:            r.material_type     || '',
     col_cat:       cats[0]             || '',
     col_cats:      cats,
     isMulti:       cats.length > 1,
@@ -650,6 +640,105 @@ function drawerPhotoGoto(idx){
   dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
 }
 
+// ── Quick View field resolution ──
+// Published stones (enc_stone_content.published===true) use the canonical
+// encyclopedia columns. Unfinished stones fall back to the approved `stones`
+// columns per ENCYCLOPEDIA-QUICK-VIEW cleanup spec — never a blend of the two
+// for the same field.
+function encContentFor(c){
+  return (_encContentById && _encContentById.get(c.i)) || null;
+}
+function drawerFieldSet(c){
+  const ec=encContentFor(c);
+  return{
+    bestFor:         (ec&&ec.best_for)         || c.card_best_for  || '',
+    useWhen:         (ec&&ec.use_when)         || c.uw             || '',
+    affirmation:     (ec&&ec.affirmation)      || c.aff            || '',
+    role:            (ec&&ec.energetic_role)   || c.pmRole         || '',
+    chakraPrimary:   (ec&&ec.chakra_primary)   || c.primaryChakra  || '',
+    chakraSecondary: (ec&&ec.chakra_secondary) || '',
+    element:         (ec&&ec.element)          || c.element        || '',
+    zodiac:          (ec&&ec.zodiac)           || c.zodiac         || '',
+    colorEnergy:     (ec&&ec.color_energy)     || c.colorEnergy    || '',
+    materialType:    (ec&&ec.material_type)    || c.mt             || '',
+  };
+}
+// Up to 3 Energetic Theme chips: published stones use enc_themes (primary
+// titles first, then secondary, in display_order — 'occasional' tier is never
+// shown). Stones with no enc_themes rows (unfinished entries) fall back to
+// the legacy energetic_role_1/2/3 triple as temporary chips — those legacy
+// values are never treated as the canonical Energetic Role.
+function drawerThemeChips(c){
+  const enc=_encThemesById&&_encThemesById.get(c.i);
+  if(enc){
+    const titles=[...enc.primary,...enc.secondary].map(t=>t.title).filter(Boolean);
+    if(titles.length)return titles.slice(0,3);
+  }
+  return[c.er1,c.er2,c.er3].filter(Boolean);
+}
+// Family pill: hide when family is blank; show "Family" alone when species is
+// blank, equals the stone's own canonical name, or equals family itself;
+// otherwise "Family · Species".
+function familyPillText(c){
+  const fam=(c.fam||'').trim();
+  if(!fam)return'';
+  const sp=(c.sp||'').trim();
+  if(!sp)return fam;
+  const spLower=sp.toLowerCase();
+  if(spLower===(c.n||'').trim().toLowerCase())return fam;
+  if(spLower===fam.toLowerCase())return fam;
+  return fam+' · '+sp;
+}
+
+function renderDrawerContent(c){
+  const famText=familyPillText(c);
+  const famBlock=document.getElementById('d-fam-block');
+  if(famBlock){
+    if(famText){document.getElementById('d-fam').textContent=famText;famBlock.style.display='';}
+    else famBlock.style.display='none';
+  }
+
+  const toxMsg=TOXIC_NOTES[c.n]||c.tox||'';
+  const toxBlock=document.getElementById('d-tox-block');
+  if(toxBlock){if(toxMsg){document.getElementById('d-tox').textContent=toxMsg;toxBlock.style.display='';}else toxBlock.style.display='none';}
+
+  const f=drawerFieldSet(c);
+
+  const bfBlock=document.getElementById('d-bf-block');
+  if(bfBlock){if(f.bestFor){document.getElementById('d-bf').textContent=f.bestFor;bfBlock.style.display='';}else bfBlock.style.display='none';}
+  const uwBlock=document.getElementById('d-uw-block');
+  if(uwBlock){if(f.useWhen){document.getElementById('d-uw').textContent=f.useWhen;uwBlock.style.display='';}else uwBlock.style.display='none';}
+  const affBlock=document.getElementById('d-aff-block');
+  if(affBlock){if(f.affirmation){document.getElementById('d-aff').textContent='"'+f.affirmation+'"';affBlock.style.display='';}else affBlock.style.display='none';}
+
+  const glanceItems=[
+    ['d-role-wrap','d-role',f.role],
+    ['d-chakra-wrap','d-chakra',f.chakraPrimary?f.chakraPrimary+(f.chakraSecondary?' · '+f.chakraSecondary:''):''],
+    ['d-el-wrap','d-el',f.element],
+    ['d-zodiac-wrap','d-zodiac',f.zodiac],
+    ['d-colorenergy-wrap','d-colorenergy',f.colorEnergy],
+    ['d-mt-wrap','d-mt',f.materialType],
+  ];
+  let glanceHasContent=false;
+  glanceItems.forEach(([wrapId,valId,val])=>{
+    const wrap=document.getElementById(wrapId);
+    if(!wrap)return;
+    if(val){document.getElementById(valId).textContent=val;wrap.style.display='';glanceHasContent=true;}
+    else wrap.style.display='none';
+  });
+  const glanceBlock=document.getElementById('d-glance-block');
+  if(glanceBlock)glanceBlock.style.display=glanceHasContent?'':'none';
+
+  const chips=drawerThemeChips(c);
+  const themesBlock=document.getElementById('d-themes-block');
+  if(themesBlock){
+    if(chips.length){
+      document.getElementById('d-tags').innerHTML=chips.map((t,i)=>`<span class="tag${i===0?' primary':''}">${t}</span>`).join('');
+      themesBlock.style.display='';
+    }else themesBlock.style.display='none';
+  }
+}
+
 function openDetail(id){
   const c=CRYSTALS.find(x=>x.i===id);
   if(!c)return;
@@ -673,32 +762,12 @@ function openDetail(id){
   document.getElementById('d-name').textContent=c.n;
   document.getElementById('d-alt').textContent=c.a?'Also known as: '+c.a:'';
   updateDrawerFullEntryLink(c);
-  document.getElementById('d-fam').textContent=c.fam+(c.sp&&c.sp!==c.fam?' · '+c.sp:'');
-
-  document.getElementById('d-uw').textContent=c.uw||'—';
-  document.getElementById('d-geo').textContent=c.g||'—';
-  const toxMsg=TOXIC_NOTES[c.n]||c.tox||'';
-  const toxBlock=document.getElementById('d-tox-block');
-  if(toxBlock){if(toxMsg){document.getElementById('d-tox').textContent=toxMsg;toxBlock.style.display='';}else toxBlock.style.display='none';}
-  document.getElementById('d-sy').textContent=c.sy||'—';
-  document.getElementById('d-fo').textContent=c.fo||'—';
-  document.getElementById('d-m').textContent=c.m?c.m+' Mohs':'—';
-  document.getElementById('d-tr').textContent=c.tr||'—';
-  document.getElementById('d-c').textContent=c.c||'—';
-  document.getElementById('d-cc').textContent=c.cc||'—';
-  document.getElementById('d-mt').textContent=c.mt||'—';
-  const elW=document.getElementById('d-el-wrap');
-  if(elW){if(c.element){document.getElementById('d-el').textContent=c.element;elW.style.display='';}else elW.style.display='none';}
-  const cb=document.getElementById('d-chakra-block');
-  if(cb){if(c.chakras&&c.chakras.length){document.getElementById('d-chakras').innerHTML=c.chakras.map(ch=>`<span class="chakra-chip">${ch}</span>`).join('');cb.style.display='';}else cb.style.display='none';}
-  const zb=document.getElementById('d-zodiac-block');
-  if(zb){if(c.zodiac){document.getElementById('d-zodiac').textContent=c.zodiac;zb.style.display='';}else zb.style.display='none';}
-  const ab=document.getElementById('d-aff-block');
-  if(ab){if(c.aff){document.getElementById('d-aff').textContent='"'+c.aff+'"';ab.style.display='';}else ab.style.display='none';}
-  const tags=[c.er1,c.er2,c.er3].filter(Boolean);
-  document.getElementById('d-tags').innerHTML=tags.map((t,i)=>`<span class="tag${i===0?' primary':''}">${t}</span>`).join('');
-  const sb=document.getElementById('d-sib-block');
-  if(sb){const fe=Object.entries(SP_FAM).find(([,ids])=>ids.includes(c.i));if(fe){const oth=fe[1].filter(id=>id!==c.i).map(id=>CRYSTALS.find(x=>x.i===id)).filter(Boolean);if(oth.length){document.getElementById('d-sibs').innerHTML=oth.map(s=>`<span class="sib-tag" onclick="openDetail('${s.i}')">${s.n}</span>`).join('');sb.style.display='';}else sb.style.display='none';}else sb.style.display='none';}
+  renderDrawerContent(c);
+  if(!_encContentById||!_encThemesById){
+    Promise.all([loadEncContentById(),loadEncThemesById()]).then(()=>{
+      if(currentCrystal&&currentCrystal.i===c.i)renderDrawerContent(c);
+    });
+  }
   updateDrawerStatus(c.i);
   _renderSotdEventBanner();
   document.getElementById('drawer-overlay').classList.add('open');
@@ -743,24 +812,68 @@ function findStoneEntry(identifier,name){
 
 let pendingDirectStoneOpen=null;
 
-// ── Published full-entry slugs (for drawer "View full encyclopedia entry" link) ──
+// ── Published encyclopedia content (canonical drawer fields + "View full entry" link) ──
+// Keyed by stone_id. Only rows with published=true are loaded — this is the
+// same set that controls the full-entry link, widened to carry the canonical
+// Quick View fields (best_for, use_when, affirmation, energetic_role,
+// chakra_primary/secondary, element, zodiac, color_energy, material_type) so
+// the drawer doesn't need a second round trip per stone.
 let _publishedFullEntrySlugs=null;
-let _publishedFullEntrySlugsPromise=null;
-function loadPublishedFullEntrySlugs(){
-  if(_publishedFullEntrySlugsPromise)return _publishedFullEntrySlugsPromise;
-  _publishedFullEntrySlugsPromise=(async()=>{
-    if(typeof _supa==='undefined'){_publishedFullEntrySlugs=new Set();return _publishedFullEntrySlugs;}
+let _encContentById=null;
+let _encContentByIdPromise=null;
+function loadEncContentById(){
+  if(_encContentByIdPromise)return _encContentByIdPromise;
+  _encContentByIdPromise=(async()=>{
+    if(typeof _supa==='undefined'){_encContentById=new Map();_publishedFullEntrySlugs=new Set();return _encContentById;}
     try{
-      const {data,error}=await _supa.from('enc_stone_content').select('slug').eq('published',true);
-      _publishedFullEntrySlugs=new Set(!error&&data?data.map(r=>String(r.slug||'').trim().toLowerCase()).filter(Boolean):[]);
+      const {data,error}=await _supa.from('enc_stone_content').select('stone_id,slug,best_for,use_when,affirmation,energetic_role,chakra_primary,chakra_secondary,element,zodiac,color_energy,material_type,published').eq('published',true);
+      const rows=(!error&&data)?data:[];
+      _encContentById=new Map(rows.map(r=>[r.stone_id,r]));
+      _publishedFullEntrySlugs=new Set(rows.map(r=>String(r.slug||'').trim().toLowerCase()).filter(Boolean));
     }catch(err){
-      console.warn('Failed to load published full-entry slugs:',err);
+      console.warn('Failed to load published encyclopedia content:',err);
+      _encContentById=new Map();
       _publishedFullEntrySlugs=new Set();
     }
-    return _publishedFullEntrySlugs;
+    return _encContentById;
   })();
-  return _publishedFullEntrySlugsPromise;
+  return _encContentByIdPromise;
 }
+
+// ── Encyclopedia themes (Energetic Themes chips) ──
+// Keyed by stone_id → {primary:[{title,display_order}...], secondary:[...]}.
+// 'occasional' tier rows are excluded at the query level — they never
+// surface as Quick View chips.
+let _encThemesById=null;
+let _encThemesByIdPromise=null;
+function loadEncThemesById(){
+  if(_encThemesByIdPromise)return _encThemesByIdPromise;
+  _encThemesByIdPromise=(async()=>{
+    if(typeof _supa==='undefined'){_encThemesById=new Map();return _encThemesById;}
+    try{
+      const {data,error}=await _supa.from('enc_themes').select('stone_id,tier,title,display_order').in('tier',['primary','secondary']);
+      const rows=(!error&&data)?data:[];
+      const grouped=new Map();
+      rows.forEach(r=>{
+        if(!grouped.has(r.stone_id))grouped.set(r.stone_id,{primary:[],secondary:[]});
+        const g=grouped.get(r.stone_id);
+        if(r.tier==='primary')g.primary.push(r);
+        else if(r.tier==='secondary')g.secondary.push(r);
+      });
+      grouped.forEach(g=>{
+        g.primary.sort((a,b)=>(a.display_order||0)-(b.display_order||0));
+        g.secondary.sort((a,b)=>(a.display_order||0)-(b.display_order||0));
+      });
+      _encThemesById=grouped;
+    }catch(err){
+      console.warn('Failed to load encyclopedia themes:',err);
+      _encThemesById=new Map();
+    }
+    return _encThemesById;
+  })();
+  return _encThemesByIdPromise;
+}
+
 function updateDrawerFullEntryLink(c){
   const link=document.getElementById('d-full-entry-link');
   if(!link||!c)return;
@@ -780,7 +893,7 @@ function updateDrawerFullEntryLink(c){
   if(_publishedFullEntrySlugs){
     applyIfCurrent(_publishedFullEntrySlugs);
   }else{
-    loadPublishedFullEntrySlugs().then(applyIfCurrent);
+    loadEncContentById().then(()=>applyIfCurrent(_publishedFullEntrySlugs));
   }
 }
 
@@ -2075,7 +2188,8 @@ function wireKitStoneLinks(){
 
 function init(){
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
-  loadPublishedFullEntrySlugs();
+  loadEncContentById();
+  loadEncThemesById();
   renderSotd();
   // Load custom encyclopedia entries
   customEntries.forEach(e=>{if(!CRYSTALS.find(c=>c.i===e.i))CRYSTALS.push(e);});
@@ -2380,7 +2494,7 @@ async function loadStonesAndInit() {
   fetch('data/sub-filter-kw.json').then(r=>r.json()).then(d=>{SUB_FILTER_KW=d;}).catch(()=>{});
   loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
   const CACHE_KEY = 'spl_stones_cache';
-  const CACHE_VER = 'v4';
+  const CACHE_VER = 'v5';
 
   function fetchFresh() {
     return _supa.from('stones').select('*').order('id').then(({ data, error }) => {

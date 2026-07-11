@@ -1352,46 +1352,44 @@
       </div>
       <div id="drawer-ref-photo"></div>
     </div>
-    <div style="font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Family</div>
-    <span class="fam-tag" id="d-fam" onclick="filterByFamily()" title="View all stones in this family"></span>
-    <div class="divider" style="margin:0.75rem 0"></div>
-    <div class="sec-label">Use when</div>
-    <div class="use-when-box" id="d-uw"></div>
-    <div class="sec-label" style="margin-top:1rem">Geology & formation</div>
-    <div class="geo-text" id="d-geo"></div>
-    <div id="d-tox-block" style="display:none;margin-top:0.6rem;padding:8px 12px;background:#fff8f0;border:0.5px solid #d4824a;border-radius:6px;font-size:12px;color:#7a3a10;line-height:1.5">
+    <div id="d-fam-block">
+      <div class="fam-label">Family</div>
+      <span class="fam-tag" id="d-fam" onclick="filterByFamily()" title="View all stones in this family"></span>
+    </div>
+    <div class="divider"></div>
+    <div id="d-tox-block" style="display:none;margin-bottom:0.9rem;padding:8px 12px;background:#fff8f0;border:0.5px solid #d4824a;border-radius:6px;font-size:12px;color:#7a3a10;line-height:1.5">
       <span style="font-weight:600">⚠ Handling note:</span> <span id="d-tox"></span>
     </div>
-    <div class="divider"></div>
-    <div class="sec-label">Properties</div>
-    <div class="props-grid">
-      <div class="prop-f"><label>Mohs hardness <button class="prop-help" onclick="openPopup('mohs')">?</button></label><span id="d-m"></span></div>
-      <div class="prop-f"><label>Crystal system <button class="prop-help" onclick="openPopup('system')">?</button></label><span id="d-sy"></span></div>
-      <div class="prop-f"><label>Formation <button class="prop-help" onclick="openPopup('formation')">?</button></label><span id="d-fo"></span></div>
-      <div class="prop-f"><label>Material <button class="prop-help" onclick="openPopup('material')">?</button></label><span id="d-mt"></span></div>
-      <div class="prop-f"><label>Transparency <button class="prop-help" onclick="openPopup('transparency')">?</button></label><span id="d-tr"></span></div>
-      <div class="prop-f" id="d-el-wrap"><label>Element <button class="prop-help" onclick="openPopup('element')">?</button></label><span id="d-el"></span></div>
-      <div class="prop-f"><label>Color</label><span id="d-c"></span></div>
-      <div class="prop-f"><label>Color cause <button class="prop-help" onclick="openPopup('colorcause')">?</button></label><span id="d-cc"></span></div>
+    <div class="practical-trio">
+      <div id="d-bf-block" style="display:none">
+        <div class="sec-label">Best for</div>
+        <div class="practical-text" id="d-bf"></div>
+      </div>
+      <div id="d-uw-block" style="display:none">
+        <div class="sec-label">Use when</div>
+        <div class="use-when-box" id="d-uw"></div>
+      </div>
+      <div id="d-aff-block" style="display:none">
+        <div class="sec-label" style="display:flex;align-items:center;gap:4px">Affirmation <button class="prop-help" onclick="openPopup('aff')">?</button></div>
+        <div class="affirmation-text" id="d-aff"></div>
+      </div>
     </div>
-    <div id="d-chakra-block">
+    <div id="d-glance-block">
       <div class="divider"></div>
-      <div class="sec-label" style="display:flex;align-items:center;gap:4px">Chakras <button class="prop-help" onclick="openPopup('chakra')">?</button></div>
-      <div class="chakra-chips" id="d-chakras"></div>
+      <div class="sec-label">At a glance</div>
+      <div class="props-grid">
+        <div class="prop-f" id="d-role-wrap" style="display:none"><label>Energetic role <button class="prop-help" onclick="openPopup('er')">?</button></label><span id="d-role"></span></div>
+        <div class="prop-f" id="d-chakra-wrap" style="display:none"><label>Chakra <button class="prop-help" onclick="openPopup('chakra')">?</button></label><span id="d-chakra"></span></div>
+        <div class="prop-f" id="d-el-wrap" style="display:none"><label>Element <button class="prop-help" onclick="openPopup('element')">?</button></label><span id="d-el"></span></div>
+        <div class="prop-f" id="d-zodiac-wrap" style="display:none"><label>Zodiac</label><span id="d-zodiac"></span></div>
+        <div class="prop-f" id="d-colorenergy-wrap" style="display:none"><label>Color energy</label><span id="d-colorenergy"></span></div>
+        <div class="prop-f" id="d-mt-wrap" style="display:none"><label>Material type <button class="prop-help" onclick="openPopup('material')">?</button></label><span id="d-mt"></span></div>
+      </div>
     </div>
-    <div id="d-zodiac-block" style="display:none">
-      <div style="margin-top:0.75rem"><div class="sec-label">Zodiac</div><div style="font-size:13px;color:var(--ink2)" id="d-zodiac"></div></div>
-    </div>
-    <div id="d-aff-block" style="display:none">
-      <div style="margin-top:0.75rem"><div class="sec-label" style="display:flex;align-items:center;gap:4px">Intention <button class="prop-help" onclick="openPopup('aff')">?</button></div><div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink2);line-height:1.6" id="d-aff"></div></div>
-    </div>
-    <div class="divider"></div>
-    <div class="sec-label" style="display:flex;align-items:center;gap:4px">Energetic role <button class="prop-help" onclick="openPopup('er')">?</button></div>
-    <div class="tags-row" id="d-tags"></div>
-    <div id="d-sib-block" style="display:none">
+    <div id="d-themes-block" style="display:none">
       <div class="divider"></div>
-      <div class="sec-label">Family members</div>
-      <div class="sibs-row" id="d-sibs"></div>
+      <div class="sec-label">Energetic themes</div>
+      <div class="tags-row" id="d-tags"></div>
     </div>
     <div class="owned-row">
       <div class="drawer-pill-row">

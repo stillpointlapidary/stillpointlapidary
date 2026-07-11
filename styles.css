@@ -206,29 +206,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .drawer-full-entry-link{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;letter-spacing:0.02em;color:var(--accent);text-decoration:none;border:none;background:none;padding:0;margin-bottom:6px;transition:color 0.15s}
 .drawer-full-entry-link:hover,.drawer-full-entry-link:focus{color:#7a6547;text-decoration:underline}
 .drawer-full-entry-icon{width:13px;height:13px;flex-shrink:0}
-.fam-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 12px;border:0.5px solid var(--accent2);border-radius:20px;color:var(--accent);margin-bottom:1.25rem;cursor:pointer;background:var(--stone2);transition:all 0.15s}
+.fam-label{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.fam-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 12px;border:0.5px solid var(--accent2);border-radius:20px;color:var(--accent);cursor:pointer;background:var(--stone2);transition:all 0.15s}
 .fam-tag:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
 .fam-tag::after{content:"→";font-size:10px;opacity:0.7}
 .fam-tag:hover{border-color:var(--accent2);color:var(--accent)}
 .divider{height:0.5px;background:var(--border);margin:1.1rem 0}
 .sec-label{font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink2r);margin-bottom:8px;font-weight:500}
-.use-when-box{background:var(--stone2);border-radius:8px;padding:1rem 1.1rem;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;line-height:1.6;color:var(--ink);margin-bottom:0.5rem}
-.geo-text{font-size:14px;color:var(--ink2);line-height:1.7}
 
-/* PROPS GRID with ? helpers */
+/* PRACTICAL TRIO — Best For / Use When / Affirmation, kept visually grouped */
+.practical-trio{display:flex;flex-direction:column;gap:0.9rem}
+.use-when-box{background:var(--stone2);border-radius:8px;padding:1rem 1.1rem;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;line-height:1.6;color:var(--ink)}
+.practical-text{font-size:14px;color:var(--ink2);line-height:1.6}
+.affirmation-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink2);line-height:1.6}
+
+/* AT A GLANCE — compact grid with ? helpers */
 .props-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .prop-f label{font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);display:flex;align-items:center;gap:4px;margin-bottom:2px}
 .prop-f span{font-size:14px;color:var(--ink);font-weight:500}
 .prop-help{width:14px;height:14px;border-radius:50%;border:0.5px solid var(--border);background:transparent;cursor:pointer;font-size:9px;color:var(--ink3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Jost',sans-serif;line-height:1}
 .prop-help:hover{border-color:var(--accent2);color:var(--accent);background:var(--stone2)}
 
+/* ENERGETIC THEMES — restrained chips, max 3 */
 .tags-row{display:flex;flex-wrap:wrap;gap:5px}
 .tag{font-size:12px;letter-spacing:0.04em;text-transform:uppercase;padding:4px 12px;border:0.5px solid var(--stone3);border-radius:20px;color:var(--ink2);background:var(--white)}
 .tag.primary{border-color:var(--accent2);color:var(--accent)}
-.chakra-chips,.sibs-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:0.5rem}
-.chakra-chip{font-size:12px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border);color:var(--ink2)}
-.sib-tag{font-size:12px;padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;color:var(--ink2);cursor:pointer;display:inline-block}
-.sib-tag:hover{border-color:var(--accent2);color:var(--accent)}
 .owned-row{display:flex;flex-direction:column;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);gap:10px}
 .drawer-pill-row{display:flex;gap:8px;flex-wrap:wrap}
 .drawer-pill{font-size:13px;letter-spacing:0.03em;padding:6px 14px;border-radius:999px;border:1.5px solid var(--accent2);background:transparent;color:var(--accent2);font-family:'Jost',sans-serif;cursor:pointer;transition:all 0.15s;white-space:nowrap}
