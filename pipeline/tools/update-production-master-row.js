@@ -68,6 +68,15 @@ const ALLOWED_COLUMNS = [
   'Structured Data Status',
   'Blocker',
   'Notes',
+  'SOTD Essence',
+  'SOTD Energy Label',
+  'SOTD Question',
+  'SOTD Takeaway',
+  'SOTD Review Status',
+  'SOTD Review Source',
+  'SOTD Reviewed By',
+  'SOTD Reviewed At',
+  'SOTD Notes / Blocker',
 ];
 
 function fail(message) {
