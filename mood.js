@@ -14,23 +14,67 @@ function toggleIntentionTier4(checkbox){
 
 function intentionTierRangeLabel(){return intentionIncludeTier4?'Tier 1–4':'Tier 1–3';}
 
-function getIntentionGroupMatches(group){
-  const parentSlug=INTENTION_PARENT_SLUGS[group];
-  if(parentSlug&&CURATED_INTENTION_SLUGS.has(parentSlug)){
-    const rows=curatedIntentionIndex[parentSlug]||[];
+function intentionFilterHaystack(c){
+  return [
+    c.n,c.a,c.uw,c.er1,c.er2,c.er3,c.primary_theme,
+    ...(c.all_themes||[])
+  ].filter(Boolean).join(' ').toLowerCase();
+}
+
+// Resolves the stones matching a single sub-intention filter definition
+// (curated Supabase rows take priority; a recognized curated slug returning
+// 0 rows is a data/mapping error and must never silently fall back). This is
+// the one working child-pill predicate — reused for both individual child
+// selections and the parent "All" union below, so there is a single source
+// of truth for what "matches this intention" means.
+function getIntentionFilterMatches(filter){
+  if(!filter)return[];
+  const slug=filter.slug;
+  if(slug&&CURATED_INTENTION_SLUGS.has(slug)){
+    const rows=curatedIntentionIndex[slug]||[];
     if(rows.length===0){
-      console.error('[Intention] Recognized slug returned 0 curated rows:',parentSlug,'— check Supabase data, RLS, and loadStoneIntentionReasons()');
-      activeCuratedSlug=parentSlug;
+      console.error('[Intention] Recognized slug returned 0 curated rows:',slug,'— check Supabase data, RLS, and loadStoneIntentionReasons()');
       return[];
     }
-    activeCuratedSlug=parentSlug;
     return filterIntentionTier(rows.map(r=>{
       const stone=CRYSTALS.find(c=>c.i===r.stone_slug);
-      if(!stone)console.warn('[Intention] stone_slug not found in CRYSTALS:',r.stone_slug,'(intention:',parentSlug+')');
+      if(!stone)console.warn('[Intention] stone_slug not found in CRYSTALS:',r.stone_slug,'(intention:',slug+')');
       return stone;
     }).filter(Boolean));
   }
+  return filterIntentionTier(CRYSTALS.filter(c=>{
+    if(slug&&c.intention_tags&&c.intention_tags.length>0){
+      return c.intention_tags.includes(slug);
+    }
+    const themes=c.all_themes||[];
+    const themeHit=(filter.themes||[]).some(t=>themes.includes(t)||c.primary_theme===t);
+    if(themeHit)return true;
+    const hay=intentionFilterHaystack(c);
+    return (filter.keywords||[]).some(k=>hay.includes(String(k).toLowerCase()));
+  }));
+}
+
+// A parent category's "All" match set is the deduplicated union of every one
+// of its child intentions' matches — never a literal parent-level tag/slug,
+// which (even when populated) is a separate, much smaller editorial list.
+function getIntentionGroupMatches(group){
   activeCuratedSlug=null;
+  const defs=INTENTION_SUB_FILTERS[group]||[];
+  if(defs.length){
+    const seen=new Set();
+    const union=[];
+    defs.forEach(def=>{
+      getIntentionFilterMatches(def).forEach(stone=>{
+        if(stone&&!seen.has(stone.i)){
+          seen.add(stone.i);
+          union.push(stone);
+        }
+      });
+    });
+    return union;
+  }
+  // Groups with no defined child filters fall back to intention_tags/themes.
+  const parentSlug=INTENTION_PARENT_SLUGS[group];
   return filterIntentionTier(CRYSTALS.filter(c=>{
     if(parentSlug&&c.intention_tags&&c.intention_tags.length>0){
       return c.intention_tags.includes(parentSlug);
@@ -40,35 +84,17 @@ function getIntentionGroupMatches(group){
   }));
 }
 
-function intentionFilterHaystack(c){
-  return [
-    c.n,c.a,c.uw,c.er1,c.er2,c.er3,c.primary_theme,
-    ...(c.all_themes||[])
-  ].filter(Boolean).join(' ').toLowerCase();
-}
-
 function applyIntentionSubFilter(matches, group, filterLabel){
   if(!filterLabel||filterLabel==='all'){
-    const parentSlug=INTENTION_PARENT_SLUGS[group];
-    if(parentSlug&&curatedIntentionIndex[parentSlug])activeCuratedSlug=parentSlug;
+    activeCuratedSlug=null;
     return matches;
   }
   const defs=(INTENTION_SUB_FILTERS[group]||[]).length?INTENTION_SUB_FILTERS[group]:activeIntentionFilterDefs;
   const filter=defs.find(f=>f.label===filterLabel);
   if(!filter)return matches;
   if(filter.slug&&CURATED_INTENTION_SLUGS.has(filter.slug)){
-    const rows=curatedIntentionIndex[filter.slug]||[];
-    if(rows.length===0){
-      console.error('[Intention] Recognized sub-slug returned 0 curated rows:',filter.slug,'— check Supabase data, RLS, and loadStoneIntentionReasons()');
-      activeCuratedSlug=filter.slug;
-      return[];
-    }
     activeCuratedSlug=filter.slug;
-    return filterIntentionTier(rows.map(r=>{
-      const stone=CRYSTALS.find(c=>c.i===r.stone_slug);
-      if(!stone)console.warn('[Intention] stone_slug not found in CRYSTALS:',r.stone_slug,'(intention:',filter.slug+')');
-      return stone;
-    }).filter(Boolean));
+    return getIntentionFilterMatches(filter);
   }
   activeCuratedSlug=null;
   return matches.filter(c=>{
