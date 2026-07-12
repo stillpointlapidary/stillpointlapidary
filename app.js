@@ -706,28 +706,7 @@ function drawerThemeChips(c){
   }
   return[c.er1,c.er2,c.er3].filter(Boolean);
 }
-// Family pill: hide when family is blank; show "Family" alone when species is
-// blank, equals the stone's own canonical name, or equals family itself;
-// otherwise "Family · Species".
-function familyPillText(c){
-  const fam=(c.fam||'').trim();
-  if(!fam)return'';
-  const sp=(c.sp||'').trim();
-  if(!sp)return fam;
-  const spLower=sp.toLowerCase();
-  if(spLower===(c.n||'').trim().toLowerCase())return fam;
-  if(spLower===fam.toLowerCase())return fam;
-  return fam+' · '+sp;
-}
-
 function renderDrawerContent(c){
-  const famText=familyPillText(c);
-  const famBlock=document.getElementById('d-fam-block');
-  if(famBlock){
-    if(famText){document.getElementById('d-fam').textContent=famText;famBlock.style.display='';}
-    else famBlock.style.display='none';
-  }
-
   const toxMsg=TOXIC_NOTES[c.n]||c.tox||'';
   const toxBlock=document.getElementById('d-tox-block');
   if(toxBlock){if(toxMsg){document.getElementById('d-tox').textContent=toxMsg;toxBlock.style.display='';}else toxBlock.style.display='none';}
@@ -1155,19 +1134,6 @@ document.addEventListener('keydown',function(e){
   if(e.key==='ArrowRight') photoLightboxNav(1);
   if(e.key==='Escape') closePhotoLightbox();
 });
-function filterByFamily(){
-  if(!currentCrystal)return;
-  const fam=currentCrystal.fam;
-  closeDrawer();
-  if(!document.getElementById('tab-encyclopedia')){
-    const target=new URL('encyclopedia.html',window.location.href);
-    target.searchParams.set('fam',fam);
-    window.location.href=target.href;
-    return;
-  }
-  jumpToFamily(fam);
-}
-
 const PENDING_DRAWER_ACTION_KEY='spl_pending_drawer_action';
 
 function savePendingDrawerAction(actionType,stone){
