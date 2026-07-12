@@ -223,16 +223,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .practical-text{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink2);line-height:1.6}
 .affirmation-text{font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;color:var(--ink2);line-height:1.6}
 
-/* OVERVIEW — plain editorial paragraph, not a card */
-.overview-text{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.65;margin:0}
+/* OVERVIEW — plain editorial paragraph, not a card. Sized for the future
+   compact (~40-65 word) paragraph; overview_p1 is a temporary display
+   fallback only. white-space:pre-line preserves source paragraph breaks
+   without inventing any sentence/keyword-based splitting. */
+.overview-text{font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:var(--ink2);line-height:1.68;margin:0;max-width:62ch;white-space:pre-line}
 
 /* AT A GLANCE — compact mini-cards, one designed component */
 .props-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.prop-f{display:flex;flex-direction:column;justify-content:center;gap:2px;border:0.5px solid var(--border);background:var(--stone2);border-radius:10px;padding:0.65rem 0.7rem;min-height:62px}
-.prop-f .enc-icon{width:13px;height:13px;color:var(--accent);margin-bottom:2px;flex-shrink:0}
+.prop-f{display:flex;flex-direction:column;justify-content:center;gap:4px;border:0.5px solid var(--border);background:var(--stone2);border-radius:10px;padding:0.65rem 0.7rem;min-height:62px}
+.prop-f-header{display:flex;align-items:center;gap:5px}
+.prop-f-header .enc-icon{width:13px;height:13px;color:var(--accent);flex-shrink:0}
 .prop-f-accent{border-color:var(--accent2)}
 .prop-f-accent span{font-weight:600}
-.prop-f label{font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r)}
+.prop-f label{font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);line-height:1}
 .prop-f span{font-size:13.5px;color:var(--ink);font-weight:500;line-height:1.35;overflow-wrap:break-word}
 .prop-help{width:14px;height:14px;border-radius:50%;border:0.5px solid var(--border);background:transparent;cursor:pointer;font-size:9px;color:var(--ink3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Jost',sans-serif;line-height:1}
 .prop-help:hover{border-color:var(--accent2);color:var(--accent);background:var(--stone2)}
@@ -245,8 +249,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* HANDLING NOTE — moved below At a Glance / Energetic Themes, no longer leads the drawer */
 .d-tox-inner{padding:8px 12px;background:#fff8f0;border:0.5px solid #d4824a;border-radius:6px;font-size:12px;color:#7a3a10;line-height:1.5}
 .owned-row{display:flex;flex-direction:column;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);gap:10px}
-.drawer-pill-row{display:flex;gap:8px;flex-wrap:wrap}
-.drawer-pill{font-size:13px;letter-spacing:0.03em;padding:6px 14px;border-radius:999px;border:1.5px solid var(--accent2);background:transparent;color:var(--accent2);font-family:'Jost',sans-serif;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.drawer-pill-row{display:flex;gap:10px;flex-wrap:wrap}
+.drawer-pill{flex:1 1 150px;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:11px 16px;border-radius:999px;border:1px solid var(--accent2);background:transparent;color:var(--accent2);font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;line-height:1;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.drawer-pill .enc-icon{width:14px;height:14px;flex-shrink:0}
 .drawer-pill:hover{background:var(--accent2);color:var(--white)}
 .drawer-pill.drawer-pill-active{background:var(--accent2);color:var(--white)}
 .drawer-pill.drawer-pill-active:hover{background:transparent;color:var(--accent2)}

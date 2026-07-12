@@ -1206,15 +1206,16 @@ function requestDrawerSaveSignIn(actionType){
 function updateDrawerStatus(id){
   const isOwned=!!owned[id];
   const isWish=!!wish[id];
-  const signedIn=!!_currentUser;
   const pillOwned=document.getElementById('drawer-pill-owned');
   const pillWish=document.getElementById('drawer-pill-wish');
   if(pillOwned){
-    pillOwned.textContent=isOwned?'In your collection':(signedIn?'Add to collection':'Save to collection');
+    const label=document.getElementById('drawer-pill-owned-label');
+    if(label)label.textContent=isOwned?'In your collection':'Add to collection';
     pillOwned.classList.toggle('drawer-pill-active',isOwned);
   }
   if(pillWish){
-    pillWish.textContent=isWish?'On your wishlist':(signedIn?'Add to wishlist':'Save to wishlist');
+    const label=document.getElementById('drawer-pill-wish-label');
+    if(label)label.textContent=isWish?'Wishlisted':'Wishlist';
     pillWish.classList.toggle('drawer-pill-active',isWish);
   }
   const viewLinks=document.getElementById('drawer-view-links');
@@ -1246,8 +1247,8 @@ function drawerWishlistAction(){
   const wasWished=!!wish[currentCrystal.i];
   toggleWish();
   if(!wasWished){
-    const pill=document.getElementById('drawer-pill-wish');
-    if(pill){pill.textContent='Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
+    const label=document.getElementById('drawer-pill-wish-label');
+    if(label){label.textContent='Added!';setTimeout(()=>{updateDrawerStatus(currentCrystal?.i);},1200);}
   }
 }
 // toggleOwned and toggleWish are defined as window.toggleOwned / window.toggleWish

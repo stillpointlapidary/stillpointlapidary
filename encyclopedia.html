@@ -1348,8 +1348,8 @@
       <div class="drawer-header-text">
         <div class="d-id" id="d-id"></div>
         <div class="d-name" id="d-name"></div>
-        <a class="drawer-full-entry-link" id="d-full-entry-link" href="#" style="display:none" target="_self"><svg class="drawer-full-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>View full encyclopedia entry →</a>
         <div class="d-alt" id="d-alt"></div>
+        <a class="drawer-full-entry-link" id="d-full-entry-link" href="#" style="display:none" target="_self"><svg class="drawer-full-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>View full encyclopedia entry →</a>
       </div>
       <div id="drawer-ref-photo"></div>
     </div>
@@ -1384,12 +1384,12 @@
       <div class="divider"></div>
       <div class="sec-label">At a glance</div>
       <div class="props-grid">
-        <div class="prop-f" id="d-role-wrap" style="display:none"><span class="enc-icon icon-manifestation" aria-hidden="true"></span><label>Energetic role</label><span id="d-role"></span></div>
-        <div class="prop-f" id="d-chakra-wrap" style="display:none"><span class="enc-icon icon-chakra" aria-hidden="true"></span><label>Chakra</label><span id="d-chakra"></span></div>
-        <div class="prop-f" id="d-el-wrap" style="display:none"><span class="enc-icon icon-element" aria-hidden="true"></span><label>Element</label><span id="d-el"></span></div>
-        <div class="prop-f" id="d-zodiac-wrap" style="display:none"><span class="enc-icon icon-zodiac" aria-hidden="true"></span><label>Zodiac</label><span id="d-zodiac"></span></div>
-        <div class="prop-f" id="d-colorenergy-wrap" style="display:none"><span class="enc-icon icon-color-range" aria-hidden="true"></span><label>Color energy</label><span id="d-colorenergy"></span></div>
-        <div class="prop-f" id="d-mt-wrap" style="display:none"><span class="enc-icon icon-encyclopedia" aria-hidden="true"></span><label>Material type</label><span id="d-mt"></span></div>
+        <div class="prop-f" id="d-role-wrap" style="display:none"><div class="prop-f-header"><span class="enc-icon icon-manifestation" aria-hidden="true"></span><label>Energetic role</label></div><span id="d-role"></span></div>
+        <div class="prop-f" id="d-chakra-wrap" style="display:none"><div class="prop-f-header"><span class="enc-icon icon-chakra" aria-hidden="true"></span><label>Chakra</label></div><span id="d-chakra"></span></div>
+        <div class="prop-f" id="d-el-wrap" style="display:none"><div class="prop-f-header"><span class="enc-icon icon-element" aria-hidden="true"></span><label>Element</label></div><span id="d-el"></span></div>
+        <div class="prop-f" id="d-zodiac-wrap" style="display:none"><div class="prop-f-header"><span class="enc-icon icon-zodiac" aria-hidden="true"></span><label>Zodiac</label></div><span id="d-zodiac"></span></div>
+        <div class="prop-f" id="d-colorenergy-wrap" style="display:none"><div class="prop-f-header"><span class="enc-icon icon-color-range" aria-hidden="true"></span><label>Color energy</label></div><span id="d-colorenergy"></span></div>
+        <div class="prop-f" id="d-mt-wrap" style="display:none"><div class="prop-f-header"><span class="enc-icon icon-encyclopedia" aria-hidden="true"></span><label>Material type</label></div><span id="d-mt"></span></div>
       </div>
     </div>
     <div id="d-themes-block" style="display:none">
@@ -1403,8 +1403,8 @@
     </div>
     <div class="owned-row">
       <div class="drawer-pill-row">
-        <button class="drawer-pill" id="drawer-pill-owned" onclick="drawerCollectionAction()"></button>
-        <button class="drawer-pill" id="drawer-pill-wish" onclick="drawerWishlistAction()"></button>
+        <button class="drawer-pill" id="drawer-pill-owned" onclick="drawerCollectionAction()"><span class="enc-icon icon-add-piece" aria-hidden="true"></span><span class="drawer-pill-label" id="drawer-pill-owned-label"></span></button>
+        <button class="drawer-pill" id="drawer-pill-wish" onclick="drawerWishlistAction()"><span class="enc-icon icon-wishlist" aria-hidden="true"></span><span class="drawer-pill-label" id="drawer-pill-wish-label"></span></button>
       </div>
       <div id="drawer-view-links" style="display:none;gap:12px;font-size:11px;color:var(--ink3)">
         <a id="drawer-view-coll" href="#" style="display:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:'Jost',sans-serif" onclick="event.preventDefault();closeDrawer();switchTabByName('collection')">View collection →</a>
