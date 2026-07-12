@@ -655,13 +655,43 @@ function drawerFieldSet(c){
     useWhen:         (ec&&ec.use_when)         || c.uw             || '',
     affirmation:     (ec&&ec.affirmation)      || c.aff            || '',
     role:            (ec&&ec.energetic_role)   || c.pmRole         || '',
+    roleIcon:        (ec&&ec.energetic_role_icon) || '',
     chakraPrimary:   (ec&&ec.chakra_primary)   || c.primaryChakra  || '',
     chakraSecondary: (ec&&ec.chakra_secondary) || '',
     element:         (ec&&ec.element)          || c.element        || '',
     zodiac:          (ec&&ec.zodiac)           || c.zodiac         || '',
     colorEnergy:     (ec&&ec.color_energy)     || c.colorEnergy    || '',
     materialType:    (ec&&ec.material_type)    || c.mt             || '',
+    overview:        (ec&&ec.overview_p1)      || '',
   };
+}
+// Validates an icon class against the centralized icon system (stones/enc-icons.css)
+// rather than a hardcoded duplicate list — a class only counts as approved if a
+// mask-image rule for it is actually loaded on the page.
+let _validIconClasses=null;
+function isValidIconClass(cls){
+  if(!cls)return false;
+  if(!_validIconClasses){
+    _validIconClasses=new Set();
+    for(const sheet of document.styleSheets){
+      let rules;
+      try{ rules=sheet.cssRules; }catch(e){ continue; }
+      if(!rules)continue;
+      for(const rule of rules){
+        if(rule.selectorText && /^\.icon-[a-z0-9-]+$/.test(rule.selectorText)){
+          _validIconClasses.add(rule.selectorText.slice(1));
+        }
+      }
+    }
+  }
+  return _validIconClasses.has(cls);
+}
+// Strip a leading "Use when" clause from Use When body text — the card label
+// already supplies that context, so keeping it in the body would duplicate it.
+function normalizeUseWhenText(text){
+  const stripped=String(text||'').replace(/^use\s+when\b[\s,:]*/i,'');
+  if(!stripped)return'';
+  return stripped.charAt(0).toUpperCase()+stripped.slice(1);
 }
 // Up to 3 Energetic Theme chips: published stones use enc_themes (primary
 // titles first, then secondary, in display_order — 'occasional' tier is never
@@ -707,9 +737,25 @@ function renderDrawerContent(c){
   const bfBlock=document.getElementById('d-bf-block');
   if(bfBlock){if(f.bestFor){document.getElementById('d-bf').textContent=f.bestFor;bfBlock.style.display='';}else bfBlock.style.display='none';}
   const uwBlock=document.getElementById('d-uw-block');
-  if(uwBlock){if(f.useWhen){document.getElementById('d-uw').textContent=f.useWhen;uwBlock.style.display='';}else uwBlock.style.display='none';}
+  if(uwBlock){if(f.useWhen){document.getElementById('d-uw').textContent=normalizeUseWhenText(f.useWhen);uwBlock.style.display='';}else uwBlock.style.display='none';}
   const affBlock=document.getElementById('d-aff-block');
-  if(affBlock){if(f.affirmation){document.getElementById('d-aff').textContent='"'+f.affirmation+'"';affBlock.style.display='';}else affBlock.style.display='none';}
+  if(affBlock){
+    if(f.affirmation){
+      document.getElementById('d-aff').textContent=f.affirmation;
+      const affIcon=document.getElementById('d-aff-icon');
+      if(affIcon){
+        const validIcon=isValidIconClass(f.roleIcon);
+        affIcon.className='enc-icon'+(validIcon?' '+f.roleIcon:'');
+        affIcon.style.visibility=validIcon?'':'hidden';
+      }
+      affBlock.style.display='';
+    }else affBlock.style.display='none';
+  }
+  const practicalBlock=document.getElementById('d-practical-block');
+  if(practicalBlock)practicalBlock.style.display=(f.bestFor||f.useWhen||f.affirmation)?'':'none';
+
+  const overviewBlock=document.getElementById('d-overview-block');
+  if(overviewBlock){if(f.overview){document.getElementById('d-overview').textContent=f.overview;overviewBlock.style.display='';}else overviewBlock.style.display='none';}
 
   const glanceItems=[
     ['d-role-wrap','d-role',f.role],
@@ -728,6 +774,14 @@ function renderDrawerContent(c){
   });
   const glanceBlock=document.getElementById('d-glance-block');
   if(glanceBlock)glanceBlock.style.display=glanceHasContent?'':'none';
+
+  // Accent border is a paired treatment — only show it when Role and Chakra
+  // are both present, never as a single isolated accent card.
+  const rolePaired=!!(f.role&&(f.chakraPrimary||f.chakraSecondary));
+  const roleWrap=document.getElementById('d-role-wrap');
+  const chakraWrap=document.getElementById('d-chakra-wrap');
+  if(roleWrap)roleWrap.classList.toggle('prop-f-accent',rolePaired);
+  if(chakraWrap)chakraWrap.classList.toggle('prop-f-accent',rolePaired);
 
   const chips=drawerThemeChips(c);
   const themesBlock=document.getElementById('d-themes-block');
@@ -816,8 +870,9 @@ let pendingDirectStoneOpen=null;
 // Keyed by stone_id. Only rows with published=true are loaded — this is the
 // same set that controls the full-entry link, widened to carry the canonical
 // Quick View fields (best_for, use_when, affirmation, energetic_role,
-// chakra_primary/secondary, element, zodiac, color_energy, material_type) so
-// the drawer doesn't need a second round trip per stone.
+// energetic_role_icon, chakra_primary/secondary, element, zodiac, color_energy,
+// material_type, overview_p1) so the drawer doesn't need a second round trip
+// per stone.
 let _publishedFullEntrySlugs=null;
 let _encContentById=null;
 let _encContentByIdPromise=null;
@@ -826,7 +881,7 @@ function loadEncContentById(){
   _encContentByIdPromise=(async()=>{
     if(typeof _supa==='undefined'){_encContentById=new Map();_publishedFullEntrySlugs=new Set();return _encContentById;}
     try{
-      const {data,error}=await _supa.from('enc_stone_content').select('stone_id,slug,best_for,use_when,affirmation,energetic_role,chakra_primary,chakra_secondary,element,zodiac,color_energy,material_type,published').eq('published',true);
+      const {data,error}=await _supa.from('enc_stone_content').select('stone_id,slug,best_for,use_when,affirmation,energetic_role,energetic_role_icon,chakra_primary,chakra_secondary,element,zodiac,color_energy,material_type,overview_p1,published').eq('published',true);
       const rows=(!error&&data)?data:[];
       _encContentById=new Map(rows.map(r=>[r.stone_id,r]));
       _publishedFullEntrySlugs=new Set(rows.map(r=>String(r.slug||'').trim().toLowerCase()).filter(Boolean));

@@ -39,6 +39,7 @@
 <title>Still Point Lapidary</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="stones/enc-icons.css">
 </head>
 <body>
 <div class="app-shell">
@@ -206,39 +207,48 @@
       <span class="fam-tag" id="d-fam" onclick="filterByFamily()" title="View all stones in this family"></span>
     </div>
     <div class="divider"></div>
-    <div id="d-tox-block" style="display:none;margin-bottom:0.9rem;padding:8px 12px;background:#fff8f0;border:0.5px solid #d4824a;border-radius:6px;font-size:12px;color:#7a3a10;line-height:1.5">
-      <span style="font-weight:600">⚠ Handling note:</span> <span id="d-tox"></span>
+    <div id="d-practical-block">
+      <div class="sec-label">Practical Guidance</div>
+      <div class="practical-trio">
+        <div class="practical-card" id="d-bf-block" style="display:none">
+          <div class="practical-card-label"><span class="enc-icon icon-best-for" aria-hidden="true"></span>Best for</div>
+          <div class="practical-text" id="d-bf"></div>
+        </div>
+        <div class="practical-card" id="d-uw-block" style="display:none">
+          <div class="practical-card-label"><span class="enc-icon icon-todays-practice" aria-hidden="true"></span>Use when</div>
+          <div class="use-when-box" id="d-uw"></div>
+        </div>
+        <div class="practical-card" id="d-aff-block" style="display:none">
+          <div class="practical-card-label"><span class="enc-icon" id="d-aff-icon" aria-hidden="true" style="visibility:hidden"></span>Affirmation <button class="prop-help" onclick="openPopup('aff')">?</button></div>
+          <div class="affirmation-text" id="d-aff"></div>
+        </div>
+      </div>
     </div>
-    <div class="practical-trio">
-      <div id="d-bf-block" style="display:none">
-        <div class="sec-label">Best for</div>
-        <div class="practical-text" id="d-bf"></div>
-      </div>
-      <div id="d-uw-block" style="display:none">
-        <div class="sec-label">Use when</div>
-        <div class="use-when-box" id="d-uw"></div>
-      </div>
-      <div id="d-aff-block" style="display:none">
-        <div class="sec-label" style="display:flex;align-items:center;gap:4px">Affirmation <button class="prop-help" onclick="openPopup('aff')">?</button></div>
-        <div class="affirmation-text" id="d-aff"></div>
-      </div>
+    <div id="d-overview-block" style="display:none">
+      <div class="divider"></div>
+      <div class="sec-label">Overview</div>
+      <p class="overview-text" id="d-overview"></p>
     </div>
     <div id="d-glance-block">
       <div class="divider"></div>
       <div class="sec-label">At a glance</div>
       <div class="props-grid">
-        <div class="prop-f" id="d-role-wrap" style="display:none"><label>Energetic role <button class="prop-help" onclick="openPopup('er')">?</button></label><span id="d-role"></span></div>
-        <div class="prop-f" id="d-chakra-wrap" style="display:none"><label>Chakra <button class="prop-help" onclick="openPopup('chakra')">?</button></label><span id="d-chakra"></span></div>
-        <div class="prop-f" id="d-el-wrap" style="display:none"><label>Element <button class="prop-help" onclick="openPopup('element')">?</button></label><span id="d-el"></span></div>
-        <div class="prop-f" id="d-zodiac-wrap" style="display:none"><label>Zodiac</label><span id="d-zodiac"></span></div>
-        <div class="prop-f" id="d-colorenergy-wrap" style="display:none"><label>Color energy</label><span id="d-colorenergy"></span></div>
-        <div class="prop-f" id="d-mt-wrap" style="display:none"><label>Material type <button class="prop-help" onclick="openPopup('material')">?</button></label><span id="d-mt"></span></div>
+        <div class="prop-f" id="d-role-wrap" style="display:none"><span class="enc-icon icon-manifestation" aria-hidden="true"></span><label>Energetic role</label><span id="d-role"></span></div>
+        <div class="prop-f" id="d-chakra-wrap" style="display:none"><span class="enc-icon icon-chakra" aria-hidden="true"></span><label>Chakra</label><span id="d-chakra"></span></div>
+        <div class="prop-f" id="d-el-wrap" style="display:none"><span class="enc-icon icon-element" aria-hidden="true"></span><label>Element</label><span id="d-el"></span></div>
+        <div class="prop-f" id="d-zodiac-wrap" style="display:none"><span class="enc-icon icon-zodiac" aria-hidden="true"></span><label>Zodiac</label><span id="d-zodiac"></span></div>
+        <div class="prop-f" id="d-colorenergy-wrap" style="display:none"><span class="enc-icon icon-color-range" aria-hidden="true"></span><label>Color energy</label><span id="d-colorenergy"></span></div>
+        <div class="prop-f" id="d-mt-wrap" style="display:none"><span class="enc-icon icon-encyclopedia" aria-hidden="true"></span><label>Material type</label><span id="d-mt"></span></div>
       </div>
     </div>
     <div id="d-themes-block" style="display:none">
       <div class="divider"></div>
       <div class="sec-label">Energetic themes</div>
       <div class="tags-row" id="d-tags"></div>
+    </div>
+    <div id="d-tox-block" style="display:none">
+      <div class="divider"></div>
+      <div class="d-tox-inner"><span style="font-weight:600">⚠ Handling note:</span> <span id="d-tox"></span></div>
     </div>
     <div class="owned-row">
       <div class="drawer-pill-row">

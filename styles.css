@@ -214,16 +214,26 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .divider{height:0.5px;background:var(--border);margin:1.1rem 0}
 .sec-label{font-size:12px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink2r);margin-bottom:8px;font-weight:500}
 
-/* PRACTICAL TRIO — Best For / Use When / Affirmation, kept visually grouped */
-.practical-trio{display:flex;flex-direction:column;gap:0.9rem}
-.use-when-box{background:var(--stone2);border-radius:8px;padding:1rem 1.1rem;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;line-height:1.6;color:var(--ink)}
-.practical-text{font-size:14px;color:var(--ink2);line-height:1.6}
-.affirmation-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--ink2);line-height:1.6}
+/* PRACTICAL GUIDANCE — Best For / Use When / Affirmation, one coordinated card group */
+.practical-trio{display:flex;flex-direction:column;gap:0.7rem}
+.practical-card{border:0.5px solid var(--border);background:var(--stone2);border-radius:10px;padding:0.8rem 1rem}
+.practical-card-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.practical-card-label .enc-icon{width:13px;height:13px;color:var(--accent);flex-shrink:0}
+.use-when-box{font-family:Georgia,'Times New Roman',serif;font-size:14px;line-height:1.6;color:var(--ink2);font-style:normal}
+.practical-text{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink2);line-height:1.6}
+.affirmation-text{font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;color:var(--ink2);line-height:1.6}
 
-/* AT A GLANCE — compact grid with ? helpers */
-.props-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.prop-f label{font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);display:flex;align-items:center;gap:4px;margin-bottom:2px}
-.prop-f span{font-size:14px;color:var(--ink);font-weight:500}
+/* OVERVIEW — plain editorial paragraph, not a card */
+.overview-text{font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink2);line-height:1.65;margin:0}
+
+/* AT A GLANCE — compact mini-cards, one designed component */
+.props-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.prop-f{display:flex;flex-direction:column;justify-content:center;gap:2px;border:0.5px solid var(--border);background:var(--stone2);border-radius:10px;padding:0.65rem 0.7rem;min-height:62px}
+.prop-f .enc-icon{width:13px;height:13px;color:var(--accent);margin-bottom:2px;flex-shrink:0}
+.prop-f-accent{border-color:var(--accent2)}
+.prop-f-accent span{font-weight:600}
+.prop-f label{font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r)}
+.prop-f span{font-size:13.5px;color:var(--ink);font-weight:500;line-height:1.35;overflow-wrap:break-word}
 .prop-help{width:14px;height:14px;border-radius:50%;border:0.5px solid var(--border);background:transparent;cursor:pointer;font-size:9px;color:var(--ink3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Jost',sans-serif;line-height:1}
 .prop-help:hover{border-color:var(--accent2);color:var(--accent);background:var(--stone2)}
 
@@ -231,6 +241,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .tags-row{display:flex;flex-wrap:wrap;gap:5px}
 .tag{font-size:12px;letter-spacing:0.04em;text-transform:uppercase;padding:4px 12px;border:0.5px solid var(--stone3);border-radius:20px;color:var(--ink2);background:var(--white)}
 .tag.primary{border-color:var(--accent2);color:var(--accent)}
+
+/* HANDLING NOTE — moved below At a Glance / Energetic Themes, no longer leads the drawer */
+.d-tox-inner{padding:8px 12px;background:#fff8f0;border:0.5px solid #d4824a;border-radius:6px;font-size:12px;color:#7a3a10;line-height:1.5}
 .owned-row{display:flex;flex-direction:column;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);gap:10px}
 .drawer-pill-row{display:flex;gap:8px;flex-wrap:wrap}
 .drawer-pill{font-size:13px;letter-spacing:0.03em;padding:6px 14px;border-radius:999px;border:1.5px solid var(--accent2);background:transparent;color:var(--accent2);font-family:'Jost',sans-serif;cursor:pointer;transition:all 0.15s;white-space:nowrap}
@@ -432,7 +445,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .warn-note{color:#8a6020;background:#fdf9f0;border:0.5px solid #d4b882;border-radius:6px;padding:0.6rem 0.9rem;font-size:12px;line-height:1.6;margin-top:0.75rem}
 
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--stone3);border-radius:2px}
-@media(max-width:600px){.topbar{padding:0 1rem}.content{padding:1rem}.form-row{grid-template-columns:1fr}.form-row.thirds{grid-template-columns:1fr 1fr}.props-grid{grid-template-columns:1fr}.drawer{width:100vw}.coll-stats{grid-template-columns:1fr}.coll-btns{flex-direction:column}.coll-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.topbar{padding:0 1rem}.content{padding:1rem}.form-row{grid-template-columns:1fr}.form-row.thirds{grid-template-columns:1fr 1fr}.drawer{width:100vw}.coll-stats{grid-template-columns:1fr}.coll-btns{flex-direction:column}.coll-grid{grid-template-columns:repeat(2,1fr)}}
+/* At a Glance: very narrow phones only drop to a single column */
+@media(max-width:380px){.props-grid{grid-template-columns:1fr}}
 
 /* ── MOBILE OPTIMIZATIONS ── */
 @media(max-width:600px){
@@ -1417,12 +1432,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .kit-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:0.04em;color:var(--ink2);border:0.5px solid var(--border);border-radius:6px;padding:9px 16px;background:var(--white);cursor:pointer;font-family:'Jost',sans-serif}
 .kit-cta:hover{background:var(--stone2);border-color:var(--accent2)}
 .kit-icon-wrap,.kit-desc,.kit-divider{display:none}
-.enc-icon{display:inline-block;width:1em;height:1em;flex:0 0 auto;background-color:currentColor;vertical-align:-0.125em;mask-repeat:no-repeat;mask-position:center;mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain}
-.icon-grounding{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/grounding.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/grounding.svg")}
-.icon-protection{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/protection.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/protection.svg")}
-.icon-heart-healing{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/heart-healing.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/heart-healing.svg")}
-.icon-clarity-focus{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/clarity-focus.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/clarity-focus.svg")}
-.icon-spiritual-connection{mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/spiritual-connection.svg");-webkit-mask-image:url("https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/icons/encyclopedia/spiritual-connection.svg")}
+/* .enc-icon and all icon-* mask definitions now come from the centralized
+   stones/enc-icons.css stylesheet (linked in <head>) — do not redefine here. */
 @media(min-width:701px){
   #s101-roles .kit-grid{gap:14px;margin-bottom:1.4rem;align-items:stretch}
   #s101-roles .kit-card{flex-direction:column;border-color:var(--border2);border-radius:12px;background:var(--white);box-shadow:0 1px 3px rgba(42,37,32,0.05),0 6px 16px rgba(42,37,32,0.045);text-align:center}
