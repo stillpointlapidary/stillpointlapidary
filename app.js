@@ -509,6 +509,7 @@ function mapRow(r) {
     tox:           r.toxicity_note     || '',
     card_props:    Array.isArray(r.card_properties) ? r.card_properties : [],
     card_best_for: r.card_best_for     || '',
+    qvOverview:    r.quick_view_overview || '',
     o:             false,
     w:             false,
     _search:       [er1, er2, er3, pt, at].join(' '),
@@ -662,7 +663,7 @@ function drawerFieldSet(c){
     zodiac:          (ec&&ec.zodiac)           || c.zodiac         || '',
     colorEnergy:     (ec&&ec.color_energy)     || c.colorEnergy    || '',
     materialType:    (ec&&ec.material_type)    || c.mt             || '',
-    overview:        (ec&&ec.overview_p1)      || '',
+    overview:        c.qvOverview || (ec&&ec.overview_p1) || '',
   };
 }
 // Validates an icon class against the centralized icon system (stones/enc-icons.css)
@@ -2516,7 +2517,7 @@ async function loadStonesAndInit() {
   fetch('data/sub-filter-kw.json').then(r=>r.json()).then(d=>{SUB_FILTER_KW=d;}).catch(()=>{});
   loadStoneIntentionReasons(); // non-blocking; enriches Why text when stones are available
   const CACHE_KEY = 'spl_stones_cache';
-  const CACHE_VER = 'v5';
+  const CACHE_VER = 'v6';
 
   function fetchFresh() {
     return _supa.from('stones').select('*').order('id').then(({ data, error }) => {
