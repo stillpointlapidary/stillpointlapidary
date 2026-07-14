@@ -319,6 +319,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0133": ["atlantisite-tumble.webp", "atlantisite-freeform.webp"],
   "C-0136": ["galena-specimen.webp"],
   "C-0137": ["pyrite.webp"],
+  "C-0139": ["black-obsidian.webp"],
   "C-0140": ["gold-sheen-obsidian.webp", "gold-sheen-obsidian-large-sphere.webp"],
   "C-0141": ["mahogany-obsidian-tumble.webp"],
   "C-0143": ["snowflake-obsidian-tumble.webp"],
