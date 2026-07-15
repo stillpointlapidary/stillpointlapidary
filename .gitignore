@@ -125,6 +125,9 @@ docs/encyclopedia/archive/CLAUDE-CODE-HANDOFF-2026-06-19-session2.md
 # Generated pipeline output
 pipeline/output/
 
+# Retained read-only audit reports (regenerable, not runtime, not authoritative)
+/audit-output/
+
 # Generated import packets — transport-only, disposable, regenerate on every
 # run (see pipeline/README.md). generate-packet.js defaults to pipeline/output/
 # above, but this catches a packet written anywhere else (e.g. an explicit
