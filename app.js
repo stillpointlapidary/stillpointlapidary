@@ -453,9 +453,9 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0410": ["black-agate.webp"],
   "C-0415": ["sardonyx-heart-family.webp"],
   "C-0420": ["rosasite-in-dolomite-specimen.webp"],
-  "C-9001": ["pink-amethyst-heart.webp"],
-  "C-9002": ["chocolate-calcite-carving.webp"],
-  "C-9003": ["silver-sheen-obsidian.webp"],
+  "C-0425": ["pink-amethyst-heart.webp"],
+  "C-0426": ["chocolate-calcite-carving.webp"],
+  "C-0427": ["silver-sheen-obsidian.webp"],
 };
 function jsArg(v){return JSON.stringify(String(v==null?'':v));}
 function escapeAttr(v){
