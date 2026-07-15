@@ -58,6 +58,8 @@ const ID_HEADER = 'Stone ID';
 const ALLOWED_COLUMNS = [
   'Element',
   'Zodiac',
+  'Primary Chakra',
+  'Styling Chakra',
   'Encyclopedia Energetic Role',
   'Energetic Role Icon',
   'Color Energy',

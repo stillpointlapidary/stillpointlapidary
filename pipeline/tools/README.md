@@ -49,6 +49,8 @@ catalog-wide or structural changes.
 ```
 Element
 Zodiac
+Primary Chakra
+Styling Chakra
 Encyclopedia Energetic Role
 Energetic Role Icon
 Color Energy
