@@ -1,0 +1,707 @@
+{
+  "calcite": {
+    "slug": "calcite",
+    "displayName": "Calcite",
+    "encyclopediaFilterValue": "Calcite",
+    "editorialStatusNote": "Editorial status: Complete first-page draft for Christie’s holistic review. The metaphysical sections synthesize the approved online source set currently available. Identity-sensitive claims and final energetic distinctions should still receive the normal book-source and technical audit before publication.",
+    "hero": {
+      "image": "blue-calcite.webp",
+      "title": "Calcite Family Guide",
+      "signatureLine": "One mineral, an astonishing range of personalities.",
+      "paragraphs": [
+        "Calcite is one of the great shape-shifters of the mineral world. It can appear clear enough to split an image in two, striped like carved stone, softly luminous, or vivid with the minerals growing through it. Beneath all that variety is a shared energetic identity: movement, clearing, and the return of momentum where life has gone still.",
+        "This guide brings the family into focus. Discover what unites the Calcites, how each variety directs that energy differently, which familiar names describe true forms of the mineral, and which belong to more complex trade materials."
+      ],
+      "primaryAction": {
+        "label": "Explore the Calcite Family",
+        "target": "fg-find-your-calcite"
+      },
+      "secondaryAction": {
+        "label": "Browse Calcite in the Encyclopedia"
+      }
+    },
+    "energySection": {
+      "paragraphs": [
+        "Calcite’s energy clears space, restores circulation, and brings movement back to places that have gone still. It gathers scattered attention, loosens emotional congestion, revives confidence, and makes the next step easier to see.",
+        "That movement is the family resemblance. It may arrive as calm, courage, clarity, tenderness, renewed focus, or creative momentum, but its underlying action remains remarkably consistent: Calcite helps life begin moving again.",
+        "This is why owning several Calcites is not duplication. Each variety carries the same current toward a different destination. One clears enough noise for the right words to arrive. Another reawakens initiative. Another restores warmth where the heart has become guarded or tired."
+      ],
+      "leadIn": "The simplest way to understand the family is to ask:",
+      "question": "What needs to move?",
+      "afterQuestion": "That question is the compass for everything that follows.",
+      "groundingParagraph": {
+        "text": "Specific Calcite traditions are relatively modern compared with ancient crystal lore, but approved sources repeatedly distinguish Blue Calcite through calm and expression, Orange Calcite through hope and active participation, Mangano Calcite through compassion and emotional comfort, and Clear or Optical Calcite through clarity and forward movement.",
+        "sourceRefIds": [
+          "moonrise-blue"
+        ]
+      }
+    },
+    "findYourCalcite": {
+      "intro": "Start with the shift you want to make.",
+      "intro2": "Color is the easiest difference to see, but it is not the most useful place to stop. Each Calcite below gives the family’s central energy a distinct direction.",
+      "groupLabel": "Calcite varieties and forms",
+      "members": [
+        {
+          "stoneId": "C-0007",
+          "name": "Blue Calcite",
+          "headline": "Make room for calm",
+          "distinction": "Settle the inner noise so thought, emotion, and expression can find their natural rhythm.",
+          "identityLabel": "Blue color form of Calcite",
+          "groundingNote": {
+            "text": "Blue Calcite’s established energetic identity combines calm confidence, articulation, reflection, and the ability to translate inner experience into words or practical action.",
+            "sourceRefIds": [
+              "moonrise-blue-2"
+            ]
+          }
+        },
+        {
+          "stoneId": "C-0012",
+          "name": "Green Calcite",
+          "headline": "Open a new chapter",
+          "distinction": "Bring fresh movement to emotional patterns that have finished teaching what they came to teach.",
+          "identityLabel": "Green color form of Calcite"
+        },
+        {
+          "stoneId": "C-0013",
+          "name": "Honey Calcite",
+          "headline": "Gather your confidence",
+          "distinction": "Bring attention, capability, and follow-through into the same room.",
+          "identityLabel": "Golden to honey-colored Calcite"
+        },
+        {
+          "stoneId": "C-0014",
+          "name": "Mangano Calcite",
+          "headline": "Let tenderness lead",
+          "distinction": "Create the emotional safety needed for compassion, forgiveness, and honest repair.",
+          "identityLabel": "Manganese-bearing pink Calcite",
+          "groundingNote": {
+            "text": "Mangano Calcite is a pale pink manganese-bearing variety whose modern crystal identity centers on compassion, comfort, empathy, and emotional steadiness.",
+            "sourceRefIds": [
+              "moonrise-mangano"
+            ]
+          }
+        },
+        {
+          "stoneId": "C-0016",
+          "name": "Orange Calcite",
+          "headline": "Bring the spark back",
+          "distinction": "Rekindle initiative, pleasure, creativity, and the desire to participate fully in life.",
+          "identityLabel": "Orange color form of Calcite",
+          "groundingNote": {
+            "text": "Orange Calcite is consistently framed around happiness, hope, freedom from stagnation, and turning ideals into lived action.",
+            "sourceRefIds": [
+              "moonrise-orange"
+            ]
+          }
+        },
+        {
+          "stoneId": "C-0015",
+          "name": "Optical Calcite",
+          "headline": "Change the lens",
+          "distinction": "Clear confusion by examining perspective, assumptions, and what may have been overlooked.",
+          "identityLabel": "Transparent optical Calcite"
+        },
+        {
+          "stoneId": "C-0011",
+          "name": "Cobaltoan Calcite",
+          "headline": "Live with an open heart",
+          "distinction": "Let love, joy, acceptance, and emotional generosity become visible again.",
+          "identityLabel": "Cobalt-bearing Calcite",
+          "groundingNote": {
+            "text": "“Cobaltoan Calcite” is a compositional variety of Calcite, meaning cobalt is present within the material rather than the name describing only its color.",
+            "sourceRefIds": [
+              "mindat-cobaltoan"
+            ]
+          }
+        },
+        {
+          "stoneId": "C-0426",
+          "name": "Chocolate Calcite",
+          "headline": "Stand steady in motion",
+          "distinction": "Give change a foundation of comfort, presence, and practical confidence.",
+          "identityLabel": "Commercial brown Calcite variety"
+        }
+      ]
+    },
+    "tradeMaterials": {
+      "intro": "These stones remain part of the same exploration experience because Calcite is central to their identity, composition, or market history. Their badges explain how they belong rather than dividing the page into “real” and “questionable” relatives.",
+      "members": [
+        {
+          "stoneId": "C-0009",
+          "name": "Caribbean Calcite",
+          "headline": "Let calm carry you forward",
+          "distinction": "Create an atmosphere of ease spacious enough for reflection, imagination, and gentle progress.",
+          "identityLabel": "Calcite-Aragonite trade material",
+          "relationship": [
+            {
+              "text": "Material sold as Caribbean Calcite commonly combines blue Calcite with white to brown Aragonite from Pakistan. Calcite and Aragonite share the formula CaCO₃ but arrange that chemistry in different crystal structures, making them closely related polymorphs rather than the same mineral.",
+              "sourceRefIds": [
+                "mindat-caribbean"
+              ]
+            }
+          ]
+        },
+        {
+          "stoneId": "C-0018",
+          "name": "Zebra Calcite",
+          "headline": "Find strength in contrast",
+          "distinction": "Bring opposing feelings, needs, or possibilities into a more coherent whole.",
+          "identityLabel": "Banded Calcite trade material",
+          "relationship": [
+            {
+              "text": "“Zebra Calcite” is best treated as a descriptive market name for boldly banded carbonate material. Calcite is central to the name and appearance, but the exact accompanying phases and the origin of the banding can vary by material and source. The guide should therefore explain the pattern without pretending the trade label guarantees one universal composition."
+            }
+          ]
+        },
+        {
+          "stoneId": "C-0322",
+          "name": "Lemurian Aquatine Calcite",
+          "headline": "Listen beneath the surface",
+          "distinction": "Slow the pace enough for intuition, self-awareness, and deeper emotional truth to become audible.",
+          "identityLabel": "Trade-named blue-green banded Calcite material",
+          "relationship": [
+            {
+              "text": "“Lemurian Aquatine Calcite” is a metaphysical trade name rather than a formal geological variety. Commercial sources generally describe blue-green banded calcium-carbonate material from Argentina, but the name is not standardized enough to guarantee identical composition from every seller.",
+              "sourceRefIds": [
+                "newmoon-lemurian"
+              ]
+            },
+            {
+              "text": "The word Lemurian belongs to the stone’s modern spiritual story, not its mineral classification."
+            }
+          ]
+        },
+        {
+          "stoneId": "C-0008",
+          "name": "Bumblebee Jasper",
+          "headline": "Turn purpose into motion",
+          "distinction": "Bring boldness, personal direction, and the courage to act on what matters.",
+          "identityLabel": "Calcite-rich mixed material",
+          "relationship": [
+            {
+              "text": "Bumblebee Jasper is not true Jasper. Laboratory analysis has found that the material consists largely of Calcite, with Pyrite in darker areas and arsenic-bearing Realgar detected in yellow to orange regions. That composition makes it a meaningful Calcite-family inclusion, but also a handling exception rather than a simple color variety.",
+              "sourceRefIds": [
+                "epigem-bumblebee"
+              ]
+            },
+            {
+              "text": "Its metaphysical tradition centers on removing blocks, recognizing personal purpose, and bringing spiritual intention into ordinary life.",
+              "sourceRefIds": [
+                "moonrise-bumblebee"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "familyFitsTogether": {
+      "intro": [
+        "The names are describing different kinds of difference.",
+        "A mineral family becomes confusing when every label appears to carry the same authority. “Blue,” “Mangano,” “Optical,” “Caribbean,” and “Zebra” may all appear beside the word Calcite, but they are not making the same kind of claim.",
+        "The easiest way to read the family is to ask what each name is actually telling you."
+      ],
+      "panels": [
+        {
+          "title": "Color forms",
+          "paragraphs": [
+            "Names such as Blue, Green, Orange, Red, White, and Brown Calcite describe the dominant visible color of the material. They are useful and familiar, but they do not necessarily represent formally defined mineral varieties or one universal cause of color.",
+            "Two stones may both be sold as Green Calcite while receiving their color from different impurities, inclusions, or growth conditions. Color gives the material a recognizable market and crystal-practice identity, but it does not replace chemical analysis."
+          ]
+        },
+        {
+          "title": "Compositional varieties",
+          "paragraphs": [
+            "Mangano Calcite and Cobaltoan Calcite tell us more. Their names point to manganese or cobalt within the material. These trace elements contribute to the pink, rose, or magenta coloration and give the varieties a more specific chemical identity than a broad color label."
+          ]
+        },
+        {
+          "title": "Optical forms",
+          "paragraphs": [
+            {
+              "text": "Optical Calcite and Iceland Spar are prized for transparency and strong double refraction. Looking through a clear cleavage piece can produce a visible double image because light travels through the crystal in two paths.",
+              "sourceRefIds": [
+                "mindat-doublerefraction"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Banded and patterned material",
+          "paragraphs": [
+            "Zebra Calcite, banded Calcite, and decorative carbonate sold as “Onyx Marble” are named for their visual structure. Layers, veins, repeated growth, and associated minerals create patterns that can make Calcite look completely unlike a transparent crystal."
+          ]
+        },
+        {
+          "title": "Closely related or mixed materials",
+          "subpanels": [
+            {
+              "label": "Closely related carbonate mixtures",
+              "paragraphs": [
+                {
+                  "text": "Caribbean Calcite combines two forms of calcium carbonate: Calcite and Aragonite. They share the same formula but have different crystal structures. That makes Caribbean Calcite more complex than a color variety while keeping it firmly relevant to the Calcite family story.",
+                  "sourceRefIds": [
+                    "mindat-caribbean"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Calcite-rich mixed materials",
+              "paragraphs": [
+                "Bumblebee Jasper illustrates another relationship. Calcite provides much of the material’s body, while additional mineral phases create its dramatic pattern and its handling concerns. The commercial name hides that mineralogical story, which is precisely why the Family Guide earns its keep."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "otherCalcites": {
+      "intro": [
+        "The Calcite world is larger than the encyclopedia roster.",
+        "A family guide should not pretend that a stone disappears because it does not have a dedicated entry. The names below represent the colors, forms, habits, and commercial labels readers are most likely to meet beyond the main encyclopedia.",
+        "Some deserve substantial explanation. Others need only enough context to prevent confusion."
+      ],
+      "featured": [
+        {
+          "anchor": "red-calcite",
+          "legacyStoneId": "C-0017",
+          "name": "Red Calcite",
+          "headline": "Deeper momentum",
+          "paragraphs": [
+            "Red Calcite carries the family’s movement into determination, endurance, and embodied action. Its energy feels direct and substantial: less about the first spark of enthusiasm and more about staying present long enough to carry a decision through.",
+            "The name generally describes red to reddish-orange Calcite, often sold in massive or polished form. Its deeper saturation distinguishes it from much of the Orange Calcite market, although the boundary between the two names is commercial rather than absolute. Color alone cannot confirm the precise impurities or inclusions responsible for a particular specimen."
+          ],
+          "comparison": {
+            "heading": "How it differs from Orange Calcite",
+            "lines": [
+              "Orange Calcite rekindles enjoyment, initiative, and creative momentum.",
+              "Red Calcite gives that momentum weight, stamina, and commitment."
+            ]
+          },
+          "closingParagraph": "Red Calcite remains searchable through Still Point even without a standalone encyclopedia page. Its proper home is here, where the difference can be explained without creating another nearly overlapping entry.",
+          "closestPaths": {
+            "label": "Closest encyclopedia paths",
+            "items": [
+              {
+                "name": "Orange Calcite",
+                "stoneId": "C-0016"
+              },
+              {
+                "name": "Chocolate Calcite",
+                "stoneId": "C-0426"
+              },
+              {
+                "name": "Cobaltoan Calcite",
+                "stoneId": "C-0011"
+              }
+            ]
+          }
+        },
+        {
+          "anchor": "white-calcite",
+          "name": "White Calcite",
+          "headline": "A clean beginning",
+          "paragraphs": [
+            "White Calcite brings the family’s clearing quality into its simplest form. It creates a sense of openness, renewal, and readiness, making it a natural choice for fresh starts and spaces that feel energetically crowded.",
+            "The name covers opaque to translucent white material rather than one narrowly defined variety. White Calcite is common, but its simplicity is instructive: color is not required for Calcite to show strong cleavage, varied crystal habits, or beautiful internal structure."
+          ]
+        },
+        {
+          "anchor": "clear-calcite-iceland-spar",
+          "name": "Clear Calcite and Iceland Spar",
+          "headline": "Clarity you can see",
+          "paragraphs": [
+            "Clear Calcite turns the family’s relationship with perception into a physical demonstration. A transparent piece can split an image into two, revealing the mineral’s strong double refraction with no equipment beyond a printed line.",
+            {
+              "text": "“Iceland Spar” originally became famous through exceptional transparent Calcite from Iceland, but the term is now commonly used for clear optical-quality Calcite from other localities as well.",
+              "sourceRefIds": [
+                "mindat-icelandspar"
+              ]
+            }
+          ],
+          "closingParagraph": "On Still Point, this territory belongs with Optical Calcite, preventing a historical name from becoming a duplicate encyclopedia entry.",
+          "seeAlso": {
+            "name": "Optical Calcite",
+            "stoneId": "C-0015"
+          }
+        },
+        {
+          "anchor": "yellow-golden-honey-calcite",
+          "name": "Yellow, Golden, and Honey Calcite",
+          "headline": "Confidence, focus, and purposeful growth",
+          "paragraphs": [
+            "These names overlap heavily in the market. Sellers may use them according to color depth, transparency, locality, or simple preference rather than a universal grading system."
+          ],
+          "listIntro": "A practical distinction:",
+          "list": [
+            "Yellow Calcite is the broad color term.",
+            "Golden Calcite often suggests clearer, more vivid, or more saturated material.",
+            "Honey Calcite usually suggests warm amber, honey, or caramel tones and has developed the strongest standalone market identity."
+          ],
+          "closingParagraph": "The boundaries are visual and commercial, not separate mineral species. That is why Honey Calcite earns one encyclopedia entry while the family guide absorbs neighboring labels.",
+          "seeAlso": {
+            "name": "Honey Calcite",
+            "stoneId": "C-0013"
+          }
+        },
+        {
+          "anchor": "pink-calcite",
+          "name": "Pink Calcite",
+          "headline": "The heart-facing side of the family",
+          "paragraphs": [
+            "Pink Calcite is a broad market category, not automatically a synonym for Mangano Calcite or Cobaltoan Calcite."
+          ],
+          "list": [
+            "Mangano Calcite is manganese-bearing and usually pale pink.",
+            "Cobaltoan Calcite contains cobalt and often appears more vivid, saturated, or magenta.",
+            "Pink Calcite may be used more loosely when the exact cause of color has not been established."
+          ],
+          "closingParagraph": "The guide should encourage accurate labeling without making a gentle pink stone feel lesser simply because its trace chemistry is unknown.",
+          "seeAlsoMultiple": [
+            {
+              "name": "Mangano Calcite",
+              "stoneId": "C-0014"
+            },
+            {
+              "name": "Cobaltoan Calcite",
+              "stoneId": "C-0011"
+            }
+          ]
+        },
+        {
+          "anchor": "black-dark-calcite",
+          "name": "Black and Dark Calcite",
+          "headline": "Depth, grounding, and quiet consolidation",
+          "paragraphs": [
+            "Material sold as Black Calcite ranges from deep gray and brown to nearly black. The dark appearance may reflect inclusions, organic matter, associated minerals, or a fine-grained massive structure rather than one standardized variety.",
+            "It deserves recognition because readers will encounter the name, but it does not warrant a standalone entry without a more consistent identity."
+          ]
+        },
+        {
+          "anchor": "banded-calcite-onyx-marble",
+          "name": "Banded Calcite and Onyx Marble",
+          "headline": "A decorative stone with a borrowed name",
+          "paragraphs": [
+            "Banded Calcite can form flowing layers of cream, tan, amber, green, brown, and white. The decorative-stone trade frequently calls this material “Onyx,” “Onyx Marble,” or “Mexican Onyx.”",
+            "It is not true Onyx, which is a silica-based variety of Chalcedony. “Onyx Marble” is commercial language for banded carbonate stone, commonly Calcite or Aragonite-rich material.",
+            "This distinction explains why two objects both sold as “Onyx” may differ dramatically in hardness, care, and composition."
+          ]
+        }
+      ],
+      "compactDirectoryIntro": "These labels appear often enough to recognize, but they do not describe formal mineral varieties:",
+      "compactDirectory": [
+        {
+          "name": "Lemon Calcite",
+          "body": "A bright, pale yellow market name that overlaps Yellow and Golden Calcite."
+        },
+        {
+          "name": "Orchid Calcite",
+          "body": "Usually cream, peach, pink, lavender, or softly mottled Calcite sold under a decorative color name."
+        },
+        {
+          "name": "Pistachio Calcite",
+          "body": "A commercial label for pale yellow-green or green Calcite, sometimes overlapping material sold simply as Green Calcite."
+        },
+        {
+          "name": "Salmon Calcite",
+          "body": "A peach, coral, or pink-orange color term that may sit visually between Orange, Pink, and Mangano Calcite."
+        },
+        {
+          "name": "Gray Calcite",
+          "body": "A broad color label for smoky, silver-gray, or charcoal material whose exact inclusions may vary."
+        },
+        {
+          "name": "Brown Calcite",
+          "body": "A general category that overlaps Chocolate Calcite, depending on saturation, pattern, and seller terminology."
+        }
+      ],
+      "compactDirectoryClosing": "These names can be useful descriptions. They become misleading only when presented as universally defined mineral varieties.",
+      "habitStripIntro": "These terms describe shape, not color or composition.",
+      "habitStrip": [
+        {
+          "name": "Dogtooth Calcite",
+          "body": "Pointed scalenohedral crystals whose tapered forms resemble teeth."
+        },
+        {
+          "name": "Nailhead Calcite",
+          "body": "Flatter crystal forms with broad terminations, creating a head-and-stem silhouette."
+        },
+        {
+          "name": "Rhombohedral Calcite",
+          "body": "Blocky crystals or cleavage fragments defined by Calcite’s characteristic angled geometry."
+        },
+        {
+          "name": "Cave Calcite",
+          "body": "A broad descriptive category that includes stalactites, stalagmites, flowstone, and related deposits formed from calcium-rich water."
+        }
+      ],
+      "habitStripClosing": "One specimen can carry both a color name and a habit name. A golden Dogtooth Calcite, for example, is describing color and shape at the same time."
+    },
+    "whatIsCalcite": {
+      "mainIdentity": [
+        {
+          "text": "Calcite is calcium carbonate, CaCO₃, and one of Earth’s most widespread minerals. It is a major constituent of limestone and marble, builds cave formations, fills fractures and cavities, and grows in sedimentary, metamorphic, igneous, and hydrothermal environments. Its abundance does not make it visually predictable. Calcite develops an extraordinary variety of crystal habits, colors, textures, inclusions, and optical effects.",
+          "sourceRefIds": [
+            "mindat-calcite-general"
+          ]
+        },
+        "Pure Calcite is colorless or white. Color enters through trace chemistry, inclusions, associated minerals, structural effects, or material formed in repeated layers. That flexibility explains why one mineral can appear as a transparent rhomb, a powder-blue carving, a banded decorative stone, a vivid cobalt-rich crystal, or the pale foundation of Bumblebee Jasper."
+      ],
+      "physicalCharacteristics": [
+        {
+          "text": "Calcite is also a mineral of memorable physical contrasts. It is soft, with a Mohs hardness of 3, but capable of forming remarkably crisp crystals. It has prominent rhombohedral cleavage and reacts readily with weak acid. Transparent material can display strong double refraction, making a line or image viewed through it appear twice.",
+          "sourceRefIds": [
+            "mindat-calcite-general"
+          ]
+        }
+      ],
+      "whySoManyForms": {
+        "intro": "Calcite grows in a wide range of geological environments. It can crystallize directly from mineral-rich water, develop inside cavities and veins, accumulate through biological and sedimentary processes, or recrystallize when limestone becomes marble.",
+        "listIntro": "Different conditions alter:",
+        "list": [
+          "crystal habit",
+          "transparency",
+          "grain size",
+          "included minerals",
+          "banding",
+          "color",
+          "matrix",
+          "fluorescence",
+          "overall appearance"
+        ],
+        "closing": "The family’s diversity is not a branding invention. The mineral truly is that adaptable. The market simply adds another layer by naming particularly recognizable colors and patterns."
+      }
+    },
+    "identificationBuyingCare": {
+      "recognizing": {
+        "intro": "Calcite’s most useful identifying features are:",
+        "list": [
+          "Mohs hardness around 3",
+          "prominent rhombohedral cleavage",
+          "reaction with weak acids",
+          "strong double refraction in transparent material",
+          "a wide range of crystal habits and colors"
+        ],
+        "closing": [
+          "These clues work together. Color alone is unreliable because Calcite can resemble Fluorite, Aragonite, Gypsum, Quartz, Dolomite, Celestite, and numerous decorative stones.",
+          "Avoid testing a valued specimen with vinegar or acid merely to satisfy curiosity. Acid reaction is diagnostically useful, but it damages the surface."
+        ]
+      },
+      "buying": {
+        "intro": "A good Calcite listing should make clear whether the name describes:",
+        "list": [
+          "a color",
+          "a trace-element variety",
+          "a crystal habit",
+          "a mixed material",
+          "a locality product",
+          "a commercial trade name"
+        ],
+        "paragraphs": [
+          "Look for photographs that show natural variation, fractures, cleavage, matrix, banding, and surface texture. Perfectly uniform color in a material normally known for variation deserves a closer look, particularly when the seller gives no locality or treatment information.",
+          "Polishing does not make Calcite false or inferior. It can reveal color, translucency, and banding beautifully. It can also hide crystal habit and obscure where one mineral ends and another begins."
+        ],
+        "list2Intro": "A balanced collection benefits from both:",
+        "list2": [
+          "raw or crystalline specimens for structure and identification",
+          "polished pieces for color, pattern, and tactile presence"
+        ]
+      },
+      "care": {
+        "intro": {
+          "text": "Calcite is soft and has perfect cleavage. Store it away from Quartz, Beryl, Topaz, and other harder stones that can scratch it. Protect crystal points, thin edges, and polished carvings from impact because an internal cleavage plane can split even a substantial-looking piece.",
+          "sourceRefIds": [
+            "mindat-calcite-general"
+          ]
+        },
+        "listIntro": "For routine care:",
+        "list": [
+          "dust with a soft cloth or brush",
+          "use a barely damp cloth when needed",
+          "dry promptly",
+          "avoid soaking",
+          "avoid acidic cleaners",
+          "avoid ultrasonic and steam cleaning",
+          "avoid abrasive polishing compounds"
+        ],
+        "bumblebeeWarning": {
+          "text": "Bumblebee Jasper requires additional caution because arsenic-bearing Realgar has been detected in some material. Keep it intact, avoid cutting or grinding it without professional controls, never make elixirs with it, and wash hands after handling rough or damaged pieces.",
+          "sourceRefIds": [
+            "epigem-bumblebee"
+          ]
+        }
+      }
+    },
+    "relatedCarbonates": {
+      "intro": [
+        "Calcite belongs to a larger chemical neighborhood.",
+        "Carbonate minerals share the carbonate group in their structure, but changing the principal elements or crystal arrangement creates distinct minerals with their own appearance, hardness, density, and collecting identity."
+      ],
+      "minerals": [
+        {
+          "name": "Aragonite",
+          "relationLine": "Aragonite has the same chemical formula as Calcite, CaCO₃, but a different crystal structure.",
+          "explanation": {
+            "text": "The two are polymorphs: identical chemistry arranged differently. That relationship explains why they often appear together and why trade materials such as Caribbean Calcite can include both.",
+            "sourceRefIds": [
+              "mindat-caribbean"
+            ]
+          }
+        },
+        {
+          "name": "Dolomite",
+          "relationLine": "Dolomite has the formula CaMg(CO₃)₂, replacing part of Calcite’s calcium framework with magnesium.",
+          "explanation": {
+            "text": "It is a separate mineral, generally harder than Calcite and less reactive to weak acid unless powdered. Its curved rhombohedral crystals can resemble Calcite, making mineral habit and simple appearance insufficient for certain identification."
+          }
+        },
+        {
+          "name": "Rhodochrosite",
+          "relationLine": "Rhodochrosite is manganese carbonate, MnCO₃, and a member of the Calcite group.",
+          "explanation": {
+            "text": "Its pink and red colors create obvious visual comparisons with Mangano and Cobaltoan Calcite, but Rhodochrosite is a distinct mineral with greater density and a different composition.",
+            "sourceRefIds": [
+              "mindat-rhodochrosite"
+            ]
+          }
+        },
+        {
+          "name": "Magnesite",
+          "relationLine": "Magnesite is magnesium carbonate, MgCO₃.",
+          "explanation": {
+            "text": "It commonly appears white, cream, gray, yellowish, brown, or faintly pink and belongs to the Calcite group, but is harder and chemically distinct.",
+            "sourceRefIds": [
+              "mindat-magnesite"
+            ]
+          }
+        },
+        {
+          "name": "Siderite",
+          "relationLine": "Siderite is iron carbonate, FeCO₃.",
+          "explanation": {
+            "text": "Its brown, tan, yellow-brown, or gray crystals can resemble earthy Calcite, but iron changes both its composition and its physical character."
+          }
+        },
+        {
+          "name": "Smithsonite",
+          "relationLine": "Smithsonite is zinc carbonate, ZnCO₃.",
+          "explanation": {
+            "text": "Its rounded, botryoidal surfaces and pastel colors make it popular with collectors, while its chemistry and greater density separate it clearly from Calcite."
+          }
+        },
+        {
+          "name": "Malachite and Azurite",
+          "relationLine": "Malachite and Azurite are copper carbonate minerals.",
+          "explanation": {
+            "text": "Copper gives them their celebrated green and blue colors, but they are not colored forms of Calcite. They belong on the wider carbonate map because they help show how one structural family can produce minerals with dramatically different identities."
+          }
+        }
+      ]
+    },
+    "closing": {
+      "title": "One family, many ways forward",
+      "paragraphs": [
+        "Calcite becomes less confusing once its variety is understood as a strength rather than a naming problem.",
+        "The mineral carries one recognizable impulse through dozens of appearances: clearing, movement, and renewed participation. Color, chemistry, crystal form, pattern, and associated minerals decide how that impulse is expressed."
+      ],
+      "listIntro": "A collection of Calcites is therefore not a row of duplicates. It is a study in how one mineral can meet entirely different moments:",
+      "list": [
+        "quiet enough to hear yourself",
+        "clarity enough to choose",
+        "warmth enough to reconnect",
+        "confidence enough to continue",
+        "energy enough to begin"
+      ],
+      "finalLine": "Start with what needs to move. The family will take it from there.",
+      "actions": [
+        {
+          "label": "Explore Calcite encyclopedia entries",
+          "type": "jumpToFamily"
+        },
+        {
+          "label": "Open a Calcite in Quick View",
+          "type": "openDetail",
+          "stoneId": "C-0007"
+        },
+        {
+          "label": "Continue to Aragonite",
+          "type": "inert"
+        },
+        {
+          "label": "Continue to Dolomite",
+          "type": "inert"
+        },
+        {
+          "label": "Return to Crystal Families",
+          "type": "backTo101"
+        }
+      ]
+    },
+    "factualFlags": [
+      "Zebra Calcite: verify the exact composition and locality represented by Still Point’s rostered identity before assigning anything more specific than “banded Calcite trade material.”",
+      "Lemurian Aquatine Calcite: retain the trade-name framing. Confirm the rostered material’s source, composition, and relationship to Argentine blue banded Calcite before making locality-specific public claims.",
+      "Chocolate Calcite: verify whether Still Point wants it framed purely as a commercial brown color variety or as a more specific market material.",
+      "Honey versus Golden Calcite: maintain the clear warning that terminology overlaps rather than inventing a rigid mineralogical boundary.",
+      "Bumblebee Jasper: keep the Calcite-rich mixed-material identity and physical handling warning. Avoid universalizing the exact proportions of Realgar, Pyrite, or other phases across every specimen.",
+      "Color causes: do not assign one trace element or inclusion as the universal source of Blue, Green, Orange, Red, Black, or other broad Calcite colors without specimen-specific evidence."
+    ],
+    "sourceReferences": {
+      "moonrise-blue": {
+        "url": "https://moonrisecrystals.com/blue-calcite-meaning/",
+        "label": "Moonrise Crystals — Blue Calcite meaning"
+      },
+      "moonrise-blue-2": {
+        "url": "https://moonrisecrystals.com/blue-calcite-meaning/",
+        "label": "Moonrise Crystals — Blue Calcite meaning"
+      },
+      "moonrise-mangano": {
+        "url": "https://moonrisecrystals.com/mangano-calcite-meaning/",
+        "label": "Moonrise Crystals — Mangano Calcite meaning"
+      },
+      "moonrise-orange": {
+        "url": "https://moonrisecrystals.com/orange-calcite-meaning/",
+        "label": "Moonrise Crystals — Orange Calcite meaning"
+      },
+      "mindat-cobaltoan": {
+        "url": "https://www.mindat.org/mesg-47163.html",
+        "label": "Mindat — Cobaltoan Calcite forum discussion"
+      },
+      "mindat-caribbean": {
+        "url": "https://www.mindat.org/mesg-518803.html",
+        "label": "Mindat — Caribbean Calcite forum discussion"
+      },
+      "newmoon-lemurian": {
+        "url": "https://newmoonbeginnings.com/lemurian-aquatine-calcite-rough-polished/",
+        "label": "New Moon Beginnings — Lemurian Aquatine Calcite"
+      },
+      "epigem-bumblebee": {
+        "url": "https://www.epigem.de/en-us/informations/toxic-minerals/eclipse-bumblebee-stone.html",
+        "label": "epigem.de — Bumblebee Stone toxic minerals note"
+      },
+      "moonrise-bumblebee": {
+        "url": "https://moonrisecrystals.com/bumblebee-jasper-meaning/",
+        "label": "Moonrise Crystals — Bumblebee Jasper meaning"
+      },
+      "mindat-doublerefraction": {
+        "url": "https://www.mindat.org/gm/4900",
+        "label": "Mindat — Calcite (double refraction)"
+      },
+      "mindat-icelandspar": {
+        "url": "https://www.mindat.org/mesg-304807.html",
+        "label": "Mindat — Iceland Spar forum discussion"
+      },
+      "mindat-calcite-general": {
+        "url": "https://www.mindat.org/show.php?id=859&ld=1",
+        "label": "Mindat — Calcite species page"
+      },
+      "mindat-rhodochrosite": {
+        "url": "https://www.mindat.org/min-3406.html",
+        "label": "Mindat — Rhodochrosite species page"
+      },
+      "mindat-magnesite": {
+        "url": "https://www.mindat.org/min-2482.html",
+        "label": "Mindat — Magnesite species page"
+      }
+    }
+  }
+}

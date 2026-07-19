@@ -580,6 +580,15 @@ function encRetiredResultHtml(t){
       return`<button type="button" class="enc-retired-link" onclick="openDetail('${escapeAttr(match.i)}')">${escapeAttr(match.n)}</button>`;
     }).filter(Boolean).join('');
     actionHtml=`<div class="enc-retired-family-label">${escapeAttr(t.redirect_family_label||'')}</div><div class="enc-retired-family-chips">${chips}</div>`;
+  }else if(t.redirect_type==='guide'&&t.redirect_slug&&typeof openFamilyGuide==='function'){
+    // Family Guide redirect — reuses redirect_slug for the guide's family slug (same
+    // "slug of the target" meaning it already carries for the 'single' type, just
+    // pointed at a guide instead of a stone). redirect_anchor is an optional column
+    // this schema does not yet have; when absent the guide still opens, just without
+    // the in-page scroll. See audit note: no anchor column exists as of 2026-07-19.
+    const anchorArg=t.redirect_anchor?`,{anchor:'${escapeAttr(t.redirect_anchor)}'}`:'';
+    const label=t.redirect_family_label||t.redirect_slug;
+    actionHtml=`<button type="button" class="enc-retired-link" onclick="openFamilyGuide('${escapeAttr(t.redirect_slug)}'${anchorArg});return false;">See ${escapeAttr(label)}</button>`;
   }else{
     actionHtml=`<div class="enc-retired-message">${escapeAttr(t.helper_message||'No longer part of our active collection.')}</div>`;
   }

@@ -1550,6 +1550,140 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .badge-warn{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fdf0dc;color:#7a5010;letter-spacing:0.04em}
 .badge-no{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fde8e8;color:#7a2020;letter-spacing:0.04em}
 
+/* ── FAMILY GUIDE (pilot: Calcite) ──
+   Reuses .c101-h1/.c101-h2/.c101-body/.c101-block/.c101-photo-intro for section
+   typography/spacing and .btn for actions. Genuinely new primitives below,
+   grouped by the approved editorial section they belong to. */
+#tab-family{padding:1.5rem}
+.fg-guide .fg-p{font-size:14px;line-height:1.8;color:var(--ink2);margin:0 0 1rem;max-width:68ch}
+.fg-guide .fg-list{margin:0 0 1rem;padding-left:1.1rem;font-size:14px;line-height:1.75;color:var(--ink2)}
+.fg-guide .fg-list li{margin-bottom:2px}
+.fg-list-intro{font-size:13px;letter-spacing:0.03em;color:var(--ink2r);margin-bottom:0.4rem}
+.fg-inline-link{background:none;border:none;padding:0;font:inherit;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.fg-inline-link:hover{color:var(--ink)}
+.fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
+
+/* 1. Hero */
+.fg-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:0.3rem}
+.fg-hero-signature{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;color:var(--accent);margin-bottom:0.9rem;line-height:1.4}
+.fg-hero-p{font-size:15px;line-height:1.75;color:var(--ink2);margin:0 0 0.9rem;max-width:60ch}
+.fg-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:0.4rem}
+
+/* 2. The Energy of Calcite — quiet typographic pause, not a promo box */
+.fg-energy{max-width:66ch}
+.fg-energy-p{font-size:15px;line-height:1.8;color:var(--ink2);margin:0 0 1rem}
+.fg-energy-leadin{font-size:13px;letter-spacing:0.04em;color:var(--ink2r);margin:1.4rem 0 0.3rem}
+.fg-energy-question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:34px;line-height:1.25;color:var(--ink);margin:0 0 0.6rem;padding:0.2rem 0}
+.fg-energy-afterquestion{font-size:14px;color:var(--ink2r);margin-bottom:1.3rem}
+.fg-energy-grounding{font-size:12.5px;color:var(--ink3);line-height:1.7;border-top:0.5px solid var(--border);padding-top:0.9rem;margin-top:0.4rem}
+
+/* 3. Find Your Calcite — image-forward choice tiles */
+.fg-find-intro{font-family:Georgia,'Times New Roman',serif;font-size:19px;color:var(--ink);margin-bottom:0.4rem}
+.fg-find-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:1.1rem}
+.fg-find-tile{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s;display:flex;flex-direction:column}
+.fg-find-tile:hover{border-color:var(--accent2);box-shadow:0 8px 22px rgba(42,37,32,0.08)}
+.fg-find-tile-img{width:100%;aspect-ratio:1/1;background:var(--stone2);overflow:hidden}
+.fg-find-tile-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-find-tile-noimg{width:100%;height:100%;background:var(--stone3)}
+.fg-find-tile-copy{padding:0.85rem 0.95rem 1rem}
+.fg-find-tile-name{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.fg-find-tile-headline{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;line-height:1.25;color:var(--ink);margin-bottom:5px}
+.fg-find-tile-distinction{font-size:13px;line-height:1.55;color:var(--ink2);margin-bottom:8px}
+.fg-identity-label{display:inline-block;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);color:var(--ink3)}
+
+/* 4. Trade materials — same tile language, two-column, relationship copy shown */
+.fg-trade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1rem}
+.fg-trade-card{display:flex;gap:0;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.fg-trade-card-img{width:120px;flex-shrink:0;cursor:pointer;background:var(--stone2)}
+.fg-trade-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-trade-card-body{padding:0.9rem 1rem;min-width:0}
+.fg-trade-relationship{font-size:12.5px;line-height:1.65;color:var(--ink2r);margin:6px 0}
+.fg-trade-qv{font-size:11px;letter-spacing:0.03em;margin-top:4px;display:inline-block}
+
+/* 5. How the Family Fits Together — five compact panels, not one essay */
+.fg-fits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0.75rem}
+.fg-fits-panel{background:var(--stone2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+.fg-fits-panel:last-child{grid-column:1/-1}
+.fg-fits-panel-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.5rem}
+.fg-fits-panel .fg-p,.fg-fits-panel p{font-size:13px;line-height:1.65;color:var(--ink2);margin:0 0 0.6rem}
+.fg-panel-subpanel{margin-bottom:0.7rem}
+.fg-panel-subpanel:last-child{margin-bottom:0}
+.fg-panel-sublabel{font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2r);margin-bottom:3px}
+
+/* 6. Other Calcites You May Encounter — three visual density levels */
+.fg-featured-list{display:flex;flex-direction:column;gap:1rem;margin-top:0.75rem}
+.fg-featured-profile{border:0.5px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;background:var(--white);scroll-margin-top:90px}
+.fg-featured-name{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--ink);margin-bottom:2px}
+.fg-featured-headline{font-size:13px;letter-spacing:0.03em;color:var(--accent);margin-bottom:0.6rem}
+.fg-comparison-block{background:var(--stone2);border-radius:8px;padding:0.75rem 1rem;margin:0.6rem 0}
+.fg-comparison-heading{font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink2r);margin-bottom:5px}
+.fg-comparison-line{font-size:13px;line-height:1.6;color:var(--ink2);margin:0 0 3px}
+.fg-see-also{font-size:12px;color:var(--ink3);margin-top:0.5rem;border-top:0.5px solid var(--border2);padding-top:0.6rem}
+
+.fg-level2,.fg-level3{margin-top:1.4rem}
+.fg-level-label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);font-weight:500;margin-bottom:4px}
+.fg-level-intro{font-size:13px;margin-bottom:0.7rem}
+.fg-level-closing{font-size:12.5px;color:var(--ink3)}
+.fg-compact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fg-compact-item{background:var(--stone2);border:0.5px solid var(--border2);border-radius:8px;padding:0.6rem 0.75rem}
+.fg-compact-name{display:block;font-size:12.5px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.fg-compact-body{display:block;font-size:11.5px;line-height:1.5;color:var(--ink2r)}
+.fg-habit-strip{display:flex;flex-wrap:wrap;gap:8px}
+.fg-habit-chip{background:var(--white);border:0.5px solid var(--border);border-radius:20px;padding:6px 14px;display:flex;align-items:baseline;gap:6px;max-width:100%}
+.fg-habit-name{font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap}
+.fg-habit-body{font-size:11px;color:var(--ink3)}
+
+/* 7. What Is Calcite? */
+.fg-whatis-sub{max-width:66ch;margin-bottom:0.9rem}
+.fg-whatis-subhead{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin:1.1rem 0 0.5rem}
+.fg-term{font-style:normal;color:var(--accent);font-weight:500}
+
+/* 8. Identification, Buying, and Care */
+.fg-ibc-block{margin-bottom:1.4rem}
+.fg-ibc-label{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:0.5rem}
+.fg-bumblebee-warn{margin-top:0.75rem}
+
+/* 9. Related Carbonate Minerals — concise cards, not full essays */
+.fg-carbonate-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:0.75rem}
+.fg-carbonate-card{background:var(--stone2);border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem}
+.fg-carbonate-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:4px}
+.fg-carbonate-relation{font-size:13px;color:var(--ink);line-height:1.55;margin-bottom:4px}
+.fg-carbonate-explanation{font-size:12.5px;color:var(--ink2r);line-height:1.6;margin:0}
+
+/* 10. Closing section — graceful, not another heavy block */
+.fg-closing{text-align:center;max-width:64ch;margin-left:auto;margin-right:auto}
+.fg-closing .fg-p,.fg-closing .fg-list{text-align:left}
+.fg-closing-final{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;color:var(--ink);text-align:center;margin-top:1rem}
+.fg-closing-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:1.25rem}
+.fg-closing-inert{font-size:13px;color:var(--ink3);padding:8px 4px;display:inline-flex;align-items:center}
+
+@media(max-width:900px){
+  .fg-find-grid{grid-template-columns:repeat(2,1fr)}
+  .fg-fits-grid{grid-template-columns:1fr 1fr}
+  .fg-fits-panel:last-child{grid-column:1/-1}
+  .fg-carbonate-grid{grid-template-columns:1fr}
+  .fg-compact-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:600px){
+  #tab-family{padding:1rem}
+  .fg-hero-title{font-size:24px}
+  .fg-energy-question{font-size:26px}
+  .fg-find-grid{grid-template-columns:1fr}
+  .fg-find-tile{flex-direction:row}
+  .fg-find-tile-img{width:110px;aspect-ratio:1/1;flex-shrink:0}
+  .fg-find-tile-copy{padding:0.75rem 0.85rem}
+  .fg-trade-grid{grid-template-columns:1fr}
+  .fg-trade-card{flex-direction:row}
+  .fg-fits-grid{grid-template-columns:1fr}
+  .fg-fits-panel:last-child{grid-column:auto}
+  .fg-compact-grid{grid-template-columns:1fr}
+  .fg-habit-strip{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .fg-habit-chip{flex-shrink:0}
+  .fg-carbonate-grid{grid-template-columns:1fr}
+  .fg-closing-actions{flex-direction:column;align-items:stretch}
+}
+
 /* ── MOBILE POLISH PASS ── */
 @media(max-width:600px){
 
@@ -1984,12 +2118,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
      Intention, and Identify V2 all render `.crystal-card` output from (or,
      for Choose by Intention, styled to match) encCardHtml() — one coherent
      base instead of three independently drifting sets of values. */
-  .enc-tier-grid,.enc-accordion-grid,#tab-encyclopedia #crystal-grid,#mood-stone-grid,#id2-grid{grid-template-columns:1fr;gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
-  .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card,#mood-stone-grid .crystal-card,#id2-grid .crystal-card{flex-direction:row;align-items:flex-start;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:100px;background:var(--white)}
-  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone,#mood-stone-grid .card-img-zone,#id2-grid .card-img-zone{width:92px;min-height:100px;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
-  .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img,#mood-stone-grid .card-img-zone img,#id2-grid .card-img-zone img{max-height:100%;width:100%;object-fit:contain}
-  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body,#mood-stone-grid .card-body,#id2-grid .card-body{padding:0.6rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
-  .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name,#mood-stone-grid .card-name,#id2-grid .card-name{font-size:16px;overflow-wrap:normal}
+  .enc-tier-grid,.enc-accordion-grid,#tab-encyclopedia #crystal-grid,#mood-stone-grid,#id2-grid,.fg-member-grid{grid-template-columns:1fr;gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
+  .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card,#mood-stone-grid .crystal-card,#id2-grid .crystal-card,.fg-member-grid .crystal-card{flex-direction:row;align-items:flex-start;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:100px;background:var(--white)}
+  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone,#mood-stone-grid .card-img-zone,#id2-grid .card-img-zone,.fg-member-grid .card-img-zone{width:92px;min-height:100px;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
+  .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img,#mood-stone-grid .card-img-zone img,#id2-grid .card-img-zone img,.fg-member-grid .card-img-zone img{max-height:100%;width:100%;object-fit:contain}
+  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body,#mood-stone-grid .card-body,#id2-grid .card-body,.fg-member-grid .card-body{padding:0.6rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+  .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name,#mood-stone-grid .card-name,#id2-grid .card-name,.fg-member-grid .card-name{font-size:16px;overflow-wrap:normal}
   .enc-tier-grid .card-color,.enc-accordion-grid .card-color,#tab-encyclopedia #crystal-grid .card-color{line-height:1.35}
   .enc-next-shelf{grid-template-columns:1fr}
   .enc-next-up{display:none}

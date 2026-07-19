@@ -624,7 +624,14 @@ _authInit();
     const famCard=e.target.closest && e.target.closest('#fam-cards .fam-card');
     if(famCard){
       const fam=famCard.getAttribute('data-family') || (famCard.querySelector('.fam-name')||{}).textContent;
-      if(fam){ e.preventDefault(); e.stopPropagation(); jumpToFamily(fam.trim()); return; }
+      if(fam){
+        e.preventDefault(); e.stopPropagation();
+        const famName=fam.trim();
+        const famData=typeof C101_FAM_DATA!=='undefined'?C101_FAM_DATA.find(x=>x.n===famName):null;
+        if(famData&&famData.guideSlug&&typeof openFamilyGuide==='function') openFamilyGuide(famData.guideSlug);
+        else jumpToFamily(famName);
+        return;
+      }
     }
     const chakraCard=e.target.closest && e.target.closest('#chakra-cards .chakra-card');
     if(chakraCard){

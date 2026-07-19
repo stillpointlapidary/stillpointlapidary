@@ -40,7 +40,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="stones/enc-icons.css">
-<script>(function(){try{var t=new URLSearchParams(location.search).get('tab');var m={mood:2,identify:4,collection:5,'101':6};if(m[t]){var s=document.createElement('style');s.id='initial-tab-style';s.textContent='main>section{display:none!important}#tab-'+t+'{display:block!important}.main-nav .nav-tab.active{color:var(--ink2r);border-bottom-color:transparent;background:transparent}.main-nav .nav-tab:nth-child('+m[t]+'){color:var(--ink);border-bottom-color:var(--accent)}@media(max-width:768px){.main-nav .nav-tab:nth-child('+m[t]+'){background:var(--stone2);border-bottom-color:var(--border2)}}';document.head.appendChild(s);}}catch(e){}})();</script>
+<script>(function(){try{var qs=new URLSearchParams(location.search);var t=qs.get('tab');var m={mood:2,identify:4,collection:5,'101':6};if(m[t]){var s=document.createElement('style');s.id='initial-tab-style';s.textContent='main>section{display:none!important}#tab-'+t+'{display:block!important}.main-nav .nav-tab.active{color:var(--ink2r);border-bottom-color:transparent;background:transparent}.main-nav .nav-tab:nth-child('+m[t]+'){color:var(--ink);border-bottom-color:var(--accent)}@media(max-width:768px){.main-nav .nav-tab:nth-child('+m[t]+'){background:var(--stone2);border-bottom-color:var(--border2)}}';document.head.appendChild(s);}else if(t==='family'&&qs.get('family')){var s2=document.createElement('style');s2.id='initial-tab-style';s2.textContent='main>section{display:none!important}#tab-family{display:block!important}.main-nav .nav-tab.active{color:var(--ink2r);border-bottom-color:transparent;background:transparent}';document.head.appendChild(s2);}}catch(e){}})();</script>
 </head>
 <body>
 <div class="app-shell">
@@ -1294,6 +1294,9 @@
     </div><!-- /c101-content-pane -->
   </div><!-- /c101-layout -->
 </div><!-- /c101-wrap -->
+</section><!-- /tab-101 (was previously left unclosed; closing it here so later
+     main-level siblings — the Grid Detail Modal and the Family Guide section —
+     are not silently nested inside a hidden #tab-101 by HTML parser recovery) -->
 
 <!-- Grid Detail Modal -->
 <div class="grid-modal-overlay" id="grid-modal-overlay" onclick="if(event.target===this)closeGridModal()">
@@ -1302,6 +1305,9 @@
     <div id="grid-modal-content"></div>
   </div>
 </div>
+
+<!-- Family Guide — approved route: encyclopedia.html?tab=family&family=<slug>[#anchor] -->
+<section id="tab-family" style="display:none"></section>
 
 </main>
 
@@ -2179,6 +2185,7 @@
 <script src="mood.js"></script>
 <script src="collection.js"></script>
 <script src="encyclopedia.js"></script>
+<script src="family-guide.js"></script>
 <script src="auth.js"></script>
 
 

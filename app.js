@@ -2250,12 +2250,16 @@ function init(){
 
     // Read the intended tab BEFORE any rendering so we can hide encyclopedia immediately
     // and avoid the flash where encyclopedia briefly appears before the real target tab.
-    const urlTab=(()=>{try{const p=new URLSearchParams(window.location.search).get('tab');return(['mood','encyclopedia','identify','collection','101'].includes(p)?p:null);}catch(e){return null;}})();
+    const urlParams=(()=>{try{return new URLSearchParams(window.location.search);}catch(e){return null;}})();
+    const urlTab=(()=>{const p=urlParams&&urlParams.get('tab');return(['mood','encyclopedia','identify','collection','101'].includes(p)?p:null);})();
+    const isFamilyGuideUrl=!!(urlParams&&urlParams.get('tab')==='family'&&urlParams.get('family'));
     const rememberedTab=urlTab||'encyclopedia';
 
     // Apply the target tab immediately — before encRender() — so the correct tab is
     // the first thing the user sees. encRender() then renders into a hidden section.
-    if(['mood','collection','identify','101'].includes(rememberedTab)){
+    if(isFamilyGuideUrl&&typeof resolveFamilyGuideFromUrl==='function'){
+      resolveFamilyGuideFromUrl();
+    }else if(['mood','collection','identify','101'].includes(rememberedTab)){
       switchTabByName(rememberedTab);
       if(rememberedTab==='collection'){
         // Auth hasn't resolved yet; show a loading state until loadSupabaseState fires.
