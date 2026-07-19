@@ -560,6 +560,24 @@ function noPhotoZoneHtml(c){
   return`<div class="card-img-zone no-photo"><span class="no-photo-orb" style="--orb:${orb};background:${orb}"></span></div>`;
 }
 
+// Canonical card role-tag source, shared by every card renderer: prefer
+// parsed card_props when present, else fall back to energetic_role_1/2/3.
+// Preserves order, drops blanks, deduplicates by normalized value, caps at
+// `limit` (default 3).
+function canonicalRoleTags(c, limit=3){
+  const raw = (c.card_props && c.card_props.length) ? c.card_props : [c.er1, c.er2, c.er3];
+  const seen = new Set();
+  const out = [];
+  (raw || []).forEach(t => {
+    if (!t) return;
+    const key = String(t).trim().toLowerCase();
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    out.push(t);
+  });
+  return out.slice(0, limit);
+}
+
 function collectionPhotoUrl(photo){
   if(!photo)return'';
   if(typeof photo==='string')return photo;

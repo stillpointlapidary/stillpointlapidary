@@ -722,12 +722,6 @@ function intentionBestForText(stone){
   return getStoneWhyText(stone, parentSlug, subSlug);
 }
 
-function intentionTierPillHtml(c){
-  const t=Number(c&&c.tier);
-  const n=t===1?'Tier 1':t===2?'Tier 2':t===3?'Tier 3':(t===0&&FEATURED_STONES.some(s=>s.id===(c&&c.i)))?'Tier 1':'';
-  return n?`<span class="mood-tier-pill">${n}</span>`:'';
-}
-
 function isGenericBlurb(text){
   if(!text||text.length<20)return true;
   const t=String(text).toLowerCase();
@@ -740,7 +734,7 @@ function openIntentionDetail(stoneId){
 }
 
 function intentionStoneCardHtml(c){
-  const roles=[c.er1,c.er2].filter(Boolean).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">·</span>');
+  const roles=canonicalRoleTags(c,3).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc

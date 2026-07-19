@@ -294,12 +294,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:800px){.mood-stone-grid{grid-template-columns:repeat(3,1fr)}}
 .mood-stone-card{background:var(--white);padding:1rem;cursor:pointer;transition:background 0.12s}
 .mood-stone-card:hover{background:var(--stone2)}
-.mood-best-for{font-size:11.5px;color:var(--ink2);line-height:1.38;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mood-best-for span{font-weight:500;color:var(--ink)}
 .mood-card-tags{margin-bottom:0}
 .mood-card-header{display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex-wrap:wrap;margin-bottom:2px}
 .mood-card-header .card-name{margin-bottom:0}
-.mood-tier-pill{font-size:9px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--stone2);border:0.5px solid var(--border2);color:var(--accent);white-space:nowrap;flex-shrink:0}
 .mood-why-match{font-size:11px;color:var(--ink2);line-height:1.38;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .mood-why-label{font-weight:500;color:var(--ink3);font-style:italic}
 .mood-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
@@ -479,14 +476,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .card-img-zone img{max-height:90px}
   .crystal-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
 
-  /* Identify tab: horizontal card layout (thumbnail left, text right) */
-  #id-results-grid{grid-template-columns:1fr;background:transparent;border:none;border-radius:0;gap:8px}
-  #id-results-grid .crystal-card{flex-direction:row;align-items:center;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:72px;background:var(--white)}
-  #id-results-grid .card-img-zone{width:80px;height:80px;flex-shrink:0;border-right:0.5px solid var(--border2)}
-  #id-results-grid .card-img-zone img{max-height:80px}
-  #id-results-grid .card-body{padding:0.5rem 0.75rem;min-width:0}
-  #id-results-grid .card-name{font-size:14px;margin-bottom:2px}
-
   /* Crystals 101 section nav: bleed to screen edges on mobile */
   .c101-nav-wrap{margin:0 -1rem}
   .c101-nav{padding:0.75rem 1rem;padding-right:3rem}
@@ -559,31 +548,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .ai-results-title{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:var(--ink)}
 .ai-results-back{font-size:12px;color:var(--ink2r);cursor:pointer;text-decoration:underline;text-underline-offset:2px;background:none;border:none;font-family:'Jost',sans-serif;padding:0}
 .ai-stone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
-.ai-stone-card{background:var(--white);padding:1rem;cursor:pointer;transition:background 0.12s;display:flex;flex-direction:column;gap:4px}
-.ai-stone-card:hover{background:var(--stone2)}
-.ai-stone-name{font-family:Georgia,'Times New Roman',serif;font-size:18px;color:var(--ink);line-height:1.2}
-.ai-stone-reason{font-size:12px;color:var(--ink2);line-height:1.55;font-style:italic}
-.ai-stone-arrow{font-size:11px;color:var(--accent);margin-top:4px}
 @media(max-width:600px){
   .ai-stone-grid{grid-template-columns:1fr}
-  .ai-stone-card{min-width:0}
-  .ai-stone-name,.ai-stone-reason{overflow-wrap:anywhere}
-  .ai-stone-reason{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .sub-filter-row{flex-wrap:nowrap;align-items:center;overflow:hidden;padding:0.55rem 0.65rem;border-radius:999px;background:rgba(237,233,227,0.72);margin-bottom:0.85rem}
   .sub-filter-label{font-size:10px;white-space:nowrap}
   #sub-filter-pills{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   #sub-filter-pills::-webkit-scrollbar{display:none}
-  #mood-stone-grid{grid-template-columns:1fr;background:transparent;border:none;border-radius:0;gap:8px}
-  #mood-stone-grid .crystal-card{flex-direction:row;align-items:center;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:78px;background:var(--white)}
-  #mood-stone-grid .card-img-zone{width:82px;height:82px;flex-shrink:0;border-right:0.5px solid var(--border2)}
-  #mood-stone-grid .card-img-zone img{max-height:82px}
-  #mood-stone-grid .card-body{padding:0.55rem 0.75rem;min-width:0}
-  #mood-stone-grid .card-name{font-size:15px;margin-bottom:2px}
-  #mood-stone-grid .card-role,#mood-stone-grid .ai-stone-reason{font-size:11.5px;line-height:1.35}
-  #mood-stone-grid .ai-stone-reason,#mood-stone-grid .mood-best-for{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  #mood-stone-grid .mood-best-for{font-size:11px;line-height:1.32;margin-top:4px}
+  /* Choose by Intention: row-card structure/image/body/name now come from the
+     shared block above; only its own markup (role sizing, header, why-text)
+     needs surface-specific rules here. */
+  #mood-stone-grid .card-name{margin-bottom:2px}
+  #mood-stone-grid .card-role{font-size:11.5px;line-height:1.35}
   #mood-stone-grid .mood-card-header{flex-wrap:nowrap;align-items:center}
-  #mood-stone-grid .mood-tier-pill{font-size:8.5px;padding:1px 6px}
   #mood-stone-grid .mood-why-match{font-size:10.5px;-webkit-line-clamp:1;margin-top:3px}
 }
 .ai-error{font-size:13px;color:#b94a48;padding:0.75rem 1rem;background:#fff5f5;border:0.5px solid #f5c6c6;border-radius:8px;margin-top:0.5rem;display:none}
@@ -1351,8 +1327,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .id2-zero-chip-x{font-size:13px;color:var(--ink3);margin-left:2px}
 .id2-zero-reset{margin-top:0.25rem;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 22px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--ink2);cursor:pointer;transition:all 0.15s}
 .id2-zero-reset:hover{border-color:var(--accent);color:var(--accent)}
-.id2-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
-.id2-theme-tag{font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--stone);border:0.5px solid var(--border2);color:var(--ink3)}
 
 /* ── Crystals 101 CSS (from lines 837–921) ── */
 .c101-wrap{padding:0 0 1.5rem}
@@ -2006,12 +1980,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .enc-tier-header{grid-template-columns:auto 1fr}
   .enc-tier-viewall{display:none}
   .enc-tier-title{font-size:22px}
-  .enc-tier-grid,.enc-accordion-grid,#tab-encyclopedia #crystal-grid{grid-template-columns:1fr;gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
-  .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card{flex-direction:row;align-items:flex-start;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:100px;background:var(--white)}
-  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone{width:92px;min-height:100px;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
-  .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img{max-height:100%;width:100%;object-fit:cover}
-  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body{padding:0.6rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
-  .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name{font-size:16px;overflow-wrap:normal}
+  /* Shared mobile horizontal row-card treatment: Main Encyclopedia, Choose by
+     Intention, and Identify V2 all render `.crystal-card` output from (or,
+     for Choose by Intention, styled to match) encCardHtml() — one coherent
+     base instead of three independently drifting sets of values. */
+  .enc-tier-grid,.enc-accordion-grid,#tab-encyclopedia #crystal-grid,#mood-stone-grid,#id2-grid{grid-template-columns:1fr;gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
+  .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card,#mood-stone-grid .crystal-card,#id2-grid .crystal-card{flex-direction:row;align-items:flex-start;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:100px;background:var(--white)}
+  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone,#mood-stone-grid .card-img-zone,#id2-grid .card-img-zone{width:92px;min-height:100px;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
+  .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img,#mood-stone-grid .card-img-zone img,#id2-grid .card-img-zone img{max-height:100%;width:100%;object-fit:contain}
+  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body,#mood-stone-grid .card-body,#id2-grid .card-body{padding:0.6rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+  .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name,#mood-stone-grid .card-name,#id2-grid .card-name{font-size:16px;overflow-wrap:normal}
   .enc-tier-grid .card-color,.enc-accordion-grid .card-color,#tab-encyclopedia #crystal-grid .card-color{line-height:1.35}
   .enc-next-shelf{grid-template-columns:1fr}
   .enc-next-up{display:none}
