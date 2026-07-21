@@ -176,17 +176,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .crystal-card:hover .card-img-zone img{opacity:0.85}
 .card-img-zone{width:100%;height:110px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .card-img-zone img{max-width:100%;max-height:110px;object-fit:contain;display:block;padding:6px;transition:opacity 0.15s}
-.card-body{padding:0.6rem 0.75rem 0.7rem;flex:1}
+.card-body{padding:0.6rem 0.75rem 0.7rem;flex:1;display:flex;flex-direction:column}
 .card-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:500;line-height:1.2;color:var(--ink);margin-bottom:4px}
 .card-color{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--ink3);margin-bottom:3px}
 .color-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;border:0.5px solid rgba(0,0,0,0.1)}
-.card-role{font-size:12px;color:var(--accent);letter-spacing:0.02em;line-height:1.4}
-.card-role-sep{font-size:12px;color:var(--ink3);margin:0 3px;line-height:1.4}
+/* Descriptor pills: subtler than .mood-theme-tag (no border, softer fill) — used both
+   by encCardHtml's .stone-card-properties and intentionStoneCardHtml's .mood-card-tags. */
+.card-role{display:inline-flex;align-items:center;font-size:11px;color:var(--accent);letter-spacing:0.02em;line-height:1.3;padding:3px 9px;border-radius:999px;background:var(--stone2)}
+.card-role-sep{display:none}
 .stone-card-properties{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
-.stone-card-properties .card-role{background:none;padding:0}
 .stone-card-best-for{margin-top:4px}
 .stone-card-best-for-label{display:block;font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
 .stone-card-best-for p{margin:0;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;line-height:1.35;color:var(--ink2)}
+/* Desktop-only visual order (DOM order stays name -> pills -> Best For everywhere,
+   matching the required mobile order below 601px unchanged): promote Best For above
+   the descriptor pills, and keep Identify's appended .mood-theme-tags row last. */
+@media(min-width:601px){
+  .stone-card-properties{order:1}
+  .mood-theme-tags{order:2}
+}
 .card-badge{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;z-index:2}
 .badge-owned{background:var(--accent2)}
 .badge-wish{background:transparent;border:1.5px solid var(--accent2)}
@@ -294,7 +302,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:800px){.mood-stone-grid{grid-template-columns:repeat(3,1fr)}}
 .mood-stone-card{background:var(--white);padding:1rem;cursor:pointer;transition:background 0.12s}
 .mood-stone-card:hover{background:var(--stone2)}
-.mood-card-tags{margin-bottom:0}
+.mood-card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:0}
 .mood-card-header{display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex-wrap:wrap;margin-bottom:2px}
 .mood-card-header .card-name{margin-bottom:0}
 .mood-why-match{font-size:11px;color:var(--ink2);line-height:1.38;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
