@@ -367,11 +367,16 @@ function extractRowBlock(sheetXml, excelRowNum) {
 }
 
 function extractCell(rowContent, addr) {
-  const pairedRe = new RegExp(`<c r="${addr}"([^>]*)>([\\s\\S]*?)</c>`);
-  let m = rowContent.match(pairedRe);
-  if (m) return { exists: true, fullMatch: m[0], attrs: m[1], index: m.index };
+  // Self-closing must be checked first: the paired regex's `[^>]*` attrs
+  // group does not exclude `/`, so against a self-closing cell like
+  // `<c r="X1" s="2"/>` it would otherwise treat that `/>` as an opening
+  // tag's `>` and lazily consume everything up through the *next* cell's
+  // `</c>` — silently deleting or overwriting the following cell too.
   const selfClosingRe = new RegExp(`<c r="${addr}"([^>]*)/>`);
-  m = rowContent.match(selfClosingRe);
+  let m = rowContent.match(selfClosingRe);
+  if (m) return { exists: true, fullMatch: m[0], attrs: m[1], index: m.index };
+  const pairedRe = new RegExp(`<c r="${addr}"([^>]*)>([\\s\\S]*?)</c>`);
+  m = rowContent.match(pairedRe);
   if (m) return { exists: true, fullMatch: m[0], attrs: m[1], index: m.index };
   return { exists: false };
 }
