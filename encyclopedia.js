@@ -384,9 +384,10 @@ function getFiltered(){
 }
 
 function getRetiredMatches(){
-  const q=encSearchValue().toLowerCase();
-  if(!q||!Array.isArray(RETIRED_TERMS)||!RETIRED_TERMS.length)return[];
-  return RETIRED_TERMS.filter(t=>t.old_name&&t.old_name.toLowerCase().includes(q));
+  const q=encSearchValue().trim().toLowerCase();
+  if(!q||q.length<2||!Array.isArray(RETIRED_TERMS)||!RETIRED_TERMS.length)return[];
+  const wordStart=new RegExp('\\b'+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+  return RETIRED_TERMS.filter(t=>t.old_name&&wordStart.test(t.old_name.toLowerCase()));
 }
 
 

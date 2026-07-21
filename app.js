@@ -400,6 +400,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0254": ["lepidolite.webp"],
   "C-0256": ["magnesite-tumble.webp"],
   "C-0260": ["muscovite-specimen.webp"],
+  "C-0264": ["rainforest-jasper-tower.webp", "rainforest-rhyolite-tumble.webp"],
   "C-0265": ["seraphinite.webp"],
   "C-0266": ["tektite-tumble.webp", "tektite-tumble-2.webp"],
   "C-0267": ["thulite.webp"],
