@@ -56,6 +56,13 @@ const ID_HEADER = 'Stone ID';
 // matching. If the workbook's actual header differs, this tool stops and
 // reports the mismatch rather than guessing.
 const ALLOWED_COLUMNS = [
+  'Canonical Name',
+  'Alternate Names',
+  'Slug',
+  'Previous Stone',
+  'Previous Slug',
+  'Next Stone',
+  'Next Slug',
   'Element',
   'Zodiac',
   'Primary Chakra',

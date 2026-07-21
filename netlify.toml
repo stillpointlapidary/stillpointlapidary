@@ -63,3 +63,21 @@
   to = "/stones/stone.html?slug=smoky-quartz"
   status = 301
   force = true
+
+# C-0264 catalog rename: Rhyolite -> Rainforest Jasper (Christie-approved, 2026-07-21).
+# Old slug never had a legacy static page (production status was still "Not
+# Started"), but the dynamic template's slug query param is still redirected
+# so any old link or bookmark resolves cleanly.
+[[redirects]]
+  from = "/rhyolite"
+  to = "/stones/stone.html?slug=rainforest-jasper"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stones/stone.html"
+  to = "/stones/stone.html?slug=rainforest-jasper"
+  status = 301
+  force = true
+  [redirects.query]
+    slug = "rhyolite"

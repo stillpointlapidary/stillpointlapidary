@@ -71,6 +71,15 @@ photo-linking gap — the "Group I — Card & Image" columns existed in the
 workbook but were unwritten catalog-wide (0/333 rows) and unreachable through
 this tool until then.
 
+`Canonical Name`, `Alternate Names`, `Slug`, `Previous Stone`, `Previous Slug`,
+`Next Stone`, `Next Slug` were added 2026-07-21 for the approved C-0264
+Rhyolite -> Rainforest Jasper catalog rename (roster-identity and navigation
+fields, needed for that single explicitly-approved rename plus its two
+navigation-neighbor rows). These are structural/identity fields, not routine
+workflow status — do not reuse them for an unapproved or catalog-wide rename;
+each use should trace back to an explicit approved identity decision like this
+one.
+
 If a requested column isn't on this list, or isn't found in the workbook
 under its exact expected header, the script reports the problem and stops —
 it never guesses.
