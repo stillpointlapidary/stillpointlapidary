@@ -61,7 +61,15 @@ Supabase Status
 Structured Data Status
 Blocker
 Notes
+Image URL
+Image Filename
+Image Status
 ```
+
+`Image URL`, `Image Filename`, `Image Status` were added 2026-07-20 to close the
+photo-linking gap — the "Group I — Card & Image" columns existed in the
+workbook but were unwritten catalog-wide (0/333 rows) and unreachable through
+this tool until then.
 
 If a requested column isn't on this list, or isn't found in the workbook
 under its exact expected header, the script reports the problem and stops —
