@@ -80,6 +80,18 @@ workflow status — do not reuse them for an unapproved or catalog-wide rename;
 each use should trace back to an explicit approved identity decision like this
 one.
 
+`Family`, `Species`, `Energetic Role 1`, `Energetic Role 2`, `Best For`,
+`Use When`, `Affirmation`, `Card Properties`, `Exception / Identity Flag` were
+added 2026-07-21 for the approved C-0334 Pink Halite -> Asbolane paired
+catalog replacement (converting the retained Pink Halite seat into the
+Asbolane addition, per `ENCYCLOPEDIA-CATALOG-DECISIONS.md` §17). Asbolane's
+metaphysical values are an explicitly approved thin-source exception; these
+columns exist to write and, where no approved value exists (`Use When`,
+`Affirmation`), to blank stale content from the retired seat. Do not reuse
+these columns for routine single-stone editorial correction — each use should
+trace back to an explicit approved identity or paired-replacement decision
+like this one.
+
 If a requested column isn't on this list, or isn't found in the workbook
 under its exact expected header, the script reports the problem and stops —
 it never guesses.

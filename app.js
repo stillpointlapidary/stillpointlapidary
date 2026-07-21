@@ -419,6 +419,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0327": ["marcasite-tower.webp"],
   "C-0328": ["merlinite-specimen-family.webp"],
   "C-0331": ["peacock-ore-specimen.webp"],
+  "C-0334": ["asbolane.webp"],
   "C-0342": ["sphalerite.webp", "sphalerite-cube.webp"],
   "C-0346": ["stilbite.webp", "stilbite-palm.webp"],
   "C-0349": ["thunderegg.webp"],
