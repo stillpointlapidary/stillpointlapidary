@@ -1558,138 +1558,113 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .badge-warn{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fdf0dc;color:#7a5010;letter-spacing:0.04em}
 .badge-no{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fde8e8;color:#7a2020;letter-spacing:0.04em}
 
-/* ── FAMILY GUIDE (pilot: Calcite) ──
-   Reuses .c101-h1/.c101-h2/.c101-body/.c101-block/.c101-photo-intro for section
-   typography/spacing and .btn for actions. Genuinely new primitives below,
-   grouped by the approved editorial section they belong to. */
+/* ── FAMILY GUIDE (pilot: Calcite) — museum-guide visual rebuild (2026-07) ──
+   Three component families throughout: feature bands (hero / overview /
+   closing), uniform stone cards (varieties + extended family), and compact
+   fact modules (recognition / shapes / essentials). Scoped entirely to its
+   own .fg- classes — does not reuse or modify the shared .c101-* Crystals
+   101 typography/layout system used elsewhere on the site. */
 #tab-family{padding:1.5rem}
-.fg-guide .fg-p{font-size:14px;line-height:1.8;color:var(--ink2);margin:0 0 1rem;max-width:68ch}
-.fg-guide .fg-list{margin:0 0 1rem;padding-left:1.1rem;font-size:14px;line-height:1.75;color:var(--ink2)}
-.fg-guide .fg-list li{margin-bottom:2px}
-.fg-list-intro{font-size:13px;letter-spacing:0.03em;color:var(--ink2r);margin-bottom:0.4rem}
-.fg-inline-link{background:none;border:none;padding:0;font:inherit;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-.fg-inline-link:hover{color:var(--ink)}
+.fg-guide{max-width:1100px;margin:0 auto}
+#fg-hero,#fg-overview,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-essentials,#fg-closing{scroll-margin-top:160px}
 .fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
+.fg-loading{padding:3rem 1rem;text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--ink3)}
+.fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
+.fg-list li{margin-bottom:3px}
 
-/* 1. Hero */
-.fg-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:0.3rem}
-.fg-hero-signature{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;color:var(--accent);margin-bottom:0.9rem;line-height:1.4}
-.fg-hero-p{font-size:15px;line-height:1.75;color:var(--ink2);margin:0 0 0.9rem;max-width:60ch}
-.fg-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:0.4rem}
+.fg-section{margin-bottom:2.5rem}
+.fg-h2{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;letter-spacing:0.01em;color:var(--ink);text-align:center;margin:0 0 0.35rem}
+.fg-section-sub{font-size:13px;color:var(--ink2r);text-align:center;margin:0 auto 1.5rem;max-width:52ch}
 
-/* 2. The Energy of Calcite — quiet typographic pause, not a promo box */
-.fg-energy{max-width:66ch}
-.fg-energy-p{font-size:15px;line-height:1.8;color:var(--ink2);margin:0 0 1rem}
-.fg-energy-leadin{font-size:13px;letter-spacing:0.04em;color:var(--ink2r);margin:1.4rem 0 0.3rem}
-.fg-energy-question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:34px;line-height:1.25;color:var(--ink);margin:0 0 0.6rem;padding:0.2rem 0}
-.fg-energy-afterquestion{font-size:14px;color:var(--ink2r);margin-bottom:1.3rem}
-.fg-energy-grounding{font-size:12.5px;color:var(--ink3);line-height:1.7;border-top:0.5px solid var(--border);padding-top:0.9rem;margin-top:0.4rem}
+/* 1. Hero — warm near-white split composition, copy left / photo right */
+.fg-hero{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem 2rem;box-shadow:0 8px 24px rgba(42,37,32,0.06);margin-bottom:1.75rem}
+.fg-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,42%);gap:2.25rem;align-items:center}
+.fg-hero-copy{min-width:0}
+.fg-eyebrow{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+.fg-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:400;line-height:1.15;color:var(--ink);margin:0 0 0.5rem}
+.fg-hero-sub{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;color:var(--accent);margin:0 0 1rem;line-height:1.4}
+.fg-hero-body{font-size:15px;line-height:1.8;color:var(--ink2);margin:0 0 1rem;max-width:52ch}
+.fg-hero-italic{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;color:var(--ink);margin:0 0 1.35rem}
+.fg-hero-prompt{border-top:0.5px solid var(--border2);padding-top:1.1rem}
+.fg-hero-prompt-lead{font-size:12px;letter-spacing:0.04em;color:var(--ink2r);margin-bottom:0.2rem}
+.fg-hero-question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:28px;line-height:1.2;color:var(--ink);margin-bottom:0.35rem}
+.fg-hero-prompt-sub{font-size:12.5px;color:var(--ink2r)}
+.fg-hero-media{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--stone2);border:0.5px solid var(--border)}
+.fg-hero-media-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;width:100%;height:100%}
+.fg-hero-media-grid img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-hero-media-label{position:absolute;right:10px;bottom:10px;background:rgba(250,248,246,0.92);border:0.5px solid var(--border);border-radius:20px;padding:4px 10px;font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2r)}
 
-/* 3. Find Your Calcite — image-forward choice tiles */
-.fg-find-intro{font-family:Georgia,'Times New Roman',serif;font-size:19px;color:var(--ink);margin-bottom:0.4rem}
-.fg-find-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:1.1rem}
-.fg-find-tile{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s;display:flex;flex-direction:column}
-.fg-find-tile:hover{border-color:var(--accent2);box-shadow:0 8px 22px rgba(42,37,32,0.08)}
-.fg-find-tile-img{width:100%;aspect-ratio:1/1;background:var(--stone2);overflow:hidden}
-.fg-find-tile-img img{width:100%;height:100%;object-fit:cover;display:block}
-.fg-find-tile-noimg{width:100%;height:100%;background:var(--stone3)}
-.fg-find-tile-copy{padding:0.85rem 0.95rem 1rem}
-.fg-find-tile-name{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
-.fg-find-tile-headline{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;line-height:1.25;color:var(--ink);margin-bottom:5px}
-.fg-find-tile-distinction{font-size:13px;line-height:1.55;color:var(--ink2);margin-bottom:8px}
-.fg-identity-label{display:inline-block;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);color:var(--ink3)}
+/* 2. Short family overview — one centered feature paragraph */
+.fg-overview{max-width:74ch;margin:0 auto 2.5rem;text-align:center}
+.fg-overview-text{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.65;color:var(--ink);margin:0}
 
-/* 4. Trade materials — same tile language, two-column, relationship copy shown */
-.fg-trade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1rem}
-.fg-trade-card{display:flex;gap:0;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
-.fg-trade-card-img{width:120px;flex-shrink:0;cursor:pointer;background:var(--stone2)}
-.fg-trade-card-img img{width:100%;height:100%;object-fit:cover;display:block}
-.fg-trade-card-body{padding:0.9rem 1rem;min-width:0}
-.fg-trade-relationship{font-size:12.5px;line-height:1.65;color:var(--ink2r);margin:6px 0}
-.fg-trade-qv{font-size:11px;letter-spacing:0.03em;margin-top:4px;display:inline-block}
+/* Uniform stone cards — Section 3 (eight common varieties) and Section 6
+   (extended family, with an added identity badge) */
+.fg-card-grid{display:grid;gap:16px}
+.fg-card-grid--4{grid-template-columns:repeat(4,1fr)}
+.fg-stonecard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:100%;transition:box-shadow 0.2s,border-color 0.2s}
+.fg-stonecard:hover{border-color:var(--accent2);box-shadow:0 8px 22px rgba(42,37,32,0.08)}
+.fg-stonecard-media{display:block;width:100%;aspect-ratio:1/1;background:var(--stone2);border:none;padding:0;cursor:pointer;overflow:hidden}
+.fg-stonecard-media img{width:100%;height:100%;object-fit:contain;display:block}
+.fg-stonecard-media:focus-visible{outline:1.5px solid var(--accent2);outline-offset:-2px}
+.fg-stonecard-noimg{width:100%;height:100%;background:var(--stone3)}
+.fg-stonecard-body{padding:0.9rem 1rem 1.05rem;display:flex;flex-direction:column;flex:1}
+.fg-stonecard-name{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.fg-stonecard-phrase{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;line-height:1.25;color:var(--ink);margin-bottom:8px;flex:1}
+.fg-badge{display:inline-block;align-self:flex-start;font-size:9px;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);color:var(--ink3);margin-bottom:8px}
+.fg-stonecard-qv{align-self:flex-start;background:none;border:none;padding:0;font:inherit;font-size:11px;letter-spacing:0.03em;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.fg-stonecard-qv:hover{color:var(--ink)}
+.fg-stonecard-qv:focus-visible{outline:1.5px solid var(--accent2);outline-offset:2px}
 
-/* 5. How the Family Fits Together — five compact panels, not one essay */
-.fg-fits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0.75rem}
-.fg-fits-panel{background:var(--stone2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
-.fg-fits-panel:last-child{grid-column:1/-1}
-.fg-fits-panel-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.5rem}
-.fg-fits-panel .fg-p,.fg-fits-panel p{font-size:13px;line-height:1.65;color:var(--ink2);margin:0 0 0.6rem}
-.fg-panel-subpanel{margin-bottom:0.7rem}
-.fg-panel-subpanel:last-child{margin-bottom:0}
-.fg-panel-sublabel{font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2r);margin-bottom:3px}
+/* Compact fact modules — Sections 4 (Recognition), 5 (Shapes), 7 (Essentials) */
+.fg-fact-grid{display:grid;gap:14px}
+.fg-fact-grid--4{grid-template-columns:repeat(4,1fr)}
+.fg-fact-grid--3{grid-template-columns:repeat(3,1fr)}
+.fg-factcard{background:var(--stone2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.3rem;height:100%}
+.fg-fact-icon{display:block;font-size:19px;color:var(--accent);margin-bottom:0.65rem}
+.fg-fact-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.4rem}
+.fg-fact-body{font-size:13px;line-height:1.6;color:var(--ink2);margin:0}
+.fg-factcard .fg-list{margin-top:0.15rem}
 
-/* 6. Other Calcites You May Encounter — three visual density levels */
-.fg-featured-list{display:flex;flex-direction:column;gap:1rem;margin-top:0.75rem}
-.fg-featured-profile{border:0.5px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;background:var(--white);scroll-margin-top:90px}
-.fg-featured-name{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--ink);margin-bottom:2px}
-.fg-featured-headline{font-size:13px;letter-spacing:0.03em;color:var(--accent);margin-bottom:0.6rem}
-.fg-comparison-block{background:var(--stone2);border-radius:8px;padding:0.75rem 1rem;margin:0.6rem 0}
-.fg-comparison-heading{font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink2r);margin-bottom:5px}
-.fg-comparison-line{font-size:13px;line-height:1.6;color:var(--ink2);margin:0 0 3px}
-.fg-see-also{font-size:12px;color:var(--ink3);margin-top:0.5rem;border-top:0.5px solid var(--border2);padding-top:0.6rem}
+/* 7. Calcite Essentials — exactly four modules, evenly divided on desktop */
+.fg-essentials-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fg-essentials-grid .fg-factcard{background:var(--white)}
 
-.fg-level2,.fg-level3{margin-top:1.4rem}
-.fg-level-label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);font-weight:500;margin-bottom:4px}
-.fg-level-intro{font-size:13px;margin-bottom:0.7rem}
-.fg-level-closing{font-size:12.5px;color:var(--ink3)}
-.fg-compact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.fg-compact-item{background:var(--stone2);border:0.5px solid var(--border2);border-radius:8px;padding:0.6rem 0.75rem}
-.fg-compact-name{display:block;font-size:12.5px;font-weight:500;color:var(--ink);margin-bottom:2px}
-.fg-compact-body{display:block;font-size:11.5px;line-height:1.5;color:var(--ink2r)}
-.fg-habit-strip{display:flex;flex-wrap:wrap;gap:8px}
-.fg-habit-chip{background:var(--white);border:0.5px solid var(--border);border-radius:20px;padding:6px 14px;display:flex;align-items:baseline;gap:6px;max-width:100%}
-.fg-habit-name{font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap}
-.fg-habit-body{font-size:11px;color:var(--ink3)}
+/* 8. Closing callout — one CTA only */
+.fg-closing{background:var(--stone2);border-radius:16px;padding:2.25rem 1.5rem;text-align:center;max-width:1100px;margin:0 auto}
+.fg-closing-line{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:20px;color:var(--ink);margin:0 0 0.4rem}
+.fg-closing-question{font-size:14px;color:var(--ink2r);margin:0 0 1.35rem}
 
-/* 7. What Is Calcite? */
-.fg-whatis-sub{max-width:66ch;margin-bottom:0.9rem}
-.fg-whatis-subhead{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin:1.1rem 0 0.5rem}
-.fg-term{font-style:normal;color:var(--accent);font-weight:500}
+@media(prefers-reduced-motion:reduce){
+  .fg-guide *{scroll-behavior:auto}
+}
 
-/* 8. Identification, Buying, and Care */
-.fg-ibc-block{margin-bottom:1.4rem}
-.fg-ibc-label{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:0.5rem}
-.fg-bumblebee-warn{margin-top:0.75rem}
-
-/* 9. Related Carbonate Minerals — concise cards, not full essays */
-.fg-carbonate-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:0.75rem}
-.fg-carbonate-card{background:var(--stone2);border:0.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem}
-.fg-carbonate-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:4px}
-.fg-carbonate-relation{font-size:13px;color:var(--ink);line-height:1.55;margin-bottom:4px}
-.fg-carbonate-explanation{font-size:12.5px;color:var(--ink2r);line-height:1.6;margin:0}
-
-/* 10. Closing section — graceful, not another heavy block */
-.fg-closing{text-align:center;max-width:64ch;margin-left:auto;margin-right:auto}
-.fg-closing .fg-p,.fg-closing .fg-list{text-align:left}
-.fg-closing-final{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;color:var(--ink);text-align:center;margin-top:1rem}
-.fg-closing-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:1.25rem}
-.fg-closing-inert{font-size:13px;color:var(--ink3);padding:8px 4px;display:inline-flex;align-items:center}
+@media(max-width:1200px){
+  .fg-hero-title{font-size:30px}
+}
 
 @media(max-width:900px){
-  .fg-find-grid{grid-template-columns:repeat(2,1fr)}
-  .fg-fits-grid{grid-template-columns:1fr 1fr}
-  .fg-fits-panel:last-child{grid-column:1/-1}
-  .fg-carbonate-grid{grid-template-columns:1fr}
-  .fg-compact-grid{grid-template-columns:repeat(2,1fr)}
+  .fg-hero-grid{grid-template-columns:1fr;gap:1.25rem}
+  .fg-hero-media{order:-1;max-height:260px}
+  .fg-card-grid--4{grid-template-columns:repeat(2,1fr)}
+  .fg-fact-grid--4{grid-template-columns:repeat(2,1fr)}
+  .fg-fact-grid--3{grid-template-columns:1fr}
+  .fg-essentials-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  .fg-hero-title{font-size:24px}
-  .fg-energy-question{font-size:26px}
-  .fg-find-grid{grid-template-columns:1fr}
-  .fg-find-tile{flex-direction:row}
-  .fg-find-tile-img{width:110px;aspect-ratio:1/1;flex-shrink:0}
-  .fg-find-tile-copy{padding:0.75rem 0.85rem}
-  .fg-trade-grid{grid-template-columns:1fr}
-  .fg-trade-card{flex-direction:row}
-  .fg-fits-grid{grid-template-columns:1fr}
-  .fg-fits-panel:last-child{grid-column:auto}
-  .fg-compact-grid{grid-template-columns:1fr}
-  .fg-habit-strip{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
-  .fg-habit-chip{flex-shrink:0}
-  .fg-carbonate-grid{grid-template-columns:1fr}
-  .fg-closing-actions{flex-direction:column;align-items:stretch}
+  #fg-hero,#fg-overview,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-essentials,#fg-closing{scroll-margin-top:132px}
+  .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
+  .fg-hero-title{font-size:25px}
+  .fg-hero-question{font-size:23px}
+  .fg-section{margin-bottom:2rem}
+  .fg-h2{font-size:20px}
+  .fg-overview-text{font-size:16px}
+  .fg-card-grid--4{grid-template-columns:1fr}
+  .fg-fact-grid--4{grid-template-columns:1fr}
+  .fg-essentials-grid{grid-template-columns:1fr}
+  .fg-closing{padding:1.75rem 1.25rem;border-radius:14px}
 }
 
 /* ── MOBILE POLISH PASS ── */

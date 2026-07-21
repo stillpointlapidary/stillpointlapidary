@@ -6,8 +6,14 @@
     "editorialStatusNote": "Editorial status: Complete first-page draft for Christie’s holistic review. The metaphysical sections synthesize the approved online source set currently available. Identity-sensitive claims and final energetic distinctions should still receive the normal book-source and technical audit before publication.",
     "hero": {
       "image": "blue-calcite.webp",
+      "eyebrow": "FAMILY GUIDE",
       "title": "Calcite Family Guide",
       "signatureLine": "One mineral, an astonishing range of personalities.",
+      "condensedIntro": "Calcite clears space, restores circulation, and brings movement back to places that have gone still. Each variety directs that movement differently, toward calm, confidence, clarity, tenderness, creativity, or grounded action.",
+      "centralIdea": "Calcite helps life begin moving again.",
+      "promptLeadIn": "Calcite asks:",
+      "question": "What wants to move?",
+      "questionSub": "That’s your compass.",
       "paragraphs": [
         "Calcite is one of the great shape-shifters of the mineral world. It can appear clear enough to split an image in two, striped like carved stone, softly luminous, or vivid with the minerals growing through it. Beneath all that variety is a shared energetic identity: movement, clearing, and the return of momentum where life has gone still.",
         "This guide brings the family into focus. Discover what unites the Calcites, how each variety directs that energy differently, which familiar names describe true forms of the mineral, and which belong to more complex trade materials."
@@ -19,6 +25,9 @@
       "secondaryAction": {
         "label": "Browse Calcite in the Encyclopedia"
       }
+    },
+    "overview": {
+      "paragraph": "Calcite is one of Earth’s most common minerals, yet it appears in an extraordinary range of colors, textures, and forms. Each variety directs that same energy toward something different — calm, confidence, clarity, tenderness, creativity, or grounded action — which is what makes the family so useful to learn."
     },
     "energySection": {
       "paragraphs": [
@@ -132,6 +141,7 @@
           "headline": "Let calm carry you forward",
           "distinction": "Create an atmosphere of ease spacious enough for reflection, imagination, and gentle progress.",
           "identityLabel": "Calcite-Aragonite trade material",
+          "identityBadge": "CALCITE + ARAGONITE MATERIAL",
           "relationship": [
             {
               "text": "Material sold as Caribbean Calcite commonly combines blue Calcite with white to brown Aragonite from Pakistan. Calcite and Aragonite share the formula CaCO₃ but arrange that chemistry in different crystal structures, making them closely related polymorphs rather than the same mineral.",
@@ -147,6 +157,7 @@
           "headline": "Find strength in contrast",
           "distinction": "Bring opposing feelings, needs, or possibilities into a more coherent whole.",
           "identityLabel": "Banded Calcite trade material",
+          "identityBadge": "BANDED CALCITE TRADE MATERIAL",
           "relationship": [
             {
               "text": "“Zebra Calcite” is best treated as a descriptive market name for boldly banded carbonate material. Calcite is central to the name and appearance, but the exact accompanying phases and the origin of the banding can vary by material and source. The guide should therefore explain the pattern without pretending the trade label guarantees one universal composition."
@@ -159,6 +170,7 @@
           "headline": "Listen beneath the surface",
           "distinction": "Slow the pace enough for intuition, self-awareness, and deeper emotional truth to become audible.",
           "identityLabel": "Trade-named blue-green banded Calcite material",
+          "identityBadge": "BANDED CALCITE TRADE MATERIAL",
           "relationship": [
             {
               "text": "“Lemurian Aquatine Calcite” is a metaphysical trade name rather than a formal geological variety. Commercial sources generally describe blue-green banded calcium-carbonate material from Argentina, but the name is not standardized enough to guarantee identical composition from every seller.",
@@ -177,6 +189,7 @@
           "headline": "Turn purpose into motion",
           "distinction": "Bring boldness, personal direction, and the courage to act on what matters.",
           "identityLabel": "Calcite-rich mixed material",
+          "identityBadge": "CALCITE-RICH MIXED MATERIAL",
           "relationship": [
             {
               "text": "Bumblebee Jasper is not true Jasper. Laboratory analysis has found that the material consists largely of Calcite, with Pyrite in darker areas and arsenic-bearing Realgar detected in yellow to orange regions. That composition makes it a meaningful Calcite-family inclusion, but also a handling exception rather than a simple color variety.",
@@ -436,6 +449,68 @@
         }
       ],
       "habitStripClosing": "One specimen can carry both a color name and a habit name. A golden Dogtooth Calcite, for example, is describing color and shape at the same time."
+    },
+    "recognition": {
+      "items": [
+        {
+          "title": "Glassy luster",
+          "body": "Often shiny with a smooth, glassy look."
+        },
+        {
+          "title": "Perfect cleavage",
+          "body": "Splits in rhombohedral angles rather than flat sheets."
+        },
+        {
+          "title": "Often translucent",
+          "body": "Light may pass through softly or vividly."
+        },
+        {
+          "title": "Wide color range",
+          "body": "Forms in many colors and repeated patterns."
+        }
+      ]
+    },
+    "shapes": {
+      "items": [
+        {
+          "title": "Pointed crystals",
+          "body": "Dogtooth and scalenohedral crystals with tapered points are common in nature."
+        },
+        {
+          "title": "Slanted blocks",
+          "body": "Rhombohedral crystals split into angled parallelograms."
+        },
+        {
+          "title": "Massive & banded",
+          "body": "Common in polished pieces and decorative banded materials."
+        }
+      ]
+    },
+    "essentials": {
+      "items": [
+        {
+          "title": "What it is",
+          "body": "Calcite is a calcium carbonate mineral with extraordinary variety in color, form, and appearance."
+        },
+        {
+          "title": "How to recognize it",
+          "body": "Mohs hardness around 3, prominent rhombohedral cleavage, often translucent, and a glassy appearance."
+        },
+        {
+          "title": "How to care for it",
+          "list": [
+            "Soft and easily scratched",
+            "Avoid acids and harsh chemicals",
+            "Avoid hard impacts",
+            "Avoid prolonged harsh sunlight",
+            "Clean gently with water and a soft cloth when appropriate"
+          ]
+        },
+        {
+          "title": "Mineral neighbors",
+          "body": "Calcite belongs to a larger carbonate mineral family, including Aragonite, Dolomite, Rhodochrosite, Magnesite, Siderite, and Smithsonite — each a distinct mineral with its own chemistry, hardness, and character."
+        }
+      ]
     },
     "whatIsCalcite": {
       "mainIdentity": [

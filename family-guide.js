@@ -1,16 +1,21 @@
 /* ── FAMILY GUIDE (pilot: Calcite) ──
    Approved route: encyclopedia.html?tab=family&family=<slug>[#anchor]
-   Lives inside the existing encyclopedia.html SPA. Reuses CRYSTALS, encCardHtml(),
-   openDetail(), jumpToFamily(), firstEncyclopediaPhoto(), and the existing
-   switchTabByName()/syncTabUrl() tab machinery — no standalone template, no
-   second Quick View/card/Supabase path.
+   Lives inside the existing encyclopedia.html SPA. Reuses CRYSTALS, openDetail(),
+   jumpToFamily(), firstEncyclopediaPhoto(), and the existing switchTabByName()/
+   syncTabUrl() tab machinery — no standalone template, no second Quick View/
+   card/Supabase path.
 
-   Content source: data/family-guides.json. That file carries the complete
-   supplied Draft 1 copy verbatim, plus two internal-only fields that are never
-   rendered here: `sourceReferences` (id -> {url,label}) and `factualFlags`.
-   Any content block that cites a source carries a `sourceRefIds` array; see
-   fgSourced() below for how the association is preserved without printing a
-   raw URL on the page. */
+   Visual rebuild (2026-07): museum-guide-style page — feature bands, uniform
+   stone cards, compact fact modules. Approved public section order:
+   1. Hero  2. Short overview  3. Meet Eight Common Calcite Varieties
+   4. How to Recognize Calcite  5. Shapes Calcite Takes
+   6. The Calcite Extended Family  7. Calcite Essentials  8. Closing callout.
+
+   Content source: data/family-guides.json. Fields no longer rendered by this
+   page (familyFitsTogether, otherCalcites, whatIsCalcite, identificationBuyingCare,
+   relatedCarbonates full detail, sourceReferences, factualFlags) are kept in the
+   data file as an archival record of the earlier approved Draft 1 copy — they are
+   simply not read by any function below. Nothing here deletes that content. */
 
 let FAMILY_GUIDES = null;
 let _familyGuidesLoadPromise = null;
@@ -27,6 +32,10 @@ function loadFamilyGuides(){
 
 function familyGuideSlugify(v){
   return String(v||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+
+function fgReducedMotion(){
+  try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; }
 }
 
 // ── Entry point for tile/link clicks — pushes a new history entry so Back
@@ -74,14 +83,9 @@ function scrollToFamilyGuideHash(){
   setTimeout(()=>{
     const el=document.getElementById(hash);
     if(!el) return;
-    try{ el.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){ el.scrollIntoView(); }
+    const behavior = fgReducedMotion() ? 'auto' : 'smooth';
+    try{ el.scrollIntoView({behavior,block:'start'}); }catch(e){ el.scrollIntoView(); }
   },60);
-}
-
-function fgScrollToId(id){
-  const el=document.getElementById(id);
-  if(!el) return;
-  try{ el.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){ el.scrollIntoView(); }
 }
 
 // ── Route resolution — called on initial load and on popstate. Returns
@@ -106,344 +110,195 @@ window.addEventListener('popstate', function(){
   if(t==='encyclopedia' && typeof encRender==='function') encRender();
 });
 
-/* ── Small content helpers ──────────────────────────────────────────────
-   `fgSourced` accepts either a plain string or {text, sourceRefIds:[...]}.
-   The sourceRefIds are attached as a data attribute (internal association
-   only, never rendered as visible text or a link) so the claim<->source
-   pairing survives in the DOM/data without printing a raw research URL. */
-function fgSourced(block){
-  if(block==null) return '';
-  if(typeof block==='string') return { text: block, refs: [] };
-  return { text: block.text||'', refs: block.sourceRefIds||[] };
-}
-function fgPara(block, cls){
-  const b=fgSourced(block);
-  if(!b.text) return '';
-  const refAttr = b.refs.length ? ` data-fg-source-refs="${escapeAttr(b.refs.join(','))}"` : '';
-  return `<p class="${cls||'fg-p'}"${refAttr}>${escapeAttr(b.text)}</p>`;
-}
-function fgParas(list, cls){
-  return (list||[]).map(b=>fgPara(b,cls)).join('');
-}
+/* ── Small content helpers ─────────────────────────────────────────────── */
 function fgList(items){
   return `<ul class="fg-list">${(items||[]).map(i=>`<li>${escapeAttr(i)}</li>`).join('')}</ul>`;
 }
 function fgCrystal(stoneId){
   return (typeof CRYSTALS!=='undefined' && CRYSTALS.find) ? CRYSTALS.find(x=>x.i===stoneId) : null;
 }
-function fgOpenDetailLink(name, stoneId){
-  const c = fgCrystal(stoneId);
-  if(!c) return escapeAttr(name); // unresolved — render as plain text, never a false link
-  return `<button type="button" class="fg-inline-link" onclick="openDetail('${escapeAttr(stoneId)}')">${escapeAttr(name)}</button>`;
-}
 
-/* ── 1. Hero ────────────────────────────────────────────────────────── */
+/* ── 1. Hero — warm near-white split composition: editorial copy left, true-
+   color photo zone right. No dark overlay, no buttons. Christie has not yet
+   supplied the final Calcite family photograph, so the photo zone is filled
+   with a temporary collage built only from existing approved encyclopedia
+   photos already used elsewhere in this guide — never new/invented photography
+   — and is labeled as a placeholder. The zone keeps the approved eventual
+   16:9 ratio so swapping in the real photo later is a single-image change. */
+function fgHeroMediaHtml(guide){
+  const ids = ['C-0007','C-0016','C-0014','C-0015']; // Blue, Orange, Mangano, Optical — representative spread
+  const imgs = ids.map(id=>{
+    const c = fgCrystal(id);
+    const src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+    return src ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(c.n)}" loading="lazy">` : '';
+  }).filter(Boolean);
+  if(!imgs.length && guide.hero && guide.hero.image){
+    imgs.push(`<img src="${escapeAttr(SUPABASE_ENC+guide.hero.image)}" alt="${escapeAttr(guide.displayName||guide.slug)}">`);
+  }
+  return `<div class="fg-hero-media">
+    <div class="fg-hero-media-grid">${imgs.join('')}</div>
+    <span class="fg-hero-media-label">Family photograph — coming soon</span>
+  </div>`;
+}
 function familyGuideHeroHtml(guide){
   const hero = guide.hero||{};
-  const img = hero.image ? `<img src="${escapeAttr(SUPABASE_ENC+hero.image)}" alt="${escapeAttr(guide.displayName||guide.slug)}">` : '';
-  const primaryBtn = hero.primaryAction
-    ? `<button type="button" class="btn btn-accent fg-hero-btn" onclick="fgScrollToId('${escapeAttr(hero.primaryAction.target||'')}')">${escapeAttr(hero.primaryAction.label)}</button>`
-    : '';
-  const secondaryBtn = (hero.secondaryAction && guide.encyclopediaFilterValue)
-    ? `<button type="button" class="btn fg-hero-btn" onclick="jumpToFamily('${escapeAttr(guide.encyclopediaFilterValue)}')">${escapeAttr(hero.secondaryAction.label)}</button>`
-    : '';
-  return `<div class="fg-hero c101-photo-intro c101-photo-intro--families">
-    <div class="c101-photo-copy">
-      <div class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</div>
-      <div class="fg-hero-signature">${escapeAttr(hero.signatureLine||'')}</div>
-      ${fgParas(hero.paragraphs,'fg-hero-p')}
-      <div class="fg-hero-actions">${primaryBtn}${secondaryBtn}</div>
+  return `<section class="fg-hero" id="fg-hero">
+    <div class="fg-hero-grid">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
+        ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+        ${hero.centralIdea?`<p class="fg-hero-italic">${escapeAttr(hero.centralIdea)}</p>`:''}
+        ${hero.question?`<div class="fg-hero-prompt">
+          ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+          <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+          ${hero.questionSub?`<div class="fg-hero-prompt-sub">${escapeAttr(hero.questionSub)}</div>`:''}
+        </div>`:''}
+      </div>
+      ${fgHeroMediaHtml(guide)}
     </div>
-    <figure class="c101-photo-slot">${img}</figure>
-  </div>`;
+  </section>`;
 }
 
-/* ── 2. The Energy of Calcite ───────────────────────────────────────── */
-function familyGuideEnergyHtml(guide){
-  const e = guide.energySection||{};
-  return `<div class="c101-block fg-energy" id="fg-energy">
-    ${fgParas(e.paragraphs,'fg-energy-p')}
-    <div class="fg-energy-leadin">${escapeAttr(e.leadIn||'')}</div>
-    <div class="fg-energy-question">${escapeAttr(e.question||'')}</div>
-    <div class="fg-energy-afterquestion">${escapeAttr(e.afterQuestion||'')}</div>
-    ${fgPara(e.groundingParagraph,'fg-energy-p fg-energy-grounding')}
-  </div>`;
+/* ── 2. Short family overview — one centered feature paragraph. ────────── */
+function familyGuideOverviewHtml(guide){
+  const o = guide.overview||{};
+  if(!o.paragraph) return '';
+  return `<section class="fg-overview" id="fg-overview">
+    <p class="fg-overview-text">${escapeAttr(o.paragraph)}</p>
+  </section>`;
 }
 
-/* ── 3. Find Your Calcite ───────────────────────────────────────────── */
-function familyGuideFindTileHtml(member){
+/* ── Uniform stone card — shared by Section 3 (eight common varieties) and
+   Section 6 (extended family, with an added identity badge). ── */
+function fgStoneCardHtml(member, opts){
+  opts = opts || {};
   const c = fgCrystal(member.stoneId);
   if(!c) return ''; // unresolved roster ID — skipped, not fatal (see stop-condition handling)
   const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
   const imgHtml = imgSrc
     ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
-    : `<div class="fg-find-tile-noimg"></div>`;
-  return `<div class="fg-find-tile" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">
-    <div class="fg-find-tile-img">${imgHtml}</div>
-    <div class="fg-find-tile-copy">
-      <div class="fg-find-tile-name">${escapeAttr(c.n)}</div>
-      <div class="fg-find-tile-headline">${escapeAttr(member.headline||'')}</div>
-      <div class="fg-find-tile-distinction">${escapeAttr(member.distinction||'')}</div>
-      <div class="fg-identity-label">${escapeAttr(member.identityLabel||'')}</div>
+    : `<div class="fg-stonecard-noimg"></div>`;
+  const badgeHtml = (opts.badge && member.identityBadge)
+    ? `<span class="fg-badge">${escapeAttr(member.identityBadge)}</span>` : '';
+  const idAttr = opts.anchorId ? ` id="${escapeAttr(opts.anchorId)}"` : '';
+  return `<div class="fg-stonecard"${idAttr}>
+    <button type="button" class="fg-stonecard-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+    <div class="fg-stonecard-body">
+      <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
+      <div class="fg-stonecard-phrase">${escapeAttr(member.headline||'')}</div>
+      ${badgeHtml}
+      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
     </div>
   </div>`;
 }
-function familyGuideFindYourCalciteHtml(guide){
+
+/* ── 3. Meet Eight Common Calcite Varieties ─────────────────────────────
+   Red Calcite (legacy anchor #red-calcite) no longer has a standalone essay
+   on the public page. Its closest encyclopedia path is Orange Calcite, so the
+   compatibility anchor lives on that card — any existing link or search
+   redirect to #red-calcite still resolves and scrolls into context, without
+   reintroducing a large visible Red Calcite section. */
+function familyGuideVarietiesHtml(guide){
   const f = guide.findYourCalcite||{};
-  const tiles = (f.members||[]).map(familyGuideFindTileHtml).filter(Boolean).join('');
-  return `<div class="c101-block" id="fg-find-your-calcite">
-    <div class="c101-h2">Find Your Calcite</div>
-    <div class="fg-find-intro">${escapeAttr(f.intro||'')}</div>
-    ${f.intro2?`<div class="c101-body">${escapeAttr(f.intro2)}</div>`:''}
-    <div class="fg-find-grid">${tiles}</div>
+  const members = f.members||[];
+  const cards = members.map(m=>fgStoneCardHtml(m, {anchorId: m.stoneId==='C-0016' ? 'red-calcite' : null})).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-varieties">
+    <h2 class="fg-h2">Meet Eight Common Calcite Varieties</h2>
+    ${f.intro?`<p class="fg-section-sub">${escapeAttr(f.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--4">${cards}</div>
+  </section>`;
+}
+
+/* ── Compact fact card — shared by Recognition, Shapes, and Essentials. ── */
+function fgFactCardHtml(item, icon){
+  const iconHtml = icon ? `<span class="enc-icon ${icon} fg-fact-icon" aria-hidden="true"></span>` : '';
+  const bodyHtml = item.list ? fgList(item.list) : `<p class="fg-fact-body">${escapeAttr(item.body||'')}</p>`;
+  return `<div class="fg-factcard">
+    ${iconHtml}
+    <div class="fg-fact-title">${escapeAttr(item.title||'')}</div>
+    ${bodyHtml}
   </div>`;
 }
 
-/* ── 4. Calcite-Rich, Patterned, and Trade Materials ───────────────── */
-function familyGuideTradeCardHtml(member){
-  const c = fgCrystal(member.stoneId);
-  if(!c) return '';
-  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
-  const imgHtml = imgSrc ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">` : `<div class="fg-find-tile-noimg"></div>`;
-  const rel = (member.relationship||[]).map(r=>fgPara(r,'fg-trade-relationship')).join('');
-  return `<div class="fg-trade-card">
-    <div class="fg-trade-card-img" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</div>
-    <div class="fg-trade-card-body">
-      <div class="fg-find-tile-name">${escapeAttr(c.n)}</div>
-      <div class="fg-find-tile-headline">${escapeAttr(member.headline||'')}</div>
-      <div class="fg-find-tile-distinction">${escapeAttr(member.distinction||'')}</div>
-      <div class="fg-identity-label">${escapeAttr(member.identityLabel||'')}</div>
-      ${rel}
-      <button type="button" class="fg-inline-link fg-trade-qv" onclick="openDetail('${escapeAttr(c.i)}')">View in Quick View</button>
-    </div>
-  </div>`;
+/* ── 4. How to Recognize Calcite ─────────────────────────────────────── */
+const FG_RECOGNITION_ICONS = ['icon-color-optical-effect','icon-forms-shapes','icon-magnifier-gem','icon-color-range'];
+function familyGuideRecognitionHtml(guide){
+  const items = (guide.recognition||{}).items||[];
+  const cards = items.map((it,i)=>fgFactCardHtml(it, FG_RECOGNITION_ICONS[i])).join('');
+  return `<section class="fg-section" id="fg-recognize">
+    <h2 class="fg-h2">How to Recognize Calcite</h2>
+    <p class="fg-section-sub">Look for these hallmarks that connect the family.</p>
+    <div class="fg-fact-grid fg-fact-grid--4">${cards}</div>
+  </section>`;
 }
-function familyGuideTradeMaterialsHtml(guide){
+
+/* ── 5. Shapes Calcite Takes ─────────────────────────────────────────── */
+const FG_SHAPE_ICONS = ['icon-crystal-single','icon-forms-shapes','icon-inclusions-patterns'];
+function familyGuideShapesHtml(guide){
+  const items = (guide.shapes||{}).items||[];
+  const cards = items.map((it,i)=>fgFactCardHtml(it, FG_SHAPE_ICONS[i])).join('');
+  return `<section class="fg-section" id="fg-shapes">
+    <h2 class="fg-h2">Shapes Calcite Takes</h2>
+    <p class="fg-section-sub">These are the most common forms you’ll see.</p>
+    <div class="fg-fact-grid fg-fact-grid--3">${cards}</div>
+  </section>`;
+}
+
+/* ── 6. The Calcite Extended Family — Calcite-rich, patterned, and trade
+   materials. Kept visually consistent with Section 3's stone cards, plus a
+   compact identity badge so honest material distinctions stay visible. ── */
+function familyGuideExtendedFamilyHtml(guide){
   const t = guide.tradeMaterials||{};
-  const cards = (t.members||[]).map(familyGuideTradeCardHtml).filter(Boolean).join('');
-  return `<div class="c101-block" id="fg-trade-materials">
-    <div class="c101-h2">Calcite-Rich, Patterned, and Trade Materials</div>
-    <div class="c101-body">${escapeAttr(t.intro||'')}</div>
-    <div class="fg-trade-grid">${cards}</div>
-  </div>`;
+  const cards = (t.members||[]).map(m=>fgStoneCardHtml(m, {badge:true})).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-extended">
+    <h2 class="fg-h2">The Calcite Extended Family</h2>
+    <p class="fg-section-sub">Calcite-rich, patterned, and trade materials.</p>
+    <div class="fg-card-grid fg-card-grid--4">${cards}</div>
+  </section>`;
 }
 
-/* ── 5. How the Family Fits Together ────────────────────────────────── */
-function familyGuideFitsPanelHtml(panel){
-  let body;
-  if(panel.subpanels){
-    body = panel.subpanels.map(sp=>`<div class="fg-panel-subpanel"><div class="fg-panel-sublabel">${escapeAttr(sp.label)}</div>${fgParas(sp.paragraphs)}</div>`).join('');
-  } else {
-    body = fgParas(panel.paragraphs);
-  }
-  return `<div class="fg-fits-panel">
-    <div class="fg-fits-panel-title">${escapeAttr(panel.title)}</div>
-    ${body}
-  </div>`;
-}
-function familyGuideFitsTogetherHtml(guide){
-  const f = guide.familyFitsTogether||{};
-  const panels = (f.panels||[]).map(familyGuideFitsPanelHtml).join('');
-  return `<div class="c101-block" id="fg-fits-together">
-    <div class="c101-h2">How the Family Fits Together</div>
-    ${fgParas(f.intro,'c101-body')}
-    <div class="fg-fits-grid">${panels}</div>
-  </div>`;
+/* ── 7. Calcite Essentials — exactly four evenly divided modules. ──────── */
+const FG_ESSENTIALS_ICONS = ['icon-geology','icon-identify','icon-care-cleaning','icon-crystal-cluster'];
+function familyGuideEssentialsHtml(guide){
+  const items = (guide.essentials||{}).items||[];
+  const cards = items.slice(0,4).map((it,i)=>fgFactCardHtml(it, FG_ESSENTIALS_ICONS[i])).join('');
+  return `<section class="fg-section" id="fg-essentials">
+    <h2 class="fg-h2">Calcite Essentials</h2>
+    <p class="fg-section-sub">What it is, how to recognize it, and how to care for it.</p>
+    <div class="fg-essentials-grid">${cards}</div>
+  </section>`;
 }
 
-/* ── 6. Other Calcites You May Encounter (3 visual levels) ──────────── */
-function familyGuideFeaturedProfileHtml(entry){
-  const paras = (entry.paragraphs||[]).map(p=>fgPara(p)).join('');
-  const listHtml = entry.list ? `${entry.listIntro?`<div class="fg-list-intro">${escapeAttr(entry.listIntro)}</div>`:''}${fgList(entry.list)}` : '';
-  const comparisonHtml = entry.comparison ? `<div class="fg-comparison-block">
-    <div class="fg-comparison-heading">${escapeAttr(entry.comparison.heading)}</div>
-    ${(entry.comparison.lines||[]).map(l=>`<p class="fg-comparison-line">${escapeAttr(l)}</p>`).join('')}
-  </div>` : '';
-  const closing = entry.closingParagraph ? `<p class="fg-p">${escapeAttr(entry.closingParagraph)}</p>` : '';
-  let seeAlsoHtml = '';
-  if(entry.seeAlso){
-    seeAlsoHtml = `<div class="fg-see-also">See also: ${fgOpenDetailLink(entry.seeAlso.name, entry.seeAlso.stoneId)}</div>`;
-  } else if(entry.seeAlsoMultiple){
-    seeAlsoHtml = `<div class="fg-see-also">See also: ${entry.seeAlsoMultiple.map(s=>fgOpenDetailLink(s.name,s.stoneId)).join(' · ')}</div>`;
-  } else if(entry.closestPaths){
-    seeAlsoHtml = `<div class="fg-see-also">${escapeAttr(entry.closestPaths.label)}: ${entry.closestPaths.items.map(s=>fgOpenDetailLink(s.name,s.stoneId)).join(' · ')}</div>`;
-  }
-  return `<div class="fg-featured-profile" id="${escapeAttr(entry.anchor||'')}">
-    <div class="fg-featured-name">${escapeAttr(entry.name)}</div>
-    <div class="fg-featured-headline">${escapeAttr(entry.headline||'')}</div>
-    ${paras}
-    ${listHtml}
-    ${comparisonHtml}
-    ${closing}
-    ${seeAlsoHtml}
-  </div>`;
-}
-function familyGuideCompactDirectoryHtml(other){
-  const items = (other.compactDirectory||[]).map(e=>`<div class="fg-compact-item"><span class="fg-compact-name">${escapeAttr(e.name)}</span><span class="fg-compact-body">${escapeAttr(e.body)}</span></div>`).join('');
-  return `<div class="fg-level2">
-    <div class="fg-level-label">Also seen under these market names</div>
-    <div class="c101-body fg-level-intro">${escapeAttr(other.compactDirectoryIntro||'')}</div>
-    <div class="fg-compact-grid">${items}</div>
-    ${other.compactDirectoryClosing?`<p class="fg-p fg-level-closing">${escapeAttr(other.compactDirectoryClosing)}</p>`:''}
-  </div>`;
-}
-function familyGuideHabitStripHtml(other){
-  const items = (other.habitStrip||[]).map(e=>`<div class="fg-habit-chip"><span class="fg-habit-name">${escapeAttr(e.name)}</span><span class="fg-habit-body">${escapeAttr(e.body)}</span></div>`).join('');
-  return `<div class="fg-level3">
-    <div class="fg-level-label">Named by crystal habit</div>
-    <div class="c101-body fg-level-intro">${escapeAttr(other.habitStripIntro||'')}</div>
-    <div class="fg-habit-strip">${items}</div>
-    ${other.habitStripClosing?`<p class="fg-p fg-level-closing">${escapeAttr(other.habitStripClosing)}</p>`:''}
-  </div>`;
-}
-function familyGuideOtherCalcitesHtml(guide){
-  const o = guide.otherCalcites||{};
-  const featured = (o.featured||[]).map(familyGuideFeaturedProfileHtml).join('');
-  return `<div class="c101-block" id="fg-other-calcites">
-    <div class="c101-h2">Other Calcites You May Encounter</div>
-    ${fgParas(o.intro,'c101-body')}
-    <div class="fg-featured-list">${featured}</div>
-    ${familyGuideCompactDirectoryHtml(o)}
-    ${familyGuideHabitStripHtml(o)}
-  </div>`;
-}
-
-/* ── 7. What Is Calcite? ─────────────────────────────────────────────── */
-function fgEmphasize(text){
-  // Restrained emphasis for the handful of technical terms named in the brief —
-  // wraps exact matches in <em>, does not alter wording or add new terms.
-  const terms=['CaCO₃','MnCO₃','MgCO₃','FeCO₃','ZnCO₃','CaMg(CO₃)₂','Mohs 3','Mohs hardness of 3','cleavage','acid','double refraction'];
-  let out=escapeAttr(text);
-  terms.forEach(t=>{
-    const esc=escapeAttr(t).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-    out=out.replace(new RegExp(esc,'g'), m=>`<em class="fg-term">${m}</em>`);
-  });
-  return out;
-}
-function fgParaEmph(block){
-  const b=fgSourced(block);
-  if(!b.text) return '';
-  const refAttr = b.refs.length ? ` data-fg-source-refs="${escapeAttr(b.refs.join(','))}"` : '';
-  return `<p class="fg-p"${refAttr}>${fgEmphasize(b.text)}</p>`;
-}
-function familyGuideWhatIsHtml(guide){
-  const w = guide.whatIsCalcite||{};
-  const wsm = w.whySoManyForms||{};
-  return `<div class="c101-block" id="fg-what-is-calcite">
-    <div class="c101-h2">What Is Calcite?</div>
-    <div class="fg-whatis-sub">${(w.mainIdentity||[]).map(fgParaEmph).join('')}</div>
-    <div class="fg-whatis-subhead">Memorable physical characteristics</div>
-    <div class="fg-whatis-sub">${(w.physicalCharacteristics||[]).map(fgParaEmph).join('')}</div>
-    <div class="fg-whatis-subhead">Why so many forms?</div>
-    <div class="fg-whatis-sub">
-      <p class="fg-p">${escapeAttr(wsm.intro||'')}</p>
-      ${wsm.listIntro?`<div class="fg-list-intro">${escapeAttr(wsm.listIntro)}</div>`:''}
-      ${fgList(wsm.list)}
-      <p class="fg-p">${escapeAttr(wsm.closing||'')}</p>
-    </div>
-  </div>`;
-}
-
-/* ── 8. Identification, Buying, and Care ────────────────────────────── */
-function familyGuideIdBuyingCareHtml(guide){
-  const ibc = guide.identificationBuyingCare||{};
-  const rec = ibc.recognizing||{}, buy = ibc.buying||{}, care = ibc.care||{};
-  return `<div class="c101-block" id="fg-id-buying-care">
-    <div class="c101-h2">Identification, Buying, and Care</div>
-    <div class="fg-ibc-block">
-      <div class="fg-ibc-label">Recognizing Calcite</div>
-      <div class="fg-list-intro">${escapeAttr(rec.intro||'')}</div>
-      ${fgList(rec.list)}
-      ${fgParas(rec.closing)}
-    </div>
-    <div class="fg-ibc-block">
-      <div class="fg-ibc-label">Buying with clearer expectations</div>
-      <div class="fg-list-intro">${escapeAttr(buy.intro||'')}</div>
-      ${fgList(buy.list)}
-      ${fgParas(buy.paragraphs)}
-      ${buy.list2Intro?`<div class="fg-list-intro">${escapeAttr(buy.list2Intro)}</div>`:''}
-      ${fgList(buy.list2)}
-    </div>
-    <div class="fg-ibc-block">
-      <div class="fg-ibc-label">Care</div>
-      ${fgPara(care.intro)}
-      ${care.listIntro?`<div class="fg-list-intro">${escapeAttr(care.listIntro)}</div>`:''}
-      ${fgList(care.list)}
-      ${care.bumblebeeWarning?`<div class="c101-warn fg-bumblebee-warn"><strong>Handling note — Bumblebee Jasper:</strong> ${escapeAttr(fgSourced(care.bumblebeeWarning).text)}</div>`:''}
-    </div>
-  </div>`;
-}
-
-/* ── 9. Related Carbonate Minerals ──────────────────────────────────── */
-function familyGuideCarbonateCardHtml(m){
-  const explanation = fgPara(m.explanation,'fg-carbonate-explanation');
-  return `<div class="fg-carbonate-card">
-    <div class="fg-carbonate-name">${escapeAttr(m.name)}</div>
-    <div class="fg-carbonate-relation">${escapeAttr(m.relationLine||'')}</div>
-    ${explanation}
-  </div>`;
-}
-function familyGuideRelatedCarbonatesHtml(guide){
-  const rc = guide.relatedCarbonates||{};
-  const cards = (rc.minerals||[]).map(familyGuideCarbonateCardHtml).join('');
-  return `<div class="c101-block" id="fg-related-carbonates">
-    <div class="c101-h2">Related Carbonate Minerals</div>
-    ${fgParas(rc.intro,'c101-body')}
-    <div class="fg-carbonate-grid">${cards}</div>
-  </div>`;
-}
-
-/* ── 10. Closing section ────────────────────────────────────────────── */
-function fgClosingActionHtml(action, guide){
-  if(action.type==='jumpToFamily' && guide.encyclopediaFilterValue){
-    return `<button type="button" class="btn fg-closing-btn" onclick="jumpToFamily('${escapeAttr(guide.encyclopediaFilterValue)}')">${escapeAttr(action.label)}</button>`;
-  }
-  if(action.type==='openDetail' && action.stoneId){
-    const c=fgCrystal(action.stoneId);
-    if(!c) return ''; // no false action if the target doesn't resolve
-    return `<button type="button" class="btn fg-closing-btn" onclick="openDetail('${escapeAttr(action.stoneId)}')">${escapeAttr(action.label)}</button>`;
-  }
-  if(action.type==='backTo101'){
-    return `<button type="button" class="btn fg-closing-btn" onclick="switchTabByName('101')">${escapeAttr(action.label)}</button>`;
-  }
-  // 'inert' — no resolvable target yet (e.g. a future Aragonite/Dolomite family
-  // guide). Rendered as plain text rather than a false/dead link.
-  return `<span class="fg-closing-inert">${escapeAttr(action.label)}</span>`;
-}
+/* ── 8. Closing callout — one CTA only. ─────────────────────────────────── */
 function familyGuideClosingHtml(guide){
-  const cl = guide.closing||{};
-  const actions = (cl.actions||[]).map(a=>fgClosingActionHtml(a,guide)).join('');
-  return `<div class="c101-block fg-closing" id="fg-closing">
-    <div class="c101-h2">${escapeAttr(cl.title||'')}</div>
-    ${fgParas(cl.paragraphs)}
-    ${cl.listIntro?`<p class="fg-p">${escapeAttr(cl.listIntro)}</p>`:''}
-    ${fgList(cl.list)}
-    ${cl.finalLine?`<p class="fg-p fg-closing-final">${escapeAttr(cl.finalLine)}</p>`:''}
-    <div class="fg-closing-actions">${actions}</div>
-  </div>`;
+  return `<section class="fg-closing" id="fg-closing">
+    <p class="fg-closing-line">Calcite helps life begin moving again.</p>
+    <p class="fg-closing-question">Calcite asks: What wants to move next?</p>
+    <button type="button" class="btn btn-accent fg-closing-btn" onclick="switchTabByName('encyclopedia')">Return to Encyclopedia</button>
+  </section>`;
 }
 
-/* ── Full guide assembly — approved editorial order ─────────────────── */
+/* ── Full guide assembly — approved public section order ───────────────── */
 function familyGuideHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
-    ${familyGuideEnergyHtml(guide)}
-    ${familyGuideFindYourCalciteHtml(guide)}
-    ${familyGuideTradeMaterialsHtml(guide)}
-    ${familyGuideFitsTogetherHtml(guide)}
-    ${familyGuideOtherCalcitesHtml(guide)}
-    ${familyGuideWhatIsHtml(guide)}
-    ${familyGuideIdBuyingCareHtml(guide)}
-    ${familyGuideRelatedCarbonatesHtml(guide)}
+    ${familyGuideOverviewHtml(guide)}
+    ${familyGuideVarietiesHtml(guide)}
+    ${familyGuideRecognitionHtml(guide)}
+    ${familyGuideShapesHtml(guide)}
+    ${familyGuideExtendedFamilyHtml(guide)}
+    ${familyGuideEssentialsHtml(guide)}
     ${familyGuideClosingHtml(guide)}
   </div>`;
 }
 
 function familyGuideNotFoundHtml(slug){
   return `<div class="fg-guide fg-not-found">
-    <div class="c101-h1">Family guide not found</div>
-    <div class="c101-body">"${escapeAttr(slug)}" doesn't match a published Family Guide yet.</div>
+    <div class="fg-h2">Family guide not found</div>
+    <p class="fg-fact-body">"${escapeAttr(slug)}" doesn't match a published Family Guide yet.</p>
     <button type="button" class="btn btn-sm" onclick="switchTabByName('101')">Back to Crystals 101</button>
   </div>`;
 }
