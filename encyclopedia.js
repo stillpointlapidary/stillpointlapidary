@@ -560,14 +560,14 @@ function encCardHtml(c){
   const isOwned=!!owned[c.i], isWish=!!wish[c.i];
   const badge=isOwned?'<span class="card-badge badge-owned"></span>':(isWish?'<span class="card-badge badge-wish"></span>':'');
   const props=canonicalRoleTags(c,3);
-  const pillsHtml=props.length?`<div class="stone-card-properties">${props.map(t=>`<span class="card-role">${t}</span>`).join('<span class="card-role-sep">·</span>')}</div>`:'';
-  const bestForHtml=c.card_best_for?`<div class="stone-card-best-for"><span class="stone-card-best-for-label">BEST FOR</span><p>${c.card_best_for}</p></div>`:'';
+  const pillsHtml=props.length?`<div class="stone-card-properties">${props.map(t=>`<span class="card-role"><span class="card-role-text">${t}</span></span>`).join('<span class="card-role-sep">·</span>')}</div>`:'';
+  const bestForHtml=c.card_best_for?`<div class="stone-card-best-for"><span class="enc-icon icon-best-for" aria-hidden="true"></span><span class="stone-card-best-for-divider" aria-hidden="true"></span><span class="stone-card-best-for-text"><span class="stone-card-best-for-label">BEST FOR</span><span class="stone-card-best-for-value" title="${escapeAttr(c.card_best_for)}">${c.card_best_for}</span></span></div>`:'';
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
     ?`<div class="card-img-zone has-photo" onclick="openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${imgSrc}" alt="${c.n}" loading="lazy"></div>`
     :`<div onclick="openDetail('${c.i}')">${noPhotoZoneHtml(c)}</div>`;
-  return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${pillsHtml}${bestForHtml}</div></div>`;
+  return`<div class="crystal-card">${badge}${imgZone}<div class="card-photo-divider" aria-hidden="true"></div><div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${pillsHtml}${bestForHtml}</div></div>`;
 }
 
 // Resolves preserved/retired search terms (e.g. "Pink Halite") to their canonical

@@ -184,21 +184,30 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    by encCardHtml's .stone-card-properties and intentionStoneCardHtml's .mood-card-tags. */
 .card-role{display:inline-flex;align-items:center;font-size:11px;color:var(--accent);letter-spacing:0.02em;line-height:1.3;padding:3px 9px;border-radius:999px;background:var(--stone2)}
 .card-role-sep{display:none}
-.stone-card-properties{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
-.stone-card-best-for{margin-top:4px}
+/* Approved Option B: three equal-width pill columns, DOM order is name -> pills ->
+   Best For everywhere (no desktop reorder). .stone-card-properties/.stone-card-best-for*
+   are unique to encCardHtml — safe to restyle without affecting intentionStoneCardHtml's
+   .mood-card-tags/.mood-why-match, which don't use these classes. */
+.stone-card-properties{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.stone-card-properties .card-role{width:100%;min-width:0;box-sizing:border-box;justify-content:center;border:0.5px solid var(--border)}
+.stone-card-properties .card-role-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;max-width:100%}
+.stone-card-best-for{display:flex;align-items:center;gap:8px;margin-top:8px}
+.stone-card-best-for .enc-icon{width:14px;height:14px;color:var(--accent);flex-shrink:0}
+.stone-card-best-for-divider{width:0.5px;align-self:stretch;background:var(--accent2);opacity:0.55;flex-shrink:0}
+.stone-card-best-for-text{min-width:0;flex:1}
 .stone-card-best-for-label{display:block;font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
-.stone-card-best-for p{margin:0;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;line-height:1.35;color:var(--ink2)}
-/* Desktop-only visual order (DOM order stays name -> pills -> Best For everywhere,
-   matching the required mobile order below 601px unchanged): promote Best For above
-   the descriptor pills, and keep Identify's appended .mood-theme-tags row last.
-   Also quiets the pills on desktop only (smaller padding/height, lighter fill,
-   tighter gaps) — mobile keeps its existing pill sizing untouched. */
+.stone-card-best-for-value{display:block;margin:0;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;line-height:1.35;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Fine bronze rule directly beneath the square photo — encCardHtml only. */
+.card-photo-divider{height:0.5px;background:var(--accent2);opacity:0.6}
+/* True 1:1 square photo region — scoped to the ordinary discovery card grids
+   (Encyclopedia + Identify V2 results, which render encCardHtml output) so
+   Choose-by-Intention's .card-img-zone (110px letterboxed) is untouched. */
+.enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#crystal-grid .card-img-zone,#id2-grid .card-img-zone{width:100%;height:auto;aspect-ratio:1/1}
+.enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#crystal-grid .card-img-zone img,#id2-grid .card-img-zone img{max-height:none}
 @media(min-width:601px){
-  .stone-card-properties{order:1;gap:3px;margin-top:3px;margin-bottom:0}
-  .mood-theme-tags{order:2}
   .card-body{padding:0.6rem 0.75rem 0.55rem}
   .card-role{padding:2px 7px;background:var(--stone)}
-  .stone-card-best-for{margin-top:3px}
+  .stone-card-best-for{margin-top:6px}
 }
 .card-badge{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;z-index:2}
 .badge-owned{background:var(--accent2)}
@@ -312,6 +321,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .mood-card-header .card-name{margin-bottom:0}
 .mood-why-match{font-size:11px;color:var(--ink2);line-height:1.38;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .mood-why-label{font-weight:500;color:var(--ink3);font-style:italic}
+.mood-why-label::after{content:": "}
 .mood-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
 .mood-theme-tag{font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--stone);border:0.5px solid var(--border2);color:var(--ink3)}
 .mood-results-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:0.4rem 0 0.6rem}
@@ -573,7 +583,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   #mood-stone-grid .card-name{margin-bottom:2px}
   #mood-stone-grid .card-role{font-size:11.5px;line-height:1.35}
   #mood-stone-grid .mood-card-header{flex-wrap:nowrap;align-items:center}
-  #mood-stone-grid .mood-why-match{font-size:10.5px;-webkit-line-clamp:1;margin-top:3px}
+  /* Mobile-only: stack Why into the same label-above/value-below block used by
+     the encyclopedia card's Best For (no bullseye icon here — not part of this
+     renderer). Desktop keeps the inline "Why: reason…" 2-line clamp untouched. */
+  #mood-stone-grid .mood-why-match{display:block;font-size:12px;line-height:1.35;margin-top:8px}
+  #mood-stone-grid .mood-why-label{display:block;font-style:normal;font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:9.5px;color:var(--ink3);margin-bottom:2px}
+  #mood-stone-grid .mood-why-label::after{content:none}
+  #mood-stone-grid .mood-why-value{display:block;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 }
 .ai-error{font-size:13px;color:#b94a48;padding:0.75rem 1rem;background:#fff5f5;border:0.5px solid #f5c6c6;border-radius:8px;margin-top:0.5rem;display:none}
 .ai-error.ai-error--gentle{color:var(--ink2);background:var(--stone2);border-color:var(--border)}
@@ -2108,11 +2124,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
      base instead of three independently drifting sets of values. */
   .enc-tier-grid,.enc-accordion-grid,#tab-encyclopedia #crystal-grid,#mood-stone-grid,#id2-grid,.fg-member-grid{grid-template-columns:1fr;gap:8px;background:transparent;border:none;border-radius:0;overflow:visible}
   .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card,#mood-stone-grid .crystal-card,#id2-grid .crystal-card,.fg-member-grid .crystal-card{flex-direction:row;align-items:flex-start;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:100px;background:var(--white)}
-  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone,#mood-stone-grid .card-img-zone,#id2-grid .card-img-zone,.fg-member-grid .card-img-zone{width:92px;min-height:100px;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
+  .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone,#mood-stone-grid .card-img-zone,#id2-grid .card-img-zone,.fg-member-grid .card-img-zone{width:92px;min-height:100px;aspect-ratio:auto;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
   .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img,#mood-stone-grid .card-img-zone img,#id2-grid .card-img-zone img,.fg-member-grid .card-img-zone img{max-height:100%;width:100%;object-fit:contain}
   .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body,#mood-stone-grid .card-body,#id2-grid .card-body,.fg-member-grid .card-body{padding:0.6rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
   .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name,#mood-stone-grid .card-name,#id2-grid .card-name,.fg-member-grid .card-name{font-size:16px;overflow-wrap:normal}
   .enc-tier-grid .card-color,.enc-accordion-grid .card-color,#tab-encyclopedia #crystal-grid .card-color{line-height:1.35}
+  /* Option B additions (photo divider, 3-col pill grid, iconized Best For) are
+     desktop-only per approved design — undo them back to pre-change mobile
+     behavior so pills wrap naturally instead of truncating in fixed columns. */
+  .enc-tier-grid .card-photo-divider,.enc-accordion-grid .card-photo-divider,#tab-encyclopedia #crystal-grid .card-photo-divider,#id2-grid .card-photo-divider{display:none}
+  .stone-card-properties{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
+  .stone-card-properties .card-role{width:auto;flex:0 0 auto}
+  .stone-card-properties .card-role-text{white-space:normal;overflow:visible;text-overflow:clip;max-width:none}
   .enc-next-shelf{grid-template-columns:1fr}
   .enc-next-up{display:none}
   .enc-accordion-row{grid-template-columns:auto 1fr auto;padding:0.85rem 1rem}

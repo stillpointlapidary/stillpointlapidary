@@ -741,7 +741,7 @@ function intentionStoneCardHtml(c){
     ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
   const reason=intentionBestForText(c);
-  const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-label">Why:</span> ${escapeAttr(reason)}</div>`:'';
+  const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-label">Why</span><span class="mood-why-value">${escapeAttr(reason)}</span></div>`:'';
   const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
   const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
   return `<div class="crystal-card mood-result-card" onclick="openIntentionDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;

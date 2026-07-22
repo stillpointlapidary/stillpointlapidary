@@ -76,6 +76,25 @@ const THEME_GROUPS=[
   {label:'Mind & Spirit',        themes:['Clarity & Focus','Communication','Intuition','Spiritual Connection']},
   {label:'Energy & Change',      themes:['Vitality','Amplification','Transformation','Manifestation','Confidence']},
 ];
+// Centralized Energetic Role -> icon class map. Mirrors the 12 approved roles
+// in pipeline/lib/icon-map.json's `energeticRoles` (the pipeline's source of
+// truth for this mapping) so the runtime derives the icon from the role label
+// itself instead of trusting a per-row Supabase column that isn't guaranteed
+// to be populated.
+const ENERGETIC_ROLE_ICONS={
+  'Grounding':'icon-grounding',
+  'Protection':'icon-protection',
+  'Vitality':'icon-vitality',
+  'Heart Healing':'icon-heart-healing',
+  'Calm & Peace':'icon-calm-peace',
+  'Emotional Regulation':'icon-emotional-regulation',
+  'Clarity & Focus':'icon-clarity-focus',
+  'Intuition':'icon-intuition',
+  'Spiritual Connection':'icon-spiritual-connection',
+  'Transformation':'icon-transformation',
+  'Manifestation':'icon-manifestation',
+  'Amplification':'icon-amplification',
+};
 const COLOR_OPTS=[
   {val:'Red',hex:'#b04a4a'},{val:'Orange',hex:'#d4783a'},{val:'Yellow',hex:'#c9a832'},
   {val:'Green',hex:'#4a8a5a'},{val:'Pink',hex:'#d4839a'},{val:'Blue',hex:'#5a8ab0'},
@@ -399,7 +418,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0240": ["pink-halite.webp"],
   "C-0241": ["howlite.webp"],
   "C-0245": ["kunzite.webp"],
-  "C-0246": ["apophyllite-specimen.webp"],
+  "C-0246": ["apophyllite.webp"],
   "C-0247": ["astrophyllite.webp"],
   "C-0248": ["bronzite-tumble.webp"],
   "C-0249": ["charoite.webp"],
@@ -699,12 +718,15 @@ function encContentFor(c){
 }
 function drawerFieldSet(c){
   const ec=encContentFor(c);
+  const role=(ec&&ec.energetic_role)||c.pmRole||'';
+  let roleIcon=ENERGETIC_ROLE_ICONS[role]||'';
+  if(role&&!roleIcon)console.warn(`[enc] Energetic Role "${role}" (stone ${c.i}) has no entry in ENERGETIC_ROLE_ICONS`);
   return{
     bestFor:         (ec&&ec.best_for)         || c.card_best_for  || '',
     useWhen:         (ec&&ec.use_when)         || c.uw             || '',
     affirmation:     (ec&&ec.affirmation)      || c.aff            || '',
-    role:            (ec&&ec.energetic_role)   || c.pmRole         || '',
-    roleIcon:        (ec&&ec.energetic_role_icon) || '',
+    role:            role,
+    roleIcon:        roleIcon,
     chakraPrimary:   (ec&&ec.chakra_primary)   || c.primaryChakra  || '',
     chakraSecondary: (ec&&ec.chakra_secondary) || '',
     element:         (ec&&ec.element)          || c.element        || '',
