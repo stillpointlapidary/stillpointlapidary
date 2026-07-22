@@ -197,6 +197,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .stone-card-best-for-text{min-width:0;flex:1}
 .stone-card-best-for-label{display:block;font-family:'Jost',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
 .stone-card-best-for-value{display:block;margin:0;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;line-height:1.35;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Best For icon + vertical divider are retired on this card everywhere
+   (mobile and desktop) — label/value text only, no decorative marker.
+   display:none only; markup is untouched. */
+.stone-card-best-for .enc-icon,.stone-card-best-for-divider{display:none}
 /* Fine bronze rule directly beneath the square photo — encCardHtml only. */
 .card-photo-divider{height:0.5px;background:var(--accent2);opacity:0.6}
 /* True 1:1 square photo region — scoped to the ordinary discovery card grids
@@ -208,6 +212,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .card-body{padding:0.6rem 0.75rem 0.55rem}
   .card-role{padding:2px 7px;background:var(--stone)}
   .stone-card-best-for{margin-top:6px}
+}
+/* Desktop only (>=901px, matching the row-card mobile/tablet cutoff used
+   elsewhere for this same card): Best For moves directly beneath the name,
+   and the property pills move below Best For, wrapping naturally instead of
+   truncating. This is a pure flex `order` reorder on .card-body's existing
+   flex column — the DOM order emitted by encCardHtml() (name -> pills ->
+   Best For) and the <=900px mobile/tablet rules above are not touched by
+   this block at all, so the approved mobile presentation (dot-separated
+   plain-text properties, no pill badges, Best For last) is unaffected. */
+@media(min-width:901px){
+  .card-name{order:1}
+  .stone-card-best-for{order:2;margin-top:6px}
+  .stone-card-properties{order:3;display:flex;flex-wrap:wrap;align-items:center;gap:5px 6px;margin-top:8px;margin-bottom:0}
+  .stone-card-properties .card-role{width:auto;flex:0 0 auto}
+  .stone-card-properties .card-role-text{white-space:normal;overflow:visible;text-overflow:clip;max-width:100%}
 }
 .card-badge{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;z-index:2}
 .badge-owned{background:var(--accent2)}
@@ -2126,16 +2145,22 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .enc-tier-grid .crystal-card,.enc-accordion-grid .crystal-card,#tab-encyclopedia #crystal-grid .crystal-card,#mood-stone-grid .crystal-card,#id2-grid .crystal-card,.fg-member-grid .crystal-card{flex-direction:row;align-items:flex-start;border:0.5px solid var(--border);border-radius:10px;overflow:hidden;min-height:100px;background:var(--white)}
   .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#tab-encyclopedia #crystal-grid .card-img-zone,#mood-stone-grid .card-img-zone,#id2-grid .card-img-zone,.fg-member-grid .card-img-zone{width:92px;min-height:100px;aspect-ratio:auto;flex-shrink:0;align-self:stretch;border-right:0.5px solid var(--border2)}
   .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#tab-encyclopedia #crystal-grid .card-img-zone img,#mood-stone-grid .card-img-zone img,#id2-grid .card-img-zone img,.fg-member-grid .card-img-zone img{max-height:100%;width:100%;object-fit:contain}
-  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body,#mood-stone-grid .card-body,#id2-grid .card-body,.fg-member-grid .card-body{padding:0.6rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+  .enc-tier-grid .card-body,.enc-accordion-grid .card-body,#tab-encyclopedia #crystal-grid .card-body,#mood-stone-grid .card-body,#id2-grid .card-body,.fg-member-grid .card-body{padding:0.45rem 0.8rem;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
   .enc-tier-grid .card-name,.enc-accordion-grid .card-name,#tab-encyclopedia #crystal-grid .card-name,#mood-stone-grid .card-name,#id2-grid .card-name,.fg-member-grid .card-name{font-size:16px;overflow-wrap:normal}
   .enc-tier-grid .card-color,.enc-accordion-grid .card-color,#tab-encyclopedia #crystal-grid .card-color{line-height:1.35}
   /* Option B additions (photo divider, 3-col pill grid, iconized Best For) are
-     desktop-only per approved design — undo them back to pre-change mobile
-     behavior so pills wrap naturally instead of truncating in fixed columns. */
+     desktop-only per approved design — undo them back to the approved mobile
+     treatment: plain dot-separated property text (no pill badge shape), never
+     the desktop pill styling. This is the locked mobile reference — do not
+     reintroduce pill background/border/border-radius here. */
   .enc-tier-grid .card-photo-divider,.enc-accordion-grid .card-photo-divider,#tab-encyclopedia #crystal-grid .card-photo-divider,#id2-grid .card-photo-divider{display:none}
-  .stone-card-properties{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
-  .stone-card-properties .card-role{width:auto;flex:0 0 auto}
+  .stone-card-properties{display:block;margin-bottom:3px}
+  .stone-card-properties .card-role{display:inline;width:auto;padding:0;background:transparent;border:none;border-radius:0}
   .stone-card-properties .card-role-text{white-space:normal;overflow:visible;text-overflow:clip;max-width:none}
+  .stone-card-properties .card-role-sep{display:inline;color:var(--accent);opacity:0.55;margin:0 3px}
+  /* Denser mobile/tablet rhythm to match the approved reference — tighter
+     than the base/desktop value, horizontal spacing and image size untouched. */
+  .stone-card-best-for{margin-top:4px}
   .enc-next-shelf{grid-template-columns:1fr}
   .enc-next-up{display:none}
   .enc-accordion-row{grid-template-columns:auto 1fr auto;padding:0.85rem 1rem}

@@ -370,8 +370,8 @@ node pipeline/reconcile-structured-fields.js --stone <slug-or-id>
 node pipeline/reconcile-structured-fields.js --stone <slug-or-id> --apply   # only if drift found
 
 # 3. Generate a packet from the approved canonical MD (external path — see
-#    "Canonical paths" above; docs/encyclopedia/entries/ is a staging mirror
-#    only). Default output goes to pipeline/output/, gitignored:
+#    "Canonical paths" above; this repo has no local staging mirror).
+#    Default output goes to pipeline/output/, gitignored:
 node pipeline/generate-packet.js --md "C:\Users\chris\Documents\Still Point Lapidary\Encyclopedia\Canonical MDs\<slug>.md"
 
 # 4. Validate the packet:

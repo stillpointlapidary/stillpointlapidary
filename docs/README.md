@@ -1,10 +1,10 @@
 # Still Point Lapidary Documentation
 
-This directory contains implementation-facing encyclopedia documentation for the Website repo: the MD schema reference and repo-local staging mirrors of canonical stone MDs.
+This directory contains implementation-facing encyclopedia documentation for the Website repo: the MD schema reference.
 
 ## Current Documentation Areas
 
-- [`encyclopedia/`](encyclopedia/) — MD schema reference and repo-local canonical MD staging mirrors (see `encyclopedia/README.md`)
+- [`encyclopedia/`](encyclopedia/) — MD schema reference (see `encyclopedia/README.md`)
 
 ## Runtime Files
 
@@ -29,4 +29,4 @@ This repo is not where structured production values, canonical MDs, project rule
 
 The `data/catalog/` and `data/navigation/` CSV exports that used to live in this repo are not active structured data. They were historical exports only — audited against the Production Master and found fully superseded by it — and have been removed from this repo and preserved in the external Archive above. Do not reactivate a CSV as authority unless Christie or Dustin explicitly does so.
 
-Repo-local MDs under `docs/encyclopedia/entries/` are temporary staging mirrors for the pipeline only, not authority — see `docs/encyclopedia/README.md`.
+Repo-local MD staging mirrors formerly under `docs/encyclopedia/entries/` were archived 2026-07-22 (unused by any pipeline script, never authority) — see `docs/encyclopedia/README.md`.

@@ -22,7 +22,7 @@
  * Example:
  *   SUPABASE_URL=... SUPABASE_SERVICE_KEY=... \
  *   node pipeline/smoke-test.js \
- *     --packet tests/fixtures/rose-quartz.packet.json \
+ *     --packet pipeline/output/citrine.packet.json \
  *     --base-url https://stillpointlapidary.com
  */
 

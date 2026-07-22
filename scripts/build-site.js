@@ -43,10 +43,9 @@ const DATA_FILES = [
   'data/family-guides.json',
 ];
 
-// From stones/: copy *.html and these two files; explicitly never generate-stone-page.js
+// From stones/: copy *.html and this file; explicitly never generate-stone-page.js
 const STONES_EXPLICIT = [
   'stones/enc-icons.css',
-  'stones/enc-nav.js',
 ];
 // stones/*.html is discovered dynamically
 
@@ -79,6 +78,17 @@ const ASSETS_EXCLUDE = new Set([
   'manifest-extension.json',
   'preview-final-complete-set.html',
   'preview-icon-extension.html',
+  // Unresolved design-option candidates, never wired into any page — kept as
+  // source history, not shipped. Re-include here (or remove this note) if one
+  // is ever chosen and referenced from a page.
+  'Identify Option 1.png',
+  'Identify Option 2.png',
+  'Identify Option 3.png',
+  'Identify4.png',
+  'Identify5.png',
+  'hero1.png',
+  'hero2.png',
+  'grid-alternate.png',
 ]);
 
 function copyDirRecursive(src, dest) {

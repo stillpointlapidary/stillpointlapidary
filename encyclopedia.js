@@ -570,6 +570,40 @@ function encCardHtml(c){
   return`<div class="crystal-card">${badge}${imgZone}<div class="card-photo-divider" aria-hidden="true"></div><div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${pillsHtml}${bestForHtml}</div></div>`;
 }
 
+/* Desktop-only pill balancing (>=901px): when the three property pills don't
+   fit on one line, the widest pill's flex `order` moves it to the end so it
+   wraps alone onto row 2 while the two narrower pills stay together on row 1
+   — instead of leaving whichever pill happens to render third stranded by
+   arbitrary DOM order. Measures actual rendered pill width, not word length.
+   No-ops entirely below the mobile/tablet breakpoint and touches only inline
+   `order` styles on the pills themselves, so it can never affect the locked
+   mobile presentation or any other markup/CSS. */
+function arrangeDesktopPillGroup(group){
+  const pills=Array.from(group.children).filter(el=>el.classList.contains('card-role'));
+  pills.forEach(p=>{p.style.order='';});
+  if(pills.length<3)return;
+  if(!window.matchMedia('(min-width:901px)').matches)return;
+  const containerWidth=group.clientWidth;
+  if(!containerWidth)return;
+  const gap=parseFloat(getComputedStyle(group).columnGap)||0;
+  const widths=pills.map(p=>p.getBoundingClientRect().width);
+  const total=widths.reduce((a,b)=>a+b,0)+gap*(pills.length-1);
+  if(total<=containerWidth+0.5)return;
+  let maxIdx=0;
+  widths.forEach((w,i)=>{if(w>widths[maxIdx])maxIdx=i;});
+  pills.forEach((p,i)=>{p.style.order=(i===maxIdx)?String(pills.length):String(i);});
+}
+function arrangeAllDesktopPillGroups(){
+  document.querySelectorAll('.stone-card-properties').forEach(arrangeDesktopPillGroup);
+}
+let _pillArrangeTimer=null;
+function scheduleArrangeDesktopPillGroups(){
+  clearTimeout(_pillArrangeTimer);
+  _pillArrangeTimer=setTimeout(arrangeAllDesktopPillGroups,30);
+}
+window.addEventListener('resize',scheduleArrangeDesktopPillGroups);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(scheduleArrangeDesktopPillGroups);
+
 // Resolves preserved/retired search terms (e.g. "Pink Halite") to their canonical
 // CRYSTALS entries so those stones surface as ordinary results — no separate
 // preserved-terms panel, heading, or "see X" button is rendered publicly.
@@ -615,6 +649,7 @@ function renderPagedStoneList({stones,container,stateKey,renderCard,loadMoreCont
   pagedStoneLists[stateKey]={list,container,stateKey,renderCard,loadMoreContainer,batchSize,visible};
   const shown=list.slice(0,visible);
   container.innerHTML=shown.map(renderCard).join('');
+  scheduleArrangeDesktopPillGroups();
   updatePagedStoneLoadMore(stateKey);
 }
 
@@ -643,6 +678,7 @@ function pagedStoneListLoadMore(stateKey){
   state.visible+=state.batchSize;
   const shown=state.list.slice(0,state.visible);
   state.container.innerHTML=shown.map(state.renderCard).join('');
+  scheduleArrangeDesktopPillGroups();
   updatePagedStoneLoadMore(stateKey);
 }
 
@@ -802,6 +838,7 @@ function renderEncTierPreview(){
 
 function encTier1RenderUpTo(allStones,upTo,grid){
   grid.innerHTML=allStones.slice(0,upTo).map(c=>encCardHtml(c)).join('');
+  scheduleArrangeDesktopPillGroups();
   const remaining=allStones.length-upTo;
   const existingPill=document.getElementById('enc-t1-more-pill');
   if(existingPill)existingPill.remove();
