@@ -570,30 +570,27 @@ function encCardHtml(c){
   return`<div class="crystal-card">${badge}${imgZone}<div class="card-body" onclick="openDetail('${c.i}')" style="cursor:pointer"><div class="card-name">${c.n}</div>${pillsHtml}${bestForHtml}</div></div>`;
 }
 
-function encRetiredResultHtml(t){
-  let actionHtml='';
-  if(t.redirect_type==='single'&&t.redirect_stone_id){
-    actionHtml=`<button type="button" class="enc-retired-link" onclick="openDetail('${escapeAttr(t.redirect_stone_id)}')">See ${escapeAttr(t.redirect_slug||'')}</button>`;
-  }else if(t.redirect_type==='family'&&Array.isArray(t.redirect_family_member_slugs)&&t.redirect_family_member_slugs.length){
-    const chips=t.redirect_family_member_slugs.map(slug=>{
-      const match=CRYSTALS.find(c=>c.slug===slug);
-      if(!match)return'';
-      return`<button type="button" class="enc-retired-link" onclick="openDetail('${escapeAttr(match.i)}')">${escapeAttr(match.n)}</button>`;
-    }).filter(Boolean).join('');
-    actionHtml=`<div class="enc-retired-family-label">${escapeAttr(t.redirect_family_label||'')}</div><div class="enc-retired-family-chips">${chips}</div>`;
-  }else if(t.redirect_type==='guide'&&t.redirect_slug&&typeof openFamilyGuide==='function'){
-    // Family Guide redirect — reuses redirect_slug for the guide's family slug (same
-    // "slug of the target" meaning it already carries for the 'single' type, just
-    // pointed at a guide instead of a stone). redirect_anchor is an optional column
-    // this schema does not yet have; when absent the guide still opens, just without
-    // the in-page scroll. See audit note: no anchor column exists as of 2026-07-19.
-    const anchorArg=t.redirect_anchor?`,{anchor:'${escapeAttr(t.redirect_anchor)}'}`:'';
-    const label=t.redirect_family_label||t.redirect_slug;
-    actionHtml=`<button type="button" class="enc-retired-link" onclick="openFamilyGuide('${escapeAttr(t.redirect_slug)}'${anchorArg});return false;">See ${escapeAttr(label)}</button>`;
-  }else{
-    actionHtml=`<div class="enc-retired-message">${escapeAttr(t.helper_message||'No longer part of our active collection.')}</div>`;
-  }
-  return`<div class="enc-retired-card"><div class="enc-retired-name">${escapeAttr(t.old_name)}</div><div class="enc-retired-note">No longer part of our active collection.</div>${actionHtml}</div>`;
+// Resolves preserved/retired search terms (e.g. "Pink Halite") to their canonical
+// CRYSTALS entries so those stones surface as ordinary results — no separate
+// preserved-terms panel, heading, or "see X" button is rendered publicly.
+function getRetiredCanonicalStones(retiredMatches){
+  const out=[];
+  const seen=new Set();
+  (retiredMatches||[]).forEach(t=>{
+    let matches=[];
+    if(t.redirect_type==='single'&&t.redirect_stone_id){
+      const m=CRYSTALS.find(c=>c.i===t.redirect_stone_id);
+      if(m)matches=[m];
+    }else if(t.redirect_type==='family'&&Array.isArray(t.redirect_family_member_slugs)){
+      matches=t.redirect_family_member_slugs.map(slug=>CRYSTALS.find(c=>c.slug===slug)).filter(Boolean);
+    }
+    matches.forEach(c=>{
+      if(seen.has(c.i))return;
+      seen.add(c.i);
+      out.push(c);
+    });
+  });
+  return out;
 }
 
 const pagedStoneLists={};
@@ -650,8 +647,16 @@ function pagedStoneListLoadMore(stateKey){
 }
 
 function encRender(){
-  const list = getFiltered();
+  let list = getFiltered();
   const retiredMatches = getRetiredMatches();
+  if(retiredMatches.length){
+    const seen=new Set(list.map(c=>c.i));
+    getRetiredCanonicalStones(retiredMatches).forEach(c=>{
+      if(seen.has(c.i))return;
+      seen.add(c.i);
+      list=list.concat([c]);
+    });
+  }
 
   const filtersActive = Object.values(filters).some(v => v !== 'all') ||
     encSearchValue().length > 0;
@@ -688,17 +693,6 @@ function encRender(){
 
   const grid = document.getElementById('crystal-grid');
   if(!grid) return;
-
-  let retiredPanel=document.getElementById('enc-retired-terms-panel');
-  if(!retiredPanel){
-    retiredPanel=document.createElement('div');
-    retiredPanel.id='enc-retired-terms-panel';
-    grid.parentNode.insertBefore(retiredPanel,grid);
-  }
-  retiredPanel.innerHTML=retiredMatches.length
-    ?`<div class="enc-retired-panel-label">Preserved terms</div>${retiredMatches.map(encRetiredResultHtml).join('')}`
-    :'';
-  retiredPanel.style.display=retiredMatches.length?'':'none';
 
   if(!list.length){
     grid.innerHTML = '<div class="empty-coll-state"><div class="empty-coll-icon">✦</div><div class="empty-coll-title">No stones found</div><div class="empty-coll-text">Try adjusting your filters or search for something different.</div><button class="empty-coll-btn" onclick="resetFilters()">Clear filters</button></div>';

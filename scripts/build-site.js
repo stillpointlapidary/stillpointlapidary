@@ -20,6 +20,7 @@ const TOP_LEVEL_FILES = [
   { src: '101.js',              required: true  },
   { src: 'collection.js',       required: true  },
   { src: 'encyclopedia.js',     required: true  },
+  { src: 'family-guide.js',     required: true  },
   { src: 'identify.js',         required: true  },
   { src: 'mood.js',             required: true  },
   { src: 'favicon.svg',         required: true  },
@@ -39,6 +40,7 @@ const DATA_FILES = [
   'data/mood-theme-map.json',
   'data/sub-filter-kw.json',
   'data/sub-filters.json',
+  'data/family-guides.json',
 ];
 
 // From stones/: copy *.html and these two files; explicitly never generate-stone-page.js
