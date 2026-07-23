@@ -1508,6 +1508,7 @@
     "closingCallout": "Garnet begins with a familiar name and opens into one of the mineral world's most varied families.",
     "closingSupportingCopy": "Follow the branches, compare the crystals, and let composition tell the larger story.",
     "hero": {
+      "mediaStoneIds": ["C-0048", "C-0275", "C-0355"],
       "eyebrow": "FAMILY GUIDE",
       "title": "The Garnet Family",
       "signatureLine": "One name. Many species. Far more than just red.",
