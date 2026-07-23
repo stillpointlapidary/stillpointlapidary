@@ -9,11 +9,9 @@
       "eyebrow": "FAMILY GUIDE",
       "title": "Calcite Family Guide",
       "signatureLine": "One mineral, an astonishing range of personalities.",
-      "condensedIntro": "Calcite clears space, restores circulation, and brings movement back to places that have gone still. Each variety directs that movement differently, toward calm, confidence, clarity, tenderness, creativity, or grounded action.",
-      "centralIdea": "Calcite helps life begin moving again.",
+      "condensedIntro": "Calcite clears stagnation and brings movement back to places that have gone still. Each variety directs that movement differently, toward calm, confidence, clarity, tenderness, creativity, or grounded action.",
       "promptLeadIn": "Calcite asks:",
       "question": "What wants to move?",
-      "questionSub": "That’s your compass.",
       "paragraphs": [
         "Calcite is one of the great shape-shifters of the mineral world. It can appear clear enough to split an image in two, striped like carved stone, softly luminous, or vivid with the minerals growing through it. Beneath all that variety is a shared energetic identity: movement, clearing, and the return of momentum where life has gone still.",
         "This guide brings the family into focus. Discover what unites the Calcites, how each variety directs that energy differently, which familiar names describe true forms of the mineral, and which belong to more complex trade materials."
@@ -27,7 +25,7 @@
       }
     },
     "overview": {
-      "paragraph": "Calcite is one of Earth’s most common minerals, yet it appears in an extraordinary range of colors, textures, and forms. Each variety directs that same energy toward something different — calm, confidence, clarity, tenderness, creativity, or grounded action — which is what makes the family so useful to learn."
+      "paragraph": "Calcite is one of Earth’s most common minerals, yet it appears in an extraordinary range of colors, textures, and forms. Its varieties may share the same mineral foundation, but each has a distinct physical character, collecting appeal, and place within crystal traditions."
     },
     "energySection": {
       "paragraphs": [
@@ -133,6 +131,7 @@
       ]
     },
     "tradeMaterials": {
+      "sectionIntro": "Some materials sold alongside Calcite are not simple Calcite varieties. They may combine Calcite with other minerals, use trade names for banded material, or belong to mixed materials in which Calcite is only part of the story.",
       "intro": "These stones remain part of the same exploration experience because Calcite is central to their identity, composition, or market history. Their badges explain how they belong rather than dividing the page into “real” and “questionable” relatives.",
       "members": [
         {
@@ -453,39 +452,118 @@
     "recognition": {
       "items": [
         {
-          "title": "Glassy luster",
-          "body": "Often shiny with a smooth, glassy look."
+          "title": "Glassy Luster",
+          "body": "Fresh surfaces often catch the light with a bright, glass-like shine.",
+          "image": "recognize-glassy-luster.jpg",
+          "alt": "Close-up of a transparent calcite cleavage block showing a glassy, reflective face"
         },
         {
-          "title": "Perfect cleavage",
-          "body": "Splits in rhombohedral angles rather than flat sheets."
+          "title": "Distinctive Cleavage",
+          "body": "Calcite breaks along smooth, slanted planes rather than flat sheets, leaving angled edges wherever it fractures.",
+          "image": "recognize-distinctive-cleavage.jpg",
+          "alt": "Two calcite cleavage blocks showing the sharp, slanted edges where the mineral has split"
         },
         {
-          "title": "Often translucent",
-          "body": "Light may pass through softly or vividly."
+          "title": "Translucency & Double Refraction",
+          "body": "Clear pieces can be strikingly transparent, and the clearest specimens split a line or letter seen through them into two images.",
+          "image": "recognize-double-refraction.jpg",
+          "alt": "A transparent calcite crystal placed over the letter A, showing the letter doubled by double refraction"
         },
         {
-          "title": "Wide color range",
-          "body": "Forms in many colors and repeated patterns."
+          "title": "Many Colors and Patterns",
+          "body": "The same mineral appears in blues, oranges, pinks, greens, and more, shaped by trace elements and growth conditions.",
+          "swatchStoneIds": ["C-0007", "C-0016", "C-0014", "C-0012"]
         }
       ]
     },
     "shapes": {
       "items": [
         {
-          "title": "Pointed crystals",
-          "body": "Dogtooth and scalenohedral crystals with tapered points are common in nature."
+          "title": "Pointed Crystals",
+          "body": "Dogtooth and scalenohedral crystals taper to sharp points and are among the most collectible natural Calcite forms.",
+          "image": "shapes-pointed-crystals.jpg",
+          "alt": "Cluster of pointed, honey-colored scalenohedral calcite crystals growing on matrix"
         },
         {
-          "title": "Slanted blocks",
-          "body": "Rhombohedral crystals split into angled parallelograms."
+          "title": "Slanted Blocks",
+          "body": "Rhombohedral crystals and cleavage fragments split into angled, parallelogram-faced blocks rather than cubes.",
+          "image": "shapes-slanted-blocks.jpg",
+          "alt": "Two rhombohedral calcite cleavage blocks with slanted, parallelogram-shaped faces"
         },
         {
-          "title": "Massive & banded",
-          "body": "Common in polished pieces and decorative banded materials."
+          "title": "Massive & Banded",
+          "body": "Calcite often grows as a crack- or cavity-filling rather than as single crystals, forming massive or banded material. Here it lines the inner cavity of a septarian nodule, a formation in which Calcite is one part of a more complex whole rather than a simple Calcite specimen.",
+          "image": "shapes-massive-banded.jpg",
+          "alt": "Yellow calcite crystals filling the internal cavity of a banded septarian concretion"
         }
       ]
     },
+    "collection": {
+      "title": "Calcite in Your Collection",
+      "intro": "Soft enough to need thoughtful care, varied enough to keep surprising you.",
+      "careForIt": {
+        "intro": "Calcite is relatively soft and can scratch, chip, or lose its polish more easily than harder minerals.",
+        "bullets": [
+          "Dust gently with a soft cloth.",
+          "Avoid acids, harsh cleaners, and prolonged soaking.",
+          "Protect polished pieces from impacts and abrasive surfaces.",
+          "Limit prolonged exposure to harsh sunlight.",
+          "Use water briefly, when appropriate, and dry the piece thoroughly."
+        ]
+      },
+      "rememberThis": "Calcite does not have one signature appearance. It may be translucent or opaque, crystalline or banded, softly colored or vivid. What connects these forms is the same soft carbonate mineral beneath them.",
+      "watchFor": "Not every market name describes a simple Calcite variety. Some materials combine Calcite with other minerals, while others are banded trade materials or Calcite-rich mixtures."
+    },
+    "imageCredits": [
+      {
+        "title": "Rhombohedral cleavage fragments of calcite (glassy face detail)",
+        "creator": "James St. John",
+        "source": "https://commons.wikimedia.org/wiki/File:Rhombohedral_cleavage_fragments_of_calcite.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modified": "Cropped to isolate the reflective cleavage face."
+      },
+      {
+        "title": "Rhombohedral cleavage fragments of calcite (cleavage edge detail)",
+        "creator": "James St. John",
+        "source": "https://commons.wikimedia.org/wiki/File:Rhombohedral_cleavage_fragments_of_calcite.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modified": "Cropped to the shared cleavage edge."
+      },
+      {
+        "title": "Rhombohedral cleavage fragments of calcite (full pair)",
+        "creator": "James St. John",
+        "source": "https://commons.wikimedia.org/wiki/File:Rhombohedral_cleavage_fragments_of_calcite.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modified": "Trimmed margins."
+      },
+      {
+        "title": "Calcite and double refraction (GeoDIL no. 670)",
+        "creator": "Twyla Baker, Geoscience Digital Image Library (GeoDIL), University of North Dakota",
+        "source": "https://commons.wikimedia.org/wiki/File:Calcite_and_double_refraction_(GeoDIL_number_-_670).jpg",
+        "license": "CC0 1.0 Public Domain",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modified": "Cropped to trim background margin."
+      },
+      {
+        "title": "Calcite (Magmont Mine, Iron County, Missouri, USA)",
+        "creator": "James St. John",
+        "source": "https://commons.wikimedia.org/wiki/File:Calcite_(Magmont_Mine,_Iron_County,_Missouri,_USA)_1.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modified": "Cropped to trim margins."
+      },
+      {
+        "title": "Calcite in septarian concretion (Kane County, Utah, USA)",
+        "creator": "James St. John",
+        "source": "https://commons.wikimedia.org/wiki/File:Calcite_in_septarian_concretion_(Kane_County,_Utah,_USA).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modified": "Cropped to the crystal-filled cavity region."
+      }
+    ],
     "essentials": {
       "items": [
         {
