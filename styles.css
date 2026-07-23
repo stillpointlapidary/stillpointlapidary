@@ -1607,7 +1607,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    elsewhere on the site. */
 #tab-family{padding:1.5rem}
 .fg-guide{max-width:1100px;margin:0 auto}
-#fg-hero,#fg-overview,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing{scroll-margin-top:160px}
+#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing{scroll-margin-top:160px}
 .fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
 .fg-loading{padding:3rem 1rem;text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--ink3)}
 .fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
@@ -1623,6 +1623,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    Collection) so they don't wrap into an unnecessarily narrow 3-line block. */
 .fg-lead{font-size:19px;line-height:1.55;color:var(--ink2);letter-spacing:0.01em;text-align:center;margin:0.5rem auto 1.75rem;max-width:58ch}
 .fg-lead--wide{max-width:82ch}
+/* Extended Family intro only — widened further (2026-07-22) so the approved
+   sentence settles into two balanced lines at desktop width instead of
+   wrapping "story" onto its own third line. */
+.fg-lead--extended-intro{max-width:96ch}
 
 /* 1. Hero — warm near-white split composition, copy left / photo right */
 .fg-hero{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem 2rem;box-shadow:0 8px 24px rgba(42,37,32,0.06);margin-bottom:1.75rem}
@@ -1640,9 +1644,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-hero-media-grid img{width:100%;height:100%;object-fit:cover;display:block}
 .fg-hero-media-label{position:absolute;right:10px;bottom:10px;background:rgba(250,248,246,0.92);border:0.5px solid var(--border);border-radius:20px;padding:4px 10px;font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2r)}
 
-/* 2. Short family overview — bridge paragraph, full content width, left-aligned */
-.fg-overview{max-width:100%;margin:0 0 2.5rem;text-align:left}
-.fg-overview-text{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.65;color:var(--ink);margin:0;max-width:90ch}
+/* Hero bottom section — the family-overview paragraph, folded into the hero
+   card (2026-07-22) as its concluding part rather than a detached section.
+   Left-aligned, broad readable measure, balanced padding below a divider. */
+.fg-hero-divider{border-top:0.5px solid var(--border2);margin:1.5rem 0 1.25rem}
+.fg-hero-intro{max-width:100%;text-align:left}
+.fg-hero-intro-text{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.65;color:var(--ink);margin:0;max-width:90ch}
 
 /* Uniform stone cards — Section 3 (eight common varieties) and Section 6
    (extended family, with an added identity badge). Compacted 2026-07-22:
@@ -1663,6 +1670,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-stonecard-qv:hover{color:var(--ink)}
 .fg-stonecard-qv:focus-visible{outline:1.5px solid var(--accent2);outline-offset:2px}
 
+/* Extended Family tiles only (2026-07-22) — image zone goes white so empty
+   side margins around portrait/contained images merge with the photo
+   background, matching the encyclopedia tile treatment, instead of showing
+   warm gray gutters. Section 3's variety cards are untouched. */
+#fg-extended .fg-stonecard-media{background:var(--white)}
+
 /* Photo-led teaching cards — Section 4 (Recognition) and Section 5 (Shapes).
    Real, license-cleared educational photographs with consistent framing. */
 .fg-photo-grid{display:grid;gap:16px}
@@ -1672,7 +1685,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-photocard-media{width:100%;aspect-ratio:4/3;background:var(--stone2);overflow:hidden}
 .fg-photocard-media img{width:100%;height:100%;object-fit:cover;display:block}
 .fg-photocard-swatch{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;width:100%;height:100%}
+.fg-photocard-swatch-cell{width:100%;height:100%;overflow:hidden}
 .fg-photocard-swatch img{width:100%;height:100%;object-fit:cover;display:block}
+/* Many Colors and Patterns six-image grid (2026-07-22) — 3x2, each specimen
+   in its own white cell with subtle dividers, full specimen visible via
+   object-fit:contain rather than the cover-cropped 2x2 swatch above. */
+.fg-photocard-swatch--6{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:1px;background:var(--border2)}
+.fg-photocard-swatch--6 .fg-photocard-swatch-cell{background:var(--white);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.fg-photocard-swatch--6 img{width:100%;height:100%;object-fit:contain;display:block;padding:6px}
 .fg-photocard-body{padding:1rem 1.1rem 1.15rem;display:flex;flex-direction:column;flex:1}
 .fg-photocard-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.35rem}
 .fg-photocard-text{font-size:13px;line-height:1.6;color:var(--ink2);margin:0}
@@ -1680,9 +1700,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* 7. Calcite in Your Collection — compact three-card row on desktop: Care
    for It slightly wider, Remember This / Watch For standard width. Reads
    as one composed closing section rather than three unrelated cards. */
-.fg-collection-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px;align-items:start}
-.fg-collection-care{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem}
-.fg-collection-sub{background:var(--stone2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem}
+.fg-collection-grid{display:grid;grid-template-columns:1.55fr 1fr 1fr;gap:14px;align-items:stretch}
+.fg-collection-care{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;height:100%;box-sizing:border-box}
+.fg-collection-sub{background:var(--stone2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;height:100%;box-sizing:border-box}
 .fg-collection-panel-title{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:0.45rem}
 .fg-collection-care .fg-fact-body{margin-bottom:0.5rem}
 .fg-collection-care .fg-list{line-height:1.55}
@@ -1719,21 +1739,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-photo-grid--4{grid-template-columns:repeat(2,1fr)}
   .fg-photo-grid--3{grid-template-columns:1fr}
   .fg-collection-grid{grid-template-columns:1fr}
+  .fg-collection-care,.fg-collection-sub{height:auto}
   .fg-lead{font-size:18px}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-overview,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing{scroll-margin-top:132px}
   .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
   .fg-hero-title{font-size:25px}
   .fg-hero-question{font-size:23px}
   .fg-section{margin-bottom:2rem}
   .fg-h2{font-size:20px}
-  .fg-overview-text{font-size:16px;max-width:none}
+  .fg-hero-intro-text{font-size:16px;max-width:none}
   .fg-lead{font-size:17px;max-width:none;margin:0.4rem auto 1.35rem}
   .fg-card-grid--4{grid-template-columns:1fr}
   .fg-photo-grid--4{grid-template-columns:1fr}
+  .fg-photocard-swatch--6{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
   .fg-collection-grid{grid-template-columns:1fr}
   .fg-closing{padding:1.75rem 1.25rem;border-radius:14px}
 }
