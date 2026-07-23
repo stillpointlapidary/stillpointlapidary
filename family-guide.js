@@ -6,16 +6,22 @@
    card/Supabase path.
 
    Visual rebuild (2026-07): museum-guide-style page — feature bands, uniform
-   stone cards, compact fact modules. Approved public section order:
+   stone cards, compact fact modules. Revised again (2026-07-22) per Christie's
+   approved review: Recognition and Shapes became real photo-led teaching
+   sections using license-cleared public educational photography (local files
+   under assets/family-guide-calcite/, credited via imageCredits below), and
+   Essentials was replaced by a composed Care-for-it/Remember-this/Watch-for
+   closing section. Approved public section order:
    1. Hero  2. Short overview  3. Meet Eight Common Calcite Varieties
    4. How to Recognize Calcite  5. Shapes Calcite Takes
-   6. The Calcite Extended Family  7. Calcite Essentials  8. Closing callout.
+   6. The Calcite Extended Family  7. Calcite in Your Collection
+   8. Closing callout  9. Image credits (below the closing panel, 2026-07-22).
 
    Content source: data/family-guides.json. Fields no longer rendered by this
    page (familyFitsTogether, otherCalcites, whatIsCalcite, identificationBuyingCare,
-   relatedCarbonates full detail, sourceReferences, factualFlags) are kept in the
-   data file as an archival record of the earlier approved Draft 1 copy — they are
-   simply not read by any function below. Nothing here deletes that content. */
+   relatedCarbonates full detail, sourceReferences, factualFlags, essentials) are
+   kept in the data file as an archival record of earlier approved copy — they
+   are simply not read by any function below. Nothing here deletes that content. */
 
 let FAMILY_GUIDES = null;
 let _familyGuidesLoadPromise = null;
@@ -149,11 +155,9 @@ function familyGuideHeroHtml(guide){
         <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
         ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
         ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
-        ${hero.centralIdea?`<p class="fg-hero-italic">${escapeAttr(hero.centralIdea)}</p>`:''}
         ${hero.question?`<div class="fg-hero-prompt">
           ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
           <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
-          ${hero.questionSub?`<div class="fg-hero-prompt-sub">${escapeAttr(hero.questionSub)}</div>`:''}
         </div>`:''}
       </div>
       ${fgHeroMediaHtml(guide)}
@@ -206,43 +210,58 @@ function familyGuideVarietiesHtml(guide){
   const cards = members.map(m=>fgStoneCardHtml(m, {anchorId: m.stoneId==='C-0016' ? 'red-calcite' : null})).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-varieties">
     <h2 class="fg-h2">Meet Eight Common Calcite Varieties</h2>
-    ${f.intro?`<p class="fg-section-sub">${escapeAttr(f.intro)}</p>`:''}
+    ${f.intro?`<p class="fg-lead">${escapeAttr(f.intro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--4">${cards}</div>
   </section>`;
 }
 
-/* ── Compact fact card — shared by Recognition, Shapes, and Essentials. ── */
-function fgFactCardHtml(item, icon){
-  const iconHtml = icon ? `<span class="enc-icon ${icon} fg-fact-icon" aria-hidden="true"></span>` : '';
-  const bodyHtml = item.list ? fgList(item.list) : `<p class="fg-fact-body">${escapeAttr(item.body||'')}</p>`;
-  return `<div class="fg-factcard">
-    ${iconHtml}
-    <div class="fg-fact-title">${escapeAttr(item.title||'')}</div>
-    ${bodyHtml}
+/* ── Photo-led teaching card — shared by Recognition and Shapes. A card
+   either shows one local educational photograph (item.image, from
+   assets/family-guide-calcite/) or, for the "many colors" recognition card,
+   a small swatch grid built from existing approved encyclopedia photos
+   (item.swatchStoneIds) — no new third-party photography involved. ── */
+function fgPhotoCardHtml(item){
+  let mediaHtml;
+  if(item.swatchStoneIds){
+    const imgs = item.swatchStoneIds.map(id=>{
+      const c = fgCrystal(id);
+      const src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+      return src ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(c.n)}" loading="lazy">` : '';
+    }).filter(Boolean).join('');
+    mediaHtml = `<div class="fg-photocard-swatch">${imgs}</div>`;
+  }else if(item.image){
+    mediaHtml = `<img src="${escapeAttr('assets/family-guide-calcite/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`;
+  }else{
+    mediaHtml = '';
+  }
+  return `<div class="fg-photocard">
+    <div class="fg-photocard-media">${mediaHtml}</div>
+    <div class="fg-photocard-body">
+      <div class="fg-photocard-title">${escapeAttr(item.title||'')}</div>
+      <p class="fg-photocard-text">${escapeAttr(item.body||'')}</p>
+    </div>
   </div>`;
 }
 
 /* ── 4. How to Recognize Calcite ─────────────────────────────────────── */
-const FG_RECOGNITION_ICONS = ['icon-color-optical-effect','icon-forms-shapes','icon-magnifier-gem','icon-color-range'];
 function familyGuideRecognitionHtml(guide){
   const items = (guide.recognition||{}).items||[];
-  const cards = items.map((it,i)=>fgFactCardHtml(it, FG_RECOGNITION_ICONS[i])).join('');
+  const cards = items.map(fgPhotoCardHtml).join('');
   return `<section class="fg-section" id="fg-recognize">
     <h2 class="fg-h2">How to Recognize Calcite</h2>
-    <p class="fg-section-sub">Look for these hallmarks that connect the family.</p>
-    <div class="fg-fact-grid fg-fact-grid--4">${cards}</div>
+    <p class="fg-lead">Look for these hallmarks that connect the family.</p>
+    <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
   </section>`;
 }
 
 /* ── 5. Shapes Calcite Takes ─────────────────────────────────────────── */
-const FG_SHAPE_ICONS = ['icon-crystal-single','icon-forms-shapes','icon-inclusions-patterns'];
 function familyGuideShapesHtml(guide){
   const items = (guide.shapes||{}).items||[];
-  const cards = items.map((it,i)=>fgFactCardHtml(it, FG_SHAPE_ICONS[i])).join('');
+  const cards = items.map(fgPhotoCardHtml).join('');
   return `<section class="fg-section" id="fg-shapes">
     <h2 class="fg-h2">Shapes Calcite Takes</h2>
-    <p class="fg-section-sub">These are the most common forms you’ll see.</p>
-    <div class="fg-fact-grid fg-fact-grid--3">${cards}</div>
+    <p class="fg-lead">These are the most common forms you’ll see.</p>
+    <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
   </section>`;
 }
 
@@ -254,28 +273,58 @@ function familyGuideExtendedFamilyHtml(guide){
   const cards = (t.members||[]).map(m=>fgStoneCardHtml(m, {badge:true})).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-extended">
     <h2 class="fg-h2">The Calcite Extended Family</h2>
-    <p class="fg-section-sub">Calcite-rich, patterned, and trade materials.</p>
+    ${t.sectionIntro?`<p class="fg-lead fg-lead--wide">${escapeAttr(t.sectionIntro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--4">${cards}</div>
   </section>`;
 }
 
-/* ── 7. Calcite Essentials — exactly four evenly divided modules. ──────── */
-const FG_ESSENTIALS_ICONS = ['icon-geology','icon-identify','icon-care-cleaning','icon-crystal-cluster'];
-function familyGuideEssentialsHtml(guide){
-  const items = (guide.essentials||{}).items||[];
-  const cards = items.slice(0,4).map((it,i)=>fgFactCardHtml(it, FG_ESSENTIALS_ICONS[i])).join('');
-  return `<section class="fg-section" id="fg-essentials">
-    <h2 class="fg-h2">Calcite Essentials</h2>
-    <p class="fg-section-sub">What it is, how to recognize it, and how to care for it.</p>
-    <div class="fg-essentials-grid">${cards}</div>
+/* ── 7. Calcite in Your Collection — one composed closing field-guide
+   section: a full-width Care for It panel over two smaller Remember
+   This / Watch For panels. Replaces the earlier four-box Essentials
+   section (that data is kept archived below as essentials, unused). ── */
+function familyGuideCollectionHtml(guide){
+  const c = guide.collection||{};
+  const care = c.careForIt||{};
+  return `<section class="fg-section" id="fg-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Calcite in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-collection-grid">
+      <div class="fg-collection-care">
+        <div class="fg-collection-panel-title">Care for It</div>
+        ${care.intro?`<p class="fg-fact-body">${escapeAttr(care.intro)}</p>`:''}
+        ${fgList(care.bullets||[])}
+      </div>
+      <div class="fg-collection-sub">
+        <div class="fg-collection-panel-title">Remember This</div>
+        <p class="fg-fact-body">${escapeAttr(c.rememberThis||'')}</p>
+      </div>
+      <div class="fg-collection-sub">
+        <div class="fg-collection-panel-title">Watch For</div>
+        <p class="fg-fact-body">${escapeAttr(c.watchFor||'')}</p>
+      </div>
+    </div>
   </section>`;
+}
+
+/* ── Discreet image-credits block for the third-party educational photos
+   used in Recognition and Shapes. Source of record: guide.imageCredits. ── */
+function familyGuideImageCreditsHtml(guide){
+  const items = guide.imageCredits||[];
+  if(!items.length) return '';
+  const rows = items.map(c=>`<li class="fg-credit-item">
+    <span class="fg-credit-title">${escapeAttr(c.title||'')}</span>
+    <span class="fg-credit-meta">Photo: ${escapeAttr(c.creator||'')} · <a href="${escapeAttr(c.source||'#')}" target="_blank" rel="noopener">source</a> · <a href="${escapeAttr(c.licenseUrl||'#')}" target="_blank" rel="noopener">${escapeAttr(c.license||'')}</a>${c.modified?' · '+escapeAttr(c.modified):''}</span>
+  </li>`).join('');
+  return `<details class="fg-credits">
+    <summary class="fg-credits-summary">Image credits</summary>
+    <ul class="fg-credits-list">${rows}</ul>
+  </details>`;
 }
 
 /* ── 8. Closing callout — one CTA only. ─────────────────────────────────── */
 function familyGuideClosingHtml(guide){
   return `<section class="fg-closing" id="fg-closing">
     <p class="fg-closing-line">Calcite helps life begin moving again.</p>
-    <p class="fg-closing-question">Calcite asks: What wants to move next?</p>
     <button type="button" class="btn btn-accent fg-closing-btn" onclick="switchTabByName('encyclopedia')">Return to Encyclopedia</button>
   </section>`;
 }
@@ -290,8 +339,9 @@ function familyGuideHtml(guide){
     ${familyGuideRecognitionHtml(guide)}
     ${familyGuideShapesHtml(guide)}
     ${familyGuideExtendedFamilyHtml(guide)}
-    ${familyGuideEssentialsHtml(guide)}
+    ${familyGuideCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
   </div>`;
 }
 
