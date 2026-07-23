@@ -1568,6 +1568,32 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fam-photo-img{max-width:70%;max-height:78%;width:auto;height:auto;object-fit:contain;display:block}
 .fam-photo-placeholder{position:absolute;inset:0}
 .fam-body{padding:0.85rem 0.9rem}
+/* ══ "Ten Families, Many Stories" primary grid (2026-07-23 landing-page
+   redesign). Additive modifiers only — .fam-grid/.fam-card/.fam-photo/
+   .fam-photo-img base rules above are untouched (nothing else on the page
+   uses them), so this is scoped entirely through the --primary modifier
+   classes below. Card photo zone is always a plain white field (no per-family
+   accent color, no colored gutter) with the photo centered and padded inside
+   it, matching the established .card-img-zone treatment used by the main
+   Encyclopedia discovery cards elsewhere on this page. Four across desktop,
+   two across at the same ~900px breakpoint already used by .fg-card-grid--4,
+   one across at the same ~600px breakpoint used everywhere else on this
+   page — no new breakpoint values introduced. ══ */
+.fam-grid--primary{grid-template-columns:repeat(4,1fr);gap:16px}
+.fam-card--primary{display:flex;flex-direction:column;border-radius:14px}
+.fam-card--primary .fam-photo{height:auto;aspect-ratio:1/1;background:#fff;padding:16px;box-sizing:border-box}
+.fam-card--primary .fam-photo-img{max-width:100%;max-height:100%;margin:auto}
+.fam-card--primary .fam-photo-placeholder{background:#fff!important}
+.fam-card--primary .fam-body{padding:0.95rem 1.05rem 1.05rem}
+@media(max-width:900px){
+  .fam-grid--primary{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .fam-grid--primary{grid-template-columns:1fr;gap:10px}
+}
+/* "Smaller Families, Distinct Stories" — reserved section, tasteful empty
+   future-content state. No cards are auto-populated into it this pass. */
+.fam-future-note{border:0.5px dashed var(--border);border-radius:14px;padding:1.75rem 1.25rem;text-align:center;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink3);background:var(--stone2)}
 /* ENC PHOTO LIGHTBOX */
 .enc-lightbox{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.7);z-index:400;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
 .enc-lightbox.open{display:flex}
@@ -1590,22 +1616,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fam-count{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
 .fam-energy{font-size:12.5px;color:var(--ink2);line-height:1.65;margin-bottom:8px}
 .fam-examples{font-size:10.5px;color:var(--ink3);letter-spacing:0.02em;border-top:0.5px solid var(--border2);padding-top:7px;line-height:1.5}
-@media(max-width:768px){
-  #s101-families #fam-tier-nav{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;margin-bottom:0.9rem!important;padding:0 0 0.25rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  #s101-families #fam-tier-nav::-webkit-scrollbar{display:none}
-  #s101-families #fam-tier-nav .c101-pill{flex:0 0 auto;min-height:38px;padding:8px 13px;font-size:10.5px;border-radius:999px}
-  #s101-families .fam-grid{grid-template-columns:1fr;gap:8px;margin-bottom:1.2rem}
-  #s101-families .fam-card{display:grid;grid-template-columns:9px minmax(0,1fr);border-radius:10px;min-height:0}
-  #s101-families .fam-card:hover{transform:none}
-  #s101-families .fam-photo{grid-column:1;grid-row:1;width:9px;height:auto;min-height:100%;border-right:0.5px solid rgba(42,37,32,0.08);display:block;background:none}
-  #s101-families .fam-photo-img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
-  #s101-families .fam-photo-placeholder{position:absolute;inset:0}
-  #s101-families .fam-body{grid-column:2;padding:0.75rem 0.85rem}
-  #s101-families .fam-name{font-size:16px;margin-bottom:1px}
-  #s101-families .fam-count{font-size:9.5px;margin-bottom:6px}
-  #s101-families .fam-energy{font-size:12px;line-height:1.55;margin-bottom:7px}
-  #s101-families .fam-examples{font-size:10.5px;line-height:1.45;padding-top:6px}
-}
+/* Former #s101-families mobile override (9px accent-sliver card layout,
+   #fam-tier-nav pill-strip styling) removed 2026-07-23: #fam-tier-nav no
+   longer exists in the markup (tier-pill switching was retired along with
+   the fixed "Ten Families" grid — see 101.js), and the sliver-photo layout
+   directly conflicted with the approved white-photo-container redesign.
+   Mobile now falls through to .fam-grid--primary's own 1-column rule and
+   .fam-card--primary's square white photo zone above. */
 
 /* Care tables */
 .care-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:1.5rem}
@@ -1625,7 +1642,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    elsewhere on the site. */
 #tab-family{padding:1.5rem}
 .fg-guide{max-width:1100px;margin:0 auto}
-#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone{scroll-margin-top:160px}
+#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished{scroll-margin-top:160px}
 .fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
 .fg-loading{padding:3rem 1rem;text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--ink3)}
 .fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
@@ -1671,6 +1688,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-hero-question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:28px;line-height:1.2;color:var(--ink);margin-bottom:0.35rem}
 .fg-hero-media{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--stone2);border:0.5px solid var(--border)}
 .fg-hero-media-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;width:100%;height:100%}
+/* Two-image hero spread (2026-07-23, Chalcedony's two-member roster) — a
+   single row instead of a 2x2 grid with an empty bottom half. Only applied
+   when exactly two media images are supplied; see fgHeroMediaHtml(). */
+.fg-hero-media-grid--2{grid-template-rows:1fr}
 .fg-hero-media-grid img{width:100%;height:100%;object-fit:cover;display:block}
 .fg-hero-media-label{position:absolute;right:10px;bottom:10px;background:rgba(250,248,246,0.92);border:0.5px solid var(--border);border-radius:20px;padding:4px 10px;font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2r)}
 
@@ -1825,6 +1846,100 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    section's labeled placeholder visual. */
 .fg-sunstone-card-wrap{max-width:300px;margin:1.5rem auto 0}
 
+/* ══ CHALCEDONY FAMILY GUIDE — dedicated components (2026-07-23 first
+   implementation pass). Additive only; nothing here touches a Calcite,
+   Quartz, Fluorite, or Feldspar selector. */
+
+/* Meet the Chalcedony Family — only two rostered expressions (Blue and Pink
+   Chalcedony), so the shared four-column .fg-card-grid would leave two empty
+   slots. This modifier reuses the same .fg-card-grid/.fg-stonecard base and
+   just narrows to a centered two-column layout sized for exactly that. */
+.fg-card-grid--2{grid-template-columns:repeat(2,1fr);max-width:520px;margin:0 auto}
+
+/* General-purpose left-aligned explanatory prose (2026-07-23) — for
+   sections built from factual working copy rather than a single lead
+   sentence or a stone-card grid (What Chalcedony Actually Is, etc.).
+   Distinct from .fg-lead (centered, large, one-line) and .fg-hero-intro-text
+   (hero-only): plain body-copy sizing for multi-paragraph sections. */
+.fg-prose-block{max-width:78ch;margin:0 auto}
+.fg-prose{font-size:15px;line-height:1.75;color:var(--ink2);text-align:left;margin:0 0 0.9rem}
+.fg-prose:last-child{margin-bottom:0}
+.fg-note-center{text-align:center;max-width:70ch;margin:0.85rem auto 0}
+
+/* Macrocrystalline Quartz vs. microcrystalline Chalcedony comparison —
+   reuses .fg-single-visual per cell, just placed two-up instead of one
+   centered frame. */
+.fg-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:1.25rem auto 0}
+.fg-compare-grid .fg-single-visual{margin:0}
+
+/* Chalcedony, Agate & Jasper fit cards — reuses .fg-relationship-card/
+   .fg-relationship-media/.fg-relationship-label as-is, just adds a footer
+   action row (a real "Open Quartz Family Guide" button for guides that
+   exist, or a disabled "Family guide coming soon" button for a family with
+   no guide yet — never a dead link). */
+.fg-family-fit-action{margin:0.7rem 1.1rem 0}
+.fg-quartz-link-wrap{text-align:center;margin-top:1.25rem}
+
+/* Shared disabled-button treatment (2026-07-23) — previously undefined for
+   .btn anywhere on the site; purely additive, only applies to buttons that
+   carry the disabled attribute, so no existing enabled button anywhere
+   changes appearance. */
+.btn:disabled{opacity:0.45;cursor:not-allowed}
+.btn:disabled:hover{background:transparent;color:var(--ink2);border-color:var(--border)}
+
+/* ══ SHARED FAMILY-GUIDE SECTION-INTRO COMPONENT (2026-07-23, introduced for
+   Jasper) — the new title -> one-sentence italic-Georgia intro -> content
+   pattern. Reusable by any guide/section; several existing generic
+   components (familyGuideMeetFamilyHtml, familyGuideCollectionHtml,
+   familyGuideAgateJasperFitHtml, familyGuideWhatChangesNameHtml) now accept
+   an opt-in flag to use this class instead of .fg-lead, but none of
+   Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate's data sets those flags,
+   so their existing approved output is completely unchanged. Only Jasper's
+   data opts in this pass, per Christie's instruction not to retrofit other
+   guides without an editorial decision. ══ */
+.fg-section-intro{
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink2);
+  max-width: 720px;
+  margin: 0.35rem auto 1.6rem;
+  text-align: center;
+}
+
+/* ══ JASPER FAMILY GUIDE — dedicated components (2026-07-23 first
+   implementation pass). Additive only; nothing here touches a Calcite,
+   Quartz, Fluorite, Feldspar, Chalcedony, or Agate selector. ══ */
+
+/* Meet Twelve Jasper Expressions — a fixed twelve-card roster: 4 per row on
+   wide desktop, 3 at intermediate widths, 2 then 1 on the shared mobile
+   breakpoints already used by every other card grid on this page. This is
+   a new modifier (not a change to the existing .fg-card-grid--4 used by
+   Calcite/Quartz/Fluorite/Feldspar/Agate's 4-per-row roster grids), so none
+   of their responsive behavior changes. */
+.fg-card-grid--12{grid-template-columns:repeat(4,1fr)}
+
+/* Three-category variant of the existing five-category .fg-namegrid (used
+   by Quartz's "What Changes the Name?"), for Jasper's "Pattern Is Not the
+   Same as Identity" reuse of that same component. Centered/capped so three
+   cards don't stretch across a five-column track. */
+.fg-namegrid--3{grid-template-columns:repeat(3,1fr);max-width:820px;margin:0 auto}
+
+/* Two-up variant of the existing .fg-photo-grid (already has --4 and --3),
+   for Jasper's optional rough-vs-polished compact comparison strip. */
+.fg-photo-grid--2{grid-template-columns:repeat(2,1fr)}
+
+/* What Jasper Actually Is — one large educational image beside explanatory
+   copy, mirroring the hero's copy/media split at section scale. New,
+   reusable shape (not currently needed by any other guide's sections). */
+.fg-explain-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,42%);gap:2rem;align-items:center;margin-bottom:1.5rem}
+.fg-explain-media{width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--stone2);border:0.5px solid var(--border)}
+.fg-explain-media img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-explain-copy{min-width:0}
+.fg-what-jasper-compare{margin-top:0}
+
 /* 8. Image credits — discreet, collapsed by default. Only ever rendered
    directly after .fg-closing, so its top margin (added 2026-07-22, part of
    the shared closing-transition spacing correction) creates a modest gap
@@ -1871,6 +1986,126 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-section:has(+ .fg-closing){margin-bottom:30px}
 .fg-closing{background:var(--stone2);border:0.5px solid var(--border);border-radius:16px;padding:2.25rem 1.5rem;text-align:center;max-width:1100px;margin:30px auto 0}
 .fg-closing-line{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:20px;color:var(--ink);margin:0 0 1.5rem}
+/* Optional second closing line (2026-07-23, added for Garnet) — see
+   guide.closingSupportingCopy in family-guide.js. No other guide's data sets
+   this field, so their closing panels are unaffected. */
+.fg-closing-supporting{font-size:14px;color:var(--ink2r);margin:-0.9rem 0 1.5rem}
+
+/* ══════════════════════════════════════════════════════════════════════
+   GARNET FAMILY GUIDE — dedicated styles (2026-07-23, revised same day into
+   a simpler, wider, less card-heavy layout per Christie's "focused layout
+   and structure correction" pass). Section set: Meet the Family, Garnet Is
+   a Group/Not One Stone, Major Branches (now carrying color + familiar-
+   names content too), How Garnet Appears, In Your Collection. Purely
+   additive: nothing here changes any other guide's selectors or output. ══ */
+
+/* Two small hero additions used only when a guide's data supplies them
+   (guide.hero.emphasisLine / guide.hero.supportingLine — see
+   familyGuideHeroHtml() in family-guide.js). No existing guide sets either
+   field, so their hero output is byte-for-byte unchanged. */
+.fg-hero-emphasis{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;color:var(--accent);margin:0 0 1rem}
+.fg-hero-supporting{font-size:13px;color:var(--ink2r);margin-top:0.5rem}
+
+/* Meet the Garnet Family — five-card roster. Flex-based (not grid) so
+   wrapping five cards at ~320px each naturally lands as three cards on row
+   one and two centered on row two at desktop widths, without a
+   grid-template-areas hack; justify-content:center is what centers the
+   shorter second row. Widened from the previous --5 grid modifier so
+   identity labels/descriptions no longer break into narrow strips. */
+.fg-card-grid--garnet-roster{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 310px;max-width:330px}
+
+/* Garnet Is a Group, Not One Stone — widened reading measure (this
+   guide's own prose-block only; the shared .fg-prose-block used by
+   Chalcedony/Agate is untouched), ending in an inline emphasized line
+   instead of a separate bordered three-box visual. */
+#fg-garnet-group .fg-prose-block,
+#fg-tourmaline-group .fg-prose-block,
+#fg-growth-recording .fg-prose-block,
+#fg-obsidian-group .fg-prose-block{max-width:92ch}
+.fg-prose-emphasis{font-style:italic;color:var(--accent);margin-top:0.9em}
+
+/* The Major Garnet Branches — parent-and-branches diagram, widened to be
+   the dominant visual section of the page, plus the color explanation and
+   familiar-names note folded directly beneath it. */
+.fg-tree{max-width:1080px;margin:1.75rem auto 0}
+.fg-tree-parent{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.75rem;text-align:center;max-width:520px;margin:0 auto;box-shadow:0 8px 24px rgba(42,37,32,0.06)}
+.fg-tree-parent-title{font-family:Georgia,'Times New Roman',serif;font-size:21px;letter-spacing:0.02em;color:var(--ink)}
+.fg-tree-parent-sub{font-size:13.5px;color:var(--ink2r);margin-top:4px}
+.fg-tree-branches{display:flex;justify-content:center;gap:48px;margin-top:1.9rem}
+.fg-tree-branch{flex:1;max-width:480px;position:relative;padding-top:1.5rem}
+.fg-tree-branch::before{content:'';position:absolute;top:0;left:50%;width:0;height:1.5rem;border-left:0.5px solid var(--border2);transform:translateX(-50%)}
+.fg-tree-branch-title{font-family:'Jost',sans-serif;font-size:13.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);text-align:center}
+.fg-tree-branch-secondary{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);text-align:center;margin-top:2px}
+.fg-tree-species{display:flex;flex-direction:column;gap:10px;margin-top:1.1rem}
+.fg-tree-species-item{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:0.8rem 1.1rem}
+.fg-tree-species-name{font-family:Georgia,'Times New Roman',serif;font-size:15.5px;color:var(--ink)}
+.fg-tree-species-caption{font-size:13px;line-height:1.55;color:var(--ink2);margin:2px 0 0}
+
+/* Color explanation, folded beneath the branch diagram. A supporting strip
+   of small inline chips (not six large cards) — swatches are plain CSS
+   colors matching the color-word already given in the copy (e.g. "Deep
+   red" shown with a deep-red dot) — not a claim about any species. */
+.fg-garnet-branches-subblock{margin-top:1.75rem}
+.fg-color-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 16px;max-width:820px;margin:1.1rem auto 0}
+.fg-color-chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2)}
+.fg-color-chip-dot{width:14px;height:14px;border-radius:50%;border:0.5px solid var(--border2);flex-shrink:0}
+
+/* Familiar Names Within the Family — one compact note (not a three-column
+   terminology panel with separate cards). */
+.fg-names-note{max-width:640px;margin:1.75rem auto 0;background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem}
+.fg-names-note-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);text-align:center;margin-bottom:0.75rem}
+.fg-namemap{display:flex;flex-direction:column;gap:8px}
+.fg-namemap-row{display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--ink2)}
+.fg-namemap-from{font-weight:600;color:var(--ink);white-space:nowrap}
+.fg-namemap-arrow{color:var(--accent)}
+
+/* How Garnet Appears — four-stage visual sequence (unchanged pattern from
+   the prior pass) plus one compact recognition list beneath it (reuses the
+   shared .fg-list styling instead of five separate cards with CSS
+   silhouettes, which have been removed). */
+.fg-progression{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:1.5rem}
+.fg-progression-stage{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.fg-progression-media{width:100%;aspect-ratio:4/3;background:var(--stone2)}
+.fg-progression-media img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-progression-number{width:22px;height:22px;border-radius:50%;background:var(--stone2);border:0.5px solid var(--border2);color:var(--accent);font-family:'Jost',sans-serif;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0.85rem auto 0}
+.fg-progression-body{padding:0.6rem 1rem 1rem;text-align:center}
+.fg-progression-title{font-family:Georgia,'Times New Roman',serif;font-size:14.5px;color:var(--ink);margin-bottom:0.3rem}
+.fg-progression-text{font-size:12.5px;line-height:1.55;color:var(--ink2);margin:0}
+
+/* Shared compact plain-list treatment for Garnet's two simplified lists:
+   the recognition list under "How Garnet Appears" and the guidance list
+   under "Garnet in Your Collection". Reuses the existing .fg-list base
+   class (bullet styling) via fgList()'s extraClass parameter — this
+   wrapper just centers it at a comfortable reading width. */
+.fg-garnet-plain-list-wrap{max-width:640px;margin:1.5rem auto 0}
+.fg-garnet-plain-list{font-size:14px}
+
+/* Garnet in Your Collection — compact linked list of the five canonical
+   entries (deliberately not a repeat of the five-card roster gallery). */
+.fg-catalog-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:820px;margin:1.5rem auto 0}
+.fg-catalog-link{font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:0.03em;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:20px;padding:6px 14px;cursor:pointer}
+.fg-catalog-link:hover{color:var(--white);background:var(--accent)}
+
+/* Garnet-scoped widening of the shared section-intro component (see
+   .fg-section-intro base rule above) so short sentences read at a roomier
+   measure on this guide only — every other guide's section-intro usage is
+   untouched since the selector is scoped to Garnet's own section IDs. */
+#fg-meet-garnet-family .fg-section-intro,
+#fg-garnet-group .fg-section-intro,
+#fg-garnet-branches .fg-section-intro,
+#fg-garnet-appearance .fg-section-intro,
+#fg-garnet-collection .fg-section-intro,
+#fg-meet-tourmaline-family .fg-section-intro,
+#fg-tourmaline-group .fg-section-intro,
+#fg-growth-recording .fg-section-intro,
+#fg-tourmaline-appearance .fg-section-intro,
+#fg-tourmaline-collection .fg-section-intro,
+#fg-meet-obsidian-family .fg-section-intro,
+#fg-obsidian-group .fg-section-intro,
+#fg-lava-preserves .fg-section-intro,
+#fg-obsidian-appearance .fg-section-intro,
+#fg-obsidian-collection .fg-section-intro{max-width:860px}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
@@ -1878,6 +2113,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 @media(max-width:1200px){
   .fg-hero-title{font-size:30px}
+  .fg-card-grid--12{grid-template-columns:repeat(3,1fr)}
 }
 
 @media(max-width:900px){
@@ -1893,11 +2129,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-relationship-grid{grid-template-columns:1fr}
   .fg-relationship-grid--5{grid-template-columns:repeat(2,1fr)}
   .fg-branch-grid{grid-template-columns:1fr}
+  .fg-card-grid--2{max-width:420px}
+  .fg-card-grid--12{grid-template-columns:repeat(2,1fr)}
+  .fg-namegrid--3{grid-template-columns:repeat(2,1fr);max-width:none}
+  .fg-explain-grid{grid-template-columns:1fr;gap:1.25rem}
+  .fg-explain-media{order:-1;max-height:260px}
+  .fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 46%;max-width:400px}
+  .fg-tree-branches{flex-direction:column;align-items:center}
+  .fg-tree-branch{max-width:100%}
+  .fg-progression{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection{scroll-margin-top:132px}
   .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
   .fg-hero-title{font-size:25px}
   .fg-hero-question{font-size:23px}
@@ -1906,6 +2151,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-hero-intro-text{font-size:16px;max-width:none}
   .fg-lead{font-size:17px;max-width:none;margin:0.4rem auto 1.35rem}
   .fg-lead--question{font-size:19px}
+  .fg-section-intro{font-size:17px}
   .fg-card-grid--4{grid-template-columns:1fr}
   .fg-photo-grid--4{grid-template-columns:1fr}
   .fg-photocard-swatch--6{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
@@ -1916,6 +2162,32 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-single-visual{max-width:100%}
   .fg-relationship-grid--5{grid-template-columns:1fr}
   .fg-sunstone-card-wrap{max-width:100%}
+  .fg-card-grid--2{grid-template-columns:1fr;max-width:100%}
+  .fg-compare-grid{grid-template-columns:1fr;max-width:100%}
+  .fg-card-grid--12{grid-template-columns:1fr}
+  .fg-namegrid--3{grid-template-columns:1fr}
+  .fg-photo-grid--2{grid-template-columns:1fr}
+  .fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 100%;max-width:440px}
+  .fg-tree-parent{max-width:100%}
+  .fg-progression{grid-template-columns:1fr}
+  #fg-meet-garnet-family .fg-section-intro,
+  #fg-garnet-group .fg-section-intro,
+  #fg-garnet-branches .fg-section-intro,
+  #fg-garnet-appearance .fg-section-intro,
+  #fg-garnet-collection .fg-section-intro,
+  #fg-meet-tourmaline-family .fg-section-intro,
+  #fg-tourmaline-group .fg-section-intro,
+  #fg-growth-recording .fg-section-intro,
+  #fg-tourmaline-appearance .fg-section-intro,
+  #fg-tourmaline-collection .fg-section-intro,
+  #fg-meet-obsidian-family .fg-section-intro,
+  #fg-obsidian-group .fg-section-intro,
+  #fg-lava-preserves .fg-section-intro,
+  #fg-obsidian-appearance .fg-section-intro,
+  #fg-obsidian-collection .fg-section-intro{max-width:none}
+  #fg-garnet-group .fg-prose-block{max-width:none}
+  #fg-tourmaline-group .fg-prose-block{max-width:none}
+  #fg-obsidian-group .fg-prose-block{max-width:none}
 }
 
 /* ── MOBILE POLISH PASS ── */

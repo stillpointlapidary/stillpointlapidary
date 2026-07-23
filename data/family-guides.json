@@ -1209,5 +1209,620 @@
       {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null, "use": "When the Light Moves — Aventurescence position, and Sunstone and the Spark Within"},
       {"filename": "Pierrelune.jpg", "creator": null, "license": null, "use": "Named in brief (Polished Moonstone) but not assigned to a section position — Moonstone's card already uses an approved Christie photograph, so this was not forced into a slot; reported as unplaced"}
     ]
+  },
+  "chalcedony": {
+    "slug": "chalcedony",
+    "displayName": "Chalcedony",
+    "encyclopediaFilterValue": "Chalcedony",
+    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's review. This guide's central job is to bridge Quartz (macrocrystalline) and Agate/Jasper (cataloged as separate families): it explains that Chalcedony is microcrystalline Quartz, not a separate mineral species, without pulling Agate or Jasper roster stones into Chalcedony's own two-member roster (Blue Chalcedony C-0082, Pink Chalcedony C-0084 — both verified live against ENCYCLOPEDIA_PHOTOS/pipeline data 2026-07-23). Hero condensedIntro/overview paragraph, What Chalcedony Actually Is, Chalcedony/Agate/Jasper Fit, Color/Translucency/Surface, Forms, and Wider Quartz Story sections use restrained working copy built only from the facts and structure given in this pass's brief — none of it is Christie's locked final wording, and hero signatureLine/closingCallout are plain working drafts (no 'asks' prompt was written, since no approved emotional-hook copy exists yet for this guide). Roster cards (Meet the Chalcedony Family) carry no identityLabel/quickView copy by design — name and Quick View only, no invented identity or metaphysical claims. No licensed educational photography has been approved for this pass, so What Chalcedony Actually Is (macro/micro comparison), Color/Translucency/Surface, and every Forms card render labeled 'Photo pending' placeholders rather than substituting any other image; nothing is recorded in imageCredits because nothing third-party is actually displayed yet. Chalcedony/Agate/Jasper Fit reuses the same representative stoneIds (C-0077 Moss Agate, C-0099 Red Jasper) already approved and live in the Quartz guide's own relationship section, for the identical illustrative purpose — not a roster change. Agate and Jasper Family Guide links render as disabled 'Family guide coming soon' buttons (not dead links) since those guides don't exist yet; the Quartz Family Guide link is real and functional. Collection section is working draft covering the requested practical distinctions (translucent/opaque, even color/banding, polished/natural surface, trade-name confidence, provenance/treatment uncertainty), flagged pending via editorialNote like Quartz/Feldspar's collection sections. No Production Master or Supabase family-classification values were changed to build this guide.",
+    "closingCallout": "Chalcedony is quartz too fine to see on its own — and the quiet bridge to Agate and Jasper.",
+    "hero": {
+      "mediaStoneIds": ["C-0082", "C-0084"],
+      "eyebrow": "FAMILY GUIDE",
+      "title": "Chalcedony Family Guide",
+      "signatureLine": "Working draft — Quartz, grown too fine to see as separate crystals.",
+      "condensedIntro": "Chalcedony is Quartz — the same mineral as Clear Quartz, Amethyst, and Citrine — grown as compact intergrowths far too small to see as individual crystals. That difference in growth, not a difference in chemistry, is what gives Chalcedony its smooth, often translucent character."
+    },
+    "overview": {
+      "paragraph": "Chalcedony is not a separate mineral from Quartz. It is Quartz itself, built from crystals so fine that they cannot be seen individually without magnification — a structure known as microcrystalline, in contrast with the large, visible crystals of macrocrystalline Quartz varieties like Amethyst or Citrine. Agate and Jasper share this same microcrystalline-quartz foundation, but this encyclopedia catalogs them as their own separate families because their banding, pattern vocabulary, and market identity are extensive enough to deserve their own guides. Chalcedony is also a market name in its own right — not every material sold as \"chalcedony\" in the trade is cataloged here as a standalone Chalcedony entry."
+    },
+    "meetTheFamily": {
+      "title": "Meet the Chalcedony Family",
+      "intro": "Two rostered expressions currently carry a standalone Chalcedony entry in this encyclopedia.",
+      "members": [
+        {"stoneId": "C-0082"},
+        {"stoneId": "C-0084"}
+      ]
+    },
+    "whatChalcedonyIs": {
+      "title": "What Chalcedony Actually Is",
+      "paragraphs": [
+        "Quartz is the broader mineral family. Chalcedony belongs to it, built from extremely fine intergrowths of quartz and a closely related silica mineral called moganite.",
+        "Those crystals are too small to see individually without magnification. That microscopic structure — not a different chemistry — is what separates Chalcedony from macrocrystalline Quartz varieties such as Clear Quartz, Amethyst, or Citrine.",
+        "The fine, intergrown structure is also what produces Chalcedony's smooth, waxy, often translucent appearance, distinct from the flat crystal faces and sharp points typical of macrocrystalline Quartz."
+      ]
+    },
+    "agateJasperFit": {
+      "title": "Chalcedony, Agate & Jasper",
+      "intro": "Mineralogically, Chalcedony, Agate, and Jasper all belong to the wider quartz story. This encyclopedia catalogs them as separate families because each has enough of its own naming, pattern vocabulary, and collector history to deserve its own path.",
+      "quartzLinkLabel": "Open the Quartz Family Guide",
+      "branches": [
+        {"label": "Chalcedony", "stoneId": "C-0082", "description": "Generally unbanded or subtly patterned microcrystalline quartz, often translucent.", "current": true},
+        {"label": "Agate", "stoneId": "C-0077", "description": "Organized separately because banding, pattern terminology, collector identity, and market naming are extensive enough to deserve their own path."},
+        {"label": "Jasper", "stoneId": "C-0099", "description": "Organized separately because it is typically opaque and carries its own large commercial and collector vocabulary."}
+      ]
+    },
+    "colorTranslucencySurface": {
+      "title": "Color, Translucency & Surface",
+      "intro": "Readers commonly recognize Chalcedony by a handful of visual qualities. None of these is a guaranteed test on its own — surface treatment, polish, and lighting all affect how a specimen looks — but together they describe the family's general character.",
+      "qualities": ["Soft, diffuse translucency", "Waxy luster", "Even color", "Clouding", "Subtle patterning", "Botryoidal surfaces"],
+      "note": "Individual specimens can depart from any single quality above; treat these as common tendencies, not a checklist that must all be present."
+    },
+    "forms": {
+      "title": "Forms Chalcedony Takes",
+      "intro": "The same material appears in a range of natural and worked forms.",
+      "items": [
+        {"title": "Nodules", "body": "Rounded masses that grew filling a cavity in surrounding rock.", "placeholderLabel": "Photo pending"},
+        {"title": "Seams", "body": "Thin veins filling cracks or fractures in host rock.", "placeholderLabel": "Photo pending"},
+        {"title": "Botryoidal Growth", "body": "Clustered, rounded surface texture, often described as grape-like.", "placeholderLabel": "Photo pending"},
+        {"title": "Polished Cabochons", "body": "Cut and polished into smooth, domed shapes for jewelry.", "placeholderLabel": "Photo pending"},
+        {"title": "Beads", "body": "Shaped and drilled for stringing.", "placeholderLabel": "Photo pending"},
+        {"title": "Carvings", "body": "Worked into decorative or figural forms.", "placeholderLabel": "Photo pending"},
+        {"title": "Rough Masses", "body": "Uncut natural material showing the mineral's raw surface.", "placeholderLabel": "Photo pending"}
+      ]
+    },
+    "widerQuartzStory": {
+      "title": "Chalcedony in the Wider Quartz Story",
+      "intro": "The chalcedony umbrella intersects with many familiar market names and textures. These are educational relationships, not a statement about how this encyclopedia currently browses or groups every stone below — Carnelian and Chrysoprase, for example, are not necessarily filed under the Chalcedony family here.",
+      "examples": ["Carnelian", "Chrysoprase", "Onyx", "Agate", "Jasper"],
+      "note": "Names above are shown for educational context only and are not linked to catalog entries or roster assignments in this pass."
+    },
+    "collection": {
+      "title": "Chalcedony in Your Collection",
+      "editorialNote": "Working draft (2026-07-23) — pending Christie's final review. Covers the requested practical distinctions (translucent/opaque, even color/banding, polished/natural surface, trade-name confidence, provenance/treatment uncertainty) but is not final editorial language.",
+      "careForIt": {
+        "intro": "Chalcedony shares Quartz's durability and generally tolerates normal handling well.",
+        "bullets": [
+          "Mohs 6.5–7 — generally durable for handling and display.",
+          "Safe for brief water contact when cleaning; dry thoroughly afterward.",
+          "Avoid harsh chemicals on dyed or treated material.",
+          "Keep polished cabochons away from abrasive surfaces to protect the finish."
+        ]
+      },
+      "rememberThis": "Chalcedony ranges from softly translucent to nearly opaque, and from evenly colored to subtly patterned. A polished cabochon and a natural rough surface can look like different materials even when they are the same stone.",
+      "watchFor": "Trade names are not always reliable. Material sold under a colorful market name may or may not carry a confirmed identity, treatment status, or provenance — when in doubt, treat a trade name as a description rather than a guarantee."
+    },
+    "imageCredits": []
+  },
+  "agate": {
+    "slug": "agate",
+    "displayName": "Agate",
+    "encyclopediaFilterValue": "Agate",
+    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's review, built on the shared architecture Chalcedony's guide established. Agate's job is to explain the pattern distinction (banding) that separates it from plain Chalcedony and from Jasper, without pulling Chalcedony or Jasper roster stones into Agate's own roster. IMPORTANT LIMITATION: unlike Chalcedony's roster (handed to us directly as exactly Blue and Pink Chalcedony), this session had no way to verify live Supabase family-column values for Agate — a web_fetch attempt against the project's own public Supabase REST endpoint (read-only, using the same publishable key already embedded client-side in auth.js) timed out, and per this environment's rules a failed/blocked fetch may not be routed around via bash/curl. Rather than hardcode a guessed list of which \"*Agate*\"-named stones (14 candidates found in pipeline/data/structured-values.generated.json: Black, Blue Lace, Botswana, Crazy Lace, Dendritic, Druzy, Fire, Flower, Gobi, Grape, Moss, Orca, Tree, and Turritella Agate) are actually tagged family:\"Agate\" in Production Master today, Meet the Agate Family and the hero media collage both resolve live from CRYSTALS (client-side, at render time) via c.fam===\"Agate\" — the same field/mechanism the Crystals 101 family tiles already use for their own counts and examples. This means the section is guaranteed accurate to whatever Production Master actually says, at the cost of not being previewable in this offline session; recommend a live visual check once deployed. Hero signatureLine/closingCallout are plain working drafts; What Agate Actually Is, Chalcedony/Agate/Jasper Fit, Color/Translucency/Surface, Forms, Wider Quartz Story, and Collection sections use restrained working copy built only from standard, uncontroversial agate-formation facts (banded chalcedony formed by successive silica deposition in cavities) — none of it is Christie's locked final wording. No licensed educational photography has been approved for this pass, so the unbanded-Chalcedony/banded-Agate comparison and every Forms card render labeled 'Photo pending' placeholders; imageCredits is empty because nothing third-party is actually displayed. Chalcedony/Agate/Jasper Fit reuses C-0077 Moss Agate (current), C-0082 Blue Chalcedony (now a real, working Chalcedony Family Guide link), and C-0099 Red Jasper (disabled 'coming soon', no guide yet) — the same representative stoneIds already approved and live in both the Quartz and Chalcedony guides' own relationship sections. No Production Master or Supabase family-classification values were changed to build this guide, and nothing was staged, committed, or pushed (the repo's .git/index.lock remains unresolved per Christie's instruction).",
+    "closingCallout": "Working draft — Agate is chalcedony that grew in bands, one silica story written in layers.",
+    "hero": {
+      "mediaDynamicFilterValue": "Agate",
+      "eyebrow": "FAMILY GUIDE",
+      "title": "Agate Family Guide",
+      "signatureLine": "Working draft — banded chalcedony, one layer at a time.",
+      "condensedIntro": "Agate is Chalcedony — itself microcrystalline Quartz — set apart by pattern rather than chemistry. Silica-rich fluid deposits one thin layer after another along the wall of a rock cavity, and each layer's slightly different color or clarity becomes a visible band."
+    },
+    "overview": {
+      "paragraph": "Agate is a banded, patterned variety of Chalcedony — itself microcrystalline Quartz, built from intergrowths of quartz and moganite too fine to see individually without magnification. What sets Agate apart is not a different chemistry but a different growth story: silica-rich fluid deposits one thin layer after another along the wall of a cavity, most often in volcanic rock, producing the concentric bands, \"eyes,\" or wall-lining patterns collectors call agate. Agate shares this chalcedony/quartz foundation with plain Chalcedony and with Jasper, but this encyclopedia catalogs all three as separate families because each carries its own extensive naming, pattern vocabulary, and collector culture."
+    },
+    "meetTheFamily": {
+      "title": "Meet the Agate Family",
+      "intro": "These rostered expressions currently carry a standalone Agate entry in this encyclopedia. The list below is resolved live from the catalog rather than fixed in this guide, so it stays accurate as Agate entries are added or reclassified.",
+      "dynamicFilterValue": "Agate"
+    },
+    "whatAgateIs": {
+      "title": "What Agate Actually Is",
+      "paragraphs": [
+        "Agate belongs to the same Chalcedony/Quartz family as plain Chalcedony and Jasper. Structurally, it is Chalcedony — fine intergrowths of quartz and moganite too small to see individually without magnification.",
+        "What sets Agate apart is pattern, not chemistry. Agate typically forms in cavities, most often in volcanic rock, as silica-rich fluid deposits one thin layer after another along the cavity wall. Each layer can differ slightly in color, porosity, or impurity content, producing the concentric bands, \"eyes,\" or wall-lining patterns collectors call agate.",
+        "A cavity that fills completely can leave a solid banded nodule. One that fills only partway can leave a hollow center lined with the same bands and, often, a cluster of larger quartz crystals — a geode."
+      ]
+    },
+    "agateJasperFit": {
+      "title": "Agate, Chalcedony & Jasper",
+      "intro": "Mineralogically, Agate, Chalcedony, and Jasper all belong to the wider quartz story. This encyclopedia catalogs them as separate families because each has enough of its own naming, pattern vocabulary, and collector history to deserve its own path.",
+      "quartzLinkLabel": "Open the Quartz Family Guide",
+      "branches": [
+        {"label": "Agate", "stoneId": "C-0077", "description": "Patterned microcrystalline quartz known for concentric banding, fortification patterns, and often a druzy or crystal-lined center.", "current": true},
+        {"label": "Chalcedony", "stoneId": "C-0082", "description": "Generally unbanded or subtly patterned microcrystalline quartz, often translucent.", "guideSlug": "chalcedony"},
+        {"label": "Jasper", "stoneId": "C-0099", "description": "Organized separately because it is typically opaque and carries its own large commercial and collector vocabulary."}
+      ]
+    },
+    "colorTranslucencySurface": {
+      "title": "Banding, Translucency & Surface",
+      "intro": "Readers commonly recognize Agate by a handful of visual qualities. None of these is a guaranteed test on its own — dyeing and other treatments can affect band color and visibility — but together they describe the family's general character.",
+      "qualities": ["Concentric banding", "Fortification patterns", "Color zoning between layers", "Waxy to glassy luster", "Druzy crystal-lined centers", "Translucent to opaque bands"],
+      "note": "Individual specimens can depart from any single quality above; treat these as common tendencies, not a checklist that must all be present."
+    },
+    "forms": {
+      "title": "Forms Agate Takes",
+      "intro": "The same material appears in a range of natural and worked forms.",
+      "items": [
+        {"title": "Nodules & Geodes", "body": "Rounded masses formed filling a rock cavity; one only partly filled leaves a hollow, crystal-lined geode.", "placeholderLabel": "Photo pending"},
+        {"title": "Slabs", "body": "Cut and polished cross-sections that reveal the banding pattern face-on.", "placeholderLabel": "Photo pending"},
+        {"title": "Druzy-Lined Cavities", "body": "A geode's hollow center often ends in a layer of small, sparkling quartz crystals.", "placeholderLabel": "Photo pending"},
+        {"title": "Botryoidal Surfaces", "body": "Rounded, grape-like clusters on some agate surfaces.", "placeholderLabel": "Photo pending"},
+        {"title": "Polished Cabochons", "body": "Cut and polished into smooth, domed shapes for jewelry.", "placeholderLabel": "Photo pending"},
+        {"title": "Beads & Carvings", "body": "Shaped for stringing or worked into decorative and figural forms.", "placeholderLabel": "Photo pending"},
+        {"title": "Bookends & Tumbled Stones", "body": "Large polished geode halves used as bookends; smaller pieces tumbled smooth for handling.", "placeholderLabel": "Photo pending"}
+      ]
+    },
+    "widerQuartzStory": {
+      "title": "Agate's Many Names",
+      "intro": "The Agate umbrella covers many familiar market and pattern names. These are educational examples of naming variety, not a statement about how this encyclopedia currently browses or groups every stone below.",
+      "examples": ["Moss Agate", "Blue Lace Agate", "Botswana Agate", "Crazy Lace Agate", "Dendritic Agate", "Fire Agate", "Turritella Agate"],
+      "note": "Names above are shown for educational context only and are not linked to catalog entries or roster assignments in this pass."
+    },
+    "collection": {
+      "title": "Agate in Your Collection",
+      "editorialNote": "Working draft (2026-07-23) — pending Christie's final review. Covers the requested practical distinctions (banded/unbanded, dyed/natural color, geode/slab, polished/natural surface, provenance uncertainty) but is not final editorial language.",
+      "careForIt": {
+        "intro": "Agate shares Quartz and Chalcedony's durability and generally tolerates normal handling well.",
+        "bullets": [
+          "Mohs 6.5–7 — generally durable for handling and display.",
+          "Safe for brief water contact when cleaning; dry thoroughly afterward.",
+          "Many market agates are dyed to intensify or add color — avoid harsh chemicals that could affect dyed surfaces.",
+          "Protect polished slabs and cabochons from abrasive surfaces to preserve the finish."
+        ]
+      },
+      "rememberThis": "Agate's banding can be subtle or dramatic, natural or enhanced. A gray, undyed slab and a vividly colored dyed one can be the same underlying material shown very differently.",
+      "watchFor": "Dyeing, and dyeing combined with heating, are extremely common treatments in the agate trade, especially for vivid blues, purples, and reds. Treat unusually uniform or saturated color as a prompt to ask about treatment rather than an automatic defect — but always ask."
+    },
+    "imageCredits": []
+  },
+  "jasper": {
+    "slug": "jasper",
+    "displayName": "Jasper",
+    "encyclopediaFilterValue": "Jasper",
+    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's review. Also the first guide to use the new shared .fg-section-intro component (title -> one-sentence italic-Georgia intro -> content, styles.css) and the first to reuse existing generic components via new opt-in flags (useSectionIntro on familyGuideMeetFamilyHtml/familyGuideCollectionHtml/familyGuideAgateJasperFitHtml; sectionIntro+gridCols on familyGuideWhatChangesNameHtml) rather than by editing those functions' defaults — Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate's data never sets these flags, so none of them were retrofitted or changed. All 12 roster stoneIds/slugs were verified against pipeline/data/structured-values.generated.json and app.js's ENCYCLOPEDIA_PHOTOS map (2026-07-23): Brecciated C-0087, Dragon's Blood C-0089, Laguna C-0091, Leopard Skin C-0092, Mookaite C-0094, Ocean C-0095, Picture C-0097, Polychrome C-0098, Red C-0099, Star C-0100, Yellow C-0101, Zebra C-0102 — all resolve and are clickable except Laguna Jasper (C-0091), which currently has no entry in ENCYCLOPEDIA_PHOTOS and renders as a labeled 'Photo pending' card (placeholderOk) rather than a broken tile. IMAGE SOURCING: none of the five candidate Wikimedia Commons/licensed educational images (Photos A-D plus optional Photo E) could be retained this pass. Repeated mcp__workspace__web_fetch attempts against commons.wikimedia.org (the file page, /wiki/Special:FilePath/, and the Commons api.php imageinfo endpoint) and upload.wikimedia.org all returned empty content, while control fetches to example.com and en.wikipedia.org succeeded normally in the same session — indicating a domain-specific restriction on Wikimedia Commons/upload media rather than a transient failure. Per this environment's rules, a blocked/failed fetch was not routed around via bash/curl. Every corresponding image slot (What Jasper Actually Is' large image and rough/polished strip, all six How-Jasper-Makes-a-Pattern categories, all seven Rough/Cut/Polished items) renders a labeled 'Photo pending' placeholder instead of a substitute image; imageCredits is empty because nothing third-party is displayed. Full source-page URL, creator, license, intended section, suggested filename, and suggested visible-credit text for all five candidates are preserved below in pendingAssets for a future pass with working image access — recommend trying a Claude-in-Chrome-connected session, which renders pages with JavaScript and was not available in this one. The Rough-vs-Polished comparison's 'Polished' position uses Red Jasper's own existing approved encyclopedia photo (via a new, additive fgPhotoCardHtml singleStoneId branch) rather than an invented image. EDITORIAL CORRECTION (2026-07-23, second pass): the first pass had grounded several explanatory claims in the Wikipedia 'Jasper' article. Wikipedia is not an approved encyclopedia source for this project, and Claude Code must not independently establish or author geological identity claims. All copy sourced that way has been removed and replaced with clearly marked working-copy placeholders that assert nothing beyond what Christie's own brief already supplied. Four items are recorded here as open editorial gaps for Lyra/Christie's review during the refinement pass, with no replacement research attempted: (1) Jasper's precise silica/aggregate structural definition — What Jasper Actually Is now states only the approved facts (fine-grained silica story, generally opaque) and marks the fuller structural/causal explanation as pending; (2) Ocean Jasper's identity — the roster card's locality claim ('often from Madagascar') was removed and the Pattern Is Not the Same as Identity example now reads 'identity note pending'; (3) Mookaite's identity — the same example was replaced with 'identity note pending'; (4) Dalmatian Stone's identity — the specific 'granite trade name' description was removed; the example now states only that it is excluded from this roster per Christie's own catalog guidance (given directly in this guide's original brief, not researched by Claude Code) and marks the fuller identity description as pending. The Jasper/Agate/Chalcedony relationship section gives both Chalcedony and Agate real, functional Family Guide links (both guides now exist) using the same representative stoneIds (C-0082, C-0077) already approved and live in the Quartz, Chalcedony, and Agate guides' own relationship sections. Jasper in Your Collection folds the brief's five suggested panel themes (pattern, actual identity, rough/polished, locality, natural variation) into the existing shared three-panel Care for It / Remember This / Watch For structure (all five appear as Care for It bullets) rather than building a new five-panel grid, per the instruction to use the established collection-panel structure — flagging this interpretive choice in case a distinct five-panel layout was actually intended. Hero signatureLine/closingCallout are plain working drafts per Christie's suggested working-copy direction; no invented final editorial claims beyond what this brief supplied. No Production Master, Supabase, family, or species values were changed to build this guide.",
+    "closingCallout": "Working draft — Jasper rewards the second look. What first appears solid often contains an entire terrain.",
+    "hero": {
+      "mediaStoneIds": ["C-0097", "C-0095"],
+      "eyebrow": "FAMILY GUIDE",
+      "title": "The Jasper Family",
+      "signatureLine": "Working draft — where silica becomes landscape.",
+      "condensedIntro": "Jasper gathers fractures, layers, mineral inclusions, and color into materials that can resemble maps, horizons, stonework, or painted terrain."
+    },
+    "overview": {
+      "paragraph": "Jasper is generally opaque, fine-grained silica whose look is shaped by pattern, mineral inclusions, fracturing, sedimentary history, silicification, locality, and trade naming — often all at once. Familiar Jasper names do not always describe one identical mineralogical material. This guide keeps the names readers already know while explaining, wherever it can, the actual physical identity behind them."
+    },
+    "meetTheFamily": {
+      "title": "Meet Twelve Jasper Expressions",
+      "useSectionIntro": true,
+      "intro": "Begin with pattern, then notice how each material carries its own geological and collector story.",
+      "gridClass": "fg-card-grid--12",
+      "members": [
+        {"stoneId": "C-0087", "headline": "Fragments fractured and re-cemented into a new, mottled pattern."},
+        {"stoneId": "C-0089", "headline": "Deep green material scattered with vivid red inclusions."},
+        {"stoneId": "C-0091", "headline": "Warm, banded coloring prized by lapidary cutters."},
+        {"stoneId": "C-0092", "headline": "Rounded, spotted patterning reminiscent of an animal print."},
+        {"stoneId": "C-0094", "headline": "Bold swirls of red, yellow, and cream."},
+        {"stoneId": "C-0095", "headline": "Orbicular spots and swirling color patterns."},
+        {"stoneId": "C-0097", "headline": "Layered coloring that can resemble a painted landscape."},
+        {"stoneId": "C-0098", "headline": "Multicolored swirls across a single piece."},
+        {"stoneId": "C-0099", "headline": "Deep, even red — one of the most classic Jasper looks."},
+        {"stoneId": "C-0100", "headline": "Pale background traced with fine, radiating patterning."},
+        {"stoneId": "C-0101", "headline": "Warm yellow to gold coloring with a smooth, opaque finish."},
+        {"stoneId": "C-0102", "headline": "Bold black-and-white or dark banded contrast."}
+      ]
+    },
+    "whatJasperIs": {
+      "title": "What Jasper Actually Is",
+      "sectionIntro": "The name is familiar, but the material behind it can be more varied than it first appears.",
+      "paragraphs": [
+        "Jasper belongs to the fine-grained silica story used throughout this encyclopedia, and it is generally opaque.",
+        "Editorial copy pending — a fuller description of Jasper's structure, and the geological reasons behind its color and pattern, awaits approved source material for Lyra and Christie's review. Working note only: pattern, mineral inclusions, fracturing, sedimentary history, silicification, and locality can all play a part in how a given piece looks.",
+        "Jasper is also a broad lapidary and collector term. Not every material sold as Jasper has one identical mineralogical definition — some familiar Jasper names may be more accurately described as a rock, aggregate, radiolarite, or another silica-rich material, a distinction the next few sections walk through carefully."
+      ],
+      "placeholderLabel": "Photo pending — rough Jasper",
+      "pendingAsset": {"source": "https://commons.wikimedia.org/wiki/File:Unpolished_jasper.jpg", "creator": "Ryan Bushby (HighInBC)", "license": "Public domain", "filename": "jasper-unpolished-rough-ryan-bushby.jpg", "use": "What Jasper Actually Is — large image", "suggestedCredit": "Unpolished Jasper — Ryan Bushby (HighInBC), public domain, via Wikimedia Commons"},
+      "compareItems": [
+        {"title": "Rough", "body": "Uncut material as it comes out of the ground.", "placeholderLabel": "Photo pending — rough Jasper"},
+        {"title": "Polished (Red Jasper)", "body": "The same broad material, cut and polished — shown here with an existing approved encyclopedia photo.", "singleStoneId": "C-0099"}
+      ]
+    },
+    "patternGuide": {
+      "title": "How Jasper Makes a Pattern",
+      "sectionIntro": "Fractures, layers, inclusions, and mineral growth create the markings collectors recognize.",
+      "categories": [
+        {"title": "Brecciated", "body": "Broken fragments healed or cemented into a new pattern.", "placeholderLabel": "Photo pending"},
+        {"title": "Scenic", "body": "Lines, layers, and markings that resemble landscapes or painted horizons.", "placeholderLabel": "Photo pending"},
+        {"title": "Orbicular", "body": "Rounded, eye-like, or clustered structures repeated through the material.", "placeholderLabel": "Photo pending"},
+        {"title": "Spotted", "body": "Distinct contrasting inclusions or circular markings.", "placeholderLabel": "Photo pending"},
+        {"title": "Banded", "body": "Parallel, wavy, or irregular layers.", "placeholderLabel": "Photo pending"},
+        {"title": "Mottled", "body": "Broad pools, patches, or transitions without strict repetition.", "placeholderLabel": "Photo pending"}
+      ]
+    },
+    "whatChangesName": {
+      "title": "Pattern Is Not the Same as Identity",
+      "sectionIntro": "A memorable trade name can describe appearance without fully explaining what the material is.",
+      "question": "Familiar name on the card; accurate identity on the page.",
+      "gridCols": 3,
+      "categories": [
+        {"label": "Visually Named", "examples": ["Zebra Jasper", "Leopard Skin Jasper", "Star Jasper", "Picture Jasper"]},
+        {"label": "Locality or Deposit Named", "examples": ["Ocean Jasper", "Laguna Jasper", "Mookaite Jasper"]},
+        {"label": "Commercial Jasper Names", "examples": ["Mookaite — identity note pending Lyra/Christie review", "Ocean Jasper — identity note pending Lyra/Christie review", "Dalmatian Stone — not cataloged here as Jasper per Christie's catalog guidance; fuller identity note pending"]}
+      ]
+    },
+    "roughCutPolished": {
+      "title": "Rough, Cut, and Polished",
+      "sectionIntro": "Lapidary work can reveal landscapes that remain almost hidden in the rough.",
+      "items": [
+        {"title": "Rough Exterior", "body": "The unworked surface as it exists in the ground or rough-stone market.", "placeholderLabel": "Photo pending"},
+        {"title": "Cut Face", "body": "A first cut reveals the pattern hidden inside.", "placeholderLabel": "Photo pending"},
+        {"title": "Polished Slab", "body": "A flat, polished cross-section shows the full pattern clearly.", "placeholderLabel": "Photo pending"},
+        {"title": "Cabochon", "body": "Cut and polished into a smooth, domed shape for jewelry.", "placeholderLabel": "Photo pending"},
+        {"title": "Carving", "body": "Worked into decorative or figural forms.", "placeholderLabel": "Photo pending"},
+        {"title": "Bead", "body": "Shaped and drilled for stringing.", "placeholderLabel": "Photo pending"},
+        {"title": "Tumble", "body": "Tumbled smooth, rounding the material for handling and display.", "placeholderLabel": "Photo pending"}
+      ]
+    },
+    "agateJasperFit": {
+      "title": "Jasper, Agate, and Chalcedony",
+      "useSectionIntro": true,
+      "intro": "These materials share a wider silica story, but opacity, banding, and texture lead them down different paths.",
+      "quartzLinkLabel": "Open the Quartz Family Guide",
+      "branches": [
+        {"label": "Chalcedony", "stoneId": "C-0082", "description": "The broader fine-grained silica family, often translucent or evenly colored.", "guideSlug": "chalcedony"},
+        {"label": "Agate", "stoneId": "C-0077", "description": "Usually organized around banding, translucency, nodules, and extensive pattern terminology.", "guideSlug": "agate"},
+        {"label": "Jasper", "stoneId": "C-0099", "description": "Usually opaque, inclusion-rich, patterned, and commercially diverse.", "current": true}
+      ]
+    },
+    "collection": {
+      "title": "Jasper in Your Collection",
+      "useSectionIntro": true,
+      "intro": "Look beyond the name to pattern, provenance, finish, and the actual material in your hand.",
+      "editorialNote": "Working draft (2026-07-23) — pending Christie's final review. Folds the brief's five suggested checklist themes into the existing shared Care for It / Remember This / Watch For structure rather than a new five-panel layout — see editorialStatusNote.",
+      "careForIt": {
+        "intro": "Jasper is durable, so the checklist below is about identity as much as physical care.",
+        "bullets": [
+          "Start with pattern — notice whether the piece is banded, spotted, fractured, scenic, orbicular, or broadly mottled.",
+          "Check the actual identity — a familiar Jasper name may describe a rock, trade name, or mixed material.",
+          "Compare rough and polished — the same material may look dramatically different before cutting.",
+          "Keep locality information — for deposit-specific materials, provenance can be part of the collector story.",
+          "Expect natural variation — two pieces sold under the same name may look very different."
+        ]
+      },
+      "rememberThis": "Mohs 6.5–7 and generally durable — safe for brief water contact and most ordinary handling.",
+      "watchFor": "Some familiar \"Jasper\" market names are more accurately described as rocks, trade names, or other silica-rich materials. The name on the card and the identity on the page are not always making the same claim."
+    },
+    "imageCredits": [],
+    "pendingAssets": [
+      {"source": "https://commons.wikimedia.org/wiki/File:Unpolished_jasper.jpg", "creator": "Ryan Bushby (HighInBC)", "license": "Public domain", "filename": "jasper-unpolished-rough-ryan-bushby.jpg", "use": "What Jasper Actually Is — large image; Rough-vs-Polished comparison — Rough position", "suggestedCredit": "Unpolished Jasper — Ryan Bushby (HighInBC), public domain, via Wikimedia Commons"},
+      {"source": "https://commons.wikimedia.org/wiki/File:Brecciated_jasper_1.jpg", "creator": "James St. John", "license": "CC BY 2.0", "filename": "jasper-brecciated-pattern-james-st-john.jpg", "use": "How Jasper Makes a Pattern — Brecciated category", "suggestedCredit": "Brecciated Jasper — James St. John, CC BY 2.0, via Wikimedia Commons"},
+      {"source": "https://commons.wikimedia.org/wiki/File:Picture-jasper.jpg", "creator": "Linas Juozėnas", "license": "CC BY-SA 4.0", "filename": "jasper-picture-pattern-linas-juozenas.jpg", "use": "How Jasper Makes a Pattern — Scenic category", "suggestedCredit": "Picture Jasper — Linas Juozėnas, CC BY-SA 4.0, via Wikimedia Commons", "note": "ShareAlike license — any derivative use must carry the same CC BY-SA 4.0 terms."},
+      {"source": "https://commons.wikimedia.org/wiki/File:Jaspe_Orbiculaire_de_Madagascar_1.jpg", "creator": "Lionel Allorge", "license": "CC BY-SA 3.0", "filename": "jasper-orbicular-madagascar-lionel-allorge.jpg", "use": "How Jasper Makes a Pattern — Orbicular category", "suggestedCredit": "Orbicular Jasper from Madagascar — Lionel Allorge, CC BY-SA 3.0, via Wikimedia Commons", "note": "ShareAlike license — any derivative use must carry the same CC BY-SA 3.0 terms."},
+      {"source": "https://commons.wikimedia.org/wiki/File:Mookaite_(Windalia_Radiolarite_Formation,_Lower_Cretaceous;_Western_Australia)_17_(45998712375).jpg", "creator": "James St. John", "license": "CC BY 2.0", "filename": "jasper-mookaite-radiolarite-james-st-john.jpg", "use": "Pattern Is Not the Same as Identity — Commercial Jasper Names / Mookaite context (optional)", "suggestedCredit": "Mookaite from Western Australia — James St. John, CC BY 2.0, via Wikimedia Commons", "note": "Optional photo. Must be captioned as Mookaite/radiolarite, not presented as a generic true-Jasper specimen, per the brief."}
+    ]
+  },
+  "garnet": {
+    "slug": "garnet",
+    "displayName": "Garnet",
+    "encyclopediaFilterValue": "Garnet",
+    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Garnet Family Guide brief (2026-07-23), built strictly from the supplied copy, labels, classifications, and section order. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
+    "closingCallout": "Garnet begins with a familiar name and opens into one of the mineral world's most varied families.",
+    "closingSupportingCopy": "Follow the branches, compare the crystals, and let composition tell the larger story.",
+    "hero": {
+      "eyebrow": "FAMILY GUIDE",
+      "title": "The Garnet Family",
+      "signatureLine": "One name. Many species. Far more than just red.",
+      "condensedIntro": "Garnet is often introduced as a single deep-red stone, but that familiar name belongs to an entire mineral group. Its members share a common crystal structure while differing in composition, color, growth, and the forms collectors are most likely to encounter.",
+      "emphasisLine": "To understand Garnet, begin with the family tree.",
+      "promptLeadIn": "Garnet asks:",
+      "question": "Which branch are you holding?",
+      "supportingLine": "The name is only the beginning."
+    },
+    "meetGarnetFamily": {
+      "title": "Meet the Garnet Family",
+      "intro": "Five Garnet species have their own place in the Still Point catalog, each revealing a different part of the family.",
+      "members": [
+        {"stoneId": "C-0048", "identityLabel": "IRON-ALUMINUM GARNET", "headline": "The familiar deep-red member of the family"},
+        {"stoneId": "C-0061", "identityLabel": "CALCIUM-ALUMINUM GARNET", "headline": "A species with an especially broad color range"},
+        {"stoneId": "C-0131", "identityLabel": "MANGANESE-ALUMINUM GARNET", "headline": "Often recognized by warm orange to reddish tones"},
+        {"stoneId": "C-0275", "identityLabel": "CALCIUM-IRON GARNET", "headline": "A varied species ranging from earthy crystals to bright gems"},
+        {"stoneId": "C-0355", "identityLabel": "CALCIUM-CHROMIUM GARNET", "headline": "Usually encountered as vivid drusy crystals on matrix"}
+      ]
+    },
+    "garnetGroup": {
+      "title": "Garnet Is a Group, Not One Stone",
+      "intro": "The members of the family share a structural blueprint, but their chemistry is allowed to change.",
+      "paragraphs": [
+        "The word garnet does not identify one mineral species. It refers to a group of minerals built around the same basic crystal structure. Different elements can occupy key positions within that structure, producing distinct species with different colors, densities, and geological settings.",
+        "Natural Garnets also do not always sit neatly at a single chemical endpoint. Many contain intermediate compositions, blending characteristics associated with more than one named species. That is why a specimen may be accurately called Garnet even when its exact position within the family requires testing."
+      ],
+      "supportingLine": "Shared structure does not mean identical chemistry."
+    },
+    "majorBranches": {
+      "title": "The Major Garnet Branches",
+      "intro": "For a practical introduction, six familiar silicate species form the clearest map of the family.",
+      "parent": {"title": "GARNET", "sub": "A mineral group with a shared structural framework"},
+      "branches": [
+        {
+          "title": "ALUMINUM-RICH BRANCH",
+          "secondaryLabel": "PYRALSPITE",
+          "species": [
+            {"name": "Pyrope", "caption": "A magnesium-aluminum species often associated with deep red material."},
+            {"name": "Almandine", "caption": "An iron-aluminum species and one of the most familiar Garnets in rocks and collections."},
+            {"name": "Spessartine", "caption": "A manganese-aluminum species frequently seen in orange, reddish-orange, and brownish crystals."}
+          ]
+        },
+        {
+          "title": "CALCIUM-RICH BRANCH",
+          "secondaryLabel": "UGRANDITE",
+          "species": [
+            {"name": "Grossular", "caption": "A calcium-aluminum species whose natural colors extend far beyond the red commonly expected of Garnet."},
+            {"name": "Andradite", "caption": "A calcium-iron species with several visually distinct forms and collector varieties."},
+            {"name": "Uvarovite", "caption": "A calcium-chromium species most often found as small green crystals coating matrix."}
+          ]
+        }
+      ],
+      "colorParagraphs": [
+        "Red is only one part of the Garnet family. Changes in major composition and smaller amounts of coloring elements can produce orange, yellow, green, brown, purple-red, nearly black, and occasionally color-changing material.",
+        "Color alone cannot identify a Garnet species. Similar colors can occur in different branches, while one species may appear in several colors. Composition, geological context, physical properties, and laboratory testing provide a more reliable answer than appearance by itself."
+      ],
+      "colorCells": [
+        {"label": "Deep red"},
+        {"label": "Orange"},
+        {"label": "Yellow to honey"},
+        {"label": "Green"},
+        {"label": "Brown to nearly black"},
+        {"label": "Purple-red or color-changing"}
+      ],
+      "colorCaption": "A color may suggest a direction, but it does not prove the species.",
+      "namesTitle": "Familiar Names Within the Family",
+      "nameMap": [
+        {"from": "Hessonite", "to": "Grossular"},
+        {"from": "Tsavorite", "to": "Grossular"},
+        {"from": "Demantoid", "to": "Andradite"},
+        {"from": "Melanite", "to": "Andradite"},
+        {"from": "Rhodolite", "to": "commonly associated with Pyrope-Almandine composition"},
+        {"from": "Mali Garnet", "to": "commonly associated with Grossular-Andradite composition"}
+      ],
+      "namesNote": "These names clarify the family; they do not create six more foundational species."
+    },
+    "appearance": {
+      "title": "How Garnet Appears",
+      "intro": "Crystal shape, matrix, surface, and preparation all change what the Garnet story looks like in the hand.",
+      "stages": [
+        {"title": "Crystal in Matrix", "body": "The host rock preserves geological context and shows how the crystal grew."},
+        {"title": "Loose Crystal", "body": "The natural geometry, luster, and surface become easier to examine."},
+        {"title": "Polished Stone", "body": "Polishing brings forward color, inclusions, and translucency while softening the original form."},
+        {"title": "Faceted Stone", "body": "Transparent material may be cut for light, but faceting represents only one part of the Garnet story."}
+      ],
+      "recognitionItems": [
+        "Compact, many-sided crystal forms",
+        "Dodecahedral and trapezohedral geometry",
+        "Glassy to resinous luster",
+        "No obvious cleavage",
+        "Matrix context can help",
+        "Exact species may require testing"
+      ]
+    },
+    "garnetCollection": {
+      "title": "Garnet in Your Collection",
+      "intro": "The most useful collection begins with differences in species, crystal form, matrix, and provenance rather than color names alone.",
+      "listItems": [
+        "Compare an aluminum-rich Garnet with a calcium-rich Garnet.",
+        "Keep matrix specimens when geological context matters.",
+        "Record locality when it is reliable.",
+        "Use \"Garnet\" when the exact species has not been verified."
+      ],
+      "catalogLinks": [
+        {"name": "Almandine Garnet", "stoneId": "C-0048"},
+        {"name": "Grossular Garnet", "stoneId": "C-0061"},
+        {"name": "Spessartine Garnet", "stoneId": "C-0131"},
+        {"name": "Andradite Garnet", "stoneId": "C-0275"},
+        {"name": "Uvarovite", "stoneId": "C-0355"}
+      ]
+    },
+    "imageCredits": []
+  },
+  "tourmaline": {
+    "slug": "tourmaline",
+    "displayName": "Tourmaline",
+    "encyclopediaFilterValue": "Tourmaline",
+    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Tourmaline Family Guide brief (2026-07-23), built strictly from the supplied copy, labels, roster, and section order, reusing the corrected Garnet layout pattern. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
+    "hero": {
+      "eyebrow": "FAMILY GUIDE",
+      "title": "The Tourmaline Family",
+      "signatureLine": "One family. A world of color.",
+      "condensedIntro": "Tourmaline can appear black, brown, green, pink, blue, or several colors at once. As a crystal grows, changing conditions may be preserved as bands, cores, rims, and color shifts inside it.",
+      "emphasisLine": "A Tourmaline crystal can become a timeline of its own growth.",
+      "promptLeadIn": "Tourmaline asks:",
+      "question": "What changed as you grew?",
+      "mediaStoneIds": ["C-0129", "C-0053", "C-0057", "C-0055"]
+    },
+    "meetTourmalineFamily": {
+      "title": "Meet the Tourmaline Family",
+      "intro": "Five Tourmalines in the Still Point catalog show how species, color, and growth pattern can overlap without meaning the same thing.",
+      "members": [
+        {"stoneId": "C-0129", "identityLabel": "SCHORL", "headline": "The iron-rich species behind most material sold as Black Tourmaline"},
+        {"stoneId": "C-0053", "identityLabel": "DRAVITE", "headline": "A magnesium-rich species commonly seen in brown, honey, and nearly black crystals"},
+        {"stoneId": "C-0057", "identityLabel": "ELBAITE", "headline": "Green Elbaite showing the color range possible within one Tourmaline species"},
+        {"stoneId": "C-0055", "identityLabel": "ELBAITE", "headline": "Pink to red-pink Elbaite, sometimes preserving visible changes in color intensity"},
+        {"stoneId": "C-0056", "identityLabel": "COLOR-ZONED ELBAITE", "headline": "A growth pattern with a pink interior and green outer zone"}
+      ]
+    },
+    "tourmalineGroup": {
+      "title": "Tourmaline Is a Group, Not One Species",
+      "intro": "Tourmaline names may describe a mineral species, a color, or a growth pattern, and those are not interchangeable ideas.",
+      "paragraphs": [
+        "Tourmaline is a mineral group built around a shared structural framework. Different elements can occupy important positions inside that structure, creating distinct mineral species.",
+        "The Still Point catalog introduces three of the most familiar species: Schorl, Dravite, and Elbaite. Black Tourmaline is usually Schorl, Brown Tourmaline is represented by Dravite, and the catalog's green, pink, and Watermelon Tourmalines are expressions of Elbaite."
+      ],
+      "tree": {
+        "parent": {"title": "TOURMALINE", "sub": "The mineral group"},
+        "branches": [
+          {"title": "SCHORL", "secondaryLabel": "Black Tourmaline"},
+          {"title": "DRAVITE", "secondaryLabel": "Brown Tourmaline"},
+          {"title": "ELBAITE", "secondaryLabel": "Green, Pink, and Watermelon Tourmaline"}
+        ]
+      },
+      "closingLine": "These are the three species needed to understand the Still Point catalog, not the entire Tourmaline group."
+    },
+    "growthRecording": {
+      "title": "How Tourmaline Records Growth",
+      "intro": "As growth conditions change, a Tourmaline crystal may preserve those changes in each new layer.",
+      "paragraphs": [
+        "A crystal grows by adding material to its existing surfaces. If the surrounding fluid changes while Tourmaline is forming, the chemistry entering the crystal may change too.",
+        "The finished crystal may preserve a darker core, a contrasting rim, a shift from one end to the other, or several irregular bands. These patterns belong to the growth history of the crystal."
+      ],
+      "stages": [
+        {"title": "EARLY GROWTH", "body": "The crystal begins under one chemical environment."},
+        {"title": "CHANGING CONDITIONS", "body": "The surrounding fluid and available elements begin to shift."},
+        {"title": "LATER GROWTH", "body": "New layers preserve the changed chemistry and may develop a different color."},
+        {"title": "FINISHED CRYSTAL", "body": "The completed crystal retains cores, rims, bands, or lengthwise color changes."}
+      ],
+      "comparison": [
+        {"title": "ALONG THE CRYSTAL", "body": "Color changes from one end to the other."},
+        {"title": "CORE AND RIM", "body": "A cross-section reveals earlier growth inside later growth."},
+        {"title": "PATCHES AND BANDS", "body": "Uneven changes preserve fluctuating conditions."}
+      ],
+      "watermelonNote": {
+        "title": "Why Watermelon Looks Like Watermelon",
+        "body": "Watermelon Tourmaline is color-zoned Elbaite. The familiar pattern places a pink or reddish center inside a green outer zone, sometimes with a pale band between them. The name describes the appearance and growth pattern, not a separate species."
+      },
+      "recognitionNote": "Lengthwise surface striations follow the direction of crystal growth."
+    },
+    "tourmalineAppearance": {
+      "title": "How Tourmaline Appears",
+      "intro": "Species, matrix, growth direction, and preparation all change what the Tourmaline story looks like in the hand.",
+      "stages": [
+        {"title": "Crystal in Matrix", "body": "The surrounding minerals preserve geological context and show how the Tourmaline grew in place."},
+        {"title": "Loose Prismatic Crystal", "body": "The natural prism exposes striations, terminations, and color changes along the crystal."},
+        {"title": "Lengthwise Polished Piece", "body": "A polish along the long axis can reveal bands, inclusions, and changes from one end to the other."},
+        {"title": "Cross-Sectional Slice", "body": "A slice across the crystal reveals cores, rims, and concentric zoning."}
+      ],
+      "speciesComparison": [
+        {"title": "Schorl", "body": "Usually black, commonly opaque, often strongly striated"},
+        {"title": "Dravite", "body": "Often brown to nearly black, commonly earthy in appearance"},
+        {"title": "Elbaite", "body": "Broader color range, often more transparent, frequently zoned"}
+      ],
+      "matrixNote": "Tourmaline commonly grows with Quartz, Feldspar, and Mica. These associations preserve geological context and may reveal relative growth.",
+      "quartzLink": {
+        "title": "Tourmaline Quartz",
+        "body": "Tourmaline Quartz is a Quartz entry containing visible Tourmaline inclusions. It is not a sixth Tourmaline-family roster card.",
+        "stoneId": "C-0112",
+        "linkLabel": "Tourmaline Quartz"
+      }
+    },
+    "tourmalineCollection": {
+      "title": "Tourmaline in Your Collection",
+      "intro": "A thoughtful Tourmaline collection compares species, growth direction, matrix, and zoning rather than collecting color names alone.",
+      "listItems": [
+        "Compare Schorl, Dravite, and Elbaite.",
+        "Look both along and across the crystal.",
+        "Keep matrix examples when geological context matters.",
+        "Preserve reliable locality information.",
+        "Distinguish species names from color and growth-pattern names."
+      ],
+      "terminologyNote": "Indicolite is a blue Tourmaline name, commonly used for blue Elbaite. Rubellite refers to strongly pink or red Tourmaline. Watermelon and bicolor describe visible color zoning, not separate species.",
+      "catalogLinks": [
+        {"name": "Black Tourmaline", "stoneId": "C-0129"},
+        {"name": "Brown Tourmaline", "stoneId": "C-0053"},
+        {"name": "Green Tourmaline", "stoneId": "C-0057"},
+        {"name": "Pink Tourmaline", "stoneId": "C-0055"},
+        {"name": "Watermelon Tourmaline", "stoneId": "C-0056"}
+      ]
+    },
+    "closingCallout": "Tourmaline turns growth into color, leaving each crystal with a record written from the inside out.",
+    "closingSupportingCopy": "Follow the lines, read the zones, and let the crystal show how its surroundings changed.",
+    "imageCredits": []
+  },
+  "obsidian": {
+    "slug": "obsidian",
+    "displayName": "Obsidian",
+    "encyclopediaFilterValue": "Obsidian",
+    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Obsidian Family Guide brief (2026-07-23), built strictly from the supplied copy, labels, roster, and section order, reusing the corrected Garnet/Tourmaline layout patterns. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
+    "hero": {
+      "eyebrow": "FAMILY GUIDE",
+      "title": "The Obsidian Family",
+      "signatureLine": "Born from fire. Cooled before crystals could form.",
+      "condensedIntro": "Obsidian begins as silica-rich lava that cools so quickly its atoms cannot organize into a crystal structure. The result is natural volcanic glass: smooth, dark, sharply fractured, and capable of preserving bubbles, flow patterns, mineral growth, and flashes of reflected light.",
+      "emphasisLine": "Obsidian records what happened while molten rock became glass.",
+      "promptLeadIn": "Obsidian asks:",
+      "question": "What did the fire leave behind?",
+      "mediaStoneIds": ["C-0139", "C-0140", "C-0142", "C-0143"]
+    },
+    "meetObsidianFamily": {
+      "title": "Meet the Obsidian Family",
+      "intro": "Six Obsidian entries in the Still Point catalog show how one volcanic glass can preserve very different patterns and optical effects.",
+      "members": [
+        {"stoneId": "C-0139", "identityLabel": "CLASSIC VOLCANIC GLASS", "headline": "Dark, uniform Obsidian with the family's familiar glassy surface and sharp fracture"},
+        {"stoneId": "C-0140", "identityLabel": "REFLECTIVE BUBBLE LAYERS", "headline": "Fine aligned bubbles create a warm golden reflection beneath the dark surface"},
+        {"stoneId": "C-0141", "identityLabel": "IRON-RICH PATTERNING", "headline": "Reddish-brown areas interrupt the black glass with earthy patches and bands"},
+        {"stoneId": "C-0142", "identityLabel": "LAYERED IRIDESCENCE", "headline": "Thin internal layers produce shifting bands of color when light strikes at the right angle"},
+        {"stoneId": "C-0427", "identityLabel": "REFLECTIVE BUBBLE LAYERS", "headline": "Fine internal structures create a cool silver reflection across the dark glass"},
+        {"stoneId": "C-0143", "identityLabel": "CRYSTAL GROWTH IN GLASS", "headline": "Pale radial clusters interrupt the black ground with snowflake-like patterns"}
+      ]
+    },
+    "obsidianGroup": {
+      "title": "Obsidian Is Glass, Not Crystal",
+      "intro": "Obsidian forms when lava cools too quickly for an orderly crystal structure to develop.",
+      "paragraphs": [
+        "Most minerals are built from atoms arranged in repeating structures. Obsidian is different. It is an amorphous volcanic glass formed when silica-rich lava cools rapidly enough to freeze a disordered structure in place.",
+        "That distinction explains its smooth glassy luster and conchoidal fracture. Obsidian can resemble a dark crystal in a collection, but scientifically it is a mineraloid rather than a mineral species."
+      ],
+      "compare": [
+        {"title": "CRYSTALLINE MINERAL", "body": "Atoms form an ordered repeating structure"},
+        {"title": "OBSIDIAN", "body": "Rapid cooling preserves a disordered glass structure"}
+      ],
+      "closingLine": "The difference is not how polished it looks. The difference is how its structure formed."
+    },
+    "lavaPreserves": {
+      "title": "What the Lava Preserves",
+      "intro": "Before the lava became solid glass, movement, gas, chemistry, and early mineral growth left visible traces behind.",
+      "stages": [
+        {"title": "MOLTEN LAVA", "body": "Silica-rich lava moves while hot and fluid."},
+        {"title": "RAPID COOLING", "body": "The outer material cools before crystals can organize."},
+        {"title": "FEATURES BECOME TRAPPED", "body": "Bubbles, flow layers, chemical differences, and early crystal growth remain inside the glass."},
+        {"title": "FINISHED OBSIDIAN", "body": "The solid glass preserves patterns that appear as sheen, color bands, patches, or pale clusters."}
+      ],
+      "comparison": [
+        {"title": "BUBBLES AND FLOW LAYERS", "body": "May produce gold or silver sheen"},
+        {"title": "THIN INTERNAL LAYERS", "body": "May produce rainbow iridescence"},
+        {"title": "IRON-RICH AREAS", "body": "Create reddish-brown Mahogany patterning"},
+        {"title": "CRYSTOBALITE CLUSTERS", "body": "Create Snowflake Obsidian's pale radial forms"}
+      ],
+      "cautionNote": "Appearance names describe what the glass displays. They do not represent separate mineral species."
+    },
+    "obsidianAppearance": {
+      "title": "How Obsidian Appears",
+      "intro": "Surface, fracture, thickness, and lighting can make the same dark glass look dramatically different.",
+      "stages": [
+        {"title": "Natural Rough", "body": "A dark glassy surface may show curved fracture, weathering, or attached volcanic matrix."},
+        {"title": "Fresh Fracture", "body": "Conchoidal breaks create smooth curved surfaces and extremely sharp edges."},
+        {"title": "Polished Stone", "body": "Polishing reveals depth, patterning, and reflective effects hidden by a rough exterior."},
+        {"title": "Held to the Light", "body": "Thin edges or slices may reveal translucency, flow bands, or internal structure."}
+      ],
+      "recognitionItems": [
+        "Glassy rather than granular texture",
+        "Smooth curved conchoidal fracture",
+        "Very sharp fresh edges",
+        "No visible cleavage",
+        "Often black, brown, or dark gray in ordinary light",
+        "Optical effects may appear only at a particular angle",
+        "Exact identification should not rely on color alone"
+      ],
+      "historicalNote": "Because fresh fractures can produce exceptionally sharp edges, Obsidian has long been shaped into cutting tools and points."
+    },
+    "obsidianCollection": {
+      "title": "Obsidian in Your Collection",
+      "intro": "Obsidian rewards comparison because its differences often appear through light, surface, and internal structure rather than mineral species. A strong collection might include one plain black piece, one sheen variety, one patterned variety, and one rough specimen that still shows its volcanic character.",
+      "listItems": [
+        "For contrast — Pair Black Obsidian with Gold Sheen, Silver Sheen, or Rainbow Obsidian.",
+        "For pattern — Include Mahogany or Snowflake Obsidian.",
+        "For context — Keep at least one rough or naturally fractured piece beside polished material.",
+        "For handling — Store chipped specimens carefully because fresh edges can be extremely sharp."
+      ]
+    },
+    "closingCallout": "Obsidian forms in a moment of rapid cooling, yet the glass can preserve an entire history of movement, fire, and change.",
+    "closingSupportingCopy": "Look past the dark surface and the frozen lava begins to speak.",
+    "imageCredits": []
   }
 }

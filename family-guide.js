@@ -23,7 +23,14 @@
    page (familyFitsTogether, otherCalcites, whatIsCalcite, identificationBuyingCare,
    relatedCarbonates full detail, sourceReferences, factualFlags, essentials) are
    kept in the data file as an archival record of earlier approved copy — they
-   are simply not read by any function below. Nothing here deletes that content. */
+   are simply not read by any function below. Nothing here deletes that content.
+
+   2026-07-23 — Back-navigation fix: opening a guide from Crystals 101 ->
+   Crystal Families now patches the *origin* history entry (via
+   fgPatchOriginHistoryEntry(), called from openFamilyGuide() below) so its
+   URL also records the active 101 subsection, and the shared popstate
+   handler restores that subsection after Back. See the comments on both
+   functions for the root cause and why the fix is scoped the way it is. */
 
 let FAMILY_GUIDES = null;
 let _familyGuidesLoadPromise = null;
@@ -46,15 +53,51 @@ function fgReducedMotion(){
   try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; }
 }
 
+// ── Origin-state capture for family-guide Back navigation (2026-07-23) ──
+// Root cause of the reported bug: switching to the Crystals 101 tab (via
+// switchTab/switchTabByName, including the one this popstate handler already
+// called) always runs init101(), which unconditionally shows the "work"
+// subsection — the active Crystal Families/Grids/Shapes/Roles subsection was
+// never part of the URL, only a same-tab in-page toggle. So the history
+// entry a family-guide's pushState left behind (created the moment a Crystal
+// Families tile was clicked) always resolved back to a bare tab=101 URL, and
+// Back landed on the 101 landing view instead of Crystal Families.
+//
+// Fix, kept to one shared, guide-agnostic helper: right before pushing the
+// new history entry for the guide, patch the CURRENT entry (the one the
+// pushState will sit on top of) via replaceState so its URL also records
+// which 101 subsection was active — read from the same localStorage key
+// (spl_101_section) that show101() in 101.js already wrote on every
+// subsection switch, previously unread by anything. No new state-tracking
+// mechanism, no per-guide branching: any tab could adopt this same
+// "?section=" convention later without touching this function again, and
+// nothing here fires unless the tab the guide was opened from is '101'.
+function fgPatchOriginHistoryEntry(){
+  try{
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('tab')==='101'){
+      let sec = null;
+      try{ sec = localStorage.getItem('spl_101_section'); }catch(e){}
+      if(sec){
+        params.set('section', sec);
+        const url = window.location.pathname+'?'+params.toString()+window.location.hash;
+        history.replaceState(history.state, '', url);
+      }
+    }
+  }catch(e){}
+}
+
 // ── Entry point for tile/link clicks — pushes a new history entry so Back
 // returns to whatever the user was looking at before opening the guide. ──
 function openFamilyGuide(rawSlug, opts){
   const slug = familyGuideSlugify(rawSlug);
   if(!slug) return;
   opts = opts || {};
+  fgPatchOriginHistoryEntry();
   const params = new URLSearchParams(window.location.search);
   params.set('tab','family');
   params.set('family',slug);
+  params.delete('section'); // origin-only marker (see fgPatchOriginHistoryEntry); not meaningful on a guide URL
   const hash = opts.anchor ? ('#'+opts.anchor) : '';
   const url = window.location.pathname+'?'+params.toString()+hash;
   try{ history.pushState({familyGuide:slug}, '', url); }catch(e){}
@@ -115,6 +158,18 @@ window.addEventListener('popstate', function(){
   let params; try{ params=new URLSearchParams(window.location.search); }catch(e){ params=null; }
   const t=(params && ['mood','encyclopedia','identify','collection','101'].includes(params.get('tab'))) ? params.get('tab') : 'encyclopedia';
   switchTabByName(t);
+  // Restore the originating Crystal Families (or other) 101 subsection when
+  // the entry we've popped back to carries one — see fgPatchOriginHistoryEntry
+  // above for how/why it got there. switchTabByName('101') already ran
+  // init101() synchronously above, which always defaults to 'work'; this
+  // runs after it in the same tick, so it's the last word on which
+  // subsection ends up active. No-op for every other tab and for any 101
+  // entry that never went through openFamilyGuide (e.g. a plain 101 nav
+  // click), so ordinary Crystals 101 navigation is unaffected.
+  if(t==='101'){
+    const sec = params && params.get('section');
+    if(sec && typeof show101==='function') show101(sec);
+  }
   if(t==='encyclopedia' && typeof encRender==='function') encRender();
 });
 
@@ -139,8 +194,20 @@ function fgCrystal(stoneId){
    kept below so its existing output is unaffected (2026-07-22 generalization
    for the Quartz Family Guide's first pass). */
 function fgHeroMediaHtml(guide){
-  const ids = (guide.hero && guide.hero.mediaStoneIds)
+  let ids = (guide.hero && guide.hero.mediaStoneIds)
     || (guide.slug==='calcite' ? ['C-0007','C-0016','C-0014','C-0015'] : []); // legacy Calcite spread: Blue, Orange, Mangano, Optical
+  // Dynamic fallback (2026-07-23, added for Agate) — used only when a guide
+  // supplies guide.hero.mediaDynamicFilterValue instead of a curated
+  // mediaStoneIds list, e.g. because the exact live roster couldn't be
+  // verified against Supabase in the authoring session and a hardcoded list
+  // risked showing stones that aren't actually tagged that family. Pulls the
+  // first four live CRYSTALS matching that family value, same field (c.fam)
+  // and same live-data source the Crystals 101 family tiles already use.
+  // Every other guide always supplies mediaStoneIds directly, so this branch
+  // never runs for Calcite/Quartz/Fluorite/Feldspar/Chalcedony.
+  if(!ids.length && guide.hero && guide.hero.mediaDynamicFilterValue && typeof CRYSTALS!=='undefined' && Array.isArray(CRYSTALS)){
+    ids = CRYSTALS.filter(c=>c.fam===guide.hero.mediaDynamicFilterValue).map(c=>c.i).slice(0,4);
+  }
   const imgs = ids.map(id=>{
     const c = fgCrystal(id);
     const src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
@@ -149,8 +216,14 @@ function fgHeroMediaHtml(guide){
   if(!imgs.length && guide.hero && guide.hero.image){
     imgs.push(`<img src="${escapeAttr(SUPABASE_ENC+guide.hero.image)}" alt="${escapeAttr(guide.displayName||guide.slug)}">`);
   }
+  // 2026-07-23 (added for Chalcedony, whose roster has only two members):
+  // a plain 2x2 grid leaves an empty bottom row when there are only two
+  // images. This modifier switches to a single row instead; it's applied
+  // purely based on imgs.length, so every existing guide's four-image hero
+  // (Calcite, Quartz, Fluorite, Feldspar) keeps the exact same 2x2 markup.
+  const gridModClass = imgs.length===2 ? ' fg-hero-media-grid--2' : '';
   return `<div class="fg-hero-media">
-    <div class="fg-hero-media-grid">${imgs.join('')}</div>
+    <div class="fg-hero-media-grid${gridModClass}">${imgs.join('')}</div>
     <span class="fg-hero-media-label">Family photograph — coming soon</span>
   </div>`;
 }
@@ -169,9 +242,11 @@ function familyGuideHeroHtml(guide){
         <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
         ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
         ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+        ${hero.emphasisLine?`<p class="fg-hero-emphasis">${escapeAttr(hero.emphasisLine)}</p>`:''}
         ${hero.question?`<div class="fg-hero-prompt">
           ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
           <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+          ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
         </div>`:''}
       </div>
       ${fgHeroMediaHtml(guide)}
@@ -225,7 +300,7 @@ function fgStoneCardHtml(member, opts){
       ${identityHtml}
       <div class="${phraseClass}">${escapeAttr(phraseText)}</div>
       ${badgeHtml}
-      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">${escapeAttr(opts.qvLabel||'Quick View')}</button>
     </div>
   </div>`;
 }
@@ -295,6 +370,19 @@ function fgPhotoCardHtml(item){
     }).filter(Boolean).join('');
     const sizeClass = item.swatchStoneIds.length===6 ? ' fg-photocard-swatch--6' : '';
     mediaHtml = `<div class="fg-photocard-swatch${sizeClass}">${imgs}</div>`;
+  }else if(item.singleStoneId){
+    // Single existing-encyclopedia-photo branch (2026-07-23, added for
+    // Jasper's Rough-vs-Polished comparison, which illustrates "polished"
+    // with Red Jasper's own already-approved canonical photo rather than a
+    // new/invented image). Deliberately separate from swatchStoneIds — a
+    // one-item swatch grid would leave three visibly empty cells. No
+    // existing caller (Calcite, Fluorite, Feldspar) sets this field, so
+    // this branch is purely additive.
+    const c = fgCrystal(item.singleStoneId);
+    const src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+    mediaHtml = src
+      ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(item.alt||c.n)}" loading="lazy">`
+      : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   }else if(item.image){
     mediaHtml = `<img src="${escapeAttr('assets/family-guide-calcite/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`;
   }else if(item.placeholderLabel){
@@ -368,9 +456,15 @@ function familyGuideCollectionHtml(guide){
   const care = c.careForIt||{};
   const pending = !!c.editorialNote;
   const bodyClass = pending ? 'fg-fact-body fg-placeholder-note' : 'fg-fact-body';
+  // c.useSectionIntro (2026-07-23, added for Jasper) opts into the new shared
+  // .fg-section-intro treatment (title -> one-sentence italic Georgia intro
+  // -> content) instead of the original .fg-lead fg-lead--wide styling.
+  // Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate never set this flag, so
+  // their intro paragraphs are completely unchanged by this addition.
+  const introClass = c.useSectionIntro ? 'fg-section-intro' : 'fg-lead fg-lead--wide';
   return `<section class="fg-section" id="fg-collection">
     <h2 class="fg-h2">${escapeAttr(c.title||'In Your Collection')}</h2>
-    ${c.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(c.intro)}</p>`:''}
+    ${c.intro?`<p class="${introClass}">${escapeAttr(c.intro)}</p>`:''}
     ${pending?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
     <div class="fg-collection-grid">
       <div class="fg-collection-care">
@@ -412,8 +506,14 @@ function familyGuideImageCreditsHtml(guide){
    line verbatim so this generalization changes nothing about its output). ── */
 function familyGuideClosingHtml(guide){
   const line = guide.closingCallout || '';
+  // guide.closingSupportingCopy (2026-07-23, added for Garnet) — an optional
+  // second line rendered between the closing callout and the Return button.
+  // No other guide's data sets this field, so their closing panels are
+  // completely unchanged by this addition.
+  const supporting = guide.closingSupportingCopy || '';
   return `<section class="fg-closing" id="fg-closing">
     ${line?`<p class="fg-closing-line">${escapeAttr(line)}</p>`:''}
+    ${supporting?`<p class="fg-closing-supporting">${escapeAttr(supporting)}</p>`:''}
     <button type="button" class="btn btn-accent fg-closing-btn" onclick="switchTabByName('encyclopedia')">Return to Encyclopedia</button>
   </section>`;
 }
@@ -456,10 +556,21 @@ function familyGuideWhatChangesNameHtml(guide){
     <div class="fg-namecard-label">${escapeAttr(cat.label||'')}</div>
     <div class="fg-namecard-chips">${(cat.examples||[]).map(e=>`<span class="fg-chip">${escapeAttr(e)}</span>`).join('')}</div>
   </div>`).join('');
+  // w.gridCols (2026-07-23, added for Jasper's three-category "Pattern Is Not
+  // the Same as Identity" reuse of this component) — an optional modifier
+  // class for category counts other than the default five (only "--3" is
+  // defined in styles.css so far). Quartz never sets this, so its five-
+  // category grid is completely unaffected.
+  const gridModClass = (w.gridCols && w.gridCols!==5) ? ` fg-namegrid--${w.gridCols}` : '';
+  // w.sectionIntro (2026-07-23, added for Jasper) opts into the new shared
+  // .fg-section-intro one-sentence treatment, rendered above the existing
+  // w.question flourish (unchanged) rather than replacing it. Quartz's data
+  // has no sectionIntro, so its output is byte-for-byte unaffected.
   return `<section class="fg-section" id="fg-name-change">
     <h2 class="fg-h2">${escapeAttr(w.title||'What Changes the Name?')}</h2>
+    ${w.sectionIntro?`<p class="fg-section-intro">${escapeAttr(w.sectionIntro)}</p>`:''}
     ${w.question?`<p class="fg-lead fg-lead--question">${escapeAttr(w.question)}</p>`:''}
-    <div class="fg-namegrid">${cards}</div>
+    <div class="fg-namegrid${gridModClass}">${cards}</div>
   </section>`;
 }
 
@@ -737,6 +848,837 @@ function familyGuideFeldsparHtml(guide){
   </div>`;
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   CHALCEDONY FAMILY GUIDE — dedicated section renderers (2026-07-23 first
+   implementation pass). Chalcedony's job is to be the conceptual bridge
+   between Quartz (macrocrystalline) and Agate/Jasper (its own microcrystalline-
+   quartz-family neighbors, cataloged separately) — its section order has no
+   overlap with any other guide's, so it gets its own assembly function below.
+   Purely additive: nothing here touches a Calcite, Quartz, Fluorite, or
+   Feldspar selector or function. Its roster (Blue and Pink Chalcedony) is
+   intentionally small — see fg-card-grid--2 in styles.css — and Agate/Jasper
+   roster stones are never pulled into that roster grid; they only appear as
+   representative photos in the separate Chalcedony/Agate/Jasper relationship
+   section below, the same pattern Quartz's own relationship section already
+   established and had approved. ══ */
+
+/* ── 2. Meet the Chalcedony Family — exactly two rostered expressions.
+   Deliberately not forced into an eight-card grid; fg-card-grid--2 gives a
+   centered, intentional two-card layout instead. No identity/quickView copy
+   is supplied in the data (see below), so cards show name + Quick View only,
+   never invented identity or metaphysical language. ── */
+function familyGuideMeetFamilyHtml(guide){
+  const m = guide.meetTheFamily;
+  if(!m) return '';
+  let members = m.members || [];
+  // Dynamic roster (2026-07-23, added for Agate) — an opt-in alternative to
+  // a curated members array. Chalcedony's two-member roster was handed to
+  // us directly and verified, so it stays a hardcoded, exact list. Agate's
+  // live roster could not be verified against Supabase in this session, so
+  // rather than guess which "*Agate*"-named stones are actually tagged
+  // family:"Agate" today, this resolves the roster from live CRYSTALS at
+  // render time — the same c.fam field and the same live-data approach the
+  // Crystals 101 family tiles already use for their stone counts/examples.
+  // Only runs when a guide has no explicit members array, so Calcite,
+  // Quartz, Fluorite, Feldspar, and Chalcedony are all unaffected.
+  let gridMod = 'fg-card-grid--2';
+  if(!members.length && m.dynamicFilterValue && typeof CRYSTALS!=='undefined' && Array.isArray(CRYSTALS)){
+    members = CRYSTALS.filter(c=>c.fam===m.dynamicFilterValue)
+      .slice()
+      .sort((a,b)=>(a.n>b.n?1:(a.n<b.n?-1:0)))
+      .map(c=>({stoneId:c.i}));
+    gridMod = members.length<=2 ? 'fg-card-grid--2' : 'fg-card-grid--4';
+  }
+  // m.gridClass (2026-07-23, added for Jasper's fixed twelve-member roster)
+  // — an explicit override for guides whose card count doesn't fit the
+  // existing --2/--4 modifiers. Chalcedony and Agate never set this, so the
+  // computed gridMod above still decides their layout exactly as before.
+  if(m.gridClass) gridMod = m.gridClass;
+  const cards = members.map(mem=>fgExpressionCardHtml(mem, {showIdentity:true, placeholderOk:true})).filter(Boolean).join('');
+  const emptyNote = (m.dynamicFilterValue && !members.length)
+    ? `<p class="fg-fact-body fg-note-center">Live roster still loading — please check back once the encyclopedia has finished loading.</p>` : '';
+  // m.useSectionIntro (2026-07-23, added for Jasper) opts into the new shared
+  // .fg-section-intro treatment instead of .fg-lead. Chalcedony/Agate never
+  // set this, so their intro paragraphs are unchanged.
+  const introClass = m.useSectionIntro ? 'fg-section-intro' : 'fg-lead';
+  return `<section class="fg-section" id="fg-meet-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Family')}</h2>
+    ${m.intro?`<p class="${introClass}">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-card-grid ${gridMod}">${cards}</div>
+    ${emptyNote}
+  </section>`;
+}
+
+/* ── 3. What Chalcedony Actually Is — the structural explanation (Quartz is
+   the broader family; chalcedony is fine intergrowths of quartz and moganite,
+   too small to see without magnification; that structure, not a different
+   chemistry, produces the smooth/waxy/translucent look). Restrained working
+   copy restating only the facts supplied for this pass — no invented
+   technical claims. The macrocrystalline/microcrystalline comparison has no
+   approved licensed photography yet, so both positions render as labeled
+   pending placeholders rather than substituting any other image. ── */
+function familyGuideWhatChalcedonyIsHtml(guide){
+  const w = guide.whatChalcedonyIs;
+  if(!w) return '';
+  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-what-chalcedony-is">
+    <h2 class="fg-h2">${escapeAttr(w.title||'What Chalcedony Actually Is')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-compare-grid">
+      <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending — macrocrystalline Quartz</span></div></div>
+      <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending — microcrystalline Chalcedony</span></div></div>
+    </div>
+  </section>`;
+}
+
+/* ── 3. What Agate Actually Is (2026-07-23, first Agate pass) — Agate's own
+   parallel to familyGuideWhatChalcedonyIsHtml above. Kept as a separate,
+   dedicated function/data field (guide.whatAgateIs) rather than renaming or
+   reusing Chalcedony's, so the approved Chalcedony guide's code and output
+   are left completely untouched. Explains that Agate is banded/patterned
+   chalcedony formed by successive silica deposition in a cavity — a pattern
+   distinction, not a different mineral. No approved licensed photography
+   exists yet, so the unbanded-Chalcedony/banded-Agate comparison renders as
+   labeled pending placeholders. ── */
+function familyGuideWhatAgateIsHtml(guide){
+  const w = guide.whatAgateIs;
+  if(!w) return '';
+  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-what-agate-is">
+    <h2 class="fg-h2">${escapeAttr(w.title||'What Agate Actually Is')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-compare-grid">
+      <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending — unbanded Chalcedony</span></div></div>
+      <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending — banded Agate</span></div></div>
+    </div>
+  </section>`;
+}
+
+/* ── Family-fit card — Chalcedony/Agate/Jasper branch cards, reusing
+   .fg-relationship-card/.fg-relationship-media/.fg-relationship-label as-is
+   and adding one footer action: the current guide's own family gets a "you
+   are here" badge, a family with a built guide gets a real openFamilyGuide()
+   button (Chalcedony's guide now qualifies, alongside Quartz), and a family
+   with no guide yet (currently just Jasper) gets a disabled button — never
+   a dead link, per the brief's explicit guardrail. Reused as-is by both the
+   Chalcedony and Agate guides' relationship sections; only the guide.data
+   passed to familyGuideAgateJasperFitHtml() differs between them. ── */
+function fgFamilyFitCardHtml(item){
+  const c = fgCrystal(item.stoneId);
+  if(!c) return '';
+  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+  const imgHtml = imgSrc
+    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  let actionHtml;
+  if(item.current){
+    actionHtml = `<span class="fg-badge">YOU ARE HERE</span>`;
+  }else if(item.guideSlug){
+    actionHtml = `<button type="button" class="btn btn-sm" onclick="openFamilyGuide('${escapeAttr(item.guideSlug)}')">Open ${escapeAttr(item.label)} Family Guide</button>`;
+  }else{
+    actionHtml = `<button type="button" class="btn btn-sm" disabled title="Family guide coming soon">Family guide coming soon</button>`;
+  }
+  return `<div class="fg-relationship-card">
+    <button type="button" class="fg-relationship-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+    <div class="fg-relationship-label">${escapeAttr(item.label||c.n)}</div>
+    ${item.description?`<p class="fg-fact-body">${escapeAttr(item.description)}</p>`:''}
+    <div class="fg-family-fit-action">${actionHtml}</div>
+  </div>`;
+}
+
+/* ── 4. Chalcedony, Agate & Jasper — the family-grouping explanation:
+   mineralogically all three belong to the wider quartz story, but this
+   encyclopedia catalogs Agate and Jasper as their own families. A real link
+   to the (existing) Quartz Family Guide sits below the three branch cards. ── */
+function familyGuideAgateJasperFitHtml(guide){
+  const r = guide.agateJasperFit;
+  if(!r) return '';
+  const branches = (r.branches||[]).map(fgFamilyFitCardHtml).filter(Boolean).join('');
+  // r.useSectionIntro (2026-07-23, added for Jasper) opts into the new shared
+  // .fg-section-intro treatment instead of .fg-lead fg-lead--wide. Chalcedony
+  // and Agate never set this, so their already-approved intro paragraphs
+  // here are completely unchanged.
+  const introClass = r.useSectionIntro ? 'fg-section-intro' : 'fg-lead fg-lead--wide';
+  return `<section class="fg-section" id="fg-agate-jasper-fit">
+    <h2 class="fg-h2">${escapeAttr(r.title||'Chalcedony, Agate & Jasper')}</h2>
+    ${r.intro?`<p class="${introClass}">${escapeAttr(r.intro)}</p>`:''}
+    <div class="fg-relationship-grid">${branches}</div>
+    ${r.quartzLinkLabel?`<div class="fg-quartz-link-wrap"><button type="button" class="btn" onclick="openFamilyGuide('quartz')">${escapeAttr(r.quartzLinkLabel)}</button></div>`:''}
+  </section>`;
+}
+
+/* ── 5. Color, Translucency & Surface — the recognizable-qualities chip list
+   (soft translucency, waxy luster, even color, clouding, subtle patterning,
+   botryoidal surfaces). Framed explicitly as not a guaranteed test, per the
+   brief's guardrail against overstating identification cues. One pending
+   placeholder visual; no licensed photo approved yet for this section. ── */
+function familyGuideColorTranslucencyHtml(guide){
+  const s = guide.colorTranslucencySurface;
+  if(!s) return '';
+  const chips = (s.qualities||[]).map(q=>`<span class="fg-chip">${escapeAttr(q)}</span>`).join('');
+  return `<section class="fg-section" id="fg-color-translucency">
+    <h2 class="fg-h2">${escapeAttr(s.title||'Color, Translucency & Surface')}</h2>
+    ${s.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(s.intro)}</p>`:''}
+    <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-zoning-chips">${chips}</div>
+    ${s.note?`<p class="fg-fact-body fg-note-center">${escapeAttr(s.note)}</p>`:''}
+  </section>`;
+}
+
+/* ── 6. Forms Chalcedony Takes — reuses fgPhotoCardHtml exactly as Calcite's
+   Shapes section does. No licensed photography approved yet for any of these
+   forms, so every card renders via the existing placeholderLabel branch. ── */
+function familyGuideFormsHtml(guide){
+  const f = guide.forms;
+  if(!f) return '';
+  const cards = (f.items||[]).map(fgPhotoCardHtml).join('');
+  return `<section class="fg-section" id="fg-forms">
+    <h2 class="fg-h2">${escapeAttr(f.title||'Forms Chalcedony Takes')}</h2>
+    ${f.intro?`<p class="fg-lead">${escapeAttr(f.intro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
+  </section>`;
+}
+
+/* ── 7. Chalcedony in the Wider Quartz Story — plain, non-clickable chips
+   (Carnelian, Chrysoprase, Onyx, Agate, Jasper). Educational relationships
+   only: no stone links, no roster implication, and an explicit note that
+   this is not a claim about how the encyclopedia currently browses/groups
+   these materials, per the brief's guardrail. ── */
+function familyGuideWiderQuartzStoryHtml(guide){
+  const w = guide.widerQuartzStory;
+  if(!w) return '';
+  const chips = (w.examples||[]).map(e=>`<span class="fg-chip">${escapeAttr(e)}</span>`).join('');
+  return `<section class="fg-section" id="fg-wider-quartz-story">
+    <h2 class="fg-h2">${escapeAttr(w.title||'Chalcedony in the Wider Quartz Story')}</h2>
+    ${w.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(w.intro)}</p>`:''}
+    <div class="fg-zoning-chips">${chips}</div>
+    ${w.note?`<p class="fg-fact-body fg-note-center">${escapeAttr(w.note)}</p>`:''}
+  </section>`;
+}
+
+/* ── Chalcedony guide assembly — its own approved section order. ── */
+function familyGuideChalcedonyHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideMeetFamilyHtml(guide)}
+    ${familyGuideWhatChalcedonyIsHtml(guide)}
+    ${familyGuideAgateJasperFitHtml(guide)}
+    ${familyGuideColorTranslucencyHtml(guide)}
+    ${familyGuideFormsHtml(guide)}
+    ${familyGuideWiderQuartzStoryHtml(guide)}
+    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
+/* ── Agate guide assembly (2026-07-23) — the second guide to use Agate's
+   own "What Agate Actually Is" section, alongside the same generic
+   Chalcedony/Agate/Jasper Fit, Color/Translucency/Surface, Forms, and Wider
+   Quartz Story sections Chalcedony's page already established (unmodified,
+   just fed Agate's own guide data). Meet the Agate Family resolves its
+   roster live (guide.meetTheFamily.dynamicFilterValue:"Agate") rather than
+   from a hardcoded members list — see familyGuideMeetFamilyHtml() above for
+   why. Purely additive: nothing here changes Chalcedony's assembly, data, or
+   rendered output. ── */
+function familyGuideAgateHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideMeetFamilyHtml(guide)}
+    ${familyGuideWhatAgateIsHtml(guide)}
+    ${familyGuideAgateJasperFitHtml(guide)}
+    ${familyGuideColorTranslucencyHtml(guide)}
+    ${familyGuideFormsHtml(guide)}
+    ${familyGuideWiderQuartzStoryHtml(guide)}
+    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   JASPER FAMILY GUIDE — dedicated section renderers (2026-07-23 first
+   implementation pass). Also the first guide to use the new shared
+   .fg-section-intro component (title -> one-sentence italic Georgia intro
+   -> content), added this pass in styles.css. Reuses Chalcedony/Agate's
+   generic Chalcedony/Agate/Jasper-Fit, Collection, and What-Changes-the-
+   Name components (each opted in via a new useSectionIntro/sectionIntro
+   flag — see those functions above), plus fgPhotoCardHtml/fgExpressionCardHtml
+   unchanged. No licensed educational photography could be retained this
+   pass (see editorialStatusNote/pendingAssets in the data) — every
+   would-be photo slot below renders a labeled pending placeholder instead
+   of a substitute image, per the brief's explicit guardrail. ══ */
+
+/* ── 3. What Jasper Actually Is — a large educational image beside
+   explanatory copy, with an optional compact rough-vs-polished strip below
+   (reusing fgPhotoCardHtml). Kept as its own dedicated function/data field
+   (guide.whatJasperIs) rather than reusing or renaming Chalcedony's/Agate's
+   parallel sections, so their approved code and output stay untouched. ── */
+function familyGuideWhatJasperIsHtml(guide){
+  const w = guide.whatJasperIs;
+  if(!w) return '';
+  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const mainImgHtml = w.image
+    ? `<img src="${escapeAttr('assets/family-guide-jasper/'+w.image)}" alt="${escapeAttr(w.imageAlt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>${escapeAttr(w.placeholderLabel||'Photo pending')}</span></div>`;
+  const compareCount = (w.compareItems||[]).length;
+  const compareGridClass = compareCount===2 ? 'fg-photo-grid--2' : (compareCount===3 ? 'fg-photo-grid--3' : 'fg-photo-grid--4');
+  const compareHtml = compareCount
+    ? `<div class="fg-photo-grid ${compareGridClass} fg-what-jasper-compare">${(w.compareItems||[]).map(fgPhotoCardHtml).join('')}</div>`
+    : '';
+  return `<section class="fg-section" id="fg-what-jasper-is">
+    <h2 class="fg-h2">${escapeAttr(w.title||'What Jasper Actually Is')}</h2>
+    ${w.sectionIntro?`<p class="fg-section-intro">${escapeAttr(w.sectionIntro)}</p>`:''}
+    <div class="fg-explain-grid">
+      <div class="fg-explain-media">${mainImgHtml}</div>
+      <div class="fg-explain-copy">${paras}</div>
+    </div>
+    ${compareHtml}
+  </section>`;
+}
+
+/* ── 4. How Jasper Makes a Pattern — reader-facing visual pattern
+   categories (Brecciated, Scenic, Orbicular, Spotted, Banded, Mottled),
+   reusing fgPhotoCardHtml exactly as Calcite's Shapes/Recognition sections
+   do. Explicitly not a formal universal classification — see the section
+   intro and editorialStatusNote. ── */
+function familyGuideJasperPatternHtml(guide){
+  const p = guide.patternGuide;
+  if(!p) return '';
+  const cards = (p.categories||[]).map(fgPhotoCardHtml).join('');
+  return `<section class="fg-section" id="fg-jasper-pattern">
+    <h2 class="fg-h2">${escapeAttr(p.title||'How Jasper Makes a Pattern')}</h2>
+    ${p.sectionIntro?`<p class="fg-section-intro">${escapeAttr(p.sectionIntro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
+  </section>`;
+}
+
+/* ── 6. Rough, Cut, and Polished — a lapidary-stage comparison (rough,
+   cut face, polished slab, cabochon, carving, bead, tumble), reusing
+   fgPhotoCardHtml exactly as the Pattern section above does. ── */
+function familyGuideRoughCutPolishedHtml(guide){
+  const r = guide.roughCutPolished;
+  if(!r) return '';
+  const cards = (r.items||[]).map(fgPhotoCardHtml).join('');
+  return `<section class="fg-section" id="fg-rough-cut-polished">
+    <h2 class="fg-h2">${escapeAttr(r.title||'Rough, Cut, and Polished')}</h2>
+    ${r.sectionIntro?`<p class="fg-section-intro">${escapeAttr(r.sectionIntro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
+  </section>`;
+}
+
+/* ── Jasper guide assembly — its own approved section order. Purely
+   additive: nothing here changes Calcite/Quartz/Fluorite/Feldspar/
+   Chalcedony/Agate's assembly, data, or rendered output. ── */
+function familyGuideJasperHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideMeetFamilyHtml(guide)}
+    ${familyGuideWhatJasperIsHtml(guide)}
+    ${familyGuideJasperPatternHtml(guide)}
+    ${familyGuideWhatChangesNameHtml(guide)}
+    ${familyGuideRoughCutPolishedHtml(guide)}
+    ${familyGuideAgateJasperFitHtml(guide)}
+    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   GARNET FAMILY GUIDE — dedicated section renderers (2026-07-23, revised
+   same day into a simpler six-section layout per Christie's "focused layout
+   and structure correction" pass: the original eight-section split read as
+   fragmented/card-heavy, so Color, Familiar Names, Recognition, and
+   Crystal-to-Polished were folded into two broader sections — Major
+   Branches now carries color + naming context, and a new "How Garnet
+   Appears" section carries the stage sequence + a compact recognition
+   list. Section order: Meet the Family, Garnet Is a Group/Not One Stone,
+   Major Branches (+ color + names), How Garnet Appears, In Your
+   Collection, Closing. Purely additive/Garnet-scoped: nothing here touches
+   a Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate/Jasper selector,
+   function, or data field. All five roster cards use fgStoneCardHtml
+   directly in placeholder-aware mode (opts.placeholderOk) since two of the
+   five species (Grossular, Spessartine) have no canonical photo on file
+   yet — see the brief's explicit guardrail against substituting a
+   different stone's image. ══ */
+
+/* ── 1. Meet the Garnet Family — five rostered species. Grid uses
+   .fg-card-grid--garnet-roster (flex-wrap + centered rows), which naturally
+   lays out as three cards on row one and two centered on row two at
+   desktop widths, without a grid-template-areas hack. "QUICK VIEW →"
+   button copy per the approved brief (an opt-in fgStoneCardHtml field,
+   opts.qvLabel, defaulting to the existing "Quick View" text everywhere
+   else so no other guide's cards are affected). ── */
+function familyGuideMeetGarnetFamilyHtml(guide){
+  const m = guide.meetGarnetFamily;
+  if(!m) return '';
+  const cards = (m.members||[]).map(mem=>fgStoneCardHtml(mem, {showIdentity:true, placeholderOk:true, qvLabel:'QUICK VIEW →'})).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-garnet-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Garnet Family')}</h2>
+    ${m.intro?`<p class="fg-section-intro">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+  </section>`;
+}
+
+/* ── 2. Garnet Is a Group, Not One Stone — explanatory copy widened to a
+   comfortable reading measure, ending in an emphasized inline line rather
+   than a separate bordered three-box visual (removed per the layout
+   correction — the prose already makes the point). ── */
+function familyGuideGarnetGroupHtml(guide){
+  const g = guide.garnetGroup;
+  if(!g) return '';
+  const paras = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-garnet-group">
+    <h2 class="fg-h2">${escapeAttr(g.title||'Garnet Is a Group, Not One Stone')}</h2>
+    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
+    <div class="fg-prose-block">
+      ${paras}
+      ${g.supportingLine?`<p class="fg-prose fg-prose-emphasis">${escapeAttr(g.supportingLine)}</p>`:''}
+    </div>
+  </section>`;
+}
+
+/* ── 3. The Major Garnet Branches — now the dominant, widened visual
+   section of the page. Carries the parent/branch/species diagram plus,
+   folded in beneath it, the color explanation (two paragraphs + a compact
+   horizontal color strip) and a compact "Familiar Names Within the Family"
+   note — replacing what were three separate, narrower, card-heavy sections
+   in the previous pass. All content remains entirely data-driven from
+   guide.majorBranches; nothing here reorders or renames the branches,
+   species, colors, or name-map relationships. ── */
+const FG_GARNET_COLOR_SWATCHES = {
+  'deep red': '#7a2a2a',
+  'orange': '#c4713a',
+  'yellow to honey': '#d4a53a',
+  'green': '#4a7a4a',
+  'brown to nearly black': '#3a2a20',
+  'purple-red or color-changing': '#7a3a5a'
+};
+function familyGuideGarnetBranchesHtml(guide){
+  const b = guide.majorBranches;
+  if(!b) return '';
+  const branchesHtml = (b.branches||[]).map(br=>{
+    const species = (br.species||[]).map(sp=>`<div class="fg-tree-species-item">
+      <div class="fg-tree-species-name">${escapeAttr(sp.name||'')}</div>
+      <p class="fg-tree-species-caption">${escapeAttr(sp.caption||'')}</p>
+    </div>`).join('');
+    return `<div class="fg-tree-branch">
+      <div class="fg-tree-branch-title">${escapeAttr(br.title||'')}</div>
+      ${br.secondaryLabel?`<div class="fg-tree-branch-secondary">${escapeAttr(br.secondaryLabel)}</div>`:''}
+      <div class="fg-tree-species">${species}</div>
+    </div>`;
+  }).join('');
+  const colorParas = (b.colorParagraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const colorChips = (b.colorCells||[]).map(cell=>{
+    const key = String(cell.label||'').toLowerCase().trim();
+    const color = FG_GARNET_COLOR_SWATCHES[key] || 'var(--stone3)';
+    return `<span class="fg-color-chip"><span class="fg-color-chip-dot" style="background:${color}"></span>${escapeAttr(cell.label||'')}</span>`;
+  }).join('');
+  const nameRows = (b.nameMap||[]).map(row=>`<div class="fg-namemap-row"><span class="fg-namemap-from">${escapeAttr(row.from||'')}</span><span class="fg-namemap-arrow">→</span><span>${escapeAttr(row.to||'')}</span></div>`).join('');
+  return `<section class="fg-section" id="fg-garnet-branches">
+    <h2 class="fg-h2">${escapeAttr(b.title||'The Major Garnet Branches')}</h2>
+    ${b.intro?`<p class="fg-section-intro">${escapeAttr(b.intro)}</p>`:''}
+    <div class="fg-tree">
+      <div class="fg-tree-parent">
+        <div class="fg-tree-parent-title">${escapeAttr((b.parent&&b.parent.title)||'GARNET')}</div>
+        <div class="fg-tree-parent-sub">${escapeAttr((b.parent&&b.parent.sub)||'')}</div>
+      </div>
+      <div class="fg-tree-branches">${branchesHtml}</div>
+    </div>
+    ${colorParas?`<div class="fg-prose-block fg-garnet-branches-subblock">${colorParas}</div>`:''}
+    ${colorChips?`<div class="fg-color-strip">${colorChips}</div>`:''}
+    ${b.colorCaption?`<p class="fg-note-center">${escapeAttr(b.colorCaption)}</p>`:''}
+    ${nameRows?`<div class="fg-names-note">
+      <div class="fg-names-note-title">${escapeAttr(b.namesTitle||'Familiar Names Within the Family')}</div>
+      <div class="fg-namemap">${nameRows}</div>
+      ${b.namesNote?`<p class="fg-fact-body fg-note-center">${escapeAttr(b.namesNote)}</p>`:''}
+    </div>`:''}
+  </section>`;
+}
+
+/* ── 4. How Garnet Appears — replaces the former separate "How to
+   Recognize Garnet" and "From Crystal to Polished Stone" sections: one
+   four-stage visual sequence (each stage renders as a labeled pending
+   placeholder per the brief's explicit allowance, rather than guessing
+   which of Almandine Garnet's existing canonical photos depicts which
+   stage), followed by one compact recognition list instead of five
+   separate cards with CSS silhouettes. ── */
+function familyGuideGarnetAppearanceHtml(guide){
+  const a = guide.appearance;
+  if(!a) return '';
+  const stages = (a.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
+    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-progression-number">${i+1}</div>
+    <div class="fg-progression-body">
+      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
+      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
+    </div>
+  </div>`).join('');
+  const recognitionItems = fgList(a.recognitionItems||[], 'fg-garnet-plain-list');
+  return `<section class="fg-section" id="fg-garnet-appearance">
+    <h2 class="fg-h2">${escapeAttr(a.title||'How Garnet Appears')}</h2>
+    ${a.intro?`<p class="fg-section-intro">${escapeAttr(a.intro)}</p>`:''}
+    <div class="fg-progression">${stages}</div>
+    <div class="fg-garnet-plain-list-wrap">${recognitionItems}</div>
+  </section>`;
+}
+
+/* ── 5. Garnet in Your Collection — a simple compact list (not four large
+   bordered rows) plus the compact linked list of the five canonical
+   entries (deliberately not a repeat of the full five-card roster gallery
+   from Section 1). ── */
+function familyGuideGarnetCollectionHtml(guide){
+  const c = guide.garnetCollection;
+  if(!c) return '';
+  const listItems = fgList(c.listItems||[], 'fg-garnet-plain-list');
+  const links = (c.catalogLinks||[]).map(l=>{
+    const cr = fgCrystal(l.stoneId);
+    if(!cr) return '';
+    return `<button type="button" class="fg-catalog-link" onclick="openDetail('${escapeAttr(cr.i)}')">${escapeAttr(l.name||cr.n)}</button>`;
+  }).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-garnet-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Garnet in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-garnet-plain-list-wrap">${listItems}</div>
+    <div class="fg-catalog-links">${links}</div>
+  </section>`;
+}
+
+/* ── Garnet guide assembly — its own approved section order. Purely
+   additive: nothing here changes any other guide's assembly, data, or
+   rendered output. ── */
+function familyGuideGarnetHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideMeetGarnetFamilyHtml(guide)}
+    ${familyGuideGarnetGroupHtml(guide)}
+    ${familyGuideGarnetBranchesHtml(guide)}
+    ${familyGuideGarnetAppearanceHtml(guide)}
+    ${familyGuideGarnetCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TOURMALINE FAMILY GUIDE — dedicated section renderers (2026-07-23,
+   built per Christie's lean implementation brief, reusing the corrected
+   Garnet layout pattern: wide prose, one dominant visual, a 3+2 roster,
+   one appearance sequence, minimal bordered cards. Purely additive/
+   Tourmaline-scoped: nothing here touches a Calcite/Quartz/Fluorite/
+   Feldspar/Chalcedony/Agate/Jasper/Garnet selector, function, or data
+   field. Roster cards reuse fgStoneCardHtml in placeholder-aware mode
+   (opts.placeholderOk) since Watermelon Tourmaline has no canonical photo
+   on file yet — see the brief's explicit pending-photo allowance. ══ */
+
+/* ── 1. Meet the Tourmaline Family — five rostered species/expressions.
+   Reuses .fg-card-grid--garnet-roster: a flex-wrap, centered-row layout
+   (3 cards, then 2 centered) that is not garnet-specific in behavior,
+   only in its original naming — the exact 3+2/2-col/1-col responsive
+   pattern the brief asks this guide to reuse. ── */
+function familyGuideMeetTourmalineFamilyHtml(guide){
+  const m = guide.meetTourmalineFamily;
+  if(!m) return '';
+  const cards = (m.members||[]).map(mem=>fgStoneCardHtml(mem, {showIdentity:true, placeholderOk:true, qvLabel:'QUICK VIEW →'})).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-tourmaline-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Tourmaline Family')}</h2>
+    ${m.intro?`<p class="fg-section-intro">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+  </section>`;
+}
+
+/* ── Shared triple-caption grid — three bordered title+caption cards in a
+   centered 3-column grid. Reuses .fg-namegrid--3 (grid layout only) and
+   .fg-tree-species-item (bordered card, Georgia name + caption) exactly
+   as already styled for Garnet's branch species list — no new CSS. Used
+   twice below: the growth-pattern comparison (Section 3) and the species
+   comparison (Section 4). ── */
+function fgTripleCaptionGridHtml(items){
+  const cards = (items||[]).map(it=>`<div class="fg-tree-species-item">
+    <div class="fg-tree-species-name">${escapeAttr(it.title||'')}</div>
+    <p class="fg-tree-species-caption">${escapeAttr(it.body||'')}</p>
+  </div>`).join('');
+  return `<div class="fg-namegrid fg-namegrid--3">${cards}</div>`;
+}
+
+/* ── 2. Tourmaline Is a Group, Not One Species — wide prose plus one
+   simple relationship visual (TOURMALINE -> Schorl/Dravite/Elbaite).
+   Reuses .fg-tree/.fg-tree-parent/.fg-tree-branches/.fg-tree-branch as
+   Garnet's branch diagram does, but omits the nested species list (this
+   guide's branches map directly to a roster color group, not to further
+   species), so .fg-tree-species is never rendered empty. ── */
+function familyGuideTourmalineGroupHtml(guide){
+  const g = guide.tourmalineGroup;
+  if(!g) return '';
+  const paras = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const tree = g.tree||{};
+  const branchesHtml = (tree.branches||[]).map(br=>`<div class="fg-tree-branch">
+    <div class="fg-tree-branch-title">${escapeAttr(br.title||'')}</div>
+    ${br.secondaryLabel?`<div class="fg-tree-branch-secondary">${escapeAttr(br.secondaryLabel)}</div>`:''}
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-tourmaline-group">
+    <h2 class="fg-h2">${escapeAttr(g.title||'Tourmaline Is a Group, Not One Species')}</h2>
+    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
+    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-tree">
+      <div class="fg-tree-parent">
+        <div class="fg-tree-parent-title">${escapeAttr((tree.parent&&tree.parent.title)||'TOURMALINE')}</div>
+        <div class="fg-tree-parent-sub">${escapeAttr((tree.parent&&tree.parent.sub)||'')}</div>
+      </div>
+      <div class="fg-tree-branches">${branchesHtml}</div>
+    </div>
+    ${g.closingLine?`<p class="fg-note-center">${escapeAttr(g.closingLine)}</p>`:''}
+  </section>`;
+}
+
+/* ── 3. How Tourmaline Records Growth — the dominant visual section: a
+   four-stage growth diagram (reuses .fg-progression, same component as
+   Garnet's appearance-stage sequence), a compact three-way comparison
+   (fgTripleCaptionGridHtml), a Watermelon note (reuses .fg-names-note),
+   and one short recognition line. ── */
+function familyGuideGrowthRecordingHtml(guide){
+  const r = guide.growthRecording;
+  if(!r) return '';
+  const paras = (r.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const stages = (r.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
+    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-progression-number">${i+1}</div>
+    <div class="fg-progression-body">
+      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
+      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
+    </div>
+  </div>`).join('');
+  const w = r.watermelonNote||{};
+  return `<section class="fg-section" id="fg-growth-recording">
+    <h2 class="fg-h2">${escapeAttr(r.title||'How Tourmaline Records Growth')}</h2>
+    ${r.intro?`<p class="fg-section-intro">${escapeAttr(r.intro)}</p>`:''}
+    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-progression">${stages}</div>
+    ${fgTripleCaptionGridHtml(r.comparison)}
+    ${w.body?`<div class="fg-names-note">
+      <div class="fg-names-note-title">${escapeAttr(w.title||'Why Watermelon Looks Like Watermelon')}</div>
+      <p class="fg-fact-body fg-note-center">${escapeAttr(w.body)}</p>
+    </div>`:''}
+    ${r.recognitionNote?`<p class="fg-note-center">${escapeAttr(r.recognitionNote)}</p>`:''}
+  </section>`;
+}
+
+/* ── 4. How Tourmaline Appears — a four-stage sequence (reuses
+   .fg-progression again), a species comparison (fgTripleCaptionGridHtml),
+   a matrix note, and one contextual link to the Tourmaline Quartz Quartz-
+   family entry (reuses .fg-catalog-link — not a sixth roster card, no
+   Quick View grid slot, no family-guide route). ── */
+function familyGuideTourmalineAppearanceHtml(guide){
+  const a = guide.tourmalineAppearance;
+  if(!a) return '';
+  const stages = (a.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
+    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-progression-number">${i+1}</div>
+    <div class="fg-progression-body">
+      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
+      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
+    </div>
+  </div>`).join('');
+  const q = a.quartzLink||{};
+  const qc = q.stoneId ? fgCrystal(q.stoneId) : null;
+  return `<section class="fg-section" id="fg-tourmaline-appearance">
+    <h2 class="fg-h2">${escapeAttr(a.title||'How Tourmaline Appears')}</h2>
+    ${a.intro?`<p class="fg-section-intro">${escapeAttr(a.intro)}</p>`:''}
+    <div class="fg-progression">${stages}</div>
+    ${fgTripleCaptionGridHtml(a.speciesComparison)}
+    ${a.matrixNote?`<p class="fg-note-center">${escapeAttr(a.matrixNote)}</p>`:''}
+    ${qc?`<div class="fg-names-note">
+      <div class="fg-names-note-title">${escapeAttr(q.title||'Tourmaline Quartz')}</div>
+      <p class="fg-fact-body fg-note-center">${escapeAttr(q.body||'')}</p>
+      <div class="fg-catalog-links"><button type="button" class="fg-catalog-link" onclick="openDetail('${escapeAttr(qc.i)}')">${escapeAttr(q.linkLabel||'Tourmaline Quartz')}</button></div>
+    </div>`:''}
+  </section>`;
+}
+
+/* ── 5. Tourmaline in Your Collection — a simple compact list, one small
+   terminology note (Indicolite/Rubellite/Watermelon are names, not
+   separate species/roster cards — no cards, routes, or Quick View
+   entries are added for them), and the five linked catalog pills. ── */
+function familyGuideTourmalineCollectionHtml(guide){
+  const c = guide.tourmalineCollection;
+  if(!c) return '';
+  const listItems = fgList(c.listItems||[], 'fg-garnet-plain-list');
+  const links = (c.catalogLinks||[]).map(l=>{
+    const cr = fgCrystal(l.stoneId);
+    if(!cr) return '';
+    return `<button type="button" class="fg-catalog-link" onclick="openDetail('${escapeAttr(cr.i)}')">${escapeAttr(l.name||cr.n)}</button>`;
+  }).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-tourmaline-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Tourmaline in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-garnet-plain-list-wrap">${listItems}</div>
+    ${c.terminologyNote?`<p class="fg-fact-body fg-note-center">${escapeAttr(c.terminologyNote)}</p>`:''}
+    <div class="fg-catalog-links">${links}</div>
+  </section>`;
+}
+
+/* ── Tourmaline guide assembly — its own approved section order. Purely
+   additive: nothing here changes any other guide's assembly, data, or
+   rendered output. ── */
+function familyGuideTourmalineHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideMeetTourmalineFamilyHtml(guide)}
+    ${familyGuideTourmalineGroupHtml(guide)}
+    ${familyGuideGrowthRecordingHtml(guide)}
+    ${familyGuideTourmalineAppearanceHtml(guide)}
+    ${familyGuideTourmalineCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   OBSIDIAN FAMILY GUIDE — dedicated section renderers (2026-07-23, built
+   per Christie's lean implementation brief, reusing the corrected Garnet/
+   Tourmaline layout patterns: wide prose, one dominant visual, a 3+3
+   roster, one appearance sequence, minimal bordered cards. Purely
+   additive/Obsidian-scoped: nothing here touches a Calcite/Quartz/
+   Fluorite/Feldspar/Chalcedony/Agate/Jasper/Garnet/Tourmaline selector,
+   function, or data field. Roster cards reuse fgStoneCardHtml in
+   placeholder-aware mode (opts.placeholderOk); all six roster stones have
+   a canonical image on file per the Production Master. ══ */
+
+/* ── Shared bordered title+caption card — reuses .fg-tree-species-item
+   exactly as Tourmaline's fgTripleCaptionGridHtml does, but factored so
+   the wrapping grid class is caller-supplied: Obsidian needs a 2-up
+   comparison (Section 2) and a 4-up comparison (Section 3), neither of
+   which match Tourmaline's fixed 3-up grid. No new CSS: fg-card-grid--2
+   (2 cols, centered, collapses to 1 on mobile) and fg-card-grid--4 (4/2/1
+   responsive) are both existing, already-shipped grid classes reused
+   here for text cards instead of their usual stone-photo cards. ── */
+function fgCaptionCardsHtml(items){
+  return (items||[]).map(it=>`<div class="fg-tree-species-item">
+    <div class="fg-tree-species-name">${escapeAttr(it.title||'')}</div>
+    <p class="fg-tree-species-caption">${escapeAttr(it.body||'')}</p>
+  </div>`).join('');
+}
+
+/* ── 1. Meet the Obsidian Family — six rostered expressions. Reuses
+   .fg-card-grid--garnet-roster (flex-wrap, centered rows) which, with six
+   cards instead of five, naturally lays out as the requested 3+3 rather
+   than 3+2 — same component, no new modifier needed. ── */
+function familyGuideMeetObsidianFamilyHtml(guide){
+  const m = guide.meetObsidianFamily;
+  if(!m) return '';
+  const cards = (m.members||[]).map(mem=>fgStoneCardHtml(mem, {showIdentity:true, placeholderOk:true, qvLabel:'QUICK VIEW →'})).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-obsidian-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Obsidian Family')}</h2>
+    ${m.intro?`<p class="fg-section-intro">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+  </section>`;
+}
+
+/* ── 2. Obsidian Is Glass, Not Crystal — wide prose plus one simple
+   two-item comparison (Crystalline Mineral vs. Obsidian). No additional
+   taxonomy cards, per the brief. ── */
+function familyGuideObsidianGroupHtml(guide){
+  const g = guide.obsidianGroup;
+  if(!g) return '';
+  const paras = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-obsidian-group">
+    <h2 class="fg-h2">${escapeAttr(g.title||'Obsidian Is Glass, Not Crystal')}</h2>
+    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
+    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-card-grid fg-card-grid--2">${fgCaptionCardsHtml(g.compare)}</div>
+    ${g.closingLine?`<p class="fg-note-center">${escapeAttr(g.closingLine)}</p>`:''}
+  </section>`;
+}
+
+/* ── 3. What the Lava Preserves — the dominant visual section: a
+   four-stage formation sequence (reuses .fg-progression, same component
+   as Garnet's/Tourmaline's stage sequences), a compact four-item "what
+   creates what" comparison, and one caution line. No standalone sections
+   for sheen, rainbow color, Mahogany, or Snowflake, per the brief. ── */
+function familyGuideLavaPreservesHtml(guide){
+  const l = guide.lavaPreserves;
+  if(!l) return '';
+  const stages = (l.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
+    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-progression-number">${i+1}</div>
+    <div class="fg-progression-body">
+      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
+      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
+    </div>
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-lava-preserves">
+    <h2 class="fg-h2">${escapeAttr(l.title||'What the Lava Preserves')}</h2>
+    ${l.intro?`<p class="fg-section-intro">${escapeAttr(l.intro)}</p>`:''}
+    <div class="fg-progression">${stages}</div>
+    <div class="fg-card-grid fg-card-grid--4">${fgCaptionCardsHtml(l.comparison)}</div>
+    ${l.cautionNote?`<p class="fg-note-center">${escapeAttr(l.cautionNote)}</p>`:''}
+  </section>`;
+}
+
+/* ── 4. How Obsidian Appears — a four-stage sequence (reuses
+   .fg-progression again), a compact recognition list (reuses .fg-list via
+   fgList, same pattern as Garnet's recognitionItems), and one short
+   historical note. ── */
+function familyGuideObsidianAppearanceHtml(guide){
+  const a = guide.obsidianAppearance;
+  if(!a) return '';
+  const stages = (a.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
+    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-progression-number">${i+1}</div>
+    <div class="fg-progression-body">
+      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
+      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
+    </div>
+  </div>`).join('');
+  const recognitionItems = fgList(a.recognitionItems||[], 'fg-garnet-plain-list');
+  return `<section class="fg-section" id="fg-obsidian-appearance">
+    <h2 class="fg-h2">${escapeAttr(a.title||'How Obsidian Appears')}</h2>
+    ${a.intro?`<p class="fg-section-intro">${escapeAttr(a.intro)}</p>`:''}
+    <div class="fg-progression">${stages}</div>
+    <div class="fg-garnet-plain-list-wrap">${recognitionItems}</div>
+    ${a.historicalNote?`<p class="fg-note-center">${escapeAttr(a.historicalNote)}</p>`:''}
+  </section>`;
+}
+
+/* ── 5. Obsidian in Your Collection — a simple compact list only (revised
+   2026-07-23 per Christie's correction: no catalog-link pills, no repeat
+   of the six-card roster gallery from Section 1, no new component —
+   reuses the same .fg-list/.fg-garnet-plain-list treatment as every
+   other guide's compact list). ── */
+function familyGuideObsidianCollectionHtml(guide){
+  const c = guide.obsidianCollection;
+  if(!c) return '';
+  const listItems = fgList(c.listItems||[], 'fg-garnet-plain-list');
+  return `<section class="fg-section" id="fg-obsidian-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Obsidian in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-garnet-plain-list-wrap">${listItems}</div>
+  </section>`;
+}
+
+/* ── Obsidian guide assembly — its own approved section order. Purely
+   additive: nothing here changes any other guide's assembly, data, or
+   rendered output. ── */
+function familyGuideObsidianHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideMeetObsidianFamilyHtml(guide)}
+    ${familyGuideObsidianGroupHtml(guide)}
+    ${familyGuideLavaPreservesHtml(guide)}
+    ${familyGuideObsidianAppearanceHtml(guide)}
+    ${familyGuideObsidianCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
 /* ── Generic guide assembly — for any family guide other than Calcite,
    Fluorite, or Feldspar (currently: Quartz). Calcite keeps its own fixed,
    unmodified assembly below so its approved layout and output are
@@ -763,6 +1705,12 @@ function familyGuideGenericHtml(guide){
 function familyGuideHtml(guide){
   if(guide.slug==='fluorite') return familyGuideFluoriteHtml(guide);
   if(guide.slug==='feldspar') return familyGuideFeldsparHtml(guide);
+  if(guide.slug==='chalcedony') return familyGuideChalcedonyHtml(guide);
+  if(guide.slug==='agate') return familyGuideAgateHtml(guide);
+  if(guide.slug==='jasper') return familyGuideJasperHtml(guide);
+  if(guide.slug==='garnet') return familyGuideGarnetHtml(guide);
+  if(guide.slug==='tourmaline') return familyGuideTourmalineHtml(guide);
+  if(guide.slug==='obsidian') return familyGuideObsidianHtml(guide);
   if(guide.slug!=='calcite') return familyGuideGenericHtml(guide);
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
@@ -790,7 +1738,7 @@ function familyGuideNotFoundHtml(slug){
 // Crystals 101 family tiles already rendered before this resolves, refresh them
 // so a guide-enabled tile can pick up its hero image from the guide record.
 loadFamilyGuides().then(()=>{
-  if(document.getElementById('fam-cards') && typeof renderFamilies==='function'){
-    renderFamilies(window.currentFamTier||'major');
+  if(document.getElementById('fam-cards') && typeof renderPrimaryFamilies==='function'){
+    renderPrimaryFamilies();
   }
 });
