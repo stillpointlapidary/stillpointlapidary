@@ -68,7 +68,7 @@ let detailReturnContext=null;
 let batchEntries=[];
 let customEntries=JSON.parse(localStorage.getItem('lap_enc_custom')||'[]');
 
-const FAM_OPTS=['Aggregate','Apatite','Aragonite','Beryl','Calcite','Copper Minerals','Feldspar','Fluorite','Fossil Material','Garnet','Gypsum','Iron Minerals','Kyanite','Obsidian','Opal','Organic Material','Quartz','Serpentine','Silicates','Synthetic Material','Tourmaline'];
+const FAM_OPTS=['Agate','Aggregate','Apatite','Aragonite','Beryl','Calcite','Chalcedony','Copper Minerals','Feldspar','Fluorite','Fossil Material','Garnet','Gypsum','Iron Minerals','Jasper','Kyanite','Obsidian','Opal','Organic Material','Quartz','Serpentine','Silicates','Synthetic Material','Tourmaline'];
 const THEME_OPTS=['Grounding','Protection','Heart Healing','Emotional Regulation','Calm & Peace','Self-Love','Joy','Clarity & Focus','Communication','Intuition','Spiritual Connection','Vitality','Amplification','Transformation','Manifestation','Confidence'];
 const THEME_GROUPS=[
   {label:'Grounded & Protected', themes:['Grounding','Protection']},

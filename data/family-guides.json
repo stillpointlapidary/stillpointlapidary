@@ -4,6 +4,7 @@
     "displayName": "Calcite",
     "encyclopediaFilterValue": "Calcite",
     "editorialStatusNote": "Editorial status: Complete first-page draft for Christie’s holistic review. The metaphysical sections synthesize the approved online source set currently available. Identity-sensitive claims and final energetic distinctions should still receive the normal book-source and technical audit before publication.",
+    "closingCallout": "Calcite helps life begin moving again.",
     "hero": {
       "image": "blue-calcite.webp",
       "eyebrow": "FAMILY GUIDE",
@@ -856,5 +857,357 @@
         "label": "Mindat — Magnesite species page"
       }
     }
+  },
+  "quartz": {
+    "slug": "quartz",
+    "displayName": "Quartz",
+    "encyclopediaFilterValue": "Quartz",
+    "editorialStatusNote": "First implementation pass (2026-07-22) for Christie's visual review. Hero, Introduction, the eight anchor-expression cards, and the What Changes the Name? categories use Christie's locked copy exactly. Growth Forms & Inclusions and Quartz in Your Collection are structural shells only — those sections have no approved body copy yet and render clearly marked placeholders (see fg-placeholder-note text) pending Christie's editorial input. Where Agate, Chalcedony & Jasper Fit was updated 2026-07-23 with Christie's approved section-level explanatory paragraph following the family-grouping correction (Agate, Chalcedony, and Jasper are now separate encyclopedia families, not Quartz-family subgroups); the three branch cards still show per-card 'Editorial copy pending' since no branch-specific prose has been approved.",
+    "closingCallout": "Quartz helps bring what matters into clearer focus.",
+    "hero": {
+      "mediaStoneIds": ["C-0105", "C-0119", "C-0121", "C-0108"],
+      "eyebrow": "FAMILY GUIDE",
+      "title": "Quartz Family Guide",
+      "signatureLine": "A family of clarity, amplification, and many distinct expressions.",
+      "condensedIntro": "Quartz appears under many names, but the family shares a recognizable energetic character. It is known for clarity, amplification, and helping intention become more focused. Each variety brings its own emphasis, while color, inclusions, growth, locality, and treatment shape how the material looks and how it is understood.",
+      "promptLeadIn": "Quartz asks:",
+      "question": "What do you want to make clearer?"
+    },
+    "overview": {
+      "paragraphs": [
+        "Quartz is familiar enough to seem simple, yet its names describe several very different kinds of distinction. Amethyst and Citrine are color varieties. Rutilated Quartz is defined by another mineral held inside it. Spirit Quartz and Faden Quartz are recognized by how they grow. Aura Quartz is transformed through treatment.",
+        "Once those differences are separated, the family becomes much easier to understand."
+      ]
+    },
+    "expressions": {
+      "title": "Meet Eight Quartz Expressions",
+      "members": [
+        {
+          "stoneId": "C-0105",
+          "identityLabel": "The Amplifier",
+          "quickView": "Strengthens focus, intention, and the energy of other stones."
+        },
+        {
+          "stoneId": "C-0119",
+          "identityLabel": "The Quiet Mind",
+          "quickView": "Calms mental noise and supports reflection, intuition, and rest."
+        },
+        {
+          "stoneId": "C-0121",
+          "identityLabel": "The Motivator",
+          "quickView": "Builds confidence, creativity, optimism, and forward movement."
+        },
+        {
+          "stoneId": "C-0108",
+          "identityLabel": "The Heart Softener",
+          "quickView": "Encourages compassion, self-kindness, trust, and emotional openness."
+        },
+        {
+          "stoneId": "C-0103",
+          "identityLabel": "The Grounding Lens",
+          "quickView": "Clears mental clutter while returning attention to the body and present moment."
+        },
+        {
+          "stoneId": "C-0126",
+          "identityLabel": "The Conscious Shift",
+          "quickView": "Supports thoughtful growth, discernment, and heart-led change."
+        },
+        {
+          "stoneId": "C-0114",
+          "identityLabel": "The Clear Path",
+          "quickView": "Organizes scattered energy and helps reveal direction through complexity."
+        },
+        {
+          "stoneId": "C-0113",
+          "identityLabel": "The Steady Spark",
+          "quickView": "Combines drive and momentum with grounding, focus, and emotional steadiness."
+        }
+      ]
+    },
+    "whatChangesName": {
+      "title": "What Changes the Name?",
+      "question": "What changed here?",
+      "categories": [
+        {
+          "label": "Color",
+          "examples": ["Amethyst", "Citrine", "Rose Quartz", "Smoky Quartz", "Prasiolite"]
+        },
+        {
+          "label": "Inclusions",
+          "examples": ["Rutilated Quartz", "Tourmalinated Quartz", "Hematoid Quartz", "Lodolite Quartz", "Enhydro Quartz"]
+        },
+        {
+          "label": "Growth Form",
+          "examples": ["Spirit Quartz", "Elestial Quartz", "Faden Quartz", "Lemurian Seed Crystal"]
+        },
+        {
+          "label": "Locality or Provenance",
+          "examples": ["Tibetan Quartz", "Vera Cruz Amethyst"]
+        },
+        {
+          "label": "Treatment or Commercial Naming",
+          "examples": ["Aura Quartz", "heat-treated Citrine", "Crackle Quartz"]
+        }
+      ]
+    },
+    "growthFormsInclusions": {
+      "title": "Growth Forms & Inclusions",
+      "editorialNote": "MISSING APPROVED COPY: no body text exists yet for these cards beyond the stone name. Placeholders render via fg-placeholder-note until Christie supplies final copy distinguishing growth-form recognition from inclusion identification per stone.",
+      "growthForms": {
+        "label": "Growth Forms",
+        "items": [
+          {"stoneId": "C-0104"},
+          {"stoneId": "C-0366"},
+          {"stoneId": "C-0304"},
+          {"stoneId": "C-0323"}
+        ]
+      },
+      "inclusions": {
+        "label": "Inclusions & Internal Features",
+        "items": [
+          {"stoneId": "C-0114"},
+          {"stoneId": "C-0112"},
+          {"stoneId": "C-0115"},
+          {"stoneId": "C-0367"},
+          {"stoneId": "C-0113"}
+        ]
+      }
+    },
+    "relationship": {
+      "title": "Where Agate, Chalcedony & Jasper Fit",
+      "bodyParagraph": "Mineralogically, chalcedony, agate, and jasper belong to the wider quartz story. For this encyclopedia, they are organized as separate families because their textures, naming systems, collector distinctions, and commercial identities are extensive enough to deserve their own paths.",
+      "branches": [
+        {"label": "Chalcedony", "stoneId": "C-0082"},
+        {"label": "Agate", "stoneId": "C-0077"},
+        {"label": "Jasper", "stoneId": "C-0099"}
+      ]
+    },
+    "collection": {
+      "title": "Quartz in Your Collection",
+      "editorialNote": "MISSING APPROVED COPY: Care for It / Remember This / Watch For content below is a structural placeholder only — no final Quartz collection copy has been approved yet.",
+      "careForIt": {
+        "intro": "Placeholder — approved Quartz care guidance pending Christie's review.",
+        "bullets": [
+          "Placeholder — final care bullets pending."
+        ]
+      },
+      "rememberThis": "Placeholder — approved reminder copy pending Christie's review.",
+      "watchFor": "Placeholder — approved caution copy (treated Citrine, Aura Quartz, Crackle Quartz, misleading commercial names) pending Christie's review."
+    }
+  },
+  "fluorite": {
+    "slug": "fluorite",
+    "displayName": "Fluorite",
+    "encyclopediaFilterValue": "Fluorite",
+    "editorialStatusNote": "First implementation pass (2026-07-22) for Christie's visual review. Hero, lower-hero introduction, Cube/Octahedron/Cleavage copy, the fluorescence paragraph, and the Care for It / Remember This / Watch For collection copy use Christie's locked wording exactly. The eight expression cards' identity labels and Quick View lines have no approved copy yet and render clearly marked placeholders. Yttrium Fluorite and Candy Fluorite do not resolve to any canonical roster entry (verified against the live stones table 2026-07-22) and render as non-clickable family-guide-only cards per the Candy Fluorite guardrail. One Mineral, Many Colors and Color Zoning, Banding & Phantoms have no approved body copy yet. Five educational images (Cube/Octahedron/Cleavage x3, Zoning x1, Fluorescence x1) are approved by filename/creator/license but not yet retained locally — see pendingAssets below and each section's placeholder. Asset folder assets/family-guide-fluorite/ has been created and is empty, ready for those drops.",
+    "closingCallout": "Fluorite helps separate what matters from everything competing for attention.",
+    "hero": {
+      "mediaStoneIds": ["C-0034", "C-0032", "C-0031", "C-0036"],
+      "eyebrow": "FAMILY GUIDE",
+      "title": "Fluorite Family Guide",
+      "signatureLine": "A family of clarity, color, and remarkable geometry.",
+      "condensedIntro": "Fluorite brings order to what feels scattered. Across its many colors, it is known for supporting focus, discernment, and the ability to sort signal from noise. Its cubes, octahedra, internal bands, and unexpected fluorescence make the family as visually instructive as it is energetically distinct.",
+      "promptLeadIn": "Fluorite asks:",
+      "question": "What deserves your full attention?"
+    },
+    "overview": {
+      "paragraphs": [
+        "Fluorite is calcium fluoride, a single mineral capable of appearing colorless, purple, green, blue, yellow, pink, or layered in several colors at once. It crystallizes in the cubic system, but its perfect cleavage can also produce octahedral pieces. Color, habit, zoning, locality, and commercial naming explain most of the differences readers encounter within the family."
+      ]
+    },
+    "expressions": {
+      "title": "Meet Eight Fluorite Expressions",
+      "members": [
+        {"stoneId": "C-0034"},
+        {"stoneId": "C-0032"},
+        {"stoneId": "C-0031"},
+        {"stoneId": "C-0036"},
+        {"stoneId": "C-0033"},
+        {"stoneId": "C-0035"},
+        {"name": "Yttrium Fluorite"},
+        {"name": "Candy Fluorite"}
+      ]
+    },
+    "manyColors": {
+      "title": "One Mineral, Many Colors",
+      "editorialNote": "MISSING APPROVED COPY: no explanatory body text has been approved yet for this section. The six-image grid below uses Fluorite's six canonical color entries, reusing the established Calcite Many Colors six-image pattern, per Christie's instruction.",
+      "swatchStoneIds": ["C-0034", "C-0032", "C-0031", "C-0036", "C-0033", "C-0035"]
+    },
+    "cubeOctahedronCleavage": {
+      "title": "Cube, Octahedron, or Cleavage Piece?",
+      "items": [
+        {
+          "title": "Cubic Crystal",
+          "body": "Fluorite most characteristically grows as cubes, sometimes with beveled corners or more complex modifications.",
+          "placeholderLabel": "Photo pending",
+          "pendingAsset": {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
+        },
+        {
+          "title": "Natural Octahedron",
+          "body": "Fluorite can also grow naturally with eight triangular faces, although this habit is less common than the cube.",
+          "placeholderLabel": "Photo pending",
+          "pendingAsset": {"filename": "Fluorite-282542.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
+        },
+        {
+          "title": "Cleavage Piece",
+          "body": "Because Fluorite cleaves perfectly in four directions, broken material can form neat octahedral fragments. Many small polished or rough “Fluorite octahedrons” are cleavage pieces rather than complete naturally grown crystals.",
+          "placeholderLabel": "Photo pending",
+          "pendingAsset": {"filename": "Diamond-shaped fluorite crystal.jpg", "creator": "James St. John", "license": "CC BY 2.0"}
+        }
+      ]
+    },
+    "zoningPhantoms": {
+      "title": "Color Zoning, Banding & Phantoms",
+      "editorialNote": "MISSING APPROVED COPY: no explanatory paragraph has been approved yet for this section. The pattern-type labels below are structural vocabulary only, not a claim that every visible band is a phantom or that one cause explains every transition.",
+      "patterns": ["Central core", "Edge bands", "Repeated growth zones", "Layered bands", "Box-like phantoms"],
+      "pendingAsset": {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
+    },
+    "fluorescence": {
+      "title": "Why Some Fluorite Glows",
+      "paragraph": "Some Fluorite fluoresces under ultraviolet light, producing visible color that is not apparent under ordinary illumination. The response varies by specimen and locality, and many pieces show little or no fluorescence.",
+      "pendingAsset": {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5"}
+    },
+    "collection": {
+      "title": "Fluorite in Your Collection",
+      "careForIt": {
+        "intro": "Fluorite is relatively soft and has perfect cleavage, so edges and points can chip from impact.",
+        "bullets": [
+          "Dust gently with a soft cloth or brush.",
+          "Avoid knocks, drops, and crowded storage.",
+          "Keep it separate from harder minerals.",
+          "Use water conservatively when matrix, coatings, or repairs are uncertain.",
+          "Avoid ultrasonic and steam cleaning.",
+          "Protect strongly colored specimens from prolonged direct sunlight."
+        ]
+      },
+      "rememberThis": "Color names describe expressions of Fluorite, not separate mineral species. Crystal habit, zoning, cleavage, locality, and treatment may matter as much as color when understanding a specimen.",
+      "watchFor": "Small octahedrons may be cleavage pieces rather than naturally grown crystals. Commercial names can be inconsistent, and unusually vivid material should be described honestly when treatment or enhancement is known or suspected.",
+      "watchForNote": "Candy Fluorite–specific caution copy (composition, locality, treatment status) pending Christie's review — do not assume treated or untreated without provenance."
+    },
+    "pendingAssets": [
+      {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Cube, Octahedron, or Cleavage Piece? — Cubic Crystal position"},
+      {"filename": "Fluorite-282542.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Cube, Octahedron, or Cleavage Piece? — Natural Octahedron position"},
+      {"filename": "Diamond-shaped fluorite crystal.jpg", "creator": "James St. John", "license": "CC BY 2.0", "use": "Cube, Octahedron, or Cleavage Piece? — Cleavage Piece position"},
+      {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Color Zoning, Banding & Phantoms"},
+      {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5", "use": "Why Some Fluorite Glows — white light vs. shortwave UV comparison"}
+    ]
+  },
+  "feldspar": {
+    "slug": "feldspar",
+    "displayName": "Feldspar",
+    "encyclopediaFilterValue": "Feldspar",
+    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's visual review. Hero, lower-hero introduction, and the closing line use Christie's locked wording exactly. All eight roster IDs for Meet Eight Feldspar Expressions were verified live against Supabase stones (2026-07-23): Moonstone C-0162, Rainbow Moonstone C-0030, Labradorite C-0028, Spectrolite C-0166, Sunstone C-0029, Amazonite C-0025, Peach Moonstone C-0395, Black Moonstone C-0159 — all resolve and are clickable. Larvikite (C-0396, family 'Feldspar-rich Rocks') and Green Moonstone (C-0399, species Garnierite, family 'Nickel-bearing Silicates') also verified for the Labradorite/Spectrolite/Larvikite and Moonstone-decoder sections respectively. No card identity labels, Quick View lines, branch/optics/decoder explanatory prose, Sunstone body copy, or collection copy are approved yet — all render as clearly marked placeholders. Five educational images are named by filename only in the brief (no creator/license supplied this pass, unlike Fluorite's); they are recorded in pendingAssets below with creator/license left unconfirmed and every section renders a labeled 'Photo pending' placeholder instead of substituting any other image. Pierrelune.jpg (Polished Moonstone) was named as a candidate without an assigned section position in the brief; it is listed in pendingAssets as unplaced rather than forced into a slot. Asset folder assets/family-guide-feldspar/ has not been created — no approved local assets exist yet to store there.",
+    "closingCallout": "Feldspar reminds us that perspective can reveal what structure keeps hidden.",
+    "hero": {
+      "mediaStoneIds": ["C-0162", "C-0028", "C-0029", "C-0025"],
+      "eyebrow": "FAMILY GUIDE",
+      "title": "Feldspar Family Guide",
+      "signatureLine": "A mineral family shaped by structure, color, and moving light.",
+      "condensedIntro": "Feldspar is one of Earth’s most abundant mineral families, yet many of its best-known members are recognized by light rather than composition alone. Moonstone carries a floating glow. Labradorite flashes from within. Sunstone scatters bright reflections. Across the family, internal structure turns ordinary light into something mobile, layered, and surprising.",
+      "promptLeadIn": "Feldspar asks:",
+      "question": "What changes when you look from another angle?"
+    },
+    "overview": {
+      "paragraph": "The feldspar group contains several related mineral branches, including potassium feldspars and the plagioclase series. Familiar stones such as Moonstone, Labradorite, Sunstone, Amazonite, and Spectrolite occupy different places within that wider family. Their names may describe composition, optical effect, locality, color, or commercial usage, so understanding the branch beneath the name makes the family easier to navigate."
+    },
+    "expressions": {
+      "title": "Meet Eight Feldspar Expressions",
+      "members": [
+        {"stoneId": "C-0162"},
+        {"stoneId": "C-0030"},
+        {"stoneId": "C-0028"},
+        {"stoneId": "C-0166"},
+        {"stoneId": "C-0029"},
+        {"stoneId": "C-0025"},
+        {"stoneId": "C-0395"},
+        {"stoneId": "C-0159"}
+      ]
+    },
+    "branches": {
+      "title": "Two Great Branches",
+      "editorialNote": "MISSING APPROVED COPY: no explanatory body text has been approved yet for this section. The two branch cards below use the concise labels given in the brief; they are not a claim that every listed stone is a formal mineralogical variety of that branch or that composition has been verified specimen-by-specimen.",
+      "items": [
+        {"title": "Potassium Feldspar", "labels": ["Orthoclase", "Microcline", "Sanidine", "Amazonite", "traditional Moonstone materials"]},
+        {"title": "Plagioclase Feldspar", "labels": ["Albite–Anorthite series", "Labradorite", "Rainbow Moonstone", "Spectrolite", "many Sunstones"]}
+      ]
+    },
+    "lightMoves": {
+      "title": "When the Light Moves",
+      "editorialNote": "MISSING APPROVED COPY: no explanatory paragraph has been approved yet for any of the four optical-effect cards. Card titles are locked; body text and photography are placeholders pending Christie's review.",
+      "items": [
+        {
+          "title": "Adularescence",
+          "body": "Editorial copy pending.",
+          "bodyPending": true,
+          "placeholderLabel": "Photo pending",
+          "pendingAsset": {"filename": "AdulaireSuisse2.jpg", "creator": null, "license": null}
+        },
+        {
+          "title": "Labradorescence",
+          "body": "Editorial copy pending.",
+          "bodyPending": true,
+          "placeholderLabel": "Photo pending",
+          "pendingAsset": {"filename": "Labradorite in two samples showing labradorescence.jpg", "creator": null, "license": null}
+        },
+        {
+          "title": "Aventurescence",
+          "body": "Editorial copy pending.",
+          "bodyPending": true,
+          "placeholderLabel": "Photo pending",
+          "pendingAsset": {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null}
+        },
+        {
+          "title": "Schiller and Iridescence",
+          "body": "Editorial copy pending.",
+          "bodyPending": true,
+          "placeholderLabel": "Photo pending"
+        }
+      ]
+    },
+    "moonstoneDecoder": {
+      "title": "Moonstone Is Not One Simple Name",
+      "editorialNote": "MISSING APPROVED COPY: no final explanatory prose has been approved for any of these five cards. The identityStatus lines below reflect only facts already controlled elsewhere in the project (the Rainbow Moonstone guardrail stated in this brief, and Green Moonstone's existing catalog species of Garnierite) — they are not new editorial claims.",
+      "items": [
+        {"stoneId": "C-0162", "label": "Moonstone", "identityStatus": "Traditional Moonstone material, potassium feldspar branch."},
+        {"stoneId": "C-0030", "label": "Rainbow Moonstone", "badge": "IDENTITY GUARDRAIL", "identityStatus": "Identity guardrail: white Labradorite, not a color variety of traditional Moonstone."},
+        {"stoneId": "C-0395", "label": "Peach Moonstone", "badge": "IDENTITY CAUTION", "identityStatus": "Commercial name — universal mineral identity not established here; framed cautiously pending review."},
+        {"stoneId": "C-0159", "label": "Black Moonstone", "badge": "IDENTITY CAUTION", "identityStatus": "Commercial name — universal mineral identity not established here; framed cautiously pending review."},
+        {"stoneId": "C-0399", "label": "Green Moonstone", "badge": "IDENTITY CAUTION", "identityStatus": "Catalog identity: Garnierite (Nickel-bearing Silicates family) — not a Feldspar, and not automatically true Moonstone."}
+      ]
+    },
+    "lsl": {
+      "title": "Labradorite, Spectrolite & Larvikite",
+      "editorialNote": "MISSING APPROVED COPY: no final explanatory prose has been approved for these three cards. Role lines below use only the concise labels given in the brief.",
+      "items": [
+        {"stoneId": "C-0028", "label": "Labradorite", "roleLines": ["Feldspar mineral", "Broad gem and specimen material"]},
+        {"stoneId": "C-0166", "label": "Spectrolite", "roleLines": ["Finnish labradorite designation", "Associated with especially broad or vivid spectral color display"]},
+        {"stoneId": "C-0396", "label": "Larvikite", "badge": "ROCK, NOT A LABRADORITE VARIETY", "roleLines": ["Feldspar-rich rock", "Not a variety of Labradorite", "May show flashes that cause understandable market confusion"]}
+      ]
+    },
+    "sunstoneSection": {
+      "title": "Sunstone and the Spark Within",
+      "editorialNote": "MISSING APPROVED COPY: no final explanatory prose has been approved for this section. Structure only — a single focused card for the roster's Sunstone (C-0029) plus a placeholder for the planned licensed Aventurescence/Sunstone teaching image.",
+      "stoneId": "C-0029",
+      "pendingAsset": {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null}
+    },
+    "collection": {
+      "title": "Feldspar in Your Collection",
+      "editorialNote": "MISSING APPROVED COPY: Care for It / Remember This / Watch For content below is a structural placeholder only — no final Feldspar collection copy has been approved yet.",
+      "careForIt": {
+        "intro": "Placeholder — approved Feldspar care guidance pending Christie's review.",
+        "bullets": [
+          "Placeholder — final care bullets pending."
+        ]
+      },
+      "rememberThis": "Placeholder — approved reminder copy pending Christie's review.",
+      "watchFor": "Placeholder — approved caution copy (Rainbow Moonstone identity, vague Moonstone naming, Green Moonstone misidentification, Larvikite sold as Labradorite, coated/dyed material, misleading Sunstone sparkle) pending Christie's review."
+    },
+    "pendingAssets": [
+      {"filename": "AdulaireSuisse2.jpg", "creator": null, "license": null, "use": "When the Light Moves — Adularescence position"},
+      {"filename": "Labradorite in two samples showing labradorescence.jpg", "creator": null, "license": null, "use": "When the Light Moves — Labradorescence position"},
+      {"filename": "Spectrolite from Ylämaa.jpg", "creator": null, "license": null, "use": "Named in brief but not yet assigned to a rendered section position — reported as unplaced"},
+      {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null, "use": "When the Light Moves — Aventurescence position, and Sunstone and the Spark Within"},
+      {"filename": "Pierrelune.jpg", "creator": null, "license": null, "use": "Named in brief (Polished Moonstone) but not assigned to a section position — Moonstone's card already uses an approved Christie photograph, so this was not forced into a slot; reported as unplaced"}
+    ]
   }
 }

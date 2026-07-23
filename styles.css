@@ -209,6 +209,24 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-tier-grid .card-img-zone,.enc-accordion-grid .card-img-zone,#crystal-grid .card-img-zone,#id2-grid .card-img-zone{width:100%;height:auto;aspect-ratio:1/1}
 .enc-tier-grid .card-img-zone img,.enc-accordion-grid .card-img-zone img,#crystal-grid .card-img-zone img,#id2-grid .card-img-zone img{max-height:none}
 @media(min-width:601px){
+  /* 2026-07-23 discovery-card photo scale fix. .card-img-zone.has-photo img
+     (below, "square photo zone for real photos") sets a fixed max-height:110px.
+     That rule and the square-zone unlock two lines up are both two-class-plus-
+     type selectors — identical specificity — so source order alone decided
+     the winner, and the has-photo rule (later in the file) was clobbering the
+     square unlock inside .enc-tier-grid and .enc-accordion-grid: the
+     Encyclopedia's default Essentials / Shelf Builders / Collector Favorites /
+     Rare & Specialty Finds discovery view. Every canonical 1254x1254 photo
+     was capped to 110px tall there regardless of how large its actual square
+     zone had become. #crystal-grid and #id2-grid were already unaffected
+     (their ID selectors already outrank .has-photo on specificity). Adding
+     .has-photo explicitly here settles all four contexts by specificity
+     instead of source order. Scoped to this existing min-width:601px block so
+     it can never interact with the mobile row-card rule for the same
+     property at max-width:600px below. Nothing else about the zone (size,
+     aspect-ratio, padding, object-fit) or the .no-photo color-circle
+     placeholder is touched. */
+  .enc-tier-grid .card-img-zone.has-photo img,.enc-accordion-grid .card-img-zone.has-photo img,#crystal-grid .card-img-zone.has-photo img,#id2-grid .card-img-zone.has-photo img{max-height:none}
   .card-body{padding:0.6rem 0.75rem 0.55rem}
   .card-role{padding:2px 7px;background:var(--stone)}
   .stone-card-best-for{margin-top:6px}
@@ -1607,7 +1625,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    elsewhere on the site. */
 #tab-family{padding:1.5rem}
 .fg-guide{max-width:1100px;margin:0 auto}
-#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing{scroll-margin-top:160px}
+#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone{scroll-margin-top:160px}
 .fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
 .fg-loading{padding:3rem 1rem;text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--ink3)}
 .fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
@@ -1627,6 +1645,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    sentence settles into two balanced lines at desktop width instead of
    wrapping "story" onto its own third line. */
 .fg-lead--extended-intro{max-width:96ch}
+/* Question-style lead (2026-07-22) — used for Quartz's "What changed here?"
+   in-section prompt, echoing the hero question's italic Georgia treatment
+   at section scale rather than reusing the plain sans lead. */
+.fg-lead--question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:22px;color:var(--ink)}
+
+/* Placeholder markers (2026-07-22) — visibly distinct from finished copy so
+   review sessions never mistake a placeholder for approved public text.
+   Used by Quartz's not-yet-written sections (Growth Forms & Inclusions,
+   Agate/Chalcedony/Jasper relationships, Collection). Not used anywhere in
+   the Calcite page. */
+.fg-placeholder-banner{text-align:center;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);background:var(--stone2);border:0.5px dashed var(--border2);border-radius:8px;padding:6px 12px;max-width:fit-content;margin:0 auto 1.5rem}
+.fg-placeholder-note{font-style:italic;color:var(--ink3)!important}
 
 /* 1. Hero — warm near-white split composition, copy left / photo right */
 .fg-hero{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem 2rem;box-shadow:0 8px 24px rgba(42,37,32,0.06);margin-bottom:1.75rem}
@@ -1650,6 +1680,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-hero-divider{border-top:0.5px solid var(--border2);margin:1.5rem 0 1.25rem}
 .fg-hero-intro{max-width:100%;text-align:left}
 .fg-hero-intro-text{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.65;color:var(--ink);margin:0;max-width:90ch}
+/* Preserves the paragraph break when a guide supplies more than one
+   intro paragraph (Quartz's approved two-paragraph introduction, 2026-07-22).
+   Calcite only ever renders one <p> here, so this sibling rule never applies
+   to it. */
+.fg-hero-intro-text + .fg-hero-intro-text{margin-top:0.9em}
 
 /* Uniform stone cards — Section 3 (eight common varieties) and Section 6
    (extended family, with an added identity badge). Compacted 2026-07-22:
@@ -1662,8 +1697,19 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-stonecard-media img{width:100%;height:100%;object-fit:contain;display:block}
 .fg-stonecard-media:focus-visible{outline:1.5px solid var(--accent2);outline-offset:-2px}
 .fg-stonecard-noimg{width:100%;height:100%;background:var(--stone3)}
+/* Labeled placeholder tile (2026-07-22) — used only where opts.placeholderOk
+   is passed (Quartz's Growth Forms & Inclusions cards, Agate/Chalcedony/
+   Jasper branches) so a missing photo reads as an intentional pending state
+   rather than a silent broken tile. Calcite never passes this option. */
+.fg-stonecard-noimg--labeled{display:flex;align-items:center;justify-content:center}
+.fg-stonecard-noimg--labeled span{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3)}
 .fg-stonecard-body{padding:0.7rem 0.9rem 0.8rem;display:flex;flex-direction:column;flex:1}
 .fg-stonecard-name{font-size:13px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+/* Identity-label line (2026-07-22) — opt-in via opts.showIdentity, used by
+   Quartz's eight anchor-expression cards between the stone name and the
+   Quick View phrase. Calcite's cards never pass showIdentity, so this class
+   never renders there. */
+.fg-stonecard-identity{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:14px;color:var(--accent);margin-bottom:4px}
 .fg-stonecard-phrase{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;line-height:1.24;color:var(--ink);margin-bottom:6px;flex:1}
 .fg-badge{display:inline-block;align-self:flex-start;font-size:9px;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);color:var(--ink3);margin-bottom:6px}
 .fg-stonecard-qv{align-self:flex-start;background:none;border:none;padding:0;font:inherit;font-size:11px;letter-spacing:0.03em;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
@@ -1709,8 +1755,83 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-collection-care .fg-list li{margin-bottom:2px}
 .fg-fact-body{font-size:13px;line-height:1.6;color:var(--ink2);margin:0}
 
-/* 8. Image credits — discreet, collapsed by default */
-.fg-credits{max-width:1100px;margin:0 auto 2.5rem;font-size:12px;color:var(--ink2r)}
+/* ══ QUARTZ FAMILY GUIDE — generic-path components (2026-07-22 first
+   implementation pass). New, reusable section types with no Calcite
+   equivalent; scoped to their own classes so Calcite's page is unaffected. */
+
+/* What Changes the Name? — five-category naming-logic grid. Text-only
+   (numbered index + label + example chips), no photography, so the *kind*
+   of distinction each name makes is legible at a glance. */
+.fg-namegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.fg-namecard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:8px}
+.fg-namecard-index{width:24px;height:24px;border-radius:50%;background:var(--stone2);border:0.5px solid var(--border2);color:var(--accent);font-family:'Jost',sans-serif;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.fg-namecard-label{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink)}
+.fg-namecard-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.fg-chip{display:inline-block;font-size:11px;letter-spacing:0.02em;color:var(--ink2);background:var(--stone2);border:0.5px solid var(--border2);border-radius:20px;padding:3px 10px}
+
+/* Growth Forms & Inclusions — two labeled stone-card subgroups. */
+.fg-subgroup{margin-bottom:1.5rem}
+.fg-subgroup:last-child{margin-bottom:0}
+.fg-subgroup-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);margin-bottom:0.75rem}
+
+/* Where Agate, Chalcedony & Jasper Fit — three-branch relationship guide. */
+.fg-relationship-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fg-relationship-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;text-align:center;padding-bottom:1rem}
+.fg-relationship-media{display:block;width:100%;aspect-ratio:6/5;background:var(--stone2);border:none;padding:0;cursor:pointer;overflow:hidden}
+.fg-relationship-media img{width:100%;height:100%;object-fit:contain;display:block}
+.fg-relationship-media:focus-visible{outline:1.5px solid var(--accent2);outline-offset:-2px}
+.fg-relationship-label{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin:0.85rem 1rem 0.35rem}
+.fg-relationship-card .fg-fact-body{padding:0 1.1rem}
+
+/* ══ FLUORITE FAMILY GUIDE — dedicated components (2026-07-22 first
+   implementation pass). Additive only; nothing here touches a Calcite or
+   Quartz selector. */
+
+/* Non-clickable "family-guide expression" card variant — Yttrium Fluorite
+   and Candy Fluorite, neither of which resolves to a canonical roster
+   entry. Reuses .fg-stonecard's layout, just without the button affordance. */
+.fg-stonecard--unlinked .fg-stonecard-media{cursor:default}
+
+/* Single centered visual frame — used by One Mineral Many Colors (holds the
+   six-image swatch grid), Color Zoning & Phantoms, and Why Some Fluorite
+   Glows (each holds one labeled placeholder pending a retained photo). */
+.fg-single-visual{max-width:640px;margin:0 auto;aspect-ratio:4/3;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white)}
+
+/* Color Zoning & Phantoms pattern-vocabulary chips (core / edge bands /
+   growth zones / layered bands / box phantoms) — reuses .fg-chip. */
+.fg-zoning-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:1.1rem}
+
+/* ══ FELDSPAR FAMILY GUIDE — dedicated components (2026-07-23 first
+   implementation pass). Additive only; nothing here touches a Calcite,
+   Quartz, or Fluorite selector. */
+
+/* Two Great Branches — plain two-card branch guide, no photography. */
+.fg-branch-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fg-branch-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem}
+.fg-branch-title{font-family:Georgia,'Times New Roman',serif;font-size:19px;color:var(--ink);margin-bottom:0.8rem;text-align:center}
+.fg-branch-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+
+/* Moonstone decoder — five-card variant of the existing three-column
+   .fg-relationship-grid; the base class still supplies card/media/label
+   styling, this modifier only changes column count. */
+.fg-relationship-grid--5{grid-template-columns:repeat(5,1fr)}
+/* Relationship-card badge (Larvikite's "rock, not a variety" flag and the
+   Moonstone decoder's identity-caution flags) — centered like the label,
+   since .fg-relationship-card is not a flex container. */
+.fg-relationship-card .fg-badge{margin:0 0 6px}
+.fg-relationship-card .fg-list{text-align:left;padding:0 1.1rem 0 1.6rem;margin-bottom:0.4rem}
+
+/* Sunstone and the Spark Within — single centered stone card below the
+   section's labeled placeholder visual. */
+.fg-sunstone-card-wrap{max-width:300px;margin:1.5rem auto 0}
+
+/* 8. Image credits — discreet, collapsed by default. Only ever rendered
+   directly after .fg-closing, so its top margin (added 2026-07-22, part of
+   the shared closing-transition spacing correction) creates a modest gap
+   below the closing panel purely as a side effect of this element actually
+   existing — a guide with no credits (Quartz, Fluorite currently) never
+   renders this element at all, so it never leaves an empty gap. */
+.fg-credits{max-width:1100px;margin:1.25rem auto 2.5rem;font-size:12px;color:var(--ink2r)}
 .fg-credits-summary{cursor:pointer;letter-spacing:0.03em;padding:0.4rem 0;color:var(--ink2r)}
 .fg-credits-summary:hover{color:var(--ink2)}
 .fg-credits-list{list-style:none;margin:0.6rem 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -1720,9 +1841,36 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-credit-meta a{color:var(--accent)}
 .fg-credit-meta a:hover{color:var(--ink)}
 
-/* 9. Closing callout — one line, one CTA */
-.fg-closing{background:var(--stone2);border-radius:16px;padding:2.25rem 1.5rem;text-align:center;max-width:1100px;margin:0 auto}
-.fg-closing-line{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:20px;color:var(--ink);margin:0 0 1.35rem}
+/* 9. Closing callout — one line, one CTA. Shared closing-transition spacing
+   correction (2026-07-22, refined same day): applies to every family guide
+   through this one component (Calcite, Quartz, Fluorite, and any future
+   guide — e.g. Feldspar — automatically, since none of them declare their
+   own closing rules). 2026-07-23: Christie reviewed the borderless treatment
+   against the page background across all four guides and asked for one
+   extremely subtle shared border if separation felt insufficient — it did
+   (background/page contrast alone reads soft at every breakpoint). Added
+   `0.5px solid var(--border)`, the same token and weight already used by
+   every other bordered box on this page (.fg-hero, .fg-stonecard,
+   .fg-photocard, .fg-relationship-card, .fg-collection-care/-sub) — no new
+   token, no shadow, background/radius/padding/typography/button/spacing
+   all unchanged.
+
+   Gap-above-closing refinement: the prior pass set margin-top:48px on
+   .fg-closing to reliably dominate the adjacent-sibling margin collapse
+   with the preceding section's own .fg-section margin-bottom (40px desktop
+   / 32px <=900px) — but 48px read as too far apart. Adjacent block margins
+   collapse to their max, not their sum, so simply lowering .fg-closing's
+   margin-top below the preceding section's 40px/32px margin-bottom would
+   have no visible effect at all (the larger of the two always wins). The
+   :has() rule below targets specifically "whichever .fg-section sits
+   immediately before .fg-closing" and matches its margin-bottom to the
+   same value as .fg-closing's margin-top, so the collapsed result is that
+   exact target regardless of which side technically "wins" — a single
+   shared rule, not a per-family override, and it doesn't touch the normal
+   .fg-section margin-bottom used everywhere else on the page. */
+.fg-section:has(+ .fg-closing){margin-bottom:30px}
+.fg-closing{background:var(--stone2);border:0.5px solid var(--border);border-radius:16px;padding:2.25rem 1.5rem;text-align:center;max-width:1100px;margin:30px auto 0}
+.fg-closing-line{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:20px;color:var(--ink);margin:0 0 1.5rem}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
@@ -1741,11 +1889,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-collection-grid{grid-template-columns:1fr}
   .fg-collection-care,.fg-collection-sub{height:auto}
   .fg-lead{font-size:18px}
+  .fg-namegrid{grid-template-columns:repeat(2,1fr)}
+  .fg-relationship-grid{grid-template-columns:1fr}
+  .fg-relationship-grid--5{grid-template-columns:repeat(2,1fr)}
+  .fg-branch-grid{grid-template-columns:1fr}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone{scroll-margin-top:132px}
   .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
   .fg-hero-title{font-size:25px}
   .fg-hero-question{font-size:23px}
@@ -1753,11 +1905,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-h2{font-size:20px}
   .fg-hero-intro-text{font-size:16px;max-width:none}
   .fg-lead{font-size:17px;max-width:none;margin:0.4rem auto 1.35rem}
+  .fg-lead--question{font-size:19px}
   .fg-card-grid--4{grid-template-columns:1fr}
   .fg-photo-grid--4{grid-template-columns:1fr}
   .fg-photocard-swatch--6{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
   .fg-collection-grid{grid-template-columns:1fr}
-  .fg-closing{padding:1.75rem 1.25rem;border-radius:14px}
+  .fg-closing{padding:1.75rem 1.25rem;border-radius:14px;margin-top:26px}
+  .fg-section:has(+ .fg-closing){margin-bottom:26px}
+  .fg-namegrid{grid-template-columns:1fr}
+  .fg-single-visual{max-width:100%}
+  .fg-relationship-grid--5{grid-template-columns:1fr}
+  .fg-sunstone-card-wrap{max-width:100%}
 }
 
 /* ── MOBILE POLISH PASS ── */

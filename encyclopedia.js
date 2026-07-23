@@ -358,7 +358,16 @@ function encSort(v){sortBy=v;encRender();}
 function getFiltered(){
   const q=encSearchValue().toLowerCase();
   return CRYSTALS.filter(c=>{
-    const famOk=filters.fam==='all'||c.fam===filters.fam||c.sp===filters.fam;
+    // 2026-07-23: Family filter matches the reader-facing Family field only.
+    // Previously also matched Species (c.sp===filters.fam), which silently
+    // pulled in cross-listed stones once families were split by display name
+    // (e.g. selecting "Quartz" matched every reassigned Agate/Jasper/
+    // Chalcedony stone too, since their species is still "Quartz"; selecting
+    // "Chalcedony" matched five unrelated Aggregate-family stones whose
+    // species happens to be "Chalcedony"). Species itself is untouched and
+    // still used everywhere else (search, Identify, geology, etc.) — only
+    // this one filter's match condition changed.
+    const famOk=filters.fam==='all'||c.fam===filters.fam;
     const themeOk=filters.theme==='all'||
       (c.all_themes&&c.all_themes.some(t=>t.toLowerCase().includes(filters.theme.toLowerCase())))||
       [c.er1,c.er2,c.er3].some(v=>v&&v.toLowerCase().includes(filters.theme.toLowerCase()));
