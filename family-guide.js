@@ -369,6 +369,14 @@ function familyGuideVarietiesHtml(guide){
    before — purely additive, opt-in per call site. ── */
 function fgPhotoCardHtml(item, opts){
   const folder = (opts && opts.folder) || 'family-guide-calcite';
+  // opts.containMedia (2026-07-23, added for Feldspar's When the Light Moves
+  // cards) swaps the media tile's default object-fit:cover crop for
+  // object-fit:contain via the .fg-photocard-media--contain modifier, so
+  // optical effects (adularescence/labradorescence/aventurescence) aren't
+  // cropped out of frame. Opt-in only — every existing caller (Calcite,
+  // Fluorite, Jasper) never sets this, so their cropped-to-fill cards are
+  // completely unchanged.
+  const mediaClass = (opts && opts.containMedia) ? 'fg-photocard-media fg-photocard-media--contain' : 'fg-photocard-media';
   let mediaHtml;
   if(item.swatchStoneIds){
     const imgs = item.swatchStoneIds.map(id=>{
@@ -409,7 +417,7 @@ function fgPhotoCardHtml(item, opts){
   // never set this, so their captions render exactly as before.
   const textClass = item.bodyPending ? 'fg-photocard-text fg-placeholder-note' : 'fg-photocard-text';
   return `<div class="fg-photocard">
-    <div class="fg-photocard-media">${mediaHtml}</div>
+    <div class="${mediaClass}">${mediaHtml}</div>
     <div class="fg-photocard-body">
       <div class="fg-photocard-title">${escapeAttr(item.title||'')}</div>
       <p class="${textClass}">${escapeAttr(item.body||'')}</p>
@@ -795,7 +803,7 @@ function familyGuideBranchesHtml(guide){
 function familyGuideLightMovesHtml(guide){
   const l = guide.lightMoves;
   if(!l) return '';
-  const cards = (l.items||[]).map(fgPhotoCardHtml).join('');
+  const cards = (l.items||[]).map(item=>fgPhotoCardHtml(item, {folder:'family-guide-feldspar', containMedia:true})).join('');
   return `<section class="fg-section" id="fg-light-moves">
     <h2 class="fg-h2">${escapeAttr(l.title||'When the Light Moves')}</h2>
     ${l.editorialNote?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
@@ -842,10 +850,18 @@ function familyGuideSunstoneHtml(guide){
   const s = guide.sunstoneSection;
   if(!s) return '';
   const cardHtml = fgStoneCardHtml({stoneId:s.stoneId}, {placeholderOk:true});
+  // s.image (2026-07-23, added once the licensed Aventurescence/Sunstone
+  // photo — reused from When the Light Moves — was approved and wired) reuses
+  // .fg-single-visual's existing object-fit:contain rule, so the sparkle
+  // isn't cropped. Falls back to the original labeled placeholder when no
+  // image is set, matching every earlier state of this section.
+  const visualHtml = s.image
+    ? `<img src="${escapeAttr('assets/family-guide-feldspar/'+s.image)}" alt="${escapeAttr(s.alt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   return `<section class="fg-section" id="fg-sunstone">
     <h2 class="fg-h2">${escapeAttr(s.title||'Sunstone and the Spark Within')}</h2>
     ${s.editorialNote?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
-    <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-single-visual">${visualHtml}</div>
     <div class="fg-sunstone-card-wrap">${cardHtml}</div>
   </section>`;
 }

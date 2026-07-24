@@ -1106,7 +1106,7 @@
     "slug": "feldspar",
     "displayName": "Feldspar",
     "encyclopediaFilterValue": "Feldspar",
-    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's visual review. Hero, lower-hero introduction, and the closing line use Christie's locked wording exactly. All eight roster IDs for Meet Eight Feldspar Expressions were verified live against Supabase stones (2026-07-23): Moonstone C-0162, Rainbow Moonstone C-0030, Labradorite C-0028, Spectrolite C-0166, Sunstone C-0029, Amazonite C-0025, Peach Moonstone C-0395, Black Moonstone C-0159 — all resolve and are clickable. Larvikite (C-0396, family 'Feldspar-rich Rocks') and Green Moonstone (C-0399, species Garnierite, family 'Nickel-bearing Silicates') also verified for the Labradorite/Spectrolite/Larvikite and Moonstone-decoder sections respectively. No card identity labels, Quick View lines, branch/optics/decoder explanatory prose, Sunstone body copy, or collection copy are approved yet — all render as clearly marked placeholders. Five educational images are named by filename only in the brief (no creator/license supplied this pass, unlike Fluorite's); they are recorded in pendingAssets below with creator/license left unconfirmed and every section renders a labeled 'Photo pending' placeholder instead of substituting any other image. Pierrelune.jpg (Polished Moonstone) was named as a candidate without an assigned section position in the brief; it is listed in pendingAssets as unplaced rather than forced into a slot. Asset folder assets/family-guide-feldspar/ has not been created — no approved local assets exist yet to store there.",
+    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's visual review, updated 2026-07-23 with three approved educational photos acquired and wired. Hero, lower-hero introduction, and the closing line use Christie's locked wording exactly. All eight roster IDs for Meet Eight Feldspar Expressions were verified live against Supabase stones (2026-07-23): Moonstone C-0162, Rainbow Moonstone C-0030, Labradorite C-0028, Spectrolite C-0166, Sunstone C-0029, Amazonite C-0025, Peach Moonstone C-0395, Black Moonstone C-0159 — all resolve and are clickable. Larvikite (C-0396, family 'Feldspar-rich Rocks') and Green Moonstone (C-0399, species Garnierite, family 'Nickel-bearing Silicates') also verified for the Labradorite/Spectrolite/Larvikite and Moonstone-decoder sections respectively. No card identity labels, Quick View lines, branch/optics/decoder explanatory prose, Sunstone body copy, or collection copy are approved yet — all render as clearly marked placeholders. Three of the five previously-pending educational images (AdulaireSuisse2.jpg, Labradorite in two samples showing labradorescence.jpg, Oligoclase-Sunstone from India2.jpg) were verified against their exact Wikimedia Commons source pages, downloaded from their exact original-file URLs, converted to WebP at quality 88 preserving full original proportions (no cropping), and wired into assets/family-guide-feldspar/: Adularescence and Labradorescence cards in When the Light Moves, and the Aventurescence card (reused in Sunstone and the Spark Within). Credits recorded in imageCredits below. Schiller and Iridescence remains an unwired 'Photo pending' placeholder — no image was chosen for it. Spectrolite from Ylämaa.jpg and Pierrelune.jpg remain unplaced by design (see pendingAssets) — Spectrolite has no assigned section position and Pierrelune's candidate Moonstone slot already uses an approved Christie photograph.",
     "closingCallout": "Feldspar reminds us that perspective can reveal what structure keeps hidden.",
     "hero": {
       "mediaStoneIds": ["C-0162", "C-0028", "C-0029", "C-0025"],
@@ -1149,22 +1149,28 @@
           "title": "Adularescence",
           "body": "Editorial copy pending.",
           "bodyPending": true,
+          "image": "AdulaireSuisse2.webp",
+          "alt": "Adularia specimen from the Adula Mountains, Switzerland, displaying the floating blue-white sheen of adularescence",
           "placeholderLabel": "Photo pending",
-          "pendingAsset": {"filename": "AdulaireSuisse2.jpg", "creator": null, "license": null}
+          "pendingAsset": {"filename": "AdulaireSuisse2.jpg", "creator": "Didier Descouens (Archaeodontosaurus)", "license": "Dual: GFDL 1.2+ / CC BY-SA (1.0, 2.0, 2.5, 3.0)"}
         },
         {
           "title": "Labradorescence",
           "body": "Editorial copy pending.",
           "bodyPending": true,
+          "image": "Labradorite in two samples showing labradorescence.webp",
+          "alt": "Two labradorite samples side by side, one showing strong iridescent labradorescence and one not catching the light",
           "placeholderLabel": "Photo pending",
-          "pendingAsset": {"filename": "Labradorite in two samples showing labradorescence.jpg", "creator": null, "license": null}
+          "pendingAsset": {"filename": "Labradorite in two samples showing labradorescence.jpg", "creator": "Grendelkhan", "license": "CC BY-SA 3.0"}
         },
         {
           "title": "Aventurescence",
           "body": "Editorial copy pending.",
           "bodyPending": true,
+          "image": "Oligoclase-Sunstone from India2.webp",
+          "alt": "Tumble-polished Sunstone, a variety of Oligoclase from India, showing bright aventurescent sparkle",
           "placeholderLabel": "Photo pending",
-          "pendingAsset": {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null}
+          "pendingAsset": {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": "Ra'ike", "license": "Dual: CC BY 3.0 / GFDL 1.2+"}
         },
         {
           "title": "Schiller and Iridescence",
@@ -1198,7 +1204,9 @@
       "title": "Sunstone and the Spark Within",
       "editorialNote": "MISSING APPROVED COPY: no final explanatory prose has been approved for this section. Structure only — a single focused card for the roster's Sunstone (C-0029) plus a placeholder for the planned licensed Aventurescence/Sunstone teaching image.",
       "stoneId": "C-0029",
-      "pendingAsset": {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null}
+      "image": "Oligoclase-Sunstone from India2.webp",
+      "alt": "Tumble-polished Sunstone, a variety of Oligoclase from India, showing bright aventurescent sparkle",
+      "pendingAsset": {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": "Ra'ike", "license": "Dual: CC BY 3.0 / GFDL 1.2+"}
     },
     "collection": {
       "title": "Feldspar in Your Collection",
@@ -1212,11 +1220,31 @@
       "rememberThis": "Placeholder — approved reminder copy pending Christie's review.",
       "watchFor": "Placeholder — approved caution copy (Rainbow Moonstone identity, vague Moonstone naming, Green Moonstone misidentification, Larvikite sold as Labradorite, coated/dyed material, misleading Sunstone sparkle) pending Christie's review."
     },
+    "imageCredits": [
+      {
+        "title": "Adularia (Moonstone) from the Adula Mountains, Ticino, Switzerland, showing adularescence",
+        "creator": "Didier Descouens (Archaeodontosaurus)",
+        "source": "https://commons.wikimedia.org/wiki/File:AdulaireSuisse2.jpg",
+        "license": "GFDL 1.2+ / CC BY-SA (dual)",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "title": "Two Labradorite samples, one showing labradorescence",
+        "creator": "Grendelkhan",
+        "source": "https://commons.wikimedia.org/wiki/File:Labradorite_in_two_samples_showing_labradorescence.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "title": "Sunstone, a variety of Oligoclase, from India",
+        "creator": "Ra'ike",
+        "source": "https://commons.wikimedia.org/wiki/File:Oligoclase-Sunstone_from_India2.jpg",
+        "license": "CC BY 3.0 / GFDL 1.2+ (dual)",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
+      }
+    ],
     "pendingAssets": [
-      {"filename": "AdulaireSuisse2.jpg", "creator": null, "license": null, "use": "When the Light Moves — Adularescence position"},
-      {"filename": "Labradorite in two samples showing labradorescence.jpg", "creator": null, "license": null, "use": "When the Light Moves — Labradorescence position"},
       {"filename": "Spectrolite from Ylämaa.jpg", "creator": null, "license": null, "use": "Named in brief but not yet assigned to a rendered section position — reported as unplaced"},
-      {"filename": "Oligoclase-Sunstone from India2.jpg", "creator": null, "license": null, "use": "When the Light Moves — Aventurescence position, and Sunstone and the Spark Within"},
       {"filename": "Pierrelune.jpg", "creator": null, "license": null, "use": "Named in brief (Polished Moonstone) but not assigned to a section position — Moonstone's card already uses an approved Christie photograph, so this was not forced into a slot; reported as unplaced"}
     ]
   },
