@@ -357,10 +357,18 @@ function familyGuideVarietiesHtml(guide){
 
 /* ── Photo-led teaching card — shared by Recognition and Shapes. A card
    either shows one local educational photograph (item.image, from
-   assets/family-guide-calcite/) or, for the "many colors" recognition card,
-   a small swatch grid built from existing approved encyclopedia photos
-   (item.swatchStoneIds) — no new third-party photography involved. ── */
-function fgPhotoCardHtml(item){
+   assets/family-guide-calcite/ by default) or, for the "many colors"
+   recognition card, a small swatch grid built from existing approved
+   encyclopedia photos (item.swatchStoneIds) — no new third-party photography
+   involved. opts.folder (2026-07-24, added for Jasper's Pattern Guide cards)
+   lets a caller supply a different assets/family-guide-<slug>/ folder for the
+   item.image branch; it defaults to 'family-guide-calcite' so every existing
+   caller that never passes opts (Calcite's Recognition/Shapes, Fluorite's
+   Cube/Octahedron/Cleavage, Feldspar's When the Light Moves, Jasper's
+   compareItems/Rough-Cut-Polished, etc.) resolves to the exact same path as
+   before — purely additive, opt-in per call site. ── */
+function fgPhotoCardHtml(item, opts){
+  const folder = (opts && opts.folder) || 'family-guide-calcite';
   let mediaHtml;
   if(item.swatchStoneIds){
     const imgs = item.swatchStoneIds.map(id=>{
@@ -384,7 +392,7 @@ function fgPhotoCardHtml(item){
       ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(item.alt||c.n)}" loading="lazy">`
       : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   }else if(item.image){
-    mediaHtml = `<img src="${escapeAttr('assets/family-guide-calcite/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`;
+    mediaHtml = `<img src="${escapeAttr('assets/'+folder+'/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`;
   }else if(item.placeholderLabel){
     // Labeled placeholder (2026-07-22, added for Fluorite's Cube/Octahedron/
     // Cleavage comparison) — used when a card's educational photo is
@@ -1147,7 +1155,7 @@ function familyGuideWhatJasperIsHtml(guide){
 function familyGuideJasperPatternHtml(guide){
   const p = guide.patternGuide;
   if(!p) return '';
-  const cards = (p.categories||[]).map(fgPhotoCardHtml).join('');
+  const cards = (p.categories||[]).map(cat=>fgPhotoCardHtml(cat, {folder:'family-guide-jasper'})).join('');
   return `<section class="fg-section" id="fg-jasper-pattern">
     <h2 class="fg-h2">${escapeAttr(p.title||'How Jasper Makes a Pattern')}</h2>
     ${p.sectionIntro?`<p class="fg-section-intro">${escapeAttr(p.sectionIntro)}</p>`:''}

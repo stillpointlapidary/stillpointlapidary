@@ -1419,6 +1419,8 @@
         "Editorial copy pending — a fuller description of Jasper's structure, and the geological reasons behind its color and pattern, awaits approved source material for Lyra and Christie's review. Working note only: pattern, mineral inclusions, fracturing, sedimentary history, silicification, and locality can all play a part in how a given piece looks.",
         "Jasper is also a broad lapidary and collector term. Not every material sold as Jasper has one identical mineralogical definition — some familiar Jasper names may be more accurately described as a rock, aggregate, radiolarite, or another silica-rich material, a distinction the next few sections walk through carefully."
       ],
+      "image": "jasper-unpolished-rough-ryan-bushby.webp",
+      "imageAlt": "Unpolished Jasper fresh out of the ground",
       "placeholderLabel": "Photo pending — rough Jasper",
       "pendingAsset": {"source": "https://commons.wikimedia.org/wiki/File:Unpolished_jasper.jpg", "creator": "Ryan Bushby (HighInBC)", "license": "Public domain", "filename": "jasper-unpolished-rough-ryan-bushby.jpg", "use": "What Jasper Actually Is — large image", "suggestedCredit": "Unpolished Jasper — Ryan Bushby (HighInBC), public domain, via Wikimedia Commons"},
       "compareItems": [
@@ -1430,9 +1432,9 @@
       "title": "How Jasper Makes a Pattern",
       "sectionIntro": "Fractures, layers, inclusions, and mineral growth create the markings collectors recognize.",
       "categories": [
-        {"title": "Brecciated", "body": "Broken fragments healed or cemented into a new pattern.", "placeholderLabel": "Photo pending"},
-        {"title": "Scenic", "body": "Lines, layers, and markings that resemble landscapes or painted horizons.", "placeholderLabel": "Photo pending"},
-        {"title": "Orbicular", "body": "Rounded, eye-like, or clustered structures repeated through the material.", "placeholderLabel": "Photo pending"},
+        {"title": "Brecciated", "body": "Broken fragments healed or cemented into a new pattern.", "image": "jasper-brecciated-pattern-james-st-john.webp", "alt": "Brecciated Jasper showing broken fragments cemented into a new mottled pattern", "placeholderLabel": "Photo pending"},
+        {"title": "Scenic", "body": "Lines, layers, and markings that resemble landscapes or painted horizons.", "image": "jasper-picture-pattern-linas-juozenas.webp", "alt": "Picture Jasper showing banded, scenic markings that resemble a painted landscape", "placeholderLabel": "Photo pending"},
+        {"title": "Orbicular", "body": "Rounded, eye-like, or clustered structures repeated through the material.", "image": "jasper-orbicular-madagascar-lionel-allorge.webp", "alt": "Orbicular Jasper from Madagascar showing rounded, eye-like structures repeated through the material", "placeholderLabel": "Photo pending"},
         {"title": "Spotted", "body": "Distinct contrasting inclusions or circular markings.", "placeholderLabel": "Photo pending"},
         {"title": "Banded", "body": "Parallel, wavy, or irregular layers.", "placeholderLabel": "Photo pending"},
         {"title": "Mottled", "body": "Broad pools, patches, or transitions without strict repetition.", "placeholderLabel": "Photo pending"}
