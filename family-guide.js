@@ -688,13 +688,14 @@ function familyGuideManyColorsHtml(guide){
 
 /* ── Cube, Octahedron, or Cleavage Piece? — three-position comparison using
    Christie's approved explanatory copy verbatim for each position. Reuses
-   fgPhotoCardHtml's new placeholderLabel branch since none of the three
-   licensed educational images (see guide.cubeOctahedronCleavage.items[].
-   pendingAsset for filename/creator/license) are retained locally yet. ── */
+   fgPhotoCardHtml's item.image branch (2026-07-24, folder:'family-guide-
+   fluorite') now that the three licensed educational images (see
+   guide.cubeOctahedronCleavage.items[].pendingAsset for filename/creator/
+   license) are retained locally. ── */
 function familyGuideCubeOctahedronHtml(guide){
   const s = guide.cubeOctahedronCleavage;
   if(!s) return '';
-  const cards = (s.items||[]).map(fgPhotoCardHtml).join('');
+  const cards = (s.items||[]).map(item=>fgPhotoCardHtml(item, {folder:'family-guide-fluorite'})).join('');
   return `<section class="fg-section" id="fg-cube-octahedron">
     <h2 class="fg-h2">${escapeAttr(s.title||'Cube, Octahedron, or Cleavage Piece?')}</h2>
     <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
@@ -704,31 +705,41 @@ function familyGuideCubeOctahedronHtml(guide){
 /* ── Color Zoning, Banding & Phantoms — the visual-pattern vocabulary
    (core / edge bands / growth zones / layered bands / box phantoms) is
    rendered as neutral labeled chips, not as sentences, since no approved
-   explanatory paragraph exists yet. The one approved educational image
-   candidate (see guide.zoningPhantoms.pendingAsset) is not retained
-   locally, so a labeled placeholder renders in its place. ── */
+   explanatory paragraph exists yet. guide.zoningPhantoms.image (2026-07-24,
+   now retained locally under assets/family-guide-fluorite/ — see
+   guide.zoningPhantoms.pendingAsset for filename/creator/license) renders in
+   place of the labeled placeholder once set; falls back to the placeholder
+   exactly as before when unset. ── */
 function familyGuideZoningHtml(guide){
   const z = guide.zoningPhantoms;
   if(!z) return '';
   const patterns = (z.patterns||[]).map(p=>`<span class="fg-chip">${escapeAttr(p)}</span>`).join('');
+  const visualHtml = z.image
+    ? `<img src="${escapeAttr('assets/family-guide-fluorite/'+z.image)}" alt="${escapeAttr(z.imageAlt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   return `<section class="fg-section" id="fg-zoning">
     <h2 class="fg-h2">${escapeAttr(z.title||'Color Zoning, Banding & Phantoms')}</h2>
     ${z.editorialNote?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
-    <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-single-visual">${visualHtml}</div>
     ${patterns?`<div class="fg-zoning-chips">${patterns}</div>`:''}
   </section>`;
 }
 
 /* ── Why Some Fluorite Glows — Christie's approved fluorescence paragraph,
-   verbatim, plus a labeled placeholder for the one approved comparison
-   image candidate (see guide.fluorescence.pendingAsset), not yet retained
-   locally. ── */
+   verbatim, plus guide.fluorescence.image (2026-07-24, now retained locally
+   under assets/family-guide-fluorite/ — see guide.fluorescence.pendingAsset
+   for filename/creator/license), which renders in place of the labeled
+   placeholder once set; falls back to the placeholder exactly as before
+   when unset. ── */
 function familyGuideFluorescenceHtml(guide){
   const f = guide.fluorescence;
   if(!f) return '';
+  const visualHtml = f.image
+    ? `<img src="${escapeAttr('assets/family-guide-fluorite/'+f.image)}" alt="${escapeAttr(f.imageAlt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   return `<section class="fg-section" id="fg-fluorescence">
     <h2 class="fg-h2">${escapeAttr(f.title||'Why Some Fluorite Glows')}</h2>
-    <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
+    <div class="fg-single-visual">${visualHtml}</div>
     ${f.paragraph?`<p class="fg-lead fg-lead--wide">${escapeAttr(f.paragraph)}</p>`:''}
   </section>`;
 }

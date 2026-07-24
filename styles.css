@@ -1815,8 +1815,15 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* Single centered visual frame — used by One Mineral Many Colors (holds the
    six-image swatch grid), Color Zoning & Phantoms, and Why Some Fluorite
-   Glows (each holds one labeled placeholder pending a retained photo). */
+   Glows (each holds one labeled placeholder pending a retained photo, or a
+   retained photo once one is wired). */
 .fg-single-visual{max-width:640px;margin:0 auto;aspect-ratio:4/3;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white)}
+/* object-fit:contain (2026-07-24, added for Fluorite's Zoning & Fluorescence
+   photos) — keeps the full teaching photo visible with no cropping inside
+   the fixed 4:3 frame above, letterboxing on var(--white) rather than
+   cover-cropping detail out of frame. Only applies when a real <img> is
+   present; the placeholder div is unaffected. */
+.fg-single-visual img{width:100%;height:100%;object-fit:contain;display:block}
 
 /* Color Zoning & Phantoms pattern-vocabulary chips (core / edge bands /
    growth zones / layered bands / box phantoms) — reuses .fg-chip. */

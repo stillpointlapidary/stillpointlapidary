@@ -1039,18 +1039,24 @@
         {
           "title": "Cubic Crystal",
           "body": "Fluorite most characteristically grows as cubes, sometimes with beveled corners or more complex modifications.",
+          "image": "Fluorite-171715.webp",
+          "alt": "Cubic Fluorite crystal with beveled corners, Rob Lavinsky / iRocks.com specimen",
           "placeholderLabel": "Photo pending",
           "pendingAsset": {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
         },
         {
           "title": "Natural Octahedron",
           "body": "Fluorite can also grow naturally with eight triangular faces, although this habit is less common than the cube.",
+          "image": "Fluorite-282542.webp",
+          "alt": "Naturally grown octahedral Fluorite crystal, Rob Lavinsky / iRocks.com specimen",
           "placeholderLabel": "Photo pending",
           "pendingAsset": {"filename": "Fluorite-282542.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
         },
         {
           "title": "Cleavage Piece",
           "body": "Because Fluorite cleaves perfectly in four directions, broken material can form neat octahedral fragments. Many small polished or rough “Fluorite octahedrons” are cleavage pieces rather than complete naturally grown crystals.",
+          "image": "Diamond-shaped fluorite crystal.webp",
+          "alt": "Diamond-shaped Fluorite cleavage fragment showing octahedral cleavage",
           "placeholderLabel": "Photo pending",
           "pendingAsset": {"filename": "Diamond-shaped fluorite crystal.jpg", "creator": "James St. John", "license": "CC BY 2.0"}
         }
@@ -1060,11 +1066,15 @@
       "title": "Color Zoning, Banding & Phantoms",
       "editorialNote": "MISSING APPROVED COPY: no explanatory paragraph has been approved yet for this section. The pattern-type labels below are structural vocabulary only, not a claim that every visible band is a phantom or that one cause explains every transition.",
       "patterns": ["Central core", "Edge bands", "Repeated growth zones", "Layered bands", "Box-like phantoms"],
+      "image": "Fluorite-Calcite-Chalcopyrite-260129.webp",
+      "imageAlt": "Fluorite with Calcite and Chalcopyrite showing internal color zoning and banding",
       "pendingAsset": {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
     },
     "fluorescence": {
       "title": "Why Some Fluorite Glows",
       "paragraph": "Some Fluorite fluoresces under ultraviolet light, producing visible color that is not apparent under ordinary illumination. The response varies by specimen and locality, and many pieces show little or no fluorescence.",
+      "image": "Fluorit uv hg.webp",
+      "imageAlt": "Fluorite specimen shown under white light and shortwave UV light, comparing its fluorescent glow",
       "pendingAsset": {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5"}
     },
     "collection": {
