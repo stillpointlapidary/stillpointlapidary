@@ -318,7 +318,16 @@ function fgExpressionCardHtml(member, opts){
   opts = opts || {};
   const name = member.name||'';
   if(!name) return '';
-  const imgHtml = `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  // member.image (2026-07-24, added for Candy Fluorite) lets a name-only
+  // expression card show an approved teaching photo from the family's own
+  // assets/family-guide-<folder>/ directory instead of the "Photo pending"
+  // placeholder. Yttrium Fluorite has no image field, so its output is
+  // unchanged. opts.folder defaults to 'family-guide-fluorite' since this
+  // dispatcher is currently only called by the Fluorite guide.
+  const folder = opts.folder || 'family-guide-fluorite';
+  const imgHtml = member.image
+    ? `<img src="${escapeAttr('assets/'+folder+'/'+member.image)}" alt="${escapeAttr(member.alt||name)}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   const identityHtml = (opts.showIdentity && member.identityLabel)
     ? `<div class="fg-stonecard-identity">${escapeAttr(member.identityLabel)}</div>` : '';
   let phraseText = member.quickView||member.headline||'';

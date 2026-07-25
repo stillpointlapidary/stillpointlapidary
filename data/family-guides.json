@@ -999,7 +999,7 @@
     "slug": "fluorite",
     "displayName": "Fluorite",
     "encyclopediaFilterValue": "Fluorite",
-    "editorialStatusNote": "First implementation pass (2026-07-22) for Christie's visual review. Hero, lower-hero introduction, Cube/Octahedron/Cleavage copy, the fluorescence paragraph, and the Care for It / Remember This / Watch For collection copy use Christie's locked wording exactly. The eight expression cards' identity labels and Quick View lines have no approved copy yet and render clearly marked placeholders. Yttrium Fluorite and Candy Fluorite do not resolve to any canonical roster entry (verified against the live stones table 2026-07-22) and render as non-clickable family-guide-only cards per the Candy Fluorite guardrail. One Mineral, Many Colors and Color Zoning, Banding & Phantoms have no approved body copy yet. Five educational images (Cube/Octahedron/Cleavage x3, Zoning x1, Fluorescence x1) are approved by filename/creator/license but not yet retained locally — see pendingAssets below and each section's placeholder. Asset folder assets/family-guide-fluorite/ has been created and is empty, ready for those drops.",
+    "editorialStatusNote": "First implementation pass (2026-07-22) for Christie's visual review. Hero, lower-hero introduction, Cube/Octahedron/Cleavage copy, the fluorescence paragraph, and the Care for It / Remember This / Watch For collection copy use Christie's locked wording exactly. The eight expression cards' identity labels and Quick View lines have no approved copy yet and render clearly marked placeholders. Yttrium Fluorite and Candy Fluorite do not resolve to any canonical roster entry (verified against the live stones table 2026-07-22) and render as non-clickable family-guide-only cards per the Candy Fluorite guardrail. One Mineral, Many Colors and Color Zoning, Banding & Phantoms have no approved body copy yet. Five educational images (Cube/Octahedron/Cleavage x3, Zoning x1, Fluorescence x1) are approved by filename/creator/license but not yet retained locally — see pendingAssets below and each section's placeholder. Asset folder assets/family-guide-fluorite/ has been created and is empty, ready for those drops. UPDATE (2026-07-24): Christie's approved candy-fluorite.webp teaching photo retained to assets/family-guide-fluorite/ and wired to the existing Candy Fluorite expression card (member.image, rendered by fgExpressionCardHtml's new opt-in image branch) with alt text 'Polished Candy Fluorite point with green and purple color zoning'. Candy Fluorite remains a non-clickable family-guide-only card — no roster entry, Stone ID, or ENCYCLOPEDIA_PHOTOS mapping was created. Yttrium Fluorite is unaffected and still renders its 'Photo pending' placeholder.",
     "closingCallout": "Fluorite helps separate what matters from everything competing for attention.",
     "hero": {
       "mediaStoneIds": ["C-0034", "C-0032", "C-0031", "C-0036"],
@@ -1025,7 +1025,7 @@
         {"stoneId": "C-0033"},
         {"stoneId": "C-0035"},
         {"name": "Yttrium Fluorite"},
-        {"name": "Candy Fluorite"}
+        {"name": "Candy Fluorite", "image": "candy-fluorite.webp", "alt": "Polished Candy Fluorite point with green and purple color zoning"}
       ]
     },
     "manyColors": {
