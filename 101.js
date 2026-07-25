@@ -1264,7 +1264,7 @@ const CRYSTAL_SHAPES = [
     tile: 'A surface of sparkling micro-crystals that amplifies surrounding energy and adds brilliant visual texture. A natural formation, not a carved shape.',
     body: 'A surface covered in a layer of tiny, sparkling micro-crystals formed within a cavity or on a host stone. Not a carved shape but a natural formation. Amplifies the energy of whatever surrounds it, adds visual brilliance, and is commonly used in jewelry and decorative settings. Often found coating Agate or Chalcedony.',
     use: 'Amplification · Jewelry · Display · Enhancing other stones',
-    examples: ['Druzy Agate', 'Grape Agate', 'Chalcopyrite', 'Uvarovite'],
+    examples: ['Grape Agate', 'Chalcopyrite', 'Uvarovite'],
     draw: drawDruzyShape,
   },
   {

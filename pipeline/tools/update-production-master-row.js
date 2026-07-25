@@ -59,6 +59,7 @@ const ALLOWED_COLUMNS = [
   'Canonical Name',
   'Alternate Names',
   'Slug',
+  'Collection Tier',
   'Previous Stone',
   'Previous Slug',
   'Next Stone',

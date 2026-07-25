@@ -297,7 +297,6 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0069": ["blue-lace-agate.webp"],
   "C-0070": ["botswana-agate.webp"],
   "C-0071": ["crazy-lace-agate.webp"],
-  "C-0073": ["druzy-agate.webp"],
   "C-0074": ["fire-agate-tumble.webp", "fire-agate-heart.webp"],
   "C-0075": ["flower-agate-palm.webp"],
   "C-0076": ["grape-agate-specimen.webp", "grape-agate-sphere.webp", "grape-agate-tumble-family.webp", "grape-agate-tower.webp"],

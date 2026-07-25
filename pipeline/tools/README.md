@@ -92,6 +92,18 @@ these columns for routine single-stone editorial correction — each use should
 trace back to an explicit approved identity or paired-replacement decision
 like this one.
 
+`Collection Tier` was added 2026-07-24 for the approved six-for-six catalog
+swap (`ENCYCLOPEDIA-CATALOG-DECISIONS.md` §18/§19): two reused seats change
+tier when their identity changes (C-0106, C-0150), and four existing rows
+are promoted (Galena, Astrophyllite: Tier 3 → Tier 2; Cobaltoan Calcite,
+Cavansite: Tier 4 → Tier 3). Workbook header confirmed as
+`Group B — Catalog Structure | Collection Tier`, which strips to the exact
+allow-list entry `Collection Tier`. Do not reuse this column for a routine
+single-stone tier change — each use should trace back to an explicit
+approved catalog-wide tier decision like this one. `Cohort`, `Catalog
+Display Order`, and `Navigation Display Order` remain intentionally
+unwritable through this tool.
+
 If a requested column isn't on this list, or isn't found in the workbook
 under its exact expected header, the script reports the problem and stops —
 it never guesses.
