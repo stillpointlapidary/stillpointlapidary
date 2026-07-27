@@ -14,6 +14,7 @@ const DIST = path.join(ROOT, 'dist');
 const TOP_LEVEL_FILES = [
   { src: 'index.html',          required: true  },
   { src: 'encyclopedia.html',   required: true  },
+  { src: 'credits.html',        required: true  },
   { src: 'styles.css',          required: true  },
   { src: 'app.js',              required: true  },
   { src: 'auth.js',             required: true  },
@@ -41,6 +42,7 @@ const DATA_FILES = [
   'data/sub-filter-kw.json',
   'data/sub-filters.json',
   'data/family-guides.json',
+  'data/encyclopedia-photo-credits.json',
 ];
 
 // From stones/: copy *.html and this file; explicitly never generate-stone-page.js
