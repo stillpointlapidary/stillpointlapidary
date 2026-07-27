@@ -551,6 +551,29 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0362": ["zincite-wc.webp"],
   "C-0019": ["dioptase-wc.webp"],
 };
+
+/* ── Photo credit lookup (additive, read-only) ──
+   Loads data/encyclopedia-photo-credits.json once. A link is shown only
+   when a public record's stoneId AND filename both match exactly what is
+   actually rendered — never from ENCYCLOPEDIA_PHOTOS alone, and never for
+   Christie-owned images (which simply have no registry entry). */
+let _photoCreditsPromise = null;
+function loadPhotoCredits(){
+  if(_photoCreditsPromise) return _photoCreditsPromise;
+  _photoCreditsPromise = fetch('data/encyclopedia-photo-credits.json')
+    .then(r=>r.ok?r.json():[])
+    .catch(()=>[]);
+  return _photoCreditsPromise;
+}
+function findPhotoCredit(records, stoneId, filename){
+  if(!stoneId || !filename) return null;
+  return (records||[]).find(r=>r && r.public===true && r.stoneId===stoneId && r.filename===filename) || null;
+}
+function photoCreditLinkHtml(record){
+  if(!record) return '';
+  return `<a class="drawer-photo-credit-link" href="credits.html#credit-${escapeAttr(record.stoneId)}" target="_blank" rel="noopener">Photo credit</a>`;
+}
+
 function jsArg(v){return JSON.stringify(String(v==null?'':v));}
 function escapeAttr(v){
   return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -901,6 +924,14 @@ function openDetail(id){
     if(encPhotos && encPhotos.length > 0){
       const srcs = encPhotos.map(f => SUPABASE_ENC + f);
       drawerPhotoWrap.innerHTML = buildDrawerPhotoHtml(srcs, c.n);
+      loadPhotoCredits().then(records=>{
+        if(!currentCrystal || currentCrystal.i!==c.i) return; // drawer moved on
+        const credit = findPhotoCredit(records, c.i, encPhotos[0]);
+        const linkHtml = photoCreditLinkHtml(credit);
+        if(linkHtml && drawerPhotoWrap.isConnected){
+          drawerPhotoWrap.insertAdjacentHTML('beforeend', linkHtml);
+        }
+      });
     } else if(featuredMatch && featuredMatch.photo){
       const imgSrc = `${SUPABASE_STONES}${featuredMatch.photo}`;
       drawerPhotoWrap.innerHTML = buildDrawerPhotoHtml([imgSrc], featuredMatch.name);

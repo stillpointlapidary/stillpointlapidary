@@ -187,6 +187,24 @@
   object-fit: contain;
   object-position: center;
 }
+.stone-photo-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.stone-photo-credit-link {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--ink3, #9a948e);
+  text-decoration: none;
+  align-self: flex-start;
+}
+.stone-photo-credit-link:hover {
+  color: var(--ink2, #6b6560);
+  text-decoration: underline;
+}
 
 /* Hero right column */
 .hero-right {
@@ -1092,7 +1110,7 @@
     </div>
   </div>
   <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
-    © 2026 Still Point {technodelic} Studio
+    © 2026 Still Point {technodelic} Studio · <a href="../credits.html" style="color:var(--ink3);text-decoration:underline">Photo Credits</a>
   </div>
 </footer>
 
@@ -1235,6 +1253,33 @@ function redirectToIndex() {
   window.location.replace('../encyclopedia.html');
 }
 
+/* ── Photo credit lookup (additive, read-only) ──
+   Loads data/encyclopedia-photo-credits.json once, then returns a record
+   only when stoneId AND the rendered image's filename both match exactly
+   and the record is public. Any mismatch (including Christie-owned images,
+   which never have a registry entry) returns null — caller must render
+   nothing in that case, not an empty placeholder. */
+let _photoCreditsPromise = null;
+function loadPhotoCredits() {
+  if (_photoCreditsPromise) return _photoCreditsPromise;
+  _photoCreditsPromise = fetch('../data/encyclopedia-photo-credits.json')
+    .then(r => r.ok ? r.json() : [])
+    .catch(() => []);
+  return _photoCreditsPromise;
+}
+async function lookupPhotoCredit(stoneId, imageUrl) {
+  if (!stoneId || !imageUrl) return null;
+  const filename = imageUrl.split('/').pop().split('?')[0];
+  const records = await loadPhotoCredits();
+  return (records || []).find(r =>
+    r && r.public === true && r.stoneId === stoneId && r.filename === filename
+  ) || null;
+}
+function photoCreditLinkHtml(photoCredit) {
+  if (!photoCredit) return '';
+  return `<a class="stone-photo-credit-link" href="../credits.html#credit-${esc(photoCredit.stoneId)}">Photo credit</a>`;
+}
+
 /* ─────────────────────────────────────────────
    MAIN
    ───────────────────────────────────────────── */
@@ -1326,6 +1371,12 @@ async function init() {
   const imageUrl = stone.image_url
     || `${SUPABASE_URL}/storage/v1/object/public/stone-images/encyclopedia/${slug}.webp`;
 
+  /* 7a. Photo credit — conditional link only, never invented. Shown only
+     when a public registry record exists AND both Stone ID and the
+     currently-rendered filename match exactly. Does not read/alter
+     ENCYCLOPEDIA_PHOTOS or Production Master. */
+  const photoCredit = await lookupPhotoCredit(stoneId, imageUrl);
+
   /* 8. Build navigation links */
   const prevSlug = c.nav_prev_slug;
   const prevName = c.nav_prev_name;
@@ -1334,7 +1385,7 @@ async function init() {
 
   /* 9. Render main content */
   document.getElementById('enc-main').innerHTML = buildMain({
-    c, stone, stoneName, slug, imageUrl,
+    c, stone, stoneName, slug, imageUrl, photoCredit,
     chakra, themes, notes, facts, localities,
     similar, pairs, colorMap, care, reach,
     prevSlug, prevName, nextSlug, nextName,
@@ -1354,13 +1405,13 @@ async function init() {
 /* ─────────────────────────────────────────────
    BUILD MAIN HTML
    ───────────────────────────────────────────── */
-function buildMain({ c, stone, stoneName, slug, imageUrl,
+function buildMain({ c, stone, stoneName, slug, imageUrl, photoCredit,
     chakra, themes, notes, facts, localities,
     similar, pairs, colorMap, care, reach,
     prevSlug, prevName, nextSlug, nextName }) {
 
   return `
-    ${buildHero(c, stone, stoneName, imageUrl)}
+    ${buildHero(c, stone, stoneName, imageUrl, photoCredit)}
     ${buildAtAGlance(c)}
     <div class="content-grid">
       <div class="content-stack-left">
@@ -1388,12 +1439,15 @@ function buildMain({ c, stone, stoneName, slug, imageUrl,
 }
 
 /* ── HERO ── */
-function buildHero(c, stone, stoneName, imageUrl) {
+function buildHero(c, stone, stoneName, imageUrl, photoCredit) {
   const roleIcon = esc(c.energetic_role_icon || 'icon-manifestation');
   return `
     <section class="enc-hero" id="hero">
-      <div class="stone-photo-wrap">
-        <img alt="${esc(c.image_alt || stoneName)}" src="${esc(imageUrl)}"/>
+      <div class="stone-photo-col">
+        <div class="stone-photo-wrap">
+          <img alt="${esc(c.image_alt || stoneName)}" src="${esc(imageUrl)}"/>
+        </div>
+        ${photoCreditLinkHtml(photoCredit)}
       </div>
       <div class="hero-right">
         <div class="collection-label">${esc(c.collection_label || '')}</div>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Photo credits and licensing information for third-party images used across Still Point Lapidary.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Photo Credits — Still Point Lapidary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar">
+  <a href="index.html" class="brand-home" aria-label="Return to Still Point Lapidary home">
+    <div class="brand-block">
+      <img src="/assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+      <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+      </div>
+    </div>
+  </a>
+  <div class="topbar-right">
+    <a class="btn btn-sm" href="encyclopedia.html?tab=encyclopedia">Back to Encyclopedia</a>
+  </div>
+</header>
+
+<div class="main-nav-wrap"><nav class="main-nav">
+  <a class="nav-tab" href="index.html">Home</a>
+  <a class="nav-tab" href="encyclopedia.html?tab=mood">Choose by Intention</a>
+  <a class="nav-tab" href="encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+  <a class="nav-tab" href="encyclopedia.html?tab=identify">Identify</a>
+  <a class="nav-tab" href="encyclopedia.html?tab=collection">My Collection</a>
+  <a class="nav-tab" href="encyclopedia.html?tab=101">Crystals 101</a>
+</nav></div>
+
+<main class="content">
+  <section class="pc-header">
+    <h1 class="pc-title">Photo Credits</h1>
+    <p class="pc-intro">Still Point Lapidary uses a mix of Christie's own reference photography and select
+      third-party images shared under open licenses. This page lists every third-party image currently in
+      active public use, with its source, license, and any modification made for site use.</p>
+  </section>
+
+  <div id="pc-sections" aria-live="polite">
+    <p class="pc-loading">Loading credits…</p>
+  </div>
+</main>
+
+<footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
+  <div style="max-width:520px;margin:0 auto">
+    <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem">A complimentary offering from</div>
+    <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="display:block;font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:0.5rem;text-decoration:none">Still Point <em style="color:var(--accent2);font-style:italic">{technodelic}</em> Studio</a>
+    <div style="font-family:'Jost',sans-serif;font-size:12px;color:var(--ink2);line-height:1.8;margin-bottom:0.4rem">Guided sessions for nervous system regulation, integration, and inner&nbsp;clarity.</div>
+    <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;color:var(--ink3);margin-bottom:0.6rem">Dallas · Fort Worth</div>
+    <div style="margin-bottom:1.25rem;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.04em">
+      <a href="https://stillpointdfw.com" target="_blank" rel="noopener" style="color:var(--accent2);text-decoration:none">stillpointdfw.com</a>
+    </div>
+  </div>
+  <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
+    © 2026 Still Point {technodelic} Studio
+  </div>
+</footer>
+</div>
+
+<script>
+/* ── Central Photo Credits page ──
+   Pulls two independent, read-only data sources and renders each as a
+   collapsible, alphabetized section. Never writes to either source.
+   - Encyclopedia: data/encyclopedia-photo-credits.json (public:true only)
+   - Crystal Family Guides: data/family-guides.json (guide.imageCredits),
+     reused/derived directly — no second manually maintained copy. */
+
+function pcEscapeHtml(v){
+  return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function pcIsSafeUrl(url){
+  if(!url||typeof url!=='string')return false;
+  try{const u=new URL(url,window.location.href);return u.protocol==='https:'||u.protocol==='http:';}catch{return false;}
+}
+
+function pcCreditItemHtml(anchorId, title, creator, source, license, licenseUrl, modified){
+  const srcLink = pcIsSafeUrl(source)
+    ? `<a href="${pcEscapeHtml(source)}" target="_blank" rel="noopener noreferrer">View source</a>` : '';
+  const licLink = pcIsSafeUrl(licenseUrl)
+    ? `<a href="${pcEscapeHtml(licenseUrl)}" target="_blank" rel="noopener noreferrer">View license</a>` : '';
+  return `<div class="pc-item" id="${pcEscapeHtml(anchorId)}">
+    <div class="pc-item-title">${pcEscapeHtml(title)}</div>
+    <div class="pc-item-meta">
+      ${creator?`<span class="pc-item-creator">Photo: ${pcEscapeHtml(creator)}</span>`:''}
+      ${license?`<span class="pc-item-license">${pcEscapeHtml(license)}</span>`:''}
+      ${srcLink}${licLink}
+    </div>
+    ${modified?`<div class="pc-item-modified">${pcEscapeHtml(modified)}</div>`:''}
+  </div>`;
+}
+
+async function pcLoadEncyclopediaSection(){
+  let records = [];
+  try{
+    const res = await fetch('data/encyclopedia-photo-credits.json');
+    if(res.ok) records = await res.json();
+  }catch{ records = []; }
+  const active = (records||[]).filter(r=>r && r.public===true)
+    .sort((a,b)=>String(a.stoneName||'').localeCompare(String(b.stoneName||'')));
+  if(!active.length) return '';
+  const items = active.map(r=>pcCreditItemHtml(
+    `credit-${r.stoneId}`, r.stoneName, r.creator, r.source, r.license, r.licenseUrl, r.modified
+  )).join('');
+  return `<details class="pc-section" id="pc-section-encyclopedia" open>
+    <summary class="pc-section-summary">Encyclopedia <span class="pc-section-count">(${active.length})</span></summary>
+    <div class="pc-item-grid">${items}</div>
+  </details>`;
+}
+
+async function pcLoadFamilyGuideSection(){
+  let data = {};
+  try{
+    const res = await fetch('data/family-guides.json');
+    if(res.ok) data = await res.json();
+  }catch{ data = {}; }
+  const guides = Object.values(data||{})
+    .filter(g=>g && Array.isArray(g.imageCredits) && g.imageCredits.length)
+    .sort((a,b)=>String(a.displayName||a.slug||'').localeCompare(String(b.displayName||b.slug||'')));
+  if(!guides.length) return '';
+  let total = 0;
+  const groups = guides.map(g=>{
+    const items = [...g.imageCredits].sort((a,b)=>String(a.title||'').localeCompare(String(b.title||'')));
+    total += items.length;
+    const rows = items.map((c,i)=>pcCreditItemHtml(
+      `credit-fg-${pcEscapeHtml(g.slug)}-${i}`, c.title, c.creator, c.source, c.license, c.licenseUrl, c.modified
+    )).join('');
+    return `<div class="pc-subgroup">
+      <h3 class="pc-subgroup-title">${pcEscapeHtml(g.displayName||g.slug)} <a class="pc-subgroup-link" href="encyclopedia.html?tab=family&amp;family=${pcEscapeHtml(g.slug)}">View guide</a></h3>
+      <div class="pc-item-grid">${rows}</div>
+    </div>`;
+  }).join('');
+  return `<details class="pc-section" id="pc-section-family-guides">
+    <summary class="pc-section-summary">Crystal Family Guides <span class="pc-section-count">(${total})</span></summary>
+    ${groups}
+  </details>`;
+}
+
+/* Beyond the Basics and Other Educational Images: no data source currently
+   exists in this repo (confirmed by inspection). Omitted entirely per the
+   "no empty groups" requirement — add loaders here only once real records
+   exist. */
+
+async function pcRender(){
+  const container = document.getElementById('pc-sections');
+  const [encHtml, fgHtml] = await Promise.all([
+    pcLoadEncyclopediaSection(),
+    pcLoadFamilyGuideSection(),
+  ]);
+  const sections = [encHtml, fgHtml].filter(Boolean).join('');
+  container.innerHTML = sections || '<p class="pc-empty">No active photo credits yet.</p>';
+  pcOpenFromHash();
+}
+
+function pcOpenFromHash(){
+  const hash = window.location.hash ? window.location.hash.slice(1) : '';
+  if(!hash) return;
+  const target = document.getElementById(hash);
+  if(!target) return;
+  const details = target.closest('details.pc-section');
+  if(details) details.open = true;
+  requestAnimationFrame(()=>{
+    target.scrollIntoView({behavior:'smooth', block:'center'});
+    target.classList.add('pc-item--highlight');
+    setTimeout(()=>target.classList.remove('pc-item--highlight'), 2400);
+  });
+}
+
+window.addEventListener('hashchange', pcOpenFromHash);
+pcRender();
+</script>
+</body>
+</html>

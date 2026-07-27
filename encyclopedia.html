@@ -1097,14 +1097,26 @@
       <div class="c101-callout"><strong>Practical implication:</strong> If you receive an unfamiliar stone and it's in the Quartz family, you already know it will likely be durable (7+ Mohs), work well with amplification, and respond well to moonlight cleansing. The family is a shortcut.</div>
     </div>
 
+    <!-- Ten Families, Many Stories — fixed, curated primary roster (2026-07-23).
+         Replaces the former tier-filtered "Browse Crystal Families" search/pill
+         UI, whose tier switching could no longer safely drive this grid once
+         membership became a fixed approved list rather than a live tier filter
+         (see renderPrimaryFamilies()/initFamilies() in 101.js). C101_FAM_DATA
+         and C101_TIERS are unchanged and still hold the full roster for a
+         possible future "All Families" view. -->
     <div class="c101-block">
-      <div class="c101-h2">Browse Crystal Families</div>
-      <div style="position:relative;margin-bottom:1rem">
-        <input type="text" id="fam-search-input" placeholder="Search families…" oninput="famSearch()"
-          style="width:100%;padding:9px 16px;border:0.5px solid var(--border);border-radius:8px;background:var(--white);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none">
-      </div>
-      <div class="c101-nav" id="fam-tier-nav" style="margin-bottom:1.25rem"></div>
-      <div class="fam-grid" id="fam-cards"></div>
+      <div class="c101-h2">Ten Families, Many Stories</div>
+      <p class="fg-section-intro">Ten richly varied crystal families, each with its own patterns, relationships, and ways of taking shape.</p>
+      <div class="fam-grid fam-grid--primary" id="fam-cards"></div>
+    </div>
+
+    <!-- Smaller Families, Distinct Stories — reserved for later, selected
+         shorter family profiles. Left empty with a future-content state per
+         Christie/Lyra's approved direction; no tiles are auto-populated here. -->
+    <div class="c101-block">
+      <div class="c101-h2">Smaller Families, Distinct Stories</div>
+      <p class="fg-section-intro">Focused guides to families with narrower branches, strong identities, and their own place in the crystal world.</p>
+      <div class="fam-future-note">More focused family guides are on the way.</div>
     </div>
   </div>
 
@@ -1322,7 +1334,7 @@
     </div>
   </div>
   <div style="max-width:520px;margin:2rem auto 0;padding-top:1.25rem;border-top:0.5px solid var(--border);font-family:'Jost',sans-serif;font-size:10px;color:var(--ink3);letter-spacing:0.04em">
-    © 2026 Still Point {technodelic} Studio
+    © 2026 Still Point {technodelic} Studio · <a href="credits.html" style="color:var(--ink3);text-decoration:underline">Photo Credits</a>
   </div>
 </footer>
 </div>

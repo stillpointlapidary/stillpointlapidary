@@ -1284,6 +1284,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .drawer-ref-photo-placeholder:hover{opacity:1}
 @media(max-width:600px){.drawer-photo-nav.prev{left:-21px}.drawer-photo-nav.next{right:-21px}}
 .featured-card.has-photo{background:linear-gradient(180deg,#ffffff 0%,#faf8f6 78%,var(--white) 100%)}
+.drawer-photo-credit-link{display:block;text-align:center;margin-top:5px;font-family:'Jost',sans-serif;font-size:8.5px;letter-spacing:0.05em;color:var(--ink3);text-decoration:none}
+.drawer-photo-credit-link:hover{color:var(--ink2);text-decoration:underline}
 
 
 /* LOAD MORE */
@@ -1966,6 +1968,35 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-credit-meta{font-size:11px;color:var(--ink2r)}
 .fg-credit-meta a{color:var(--accent)}
 .fg-credit-meta a:hover{color:var(--ink)}
+
+/* ── Central Photo Credits page (credits.html) — separate, additive
+   registry/renderer. Does not read or write .fg-credits* data; it only
+   mirrors the same family-guide imageCredits data for a combined index. ── */
+.pc-header{max-width:1100px;margin:0 auto;padding:1rem 0 0.5rem}
+.pc-title{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:0.6rem}
+.pc-intro{font-size:13px;line-height:1.7;color:var(--ink2);max-width:70ch}
+.pc-loading,.pc-empty{max-width:1100px;margin:1.5rem auto;font-size:13px;color:var(--ink2r)}
+.pc-section{max-width:1100px;margin:1rem auto;border:0.5px solid var(--border);border-radius:12px;padding:0.25rem 1.25rem 1.25rem;background:var(--stone2)}
+.pc-section-summary{cursor:pointer;list-style:none;padding:0.9rem 0;font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.pc-section-summary::-webkit-details-marker{display:none}
+.pc-section-summary::before{content:'▸';font-size:13px;color:var(--ink3);transition:transform 0.15s ease}
+.pc-section[open]>.pc-section-summary::before{transform:rotate(90deg)}
+.pc-section-count{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink3);font-weight:400}
+.pc-subgroup{margin:0.75rem 0 1.25rem}
+.pc-subgroup-title{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.03em;color:var(--ink2);margin-bottom:0.5rem;display:flex;align-items:center;gap:10px}
+.pc-subgroup-link{font-size:11px;color:var(--accent);text-decoration:none}
+.pc-subgroup-link:hover{color:var(--ink)}
+.pc-item-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+@media(max-width:700px){.pc-item-grid{grid-template-columns:1fr}}
+.pc-item{padding:10px 0;border-top:0.5px solid var(--border)}
+.pc-item:nth-child(-n+2){border-top:none}
+@media(max-width:700px){.pc-item{border-top:0.5px solid var(--border)}.pc-item:first-child{border-top:none}}
+.pc-item-title{font-size:13px;color:var(--ink);margin-bottom:3px}
+.pc-item-meta{font-size:11px;color:var(--ink2r);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.pc-item-meta a{color:var(--accent);text-decoration:none}
+.pc-item-meta a:hover{color:var(--ink);text-decoration:underline}
+.pc-item-modified{font-size:11px;color:var(--ink3);margin-top:3px;font-style:italic}
+.pc-item--highlight{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px;transition:outline-color 0.3s ease}
 
 /* 9. Closing callout — one line, one CTA. Shared closing-transition spacing
    correction (2026-07-22, refined same day): applies to every family guide
