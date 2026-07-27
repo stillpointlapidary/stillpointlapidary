@@ -1974,7 +1974,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    mirrors the same family-guide imageCredits data for a combined index. ── */
 .pc-header{max-width:1100px;margin:0 auto;padding:1rem 0 0.5rem}
 .pc-title{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:0.6rem}
-.pc-intro{font-size:13px;line-height:1.7;color:var(--ink2);max-width:70ch}
+.pc-intro{font-size:13px;line-height:1.7;color:var(--ink2);max-width:100%}
 .pc-loading,.pc-empty{max-width:1100px;margin:1.5rem auto;font-size:13px;color:var(--ink2r)}
 .pc-section{max-width:1100px;margin:1rem auto;border:0.5px solid var(--border);border-radius:12px;padding:0.25rem 1.25rem 1.25rem;background:var(--stone2)}
 .pc-section-summary{cursor:pointer;list-style:none;padding:0.9rem 0;font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:8px}
