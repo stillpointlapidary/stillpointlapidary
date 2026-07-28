@@ -15,6 +15,7 @@ const TOP_LEVEL_FILES = [
   { src: 'index.html',          required: true  },
   { src: 'encyclopedia.html',   required: true  },
   { src: 'credits.html',        required: true  },
+  { src: 'beyond-the-basics.html', required: true  },
   { src: 'styles.css',          required: true  },
   { src: 'app.js',              required: true  },
   { src: 'auth.js',             required: true  },
@@ -34,6 +35,7 @@ const TOP_LEVEL_FILES = [
 // Top-level directories to copy recursively (no filtering)
 const TOP_LEVEL_DIRS = [
   { src: 'assets', required: true },
+  { src: 'beyond-the-basics', required: true },
 ];
 
 // Exact data files (no other data/ contents)

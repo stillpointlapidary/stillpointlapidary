@@ -1,0 +1,220 @@
+/* Beyond the Basics — landing page. Scoped under .btbl- to avoid collisions
+   with global styles.css and with the article-page btb-shared.css classes. */
+
+.btbl{max-width:1220px;margin:0 auto;padding:0.5rem 0 1rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+.btbl-head{text-align:center;padding:1.75rem 1rem 1.25rem}
+.btbl-title{margin:0 0 0.6rem;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(38px,5.5vw,58px);letter-spacing:-0.01em;color:var(--ink)}
+.btbl-subtitle{margin:0 auto;max-width:560px;font-size:15px;color:var(--ink2);line-height:1.6}
+
+/* ── Category pills ─────────────────────────────────────────────────── */
+.btbl-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;padding:1.25rem 1rem 1.75rem}
+.btbl-pill{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 18px;border-radius:999px;border:0.5px solid var(--border);background:var(--white);color:var(--ink2);cursor:pointer;transition:all 0.15s}
+.btbl-pill:hover{border-color:var(--accent2);color:var(--ink)}
+.btbl-pill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.btbl-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ── Featured mosaic ────────────────────────────────────────────────── */
+/* Every featured tile (Articles 01-06 + Mystery Drawer) is one unbroken
+   full-bleed image card with live-HTML text overlaid on the image — no
+   separate white caption body. This is intentionally a different
+   construction from the All Articles archive cards below, which keep the
+   image-above / metadata-below layout. */
+.btbl-mosaic{display:flex;flex-direction:column;gap:1rem;padding:0 1rem 2.25rem}
+.btbl-row{display:grid;gap:1rem}
+.btbl-row-1{grid-template-columns:1.5fr 1fr}
+.btbl-row-2{grid-template-columns:repeat(3,1fr)}
+.btbl-row-3{grid-template-columns:1fr 1fr}
+
+.btbl-tile{position:relative;display:block;width:100%;min-height:300px;border-radius:16px;overflow:hidden;border:0;margin:0;padding:0;background:var(--stone2);font:inherit;text-align:left;text-decoration:none;color:inherit;transition:box-shadow 0.2s}
+a.btbl-tile,button.btbl-tile{cursor:pointer}
+div.btbl-tile{cursor:default}
+.btbl-tile:hover{box-shadow:0 12px 30px rgba(42,37,32,0.14)}
+.btbl-tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.btbl-tile-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 50%;display:block;transition:transform 0.4s ease}
+.btbl-tile:hover .btbl-tile-media{transform:scale(1.035)}
+.btbl-tile--article-01:hover .btbl-tile-media{transform:scale(1.11) translateY(-3.5%)}
+.btbl-tile--article-03:hover .btbl-tile-media{transform:scale(1.13) translateY(-3%)}
+.btbl-tile--article-06:hover .btbl-tile-media{transform:scale(1.07) translateY(-2%)}
+@media(prefers-reduced-motion:reduce){.btbl-tile-media{transition:none}.btbl-tile:hover .btbl-tile-media{transform:none}}
+
+.btbl-tile-scrim{position:absolute;inset:0;pointer-events:none}
+.btbl-tile--dark .btbl-tile-scrim{background:linear-gradient(to top,rgba(20,14,10,0.88) 0%,rgba(20,14,10,0.45) 45%,rgba(20,14,10,0.05) 72%)}
+.btbl-tile--pale .btbl-tile-scrim{background:linear-gradient(90deg,rgba(250,248,246,0.96) 0%,rgba(250,248,246,0.82) 34%,rgba(250,248,246,0.15) 54%,rgba(250,248,246,0) 66%)}
+
+.btbl-tile-body{position:relative;z-index:1;height:100%;min-height:inherit;display:flex;flex-direction:column;justify-content:flex-end;padding:1.35rem;gap:0.4rem;width:100%;box-sizing:border-box}
+.btbl-tile-eyebrow{display:flex;align-items:center;gap:0.5rem;font-size:11px;letter-spacing:0.08em;text-transform:uppercase}
+.btbl-tile-number{font-weight:500}
+.btbl-tile-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.6vw,24px);line-height:1.22}
+.btbl-tile-desc{margin:0;font-size:12.5px;line-height:1.48}
+.btbl-tile-cta{margin-top:0.3rem;font-size:12px;letter-spacing:0.05em;display:inline-flex;align-items:center;gap:6px}
+.btbl-tile:hover .btbl-tile-cta{gap:9px}
+
+.btbl-tile--dark .btbl-tile-eyebrow{color:rgba(250,248,246,0.78)}
+.btbl-tile--dark .btbl-tile-title{color:var(--white)}
+.btbl-tile--dark .btbl-tile-desc{color:rgba(250,248,246,0.9)}
+.btbl-tile--dark .btbl-tile-cta,.btbl-tile--dark .btbl-tile-number{color:var(--accent2)}
+
+.btbl-tile--pale .btbl-tile-eyebrow{color:var(--ink3)}
+.btbl-tile--pale .btbl-tile-title{color:var(--ink)}
+.btbl-tile--pale .btbl-tile-desc{color:var(--ink2)}
+.btbl-tile--pale .btbl-tile-cta,.btbl-tile--pale .btbl-tile-number{color:var(--accent)}
+
+/* Row 1 — the two large opening tiles */
+.btbl-row-1 .btbl-tile{min-height:320px}
+.btbl-row-1 .btbl-tile-title{font-size:clamp(21px,2.2vw,28px)}
+
+/* Article 01 — dark, specimen top-anchored/right, copy stays bottom-left */
+.btbl-tile--article-01 .btbl-tile-media{
+  top:-10%;
+  bottom:auto;
+  height:118%;
+  object-position:62% top;
+}
+.btbl-tile--article-01 .btbl-tile-body{max-width:58%;justify-content:flex-end}
+
+/* Article 02 — kyanite on the right; copy sits left, roughly centered */
+.btbl-tile--article-02 .btbl-tile-media{object-position:82% 48%}
+.btbl-tile--article-02 .btbl-tile-body{max-width:40%;justify-content:center}
+
+/* Row 2 — three equal tiles, each with the specimen anchored right */
+.btbl-row-2 .btbl-tile{min-height:250px}
+
+/* Article 03 — dendritic egg top-anchored/right; copy left, bottom-anchored */
+.btbl-tile--article-03 .btbl-tile-media{
+  top:-9%;
+  bottom:auto;
+  height:116%;
+  object-position:88% top;
+}
+.btbl-tile--article-03 .btbl-tile-body{max-width:50%;justify-content:flex-end}
+
+/* Article 04 — pen + stone upper-right; copy left, bottom-anchored, keep pen tip visible */
+.btbl-tile--article-04 .btbl-tile-media{object-position:90% 32%}
+.btbl-tile--article-04 .btbl-tile-body{max-width:46%;justify-content:flex-end}
+
+/* Article 05 — specimen anchored hard right; copy left, bottom-anchored */
+.btbl-tile--article-05 .btbl-tile-media{object-position:92% 48%}
+.btbl-tile--article-05 .btbl-tile-body{max-width:48%;justify-content:flex-end}
+
+/* Row 3 — Article 06 (2fr, wide banner) + Mystery Drawer (1fr) */
+.btbl-row-3 .btbl-tile{min-height:270px}
+
+/* Article 06 — labradorite + florals top-anchored/right, copy left, bottom-anchored */
+.btbl-tile--article-06 .btbl-tile-media{
+  top:-11%;
+  bottom:auto;
+  height:120%;
+  object-position:78% top;
+}
+.btbl-tile--article-06 .btbl-tile-body{max-width:46%;justify-content:flex-end}
+
+/* Mystery Drawer — the dedicated landscape asset already contains the
+   dark wood field and a restrained drawer on the right. Keep it full-bleed;
+   copy remains in the open left side. */
+.btbl-tile--drawer .btbl-tile-media{object-fit:cover;object-position:center center;transform:none}
+.btbl-tile--drawer:hover .btbl-tile-media{transform:scale(1.015)}
+.btbl-tile--drawer .btbl-tile-scrim{background:linear-gradient(90deg,rgba(20,14,10,0.52) 0%,rgba(20,14,10,0.22) 43%,rgba(20,14,10,0) 64%)}
+.btbl-tile--drawer .btbl-tile-body{align-items:flex-start;justify-content:center;text-align:left;max-width:48%;gap:0.55rem;padding-left:1.55rem}
+.btbl-drawer-heading{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.7vw,23px);line-height:1.22;letter-spacing:0.03em;text-transform:uppercase;color:var(--white)}
+.btbl-drawer-desc{margin:0;font-size:12.5px;line-height:1.55;color:rgba(250,248,246,0.88)}
+.btbl-drawer-arrow{margin-left:0.4rem;font-size:18px;color:var(--accent2);display:inline-block;transition:transform 0.2s}
+.btbl-tile--drawer:hover .btbl-drawer-arrow{transform:translateX(5px)}
+@media(prefers-reduced-motion:reduce){.btbl-drawer-arrow{transition:none}.btbl-tile--drawer:hover .btbl-drawer-arrow{transform:none}}
+
+/* ── Editorial transition between mosaic and archive search ──────────── */
+.btbl-explore{text-align:center;max-width:520px;margin:0 auto;padding:0.5rem 1rem 2rem}
+.btbl-explore-heading{margin:0 0 0.5rem;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(22px,2.4vw,28px);color:var(--ink)}
+.btbl-explore-text{margin:0;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* ── Archive transition: search + filters ──────────────────────────── */
+.btbl-archive-transition{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.85rem;padding:1rem 1rem;margin:0 1rem 1.5rem;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.btbl-search{flex:1 1 240px;max-width:340px;position:relative}
+.btbl-search-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.btbl-search-input{width:100%;padding:9px 14px;border-radius:999px;border:0.5px solid var(--border);background:var(--white);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none;box-sizing:border-box}
+.btbl-search-input:focus-visible{border-color:var(--accent);outline:2px solid var(--accent2);outline-offset:1px}
+.btbl-archive-pills{display:flex;flex-wrap:wrap;gap:0.4rem}
+.btbl-archive-pills .btbl-pill{padding:6px 14px;font-size:11px}
+
+/* ── All Articles grid ──────────────────────────────────────────────── */
+/* Archive cards keep the original image-above / metadata-below
+   construction — intentionally different from the featured-mosaic tiles
+   above, which are full-bleed image cards (.btbl-tile). */
+.btbl-card{position:relative;border-radius:16px;overflow:hidden;border:0.5px solid var(--border);background:var(--white);display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow 0.2s,border-color 0.2s}
+a.btbl-card{cursor:pointer}
+a.btbl-card:hover{box-shadow:0 10px 28px rgba(42,37,32,0.10);border-color:var(--border2)}
+.btbl-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btbl-card.is-unavailable{cursor:default}
+
+.btbl-card-media{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--stone2)}
+.btbl-card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
+a.btbl-card:hover .btbl-card-media img{transform:scale(1.035)}
+@media(prefers-reduced-motion:reduce){.btbl-card-media img{transition:none}a.btbl-card:hover .btbl-card-media img{transform:none}}
+
+.btbl-card-body{padding:1rem 1.15rem 1.15rem;display:flex;flex-direction:column;gap:0.4rem}
+.btbl-card-eyebrow{display:flex;align-items:center;gap:0.5rem;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
+.btbl-card-number{color:var(--accent)}
+.btbl-card-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:19px;line-height:1.25;color:var(--ink)}
+.btbl-card-desc{margin:0;font-size:13px;line-height:1.55;color:var(--ink2)}
+.btbl-card-cta{margin-top:0.35rem;font-size:12px;letter-spacing:0.05em;color:var(--accent);display:inline-flex;align-items:center;gap:6px}
+a.btbl-card:hover .btbl-card-cta{gap:9px}
+
+.btbl-archive-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 1rem 1rem}
+.btbl-archive-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:26px;color:var(--ink)}
+.btbl-archive-viewall{font-size:12px;letter-spacing:0.05em;color:var(--accent);text-decoration:none}
+.btbl-archive-viewall:hover{text-decoration:underline}
+
+.btbl-archive-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:0 1rem}
+.btbl-archive-grid .btbl-card-media{aspect-ratio:1/1}
+.btbl-archive-grid .btbl-card-body{padding:0.85rem 0.9rem 1rem;gap:0.3rem}
+.btbl-archive-grid .btbl-card-title{font-size:15.5px}
+.btbl-archive-grid .btbl-card-desc{display:none}
+.btbl-archive-empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--ink3);font-size:13px}
+
+.btbl-count-line{text-align:center;padding:2rem 1rem 0.5rem;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
+.btbl-count-line .btbl-count-star{color:var(--accent2);margin-right:0.4em}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .btbl-row-1{grid-template-columns:1fr}
+  .btbl-row-2{grid-template-columns:1fr 1fr}
+  .btbl-archive-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:768px){
+  .btbl-row-2{grid-template-columns:1fr}
+  .btbl-row-3{grid-template-columns:1fr}
+  .btbl-archive-grid{grid-template-columns:repeat(2,1fr)}
+  .btbl-archive-transition{flex-direction:column;align-items:stretch;gap:0.6rem;padding:0.75rem 1rem}
+  .btbl-search{max-width:none}
+  .btbl-tile-body{padding:1.1rem}
+  .btbl-explore{padding:0.25rem 1rem 1.1rem}
+
+  /* Deliberate mobile heights/widths per tile — not a shrunken desktop grid */
+  .btbl-tile--article-01{min-height:260px}
+  .btbl-tile--article-01 .btbl-tile-body{max-width:70%}
+  .btbl-tile--article-02{min-height:270px}
+  .btbl-tile--article-02 .btbl-tile-media{object-position:92% 48%}
+  .btbl-tile--article-02 .btbl-tile-body{max-width:44%;justify-content:flex-end}
+  .btbl-tile--article-03{min-height:235px}
+  .btbl-tile--article-03 .btbl-tile-body{max-width:58%}
+  .btbl-tile--article-04{min-height:235px}
+  .btbl-tile--article-04 .btbl-tile-body{max-width:54%}
+  .btbl-tile--article-05{min-height:235px}
+  .btbl-tile--article-05 .btbl-tile-body{max-width:56%}
+  .btbl-tile--article-06{min-height:250px}
+  .btbl-tile--article-06 .btbl-tile-body{max-width:52%}
+  .btbl-tile--drawer{min-height:245px}
+  .btbl-tile--drawer .btbl-tile-body{max-width:52%;padding-left:1rem}
+}
+
+@media(max-width:520px){
+  .btbl-archive-grid{grid-template-columns:1fr 1fr}
+  .btbl-pills{gap:0.4rem}
+  .btbl-pill{padding:7px 14px;font-size:11px}
+  .btbl-tile-title{font-size:17px}
+  .btbl-tile-desc{font-size:12px}
+}

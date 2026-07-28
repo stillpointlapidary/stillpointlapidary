@@ -1,0 +1,291 @@
+/* ============================================================
+   Beyond the Basics — reusable article-page system
+   Shared across all 77 planned articles. Do not add per-article
+   or per-stone overrides here — article-specific content lives
+   in the page HTML, this file only holds reusable structure.
+   Visual system matches Crystals 101 (101.js / .c101-* rules in
+   styles.css): Georgia/Times New Roman serif for major headings
+   only, Jost sans-serif for body/labels/cards, wide 1160px canvas,
+   restrained bronze accents. Redesign pass 2026-07-27.
+   ============================================================ */
+
+:root{
+  --btb-paper:#f8f4ed;
+  --btb-paper-2:#efe8de;
+  --btb-ink:#30231a;
+  --btb-muted:#725e50;
+  --btb-bronze:#9b6a3d;
+  --btb-line:rgba(155,106,61,.3);
+  --btb-line-soft:rgba(155,106,61,.18);
+  --btb-white:#fcfaf6;
+  --btb-serif:Georgia,'Times New Roman',serif;
+  --btb-sans:'Jost',Arial,sans-serif;
+  --btb-max-width:1160px;
+  --btb-prose-width:72ch;
+}
+
+.btb-body{
+  margin:0;
+  background:var(--btb-paper);
+  color:var(--btb-ink);
+  font-family:var(--btb-sans);
+  font-weight:300;
+}
+
+/* ---- header (matches landing page header) ---- */
+.btb-site-head{
+  height:64px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--btb-line);background:rgba(252,250,246,.94);
+}
+.btb-brand{display:flex;align-items:center;gap:12px;letter-spacing:.24em;text-transform:uppercase}
+.btb-brand-mark{font-family:var(--btb-serif);font-size:28px;color:var(--btb-bronze)}
+.btb-brand-name{font-family:var(--btb-serif);font-size:19px;line-height:.9;letter-spacing:.16em}
+.btb-brand-name small{display:block;margin-top:8px;text-align:center;font:10px var(--btb-sans);letter-spacing:.45em}
+
+/* ---- return links (top + final) ---- */
+.btb-return{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--btb-sans);
+  font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--btb-bronze);text-decoration:none;
+}
+.btb-return:hover{color:var(--btb-ink)}
+.btb-return-top{margin:22px 0 8px}
+.btb-return-bottom{
+  display:flex;justify-content:center;margin:48px 0 40px;
+  padding-top:26px;border-top:1px solid var(--btb-line-soft);
+}
+
+/* ---- article shell ---- */
+.btb-article{
+  width:min(var(--btb-max-width), calc(100% - 48px));
+  margin:0 auto;padding:8px 0 0;
+}
+
+/* ---- masthead: category / title / dek / meta ---- */
+.btb-category{
+  font-family:var(--btb-sans);
+  font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--btb-bronze);margin:0 0 12px;
+}
+.btb-category .sep{margin:0 .5em;color:var(--btb-line)}
+
+.btb-title{
+  font-family:var(--btb-serif);font-weight:400;
+  font-size:clamp(30px,4vw,42px);line-height:1.12;letter-spacing:-.01em;
+  margin:0 0 14px;overflow-wrap:break-word;hyphens:auto;
+}
+
+.btb-dek{
+  font-family:var(--btb-sans);font-style:normal;font-weight:300;
+  font-size:clamp(15px,1.6vw,17px);line-height:1.6;color:var(--btb-muted);
+  margin:0 0 18px;max-width:56ch;
+}
+
+.btb-meta{
+  display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;
+  font-family:var(--btb-sans);
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--btb-muted);
+  margin:0;
+}
+
+/* ---- hero: text left, contained image right ---- */
+.btb-hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;
+  margin:20px 0 40px;padding-bottom:26px;border-bottom:1px solid var(--btb-line-soft);
+}
+.btb-hero-media{margin:0}
+.btb-hero-media .btb-image-box{
+  height:260px;border-radius:10px;border:1px solid var(--btb-line);
+  background:var(--btb-white);display:flex;align-items:center;justify-content:center;padding:14px;
+}
+.btb-hero-media .btb-image-box img{width:100%;height:100%;object-fit:contain;object-position:center}
+@media (max-width:760px){
+  .btb-hero-grid{grid-template-columns:1fr;gap:20px;margin:16px 0 32px}
+  .btb-hero-media{order:2}
+  .btb-hero-text{order:1}
+  .btb-hero-media .btb-image-box{height:220px}
+}
+
+/* ---- reusable image box: holds either a real photo or a placeholder ---- */
+.btb-image-box{width:100%;display:block;overflow:hidden;position:relative;background:var(--btb-white)}
+.btb-image-box img{width:100%;height:100%;object-fit:cover;display:block}
+.btb-image-box.is-placeholder{
+  background:repeating-linear-gradient(135deg, var(--btb-paper-2) 0 14px, var(--btb-white) 14px 28px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
+}
+.btb-image-box .btb-placeholder-copy{
+  font-family:var(--btb-serif);font-style:italic;font-size:15px;color:var(--btb-muted);
+  max-width:40ch;
+}
+.btb-four-item .btb-image-box{aspect-ratio:1/1}
+
+/* ---- compact teaching sections ---- */
+.btb-section{margin:0 0 30px}
+.btb-section h2{
+  font-family:var(--btb-serif);font-weight:400;
+  font-size:clamp(21px,2.6vw,26px);line-height:1.22;margin:0 0 14px;
+}
+.btb-section h3{
+  font-family:var(--btb-serif);font-weight:400;
+  font-size:17px;margin:0 0 6px;color:var(--btb-ink);
+}
+.btb-section p{
+  font-family:var(--btb-sans);
+  font-size:15.5px;line-height:1.75;color:#3d2f24;margin:0 0 14px;max-width:var(--btb-prose-width);
+}
+.btb-plain-list{
+  margin:0 0 14px;padding:0 0 0 1.1em;max-width:var(--btb-prose-width);
+}
+.btb-plain-list li{
+  font-family:var(--btb-sans);
+  font-size:15.5px;line-height:1.75;color:#3d2f24;margin:0 0 6px;
+}
+
+/* ---- Big Idea callout: compact modern card ---- */
+.btb-bigidea{
+  background:var(--btb-paper-2);border-left:3px solid var(--btb-bronze);
+  border-radius:0 8px 8px 0;padding:20px 26px;margin:0 0 30px;
+}
+.btb-bigidea-label{
+  font-family:var(--btb-sans);font-size:11px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--btb-bronze);margin:0 0 8px;
+}
+.btb-bigidea-text{
+  font-family:var(--btb-serif);font-size:19px;line-height:1.5;color:var(--btb-ink);margin:0;
+}
+
+/* ---- Read the Specimen: single uncropped teaching graphic ---- */
+.btb-teaching-image{
+  width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--btb-line);
+  background:var(--btb-white);margin:0 0 30px;padding:10px;
+}
+.btb-teaching-image img{width:100%;height:auto;display:block;object-fit:contain}
+
+/* ---- reusable distinction / comparison module ---- */
+.btb-distinction{margin:0 0 30px;border:1px solid var(--btb-line);border-radius:8px;overflow:hidden;background:var(--btb-white)}
+.btb-distinction-row{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:4px 20px;
+  padding:15px 20px;border-bottom:1px solid var(--btb-line-soft);
+}
+.btb-distinction-row:last-child{border-bottom:0}
+.btb-distinction-row:nth-child(odd){background:var(--btb-paper-2)}
+.btb-distinction-term{
+  font-family:var(--btb-sans);font-size:14.5px;font-weight:500;color:var(--btb-ink);
+  align-self:center;
+}
+.btb-distinction-desc{font-family:var(--btb-sans);font-size:14px;line-height:1.55;color:var(--btb-muted);align-self:center}
+@media (max-width:560px){
+  .btb-distinction-row{grid-template-columns:1fr;gap:4px}
+  .btb-distinction-term:after{content:"";display:block;width:28px;height:1px;background:var(--btb-line);margin-top:6px}
+}
+
+/* ---- Four Familiar Fossils: 2x2 grid, image-left cards ---- */
+.btb-four-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:0 0 30px;
+}
+.btb-four-item{
+  display:flex;gap:16px;align-items:flex-start;
+  border:1px solid var(--btb-line);border-left:3px solid var(--btb-bronze);
+  border-radius:8px;overflow:hidden;background:var(--btb-white);padding:16px;min-width:0;
+}
+.btb-four-item .btb-image-box{
+  width:112px;height:112px;flex-shrink:0;border-radius:6px;
+}
+.btb-four-text{min-width:0}
+.btb-four-item h3{font-size:16px;margin:0 0 6px}
+.btb-four-item p{font-family:var(--btb-sans);font-size:13.5px;line-height:1.6;margin:0 0 8px;color:var(--btb-muted)}
+.btb-four-item p:last-child{margin-bottom:0}
+@media (max-width:760px){
+  .btb-four-grid{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .btb-four-item{flex-direction:column}
+  .btb-four-item .btb-image-box{width:100%;height:auto;aspect-ratio:16/10}
+}
+
+/* ---- Quiet Practice: modern practice card ---- */
+.btb-practice{
+  background:var(--btb-paper-2);border:1px solid var(--btb-line);border-left:3px solid var(--btb-bronze);
+  border-radius:0 10px 10px 0;padding:26px 28px;margin:0 0 30px;
+}
+.btb-practice-label{
+  font-family:var(--btb-sans);font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--btb-bronze);margin:0 0 14px;
+}
+.btb-practice-intro{font-family:var(--btb-sans);font-size:14.5px;color:var(--btb-muted);line-height:1.65;margin:0 0 14px}
+.btb-practice-question{
+  font-family:var(--btb-serif);font-size:22px;line-height:1.42;color:var(--btb-ink);margin:0 0 18px;
+}
+.btb-practice-list{
+  list-style:none;margin:0 0 16px;padding:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:9px 24px;
+}
+.btb-practice-list li{
+  font-family:var(--btb-sans);font-size:13.5px;color:var(--btb-ink);line-height:1.5;
+  padding-left:14px;position:relative;
+}
+.btb-practice-list li::before{content:"–";position:absolute;left:0;color:var(--btb-bronze)}
+.btb-practice-close{font-family:var(--btb-sans);font-size:13.5px;color:var(--btb-muted);line-height:1.65;margin:0}
+@media (max-width:600px){
+  .btb-practice-list{grid-template-columns:1fr}
+}
+
+/* ---- "Why This Matters" callout: neutral modern panel ---- */
+.btb-callout{
+  background:var(--btb-paper-2);border:1px solid var(--btb-line);border-left:3px solid var(--btb-bronze);
+  border-radius:0 8px 8px 0;padding:22px 26px;margin:0 0 36px;
+}
+.btb-callout .btb-callout-eyebrow{
+  font-family:var(--btb-sans);
+  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--btb-bronze);margin:0 0 10px;
+}
+.btb-callout p{font-family:var(--btb-sans);font-size:14.5px;line-height:1.68;margin:0 0 9px;color:var(--btb-ink)}
+.btb-callout p:last-child{margin-bottom:0}
+
+/* ---- related content: quiet, non-clickable when unavailable ---- */
+.btb-related{margin:0 0 30px}
+.btb-related h2{
+  font-family:var(--btb-serif);font-weight:400;font-size:18px;margin:0 0 10px;
+}
+.btb-related-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center}
+.btb-related-list li{margin:0;font-family:var(--btb-sans)}
+.btb-related-link{
+  display:inline-block;padding:9px 16px;border-radius:20px;
+  font-size:13.5px;color:var(--btb-ink);text-decoration:none;
+  background:var(--btb-white);border:1px solid var(--btb-line);
+  min-height:36px;line-height:18px;
+}
+.btb-related-link:hover{background:var(--btb-paper-2)}
+.btb-related-quiet{
+  font-size:13.5px;color:var(--btb-muted);
+}
+.btb-related-list li:not(:last-child) .btb-related-quiet::after,
+.btb-related-list li:not(:last-child) .btb-related-link::after{
+  content:"·";margin:0 12px;color:var(--btb-line);
+}
+
+/* ---- Photo Credits: mirrors the Calcite Family Guide treatment
+   (collapsed <details>/<summary>, full attribution content preserved
+   inside) — see familyGuideImageCreditsHtml() / .fg-credits in
+   family-guide.js / styles.css. ---- */
+.btb-credits{max-width:var(--btb-max-width);margin:1.25rem 0 2.5rem;font-size:12px;color:var(--btb-muted)}
+.btb-credits-summary{cursor:pointer;letter-spacing:.03em;padding:.4rem 0;color:var(--btb-muted);font-family:var(--btb-sans)}
+.btb-credits-summary:hover{color:var(--btb-ink)}
+.btb-credits-list{list-style:none;margin:.6rem 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.btb-credit-item{display:flex;flex-direction:column;gap:1px}
+.btb-credit-title{color:var(--btb-ink);font-size:12px;font-weight:500;font-family:var(--btb-sans)}
+.btb-credit-meta{font-size:11px;color:var(--btb-muted);font-family:var(--btb-sans)}
+.btb-credit-meta a{color:var(--btb-bronze)}
+.btb-credit-meta a:hover{color:var(--btb-ink)}
+
+/* ---- responsive base ---- */
+@media (max-width:900px){
+  .btb-site-head nav{display:none}
+}
+@media (max-width:580px){
+  .btb-site-head{padding:0 14px}
+  .btb-brand-name{font-size:16px}
+  .btb-article{width:calc(100% - 28px)}
+}
