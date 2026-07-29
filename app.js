@@ -276,7 +276,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0036": ["yellow-fluorite.webp"],
   "C-0037": ["copper-specimen.webp"],
   "C-0038": ["ruby-tumble-family.webp", "ruby-tumble.webp", "ruby-record-keeper-specimens.webp", "ruby-honeycomb-specimen.webp", "ruby-tumble-2.webp"],
-  "C-0039": ["sapphire.webp", "sapphire-2.webp"],
+  "C-0039": ["sapphire-2.webp", "sapphire.webp"],
   "C-0040": ["goethite.webp"],
   "C-0041": ["hematite.webp"],
   "C-0043": ["magnetite.webp"],
