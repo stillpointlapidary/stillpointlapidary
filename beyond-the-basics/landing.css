@@ -45,11 +45,11 @@ div.btbl-tile{cursor:default}
 .btbl-tile--dark .btbl-tile-scrim{background:linear-gradient(to top,rgba(20,14,10,0.88) 0%,rgba(20,14,10,0.45) 45%,rgba(20,14,10,0.05) 72%)}
 .btbl-tile--pale .btbl-tile-scrim{background:linear-gradient(90deg,rgba(250,248,246,0.96) 0%,rgba(250,248,246,0.82) 34%,rgba(250,248,246,0.15) 54%,rgba(250,248,246,0) 66%)}
 
-.btbl-tile-body{position:relative;z-index:1;height:100%;min-height:inherit;display:flex;flex-direction:column;justify-content:flex-end;padding:1.35rem;gap:0.4rem;width:100%;box-sizing:border-box}
-.btbl-tile-eyebrow{display:flex;align-items:center;gap:0.5rem;font-size:11px;letter-spacing:0.08em;text-transform:uppercase}
-.btbl-tile-number{font-weight:500}
-.btbl-tile-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.6vw,24px);line-height:1.22}
-.btbl-tile-desc{margin:0;font-size:12.5px;line-height:1.48}
+.btbl-tile-body{position:relative;z-index:1;height:100%;min-height:inherit;display:flex;flex-direction:column;justify-content:flex-start;padding:1.5rem 1.35rem;gap:0.75rem;width:100%;box-sizing:border-box}
+.btbl-tile-eyebrow{display:flex;align-items:baseline;gap:0.5rem;font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase}
+.btbl-tile-number{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:25px;letter-spacing:0;text-transform:none}
+.btbl-tile-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.6vw,24px);line-height:1.22;white-space:pre-line}
+.btbl-tile-desc{margin:0;font-size:14.5px;line-height:1.48}
 .btbl-tile-cta{margin-top:0.3rem;font-size:12px;letter-spacing:0.05em;display:inline-flex;align-items:center;gap:6px}
 .btbl-tile:hover .btbl-tile-cta{gap:9px}
 
@@ -66,6 +66,7 @@ div.btbl-tile{cursor:default}
 /* Row 1 — the two large opening tiles */
 .btbl-row-1 .btbl-tile{min-height:320px}
 .btbl-row-1 .btbl-tile-title{font-size:clamp(21px,2.2vw,28px)}
+.btbl-row-1 .btbl-tile-body{gap:1rem}
 
 /* Article 01 — dark, specimen top-anchored/right, copy stays bottom-left */
 .btbl-tile--article-01 .btbl-tile-media{
@@ -74,11 +75,11 @@ div.btbl-tile{cursor:default}
   height:118%;
   object-position:62% top;
 }
-.btbl-tile--article-01 .btbl-tile-body{max-width:58%;justify-content:flex-end}
+.btbl-tile--article-01 .btbl-tile-body{max-width:58%}
 
 /* Article 02 — kyanite on the right; copy sits left, roughly centered */
 .btbl-tile--article-02 .btbl-tile-media{object-position:82% 48%}
-.btbl-tile--article-02 .btbl-tile-body{max-width:40%;justify-content:center}
+.btbl-tile--article-02 .btbl-tile-body{max-width:40%}
 
 /* Row 2 — three equal tiles, each with the specimen anchored right */
 .btbl-row-2 .btbl-tile{min-height:250px}
@@ -90,15 +91,15 @@ div.btbl-tile{cursor:default}
   height:116%;
   object-position:88% top;
 }
-.btbl-tile--article-03 .btbl-tile-body{max-width:50%;justify-content:flex-end}
+.btbl-tile--article-03 .btbl-tile-body{max-width:50%}
 
 /* Article 04 — pen + stone upper-right; copy left, bottom-anchored, keep pen tip visible */
 .btbl-tile--article-04 .btbl-tile-media{object-position:90% 32%}
-.btbl-tile--article-04 .btbl-tile-body{max-width:46%;justify-content:flex-end}
+.btbl-tile--article-04 .btbl-tile-body{max-width:46%}
 
 /* Article 05 — specimen anchored hard right; copy left, bottom-anchored */
 .btbl-tile--article-05 .btbl-tile-media{object-position:92% 48%}
-.btbl-tile--article-05 .btbl-tile-body{max-width:48%;justify-content:flex-end}
+.btbl-tile--article-05 .btbl-tile-body{max-width:48%}
 
 /* Row 3 — Article 06 (2fr, wide banner) + Mystery Drawer (1fr) */
 .btbl-row-3 .btbl-tile{min-height:270px}
@@ -110,7 +111,7 @@ div.btbl-tile{cursor:default}
   height:120%;
   object-position:78% top;
 }
-.btbl-tile--article-06 .btbl-tile-body{max-width:46%;justify-content:flex-end}
+.btbl-tile--article-06 .btbl-tile-body{max-width:46%}
 
 /* Mystery Drawer — the dedicated landscape asset already contains the
    dark wood field and a restrained drawer on the right. Keep it full-bleed;
@@ -118,7 +119,7 @@ div.btbl-tile{cursor:default}
 .btbl-tile--drawer .btbl-tile-media{object-fit:cover;object-position:center center;transform:none}
 .btbl-tile--drawer:hover .btbl-tile-media{transform:scale(1.015)}
 .btbl-tile--drawer .btbl-tile-scrim{background:linear-gradient(90deg,rgba(20,14,10,0.52) 0%,rgba(20,14,10,0.22) 43%,rgba(20,14,10,0) 64%)}
-.btbl-tile--drawer .btbl-tile-body{align-items:flex-start;justify-content:center;text-align:left;max-width:48%;gap:0.55rem;padding-left:1.55rem}
+.btbl-tile--drawer .btbl-tile-body{align-items:flex-start;text-align:left;max-width:48%;gap:0.55rem;padding-left:1.55rem}
 .btbl-drawer-heading{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.7vw,23px);line-height:1.22;letter-spacing:0.03em;text-transform:uppercase;color:var(--white)}
 .btbl-drawer-desc{margin:0;font-size:12.5px;line-height:1.55;color:rgba(250,248,246,0.88)}
 .btbl-drawer-arrow{margin-left:0.4rem;font-size:18px;color:var(--accent2);display:inline-block;transition:transform 0.2s}
@@ -137,7 +138,7 @@ div.btbl-tile{cursor:default}
 .btbl-search-input{width:100%;padding:9px 14px;border-radius:999px;border:0.5px solid var(--border);background:var(--white);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);outline:none;box-sizing:border-box}
 .btbl-search-input:focus-visible{border-color:var(--accent);outline:2px solid var(--accent2);outline-offset:1px}
 .btbl-archive-pills{display:flex;flex-wrap:wrap;gap:0.4rem}
-.btbl-archive-pills .btbl-pill{padding:6px 14px;font-size:11px}
+.btbl-archive-pills .btbl-pill{padding:6px 14px;font-size:12.5px}
 
 /* ── All Articles grid ──────────────────────────────────────────────── */
 /* Archive cards keep the original image-above / metadata-below
@@ -170,11 +171,11 @@ a.btbl-card:hover .btbl-card-cta{gap:9px}
 .btbl-archive-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:0 1rem}
 .btbl-archive-grid .btbl-card-media{aspect-ratio:1/1}
 .btbl-archive-grid .btbl-card-body{padding:0.85rem 0.9rem 1rem;gap:0.3rem}
-.btbl-archive-grid .btbl-card-title{font-size:15.5px}
+.btbl-archive-grid .btbl-card-title{font-size:17px}
 .btbl-archive-grid .btbl-card-desc{display:none}
 .btbl-archive-empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--ink3);font-size:13px}
 
-.btbl-count-line{text-align:center;padding:2rem 1rem 0.5rem;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
+.btbl-count-line{text-align:center;padding:2rem 1rem 0.5rem;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
 .btbl-count-line .btbl-count-star{color:var(--accent2);margin-right:0.4em}
 
 /* ── Responsive ─────────────────────────────────────────────────────── */
@@ -198,7 +199,7 @@ a.btbl-card:hover .btbl-card-cta{gap:9px}
   .btbl-tile--article-01 .btbl-tile-body{max-width:70%}
   .btbl-tile--article-02{min-height:270px}
   .btbl-tile--article-02 .btbl-tile-media{object-position:92% 48%}
-  .btbl-tile--article-02 .btbl-tile-body{max-width:44%;justify-content:flex-end}
+  .btbl-tile--article-02 .btbl-tile-body{max-width:44%}
   .btbl-tile--article-03{min-height:235px}
   .btbl-tile--article-03 .btbl-tile-body{max-width:58%}
   .btbl-tile--article-04{min-height:235px}
@@ -214,7 +215,7 @@ a.btbl-card:hover .btbl-card-cta{gap:9px}
 @media(max-width:520px){
   .btbl-archive-grid{grid-template-columns:1fr 1fr}
   .btbl-pills{gap:0.4rem}
-  .btbl-pill{padding:7px 14px;font-size:11px}
+  .btbl-pill{padding:7px 14px;font-size:12.5px}
   .btbl-tile-title{font-size:17px}
-  .btbl-tile-desc{font-size:12px}
+  .btbl-tile-desc{font-size:14.5px}
 }

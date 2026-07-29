@@ -21,6 +21,26 @@
     return node;
   }
 
+  // Description fields may be a plain string or an array of lines that
+  // must render as real line breaks (not string concatenation with "\n",
+  // which textContent collapses). Array form renders each line as a text
+  // node joined by actual <br> elements — same technique already used for
+  // the Mystery Drawer heading/desc below.
+  function buildMultilineEl(tag, className, value) {
+    var node = document.createElement(tag);
+    node.className = className;
+    var lines = Array.isArray(value) ? value : [value];
+    lines.forEach(function (line, i) {
+      if (i > 0) node.appendChild(document.createElement('br'));
+      node.appendChild(document.createTextNode(line));
+    });
+    return node;
+  }
+
+  function descriptionText(article) {
+    return Array.isArray(article.description) ? article.description.join(' ') : (article.description || '');
+  }
+
   function categoryLabel(article) {
     return article.categoryDisplay || article.category;
   }
@@ -47,7 +67,7 @@
       el('span', { text: categoryLabel(article) })
     ]);
     var title = el(opts.headingTag || 'h3', { class: 'btbl-card-title', text: article.title });
-    var desc = el('p', { class: 'btbl-card-desc', text: article.description });
+    var desc = buildMultilineEl('p', 'btbl-card-desc', article.description);
 
     var body = el('div', { class: 'btbl-card-body' }, [eyebrow, title, desc]);
 
@@ -129,7 +149,7 @@
       el('span', { text: categoryLabel(article) })
     ]);
     var title = el(opts.headingTag || 'h3', { class: 'btbl-tile-title', text: article.title });
-    var desc = el('p', { class: 'btbl-tile-desc', text: article.description });
+    var desc = buildMultilineEl('p', 'btbl-tile-desc', article.description);
     var body = el('div', { class: 'btbl-tile-body' }, [eyebrow, title, desc]);
 
     if (article.available && opts.showCta) {
@@ -215,7 +235,7 @@
     var categoryOk = activeCategory === 'All' || article.category === activeCategory;
     if (!categoryOk) return false;
     if (!searchTerm) return true;
-    var haystack = (article.title + ' ' + categoryLabel(article) + ' ' + (article.description || '')).toLowerCase();
+    var haystack = (article.title + ' ' + categoryLabel(article) + ' ' + descriptionText(article)).toLowerCase();
     return haystack.indexOf(searchTerm) !== -1;
   }
 

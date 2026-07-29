@@ -44,8 +44,8 @@
     {
       id: 'featured-01', showIn: ['featured'], featuredPosition: 1,
       number: '01', category: 'Phenomena',
-      title: 'Why Some Crystals Glow',
-      description: 'Fluorescence, phosphorescence, and what ultraviolet light reveals.',
+      title: 'Why Some\nCrystals Glow',
+      description: ['Fluorescence, phosphorescence,', 'and what ultraviolet light reveals.'],
       image: IMG_01, alt: ALT_01, slug: null, route: null, available: false
     },
     {
@@ -91,7 +91,7 @@
       id: 'archive-01', showIn: ['archive'], archivePosition: 1,
       number: '01', category: 'Phenomena',
       title: 'Why Some Crystals Glow',
-      description: 'Fluorescence, phosphorescence, and what ultraviolet light reveals.',
+      description: ['Fluorescence, phosphorescence,', 'and what ultraviolet light reveals.'],
       image: IMG_01, alt: ALT_01, slug: null, route: null, available: false
     },
     {
