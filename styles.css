@@ -2313,6 +2313,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    classes are shared across Calcite/Quartz/Fluorite/Feldspar/Chalcedony/
    Agate/Jasper/Garnet/Tourmaline/Obsidian and intentionally keep their own
    approved centered treatment. ── */
+/* 2026-08-07: major-section separation, desktop — a single Copper-scoped
+   override of the shared .fg-section margin-bottom (2.5rem elsewhere),
+   increased to 76px. Mobile override (56px) sits in the existing
+   max-width:900px breakpoint below. Internal card/copy spacing is
+   untouched — only the gap between major sections changes. */
+.fg-guide[data-family-slug="copper"] .fg-section{margin-bottom:76px}
 .fg-guide[data-family-slug="copper"] .fg-h2{text-align:left}
 .fg-guide[data-family-slug="copper"] .fg-lead,
 .fg-guide[data-family-slug="copper"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0}
@@ -2460,6 +2466,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
      column instead of letting it fill the width. */
   .fg-copper-intro-grid{flex-direction:column;align-items:flex-start}
   .fg-copper-intro-media{flex:none;width:150px}
+  /* 2026-08-07: major-section separation, mobile — see the desktop
+     76px rule above (data-family-slug="copper" .fg-section). */
+  .fg-guide[data-family-slug="copper"] .fg-section{margin-bottom:56px}
 }
 
 @media(max-width:600px){
