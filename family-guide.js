@@ -1824,7 +1824,10 @@ function familyGuideOneDepositHtml(guide){
         : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
       mediaHtml = `<div class="fg-copper-intro-media">
         <button type="button" class="fg-copper-intro-media-img" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
-        <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+        <div class="fg-mineralcard-header fg-copper-intro-namerow">
+          <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
+          <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+        </div>
       </div>`;
     }
   }
@@ -2034,14 +2037,17 @@ function familyGuideCopperCareHtml(guide){
 
 /* ── 6. Closing essay — "A Family Written in Color." Unlike every other
    guide's one-line closingCallout (rendered by the shared
-   familyGuideClosingHtml below), Copper's brief calls for the full
-   two-paragraph closing essay paired with one detailed image, kept
-   visually quiet. Reuses the existing .fg-explain-grid image+prose split
-   (already used elsewhere for a photo-beside-text layout) rather than
-   inventing a new one. familyGuideClosingHtml still runs immediately after
-   this for the standard italic one-line callout + Return to Encyclopedia
-   button, preserving the same closing pattern every other guide ends
-   with. ── */
+   familyGuideClosingHtml), Copper's brief calls for the full two-paragraph
+   closing essay paired with one detailed image, kept visually quiet.
+   Reuses the existing .fg-explain-grid image+prose split (already used
+   elsewhere for a photo-beside-text layout) rather than inventing a new
+   one. The essay's own finalLine already carries the guide's single
+   italic closing statement, so Copper does NOT call the shared
+   familyGuideClosingHtml afterward (2026-08-03 correction) — that would
+   duplicate the line and add a large boxed callout the brief explicitly
+   asked to remove. familyGuideCopperClosingPillHtml below replaces it with
+   a quiet centered nav-only pill, scoped to Copper's own assembly; every
+   other guide keeps calling familyGuideClosingHtml unchanged. ── */
 function familyGuideCopperClosingEssayHtml(guide){
   const ce = guide.closingEssay;
   if(!ce) return '';
@@ -2062,6 +2068,24 @@ function familyGuideCopperClosingEssayHtml(guide){
       <div class="fg-explain-media">${mediaHtml}</div>
     </div>
   </section>`;
+}
+
+/* ── Copper-only closing navigation pill (2026-08-03) — replaces the
+   shared familyGuideClosingHtml's large boxed callout for Copper only.
+   The closing essay's finalLine already carries the guide's one italic
+   closing statement, so this is navigation only: a small, quiet, centered
+   pill reusing the site's existing .fg-catalog-link pill treatment
+   (already approved and used on Garnet's collection links) rather than
+   inventing new pill styling. Reuses guide.closingButton unchanged (same
+   label/target Copper has used since ca78a4c) and the existing
+   fgReturnToCrystalFamilies() navigation helper. ── */
+function familyGuideCopperClosingPillHtml(guide){
+  const cb = guide.closingButton;
+  const btnLabel = (cb && cb.label) || 'Return to Crystal Families';
+  const btnOnclick = (cb && cb.target==='crystalFamilies') ? 'fgReturnToCrystalFamilies()' : "switchTabByName('encyclopedia')";
+  return `<div class="fg-copper-closing-pill-wrap">
+    <button type="button" class="fg-catalog-link" onclick="${btnOnclick}">${escapeAttr(btnLabel)}</button>
+  </div>`;
 }
 
 /* ── Restrained Photo Credits link (2026-08-02) — replaces the shared
@@ -2090,7 +2114,7 @@ function familyGuideCopperHtml(guide){
     ${familyGuideGrowTogetherHtml(guide)}
     ${familyGuideCopperCareHtml(guide)}
     ${familyGuideCopperClosingEssayHtml(guide)}
-    ${familyGuideClosingHtml(guide)}
+    ${familyGuideCopperClosingPillHtml(guide)}
     ${familyGuideCopperCreditsLinkHtml()}
   </div>`;
 }

@@ -2175,8 +2175,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    scrolling table, per the brief's explicit no-horizontal-scroll rule.
    No max-width of its own (2026-07-31 normalization pass) — it spans the
    same .fg-guide shell width as every other Copper section instead of
-   sitting in its own narrower centered column. */
-.fg-table-wrap{margin:1.5rem 0 0}
+   sitting in its own narrower centered column. 2026-08-03: margin-top
+   nudged from 1.5rem to 2rem for slightly more breathing room above the
+   table, below the combined intro module — a subtle bump only. */
+.fg-table-wrap{margin:2rem 0 0}
 .fg-table{width:100%;border-collapse:collapse;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
 .fg-table th,.fg-table td{padding:0.85rem 1.1rem;text-align:left;font-size:16px;line-height:1.55;color:var(--ink2)}
 /* 2026-08-02: shorter header row (reduced vertical padding only — body
@@ -2230,10 +2232,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    paragraphs; the formation table (rendered separately, right after this
    grid) is not part of the grid itself so it can span the full section
    width. Stacks to image-then-copy on narrow widths. */
-.fg-copper-intro-grid{display:flex;gap:1.75rem;align-items:flex-start;margin-bottom:1.5rem}
+/* 2026-08-03: modest extra breathing room above the module (beneath the
+   hero) and below it (above the formation table) — a subtle bump, not a
+   new section gap. Scoped to the #fg-one-deposit id, which only this
+   Copper section uses, so no shared spacing rule is touched. */
+#fg-one-deposit{margin-top:0.75rem}
+.fg-copper-intro-grid{display:flex;gap:1.75rem;align-items:flex-start;margin-bottom:1.9rem}
 .fg-copper-intro-media{flex:0 0 150px;display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem}
 .fg-copper-intro-media-img{display:block;width:150px;height:150px;background:#FFFFFF;border:none;padding:0;cursor:pointer;overflow:hidden;border-radius:8px}
 .fg-copper-intro-media-img img{width:100%;height:100%;object-fit:contain;display:block;padding:8px;box-sizing:border-box}
+/* 2026-08-03: "COPPER / Quick View" name row beneath the image, matching
+   the mineral cards' own name-row treatment exactly (same
+   .fg-mineralcard-header/.fg-stonecard-name/.fg-stonecard-qv classes,
+   nothing new) rather than the earlier standalone Quick-View-only link.
+   Width matches the 150px image well so the row reads as its label. */
+.fg-copper-intro-namerow{width:150px;margin-bottom:0}
 .fg-copper-intro-copy{flex:1;min-width:0}
 .fg-copper-intro-copy .fg-h2{margin-top:0}
 
@@ -2266,7 +2279,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    consistent size across all three groups. */
 .fg-colorgroup-thumb button{width:105px;height:105px;flex-shrink:0;border-radius:10px;overflow:hidden;border:0.5px solid var(--border);background:#FFFFFF;padding:0;cursor:pointer;display:block}
 .fg-colorgroup-thumb img{width:100%;height:100%;object-fit:contain;display:block;padding:5px;box-sizing:border-box}
-.fg-colorgroup-thumb-name{font-size:16px;color:var(--ink3);margin-top:5px;letter-spacing:0.01em;text-align:left}
+/* 2026-08-03: centered beneath the centered specimen thumbnails — an
+   exception to this guide's left-aligned prose/headings, scoped to only
+   this class (no other Copper text is affected). */
+.fg-colorgroup-thumb-name{font-size:16px;color:var(--ink3);margin-top:5px;letter-spacing:0.01em;text-align:center}
 /* A restrained, left-aligned emphasis line — deliberately its own class
    (2026-07-31) rather than reusing the shared centered/22px .fg-lead--
    question flourish, which read as an oversized centered pull-quote. */
@@ -2343,15 +2359,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Closing essay's new final line (2026-08-01) — restrained, left-aligned,
    slightly emphasized; not a centered pull-quote, no banner, no image. */
 .fg-copper-closing-final{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;line-height:1.6;color:var(--accent);text-align:left;margin:1rem 0 0}
-/* "Explore All Copper Minerals" secondary action (2026-08-01) — sits
-   after the complete mineral gallery (six primary cards + Other Copper
-   Minerals to Know), left-aligned and moderate, not a hero button. */
-.fg-copper-explore-all{margin-top:1.75rem;text-align:left}
+/* "Explore All Copper Minerals" secondary action (2026-08-01; centered
+   2026-08-03) — sits after the complete mineral gallery (six primary
+   cards + More Expressions of Copper), centered beneath the final card
+   row and moderate in scale, not a hero button. */
+.fg-copper-explore-all{margin-top:1.75rem;text-align:center}
 /* 2026-08-01 refinement pass: the closing-essay image column shrinks from
    42% to 28% of the row (roughly a one-third reduction), giving the
    closing thought more visual weight than the specimen photo while
    keeping the same two-column arrangement and object-fit:contain. */
 .fg-guide[data-family-slug="copper"] #fg-copper-closing-essay .fg-explain-grid{grid-template-columns:minmax(0,1fr) minmax(200px,28%)}
+/* Closing navigation pill (2026-08-03) — replaces the shared, larger
+   boxed .fg-closing callout for Copper only (see
+   familyGuideCopperClosingPillHtml). Reuses the existing .fg-catalog-link
+   pill styling verbatim (already approved, used on Garnet's collection
+   links) rather than inventing new pill CSS; this wrapper only centers it
+   and adds the gap beneath the closing essay. */
+.fg-copper-closing-pill-wrap{margin-top:1.75rem;text-align:center}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
