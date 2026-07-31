@@ -1952,26 +1952,35 @@
             "When cuprite grows with blue-green copper minerals, the contrast can be dramatic."
           ]
         }
-      ],
-      "secondaryIntro": "Turquoise, Ajoite, and Plancheite",
-      "secondaryMembers": [
+      ]
+    },
+    "otherCopperMinerals": {
+      "title": "Other Copper Minerals to Know",
+      "intro": "Copper's reach extends beyond the six minerals above. Turquoise, ajoite, and plancheite each have their own identity within the wider copper-mineral story.",
+      "members": [
         {
           "stoneId": "C-0228",
-          "name": "Turquoise",
-          "paragraph": "Turquoise is a compact blue to green copper-bearing mineral that often forms in veins or nodules. Its matrix, treatments, and long history as a gemstone give it a visual identity of its own."
+          "paragraphs": [
+            "Turquoise is a compact blue to green copper-bearing mineral that often forms in veins or nodules. Its matrix, treatments, and long history as a gemstone give it a visual identity of its own."
+          ]
         },
         {
           "stoneId": "C-0271",
-          "name": "Ajoite",
-          "paragraph": "Ajoite is much rarer. It is usually encountered as blue-green inclusions or delicate growths, often associated with quartz and other copper minerals."
+          "paragraphs": [
+            "Ajoite is much rarer. It is usually encountered as blue-green inclusions or delicate growths, often associated with quartz and other copper minerals."
+          ]
         },
         {
           "name": "Plancheite",
-          "image": "plancheite-246447.jpg",
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Plancheite-246447-wc.webp",
           "alt": "Plancheite specimen with pale blue fibrous growth, Shangulowé Mine, Katanga, Democratic Republic of the Congo",
-          "paragraph": "Plancheite is a rare blue copper silicate that commonly forms fibrous or radiating growths. Its pale blue color and texture can make it resemble Shattuckite, especially in mixed specimens."
+          "paragraphs": [
+            "Plancheite is a rare blue copper silicate that commonly forms fibrous or radiating growths. Its pale blue color and texture can make it resemble Shattuckite, especially in mixed specimens."
+          ]
         }
-      ]
+      ],
+      "exploreAllLabel": "Explore All Copper Minerals",
+      "exploreAllFamily": "Copper Minerals"
     },
     "colorComparison": {
       "title": "Blue, Green, or Both?",
@@ -1999,18 +2008,23 @@
         },
         {
           "title": "Chrysocolla in Quartz and Gem Silica",
-          "placeholderLabel": "Photo pending",
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Quartz-Chrysocolla-74909-wc.webp",
+          "alt": "Quartz, chrysocolla, and chalcedony (gem silica) association from the Globe-Miami District, Arizona",
           "body": "Chrysocolla in quartz can be harder and more durable than ordinary chrysocolla-rich material. Gem silica is a related but more specific material: chalcedony colored blue or green by copper."
         },
         {
           "title": "Sonora Sunrise",
-          "placeholderLabel": "Photo pending",
-          "body": "Sonora Sunrise, also called Sonora Sunset, is a trade name usually associated with blue-green chrysocolla and red cuprite in dark matrix."
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Cuprite-tenorite-chrysocolla,_Milpillas_mine,_SON-wc.webp",
+          "alt": "Representative cuprite, tenorite, and chrysocolla association from the Milpillas Mine, Sonora, Mexico",
+          "body": "Sonora Sunrise, also called Sonora Sunset, is a trade name usually associated with blue-green chrysocolla and red cuprite in dark matrix.",
+          "caption": "Representative cuprite, tenorite, and chrysocolla association from Sonora, Mexico."
         },
         {
           "title": "Mixed Copper Minerals and Quantum Quattro",
-          "placeholderLabel": "Photo pending",
-          "body": "Quantum Quattro is a less standardized trade name for mixed blue-green copper minerals, often described as chrysocolla, shattuckite, malachite, and dioptase with quartz. Actual pieces vary, so the name does not guarantee a fixed composition."
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Malachite-Chrysocolla-44122-wc.webp",
+          "alt": "Malachite and chrysocolla from the Katanga Copper Crescent",
+          "body": "Quantum Quattro is a less standardized trade name for mixed blue-green copper minerals, often described as chrysocolla, shattuckite, malachite, and dioptase with quartz. Actual pieces vary, so the name does not guarantee a fixed composition.",
+          "caption": "Malachite and chrysocolla from the Katanga Copper Crescent."
         }
       ],
       "closingNote": "These names can still be useful, but they do not all describe single mineral species."
@@ -2035,7 +2049,8 @@
       "paragraphs": [
         "Copper minerals show how much can happen inside one small pocket of rock. Blue becomes green. One mineral coats another. Clear boundaries soften into mixtures.",
         "The closer you look, the less chaotic the color becomes. What first appears to be a wild blue-green stone begins to reveal a record of water, chemistry, and change."
-      ]
+      ],
+      "finalLine": "In copper minerals, change does not disappear. It becomes color."
     },
     "imageCredits": [
       {
@@ -2044,7 +2059,31 @@
         "source": "https://commons.wikimedia.org/wiki/File:Plancheite-246447.jpg",
         "license": "CC BY-SA 3.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-        "modified": "Original filename: Plancheite-246447.jpg (Wikimedia VRTS permission ticket 2010022810018255). Retained at its original 600×563 resolution; no cropping, recoloring, or other alteration."
+        "modified": "Still Point file: Plancheite-246447-wc.webp (original filename Plancheite-246447.jpg; Wikimedia VRTS permission ticket 2010022810018255). Modified for Still Point Lapidary: background cleanup, white-background presentation, square WebP preparation, and restrained presentation adjustment."
+      },
+      {
+        "title": "Quartz, chrysocolla, and chalcedony (gem silica) association (Globe-Miami District, Gila County, Arizona, USA)",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Quartz-Chrysocolla-74909.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Still Point file: Quartz-Chrysocolla-74909-wc.webp (original filename Quartz-Chrysocolla-74909.jpg). Modified for Still Point Lapidary: background cleanup, white-background presentation, square WebP preparation, and restrained presentation adjustment."
+      },
+      {
+        "title": "Cuprite, tenorite, and chrysocolla association (Milpillas Mine, Cananea Mining District, Sonora, Mexico) — representative Sonora copper-mineral association, not a formally authenticated Sonora Sunrise specimen",
+        "creator": "James St. John",
+        "source": "https://commons.wikimedia.org/wiki/File:Cuprite-tenorite-chrysocolla,_Milpillas_mine,_SON.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modified": "Still Point file: Cuprite-tenorite-chrysocolla,_Milpillas_mine,_SON-wc.webp (original filename Cuprite-tenorite-chrysocolla, Milpillas mine, SON.jpg). Modified for Still Point Lapidary: background cleanup, white-background presentation, square WebP preparation, and restrained presentation adjustment."
+      },
+      {
+        "title": "Malachite and chrysocolla association (Kolwezi, Western area, Katanga Copper Crescent, Katanga (Shaba), Democratic Republic of the Congo)",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Malachite-Chrysocolla-44122.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Still Point file: Malachite-Chrysocolla-44122-wc.webp (original filename Malachite-Chrysocolla-44122.jpg). Modified for Still Point Lapidary: background cleanup, white-background presentation, square WebP preparation, and restrained presentation adjustment."
       }
     ]
   }

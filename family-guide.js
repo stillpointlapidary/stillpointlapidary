@@ -412,6 +412,14 @@ function fgPhotoCardHtml(item, opts){
     mediaHtml = src
       ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(item.alt||c.n)}" loading="lazy">`
       : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  }else if(item.url){
+    // Absolute-URL branch (2026-08-01, added for Copper's grow-together
+    // features) — for approved images hosted directly in Supabase Storage
+    // (stone-images/family-guides/<slug>/) rather than a local
+    // assets/family-guide-<slug>/ file. Every existing caller uses
+    // item.image (a local asset filename) instead, so this is purely
+    // additive and doesn't touch their resolved path.
+    mediaHtml = `<img src="${escapeAttr(item.url)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`;
   }else if(item.image){
     mediaHtml = `<img src="${escapeAttr('assets/'+folder+'/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`;
   }else if(item.placeholderLabel){
@@ -429,11 +437,19 @@ function fgPhotoCardHtml(item, opts){
   // via the shared fg-placeholder-note style. Calcite's and Fluorite's items
   // never set this, so their captions render exactly as before.
   const textClass = item.bodyPending ? 'fg-photocard-text fg-placeholder-note' : 'fg-photocard-text';
+  // item.caption (2026-08-01, added for Copper's Sonora Sunrise and Mixed
+  // Copper Minerals/Quantum Quattro features) — a short image-context line
+  // distinct from the main body copy, for representative/non-authenticated
+  // photos that need an accurate caption without altering the approved
+  // body paragraph. No other caller sets this, so their cards are
+  // unaffected.
+  const captionHtml = item.caption ? `<p class="fg-photocard-caption">${escapeAttr(item.caption)}</p>` : '';
   return `<div class="fg-photocard">
     <div class="${mediaClass}">${mediaHtml}</div>
     <div class="fg-photocard-body">
       <div class="fg-photocard-title">${escapeAttr(item.title||'')}</div>
       <p class="${textClass}">${escapeAttr(item.body||'')}</p>
+      ${captionHtml}
     </div>
   </div>`;
 }
@@ -1808,6 +1824,32 @@ function familyGuideOneDepositHtml(guide){
    never given its own card — it only appears inside Shattuckite's
    paragraph copy, exactly as approved. ── */
 function fgMineralCardHtml(member){
+  // No-stoneId branch (2026-08-01, added for Plancheite, which moved from
+  // a small compact secondary card into "Other Copper Minerals to Know" —
+  // the same full mineral-card treatment as the six primary Copper cards.
+  // Plancheite has no canonical roster entry or encyclopedia page, so it
+  // renders from an approved image URL (member.url) instead of
+  // firstEncyclopediaPhoto(), with no Quick View button and no
+  // openDetail() call — same "don't invent a roster link" principle
+  // fgExpressionCardHtml already applies for Fluorite's non-roster
+  // expressions. Every other caller (all six primary Copper cards,
+  // Turquoise, Ajoite) still carries a stoneId, so their markup and Quick
+  // View behavior below are completely unchanged.
+  if(!member.stoneId){
+    const name = member.name||'';
+    if(!name) return '';
+    const imgHtml = member.url
+      ? `<img src="${escapeAttr(member.url)}" alt="${escapeAttr(member.alt||name)}" loading="lazy">`
+      : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+    const paras = (member.paragraphs||[]).map(p=>`<p class="fg-mineralcard-text">${escapeAttr(p)}</p>`).join('');
+    return `<div class="fg-mineralcard fg-mineralcard--unlinked">
+      <div class="fg-mineralcard-media" title="${escapeAttr(name)} — no standalone encyclopedia entry">${imgHtml}</div>
+      <div class="fg-mineralcard-body">
+        <div class="fg-stonecard-name">${escapeAttr(name)}</div>
+        ${paras}
+      </div>
+    </div>`;
+  }
   const c = fgCrystal(member.stoneId);
   if(!c) return '';
   const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
@@ -1824,53 +1866,39 @@ function fgMineralCardHtml(member){
     </div>
   </div>`;
 }
-function fgMineralCardSecondaryHtml(member){
-  // No-stoneId branch (2026-08-01, added for Plancheite) — Plancheite has
-  // no canonical roster entry or encyclopedia page, so it renders from a
-  // local family-guide asset (assets/family-guide-copper/) instead of
-  // firstEncyclopediaPhoto(), with no Quick View button and no
-  // openDetail() call — same "don't invent a roster link" principle
-  // fgExpressionCardHtml already applies for Fluorite's non-roster
-  // expressions. Turquoise and Ajoite both still carry a stoneId, so their
-  // markup and Quick View behavior below are completely unchanged.
-  if(!member.stoneId){
-    const name = member.name||'';
-    if(!name) return '';
-    const imgHtml = member.image
-      ? `<img src="${escapeAttr('assets/family-guide-copper/'+member.image)}" alt="${escapeAttr(member.alt||name)}" loading="lazy">`
-      : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
-    return `<div class="fg-mineralcard fg-mineralcard--secondary fg-mineralcard--unlinked">
-      <div class="fg-mineralcard-media" title="${escapeAttr(name)} — no standalone encyclopedia entry">${imgHtml}</div>
-      <div class="fg-mineralcard-body">
-        <div class="fg-stonecard-name">${escapeAttr(name)}</div>
-        <p class="fg-mineralcard-text">${escapeAttr(member.paragraph||'')}</p>
-      </div>
-    </div>`;
-  }
-  const c = fgCrystal(member.stoneId);
-  if(!c) return '';
-  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
-  const imgHtml = imgSrc
-    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
-    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
-  return `<div class="fg-mineralcard fg-mineralcard--secondary">
-    <button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
-    <div class="fg-mineralcard-body">
-      <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
-      <p class="fg-mineralcard-text">${escapeAttr(member.paragraph||'')}</p>
-      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
-    </div>
-  </div>`;
-}
 function familyGuideMeetCopperFamilyHtml(guide){
   const m = guide.meetCopperFamily;
   if(!m) return '';
   const cards = (m.members||[]).map(fgMineralCardHtml).filter(Boolean).join('');
-  const secondaryCards = (m.secondaryMembers||[]).map(fgMineralCardSecondaryHtml).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-meet-copper-family">
     <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Copper Minerals')}</h2>
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
-    ${secondaryCards?`<div class="fg-mineralcard-secondary-grid">${secondaryCards}</div>`:''}
+  </section>`;
+}
+
+/* ── 2b. Other Copper Minerals to Know — Turquoise, Ajoite, and Plancheite,
+   restyled (2026-08-01) as a continuation of the primary mineral gallery
+   rather than the old compact horizontal secondary cards: same
+   fgMineralCardHtml component and .fg-card-grid--garnet-roster grid as the
+   six primary cards above, just its own heading/intro and section. Ends
+   with the "Explore All Copper Minerals" secondary action, which reuses
+   the exact existing prefiltered-encyclopedia handler
+   (jumpToFamily -> jumpToFilteredEncyclopedia('fam', family)) that the
+   Crystal Families tile itself used before it was wired to
+   openFamilyGuide() — preserved here rather than rebuilt, per the
+   brief's explicit "don't reconstruct or guess the filter parameters". ── */
+function familyGuideOtherCopperMineralsHtml(guide){
+  const o = guide.otherCopperMinerals;
+  if(!o) return '';
+  const cards = (o.members||[]).map(fgMineralCardHtml).filter(Boolean).join('');
+  const exploreBtn = (o.exploreAllFamily && typeof jumpToFamily==='function')
+    ? `<div class="fg-copper-explore-all"><button type="button" class="btn btn-sm" onclick="jumpToFamily('${escapeAttr(o.exploreAllFamily)}')">${escapeAttr(o.exploreAllLabel||'Explore All Copper Minerals')}</button></div>`
+    : '';
+  return `<section class="fg-section" id="fg-other-copper-minerals">
+    <h2 class="fg-h2">${escapeAttr(o.title||'Other Copper Minerals to Know')}</h2>
+    ${o.intro?`<p class="fg-prose">${escapeAttr(o.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+    ${exploreBtn}
   </section>`;
 }
 
@@ -1897,10 +1925,18 @@ function familyGuideColorComparisonHtml(guide){
   const cc = guide.colorComparison;
   if(!cc) return '';
   const paras = (cc.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const groups = (cc.groups||[]).map(g=>`<div class="fg-colorgroup">
+  // 2026-08-01 redesign: each group is now a bordered card (equal outer
+  // height via the parent grid's default stretch) instead of a bare label
+  // + scattered thumbnail row. The third group (Blue-Green or Variable)
+  // holds three specimens instead of two, so it gets a narrower-thumbnail
+  // modifier class to keep all three comfortably on one row.
+  const groups = (cc.groups||[]).map((g,i)=>{
+    const modClass = (g.stoneIds||[]).length>2 ? ' fg-colorgroup--variable' : '';
+    return `<div class="fg-colorgroup${modClass}">
     <div class="fg-colorgroup-title">${escapeAttr(g.label||'')}</div>
     <div class="fg-colorgroup-thumbs">${(g.stoneIds||[]).map(fgColorGroupThumbHtml).filter(Boolean).join('')}</div>
-  </div>`).join('');
+  </div>`;
+  }).join('');
   return `<section class="fg-section" id="fg-color-comparison">
     <h2 class="fg-h2">${escapeAttr(cc.title||'Blue, Green, or Both?')}</h2>
     <div class="fg-prose-block">${paras}</div>
@@ -1973,10 +2009,14 @@ function familyGuideCopperClosingEssayHtml(guide){
     ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(ce.alt||(c&&c.n)||'')}" loading="lazy">`
     : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   const paras = (ce.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  // ce.finalLine (2026-08-01) — one restrained concluding line rendered
+  // after the two closing paragraphs, left-aligned and slightly
+  // emphasized (not a centered pull-quote, not a banner, no extra image).
+  const finalLineHtml = ce.finalLine ? `<p class="fg-copper-closing-final">${escapeAttr(ce.finalLine)}</p>` : '';
   return `<section class="fg-section" id="fg-copper-closing-essay">
     <h2 class="fg-h2">${escapeAttr(ce.title||'A Family Written in Color')}</h2>
     <div class="fg-explain-grid">
-      <div class="fg-explain-copy">${paras}</div>
+      <div class="fg-explain-copy">${paras}${finalLineHtml}</div>
       <div class="fg-explain-media">${mediaHtml}</div>
     </div>
   </section>`;
@@ -1991,6 +2031,7 @@ function familyGuideCopperHtml(guide){
     ${familyGuideHeroHtml(guide)}
     ${familyGuideOneDepositHtml(guide)}
     ${familyGuideMeetCopperFamilyHtml(guide)}
+    ${familyGuideOtherCopperMineralsHtml(guide)}
     ${familyGuideColorComparisonHtml(guide)}
     ${familyGuideGrowTogetherHtml(guide)}
     ${familyGuideCopperCareHtml(guide)}
