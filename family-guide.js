@@ -1842,10 +1842,16 @@ function fgMineralCardHtml(member){
       ? `<img src="${escapeAttr(member.url)}" alt="${escapeAttr(member.alt||name)}" loading="lazy">`
       : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
     const paras = (member.paragraphs||[]).map(p=>`<p class="fg-mineralcard-text">${escapeAttr(p)}</p>`).join('');
+    // 2026-08-02: name-only header row (no Quick View button here since
+    // Plancheite has no roster entry) — kept as its own row/class so the
+    // stoneId branch below (which does add a Quick View button into this
+    // same row) shares identical header markup/spacing.
     return `<div class="fg-mineralcard fg-mineralcard--unlinked">
       <div class="fg-mineralcard-media" title="${escapeAttr(name)} — no standalone encyclopedia entry">${imgHtml}</div>
       <div class="fg-mineralcard-body">
-        <div class="fg-stonecard-name">${escapeAttr(name)}</div>
+        <div class="fg-mineralcard-header">
+          <div class="fg-stonecard-name">${escapeAttr(name)}</div>
+        </div>
         ${paras}
       </div>
     </div>`;
@@ -1857,14 +1863,51 @@ function fgMineralCardHtml(member){
     ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
     : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
   const paras = (member.paragraphs||[]).map(p=>`<p class="fg-mineralcard-text">${escapeAttr(p)}</p>`).join('');
+  // 2026-08-02: name and Quick View share one header row (name left,
+  // Quick View right) instead of Quick View sitting in its own row below
+  // the paragraphs — matches the restrained utility-link treatment
+  // restored for Copper (see fg-stonecard-qv's reverted font-size).
   return `<div class="fg-mineralcard">
     <button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
     <div class="fg-mineralcard-body">
-      <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
+      <div class="fg-mineralcard-header">
+        <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
+        <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+      </div>
       ${paras}
-      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
     </div>
   </div>`;
+}
+/* ── 2. "The Copper Behind the Color" (2026-08-02) — native copper (roster
+   stone C-0037) as a compact horizontal feature immediately before the
+   Meet the Copper Minerals grid. Deliberately its own component, not a
+   fourth card in the Azurite/Malachite/Chrysocolla row and not folded
+   into "Other Copper Minerals to Know": a distinct visual introduction to
+   the element itself, moderate in scale (image left, copy right), with
+   the same name+Quick View header-row treatment as the mineral cards. ── */
+function familyGuideCopperFeatureHtml(guide){
+  const f = guide.copperFeature;
+  if(!f || !f.stoneId) return '';
+  const c = fgCrystal(f.stoneId);
+  if(!c) return '';
+  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+  const imgHtml = imgSrc
+    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const paras = (f.paragraphs||[]).map(p=>`<p class="fg-mineralcard-text">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-copper-feature">
+    <h2 class="fg-h2">${escapeAttr(f.title||'The Copper Behind the Color')}</h2>
+    <div class="fg-copper-feature">
+      <button type="button" class="fg-copper-feature-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+      <div class="fg-copper-feature-body">
+        <div class="fg-mineralcard-header">
+          <div class="fg-stonecard-name">${escapeAttr(f.name||c.n)}</div>
+          <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+        </div>
+        ${paras}
+      </div>
+    </div>
+  </section>`;
 }
 function familyGuideMeetCopperFamilyHtml(guide){
   const m = guide.meetCopperFamily;
@@ -2022,6 +2065,18 @@ function familyGuideCopperClosingEssayHtml(guide){
   </section>`;
 }
 
+/* ── Restrained Photo Credits link (2026-08-02) — replaces the shared
+   expandable familyGuideImageCreditsHtml details/list panel for Copper
+   only. The full credit records still live in guide.imageCredits and
+   still render in full on credits.html (pcLoadFamilyGuideSection() there
+   reads that same array directly); this is just a quiet secondary-nav
+   link to that page instead of a second, vertically bulky copy of the
+   list on the guide itself. Every other guide keeps calling
+   familyGuideImageCreditsHtml() unchanged. ── */
+function familyGuideCopperCreditsLinkHtml(){
+  return `<div class="fg-copper-credits-link-wrap"><a class="fg-copper-credits-link" href="credits.html">Photo Credits</a></div>`;
+}
+
 /* ── Copper Minerals guide assembly — its own approved section order.
    Purely additive: nothing here changes any other guide's assembly, data,
    or rendered output. ── */
@@ -2030,6 +2085,7 @@ function familyGuideCopperHtml(guide){
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
     ${familyGuideOneDepositHtml(guide)}
+    ${familyGuideCopperFeatureHtml(guide)}
     ${familyGuideMeetCopperFamilyHtml(guide)}
     ${familyGuideOtherCopperMineralsHtml(guide)}
     ${familyGuideColorComparisonHtml(guide)}
@@ -2037,7 +2093,7 @@ function familyGuideCopperHtml(guide){
     ${familyGuideCopperCareHtml(guide)}
     ${familyGuideCopperClosingEssayHtml(guide)}
     ${familyGuideClosingHtml(guide)}
-    ${familyGuideImageCreditsHtml(guide)}
+    ${familyGuideCopperCreditsLinkHtml()}
   </div>`;
 }
 

@@ -1893,12 +1893,21 @@
       ]
     },
     "formationTable": {
-      "headers": ["Local condition", "Outcome", "Examples", "Color"],
+      "headers": ["Condition", "Outcome", "Examples", "Color"],
       "rows": [
         ["Carbonate-rich", "Copper carbonates form", "Azurite, Malachite", "Deep blue or green"],
         ["Silica-rich", "Copper silicates form", "Chrysocolla, Shattuckite", "Blue to blue-green"],
         ["Other local chemistry", "Different copper minerals form", "Cuprite, Dioptase, Turquoise, Ajoite", "Red, emerald green, or compact blue-green"],
         ["Conditions change", "Minerals overlap or replace one another", "Azurmalachite, mixed copper specimens", "Blue-green mixtures and contrasting bands"]
+      ]
+    },
+    "copperFeature": {
+      "title": "The Copper Behind the Color",
+      "stoneId": "C-0037",
+      "name": "Copper",
+      "paragraphs": [
+        "Copper can occur naturally as a mineral in its metallic form, often developing branching, twisted, or sheet-like shapes. It is also the element behind the vivid blues and greens found throughout this family.",
+        "As copper-bearing minerals form or change near a deposit's surface, different combinations of copper, oxygen, carbon, sulfur, silica, and water produce remarkably different colors and structures."
       ]
     },
     "meetCopperFamily": {
@@ -1908,24 +1917,24 @@
           "stoneId": "C-0006",
           "name": "Azurite",
           "paragraphs": [
-            "Azurite is known for its intense blue color, which can range from rich royal blue to nearly black. It may form as distinct crystals, rounded growths, velvety coatings, or massive material mixed with other minerals.",
-            "It is often found with malachite, and some azurite gradually alters into malachite over time."
+            "Azurite is known for its intense blue, ranging from rich royal blue to nearly black. It may form as distinct crystals, rounded growths, velvety coatings, or massive material.",
+            "Often found with malachite, some azurite gradually alters into malachite over time."
           ]
         },
         {
           "stoneId": "C-0020",
           "name": "Malachite",
           "paragraphs": [
-            "Malachite appears in shades of bright, forest, and nearly black-green. Its most familiar forms show bands, rings, ripples, or rounded growth patterns.",
-            "The internal patterning visible in polished malachite reflects layers of mineral growth rather than painted or added color."
+            "Malachite ranges from bright green to nearly black-green, often forming bands, rings, ripples, or rounded growth patterns.",
+            "In polished pieces, those patterns reveal layers of mineral growth—not painted or added color."
           ]
         },
         {
           "stoneId": "C-0052",
           "name": "Chrysocolla",
           "paragraphs": [
-            "Chrysocolla ranges from pale blue to vivid turquoise-green. It often appears as massive material, surface coatings, or uneven patches mixed with quartz, malachite, and other copper minerals.",
-            "Its appearance can vary widely, which makes chrysocolla especially difficult to identify by color alone."
+            "Chrysocolla ranges from pale blue to vivid turquoise-green. It often appears as coatings, uneven patches, or massive material mixed with quartz, malachite, and other copper minerals.",
+            "Because its appearance varies widely, color alone is rarely enough to identify it."
           ]
         },
         {
@@ -2004,30 +2013,27 @@
           "title": "Azurmalachite",
           "singleStoneId": "C-0430",
           "alt": "Azurmalachite specimen showing both blue azurite and green malachite",
-          "body": "Azurmalachite is a descriptive name for material containing both azurite and malachite. The blue and green may appear in distinct areas or merge into flowing patterns."
+          "body": "Azurmalachite contains both azurite and malachite. Its blues and greens may remain distinct or merge into flowing patterns."
         },
         {
           "title": "Chrysocolla in Quartz and Gem Silica",
           "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Quartz-Chrysocolla-74909-wc.webp",
           "alt": "Quartz, chrysocolla, and chalcedony (gem silica) association from the Globe-Miami District, Arizona",
-          "body": "Chrysocolla in quartz can be harder and more durable than ordinary chrysocolla-rich material. Gem silica is a related but more specific material: chalcedony colored blue or green by copper."
+          "body": "Quartz can make chrysocolla-rich material harder and more durable. Gem silica is the rarer, more specific form: translucent chalcedony colored blue or green by copper."
         },
         {
           "title": "Sonora Sunrise",
           "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Cuprite-tenorite-chrysocolla,_Milpillas_mine,_SON-wc.webp",
           "alt": "Representative cuprite, tenorite, and chrysocolla association from the Milpillas Mine, Sonora, Mexico",
-          "body": "Sonora Sunrise, also called Sonora Sunset, is a trade name usually associated with blue-green chrysocolla and red cuprite in dark matrix.",
-          "caption": "Representative cuprite, tenorite, and chrysocolla association from Sonora, Mexico."
+          "body": "Sonora Sunrise, also called Sonora Sunset, combines blue-green chrysocolla with red cuprite in a dark matrix."
         },
         {
           "title": "Mixed Copper Minerals and Quantum Quattro",
           "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/copper-minerals/Malachite-Chrysocolla-44122-wc.webp",
           "alt": "Malachite and chrysocolla from the Katanga Copper Crescent",
-          "body": "Quantum Quattro is a less standardized trade name for mixed blue-green copper minerals, often described as chrysocolla, shattuckite, malachite, and dioptase with quartz. Actual pieces vary, so the name does not guarantee a fixed composition.",
-          "caption": "Malachite and chrysocolla from the Katanga Copper Crescent."
+          "body": "Quantum Quattro is a trade name for mixed blue-green copper minerals with quartz. Its reported ingredients vary, so the name does not represent one fixed composition."
         }
-      ],
-      "closingNote": "These names can still be useful, but they do not all describe single mineral species."
+      ]
     },
     "copperCare": {
       "title": "Copper Minerals in Your Collection",

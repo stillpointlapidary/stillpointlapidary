@@ -2179,7 +2179,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-table-wrap{margin:1.5rem 0 0}
 .fg-table{width:100%;border-collapse:collapse;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
 .fg-table th,.fg-table td{padding:0.85rem 1.1rem;text-align:left;font-size:16px;line-height:1.55;color:var(--ink2)}
-.fg-table th{font-family:'Jost',sans-serif;font-size:16px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);background:var(--stone2);border-bottom:0.5px solid var(--border)}
+/* 2026-08-02: shorter header row (reduced vertical padding only — body
+   rows above keep their existing 0.85rem). */
+.fg-table th{padding:0.45rem 1.1rem;font-family:'Jost',sans-serif;font-size:16px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);background:var(--stone2);border-bottom:0.5px solid var(--border)}
 .fg-table td{border-bottom:0.5px solid var(--border2)}
 .fg-table tr:last-child td{border-bottom:none}
 .fg-table td:first-child,.fg-table th:first-child{color:var(--ink);font-weight:500}
@@ -2202,10 +2204,36 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-mineralcard-media{display:block;width:100%;height:180px;background:#FFFFFF;border:none;padding:0;cursor:pointer;overflow:hidden}
 .fg-mineralcard-media img{width:100%;height:100%;object-fit:contain;display:block;padding:10px;box-sizing:border-box}
 .fg-mineralcard-body{padding:0.9rem 1.05rem 1rem;display:flex;flex-direction:column;flex:1}
-.fg-mineralcard-text{font-size:16px;line-height:1.65;color:var(--ink2);margin:0 0 0.6em}
-.fg-mineralcard-text:last-of-type{margin-bottom:0.7em}
+/* 2026-08-02: name + Quick View share one header row (name left, Quick
+   View right) instead of Quick View sitting in its own row below the
+   card copy. flex-wrap allows a clean wrap on narrow mobile widths. */
+.fg-mineralcard-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 12px;margin-bottom:0.5rem}
+.fg-mineralcard-header .fg-stonecard-name{margin-bottom:0}
+/* 2026-08-02: a modestly larger, more visible gap between actual
+   paragraphs (was 0.6em) now that each card holds fewer, shorter
+   paragraphs. */
+.fg-mineralcard-text{font-size:16px;line-height:1.65;color:var(--ink2);margin:0 0 0.9em}
+.fg-mineralcard-text:last-of-type{margin-bottom:0}
 /* Plancheite's non-clickable card (no roster entry, no Quick View). */
 .fg-mineralcard--unlinked .fg-mineralcard-media{cursor:default}
+
+/* "The Copper Behind the Color" (2026-08-02) — a compact horizontal
+   feature (image left, name/Quick View header row + copy right), moderate
+   in scale, distinct from both the mineral-card grid and the grow-together
+   cards. Stacks to image-above-copy on narrow mobile widths. */
+.fg-copper-feature{display:flex;gap:1.4rem;align-items:flex-start;background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.2rem 1.35rem}
+.fg-copper-feature-media{flex:0 0 150px;width:150px;height:150px;background:#FFFFFF;border:none;padding:0;cursor:pointer;overflow:hidden;border-radius:8px}
+.fg-copper-feature-media img{width:100%;height:100%;object-fit:contain;display:block;padding:8px;box-sizing:border-box}
+.fg-copper-feature-body{flex:1;min-width:0}
+
+/* Restrained "Photo Credits" utility link (2026-08-02) — replaces the
+   expandable image-credits panel on the Copper guide itself. Sized to
+   match the shared .fg-credits-summary's original 12px treatment (a
+   secondary-navigation exception to the 16px editorial-text floor); the
+   full credit records still render on credits.html. */
+.fg-copper-credits-link-wrap{margin-top:1.5rem}
+.fg-copper-credits-link{font-size:12px;letter-spacing:0.03em;color:var(--ink2r);text-decoration:underline;text-underline-offset:2px}
+.fg-copper-credits-link:hover{color:var(--ink2)}
 
 /* Blue, Green, or Both? — three left-aligned, bordered comparison cards
    (2026-08-01 redesign, was a bare label + scattered small-thumbnail row).
@@ -2265,13 +2293,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    edited directly above since no other guide uses them. fg-eyebrow and
    fg-hero-media-label are deliberately left untouched — they're part of
    the temporary hero's own presentation, which this pass preserves. */
-.fg-guide[data-family-slug="copper"] .fg-stonecard-qv{font-size:16px}
+/* 2026-08-02 correction: Quick View is restored to its restrained,
+   pre-16px-pass utility-link size (the shared .fg-stonecard-qv 11px rule
+   applies again — no Copper override) since it's secondary navigation,
+   not editorial content. Copper's Photo Credits link (below) is the same
+   kind of exception, and never had a 16px override to begin with. */
 .fg-guide[data-family-slug="copper"] .fg-stonecard-name{font-size:16px;letter-spacing:0.03em}
 .fg-guide[data-family-slug="copper"] .fg-photocard-text{font-size:16px}
 .fg-guide[data-family-slug="copper"] .fg-hero-body{font-size:16px}
-.fg-guide[data-family-slug="copper"] .fg-credits{font-size:16px}
-.fg-guide[data-family-slug="copper"] .fg-credit-title{font-size:16px}
-.fg-guide[data-family-slug="copper"] .fg-credit-meta{font-size:16px}
 .fg-guide[data-family-slug="copper"] .btn{font-size:16px}
 /* Hero — full specimen visible (object-fit:contain), comfortable white
    space around each stone, and a shorter/moderate media band instead of
@@ -2347,11 +2376,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-progression{grid-template-columns:repeat(2,1fr)}
   .fg-colorgroups{grid-template-columns:1fr}
   .fg-copper-care-grid{grid-template-columns:1fr}
+  .fg-copper-feature{flex-direction:column}
+  .fg-copper-feature-media{width:100%;height:auto;aspect-ratio:4/3;flex:none}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-copper-feature,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
   .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:16px}
   .fg-table thead{display:none}
   .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}
