@@ -2495,8 +2495,19 @@ function setWishlistNavActive(){
   const wishBtn=document.querySelector('.nav-tab-mobile-only');
   if(wishBtn)wishBtn.classList.add('active');
 }
+// 2026-08-05 — the footer's Photo Credits link (id="footerCreditsLink" in
+// encyclopedia.html) is reset to its normal "credits.html" destination at
+// the start of every tab switch. The Copper family guide overrides it to
+// "credits.html#copper-minerals" afterward, once rendered (see
+// fgSetFooterCreditsLink in family-guide.js) — every other tab/guide keeps
+// this default. No-op (element absent) on any page without that id.
+function resetFooterCreditsLink(){
+  const link = document.getElementById('footerCreditsLink');
+  if(link) link.setAttribute('href', 'credits.html');
+}
 function switchTab(name,btn){
   clearInitialTabStyle();
+  resetFooterCreditsLink();
   closeMobileNav();
   rememberActiveTab(name);
   syncTabUrl(name);
@@ -2515,6 +2526,7 @@ function switchTab(name,btn){
 }
 function switchTabByName(name){
   clearInitialTabStyle();
+  resetFooterCreditsLink();
   closeMobileNav();
   rememberActiveTab(name);
   syncTabUrl(name);

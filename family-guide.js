@@ -125,7 +125,24 @@ function renderFamilyGuideView(rawSlug, opts){
     return;
   }
   root.innerHTML = familyGuideHtml(guide);
+  fgSetFooterCreditsLink(slug);
   if(opts.scrollToHash!==false) scrollToFamilyGuideHash();
+}
+
+// ── Page-specific footer Photo Credits routing (2026-08-05) — the footer
+// itself is static per-page markup (encyclopedia.html), shared across
+// every tab including every family guide, so this cannot be a hard-coded
+// href change without redirecting every guide/tab to the Copper section.
+// Instead: switchTab()/switchTabByName() in app.js reset the footer link
+// (id="footerCreditsLink") to its normal "credits.html" destination at
+// the start of every tab switch; this function then runs afterward, once
+// per family-guide render, and only overrides it to the anchored
+// "credits.html#copper-minerals" destination when the active guide is
+// Copper. Every other guide/tab keeps the default reset value untouched.
+function fgSetFooterCreditsLink(slug){
+  const link = document.getElementById('footerCreditsLink');
+  if(!link) return;
+  link.setAttribute('href', slug==='copper' ? 'credits.html#copper-minerals' : 'credits.html');
 }
 
 function scrollToFamilyGuideHash(){
@@ -2088,17 +2105,15 @@ function familyGuideCopperClosingPillHtml(guide){
   </div>`;
 }
 
-/* ── Restrained Photo Credits link (2026-08-02) — replaces the shared
-   expandable familyGuideImageCreditsHtml details/list panel for Copper
-   only. The full credit records still live in guide.imageCredits and
-   still render in full on credits.html (pcLoadFamilyGuideSection() there
-   reads that same array directly); this is just a quiet secondary-nav
-   link to that page instead of a second, vertically bulky copy of the
-   list on the guide itself. Every other guide keeps calling
-   familyGuideImageCreditsHtml() unchanged. ── */
-function familyGuideCopperCreditsLinkHtml(){
-  return `<div class="fg-copper-credits-link-wrap"><a class="fg-copper-credits-link" href="credits.html">Photo Credits</a></div>`;
-}
+/* ── 2026-08-05: the in-page "Photo Credits" link (familyGuideCopperCreditsLinkHtml,
+   added 2026-08-02) was removed — the footer's own Photo Credits link is
+   now made page-specific for Copper instead (see the footer-credits-link
+   handling in renderFamilyGuideView above), so the guide no longer needs
+   its own separate link to the same destination. The full credit records
+   still live in guide.imageCredits and still render in full on
+   credits.html (pcLoadFamilyGuideSection() there reads that same array
+   directly) — nothing about the credit data itself changed. Every other
+   guide still calls familyGuideImageCreditsHtml() unchanged. ── */
 
 /* ── Copper Minerals guide assembly — its own approved section order.
    Purely additive: nothing here changes any other guide's assembly, data,
@@ -2115,7 +2130,6 @@ function familyGuideCopperHtml(guide){
     ${familyGuideCopperCareHtml(guide)}
     ${familyGuideCopperClosingEssayHtml(guide)}
     ${familyGuideCopperClosingPillHtml(guide)}
-    ${familyGuideCopperCreditsLinkHtml()}
   </div>`;
 }
 

@@ -2237,7 +2237,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    new section gap. Scoped to the #fg-one-deposit id, which only this
    Copper section uses, so no shared spacing rule is touched. */
 #fg-one-deposit{margin-top:0.75rem}
-.fg-copper-intro-grid{display:flex;gap:1.75rem;align-items:flex-start;margin-bottom:1.9rem}
+/* 2026-08-05: align-items changed from flex-start to center — the
+   complete Copper media stack (image + name row) is shorter than the
+   right-side heading/paragraphs, so flex-start left it looking top-heavy
+   against the taller text column. center vertically centers the media
+   stack as a whole against the full height of the copy column; the copy
+   column's own content is unaffected (it already fills the row's height,
+   so centering it against itself is a no-op) and stays left-aligned.
+   The max-width:900px breakpoint below restores flex-start once the grid
+   stacks to a single column, so mobile/tablet layout is unchanged. */
+.fg-copper-intro-grid{display:flex;gap:1.75rem;align-items:center;margin-bottom:1.9rem}
 .fg-copper-intro-media{flex:0 0 150px;display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem}
 .fg-copper-intro-media-img{display:block;width:150px;height:150px;background:#FFFFFF;border:none;padding:0;cursor:pointer;overflow:hidden;border-radius:8px}
 .fg-copper-intro-media-img img{width:100%;height:100%;object-fit:contain;display:block;padding:8px;box-sizing:border-box}
@@ -2257,15 +2266,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-copper-intro-namerow .fg-stonecard-qv{align-self:center}
 .fg-copper-intro-copy{flex:1;min-width:0}
 .fg-copper-intro-copy .fg-h2{margin-top:0}
-
-/* Restrained "Photo Credits" utility link (2026-08-02) — replaces the
-   expandable image-credits panel on the Copper guide itself. Sized to
-   match the shared .fg-credits-summary's original 12px treatment (a
-   secondary-navigation exception to the 16px editorial-text floor); the
-   full credit records still render on credits.html. */
-.fg-copper-credits-link-wrap{margin-top:1.5rem}
-.fg-copper-credits-link{font-size:12px;letter-spacing:0.03em;color:var(--ink2r);text-decoration:underline;text-underline-offset:2px}
-.fg-copper-credits-link:hover{color:var(--ink2)}
 
 /* Blue, Green, or Both? — three left-aligned, bordered comparison cards
    (2026-08-01 redesign, was a bare label + scattered small-thumbnail row).
@@ -2399,10 +2399,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Closing navigation pill (2026-08-03) — replaces the shared, larger
    boxed .fg-closing callout for Copper only (see
    familyGuideCopperClosingPillHtml). Reuses the existing .fg-catalog-link
-   pill styling verbatim (already approved, used on Garnet's collection
-   links) rather than inventing new pill CSS; this wrapper only centers it
-   and adds the gap beneath the closing essay. */
+   pill as its base (already approved, used on Garnet's collection links)
+   rather than inventing new pill CSS; this wrapper only centers it and
+   adds the gap beneath the closing essay. */
 .fg-copper-closing-pill-wrap{margin-top:1.75rem;text-align:center}
+/* 2026-08-05: modestly strengthened so the pill no longer reads as faint
+   — firmer border (var(--border2) at 0.07 alpha -> var(--border) at 0.12
+   alpha), a slightly deeper fill (var(--stone2) -> var(--stone3)), and a
+   bit more horizontal padding (14px -> 20px; vertical nudged 6px -> 7px
+   to keep the shape balanced). Font size, border-radius (pill shape), and
+   centered placement are all untouched. Scoped to this wrapper only, so
+   the shared .fg-catalog-link class (and Garnet's use of it) is
+   unaffected. */
+.fg-copper-closing-pill-wrap .fg-catalog-link{background:var(--stone3);border:0.5px solid var(--border);padding:7px 20px}
+.fg-copper-closing-pill-wrap .fg-catalog-link:hover{background:var(--accent);border-color:var(--accent)}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
@@ -2438,7 +2448,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-progression{grid-template-columns:repeat(2,1fr)}
   .fg-colorgroups{grid-template-columns:1fr}
   .fg-copper-care-grid{grid-template-columns:1fr}
-  .fg-copper-intro-grid{flex-direction:column}
+  /* align-items:flex-start restores the pre-2026-08-05 stacked behavior
+     once the grid switches to a single column — center (the desktop-only
+     change above) would otherwise horizontally center/shrink the text
+     column instead of letting it fill the width. */
+  .fg-copper-intro-grid{flex-direction:column;align-items:flex-start}
   .fg-copper-intro-media{flex:none;width:150px}
 }
 

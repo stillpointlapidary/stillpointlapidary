@@ -132,7 +132,16 @@ async function pcLoadFamilyGuideSection(){
     const rows = items.map((c,i)=>pcCreditItemHtml(
       `credit-fg-${pcEscapeHtml(g.slug)}-${i}`, c.title, c.creator, c.source, c.license, c.licenseUrl, c.modified
     )).join('');
-    return `<div class="pc-subgroup">
+    // 2026-08-05: Copper gets a stable id ("copper-minerals") on this
+    // existing subgroup wrapper so the footer's page-specific Photo
+    // Credits link (credits.html#copper-minerals) can target it directly.
+    // pcOpenFromHash() below already force-opens the closest details.pc-
+    // section and scrolls/highlights any matched id, so no new anchor
+    // logic is needed here — just the id itself. No other guide's
+    // subgroup gets an id; this is a Copper-only, minimally scoped
+    // addition to the existing pattern.
+    const idAttr = g.slug==='copper' ? ' id="copper-minerals"' : '';
+    return `<div class="pc-subgroup"${idAttr}>
       <h3 class="pc-subgroup-title">${pcEscapeHtml(g.displayName||g.slug)} <a class="pc-subgroup-link" href="encyclopedia.html?tab=family&amp;family=${pcEscapeHtml(g.slug)}">View guide</a></h3>
       <div class="pc-item-grid">${rows}</div>
     </div>`;
