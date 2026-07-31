@@ -540,11 +540,38 @@ function familyGuideClosingHtml(guide){
   // No other guide's data sets this field, so their closing panels are
   // completely unchanged by this addition.
   const supporting = guide.closingSupportingCopy || '';
+  // guide.closingButton (2026-07-31, added for Copper) — an optional
+  // override for the Return button's label and destination. Every other
+  // guide has no closingButton field, so they keep the exact original
+  // "Return to Encyclopedia" button/behavior below unchanged. Copper's
+  // brief specifically calls for returning to Crystal Families (not just
+  // relying on browser Back), so its data sets
+  // closingButton:{label:'Return to Crystal Families', target:'crystalFamilies'}.
+  const cb = guide.closingButton;
+  const btnLabel = (cb && cb.label) || 'Return to Encyclopedia';
+  const btnOnclick = (cb && cb.target==='crystalFamilies') ? 'fgReturnToCrystalFamilies()' : "switchTabByName('encyclopedia')";
   return `<section class="fg-closing" id="fg-closing">
     ${line?`<p class="fg-closing-line">${escapeAttr(line)}</p>`:''}
     ${supporting?`<p class="fg-closing-supporting">${escapeAttr(supporting)}</p>`:''}
-    <button type="button" class="btn btn-accent fg-closing-btn" onclick="switchTabByName('encyclopedia')">Return to Encyclopedia</button>
+    <button type="button" class="btn btn-accent fg-closing-btn" onclick="${btnOnclick}">${escapeAttr(btnLabel)}</button>
   </section>`;
+}
+
+// ── Return-to-Crystal-Families helper (2026-07-31, added for Copper's
+// closing button — a forward navigation, not a Back-button case, so it
+// can't rely on the existing origin-history-patch mechanism above, which
+// only fires on the tile-click -> guide path. Writes the same
+// spl_101_section localStorage key show101() already writes on every
+// subsection switch, so the sidebar/section state stays consistent with
+// however the user reaches Crystal Families next. ──
+function fgReturnToCrystalFamilies(){
+  try{ localStorage.setItem('spl_101_section','families'); }catch(e){}
+  const url = window.location.pathname+'?tab=101&section=families';
+  try{ history.pushState({tab:'101',section:'families'}, '', url); }catch(e){}
+  switchTabByName('101');
+  if(typeof show101==='function'){
+    show101('families', document.querySelector('.c101-sidebar-item[onclick*="families"]'));
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -1856,7 +1883,7 @@ function familyGuideColorComparisonHtml(guide){
     <h2 class="fg-h2">${escapeAttr(cc.title||'Blue, Green, or Both?')}</h2>
     <div class="fg-prose-block">${paras}</div>
     <div class="fg-colorgroups">${groups}</div>
-    ${cc.pullQuote?`<p class="fg-lead fg-lead--question fg-copper-pullquote">${escapeAttr(cc.pullQuote)}</p>`:''}
+    ${cc.pullQuote?`<p class="fg-copper-pullquote">${escapeAttr(cc.pullQuote)}</p>`:''}
   </section>`;
 }
 
@@ -1878,9 +1905,9 @@ function familyGuideGrowTogetherHtml(guide){
   const cards = (g.features||[]).map(f=>fgPhotoCardHtml(f)).join('');
   return `<section class="fg-section" id="fg-grow-together">
     <h2 class="fg-h2">${escapeAttr(g.title||'When Copper Minerals Grow Together')}</h2>
-    ${g.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(g.intro)}</p>`:''}
+    ${g.intro?`<p class="fg-prose">${escapeAttr(g.intro)}</p>`:''}
     <div class="fg-photo-grid fg-photo-grid--2">${cards}</div>
-    ${g.closingNote?`<p class="fg-note-center">${escapeAttr(g.closingNote)}</p>`:''}
+    ${g.closingNote?`<p class="fg-copper-note">${escapeAttr(g.closingNote)}</p>`:''}
   </section>`;
 }
 

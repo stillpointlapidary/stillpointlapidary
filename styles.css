@@ -2172,10 +2172,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    visual plan. Desktop: a real table with fine rules on a warm-white
    surface. Mobile: each row becomes a stacked card via data-label
    attributes (set in fgFormationTableHtml) instead of a horizontally
-   scrolling table, per the brief's explicit no-horizontal-scroll rule. */
-.fg-table-wrap{max-width:900px;margin:1.5rem auto 0}
+   scrolling table, per the brief's explicit no-horizontal-scroll rule.
+   No max-width of its own (2026-07-31 normalization pass) — it spans the
+   same .fg-guide shell width as every other Copper section instead of
+   sitting in its own narrower centered column. */
+.fg-table-wrap{margin:1.5rem 0 0}
 .fg-table{width:100%;border-collapse:collapse;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
-.fg-table th,.fg-table td{padding:0.85rem 1.1rem;text-align:left;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.fg-table th,.fg-table td{padding:0.85rem 1.1rem;text-align:left;font-size:14px;line-height:1.55;color:var(--ink2)}
 .fg-table th{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);background:var(--stone2);border-bottom:0.5px solid var(--border)}
 .fg-table td{border-bottom:0.5px solid var(--border2)}
 .fg-table tr:last-child td{border-bottom:none}
@@ -2184,33 +2187,85 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Mineral cards — full approved-copy body (not a one-line phrase), reusing
    .fg-stonecard-name/.fg-stonecard-qv for visual consistency with every
    other guide's cards while adding its own square media + multi-paragraph
-   body classes. */
+   body classes. object-fit:contain (2026-07-31 normalization pass) so the
+   full specimen is always visible rather than cropped to fill the square. */
 .fg-mineralcard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:100%}
-.fg-mineralcard-media{display:block;width:100%;aspect-ratio:1/1;background:var(--stone2);border:none;padding:0;cursor:pointer;overflow:hidden}
-.fg-mineralcard-media img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-mineralcard-media{display:block;width:100%;aspect-ratio:1/1;background:var(--white);border:none;padding:0;cursor:pointer;overflow:hidden}
+.fg-mineralcard-media img{width:100%;height:100%;object-fit:contain;display:block;padding:10px;box-sizing:border-box}
 .fg-mineralcard-body{padding:0.9rem 1.05rem 1rem;display:flex;flex-direction:column;flex:1}
-.fg-mineralcard-text{font-size:13.5px;line-height:1.65;color:var(--ink2);margin:0 0 0.6em}
+.fg-mineralcard-text{font-size:14.5px;line-height:1.7;color:var(--ink2);margin:0 0 0.6em}
 .fg-mineralcard-text:last-of-type{margin-bottom:0.7em}
 
-/* Secondary (Turquoise/Ajoite) row — smaller, horizontal cards. */
-.fg-mineralcard-secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:1.25rem auto 0}
+/* Secondary (Turquoise/Ajoite) row — smaller, horizontal cards. No
+   max-width/auto-centering (2026-07-31) — left-anchored to the shared
+   shell like every other Copper module, sized by its own 2-column grid
+   rather than a separately-narrower wrapper. */
+.fg-mineralcard-secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:1.25rem}
 .fg-mineralcard--secondary{flex-direction:row;align-items:stretch}
 .fg-mineralcard--secondary .fg-mineralcard-media{width:96px;aspect-ratio:1/1;flex-shrink:0}
 .fg-mineralcard--secondary .fg-mineralcard-body{padding:0.75rem 1rem}
 
-/* Blue, Green, or Both? — three label+thumbnail groups. Deliberately small
-   and distinct from the full mineral-card grid above. */
-.fg-colorgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:1.5rem auto 0}
-.fg-colorgroup{text-align:center}
+/* Blue, Green, or Both? — three left-aligned label+thumbnail groups.
+   Deliberately small and distinct from the full mineral-card grid above.
+   Left-aligned titles/thumbs (2026-07-31 normalization pass — the brief
+   explicitly calls out centered group titles as a defect) and no
+   max-width/auto-centering, matching every other Copper section's shared
+   shell width. */
+.fg-colorgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:1.5rem}
+.fg-colorgroup{text-align:left}
 .fg-colorgroup-title{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:0.85rem}
-.fg-colorgroup-thumbs{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.fg-colorgroup-thumb button{width:78px;height:78px;border-radius:10px;overflow:hidden;border:0.5px solid var(--border);background:var(--stone2);padding:0;cursor:pointer;display:block}
-.fg-colorgroup-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.fg-colorgroup-thumb-name{font-size:10.5px;color:var(--ink3);margin-top:5px;letter-spacing:0.01em}
-.fg-copper-pullquote{margin-top:2rem}
+.fg-colorgroup-thumbs{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start}
+.fg-colorgroup-thumb button{width:78px;height:78px;border-radius:10px;overflow:hidden;border:0.5px solid var(--border);background:var(--white);padding:0;cursor:pointer;display:block}
+.fg-colorgroup-thumb img{width:100%;height:100%;object-fit:contain;display:block;padding:4px;box-sizing:border-box}
+.fg-colorgroup-thumb-name{font-size:11px;color:var(--ink3);margin-top:5px;letter-spacing:0.01em;text-align:left}
+/* A restrained, left-aligned emphasis line — deliberately its own class
+   (2026-07-31) rather than reusing the shared centered/22px .fg-lead--
+   question flourish, which read as an oversized centered pull-quote. */
+.fg-copper-pullquote{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16.5px;line-height:1.6;color:var(--accent);text-align:left;margin:1.5rem 0 0;max-width:72ch}
+
+/* A restrained left-aligned closing note (2026-07-31), replacing the
+   shared centered .fg-note-center for Copper's "these names can still be
+   useful..." line. */
+.fg-copper-note{font-size:13.5px;line-height:1.6;color:var(--ink2r);text-align:left;margin:1rem 0 0;max-width:72ch}
 
 /* Copper Minerals in Your Collection — two calm, equal panels. */
 .fg-copper-care-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg-copper-care-grid .fg-fact-body{font-size:14.5px;line-height:1.7}
+
+/* ── Copper-only normalization pass (2026-07-31): left-aligned headings,
+   one consistent page shell, and moderate hero/photo scale. Every rule
+   below is scoped to .fg-guide[data-family-slug="copper"] so no other
+   guide's shared .fg-h2/.fg-lead/.fg-prose-block/.fg-hero-media-grid/
+   .fg-photocard-media/.fg-explain-media styling is touched — those
+   classes are shared across Calcite/Quartz/Fluorite/Feldspar/Chalcedony/
+   Agate/Jasper/Garnet/Tourmaline/Obsidian and intentionally keep their own
+   approved centered treatment. ── */
+.fg-guide[data-family-slug="copper"] .fg-h2{text-align:left}
+.fg-guide[data-family-slug="copper"] .fg-lead,
+.fg-guide[data-family-slug="copper"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0}
+.fg-guide[data-family-slug="copper"] .fg-prose-block{max-width:none;margin:0}
+.fg-guide[data-family-slug="copper"] .fg-prose{text-align:left}
+/* Hero — full specimen visible (object-fit:contain), comfortable white
+   space around each stone, and a shorter/moderate media band instead of
+   the default 16:9 height, so the three-stone spread reads as a
+   restrained composition rather than an oversized crop. */
+.fg-guide[data-family-slug="copper"] .fg-hero-media{max-height:300px}
+.fg-guide[data-family-slug="copper"] .fg-hero-media-grid img{object-fit:contain;background:var(--white);padding:10px;box-sizing:border-box}
+/* Grow-together features and closing essay reuse the shared photocard/
+   explain-media image treatment elsewhere on the site (cover-cropped);
+   Copper's brief specifically wants full, uncropped specimens here too. */
+.fg-guide[data-family-slug="copper"] .fg-photocard-media img,
+.fg-guide[data-family-slug="copper"] .fg-explain-media img{object-fit:contain;background:var(--white);padding:8px;box-sizing:border-box}
+/* Compact, dignified "Photo pending" state (2026-07-31) — the shared
+   fg-photocard-media reserves a full 4:3 photo height even when there's
+   no image; for Copper's grow-together cards with no approved photo, that
+   read as an oversized empty gray box. This collapses just that card's
+   media band to a slim labeled strip instead, only when it contains the
+   placeholder (real photos, e.g. Azurmalachite, keep the normal 4:3 media
+   band untouched). */
+.fg-guide[data-family-slug="copper"] #fg-grow-together .fg-photocard:has(.fg-stonecard-noimg--labeled) .fg-photocard-media{aspect-ratio:auto;background:transparent}
+.fg-guide[data-family-slug="copper"] #fg-grow-together .fg-photocard:has(.fg-stonecard-noimg--labeled) .fg-stonecard-noimg--labeled{height:auto;padding:0.5rem 0.75rem;justify-content:flex-start;border:0.5px dashed var(--border2);border-radius:8px;background:var(--stone2);width:fit-content;margin:0.9rem 0 0 1.1rem}
+.fg-guide[data-family-slug="copper"] #fg-grow-together .fg-stonecard-noimg--labeled span{font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3)}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
@@ -2244,7 +2299,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-tree-branches{flex-direction:column;align-items:center}
   .fg-tree-branch{max-width:100%}
   .fg-progression{grid-template-columns:repeat(2,1fr)}
-  .fg-colorgroups{grid-template-columns:1fr;max-width:420px}
+  .fg-colorgroups{grid-template-columns:1fr}
   .fg-copper-care-grid{grid-template-columns:1fr}
   .fg-mineralcard-secondary-grid{grid-template-columns:1fr}
 }
@@ -2261,7 +2316,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-table td::before{content:attr(data-label);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);flex:0 0 auto;min-width:9.5em}
   .fg-mineralcard--secondary{flex-direction:column}
   .fg-mineralcard--secondary .fg-mineralcard-media{width:100%;aspect-ratio:4/3}
-  .fg-colorgroups{max-width:100%}
   .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
   .fg-hero-title{font-size:25px}
   .fg-hero-question{font-size:23px}
