@@ -2396,23 +2396,29 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    spacing between cards, section-to-section spacing, or any other
    guide's headings. */
 .fg-guide[data-family-slug="copper"] .fg-h2 + *{margin-top:1rem}
-/* Closing navigation pill (2026-08-03) — replaces the shared, larger
-   boxed .fg-closing callout for Copper only (see
-   familyGuideCopperClosingPillHtml). Reuses the existing .fg-catalog-link
-   pill as its base (already approved, used on Garnet's collection links)
-   rather than inventing new pill CSS; this wrapper only centers it and
-   adds the gap beneath the closing essay. */
+/* Closing navigation pill wrapper (2026-08-03) — replaces the shared,
+   larger boxed .fg-closing callout for Copper only (see
+   familyGuideCopperClosingPillHtml). Centers the pill and adds the gap
+   beneath the closing essay; the pill itself is styled below. */
 .fg-copper-closing-pill-wrap{margin-top:1.75rem;text-align:center}
-/* 2026-08-05: modestly strengthened so the pill no longer reads as faint
-   — firmer border (var(--border2) at 0.07 alpha -> var(--border) at 0.12
-   alpha), a slightly deeper fill (var(--stone2) -> var(--stone3)), and a
-   bit more horizontal padding (14px -> 20px; vertical nudged 6px -> 7px
-   to keep the shape balanced). Font size, border-radius (pill shape), and
-   centered placement are all untouched. Scoped to this wrapper only, so
-   the shared .fg-catalog-link class (and Garnet's use of it) is
-   unaffected. */
-.fg-copper-closing-pill-wrap .fg-catalog-link{background:var(--stone3);border:0.5px solid var(--border);padding:7px 20px}
-.fg-copper-closing-pill-wrap .fg-catalog-link:hover{background:var(--accent);border-color:var(--accent)}
+
+/* ── Unified Copper navigation-pill system (2026-08-06) ──────────────
+   One shared base (fg-copper-pill) for both "Explore All Copper
+   Minerals" and "Return to Crystal Families", so they read as one
+   editorial system: compact, fully rounded, ~38-40px tall, 13px medium
+   Jost, no letter-spacing/uppercase treatment. New classes, scoped
+   entirely to Copper's own markup — .btn/.btn-sm (used site-wide) and
+   .fg-catalog-link (Garnet's differently-sized pill) are untouched, so
+   no other guide or shared control changes. Explore and Return share
+   height/padding/shape/typography/border-width; only fill/border color
+   and text color differ (the --explore/--return modifiers below), which
+   is what gives Explore its slightly stronger, copper-tinted emphasis
+   and keeps Return neutral but no longer faint. */
+.fg-copper-pill{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.01em;text-transform:none;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.fg-copper-pill--explore{background:rgba(200,169,110,0.14);border:1px solid var(--accent2);color:var(--accent)}
+.fg-copper-pill--explore:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+.fg-copper-pill--return{background:var(--stone3);border:1px solid var(--border);color:var(--ink2)}
+.fg-copper-pill--return:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}

@@ -1932,8 +1932,14 @@ function familyGuideMeetCopperFamilyHtml(guide){
   const m = guide.meetCopperFamily;
   if(!m) return '';
   const cards = (m.members||[]).map(fgMineralCardHtml).filter(Boolean).join('');
+  // m.intro (2026-08-06) — same fg-prose pattern already used by
+  // otherCopperMinerals.intro below: left-aligned, full guide width, no
+  // narrower wrapper. `.fg-h2 + *` (styles.css) gives it the same
+  // moderate heading gap every other Copper section intro already has;
+  // .fg-prose's own bottom margin gives the same gap before the card grid.
   return `<section class="fg-section" id="fg-meet-copper-family">
     <h2 class="fg-h2">${escapeAttr(m.title||'Featured Copper Minerals')}</h2>
+    ${m.intro?`<p class="fg-prose">${escapeAttr(m.intro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
   </section>`;
 }
@@ -1953,8 +1959,14 @@ function familyGuideOtherCopperMineralsHtml(guide){
   const o = guide.otherCopperMinerals;
   if(!o) return '';
   const cards = (o.members||[]).map(fgMineralCardHtml).filter(Boolean).join('');
+  // 2026-08-06: moved off the shared .btn/.btn-sm classes onto the new
+  // unified Copper pill system (fg-copper-pill, see styles.css) — .btn was
+  // getting bumped to 16px by the Copper-scoped ".fg-guide .btn" rule
+  // while keeping .btn-sm's small padding, which read as oversized/
+  // mismatched. jumpToFamily(...) onclick and exploreAllFamily/-Label data
+  // are completely unchanged, so filtering/navigation behavior is intact.
   const exploreBtn = (o.exploreAllFamily && typeof jumpToFamily==='function')
-    ? `<div class="fg-copper-explore-all"><button type="button" class="btn btn-sm" onclick="jumpToFamily('${escapeAttr(o.exploreAllFamily)}')">${escapeAttr(o.exploreAllLabel||'Explore All Copper Minerals')}</button></div>`
+    ? `<div class="fg-copper-explore-all"><button type="button" class="fg-copper-pill fg-copper-pill--explore" onclick="jumpToFamily('${escapeAttr(o.exploreAllFamily)}')">${escapeAttr(o.exploreAllLabel||'Explore All Copper Minerals')}</button></div>`
     : '';
   return `<section class="fg-section" id="fg-other-copper-minerals">
     <h2 class="fg-h2">${escapeAttr(o.title||'More Expressions of Copper')}</h2>
@@ -2091,17 +2103,19 @@ function familyGuideCopperClosingEssayHtml(guide){
    shared familyGuideClosingHtml's large boxed callout for Copper only.
    The closing essay's finalLine already carries the guide's one italic
    closing statement, so this is navigation only: a small, quiet, centered
-   pill reusing the site's existing .fg-catalog-link pill treatment
-   (already approved and used on Garnet's collection links) rather than
-   inventing new pill styling. Reuses guide.closingButton unchanged (same
-   label/target Copper has used since ca78a4c) and the existing
-   fgReturnToCrystalFamilies() navigation helper. ── */
+   pill. 2026-08-06: moved off .fg-catalog-link (Garnet's pill, a
+   different size/shape spec) onto the same unified fg-copper-pill system
+   the Explore All pill now uses, so the two Copper nav pills visibly
+   match — fg-copper-pill--return is the quieter, neutral-toned variant.
+   Reuses guide.closingButton unchanged (same label/target Copper has used
+   since ca78a4c) and the existing fgReturnToCrystalFamilies() navigation
+   helper. ── */
 function familyGuideCopperClosingPillHtml(guide){
   const cb = guide.closingButton;
   const btnLabel = (cb && cb.label) || 'Return to Crystal Families';
   const btnOnclick = (cb && cb.target==='crystalFamilies') ? 'fgReturnToCrystalFamilies()' : "switchTabByName('encyclopedia')";
   return `<div class="fg-copper-closing-pill-wrap">
-    <button type="button" class="fg-catalog-link" onclick="${btnOnclick}">${escapeAttr(btnLabel)}</button>
+    <button type="button" class="fg-copper-pill fg-copper-pill--return" onclick="${btnOnclick}">${escapeAttr(btnLabel)}</button>
   </div>`;
 }
 

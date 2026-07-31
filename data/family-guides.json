@@ -1900,6 +1900,7 @@
     },
     "meetCopperFamily": {
       "title": "Featured Copper Minerals",
+      "intro": "These six minerals offer a clear introduction to the copper family, showing the vivid color, varied forms, and close mineral relationships that make it so distinctive.",
       "members": [
         {
           "stoneId": "C-0006",
