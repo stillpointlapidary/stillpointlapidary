@@ -1774,11 +1774,12 @@ function familyGuideObsidianHtml(guide){
    COPPER MINERALS FAMILY GUIDE — dedicated section renderers (2026-07-31
    first implementation pass, built from Christie's approved
    copper-minerals-family-guide.md and copper-minerals-visual-plan.md;
-   2026-08-03 intro recomposition moved "The Copper Behind the Color" to
-   immediately below the hero and reordered the rest accordingly — see
+   2026-08-03 correction restored the original approved hero and folded the
+   Native Copper feature into a single compact two-column lead-in with
+   "One Deposit, Many Outcomes" — see familyGuideOneDepositHtml and
    familyGuideCopperHtml's assembly order below for the current sequence).
-   Copper's page order (integrated Native Copper introduction, Featured
-   Copper Minerals, One Deposit Many Outcomes + formation table, More
+   Copper's page order (hero, combined Native Copper / One Deposit Many
+   Outcomes introduction + formation table, Featured Copper Minerals, More
    Expressions of Copper, Blue/Green/Both color comparison, When Copper
    Minerals Grow Together, Copper Minerals in Your Collection, closing
    essay) has no overlap with any other guide's sections, and — per
@@ -1790,12 +1791,17 @@ function familyGuideObsidianHtml(guide){
    Fluorite/Feldspar/Chalcedony/Agate/Jasper/Garnet/Tourmaline/Obsidian
    selector, function, or data field. ══ */
 
-/* ── 1. One Deposit, Many Outcomes — the approved explanatory paragraphs
-   followed immediately by the formation table (no note above or below the
-   table, per the visual plan). fgFormationTableHtml renders a real <table>
-   for desktop legibility and screen-reader semantics; the mobile stacked-
-   card fallback is pure CSS (data-label attributes + a media query), so no
-   separate mobile-only markup path is needed. ── */
+/* ── 1. One Deposit, Many Outcomes — a compact two-column editorial lead-in
+   (2026-08-03 recomposition) combining the Native Copper specimen (image +
+   Quick View, left column) with the condensed formation explanation
+   (heading + two paragraphs, right column), immediately followed by the
+   formation table at the shared content width. Replaces the earlier
+   separate "The Copper Behind the Color" feature and the longer
+   free-standing prose block — there is exactly one introductory text area
+   here, not three. fgFormationTableHtml renders a real <table> for desktop
+   legibility and screen-reader semantics; the mobile stacked-card fallback
+   is pure CSS (data-label attributes + a media query), so no separate
+   mobile-only markup path is needed. ── */
 function fgFormationTableHtml(table){
   if(!table || !table.rows || !table.rows.length) return '';
   const headers = table.headers||[];
@@ -1807,9 +1813,29 @@ function familyGuideOneDepositHtml(guide){
   const o = guide.oneDeposit;
   if(!o) return '';
   const paras = (o.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const f = guide.copperFeature;
+  let mediaHtml = '';
+  if(f && f.stoneId){
+    const c = fgCrystal(f.stoneId);
+    if(c){
+      const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+      const imgHtml = imgSrc
+        ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
+        : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+      mediaHtml = `<div class="fg-copper-intro-media">
+        <button type="button" class="fg-copper-intro-media-img" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+        <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+      </div>`;
+    }
+  }
   return `<section class="fg-section" id="fg-one-deposit">
-    <h2 class="fg-h2">${escapeAttr(o.title||'One Deposit, Many Outcomes')}</h2>
-    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-copper-intro-grid">
+      ${mediaHtml}
+      <div class="fg-copper-intro-copy">
+        <h2 class="fg-h2">${escapeAttr(o.title||'One Deposit, Many Outcomes')}</h2>
+        ${paras}
+      </div>
+    </div>
     ${fgFormationTableHtml(guide.formationTable)}
   </section>`;
 }
@@ -1881,37 +1907,6 @@ function fgMineralCardHtml(member){
       ${paras}
     </div>
   </div>`;
-}
-/* ── 2. "The Copper Behind the Color" (2026-08-02) — native copper (roster
-   stone C-0037) as a compact horizontal feature immediately before the
-   Meet the Copper Minerals grid. Deliberately its own component, not a
-   fourth card in the Azurite/Malachite/Chrysocolla row and not folded
-   into "Other Copper Minerals to Know": a distinct visual introduction to
-   the element itself, moderate in scale (image left, copy right), with
-   the same name+Quick View header-row treatment as the mineral cards. ── */
-function familyGuideCopperFeatureHtml(guide){
-  const f = guide.copperFeature;
-  if(!f || !f.stoneId) return '';
-  const c = fgCrystal(f.stoneId);
-  if(!c) return '';
-  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
-  const imgHtml = imgSrc
-    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
-    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
-  const paras = (f.paragraphs||[]).map(p=>`<p class="fg-mineralcard-text">${escapeAttr(p)}</p>`).join('');
-  return `<section class="fg-section" id="fg-copper-feature">
-    <h2 class="fg-h2">${escapeAttr(f.title||'The Copper Behind the Color')}</h2>
-    <div class="fg-copper-feature">
-      <button type="button" class="fg-copper-feature-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
-      <div class="fg-copper-feature-body">
-        <div class="fg-mineralcard-header">
-          <div class="fg-stonecard-name">${escapeAttr(f.name||c.n)}</div>
-          <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
-        </div>
-        ${paras}
-      </div>
-    </div>
-  </section>`;
 }
 function familyGuideMeetCopperFamilyHtml(guide){
   const m = guide.meetCopperFamily;
@@ -2088,9 +2083,8 @@ function familyGuideCopperHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
-    ${familyGuideCopperFeatureHtml(guide)}
-    ${familyGuideMeetCopperFamilyHtml(guide)}
     ${familyGuideOneDepositHtml(guide)}
+    ${familyGuideMeetCopperFamilyHtml(guide)}
     ${familyGuideOtherCopperMineralsHtml(guide)}
     ${familyGuideColorComparisonHtml(guide)}
     ${familyGuideGrowTogetherHtml(guide)}

@@ -2217,14 +2217,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* Plancheite's non-clickable card (no roster entry, no Quick View). */
 .fg-mineralcard--unlinked .fg-mineralcard-media{cursor:default}
 
-/* "The Copper Behind the Color" (2026-08-02) — a compact horizontal
-   feature (image left, name/Quick View header row + copy right), moderate
-   in scale, distinct from both the mineral-card grid and the grow-together
-   cards. Stacks to image-above-copy on narrow mobile widths. */
-.fg-copper-feature{display:flex;gap:1.4rem;align-items:flex-start;background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.2rem 1.35rem}
-.fg-copper-feature-media{flex:0 0 150px;width:150px;height:150px;background:#FFFFFF;border:none;padding:0;cursor:pointer;overflow:hidden;border-radius:8px}
-.fg-copper-feature-media img{width:100%;height:100%;object-fit:contain;display:block;padding:8px;box-sizing:border-box}
-.fg-copper-feature-body{flex:1;min-width:0}
+/* One Deposit, Many Outcomes — combined Native Copper / formation
+   introduction (2026-08-03 recomposition). A restrained two-column
+   editorial lead-in, not a card: no border/background box of its own, so
+   it reads as page copy rather than another feature module. Left column
+   holds the C-0037 image (white contained well, moderate 150px-class
+   scale, object-fit:contain) with Quick View directly beneath it, left-
+   aligned with the image, directly reusing the shared restrained 11px
+   .fg-stonecard-qv class (no new Quick View style — same accent-color
+   underline link used on every mineral card) rather than duplicating its
+   rules under a new name. Right column carries the section heading and two
+   paragraphs; the formation table (rendered separately, right after this
+   grid) is not part of the grid itself so it can span the full section
+   width. Stacks to image-then-copy on narrow widths. */
+.fg-copper-intro-grid{display:flex;gap:1.75rem;align-items:flex-start;margin-bottom:1.5rem}
+.fg-copper-intro-media{flex:0 0 150px;display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem}
+.fg-copper-intro-media-img{display:block;width:150px;height:150px;background:#FFFFFF;border:none;padding:0;cursor:pointer;overflow:hidden;border-radius:8px}
+.fg-copper-intro-media-img img{width:100%;height:100%;object-fit:contain;display:block;padding:8px;box-sizing:border-box}
+.fg-copper-intro-copy{flex:1;min-width:0}
+.fg-copper-intro-copy .fg-h2{margin-top:0}
 
 /* Restrained "Photo Credits" utility link (2026-08-02) — replaces the
    expandable image-credits panel on the Copper guide itself. Sized to
@@ -2376,13 +2387,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-progression{grid-template-columns:repeat(2,1fr)}
   .fg-colorgroups{grid-template-columns:1fr}
   .fg-copper-care-grid{grid-template-columns:1fr}
-  .fg-copper-feature{flex-direction:column}
-  .fg-copper-feature-media{width:100%;height:auto;aspect-ratio:4/3;flex:none}
+  .fg-copper-intro-grid{flex-direction:column}
+  .fg-copper-intro-media{flex:none;width:150px}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-copper-feature,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
   .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:16px}
   .fg-table thead{display:none}
   .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}

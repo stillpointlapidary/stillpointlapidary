@@ -1877,16 +1877,14 @@
       "mediaStoneIds": ["C-0006", "C-0020", "C-0052"],
       "eyebrow": "FAMILY GUIDE",
       "title": "Copper Minerals",
-      "signatureLine": "Copper paints in blue and green."
+      "signatureLine": "Copper paints in blue and green.",
+      "condensedIntro": "Copper does not create just one recognizable mineral. As water and oxygen move through copper-bearing rock, they can transform the material near the surface and produce vivid new minerals in cracks, pockets, and open spaces."
     },
     "oneDeposit": {
       "title": "One Deposit, Many Outcomes",
       "paragraphs": [
-        "Many copper minerals form near the surface of a copper deposit, where water and oxygen move through cracks in the rock.",
-        "As that water travels, it carries copper into new spaces. What forms there depends on the local conditions. Carbonate-rich areas may produce azurite or malachite. Silica-rich areas may produce chrysocolla or shattuckite. Other conditions can produce cuprite, dioptase, turquoise, or ajoite.",
-        "These minerals do not appear in one fixed order. They are different outcomes of the same changing environment.",
-        "Azurite and malachite are especially closely related. Azurite can sometimes alter into malachite, which is why green malachite may coat or replace blue azurite.",
-        "That is why azurite, malachite, chrysocolla, shattuckite, dioptase, and cuprite are often found near one another. Each reflects a different set of conditions, but together they tell one changing geological story."
+        "Native copper can occur in metallic form, often branching, twisting, or spreading in thin sheets. It is also the element behind the vivid blues and greens of azurite, malachite, chrysocolla, and many other minerals in this guide.",
+        "Near the surface of a copper deposit, copper combines with oxygen, carbon, sulfur, silica, and water. As conditions change, different mineral species can form—sometimes side by side within the same deposit."
       ]
     },
     "formationTable": {
@@ -1899,13 +1897,7 @@
       ]
     },
     "copperFeature": {
-      "title": "The Copper Behind the Color",
-      "stoneId": "C-0037",
-      "name": "Copper",
-      "paragraphs": [
-        "Native copper can occur as a mineral in its metallic form, often branching, twisting, or spreading in thin sheets. But copper is also the element behind the vivid blues and greens of azurite, malachite, chrysocolla, and many other minerals in this guide.",
-        "Near the surface of a copper deposit, copper combines with oxygen, carbon, sulfur, silica, and water. As copper-bearing minerals form and change, those combinations produce remarkably different colors, structures, and mineral species."
-      ]
+      "stoneId": "C-0037"
     },
     "meetCopperFamily": {
       "title": "Featured Copper Minerals",
