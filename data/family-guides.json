@@ -1865,5 +1865,171 @@
     "closingCallout": "Obsidian forms in a moment of rapid cooling, yet the glass can preserve an entire history of movement, fire, and change.",
     "closingSupportingCopy": "Look past the dark surface and the frozen lava begins to speak.",
     "imageCredits": []
+  }  ,
+  "copper": {
+    "slug": "copper",
+    "displayName": "Copper Minerals",
+    "encyclopediaFilterValue": "Copper Minerals",
+    "editorialStatusNote": "First implementation pass (2026-07-31) built from Christie's approved copper-minerals-family-guide.md and copper-minerals-visual-plan.md. Every section below uses that locked copy verbatim (markdown bold markers stripped only where the site's plain-text rendering requires it). This guide has its own dedicated section renderers (oneDeposit/formationTable, meetCopperFamily, colorGroups, growTogether, copperCare, closingEssay) rather than reusing Calcite's metaphysical/energy-role schema, per Christie's explicit direction that Copper carries no chakra, badge, or energetic-role content. Roster stoneIds verified live against Supabase (2026-07-31): Azurite C-0006, Malachite C-0020, Chrysocolla C-0052, Shattuckite C-0130, Dioptase C-0019, Cuprite C-0298, Turquoise C-0228, Ajoite C-0271, Azurmalachite C-0430, Quantum Quattro C-0368. All but Quantum Quattro have an approved ENCYCLOPEDIA_PHOTOS entry; Quantum Quattro has none, so its grow-together feature renders as a labeled 'Photo pending' placeholder rather than substituting another stone's photo. Sonora Sunrise and Chrysocolla-in-Quartz/Gem Silica are not canonical roster entries and have no approved dedicated photography distinguishing them from plain Chrysocolla, so both grow-together features also render as labeled placeholders rather than reusing a visually-similar but compositionally-different stone's image.",
+    "closingCallout": "Copper paints in blue and green.",
+    "hero": {
+      "mediaStoneIds": ["C-0006", "C-0020", "C-0052"],
+      "eyebrow": "FAMILY GUIDE",
+      "title": "Copper Minerals",
+      "signatureLine": "Copper paints in blue and green.",
+      "condensedIntro": "Copper does not create just one recognizable mineral. As water and oxygen move through copper-bearing rock, they can transform the material near the surface and produce vivid new minerals in cracks, pockets, and open spaces."
+    },
+    "overview": {
+      "paragraph": "That is why azurite, malachite, chrysocolla, shattuckite, dioptase, and cuprite are often found near one another. Each reflects a different set of conditions, but together they tell one changing geological story."
+    },
+    "oneDeposit": {
+      "title": "One Deposit, Many Outcomes",
+      "paragraphs": [
+        "Many copper minerals form near the surface of a copper deposit, where water and oxygen move through cracks in the rock.",
+        "As that water travels, it carries copper into new spaces. What forms there depends on the local conditions. Carbonate-rich areas may produce azurite or malachite. Silica-rich areas may produce chrysocolla or shattuckite. Other conditions can produce cuprite, dioptase, turquoise, or ajoite.",
+        "These minerals do not appear in one fixed order. They are different outcomes of the same changing environment.",
+        "Azurite and malachite are especially closely related. Azurite can sometimes alter into malachite, which is why green malachite may coat or replace blue azurite."
+      ]
+    },
+    "formationTable": {
+      "headers": ["Local condition", "Outcome", "Examples", "Color"],
+      "rows": [
+        ["Carbonate-rich", "Copper carbonates form", "Azurite, Malachite", "Deep blue or green"],
+        ["Silica-rich", "Copper silicates form", "Chrysocolla, Shattuckite", "Blue to blue-green"],
+        ["Other local chemistry", "Different copper minerals form", "Cuprite, Dioptase, Turquoise, Ajoite", "Red, emerald green, or compact blue-green"],
+        ["Conditions change", "Minerals overlap or replace one another", "Azurmalachite, mixed copper specimens", "Blue-green mixtures and contrasting bands"]
+      ]
+    },
+    "meetCopperFamily": {
+      "title": "Meet the Copper Minerals",
+      "members": [
+        {
+          "stoneId": "C-0006",
+          "name": "Azurite",
+          "paragraphs": [
+            "Azurite is known for its intense blue color, which can range from rich royal blue to nearly black. It may form as distinct crystals, rounded growths, velvety coatings, or massive material mixed with other minerals.",
+            "It is often found with malachite, and some azurite gradually alters into malachite over time."
+          ]
+        },
+        {
+          "stoneId": "C-0020",
+          "name": "Malachite",
+          "paragraphs": [
+            "Malachite appears in shades of bright, forest, and nearly black-green. Its most familiar forms show bands, rings, ripples, or rounded growth patterns.",
+            "The internal patterning visible in polished malachite reflects layers of mineral growth rather than painted or added color."
+          ]
+        },
+        {
+          "stoneId": "C-0052",
+          "name": "Chrysocolla",
+          "paragraphs": [
+            "Chrysocolla ranges from pale blue to vivid turquoise-green. It often appears as massive material, surface coatings, or uneven patches mixed with quartz, malachite, and other copper minerals.",
+            "Its appearance can vary widely, which makes chrysocolla especially difficult to identify by color alone."
+          ]
+        },
+        {
+          "stoneId": "C-0130",
+          "name": "Shattuckite",
+          "paragraphs": [
+            "Shattuckite is usually blue to blue-green and may form in fibrous, radiating, or velvety growths. In mixed specimens, it can resemble chrysocolla or azurite.",
+            "The rarer copper mineral plancheite can look similar, particularly when it forms pale blue fibrous growths."
+          ]
+        },
+        {
+          "stoneId": "C-0019",
+          "name": "Dioptase",
+          "paragraphs": [
+            "Dioptase forms brilliant green crystals with a glassy surface. Its color may resemble emerald, but dioptase is much softer and belongs to an entirely different mineral group.",
+            "Even small crystals can appear unusually vivid because of the mineral's strong green color and clarity."
+          ]
+        },
+        {
+          "stoneId": "C-0298",
+          "name": "Cuprite",
+          "paragraphs": [
+            "Cuprite introduces a surprising color into the copper family. It may appear deep red, brown-red, or nearly black, sometimes with a metallic or reflective surface.",
+            "When cuprite grows with blue-green copper minerals, the contrast can be dramatic."
+          ]
+        }
+      ],
+      "secondaryIntro": "Turquoise and Ajoite",
+      "secondaryMembers": [
+        {
+          "stoneId": "C-0228",
+          "name": "Turquoise",
+          "paragraph": "Turquoise is a compact blue to green copper-bearing mineral that often forms in veins or nodules. Its matrix, treatments, and long history as a gemstone give it a visual identity of its own."
+        },
+        {
+          "stoneId": "C-0271",
+          "name": "Ajoite",
+          "paragraph": "Ajoite is much rarer. It is usually encountered as blue-green inclusions or delicate growths, often associated with quartz and other copper minerals."
+        }
+      ]
+    },
+    "colorComparison": {
+      "title": "Blue, Green, or Both?",
+      "paragraphs": [
+        "Color offers a useful starting point, but it cannot confirm a mineral's identity.",
+        "Azurite is usually blue. Malachite and dioptase are usually green. Chrysocolla, shattuckite, turquoise, and ajoite may fall somewhere between the two.",
+        "Texture often gives the next clue. Distinct glassy crystals suggest something different from a soft-looking coating, a fibrous growth, or a polished banded surface. The surrounding matrix and associated minerals also matter."
+      ],
+      "groups": [
+        {"label": "Mostly Blue", "stoneIds": ["C-0006", "C-0130"]},
+        {"label": "Mostly Green", "stoneIds": ["C-0020", "C-0019"]},
+        {"label": "Blue-Green or Variable", "stoneIds": ["C-0052", "C-0228", "C-0271"]}
+      ],
+      "pullQuote": "A blue-green color can narrow the possibilities, but it cannot identify the stone by itself."
+    },
+    "growTogether": {
+      "title": "When Copper Minerals Grow Together",
+      "intro": "Copper minerals frequently share the same fractures and pockets. They may grow side by side, overlap, or become so closely intergrown that separating them by sight is difficult.",
+      "features": [
+        {
+          "title": "Azurmalachite",
+          "singleStoneId": "C-0430",
+          "alt": "Azurmalachite specimen showing both blue azurite and green malachite",
+          "body": "Azurmalachite is a descriptive name for material containing both azurite and malachite. The blue and green may appear in distinct areas or merge into flowing patterns."
+        },
+        {
+          "title": "Chrysocolla in Quartz and Gem Silica",
+          "placeholderLabel": "Photo pending",
+          "body": "Chrysocolla in quartz can be harder and more durable than ordinary chrysocolla-rich material. Gem silica is a related but more specific material: chalcedony colored blue or green by copper."
+        },
+        {
+          "title": "Sonora Sunrise",
+          "placeholderLabel": "Photo pending",
+          "body": "Sonora Sunrise, also called Sonora Sunset, is a trade name usually associated with blue-green chrysocolla and red cuprite in dark matrix."
+        },
+        {
+          "title": "Mixed Copper Minerals and Quantum Quattro",
+          "placeholderLabel": "Photo pending",
+          "body": "Quantum Quattro is a less standardized trade name for mixed blue-green copper minerals, often described as chrysocolla, shattuckite, malachite, and dioptase with quartz. Actual pieces vary, so the name does not guarantee a fixed composition."
+        }
+      ],
+      "closingNote": "These names can still be useful, but they do not all describe single mineral species."
+    },
+    "copperCare": {
+      "title": "Copper Minerals in Your Collection",
+      "panels": [
+        {
+          "title": "Handle Gently",
+          "body": "Many copper minerals are softer, more porous, or more brittle than they appear. Avoid soaking them, scrubbing delicate surfaces, or using chemical cleaners unless the mineral has been positively identified and the cleaning method is known to be safe."
+        },
+        {
+          "title": "Avoid Dust, Drinking Water, and Elixirs",
+          "body": "Do not grind, sand, drill, or polish copper minerals without appropriate equipment and dust controls. Keep them out of drinking water and crystal elixirs, and wash your hands after handling rough or dusty specimens."
+        }
+      ]
+    },
+    "closingEssay": {
+      "title": "A Family Written in Color",
+      "singleStoneId": "C-0052",
+      "alt": "Detailed blue-green copper mineral specimen",
+      "paragraphs": [
+        "Copper minerals show how much can happen inside one small pocket of rock. Blue becomes green. One mineral coats another. Clear boundaries soften into mixtures.",
+        "The closer you look, the less chaotic the color becomes. What first appears to be a wild blue-green stone begins to reveal a record of water, chemistry, and change."
+      ]
+    },
+    "imageCredits": []
   }
 }

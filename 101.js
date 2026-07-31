@@ -563,6 +563,26 @@ function renderPrimaryFamilies(){
     return`<div class="fam-card fam-card--primary" data-family="${escapeAttr(f.n)}" onclick="${clickAction}" title="${cardTitle}"><div class="fam-photo">${photoSlot}</div><div class="fam-body"><div class="fam-name">${f.n}</div>${cnt?`<div class="fam-count">${cnt} stone${cnt===1?'':'s'}</div>`:''}<div class="fam-energy">${f.energy||f.desc}</div>${examples?`<div class="fam-examples">${examples}</div>`:''}</div></div>`;
   }).join('');
 }
+// ── Smaller Families, Distinct Stories (2026-07-31) — the "Smaller
+// Families" block in encyclopedia.html was previously reserved/empty (see
+// its HTML comment). This is a small, separate roster from
+// C101_PRIMARY_FAMILIES/C101_FAM_DATA — it does not touch either — because
+// those drive the fixed ten-family "Ten Families, Many Stories" grid and a
+// possible future full "All Families" tier view. First entry: Copper
+// Minerals, linking to its new Family Guide via openFamilyGuide('copper').
+const C101_SECONDARY_FAMILIES=[
+  {n:"Copper Minerals", guideSlug:"copper", photo:(typeof SUPABASE_ENC!=='undefined'?SUPABASE_ENC+'azurmalachite.webp':''), desc:"Explore the blue, green, and red minerals shaped by changing conditions around copper deposits."}
+];
+function renderSecondaryFamilies(){
+  const fc=document.getElementById('fam-cards-secondary');
+  if(!fc)return;
+  fc.innerHTML=C101_SECONDARY_FAMILIES.map(f=>{
+    const photoSlot=f.photo
+      ?`<img class="fam-photo-img" src="${escapeAttr(f.photo)}" alt="${escapeAttr(f.n)}" loading="lazy">`
+      :`<div class="fam-photo-placeholder" style="background:${FAM_PHOTO_COLORS[f.n]||'var(--stone3)'}"></div>`;
+    return`<div class="fam-card fam-card--primary" data-family="${escapeAttr(f.n)}" data-guide-slug="${escapeAttr(f.guideSlug||'')}" title="Open the ${escapeAttr(f.n)} Family Guide"><div class="fam-photo">${photoSlot}</div><div class="fam-body"><div class="fam-name">${f.n}</div><div class="fam-energy">${f.desc||''}</div></div></div>`;
+  }).join('');
+}
 function initFamilies(){
   try { C101_FAM_DATA; } catch(e) { setTimeout(initFamilies,0); return; }
   if(!window.FAM_COUNTS){window.FAM_COUNTS={};CRYSTALS.forEach(c=>{if(c.fam)window.FAM_COUNTS[c.fam]=(window.FAM_COUNTS[c.fam]||0)+1;});}
@@ -584,7 +604,21 @@ function initFamilies(){
       }
     });
   }
+  const fcSecondary=document.getElementById('fam-cards-secondary');
+  if(fcSecondary&&fcSecondary.dataset.familyDelegated!=='1'){
+    fcSecondary.dataset.familyDelegated='1';
+    fcSecondary.addEventListener('click',function(e){
+      const card=e.target.closest('.fam-card');
+      if(!card)return;
+      const slug=card.getAttribute('data-guide-slug');
+      if(!slug)return;
+      e.preventDefault();
+      e.stopPropagation();
+      if(typeof openFamilyGuide==='function') openFamilyGuide(slug);
+    });
+  }
   renderPrimaryFamilies();
+  renderSecondaryFamilies();
 }
 
 

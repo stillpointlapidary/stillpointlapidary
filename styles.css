@@ -1596,6 +1596,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* "Smaller Families, Distinct Stories" — reserved section, tasteful empty
    future-content state. No cards are auto-populated into it this pass. */
 .fam-future-note{border:0.5px dashed var(--border);border-radius:14px;padding:1.75rem 1.25rem;text-align:center;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink3);background:var(--stone2)}
+/* Smaller Families, Distinct Stories (2026-07-31, Copper Minerals) — reuses
+   .fam-grid--primary's card proportions, but sized to its own small tile
+   count instead of stretching a single tile across a 4-column grid meant
+   for ten primary families. */
+.fam-grid--secondary{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));max-width:760px}
 /* ENC PHOTO LIGHTBOX */
 .enc-lightbox{display:none;position:fixed;inset:0;background:rgba(42,37,32,0.7);z-index:400;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
 .enc-lightbox.open{display:flex}
@@ -2056,6 +2061,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    identity labels/descriptions no longer break into narrow strips. */
 .fg-card-grid--garnet-roster{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
 .fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 310px;max-width:330px}
+/* Copper's .fg-mineralcard reuses this same flex-wrap roster grid (2026-07-31)
+   but isn't a .fg-stonecard, so it needs its own matching flex-basis rule at
+   each breakpoint below — otherwise it grows to fill the row instead of
+   wrapping 3-then-3 like every other roster grid using this class. */
+.fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 310px;max-width:330px}
 
 /* Garnet Is a Group, Not One Stone — widened reading measure (this
    guide's own prose-block only; the shared .fg-prose-block used by
@@ -2149,6 +2159,59 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 #fg-obsidian-appearance .fg-section-intro,
 #fg-obsidian-collection .fg-section-intro{max-width:860px}
 
+/* ══════════════════════════════════════════════════════════════════════
+   COPPER MINERALS FAMILY GUIDE — dedicated styles (2026-07-31). Additive
+   only: every class below is new and scoped to Copper's own section IDs
+   or component classes, so no existing guide's CSS is touched. ══ */
+
+/* Hero three-image spread (see fgHeroMediaHtml's imgs.length===3 branch) —
+   a single row of three instead of the default 2x2 grid. */
+.fg-hero-media-grid--3{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr}
+
+/* Formation table — plain, editorial, no icons/illustrations per the
+   visual plan. Desktop: a real table with fine rules on a warm-white
+   surface. Mobile: each row becomes a stacked card via data-label
+   attributes (set in fgFormationTableHtml) instead of a horizontally
+   scrolling table, per the brief's explicit no-horizontal-scroll rule. */
+.fg-table-wrap{max-width:900px;margin:1.5rem auto 0}
+.fg-table{width:100%;border-collapse:collapse;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.fg-table th,.fg-table td{padding:0.85rem 1.1rem;text-align:left;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.fg-table th{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);background:var(--stone2);border-bottom:0.5px solid var(--border)}
+.fg-table td{border-bottom:0.5px solid var(--border2)}
+.fg-table tr:last-child td{border-bottom:none}
+.fg-table td:first-child,.fg-table th:first-child{color:var(--ink);font-weight:500}
+
+/* Mineral cards — full approved-copy body (not a one-line phrase), reusing
+   .fg-stonecard-name/.fg-stonecard-qv for visual consistency with every
+   other guide's cards while adding its own square media + multi-paragraph
+   body classes. */
+.fg-mineralcard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:100%}
+.fg-mineralcard-media{display:block;width:100%;aspect-ratio:1/1;background:var(--stone2);border:none;padding:0;cursor:pointer;overflow:hidden}
+.fg-mineralcard-media img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-mineralcard-body{padding:0.9rem 1.05rem 1rem;display:flex;flex-direction:column;flex:1}
+.fg-mineralcard-text{font-size:13.5px;line-height:1.65;color:var(--ink2);margin:0 0 0.6em}
+.fg-mineralcard-text:last-of-type{margin-bottom:0.7em}
+
+/* Secondary (Turquoise/Ajoite) row — smaller, horizontal cards. */
+.fg-mineralcard-secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:1.25rem auto 0}
+.fg-mineralcard--secondary{flex-direction:row;align-items:stretch}
+.fg-mineralcard--secondary .fg-mineralcard-media{width:96px;aspect-ratio:1/1;flex-shrink:0}
+.fg-mineralcard--secondary .fg-mineralcard-body{padding:0.75rem 1rem}
+
+/* Blue, Green, or Both? — three label+thumbnail groups. Deliberately small
+   and distinct from the full mineral-card grid above. */
+.fg-colorgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:1.5rem auto 0}
+.fg-colorgroup{text-align:center}
+.fg-colorgroup-title{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink2r);margin-bottom:0.85rem}
+.fg-colorgroup-thumbs{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.fg-colorgroup-thumb button{width:78px;height:78px;border-radius:10px;overflow:hidden;border:0.5px solid var(--border);background:var(--stone2);padding:0;cursor:pointer;display:block}
+.fg-colorgroup-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-colorgroup-thumb-name{font-size:10.5px;color:var(--ink3);margin-top:5px;letter-spacing:0.01em}
+.fg-copper-pullquote{margin-top:2rem}
+
+/* Copper Minerals in Your Collection — two calm, equal panels. */
+.fg-copper-care-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
 }
@@ -2177,14 +2240,28 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-explain-grid{grid-template-columns:1fr;gap:1.25rem}
   .fg-explain-media{order:-1;max-height:260px}
   .fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 46%;max-width:400px}
+  .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 46%;max-width:400px}
   .fg-tree-branches{flex-direction:column;align-items:center}
   .fg-tree-branch{max-width:100%}
   .fg-progression{grid-template-columns:repeat(2,1fr)}
+  .fg-colorgroups{grid-template-columns:1fr;max-width:420px}
+  .fg-copper-care-grid{grid-template-columns:1fr}
+  .fg-mineralcard-secondary-grid{grid-template-columns:1fr}
 }
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-garnet-family,#fg-garnet-group,#fg-garnet-branches,#fg-garnet-appearance,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
+  .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:12.5px}
+  .fg-table thead{display:none}
+  .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}
+  .fg-table tr{border-bottom:0.5px solid var(--border);padding:0.6rem 0}
+  .fg-table tr:last-child{border-bottom:none}
+  .fg-table td{border-bottom:none!important;padding:0.25rem 0.85rem;display:flex;gap:0.5em}
+  .fg-table td::before{content:attr(data-label);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);flex:0 0 auto;min-width:9.5em}
+  .fg-mineralcard--secondary{flex-direction:column}
+  .fg-mineralcard--secondary .fg-mineralcard-media{width:100%;aspect-ratio:4/3}
+  .fg-colorgroups{max-width:100%}
   .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
   .fg-hero-title{font-size:25px}
   .fg-hero-question{font-size:23px}
@@ -2210,6 +2287,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-namegrid--3{grid-template-columns:1fr}
   .fg-photo-grid--2{grid-template-columns:1fr}
   .fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 100%;max-width:440px}
+  .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 100%;max-width:440px}
   .fg-tree-parent{max-width:100%}
   .fg-progression{grid-template-columns:1fr}
   #fg-meet-garnet-family .fg-section-intro,

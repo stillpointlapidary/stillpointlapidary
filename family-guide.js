@@ -221,7 +221,11 @@ function fgHeroMediaHtml(guide){
   // images. This modifier switches to a single row instead; it's applied
   // purely based on imgs.length, so every existing guide's four-image hero
   // (Calcite, Quartz, Fluorite, Feldspar) keeps the exact same 2x2 markup.
-  const gridModClass = imgs.length===2 ? ' fg-hero-media-grid--2' : '';
+  // 2026-07-31 (added for Copper Minerals' three-stone hero spread): a
+  // single row of three instead of a 2x2 grid with an empty fourth cell.
+  // Only applied when exactly three images are supplied; every existing
+  // four-image or two-image hero is unaffected.
+  const gridModClass = imgs.length===2 ? ' fg-hero-media-grid--2' : (imgs.length===3 ? ' fg-hero-media-grid--3' : '');
   return `<div class="fg-hero-media">
     <div class="fg-hero-media-grid${gridModClass}">${imgs.join('')}</div>
     <span class="fg-hero-media-label">Family photograph — coming soon</span>
@@ -1723,6 +1727,230 @@ function familyGuideObsidianHtml(guide){
   </div>`;
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   COPPER MINERALS FAMILY GUIDE — dedicated section renderers (2026-07-31
+   first implementation pass, built from Christie's approved
+   copper-minerals-family-guide.md and copper-minerals-visual-plan.md).
+   Copper's page order (One Deposit Many Outcomes + formation table, Meet
+   the Copper Minerals, Blue/Green/Both color comparison, When Copper
+   Minerals Grow Together, Copper Minerals in Your Collection, closing
+   essay) has no overlap with any other guide's sections, and — per
+   Christie's explicit direction — carries none of Calcite's metaphysical/
+   energy-role framing, chakra content, or trade-material badges. It
+   therefore gets its own assembly function and section renderers below
+   rather than reusing familyGuideGenericHtml or any Calcite-derived path.
+   Purely additive/Copper-scoped: nothing here touches a Calcite/Quartz/
+   Fluorite/Feldspar/Chalcedony/Agate/Jasper/Garnet/Tourmaline/Obsidian
+   selector, function, or data field. ══ */
+
+/* ── 1. One Deposit, Many Outcomes — the approved explanatory paragraphs
+   followed immediately by the formation table (no note above or below the
+   table, per the visual plan). fgFormationTableHtml renders a real <table>
+   for desktop legibility and screen-reader semantics; the mobile stacked-
+   card fallback is pure CSS (data-label attributes + a media query), so no
+   separate mobile-only markup path is needed. ── */
+function fgFormationTableHtml(table){
+  if(!table || !table.rows || !table.rows.length) return '';
+  const headers = table.headers||[];
+  const thead = `<thead><tr>${headers.map(h=>`<th>${escapeAttr(h)}</th>`).join('')}</tr></thead>`;
+  const tbody = `<tbody>${table.rows.map(row=>`<tr>${row.map((cell,i)=>`<td data-label="${escapeAttr(headers[i]||'')}">${escapeAttr(cell)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  return `<div class="fg-table-wrap"><table class="fg-table">${thead}${tbody}</table></div>`;
+}
+function familyGuideOneDepositHtml(guide){
+  const o = guide.oneDeposit;
+  if(!o) return '';
+  const paras = (o.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-one-deposit">
+    <h2 class="fg-h2">${escapeAttr(o.title||'One Deposit, Many Outcomes')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+    ${fgFormationTableHtml(guide.formationTable)}
+  </section>`;
+}
+
+/* ── 2. Meet the Copper Minerals — six primary cards carrying the full
+   approved mineral copy (not a one-line phrase), since the brief calls for
+   the actual article paragraphs on each card. fgStoneCardHtml's compact
+   single-phrase design doesn't fit that, so this is a new, dedicated card
+   type (fgMineralCardHtml) rather than a repurposing of any shared
+   component used by another guide. Reuses the existing
+   .fg-card-grid--garnet-roster flex layout (already established for
+   Garnet's five-card and Obsidian's six-card rosters) since six 310px-wide
+   cards naturally wrap 3-then-3 in it with no new grid CSS needed. The
+   secondary Turquoise/Ajoite row uses a smaller, horizontal card
+   (fgMineralCardSecondaryHtml) in a plain two-column grid. Plancheite is
+   never given its own card — it only appears inside Shattuckite's
+   paragraph copy, exactly as approved. ── */
+function fgMineralCardHtml(member){
+  const c = fgCrystal(member.stoneId);
+  if(!c) return '';
+  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+  const imgHtml = imgSrc
+    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const paras = (member.paragraphs||[]).map(p=>`<p class="fg-mineralcard-text">${escapeAttr(p)}</p>`).join('');
+  return `<div class="fg-mineralcard">
+    <button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+    <div class="fg-mineralcard-body">
+      <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
+      ${paras}
+      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+    </div>
+  </div>`;
+}
+function fgMineralCardSecondaryHtml(member){
+  const c = fgCrystal(member.stoneId);
+  if(!c) return '';
+  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+  const imgHtml = imgSrc
+    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  return `<div class="fg-mineralcard fg-mineralcard--secondary">
+    <button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+    <div class="fg-mineralcard-body">
+      <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
+      <p class="fg-mineralcard-text">${escapeAttr(member.paragraph||'')}</p>
+      <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">Quick View</button>
+    </div>
+  </div>`;
+}
+function familyGuideMeetCopperFamilyHtml(guide){
+  const m = guide.meetCopperFamily;
+  if(!m) return '';
+  const cards = (m.members||[]).map(fgMineralCardHtml).filter(Boolean).join('');
+  const secondaryCards = (m.secondaryMembers||[]).map(fgMineralCardSecondaryHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-copper-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Copper Minerals')}</h2>
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+    ${secondaryCards?`<div class="fg-mineralcard-secondary-grid">${secondaryCards}</div>`:''}
+  </section>`;
+}
+
+/* ── 3. Blue, Green, or Both? — the approved explanatory paragraphs, a
+   three-column grouping of small clickable thumbnails (never the full
+   mineral cards from Section 2, per the visual plan), and the single
+   approved sentence rendered as the page's only pull-quote (reuses the
+   existing .fg-lead--question italic-Georgia treatment already used
+   elsewhere as a one-off flourish, rather than inventing a new emphasis
+   style). ── */
+function fgColorGroupThumbHtml(stoneId){
+  const c = fgCrystal(stoneId);
+  if(!c) return '';
+  const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+  const imgHtml = imgSrc
+    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
+    : '';
+  return `<div class="fg-colorgroup-thumb">
+    <button type="button" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
+    <div class="fg-colorgroup-thumb-name">${escapeAttr(c.n)}</div>
+  </div>`;
+}
+function familyGuideColorComparisonHtml(guide){
+  const cc = guide.colorComparison;
+  if(!cc) return '';
+  const paras = (cc.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const groups = (cc.groups||[]).map(g=>`<div class="fg-colorgroup">
+    <div class="fg-colorgroup-title">${escapeAttr(g.label||'')}</div>
+    <div class="fg-colorgroup-thumbs">${(g.stoneIds||[]).map(fgColorGroupThumbHtml).filter(Boolean).join('')}</div>
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-color-comparison">
+    <h2 class="fg-h2">${escapeAttr(cc.title||'Blue, Green, or Both?')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+    <div class="fg-colorgroups">${groups}</div>
+    ${cc.pullQuote?`<p class="fg-lead fg-lead--question fg-copper-pullquote">${escapeAttr(cc.pullQuote)}</p>`:''}
+  </section>`;
+}
+
+/* ── 4. When Copper Minerals Grow Together — four features in a two-column
+   desktop / one-column mobile grid (reuses the existing .fg-card-grid--2
+   modifier, already established for Obsidian's two-item comparison).
+   Reuses fgPhotoCardHtml exactly as Fluorite's Cube/Octahedron/Cleavage
+   and Obsidian's comparison cards do: item.singleStoneId pulls an
+   existing, already-approved encyclopedia photo (Azurmalachite);
+   item.placeholderLabel renders a clean, clearly labeled "Photo pending"
+   card — never an invented or substituted image — for Chrysocolla in
+   Quartz/Gem Silica, Sonora Sunrise, and Quantum Quattro, none of which
+   has an approved dedicated photograph on file. Quantum Quattro
+   deliberately stays inside this shared grid rather than getting a
+   standalone card, hero treatment, or badge, per the brief. ── */
+function familyGuideGrowTogetherHtml(guide){
+  const g = guide.growTogether;
+  if(!g) return '';
+  const cards = (g.features||[]).map(f=>fgPhotoCardHtml(f)).join('');
+  return `<section class="fg-section" id="fg-grow-together">
+    <h2 class="fg-h2">${escapeAttr(g.title||'When Copper Minerals Grow Together')}</h2>
+    ${g.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(g.intro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--2">${cards}</div>
+    ${g.closingNote?`<p class="fg-note-center">${escapeAttr(g.closingNote)}</p>`:''}
+  </section>`;
+}
+
+/* ── 5. Copper Minerals in Your Collection — two calm, equal panels
+   (Handle Gently / Avoid Dust, Drinking Water, and Elixirs), reusing the
+   existing .fg-collection-sub neutral panel styling but in a plain
+   two-column grid rather than the three-part care/remember/watch-for
+   layout familyGuideCollectionHtml renders for other guides — that
+   component's schema doesn't fit Copper's simpler two-panel brief, so this
+   is a small dedicated renderer instead of forcing Copper's data into it.
+   No red/yellow warning styling, no hazard icons, per the brief. ── */
+function familyGuideCopperCareHtml(guide){
+  const c = guide.copperCare;
+  if(!c) return '';
+  const panels = (c.panels||[]).map(p=>`<div class="fg-collection-sub">
+    <div class="fg-collection-panel-title">${escapeAttr(p.title||'')}</div>
+    <p class="fg-fact-body">${escapeAttr(p.body||'')}</p>
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-copper-care">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Copper Minerals in Your Collection')}</h2>
+    <div class="fg-copper-care-grid">${panels}</div>
+  </section>`;
+}
+
+/* ── 6. Closing essay — "A Family Written in Color." Unlike every other
+   guide's one-line closingCallout (rendered by the shared
+   familyGuideClosingHtml below), Copper's brief calls for the full
+   two-paragraph closing essay paired with one detailed image, kept
+   visually quiet. Reuses the existing .fg-explain-grid image+prose split
+   (already used elsewhere for a photo-beside-text layout) rather than
+   inventing a new one. familyGuideClosingHtml still runs immediately after
+   this for the standard italic one-line callout + Return to Encyclopedia
+   button, preserving the same closing pattern every other guide ends
+   with. ── */
+function familyGuideCopperClosingEssayHtml(guide){
+  const ce = guide.closingEssay;
+  if(!ce) return '';
+  const c = ce.singleStoneId ? fgCrystal(ce.singleStoneId) : null;
+  const imgSrc = c ? ((typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '') : '';
+  const mediaHtml = imgSrc
+    ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(ce.alt||(c&&c.n)||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const paras = (ce.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-copper-closing-essay">
+    <h2 class="fg-h2">${escapeAttr(ce.title||'A Family Written in Color')}</h2>
+    <div class="fg-explain-grid">
+      <div class="fg-explain-copy">${paras}</div>
+      <div class="fg-explain-media">${mediaHtml}</div>
+    </div>
+  </section>`;
+}
+
+/* ── Copper Minerals guide assembly — its own approved section order.
+   Purely additive: nothing here changes any other guide's assembly, data,
+   or rendered output. ── */
+function familyGuideCopperHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideOneDepositHtml(guide)}
+    ${familyGuideMeetCopperFamilyHtml(guide)}
+    ${familyGuideColorComparisonHtml(guide)}
+    ${familyGuideGrowTogetherHtml(guide)}
+    ${familyGuideCopperCareHtml(guide)}
+    ${familyGuideCopperClosingEssayHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+    ${familyGuideImageCreditsHtml(guide)}
+  </div>`;
+}
+
 /* ── Generic guide assembly — for any family guide other than Calcite,
    Fluorite, or Feldspar (currently: Quartz). Calcite keeps its own fixed,
    unmodified assembly below so its approved layout and output are
@@ -1755,6 +1983,7 @@ function familyGuideHtml(guide){
   if(guide.slug==='garnet') return familyGuideGarnetHtml(guide);
   if(guide.slug==='tourmaline') return familyGuideTourmalineHtml(guide);
   if(guide.slug==='obsidian') return familyGuideObsidianHtml(guide);
+  if(guide.slug==='copper') return familyGuideCopperHtml(guide);
   if(guide.slug!=='calcite') return familyGuideGenericHtml(guide);
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
