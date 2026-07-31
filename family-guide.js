@@ -1925,18 +1925,18 @@ function familyGuideColorComparisonHtml(guide){
   const cc = guide.colorComparison;
   if(!cc) return '';
   const paras = (cc.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  // 2026-08-01 redesign: each group is now a bordered card (equal outer
-  // height via the parent grid's default stretch) instead of a bare label
-  // + scattered thumbnail row. The third group (Blue-Green or Variable)
-  // holds three specimens instead of two, so it gets a narrower-thumbnail
-  // modifier class to keep all three comfortably on one row.
-  const groups = (cc.groups||[]).map((g,i)=>{
-    const modClass = (g.stoneIds||[]).length>2 ? ' fg-colorgroup--variable' : '';
-    return `<div class="fg-colorgroup${modClass}">
+  // 2026-08-01 redesign: each group is a bordered card (equal outer height
+  // via the parent grid's default stretch) instead of a bare label +
+  // scattered thumbnail row. 2026-08-02 correction: the three cards keep
+  // one consistent thumbnail size — the third group (three specimens
+  // instead of two) gets a wider *column* via .fg-colorgroups'
+  // grid-template-columns instead of shrinking its thumbnails, so all
+  // three groups stay visually consistent while still fitting three
+  // thumbnails on one row.
+  const groups = (cc.groups||[]).map(g=>`<div class="fg-colorgroup">
     <div class="fg-colorgroup-title">${escapeAttr(g.label||'')}</div>
     <div class="fg-colorgroup-thumbs">${(g.stoneIds||[]).map(fgColorGroupThumbHtml).filter(Boolean).join('')}</div>
-  </div>`;
-  }).join('');
+  </div>`).join('');
   return `<section class="fg-section" id="fg-color-comparison">
     <h2 class="fg-h2">${escapeAttr(cc.title||'Blue, Green, or Both?')}</h2>
     <div class="fg-prose-block">${paras}</div>
@@ -1964,7 +1964,7 @@ function familyGuideGrowTogetherHtml(guide){
   return `<section class="fg-section" id="fg-grow-together">
     <h2 class="fg-h2">${escapeAttr(g.title||'When Copper Minerals Grow Together')}</h2>
     ${g.intro?`<p class="fg-prose">${escapeAttr(g.intro)}</p>`:''}
-    <div class="fg-photo-grid fg-photo-grid--2">${cards}</div>
+    <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
     ${g.closingNote?`<p class="fg-copper-note">${escapeAttr(g.closingNote)}</p>`:''}
   </section>`;
 }
