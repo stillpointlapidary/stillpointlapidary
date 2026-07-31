@@ -1953,7 +1953,7 @@
           ]
         }
       ],
-      "secondaryIntro": "Turquoise and Ajoite",
+      "secondaryIntro": "Turquoise, Ajoite, and Plancheite",
       "secondaryMembers": [
         {
           "stoneId": "C-0228",
@@ -1964,6 +1964,12 @@
           "stoneId": "C-0271",
           "name": "Ajoite",
           "paragraph": "Ajoite is much rarer. It is usually encountered as blue-green inclusions or delicate growths, often associated with quartz and other copper minerals."
+        },
+        {
+          "name": "Plancheite",
+          "image": "plancheite-246447.jpg",
+          "alt": "Plancheite specimen with pale blue fibrous growth, Shangulowé Mine, Katanga, Democratic Republic of the Congo",
+          "paragraph": "Plancheite is a rare blue copper silicate that commonly forms fibrous or radiating growths. Its pale blue color and texture can make it resemble Shattuckite, especially in mixed specimens."
         }
       ]
     },
@@ -2031,6 +2037,15 @@
         "The closer you look, the less chaotic the color becomes. What first appears to be a wild blue-green stone begins to reveal a record of water, chemistry, and change."
       ]
     },
-    "imageCredits": []
+    "imageCredits": [
+      {
+        "title": "Plancheite (Shangulowé Mine, Kambove, Central area, Katanga Copper Crescent, Katanga, Democratic Republic of the Congo)",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Plancheite-246447.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Original filename: Plancheite-246447.jpg (Wikimedia VRTS permission ticket 2010022810018255). Retained at its original 600×563 resolution; no cropping, recoloring, or other alteration."
+      }
+    ]
   }
 }

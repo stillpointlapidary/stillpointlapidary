@@ -1825,6 +1825,28 @@ function fgMineralCardHtml(member){
   </div>`;
 }
 function fgMineralCardSecondaryHtml(member){
+  // No-stoneId branch (2026-08-01, added for Plancheite) — Plancheite has
+  // no canonical roster entry or encyclopedia page, so it renders from a
+  // local family-guide asset (assets/family-guide-copper/) instead of
+  // firstEncyclopediaPhoto(), with no Quick View button and no
+  // openDetail() call — same "don't invent a roster link" principle
+  // fgExpressionCardHtml already applies for Fluorite's non-roster
+  // expressions. Turquoise and Ajoite both still carry a stoneId, so their
+  // markup and Quick View behavior below are completely unchanged.
+  if(!member.stoneId){
+    const name = member.name||'';
+    if(!name) return '';
+    const imgHtml = member.image
+      ? `<img src="${escapeAttr('assets/family-guide-copper/'+member.image)}" alt="${escapeAttr(member.alt||name)}" loading="lazy">`
+      : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+    return `<div class="fg-mineralcard fg-mineralcard--secondary fg-mineralcard--unlinked">
+      <div class="fg-mineralcard-media" title="${escapeAttr(name)} — no standalone encyclopedia entry">${imgHtml}</div>
+      <div class="fg-mineralcard-body">
+        <div class="fg-stonecard-name">${escapeAttr(name)}</div>
+        <p class="fg-mineralcard-text">${escapeAttr(member.paragraph||'')}</p>
+      </div>
+    </div>`;
+  }
   const c = fgCrystal(member.stoneId);
   if(!c) return '';
   const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';

@@ -2190,7 +2190,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    body classes. object-fit:contain (2026-07-31 normalization pass) so the
    full specimen is always visible rather than cropped to fill the square. */
 .fg-mineralcard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:100%}
-.fg-mineralcard-media{display:block;width:100%;aspect-ratio:1/1;background:var(--white);border:none;padding:0;cursor:pointer;overflow:hidden}
+/* 2026-08-01 refinement pass: 4/3 instead of 1/1 — a ~25% shorter photo
+   well (height = width * 0.75 instead of width * 1) so the image
+   introduces the card rather than dominating it, while object-fit:contain
+   on the img still keeps the full specimen visible uncropped. */
+.fg-mineralcard-media{display:block;width:100%;aspect-ratio:4/3;background:var(--white);border:none;padding:0;cursor:pointer;overflow:hidden}
 .fg-mineralcard-media img{width:100%;height:100%;object-fit:contain;display:block;padding:10px;box-sizing:border-box}
 .fg-mineralcard-body{padding:0.9rem 1.05rem 1rem;display:flex;flex-direction:column;flex:1}
 .fg-mineralcard-text{font-size:14.5px;line-height:1.7;color:var(--ink2);margin:0 0 0.6em}
@@ -2200,10 +2204,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    max-width/auto-centering (2026-07-31) — left-anchored to the shared
    shell like every other Copper module, sized by its own 2-column grid
    rather than a separately-narrower wrapper. */
-.fg-mineralcard-secondary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:1.25rem}
+/* 2026-08-01: three equal compact entries (Turquoise, Ajoite, Plancheite)
+   instead of two. */
+.fg-mineralcard-secondary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:1.25rem}
 .fg-mineralcard--secondary{flex-direction:row;align-items:stretch}
 .fg-mineralcard--secondary .fg-mineralcard-media{width:96px;aspect-ratio:1/1;flex-shrink:0}
 .fg-mineralcard--secondary .fg-mineralcard-body{padding:0.75rem 1rem}
+/* Plancheite's non-clickable card (no roster entry, no Quick View). */
+.fg-mineralcard--unlinked .fg-mineralcard-media{cursor:default}
 
 /* Blue, Green, or Both? — three left-aligned label+thumbnail groups.
    Deliberately small and distinct from the full mineral-card grid above.
@@ -2266,6 +2274,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="copper"] #fg-grow-together .fg-photocard:has(.fg-stonecard-noimg--labeled) .fg-photocard-media{aspect-ratio:auto;background:transparent}
 .fg-guide[data-family-slug="copper"] #fg-grow-together .fg-photocard:has(.fg-stonecard-noimg--labeled) .fg-stonecard-noimg--labeled{height:auto;padding:0.5rem 0.75rem;justify-content:flex-start;border:0.5px dashed var(--border2);border-radius:8px;background:var(--stone2);width:fit-content;margin:0.9rem 0 0 1.1rem}
 .fg-guide[data-family-slug="copper"] #fg-grow-together .fg-stonecard-noimg--labeled span{font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3)}
+/* 2026-08-01 refinement pass: Azurmalachite is the one grow-together
+   feature with a real photo, and at the shared 4:3 aspect ratio it was
+   dramatically taller than its three text-led placeholder siblings. A
+   shallow, moderate media band (object-fit:contain still keeps the full
+   specimen visible, uncropped) instead of a portrait-tall photo well. */
+.fg-guide[data-family-slug="copper"] #fg-grow-together .fg-photocard:not(:has(.fg-stonecard-noimg--labeled)) .fg-photocard-media{aspect-ratio:2.2/1}
+/* 2026-08-01 refinement pass: the closing-essay image column shrinks from
+   42% to 28% of the row (roughly a one-third reduction), giving the
+   closing thought more visual weight than the specimen photo while
+   keeping the same two-column arrangement and object-fit:contain. */
+.fg-guide[data-family-slug="copper"] #fg-copper-closing-essay .fg-explain-grid{grid-template-columns:minmax(0,1fr) minmax(200px,28%)}
 
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
