@@ -1773,9 +1773,13 @@ function familyGuideObsidianHtml(guide){
 /* ══════════════════════════════════════════════════════════════════════
    COPPER MINERALS FAMILY GUIDE — dedicated section renderers (2026-07-31
    first implementation pass, built from Christie's approved
-   copper-minerals-family-guide.md and copper-minerals-visual-plan.md).
-   Copper's page order (One Deposit Many Outcomes + formation table, Meet
-   the Copper Minerals, Blue/Green/Both color comparison, When Copper
+   copper-minerals-family-guide.md and copper-minerals-visual-plan.md;
+   2026-08-03 intro recomposition moved "The Copper Behind the Color" to
+   immediately below the hero and reordered the rest accordingly — see
+   familyGuideCopperHtml's assembly order below for the current sequence).
+   Copper's page order (integrated Native Copper introduction, Featured
+   Copper Minerals, One Deposit Many Outcomes + formation table, More
+   Expressions of Copper, Blue/Green/Both color comparison, When Copper
    Minerals Grow Together, Copper Minerals in Your Collection, closing
    essay) has no overlap with any other guide's sections, and — per
    Christie's explicit direction — carries none of Calcite's metaphysical/
@@ -1914,7 +1918,7 @@ function familyGuideMeetCopperFamilyHtml(guide){
   if(!m) return '';
   const cards = (m.members||[]).map(fgMineralCardHtml).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-meet-copper-family">
-    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Copper Minerals')}</h2>
+    <h2 class="fg-h2">${escapeAttr(m.title||'Featured Copper Minerals')}</h2>
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
   </section>`;
 }
@@ -1938,7 +1942,7 @@ function familyGuideOtherCopperMineralsHtml(guide){
     ? `<div class="fg-copper-explore-all"><button type="button" class="btn btn-sm" onclick="jumpToFamily('${escapeAttr(o.exploreAllFamily)}')">${escapeAttr(o.exploreAllLabel||'Explore All Copper Minerals')}</button></div>`
     : '';
   return `<section class="fg-section" id="fg-other-copper-minerals">
-    <h2 class="fg-h2">${escapeAttr(o.title||'Other Copper Minerals to Know')}</h2>
+    <h2 class="fg-h2">${escapeAttr(o.title||'More Expressions of Copper')}</h2>
     ${o.intro?`<p class="fg-prose">${escapeAttr(o.intro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
     ${exploreBtn}
@@ -2084,9 +2088,9 @@ function familyGuideCopperHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
-    ${familyGuideOneDepositHtml(guide)}
     ${familyGuideCopperFeatureHtml(guide)}
     ${familyGuideMeetCopperFamilyHtml(guide)}
+    ${familyGuideOneDepositHtml(guide)}
     ${familyGuideOtherCopperMineralsHtml(guide)}
     ${familyGuideColorComparisonHtml(guide)}
     ${familyGuideGrowTogetherHtml(guide)}
