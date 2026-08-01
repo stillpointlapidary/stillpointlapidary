@@ -1145,9 +1145,7 @@
           "thumbs": [
             {"stoneId": "C-0162", "name": "Moonstone"},
             {"stoneId": "C-0025", "name": "Amazonite"}
-          ],
-          "mineralLabel": "Mineral names underneath",
-          "mineralNames": "Orthoclase · Microcline · Sanidine"
+          ]
         },
         {
           "title": "Plagioclase Feldspar",
@@ -1158,15 +1156,15 @@
             {"stoneId": "C-0028", "name": "Labradorite"},
             {"stoneId": "C-0030", "name": "Rainbow Moonstone"},
             {"stoneId": "C-0166", "name": "Spectrolite"}
-          ],
-          "mineralLabel": "Mineral range underneath",
-          "mineralNames": "Albite to Anorthite series"
+          ]
         }
       ]
     },
     "sunstoneConnector": {
       "title": "Sunstone Connects the Branches",
-      "body": "Sunstone may form in Alkali Feldspar or Plagioclase. Its name follows the reflective effect, not one exact composition. Inclusions create the bright sparkle called aventurescence, often known as schiller in Sunstone."
+      "body": "Sunstone may form in Alkali Feldspar or Plagioclase. Its name follows the reflective effect, not one exact composition. Inclusions create the bright sparkle called aventurescence, often known as schiller in Sunstone.",
+      "stoneId": "C-0029",
+      "name": "Sunstone"
     },
     "lightMoves": {
       "title": "Glow, Flash, Sparkle",
@@ -1222,9 +1220,9 @@
       "title": "Feldspar in Your Collection",
       "intro": "Feldspar rewards interaction. Its strongest light may hide until the stone turns, and its familiar market name may reveal only part of its identity. A little attention makes the collection more beautiful, more useful, and easier to protect.",
       "cards": [
-        {"title": "Display It Where the Light Can Find It", "paragraphs": ["Feldspar comes alive in changing light. Place Moonstone, Labradorite, Spectrolite, or Sunstone where you can easily pick it up, turn it, or view it from more than one angle.", "A shelf near soft daylight or a focused lamp can reveal effects that disappear in flat or dim lighting."]},
-        {"title": "Protect It", "paragraphs": ["Feldspar has natural directions of weakness called cleavage. A sharp knock can chip or split it more easily than its solid appearance suggests.", "Clean it with warm, soapy water and a soft cloth or brush. Avoid steam, ultrasonic cleaners, sudden heat, and hard impacts."]},
-        {"title": "Learn the Name", "paragraphs": ["Market names help us recognize the stone people know. Mineral names reveal the deeper relationship underneath.", "Knowing both does not make collecting colder or more technical. It makes each piece more interesting, because the name becomes the beginning of the story rather than the end."]}
+        {"title": "Two Branches", "paragraphs": ["Feldspar follows two main mineral branches: Alkali Feldspar and Plagioclase Feldspar. Familiar trade names may sit within either branch, while Sunstone can cross between them."]},
+        {"title": "What Moves the Light", "paragraphs": ["Feldspar's best-known optical effects come from internal structure or reflective inclusions. Moonstone glows, Labradorite flashes, and Sunstone sparkles as the viewing angle changes."]},
+        {"title": "Recognizing Feldspar", "paragraphs": ["Look at both the body of the stone and the way it handles light. Color, streaking, glow, flash, and sparkle can help separate familiar Feldspar expressions."]}
       ]
     },
     "imageCredits": [

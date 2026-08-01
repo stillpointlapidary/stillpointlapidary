@@ -2711,32 +2711,47 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-feldspar-decoder-grid,
 .fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-feldspar-collection-grid{margin-top:1.875rem}
 
-/* One Family, Two Great Branches (section 3) — slim colored accent rule per
-   panel (warm for Alkali Feldspar, cool for Plagioclase) instead of large
-   colored boxes, "Familiar Stones" label over enlarged labeled specimen
-   images, then the mineral-name line beneath. */
-.fg-feldspar-branch-panel{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;border-left-width:3px}
-.fg-feldspar-branch--alkali{border-left-color:#b8874a}
-.fg-feldspar-branch--plagioclase{border-left-color:#5f7f8f}
+/* One Family, Two Great Branches (section 3) — a top accent border per
+   panel (warm for Alkali Feldspar, cool for Plagioclase — 2026-08-01
+   visual-correction pass: moved from a side border to a top border so the
+   two branch cards and the Sunstone connector beneath them read as one
+   coherent composition, all using the same 3px top-accent weight), then
+   the body paragraph and a "Familiar Stones" label over enlarged labeled
+   specimen images. No mineral-classification line (removed this pass). */
+.fg-feldspar-branch-panel{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;border-top-width:3px}
+.fg-feldspar-branch--alkali{border-top-color:#b8874a}
+.fg-feldspar-branch--plagioclase{border-top-color:#5f7f8f}
 .fg-feldspar-branch-panel .fg-branch-title{text-align:left;margin-bottom:0.3rem}
 .fg-feldspar-branch-subtitle{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.02em;color:var(--ink3);margin:0 0 0.8rem}
-.fg-feldspar-branch-line{font-size:14px;color:var(--ink2);margin:0.9rem 0 0}
 .fg-feldspar-branch-line-label{display:block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);margin:0.9rem 0 0.5rem}
-/* Enlarged familiar-stone images (2026-08-01 correction: clearly larger
-   than the prior pass's 64px thumbnails, without becoming a full feature
-   image) with the stone name directly beneath each one. */
+/* Enlarged familiar-stone images (2026-08-01 visual-correction pass:
+   raised from 100px to 150px — the largest shared size that keeps both
+   the two-item Alkali row and the three-item Plagioclase row on one line
+   at the 1100px guide width) with the stone name directly beneath each
+   one. Also reused as-is by the Sunstone connector's single specimen
+   below, so all five branch examples plus Sunstone share one image-well
+   size and internal padding. */
 .fg-feldspar-branch-thumbs{display:flex;flex-wrap:wrap;gap:16px;margin:0.5rem 0 0}
-.fg-feldspar-branch-thumb{display:flex;flex-direction:column;align-items:center;gap:6px;width:108px;border:none;background:none;padding:0;cursor:pointer}
-.fg-feldspar-branch-thumb img{width:100px;height:100px;object-fit:contain;border:0.5px solid var(--border);border-radius:10px;background:#FFFFFF;padding:8px;box-sizing:border-box}
+.fg-feldspar-branch-thumb{display:flex;flex-direction:column;align-items:center;gap:8px;width:150px;border:none;background:none;padding:0;cursor:pointer}
+.fg-feldspar-branch-thumb img{width:150px;height:150px;object-fit:contain;border:0.5px solid var(--border);border-radius:10px;background:#FFFFFF;padding:14px;box-sizing:border-box}
 .fg-feldspar-branch-thumb span{font-family:'Jost',sans-serif;font-size:13px;color:var(--ink2);text-align:center;line-height:1.3}
 
 /* Sunstone Connects the Branches (section 4) — a compact connector,
-   visibly subordinate to the two branch panels above it: no image wells,
-   no placeholder, no badges. A single dual-accent top rule (half warm,
-   half cool) is the only visual callback to both branches. */
+   visibly subordinate to the two branch panels above it: no placeholder,
+   no badges. A single dual-accent top rule (half warm, half cool) is the
+   only visual callback to both branches — same 3px weight as the branch
+   panels' top borders, so all three modules read as one composition.
+   2026-08-01 visual-correction pass: the single Sunstone specimen (added
+   via familyGuideFeldsparSunstoneConnectorHtml) reuses the exact same
+   .fg-feldspar-branch-thumb component/size as the branch examples;
+   .fg-feldspar-sunstone-thumbs centers it since it's the row's only item
+   (the shared .fg-feldspar-branch-thumbs is a plain flex-start row,
+   correct for the branch panels' 2-3 item rows but not for a single
+   centered item here). */
 .fg-feldspar-sunstone-connector{max-width:640px;margin:1.875rem auto 0;padding:1.25rem 1.5rem 1.4rem;text-align:center;border:0.5px solid var(--border);border-radius:12px;border-top-width:3px;border-top-color:#b8874a;background:linear-gradient(90deg,#b8874a 0 50%,#5f7f8f 50% 100%) top/100% 3px no-repeat,var(--white)}
 .fg-feldspar-connector-heading{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;color:var(--ink);margin:0 0 0.5rem}
 .fg-feldspar-sunstone-connector .fg-fact-body{margin:0}
+.fg-feldspar-sunstone-thumbs{justify-content:center;margin-top:1rem}
 
 /* Glow, Flash, Sparkle (section 5) — plain-language word dominant over the
    secondary technical term; "What to notice" now sits above the body
@@ -2756,6 +2771,32 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-feldspar-identity-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.02em;color:var(--ink3);margin:0 0 0.5rem}
 .fg-feldspar-best-clue{font-size:14px;font-weight:600;color:var(--ink);margin-top:0.4rem}
 
+/* Moonstone decoder + Labradorite/Spectrolite/Larvikite (sections 6 and 7)
+   — image-well correction (2026-08-01 visual-correction pass). Both reuse
+   the shared .fg-relationship-media/.fg-relationship-card component
+   unchanged everywhere else in the project (e.g. Quartz's Agate/
+   Chalcedony/Jasper Fit), whose default is a gray aspect-ratio well with
+   no internal padding — fine for that section's photography, but it let
+   these two Feldspar modules' specimens read as oversized. Scoped to
+   these two section ids only (not the shared .fg-relationship-media
+   selector itself), so no other guide's relationship-card rendering
+   changes: a restrained fixed-height white well replaces the aspect-ratio
+   box, and ~22px internal padding on the media button shrinks the
+   rendered specimen without cropping (object-fit:contain is already the
+   shared img rule). Card widths/composition/copy are untouched — only the
+   image treatment inside each card changes. */
+#fg-moonstone-decoder .fg-relationship-media,
+#fg-lsl .fg-relationship-media{aspect-ratio:auto;height:170px;background:#FFFFFF;padding:22px;box-sizing:border-box}
+
+/* Feldspar in Your Collection (section 9, 2026-08-01 visual-correction
+   pass) — three equal side-by-side teaching cards, reusing the shared
+   .fg-collection-sub panel styling (Calcite's layout reference). This
+   base display:grid declaration was missing from the prior pass, which
+   left the three cards rendering as stacked full-width bars instead of
+   side-by-side cards — restored here so grid's default row-stretch
+   equalizes all three card heights to the tallest card's content. */
+.fg-feldspar-collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
 /* Closing (section 10) — bare italic line + compact pill, no surrounding
    banner/box, matching the approved Calcite/Copper treatment. */
 .fg-guide[data-family-slug="feldspar"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
@@ -2767,8 +2808,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 }
 @media(max-width:600px){
   .fg-feldspar-decoder-grid .fg-relationship-card{flex:0 1 100%;max-width:360px}
-  .fg-feldspar-branch-thumb{width:88px}
-  .fg-feldspar-branch-thumb img{width:80px;height:80px}
+  .fg-feldspar-branch-thumb{width:110px}
+  .fg-feldspar-branch-thumb img{width:110px;height:110px;padding:10px}
+  .fg-feldspar-collection-grid{grid-template-columns:1fr}
 }
 
 @media(prefers-reduced-motion:reduce){

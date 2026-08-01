@@ -979,12 +979,16 @@ function familyGuideFeldsparExpressionsHtml(guide){
 
 /* ── 3. One Family, Two Great Branches — two equal panels, each with a
    slim colored accent rule (warm for Alkali Feldspar, cool for Plagioclase
-   — see .fg-feldspar-branch--alkali/--plagioclase in styles.css), the body
-   paragraph, a "Familiar Stones" label over enlarged labeled specimen
-   images (item.thumbs: [{stoneId,name}], rendered larger than the prior
-   pass's small thumbnail row), and the mineral-name line beneath. No old
-   "Home to..." subtitle, no old text-only familiar-names line, no arrows,
-   stems, or connector diagrams. ── */
+   — see .fg-feldspar-branch--alkali/--plagioclase in styles.css, now
+   rendered as top borders instead of side borders per the 2026-08-01
+   visual-correction pass), the body paragraph, and a "Familiar Stones"
+   label over enlarged labeled specimen images (item.thumbs:
+   [{stoneId,name}]). No old "Home to..." subtitle, no old text-only
+   familiar-names line, no mineral-classification line (removed per the
+   same correction pass — do not reintroduce), no arrows, stems, or
+   connector diagrams. fgFeldsparBranchThumbHtml is also reused as-is by
+   the Sunstone connector below so both share identical specimen-well
+   scale/treatment. ── */
 function fgFeldsparBranchThumbHtml(thumb){
   const c = fgCrystal(thumb.stoneId);
   if(!c) return '';
@@ -999,7 +1003,6 @@ function fgFeldsparBranchPanelHtml(item){
     ${item.body?`<p class="fg-prose">${escapeAttr(item.body)}</p>`:''}
     ${item.familiarStonesLabel?`<div class="fg-feldspar-branch-line-label">${escapeAttr(item.familiarStonesLabel)}</div>`:''}
     ${thumbs?`<div class="fg-feldspar-branch-thumbs">${thumbs}</div>`:''}
-    ${item.mineralNames?`<div class="fg-feldspar-branch-line"><span class="fg-feldspar-branch-line-label">${escapeAttr(item.mineralLabel||'Mineral names underneath')}</span>${escapeAttr(item.mineralNames)}</div>`:''}
   </div>`;
 }
 function familyGuideFeldsparBranchesHtml(guide){
@@ -1014,19 +1017,24 @@ function familyGuideFeldsparBranchesHtml(guide){
 }
 
 /* ── 4. Sunstone Connects the Branches — a compact connector, visibly
-   subordinate to the two branch panels above it, replacing the prior
-   pass's oversized two-image "Sunstone Refuses to Pick a Side" section
-   (no image wells, no placeholder, no pills/badges, no terminology note).
-   A single dual-accent top rule (half warm/half cool, referencing both
-   branches) is the only visual callback — no connector line, no diagram.
-   Renders no image by design; guide.sunstoneConnector carries only a
-   title and one paragraph. ── */
+   subordinate to the two branch panels above it (no oversized image
+   wells, no placeholder, no pills/badges, no terminology note). The
+   dual-accent top rule (half warm/half cool, referencing both branches)
+   is preserved. guide.sunstoneConnector.stoneId (2026-08-01 visual-
+   correction pass) reuses fgFeldsparBranchThumbHtml — the same existing
+   Sunstone roster entry (C-0029) already used by the Meet Eight Feldspar
+   Expressions card above, resolved via the same fgCrystal/
+   firstEncyclopediaPhoto/openDetail path, not a new or substituted image
+   — centered as the sole specimen so Sunstone matches the two branch
+   cards' image scale and label treatment exactly. ── */
 function familyGuideFeldsparSunstoneConnectorHtml(guide){
   const s = guide.sunstoneConnector;
   if(!s) return '';
+  const thumb = s.stoneId ? fgFeldsparBranchThumbHtml({stoneId:s.stoneId, name:s.name}) : '';
   return `<div class="fg-feldspar-sunstone-connector" id="fg-sunstone-connector">
     <h3 class="fg-feldspar-connector-heading">${escapeAttr(s.title||'Sunstone Connects the Branches')}</h3>
     ${s.body?`<p class="fg-fact-body">${escapeAttr(s.body)}</p>`:''}
+    ${thumb?`<div class="fg-feldspar-branch-thumbs fg-feldspar-sunstone-thumbs">${thumb}</div>`:''}
   </div>`;
 }
 
