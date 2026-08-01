@@ -2722,18 +2722,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-feldspar-branch--alkali{border-top-color:#b8874a}
 .fg-feldspar-branch--plagioclase{border-top-color:#5f7f8f}
 .fg-feldspar-branch-panel .fg-branch-title{text-align:left;margin-bottom:0.3rem}
-.fg-feldspar-branch-subtitle{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.02em;color:var(--ink3);margin:0 0 0.8rem}
 .fg-feldspar-branch-line-label{display:block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);margin:0.9rem 0 0.5rem}
-/* Enlarged familiar-stone images (2026-08-01 visual-correction pass:
-   raised from 100px to 150px — the largest shared size that keeps both
-   the two-item Alkali row and the three-item Plagioclase row on one line
-   at the 1100px guide width) with the stone name directly beneath each
-   one. Also reused as-is by the Sunstone connector's single specimen
-   below, so all five branch examples plus Sunstone share one image-well
-   size and internal padding. */
+/* Enlarged familiar-stone images. 2026-08-01 cohesion pass: reduced from
+   150px to 136px — the rendered page (not just CSS arithmetic) showed the
+   reordered three-item Plagioclase row (Labradorite, Spectrolite, Rainbow
+   Moonstone) wrapping to a second line at 150px; 136px is the largest
+   size confirmed to keep it on one row. Also reused as-is by the Sunstone
+   connector's single specimen below, so all five branch examples plus
+   Sunstone still share one image-well size and internal padding. */
 .fg-feldspar-branch-thumbs{display:flex;flex-wrap:wrap;gap:16px;margin:0.5rem 0 0}
-.fg-feldspar-branch-thumb{display:flex;flex-direction:column;align-items:center;gap:8px;width:150px;border:none;background:none;padding:0;cursor:pointer}
-.fg-feldspar-branch-thumb img{width:150px;height:150px;object-fit:contain;border:0.5px solid var(--border);border-radius:10px;background:#FFFFFF;padding:14px;box-sizing:border-box}
+.fg-feldspar-branch-thumb{display:flex;flex-direction:column;align-items:center;gap:8px;width:136px;border:none;background:none;padding:0;cursor:pointer}
+.fg-feldspar-branch-thumb img{width:136px;height:136px;object-fit:contain;border:0.5px solid var(--border);border-radius:10px;background:#FFFFFF;padding:13px;box-sizing:border-box}
 .fg-feldspar-branch-thumb span{font-family:'Jost',sans-serif;font-size:13px;color:var(--ink2);text-align:center;line-height:1.3}
 
 /* Sunstone Connects the Branches (section 4) — a compact connector,
@@ -2748,7 +2747,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    (the shared .fg-feldspar-branch-thumbs is a plain flex-start row,
    correct for the branch panels' 2-3 item rows but not for a single
    centered item here). */
-.fg-feldspar-sunstone-connector{max-width:640px;margin:1.875rem auto 0;padding:1.25rem 1.5rem 1.4rem;text-align:center;border:0.5px solid var(--border);border-radius:12px;border-top-width:3px;border-top-color:#b8874a;background:linear-gradient(90deg,#b8874a 0 50%,#5f7f8f 50% 100%) top/100% 3px no-repeat,var(--white)}
+/* margin-bottom:76px (2026-08-01 cohesion pass) — the Sunstone connector
+   is the conclusion of the branch composition, not a .fg-section, so it
+   never got the shared .fg-section major-section rhythm; without this
+   there was effectively no gap before Glow, Flash, Sparkle. 56px override
+   at the existing max-width:900px breakpoint below. */
+.fg-feldspar-sunstone-connector{max-width:640px;margin:1.875rem auto 76px;padding:1.25rem 1.5rem 1.4rem;text-align:center;border:0.5px solid var(--border);border-radius:12px;border-top-width:3px;border-top-color:#b8874a;background:linear-gradient(90deg,#b8874a 0 50%,#5f7f8f 50% 100%) top/100% 3px no-repeat,var(--white)}
 .fg-feldspar-connector-heading{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;color:var(--ink);margin:0 0 0.5rem}
 .fg-feldspar-sunstone-connector .fg-fact-body{margin:0}
 .fg-feldspar-sunstone-thumbs{justify-content:center;margin-top:1rem}
@@ -2769,7 +2773,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-feldspar-decoder-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
 .fg-feldspar-decoder-grid .fg-relationship-card{flex:0 1 300px;max-width:300px}
 .fg-feldspar-identity-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.02em;color:var(--ink3);margin:0 0 0.5rem}
-.fg-feldspar-best-clue{font-size:14px;font-weight:600;color:var(--ink);margin-top:0.4rem}
+/* Best-clue pill (2026-08-01 cohesion pass) — reuses .fg-feldspar-notice
+   (Glow/Flash/Sparkle's "What to notice" pill) so both share the exact
+   same tinted background/radius/padding/label weight; only the margin
+   direction differs (clue sits after the body paragraph, notice sits
+   before it), overridden here. Replaces the old flat, fully-bold
+   .fg-feldspar-best-clue line. */
+.fg-feldspar-clue-pill{margin-top:0.6rem;margin-bottom:0}
 
 /* Moonstone decoder + Labradorite/Spectrolite/Larvikite (sections 6 and 7)
    — image-well correction (2026-08-01 visual-correction pass). Both reuse
@@ -2788,6 +2798,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 #fg-moonstone-decoder .fg-relationship-media,
 #fg-lsl .fg-relationship-media{aspect-ratio:auto;height:170px;background:#FFFFFF;padding:22px;box-sizing:border-box}
 
+/* Labradorite/Spectrolite/Larvikite (2026-08-01 cohesion pass) — the
+   repetitive identity captions ("A Feldspar mineral" / "Finnish
+   Labradorite" / "A Norwegian Feldspar-rich rock") were removed from the
+   rendering path; the shared .fg-relationship-label's own small default
+   bottom margin (0.35rem) read as too tight once the body paragraph
+   follows it directly, so it's nudged up here — scoped to #fg-lsl only,
+   Quartz's Agate/Chalcedony/Jasper Fit (the shared .fg-relationship-label
+   consumer) is unaffected. */
+#fg-lsl .fg-relationship-label{margin-bottom:0.6rem}
+
 /* Feldspar in Your Collection (section 9, 2026-08-01 visual-correction
    pass) — three equal side-by-side teaching cards, reusing the shared
    .fg-collection-sub panel styling (Calcite's layout reference). This
@@ -2804,6 +2824,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:900px){
   .fg-guide[data-family-slug="feldspar"] .fg-hero{margin-bottom:56px}
   .fg-guide[data-family-slug="feldspar"] .fg-section{margin-bottom:56px}
+  .fg-feldspar-sunstone-connector{margin-bottom:56px}
   .fg-feldspar-decoder-grid .fg-relationship-card{flex:0 1 46%}
 }
 @media(max-width:600px){

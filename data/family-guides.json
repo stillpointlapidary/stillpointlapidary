@@ -1154,8 +1154,8 @@
           "familiarStonesLabel": "Familiar Stones",
           "thumbs": [
             {"stoneId": "C-0028", "name": "Labradorite"},
-            {"stoneId": "C-0030", "name": "Rainbow Moonstone"},
-            {"stoneId": "C-0166", "name": "Spectrolite"}
+            {"stoneId": "C-0166", "name": "Spectrolite"},
+            {"stoneId": "C-0030", "name": "Rainbow Moonstone"}
           ]
         }
       ]
@@ -1211,9 +1211,9 @@
       "title": "Labradorite, Spectrolite & Larvikite",
       "intro": "These three names often appear beside one another because all can show shifting light. Look beneath the flash, though, and they tell three different stories: a Feldspar mineral, a celebrated Finnish form of that mineral, and a Norwegian Feldspar-rich rock.",
       "items": [
-        {"stoneId": "C-0028", "label": "Labradorite", "subtitle": "A Feldspar mineral", "body": "Labradorite is a plagioclase Feldspar known for broad fields of blue, green, gold, orange, or multicolored labradorescence."},
-        {"stoneId": "C-0166", "label": "Spectrolite", "subtitle": "Finnish Labradorite", "body": "Spectrolite is Finnish Labradorite celebrated for especially broad, saturated flashes that may reveal several colors across one polished face."},
-        {"stoneId": "C-0396", "label": "Larvikite", "subtitle": "A Norwegian Feldspar-rich rock", "body": "Larvikite is a Norwegian Feldspar-rich rock rather than a Labradorite variety. Its crystals can produce silvery or blue flashes, but its identity is distinct."}
+        {"stoneId": "C-0028", "label": "Labradorite", "body": "Labradorite is a plagioclase Feldspar known for broad fields of blue, green, gold, orange, or multicolored labradorescence."},
+        {"stoneId": "C-0166", "label": "Spectrolite", "body": "Spectrolite is Finnish Labradorite celebrated for especially broad, saturated flashes that may reveal several colors across one polished face."},
+        {"stoneId": "C-0396", "label": "Larvikite", "body": "Larvikite is a Norwegian Feldspar-rich rock rather than a Labradorite variety. Its crystals can produce silvery or blue flashes, but its identity is distinct."}
       ]
     },
     "collection": {

@@ -1075,7 +1075,22 @@ function familyGuideFeldsparLightHtml(guide){
    Moonstone is the fifth card, not a separate strip; its
    item.identityLabel ("Not Feldspar · Usually Garnierite") renders as a
    plain caption line directly beneath the stone name, styled like any
-   other body text — never as an alarming warning badge. ── */
+   other body text — never as an alarming warning badge. Each card's
+   bestClue string (e.g. "Best clue: A soft internal glow.") is split at
+   its leading label so it can share the exact same restrained pill
+   treatment as "What to notice" in Glow, Flash, Sparkle (2026-08-01
+   cohesion pass) — the label bolded, the rest regular weight, both in one
+   tinted rounded pill (see .fg-feldspar-notice in styles.css, now reused
+   by both components instead of the old flat-bold .fg-feldspar-best-clue
+   line). The stored wording itself is untouched — only how it's split
+   into label/remainder for rendering. ── */
+function fgFeldsparCluePillHtml(clue){
+  if(!clue) return '';
+  const m = /^([^:]+:)\s*(.*)$/.exec(clue);
+  const label = m ? m[1] : 'Best clue:';
+  const rest = m ? m[2] : clue;
+  return `<p class="fg-feldspar-notice fg-feldspar-clue-pill"><span>${escapeAttr(label)}</span> ${escapeAttr(rest)}</p>`;
+}
 function fgFeldsparDecoderCardHtml(item){
   const c = fgCrystal(item.stoneId);
   if(!c) return '';
@@ -1088,7 +1103,7 @@ function fgFeldsparDecoderCardHtml(item){
     <div class="fg-relationship-label">${escapeAttr(item.label||c.n)}</div>
     ${item.identityLabel?`<div class="fg-feldspar-identity-label">${escapeAttr(item.identityLabel)}</div>`:''}
     ${item.body?`<p class="fg-fact-body">${escapeAttr(item.body)}</p>`:''}
-    ${item.bestClue?`<p class="fg-feldspar-best-clue">${escapeAttr(item.bestClue)}</p>`:''}
+    ${fgFeldsparCluePillHtml(item.bestClue)}
   </div>`;
 }
 function familyGuideFeldsparMoonstoneDecoderHtml(guide){
@@ -1115,7 +1130,6 @@ function fgFeldsparLslCardHtml(item){
   return `<div class="fg-relationship-card">
     <button type="button" class="fg-relationship-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
     <div class="fg-relationship-label">${escapeAttr(item.label||c.n)}</div>
-    ${item.subtitle?`<p class="fg-feldspar-branch-subtitle">${escapeAttr(item.subtitle)}</p>`:''}
     ${item.body?`<p class="fg-fact-body">${escapeAttr(item.body)}</p>`:''}
   </div>`;
 }
