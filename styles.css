@@ -2759,11 +2759,19 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* Glow, Flash, Sparkle (section 5) — plain-language word dominant over the
    secondary technical term; "What to notice" now sits above the body
-   paragraph. Reuses .fg-photocard/.fg-photocard-media as its shell. */
+   paragraph. Reuses .fg-photocard/.fg-photocard-media as its shell.
+   2026-08-01 pill-refinement pass: label weight softened from 600 to 500
+   (still distinct from the 400 regular text beside it, no longer
+   dominant); min-height + flex/align-items:center gives all three
+   desktop-row pills one shared rendered height regardless of whether
+   their text wraps to one or two lines, with the text staying vertically
+   centered inside — min-height (not a fixed height) so the pill still
+   grows rather than clipping if it needs more lines at a narrower width. */
 .fg-feldspar-light-word{font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--ink);margin-bottom:0.1rem}
 .fg-feldspar-light-term{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.7rem}
-.fg-feldspar-notice{font-size:13px;color:var(--ink2);background:var(--stone2);border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.7rem}
-.fg-feldspar-notice span{font-weight:600;color:var(--ink)}
+.fg-feldspar-notice{display:flex;align-items:center;font-size:13px;color:var(--ink2);background:var(--stone2);border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.7rem;box-sizing:border-box}
+.fg-feldspar-notice span{font-weight:500;color:var(--ink)}
+#fg-light-moves .fg-feldspar-notice{min-height:54px}
 
 /* Moonstone decoder (section 6) — a single five-card grid: flex-wrap with
    a fixed card basis naturally lays out 3-then-2, and justify-content:
@@ -2773,13 +2781,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-feldspar-decoder-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
 .fg-feldspar-decoder-grid .fg-relationship-card{flex:0 1 300px;max-width:300px}
 .fg-feldspar-identity-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.02em;color:var(--ink3);margin:0 0 0.5rem}
-/* Best-clue pill (2026-08-01 cohesion pass) — reuses .fg-feldspar-notice
-   (Glow/Flash/Sparkle's "What to notice" pill) so both share the exact
-   same tinted background/radius/padding/label weight; only the margin
-   direction differs (clue sits after the body paragraph, notice sits
-   before it), overridden here. Replaces the old flat, fully-bold
-   .fg-feldspar-best-clue line. */
-.fg-feldspar-clue-pill{margin-top:0.6rem;margin-bottom:0}
+/* Best-clue pill — reuses .fg-feldspar-notice (Glow/Flash/Sparkle's "What
+   to notice" pill) so both share the exact same tinted background/
+   radius/padding/label weight. 2026-08-01 pass: the clue now renders
+   before the descriptive paragraph (matching Glow/Flash/Sparkle's own
+   order), so its margin is bottom (space before the paragraph) rather
+   than top — the base .fg-feldspar-notice margin-bottom already provides
+   this, so no margin override is needed here anymore. A single shared
+   min-height across all five decoder cards keeps every clue pill the
+   same rendered height without needing separate per-row rules on a
+   flex-wrap layout (explicitly acceptable per the brief when it avoids
+   excessive empty space — decoder cards are narrower than the light
+   cards, so their own min-height is set independently). */
+.fg-feldspar-clue-pill{margin-top:0}
+#fg-moonstone-decoder .fg-feldspar-clue-pill{min-height:54px}
 
 /* Moonstone decoder + Labradorite/Spectrolite/Larvikite (sections 6 and 7)
    — image-well correction (2026-08-01 visual-correction pass). Both reuse

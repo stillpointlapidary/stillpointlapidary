@@ -1102,8 +1102,8 @@ function fgFeldsparDecoderCardHtml(item){
     <button type="button" class="fg-relationship-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
     <div class="fg-relationship-label">${escapeAttr(item.label||c.n)}</div>
     ${item.identityLabel?`<div class="fg-feldspar-identity-label">${escapeAttr(item.identityLabel)}</div>`:''}
-    ${item.body?`<p class="fg-fact-body">${escapeAttr(item.body)}</p>`:''}
     ${fgFeldsparCluePillHtml(item.bestClue)}
+    ${item.body?`<p class="fg-fact-body">${escapeAttr(item.body)}</p>`:''}
   </div>`;
 }
 function familyGuideFeldsparMoonstoneDecoderHtml(guide){

@@ -1201,10 +1201,10 @@
       "intro": "Moonstone names can describe different colors, optical effects, and even different mineral identities. The quickest way to separate them is to notice what the light and body color are doing.",
       "items": [
         {"stoneId": "C-0162", "label": "Moonstone", "body": "Classic Moonstone is known for adularescence, the soft light that drifts beneath the surface.", "bestClue": "Best clue: A soft internal glow."},
-        {"stoneId": "C-0030", "label": "Rainbow Moonstone", "body": "Rainbow Moonstone is usually white Labradorite, with bright blue or multicolored flash through a pale body.", "bestClue": "Best clue: Labradorite-style flash through white Feldspar."},
-        {"stoneId": "C-0395", "label": "Peach Moonstone", "body": "Warm blush and apricot tones pair with a gentle Moonstone sheen.", "bestClue": "Best clue: Warm body color with soft glow or sheen."},
+        {"stoneId": "C-0030", "label": "Rainbow Moonstone", "body": "Rainbow Moonstone is usually white Labradorite, with bright blue or multicolored flash through a pale body.", "bestClue": "Best clue: Bright flash through a pale body."},
+        {"stoneId": "C-0395", "label": "Peach Moonstone", "body": "Warm blush and apricot tones pair with a gentle Moonstone sheen.", "bestClue": "Best clue: Warm color with a soft glow."},
         {"stoneId": "C-0159", "label": "Black Moonstone", "body": "A darker body carries pale streaks, silver movement, or subtle flash.", "bestClue": "Best clue: Dark color with pale optical movement."},
-        {"stoneId": "C-0399", "label": "Green Moonstone", "identityLabel": "Not Feldspar · Usually Garnierite", "body": "Still Point's Green Moonstone is Garnierite, a nickel-bearing silicate material sold under a Moonstone market name.", "bestClue": "Best clue: Green body color without Moonstone's classic internal glow."}
+        {"stoneId": "C-0399", "label": "Green Moonstone", "identityLabel": "Not Feldspar · Usually Garnierite", "body": "Still Point's Green Moonstone is Garnierite, a nickel-bearing silicate material sold under a Moonstone market name.", "bestClue": "Best clue: Green color without Moonstone's inner glow."}
       ]
     },
     "lsl": {
