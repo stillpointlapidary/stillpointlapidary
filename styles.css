@@ -2662,6 +2662,43 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-guide[data-family-slug="calcite"] .fg-hero-media{max-height:260px}
 }
 
+/* ── Feldspar normalization pass (2026-07-31), approved against the
+   Copper/Calcite normalization pattern — same technique, scoped only to
+   .fg-guide[data-family-slug="feldspar"], so no shared unscoped default
+   and no other guide's rendering changes. Feldspar's own markup, section
+   order, copy, images, and image-well treatment are untouched. ── */
+.fg-guide[data-family-slug="feldspar"] .fg-h2{text-align:left}
+.fg-guide[data-family-slug="feldspar"] .fg-lead,
+.fg-guide[data-family-slug="feldspar"] .fg-lead--wide{text-align:left;max-width:none;margin-left:0;margin-right:0}
+/* Heading -> introduction/banner or immediate first content: 18px. */
+.fg-guide[data-family-slug="feldspar"] .fg-h2 + *{margin-top:1.125rem}
+/* Introduction/banner -> first grid, card group, or teaching module: 30px.
+   Only the placeholder-banner's own bottom margin is raised (single
+   spacing owner); the module beneath it keeps margin-top:0, so this does
+   not stack on top of another gap. Sections with no banner (Expressions)
+   are already covered by the .fg-h2 + * rule above, since the module
+   itself is then the heading's immediate next element. */
+.fg-guide[data-family-slug="feldspar"] .fg-placeholder-banner{margin-bottom:30px}
+/* Major-section rhythm — 76px desktop / 56px at <=900px (mobile rule sits
+   in the existing max-width:900px breakpoint below), including the hero
+   -> Expressions transition, and the Collection -> closing transition kept
+   at its own restrained ~68px via the same :has() margin-collapse
+   technique already used for Copper/Calcite. Not a new shared default —
+   scoped to Feldspar only. */
+.fg-guide[data-family-slug="feldspar"] .fg-hero{margin-bottom:76px}
+.fg-guide[data-family-slug="feldspar"] .fg-section{margin-bottom:76px}
+.fg-guide[data-family-slug="feldspar"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
+/* Closing return navigation — same compact neutral pill shape already
+   established for Copper/Calcite's Return control, applied here as a
+   scoped override of the shared .fg-closing-btn. */
+.fg-guide[data-family-slug="feldspar"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
+.fg-guide[data-family-slug="feldspar"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+
+@media(max-width:900px){
+  .fg-guide[data-family-slug="feldspar"] .fg-hero{margin-bottom:56px}
+  .fg-guide[data-family-slug="feldspar"] .fg-section{margin-bottom:56px}
+}
+
 @media(prefers-reduced-motion:reduce){
   .fg-guide *{scroll-behavior:auto}
 }
