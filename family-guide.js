@@ -136,13 +136,15 @@ function renderFamilyGuideView(rawSlug, opts){
 // Instead: switchTab()/switchTabByName() in app.js reset the footer link
 // (id="footerCreditsLink") to its normal "credits.html" destination at
 // the start of every tab switch; this function then runs afterward, once
-// per family-guide render, and only overrides it to the anchored
-// "credits.html#copper-minerals" destination when the active guide is
-// Copper. Every other guide/tab keeps the default reset value untouched.
+// per family-guide render, and only overrides it to an anchored
+// "credits.html#<slug>" destination for guides listed in anchoredSlugs
+// below (Copper, Calcite). Every other guide/tab keeps the default reset
+// value untouched.
 function fgSetFooterCreditsLink(slug){
   const link = document.getElementById('footerCreditsLink');
   if(!link) return;
-  link.setAttribute('href', slug==='copper' ? 'credits.html#copper-minerals' : 'credits.html');
+  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite'};
+  link.setAttribute('href', anchoredSlugs[slug] || 'credits.html');
 }
 
 function scrollToFamilyGuideHash(){
@@ -210,7 +212,12 @@ function fgCrystal(stoneId){
    own representative spread; Calcite's original hardcoded four-ID fallback is
    kept below so its existing output is unaffected (2026-07-22 generalization
    for the Quartz Family Guide's first pass). */
-function fgHeroMediaHtml(guide){
+// ── Image-resolution logic shared by fgHeroMediaHtml (below) and the
+// Calcite-only hero recomposition (familyGuideCalciteHeroHtml, added in the
+// Calcite cleanup pass) — extracted so the second consumer doesn't fork or
+// re-derive this fallback chain. Returns just the <img> markup array;
+// fgHeroMediaHtml's own output is unchanged by this extraction. ──
+function fgHeroMediaImgs(guide){
   let ids = (guide.hero && guide.hero.mediaStoneIds)
     || (guide.slug==='calcite' ? ['C-0007','C-0016','C-0014','C-0015'] : []); // legacy Calcite spread: Blue, Orange, Mangano, Optical
   // Dynamic fallback (2026-07-23, added for Agate) — used only when a guide
@@ -233,6 +240,10 @@ function fgHeroMediaHtml(guide){
   if(!imgs.length && guide.hero && guide.hero.image){
     imgs.push(`<img src="${escapeAttr(SUPABASE_ENC+guide.hero.image)}" alt="${escapeAttr(guide.displayName||guide.slug)}">`);
   }
+  return imgs;
+}
+function fgHeroMediaHtml(guide){
+  const imgs = fgHeroMediaImgs(guide);
   // 2026-07-23 (added for Chalcedony, whose roster has only two members):
   // a plain 2x2 grid leaves an empty bottom row when there are only two
   // images. This modifier switches to a single row instead; it's applied
@@ -277,6 +288,73 @@ function familyGuideHeroHtml(guide){
       ${introParas.map(p=>`<p class="fg-hero-intro-text">${escapeAttr(p)}</p>`).join('')}
     </div>`:''}
   </section>`;
+}
+
+/* ── Calcite-only hero recomposition (final cleanup pass, scoped to
+   Calcite per Christie's review) — a single top row: copy column left
+   (eyebrow, title, subtitle, opening paragraph, then the reflective
+   prompt "Calcite asks: / What wants to move?" directly beneath it) and
+   the collage right, both top-aligned. The prompt previously lived in its
+   own full-width row below the top row (with, at an earlier point, a
+   divider above it); both the separate row and the divider are gone —
+   it's now just the last block in the copy column, separated from the
+   opening paragraph by ordinary margin spacing (see styles.css). The hero
+   box ends right after it. The geological overview paragraph that used to
+   render inside the hero as .fg-hero-intro still renders unboxed, outside
+   the hero, via familyGuideCalciteBridgeHtml below. familyGuideHeroHtml
+   above centers the media column vertically and has no equivalent
+   top-aligned/compact layout, so this stays a dedicated function called
+   only from Calcite's own assembly, leaving familyGuideHeroHtml
+   completely untouched for every other guide. Reuses fgHeroMediaImgs()
+   for the identical image-resolution logic (including Calcite's legacy
+   four-ID fallback); only the surrounding markup differs from
+   fgHeroMediaHtml — the "Family photograph — coming soon" label moves out
+   of the image overlay to a caption below the collage (see
+   .fg-hero-media-caption in styles.css). */
+function familyGuideCalciteHeroHtml(guide){
+  const hero = guide.hero||{};
+  const imgs = fgHeroMediaImgs(guide);
+  const gridModClass = imgs.length===2 ? ' fg-hero-media-grid--2' : (imgs.length===3 ? ' fg-hero-media-grid--3' : '');
+  return `<section class="fg-hero" id="fg-hero">
+    <div class="fg-hero-top">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
+        ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+        ${hero.emphasisLine?`<p class="fg-hero-emphasis">${escapeAttr(hero.emphasisLine)}</p>`:''}
+        ${hero.question?`<div class="fg-hero-prompt">
+          ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+          <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+          ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
+        </div>`:''}
+      </div>
+      <div class="fg-hero-media-col">
+        <div class="fg-hero-media">
+          <div class="fg-hero-media-grid${gridModClass}">${imgs.join('')}</div>
+        </div>
+        <div class="fg-hero-media-caption">Family photograph — coming soon</div>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ── Editorial bridge paragraph (cleanup pass, Calcite-only) — the
+   geological overview paragraph ("Calcite is one of Earth's most common
+   minerals...") formerly rendered inside the hero box as .fg-hero-intro;
+   Christie's review asked for it to sit unboxed, in the shared primary
+   content frame, between the hero and "Meet Eight Common Calcite
+   Varieties". Reuses the existing .fg-hero-intro-text paragraph styling
+   (left-aligned serif) so no new typography is introduced — only the
+   wrapping .fg-calcite-bridge container (styles.css) controls its
+   spacing above/below. */
+function familyGuideCalciteBridgeHtml(guide){
+  const ov = guide.overview||{};
+  const introParas = Array.isArray(ov.paragraphs) ? ov.paragraphs : (ov.paragraph ? [ov.paragraph] : []);
+  if(!introParas.length) return '';
+  return `<div class="fg-calcite-bridge">
+    ${introParas.map(p=>`<p class="fg-hero-intro-text">${escapeAttr(p)}</p>`).join('')}
+  </div>`;
 }
 
 /* ── Uniform stone card — shared by Section 3 (eight common varieties) and
@@ -477,7 +555,7 @@ function familyGuideRecognitionHtml(guide){
   const cards = items.map(fgPhotoCardHtml).join('');
   return `<section class="fg-section" id="fg-recognize">
     <h2 class="fg-h2">How to Recognize Calcite</h2>
-    <p class="fg-lead">Look for these hallmarks that connect the family.</p>
+    <p class="fg-lead">At first glance, Calcite’s colors and forms can make its varieties seem unrelated. Look closer and the family resemblance begins to appear in its glassy luster, distinctive cleavage, shifting translucency, and remarkable optical effects.</p>
     <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
   </section>`;
 }
@@ -488,7 +566,7 @@ function familyGuideShapesHtml(guide){
   const cards = items.map(fgPhotoCardHtml).join('');
   return `<section class="fg-section" id="fg-shapes">
     <h2 class="fg-h2">Shapes Calcite Takes</h2>
-    <p class="fg-lead">These are the most common forms you’ll see.</p>
+    <p class="fg-lead">Calcite is a mineral of many silhouettes. It may rise in pointed crystals, split into slanted blocks, or gather into dense, banded masses, each form offering another clue to how it grew.</p>
     <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
   </section>`;
 }
@@ -2060,6 +2138,7 @@ function familyGuideCopperCareHtml(guide){
   </div>`).join('');
   return `<section class="fg-section" id="fg-copper-care">
     <h2 class="fg-h2">${escapeAttr(c.title||'Copper Minerals in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-prose">${escapeAttr(c.intro)}</p>`:''}
     <div class="fg-copper-care-grid">${panels}</div>
   </section>`;
 }
@@ -2181,16 +2260,27 @@ function familyGuideHtml(guide){
   if(guide.slug==='obsidian') return familyGuideObsidianHtml(guide);
   if(guide.slug==='copper') return familyGuideCopperHtml(guide);
   if(guide.slug!=='calcite') return familyGuideGenericHtml(guide);
+  // Note (2026-07-31, Calcite normalization pass): the in-page "Image
+  // credits" <details> disclosure (familyGuideImageCreditsHtml) is
+  // deliberately no longer rendered below — Photo Credits routing moved to
+  // the shared footer link -> credits.html#calcite (see
+  // fgSetFooterCreditsLink above), per Christie's approved pass. The
+  // imageCredits records themselves are untouched in data/family-guides.json
+  // and still power that central credits.html page.
+  // Note (cleanup pass): uses familyGuideCalciteHeroHtml, not the shared
+  // familyGuideHeroHtml — see that function's comment for why. The
+  // unboxed geological paragraph (familyGuideCalciteBridgeHtml) now sits
+  // between the hero and the varieties section, outside the hero box.
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
-    ${familyGuideHeroHtml(guide)}
+    ${familyGuideCalciteHeroHtml(guide)}
+    ${familyGuideCalciteBridgeHtml(guide)}
     ${familyGuideVarietiesHtml(guide)}
     ${familyGuideRecognitionHtml(guide)}
     ${familyGuideShapesHtml(guide)}
     ${familyGuideExtendedFamilyHtml(guide)}
     ${familyGuideCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
-    ${familyGuideImageCreditsHtml(guide)}
   </div>`;
 }
 

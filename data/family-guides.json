@@ -5,6 +5,7 @@
     "encyclopediaFilterValue": "Calcite",
     "editorialStatusNote": "Editorial status: Complete first-page draft for Christie’s holistic review. The metaphysical sections synthesize the approved online source set currently available. Identity-sensitive claims and final energetic distinctions should still receive the normal book-source and technical audit before publication.",
     "closingCallout": "Calcite helps life begin moving again.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
     "hero": {
       "image": "blue-calcite.webp",
       "eyebrow": "FAMILY GUIDE",
@@ -45,7 +46,7 @@
       }
     },
     "findYourCalcite": {
-      "intro": "Start with the shift you want to make.",
+      "intro": "Calcite can shift from quiet blue and tender pink to vivid orange, clear optical forms, and richly colored collector pieces. Meet eight familiar varieties, each offering a different way to see, collect, and connect with this remarkably expressive mineral family.",
       "intro2": "Color is the easiest difference to see, but it is not the most useful place to stop. Each Calcite below gives the family’s central energy a distinct direction.",
       "groupLabel": "Calcite varieties and forms",
       "members": [
@@ -132,7 +133,7 @@
       ]
     },
     "tradeMaterials": {
-      "sectionIntro": "Some materials sold alongside Calcite are not simple Calcite varieties. They may combine Calcite with other minerals, use trade names for banded material, or belong to mixed materials in which Calcite is only part of the story.",
+      "sectionIntro": "Calcite’s story does not end with simple varieties. Some familiar trade names pair it with Aragonite or other minerals, while others belong to mixed materials in which Calcite is only part of what you see.",
       "intro": "These stones remain part of the same exploration experience because Calcite is central to their identity, composition, or market history. Their badges explain how they belong rather than dividing the page into “real” and “questionable” relatives.",
       "members": [
         {
@@ -501,7 +502,7 @@
     },
     "collection": {
       "title": "Calcite in Your Collection",
-      "intro": "Soft enough to need thoughtful care, varied enough to keep surprising you.",
+      "intro": "Calcite invites close looking and gentle handling. Its varieties may appear dramatically different, but they share a softness that rewards thoughtful care and a few useful checks.",
       "careForIt": {
         "intro": "Calcite is relatively soft and can scratch, chip, or lose its polish more easily than harder minerals.",
         "bullets": [
@@ -2026,6 +2027,7 @@
     },
     "copperCare": {
       "title": "Copper Minerals in Your Collection",
+      "intro": "Copper minerals bring vivid color and unmistakable presence to a collection. Thoughtful display, gentle handling, and a little attention to their natural sensitivities help that character remain at its best.",
       "panels": [
         {
           "title": "Handle Gently",

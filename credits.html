@@ -137,10 +137,13 @@ async function pcLoadFamilyGuideSection(){
     // Credits link (credits.html#copper-minerals) can target it directly.
     // pcOpenFromHash() below already force-opens the closest details.pc-
     // section and scrolls/highlights any matched id, so no new anchor
-    // logic is needed here — just the id itself. No other guide's
-    // subgroup gets an id; this is a Copper-only, minimally scoped
-    // addition to the existing pattern.
-    const idAttr = g.slug==='copper' ? ' id="copper-minerals"' : '';
+    // logic is needed here — just the id itself. Calcite (2026-07-31) gets
+    // the same treatment with a plain "calcite" id, now that its own guide
+    // page routes its footer Photo Credits link to credits.html#calcite
+    // instead of a redundant in-page disclosure. Every other guide's
+    // subgroup still has no id.
+    const stableIds = {copper:'copper-minerals', calcite:'calcite'};
+    const idAttr = stableIds[g.slug] ? ` id="${pcEscapeHtml(stableIds[g.slug])}"` : '';
     return `<div class="pc-subgroup"${idAttr}>
       <h3 class="pc-subgroup-title">${pcEscapeHtml(g.displayName||g.slug)} <a class="pc-subgroup-link" href="encyclopedia.html?tab=family&amp;family=${pcEscapeHtml(g.slug)}">View guide</a></h3>
       <div class="pc-item-grid">${rows}</div>
@@ -152,18 +155,32 @@ async function pcLoadFamilyGuideSection(){
   </details>`;
 }
 
-/* Beyond the Basics and Other Educational Images: no data source currently
-   exists in this repo (confirmed by inspection). Omitted entirely per the
-   "no empty groups" requirement — add loaders here only once real records
-   exist. */
+async function pcLoadBeyondBasicsSection(){
+  let records = [];
+  try{
+    const res = await fetch('data/beyond-the-basics-photo-credits.json');
+    if(res.ok) records = await res.json();
+  }catch{ records = []; }
+  const active = (records||[]).filter(r=>r && r.public===true)
+    .sort((a,b)=>String(a.title||'').localeCompare(String(b.title||'')));
+  if(!active.length) return '';
+  const items = active.map((r,i)=>pcCreditItemHtml(
+    `credit-btb-${pcEscapeHtml(r.articleSlug||'')}-${i}`, r.title, r.creator, r.source, r.license, r.licenseUrl, r.modified
+  )).join('');
+  return `<details class="pc-section" id="pc-section-beyond-the-basics">
+    <summary class="pc-section-summary">Beyond the Basics <span class="pc-section-count">(${active.length})</span></summary>
+    <div class="pc-item-grid">${items}</div>
+  </details>`;
+}
 
 async function pcRender(){
   const container = document.getElementById('pc-sections');
-  const [encHtml, fgHtml] = await Promise.all([
+  const [encHtml, fgHtml, btbHtml] = await Promise.all([
     pcLoadEncyclopediaSection(),
     pcLoadFamilyGuideSection(),
+    pcLoadBeyondBasicsSection(),
   ]);
-  const sections = [encHtml, fgHtml].filter(Boolean).join('');
+  const sections = [encHtml, fgHtml, btbHtml].filter(Boolean).join('');
   container.innerHTML = sections || '<p class="pc-empty">No active photo credits yet.</p>';
   pcOpenFromHash();
 }
