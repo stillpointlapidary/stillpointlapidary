@@ -2457,6 +2457,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="copper"] .fg-prose + .fg-card-grid,
 .fg-guide[data-family-slug="copper"] .fg-prose + .fg-photo-grid,
 .fg-guide[data-family-slug="copper"] .fg-prose + .fg-copper-care-grid{margin-top:1.75rem}
+/* "More Expressions of Copper" — equal card height on desktop (Christie's
+   review: Turquoise/Ajoite/Plancheite read as three different heights,
+   since their body copy runs to different lengths). align-items:stretch
+   alone did not fix it — .fg-mineralcard's own base height:100% resolves
+   to a definite size against this row's single-line cross size once one
+   card (Turquoise, two paragraphs) is tallest, which locks every card to
+   its own content height instead of letting stretch equalize them.
+   height:auto (removing that definite size) + align-self:stretch lets
+   the flex row's normal stretch behavior take over, so every card grows
+   to match the naturally tallest one — no fixed pixel height anywhere.
+   Scoped to #fg-other-copper-minerals only; "Meet Copper Family" above
+   keeps its current .fg-mineralcard height:100% behavior unchanged. Image
+   wells, headings, Quick View, padding, and card widths (flex-basis from
+   the shared .fg-card-grid--garnet-roster .fg-mineralcard rule) are
+   untouched — only the outer card's cross-axis sizing changes. Cards
+   still stack to their own natural height when the row wraps to a single
+   column (existing mobile/tablet flex-direction:column behavior). */
+#fg-other-copper-minerals .fg-card-grid--garnet-roster{align-items:stretch}
+#fg-other-copper-minerals .fg-mineralcard{height:auto;align-self:stretch}
 /* Hero-to-first-section transition — per EDITORIAL-PAGE-VISUAL-STANDARD.md
    §8.1, this is ordinary major-section separation (76px desktop / 56px at
    <=900px, see the mobile override below), not a reduced "connective"
