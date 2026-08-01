@@ -1107,7 +1107,7 @@
     "slug": "feldspar",
     "displayName": "Feldspar",
     "encyclopediaFilterValue": "Feldspar",
-    "editorialStatusNote": "Controlled rebuild (2026-08-01) implementing feldspar-family-guide-final-copy-and-visual-plan.md verbatim (editorial approval: Christie; independent audit: Claude Chat, PASS WITH MINOR NOTES), on the clean baseline at commit 0fbae8f — a separate uncommitted 2026-08-01 redesign pass found in the working tree ahead of this rebuild was stashed, not merged, per explicit instruction. All eight Meet Eight Feldspar Expressions roster IDs were verified live against Supabase stones in the prior 2026-07-23 pass and re-used unchanged here in the brief's approved order: Moonstone C-0162, Peach Moonstone C-0395, Black Moonstone C-0159, Rainbow Moonstone C-0030, Labradorite C-0028, Spectrolite C-0166, Sunstone C-0029, Amazonite C-0025. Larvikite (C-0396, family 'Feldspar-rich Rocks') and Green Moonstone (C-0399, species Garnierite, family 'Nickel-bearing Silicates') also carry over from that same verified pass. Every section below now carries the brief's approved verbatim public copy — no 'Editorial copy pending' placeholders remain. The Sunstone comparison's right-hand image well is an intentional, brief-mandated placeholder (fine-shimmer photo not yet supplied by Christie), not a missing-copy placeholder. No Stone IDs, canonical names, or image paths were invented or inferred from filenames; all three educational photos (AdulaireSuisse2.webp, Labradorite in two samples showing labradorescence.webp, Oligoclase-Sunstone from India2.webp) are the same already-approved, already-credited local assets carried over unchanged from the prior pass (see imageCredits below). No dedicated Feldspar footer Photo Credits anchor exists yet in family-guide.js's fgSetFooterCreditsLink() anchoredSlugs map — footer Photo Credits falls back to the default credits.html destination, which still lists this guide's imageCredits generically; flagged as an open item per the brief rather than inventing an anchor.",
+    "editorialStatusNote": "Correction pass (2026-08-01, second same-day pass) applied on top of the prior controlled rebuild (commit 6496142), per a follow-up brief that explicitly supersedes feldspar-family-guide-final-copy-and-visual-plan.md wherever the two differ. Changes this pass: bridge deleted (no replacement transition); hero prompt restructured to span the full hero width below the two-column row; Meet Eight Feldspar Expressions given shorter one-sentence-per-stone copy; branch heading changed from 'Potassium Feldspar' to 'Alkali Feldspar' (internal accent key renamed potassium->alkali, same warm color, no visual change) with familiar-stone images enlarged and labeled; the oversized two-image Sunstone comparison section replaced with a compact single-paragraph connector (no image, no placeholder); Glow/Flash/Sparkle re-ordered ('What to notice' above the body paragraph in each card) with updated copy and its trailing closing sentence removed; Moonstone decoder rebuilt as a single five-card 3-2 grid with Green Moonstone as the fifth card (identity label 'Not Feldspar · Usually Garnierite', not a warning badge) — the separate Green Moonstone horizontal strip is gone; Labradorite/Spectrolite/Larvikite given updated body copy with its bottom comparison-line strip removed; closing box treatment removed in favor of a bare italic line + compact pill, matching Calcite/Copper. All eight roster IDs, images, and Stone IDs are unchanged from the prior verified pass. The 'Feldspar in Your Collection' section is UNCHANGED this pass and remains the three care-oriented cards (Display It Where the Light Can Find It / Protect It / Learn the Name) — this brief's replacement three teaching cards ('Two Branches' / 'What Moves the Light' / 'Recognizing Feldspar') do not exist anywhere in this data file or in family-guide.js, so per the brief's own stop condition for that section, no swap was made; flagged for Christie to supply the actual approved card copy or confirm the current cards should stay. No dedicated Feldspar footer Photo Credits anchor exists yet in family-guide.js's fgSetFooterCreditsLink() anchoredSlugs map (unchanged from the prior pass) — footer Photo Credits still falls back to the default credits.html destination, which lists this guide's imageCredits generically.",
     "closingCallout": "Feldspar reminds us that perspective can reveal what structure keeps hidden.",
     "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
     "hero": {
@@ -1119,143 +1119,103 @@
       "promptLeadIn": "Feldspar asks:",
       "question": "What changes when you look from another angle?"
     },
-    "bridge": {
-      "paragraphs": [
-        "Moonstone, Labradorite, Sunstone, Amazonite, and Spectrolite may look as though they come from entirely different worlds. They are all Feldspar.",
-        "The family has two main branches, and that simple split helps explain why some members glow softly, some flash with color, and others sparkle or stand out through body color alone."
-      ]
-    },
     "expressions": {
       "title": "Meet Eight Feldspar Expressions",
-      "intro": "Feldspar does not have one signature appearance. It can be pale and luminous, dark and electric, peach-toned, blue-green, or filled with glittering reflections. These eight stones show how many different faces one mineral family can wear.",
+      "intro": "Feldspar can glow, flash, sparkle, or make its impression through color alone. These eight stones reveal how varied one mineral family can be.",
       "members": [
-        {"stoneId": "C-0162", "paragraphs": ["A soft glow seems to drift beneath Moonstone's surface as the stone moves. This floating light, called adularescence, gives Moonstone its quiet, unmistakable presence."]},
-        {"stoneId": "C-0395", "paragraphs": ["Peach Moonstone brings blush, apricot, and warm peach tones to the Moonstone palette. Its soft color and gentle sheen give it an especially warm, luminous presence."]},
-        {"stoneId": "C-0159", "paragraphs": ["Black Moonstone carries pale streaks, silver movement, or subtle flash through a darker body. Its shadowed appearance gives it a striking place among the Moonstone names."]},
-        {"stoneId": "C-0030", "paragraphs": ["Rainbow Moonstone is the familiar market name for white Labradorite, not simply a rainbow-colored version of classic Moonstone. Its pale body and bright flash make it a natural bridge from the softer Moonstones into Feldspar's more dramatic light displays."]},
-        {"stoneId": "C-0028", "paragraphs": ["Labradorite can look quiet until the angle changes. Then blue, green, gold, orange, or violet light may sweep across it in broad, directional flashes."]},
-        {"stoneId": "C-0166", "paragraphs": ["Spectrolite is vivid Finnish Labradorite rather than a separate mineral species. It is especially prized for broad, saturated flashes that may cross several colors within one polished face."]},
-        {"stoneId": "C-0029", "paragraphs": ["Sunstone catches light in bright reflective sparks. Some pieces shimmer with countless fine points, while others flash from larger coppery or reddish plates."]},
-        {"stoneId": "C-0025", "paragraphs": ["Amazonite does not wait for the light to perform. Its vivid blue-green color and pale streaking make it one of Feldspar's most immediately recognizable faces."]}
+        {"stoneId": "C-0162", "paragraphs": ["A soft, floating glow moves beneath the surface. This effect is called adularescence."]},
+        {"stoneId": "C-0395", "paragraphs": ["Warm blush and apricot tones pair with a soft Moonstone sheen."]},
+        {"stoneId": "C-0159", "paragraphs": ["A dark body carries pale streaks, silvery movement, or subtle flash."]},
+        {"stoneId": "C-0030", "paragraphs": ["White Labradorite sold under a Moonstone name, with bright blue or multicolored flash."]},
+        {"stoneId": "C-0028", "paragraphs": ["Broad flashes of blue, green, gold, orange, or violet appear as the angle changes."]},
+        {"stoneId": "C-0166", "paragraphs": ["Finnish Labradorite prized for broad, saturated flashes across several colors."]},
+        {"stoneId": "C-0029", "paragraphs": ["Reflective inclusions create fine glitter, scattered sparks, or larger coppery flashes."]},
+        {"stoneId": "C-0025", "paragraphs": ["Blue-green color and pale streaking give this Feldspar its unmistakable look."]}
       ]
     },
     "branches": {
       "title": "One Family, Two Great Branches",
-      "intro": "Think of Feldspar as one large family with two main sides. They are closely related, but their chemistry develops along different paths. That helps explain why one side gives us Moonstone and Amazonite, while the other gives us Labradorite, Rainbow Moonstone, and Spectrolite.",
-      "supportingLine": "The branch names are useful. The stones are the real story.",
+      "intro": "Feldspar has two main branches. Their chemistry follows different paths, helping explain why Moonstone and Amazonite look so different from Labradorite, Rainbow Moonstone, and Spectrolite.",
       "items": [
         {
-          "title": "Potassium Feldspar",
-          "accent": "potassium",
-          "subtitle": "Home to Moonstone and Amazonite",
-          "body": "This side of the family includes stones known for very different kinds of beauty. Moonstone is prized for floating light. Amazonite makes its impression through strong blue-green color.",
-          "familiarNamesLabel": "Familiar names",
-          "familiarNames": "Moonstone · Amazonite",
-          "mineralNamesLabel": "The mineral names underneath",
-          "mineralNames": "Orthoclase · Microcline · Sanidine",
-          "thumbStoneIds": ["C-0162", "C-0025"]
+          "title": "Alkali Feldspar",
+          "accent": "alkali",
+          "body": "This branch includes Moonstone's floating light and Amazonite's vivid blue-green color.",
+          "familiarStonesLabel": "Familiar Stones",
+          "thumbs": [
+            {"stoneId": "C-0162", "name": "Moonstone"},
+            {"stoneId": "C-0025", "name": "Amazonite"}
+          ],
+          "mineralLabel": "Mineral names underneath",
+          "mineralNames": "Orthoclase · Microcline · Sanidine"
         },
         {
           "title": "Plagioclase Feldspar",
           "accent": "plagioclase",
-          "subtitle": "Home to Labradorite, Rainbow Moonstone, and Spectrolite",
-          "body": "This side includes some of Feldspar's most dramatic displays. Labradorite and Spectrolite flash in broad fields of color, while Rainbow Moonstone brings that same family of light through a pale body.",
-          "familiarNamesLabel": "Familiar names",
-          "familiarNames": "Labradorite · Rainbow Moonstone · Spectrolite",
-          "mineralNamesLabel": "The mineral range underneath",
-          "mineralNames": "Albite to Anorthite series",
-          "thumbStoneIds": ["C-0028", "C-0030", "C-0166"]
+          "body": "This branch includes Labradorite, Rainbow Moonstone, and Spectrolite, with light that can sweep across dark or pale bodies.",
+          "familiarStonesLabel": "Familiar Stones",
+          "thumbs": [
+            {"stoneId": "C-0028", "name": "Labradorite"},
+            {"stoneId": "C-0030", "name": "Rainbow Moonstone"},
+            {"stoneId": "C-0166", "name": "Spectrolite"}
+          ],
+          "mineralLabel": "Mineral range underneath",
+          "mineralNames": "Albite to Anorthite series"
         }
       ]
     },
-    "sunstoneCompare": {
-      "title": "Sunstone Refuses to Pick a Side",
-      "paragraphs": [
-        "Sunstone is the family member that makes a tidy chart more interesting.",
-        "The name can be used for Sunstone from both major Feldspar branches. Some is potassium feldspar. Some belongs to the plagioclase series. What connects them is not one exact composition, but the reflective effect that gives the stone its sunlit name.",
-        "Sunstone does not have only one style of sparkle, either."
-      ],
-      "occursLabels": ["May occur in: Potassium Feldspar", "May occur in: Plagioclase Feldspar"],
-      "left": {
-        "caption": "Look for larger reflective plates",
-        "body": "In some pieces, distinct coppery or reddish inclusions catch the light one area at a time. The effect can look bold, patchy, and almost ember-like.",
-        "image": "Oligoclase-Sunstone from India2.webp",
-        "alt": "Tumble-polished Sunstone, a variety of Oligoclase from India, showing bright aventurescent sparkle"
-      },
-      "right": {
-        "caption": "Look for fine aventurescent shimmer",
-        "body": "In others, smaller reflective inclusions create a more even field of glitter. The surface seems to shimmer with countless tiny sparks.",
-        "placeholderText": "Fine-shimmer Sunstone photo coming soon"
-      },
-      "boldLine": "Both are Sunstone. The light simply tells the story differently.",
-      "closingParagraph": "Different feldspar hosts, inclusion materials, sizes, and concentrations can change how the light appears. That variation is part of what makes Sunstone so rewarding to compare.",
-      "terminologyNote": "Aventurescence is the gemological name for this reflective sparkle. Sunstone collectors may also call it schiller."
+    "sunstoneConnector": {
+      "title": "Sunstone Connects the Branches",
+      "body": "Sunstone may form in Alkali Feldspar or Plagioclase. Its name follows the reflective effect, not one exact composition. Inclusions create the bright sparkle called aventurescence, often known as schiller in Sunstone."
     },
     "lightMoves": {
-      "title": "Three Ways Feldspar Plays With Light",
-      "intro": "Feldspar's moving light does not always behave the same way. In Moonstone it glows. In Labradorite it flashes. In Sunstone it sparkles. Once you know what to watch for, the differences become easy to see.",
+      "title": "Glow, Flash, Sparkle",
+      "intro": "Feldspar's moving light does not always behave the same way. Moonstone glows, Labradorite flashes, and Sunstone sparkles.",
       "items": [
         {
           "plainWord": "Glow",
           "technicalTerm": "Adularescence",
-          "body": "Moonstone's light appears soft, misty, and suspended beneath the surface. As the stone turns, the glow seems to billow or roll through it rather than breaking into separate flashes.",
           "whatToNotice": "A smooth, floating glow.",
+          "body": "Moonstone's light seems suspended beneath the surface, rolling softly as the stone turns.",
           "image": "AdulaireSuisse2.webp",
           "alt": "Adularia specimen from the Adula Mountains, Switzerland, displaying the floating blue-white sheen of adularescence"
         },
         {
           "plainWord": "Flash",
           "technicalTerm": "Labradorescence",
-          "body": "Labradorite may seem gray, dark, or subdued until it reaches the right angle. Then a broad field of blue, green, gold, orange, or violet can flare into view and vanish just as quickly.",
-          "whatToNotice": "Wide sheets or fields of shifting color.",
+          "whatToNotice": "Wide fields of shifting color.",
+          "body": "Labradorite can appear subdued until blue, green, gold, orange, or violet light sweeps into view.",
           "image": "Labradorite in two samples showing labradorescence.webp",
           "alt": "Two labradorite samples side by side, one showing strong iridescent labradorescence and one not catching the light"
         },
         {
           "plainWord": "Sparkle",
           "technicalTerm": "Aventurescence",
-          "body": "Sunstone reflects light from flat inclusions inside the gem. Depending on their size and concentration, the effect may appear as fine glitter, scattered sparks, or larger metallic-looking flashes.",
-          "extraLine": "In Sunstone, this effect is also commonly called schiller.",
           "whatToNotice": "Distinct points or plates catching the light.",
+          "body": "Reflective inclusions in Sunstone create fine glitter, scattered sparks, or larger metallic-looking flashes. In Sunstone, this is often called schiller.",
           "image": "Oligoclase-Sunstone from India2.webp",
           "alt": "Tumble-polished Sunstone, a variety of Oligoclase from India, showing bright aventurescent sparkle"
         }
-      ],
-      "closingLine": "Glow, flash, and sparkle may all move as the stone turns, but they are not interchangeable. The easiest way to learn them is to watch what the light actually does."
+      ]
     },
     "moonstoneDecoder": {
       "title": "Moonstone Is More Complicated Than Its Name Suggests",
-      "paragraphs": [
-        "Moonstone sounds like one simple category. In shops and collections, it is anything but.",
-        "The name may point to classic glowing Moonstone, white Labradorite sold as Rainbow Moonstone, or darker and peach-toned materials with their own distinctive appearances. The familiar names are useful, but they do not always tell the whole mineral story."
-      ],
+      "intro": "Moonstone names can describe different colors, optical effects, and even different mineral identities. The quickest way to separate them is to notice what the light and body color are doing.",
       "items": [
-        {"stoneId": "C-0162", "label": "Moonstone", "body": "Classic Moonstone is known for adularescence, the soft light that seems to drift beneath the surface.", "bestClue": "A soft internal glow."},
-        {"stoneId": "C-0030", "label": "Rainbow Moonstone", "body": "Rainbow Moonstone is usually white Labradorite. Its pale body and bright blue or multicolored light made the market name irresistible, but it belongs to plagioclase rather than being a color variety of classic Moonstone.", "bestClue": "Bright Labradorite-style flash through a pale body."},
-        {"stoneId": "C-0395", "label": "Peach Moonstone", "body": "Peach Moonstone is loved for its blush, apricot, and warm peach tones. Its gentle sheen gives the stone a soft, luminous quality.", "bestClue": "Warm body color paired with Moonstone-like sheen or glow."},
-        {"stoneId": "C-0159", "label": "Black Moonstone", "body": "Black Moonstone pairs a darker body with pale streaks, silver movement, or subtle flash. The contrast gives it a dramatic look while keeping the soft mystery people love in Moonstone names.", "bestClue": "Dark body color with pale optical movement."}
-      ],
-      "greenMoonstone": {
-        "stoneId": "C-0399",
-        "title": "Green Moonstone Leads Outside the Family",
-        "paragraphs": [
-          "Still Point's catalog entry sold under the name Green Moonstone is identified as Garnierite, a nickel-bearing silicate material rather than Feldspar.",
-          "It is a useful reminder that a beautiful market name can lead to an entirely different mineral story."
-        ]
-      }
+        {"stoneId": "C-0162", "label": "Moonstone", "body": "Classic Moonstone is known for adularescence, the soft light that drifts beneath the surface.", "bestClue": "Best clue: A soft internal glow."},
+        {"stoneId": "C-0030", "label": "Rainbow Moonstone", "body": "Rainbow Moonstone is usually white Labradorite, with bright blue or multicolored flash through a pale body.", "bestClue": "Best clue: Labradorite-style flash through white Feldspar."},
+        {"stoneId": "C-0395", "label": "Peach Moonstone", "body": "Warm blush and apricot tones pair with a gentle Moonstone sheen.", "bestClue": "Best clue: Warm body color with soft glow or sheen."},
+        {"stoneId": "C-0159", "label": "Black Moonstone", "body": "A darker body carries pale streaks, silver movement, or subtle flash.", "bestClue": "Best clue: Dark color with pale optical movement."},
+        {"stoneId": "C-0399", "label": "Green Moonstone", "identityLabel": "Not Feldspar · Usually Garnierite", "body": "Still Point's Green Moonstone is Garnierite, a nickel-bearing silicate material sold under a Moonstone market name.", "bestClue": "Best clue: Green body color without Moonstone's classic internal glow."}
+      ]
     },
     "lsl": {
       "title": "Labradorite, Spectrolite & Larvikite",
       "intro": "These three names often appear beside one another because all can show shifting light. Look beneath the flash, though, and they tell three different stories: a Feldspar mineral, a celebrated Finnish form of that mineral, and a Norwegian Feldspar-rich rock.",
       "items": [
-        {"stoneId": "C-0028", "label": "Labradorite", "subtitle": "A Feldspar mineral", "body": "Labradorite is a member of the plagioclase series. It is the broad mineral and gem identity behind the familiar stones that reveal blue, green, gold, or multicolored labradorescence when turned in the light."},
-        {"stoneId": "C-0166", "label": "Spectrolite", "subtitle": "Finnish Labradorite", "body": "Spectrolite is not a separate mineral species. It is a designation associated with Finnish Labradorite known for especially broad, vivid, or varied spectral color."},
-        {"stoneId": "C-0396", "label": "Larvikite", "subtitle": "A Norwegian Feldspar-rich rock", "body": "Larvikite is a Norwegian Feldspar-rich rock rather than a Labradorite variety. Its feldspar crystals may produce silvery or blue flashes that explain why the two are sometimes confused, but its identity is different from Labradorite."}
-      ],
-      "bottomLines": [
-        "Labradorite: the mineral",
-        "Spectrolite: vivid Finnish Labradorite",
-        "Larvikite: a Norwegian Feldspar-rich rock that can flash"
+        {"stoneId": "C-0028", "label": "Labradorite", "subtitle": "A Feldspar mineral", "body": "Labradorite is a plagioclase Feldspar known for broad fields of blue, green, gold, orange, or multicolored labradorescence."},
+        {"stoneId": "C-0166", "label": "Spectrolite", "subtitle": "Finnish Labradorite", "body": "Spectrolite is Finnish Labradorite celebrated for especially broad, saturated flashes that may reveal several colors across one polished face."},
+        {"stoneId": "C-0396", "label": "Larvikite", "subtitle": "A Norwegian Feldspar-rich rock", "body": "Larvikite is a Norwegian Feldspar-rich rock rather than a Labradorite variety. Its crystals can produce silvery or blue flashes, but its identity is distinct."}
       ]
     },
     "collection": {

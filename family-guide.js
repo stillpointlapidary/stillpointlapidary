@@ -920,40 +920,52 @@ function familyGuideFluoriteHtml(guide){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   FELDSPAR FAMILY GUIDE — controlled rebuild (2026-08-01) implementing
-   feldspar-family-guide-final-copy-and-visual-plan.md verbatim (approved
-   section order: Hero, Bridge, Meet Eight Feldspar Expressions, One
-   Family/Two Great Branches, Sunstone Refuses to Pick a Side, Three Ways
-   Feldspar Plays With Light, Moonstone decoder, Labradorite/Spectrolite/
-   Larvikite, Collection, Closing). Replaces the prior 2026-07-23
-   placeholder-shell pass below (Two Great Branches / When the Light Moves /
-   Moonstone decoder / Labradorite-Spectrolite-Larvikite / Sunstone-and-the-
-   Spark-Within) — this is a controlled page-specific rebuild, not an
-   additional patch layer, so those five functions and the old single-card
-   Sunstone section are replaced outright rather than kept alongside the
-   new ones. Purely Feldspar-scoped: nothing here touches a Calcite,
-   Quartz, Fluorite, Chalcedony, Agate, Jasper, Garnet, Tourmaline,
-   Obsidian, or Copper selector, function, or data field. ══ */
+   FELDSPAR FAMILY GUIDE — correction pass (2026-08-01, second same-day
+   pass) applied on top of the prior controlled rebuild, per a follow-up
+   brief that explicitly supersedes feldspar-family-guide-final-copy-and-
+   visual-plan.md wherever the two differ. Current approved section order:
+   Hero (full-width prompt row, no bridge), Meet Eight Feldspar
+   Expressions, One Family/Two Great Branches (Alkali Feldspar / Plagioclase
+   Feldspar, enlarged labeled familiar-stone images), Sunstone Connects the
+   Branches (compact connector, not a full section), Glow/Flash/Sparkle,
+   Moonstone decoder (five-card 3-2 grid, Green Moonstone included),
+   Labradorite/Spectrolite/Larvikite (no bottom-line strip), Collection
+   (unchanged this pass — see familyGuideFeldsparCollectionHtml), Closing
+   (bare italic line + pill, no box). Purely Feldspar-scoped: nothing here
+   touches a Calcite, Quartz, Fluorite, Chalcedony, Agate, Jasper, Garnet,
+   Tourmaline, Obsidian, or Copper selector, function, or data field. ══ */
 
-/* ── 2. Bridge — two ordinary left-aligned paragraphs, no card, no tinted
-   background, breathing room between hero and the expressions section
-   below (see the .fg-guide[data-family-slug="feldspar"] #fg-bridge margin
-   in styles.css). No heading, per the approved plan. ── */
-function familyGuideFeldsparBridgeHtml(guide){
-  const b = guide.bridge;
-  if(!b || !(b.paragraphs||[]).length) return '';
-  const paras = b.paragraphs.map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  return `<div class="fg-feldspar-bridge" id="fg-bridge">${paras}</div>`;
+/* ── 1. Hero — dedicated Feldspar layout (the shared familyGuideHeroHtml
+   keeps the "Feldspar asks" prompt inside the copy column; this brief
+   requires it to break out and span the full hero width below the two-
+   column row instead), so Feldspar gets its own hero function rather than
+   a shared-component change that would affect every other guide. Reuses
+   fgHeroMediaImgs() unchanged for the temporary family-image source/
+   treatment. No bridge, no divider — the hero still ends immediately
+   after the question. ── */
+function familyGuideFeldsparHeroHtml(guide){
+  const hero = guide.hero||{};
+  return `<section class="fg-hero" id="fg-hero">
+    <div class="fg-hero-grid">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
+        ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+      </div>
+      ${fgHeroMediaHtml(guide)}
+    </div>
+    ${hero.question?`<div class="fg-hero-prompt fg-feldspar-hero-prompt">
+      ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+      <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+      ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
+    </div>`:''}
+  </section>`;
 }
 
-/* ── 3. Meet Eight Feldspar Expressions — reuses Copper's fgMineralCardHtml
-   (image, name + Quick View header, body paragraph) rather than the
-   compact one-line fgStoneCardHtml, since the approved copy is a real
-   two-sentence paragraph per stone. Placed in the shared four-column
-   .fg-card-grid--4 (not the flex-wrap garnet-roster grid) so it follows
-   the approved plan's exact desktop/tablet/mobile card-count sequence
-   (4 → 2 → 2/1), which .fg-card-grid--4's existing breakpoints already
-   provide unchanged. ── */
+/* ── 2. Meet Eight Feldspar Expressions — unchanged component (reuses
+   Copper's fgMineralCardHtml in the shared four-column .fg-card-grid--4),
+   just fed this pass's shorter one-sentence-per-stone copy. ── */
 function familyGuideFeldsparExpressionsHtml(guide){
   const ex = guide.expressions;
   if(!ex) return '';
@@ -965,28 +977,29 @@ function familyGuideFeldsparExpressionsHtml(guide){
   </section>`;
 }
 
-/* ── 4. One Family, Two Great Branches — two equal panels, each carrying a
-   slim colored accent rule (warm for Potassium, cool for Plagioclase — see
-   .fg-feldspar-branch--potassium/--plagioclase in styles.css), the
-   subtitle/body copy, familiar-names and mineral-names lines, and a
-   compact row of associated stone thumbnails. No arrows, stems, or
-   connector diagrams, per the approved plan. ── */
-function fgFeldsparBranchThumbHtml(stoneId){
-  const c = fgCrystal(stoneId);
+/* ── 3. One Family, Two Great Branches — two equal panels, each with a
+   slim colored accent rule (warm for Alkali Feldspar, cool for Plagioclase
+   — see .fg-feldspar-branch--alkali/--plagioclase in styles.css), the body
+   paragraph, a "Familiar Stones" label over enlarged labeled specimen
+   images (item.thumbs: [{stoneId,name}], rendered larger than the prior
+   pass's small thumbnail row), and the mineral-name line beneath. No old
+   "Home to..." subtitle, no old text-only familiar-names line, no arrows,
+   stems, or connector diagrams. ── */
+function fgFeldsparBranchThumbHtml(thumb){
+  const c = fgCrystal(thumb.stoneId);
   if(!c) return '';
   const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
   const imgHtml = imgSrc ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">` : '';
-  return `<button type="button" class="fg-feldspar-branch-thumb" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}<span>${escapeAttr(c.n)}</span></button>`;
+  return `<button type="button" class="fg-feldspar-branch-thumb" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}<span>${escapeAttr(thumb.name||c.n)}</span></button>`;
 }
 function fgFeldsparBranchPanelHtml(item){
-  const thumbs = (item.thumbStoneIds||[]).map(fgFeldsparBranchThumbHtml).filter(Boolean).join('');
+  const thumbs = (item.thumbs||[]).map(fgFeldsparBranchThumbHtml).filter(Boolean).join('');
   return `<div class="fg-feldspar-branch-panel fg-feldspar-branch--${escapeAttr(item.accent||'')}">
     <div class="fg-branch-title">${escapeAttr(item.title||'')}</div>
-    ${item.subtitle?`<p class="fg-feldspar-branch-subtitle">${escapeAttr(item.subtitle)}</p>`:''}
     ${item.body?`<p class="fg-prose">${escapeAttr(item.body)}</p>`:''}
-    ${item.familiarNames?`<div class="fg-feldspar-branch-line"><span class="fg-feldspar-branch-line-label">${escapeAttr(item.familiarNamesLabel||'Familiar names')}</span>${escapeAttr(item.familiarNames)}</div>`:''}
-    ${item.mineralNames?`<div class="fg-feldspar-branch-line"><span class="fg-feldspar-branch-line-label">${escapeAttr(item.mineralNamesLabel||'The mineral names underneath')}</span>${escapeAttr(item.mineralNames)}</div>`:''}
+    ${item.familiarStonesLabel?`<div class="fg-feldspar-branch-line-label">${escapeAttr(item.familiarStonesLabel)}</div>`:''}
     ${thumbs?`<div class="fg-feldspar-branch-thumbs">${thumbs}</div>`:''}
+    ${item.mineralNames?`<div class="fg-feldspar-branch-line"><span class="fg-feldspar-branch-line-label">${escapeAttr(item.mineralLabel||'Mineral names underneath')}</span>${escapeAttr(item.mineralNames)}</div>`:''}
   </div>`;
 }
 function familyGuideFeldsparBranchesHtml(guide){
@@ -997,64 +1010,30 @@ function familyGuideFeldsparBranchesHtml(guide){
     <h2 class="fg-h2">${escapeAttr(b.title||'One Family, Two Great Branches')}</h2>
     ${b.intro?`<p class="fg-prose">${escapeAttr(b.intro)}</p>`:''}
     <div class="fg-branch-grid">${cards}</div>
-    ${b.supportingLine?`<p class="fg-prose fg-prose-emphasis">${escapeAttr(b.supportingLine)}</p>`:''}
   </section>`;
 }
 
-/* ── 5. Sunstone Refuses to Pick a Side — spans the combined width of both
-   branches above, no connector line. Two small "May occur in" labels near
-   the opening, then two equal teaching-image wells: the left is the
-   already-approved Sunstone photo (large reflective plates); the right is
-   an intentional, brief-mandated placeholder for Christie's still-pending
-   fine-shimmer photo — same well container/radius/spacing as the left, a
-   calm neutral field, and the exact copy "Fine-shimmer Sunstone photo
-   coming soon" (never a broken-image icon or a substituted stock photo).
-   Swapping in the real photo later only requires setting
-   guide.sunstoneCompare.right.image — no layout change needed, since both
-   wells already share the identical .fg-feldspar-sunstone-well markup. ── */
-function familyGuideFeldsparSunstoneCompareHtml(guide){
-  const s = guide.sunstoneCompare;
+/* ── 4. Sunstone Connects the Branches — a compact connector, visibly
+   subordinate to the two branch panels above it, replacing the prior
+   pass's oversized two-image "Sunstone Refuses to Pick a Side" section
+   (no image wells, no placeholder, no pills/badges, no terminology note).
+   A single dual-accent top rule (half warm/half cool, referencing both
+   branches) is the only visual callback — no connector line, no diagram.
+   Renders no image by design; guide.sunstoneConnector carries only a
+   title and one paragraph. ── */
+function familyGuideFeldsparSunstoneConnectorHtml(guide){
+  const s = guide.sunstoneConnector;
   if(!s) return '';
-  const paras = (s.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const occurs = (s.occursLabels||[]).map(l=>`<span class="fg-feldspar-occurs-label">${escapeAttr(l)}</span>`).join('');
-  const l = s.left||{};
-  const leftImg = l.image
-    ? `<img src="${escapeAttr('assets/family-guide-feldspar/'+l.image)}" alt="${escapeAttr(l.alt||'')}" loading="lazy">`
-    : '';
-  const r = s.right||{};
-  const rightWell = r.image
-    ? `<img src="${escapeAttr('assets/family-guide-feldspar/'+r.image)}" alt="${escapeAttr(r.alt||'')}" loading="lazy">`
-    : `<div class="fg-feldspar-sunstone-placeholder"><span>${escapeAttr(r.placeholderText||'Fine-shimmer Sunstone photo coming soon')}</span></div>`;
-  return `<section class="fg-section" id="fg-sunstone-compare">
-    <h2 class="fg-h2">${escapeAttr(s.title||'Sunstone Refuses to Pick a Side')}</h2>
-    ${paras}
-    ${occurs?`<div class="fg-feldspar-occurs-row">${occurs}</div>`:''}
-    <div class="fg-feldspar-sunstone-grid">
-      <div class="fg-feldspar-sunstone-col">
-        <h3 class="fg-feldspar-sunstone-heading">${escapeAttr(l.caption||'')}</h3>
-        ${l.body?`<p class="fg-prose">${escapeAttr(l.body)}</p>`:''}
-        <div class="fg-feldspar-sunstone-well">${leftImg}</div>
-        <div class="fg-feldspar-sunstone-caption">${escapeAttr(l.caption||'')}</div>
-      </div>
-      <div class="fg-feldspar-sunstone-col">
-        <h3 class="fg-feldspar-sunstone-heading">${escapeAttr(r.caption||'')}</h3>
-        ${r.body?`<p class="fg-prose">${escapeAttr(r.body)}</p>`:''}
-        <div class="fg-feldspar-sunstone-well fg-feldspar-sunstone-well--placeholder">${rightWell}</div>
-        <div class="fg-feldspar-sunstone-caption">${escapeAttr(r.caption||'')}</div>
-      </div>
-    </div>
-    ${s.boldLine?`<p class="fg-prose fg-prose-emphasis">${escapeAttr(s.boldLine)}</p>`:''}
-    ${s.closingParagraph?`<p class="fg-prose">${escapeAttr(s.closingParagraph)}</p>`:''}
-    ${s.terminologyNote?`<p class="fg-prose">${escapeAttr(s.terminologyNote)}</p>`:''}
-  </section>`;
+  return `<div class="fg-feldspar-sunstone-connector" id="fg-sunstone-connector">
+    <h3 class="fg-feldspar-connector-heading">${escapeAttr(s.title||'Sunstone Connects the Branches')}</h3>
+    ${s.body?`<p class="fg-fact-body">${escapeAttr(s.body)}</p>`:''}
+  </div>`;
 }
 
-/* ── 6. Three Ways Feldspar Plays With Light — Glow / Flash / Sparkle, each
-   card leading with the plain-language word (dominant) over its technical
-   term (secondary), then the approved body paragraph and a compact "What
-   to notice" strip. Three cards only — no fourth Schiller card, per the
-   approved plan (the earlier four-card "When the Light Moves" pass is
-   fully replaced, not extended). ── */
+/* ── 5. Glow, Flash, Sparkle — three equal comparison cards. "What to
+   notice" now renders immediately below the secondary technical term,
+   above the explanatory body paragraph (moved up per this pass). No
+   closing sentence beneath the cards. ── */
 function fgFeldsparLightCardHtml(item){
   const imgHtml = item.image
     ? `<img src="${escapeAttr('assets/family-guide-feldspar/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`
@@ -1064,9 +1043,8 @@ function fgFeldsparLightCardHtml(item){
     <div class="fg-photocard-body">
       <div class="fg-feldspar-light-word">${escapeAttr(item.plainWord||'')}</div>
       <div class="fg-feldspar-light-term">${escapeAttr(item.technicalTerm||'')}</div>
-      <p class="fg-photocard-text">${escapeAttr(item.body||'')}</p>
-      ${item.extraLine?`<p class="fg-photocard-text">${escapeAttr(item.extraLine)}</p>`:''}
       ${item.whatToNotice?`<div class="fg-feldspar-notice"><span>What to notice:</span> ${escapeAttr(item.whatToNotice)}</div>`:''}
+      <p class="fg-photocard-text">${escapeAttr(item.body||'')}</p>
     </div>
   </div>`;
 }
@@ -1075,20 +1053,21 @@ function familyGuideFeldsparLightHtml(guide){
   if(!l) return '';
   const cards = (l.items||[]).map(fgFeldsparLightCardHtml).join('');
   return `<section class="fg-section" id="fg-light-moves">
-    <h2 class="fg-h2">${escapeAttr(l.title||'Three Ways Feldspar Plays With Light')}</h2>
+    <h2 class="fg-h2">${escapeAttr(l.title||'Glow, Flash, Sparkle')}</h2>
     ${l.intro?`<p class="fg-prose">${escapeAttr(l.intro)}</p>`:''}
     <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
-    ${l.closingLine?`<p class="fg-prose">${escapeAttr(l.closingLine)}</p>`:''}
   </section>`;
 }
 
-/* ── 7. Moonstone Is More Complicated Than Its Name Suggests — a 2x2
-   decoder grid (Moonstone, Rainbow Moonstone, Peach Moonstone, Black
-   Moonstone), each card carrying its own explanatory paragraph and a
-   "Best clue" line — no alarm-heavy badges. Green Moonstone renders
-   separately, in its own horizontal teaching strip beneath the grid,
-   making it visually clear it leads outside the Feldspar family without
-   using caution styling. ── */
+/* ── 6. Moonstone Is More Complicated Than Its Name Suggests — a single
+   five-card 3-2 grid (Moonstone, Rainbow Moonstone, Peach Moonstone, Black
+   Moonstone, Green Moonstone), the two-row layout produced by
+   .fg-feldspar-decoder-grid's flex-wrap (three cards fixed-width on row
+   one, the remaining two centered on row two — see styles.css). Green
+   Moonstone is the fifth card, not a separate strip; its
+   item.identityLabel ("Not Feldspar · Usually Garnierite") renders as a
+   plain caption line directly beneath the stone name, styled like any
+   other body text — never as an alarming warning badge. ── */
 function fgFeldsparDecoderCardHtml(item){
   const c = fgCrystal(item.stoneId);
   if(!c) return '';
@@ -1099,45 +1078,25 @@ function fgFeldsparDecoderCardHtml(item){
   return `<div class="fg-relationship-card">
     <button type="button" class="fg-relationship-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
     <div class="fg-relationship-label">${escapeAttr(item.label||c.n)}</div>
+    ${item.identityLabel?`<div class="fg-feldspar-identity-label">${escapeAttr(item.identityLabel)}</div>`:''}
     ${item.body?`<p class="fg-fact-body">${escapeAttr(item.body)}</p>`:''}
-    ${item.bestClue?`<p class="fg-feldspar-best-clue"><span>Best clue:</span> ${escapeAttr(item.bestClue)}</p>`:''}
+    ${item.bestClue?`<p class="fg-feldspar-best-clue">${escapeAttr(item.bestClue)}</p>`:''}
   </div>`;
 }
 function familyGuideFeldsparMoonstoneDecoderHtml(guide){
   const m = guide.moonstoneDecoder;
   if(!m) return '';
   const cards = (m.items||[]).map(fgFeldsparDecoderCardHtml).filter(Boolean).join('');
-  const paras = (m.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const g = m.greenMoonstone;
-  let greenHtml = '';
-  if(g){
-    const c = fgCrystal(g.stoneId);
-    if(c){
-      const imgSrc = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
-      const imgHtml = imgSrc
-        ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy">`
-        : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
-      const gParas = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-      greenHtml = `<div class="fg-feldspar-green-strip">
-        <button type="button" class="fg-feldspar-green-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
-        <div class="fg-feldspar-green-copy">
-          <div class="fg-feldspar-green-title">${escapeAttr(g.title||'')}</div>
-          ${gParas}
-        </div>
-      </div>`;
-    }
-  }
   return `<section class="fg-section" id="fg-moonstone-decoder">
     <h2 class="fg-h2">${escapeAttr(m.title||'Moonstone Is More Complicated Than Its Name Suggests')}</h2>
-    ${paras}
-    <div class="fg-relationship-grid fg-feldspar-decoder-grid">${cards}</div>
-    ${greenHtml}
+    ${m.intro?`<p class="fg-prose">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-feldspar-decoder-grid">${cards}</div>
   </section>`;
 }
 
-/* ── 8. Labradorite, Spectrolite & Larvikite — three comparison cards, each
-   with an identity subtitle directly beneath the name (no caution badge),
-   plus one compact bottom-line comparison strip. ── */
+/* ── 7. Labradorite, Spectrolite & Larvikite — unchanged three-card layout
+   and image treatment; this pass only updates the identity/body copy and
+   removes the bottom comparison-line strip (no replacement summary). ── */
 function fgFeldsparLslCardHtml(item){
   const c = fgCrystal(item.stoneId);
   if(!c) return '';
@@ -1156,12 +1115,10 @@ function familyGuideFeldsparLslHtml(guide){
   const s = guide.lsl;
   if(!s) return '';
   const cards = (s.items||[]).map(fgFeldsparLslCardHtml).filter(Boolean).join('');
-  const bottomLines = (s.bottomLines||[]).map(l=>`<span>${escapeAttr(l)}</span>`).join('');
   return `<section class="fg-section" id="fg-lsl">
     <h2 class="fg-h2">${escapeAttr(s.title||'Labradorite, Spectrolite & Larvikite')}</h2>
     ${s.intro?`<p class="fg-prose">${escapeAttr(s.intro)}</p>`:''}
     <div class="fg-relationship-grid">${cards}</div>
-    ${bottomLines?`<div class="fg-feldspar-bottomline">${bottomLines}</div>`:''}
   </section>`;
 }
 
@@ -1187,19 +1144,43 @@ function familyGuideFeldsparCollectionHtml(guide){
   </section>`;
 }
 
-/* ── Feldspar guide assembly — approved section order. No in-page
-   familyGuideImageCreditsHtml() call, per the approved plan's "remove the
-   in-page expandable image-credit block" instruction — guide.imageCredits
-   still powers credits.html generically (see fgSetFooterCreditsLink()
-   above for the still-unresolved dedicated-anchor gap). ── */
+/* ── Feldspar in Your Collection — UNCHANGED this pass. The follow-up
+   brief asks for this section's three care-oriented cards (Display It
+   Where the Light Can Find It / Protect It / Learn the Name) to be
+   replaced with three approved teaching cards ("Two Branches" / "What
+   Moves the Light" / "Recognizing Feldspar") "already stored in the
+   Feldspar data" — but no such objects exist anywhere in
+   data/family-guides.json or this file. Per the brief's own explicit stop
+   condition for this section ("if those exact three objects are not
+   present... stop and report... do not invent replacements"), no swap was
+   made; this function and guide.collection are untouched. See the
+   editorialStatusNote above and the correction-pass report for details. ── */
+function familyGuideFeldsparCollectionHtml(guide){
+  const c = guide.collection;
+  if(!c) return '';
+  const cards = (c.cards||[]).map(card=>`<div class="fg-collection-sub">
+    <div class="fg-collection-panel-title">${escapeAttr(card.title||'')}</div>
+    ${(card.paragraphs||[]).map(p=>`<p class="fg-fact-body">${escapeAttr(p)}</p>`).join('')}
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Feldspar in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-prose">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-feldspar-collection-grid">${cards}</div>
+  </section>`;
+}
+
+/* ── Feldspar guide assembly — approved section order. No bridge (deleted
+   this pass, no replacement transition). No in-page
+   familyGuideImageCreditsHtml() call — guide.imageCredits still powers
+   credits.html generically (see fgSetFooterCreditsLink() above for the
+   still-unresolved dedicated-anchor gap). ── */
 function familyGuideFeldsparHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
-    ${familyGuideHeroHtml(guide)}
-    ${familyGuideFeldsparBridgeHtml(guide)}
+    ${familyGuideFeldsparHeroHtml(guide)}
     ${familyGuideFeldsparExpressionsHtml(guide)}
     ${familyGuideFeldsparBranchesHtml(guide)}
-    ${familyGuideFeldsparSunstoneCompareHtml(guide)}
+    ${familyGuideFeldsparSunstoneConnectorHtml(guide)}
     ${familyGuideFeldsparLightHtml(guide)}
     ${familyGuideFeldsparMoonstoneDecoderHtml(guide)}
     ${familyGuideFeldsparLslHtml(guide)}
