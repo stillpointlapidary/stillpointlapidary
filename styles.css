@@ -1855,25 +1855,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    implementation pass). Additive only; nothing here touches a Calcite,
    Quartz, or Fluorite selector. */
 
-/* Two Great Branches — plain two-card branch guide, no photography. */
+/* One Family, Two Great Branches — plain two-panel branch guide. Panel
+   styling itself now lives in the Feldspar-scoped rebuild block below
+   (.fg-feldspar-branch-panel); this grid wrapper is still shared. */
 .fg-branch-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.fg-branch-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem}
 .fg-branch-title{font-family:Georgia,'Times New Roman',serif;font-size:19px;color:var(--ink);margin-bottom:0.8rem;text-align:center}
-.fg-branch-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-
-/* Moonstone decoder — five-card variant of the existing three-column
-   .fg-relationship-grid; the base class still supplies card/media/label
-   styling, this modifier only changes column count. */
-.fg-relationship-grid--5{grid-template-columns:repeat(5,1fr)}
-/* Relationship-card badge (Larvikite's "rock, not a variety" flag and the
-   Moonstone decoder's identity-caution flags) — centered like the label,
-   since .fg-relationship-card is not a flex container. */
+/* Relationship-card badge/list support — generic capability of
+   fgRelationshipCardHtml (shared with Quartz's Agate/Chalcedony/Jasper
+   Fit), kept even though Feldspar's 2026-08-01 rebuild no longer emits
+   badges or role-line lists on its own relationship cards. */
 .fg-relationship-card .fg-badge{margin:0 0 6px}
 .fg-relationship-card .fg-list{text-align:left;padding:0 1.1rem 0 1.6rem;margin-bottom:0.4rem}
-
-/* Sunstone and the Spark Within — single centered stone card below the
-   section's labeled placeholder visual. */
-.fg-sunstone-card-wrap{max-width:300px;margin:1.5rem auto 0}
 
 /* ══ CHALCEDONY FAMILY GUIDE — dedicated components (2026-07-23 first
    implementation pass). Additive only; nothing here touches a Calcite,
@@ -2694,9 +2686,88 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="feldspar"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
 .fg-guide[data-family-slug="feldspar"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
 
+/* ── Controlled rebuild (2026-08-01), feldspar-family-guide-final-copy-and-
+   visual-plan.md. Everything below is scoped to
+   .fg-guide[data-family-slug="feldspar"] (or is a bare new class only this
+   guide's markup ever emits), so no other guide's shared .fg-h2/.fg-prose/
+   .fg-relationship-grid/.fg-photocard/.fg-collection-sub rendering changes. ── */
+
+/* Bridge (section 2) — plain left-aligned paragraphs, no card. Carries its
+   own major-section rhythm since it isn't a .fg-section. */
+.fg-guide[data-family-slug="feldspar"] .fg-feldspar-bridge{margin-bottom:76px}
+.fg-guide[data-family-slug="feldspar"] .fg-feldspar-bridge .fg-prose{font-size:17px}
+
+/* Introduction -> first module: ~30px, matching the existing placeholder-
+   banner spacing already established above for this guide. */
+.fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-card-grid,
+.fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-branch-grid,
+.fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-photo-grid,
+.fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-relationship-grid,
+.fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-feldspar-sunstone-grid,
+.fg-guide[data-family-slug="feldspar"] .fg-prose + .fg-feldspar-collection-grid{margin-top:1.875rem}
+
+/* One Family, Two Great Branches (section 4) — slim colored accent rule per
+   panel (warm for Potassium, cool for Plagioclase) instead of large colored
+   boxes, plus the familiar-names/mineral-names lines and thumbnail row. */
+.fg-feldspar-branch-panel{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;border-left-width:3px}
+.fg-feldspar-branch--potassium{border-left-color:#b8874a}
+.fg-feldspar-branch--plagioclase{border-left-color:#5f7f8f}
+.fg-feldspar-branch-panel .fg-branch-title{text-align:left;margin-bottom:0.3rem}
+.fg-feldspar-branch-subtitle{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.02em;color:var(--ink3);margin:0 0 0.8rem}
+.fg-feldspar-branch-line{font-size:14px;color:var(--ink2);margin:0.5rem 0}
+.fg-feldspar-branch-line-label{display:block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.2rem}
+.fg-feldspar-branch-thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem}
+.fg-feldspar-branch-thumb{display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;border:none;background:none;padding:0;cursor:pointer}
+.fg-feldspar-branch-thumb img{width:64px;height:64px;object-fit:contain;border:0.5px solid var(--border);border-radius:8px;background:#FFFFFF;padding:6px;box-sizing:border-box}
+.fg-feldspar-branch-thumb span{font-size:11px;color:var(--ink3);text-align:center;line-height:1.25}
+
+/* Sunstone Refuses to Pick a Side (section 5) — two equal teaching-image
+   wells sharing one identical container/radius treatment, so the real
+   photo and the intentional placeholder are visually equal. */
+.fg-feldspar-occurs-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 1.5rem}
+.fg-feldspar-occurs-label{display:inline-flex;align-items:center;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);background:var(--stone2);border:0.5px solid var(--border);border-radius:999px;padding:5px 12px}
+.fg-feldspar-sunstone-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:1.875rem 0}
+.fg-feldspar-sunstone-heading{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;color:var(--ink);margin:0 0 0.5rem}
+.fg-feldspar-sunstone-well{width:100%;aspect-ratio:4/3;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white);margin-top:0.75rem}
+.fg-feldspar-sunstone-well img{width:100%;height:100%;object-fit:contain;display:block}
+.fg-feldspar-sunstone-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--stone2);padding:1.5rem;box-sizing:border-box}
+.fg-feldspar-sunstone-placeholder span{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.02em;color:var(--ink3);text-align:center}
+.fg-feldspar-sunstone-caption{font-size:13px;font-style:italic;color:var(--ink3);margin-top:0.6rem}
+
+/* Three Ways Feldspar Plays With Light (section 6) — plain-language word
+   dominant over the secondary technical term, plus a compact "What to
+   notice" strip. Reuses .fg-photocard/.fg-photocard-media as its shell. */
+.fg-feldspar-light-word{font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--ink);margin-bottom:0.1rem}
+.fg-feldspar-light-term{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.7rem}
+.fg-feldspar-notice{font-size:13px;color:var(--ink2);background:var(--stone2);border-radius:8px;padding:0.5rem 0.7rem;margin-top:0.6rem}
+.fg-feldspar-notice span{font-weight:600;color:var(--ink)}
+
+/* Moonstone decoder (section 7) — 2x2 grid; Green Moonstone renders as its
+   own separate horizontal strip beneath it, not a fifth grid card. */
+.fg-guide[data-family-slug="feldspar"] .fg-feldspar-decoder-grid{grid-template-columns:repeat(2,1fr);max-width:760px;margin-left:auto;margin-right:auto}
+.fg-feldspar-best-clue{font-size:14px;color:var(--ink2);margin-top:0.4rem}
+.fg-feldspar-best-clue span{font-weight:600;color:var(--ink)}
+.fg-feldspar-green-strip{display:flex;gap:1.25rem;align-items:center;margin-top:1.875rem;padding:1.2rem 1.4rem;background:var(--stone2);border:0.5px solid var(--border);border-radius:12px}
+.fg-feldspar-green-media{flex:0 0 84px;width:84px;height:84px;border:0.5px solid var(--border);border-radius:8px;overflow:hidden;background:#FFFFFF;padding:0;cursor:pointer}
+.fg-feldspar-green-media img{width:100%;height:100%;object-fit:contain;padding:6px;box-sizing:border-box;display:block}
+.fg-feldspar-green-copy{min-width:0}
+.fg-feldspar-green-title{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:0.4rem}
+.fg-feldspar-green-copy .fg-prose{font-size:14px;margin-bottom:0.4rem}
+
+/* Labradorite, Spectrolite & Larvikite (section 8) — bottom-line strip. */
+.fg-feldspar-bottomline{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:flex-start;margin-top:1.5rem;font-size:14px;color:var(--ink2)}
+
+/* Feldspar in Your Collection (section 9) — three equal panels. */
+.fg-feldspar-collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
 @media(max-width:900px){
   .fg-guide[data-family-slug="feldspar"] .fg-hero{margin-bottom:56px}
   .fg-guide[data-family-slug="feldspar"] .fg-section{margin-bottom:56px}
+  .fg-guide[data-family-slug="feldspar"] .fg-feldspar-bridge{margin-bottom:56px}
+  .fg-feldspar-sunstone-grid{grid-template-columns:1fr;gap:32px}
+  .fg-guide[data-family-slug="feldspar"] .fg-feldspar-decoder-grid{grid-template-columns:1fr}
+  .fg-feldspar-collection-grid{grid-template-columns:1fr}
+  .fg-feldspar-green-strip{flex-direction:column;align-items:flex-start}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -2719,7 +2790,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-lead{font-size:18px}
   .fg-namegrid{grid-template-columns:repeat(2,1fr)}
   .fg-relationship-grid{grid-template-columns:1fr}
-  .fg-relationship-grid--5{grid-template-columns:repeat(2,1fr)}
   .fg-branch-grid{grid-template-columns:1fr}
   .fg-card-grid--2{max-width:420px}
   .fg-card-grid--12{grid-template-columns:repeat(2,1fr)}
@@ -2779,8 +2849,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-section:has(+ .fg-closing){margin-bottom:26px}
   .fg-namegrid{grid-template-columns:1fr}
   .fg-single-visual{max-width:100%}
-  .fg-relationship-grid--5{grid-template-columns:1fr}
-  .fg-sunstone-card-wrap{max-width:100%}
   .fg-card-grid--2{grid-template-columns:1fr;max-width:100%}
   .fg-compare-grid{grid-template-columns:1fr;max-width:100%}
   .fg-card-grid--12{grid-template-columns:1fr}
