@@ -529,6 +529,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0410": ["black-agate.webp"],
   "C-0411": ["aura-quartz.webp"],
   "C-0412": ["black-onyx.webp"],
+  "C-0413": ["green-onyx.webp"],
   "C-0415": ["sardonyx-heart-family.webp"],
   "C-0416": ["green-sardonyx.webp"],
   "C-0420": ["rosasite-in-dolomite-specimen.webp"],
