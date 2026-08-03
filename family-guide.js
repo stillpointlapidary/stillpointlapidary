@@ -824,24 +824,84 @@ function familyGuideRelationshipHtml(guide){
    purely additive: Quartz's generic path and Calcite's fixed path are both
    untouched by anything in this block. ══ */
 
-/* ── One Mineral, Many Colors — reuses the same six-image contained-grid
-   pattern established for Calcite's "Many Colors and Patterns" card
-   (fg-photocard-swatch--6), built from Fluorite's six canonical color
-   entries. No approved body copy exists yet for this section, so only the
-   visual grid renders, with a marked pending banner instead of invented
-   explanatory text. ── */
+/* ── What Does "Opalized Fluorite" Mean? (2026-08-02 correction pass) — a
+   compact, non-card, non-major-section inset between the Expressions grid
+   and How Fluorite Gets Its Color, explaining the "opalized fluorite"
+   market name (Tiffany Stone) without adding a ninth Expression card. No
+   image, no Quick View, no inferred Stone ID — Tiffany Stone's roster
+   entry (if any) is unresolved and out of scope for this brief. Rendered
+   as its own top-level div (not .fg-section) so it does not receive the
+   76px major-section rhythm on either side; see .fg-fluorite-opalized-note
+   in styles.css for its restrained internal spacing instead. ── */
+function familyGuideOpalizedFluoriteNoteHtml(guide){
+  const n = guide.opalizedFluoriteNote;
+  if(!n) return '';
+  return `<div class="fg-fluorite-opalized-note" id="fg-opalized-fluorite">
+    <div class="fg-fluorite-opalized-note-title">${escapeAttr(n.title||'')}</div>
+    <p class="fg-fluorite-opalized-note-body">${escapeAttr(n.body||'')}</p>
+  </div>`;
+}
+
+/* ── How Fluorite Gets Its Color (2026-08-02 correction pass — renamed and
+   rebuilt from "One Mineral, Many Colors") — one restrained three-panel
+   teaching module (Trace elements / Color centers / More than one answer).
+   No photos are used here; guide.manyColors.panels[].accent picks a
+   subtle, restrained Fluorite-derived top-accent color per panel (see
+   .fg-fluorite-color-panel in styles.css) — never a rainbow gradient or
+   decorative treatment. The old detached closing terminology-note line is
+   removed per this pass's brief; nothing replaces it. ── */
+function fgFluoriteColorPanelHtml(panel){
+  if(!panel) return '';
+  const accentClass = panel.accent ? ` fg-fluorite-color-panel--${escapeAttr(panel.accent)}` : '';
+  return `<div class="fg-fluorite-color-panel${accentClass}">
+    <div class="fg-fluorite-color-panel-label">${escapeAttr(panel.label||'')}</div>
+    <p class="fg-fluorite-color-panel-body">${escapeAttr(panel.body||'')}</p>
+  </div>`;
+}
 function familyGuideManyColorsHtml(guide){
   const m = guide.manyColors;
   if(!m) return '';
-  const imgs = (m.swatchStoneIds||[]).map(id=>{
-    const c = fgCrystal(id);
-    const src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
-    return src ? `<div class="fg-photocard-swatch-cell"><img src="${escapeAttr(src)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>` : '';
-  }).filter(Boolean).join('');
+  const panels = (m.panels||[]).map(fgFluoriteColorPanelHtml).join('');
   return `<section class="fg-section" id="fg-many-colors">
-    <h2 class="fg-h2">${escapeAttr(m.title||'One Mineral, Many Colors')}</h2>
-    ${m.editorialNote?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
-    <div class="fg-single-visual"><div class="fg-photocard-swatch fg-photocard-swatch--6">${imgs}</div></div>
+    <h2 class="fg-h2">${escapeAttr(m.title||'How Fluorite Gets Its Color')}</h2>
+    ${m.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-fluorite-color-panels">${panels}</div>
+  </section>`;
+}
+
+/* ── How Fluorite Records Its Growth (2026-08-02 correction pass — renamed
+   and moved directly after "How Fluorite Gets Its Color", ahead of
+   Cube/Octahedron/Cleavage) — the existing approved zoning image beside the
+   three actual terms (Zoning / Banding / Phantoms) it illustrates, reusing
+   the same .fg-explain-grid/.fg-explain-media/.fg-explain-copy two-column
+   layout Jasper's "What Jasper Actually Is" already established.
+   guide.zoningPhantoms.closingLine now renders as the last item inside
+   .fg-explain-copy, alongside the terms, rather than as a detached line
+   below the whole composition — per this pass's explicit "belongs inside
+   the teaching composition, not a detached clarification or warning"
+   instruction. ── */
+function fgFluoriteZoningTermHtml(term){
+  if(!term) return '';
+  return `<div class="fg-fluorite-zoning-term">
+    <div class="fg-fluorite-zoning-term-label">${escapeAttr(term.label||'')}</div>
+    <p class="fg-fluorite-zoning-term-body">${escapeAttr(term.body||'')}</p>
+  </div>`;
+}
+function familyGuideZoningHtml(guide){
+  const z = guide.zoningPhantoms;
+  if(!z) return '';
+  const terms = (z.terms||[]).map(fgFluoriteZoningTermHtml).join('');
+  const visualHtml = z.image
+    ? `<img src="${escapeAttr('assets/family-guide-fluorite/'+z.image)}" alt="${escapeAttr(z.imageAlt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const closingHtml = z.closingLine?`<p class="fg-fluorite-zoning-closing">${escapeAttr(z.closingLine)}</p>`:'';
+  return `<section class="fg-section" id="fg-zoning">
+    <h2 class="fg-h2">${escapeAttr(z.title||'How Fluorite Records Its Growth')}</h2>
+    ${z.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(z.intro)}</p>`:''}
+    <div class="fg-explain-grid fg-fluorite-zoning-grid">
+      <div class="fg-explain-media">${visualHtml}</div>
+      <div class="fg-explain-copy">${terms}${closingHtml}</div>
+    </div>
   </section>`;
 }
 
@@ -850,56 +910,77 @@ function familyGuideManyColorsHtml(guide){
    fgPhotoCardHtml's item.image branch (2026-07-24, folder:'family-guide-
    fluorite') now that the three licensed educational images (see
    guide.cubeOctahedronCleavage.items[].pendingAsset for filename/creator/
-   license) are retained locally. ── */
+   license) are retained locally. guide.cubeOctahedronCleavage.intro
+   (2026-08-02) adds the section's short purpose-setting introduction,
+   rendered the same way every other guide's section intro is. ── */
 function familyGuideCubeOctahedronHtml(guide){
   const s = guide.cubeOctahedronCleavage;
   if(!s) return '';
   const cards = (s.items||[]).map(item=>fgPhotoCardHtml(item, {folder:'family-guide-fluorite'})).join('');
   return `<section class="fg-section" id="fg-cube-octahedron">
     <h2 class="fg-h2">${escapeAttr(s.title||'Cube, Octahedron, or Cleavage Piece?')}</h2>
+    ${s.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(s.intro)}</p>`:''}
     <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
   </section>`;
 }
 
-/* ── Color Zoning, Banding & Phantoms — the visual-pattern vocabulary
-   (core / edge bands / growth zones / layered bands / box phantoms) is
-   rendered as neutral labeled chips, not as sentences, since no approved
-   explanatory paragraph exists yet. guide.zoningPhantoms.image (2026-07-24,
-   now retained locally under assets/family-guide-fluorite/ — see
-   guide.zoningPhantoms.pendingAsset for filename/creator/license) renders in
-   place of the labeled placeholder once set; falls back to the placeholder
-   exactly as before when unset. ── */
-function familyGuideZoningHtml(guide){
-  const z = guide.zoningPhantoms;
-  if(!z) return '';
-  const patterns = (z.patterns||[]).map(p=>`<span class="fg-chip">${escapeAttr(p)}</span>`).join('');
-  const visualHtml = z.image
-    ? `<img src="${escapeAttr('assets/family-guide-fluorite/'+z.image)}" alt="${escapeAttr(z.imageAlt||'')}" loading="lazy">`
-    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
-  return `<section class="fg-section" id="fg-zoning">
-    <h2 class="fg-h2">${escapeAttr(z.title||'Color Zoning, Banding & Phantoms')}</h2>
-    ${z.editorialNote?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
-    <div class="fg-single-visual">${visualHtml}</div>
-    ${patterns?`<div class="fg-zoning-chips">${patterns}</div>`:''}
-  </section>`;
+/* ── Why Some Fluorite Glows (2026-08-02 correction pass — replaces the
+   side-by-side .fg-explain-grid composition, which vertically centered a
+   short panoramic image beside a much taller text column and left a large
+   dead area around the image). New stacked structure: heading, intro, the
+   existing normal-light/UV comparison image centered beneath the intro at
+   its natural panoramic ratio (moderate max-width, not a tall fixed-height
+   well), then the same four approved lessons — copy unchanged — in a 2x2
+   desktop grid (.fg-fluorite-lesson-grid) that stacks to one column on
+   mobile via the guide's existing 900px breakpoint. ── */
+function fgFluoriteFluorescenceLessonHtml(lesson){
+  if(!lesson) return '';
+  return `<div class="fg-fluorite-lesson-card">
+    <div class="fg-fluorite-lesson-card-label">${escapeAttr(lesson.label||'')}</div>
+    <p class="fg-fluorite-lesson-card-body">${escapeAttr(lesson.body||'')}</p>
+  </div>`;
 }
-
-/* ── Why Some Fluorite Glows — Christie's approved fluorescence paragraph,
-   verbatim, plus guide.fluorescence.image (2026-07-24, now retained locally
-   under assets/family-guide-fluorite/ — see guide.fluorescence.pendingAsset
-   for filename/creator/license), which renders in place of the labeled
-   placeholder once set; falls back to the placeholder exactly as before
-   when unset. ── */
 function familyGuideFluorescenceHtml(guide){
   const f = guide.fluorescence;
   if(!f) return '';
   const visualHtml = f.image
     ? `<img src="${escapeAttr('assets/family-guide-fluorite/'+f.image)}" alt="${escapeAttr(f.imageAlt||'')}" loading="lazy">`
     : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const lessons = (f.lessons||[]).map(fgFluoriteFluorescenceLessonHtml).join('');
   return `<section class="fg-section" id="fg-fluorescence">
     <h2 class="fg-h2">${escapeAttr(f.title||'Why Some Fluorite Glows')}</h2>
-    <div class="fg-single-visual">${visualHtml}</div>
-    ${f.paragraph?`<p class="fg-lead fg-lead--wide">${escapeAttr(f.paragraph)}</p>`:''}
+    ${f.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(f.intro)}</p>`:''}
+    <div class="fg-fluorite-uv-visual">${visualHtml}</div>
+    <div class="fg-fluorite-lesson-grid">${lessons}</div>
+  </section>`;
+}
+
+/* ── Fluorite in Your Collection (2026-08-02 correction pass — rebuilt from
+   the shared Care-for-It/Remember-This/Watch-For schema, which carried a
+   warning tone and an italic pending note, into three plain peer teaching
+   cards: Handle gently / Change the angle / Look closely). The first card
+   is wider (1.4fr) than the other two (1fr each); all three stretch to the
+   tallest card's height via CSS grid row stretch (default align-items:
+   stretch), not a fixed pixel height, so the row still expands naturally
+   if any card's text wraps to more lines. Dedicated function/CSS
+   (.fg-fluorite-collection-grid/-card) rather than reusing
+   familyGuideCollectionHtml, whose three-part schema doesn't fit this
+   design. ── */
+function fgFluoriteCollectionCardHtml(card){
+  if(!card) return '';
+  return `<div class="fg-fluorite-collection-card">
+    <div class="fg-fluorite-collection-card-title">${escapeAttr(card.title||'')}</div>
+    <p class="fg-fluorite-collection-card-body">${escapeAttr(card.body||'')}</p>
+  </div>`;
+}
+function familyGuideFluoriteCollectionHtml(guide){
+  const c = guide.collection;
+  if(!c) return '';
+  const cards = (c.cards||[]).map(fgFluoriteCollectionCardHtml).join('');
+  return `<section class="fg-section" id="fg-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Fluorite in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-lead fg-lead--wide">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-fluorite-collection-grid">${cards}</div>
   </section>`;
 }
 
@@ -958,11 +1039,12 @@ function familyGuideFluoriteHtml(guide){
     ${familyGuideFluoriteHeroHtml(guide)}
     ${familyGuideFluoriteBridgeHtml(guide)}
     ${familyGuideExpressionsHtml(guide)}
+    ${familyGuideOpalizedFluoriteNoteHtml(guide)}
     ${familyGuideManyColorsHtml(guide)}
-    ${familyGuideCubeOctahedronHtml(guide)}
     ${familyGuideZoningHtml(guide)}
+    ${familyGuideCubeOctahedronHtml(guide)}
     ${familyGuideFluorescenceHtml(guide)}
-    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideFluoriteCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
     ${familyGuideImageCreditsHtml(guide)}
   </div>`;

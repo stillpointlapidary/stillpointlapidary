@@ -1000,12 +1000,13 @@
     "slug": "fluorite",
     "displayName": "Fluorite",
     "encyclopediaFilterValue": "Fluorite",
-    "editorialStatusNote": "First implementation pass (2026-07-22) for Christie's visual review. Hero, lower-hero introduction, Cube/Octahedron/Cleavage copy, the fluorescence paragraph, and the Care for It / Remember This / Watch For collection copy use Christie's locked wording exactly. The eight expression cards' identity labels and Quick View lines have no approved copy yet and render clearly marked placeholders. Yttrium Fluorite and Candy Fluorite do not resolve to any canonical roster entry (verified against the live stones table 2026-07-22) and render as non-clickable family-guide-only cards per the Candy Fluorite guardrail. One Mineral, Many Colors and Color Zoning, Banding & Phantoms have no approved body copy yet. Five educational images (Cube/Octahedron/Cleavage x3, Zoning x1, Fluorescence x1) are approved by filename/creator/license but not yet retained locally — see pendingAssets below and each section's placeholder. Asset folder assets/family-guide-fluorite/ has been created and is empty, ready for those drops. UPDATE (2026-07-24): Christie's approved candy-fluorite.webp teaching photo retained to assets/family-guide-fluorite/ and wired to the existing Candy Fluorite expression card (member.image, rendered by fgExpressionCardHtml's new opt-in image branch) with alt text 'Polished Candy Fluorite point with green and purple color zoning'. Candy Fluorite remains a non-clickable family-guide-only card — no roster entry, Stone ID, or ENCYCLOPEDIA_PHOTOS mapping was created. Yttrium Fluorite is unaffected and still renders its 'Photo pending' placeholder.",
-    "closingCallout": "Fluorite helps separate what matters from everything competing for attention.",
+    "editorialStatusNote": "Final Visual Cleanup pass (2026-08-02), revising the same-day work in place. Section order, roster, images, Stone IDs, links, collection layout, Yttrium Fluorite placeholder, and all approved copy are unchanged. Three corrections only: (1) the opalized-fluorite inset's spacing corrected — the gap above it (from the Expressions grid) reduced to 30px via a :has()-scoped reduction of Expressions' own major-section bottom margin, and the gap below it (before How Fluorite Gets Its Color) restored to the full 76px desktop/56px mobile major-section rhythm; the inset's own copy, styling, width, and position in the section order are unchanged; (2) the hero title shortened from 'Fluorite Family Guide' to 'Fluorite', with the FAMILY GUIDE eyebrow, subtitle, hero copy, images, and layout unchanged; (3) the shared .fg-hero-prompt component's border-top divider above 'Fluorite asks:' removed for this guide only, replaced with spacing alone (30px margin-top), matching the approved Calcite/Garnet treatment — prompt copy unchanged.",
+    "closingCallout": "Fluorite turns structure into something you can see.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
     "hero": {
       "mediaStoneIds": ["C-0034", "C-0032", "C-0031", "C-0036"],
       "eyebrow": "FAMILY GUIDE",
-      "title": "Fluorite Family Guide",
+      "title": "Fluorite",
       "signatureLine": "A family of clarity, color, and remarkable geometry.",
       "condensedIntro": "Fluorite brings order to what feels scattered. Across its many colors, it is known for supporting focus, discernment, and the ability to sort signal from noise. Its cubes, octahedra, internal bands, and unexpected fluorescence make the family as visually instructive as it is energetically distinct.",
       "promptLeadIn": "Fluorite asks:",
@@ -1013,41 +1014,64 @@
     },
     "overview": {
       "paragraphs": [
-        "Fluorite is calcium fluoride, a single mineral capable of appearing colorless, purple, green, blue, yellow, pink, or layered in several colors at once. It crystallizes in the cubic system, but its perfect cleavage can also produce octahedral pieces. Color, habit, zoning, locality, and commercial naming explain most of the differences readers encounter within the family."
+        "Fluorite is calcium fluoride, but its appeal comes from how visibly it records structure. It grows most famously as cubes, cleaves along smooth internal planes, layers color as conditions change, and may fluoresce under ultraviolet light. Few minerals make geometry and growth this easy to see."
       ]
     },
     "expressions": {
       "title": "Meet Eight Fluorite Expressions",
+      "intro": "Fluorite appears under familiar color names, collector terminology, and trade names, but these cards still lead back to one mineral species. Start with the color, then notice how the crystal is built and how that color is arranged.",
       "members": [
-        {"stoneId": "C-0034"},
-        {"stoneId": "C-0032"},
-        {"stoneId": "C-0031"},
-        {"stoneId": "C-0036"},
-        {"stoneId": "C-0033"},
-        {"stoneId": "C-0035"},
-        {"name": "Yttrium Fluorite"},
-        {"name": "Candy Fluorite", "image": "candy-fluorite.webp", "alt": "Polished Candy Fluorite point with green and purple color zoning"}
+        {"stoneId": "C-0034", "quickView": "The familiar violet expression, ranging from soft lilac to deep grape."},
+        {"stoneId": "C-0032", "quickView": "Fresh mint to saturated green, sometimes paired with purple zoning."},
+        {"stoneId": "C-0031", "quickView": "Cool blue fluorite is less common and often shows striking transparency."},
+        {"stoneId": "C-0036", "quickView": "Honey, gold, and lemon tones bring out fluorite’s glassy clarity."},
+        {"stoneId": "C-0033", "quickView": "A less common expression, often prized in sharp, translucent crystals."},
+        {"stoneId": "C-0035", "quickView": "A collector name for fluorite with visible bands or zones of multiple colors."},
+        {"name": "Yttrium Fluorite", "quickView": "A collector term for fluorite in which yttrium replaces some calcium within the crystal structure."},
+        {"name": "Candy Fluorite", "image": "candy-fluorite.webp", "alt": "Polished Candy Fluorite point with green and purple color zoning", "quickView": "A trade name for vividly banded, multicolored fluorite, especially in polished pieces."}
       ]
     },
+    "opalizedFluoriteNote": {
+      "title": "What Does “Opalized Fluorite” Mean?",
+      "body": "“Opalized fluorite” is a market name often used for Tiffany Stone, a mixed lapidary rock from Utah’s Spor Mountain area. It commonly contains fine-grained fluorite with opal or chalcedony and may also include bertrandite and manganese oxides. Because it is a mixture, it is not a separate fluorite variety and it is not a type of opal."
+    },
     "manyColors": {
-      "title": "One Mineral, Many Colors",
-      "editorialNote": "MISSING APPROVED COPY: no explanatory body text has been approved yet for this section. The six-image grid below uses Fluorite's six canonical color entries, reusing the established Calcite Many Colors six-image pattern, per Christie's instruction.",
-      "swatchStoneIds": ["C-0034", "C-0032", "C-0031", "C-0036", "C-0033", "C-0035"]
+      "title": "How Fluorite Gets Its Color",
+      "intro": "Fluorite’s colors begin inside the crystal. Tiny changes in chemistry and structure affect which parts of white light are absorbed and which reach our eyes.",
+      "panels": [
+        {"label": "Trace elements", "accent": "chemistry", "body": "Small amounts of other elements can enter the crystal as it grows. Their presence may influence the colors a specimen can display."},
+        {"label": "Color centers", "accent": "lattice", "body": "A missing atom or displaced electron can create a color center within fluorite’s crystal lattice. Natural radiation may form or alter these centers, changing how the crystal absorbs light."},
+        {"label": "More than one answer", "accent": "growth", "body": "Fluorite color does not follow one universal recipe. Trace elements, color centers, and other structural changes may work together, so two similarly colored specimens may not owe their appearance to exactly the same cause."}
+      ]
+    },
+    "zoningPhantoms": {
+      "title": "How Fluorite Records Its Growth",
+      "intro": "Many collectible fluorite crystals grow from mineral-rich fluids moving through cracks, veins, and open cavities in rock. As those fluids and surrounding conditions change, the next layer of fluorite may grow with a different color or clarity.",
+      "image": "Fluorite-Calcite-Chalcopyrite-260129.webp",
+      "imageAlt": "Fluorite with Calcite and Chalcopyrite showing internal color zoning and banding",
+      "pendingAsset": {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"},
+      "terms": [
+        {"label": "Zoning", "body": "A zone is an area of different color or color intensity within one crystal. It marks a change that occurred while the crystal was still growing."},
+        {"label": "Banding", "body": "When growth conditions shift repeatedly, the zones can build into stripes or stacked bands. Slices and polished pieces often make this sequence especially easy to see."},
+        {"label": "Phantoms", "body": "Sometimes a later layer follows the outline of an earlier crystal stage. The older shape remains visible inside as a nested phantom."}
+      ],
+      "closingLine": "Read from the center outward, and a zoned fluorite crystal can act like a small record of changing growth."
     },
     "cubeOctahedronCleavage": {
       "title": "Cube, Octahedron, or Cleavage Piece?",
+      "intro": "Fluorite’s geometry can help reveal whether you are looking at natural crystal growth or the mineral’s tendency to split along smooth internal planes.",
       "items": [
         {
-          "title": "Cubic Crystal",
-          "body": "Fluorite most characteristically grows as cubes, sometimes with beveled corners or more complex modifications.",
+          "title": "Cube",
+          "body": "Fluorite belongs to the cubic crystal system and commonly grows as cubes. Their flat faces are natural crystal-growth surfaces.",
           "image": "Fluorite-171715.webp",
           "alt": "Cubic Fluorite crystal with beveled corners, Rob Lavinsky / iRocks.com specimen",
           "placeholderLabel": "Photo pending",
           "pendingAsset": {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
         },
         {
-          "title": "Natural Octahedron",
-          "body": "Fluorite can also grow naturally with eight triangular faces, although this habit is less common than the cube.",
+          "title": "Octahedron",
+          "body": "Fluorite can also grow as an octahedron, although some octahedral specimens are cleavage pieces rather than complete natural crystals.",
           "image": "Fluorite-282542.webp",
           "alt": "Naturally grown octahedral Fluorite crystal, Rob Lavinsky / iRocks.com specimen",
           "placeholderLabel": "Photo pending",
@@ -1055,7 +1079,7 @@
         },
         {
           "title": "Cleavage Piece",
-          "body": "Because Fluorite cleaves perfectly in four directions, broken material can form neat octahedral fragments. Many small polished or rough “Fluorite octahedrons” are cleavage pieces rather than complete naturally grown crystals.",
+          "body": "Because fluorite has perfect octahedral cleavage, it can break into smooth triangular faces that resemble a deliberately shaped crystal.",
           "image": "Diamond-shaped fluorite crystal.webp",
           "alt": "Diamond-shaped Fluorite cleavage fragment showing octahedral cleavage",
           "placeholderLabel": "Photo pending",
@@ -1063,37 +1087,26 @@
         }
       ]
     },
-    "zoningPhantoms": {
-      "title": "Color Zoning, Banding & Phantoms",
-      "editorialNote": "MISSING APPROVED COPY: no explanatory paragraph has been approved yet for this section. The pattern-type labels below are structural vocabulary only, not a claim that every visible band is a phantom or that one cause explains every transition.",
-      "patterns": ["Central core", "Edge bands", "Repeated growth zones", "Layered bands", "Box-like phantoms"],
-      "image": "Fluorite-Calcite-Chalcopyrite-260129.webp",
-      "imageAlt": "Fluorite with Calcite and Chalcopyrite showing internal color zoning and banding",
-      "pendingAsset": {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
-    },
     "fluorescence": {
       "title": "Why Some Fluorite Glows",
-      "paragraph": "Some Fluorite fluoresces under ultraviolet light, producing visible color that is not apparent under ordinary illumination. The response varies by specimen and locality, and many pieces show little or no fluorescence.",
+      "intro": "Fluorite gave fluorescence its name, but not every specimen glows. The response depends on what is present inside the crystal and on the ultraviolet light used to examine it.",
       "image": "Fluorit uv hg.webp",
       "imageAlt": "Fluorite specimen shown under white light and shortwave UV light, comparing its fluorescent glow",
-      "pendingAsset": {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5"}
+      "pendingAsset": {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5"},
+      "lessons": [
+        {"label": "What is happening?", "body": "Ultraviolet light gives energy to electrons inside the crystal. When those electrons return to a lower-energy state, some of that energy may be released as visible light."},
+        {"label": "Why only some fluorite glows", "body": "Certain trace elements, structural defects, or organic material can act as activators. Without the right activators, a specimen may show little or no visible response."},
+        {"label": "Why the glow varies", "body": "Blue and violet are familiar responses, but other colors can occur. The color and intensity may also differ under long-wave and short-wave ultraviolet light."},
+        {"label": "Fluorescence or afterglow?", "body": "Fluorescence is visible while the ultraviolet source is on. If the light continues after the source is removed, the continuing response is called phosphorescence."}
+      ]
     },
     "collection": {
       "title": "Fluorite in Your Collection",
-      "careForIt": {
-        "intro": "Fluorite is relatively soft and has perfect cleavage, so edges and points can chip from impact.",
-        "bullets": [
-          "Dust gently with a soft cloth or brush.",
-          "Avoid knocks, drops, and crowded storage.",
-          "Keep it separate from harder minerals.",
-          "Use water conservatively when matrix, coatings, or repairs are uncertain.",
-          "Avoid ultrasonic and steam cleaning.",
-          "Protect strongly colored specimens from prolonged direct sunlight."
-        ]
-      },
-      "rememberThis": "Color names describe expressions of Fluorite, not separate mineral species. Crystal habit, zoning, cleavage, locality, and treatment may matter as much as color when understanding a specimen.",
-      "watchFor": "Small octahedrons may be cleavage pieces rather than naturally grown crystals. Commercial names can be inconsistent, and unusually vivid material should be described honestly when treatment or enhancement is known or suspected.",
-      "watchForNote": "Candy Fluorite–specific caution copy (composition, locality, treatment status) pending Christie's review — do not assume treated or untreated without provenance."
+      "cards": [
+        {"title": "Handle gently", "body": "Fluorite is softer than many familiar collection stones and has perfect cleavage. Give it its own protected space, keep it away from harder specimens, and clean it gently without harsh methods."},
+        {"title": "Change the angle", "body": "Turn fluorite slowly in natural light and look through its edges. Color zones, internal outlines, and changes in transparency often become clearer from a different direction."},
+        {"title": "Look closely", "body": "Small octahedrons may be naturally grown crystals or cleavage pieces. Both reveal fluorite’s geometry, but they arrived at that shape in different ways."}
+      ]
     },
     "pendingAssets": [
       {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Cube, Octahedron, or Cleavage Piece? — Cubic Crystal position"},

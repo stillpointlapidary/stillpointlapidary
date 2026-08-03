@@ -1879,6 +1879,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    from Zoning/Many Colors), so the visual needs its own bottom margin
    rather than relying on the placeholder-banner rule above. */
 .fg-guide[data-family-slug="fluorite"] #fg-fluorescence .fg-single-visual{margin-bottom:20px}
+/* Hero prompt divider removal (2026-08-02 correction pass) — the shared
+   .fg-hero-prompt rule (used site-wide) draws a border-top rule above the
+   reflective prompt; removed here per the approved Garnet/Calcite
+   treatment, replaced with spacing alone (margin-top, since .fg-hero-body's
+   own 1rem/16px margin-bottom is smaller and yields to it in the margin
+   collapse). Prompt copy and markup are unchanged. */
+.fg-guide[data-family-slug="fluorite"] .fg-hero-prompt{border-top:none;padding-top:0;margin-top:30px}
 
 /* 2. Major-section rhythm — 76px desktop / 56px at <=900px (mobile rule
    sits in the existing max-width:900px breakpoint below). The bridge
@@ -1911,6 +1918,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    eight stay visually coherent as one set. */
 .fg-guide[data-family-slug="fluorite"] #fg-expressions .fg-stonecard-media{aspect-ratio:auto;height:180px;background:#FFFFFF}
 .fg-guide[data-family-slug="fluorite"] #fg-expressions .fg-stonecard-media img{object-fit:contain;padding:10px;box-sizing:border-box}
+/* Footer alignment (2026-08-02 correction pass) — .fg-stonecard-phrase's
+   flex:1 already pushes each card's footer (Quick View button on the six
+   canonical cards, the classification badge on Yttrium/Candy Fluorite) to
+   the bottom of the row's shared height. But the badge and the button have
+   different natural box heights (the badge carries padding/border/margin
+   the plain-text button doesn't), so the footer's own top edge still
+   drifted a few pixels between the two footer types. Giving both the same
+   min-height/box-sizing/centered layout removes that drift so every
+   footer in a row — badge or button — starts on the same line. */
+.fg-guide[data-family-slug="fluorite"] #fg-expressions .fg-stonecard-qv,
+.fg-guide[data-family-slug="fluorite"] #fg-expressions .fg-badge{min-height:26px;box-sizing:border-box;display:inline-flex;align-items:center;margin-bottom:0}
 
 /* 5. Cube, Octahedron, or Cleavage Piece? — its three photo cards use the
    shared .fg-photocard-media, whose site-wide default crops with
@@ -1931,9 +1949,97 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="fluorite"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
 .fg-guide[data-family-slug="fluorite"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
 
+/* 7. One Mineral, Many Colors — rebuilt (2026-08-02 editorial/design pass)
+   as a restrained three-panel teaching module (Chemistry / Crystal Lattice
+   / Growth Sequence), replacing the old six-image swatch gallery. Same
+   restrained top-accent-border technique already established for
+   Feldspar's branch panels (.fg-feldspar-branch--alkali/--plagioclase) —
+   three quiet, muted, Fluorite-adjacent hues (no rainbow gradient, no
+   saturated color fills). Panels share height when text length differs. */
+.fg-fluorite-color-panels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.fg-fluorite-color-panel{background:var(--white);border:0.5px solid var(--border);border-radius:12px;border-top-width:3px;padding:1.1rem 1.25rem;height:100%;box-sizing:border-box}
+.fg-fluorite-color-panel--chemistry{border-top-color:#8a7a9e}
+.fg-fluorite-color-panel--lattice{border-top-color:#7a9482}
+.fg-fluorite-color-panel--growth{border-top-color:#6f8a9e}
+.fg-fluorite-color-panel-label{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:0.5rem;text-align:left}
+.fg-fluorite-color-panel-body{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
+
+/* What Does "Opalized Fluorite" Mean? (2026-08-02 correction pass) — a
+   compact editorial inset, not a card and not a .fg-section, so it never
+   receives the shared 76px major-section rhythm. Full 1100px frame width,
+   left-aligned, a thin restrained Fluorite-derived left accent rule (the
+   same muted "chemistry" violet already used in How Fluorite Gets Its
+   Color) instead of a full border/box, no background fill, no icon or
+   image — deliberately quieter than every bordered card/panel elsewhere on
+   the page so it reads as a footnote to Expressions, not a new section. */
+.fg-fluorite-opalized-note{max-width:1100px;margin:30px auto 76px;padding:0.15rem 0 0.15rem 1.1rem;border-left:2px solid #8a7a9e}
+/* Grid-to-inset spacing correction (2026-08-02) — Expressions is a
+   .fg-section, so its own shared 76px margin-bottom was winning the margin
+   collapse against the inset's 30px margin-top, leaving a 76px gap where
+   28-32px was wanted. Reducing Expressions' own bottom margin specifically
+   when the inset follows it (same :has() technique used site-wide for the
+   Collection -> Closing transition) lets the inset's 30px top margin
+   govern instead. */
+.fg-guide[data-family-slug="fluorite"] #fg-expressions:has(+ .fg-fluorite-opalized-note){margin-bottom:30px}
+.fg-fluorite-opalized-note-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.35rem;text-align:left}
+.fg-fluorite-opalized-note-body{font-size:16px;line-height:1.6;color:var(--ink2);margin:0;text-align:left;max-width:82ch}
+
+/* 8. How Fluorite Records Its Growth (2026-08-02 correction pass) — this
+   moderate two-column composition (.fg-explain-grid/-media/-copy, Jasper's
+   "What Jasper Actually Is" pattern) is now used only here; Why Some
+   Fluorite Glows below has its own stacked composition instead (see next
+   block). An existing approved image, white-welled and contained rather
+   than the shared default's tan cover-crop, beside a stack of labeled term
+   blocks. .fg-fluorite-zoning-grid keeps the image moderate (a fixed calm
+   height, not letting it dominate the row) rather than the generic
+   42%-column/aspect-ratio sizing other .fg-explain-grid callers use. The
+   closing line (.fg-fluorite-zoning-closing) is the last child inside
+   .fg-explain-copy, alongside the term blocks — inside the composition,
+   not a detached line below it — styled as plain italic body copy rather
+   than an accented callout, so it doesn't read as a warning. */
+.fg-guide[data-family-slug="fluorite"] .fg-fluorite-zoning-grid.fg-explain-grid{margin-bottom:0}
+.fg-guide[data-family-slug="fluorite"] .fg-fluorite-zoning-grid .fg-explain-media{aspect-ratio:auto;height:260px;background:#FFFFFF}
+.fg-guide[data-family-slug="fluorite"] .fg-fluorite-zoning-grid .fg-explain-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+.fg-fluorite-zoning-term{margin-bottom:1rem}
+.fg-fluorite-zoning-term:last-child{margin-bottom:0}
+.fg-fluorite-zoning-term-label{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.25rem;text-align:left}
+.fg-fluorite-zoning-term-body{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
+.fg-fluorite-zoning-closing{font-style:italic;color:var(--ink2);font-size:14.5px;text-align:left;margin:0.25rem 0 0}
+
+/* 8b. Why Some Fluorite Glows (2026-08-02 correction pass) — replaces the
+   old side-by-side layout, which vertically centered a short panoramic
+   image beside a much taller text column and left a large dead area
+   around the image. New stacked composition: the comparison image centers
+   beneath the intro at its natural panoramic ratio inside a white
+   presentation area (object-fit:contain, no crop/stretch/enlargement,
+   moderate 780px max-width rather than a tall fixed-height well), then
+   the four lesson cards follow in a 2x2 grid. */
+.fg-fluorite-uv-visual{max-width:780px;margin:0 auto 1.75rem;background:#FFFFFF;border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.fg-fluorite-uv-visual img{display:block;width:100%;height:auto;object-fit:contain}
+.fg-fluorite-lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.fg-fluorite-lesson-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;height:100%;box-sizing:border-box}
+.fg-fluorite-lesson-card-label{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.35rem;text-align:left}
+.fg-fluorite-lesson-card-body{font-size:16px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
+
+/* 9. Fluorite in Your Collection (2026-08-02 correction pass) — three peer
+   cards, the first wider (1.4fr) than the other two (1fr each). No fixed
+   pixel height: CSS grid's default row stretch (align-items:stretch) makes
+   every card fill the row's tallest card, and that tallest height is set
+   by whichever card's text actually wraps to the most lines — so the row
+   still grows naturally at narrower widths instead of clipping. */
+.fg-fluorite-collection-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;align-items:stretch}
+.fg-fluorite-collection-card{background:var(--stone2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;height:100%;box-sizing:border-box}
+.fg-fluorite-collection-card-title{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:0.5rem;text-align:left}
+.fg-fluorite-collection-card-body{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
+
 @media(max-width:900px){
   .fg-guide[data-family-slug="fluorite"] .fg-hero{margin-bottom:56px}
   .fg-guide[data-family-slug="fluorite"] .fg-section{margin-bottom:56px}
+  .fg-fluorite-opalized-note{margin-bottom:56px}
+  .fg-fluorite-color-panels{grid-template-columns:1fr}
+  .fg-guide[data-family-slug="fluorite"] .fg-fluorite-zoning-grid .fg-explain-media{height:220px}
+  .fg-fluorite-lesson-grid{grid-template-columns:1fr}
+  .fg-fluorite-collection-grid{grid-template-columns:1fr}
 }
 
 /* ══ FELDSPAR FAMILY GUIDE — dedicated components (2026-07-23 first
