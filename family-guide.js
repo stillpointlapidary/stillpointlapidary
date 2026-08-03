@@ -903,11 +903,60 @@ function familyGuideFluorescenceHtml(guide){
   </section>`;
 }
 
+/* ── Fluorite hero — dedicated variant (2026-08-02 normalization pass) that
+   drops the shared familyGuideHeroHtml's bottom .fg-hero-intro/.fg-hero-
+   divider block entirely: the hero ends immediately after the reflective
+   prompt, with no divider. The overview paragraph ("Fluorite is calcium
+   fluoride...") that block used to render is now handled separately by
+   familyGuideFluoriteBridgeHtml below, as an unboxed full-width bridge
+   before "Meet Eight Fluorite Expressions" — same technique already
+   established for Calcite (familyGuideCalciteHeroHtml/
+   familyGuideCalciteBridgeHtml). Hero title, copy, media, labels, and
+   prompt copy/markup are otherwise byte-for-byte identical to the shared
+   familyGuideHeroHtml. ── */
+function familyGuideFluoriteHeroHtml(guide){
+  const hero = guide.hero||{};
+  return `<section class="fg-hero" id="fg-hero">
+    <div class="fg-hero-grid">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
+        ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+        ${hero.emphasisLine?`<p class="fg-hero-emphasis">${escapeAttr(hero.emphasisLine)}</p>`:''}
+        ${hero.question?`<div class="fg-hero-prompt">
+          ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+          <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+          ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
+        </div>`:''}
+      </div>
+      ${fgHeroMediaHtml(guide)}
+    </div>
+  </section>`;
+}
+
+/* ── Fluorite bridge paragraph (2026-08-02 normalization pass) — the
+   existing approved "Fluorite is calcium fluoride..." overview paragraph,
+   moved outside the hero box into the shared primary content frame,
+   unboxed, directly above "Meet Eight Fluorite Expressions". Copy is
+   unchanged; only its position and container changed. Reuses the same
+   .fg-hero-intro-text paragraph typography as every other guide's bridge
+   paragraph (Calcite's .fg-calcite-bridge, Garnet's .fg-garnet-bridge). ── */
+function familyGuideFluoriteBridgeHtml(guide){
+  const ov = guide.overview||{};
+  const introParas = Array.isArray(ov.paragraphs) ? ov.paragraphs : (ov.paragraph ? [ov.paragraph] : []);
+  if(!introParas.length) return '';
+  return `<div class="fg-fluorite-bridge">
+    ${introParas.map(p=>`<p class="fg-hero-intro-text">${escapeAttr(p)}</p>`).join('')}
+  </div>`;
+}
+
 /* ── Fluorite guide assembly — its own approved section order. ── */
 function familyGuideFluoriteHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
-    ${familyGuideHeroHtml(guide)}
+    ${familyGuideFluoriteHeroHtml(guide)}
+    ${familyGuideFluoriteBridgeHtml(guide)}
     ${familyGuideExpressionsHtml(guide)}
     ${familyGuideManyColorsHtml(guide)}
     ${familyGuideCubeOctahedronHtml(guide)}

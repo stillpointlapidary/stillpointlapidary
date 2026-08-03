@@ -1851,6 +1851,91 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    growth zones / layered bands / box phantoms) — reuses .fg-chip. */
 .fg-zoning-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:1.1rem}
 
+/* ── Fluorite normalization pass (2026-08-02), applying the same objective
+   conformance corrections already approved for Copper/Calcite/Feldspar/
+   Garnet. No copy, section order, roster, image, or credit was changed —
+   see familyGuideFluoriteHeroHtml/familyGuideFluoriteBridgeHtml in
+   family-guide.js for the one structural move (overview paragraph out of
+   the hero into its own bridge). Every rule below is scoped to
+   .fg-guide[data-family-slug="fluorite"] (or a fluorite-only class), so no
+   other guide's shared .fg-h2/.fg-lead/.fg-stonecard-media/
+   .fg-photocard-media/.fg-badge/.fg-closing-btn styling is touched. ── */
+
+/* 1. Alignment — section headings and the fluorescence paragraph (the only
+   .fg-lead instance this guide renders) left-aligned against the shared
+   frame; the old centered 58/82ch measures removed. The reflective hero
+   prompt, the placeholder-status banners, and the zoning/many-colors
+   image-led modules are left as their existing intentional centered
+   exceptions. */
+.fg-guide[data-family-slug="fluorite"] .fg-h2{text-align:left}
+.fg-guide[data-family-slug="fluorite"] .fg-lead,
+.fg-guide[data-family-slug="fluorite"] .fg-lead--wide{text-align:left;max-width:none;margin-left:0;margin-right:0;font-size:16px}
+/* Heading -> first following element (intro, banner, or the module itself
+   when a section has neither): ~18px. Banner -> first module beneath it:
+   ~30px. Same shared technique as Calcite/Feldspar. */
+.fg-guide[data-family-slug="fluorite"] .fg-h2 + *{margin-top:1.125rem}
+.fg-guide[data-family-slug="fluorite"] .fg-placeholder-banner{margin-bottom:30px}
+/* Fluorescence section only: image sits above its paragraph (opposite order
+   from Zoning/Many Colors), so the visual needs its own bottom margin
+   rather than relying on the placeholder-banner rule above. */
+.fg-guide[data-family-slug="fluorite"] #fg-fluorescence .fg-single-visual{margin-bottom:20px}
+
+/* 2. Major-section rhythm — 76px desktop / 56px at <=900px (mobile rule
+   sits in the existing max-width:900px breakpoint below). The bridge
+   paragraph is a transitional continuation of the hero, not its own titled
+   section, so it keeps a calmer 40px above/below rather than the full 76px
+   (same reasoning as Calcite's .fg-calcite-bridge). Collection -> Closing
+   keeps the standard ~68px reflective-transition gap via the same
+   :has() margin-collapse technique used site-wide. */
+.fg-fluorite-bridge{margin:2.5rem 0}
+.fg-guide[data-family-slug="fluorite"] .fg-section{margin-bottom:76px}
+.fg-guide[data-family-slug="fluorite"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
+
+/* 3. Typography floor — hero body copy and Quick View links raised to the
+   standard 16px/13px floors; the true micro-label "Photo pending" caption
+   (only rendered for Yttrium Fluorite, which has no retained image) raised
+   from 10px to the 11px micro-label floor; the small identity/status badge
+   raised from 9px to 11px. */
+.fg-guide[data-family-slug="fluorite"] .fg-hero-body{font-size:16px}
+.fg-guide[data-family-slug="fluorite"] .fg-stonecard-qv{font-size:13px}
+.fg-guide[data-family-slug="fluorite"] .fg-badge{font-size:11px}
+.fg-guide[data-family-slug="fluorite"] .fg-stonecard-noimg--labeled span{font-size:11px}
+
+/* 4. Meet Eight Fluorite Expressions — calmer, consistent image-well scale
+   matching the established Copper/Calcite baseline (moderate fixed height
+   instead of the shared aspect-ratio, white well instead of tan, contain
+   instead of the well's own already-contain img rule needing only the
+   white background/padding added). Applies equally to the six roster cards
+   and the two non-canonical family-guide-only cards (Yttrium and Candy
+   Fluorite), which share the exact same .fg-stonecard-media markup, so all
+   eight stay visually coherent as one set. */
+.fg-guide[data-family-slug="fluorite"] #fg-expressions .fg-stonecard-media{aspect-ratio:auto;height:180px;background:#FFFFFF}
+.fg-guide[data-family-slug="fluorite"] #fg-expressions .fg-stonecard-media img{object-fit:contain;padding:10px;box-sizing:border-box}
+
+/* 5. Cube, Octahedron, or Cleavage Piece? — its three photo cards use the
+   shared .fg-photocard-media, whose site-wide default crops with
+   object-fit:cover on a tan background. These three images are specimen
+   photographs, so they get the same white-well/contain treatment as every
+   other specimen image on this page instead of being cropped. */
+.fg-guide[data-family-slug="fluorite"] #fg-cube-octahedron .fg-photocard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="fluorite"] #fg-cube-octahedron .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+
+/* 6. Closing — the old bordered/shadowed tan CTA card and heavy
+   .btn.btn-accent button are replaced with the shared bare-line + compact
+   pill treatment already established for Copper/Calcite/Feldspar/Garnet,
+   per the editorial navigation-pill spec (EDITORIAL-PAGE-VISUAL-STANDARD.md
+   §11). The reflective closing line stays centered (an approved
+   exception); its own existing 24px bottom margin already sits inside the
+   standard's ordinary spacing range. */
+.fg-guide[data-family-slug="fluorite"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
+.fg-guide[data-family-slug="fluorite"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
+.fg-guide[data-family-slug="fluorite"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+
+@media(max-width:900px){
+  .fg-guide[data-family-slug="fluorite"] .fg-hero{margin-bottom:56px}
+  .fg-guide[data-family-slug="fluorite"] .fg-section{margin-bottom:56px}
+}
+
 /* ══ FELDSPAR FAMILY GUIDE — dedicated components (2026-07-23 first
    implementation pass). Additive only; nothing here touches a Calcite,
    Quartz, or Fluorite selector. */
