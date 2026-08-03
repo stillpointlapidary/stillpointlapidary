@@ -575,7 +575,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0019": ["dioptase.webp", "dioptase-wc.webp"],
   "C-0166": ["spectrolite.webp"],
   "C-0176": ["thomsonite.webp"],
-  "C-0231": ["vivianite.webp"],
+  "C-0231": ["vivianite.webp", "vivianite-secondary.webp"],
   "C-0233": ["zircon.webp"],
   "C-0259": ["moldavite.webp"],
   "C-0263": ["peridot.webp"],
