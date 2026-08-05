@@ -329,12 +329,29 @@ function writeZipEntry(archivePath, entryName, content) {
   }
 }
 
+// Detects the XML namespace prefix (e.g. "x:", or "" if unprefixed) this
+// workbook's XML parts actually use, by inspecting the root element. This
+// workbook (re-saved by a tool other than Excel/SheetJS at some point)
+// emits every element prefixed — <x:workbook>, <x:worksheet>, <x:row>,
+// <x:c>, <x:is>, <x:t> — instead of the more common unprefixed OOXML form.
+// A regex hardcoded to one form silently matches zero elements against the
+// other (confirmed live: resolveWorksheetPart failed with "Could not find
+// sheet" against this exact file before this fix, backup created but no
+// write attempted — see snapshots/*-pre-update-C-0172.xlsx). Detecting the
+// prefix per-part, rather than assuming either form, works regardless of
+// which convention a given .xlsx was saved with.
+function detectNsPrefix(xml, rootLocalName) {
+  const m = xml.match(new RegExp(`<(\\w+:)?${rootLocalName}\\b`));
+  return m && m[1] ? m[1] : '';
+}
+
 // Resolves the sheet-name -> worksheet-part mapping (e.g. "Catalog Master"
 // -> "xl/worksheets/sheet1.xml") from the workbook's own manifest, rather
 // than assuming sheet order/file naming.
 function resolveWorksheetPart(archivePath, sheetName) {
   const workbookXml = readZipEntry(archivePath, 'xl/workbook.xml');
-  const sheetElRe = /<sheet\b[^>]*\/>/g;
+  const wbPrefix = detectNsPrefix(workbookXml, 'workbook');
+  const sheetElRe = new RegExp(`<${wbPrefix}sheet\\b[^>]*\\/>`, 'g');
   let m;
   let rId = null;
   while ((m = sheetElRe.exec(workbookXml)) !== null) {
@@ -366,42 +383,46 @@ function resolveWorksheetPart(archivePath, sheetName) {
   return target;
 }
 
-function extractRowBlock(sheetXml, excelRowNum) {
-  const pairedRe = new RegExp(`<row r="${excelRowNum}"([^>]*)>([\\s\\S]*?)</row>`);
+function extractRowBlock(sheetXml, excelRowNum, nsPrefix) {
+  const p = nsPrefix || '';
+  const pairedRe = new RegExp(`<${p}row r="${excelRowNum}"([^>]*)>([\\s\\S]*?)</${p}row>`);
   let m = sheetXml.match(pairedRe);
   if (m) return { fullMatch: m[0], attrs: m[1], content: m[2], index: m.index };
-  const selfClosingRe = new RegExp(`<row r="${excelRowNum}"([^>]*)/>`);
+  const selfClosingRe = new RegExp(`<${p}row r="${excelRowNum}"([^>]*)/>`);
   m = sheetXml.match(selfClosingRe);
   if (m) return { fullMatch: m[0], attrs: m[1], content: '', index: m.index };
   return null;
 }
 
-function extractCell(rowContent, addr) {
+function extractCell(rowContent, addr, nsPrefix) {
+  const p = nsPrefix || '';
   // Self-closing must be checked first: the paired regex's `[^>]*` attrs
   // group does not exclude `/`, so against a self-closing cell like
   // `<c r="X1" s="2"/>` it would otherwise treat that `/>` as an opening
   // tag's `>` and lazily consume everything up through the *next* cell's
   // `</c>` — silently deleting or overwriting the following cell too.
-  const selfClosingRe = new RegExp(`<c r="${addr}"([^>]*)/>`);
+  const selfClosingRe = new RegExp(`<${p}c r="${addr}"([^>]*)/>`);
   let m = rowContent.match(selfClosingRe);
   if (m) return { exists: true, fullMatch: m[0], attrs: m[1], index: m.index };
-  const pairedRe = new RegExp(`<c r="${addr}"([^>]*)>([\\s\\S]*?)</c>`);
+  const pairedRe = new RegExp(`<${p}c r="${addr}"([^>]*)>([\\s\\S]*?)</${p}c>`);
   m = rowContent.match(pairedRe);
   if (m) return { exists: true, fullMatch: m[0], attrs: m[1], index: m.index };
   return { exists: false };
 }
 
-function buildCellXml(addr, styleAttr, value) {
+function buildCellXml(addr, styleAttr, value, nsPrefix) {
+  const p = nsPrefix || '';
   const styleStr = styleAttr ? ` s="${styleAttr}"` : '';
-  return `<c r="${addr}"${styleStr} t="inlineStr"><is><t xml:space="preserve">${escapeXmlText(value)}</t></is></c>`;
+  return `<${p}c r="${addr}"${styleStr} t="inlineStr"><${p}is><${p}t xml:space="preserve">${escapeXmlText(value)}</${p}t></${p}is></${p}c>`;
 }
 
 // Replaces, removes, or inserts exactly one cell within a row's XML content,
 // preserving that cell's existing style ref (s="N") if it had one, and
 // preserving the sparse-cell convention (blank fields have no <c> element)
 // used throughout this workbook. Leaves every other cell untouched.
-function applyCellUpdate(rowContent, addr, targetColIdx, value) {
-  const existing = extractCell(rowContent, addr);
+function applyCellUpdate(rowContent, addr, targetColIdx, value, nsPrefix) {
+  const p = nsPrefix || '';
+  const existing = extractCell(rowContent, addr, p);
   let styleAttr = null;
   if (existing.exists) {
     const sMatch = existing.attrs.match(/\ss="(\d+)"/);
@@ -413,13 +434,13 @@ function applyCellUpdate(rowContent, addr, targetColIdx, value) {
     return rowContent.slice(0, existing.index) + rowContent.slice(existing.index + existing.fullMatch.length);
   }
 
-  const newCellXml = buildCellXml(addr, styleAttr, value);
+  const newCellXml = buildCellXml(addr, styleAttr, value, p);
 
   if (existing.exists) {
     return rowContent.slice(0, existing.index) + newCellXml + rowContent.slice(existing.index + existing.fullMatch.length);
   }
 
-  const cellRe = /<c r="([A-Z]+)\d+"/g;
+  const cellRe = new RegExp(`<${p}c r="([A-Z]+)\\d+"`, 'g');
   let insertAt = rowContent.length;
   let m;
   while ((m = cellRe.exec(rowContent)) !== null) {
@@ -429,15 +450,16 @@ function applyCellUpdate(rowContent, addr, targetColIdx, value) {
 }
 
 function patchWorksheetXml(sheetXml, excelRowNum, cellUpdates) {
-  const row = extractRowBlock(sheetXml, excelRowNum);
+  const nsPrefix = detectNsPrefix(sheetXml, 'worksheet');
+  const row = extractRowBlock(sheetXml, excelRowNum, nsPrefix);
   if (!row) fail(`Could not locate row ${excelRowNum} in the worksheet XML — refusing to write.`);
 
   let newContent = row.content;
   for (const { addr, colIdx, value } of cellUpdates) {
-    newContent = applyCellUpdate(newContent, addr, colIdx, value);
+    newContent = applyCellUpdate(newContent, addr, colIdx, value, nsPrefix);
   }
 
-  const newRow = `<row r="${excelRowNum}"${row.attrs}>${newContent}</row>`;
+  const newRow = `<${nsPrefix}row r="${excelRowNum}"${row.attrs}>${newContent}</${nsPrefix}row>`;
   return sheetXml.slice(0, row.index) + newRow + sheetXml.slice(row.index + row.fullMatch.length);
 }
 
