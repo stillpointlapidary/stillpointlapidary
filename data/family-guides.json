@@ -1435,251 +1435,234 @@
     "slug": "jasper",
     "displayName": "Jasper",
     "encyclopediaFilterValue": "Jasper",
-    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's review. Also the first guide to use the new shared .fg-section-intro component (title -> one-sentence italic-Georgia intro -> content, styles.css) and the first to reuse existing generic components via new opt-in flags (useSectionIntro on familyGuideMeetFamilyHtml/familyGuideCollectionHtml/familyGuideAgateJasperFitHtml; sectionIntro+gridCols on familyGuideWhatChangesNameHtml) rather than by editing those functions' defaults — Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate's data never sets these flags, so none of them were retrofitted or changed. All 12 roster stoneIds/slugs were verified against pipeline/data/structured-values.generated.json and app.js's ENCYCLOPEDIA_PHOTOS map (2026-07-23): Brecciated C-0087, Dragon's Blood C-0089, Laguna C-0091, Leopard Skin C-0092, Mookaite C-0094, Ocean C-0095, Picture C-0097, Polychrome C-0098, Red C-0099, Star C-0100, Yellow C-0101, Zebra C-0102 — all resolve and are clickable except Laguna Jasper (C-0091), which currently has no entry in ENCYCLOPEDIA_PHOTOS and renders as a labeled 'Photo pending' card (placeholderOk) rather than a broken tile. IMAGE SOURCING: none of the five candidate Wikimedia Commons/licensed educational images (Photos A-D plus optional Photo E) could be retained this pass. Repeated mcp__workspace__web_fetch attempts against commons.wikimedia.org (the file page, /wiki/Special:FilePath/, and the Commons api.php imageinfo endpoint) and upload.wikimedia.org all returned empty content, while control fetches to example.com and en.wikipedia.org succeeded normally in the same session — indicating a domain-specific restriction on Wikimedia Commons/upload media rather than a transient failure. Per this environment's rules, a blocked/failed fetch was not routed around via bash/curl. Every corresponding image slot (What Jasper Actually Is' large image and rough/polished strip, all six How-Jasper-Makes-a-Pattern categories, all seven Rough/Cut/Polished items) renders a labeled 'Photo pending' placeholder instead of a substitute image; imageCredits is empty because nothing third-party is displayed. Full source-page URL, creator, license, intended section, suggested filename, and suggested visible-credit text for all five candidates are preserved below in pendingAssets for a future pass with working image access — recommend trying a Claude-in-Chrome-connected session, which renders pages with JavaScript and was not available in this one. The Rough-vs-Polished comparison's 'Polished' position uses Red Jasper's own existing approved encyclopedia photo (via a new, additive fgPhotoCardHtml singleStoneId branch) rather than an invented image. EDITORIAL CORRECTION (2026-07-23, second pass): the first pass had grounded several explanatory claims in the Wikipedia 'Jasper' article. Wikipedia is not an approved encyclopedia source for this project, and Claude Code must not independently establish or author geological identity claims. All copy sourced that way has been removed and replaced with clearly marked working-copy placeholders that assert nothing beyond what Christie's own brief already supplied. Four items are recorded here as open editorial gaps for Lyra/Christie's review during the refinement pass, with no replacement research attempted: (1) Jasper's precise silica/aggregate structural definition — What Jasper Actually Is now states only the approved facts (fine-grained silica story, generally opaque) and marks the fuller structural/causal explanation as pending; (2) Ocean Jasper's identity — the roster card's locality claim ('often from Madagascar') was removed and the Pattern Is Not the Same as Identity example now reads 'identity note pending'; (3) Mookaite's identity — the same example was replaced with 'identity note pending'; (4) Dalmatian Stone's identity — the specific 'granite trade name' description was removed; the example now states only that it is excluded from this roster per Christie's own catalog guidance (given directly in this guide's original brief, not researched by Claude Code) and marks the fuller identity description as pending. The Jasper/Agate/Chalcedony relationship section gives both Chalcedony and Agate real, functional Family Guide links (both guides now exist) using the same representative stoneIds (C-0082, C-0077) already approved and live in the Quartz, Chalcedony, and Agate guides' own relationship sections. Jasper in Your Collection folds the brief's five suggested panel themes (pattern, actual identity, rough/polished, locality, natural variation) into the existing shared three-panel Care for It / Remember This / Watch For structure (all five appear as Care for It bullets) rather than building a new five-panel grid, per the instruction to use the established collection-panel structure — flagging this interpretive choice in case a distinct five-panel layout was actually intended. Hero signatureLine/closingCallout are plain working drafts per Christie's suggested working-copy direction; no invented final editorial claims beyond what this brief supplied. No Production Master, Supabase, family, or species values were changed to build this guide.",
-    "closingCallout": "Working draft — Jasper rewards the second look. What first appears solid often contains an entire terrain.",
+    "editorialStatusNote": "Revision pass (2026-08-04) implementing Christie's locked Jasper Family Guide Revision brief verbatim: approved copy, approved 8-section order, and an 11-stone roster (Laguna Jasper removed, not replaced). Both rough-vs-polished modules and the prior five-category naming grid are fully removed, along with their empty cards, missing-image wells, and working-draft placeholder language. All 11 retained stoneIds were re-verified against pipeline/data/structured-values.generated.json (Production-Master-derived) and app.js's ENCYCLOPEDIA_PHOTOS map (2026-08-04): Brecciated C-0087, Dragon's Blood C-0089, Leopard Skin C-0092, Mookaite C-0094, Ocean C-0095, Picture C-0097, Polychrome C-0098, Red C-0099, Star C-0100, Yellow C-0101, Zebra C-0102 — every name/ID pair matches exactly and every stone has an approved encyclopedia photo on file. Laguna Jasper (C-0091) is confirmed removed from the roster and has no entry in ENCYCLOPEDIA_PHOTOS. How Jasper Gets Its Patterns reuses the four named roster stones' own existing approved encyclopedia photos (Brecciated/Picture/Ocean/Leopard Skin) via fgPhotoCardHtml's singleStoneId branch — no new photography sourced or uploaded. The Jasper, Agate, or Chalcedony branch cards keep their prior representative stoneIds (Chalcedony C-0082, Agate C-0077) and real Family Guide links, unchanged. What a Jasper Name Can Tell You and Jasper in Your Collection both reuse the existing generic three-card heading/body component (fgGarnetCollectionCardHtml/.fg-garnet-collection-grid, first built for Garnet) rather than introducing new card markup. No Production Master, Supabase, family, or species values were changed to build this guide.",
+    "closingCallout": "Jasper rewards the second look. What first appears solid can hold fractures, layers, circles, and an entire landscape.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
     "hero": {
       "mediaStoneIds": ["C-0097", "C-0095"],
       "eyebrow": "FAMILY GUIDE",
-      "title": "The Jasper Family",
-      "signatureLine": "Working draft — where silica becomes landscape.",
-      "condensedIntro": "Jasper gathers fractures, layers, mineral inclusions, and color into materials that can resemble maps, horizons, stonework, or painted terrain."
-    },
-    "overview": {
-      "paragraph": "Jasper is generally opaque, fine-grained silica whose look is shaped by pattern, mineral inclusions, fracturing, sedimentary history, silicification, locality, and trade naming — often all at once. Familiar Jasper names do not always describe one identical mineralogical material. This guide keeps the names readers already know while explaining, wherever it can, the actual physical identity behind them."
-    },
-    "meetTheFamily": {
-      "title": "Meet Twelve Jasper Expressions",
-      "useSectionIntro": true,
-      "intro": "Begin with pattern, then notice how each material carries its own geological and collector story.",
-      "gridClass": "fg-card-grid--12",
-      "members": [
-        {"stoneId": "C-0087", "headline": "Fragments fractured and re-cemented into a new, mottled pattern."},
-        {"stoneId": "C-0089", "headline": "Deep green material scattered with vivid red inclusions."},
-        {"stoneId": "C-0091", "headline": "Warm, banded coloring prized by lapidary cutters."},
-        {"stoneId": "C-0092", "headline": "Rounded, spotted patterning reminiscent of an animal print."},
-        {"stoneId": "C-0094", "headline": "Bold swirls of red, yellow, and cream."},
-        {"stoneId": "C-0095", "headline": "Orbicular spots and swirling color patterns."},
-        {"stoneId": "C-0097", "headline": "Layered coloring that can resemble a painted landscape."},
-        {"stoneId": "C-0098", "headline": "Multicolored swirls across a single piece."},
-        {"stoneId": "C-0099", "headline": "Deep, even red — one of the most classic Jasper looks."},
-        {"stoneId": "C-0100", "headline": "Pale background traced with fine, radiating patterning."},
-        {"stoneId": "C-0101", "headline": "Warm yellow to gold coloring with a smooth, opaque finish."},
-        {"stoneId": "C-0102", "headline": "Bold black-and-white or dark banded contrast."}
-      ]
+      "title": "Jasper",
+      "signatureLine": "Where silica becomes landscape.",
+      "condensedIntro": "Jasper gathers color, cracks, layers, and mineral markings into patterns that can resemble hills, rivers, spots, flames, or painted terrain.",
+      "promptLeadIn": "Jasper asks:",
+      "question": "What do you see when you look again?"
     },
     "whatJasperIs": {
       "title": "What Jasper Actually Is",
-      "sectionIntro": "The name is familiar, but the material behind it can be more varied than it first appears.",
       "paragraphs": [
-        "Jasper belongs to the fine-grained silica story used throughout this encyclopedia, and it is generally opaque.",
-        "Editorial copy pending — a fuller description of Jasper's structure, and the geological reasons behind its color and pattern, awaits approved source material for Lyra and Christie's review. Working note only: pattern, mineral inclusions, fracturing, sedimentary history, silicification, and locality can all play a part in how a given piece looks.",
-        "Jasper is also a broad lapidary and collector term. Not every material sold as Jasper has one identical mineralogical definition — some familiar Jasper names may be more accurately described as a rock, aggregate, radiolarite, or another silica-rich material, a distinction the next few sections walk through carefully."
+        "Jasper is a dense, mostly opaque material made largely of silica, the same ingredient found in quartz. Its crystals are too small to see, so it looks solid instead of growing with visible crystal faces.",
+        "Iron and other minerals bring its reds, yellows, greens, and browns. Cracks, layers, and changes within the stone create the patterns that make one piece look like a landscape and another like a mosaic."
+      ]
+    },
+    "meetTheFamily": {
+      "title": "Meet Jasper Expressions",
+      "useSectionIntro": true,
+      "paragraphs": [
+        "Jasper and jasper-like collector materials appear under many familiar names. Some are true varieties of Jasper, while others are trade materials grouped with it because of their appearance.",
+        "Jasper takes a smooth polish, making these materials popular for cabochons, beads, carvings, spheres, and display pieces."
       ],
-      "image": "jasper-unpolished-rough-ryan-bushby.webp",
-      "imageAlt": "Unpolished Jasper fresh out of the ground",
-      "placeholderLabel": "Photo pending — rough Jasper",
-      "pendingAsset": {"source": "https://commons.wikimedia.org/wiki/File:Unpolished_jasper.jpg", "creator": "Ryan Bushby (HighInBC)", "license": "Public domain", "filename": "jasper-unpolished-rough-ryan-bushby.jpg", "use": "What Jasper Actually Is — large image", "suggestedCredit": "Unpolished Jasper — Ryan Bushby (HighInBC), public domain, via Wikimedia Commons"},
-      "compareItems": [
-        {"title": "Rough", "body": "Uncut material as it comes out of the ground.", "placeholderLabel": "Photo pending — rough Jasper"},
-        {"title": "Polished (Red Jasper)", "body": "The same broad material, cut and polished — shown here with an existing approved encyclopedia photo.", "singleStoneId": "C-0099"}
+      "gridClass": "fg-card-grid--12",
+      "members": [
+        {"stoneId": "C-0087", "headline": "The stone broke into angular pieces before silica and other minerals filled the spaces and joined it together again. Polishing brings its natural mosaic into sharp focus."},
+        {"stoneId": "C-0089", "headline": "This collector name usually refers to green epidote patterned with red piemontite, rather than true Jasper. The strong color contrast makes it popular for carvings and polished pieces."},
+        {"stoneId": "C-0092", "headline": "Usually a patterned rhyolite rather than true Jasper. Its spots developed as volcanic rock was altered and its minerals changed or regrouped."},
+        {"stoneId": "C-0094", "headline": "This Australian material is a silica-rich sedimentary rock. Iron-bearing minerals contribute its bands and patches of red, yellow, cream, and plum."},
+        {"stoneId": "C-0095", "headline": "Tiny silica crystals grew outward from central points, creating the rounded forms seen throughout the material. Cutting across those structures reveals its circles and rings."},
+        {"stoneId": "C-0097", "headline": "Fine layers, fractures, and mineral staining overlap to create scenes that resemble hills, horizons, or desert terrain. Its landscape-like patterns are especially prized in cabochons and polished slabs."},
+        {"stoneId": "C-0098", "headline": "Different mineral-rich areas created broad fields of red, tan, brown, and blue-gray. A polished surface reveals how those colors flow through the stone."},
+        {"stoneId": "C-0099", "headline": "Tiny particles of iron oxide, especially hematite, give this Jasper its brick-red color. It is widely used for beads, carvings, cabochons, and tumbled stones."},
+        {"stoneId": "C-0100", "headline": "Branching mineral markings spread across a lighter background, forming the star-like patterns behind its collector name. The exact material sold under this trade name can vary."},
+        {"stoneId": "C-0101", "headline": "Iron-bearing minerals give this Jasper its warm yellow, ochre, and golden-brown color. It is commonly polished into tumbles, beads, and decorative forms."},
+        {"stoneId": "C-0102", "headline": "Contrasting mineral-rich layers create its striped or patchy appearance. Because Zebra Jasper is a broadly used trade name, its exact composition can vary from one source to another."}
       ]
     },
     "patternGuide": {
-      "title": "How Jasper Makes a Pattern",
-      "sectionIntro": "Fractures, layers, inclusions, and mineral growth create the markings collectors recognize.",
+      "title": "How Jasper Gets Its Patterns",
+      "sectionIntro": "Jasper does not have one pattern-making process. Its markings may record breakage, layering, mineral growth, or changes within an older rock.",
       "categories": [
-        {"title": "Brecciated", "body": "Broken fragments healed or cemented into a new pattern.", "image": "jasper-brecciated-pattern-james-st-john.webp", "alt": "Brecciated Jasper showing broken fragments cemented into a new mottled pattern", "placeholderLabel": "Photo pending"},
-        {"title": "Scenic", "body": "Lines, layers, and markings that resemble landscapes or painted horizons.", "image": "jasper-picture-pattern-linas-juozenas.webp", "alt": "Picture Jasper showing banded, scenic markings that resemble a painted landscape", "placeholderLabel": "Photo pending"},
-        {"title": "Orbicular", "body": "Rounded, eye-like, or clustered structures repeated through the material.", "image": "jasper-orbicular-madagascar-lionel-allorge.webp", "alt": "Orbicular Jasper from Madagascar showing rounded, eye-like structures repeated through the material", "placeholderLabel": "Photo pending"},
-        {"title": "Spotted", "body": "Distinct contrasting inclusions or circular markings.", "placeholderLabel": "Photo pending"},
-        {"title": "Banded", "body": "Parallel, wavy, or irregular layers.", "placeholderLabel": "Photo pending"},
-        {"title": "Mottled", "body": "Broad pools, patches, or transitions without strict repetition.", "placeholderLabel": "Photo pending"}
+        {"title": "Broken and Rejoined", "singleStoneId": "C-0087", "alt": "Brecciated Jasper showing broken fragments cemented into a new pattern", "body": "The stone fractured into angular pieces. Later silica and minerals filled the gaps, cementing the fragments into a new pattern."},
+        {"title": "Layered and Scenic", "singleStoneId": "C-0097", "alt": "Picture Jasper showing layered, scenic markings that resemble a painted landscape", "body": "Layers and mineral-rich fluids left changing bands of color. When the stone is cut, those bands can look like hills, horizons, or painted landscapes."},
+        {"title": "Rounded and Orbicular", "singleStoneId": "C-0095", "alt": "Ocean Jasper showing rounded, orbicular structures", "body": "Silica crystals grew outward around many small centers. A cut through those rounded structures reveals circles, rings, and flower-like forms."},
+        {"title": "Spotted and Mottled", "singleStoneId": "C-0092", "alt": "Leopard Skin Jasper showing spotted, mottled patterning", "body": "Changes within volcanic rock created rounded areas with different minerals and colors. Polishing exposes those spots more clearly than a rough surface can."}
       ]
     },
-    "whatChangesName": {
-      "title": "Pattern Is Not the Same as Identity",
-      "sectionIntro": "A memorable trade name can describe appearance without fully explaining what the material is.",
-      "question": "Familiar name on the card; accurate identity on the page.",
-      "gridCols": 3,
-      "categories": [
-        {"label": "Visually Named", "examples": ["Zebra Jasper", "Leopard Skin Jasper", "Star Jasper", "Picture Jasper"]},
-        {"label": "Locality or Deposit Named", "examples": ["Ocean Jasper", "Laguna Jasper", "Mookaite Jasper"]},
-        {"label": "Commercial Jasper Names", "examples": ["Mookaite — identity note pending Lyra/Christie review", "Ocean Jasper — identity note pending Lyra/Christie review", "Dalmatian Stone — not cataloged here as Jasper per Christie's catalog guidance; fuller identity note pending"]}
-      ]
-    },
-    "roughCutPolished": {
-      "title": "Rough, Cut, and Polished",
-      "sectionIntro": "Lapidary work can reveal landscapes that remain almost hidden in the rough.",
-      "items": [
-        {"title": "Rough Exterior", "body": "The unworked surface as it exists in the ground or rough-stone market.", "placeholderLabel": "Photo pending"},
-        {"title": "Cut Face", "body": "A first cut reveals the pattern hidden inside.", "placeholderLabel": "Photo pending"},
-        {"title": "Polished Slab", "body": "A flat, polished cross-section shows the full pattern clearly.", "placeholderLabel": "Photo pending"},
-        {"title": "Cabochon", "body": "Cut and polished into a smooth, domed shape for jewelry.", "placeholderLabel": "Photo pending"},
-        {"title": "Carving", "body": "Worked into decorative or figural forms.", "placeholderLabel": "Photo pending"},
-        {"title": "Bead", "body": "Shaped and drilled for stringing.", "placeholderLabel": "Photo pending"},
-        {"title": "Tumble", "body": "Tumbled smooth, rounding the material for handling and display.", "placeholderLabel": "Photo pending"}
-      ]
+    "whatJasperNameTells": {
+      "title": "What a Jasper Name Can Tell You",
+      "intro": "Jasper names do different jobs. Some describe what the stone looks like. Others preserve a place, deposit, or familiar trade name.",
+      "panels": [
+        {"heading": "Appearance", "body": "Color, spots, bands, fractures, or landscape-like patterns may inspire the name."},
+        {"heading": "Place", "body": "Some names belong to material associated with a particular locality or deposit."},
+        {"heading": "Trade Use", "body": "A market name may identify a familiar collector material even when it is not true Jasper."}
+      ],
+      "note": "The name is a useful clue, but it may not tell the stone's entire geological story."
     },
     "agateJasperFit": {
-      "title": "Jasper, Agate, and Chalcedony",
+      "title": "Jasper, Agate, or Chalcedony?",
       "useSectionIntro": true,
-      "intro": "These materials share a wider silica story, but opacity, banding, and texture lead them down different paths.",
-      "quartzLinkLabel": "Open the Quartz Family Guide",
+      "intro": "Jasper and Agate both belong to the broader Chalcedony family. Their appearance gives us the most useful starting point for telling them apart.",
+      "quartzLinkLabel": "Explore the Quartz Family Guide",
       "branches": [
-        {"label": "Chalcedony", "stoneId": "C-0082", "description": "The broader fine-grained silica family, often translucent or evenly colored.", "guideSlug": "chalcedony"},
-        {"label": "Agate", "stoneId": "C-0077", "description": "Usually organized around banding, translucency, nodules, and extensive pattern terminology.", "guideSlug": "agate"},
-        {"label": "Jasper", "stoneId": "C-0099", "description": "Usually opaque, inclusion-rich, patterned, and commercially diverse.", "current": true}
+        {"label": "Chalcedony", "stoneId": "C-0082", "description": "The broader fine-grained silica family. It is often translucent or more evenly colored.", "guideSlug": "chalcedony"},
+        {"label": "Agate", "stoneId": "C-0077", "description": "Chalcedony known for organized bands and layers, usually with some translucency.", "guideSlug": "agate"},
+        {"label": "Jasper", "stoneId": "C-0099", "description": "Usually opaque, with color and pattern created by other minerals and rock material.", "current": true}
+      ],
+      "note": "These distinctions are useful, but nature does not always draw the boundaries neatly."
+    },
+    "jasperCollection": {
+      "title": "Jasper in Your Collection",
+      "cards": [
+        {"heading": "Everyday Handling", "body": "Jasper works well for display, carving, and regular handling. Protect polished pieces from hard impacts that could chip an edge or damage the finish."},
+        {"heading": "Care & Cleaning", "body": "Use warm water, mild soap, and a soft cloth or brush. Avoid harsh chemicals and prolonged soaking, particularly when a piece may be dyed or treated."},
+        {"heading": "Buying by Name", "body": "A Jasper label may describe appearance, locality, or trade usage. Look at the individual stone and expect natural variation within every named type."}
       ]
     },
-    "collection": {
-      "title": "Jasper in Your Collection",
-      "useSectionIntro": true,
-      "intro": "Look beyond the name to pattern, provenance, finish, and the actual material in your hand.",
-      "editorialNote": "Working draft (2026-07-23) — pending Christie's final review. Folds the brief's five suggested checklist themes into the existing shared Care for It / Remember This / Watch For structure rather than a new five-panel layout — see editorialStatusNote.",
-      "careForIt": {
-        "intro": "Jasper is durable, so the checklist below is about identity as much as physical care.",
-        "bullets": [
-          "Start with pattern — notice whether the piece is banded, spotted, fractured, scenic, orbicular, or broadly mottled.",
-          "Check the actual identity — a familiar Jasper name may describe a rock, trade name, or mixed material.",
-          "Compare rough and polished — the same material may look dramatically different before cutting.",
-          "Keep locality information — for deposit-specific materials, provenance can be part of the collector story.",
-          "Expect natural variation — two pieces sold under the same name may look very different."
-        ]
-      },
-      "rememberThis": "Mohs 6.5–7 and generally durable — safe for brief water contact and most ordinary handling.",
-      "watchFor": "Some familiar \"Jasper\" market names are more accurately described as rocks, trade names, or other silica-rich materials. The name on the card and the identity on the page are not always making the same claim."
-    },
-    "imageCredits": [],
-    "pendingAssets": [
-      {"source": "https://commons.wikimedia.org/wiki/File:Unpolished_jasper.jpg", "creator": "Ryan Bushby (HighInBC)", "license": "Public domain", "filename": "jasper-unpolished-rough-ryan-bushby.jpg", "use": "What Jasper Actually Is — large image; Rough-vs-Polished comparison — Rough position", "suggestedCredit": "Unpolished Jasper — Ryan Bushby (HighInBC), public domain, via Wikimedia Commons"},
-      {"source": "https://commons.wikimedia.org/wiki/File:Brecciated_jasper_1.jpg", "creator": "James St. John", "license": "CC BY 2.0", "filename": "jasper-brecciated-pattern-james-st-john.jpg", "use": "How Jasper Makes a Pattern — Brecciated category", "suggestedCredit": "Brecciated Jasper — James St. John, CC BY 2.0, via Wikimedia Commons"},
-      {"source": "https://commons.wikimedia.org/wiki/File:Picture-jasper.jpg", "creator": "Linas Juozėnas", "license": "CC BY-SA 4.0", "filename": "jasper-picture-pattern-linas-juozenas.jpg", "use": "How Jasper Makes a Pattern — Scenic category", "suggestedCredit": "Picture Jasper — Linas Juozėnas, CC BY-SA 4.0, via Wikimedia Commons", "note": "ShareAlike license — any derivative use must carry the same CC BY-SA 4.0 terms."},
-      {"source": "https://commons.wikimedia.org/wiki/File:Jaspe_Orbiculaire_de_Madagascar_1.jpg", "creator": "Lionel Allorge", "license": "CC BY-SA 3.0", "filename": "jasper-orbicular-madagascar-lionel-allorge.jpg", "use": "How Jasper Makes a Pattern — Orbicular category", "suggestedCredit": "Orbicular Jasper from Madagascar — Lionel Allorge, CC BY-SA 3.0, via Wikimedia Commons", "note": "ShareAlike license — any derivative use must carry the same CC BY-SA 3.0 terms."},
-      {"source": "https://commons.wikimedia.org/wiki/File:Mookaite_(Windalia_Radiolarite_Formation,_Lower_Cretaceous;_Western_Australia)_17_(45998712375).jpg", "creator": "James St. John", "license": "CC BY 2.0", "filename": "jasper-mookaite-radiolarite-james-st-john.jpg", "use": "Pattern Is Not the Same as Identity — Commercial Jasper Names / Mookaite context (optional)", "suggestedCredit": "Mookaite from Western Australia — James St. John, CC BY 2.0, via Wikimedia Commons", "note": "Optional photo. Must be captioned as Mookaite/radiolarite, not presented as a generic true-Jasper specimen, per the brief."}
-    ]
+    "imageCredits": []
   },
   "garnet": {
     "slug": "garnet",
     "displayName": "Garnet",
     "encyclopediaFilterValue": "Garnet",
-    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Garnet Family Guide brief (2026-07-23), built strictly from the supplied copy, labels, classifications, and section order. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
-    "closingCallout": "Garnet begins with a familiar name and opens into one of the mineral world's most varied families.",
-    "closingSupportingCopy": "Follow the branches, compare the crystals, and let composition tell the larger story.",
+    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Garnet Family-Guide Rebuild brief (2026-08-01), built strictly from the supplied copy, structure, and section order. Rhodolite, Tsavorite, Hessonite, and Demantoid have no canonical Stone ID and are used only as compact familiar-name teaching cards, not as encyclopedia links. Pyrope has no approved Stone ID and renders as a visually ordinary but intentionally non-clicking species tile in Meet the Garnets. Almandine (C-0048), Spessartine (C-0131), Grossular (C-0061), Andradite (C-0275), and Uvarovite (C-0355) preserve their exact existing canonical names, Stone IDs, and encyclopedia links from the prior implementation. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
+    "closingCallout": "Garnet is one family expressed through many colors and names. Once the relationships come into focus, every specimen becomes part of a much larger story.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
     "hero": {
-      "mediaStoneIds": ["C-0048", "C-0275", "C-0355"],
-      "eyebrow": "FAMILY GUIDE",
-      "title": "The Garnet Family",
-      "signatureLine": "One name. Many species. Far more than just red.",
-      "condensedIntro": "Garnet is often introduced as a single deep-red stone, but that familiar name belongs to an entire mineral group. Its members share a common crystal structure while differing in composition, color, growth, and the forms collectors are most likely to encounter.",
-      "emphasisLine": "To understand Garnet, begin with the family tree.",
+      "eyebrow": "CRYSTAL FAMILY GUIDE",
+      "title": "Garnet",
+      "subhead": "One family, far more than just red.",
+      "openingParagraph": "Garnet is often pictured as a deep-red gemstone, but this colorful family also reaches into fiery orange, vivid green, warm gold, and nearly black.",
       "promptLeadIn": "Garnet asks:",
-      "question": "Which branch are you holding?",
-      "supportingLine": "The name is only the beginning."
-    },
-    "meetGarnetFamily": {
-      "title": "Meet the Garnet Family",
-      "intro": "Five Garnet species have their own place in the Still Point catalog, each revealing a different part of the family.",
-      "members": [
-        {"stoneId": "C-0048", "identityLabel": "IRON-ALUMINUM GARNET", "headline": "The familiar deep-red member of the family"},
-        {"stoneId": "C-0061", "identityLabel": "CALCIUM-ALUMINUM GARNET", "headline": "A species with an especially broad color range"},
-        {"stoneId": "C-0131", "identityLabel": "MANGANESE-ALUMINUM GARNET", "headline": "Often recognized by warm orange to reddish tones"},
-        {"stoneId": "C-0275", "identityLabel": "CALCIUM-IRON GARNET", "headline": "A varied species ranging from earthy crystals to bright gems"},
-        {"stoneId": "C-0355", "identityLabel": "CALCIUM-CHROMIUM GARNET", "headline": "Usually encountered as vivid drusy crystals on matrix"}
+      "question": "What are you ready to commit to?",
+      "media": [
+        {"name": "Pyrope", "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/pyrope-garnet-wc.webp", "alt": "Pyrope Garnet specimen"},
+        {"name": "Spessartine", "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/spessartine-garnet-wc.webp", "alt": "Spessartine Garnet specimen"},
+        {"name": "Uvarovite", "stoneId": "C-0355"}
       ]
     },
-    "garnetGroup": {
-      "title": "Garnet Is a Group, Not One Stone",
-      "intro": "The members of the family share a structural blueprint, but their chemistry is allowed to change.",
-      "paragraphs": [
-        "The word garnet does not identify one mineral species. It refers to a group of minerals built around the same basic crystal structure. Different elements can occupy key positions within that structure, producing distinct species with different colors, densities, and geological settings.",
-        "Natural Garnets also do not always sit neatly at a single chemical endpoint. Many contain intermediate compositions, blending characteristics associated with more than one named species. That is why a specimen may be accurately called Garnet even when its exact position within the family requires testing."
-      ],
-      "supportingLine": "Shared structure does not mean identical chemistry."
+    "geologicalBridge": "That remarkable range is not random. Every Garnet shares the same basic crystal framework, while changes in chemistry create distinct species with dramatically different colors and appearances.",
+    "meetTheGarnets": {
+      "title": "Meet the Garnets",
+      "intro": "Begin with six species that provide a clear map of this surprisingly varied mineral family.",
+      "members": [
+        {"name": "Pyrope", "caption": "A magnesium-rich Garnet known especially for deep red, purplish-red, and brownish-red color.", "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/pyrope-garnet-wc.webp"},
+        {"name": "Almandine", "caption": "An iron-rich Garnet whose familiar palette runs from deep red to reddish brown.", "stoneId": "C-0048"},
+        {"name": "Spessartine", "caption": "A manganese-rich Garnet recognized for orange, reddish-orange, and warm red color.", "stoneId": "C-0131", "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/spessartine-garnet-wc.webp"},
+        {"name": "Andradite", "caption": "A calcium-iron Garnet whose colors can range from yellow and green to brown and black.", "stoneId": "C-0275"},
+        {"name": "Grossular", "caption": "A calcium-rich Garnet with an unusually broad range that includes green, gold, cinnamon, and nearly colorless forms.", "stoneId": "C-0061"},
+        {"name": "Uvarovite", "caption": "A chromium-rich Garnet best known for vivid green crystals, often sparkling closely together on matrix.", "stoneId": "C-0355"}
+      ]
     },
-    "majorBranches": {
-      "title": "The Major Garnet Branches",
-      "intro": "For a practical introduction, six familiar silicate species form the clearest map of the family.",
-      "parent": {"title": "GARNET", "sub": "A mineral group with a shared structural framework"},
-      "branches": [
+    "sixFoundationsTwoGroups": {
+      "title": "Six Foundations, Two Connected Groups",
+      "intro": "Mineralogists often organize these six Garnets into two connected groups. The first three share aluminum and vary mainly through magnesium, iron, or manganese. The second three share calcium and vary through aluminum, iron, or chromium.",
+      "leftPanel": {
+        "heading": "Pyralspite Group",
+        "intro": "Aluminum forms the shared foundation.",
+        "items": [
+          {"name": "Pyrope", "caption": "Magnesium is closely associated with many of the group's deep red tones."},
+          {"name": "Almandine", "caption": "Iron commonly produces rich red to reddish-brown color."},
+          {"name": "Spessartine", "caption": "Manganese is closely associated with orange and reddish-orange color."}
+        ]
+      },
+      "rightPanel": {
+        "heading": "Ugrandite Group",
+        "intro": "Calcium forms the shared foundation.",
+        "items": [
+          {"name": "Andradite", "caption": "Iron supports colors from yellow and green to brown and black."},
+          {"name": "Grossular", "caption": "Aluminum allows an unusually broad range, including green, gold, and cinnamon."},
+          {"name": "Uvarovite", "caption": "Chromium gives this Garnet its unmistakable vivid green."}
+        ]
+      },
+      "connectedNote": "These groups are useful guides, not sealed boxes. Natural Garnets often blend chemically between species, creating colors and familiar names that sit along a spectrum."
+    },
+    "familiarNames": {
+      "title": "More Garnet Names to Know",
+      "intro": "Beyond the six foundational species, jewelry and collections use additional names for varieties and natural mixtures within the Garnet family.",
+      "cards": [
         {
-          "title": "ALUMINUM-RICH BRANCH",
-          "secondaryLabel": "PYRALSPITE",
-          "species": [
-            {"name": "Pyrope", "caption": "A magnesium-aluminum species often associated with deep red material."},
-            {"name": "Almandine", "caption": "An iron-aluminum species and one of the most familiar Garnets in rocks and collections."},
-            {"name": "Spessartine", "caption": "A manganese-aluminum species frequently seen in orange, reddish-orange, and brownish crystals."}
-          ]
+          "name": "Rhodolite",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/rhodolite-garnet-wc.webp",
+          "alt": "Oval faceted Rhodolite Garnet with raspberry-purple color",
+          "caption": "Rhodolite is a rose-red to purplish-red Garnet commonly associated with a mixture of Pyrope and Almandine. It is especially popular as a faceted jewelry stone for its raspberry-to-wine color."
         },
         {
-          "title": "CALCIUM-RICH BRANCH",
-          "secondaryLabel": "UGRANDITE",
-          "species": [
-            {"name": "Grossular", "caption": "A calcium-aluminum species whose natural colors extend far beyond the red commonly expected of Garnet."},
-            {"name": "Andradite", "caption": "A calcium-iron species with several visually distinct forms and collector varieties."},
-            {"name": "Uvarovite", "caption": "A calcium-chromium species most often found as small green crystals coating matrix."}
-          ]
+          "name": "Tsavorite",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/tsavorite-garnet-wc.webp",
+          "alt": "Bright green Tsavorite Garnet crystals on pale matrix from Tanzania",
+          "caption": "Tsavorite is a vivid green variety of Grossular, colored mainly by vanadium and sometimes chromium. It is typically faceted for jewelry, with cutters often preserving as much of the valuable rough as possible."
+        },
+        {
+          "name": "Hessonite",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/hessonite-garnet-wc.webp",
+          "alt": "Honey-orange Hessonite Garnet crystals from Québec, Canada",
+          "caption": "Hessonite is an orange to reddish-brown variety of Grossular, often recognized by its warm cinnamon tones. Faceted stones may show a softly textured interior created by inclusions and growth features."
+        },
+        {
+          "name": "Demantoid",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/demantoid-garnet-wc.webp",
+          "alt": "Light olive-green Demantoid Garnet crystals on white matrix from Madagascar",
+          "caption": "Demantoid is a green variety of Andradite known for exceptional brilliance and fire. Some prized stones contain delicate, radiating \"horsetail\" inclusions."
         }
-      ],
-      "colorParagraphs": [
-        "Red is only one part of the Garnet family. Changes in major composition and smaller amounts of coloring elements can produce orange, yellow, green, brown, purple-red, nearly black, and occasionally color-changing material.",
-        "Color alone cannot identify a Garnet species. Similar colors can occur in different branches, while one species may appear in several colors. Composition, geological context, physical properties, and laboratory testing provide a more reliable answer than appearance by itself."
-      ],
-      "colorCells": [
-        {"label": "Deep red"},
-        {"label": "Orange"},
-        {"label": "Yellow to honey"},
-        {"label": "Green"},
-        {"label": "Brown to nearly black"},
-        {"label": "Purple-red or color-changing"}
-      ],
-      "colorCaption": "A color may suggest a direction, but it does not prove the species.",
-      "namesTitle": "Familiar Names Within the Family",
-      "nameMap": [
-        {"from": "Hessonite", "to": "Grossular"},
-        {"from": "Tsavorite", "to": "Grossular"},
-        {"from": "Demantoid", "to": "Andradite"},
-        {"from": "Melanite", "to": "Andradite"},
-        {"from": "Rhodolite", "to": "commonly associated with Pyrope-Almandine composition"},
-        {"from": "Mali Garnet", "to": "commonly associated with Grossular-Andradite composition"}
-      ],
-      "namesNote": "These names clarify the family; they do not create six more foundational species."
-    },
-    "appearance": {
-      "title": "How Garnet Appears",
-      "intro": "Crystal shape, matrix, surface, and preparation all change what the Garnet story looks like in the hand.",
-      "stages": [
-        {"title": "Crystal in Matrix", "body": "The host rock preserves geological context and shows how the crystal grew."},
-        {"title": "Loose Crystal", "body": "The natural geometry, luster, and surface become easier to examine."},
-        {"title": "Polished Stone", "body": "Polishing brings forward color, inclusions, and translucency while softening the original form."},
-        {"title": "Faceted Stone", "body": "Transparent material may be cut for light, but faceting represents only one part of the Garnet story."}
-      ],
-      "recognitionItems": [
-        "Compact, many-sided crystal forms",
-        "Dodecahedral and trapezohedral geometry",
-        "Glassy to resinous luster",
-        "No obvious cleavage",
-        "Matrix context can help",
-        "Exact species may require testing"
       ]
     },
     "garnetCollection": {
       "title": "Garnet in Your Collection",
-      "intro": "The most useful collection begins with differences in species, crystal form, matrix, and provenance rather than color names alone.",
-      "listItems": [
-        "Compare an aluminum-rich Garnet with a calcium-rich Garnet.",
-        "Keep matrix specimens when geological context matters.",
-        "Record locality when it is reliable.",
-        "Use \"Garnet\" when the exact species has not been verified."
-      ],
-      "catalogLinks": [
-        {"name": "Almandine Garnet", "stoneId": "C-0048"},
-        {"name": "Grossular Garnet", "stoneId": "C-0061"},
-        {"name": "Spessartine Garnet", "stoneId": "C-0131"},
-        {"name": "Andradite Garnet", "stoneId": "C-0275"},
-        {"name": "Uvarovite", "stoneId": "C-0355"}
+      "intro": "A Garnet label can tell you several different things. These three habits make it easier to understand what you are looking at without expecting color alone to provide the whole answer.",
+      "cards": [
+        {"heading": "Read the full name", "body": "A label may say Garnet, name a foundational species such as Almandine, or use a familiar variety name such as Tsavorite. Each level adds useful information."},
+        {"heading": "Let color guide, not decide", "body": "Color can narrow the possibilities, but Garnet species overlap. A red stone is not automatically Almandine, and a green one is not automatically Tsavorite."},
+        {"heading": "Notice how it occurs", "body": "Loose crystals, matrix specimens, polished stones, and faceted gems reveal different parts of Garnet's character. Shape and setting can offer clues alongside color and label."}
       ]
     },
-    "imageCredits": []
+    "imageCredits": [
+      {
+        "title": "Pyrope Garnet (Jianggalesayi area, Qiemo County, Xinjiang, China)",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Pyrope-260132.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Still Point file: pyrope-garnet-wc.webp (original source: mindat.org photo-260132, http://www.mindat.org/photo-260132.html). Background removed and replaced with white; square crop, resizing, and minor image cleanup by Still Point Lapidary."
+      },
+      {
+        "title": "Spessartine Garnet, naturally etched crystal (Rutherford No. 3 Pegmatite, Amelia County, Virginia, USA)",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Garnet-Group-Spessartine-185963.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Still Point file: spessartine-garnet-wc.webp (original source: mindat.org photo-185963, http://www.mindat.org/photo-185963.html). Background removed and replaced with white; square crop, resizing, and minor image cleanup by Still Point Lapidary."
+      },
+      {
+        "title": "Oval faceted Rhodolite Garnet, 3.15 carats",
+        "creator": "Darla Sondrol",
+        "source": "https://commons.wikimedia.org/wiki/File:Rhodolite_(GeoDIL_number_-_2752).jpg",
+        "license": "CC0 1.0 Universal Public Domain Dedication",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "modified": "Still Point file: rhodolite-garnet-wc.webp (original collection/source: https://geodil.dperkins.org/h/2752.html). Background removed and replaced with white; square crop, resizing, and minor image cleanup by Still Point Lapidary."
+      },
+      {
+        "title": "Tsavorite Garnet from the Merelani Hills, Arusha Region, Tanzania",
+        "creator": "Lech Darski",
+        "source": "https://commons.wikimedia.org/wiki/File:Granat._grossular,tsaworyt_(Tsavorite)_-_Merelani_Hills,_Arusha_Region,_Tanzania.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modified": "Still Point file: tsavorite-garnet-wc.webp. Background removed and replaced with white; measurement inset removed; square crop, resizing, and minor image cleanup by Still Point Lapidary."
+      },
+      {
+        "title": "Hessonite Garnet from the Jeffrey Mine, Québec, Canada",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Grossular-4jg64a.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Still Point file: hessonite-garnet-wc.webp (original source: http://www.mindat.org/photo-20982.html). Background removed and replaced with white; square crop, resizing, and minor image cleanup by Still Point Lapidary."
+      },
+      {
+        "title": "Demantoid Garnet from Antetezambato, Madagascar",
+        "creator": "Rob Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Andradite-dem45a.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Still Point file: demantoid-garnet-wc.webp (original image source: http://www.irocks.com/db_pics/new2010/dem45a.jpg). Background removed and replaced with white; square crop, resizing, and minor image cleanup by Still Point Lapidary."
+      }
+    ]
   },
   "tourmaline": {
     "slug": "tourmaline",

@@ -1698,7 +1698,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    elsewhere on the site. */
 #tab-family{padding:1.5rem}
 .fg-guide{max-width:1100px;margin:0 auto}
-#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished{scroll-margin-top:160px}
+#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection{scroll-margin-top:160px}
 .fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
 .fg-loading{padding:3rem 1rem;text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--ink3)}
 .fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
@@ -2181,6 +2181,92 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    Calcite/Quartz/Fluorite/Feldspar/Agate's 4-per-row roster grids), so none
    of their responsive behavior changes. */
 .fg-card-grid--12{grid-template-columns:repeat(4,1fr)}
+
+/* ── Jasper Family Guide Revision (2026-08-04) — brings Jasper's page-wide
+   rhythm, alignment, and hero/pattern-module image treatment in line with
+   the Copper Minerals baseline (EDITORIAL-PAGE-VISUAL-STANDARD.md §2, §8.1,
+   §9), scoped entirely to [data-family-slug="jasper"] so no other guide's
+   spacing, alignment, or image treatment changes. ── */
+.fg-guide[data-family-slug="jasper"] .fg-section{margin-bottom:76px}
+/* Hero -> first section (2026-08-05 correction): the shared .fg-hero base
+   rule only ever sets margin-bottom:1.75rem (28px) — every other guide that
+   needs the 76px major-section gap after its hero (Copper, Feldspar) adds
+   its own explicit override, and Jasper's first pass omitted the desktop
+   half of that override (only the 56px mobile rule existed below), which is
+   why the hero-to-"What Jasper Actually Is" gap measured 28px instead of
+   76px. */
+.fg-guide[data-family-slug="jasper"] .fg-hero{margin-bottom:76px}
+.fg-guide[data-family-slug="jasper"] .fg-h2{text-align:left;margin-bottom:18px}
+/* Section intro spacing (2026-08-05 correction): heading-to-intro relies on
+   .fg-h2's own 18px margin-bottom above (adjacent-sibling margins collapse
+   to the larger value, so no separate top margin is needed here). When a
+   section has two intro paragraphs (Meet Jasper Expressions), each
+   paragraph keeps ordinary paragraph spacing between itself and the next,
+   and only the final paragraph carries the larger margin into the grid/
+   module below (28px, §8.2's introduction-to-module range). */
+.fg-guide[data-family-slug="jasper"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
+.fg-guide[data-family-slug="jasper"] .fg-section-intro:last-of-type{margin-bottom:28px}
+/* What Jasper Actually Is' plain-paragraph bridge uses .fg-garnet-bridge p,
+   not .fg-section-intro — same two-paragraph ordinary-spacing/final-margin
+   logic applies. The bridge div's own 46px margin-bottom (unchanged) still
+   collapses with the section's 76px rule above into the correct 76px gap
+   into Meet Jasper Expressions. */
+.fg-guide[data-family-slug="jasper"] .fg-garnet-bridge p{margin-bottom:12px}
+.fg-guide[data-family-slug="jasper"] .fg-garnet-bridge p:last-of-type{margin-bottom:0}
+/* Hero — remove the temporary "Family photograph — coming soon" badge (the
+   two hero images, Picture and Ocean Jasper, are the guide's own approved
+   roster photos, not placeholders) and present both wells restrained, white,
+   and object-fit:contain per §9's specimen-well requirement. */
+.fg-guide[data-family-slug="jasper"] .fg-hero-media-label{display:none}
+.fg-guide[data-family-slug="jasper"] .fg-hero-media{max-height:300px;background:#FFFFFF}
+.fg-guide[data-family-slug="jasper"] .fg-hero-media-grid img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+/* Meet Jasper Expressions roster (2026-08-05 correction) — the shared
+   .fg-stonecard-media only colors its <img> element white via
+   object-fit:contain; the wrapper itself keeps the sitewide tan
+   var(--stone2), which shows as beige side/top/bottom gutters whenever an
+   image's aspect ratio doesn't exactly fill the 6:5 well. Force the wrapper
+   itself white and give the image explicit ~10px padding so a visible white
+   margin surrounds every specimen on all four sides, without changing the
+   well's existing height/aspect-ratio. */
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+/* Meet Jasper Expressions card text hierarchy (2026-08-05 correction) — the
+   shared .fg-stonecard-name/.fg-stonecard-phrase pair is tuned for a small
+   uppercase label above a larger, darker serif phrase, which reads as the
+   description outweighing the name. Jasper's roster instead needs the name
+   visually primary (medium weight, full ink color) and the description
+   secondary (normal weight, lighter ink2, comfortable line height). Quick
+   View (.fg-stonecard-qv) is untouched — it already renders smaller and
+   lighter than both. */
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-name{font-family:'Jost',sans-serif;font-weight:500;font-size:15px;letter-spacing:0.01em;text-transform:none;color:var(--ink);margin-bottom:6px}
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:var(--ink2)}
+/* How Jasper Gets Its Patterns — the four cards reuse existing roster
+   photos (Brecciated/Picture/Ocean/Leopard Skin); present them as white
+   contain wells rather than the shared .fg-photocard-media's default
+   tan-cropped treatment, matching Copper's grow-together module. */
+.fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+.fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-title{font-weight:500}
+/* Jasper, Agate, or Chalcedony comparison cards (2026-08-05 correction) —
+   two fixes to the shared .fg-relationship-media/-label/.fg-fact-body
+   component, scoped to #fg-agate-jasper-fit within the Jasper guide only so
+   Chalcedony's and Agate's own relationship sections (which reuse the same
+   component/ids) are completely unaffected:
+   1. white well + ~10px padding, same beige-gutter fix as the roster above.
+   2. the well shrinks from the shared component's default aspect-ratio:6/5
+      (~270px tall in this three-column row) to a fixed ~150px, with the
+      visible specimen itself capped to ~130px in both dimensions via
+      max-width/max-height on the image (rather than width/height:100%),
+      centered in the well — a compact teaching comparison, not a featured
+      specimen gallery. Name/description hierarchy here was already correct
+      (.fg-relationship-label 17px ink vs .fg-fact-body 13px ink2, both
+      normal weight) and needs no change. */
+.fg-guide[data-family-slug="jasper"] #fg-agate-jasper-fit .fg-relationship-media{height:150px;aspect-ratio:auto;background:#FFFFFF;display:flex;align-items:center;justify-content:center;padding:10px;box-sizing:border-box}
+.fg-guide[data-family-slug="jasper"] #fg-agate-jasper-fit .fg-relationship-media img{width:auto;height:auto;max-width:130px;max-height:130px;object-fit:contain}
+@media(max-width:900px){
+  .fg-guide[data-family-slug="jasper"] .fg-hero{margin-bottom:56px}
+  .fg-guide[data-family-slug="jasper"] .fg-section{margin-bottom:56px}
+}
 
 /* Three-category variant of the existing five-category .fg-namegrid (used
    by Quartz's "What Changes the Name?"), for Jasper's "Pattern Is Not the
@@ -3294,7 +3380,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-rough-cut-polished,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
   .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:16px}
   .fg-table thead{display:none}
   .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}

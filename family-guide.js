@@ -1423,9 +1423,16 @@ function familyGuideMeetFamilyHtml(guide){
   // .fg-section-intro treatment instead of .fg-lead. Chalcedony/Agate never
   // set this, so their intro paragraphs are unchanged.
   const introClass = m.useSectionIntro ? 'fg-section-intro' : 'fg-lead';
+  // m.paragraphs (2026-08-04, added for Jasper's two-sentence "Meet Jasper
+  // Expressions" intro) — an optional array alternative to the single-string
+  // m.intro above. Every other guide's data only ever sets m.intro, so this
+  // is purely additive and changes no existing guide's output.
+  const introHtml = Array.isArray(m.paragraphs) && m.paragraphs.length
+    ? m.paragraphs.map(p=>`<p class="${introClass}">${escapeAttr(p)}</p>`).join('')
+    : (m.intro?`<p class="${introClass}">${escapeAttr(m.intro)}</p>`:'');
   return `<section class="fg-section" id="fg-meet-family">
     <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Family')}</h2>
-    ${m.intro?`<p class="${introClass}">${escapeAttr(m.intro)}</p>`:''}
+    ${introHtml}
     <div class="fg-card-grid ${gridMod}">${cards}</div>
     ${emptyNote}
   </section>`;
@@ -1521,10 +1528,15 @@ function familyGuideAgateJasperFitHtml(guide){
   // and Agate never set this, so their already-approved intro paragraphs
   // here are completely unchanged.
   const introClass = r.useSectionIntro ? 'fg-section-intro' : 'fg-lead fg-lead--wide';
+  // r.note (2026-08-04, added for Jasper's revised "Jasper, Agate, or
+  // Chalcedony?" section) — an optional closing observation rendered below
+  // the branch cards and above the Quartz link button. Chalcedony and Agate
+  // never set this, so their output is unchanged.
   return `<section class="fg-section" id="fg-agate-jasper-fit">
     <h2 class="fg-h2">${escapeAttr(r.title||'Chalcedony, Agate & Jasper')}</h2>
     ${r.intro?`<p class="${introClass}">${escapeAttr(r.intro)}</p>`:''}
     <div class="fg-relationship-grid">${branches}</div>
+    ${r.note?`<p class="fg-fact-body fg-note-center">${escapeAttr(r.note)}</p>`:''}
     ${r.quartzLinkLabel?`<div class="fg-quartz-link-wrap"><button type="button" class="btn" onclick="openFamilyGuide('quartz')">${escapeAttr(r.quartzLinkLabel)}</button></div>`:''}
   </section>`;
 }
@@ -1621,92 +1633,106 @@ function familyGuideAgateHtml(guide){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   JASPER FAMILY GUIDE — dedicated section renderers (2026-07-23 first
-   implementation pass). Also the first guide to use the new shared
-   .fg-section-intro component (title -> one-sentence italic Georgia intro
-   -> content), added this pass in styles.css. Reuses Chalcedony/Agate's
-   generic Chalcedony/Agate/Jasper-Fit, Collection, and What-Changes-the-
-   Name components (each opted in via a new useSectionIntro/sectionIntro
-   flag — see those functions above), plus fgPhotoCardHtml/fgExpressionCardHtml
-   unchanged. No licensed educational photography could be retained this
-   pass (see editorialStatusNote/pendingAssets in the data) — every
-   would-be photo slot below renders a labeled pending placeholder instead
-   of a substitute image, per the brief's explicit guardrail. ══ */
+   JASPER FAMILY GUIDE — Revision pass (2026-08-04) implementing Christie's
+   locked Jasper Family Guide Revision brief. Both rough-vs-polished modules
+   and the five-category "Pattern Is Not the Same as Identity" naming grid
+   are fully removed (function definitions deleted, not just unassembled),
+   along with their empty cards, missing-image wells, and working-draft
+   placeholder language. Reuses Chalcedony/Agate's generic Agate/Jasper-Fit
+   component unchanged (guide.agateJasperFit, opted in via useSectionIntro),
+   plus the generic three-card heading/body component first built for Garnet
+   (fgGarnetCollectionCardHtml/.fg-garnet-collection-grid) for both What a
+   Jasper Name Can Tell You and Jasper in Your Collection below. ══ */
 
-/* ── 3. What Jasper Actually Is — a large educational image beside
-   explanatory copy, with an optional compact rough-vs-polished strip below
-   (reusing fgPhotoCardHtml). Kept as its own dedicated function/data field
-   (guide.whatJasperIs) rather than reusing or renaming Chalcedony's/Agate's
-   parallel sections, so their approved code and output stay untouched. ── */
+/* ── 2. What Jasper Actually Is — a plain unboxed geological bridge (no
+   image, no card system, per the brief's explicit instruction), sitting
+   between the hero and Meet Jasper Expressions. Reuses the same
+   .fg-garnet-bridge paragraph styling Garnet's hero-to-roster bridge
+   already established (a shared, non-garnet-specific component despite its
+   original name — see Tourmaline's .fg-card-grid--garnet-roster reuse for
+   precedent), wrapped in its own titled .fg-section so it participates in
+   the ordinary major-section rhythm. ── */
 function familyGuideWhatJasperIsHtml(guide){
   const w = guide.whatJasperIs;
   if(!w) return '';
-  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const mainImgHtml = w.image
-    ? `<img src="${escapeAttr('assets/family-guide-jasper/'+w.image)}" alt="${escapeAttr(w.imageAlt||'')}" loading="lazy">`
-    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>${escapeAttr(w.placeholderLabel||'Photo pending')}</span></div>`;
-  const compareCount = (w.compareItems||[]).length;
-  const compareGridClass = compareCount===2 ? 'fg-photo-grid--2' : (compareCount===3 ? 'fg-photo-grid--3' : 'fg-photo-grid--4');
-  const compareHtml = compareCount
-    ? `<div class="fg-photo-grid ${compareGridClass} fg-what-jasper-compare">${(w.compareItems||[]).map(fgPhotoCardHtml).join('')}</div>`
-    : '';
+  const paras = (w.paragraphs||[]).map(p=>`<p>${escapeAttr(p)}</p>`).join('');
+  if(!paras) return '';
   return `<section class="fg-section" id="fg-what-jasper-is">
     <h2 class="fg-h2">${escapeAttr(w.title||'What Jasper Actually Is')}</h2>
-    ${w.sectionIntro?`<p class="fg-section-intro">${escapeAttr(w.sectionIntro)}</p>`:''}
-    <div class="fg-explain-grid">
-      <div class="fg-explain-media">${mainImgHtml}</div>
-      <div class="fg-explain-copy">${paras}</div>
-    </div>
-    ${compareHtml}
+    <div class="fg-garnet-bridge">${paras}</div>
   </section>`;
 }
 
-/* ── 4. How Jasper Makes a Pattern — reader-facing visual pattern
-   categories (Brecciated, Scenic, Orbicular, Spotted, Banded, Mottled),
-   reusing fgPhotoCardHtml exactly as Calcite's Shapes/Recognition sections
-   do. Explicitly not a formal universal classification — see the section
-   intro and editorialStatusNote. ── */
+/* ── 4. How Jasper Gets Its Patterns — a four-card image-led teaching
+   module (Broken and Rejoined, Layered and Scenic, Rounded and Orbicular,
+   Spotted and Mottled). Each card's image reuses the named roster stone's
+   own existing approved encyclopedia photo via fgPhotoCardHtml's
+   singleStoneId branch (Brecciated/Picture/Ocean/Leopard Skin) — no new
+   photography sourced, per the brief's "reuse the same existing images"
+   instruction. ── */
 function familyGuideJasperPatternHtml(guide){
   const p = guide.patternGuide;
   if(!p) return '';
-  const cards = (p.categories||[]).map(cat=>fgPhotoCardHtml(cat, {folder:'family-guide-jasper'})).join('');
+  const cards = (p.categories||[]).map(cat=>fgPhotoCardHtml(cat)).join('');
   return `<section class="fg-section" id="fg-jasper-pattern">
-    <h2 class="fg-h2">${escapeAttr(p.title||'How Jasper Makes a Pattern')}</h2>
+    <h2 class="fg-h2">${escapeAttr(p.title||'How Jasper Gets Its Patterns')}</h2>
     ${p.sectionIntro?`<p class="fg-section-intro">${escapeAttr(p.sectionIntro)}</p>`:''}
-    <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
-  </section>`;
-}
-
-/* ── 6. Rough, Cut, and Polished — a lapidary-stage comparison (rough,
-   cut face, polished slab, cabochon, carving, bead, tumble), reusing
-   fgPhotoCardHtml exactly as the Pattern section above does. ── */
-function familyGuideRoughCutPolishedHtml(guide){
-  const r = guide.roughCutPolished;
-  if(!r) return '';
-  const cards = (r.items||[]).map(fgPhotoCardHtml).join('');
-  return `<section class="fg-section" id="fg-rough-cut-polished">
-    <h2 class="fg-h2">${escapeAttr(r.title||'Rough, Cut, and Polished')}</h2>
-    ${r.sectionIntro?`<p class="fg-section-intro">${escapeAttr(r.sectionIntro)}</p>`:''}
     <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
   </section>`;
 }
 
-/* ── Jasper guide assembly — its own approved section order. Purely
-   additive: nothing here changes Calcite/Quartz/Fluorite/Feldspar/
-   Chalcedony/Agate's assembly, data, or rendered output. ── */
+/* ── 5. What a Jasper Name Can Tell You — three compact teaching panels
+   (Appearance, Place, Trade Use), reusing the generic three-card
+   heading/body component first built for Garnet in Your Collection
+   (fgGarnetCollectionCardHtml/.fg-garnet-collection-grid — plain neutral
+   cards, not garnet-specific styling). Replaces the prior numbered
+   classification grid and stone-name pill cluster entirely. ── */
+function familyGuideJasperNameHtml(guide){
+  const n = guide.whatJasperNameTells;
+  if(!n) return '';
+  const cards = (n.panels||[]).map(fgGarnetCollectionCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-jasper-name">
+    <h2 class="fg-h2">${escapeAttr(n.title||'What a Jasper Name Can Tell You')}</h2>
+    ${n.intro?`<p class="fg-section-intro">${escapeAttr(n.intro)}</p>`:''}
+    <div class="fg-garnet-collection-grid">${cards}</div>
+    ${n.note?`<p class="fg-fact-body fg-note-center">${escapeAttr(n.note)}</p>`:''}
+  </section>`;
+}
+
+/* ── 7. Jasper in Your Collection — three restrained practical cards
+   (Everyday Handling, Care & Cleaning, Buying by Name), reusing the same
+   generic three-card component as What a Jasper Name Can Tell You above.
+   Its own dedicated function/data field (guide.jasperCollection) rather
+   than the shared Care-for-It/Remember-This/Watch-For familyGuideCollection
+   Html, which doesn't fit this brief's plain three-card design. ── */
+function familyGuideJasperCollectionHtml(guide){
+  const c = guide.jasperCollection;
+  if(!c) return '';
+  const cards = (c.cards||[]).map(fgGarnetCollectionCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-jasper-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Jasper in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-garnet-collection-grid">${cards}</div>
+  </section>`;
+}
+
+/* ── Jasper guide assembly — approved 8-section order: Hero, What Jasper
+   Actually Is, Meet Jasper Expressions, How Jasper Gets Its Patterns, What
+   a Jasper Name Can Tell You, Jasper/Agate/Chalcedony, Jasper in Your
+   Collection, Closing. familyGuideImageCreditsHtml is not called — no
+   third-party imagery is used on this page, matching the Garnet/Copper
+   pattern of routing Photo Credits through the shared footer link instead. ── */
 function familyGuideJasperHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
-    ${familyGuideMeetFamilyHtml(guide)}
     ${familyGuideWhatJasperIsHtml(guide)}
+    ${familyGuideMeetFamilyHtml(guide)}
     ${familyGuideJasperPatternHtml(guide)}
-    ${familyGuideWhatChangesNameHtml(guide)}
-    ${familyGuideRoughCutPolishedHtml(guide)}
+    ${familyGuideJasperNameHtml(guide)}
     ${familyGuideAgateJasperFitHtml(guide)}
-    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideJasperCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
-    ${familyGuideImageCreditsHtml(guide)}
   </div>`;
 }
 
