@@ -143,7 +143,7 @@ function renderFamilyGuideView(rawSlug, opts){
 function fgSetFooterCreditsLink(slug){
   const link = document.getElementById('footerCreditsLink');
   if(!link) return;
-  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite'};
+  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite', garnet:'credits.html#garnet'};
   link.setAttribute('href', anchoredSlugs[slug] || 'credits.html');
 }
 
@@ -188,6 +188,34 @@ window.addEventListener('popstate', function(){
   if(t==='101'){
     const sec = params && params.get('section');
     if(sec && typeof show101==='function') show101(sec);
+    // Smaller Families Explore-button Back navigation (2026-08-05) — scoped
+    // to the six Smaller Families profile-row Explore controls only (see
+    // jumpToSmallFamilyProfile() in 101.js, which is the only code that
+    // ever sets this "profile" param). No-op for every other 101 entry,
+    // including plain Crystal Families navigation and family-guide Back.
+    // show101('families') above already ran initFamilies()/
+    // renderSecondaryFamilies() synchronously, so the target card exists
+    // in the DOM by the time this runs.
+    const profile = sec==='families' && params && params.get('profile');
+    if(profile){
+      // A single deferred scroll (even one timed to the DOM update via
+      // rAF) was reported landing back at the top in real Chrome, though
+      // it could not be reproduced locally, including under simulated slow
+      // network/CPU. Something after the first scroll — a late layout
+      // shift the local repro couldn't trigger — is the likely cause. This
+      // re-asserts the scroll position several times over the following
+      // second instead of trusting one attempt: each pass is an instant
+      // (non-smooth) snap, so it can't fight an in-progress animation the
+      // way a repeated 'smooth' call could.
+      const scrollToProfileCard=()=>{
+        const card=Array.from(document.querySelectorAll('#fam-cards-secondary .smallfam-card'))
+          .find(c=>{const n=c.querySelector('.smallfam-name');return n&&n.textContent===profile;});
+        if(!card) return;
+        try{ card.scrollIntoView({behavior:'auto',block:'center'}); }catch(e){ card.scrollIntoView(); }
+      };
+      requestAnimationFrame(()=>{ requestAnimationFrame(scrollToProfileCard); });
+      [150,350,600,1000].forEach(ms=>setTimeout(scrollToProfileCard,ms));
+    }
   }
   if(t==='encyclopedia' && typeof encRender==='function') encRender();
 });
@@ -1683,179 +1711,270 @@ function familyGuideJasperHtml(guide){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   GARNET FAMILY GUIDE — dedicated section renderers (2026-07-23, revised
-   same day into a simpler six-section layout per Christie's "focused layout
-   and structure correction" pass: the original eight-section split read as
-   fragmented/card-heavy, so Color, Familiar Names, Recognition, and
-   Crystal-to-Polished were folded into two broader sections — Major
-   Branches now carries color + naming context, and a new "How Garnet
-   Appears" section carries the stage sequence + a compact recognition
-   list. Section order: Meet the Family, Garnet Is a Group/Not One Stone,
-   Major Branches (+ color + names), How Garnet Appears, In Your
-   Collection, Closing. Purely additive/Garnet-scoped: nothing here touches
-   a Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate/Jasper selector,
-   function, or data field. All five roster cards use fgStoneCardHtml
-   directly in placeholder-aware mode (opts.placeholderOk) since two of the
-   five species (Grossular, Spessartine) have no canonical photo on file
-   yet — see the brief's explicit guardrail against substituting a
-   different stone's image. ══ */
+   GARNET FAMILY GUIDE — complete rebuild (2026-08-01) per Christie's locked
+   "Complete Garnet Family-Guide Rebuild" brief. Replaces the prior six-
+   section Garnet implementation entirely with the approved structure: a
+   restrained hero (three white image wells: Pyrope, Spessartine,
+   Uvarovite), an unboxed geological bridge paragraph, six equal Meet the
+   Garnets tiles (Pyrope intentionally non-clicking — no approved Stone ID),
+   a two-panel Six Foundations/Two Connected Groups relationship module,
+   four compact Familiar Names teaching cards, three text-only Garnet in
+   Your Collection cards, and a restrained closing + compact Return pill.
+   Purely Garnet-scoped: nothing here touches a Calcite/Quartz/Fluorite/
+   Feldspar/Chalcedony/Agate/Jasper/Tourmaline/Obsidian/Copper selector,
+   function, or data field. ══ */
 
-/* ── 1. Meet the Garnet Family — five rostered species. Grid uses
-   .fg-card-grid--garnet-roster (flex-wrap + centered rows), which naturally
-   lays out as three cards on row one and two centered on row two at
-   desktop widths, without a grid-template-areas hack. "QUICK VIEW →"
-   button copy per the approved brief (an opt-in fgStoneCardHtml field,
-   opts.qvLabel, defaulting to the existing "Quick View" text everywhere
-   else so no other guide's cards are affected). ── */
-function familyGuideMeetGarnetFamilyHtml(guide){
-  const m = guide.meetGarnetFamily;
+/* ── Hero — dedicated to Garnet because its three-image collage mixes two
+   family-guide-only assets (Pyrope, Spessartine — no Stone ID, so they
+   cannot resolve through fgCrystal/firstEncyclopediaPhoto) with one
+   existing-roster image (Uvarovite, C-0355, resolved normally so its
+   underlying encyclopedia image is reused, not replaced). Each of the
+   three collage images gets its own restrained white well
+   (.fg-garnet-hero-well, object-fit:contain) rather than the shared
+   .fg-hero-media-grid's cover-cropped, non-white cells, per the brief's
+   explicit white-image-well requirement. No divider, no emphasis line, no
+   supporting line — the hero ends after the reflective prompt. ── */
+function fgGarnetHeroWellHtml(m){
   if(!m) return '';
-  const cards = (m.members||[]).map(mem=>fgStoneCardHtml(mem, {showIdentity:true, placeholderOk:true, qvLabel:'QUICK VIEW →'})).filter(Boolean).join('');
-  return `<section class="fg-section" id="fg-meet-garnet-family">
-    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Garnet Family')}</h2>
+  let src = '', alt = m.alt || m.name || '';
+  if(m.url){
+    src = m.url;
+  }else if(m.stoneId){
+    const c = fgCrystal(m.stoneId);
+    if(c){
+      src = (typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+      alt = alt || c.n;
+    }
+  }
+  if(!src) return '';
+  return `<div class="fg-garnet-hero-well"><img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="lazy"></div>`;
+}
+/* 2026-08 correction: the reflective prompt sits below the complete
+   two-column .fg-hero-grid, spanning the hero's full interior width. The
+   lead-in ("Garnet asks:") and the question are two separate block-level
+   divs (not inline spans relying on wrapping), so "Garnet asks:" always
+   renders on its own first line and the question always begins on its own
+   next line, at every viewport width — a reliable structural break rather
+   than an accidental wrap. */
+function familyGuideGarnetHeroHtml(guide){
+  const hero = guide.hero||{};
+  const wells = (hero.media||[]).map(fgGarnetHeroWellHtml).filter(Boolean).join('');
+  return `<section class="fg-hero fg-garnet-hero" id="fg-hero">
+    <div class="fg-hero-grid">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.subhead?`<p class="fg-garnet-hero-subhead">${escapeAttr(hero.subhead)}</p>`:''}
+        ${hero.openingParagraph?`<p class="fg-hero-body">${escapeAttr(hero.openingParagraph)}</p>`:''}
+      </div>
+      <div class="fg-garnet-hero-wells">${wells}</div>
+    </div>
+    ${hero.question?`<div class="fg-garnet-hero-prompt">
+      ${hero.promptLeadIn?`<div class="fg-garnet-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+      <div class="fg-garnet-hero-prompt-question">${escapeAttr(hero.question)}</div>
+    </div>`:''}
+  </section>`;
+}
+
+/* ── Geological bridge — one unboxed paragraph sitting outside the hero, in
+   the complete shared primary content width, giving a visually grounded
+   (quiet side-accent, not a large decorative card) transition into Meet
+   the Garnets. 2026-08 correction: previously constrained to an arbitrary
+   82ch measure, which read as narrower than every other Garnet section —
+   now uses the full frame like the rest of the page. ── */
+function familyGuideGarnetBridgeHtml(guide){
+  const text = guide.geologicalBridge;
+  if(!text) return '';
+  return `<div class="fg-garnet-bridge"><p>${escapeAttr(text)}</p></div>`;
+}
+
+/* ── Meet the Garnets — normalized (2026-08 correction) to reuse the
+   established Featured Copper Minerals card anatomy verbatim: the shared
+   .fg-mineralcard/.fg-mineralcard-media/.fg-mineralcard-header/
+   .fg-stonecard-qv/.fg-mineralcard-text component and the
+   .fg-card-grid--garnet-roster grid Copper's six-card roster already uses
+   (three-up/two-row desktop, 46%-flex tablet, 100%-flex mobile — all via
+   existing rules, no new Garnet-specific grid CSS needed). Only the image
+   resolution differs from fgMineralCardHtml's default (member.stoneId ->
+   firstEncyclopediaPhoto only): Spessartine has a Stone ID (C-0131) but no
+   canonical encyclopedia photo on file, so it — like Pyrope — needs its
+   uploaded family-guide asset instead. fgGarnetSpeciesImage (shared with
+   the Six Foundations panel thumbnails below) resolves member.image first,
+   falling back to firstEncyclopediaPhoto(stoneId), so every card still
+   shows its exact existing approved image. Pyrope has no stoneId at all —
+   its card renders through the same unlinked branch fgMineralCardHtml
+   already established for Copper's Plancheite: no button, no onclick, no
+   Quick View, name still anchored in the same header-row position as the
+   other five. ── */
+function fgGarnetFeaturedCardHtml(mem){
+  if(!mem) return '';
+  const crystal = mem.stoneId ? fgCrystal(mem.stoneId) : null;
+  const src = mem.image || (crystal && typeof firstEncyclopediaPhoto==='function' ? firstEncyclopediaPhoto(crystal) : '');
+  const imgHtml = src
+    ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(mem.name||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const clickable = !!crystal;
+  const mediaHtml = clickable
+    ? `<button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(crystal.i)}')" title="Open ${escapeAttr(crystal.n)} in Quick View">${imgHtml}</button>`
+    : `<div class="fg-mineralcard-media" title="${escapeAttr(mem.name||'')} — no standalone encyclopedia entry">${imgHtml}</div>`;
+  const qvHtml = clickable
+    ? `<button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(crystal.i)}')">Quick View</button>`
+    : '';
+  return `<div class="fg-mineralcard${clickable?'':' fg-mineralcard--unlinked'}">
+    ${mediaHtml}
+    <div class="fg-mineralcard-body">
+      <div class="fg-mineralcard-header">
+        <div class="fg-stonecard-name">${escapeAttr(mem.name||'')}</div>
+        ${qvHtml}
+      </div>
+      <p class="fg-mineralcard-text">${escapeAttr(mem.caption||'')}</p>
+    </div>
+  </div>`;
+}
+function familyGuideMeetTheGarnetsHtml(guide){
+  const m = guide.meetTheGarnets;
+  if(!m) return '';
+  const cards = (m.members||[]).map(fgGarnetFeaturedCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-the-garnets">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Garnets')}</h2>
     ${m.intro?`<p class="fg-section-intro">${escapeAttr(m.intro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
   </section>`;
 }
 
-/* ── 2. Garnet Is a Group, Not One Stone — explanatory copy widened to a
-   comfortable reading measure, ending in an emphasized inline line rather
-   than a separate bordered three-box visual (removed per the layout
-   correction — the prose already makes the point). ── */
-function familyGuideGarnetGroupHtml(guide){
-  const g = guide.garnetGroup;
-  if(!g) return '';
-  const paras = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  return `<section class="fg-section" id="fg-garnet-group">
-    <h2 class="fg-h2">${escapeAttr(g.title||'Garnet Is a Group, Not One Stone')}</h2>
-    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
-    <div class="fg-prose-block">
-      ${paras}
-      ${g.supportingLine?`<p class="fg-prose fg-prose-emphasis">${escapeAttr(g.supportingLine)}</p>`:''}
-    </div>
-  </section>`;
+/* ── Six Foundations, Two Connected Groups — one integrated teaching
+   composition: two balanced panels (Pyralspite/Ugrandite) plus a
+   connecting note, all within one .fg-section so the standard 76px/56px
+   major-section gap applies once, after the whole composition, per the
+   brief's "integrated composition = one major section" rule. Small
+   non-clickable thumbnails (2026-08 correction) are added beside each
+   name/caption pair — visual reminders only, so readers can connect a
+   panel entry back to its Meet the Garnets tile without a second large
+   gallery. Each thumbnail resolves through the exact same image already
+   used for that species in Meet the Garnets (fgGarnetSpeciesImage below),
+   never a re-fetched or substituted image. Ugrandite's item order (Andradite, Grossular,
+   Uvarovite) is authored directly in guide.sixFoundationsTwoGroups.
+   rightPanel.items — this function renders items in whatever order the
+   data provides, it does not itself impose an order. ── */
+function fgGarnetSpeciesImage(name, guide){
+  const members = (guide.meetTheGarnets && guide.meetTheGarnets.members) || [];
+  const mem = members.find(m => m.name === name);
+  if(!mem) return { src: '', alt: name };
+  let src = '';
+  if(mem.image){
+    src = mem.image;
+  }else if(mem.stoneId){
+    const c = fgCrystal(mem.stoneId);
+    src = c && typeof firstEncyclopediaPhoto==='function' ? firstEncyclopediaPhoto(c) : '';
+  }
+  return { src, alt: name };
 }
-
-/* ── 3. The Major Garnet Branches — now the dominant, widened visual
-   section of the page. Carries the parent/branch/species diagram plus,
-   folded in beneath it, the color explanation (two paragraphs + a compact
-   horizontal color strip) and a compact "Familiar Names Within the Family"
-   note — replacing what were three separate, narrower, card-heavy sections
-   in the previous pass. All content remains entirely data-driven from
-   guide.majorBranches; nothing here reorders or renames the branches,
-   species, colors, or name-map relationships. ── */
-const FG_GARNET_COLOR_SWATCHES = {
-  'deep red': '#7a2a2a',
-  'orange': '#c4713a',
-  'yellow to honey': '#d4a53a',
-  'green': '#4a7a4a',
-  'brown to nearly black': '#3a2a20',
-  'purple-red or color-changing': '#7a3a5a'
-};
-function familyGuideGarnetBranchesHtml(guide){
-  const b = guide.majorBranches;
-  if(!b) return '';
-  const branchesHtml = (b.branches||[]).map(br=>{
-    const species = (br.species||[]).map(sp=>`<div class="fg-tree-species-item">
-      <div class="fg-tree-species-name">${escapeAttr(sp.name||'')}</div>
-      <p class="fg-tree-species-caption">${escapeAttr(sp.caption||'')}</p>
-    </div>`).join('');
-    return `<div class="fg-tree-branch">
-      <div class="fg-tree-branch-title">${escapeAttr(br.title||'')}</div>
-      ${br.secondaryLabel?`<div class="fg-tree-branch-secondary">${escapeAttr(br.secondaryLabel)}</div>`:''}
-      <div class="fg-tree-species">${species}</div>
-    </div>`;
+function fgGarnetGroupPanelHtml(panel, modifier, guide){
+  if(!panel) return '';
+  const items = (panel.items||[]).map(it=>{
+    const img = fgGarnetSpeciesImage(it.name, guide);
+    const mediaHtml = img.src
+      ? `<div class="fg-garnet-group-item-media"><img src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt)}" loading="lazy"></div>`
+      : `<div class="fg-garnet-group-item-media"></div>`;
+    return `<div class="fg-garnet-group-item">
+    ${mediaHtml}
+    <div class="fg-garnet-group-item-text">
+      <div class="fg-garnet-group-item-name">${escapeAttr(it.name||'')}</div>
+      <p class="fg-garnet-group-item-caption">${escapeAttr(it.caption||'')}</p>
+    </div>
+  </div>`;
   }).join('');
-  const colorParas = (b.colorParagraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const colorChips = (b.colorCells||[]).map(cell=>{
-    const key = String(cell.label||'').toLowerCase().trim();
-    const color = FG_GARNET_COLOR_SWATCHES[key] || 'var(--stone3)';
-    return `<span class="fg-color-chip"><span class="fg-color-chip-dot" style="background:${color}"></span>${escapeAttr(cell.label||'')}</span>`;
-  }).join('');
-  const nameRows = (b.nameMap||[]).map(row=>`<div class="fg-namemap-row"><span class="fg-namemap-from">${escapeAttr(row.from||'')}</span><span class="fg-namemap-arrow">→</span><span>${escapeAttr(row.to||'')}</span></div>`).join('');
-  return `<section class="fg-section" id="fg-garnet-branches">
-    <h2 class="fg-h2">${escapeAttr(b.title||'The Major Garnet Branches')}</h2>
-    ${b.intro?`<p class="fg-section-intro">${escapeAttr(b.intro)}</p>`:''}
-    <div class="fg-tree">
-      <div class="fg-tree-parent">
-        <div class="fg-tree-parent-title">${escapeAttr((b.parent&&b.parent.title)||'GARNET')}</div>
-        <div class="fg-tree-parent-sub">${escapeAttr((b.parent&&b.parent.sub)||'')}</div>
-      </div>
-      <div class="fg-tree-branches">${branchesHtml}</div>
+  return `<div class="fg-garnet-group-panel fg-garnet-group-panel--${modifier}">
+    <div class="fg-garnet-group-heading">${escapeAttr(panel.heading||'')}</div>
+    ${panel.intro?`<p class="fg-garnet-group-intro">${escapeAttr(panel.intro)}</p>`:''}
+    ${items}
+  </div>`;
+}
+function familyGuideSixFoundationsHtml(guide){
+  const s = guide.sixFoundationsTwoGroups;
+  if(!s) return '';
+  return `<section class="fg-section" id="fg-six-foundations">
+    <h2 class="fg-h2">${escapeAttr(s.title||'Six Foundations, Two Connected Groups')}</h2>
+    ${s.intro?`<p class="fg-section-intro">${escapeAttr(s.intro)}</p>`:''}
+    <div class="fg-garnet-groups">
+      ${fgGarnetGroupPanelHtml(s.leftPanel, 'left', guide)}
+      ${fgGarnetGroupPanelHtml(s.rightPanel, 'right', guide)}
     </div>
-    ${colorParas?`<div class="fg-prose-block fg-garnet-branches-subblock">${colorParas}</div>`:''}
-    ${colorChips?`<div class="fg-color-strip">${colorChips}</div>`:''}
-    ${b.colorCaption?`<p class="fg-note-center">${escapeAttr(b.colorCaption)}</p>`:''}
-    ${nameRows?`<div class="fg-names-note">
-      <div class="fg-names-note-title">${escapeAttr(b.namesTitle||'Familiar Names Within the Family')}</div>
-      <div class="fg-namemap">${nameRows}</div>
-      ${b.namesNote?`<p class="fg-fact-body fg-note-center">${escapeAttr(b.namesNote)}</p>`:''}
-    </div>`:''}
+    ${s.connectedNote?`<p class="fg-garnet-connected-note">${escapeAttr(s.connectedNote)}</p>`:''}
   </section>`;
 }
 
-/* ── 4. How Garnet Appears — replaces the former separate "How to
-   Recognize Garnet" and "From Crystal to Polished Stone" sections: one
-   four-stage visual sequence (each stage renders as a labeled pending
-   placeholder per the brief's explicit allowance, rather than guessing
-   which of Almandine Garnet's existing canonical photos depicts which
-   stage), followed by one compact recognition list instead of five
-   separate cards with CSS silhouettes. ── */
-function familyGuideGarnetAppearanceHtml(guide){
-  const a = guide.appearance;
-  if(!a) return '';
-  const stages = (a.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
-    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
-    <div class="fg-progression-number">${i+1}</div>
-    <div class="fg-progression-body">
-      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
-      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
-    </div>
-  </div>`).join('');
-  const recognitionItems = fgList(a.recognitionItems||[], 'fg-garnet-plain-list');
-  return `<section class="fg-section" id="fg-garnet-appearance">
-    <h2 class="fg-h2">${escapeAttr(a.title||'How Garnet Appears')}</h2>
-    ${a.intro?`<p class="fg-section-intro">${escapeAttr(a.intro)}</p>`:''}
-    <div class="fg-progression">${stages}</div>
-    <div class="fg-garnet-plain-list-wrap">${recognitionItems}</div>
+/* ── Where Familiar Garnet Names Fit — four compact illustrated cards
+   (Rhodolite, Tsavorite, Hessonite, Demantoid). Each uses its own uploaded
+   family-guide asset (guide.familiarNames.cards[].image, a direct Supabase
+   Storage URL — none of these four has a Stone ID), rendered in a small
+   fixed-height white well so the photo stays secondary to the relationship
+   copy, per the brief. No Quick View, no openDetail() call, no invented
+   encyclopedia link — see the brief's explicit "do not infer links"
+   instruction. ── */
+function fgGarnetNameCardHtml(card){
+  if(!card) return '';
+  const imgHtml = card.image
+    ? `<img src="${escapeAttr(card.image)}" alt="${escapeAttr(card.alt||card.name||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  return `<div class="fg-garnet-name-card">
+    <div class="fg-garnet-name-media">${imgHtml}</div>
+    <div class="fg-garnet-name-title">${escapeAttr(card.name||'')}</div>
+    <p class="fg-garnet-name-caption">${escapeAttr(card.caption||'')}</p>
+  </div>`;
+}
+function familyGuideFamiliarNamesHtml(guide){
+  const f = guide.familiarNames;
+  if(!f) return '';
+  const cards = (f.cards||[]).map(fgGarnetNameCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-familiar-names">
+    <h2 class="fg-h2">${escapeAttr(f.title||'Where Familiar Garnet Names Fit')}</h2>
+    ${f.intro?`<p class="fg-section-intro">${escapeAttr(f.intro)}</p>`:''}
+    <div class="fg-garnet-name-grid">${cards}</div>
   </section>`;
 }
 
-/* ── 5. Garnet in Your Collection — a simple compact list (not four large
-   bordered rows) plus the compact linked list of the five canonical
-   entries (deliberately not a repeat of the full five-card roster gallery
-   from Section 1). ── */
+/* ── Garnet in Your Collection — three compact text-only teaching cards
+   (Read the full name / Let color guide, not decide / Notice how it
+   occurs). Deliberately its own small renderer rather than reusing the
+   shared familyGuideCollectionHtml's Care-for-It/Remember-This/Watch-For
+   schema, which doesn't fit this brief's three-card, no-thumbnail,
+   no-catalog-links design. ── */
+function fgGarnetCollectionCardHtml(card){
+  if(!card) return '';
+  return `<div class="fg-garnet-collection-card">
+    <div class="fg-garnet-collection-card-heading">${escapeAttr(card.heading||'')}</div>
+    <p class="fg-garnet-collection-card-body">${escapeAttr(card.body||'')}</p>
+  </div>`;
+}
 function familyGuideGarnetCollectionHtml(guide){
   const c = guide.garnetCollection;
   if(!c) return '';
-  const listItems = fgList(c.listItems||[], 'fg-garnet-plain-list');
-  const links = (c.catalogLinks||[]).map(l=>{
-    const cr = fgCrystal(l.stoneId);
-    if(!cr) return '';
-    return `<button type="button" class="fg-catalog-link" onclick="openDetail('${escapeAttr(cr.i)}')">${escapeAttr(l.name||cr.n)}</button>`;
-  }).filter(Boolean).join('');
+  const cards = (c.cards||[]).map(fgGarnetCollectionCardHtml).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-garnet-collection">
     <h2 class="fg-h2">${escapeAttr(c.title||'Garnet in Your Collection')}</h2>
     ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
-    <div class="fg-garnet-plain-list-wrap">${listItems}</div>
-    <div class="fg-catalog-links">${links}</div>
+    <div class="fg-garnet-collection-grid">${cards}</div>
   </section>`;
 }
 
 /* ── Garnet guide assembly — its own approved section order. Purely
    additive: nothing here changes any other guide's assembly, data, or
-   rendered output. ── */
+   rendered output. familyGuideImageCreditsHtml is deliberately not called
+   here — Photo Credits routing is the shared footer link -> credits.html#
+   garnet (see fgSetFooterCreditsLink's anchoredSlugs), matching the
+   Copper/Calcite pattern, so no redundant in-page credits disclosure is
+   rendered. ── */
 function familyGuideGarnetHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
-    ${familyGuideHeroHtml(guide)}
-    ${familyGuideMeetGarnetFamilyHtml(guide)}
-    ${familyGuideGarnetGroupHtml(guide)}
-    ${familyGuideGarnetBranchesHtml(guide)}
-    ${familyGuideGarnetAppearanceHtml(guide)}
+    ${familyGuideGarnetHeroHtml(guide)}
+    ${familyGuideGarnetBridgeHtml(guide)}
+    ${familyGuideMeetTheGarnetsHtml(guide)}
+    ${familyGuideSixFoundationsHtml(guide)}
+    ${familyGuideFamiliarNamesHtml(guide)}
     ${familyGuideGarnetCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
-    ${familyGuideImageCreditsHtml(guide)}
   </div>`;
 }
 

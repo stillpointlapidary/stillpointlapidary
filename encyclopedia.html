@@ -1106,19 +1106,25 @@
          and C101_TIERS are unchanged and still hold the full roster for a
          possible future "All Families" view. -->
     <div class="c101-block">
-      <div class="c101-h2">Ten Families, Many Stories</div>
-      <p class="fg-section-intro">Ten richly varied crystal families, each with its own patterns, relationships, and ways of taking shape.</p>
+      <div class="c101-h2">Twelve Families, Many Stories</div>
+      <p class="fg-section-intro">Choose a family to open its guide or browse its stones.</p>
       <div class="fam-grid fam-grid--primary" id="fam-cards"></div>
     </div>
 
-    <!-- Smaller Families, Distinct Stories — populated by
-         renderSecondaryFamilies() in 101.js (C101_SECONDARY_FAMILIES). First
-         entry: Copper Minerals (2026-07-31), linking to the new Copper
-         family guide via openFamilyGuide('copper'). -->
+    <!-- Smaller Families, Distinct Stories (2026-08-03) — six compact
+         horizontal editorial cards populated by renderSecondaryFamilies()
+         in 101.js (C101_SECONDARY_FAMILIES). Explore links only exist for
+         Gypsum/Corundum/Spodumene, whose members have a clean `stones.family`
+         filter value; Mica/Zoisite/Jade render with no link (see 101.js
+         comment above C101_SECONDARY_FAMILIES). -->
     <div class="c101-block">
       <div class="c101-h2">Smaller Families, Distinct Stories</div>
-      <p class="fg-section-intro">Focused guides to families with narrower branches, strong identities, and their own place in the crystal world.</p>
-      <div class="fam-grid fam-grid--primary fam-grid--secondary" id="fam-cards-secondary"></div>
+      <p class="fg-section-intro smallfam-section-intro">Some families have only a few familiar members, but their relationships can be just as revealing. Meet six smaller groups connected by shared chemistry, structure, or history.</p>
+      <div class="smallfam-grid" id="fam-cards-secondary"></div>
+    </div>
+
+    <div class="c101-block c101-families-closing">
+      <p class="c101-families-closing-text">Every stone has an individual story, but families reveal the patterns beneath it. Learn the family, and even an unfamiliar crystal begins to feel a little more familiar.</p>
     </div>
   </div>
 
