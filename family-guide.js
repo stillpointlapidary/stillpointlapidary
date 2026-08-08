@@ -268,6 +268,16 @@ function fgHeroMediaImgs(guide){
   if(!imgs.length && guide.hero && guide.hero.image){
     imgs.push(`<img src="${escapeAttr(SUPABASE_ENC+guide.hero.image)}" alt="${escapeAttr(guide.displayName||guide.slug)}">`);
   }
+  // guide.hero.imageUrl (2026-08-07, added for Agate) — a fully-resolved
+  // image path (local assets/family-guide-<slug>/ file or an absolute URL)
+  // for a curated, non-stone-derived family photograph, distinct from
+  // guide.hero.image above which always prefixes SUPABASE_ENC and therefore
+  // only ever resolves to the encyclopedia stone-photo bucket. No other
+  // guide sets this field, so every existing hero.image/mediaStoneIds/
+  // mediaDynamicFilterValue path is unaffected.
+  if(!imgs.length && guide.hero && guide.hero.imageUrl){
+    imgs.push(`<img src="${escapeAttr(guide.hero.imageUrl)}" alt="${escapeAttr(guide.hero.imageAlt||guide.displayName||guide.slug)}">`);
+  }
   return imgs;
 }
 function fgHeroMediaHtml(guide){
@@ -301,7 +311,9 @@ function familyGuideHeroHtml(guide){
         ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
         <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
         ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
-        ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+        ${Array.isArray(hero.condensedIntro)
+          ? hero.condensedIntro.map(p=>`<p class="fg-hero-body">${escapeAttr(p)}</p>`).join('')
+          : (hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:'')}
         ${hero.emphasisLine?`<p class="fg-hero-emphasis">${escapeAttr(hero.emphasisLine)}</p>`:''}
         ${hero.question?`<div class="fg-hero-prompt">
           ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
@@ -420,12 +432,27 @@ function fgStoneCardHtml(member, opts){
     phraseText = 'Editorial copy pending.';
     phraseClass += ' fg-placeholder-note';
   }
+  // opts.splitPhrase (2026-08-07, added for Agate's visual correction pass)
+  // — breaks phraseText into two visual paragraphs at the first sentence
+  // boundary ("first sentence. rest.") instead of one dense block, purely
+  // as a presentation split; the underlying approved copy string is
+  // unchanged. Opt-in only — no other caller sets this, so every existing
+  // card's single-block phrase is byte-for-byte unaffected.
+  let phraseInner = escapeAttr(phraseText);
+  if(opts.splitPhrase && phraseText){
+    const splitAt = phraseText.indexOf('. ');
+    if(splitAt !== -1){
+      const first = phraseText.slice(0, splitAt+1);
+      const rest = phraseText.slice(splitAt+2);
+      phraseInner = `<span class="fg-stonecard-phrase-p">${escapeAttr(first)}</span><span class="fg-stonecard-phrase-p">${escapeAttr(rest)}</span>`;
+    }
+  }
   return `<div class="fg-stonecard"${idAttr}>
     <button type="button" class="fg-stonecard-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
     <div class="fg-stonecard-body">
       <div class="fg-stonecard-name">${escapeAttr(c.n)}</div>
       ${identityHtml}
-      <div class="${phraseClass}">${escapeAttr(phraseText)}</div>
+      <div class="${phraseClass}">${phraseInner}</div>
       ${badgeHtml}
       <button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(c.i)}')">${escapeAttr(opts.qvLabel||'Quick View')}</button>
     </div>
@@ -679,6 +706,26 @@ function familyGuideClosingHtml(guide){
   // No other guide's data sets this field, so their closing panels are
   // completely unchanged by this addition.
   const supporting = guide.closingSupportingCopy || '';
+  const supportingHtml = Array.isArray(supporting)
+    ? supporting.map(p=>`<p class="fg-closing-supporting">${escapeAttr(p)}</p>`).join('')
+    : (supporting?`<p class="fg-closing-supporting">${escapeAttr(supporting)}</p>`:'');
+  // guide.closingBridge (2026-08-07, added for Agate's visual correction
+  // pass) — ordinary left-aligned editorial paragraphs rendered as their
+  // own .fg-section, immediately before the closing box, using the same
+  // .fg-garnet-bridge treatment already established on this page for "What
+  // Agate Actually Is." Distinct from closingSupportingCopy above, which
+  // renders inside the box itself. No other guide sets this field.
+  const bridge = guide.closingBridge || [];
+  const bridgeHtml = bridge.length
+    ? `<div class="fg-section" id="fg-closing-bridge"><div class="fg-garnet-bridge">${bridge.map(p=>`<p>${escapeAttr(p)}</p>`).join('')}</div></div>`
+    : '';
+  // guide.closingEmphasis (2026-08-07, added for Agate) — an italicized
+  // clause appended inline to the end of the same closing-line paragraph,
+  // so "Agate does not reveal everything at once. It rewards the second
+  // look." reads as one continuous statement rather than two stacked
+  // elements. Opt-in only; every other guide's closingCallout renders as a
+  // single, fully-italic line exactly as before.
+  const emphasis = guide.closingEmphasis || '';
   // guide.closingButton (2026-07-31, added for Copper) — an optional
   // override for the Return button's label and destination. Every other
   // guide has no closingButton field, so they keep the exact original
@@ -689,9 +736,10 @@ function familyGuideClosingHtml(guide){
   const cb = guide.closingButton;
   const btnLabel = (cb && cb.label) || 'Return to Encyclopedia';
   const btnOnclick = (cb && cb.target==='crystalFamilies') ? 'fgReturnToCrystalFamilies()' : "switchTabByName('encyclopedia')";
-  return `<section class="fg-closing" id="fg-closing">
-    ${line?`<p class="fg-closing-line">${escapeAttr(line)}</p>`:''}
-    ${supporting?`<p class="fg-closing-supporting">${escapeAttr(supporting)}</p>`:''}
+  const lineHtml = line?`<p class="fg-closing-line">${escapeAttr(line)}${emphasis?` <em>${escapeAttr(emphasis)}</em>`:''}</p>`:'';
+  const bodyHtml = guide.closingSupportingFirst ? (supportingHtml + lineHtml) : (lineHtml + supportingHtml);
+  return `${bridgeHtml}<section class="fg-closing" id="fg-closing">
+    ${bodyHtml}
     <button type="button" class="btn btn-accent fg-closing-btn" onclick="${btnOnclick}">${escapeAttr(btnLabel)}</button>
   </section>`;
 }
@@ -1416,7 +1464,7 @@ function familyGuideMeetFamilyHtml(guide){
   // existing --2/--4 modifiers. Chalcedony and Agate never set this, so the
   // computed gridMod above still decides their layout exactly as before.
   if(m.gridClass) gridMod = m.gridClass;
-  const cards = members.map(mem=>fgExpressionCardHtml(mem, {showIdentity:true, placeholderOk:true})).filter(Boolean).join('');
+  const cards = members.map(mem=>fgExpressionCardHtml(mem, {showIdentity:true, placeholderOk:true, splitPhrase:m.splitPhrase})).filter(Boolean).join('');
   const emptyNote = (m.dynamicFilterValue && !members.length)
     ? `<p class="fg-fact-body fg-note-center">Live roster still loading — please check back once the encyclopedia has finished loading.</p>` : '';
   // m.useSectionIntro (2026-07-23, added for Jasper) opts into the new shared
@@ -1460,26 +1508,26 @@ function familyGuideWhatChalcedonyIsHtml(guide){
   </section>`;
 }
 
-/* ── 3. What Agate Actually Is (2026-07-23, first Agate pass) — Agate's own
-   parallel to familyGuideWhatChalcedonyIsHtml above. Kept as a separate,
-   dedicated function/data field (guide.whatAgateIs) rather than renaming or
-   reusing Chalcedony's, so the approved Chalcedony guide's code and output
-   are left completely untouched. Explains that Agate is banded/patterned
-   chalcedony formed by successive silica deposition in a cavity — a pattern
-   distinction, not a different mineral. No approved licensed photography
-   exists yet, so the unbanded-Chalcedony/banded-Agate comparison renders as
-   labeled pending placeholders. ── */
+/* ── 2. What Agate Actually Is (2026-08-07, revision pass implementing
+   Christie's locked Agate Family Guide brief) — a plain unboxed identity
+   bridge, matching familyGuideWhatJasperIsHtml's pattern exactly (no image,
+   no compare-grid, no placeholder wells; the approved brief explicitly
+   calls for "one restrained identity module, not a large specimen feature"
+   and says the section "can also work as prose without an additional
+   image"). Replaces the prior pass's unbanded-Chalcedony/banded-Agate
+   placeholder comparison entirely — that markup and its two "Photo
+   pending" wells are removed, not just unassembled. Reuses the shared
+   .fg-garnet-bridge paragraph styling already established by Jasper/
+   Garnet's own hero-to-roster bridges. guide.whatAgateIs is unchanged as
+   the data field name; only this function's markup changes. ── */
 function familyGuideWhatAgateIsHtml(guide){
   const w = guide.whatAgateIs;
   if(!w) return '';
-  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const paras = (w.paragraphs||[]).map(p=>`<p>${escapeAttr(p)}</p>`).join('');
+  if(!paras) return '';
   return `<section class="fg-section" id="fg-what-agate-is">
     <h2 class="fg-h2">${escapeAttr(w.title||'What Agate Actually Is')}</h2>
-    <div class="fg-prose-block">${paras}</div>
-    <div class="fg-compare-grid">
-      <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending — unbanded Chalcedony</span></div></div>
-      <div class="fg-single-visual"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending — banded Agate</span></div></div>
-    </div>
+    <div class="fg-garnet-bridge">${paras}</div>
   </section>`;
 }
 
@@ -1607,28 +1655,147 @@ function familyGuideChalcedonyHtml(guide){
   </div>`;
 }
 
-/* ── Agate guide assembly (2026-07-23) — the second guide to use Agate's
-   own "What Agate Actually Is" section, alongside the same generic
-   Chalcedony/Agate/Jasper Fit, Color/Translucency/Surface, Forms, and Wider
-   Quartz Story sections Chalcedony's page already established (unmodified,
-   just fed Agate's own guide data). Meet the Agate Family resolves its
-   roster live (guide.meetTheFamily.dynamicFilterValue:"Agate") rather than
-   from a hardcoded members list — see familyGuideMeetFamilyHtml() above for
-   why. Purely additive: nothing here changes Chalcedony's assembly, data, or
-   rendered output. ── */
+/* ══ AGATE FAMILY GUIDE — Implementation pass (2026-08-07) building
+   Christie's locked Agate Family Guide brief verbatim: approved copy,
+   approved 8-section order, and a fixed 10-stone featured roster (replacing
+   the prior pass's live dynamicFilterValue resolution, which this brief's
+   own roster now supersedes). familyGuideAgateJasperFitHtml, ColorTranslucency,
+   Forms, and WiderQuartzStory are no longer used by Agate's assembly — they
+   remain fully intact and still power Chalcedony's guide unchanged. Four new
+   section renderers below (pattern decoder, comparison table, naming
+   examples, collection panels) are Agate-only additions that touch no other
+   guide's function, data, or output. ══ */
+
+/* ── 4. How Agate Gets Its Patterns — a compact four-part image-led pattern
+   decoder (layered growth, mineral inclusions, botryoidal growth,
+   interference color), reusing fgPhotoCardHtml exactly as Jasper's own
+   pattern-guide module does. Three panels' images are existing approved
+   roster photos via singleStoneId; the interference-color panel uses
+   opts.folder:'family-guide-agate' to resolve its item.image
+   (fire-agate-iridescence-wc.webp) from the local Agate asset folder
+   instead of the default family-guide-calcite folder. ── */
+function familyGuideAgatePatternDecoderHtml(guide){
+  const p = guide.agatePatternDecoder;
+  if(!p) return '';
+  const cards = (p.items||[]).map(cat=>fgPhotoCardHtml(cat, {folder:'family-guide-agate'})).join('');
+  return `<section class="fg-section" id="fg-agate-pattern">
+    <h2 class="fg-h2">${escapeAttr(p.title||'How Agate Gets Its Patterns')}</h2>
+    ${p.intro?`<p class="fg-section-intro">${escapeAttr(p.intro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--4">${cards}</div>
+  </section>`;
+}
+
+/* ── 5. Agate, Chalcedony, or Jasper? — a compact three-column comparison
+   table (Material / What it tells you / What to notice), reusing the
+   generic fgFormationTableHtml table renderer Copper's "One Deposit, Many
+   Outcomes" module already established. Deliberately does not reuse
+   familyGuideAgateJasperFitHtml's branch-card component — the approved
+   brief calls for exact tabular comparison, not photo cards or catalog
+   links, and explicitly says the module "does not need decorative specimen
+   cards." familyGuideAgateJasperFitHtml itself is untouched and still
+   powers Chalcedony's and Jasper's own relationship sections. ── */
+function familyGuideAgateComparisonHtml(guide){
+  const c = guide.agateComparison;
+  if(!c) return '';
+  return `<section class="fg-section" id="fg-agate-comparison">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Agate, Chalcedony, or Jasper?')}</h2>
+    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
+    ${fgFormationTableHtml(c.table)}
+    ${c.note?`<p class="fg-fact-body fg-note-center">${escapeAttr(c.note)}</p>`:''}
+  </section>`;
+}
+
+/* ── 6. What an Agate Name Can Tell You — three compact illustrated naming
+   examples (Gobi Agate, Thunderegg, Turritella Agate), reusing
+   fgPhotoCardHtml's singleStoneId branch and the existing .fg-photo-grid--3
+   modifier. Grape Agate is deliberately not repeated here — it stays in the
+   featured roster and pattern decoder only, per the approved brief. ── */
+function familyGuideAgateNamingHtml(guide){
+  const n = guide.agateNaming;
+  if(!n) return '';
+  const cards = (n.items||[]).map(cat=>fgPhotoCardHtml(cat)).join('');
+  const introHtml = Array.isArray(n.intro)
+    ? n.intro.map(p=>`<p class="fg-section-intro">${escapeAttr(p)}</p>`).join('')
+    : (n.intro?`<p class="fg-section-intro">${escapeAttr(n.intro)}</p>`:'');
+  return `<section class="fg-section" id="fg-agate-naming">
+    <h2 class="fg-h2">${escapeAttr(n.title||'What an Agate Name Can Tell You')}</h2>
+    ${introHtml}
+    <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
+  </section>`;
+}
+
+/* ── 7. Agate in Your Collection — three restrained, text-only care panels,
+   reusing the generic fgGarnetCollectionCardHtml/.fg-garnet-collection-grid
+   component exactly as Jasper's own collection section does. No decorative
+   specimen image, per the approved brief. ── */
+function familyGuideAgateCollectionHtml(guide){
+  const c = guide.agateCollection;
+  if(!c) return '';
+  const cards = (c.cards||[]).map(fgGarnetCollectionCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-agate-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Agate in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-garnet-collection-grid">${cards}</div>
+  </section>`;
+}
+
+/* ── Hero — dedicated Agate layout (visual correction, 2026-08-07, third
+   pass). The shared familyGuideHeroHtml keeps "Agate asks" inside the
+   two-column .fg-hero-copy, so its available width is capped by whatever
+   is left after the media column — not enough for Agate's approved
+   57-character question to fit on one line at normal desktop width
+   without either shrinking the image to a sliver or shrinking the
+   approved 28px prompt typography, both of which the brief rules out.
+   Feldspar already solved exactly this by breaking guide.hero.question
+   out of .fg-hero-copy into its own full-width fg-hero-prompt row below
+   the two-column grid (familyGuideFeldsparHeroHtml) — this reuses that
+   exact established pattern rather than inventing a new one, so Agate
+   gets its own dedicated hero function for the same reason Feldspar and
+   Calcite do. Everything else (eyebrow/title/subtitle/two-paragraph
+   condensedIntro/media) is identical to the shared familyGuideHeroHtml
+   markup. ── */
+function familyGuideAgateHeroHtml(guide){
+  const hero = guide.hero||{};
+  return `<section class="fg-hero" id="fg-hero">
+    <div class="fg-hero-grid">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
+        ${Array.isArray(hero.condensedIntro)
+          ? hero.condensedIntro.map(p=>`<p class="fg-hero-body">${escapeAttr(p)}</p>`).join('')
+          : (hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:'')}
+      </div>
+      ${fgHeroMediaHtml(guide)}
+    </div>
+    ${hero.question?`<div class="fg-hero-prompt fg-agate-hero-prompt">
+      ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+      <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+      ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
+    </div>`:''}
+  </section>`;
+}
+
+/* ── Agate guide assembly — approved 8-section order: Hero, What Agate
+   Actually Is, Meet Ten Agate Expressions, How Agate Gets Its Patterns,
+   Agate/Chalcedony/Jasper comparison, What an Agate Name Can Tell You,
+   Agate in Your Collection, Closing. familyGuideImageCreditsHtml is not
+   called — no published third-party image is used on this pass (Christie's
+   hero photo needs no attribution; the Fire Agate Wikimedia Commons image
+   remains unpublished pending the exact approved EB file — see report), so
+   Photo Credits routes through the shared footer link only, matching the
+   Garnet/Jasper/Copper pattern. ── */
 function familyGuideAgateHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
-    ${familyGuideHeroHtml(guide)}
-    ${familyGuideMeetFamilyHtml(guide)}
+    ${familyGuideAgateHeroHtml(guide)}
     ${familyGuideWhatAgateIsHtml(guide)}
-    ${familyGuideAgateJasperFitHtml(guide)}
-    ${familyGuideColorTranslucencyHtml(guide)}
-    ${familyGuideFormsHtml(guide)}
-    ${familyGuideWiderQuartzStoryHtml(guide)}
-    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideMeetFamilyHtml(guide)}
+    ${familyGuideAgatePatternDecoderHtml(guide)}
+    ${familyGuideAgateComparisonHtml(guide)}
+    ${familyGuideAgateNamingHtml(guide)}
+    ${familyGuideAgateCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
-    ${familyGuideImageCreditsHtml(guide)}
   </div>`;
 }
 

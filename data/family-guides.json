@@ -1354,82 +1354,101 @@
     "slug": "agate",
     "displayName": "Agate",
     "encyclopediaFilterValue": "Agate",
-    "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's review, built on the shared architecture Chalcedony's guide established. Agate's job is to explain the pattern distinction (banding) that separates it from plain Chalcedony and from Jasper, without pulling Chalcedony or Jasper roster stones into Agate's own roster. IMPORTANT LIMITATION: unlike Chalcedony's roster (handed to us directly as exactly Blue and Pink Chalcedony), this session had no way to verify live Supabase family-column values for Agate — a web_fetch attempt against the project's own public Supabase REST endpoint (read-only, using the same publishable key already embedded client-side in auth.js) timed out, and per this environment's rules a failed/blocked fetch may not be routed around via bash/curl. Rather than hardcode a guessed list of which \"*Agate*\"-named stones (14 candidates found in pipeline/data/structured-values.generated.json: Black, Blue Lace, Botswana, Crazy Lace, Dendritic, Druzy, Fire, Flower, Gobi, Grape, Moss, Orca, Tree, and Turritella Agate) are actually tagged family:\"Agate\" in Production Master today, Meet the Agate Family and the hero media collage both resolve live from CRYSTALS (client-side, at render time) via c.fam===\"Agate\" — the same field/mechanism the Crystals 101 family tiles already use for their own counts and examples. This means the section is guaranteed accurate to whatever Production Master actually says, at the cost of not being previewable in this offline session; recommend a live visual check once deployed. Hero signatureLine/closingCallout are plain working drafts; What Agate Actually Is, Chalcedony/Agate/Jasper Fit, Color/Translucency/Surface, Forms, Wider Quartz Story, and Collection sections use restrained working copy built only from standard, uncontroversial agate-formation facts (banded chalcedony formed by successive silica deposition in cavities) — none of it is Christie's locked final wording. No licensed educational photography has been approved for this pass, so the unbanded-Chalcedony/banded-Agate comparison and every Forms card render labeled 'Photo pending' placeholders; imageCredits is empty because nothing third-party is actually displayed. Chalcedony/Agate/Jasper Fit reuses C-0077 Moss Agate (current), C-0082 Blue Chalcedony (now a real, working Chalcedony Family Guide link), and C-0099 Red Jasper (disabled 'coming soon', no guide yet) — the same representative stoneIds already approved and live in both the Quartz and Chalcedony guides' own relationship sections. No Production Master or Supabase family-classification values were changed to build this guide, and nothing was staged, committed, or pushed (the repo's .git/index.lock remains unresolved per Christie's instruction).",
-    "closingCallout": "Working draft — Agate is chalcedony that grew in bands, one silica story written in layers.",
+    "editorialStatusNote": "Implementation pass (2026-08-07) building Christie's locked Agate Family Guide Approved brief (Agate-Family-Guide-Approved.md) and Claude Code Implementation Brief verbatim: approved copy, approved 8-section order (Hero, What Agate Actually Is, Meet Ten Agate Expressions, How Agate Gets Its Patterns, Agate/Chalcedony/Jasper comparison, What an Agate Name Can Tell You, Agate in Your Collection, Closing), and a fixed 10-stone featured roster replacing the prior pass's live dynamicFilterValue resolution. All 10 featured expressions plus Gobi Agate, Thunderegg, and Turritella Agate were re-verified against Production Master (2026-08-07): Blue Lace C-0069, Botswana C-0070, Crazy Lace C-0071, Dendritic C-0072, Fire C-0074, Flower C-0075, Grape C-0076, Moss C-0077 (Full Entry Live), Orca C-0078, Tree C-0079, Gobi C-0409 (Family/Material Type still blank in Production Master), Thunderegg C-0349, Turritella C-0080 — every name/ID pair matches exactly. Hero image is Christie's own approved family photograph (assets/family-guide-agate/agate-family-hero.webp, copied unmodified from Working Images/Source; no outside attribution required). Fire Agate's approved Wikimedia Commons EB-treated iridescence image (intended filename fire-agate-iridescence-wc.webp) could not be unambiguously located locally — only an unedited '-source-' pair exists in Working Images/Source (fire-agate-source-wc.png/.webp), not clearly the described 'first EB-treated version' — so both the featured-roster card and the interference-color pattern-decoder panel render a labeled 'Photo pending' placeholder pending Christie's exact file path; nothing was uploaded. Gobi Agate's image (gobi-mushroom-family.webp) shows a carved mushroom-ornament pair; Production Master carries no locality/provenance note confirming Gobi Desert origin, so the naming-lesson placement rests on Christie's explicit assumption per the brief, not on independent provenance verification. Black Agate is intentionally omitted from every module. All other featured expressions use their existing approved Production Master image mapping. No Production Master, Supabase, family, or species values were changed to build this guide.",
+    "closingBridge": [
+      "Agate is often introduced as a stone of color and pattern. Look closer, and it becomes a lesson in how names, materials, and appearances meet.",
+      "A band can trace the wall of an ancient opening. A dark branch can be mineral rather than plant. A cluster of rounded chalcedony can become grapes. A fossil name can remain popular long after science corrects it."
+    ],
+    "closingCallout": "Agate does not reveal everything at once.",
+    "closingEmphasis": "It rewards the second look.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
     "hero": {
-      "mediaDynamicFilterValue": "Agate",
-      "eyebrow": "FAMILY GUIDE",
-      "title": "Agate Family Guide",
-      "signatureLine": "Working draft — banded chalcedony, one layer at a time.",
-      "condensedIntro": "Agate is Chalcedony — itself microcrystalline Quartz — set apart by pattern rather than chemistry. Silica-rich fluid deposits one thin layer after another along the wall of a rock cavity, and each layer's slightly different color or clarity becomes a visible band."
-    },
-    "overview": {
-      "paragraph": "Agate is a banded, patterned variety of Chalcedony — itself microcrystalline Quartz, built from intergrowths of quartz and moganite too fine to see individually without magnification. What sets Agate apart is not a different chemistry but a different growth story: silica-rich fluid deposits one thin layer after another along the wall of a cavity, most often in volcanic rock, producing the concentric bands, \"eyes,\" or wall-lining patterns collectors call agate. Agate shares this chalcedony/quartz foundation with plain Chalcedony and with Jasper, but this encyclopedia catalogs all three as separate families because each carries its own extensive naming, pattern vocabulary, and collector culture."
-    },
-    "meetTheFamily": {
-      "title": "Meet the Agate Family",
-      "intro": "These rostered expressions currently carry a standalone Agate entry in this encyclopedia. The list below is resolved live from the catalog rather than fixed in this guide, so it stays accurate as Agate entries are added or reclassified.",
-      "dynamicFilterValue": "Agate"
+      "eyebrow": "Crystal Family",
+      "title": "Agate",
+      "signatureLine": "Pattern held in stone",
+      "condensedIntro": [
+        "Agate is chalcedony shaped by repetition. Fine bands, branching inclusions, rounded growth, shifting translucency, and unexpected color give each piece its own visual rhythm. Some varieties are named for what they look like. Others carry the name of a place, a formation, or an old trade tradition.",
+        "Agate rewards a closer look. Its pattern can reveal how silica accumulated, what became enclosed as it grew, and how people later tried to describe what they found."
+      ],
+      "promptLeadIn": "Agate asks:",
+      "question": "What becomes visible when you slow down and look closely?",
+      "imageUrl": "assets/family-guide-agate/agate-family-hero.webp",
+      "imageAlt": "Split banded Agate geode bookend pair, polished blue-gray and brown exterior with druzy crystal-lined centers"
     },
     "whatAgateIs": {
       "title": "What Agate Actually Is",
       "paragraphs": [
-        "Agate belongs to the same Chalcedony/Quartz family as plain Chalcedony and Jasper. Structurally, it is Chalcedony — fine intergrowths of quartz and moganite too small to see individually without magnification.",
-        "What sets Agate apart is pattern, not chemistry. Agate typically forms in cavities, most often in volcanic rock, as silica-rich fluid deposits one thin layer after another along the cavity wall. Each layer can differ slightly in color, porosity, or impurity content, producing the concentric bands, \"eyes,\" or wall-lining patterns collectors call agate.",
-        "A cavity that fills completely can leave a solid banded nodule. One that fills only partway can leave a hollow center lined with the same bands and, often, a cluster of larger quartz crystals — a geode."
+        "Agate is a patterned form of chalcedony, the compact, microcrystalline form of quartz. Instead of growing as one large, visible crystal, its quartz is arranged in fibers and grains too small to distinguish with the unaided eye.",
+        "Many familiar Agates form when silica-rich fluids enter openings in rock and deposit chalcedony along the walls. Repeated growth can build bands, layers, plumes, or changes in translucency. Mineral inclusions can add branching or moss-like forms. In other examples, the chalcedony grows in rounded surfaces or develops optical effects that have little to do with classic banding.",
+        "That is why the word Agate covers more visual territory than a simple definition suggests. Fine banding remains its clearest hallmark, but traditional and commercial names also include materials valued for inclusions, growth form, locality, or appearance."
       ]
     },
-    "agateJasperFit": {
-      "title": "Agate, Chalcedony & Jasper",
-      "intro": "Mineralogically, Agate, Chalcedony, and Jasper all belong to the wider quartz story. This encyclopedia catalogs them as separate families because each has enough of its own naming, pattern vocabulary, and collector history to deserve its own path.",
-      "quartzLinkLabel": "Open the Quartz Family Guide",
-      "branches": [
-        {"label": "Agate", "stoneId": "C-0077", "description": "Patterned microcrystalline quartz known for concentric banding, fortification patterns, and often a druzy or crystal-lined center.", "current": true},
-        {"label": "Chalcedony", "stoneId": "C-0082", "description": "Generally unbanded or subtly patterned microcrystalline quartz, often translucent.", "guideSlug": "chalcedony"},
-        {"label": "Jasper", "stoneId": "C-0099", "description": "Organized separately because it is typically opaque and carries its own large commercial and collector vocabulary."}
+    "meetTheFamily": {
+      "title": "Meet Ten Agate Expressions",
+      "intro": "Agate does not have a single signature pattern. These ten expressions show how much can change within the same broad material, from delicate bands and branching inclusions to rounded growth and iridescent fire.",
+      "useSectionIntro": true,
+      "gridClass": "fg-card-grid--10",
+      "splitPhrase": true,
+      "members": [
+        {"stoneId": "C-0069", "headline": "Soft blue and white bands curve through this translucent chalcedony in fine, lace-like lines. Its identity comes from the delicacy of the banding rather than from one exact shade of blue."},
+        {"stoneId": "C-0070", "headline": "Botswana Agate is known for closely spaced parallel bands, often layered in gray, brown, white, pink, or muted violet. Its name joins a distinctive banded appearance with the country for which the material is known."},
+        {"stoneId": "C-0071", "headline": "Loops, eyes, waves, and crowded bands give Crazy Lace Agate its animated pattern. The name describes the visual effect rather than a separate mineral identity."},
+        {"stoneId": "C-0072", "headline": "Dark mineral inclusions branch through pale chalcedony in forms that resemble ferns, trees, or frost. They are mineral growths, not preserved plants."},
+        {"stoneId": "C-0074", "headline": "Fire Agate can flash green, gold, orange, or red when light meets extremely thin iron-bearing layers within the chalcedony. The effect shifts with the viewing angle, so a still photograph must catch the light carefully to show it."},
+        {"stoneId": "C-0075", "headline": "Flower Agate contains soft plumes or clustered internal markings that resemble blossoms. The familiar name describes that appearance without making the material a separate mineral variety."},
+        {"stoneId": "C-0076", "headline": "Grape Agate grows as closely packed rounded forms that resemble a cluster of grapes. Despite the name, it is more precisely described as botryoidal chalcedony, and its surface growth is the feature that sets it apart."},
+        {"stoneId": "C-0077", "headline": "Moss Agate contains wispy, branching, or suspended mineral inclusions that can look like moss spreading through translucent chalcedony. It usually has little or none of the regular banding associated with classic Agate."},
+        {"stoneId": "C-0078", "headline": "Orca Agate is a modern trade name for chalcedony patterned with rounded pools and patches, often in gray, white, or blue-gray. The name captures its marine appearance rather than a formal mineral distinction."},
+        {"stoneId": "C-0079", "headline": "Tree Agate is commonly used for pale, more opaque chalcedony marked by green branching inclusions. Its boundary with Moss Agate is not rigid, and the two names are often applied according to appearance and trade convention."}
       ]
     },
-    "colorTranslucencySurface": {
-      "title": "Banding, Translucency & Surface",
-      "intro": "Readers commonly recognize Agate by a handful of visual qualities. None of these is a guaranteed test on its own — dyeing and other treatments can affect band color and visibility — but together they describe the family's general character.",
-      "qualities": ["Concentric banding", "Fortification patterns", "Color zoning between layers", "Waxy to glassy luster", "Druzy crystal-lined centers", "Translucent to opaque bands"],
-      "note": "Individual specimens can depart from any single quality above; treat these as common tendencies, not a checklist that must all be present."
-    },
-    "forms": {
-      "title": "Forms Agate Takes",
-      "intro": "The same material appears in a range of natural and worked forms.",
+    "agatePatternDecoder": {
+      "title": "How Agate Gets Its Patterns",
+      "intro": "Agate patterns are records of growth. Their lines, branches, rounded surfaces, and flashes come from different processes, so similar names do not always point to the same kind of structure.",
       "items": [
-        {"title": "Nodules & Geodes", "body": "Rounded masses formed filling a rock cavity; one only partly filled leaves a hollow, crystal-lined geode.", "placeholderLabel": "Photo pending"},
-        {"title": "Slabs", "body": "Cut and polished cross-sections that reveal the banding pattern face-on.", "placeholderLabel": "Photo pending"},
-        {"title": "Druzy-Lined Cavities", "body": "A geode's hollow center often ends in a layer of small, sparkling quartz crystals.", "placeholderLabel": "Photo pending"},
-        {"title": "Botryoidal Surfaces", "body": "Rounded, grape-like clusters on some agate surfaces.", "placeholderLabel": "Photo pending"},
-        {"title": "Polished Cabochons", "body": "Cut and polished into smooth, domed shapes for jewelry.", "placeholderLabel": "Photo pending"},
-        {"title": "Beads & Carvings", "body": "Shaped for stringing or worked into decorative and figural forms.", "placeholderLabel": "Photo pending"},
-        {"title": "Bookends & Tumbled Stones", "body": "Large polished geode halves used as bookends; smaller pieces tumbled smooth for handling.", "placeholderLabel": "Photo pending"}
+        {"title": "Built in layers", "singleStoneId": "C-0070", "alt": "Botswana Agate showing closely spaced parallel banding", "body": "In many Agates, chalcedony accumulated along the walls of an opening in repeated stages. Each stage could differ slightly in color, translucency, or texture, creating bands that follow the shape of the cavity. Blue Lace, Botswana, and Crazy Lace Agate show very different results from this layered growth."},
+        {"title": "Drawn by inclusions", "singleStoneId": "C-0077", "alt": "Moss Agate showing wispy, moss-like mineral inclusions", "body": "Moss, Tree, and Dendritic Agate owe much of their pattern to minerals enclosed in or deposited through the chalcedony. Wisps, branches, and fern-like shapes may look organic, but they are not leaves, moss, or tiny fossilized trees."},
+        {"title": "Rounded as it grows", "singleStoneId": "C-0076", "alt": "Grape Agate showing rounded, botryoidal growth", "body": "The rounded surface of Grape Agate is called botryoidal growth, from a word meaning bunch of grapes. Here, the shape of the chalcedony is the main event. The material is better understood as botryoidal chalcedony than as a classically banded Agate."},
+        {"title": "Lit from within", "image": "fire-agate-iridescence-wc.webp", "alt": "Fire Agate specimen showing iridescent play-of-color", "body": "Fire Agate creates color through light interference. Extremely thin layers containing iron minerals interact with light, producing flashes that can appear and disappear as the stone or viewer moves. Its fire is an optical effect, not a painted surface or an internal flame."}
       ]
     },
-    "widerQuartzStory": {
-      "title": "Agate's Many Names",
-      "intro": "The Agate umbrella covers many familiar market and pattern names. These are educational examples of naming variety, not a statement about how this encyclopedia currently browses or groups every stone below.",
-      "examples": ["Moss Agate", "Blue Lace Agate", "Botswana Agate", "Crazy Lace Agate", "Dendritic Agate", "Fire Agate", "Turritella Agate"],
-      "note": "Names above are shown for educational context only and are not linked to catalog entries or roster assignments in this pass."
-    },
-    "collection": {
-      "title": "Agate in Your Collection",
-      "editorialNote": "Working draft (2026-07-23) — pending Christie's final review. Covers the requested practical distinctions (banded/unbanded, dyed/natural color, geode/slab, polished/natural surface, provenance uncertainty) but is not final editorial language.",
-      "careForIt": {
-        "intro": "Agate shares Quartz and Chalcedony's durability and generally tolerates normal handling well.",
-        "bullets": [
-          "Mohs 6.5–7 — generally durable for handling and display.",
-          "Safe for brief water contact when cleaning; dry thoroughly afterward.",
-          "Many market agates are dyed to intensify or add color — avoid harsh chemicals that could affect dyed surfaces.",
-          "Protect polished slabs and cabochons from abrasive surfaces to preserve the finish."
+    "agateComparison": {
+      "title": "Agate, Chalcedony, or Jasper?",
+      "intro": "These names overlap because they describe closely related silica materials. The practical distinction begins with texture, translucency, and pattern rather than three unrelated mineral identities.",
+      "table": {
+        "headers": ["Material", "What it tells you", "What to notice"],
+        "rows": [
+          ["Chalcedony", "The broad microcrystalline quartz material", "Compact texture; may be plain, patterned, translucent, or opaque"],
+          ["Agate", "A patterned expression, most clearly associated with banding", "Bands, translucency, inclusions, or named growth forms"],
+          ["Jasper", "The opaque, mineral-rich side of microcrystalline quartz", "Opacity, mottling, spots, or scenic pattern"]
         ]
       },
-      "rememberThis": "Agate's banding can be subtle or dramatic, natural or enhanced. A gray, undyed slab and a vividly colored dyed one can be the same underlying material shown very differently.",
-      "watchFor": "Dyeing, and dyeing combined with heating, are extremely common treatments in the agate trade, especially for vivid blues, purples, and reds. Treat unusually uniform or saturated color as a prompt to ask about treatment rather than an automatic defect — but always ask."
+      "note": "Think of Chalcedony as the broad family, Agate as the more translucent and often banded side, and Jasper as the more opaque side. Nature does not always respect a clean dividing line. A single piece can move between translucent Agate and opaque Jasper, which is why names such as jasp-agate exist."
     },
-    "imageCredits": []
+    "agateNaming": {
+      "title": "What an Agate Name Can Tell You",
+      "intro": [
+        "An Agate name may describe what a stone looks like, where it was found, how it grew, or how it entered the trade. Learning to read the name helps separate useful description from tradition and marketing.",
+        "Names such as Grape Agate show how appearance can become a useful shorthand. Its rounded, clustered surface resembles a bunch of grapes, while the material itself is more precisely described as botryoidal chalcedony. Other names tell different kinds of stories."
+      ],
+      "items": [
+        {"title": "A place", "singleStoneId": "C-0409", "alt": "Gobi Agate specimen from the Gobi Desert region", "body": "Gobi Agate carries the name of the desert region where the featured material originated. Here, the geographic name is supported by provenance rather than inferred from appearance alone. That distinction matters because a locality-sounding name does not prove where an undocumented specimen was found."},
+        {"title": "A larger formation", "singleStoneId": "C-0349", "alt": "Thunderegg cross-section showing an Agate-lined interior", "body": "A Thunderegg is a rounded rock structure formed in volcanic material. When cut open, it may reveal Agate, Jasper, opal, crystalline quartz, or other silica filling. The whole object is the Thunderegg. Agate may be one part of what is inside it."},
+        {"title": "A name history got wrong", "singleStoneId": "C-0080", "alt": "Turritella Agate showing fossil spiral shells preserved in chalcedony", "body": "Turritella Agate is a long-standing trade name for fossil-rich chalcedony from the Green River Formation. The visible spiral shells are freshwater snails of the genus Elimia, not the marine genus Turritella. The traditional name survived even after the fossil identity was corrected."}
+      ]
+    },
+    "agateCollection": {
+      "title": "Agate in Your Collection",
+      "intro": "Agate is durable enough for regular handling, display, and jewelry, but good care begins with knowing whether a piece is natural, dyed, fractured, coated, or assembled.",
+      "cards": [
+        {"heading": "Clean it simply", "body": "Use lukewarm water, mild soap when needed, and a soft cloth or brush. Rinse away residue and dry the piece completely. Avoid harsh chemicals and sudden temperature changes."},
+        {"heading": "Treat unknown pieces conservatively", "body": "Agate is commonly dyed to intensify color or emphasize bands. If treatment is unknown, avoid prolonged soaking, strong cleaners, and unnecessary exposure to intense light or heat. Ask the seller about treatment when color is an important part of the purchase."},
+        {"heading": "Let the pattern guide display", "body": "Bands, inclusions, and optical effects can change dramatically with direction and lighting. Turn a specimen slowly, try light from the side as well as the front, and choose an angle that reveals its strongest structure without forcing glare."}
+      ]
+    },
+    "imageCredits": [
+      {"title": "Fire Agate, Calvillo, Aguascalientes, Mexico", "creator": "Lech Darski", "source": "https://commons.wikimedia.org/wiki/File:Agat_ognisty_-_Calvillo,_Aguascalientes,_Meksyk.jpg", "license": "CC BY-SA 4.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/", "modified": "Background removed, cropped, and color and lighting adjusted."}
+    ]
   },
   "jasper": {
     "slug": "jasper",

@@ -1698,7 +1698,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    elsewhere on the site. */
 #tab-family{padding:1.5rem}
 .fg-guide{max-width:1100px;margin:0 auto}
-#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection{scroll-margin-top:160px}
+#fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-agate-pattern,#fg-agate-comparison,#fg-agate-naming,#fg-agate-collection,#fg-closing-bridge{scroll-margin-top:160px}
 .fg-not-found{max-width:480px;margin:2rem auto;text-align:center}
 .fg-loading{padding:3rem 1rem;text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--ink3)}
 .fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
@@ -2182,6 +2182,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    of their responsive behavior changes. */
 .fg-card-grid--12{grid-template-columns:repeat(4,1fr)}
 
+/* Meet Ten Agate Expressions — a fixed ten-card roster: 4 per row on wide
+   desktop, with the final two cards (9th and 10th) shifted into the middle
+   two columns of their own otherwise-empty row so the last pair reads as
+   centered rather than left-hung. Collapses to the same 2-then-1 responsive
+   behavior as every other card grid; the centering rule only applies at the
+   4-column desktop width, since at 2 columns 10 cards divide evenly (5 full
+   rows) and no centering is needed. */
+.fg-card-grid--10{grid-template-columns:repeat(4,1fr)}
+.fg-card-grid--10>:nth-child(9){grid-column:2}
+.fg-card-grid--10>:nth-child(10){grid-column:3}
+
 /* ── Jasper Family Guide Revision (2026-08-04) — brings Jasper's page-wide
    rhythm, alignment, and hero/pattern-module image treatment in line with
    the Copper Minerals baseline (EDITORIAL-PAGE-VISUAL-STANDARD.md §2, §8.1,
@@ -2266,6 +2277,165 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 @media(max-width:900px){
   .fg-guide[data-family-slug="jasper"] .fg-hero{margin-bottom:56px}
   .fg-guide[data-family-slug="jasper"] .fg-section{margin-bottom:56px}
+}
+
+/* ── Agate Family Guide (2026-08-07) — brings Agate's page-wide rhythm,
+   alignment, and image treatment in line with the Copper Minerals baseline
+   (EDITORIAL-PAGE-VISUAL-STANDARD.md §2, §4, §8.1, §9), following the same
+   pattern already established for Jasper above. Scoped entirely to
+   [data-family-slug="agate"] so no other guide's spacing, alignment, or
+   image treatment changes. ── */
+.fg-guide[data-family-slug="agate"] .fg-hero{margin-bottom:76px}
+.fg-guide[data-family-slug="agate"] .fg-h2{text-align:left;margin-bottom:18px}
+.fg-guide[data-family-slug="agate"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
+.fg-guide[data-family-slug="agate"] .fg-section-intro:last-of-type{margin-bottom:28px}
+.fg-guide[data-family-slug="agate"] .fg-garnet-bridge p{margin-bottom:12px}
+.fg-guide[data-family-slug="agate"] .fg-garnet-bridge p:last-of-type{margin-bottom:0}
+/* Closing bridge paragraphs ("Agate is often introduced...", "A band can
+   trace...") — visual correction (2026-08-07): same fix already applied to
+   #fg-what-agate-is below, scoped separately here so both bridges share
+   the ordinary 16px editorial body treatment instead of the shared
+   .fg-garnet-bridge default (21px serif), which read as heading-size
+   prose rather than ordinary paragraph copy. */
+.fg-guide[data-family-slug="agate"] #fg-closing-bridge .fg-garnet-bridge p{font-family:'Jost',sans-serif;font-size:16px;line-height:1.7;color:var(--ink2);margin-bottom:14px}
+.fg-guide[data-family-slug="agate"] #fg-closing-bridge .fg-garnet-bridge p:last-of-type{margin-bottom:0}
+/* What Agate Actually Is — visual correction (2026-08-07): the shared
+   .fg-garnet-bridge default (Georgia serif, 21px) was sized for a single
+   short reflective statement (its original Garnet/Jasper use case) and
+   here visually rivaled the section heading instead of reading as
+   ordinary subordinate body copy. Scoped tightly to #fg-what-agate-is so
+   the closing section's own .fg-garnet-bridge paragraphs (#fg-closing-bridge,
+   unchanged, still ordinary editorial copy per the prior pass) are
+   unaffected. Matches the site's plain-prose scale (.fg-prose is
+   15px/1.75 site-wide) bumped to the brief's explicit 16px floor. */
+.fg-guide[data-family-slug="agate"] #fg-what-agate-is .fg-garnet-bridge p{font-family:'Jost',sans-serif;font-size:16px;line-height:1.7;color:var(--ink2);margin-bottom:14px}
+.fg-guide[data-family-slug="agate"] #fg-what-agate-is .fg-garnet-bridge p:last-of-type{margin-bottom:0}
+.fg-guide[data-family-slug="agate"] .fg-section{margin-bottom:76px}
+/* Hero — Christie's own approved family photograph is real, not a
+   placeholder, so the shared "Family photograph — coming soon" badge is
+   removed.
+   Visual correction, fourth pass (2026-08-07): removed the specimen-card
+   "well" treatment (fixed aspect-ratio/max-height box + object-fit:contain
+   + padding) that was doubling the photo's own baked-in white field. The
+   fourth pass let the image render at its full natural 1254x1254 square
+   ratio, which fixed the "shrunken specimen in an oversized box" problem
+   but left more vertical height than needed, since a large share of the
+   square frame is the photo's own white background rather than the
+   specimen.
+   Visual correction, fifth pass (2026-08-07) — approved, scoped exception
+   to CLAUDE.md §8's sitewide "do not reintroduce object-fit:cover" rule,
+   confirmed explicitly by Christie/Dustin for this one image only: this
+   hero photo is curated Family Guide media, not an encyclopedia specimen
+   card (the §8 regression this rule guards against — specimen photos
+   losing diagnostic edges — does not apply to a hero banner image).
+   object-fit:cover on a 4:3 frame trims the excess white margin at top
+   and bottom of the square source while keeping the specimen itself at
+   its current on-screen size (unlike object-fit:contain, which would
+   shrink the whole photo, specimen included, to fit a shorter box). Do
+   not extend object-fit:cover to any other Agate image or any other
+   guide without the same explicit approval — every other image on this
+   page (roster cards, pattern decoder, naming cards) remains
+   object-fit:contain per §9's specimen-well requirement. */
+.fg-guide[data-family-slug="agate"] .fg-hero-media-label{display:none}
+.fg-guide[data-family-slug="agate"] .fg-hero-grid{align-items:center}
+.fg-guide[data-family-slug="agate"] .fg-hero-media{aspect-ratio:4/3;height:auto;max-height:none;background:none;border:none;box-shadow:none;border-radius:12px;overflow:hidden}
+.fg-guide[data-family-slug="agate"] .fg-hero-media-grid{display:block;height:100%}
+.fg-guide[data-family-slug="agate"] .fg-hero-media-grid img{width:100%;height:100%;object-fit:cover;object-position:center;padding:0;background:none;display:block}
+.fg-guide[data-family-slug="agate"] .fg-hero-body{margin-bottom:0.65rem}
+.fg-guide[data-family-slug="agate"] .fg-hero-body:last-of-type{margin-bottom:0}
+/* .fg-agate-hero-prompt (full-width row, direct child of .fg-hero per the
+   dedicated hero function above — an acceptable established pattern per
+   Feldspar's own familyGuideFeldsparHeroHtml) replaces the shared
+   border-top/padding treatment with a tight flat margin-top so it reads
+   as attached to the hero above rather than a second section. Prompt
+   typography (.fg-hero-prompt-lead, .fg-hero-question) is untouched —
+   still the shared 16px lead / 28px question sizes every other guide
+   uses. */
+.fg-guide[data-family-slug="agate"] .fg-agate-hero-prompt{border-top:none;padding-top:0;margin-top:16px}
+/* Meet Ten Agate Expressions roster — white contain wells matching Jasper's
+   own roster treatment, plus reordering Quick View directly beneath the
+   stone name (ahead of the description) via flex order on the existing
+   .fg-stonecard-body flex column; no markup change required. */
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-name{order:1}
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-qv{order:2;margin-bottom:10px}
+/* Visual correction (2026-08-07, first pass): the shared .fg-stonecard-phrase
+   default (Georgia serif, 16px, line-height 1.24) read noticeably
+   denser/heavier than the sans-serif teaching-card body copy used
+   elsewhere on the page, so this switched the roster to the same lighter
+   sans-serif family/weight (reusing Jasper's own #fg-meet-family
+   .fg-stonecard-phrase values). Second pass: 14px then read too small for
+   substantive teaching copy (these are full descriptions, not captions),
+   so the size moves up to the brief's explicit 16px with 1.6 line-height
+   — still the lighter sans-serif treatment and sentence split, just
+   larger. .fg-stonecard-phrase-p (opt-in via fgStoneCardHtml's
+   opts.splitPhrase) gives the two-sentence split a small paragraph gap
+   instead of running as one block; no other guide's roster uses this
+   class. */
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-phrase{order:3;margin-bottom:0;font-family:'Jost',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink2)}
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-phrase-p{display:block;margin-bottom:0.55em}
+.fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-phrase-p:last-child{margin-bottom:0}
+/* How Agate Gets Its Patterns — white contain wells, matching Jasper's own
+   pattern-decoder treatment. Description text (2026-08-07 correction):
+   the shared .fg-photocard-text default (13px/1.6) read too small next to
+   the 16px roster-card descriptions elsewhere on this page — these are
+   substantive teaching descriptions, not photo captions. Matches the
+   roster's #fg-meet-family .fg-stonecard-phrase treatment exactly (16px,
+   Jost, 1.6 line-height) so comparable teaching-card copy reads at one
+   consistent scale across the whole page. */
+.fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+.fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-title{font-weight:500}
+.fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-text{font-size:16px;line-height:1.6;color:var(--ink2)}
+/* What an Agate Name Can Tell You — same white contain-well treatment and
+   the same 16px description-text correction as the pattern decoder above,
+   scoped to its own section id. */
+.fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+.fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-title{font-weight:500}
+.fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-text{font-size:16px;line-height:1.6;color:var(--ink2)}
+/* Agate/Chalcedony/Jasper comparison table — left-align the section intro
+   already handled above; the shared .fg-table/.fg-table-wrap component
+   needs no Agate-specific override. The "Think of Chalcedony..." note
+   below the table used the shared .fg-fact-body/.fg-note-center pair
+   (13px, centered, 70ch cap), which read as an undersized centered
+   footnote rather than ordinary supporting copy. First correction pass
+   moved it to 15px/72ch; still read slightly small, so this pass moves it
+   to the brief's explicit 16px floor and removes the width cap entirely
+   so it takes the same natural full-frame measure as the table above it
+   instead of a narrower callout column. */
+.fg-guide[data-family-slug="agate"] #fg-agate-comparison .fg-fact-body{font-size:16px;line-height:1.7;color:var(--ink2);text-align:left;max-width:none;margin:1.1rem 0 0}
+/* Closing — visual correction (2026-08-07): the two lead-in paragraphs now
+   render via guide.closingBridge as an ordinary left-aligned .fg-section
+   (ordinary ink color, not the boxed/centered closing treatment) before
+   the closing box; #fg-closing-bridge needs no width/alignment override
+   since .fg-garnet-bridge already inherits the page's shared content frame
+   and the base .fg-h2/.fg-section-intro left-alignment rules above cover
+   any section that might precede it. The closing box itself keeps only
+   the final two-sentence statement: "Agate does not reveal everything at
+   once." renders in the ordinary (non-italic) weight of .fg-closing-line,
+   and the trailing <em> (guide.closingEmphasis) supplies the italic
+   "It rewards the second look." clause inline, so both sentences read as
+   one continuous statement rather than two stacked elements. */
+.fg-guide[data-family-slug="agate"] .fg-closing-line{font-style:normal;margin-bottom:1.1rem}
+.fg-guide[data-family-slug="agate"] .fg-closing-line em{font-style:italic}
+/* Closing — visual correction, second pass (2026-08-07): the boxed/banner
+   treatment (background, border, border-radius, padding) still read as
+   inconsistent with the completed Family Guides' restrained closing
+   pattern. This removes the box entirely and restyles the Return button
+   as the same compact editorial pill Fluorite/Calcite/Feldspar/Garnet
+   already use — copied verbatim from
+   .fg-guide[data-family-slug="fluorite"] .fg-closing/.fg-closing-btn
+   above, not a new Agate-specific treatment. .fg-closing keeps its base
+   text-align:center (unchanged), so the reflective line and pill remain
+   centered on the open page exactly as the brief asks. */
+.fg-guide[data-family-slug="agate"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
+.fg-guide[data-family-slug="agate"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
+.fg-guide[data-family-slug="agate"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+@media(max-width:900px){
+  .fg-guide[data-family-slug="agate"] .fg-hero{margin-bottom:56px}
+  .fg-guide[data-family-slug="agate"] .fg-section{margin-bottom:56px}
 }
 
 /* Three-category variant of the existing five-category .fg-namegrid (used
@@ -3339,6 +3509,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-hero-grid{grid-template-columns:1fr;gap:1.25rem}
   .fg-hero-media{order:-1;max-height:260px}
   .fg-card-grid--4{grid-template-columns:repeat(2,1fr)}
+  .fg-card-grid--10{grid-template-columns:repeat(2,1fr)}
+  .fg-card-grid--10>:nth-child(9),.fg-card-grid--10>:nth-child(10){grid-column:auto}
   .fg-photo-grid--4{grid-template-columns:repeat(2,1fr)}
   .fg-photo-grid--3{grid-template-columns:1fr}
   .fg-collection-grid{grid-template-columns:1fr}
@@ -3380,7 +3552,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay,#fg-agate-pattern,#fg-agate-comparison,#fg-agate-naming,#fg-agate-collection,#fg-closing-bridge{scroll-margin-top:132px}
   .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:16px}
   .fg-table thead{display:none}
   .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}
@@ -3398,6 +3570,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-lead--question{font-size:19px}
   .fg-section-intro{font-size:17px}
   .fg-card-grid--4{grid-template-columns:1fr}
+  .fg-card-grid--10{grid-template-columns:1fr}
   .fg-photo-grid--4{grid-template-columns:1fr}
   .fg-photocard-swatch--6{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
   .fg-collection-grid{grid-template-columns:1fr}
