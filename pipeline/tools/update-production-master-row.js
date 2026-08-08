@@ -467,6 +467,32 @@ function patchWorksheetXml(sheetXml, excelRowNum, cellUpdates) {
 // Backup
 // ---------------------------------------------------------------------------
 
+// Routine automated snapshots follow the exact pattern this function writes:
+// {base}-{ISO 8601 timestamp with colons/ms stripped}-pre-update-{stoneId}{ext}.
+// Any file in snapshots/ that does not match this pattern is a manually or
+// deliberately named backup (milestone backup, roster-challenge backup, etc.)
+// and must never be pruned by the routine-retention sweep below.
+const ROUTINE_SNAPSHOT_PATTERN = /^(.+)-\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}Z-pre-update-.+$/;
+const ROUTINE_SNAPSHOT_RETENTION_COUNT = 10;
+
+function pruneRoutineSnapshots(dir, base, ext) {
+  const entries = fs.readdirSync(dir).filter((name) => {
+    if (path.extname(name) !== ext) return false;
+    const stem = path.basename(name, ext);
+    const match = stem.match(ROUTINE_SNAPSHOT_PATTERN);
+    return !!match && match[1] === base;
+  });
+  if (entries.length <= ROUTINE_SNAPSHOT_RETENTION_COUNT) return { kept: entries.length, removed: 0 };
+  // Filename timestamps are zero-padded ISO strings, so lexical sort order
+  // equals chronological order — newest last.
+  entries.sort();
+  const toRemove = entries.slice(0, entries.length - ROUTINE_SNAPSHOT_RETENTION_COUNT);
+  for (const name of toRemove) {
+    fs.unlinkSync(path.join(dir, name));
+  }
+  return { kept: ROUTINE_SNAPSHOT_RETENTION_COUNT, removed: toRemove.length };
+}
+
 function backupWorkbook(sourcePath, stoneId) {
   const dir = path.join(path.dirname(sourcePath), 'snapshots');
   fs.mkdirSync(dir, { recursive: true });
@@ -475,6 +501,10 @@ function backupWorkbook(sourcePath, stoneId) {
   const ts = new Date().toISOString().replace(/:/g, '-').replace(/\..+Z$/, 'Z');
   const backupPath = path.join(dir, `${base}-${ts}-pre-update-${stoneId}${ext}`);
   fs.copyFileSync(sourcePath, backupPath);
+  const pruneResult = pruneRoutineSnapshots(dir, base, ext);
+  if (pruneResult.removed > 0) {
+    console.log(`Snapshot retention: kept newest ${pruneResult.kept} routine snapshot(s), removed ${pruneResult.removed} older routine snapshot(s).`);
+  }
   return backupPath;
 }
 
@@ -605,4 +635,7 @@ module.exports = {
   applyCellUpdate,
   patchWorksheetXml,
   resolveWorksheetPart,
+  pruneRoutineSnapshots,
+  ROUTINE_SNAPSHOT_PATTERN,
+  ROUTINE_SNAPSHOT_RETENTION_COUNT,
 };
