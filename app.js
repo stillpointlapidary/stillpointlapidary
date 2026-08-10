@@ -341,7 +341,7 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0113": ["hematoid-quartz.webp"],
   "C-0114": ["rutilated-quartz-tower.webp", "rutilated-quartz-tumble.webp"],
   "C-0115": ["lodolite-quartz.webp"],
-  "C-0119": ["amethyst.webp", "amethyst-specimen.webp", "amethyst-sphere.webp", "amethyst-seer-stone-tumble.webp", "amethyst-tower.webp"],
+  "C-0119": ["amethyst.webp", "amethyst-specimen.webp", "amethyst-seer-stone-tumble.webp", "amethyst-tower.webp"],
   "C-0120": ["ametrine.webp"],
   "C-0121": ["citrine-freeform.webp", "citrine-specimen.webp", "citrine-tower.webp"],
   "C-0122": ["golden-healer-heart.webp"],
@@ -495,25 +495,6 @@ const ENCYCLOPEDIA_PHOTOS = {
   "C-0363": ["calligraphy-stone-tumble.webp", "calligraphy-stone-tumble-2.webp"],
   "C-0364": ["hackmanite.webp"],
   "C-0365": ["super-seven.webp", "super-seven-secondary.webp"],
-  "C-0370": ["black-and-peach-moonstone-heart.webp"],
-  "C-0371": ["brown-zebra-jasper-tumble.webp"],
-  "C-0372": ["chalcedony-druzy-botryoidal-raw.webp"],
-  "C-0374": ["copal-amber-specimen.webp"],
-  "C-0375": ["cotton-candy-agate-specimen.webp"],
-  "C-0376": ["ferruginous-quartz-obelisk.webp"],
-  "C-0377": ["fluorite-with-pyrite-specimen.webp"],
-  "C-0379": ["green-chalcedony-tumble.webp"],
-  "C-0380": ["green-flower-sakura-jasper-heart.webp"],
-  "C-0382": ["heulandite-and-calcite-specimen.webp"],
-  "C-0383": ["honey-onyx-specimen.webp"],
-  "C-0384": ["honeycomb-ruby-sphere.webp"],
-  "C-0385": ["hyalite-opal-specimen.webp"],
-  "C-0386": ["jerejimite-specimen.webp"],
-  "C-0387": ["king-cobra-jasper-specimen.webp"],
-  "C-0389": ["luxullianite-tumble.webp"],
-  "C-0391": ["moroccan-truffle-chalcedony-specimen.webp"],
-  "C-0392": ["nontronite-specimen.webp"],
-  "C-0393": ["nunderite-tumble.webp"],
   "C-0395": ["peach-moonstone-flame.webp", "peach-moonstone-large-sphere.webp"],
   "C-0396": ["larvikite.webp"],
   "C-0397": ["phoenix-stone-large-sphere.webp", "phoenix-stone-palm.webp", "phoenix-stone-tower.webp", "phoenix-stone-small-sphere.webp"],
@@ -1212,14 +1193,6 @@ function closeDrawer(){
     detailReturnContext=null;
     switchTabByName('mood');
     setTimeout(()=>{window.scrollTo({top:ctx.scrollY||0,behavior:'instant'});},0);
-  } else if(detailReturnContext&&detailReturnContext.type==='starterStone'){
-    const ctx=detailReturnContext;
-    detailReturnContext=null;
-    setTimeout(()=>{
-      if(ctx&&Number.isInteger(ctx.index)){
-        openStarterStoneModal(ctx.index, ctx.source);
-      }
-    },0);
   } else if(detailReturnContext&&detailReturnContext.type==='home-sotd'){
     detailReturnContext=null;
   } else if(detailReturnContext&&detailReturnContext.type==='sotd'){
@@ -1411,7 +1384,7 @@ function addFromDetail(){
 // ── TEN STONES WORTH KNOWING ──
 const SUPABASE_STONES = SUPABASE_ENC;
 const FEATURED_STONES = [
-  {id:'C-0119', name:'Amethyst',         hex:'#7a5a9a', photo:'amethyst-sphere.webp',        use:'Calm · Sleep · Protection',      intention:'I am clear, calm, and protected.'},
+  {id:'C-0119', name:'Amethyst',         hex:'#7a5a9a', photo:'amethyst.webp',        use:'Calm · Sleep · Protection',      intention:'I am clear, calm, and protected.'},
   {id:'C-0108', name:'Rose Quartz',      hex:'#d4839a', photo:'rose-quartz.webp',     use:'Love · Heart · Self-compassion',  intention:'I am worthy of love.'},
   {id:'C-0105', name:'Clear Quartz',     hex:'#e0dbd4', photo:'clear-quartz.webp',    use:'Amplification · Clarity · Focus', intention:'I amplify what is already true.'},
   {id:'C-0121', name:'Citrine',          hex:'#c9a832', photo:'citrine-freeform.webp',         use:'Abundance · Confidence · Energy', intention:'I welcome abundance.'},
@@ -1423,108 +1396,8 @@ const FEATURED_STONES = [
   {id:'C-0129', name:'Black Tourmaline', hex:'#3a3530', photo:'black-tourmaline.webp',use:'Protection · Grounding · Shield', intention:'I am protected. Nothing that is not mine can enter.'},
 ];
 
-const STARTER_STONE_BEST_FOR = {
-  'C-0119': 'Winding down, meditation, and emotional reset.',
-  'C-0108': 'Softening self-talk and opening the heart.',
-  'C-0105': 'Clarifying intentions and amplifying other stones.',
-  'C-0121': 'Confidence, fresh momentum, and welcoming opportunity.',
-  'C-0028': 'Trusting intuition through change or uncertainty.',
-  'C-0175': 'Clearing stagnant energy and refreshing a space.',
-  'C-0178': 'Heart-led growth, optimism, and new openings.',
-  'C-0153': 'Creative energy, courage, and getting started.',
-  'C-0041': 'Coming back to the body and steadying scattered energy.',
-  'C-0129': 'Energetic boundaries, grounding, and protection.'
-};
-
-let starterStoneModalIndex = 0;
-let starterStoneModalSource = FEATURED_STONES;
-let starterStonePreviousFocus = null;
 let mobileSotdStone = null;
 
-function featuredStoneQualities(s){
-  if(s.qualities && s.qualities.length) return s.qualities;
-  return String(s.use || '').replace(/\u00c2/g,'').split(/\s*\u00b7\s*/).filter(Boolean);
-}
-
-
-function starterStoneQualitiesHtml(s){
-  return featuredStoneQualities(s).map(q => `<span>${escapeAttr(q)}</span>`).join('');
-}
-
-function activeStarterStoneList(){
-  return (Array.isArray(starterStoneModalSource) && starterStoneModalSource.length) ? starterStoneModalSource : FEATURED_STONES;
-}
-
-function openStarterStoneModal(index, source){
-  const overlay = document.getElementById('starter-stone-modal-overlay');
-  const content = document.getElementById('starter-stone-modal-content');
-  if(!overlay || !content) return;
-  starterStoneModalSource = (Array.isArray(source) && source.length) ? source : FEATURED_STONES;
-  const stones = activeStarterStoneList();
-  starterStoneModalIndex = (index + stones.length) % stones.length;
-  const s = stones[starterStoneModalIndex];
-  const photoHtml = s.photo
-    ? `<img class="starter-stone-modal-image" src="${SUPABASE_STONES}${s.photo}" alt="${escapeAttr(s.name)} crystal specimen">`
-    : `<div class="starter-stone-modal-dot" style="background:${escapeAttr(s.hex)}"></div>`;
-  content.innerHTML = `
-    <div class="starter-stone-modal-media">${photoHtml}</div>
-    <div class="starter-stone-modal-copy">
-      <h2 class="starter-stone-modal-title" id="starter-stone-modal-title">${escapeAttr(s.name)}</h2>
-      <div class="starter-stone-modal-qualities">${starterStoneQualitiesHtml(s)}</div>
-      <div class="starter-stone-modal-best"><span>Best for</span>${escapeAttr(s.bestFor || STARTER_STONE_BEST_FOR[s.id] || '')}</div>
-      ${s.intention?`<div class="starter-stone-modal-intention">"${escapeAttr(s.intention)}"</div>`:''}
-      <button class="starter-stone-modal-learn" type="button" onclick="learnMoreStarterStone()">View full entry →</button>
-    </div>`;
-  starterStonePreviousFocus = document.activeElement;
-  overlay.classList.add('open');
-  overlay.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-  const closeBtn = overlay.querySelector('.starter-stone-modal-close');
-  if(closeBtn) closeBtn.focus();
-}
-
-function closeStarterStoneModal(){
-  const overlay = document.getElementById('starter-stone-modal-overlay');
-  if(!overlay) return;
-  overlay.classList.remove('open');
-  overlay.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-  if(starterStonePreviousFocus && starterStonePreviousFocus.focus) starterStonePreviousFocus.focus();
-  starterStonePreviousFocus = null;
-}
-
-function navStarterStoneModal(dir){
-  openStarterStoneModal(starterStoneModalIndex + dir, activeStarterStoneList());
-}
-
-function starterStoneOverlayClick(e){
-  if(e.target && e.target.id === 'starter-stone-modal-overlay') closeStarterStoneModal();
-}
-
-function learnMoreStarterStone(){
-  const s = activeStarterStoneList()[starterStoneModalIndex];
-  if(!s) return;
-  const identifier=s.id || normalizeStoneName(s.name).replace(/\s+/g,'-');
-  const onHomepage=!document.getElementById('tab-encyclopedia');
-  if(onHomepage && document.getElementById('detail-drawer')){
-    const returnIndex=starterStoneModalIndex;
-    const returnSource=activeStarterStoneList().slice();
-    closeStarterStoneModal();
-    detailReturnContext={type:'starterStone',index:returnIndex,source:returnSource};
-    if(openPendingStoneEntry(identifier,s.name))return;
-    detailReturnContext=null;
-  }
-  closeStarterStoneModal();
-  queueDirectStoneOpen(identifier,s.name);
-}
-
-document.addEventListener('keydown',function(e){
-  const overlay = document.getElementById('starter-stone-modal-overlay');
-  if(!overlay || !overlay.classList.contains('open')) return;
-  if(e.key === 'Escape') closeStarterStoneModal();
-  if(e.key === 'ArrowLeft') navStarterStoneModal(-1);
-  if(e.key === 'ArrowRight') navStarterStoneModal(1);
-});
 // ── STONE OF THE DAY ──
 function localDateKey(d){
   const date=d||new Date();
@@ -1586,13 +1459,6 @@ async function scheduledSotdStone(){
     console.warn('Stone of the Day schedule unavailable; using deterministic fallback.', e);
     return null;
   }
-}
-
-function sotdUseSentence(s){
-  const text=String(s.bestFor || STARTER_STONE_BEST_FOR[s.id] || '').trim();
-  if(!text)return '';
-  if(/^use when/i.test(text))return text;
-  return 'Use when you ' + text.charAt(0).toLowerCase() + text.slice(1);
 }
 
 const SOTD_TIER_LABELS={1:'The Essentials',2:'Shelf Builders',3:'Collector Favorites',4:'Rare Finds'};
