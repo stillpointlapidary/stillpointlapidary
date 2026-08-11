@@ -862,7 +862,7 @@ function resetUseWhen(){
   if(titleEl)titleEl.textContent='';
   document.querySelectorAll('#intention-grid .intention-card').forEach(c=>c.classList.remove('active'));
   document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active-mood'));
-  activeMoodIdx=null;activeSubFilter=null;
+  activeMoodIdx=null;activeSubFilter=null;activeCuratedSlug=null;
   activeIntentionMode=null;activeIntentionQuery='';activeIntentionGroup=null;activeIntentionFilter='all';activeIntentionFilterDefs=[];activeIntentionBaseMatches=[];activeIntentionMatches=[];activeIntentionVisibleCount=intentionPageSize();
 }
 
