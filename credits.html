@@ -142,7 +142,7 @@ async function pcLoadFamilyGuideSection(){
     // page routes its footer Photo Credits link to credits.html#calcite
     // instead of a redundant in-page disclosure. Every other guide's
     // subgroup still has no id.
-    const stableIds = {copper:'copper-minerals', calcite:'calcite'};
+    const stableIds = {copper:'copper-minerals', calcite:'calcite', garnet:'garnet'};
     const idAttr = stableIds[g.slug] ? ` id="${pcEscapeHtml(stableIds[g.slug])}"` : '';
     return `<div class="pc-subgroup"${idAttr}>
       <h3 class="pc-subgroup-title">${pcEscapeHtml(g.displayName||g.slug)} <a class="pc-subgroup-link" href="encyclopedia.html?tab=family&amp;family=${pcEscapeHtml(g.slug)}">View guide</a></h3>
