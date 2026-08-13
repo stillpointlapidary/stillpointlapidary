@@ -490,12 +490,28 @@ function fgExpressionCardHtml(member, opts){
     phraseText = 'Photo and editorial identity pending.';
     phraseClass += ' fg-placeholder-note';
   }
+  // opts.splitPhrase (2026-08-08, added for Quartz's Growth Forms &
+  // Inclusions section, whose Phantom Quartz card has no resolvable Stone
+  // ID and so renders through this unlinked branch) — same two-sentence
+  // visual split fgStoneCardHtml already supports, so an unlinked card's
+  // copy gets the same breathing room as its linked siblings in the same
+  // grid. No existing caller (Fluorite) sets this, so its cards are
+  // unaffected.
+  let phraseInner = escapeAttr(phraseText);
+  if(opts.splitPhrase && phraseText){
+    const splitAt = phraseText.indexOf('. ');
+    if(splitAt !== -1){
+      const first = phraseText.slice(0, splitAt+1);
+      const rest = phraseText.slice(splitAt+2);
+      phraseInner = `<span class="fg-stonecard-phrase-p">${escapeAttr(first)}</span><span class="fg-stonecard-phrase-p">${escapeAttr(rest)}</span>`;
+    }
+  }
   return `<div class="fg-stonecard fg-stonecard--unlinked">
     <div class="fg-stonecard-media" title="${escapeAttr(name)} — family-guide expression, not a linked encyclopedia entry">${imgHtml}</div>
     <div class="fg-stonecard-body">
       <div class="fg-stonecard-name">${escapeAttr(name)}</div>
       ${identityHtml}
-      <div class="${phraseClass}">${escapeAttr(phraseText)}</div>
+      <div class="${phraseClass}">${phraseInner}</div>
       <span class="fg-badge">FAMILY-GUIDE EXPRESSION</span>
     </div>
   </div>`;
@@ -889,6 +905,183 @@ function familyGuideRelationshipHtml(guide){
     ${r.editorialNote?`<p class="fg-placeholder-banner">Editorial copy pending — layout shell for review only.</p>`:''}
     <div class="fg-relationship-grid">${branches}</div>
   </section>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   QUARTZ FAMILY GUIDE — Revision pass (2026-08-08) implementing Christie's
+   locked Quartz Family Guide Revision brief. Quartz moves off the generic
+   assembly (familyGuideGenericHtml/familyGuideWhatChangesNameHtml/
+   familyGuideGrowthFormsInclusionsHtml/familyGuideRelationshipHtml above
+   are untouched and still available as the fallback path for any future
+   guide with no dedicated assembly) onto its own dedicated section
+   renderers and assembly below, matching the Agate/Copper visual-
+   standardization baseline (see the [data-family-slug="quartz"] CSS in
+   styles.css). ══ */
+
+/* ── Bridge paragraph — the former in-hero "Quartz is familiar enough to
+   seem simple..." paragraph is replaced with Christie's new bridge copy
+   and moved out of the hero box entirely, reusing the same unboxed
+   .fg-section/#fg-*-bridge/.fg-garnet-bridge pattern Agate's and Jasper's
+   own hero-to-first-section bridges already established (see
+   familyGuideWhatAgateIsHtml/familyGuideWhatJasperIsHtml). No heading —
+   this is a continuation of the hero's opening thought, not its own named
+   section. ── */
+function familyGuideQuartzBridgeHtml(guide){
+  const paras = guide.quartzBridge||[];
+  if(!paras.length) return '';
+  return `<div class="fg-section" id="fg-quartz-bridge"><div class="fg-garnet-bridge">${paras.map(p=>`<p>${escapeAttr(p)}</p>`).join('')}</div></div>`;
+}
+
+/* ── Why Quartz Names Change — four compact name+description cards
+   (Brandberg Amethyst, Tibetan Quartz, Crackle Quartz, Dream Quartz),
+   replacing the prior pass's five-category "What Changes the Name?" chip
+   grid. Reuses the existing .fg-namegrid/.fg-namecard layout with new
+   .fg-namecard-body content instead of the numbered-index/chip-list
+   markup familyGuideWhatChangesNameHtml renders — that function is
+   untouched and still used by its .fg-namegrid--3 variant (Tourmaline's
+   triple-caption grid reuses the bare grid CSS only, not this markup).
+   Correction (2026-08-12): Arkansas Quartz card removed per the reversed
+   Arkansas Quartz/Clear Quartz no-merge catalog decision (see
+   ENCYCLOPEDIA-CATALOG-DECISIONS.md §11) — Arkansas Quartz is consolidated
+   into Clear Quartz and no longer gets separate family-guide treatment,
+   so the grid now runs four cards, not five (see the matching
+   [data-family-slug="quartz"] #fg-name-change .fg-namegrid column-count
+   overrides in styles.css). Each card now also carries a short
+   ex.label naming-category eyebrow (Locality / Claimed Locality /
+   Treatment / Collector Name) via the new .fg-namecard-category class,
+   so the module reads as a naming decoder rather than four
+   undifferentiated text boxes — approved per Christie's 2026-08-12
+   direction. ex.anchor (Dream Quartz only, "dream-quartz") gives that
+   card a stable id, same pattern as fgStoneCardHtml's opts.anchorId
+   (see familyGuideVarietiesHtml's #red-calcite legacy anchor), so it
+   stays a real, findable, deep-linkable section of the page rather than
+   inert placeholder text.
+   Visual correction (2026-08-20): a two-sentence ex.body now renders as
+   two separate .fg-namecard-body paragraphs (split at the first ". ",
+   same convention as fgStoneCardHtml's opts.splitPhrase) instead of one
+   run-on block, so the "what it is / why that distinction matters" beats
+   read with visible separation. Approved wording is unchanged — this only
+   changes how it's broken into paragraphs. ex.image (optional, a local
+   filename under assets/family-guide-quartz/) renders through the
+   .fg-namecard-media white contain well when an approved image exists.
+   Pending-photo wells (2026-08-12): every card without ex.image now
+   renders that same .fg-namecard-media well with the sitewide
+   .fg-stonecard-noimg--labeled "Photo pending" treatment inside it
+   (background overridden to white via the matching styles.css rule, same
+   pattern already used for #fg-growth-forms's Phantom Quartz/Lemurian
+   Seed Crystal wells) instead of omitting the media block — a structural
+   placeholder only, no temporary or invented imagery. All four current
+   examples are in this state; swapping in ex.image later needs no further
+   markup change. ── */
+function familyGuideQuartzNamingHtml(guide){
+  const w = guide.whyNamesChange;
+  if(!w) return '';
+  const cards = (w.examples||[]).map(ex=>{
+    const bodyClass = ex.bodyPending ? 'fg-namecard-body fg-placeholder-note' : 'fg-namecard-body';
+    const body = ex.body || 'Editorial copy pending.';
+    let bodyHtml;
+    const splitAt = body.indexOf('. ');
+    if(splitAt !== -1){
+      const first = body.slice(0, splitAt+1);
+      const rest = body.slice(splitAt+2);
+      bodyHtml = `<p class="${bodyClass}">${escapeAttr(first)}</p><p class="${bodyClass}">${escapeAttr(rest)}</p>`;
+    }else{
+      bodyHtml = `<p class="${bodyClass}">${escapeAttr(body)}</p>`;
+    }
+    const mediaHtml = ex.image
+      ? `<div class="fg-namecard-media"><img src="${escapeAttr('assets/family-guide-quartz/'+ex.image)}" alt="${escapeAttr(ex.alt||ex.name||'')}" loading="lazy"></div>`
+      : `<div class="fg-namecard-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>`;
+    const categoryHtml = ex.label ? `<div class="fg-namecard-category">${escapeAttr(ex.label)}</div>` : '';
+    const idAttr = ex.anchor ? ` id="${escapeAttr(ex.anchor)}"` : '';
+    return `<div class="fg-namecard"${idAttr}>
+      ${mediaHtml}
+      ${categoryHtml}
+      <div class="fg-namecard-label">${escapeAttr(ex.name||'')}</div>
+      ${bodyHtml}
+    </div>`;
+  }).join('');
+  return `<section class="fg-section" id="fg-name-change">
+    <h2 class="fg-h2">${escapeAttr(w.title||'Why Quartz Names Change')}</h2>
+    ${w.intro?`<p class="fg-section-intro">${escapeAttr(w.intro)}</p>`:''}
+    <div class="fg-namegrid">${cards}</div>
+  </section>`;
+}
+
+/* ── Growth Forms & Inclusions — Quartz-dedicated replacement for the
+   generic familyGuideGrowthFormsInclusionsHtml above, now carrying
+   Christie's approved two-sentence body copy per stone (member.headline)
+   instead of a placeholder-only shell. Each card renders through
+   fgExpressionCardHtml with opts.splitPhrase so the two sentences get
+   visual breathing room instead of collapsing into one dense block (see
+   the [data-family-slug="quartz"] #fg-growth-forms CSS in styles.css for
+   the matching white contain-well/16px description treatment already
+   established for Agate's roster). Phantom Quartz (inclusions.items[0])
+   has no stoneId — its Stone ID could not be resolved against
+   pipeline/data/structured-values.generated.json, so it renders via
+   fgExpressionCardHtml's non-clickable "FAMILY-GUIDE EXPRESSION" path
+   rather than an invented catalog link; see the editorialStatusNote for
+   this open gap. ── */
+function familyGuideQuartzGrowthFormsHtml(guide){
+  const g = guide.growthFormsInclusions;
+  if(!g) return '';
+  const growth = g.growthForms||{};
+  const incl = g.inclusions||{};
+  const growthCards = (growth.items||[]).map(m=>fgExpressionCardHtml(m, {splitPhrase:true})).filter(Boolean).join('');
+  const inclCards = (incl.items||[]).map(m=>fgExpressionCardHtml(m, {splitPhrase:true})).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-growth-forms">
+    <h2 class="fg-h2">${escapeAttr(g.title||'Growth Forms & Inclusions')}</h2>
+    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
+    <div class="fg-subgroup">
+      <div class="fg-subgroup-label">${escapeAttr(growth.label||'Growth Forms')}</div>
+      <div class="fg-card-grid fg-card-grid--4">${growthCards}</div>
+    </div>
+    <div class="fg-subgroup">
+      <div class="fg-subgroup-label">${escapeAttr(incl.label||'Inclusions & Internal Features')}</div>
+      <div class="fg-card-grid fg-card-grid--4">${inclCards}</div>
+    </div>
+  </section>`;
+}
+
+/* ── Where Agate, Chalcedony & Jasper Fit — Quartz-dedicated replacement
+   for the generic familyGuideRelationshipHtml above (that function is
+   untouched and still available as a fallback). Simplified per Christie's
+   brief to plain prose (reusing .fg-garnet-bridge, the same untitled-
+   paragraph treatment as the bridge above) plus three compact pill links
+   to the built Chalcedony/Agate/Jasper guides — no branch photo cards. ── */
+function familyGuideQuartzRelationshipHtml(guide){
+  const r = guide.quartzRelationship;
+  if(!r) return '';
+  const paras = (r.paragraphs||[]).map(p=>`<p>${escapeAttr(p)}</p>`).join('');
+  const links = (r.links||[]).map(l=>`<button type="button" class="btn fg-quartz-relationship-pill" onclick="openFamilyGuide('${escapeAttr(l.slug)}')">${escapeAttr(l.label)}</button>`).join('');
+  return `<section class="fg-section" id="fg-relationship">
+    <h2 class="fg-h2">${escapeAttr(r.title||'Where Agate, Chalcedony & Jasper Fit')}</h2>
+    <div class="fg-garnet-bridge">${paras}</div>
+    ${links?`<div class="fg-quartz-relationship-links">${links}</div>`:''}
+  </section>`;
+}
+
+/* ── Quartz guide assembly — approved section order: Hero, bridge
+   paragraph, Meet Eight Quartz Expressions, Why Quartz Names Change,
+   Growth Forms & Inclusions, Where Agate/Chalcedony/Jasper Fit, Quartz in
+   Your Collection (reuses familyGuideGarnetCollectionHtml/
+   .fg-garnet-collection-grid exactly as Garnet/Agate/Jasper's own
+   text-only three-card collection sections do, via guide.garnetCollection
+   — see that function's own comment; field name is a reused, non-
+   garnet-specific component per established convention), Closing. No
+   familyGuideImageCreditsHtml call — this pass uses no new third-party
+   photography, so Photo Credits stays on the shared footer link. ── */
+function familyGuideQuartzHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideQuartzBridgeHtml(guide)}
+    ${familyGuideExpressionsHtml(guide)}
+    ${familyGuideQuartzNamingHtml(guide)}
+    ${familyGuideQuartzGrowthFormsHtml(guide)}
+    ${familyGuideQuartzRelationshipHtml(guide)}
+    ${familyGuideGarnetCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+  </div>`;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -2867,8 +3060,8 @@ function familyGuideGenericHtml(guide){
 /* ── Full guide assembly — approved public section order. Calcite's path is
    untouched (same functions, same order) so its rendered output cannot
    regress; Fluorite uses its own dedicated assembly (its section set has no
-   overlap with Quartz's); every other guide (currently: Quartz) uses the
-   generic assembly above. */
+   overlap with Quartz's); every guide with no dedicated assembly below
+   falls through to the generic assembly above. */
 function familyGuideHtml(guide){
   if(guide.slug==='fluorite') return familyGuideFluoriteHtml(guide);
   if(guide.slug==='feldspar') return familyGuideFeldsparHtml(guide);
@@ -2879,6 +3072,7 @@ function familyGuideHtml(guide){
   if(guide.slug==='tourmaline') return familyGuideTourmalineHtml(guide);
   if(guide.slug==='obsidian') return familyGuideObsidianHtml(guide);
   if(guide.slug==='copper') return familyGuideCopperHtml(guide);
+  if(guide.slug==='quartz') return familyGuideQuartzHtml(guide);
   if(guide.slug!=='calcite') return familyGuideGenericHtml(guide);
   // Note (2026-07-31, Calcite normalization pass): the in-page "Image
   // credits" <details> disclosure (familyGuideImageCreditsHtml) is

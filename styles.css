@@ -1823,19 +1823,47 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-collection-care .fg-list li{margin-bottom:2px}
 .fg-fact-body{font-size:13px;line-height:1.6;color:var(--ink2);margin:0}
 
-/* ══ QUARTZ FAMILY GUIDE — generic-path components (2026-07-22 first
-   implementation pass). New, reusable section types with no Calcite
-   equivalent; scoped to their own classes so Calcite's page is unaffected. */
+/* ══ Shared generic-path components (2026-07-22 first implementation
+   pass; retained after Quartz's 2026-08-08 move to its own dedicated
+   assembly — see the [data-family-slug="quartz"] block below). New,
+   reusable section types with no Calcite equivalent; scoped to their own
+   classes so Calcite's page is unaffected. Quartz's naming grid now uses
+   .fg-namecard-body (below) instead of the index/chip markup this
+   comment originally described; Jasper's .fg-namegrid--3 variant still
+   reuses the bare .fg-namegrid layout only. ══ */
 
-/* What Changes the Name? — five-category naming-logic grid. Text-only
-   (numbered index + label + example chips), no photography, so the *kind*
-   of distinction each name makes is legible at a glance. */
+/* What Changes the Name? — five-category naming-logic grid (generic path,
+   currently unused by any live guide's assembly). Text-only (numbered
+   index + label + example chips), no photography, so the *kind* of
+   distinction each name makes is legible at a glance. */
 .fg-namegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .fg-namecard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:8px}
 .fg-namecard-index{width:24px;height:24px;border-radius:50%;background:var(--stone2);border:0.5px solid var(--border2);color:var(--accent);font-family:'Jost',sans-serif;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
 .fg-namecard-label{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink)}
+/* .fg-namecard-category (2026-08-12, added for Quartz's "Why Quartz Names
+   Change" naming-decoder correction) — a short eyebrow above the stone
+   name identifying which kind of naming logic that card demonstrates
+   (Locality, Claimed Locality, Treatment, Collector Name), reusing the
+   same small-caps/letter-spaced treatment as .fg-subgroup-label elsewhere
+   on this page so it reads as a label, not a headline. Optional: only
+   renders when ex.label is set, so any other .fg-namecard user is
+   unaffected. */
+.fg-namecard-category{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r)}
 .fg-namecard-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
 .fg-chip{display:inline-block;font-size:11px;letter-spacing:0.02em;color:var(--ink2);background:var(--stone2);border:0.5px solid var(--border2);border-radius:20px;padding:3px 10px}
+/* .fg-namecard-body (2026-08-08, added for Quartz's "Why Quartz Names
+   Change" revision) — a short-description variant of .fg-namecard, used
+   in place of the numbered-index/chip-list markup above. Reuses the same
+   .fg-namegrid/.fg-namecard container so the five-card layout and its
+   responsive collapse are unchanged; only this new paragraph class is
+   additive. No other guide's namecard uses this class. */
+.fg-namecard-body{font-family:'Jost',sans-serif;font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0}
+/* Visual correction (2026-08-20) — a card whose approved copy is two
+   sentences now renders as two separate .fg-namecard-body paragraphs (see
+   familyGuideQuartzNamingHtml) instead of one run-on block; this gives the
+   second sentence a small visible gap from the first. Single-sentence
+   cards (e.g. Crackle Quartz) render one paragraph and are unaffected. */
+.fg-namecard-body + .fg-namecard-body{margin-top:0.5em}
 
 /* Growth Forms & Inclusions — two labeled stone-card subgroups. */
 .fg-subgroup{margin-bottom:1.5rem}
@@ -2414,10 +2442,146 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-guide[data-family-slug="agate"] .fg-section{margin-bottom:56px}
 }
 
-/* Three-category variant of the existing five-category .fg-namegrid (used
-   by Quartz's "What Changes the Name?"), for Jasper's "Pattern Is Not the
-   Same as Identity" reuse of that same component. Centered/capped so three
-   cards don't stretch across a five-column track. */
+/* ── Quartz Family Guide Revision (2026-08-08) — brings Quartz's page-wide
+   rhythm, alignment, and card/image treatment in line with the Copper
+   Minerals baseline (EDITORIAL-PAGE-VISUAL-STANDARD.md §2, §4, §8.1, §9),
+   following the same pattern already established for Jasper/Agate above.
+   Quartz previously had no [data-family-slug="quartz"] overrides at all —
+   it was still on the pre-standardization centered .fg-h2/.fg-lead and
+   40px .fg-section defaults — so this is the first normalization pass for
+   this guide. Scoped entirely to [data-family-slug="quartz"] so no other
+   guide's spacing, alignment, or image treatment changes. ── */
+.fg-guide[data-family-slug="quartz"] .fg-hero{margin-bottom:76px}
+.fg-guide[data-family-slug="quartz"] .fg-h2{text-align:left;margin-bottom:18px}
+.fg-guide[data-family-slug="quartz"] .fg-section{margin-bottom:76px}
+.fg-guide[data-family-slug="quartz"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
+.fg-guide[data-family-slug="quartz"] .fg-section-intro:last-of-type{margin-bottom:28px}
+/* Visual correction (2026-08-20): the base .fg-section-intro (19px Georgia
+   italic) read as too heavy/competing with the 22px .fg-h2 heading above
+   it — both "Why Quartz Names Change" and "Growth Forms & Inclusions" use
+   this class, and both needed to visibly support their heading rather
+   than rival it. Matches the reduced 16px/1.5 scale already established
+   for Garnet's own .fg-section-intro correction. Applied once here so
+   both section intros stay visually identical, per the brief's explicit
+   requirement. */
+.fg-guide[data-family-slug="quartz"] .fg-section-intro{font-size:16px;line-height:1.5}
+/* Bridge paragraph (below the hero) and the "Where Agate, Chalcedony &
+   Jasper Fit" prose both reuse the shared .fg-garnet-bridge component;
+   its default (Georgia serif, 21px) reads as heading-size prose next to
+   this page's other body copy, so both get the same 16px/Jost correction
+   already established for Agate's/Jasper's own bridges. Verified
+   2026-08-20 against the live Agate page (#fg-what-agate-is .fg-garnet-
+   bridge p): font-family, font-size, line-height, color, and rendered
+   content width are byte-identical between the two guides. Left
+   unchanged this pass — see the visual-correction report for why this
+   one is not a CSS defect. */
+.fg-guide[data-family-slug="quartz"] .fg-garnet-bridge p{font-family:'Jost',sans-serif;font-size:16px;line-height:1.7;color:var(--ink2);margin-bottom:14px}
+.fg-guide[data-family-slug="quartz"] .fg-garnet-bridge p:last-of-type{margin-bottom:0}
+/* Meet Eight Quartz Expressions — visual correction (2026-08-20): white
+   contain wells stay as before; the description (.fg-stonecard-phrase)
+   drops from 16px to the 14.5px/1.6 scale already established for "Why
+   Quartz Names Change" (.fg-namecard-body) so the two card systems read
+   at one consistent, restrained description scale instead of the roster
+   cards visually outweighing the rest of the page. The italic moniker
+   (.fg-stonecard-identity) gets real breathing room below it (was the
+   sitewide default 4px) so name -> moniker -> description reads as three
+   distinct beats instead of a run-on block. */
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-identity{margin-bottom:12px}
+/* Visual correction (2026-08-21): Christie's 2026-08-20 pass dropped this
+   to 14.5px to match "Why Quartz Names Change" — on review the roster
+   description is substantive teaching copy, not a caption, and reads
+   better restored to 16px/1.6. The moniker-to-description spacing
+   (.fg-stonecard-identity margin-bottom above) and card hierarchy from
+   that pass are unchanged. */
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink2)}
+/* Growth Forms & Inclusions — visual correction (2026-08-20): description
+   size matches the same 14.5px/1.6 correction as Meet Eight Quartz
+   Expressions above (was 16px), keeping the existing split-sentence
+   paragraph gap (.fg-stonecard-phrase-p) so each card's two-sentence body
+   still reads as two readable beats, just at the corrected scale. */
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-media{background:#FFFFFF}
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+/* Visual correction (2026-08-21): restored to 16px/1.6 for the same reason
+   as #fg-expressions above — the sentence-split gap (.fg-stonecard-phrase-p)
+   from the 2026-08-20 pass is unchanged. */
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink2)}
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase-p{display:block;margin-bottom:0.55em}
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase-p:last-child{margin-bottom:0}
+/* Pending-photo wells (2026-08-21) — Phantom Quartz (no catalog Stone ID)
+   and Lemurian Seed Crystal (catalog stone with no approved photo yet)
+   were rendering the sitewide .fg-stonecard-noimg default (tan
+   var(--stone3)) inside an otherwise-white well, reading as a mismatched
+   gray block. Matches the white specimen-well treatment used everywhere
+   else on this page; wording, size, and card structure are unchanged. */
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-noimg{background:#FFFFFF}
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-noimg--labeled span{color:var(--ink3)}
+/* Growth -> Inclusions internal group spacing (2026-08-20 correction): the
+   base .fg-subgroup gap (24px, shared sitewide) read as too tight to
+   announce a new card group within the same major section. Bumped to 48px
+   — clearly more than ordinary card-row spacing, well short of the 76px
+   major-section rhythm — scoped to the non-last subgroup only; the base
+   .fg-subgroup:last-child{margin-bottom:0} rule still zeroes the trailing
+   gap before the next major section. */
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-subgroup{margin-bottom:48px}
+/* Why Quartz Names Change — specimen image well (2026-08-20 capability;
+   2026-08-12 correction rendered it as a visible pending well for all
+   four cards). Same fixed-height white well every card gets, whether it
+   holds an approved img (object-fit: contain, letting future approved
+   assets/family-guide-quartz/<file> images drop straight into
+   familyGuideQuartzNamingHtml's ex.image field with no further CSS
+   change) or — currently, for all four examples (Brandberg Amethyst,
+   Tibetan Quartz, Crackle Quartz, Dream Quartz) — the sitewide
+   .fg-stonecard-noimg--labeled "Photo pending" placeholder. That shared
+   placeholder defaults to the sitewide tan var(--stone3) fill; overridden
+   to white here so it matches this well's white background instead of
+   reading as a mismatched gray/tan block, same correction already
+   applied to #fg-growth-forms's Phantom Quartz/Lemurian Seed Crystal
+   wells above. Identical dimensions/structure regardless of image vs.
+   pending state, so every card in the row stays visually uniform. */
+.fg-guide[data-family-slug="quartz"] .fg-namecard-media{width:100%;height:120px;background:#FFFFFF;border:0.5px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;display:flex;align-items:center;justify-content:center}
+.fg-guide[data-family-slug="quartz"] .fg-namecard-media img{width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box}
+.fg-guide[data-family-slug="quartz"] .fg-namecard-media .fg-stonecard-noimg{background:#FFFFFF}
+.fg-guide[data-family-slug="quartz"] .fg-namecard-media .fg-stonecard-noimg--labeled span{color:var(--ink3)}
+/* Why Quartz Names Change — four-card balanced row (2026-08-12 correction,
+   Arkansas Quartz removed per the reversed catalog decision). The base
+   .fg-namegrid is a 5-column grid shared by every guide's naming-logic
+   card component (bare 5-col default, plus Jasper's .fg-namegrid--3
+   modifier — see the comment on the base rule); Quartz is currently the
+   only guide using the bare 5-column default, so it's scoped narrowly to
+   #fg-name-change here rather than changed sitewide, in case another
+   guide adopts the unmodified 5-card version later. Column counts at
+   each breakpoint mirror the sitewide .fg-namegrid cascade exactly
+   (5/2/1 there -> 4/2/1 here) so the existing 900px/600px collapse
+   points are reused rather than inventing new ones. */
+.fg-guide[data-family-slug="quartz"] #fg-name-change .fg-namegrid{grid-template-columns:repeat(4,1fr)}
+/* Where Agate, Chalcedony & Jasper Fit — three compact pill links to the
+   built guides, styled to the shared editorial navigation-pill spec
+   (EDITORIAL-PAGE-VISUAL-STANDARD.md §11: 39px height, 22px horizontal
+   padding, 13px/500 weight, 999px radius, content-sized) rather than the
+   uppercase/6px-radius default .btn. */
+.fg-guide[data-family-slug="quartz"] .fg-quartz-relationship-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.fg-guide[data-family-slug="quartz"] .fg-quartz-relationship-pill{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
+.fg-guide[data-family-slug="quartz"] .fg-quartz-relationship-pill:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+/* Closing — same restrained, unboxed treatment already established for
+   Agate/Jasper/Copper: the ordinary-prose closingBridge paragraph sits in
+   its own left-aligned section (#fg-closing-bridge, reusing the same
+   .fg-garnet-bridge correction above), and the closing box's background/
+   border/padding are removed so only the centered reflective line and the
+   compact Return pill remain. */
+.fg-guide[data-family-slug="quartz"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
+.fg-guide[data-family-slug="quartz"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
+.fg-guide[data-family-slug="quartz"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+@media(max-width:900px){
+  .fg-guide[data-family-slug="quartz"] .fg-hero{margin-bottom:56px}
+  .fg-guide[data-family-slug="quartz"] .fg-section{margin-bottom:56px}
+}
+
+/* Three-category variant of the base five-column .fg-namegrid layout, for
+   Jasper's "Pattern Is Not the Same as Identity" reuse of that same
+   component. Centered/capped so three cards don't stretch across a
+   five-column track. */
 .fg-namegrid--3{grid-template-columns:repeat(3,1fr);max-width:820px;margin:0 auto}
 
 /* Two-up variant of the existing .fg-photo-grid (already has --4 and --3),
@@ -3493,6 +3657,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-collection-care,.fg-collection-sub{height:auto}
   .fg-lead{font-size:18px}
   .fg-namegrid{grid-template-columns:repeat(2,1fr)}
+  .fg-guide[data-family-slug="quartz"] #fg-name-change .fg-namegrid{grid-template-columns:repeat(2,1fr)}
   .fg-relationship-grid{grid-template-columns:1fr}
   .fg-branch-grid{grid-template-columns:1fr}
   .fg-card-grid--2{max-width:420px}
@@ -3553,6 +3718,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-closing{padding:1.75rem 1.25rem;border-radius:14px;margin-top:26px}
   .fg-section:has(+ .fg-closing){margin-bottom:26px}
   .fg-namegrid{grid-template-columns:1fr}
+  .fg-guide[data-family-slug="quartz"] #fg-name-change .fg-namegrid{grid-template-columns:1fr}
   .fg-single-visual{max-width:100%}
   .fg-card-grid--2{grid-template-columns:1fr;max-width:100%}
   .fg-compare-grid{grid-template-columns:1fr;max-width:100%}

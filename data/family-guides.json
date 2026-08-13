@@ -863,8 +863,7 @@
     "slug": "quartz",
     "displayName": "Quartz",
     "encyclopediaFilterValue": "Quartz",
-    "editorialStatusNote": "First implementation pass (2026-07-22) for Christie's visual review. Hero, Introduction, the eight anchor-expression cards, and the What Changes the Name? categories use Christie's locked copy exactly. Growth Forms & Inclusions and Quartz in Your Collection are structural shells only — those sections have no approved body copy yet and render clearly marked placeholders (see fg-placeholder-note text) pending Christie's editorial input. Where Agate, Chalcedony & Jasper Fit was updated 2026-07-23 with Christie's approved section-level explanatory paragraph following the family-grouping correction (Agate, Chalcedony, and Jasper are now separate encyclopedia families, not Quartz-family subgroups); the three branch cards still show per-card 'Editorial copy pending' since no branch-specific prose has been approved.",
-    "closingCallout": "Quartz helps bring what matters into clearer focus.",
+    "editorialStatusNote": "Revision pass (2026-08-08) implementing Christie's locked Quartz Family Guide Revision brief: dedicated quartz assembly/CSS (matching the Agate/Copper visual-standardization baseline), the hero's explanatory paragraph moved below the hero as an unboxed bridge, the five-category 'What Changes the Name?' grid replaced by 'Why Quartz Names Change', 'Growth Forms & Inclusions' now carries real approved two-sentence body copy per stone (was placeholder-only), 'Where Agate, Chalcedony & Jasper Fit' simplified to plain prose plus links to the three built guides, and 'Quartz in Your Collection' replaced with three concise text cards. Correction pass (2026-08-12): Arkansas Quartz removed from 'Why Quartz Names Change' per the reversed Arkansas Quartz/Clear Quartz no-merge catalog decision (see ENCYCLOPEDIA-CATALOG-DECISIONS.md §11) — Arkansas Quartz is consolidated into Clear Quartz and no longer gets separate family-guide treatment. The section now runs four cards (Brandberg Amethyst, Tibetan Quartz, Crackle Quartz, Dream Quartz), each carrying a concise naming-category label (Locality / Claimed Locality / Treatment / Collector Name). Dream Quartz's approved copy has been added (was placeholder-only) and the card carries a stable #dream-quartz anchor. One open catalog gap remains: Phantom Quartz has no resolvable Stone ID in the current roster (pipeline/data/structured-values.generated.json has no match), so it renders as a non-clickable family-guide-only card instead of a linked catalog entry. The eight-expression roster, hero media, and 'Quartz asks' prompt are unchanged per the brief's explicit preservation instruction. Copy correction pass (2026-08-12): all eight 'Growth Forms & Inclusions' descriptions replaced with the exact approved copy (Spirit Quartz, Elestial Quartz, Faden Quartz, Lemurian Seed Crystal, Phantom Quartz, Rutilated Quartz, Tourmaline Quartz, Lodolite Quartz) — card names, images, pending-photo states, links, layout, typography, and subgroup structure unchanged. Structural pending-photo wells added (2026-08-12): all four 'Why Quartz Names Change' cards (Brandberg Amethyst, Tibetan Quartz, Crackle Quartz, Dream Quartz) now render a visible white image well with a restrained 'Photo pending' label, identical in dimensions and structure across all four and matching the white-well treatment used elsewhere on this page — no temporary, invented, or external imagery has been sourced or assigned; every well is a structural placeholder only, ready to take an approved image via ex.image with no further markup change. All four still need approved photography; Brandberg Amethyst remains the priority, with the eventual goal of one visually consistent image treatment across the full four-card row.",
     "hero": {
       "mediaStoneIds": ["C-0105", "C-0119", "C-0121", "C-0108"],
       "eyebrow": "FAMILY GUIDE",
@@ -874,12 +873,9 @@
       "promptLeadIn": "Quartz asks:",
       "question": "What do you want to make clearer?"
     },
-    "overview": {
-      "paragraphs": [
-        "Quartz is familiar enough to seem simple, yet its names describe several very different kinds of distinction. Amethyst and Citrine are color varieties. Rutilated Quartz is defined by another mineral held inside it. Spirit Quartz and Faden Quartz are recognized by how they grow. Aura Quartz is transformed through treatment.",
-        "Once those differences are separated, the family becomes much easier to understand."
-      ]
-    },
+    "quartzBridge": [
+      "Quartz is one mineral with an astonishing range of expressions. Color, growth, inclusions, locality, and treatment can all change what we see and what we call it. Learning Quartz is less about memorizing names and more about noticing what makes each expression different."
+    ],
     "expressions": {
       "title": "Meet Eight Quartz Expressions",
       "members": [
@@ -925,76 +921,64 @@
         }
       ]
     },
-    "whatChangesName": {
-      "title": "What Changes the Name?",
-      "question": "What changed here?",
-      "categories": [
-        {
-          "label": "Color",
-          "examples": ["Amethyst", "Citrine", "Rose Quartz", "Smoky Quartz", "Prasiolite"]
-        },
-        {
-          "label": "Inclusions",
-          "examples": ["Rutilated Quartz", "Tourmalinated Quartz", "Hematoid Quartz", "Lodolite Quartz", "Enhydro Quartz"]
-        },
-        {
-          "label": "Growth Form",
-          "examples": ["Spirit Quartz", "Elestial Quartz", "Faden Quartz", "Lemurian Seed Crystal"]
-        },
-        {
-          "label": "Locality or Provenance",
-          "examples": ["Tibetan Quartz", "Vera Cruz Amethyst"]
-        },
-        {
-          "label": "Treatment or Commercial Naming",
-          "examples": ["Aura Quartz", "heat-treated Citrine", "Crackle Quartz"]
-        }
+    "whyNamesChange": {
+      "title": "Why Quartz Names Change",
+      "intro": "Quartz names often tell you what is different about the specimen: where it came from, how it grew, what is inside it, or what happened to it later. The mineral can stay the same while the name changes.",
+      "examples": [
+        {"name": "Brandberg Amethyst", "label": "LOCALITY", "body": "Amethyst from Namibia's Brandberg region, known to collectors for its locality and distinctive inclusions. The name describes provenance, not a separate mineral."},
+        {"name": "Tibetan Quartz", "label": "CLAIMED LOCALITY", "body": "A Clear Quartz designation associated with Tibetan origin. The label alone does not prove where a specimen was mined."},
+        {"name": "Crackle Quartz", "label": "TREATMENT", "body": "Quartz that has been deliberately fractured to create its characteristic web of internal cracks."},
+        {"name": "Dream Quartz", "label": "COLLECTOR NAME", "anchor": "dream-quartz", "body": "Clear to smoky quartz holds wispy green Epidote inclusions that create soft, phantomlike scenes inside the crystal. Its collector name reflects both that dreamlike appearance and its modern association with dream awareness and meditative insight."}
       ]
     },
     "growthFormsInclusions": {
       "title": "Growth Forms & Inclusions",
-      "editorialNote": "MISSING APPROVED COPY: no body text exists yet for these cards beyond the stone name. Placeholders render via fg-placeholder-note until Christie supplies final copy distinguishing growth-form recognition from inclusion identification per stone.",
+      "intro": "Quartz can look remarkably different depending on how it grows and what becomes enclosed inside it.",
       "growthForms": {
         "label": "Growth Forms",
         "items": [
-          {"stoneId": "C-0104"},
-          {"stoneId": "C-0366"},
-          {"stoneId": "C-0304"},
-          {"stoneId": "C-0323"}
+          {"stoneId": "C-0104", "headline": "Tiny quartz crystals grow over a larger central crystal, creating a dense, sparkling surface."},
+          {"stoneId": "C-0366", "headline": "Stepped, layered faces form as the crystal grows unevenly, creating its sculptural appearance."},
+          {"stoneId": "C-0304", "headline": "A pale threadlike line records fractures that repeatedly opened and healed during growth."},
+          {"stoneId": "C-0323", "headline": "Horizontal growth striations mark the crystal faces. \"Lemurian\" is a collector and metaphysical designation, not a separate mineral variety."}
         ]
       },
       "inclusions": {
         "label": "Inclusions & Internal Features",
         "items": [
-          {"stoneId": "C-0114"},
-          {"stoneId": "C-0112"},
-          {"stoneId": "C-0115"},
-          {"stoneId": "C-0367"},
-          {"stoneId": "C-0113"}
+          {"name": "Phantom Quartz", "headline": "A ghostlike outline preserves an earlier crystal surface that was later covered by new growth."},
+          {"stoneId": "C-0114", "headline": "Rutile needles become enclosed as quartz grows, forming fine threads or dramatic sprays."},
+          {"stoneId": "C-0112", "headline": "Dark Tourmaline needles or rods remain visible inside the clearer Quartz host."},
+          {"stoneId": "C-0115", "headline": "Mineral inclusions create cloudlike or landscape-like scenes, making each specimen distinct."}
         ]
       }
     },
-    "relationship": {
+    "quartzRelationship": {
       "title": "Where Agate, Chalcedony & Jasper Fit",
-      "bodyParagraph": "Mineralogically, chalcedony, agate, and jasper belong to the wider quartz story. For this encyclopedia, they are organized as separate families because their textures, naming systems, collector distinctions, and commercial identities are extensive enough to deserve their own paths.",
-      "branches": [
-        {"label": "Chalcedony", "stoneId": "C-0082"},
-        {"label": "Agate", "stoneId": "C-0077"},
-        {"label": "Jasper", "stoneId": "C-0099"}
+      "paragraphs": [
+        "Quartz does not always grow as large, visible crystals. Sometimes it forms as masses of crystals so tiny they blend together. That fine-grained material is called chalcedony.",
+        "Agate is chalcedony distinguished by its patterns and banding. Jasper is opaque, silica-rich material with its own colors, patterns, and textures.",
+        "They belong to the larger Quartz story, but each has enough personality to deserve its own guide."
+      ],
+      "links": [
+        {"label": "Explore Chalcedony", "slug": "chalcedony"},
+        {"label": "Explore Agate", "slug": "agate"},
+        {"label": "Explore Jasper", "slug": "jasper"}
       ]
     },
-    "collection": {
+    "garnetCollection": {
       "title": "Quartz in Your Collection",
-      "editorialNote": "MISSING APPROVED COPY: Care for It / Remember This / Watch For content below is a structural placeholder only — no final Quartz collection copy has been approved yet.",
-      "careForIt": {
-        "intro": "Placeholder — approved Quartz care guidance pending Christie's review.",
-        "bullets": [
-          "Placeholder — final care bullets pending."
-        ]
-      },
-      "rememberThis": "Placeholder — approved reminder copy pending Christie's review.",
-      "watchFor": "Placeholder — approved caution copy (treated Citrine, Aura Quartz, Crackle Quartz, misleading commercial names) pending Christie's review."
-    }
+      "cards": [
+        {"heading": "Look Closely", "body": "Quartz rewards inspection. Turn a crystal in the light and look for growth lines, phantoms, inclusions, fractures, and changes beneath the surface."},
+        {"heading": "Know the Name", "body": "A Quartz name may describe color, locality, growth, inclusions, or treatment. Knowing what the name refers to tells you much more than the label alone."},
+        {"heading": "Let the Specimen Lead", "body": "Two pieces with the same Quartz name can look completely different. Crystal shape, clarity, inclusions, and individual growth history make each specimen its own object."}
+      ]
+    },
+    "closingBridge": [
+      "Quartz can be clear or clouded, simple or elaborate, nearly empty inside or filled with another mineral's story. Yet beneath all that variety is the same remarkable material."
+    ],
+    "closingCallout": "The more closely you look at Quartz, the less ordinary it becomes.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"}
   },
   "fluorite": {
     "slug": "fluorite",
