@@ -356,11 +356,27 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .mood-card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:0}
 .mood-card-header{display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex-wrap:wrap;margin-bottom:2px}
 .mood-card-header .card-name{margin-bottom:0}
-.mood-why-match{font-size:11px;color:var(--ink2);line-height:1.38;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mood-why-label{font-weight:500;color:var(--ink3);font-style:italic}
-.mood-why-label::after{content:": "}
+.mood-why-match{font-size:11px;color:var(--ink2);line-height:1.38;margin-top:3px}
 .mood-theme-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
 .mood-theme-tag{font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--stone);border:0.5px solid var(--border2);color:var(--ink3)}
+/* Mood cards only, desktop grid: reserve fixed space for the name and Why
+   areas (top-anchored) so the pill group that follows starts at the same
+   height on every card in a row — instead of bottom-anchoring the pills
+   (margin-top:auto), which only aligns their bottom edge and lets the TOP
+   edge drift whenever cards show a different number of wrapped pills.
+   min-height, not height: Why text is never clamped/truncated and grows
+   past this floor naturally for any reason longer than 4 lines.
+   Name: 1 line at 16px/1.2 line-height = 19.2px, rounded up. Only ~3.6% of
+   stone names (12/333, e.g. "Rainbow Moonstone") wrap to a 2nd line at this
+   column width, so reserving 2 lines for every card cost ~20px of dead
+   space on the other ~96% — not worth it against the rare row where one of
+   those 12 names sits beside 1-line siblings and its own pills start
+   slightly lower than the rest of that row.
+   Why: 4 lines at 11px/1.38 line-height = 60.72px, rounded up; plus its own
+   margin-top/margin-bottom below give the deliberate name→why→pills gaps. */
+#mood-stone-grid .mood-card-header{min-height:20px}
+#mood-stone-grid .mood-why-match{min-height:61px;margin-bottom:8px}
+#mood-stone-grid .mood-theme-tags{margin-top:0;align-content:flex-start}
 .mood-results-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:0.4rem 0 0.6rem}
 .mood-tier4-row{font-family:'Jost',sans-serif}
 .mood-tier4-label{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);cursor:pointer;user-select:none}
@@ -619,14 +635,19 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
      needs surface-specific rules here. */
   #mood-stone-grid .card-name{margin-bottom:2px}
   #mood-stone-grid .card-role{font-size:11.5px;line-height:1.35}
-  #mood-stone-grid .mood-card-header{flex-wrap:nowrap;align-items:center}
-  /* Mobile-only: stack Why into the same label-above/value-below block used by
-     the encyclopedia card's Best For (no bullseye icon here — not part of this
-     renderer). Desktop keeps the inline "Why: reason…" 2-line clamp untouched. */
-  #mood-stone-grid .mood-why-match{display:block;font-size:12px;line-height:1.35;margin-top:8px}
-  #mood-stone-grid .mood-why-label{display:block;font-style:normal;font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:9.5px;color:var(--ink3);margin-bottom:2px}
-  #mood-stone-grid .mood-why-label::after{content:none}
-  #mood-stone-grid .mood-why-value{display:block;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  /* Mobile is a single-column row-card list — one card per row, vertically
+     centered (#mood-stone-grid .card-body's justify-content:center, set in
+     the shared row-card block) — so there's no sibling row to align pills
+     against. The desktop grid's reserved min-heights on the name and Why
+     areas (above) exist purely for that cross-card alignment; here they'd
+     just be unused blank space, so zero them out and keep only the
+     deliberate name→why→pills spacing. */
+  #mood-stone-grid .mood-card-header{flex-wrap:nowrap;align-items:center;min-height:0}
+  /* Mobile-only: full Why text is always shown, no clamp/truncation on
+     either surface, no "Why:" label prefix on either surface. */
+  #mood-stone-grid .mood-why-match{display:block;font-size:12px;line-height:1.35;margin-top:8px;min-height:0;margin-bottom:0}
+  #mood-stone-grid .mood-why-value{display:block;color:var(--ink2)}
+  #mood-stone-grid .mood-theme-tags{margin-top:8px}
 }
 .ai-error{font-size:13px;color:#b94a48;padding:0.75rem 1rem;background:#fff5f5;border:0.5px solid #f5c6c6;border-radius:8px;margin-top:0.5rem;display:none}
 .ai-error.ai-error--gentle{color:var(--ink2);background:var(--stone2);border-color:var(--border)}

@@ -2,14 +2,16 @@
 
 function filterIntentionTier(stones){return intentionIncludeTier4?stones:stones.filter(c=>Number(c&&c.tier)!==4);}
 
+// Recalculates eligibility under the currently active parent/sub-filter
+// without resetting to the parent "Top X Stones" view — activeIntentionFilter
+// (and therefore the pill selection, heading, and activeCuratedSlug) must
+// survive this toggle exactly as setIntentionSubFilter already knows how to
+// preserve it.
 function toggleIntentionTier4(checkbox){
   intentionIncludeTier4=checkbox.checked;
   if(!activeIntentionGroup)return;
-  const matches=getIntentionGroupMatches(activeIntentionGroup);
-  activeIntentionVisibleCount=intentionPageSize();
-  activeIntentionFilter='all';
-  document.querySelectorAll('#sub-filter-pills .sfpill').forEach(p=>p.classList.toggle('active',(p.dataset.subfilter||'all')==='all'));
-  renderIntentionResults(matches,activeIntentionGroup);
+  activeIntentionBaseMatches=sortIntentionMatches(getIntentionGroupMatches(activeIntentionGroup),{group:activeIntentionGroup});
+  setIntentionSubFilter(activeIntentionFilter);
 }
 
 function intentionTierRangeLabel(){return intentionIncludeTier4?'Tier 1–4':'Tier 1–3';}
@@ -54,10 +56,17 @@ function getIntentionFilterMatches(filter){
   }));
 }
 
-// A parent category's "All" match set is the deduplicated union of every one
-// of its child intentions' matches — never a literal parent-level tag/slug,
-// which (even when populated) is a separate, much smaller editorial list.
+// A parent category's default match set is its own curated parent-slug list
+// (e.g. Spirit -> spirit-connection) when one exists — a distinct, editorially
+// approved shortlist, independent of any child/subgroup curated list. Only
+// groups without a recognized curated parent slug fall back to the
+// deduplicated union of their child intentions' matches.
 function getIntentionGroupMatches(group){
+  const parentSlug=INTENTION_PARENT_SLUGS[group];
+  if(parentSlug&&CURATED_INTENTION_SLUGS.has(parentSlug)){
+    activeCuratedSlug=parentSlug;
+    return getIntentionFilterMatches({slug:parentSlug});
+  }
   activeCuratedSlug=null;
   const defs=INTENTION_SUB_FILTERS[group]||[];
   if(defs.length){
@@ -74,7 +83,6 @@ function getIntentionGroupMatches(group){
     return union;
   }
   // Groups with no defined child filters fall back to intention_tags/themes.
-  const parentSlug=INTENTION_PARENT_SLUGS[group];
   return filterIntentionTier(CRYSTALS.filter(c=>{
     if(parentSlug&&c.intention_tags&&c.intention_tags.length>0){
       return c.intention_tags.includes(parentSlug);
@@ -86,7 +94,8 @@ function getIntentionGroupMatches(group){
 
 function applyIntentionSubFilter(matches, group, filterLabel){
   if(!filterLabel||filterLabel==='all'){
-    activeCuratedSlug=null;
+    const parentSlug=INTENTION_PARENT_SLUGS[group];
+    activeCuratedSlug=(parentSlug&&CURATED_INTENTION_SLUGS.has(parentSlug))?parentSlug:null;
     return matches;
   }
   const defs=(INTENTION_SUB_FILTERS[group]||[]).length?INTENTION_SUB_FILTERS[group]:activeIntentionFilterDefs;
@@ -159,7 +168,14 @@ function intentionCategoryDisplayName(group){
 
 function intentionResultsTitle(){
   if(activeIntentionMode==='ai')return'Stones for you right now';
-  if(activeIntentionMode==='category')return`Stones for ${intentionCategoryDisplayName(activeIntentionGroup).toLowerCase()}`;
+  if(activeIntentionMode==='category'){
+    if(activeIntentionFilter&&activeIntentionFilter!=='all'){
+      const defs=INTENTION_SUB_FILTERS[activeIntentionGroup]||[];
+      const filter=defs.find(f=>f.label===activeIntentionFilter);
+      if(filter)return`Stones for ${filter.label}`;
+    }
+    return`Stones for ${intentionCategoryDisplayName(activeIntentionGroup)}`;
+  }
   if(activeIntentionMode==='mood'&&activeMoodIdx!==null){
     const mood=MOOD_DATA[activeMoodIdx];
     return mood?`Stones for ${mood.label.replace(/^I (feel|need|want|am|\'m) /i,'').toLowerCase()}`:'Stones for this intention';
@@ -177,24 +193,24 @@ function buildAiSubFilters(stones){
   return ordered.filter(t=>present.has(t)).slice(0,8).map(label=>({label,themes:[label],keywords:[label.toLowerCase()]}));
 }
 
-function buildSharedSubFilters(filters){
+function buildSharedSubFilters(filters, allLabel){
   const row=document.getElementById('sub-filter-row');
   const pillsEl=document.getElementById('sub-filter-pills');
   if(!row || !pillsEl)return;
   const subs=filters||[];
   if(!subs.length){row.style.display='none';pillsEl.innerHTML='';return;}
   row.style.display='flex';
-  const chips=[{label:'All'},...subs];
+  const chips=[{label:allLabel||'All',isAll:true},...subs];
   pillsEl.innerHTML=chips.map(ch=>{
     const label=ch.label;
-    const value=label==='All'?'all':label;
+    const value=ch.isAll?'all':label;
     const active=(activeIntentionFilter||'all')===value;
     return`<button class="sfpill${active?' active':''}" type="button" data-subfilter="${escapeAttr(value)}">${escapeAttr(label)}</button>`;
   }).join('');
 }
 
 function buildIntentionSubFilters(group){
-  buildSharedSubFilters(INTENTION_SUB_FILTERS[group]||[]);
+  buildSharedSubFilters(INTENTION_SUB_FILTERS[group]||[], TOP_STONES_PILL_LABELS[group]);
 }
 
 function renderIntentionStoneCards(){
@@ -734,17 +750,16 @@ function openIntentionDetail(stoneId){
 }
 
 function intentionStoneCardHtml(c){
-  const roles=canonicalRoleTags(c,3).map(t=>`<span class="card-role">${escapeAttr(t)}</span>`).join('<span class="card-role-sep">·</span>');
   const encPhotos=ENCYCLOPEDIA_PHOTOS[c.i];
   const imgSrc=encPhotos?SUPABASE_ENC+encPhotos[0]:null;
   const imgZone=imgSrc
     ?`<div class="card-img-zone has-photo" onclick="event.stopPropagation();openEncLightbox('${imgSrc}','${c.n.replace(/'/g,"\\'")}',event)" title="View larger" style="cursor:zoom-in"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(c.n)}" loading="lazy"></div>`
     :noPhotoZoneHtml(c);
   const reason=intentionBestForText(c);
-  const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-label">Why</span><span class="mood-why-value">${escapeAttr(reason)}</span></div>`:'';
+  const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-value">${escapeAttr(reason)}</span></div>`:'';
   const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
   const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
-  return `<div class="crystal-card mood-result-card" onclick="openIntentionDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${roles?`<div class="mood-card-tags">${roles}</div>`:''}${whyHtml}${themeTagsHtml}</div></div>`;
+  return `<div class="crystal-card mood-result-card" onclick="openIntentionDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${whyHtml}${themeTagsHtml}</div></div>`;
 }
 
 function renderAIResults(matches, query){
@@ -836,8 +851,8 @@ function clearMoodResults(){
   const tier4Row=document.getElementById('mood-tier4-row');
   if(tier4Row)tier4Row.style.display='none';
   const tier4Check=document.getElementById('mood-tier4-check');
-  if(tier4Check)tier4Check.checked=false;
-  intentionIncludeTier4=false;
+  if(tier4Check)tier4Check.checked=true;
+  intentionIncludeTier4=true;
   const titleEl=document.getElementById('mood-shared-results-title');
   if(titleEl)titleEl.textContent='';
   const selectedClear=document.querySelector('#mood-selected-card .mood-selected-clear');

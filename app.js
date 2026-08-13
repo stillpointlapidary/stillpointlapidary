@@ -49,7 +49,7 @@ let activeIntentionBaseMatches=[];
 let activeIntentionMatches=[];
 let activeIntentionVisibleCount=10;
 let activeIntentionScoreMap={};
-let intentionIncludeTier4=false;
+let intentionIncludeTier4=true;
 let curatedIntentionIndex={};
 let activeCuratedSlug=null;
 let collection=[]; // Supabase-backed; do not seed from legacy browser cache.
@@ -202,13 +202,21 @@ const INTENTION_PARENT_SLUGS = {
   'Grounding':'grounding',
   'Heart':'heart-support',
   'Mind':'mental-clarity',
-  'Spirit':'intuition',
+  'Spirit':'spirit-connection',
   'Body':'body-energy',
 };
-// All 38 slugs with curated Supabase rows. If a recognized slug returns 0 rows,
+// Parent-level "return to shortlist" pill labels (replaces the generic "All" chip).
+const TOP_STONES_PILL_LABELS = {
+  'Grounding':'Top Grounding Stones',
+  'Heart':'Top Heart Support Stones',
+  'Mind':'Top Mental Clarity Stones',
+  'Spirit':'Top Spirit Stones',
+  'Body':'Top Body Stones',
+};
+// All 39 slugs with curated Supabase rows. If a recognized slug returns 0 rows,
 // it signals a data/mapping error — never fall back to CRYSTALS filtering.
 const CURATED_INTENTION_SLUGS = new Set([
-  'grounding','heart-support','mental-clarity','intuition','body-energy',
+  'grounding','heart-support','mental-clarity','intuition','spirit-connection','body-energy',
   'anxiety','stability','protection','overthinking','nervous-system','sleep',
   'self-love','grief','compassion','forgiveness','emotional-balance','relationships','inner-child',
   'clarity','focus','motivation','confidence','communication','decision-making','creativity',
@@ -219,12 +227,12 @@ const INTENTION_SHOWING_LABELS = {
   'Grounding':'Grounding',
   'Heart':'Heart support',
   'Mind':'Mental clarity',
-  'Spirit':'Intuition',
+  'Spirit':'Spirit',
   'Body':'Body',
 };
 const intentionLabelMap = {
   'grounding':'Grounding','heart-support':'Heart support','mental-clarity':'Mental clarity',
-  'intuition':'Intuition','body-energy':'Body',
+  'intuition':'Intuition','spirit-connection':'Spirit','body-energy':'Body',
   'anxiety':'Anxiety','stability':'Stability','protection':'Protection','overthinking':'Overthinking',
   'nervous-system':'Nervous system','sleep':'Sleep',
   'self-love':'Self-Love','grief':'Grief','compassion':'Compassion','forgiveness':'Forgiveness',
