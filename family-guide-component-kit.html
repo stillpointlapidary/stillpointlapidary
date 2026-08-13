@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Crystal Family Guide — Component Kit (Internal Reference)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Reuses the live site's shared stylesheet as-is. Every component below is
+     built from existing .fg- classes already used by the completed Crystal
+     Family guides (Copper Minerals, Calcite, Feldspar, Quartz, Agate, Jasper,
+     Fluorite, Garnet). No shared .fg- rule in styles.css was added,
+     duplicated, renamed, or edited for this kit. The only new CSS is (1) the
+     kit-only page chrome below, scoped to .kit- classes, and (2) a clearly
+     marked .kit-demo-fg override block that previews the final Balanced
+     Editorial numeric spec on top of the existing shared classes — see that
+     block's own comment and the handoff report for exactly what it changes
+     and why. -->
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── Kit-only chrome. Everything below is scoped to .kit- classes so it can
+   never collide with, override, or be mistaken for a live .fg- site class.
+   This styles only the reference-page shell (labels, dividers, annotations,
+   sticky nav) — never the components being demonstrated. Nothing here is
+   reusable design-system CSS; it exists only inside this reference document. */
+.kit-body{background:var(--stone)}
+.kit-topbar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:0.5px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.kit-topbar-title{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink)}
+.kit-topbar-title span{display:block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-top:2px}
+.kit-nav{display:flex;flex-wrap:wrap;gap:4px 2px}
+.kit-nav a{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:0.02em;color:var(--ink2r);text-decoration:none;padding:5px 9px;border-radius:20px;white-space:nowrap}
+.kit-nav a:hover{background:var(--stone2);color:var(--ink)}
+.kit-shell{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.kit-intro{padding:2rem 0 1rem;border-bottom:0.5px solid var(--border2);margin-bottom:2.5rem}
+.kit-intro h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:26px;color:var(--ink);margin-bottom:0.6rem}
+.kit-intro p{font-size:14px;line-height:1.7;color:var(--ink2);max-width:78ch;margin-bottom:0.6rem}
+.kit-intro p:last-child{margin-bottom:0}
+.kit-intro-status{display:inline-block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:20px;padding:3px 11px;margin-bottom:0.9rem}
+.kit-module{margin-bottom:64px;scroll-margin-top:76px}
+.kit-module-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.kit-module-letter{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.04em;color:var(--white);background:var(--accent);border-radius:5px;padding:2px 8px}
+.kit-module-title{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--ink)}
+.kit-module-note{font-size:13px;line-height:1.6;color:var(--ink2r);max-width:82ch;margin:0 0 1.25rem}
+.kit-module-note strong{color:var(--ink2);font-weight:500}
+.kit-sample{background:var(--stone);border:0.5px dashed var(--border2);border-radius:14px;padding:1.75rem}
+.kit-subhead{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin:1.75rem 0 0.85rem}
+.kit-subhead:first-child{margin-top:0}
+.kit-two-up{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.kit-ruler{position:relative;border-left:2px solid var(--accent2);padding-left:10px;margin:0.75rem 0}
+.kit-ruler-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.03em;color:var(--accent);white-space:nowrap}
+.kit-spacing-block{background:var(--white);border:0.5px solid var(--border);border-radius:4px}
+.kit-spacing-gap{display:flex;align-items:center;gap:10px;margin:4px 0}
+.kit-spacing-gap-bar{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--accent2) 0 6px,transparent 6px 10px)}
+.kit-spacing-gap-label{font-family:'Jost',sans-serif;font-size:11px;color:var(--accent);white-space:nowrap}
+.kit-note-callout{background:var(--stone2);border:0.5px solid var(--border2);border-radius:10px;padding:0.9rem 1.1rem;font-size:13px;line-height:1.65;color:var(--ink2);margin-top:1.25rem}
+.kit-note-callout strong{color:var(--ink);font-weight:500}
+.kit-source-tag{display:inline-block;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:0.04em;color:var(--ink3);background:var(--white);border:0.5px solid var(--border2);border-radius:20px;padding:2px 10px;margin:0 6px 6px 0}
+.kit-env-photo{width:100%;height:220px;border-radius:12px;overflow:hidden}
+.kit-env-photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:900px){
+  .kit-two-up{grid-template-columns:1fr}
+  .kit-topbar{padding:10px 16px}
+}
+@media(max-width:600px){
+  .kit-env-photo{height:160px}
+}
+
+/* ── Balanced Editorial demonstration overrides (final canonical spec) ──
+   Scoped to .kit-demo-fg, applied once to .kit-shell below, so it only
+   touches the .fg- components rendered on THIS reference page. No shared
+   .fg-* rule in styles.css is modified, duplicated, or renamed — every
+   value here is an override layered on top of the existing shared class.
+   These are the exact final numbers from EDITORIAL-PAGE-VISUAL-STANDARD.md
+   §5.1 and §8, previewing the state the eight-guide normalization pass
+   should reach. Live guides today still use the pre-normalization values
+   (76px/56px major-section gap, a three-tier 34/30/25px hero title, etc.)
+   — see the handoff report for the full list of what each override differs
+   from in current shared/per-guide CSS. */
+.kit-demo-fg .fg-section{margin-bottom:62px}                 /* §8.1 60–64px desktop */
+.kit-demo-fg .fg-h2{margin-bottom:15px}                       /* §8.2 14–16px heading→intro */
+.kit-demo-fg .fg-section-intro{margin:0 0 25px}               /* §8.2 24–26px intro→module */
+.kit-demo-fg .fg-card-grid{gap:17px}                          /* §8.2 16–18px grid gap */
+.kit-demo-fg .fg-stonecard-body,
+.kit-demo-fg .fg-mineralcard-body,
+.kit-demo-fg .fg-photocard-body{padding:21px 22px}            /* §8.2 20–22px card padding */
+.kit-demo-fg .fg-stonecard-media{aspect-ratio:auto;height:180px} /* §8.2 170–190px desktop well */
+.kit-demo-fg .fg-mineralcard-media{height:180px}
+.kit-demo-fg .fg-hero-title{font-size:30px}                   /* §5.1 hero title, desktop */
+.kit-demo-fg .fg-hero-body{font-size:16px;line-height:1.7}    /* §5.1 body/teaching text floor */
+.kit-demo-fg .fg-photocard-title{font-size:17px}               /* §5.1 card/module name, desktop */
+.kit-demo-fg .fg-photocard-text{font-size:16px}                /* §5.1 body/taglines/teaching text */
+.kit-demo-fg .fg-eyebrow{font-size:13px}                       /* §5.1 eyebrow/label/nav pill */
+.kit-demo-fg .fg-badge{font-size:11px}                         /* §5.1 micro-caption floor */
+.kit-demo-fg .fg-closing-line{margin-bottom:54px}              /* §8.2 52–56px closing→next section */
+.kit-demo-fg .fg-garnet-group-item-name{font-weight:500}       /* CLAUDE.md §8: no font-weight:600 */
+/* Closing-module equal-treatment correction: the live .fg-collection-care/
+   .fg-collection-sub pair differ in fill (white vs stone2) and the shared
+   .fg-collection-grid gives Care for It a permanently wider 1.55fr column.
+   Per the corrected §10 rule, no category gets permanent visual dominance —
+   all three share one fill and, when copy lengths are similar as in this
+   placeholder set, equal-width thirds. Width still adjusts per-card when
+   real copy length requires it; this override just removes the *permanent*
+   width/fill bias, it does not force literal equal widths as a hard rule. */
+.kit-demo-fg .kit-closing-equal{grid-template-columns:repeat(3,1fr)}
+.kit-demo-fg .kit-closing-equal .fg-collection-care,
+.kit-demo-fg .kit-closing-equal .fg-collection-sub{background:var(--white);padding:1.1rem 1.2rem}
+@media(max-width:900px){
+  /* Closing-module mobile/tablet fix: the desktop-only .kit-closing-equal
+     override above (repeat(3,1fr), unconditional) was winning over the live
+     .fg-collection-grid stacking rule (which goes to 1fr at this same
+     <=900px breakpoint) by specificity, leaving three narrow columns at
+     tablet/mobile widths instead of stacking. This restores the shared
+     single-column stacking behavior while keeping the equal fill/padding
+     treatment from the desktop override above. */
+  .kit-demo-fg .kit-closing-equal{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .kit-demo-fg .fg-section{margin-bottom:46px}                 /* §8.1 44–48px mobile */
+  .kit-demo-fg .fg-hero-title{font-size:26px}                  /* §5.1 hero title, mobile */
+  .kit-demo-fg .fg-photocard-title{font-size:16px}             /* §5.1 card/module name, mobile */
+  .kit-demo-fg .fg-stonecard-media{height:150px}                /* §8.2 130–170px mobile well */
+  .kit-demo-fg .fg-mineralcard-media{height:150px}
+  /* §6 in EDITORIAL-PAGE-VISUAL-STANDARD.md: stone/variety browsing grids
+     stay 2 columns on mobile. The live shared rule (.fg-card-grid--4 /
+     --10 at <=600px in styles.css) currently collapses to 1 column — see
+     the handoff report. This override is what the corrected shared rule
+     should produce. */
+  .kit-demo-fg .fg-card-grid--4,
+  .kit-demo-fg .fg-card-grid--10{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body class="kit-body">
+
+<div class="kit-topbar">
+  <div class="kit-topbar-title">Crystal Family Guide — Component Kit<span>Internal implementation reference · not a public page</span></div>
+  <nav class="kit-nav">
+    <a href="#mod-a">A. Hero &amp; Anatomy</a>
+    <a href="#mod-b">B. Variety Card</a>
+    <a href="#mod-c">C. Headings/Labels</a>
+    <a href="#mod-d">D. Image Wells</a>
+    <a href="#mod-e">E. Teaching Card</a>
+    <a href="#mod-f">F. Comparisons</a>
+    <a href="#mod-g">G. Table</a>
+    <a href="#mod-h">H. Quick View</a>
+    <a href="#mod-i">I. Closing</a>
+    <a href="#mod-j">J. Nav Pill</a>
+    <a href="#mod-k">K. Responsive</a>
+  </nav>
+</div>
+
+<div class="kit-shell kit-demo-fg">
+  <div class="kit-intro">
+    <div class="kit-intro-status">Revised for the final Balanced Editorial spec</div>
+    <h1>Visual ruler for repeated Crystal Family Guide components</h1>
+    <p>This page is the literal HTML/CSS reference required by <code>EDITORIAL-PAGE-VISUAL-STANDARD.md</code> §10 ("Component Kit"). It demonstrates the reusable patterns Claude Code should apply when normalizing completed Crystal Family guides — it is an implementation reference, not a second canonical visual authority and not a public page.</p>
+    <p>Every component below is built from the existing shared <code>.fg-</code> classes already used on the live Copper Minerals, Calcite, Feldspar, Quartz, Agate, Jasper, Fluorite, and Garnet guides. No shared family-guide CSS was added, duplicated, renamed, or edited to build this kit; the only new CSS is the kit-page chrome and a clearly marked <code>.kit-demo-fg</code> override block that previews the now-final numeric spacing and type-scale values on top of those same shared classes — see the handoff report for exactly what each override differs from in current live/per-guide CSS. Content shown is representative/placeholder; no approved family-guide copy was rewritten to populate it, and specimen photography reused here is existing approved family-guide imagery, not new photography.</p>
+  </div>
+
+  <!-- ══════════════════ A. HERO & SECTION ANATOMY ══════════════════ -->
+  <section class="kit-module" id="mod-a">
+    <div class="kit-module-head"><span class="kit-module-letter">A</span><span class="kit-module-title">Hero &amp; Section Anatomy</span></div>
+    <p class="kit-module-note">Hero convention per §6.1: eyebrow <strong>CRYSTAL FAMILY</strong>, title <strong>[Stone] Family Guide</strong>, contained in the bounded white <code>.fg-hero</code> card at moderate scale — never full-bleed. The eyebrow identifies the page category without redundantly repeating "Family Guide" immediately above a title that already contains those words; do not shorten the title to only the family name. Hero module structure itself is already correct and is not a redesign target (§2); only the eyebrow-copy and title-size normalization below apply. Below the hero: heading → optional purpose-setting introduction → module, with two distinct internal-spacing rules per §8.2 — <strong>heading→intro is 14–16px</strong>, <strong>intro→first module is 24–26px</strong>. <strong>Major-section separation is a separate, larger rule</strong> — 60–64px desktop / 44–48px at ≤900px — and is what visibly separates one editorial idea (this whole composition) from the next.</p>
+
+    <div class="kit-subhead">Hero — canonical convention</div>
+    <div class="kit-sample" style="margin-bottom:1.5rem">
+      <div class="fg-hero" style="max-width:640px;margin:0 auto">
+        <div class="fg-eyebrow">CRYSTAL FAMILY</div>
+        <h1 class="fg-hero-title">[Stone] Family Guide</h1>
+        <p class="fg-hero-body">Hero copy stays inside this bounded white card at a moderate scale, aligned to the common family-guide frame — not an oversized full-bleed editorial hero.</p>
+      </div>
+    </div>
+
+    <div class="kit-subhead">Section anatomy — spacing rhythm</div>
+    <div class="kit-sample">
+      <div class="fg-section">
+        <h2 class="fg-h2" style="text-align:left">Section Heading Names the Subject</h2>
+        <div class="kit-ruler"><span class="kit-ruler-label">↕ 14–16px heading→intro</span></div>
+        <p class="fg-section-intro" style="text-align:left;margin:0.35rem 0 0;max-width:none">A short purpose-setting introduction answers why this section exists and what the reader should notice or compare — required whenever the heading alone doesn't already answer that.</p>
+        <div class="kit-ruler"><span class="kit-ruler-label">↕ 24–26px intro→module</span></div>
+        <div class="fg-prose-block" style="max-width:none"><p class="fg-prose">The module itself follows here — a card grid, table, or teaching block, using the primary content frame's full width.</p></div>
+      </div>
+      <div class="kit-ruler" style="border-left-color:var(--accent);margin-top:1.5rem"><span class="kit-ruler-label" style="color:var(--accent);font-weight:500">↕ 60–64px desktop / 44–48px mobile — major-section separation before the NEXT editorial idea begins</span></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ B. VARIETY CARD ══════════════════ -->
+  <section class="kit-module" id="mod-b">
+    <div class="kit-module-head"><span class="kit-module-letter">B</span><span class="kit-module-title">Variety Card (default repeated specimen card)</span></div>
+    <p class="kit-module-note">Reference implementation: <strong>Calcite's <code>.fg-stonecard</code></strong> (Meet Eight Common Varieties). White image well with <code>object-fit: contain</code> and visible breathing room on all four sides, uppercase eyebrow-style name label, one short teaching tagline (no multi-paragraph body copy), optional Quick View affordance, one consistent card padding/border/radius across the set. This is the standard stone/variety browsing card that receives Quick View — see §H for the noninteractive contrast.</p>
+    <div class="kit-sample">
+      <div class="fg-card-grid fg-card-grid--4">
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Example Specimen A"><img src="assets/family-guide-calcite/shapes-pointed-crystals.jpg" alt="Example specimen showing pointed crystal habit" loading="lazy"></button>
+          <div class="fg-stonecard-body">
+            <div class="fg-stonecard-name">EXAMPLE SPECIMEN A</div>
+            <div class="fg-stonecard-phrase">One short teaching phrase describing this variety's distinguishing trait.</div>
+            <button class="fg-stonecard-qv" type="button">Quick View →</button>
+          </div>
+        </div>
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Example Specimen B"><img src="assets/family-guide-calcite/recognize-glassy-luster.jpg" alt="Example specimen showing glassy luster" loading="lazy"></button>
+          <div class="fg-stonecard-body">
+            <div class="fg-stonecard-name">EXAMPLE SPECIMEN B</div>
+            <div class="fg-stonecard-phrase">Tagline copy stays to roughly this length so cards in one row read as one family.</div>
+            <button class="fg-stonecard-qv" type="button">Quick View →</button>
+          </div>
+        </div>
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Example Specimen C"><img src="assets/family-guide-calcite/shapes-massive-banded.jpg" alt="Example specimen showing massive banded form" loading="lazy"></button>
+          <div class="fg-stonecard-body">
+            <div class="fg-stonecard-name">EXAMPLE SPECIMEN C</div>
+            <div class="fg-stonecard-phrase">One short identifying tagline — never a multi-paragraph explanation.</div>
+            <button class="fg-stonecard-qv" type="button">Quick View →</button>
+          </div>
+        </div>
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Example Specimen D"><img src="assets/family-guide-calcite/recognize-double-refraction.jpg" alt="Example specimen showing double refraction" loading="lazy"></button>
+          <div class="fg-stonecard-body">
+            <div class="fg-stonecard-name">EXAMPLE SPECIMEN D</div>
+            <div class="fg-stonecard-phrase">Quick View is optional — omit the button entirely for a card with no linked stone page.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ C. CARD HEADING & LABEL SYSTEM ══════════════════ -->
+  <section class="kit-module" id="mod-c">
+    <div class="kit-module-head"><span class="kit-module-letter">C</span><span class="kit-module-title">Card Heading &amp; Label System</span></div>
+    <p class="kit-module-note">One normalized hierarchy, reused everywhere rather than competing per-guide heading treatments: a small-caps or approved eyebrow/label, with a bold or clearly emphasized card/module name beneath it (§10). Card <em>titles</em> use Georgia at the approved 17px/16px card-name size; eyebrows/labels/badges use small-caps Jost at 13px; ordinary card copy is plain sans body text at 16px. Don't force an eyebrow onto a module whose content role doesn't need one.</p>
+    <div class="kit-sample kit-two-up">
+      <div>
+        <div class="kit-subhead">Card title (Georgia serif, 17px/16px)</div>
+        <div class="fg-photocard" style="max-width:280px">
+          <div class="fg-photocard-body">
+            <div class="fg-photocard-title">Card Title Example</div>
+            <p class="fg-photocard-text">Ordinary card copy is plain sans body text at the shared 16px floor, never competing in weight with the title.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="kit-subhead">Eyebrow / small label / badge / caption</div>
+        <div class="fg-eyebrow">Small Eyebrow Label</div>
+        <div style="margin:10px 0"><span class="fg-badge">Badge Label</span></div>
+        <div class="fg-stonecard-identity" style="margin-bottom:8px">Identity Label (italic Georgia)</div>
+        <div class="fg-photocard-caption" style="font-style:italic;color:var(--ink3);font-size:13px">Caption text sits beneath an image, italic and quiet.</div>
+        <div style="margin-top:10px"><span class="fg-chip">Chip Label</span> <span class="fg-chip">Second Chip</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ D. IMAGE WELLS ══════════════════ -->
+  <section class="kit-module" id="mod-d">
+    <div class="kit-module-head"><span class="kit-module-letter">D</span><span class="kit-module-title">Image Wells</span></div>
+    <p class="kit-module-note">Every specimen well is white, uses <code>object-fit: contain</code>, and keeps visible breathing room on all four sides — never cropped, stretched, or distorted. Standard specimen wells hold to 170–190px desktop / 130–170px mobile (§8.2); this height is capped regardless of column count, it never grows just because a grid collapses. Different module roles legitimately use different well proportions: a standard specimen-card well is not forced to match a compact teaching-module well.</p>
+    <div class="kit-sample kit-two-up">
+      <div>
+        <div class="kit-subhead">Standard specimen-card well — <code>.fg-mineralcard-media</code> (Copper), 170–190px desktop</div>
+        <div class="fg-mineralcard" style="max-width:280px">
+          <div class="fg-mineralcard-media"><img src="assets/family-guide-calcite/shapes-pointed-crystals.jpg" alt="Example specimen, fully visible, uncropped" loading="lazy"></div>
+          <div class="fg-mineralcard-body">
+            <div class="fg-mineralcard-header"><span class="fg-stonecard-name">EXAMPLE MINERAL</span></div>
+            <p class="fg-mineralcard-text">Fixed-height white well (180px shown, within the approved 170–190px range), object-fit: contain, proportionate padding around a small specimen.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="kit-subhead">Compact teaching-module well — <code>.fg-feldspar-branch-thumb</code></div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <div class="fg-feldspar-branch-thumb" style="cursor:default"><img src="assets/family-guide-feldspar/Oligoclase-Sunstone from India2.webp" alt="Compact teaching thumbnail, uncropped"><span>Compact Thumbnail A</span></div>
+          <div class="fg-feldspar-branch-thumb" style="cursor:default"><img src="assets/family-guide-feldspar/Labradorite in two samples showing labradorescence.webp" alt="Compact teaching thumbnail, uncropped"><span>Compact Thumbnail B</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="kit-note-callout"><strong>Responsive:</strong> both well types resize within their grid — resize this browser window to ≤900px and ≤600px to see the standard 4-column card grid collapse to 2 (staying 2 at mobile, not 1), the standard well step down to 150px (within 130–170px), and the compact thumbnails reflow, all without ever cropping the specimen, losing white padding, or letting the specimen scale grow.</div>
+  </section>
+
+  <!-- ══════════════════ E. TEACHING CARD ══════════════════ -->
+  <section class="kit-module" id="mod-e">
+    <div class="kit-module-head"><span class="kit-module-letter">E</span><span class="kit-module-title">Teaching Card (text-led, concise lesson)</span></div>
+    <p class="kit-module-note">A reusable text-led card for a concise explanatory lesson that doesn't need a photograph to make its point. Reference: <strong><code>.fg-garnet-collection-card</code></strong> — same padding/border language as the photo-led cards above, just without an image well. Teaching cards like these never receive a Quick View affordance, regardless of roster status — they aren't stone/variety browsing cards (see §H). <strong>Mobile:</strong> the shared <code>.fg-garnet-collection-grid</code> rule already stacks to one full-width card per row at ≤900px — cards read as horizontal teaching bars, not skinny vertical columns, with the same fill/border/radius/padding/heading treatment as desktop and body copy held at the 16px floor. Do not shrink text to force a multi-column fit at narrow widths.</p>
+    <div class="kit-sample">
+      <div class="fg-garnet-collection-grid">
+        <div class="fg-garnet-collection-card">
+          <div class="fg-garnet-collection-card-heading">Concise Lesson Heading</div>
+          <p class="fg-garnet-collection-card-body">A teaching card stays short — one clear idea, two or three sentences, no image well. It should never grow to become a small article inside the page.</p>
+        </div>
+        <div class="fg-garnet-collection-card">
+          <div class="fg-garnet-collection-card-heading">Second Lesson</div>
+          <p class="fg-garnet-collection-card-body">Peer teaching cards in one row share the same padding, heading treatment, and body size regardless of exact copy length.</p>
+        </div>
+        <div class="fg-garnet-collection-card">
+          <div class="fg-garnet-collection-card-heading">Third Lesson</div>
+          <p class="fg-garnet-collection-card-body">Use this pattern anywhere a module needs to explain a concept in prose without becoming a full photo-led teaching card.</p>
+        </div>
+      </div>
+      <div class="kit-note-callout">Resize to ≤900px — this grid stacks to 1 full-width card per row (the shared rule already does this; no kit override needed) and stays 1 column through mobile.</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ F. COMPARISON GRAMMAR ══════════════════ -->
+  <section class="kit-module" id="mod-f">
+    <div class="kit-module-head"><span class="kit-module-letter">F</span><span class="kit-module-title">Comparison Grammar — one system, purpose-driven layouts</span></div>
+    <p class="kit-module-note">Shared grammar, purpose-driven layout (§10 final examples: Feldspar branch-pair cards, Garnet Pyralspite/Ugrandite horizontal thumbnail grouping, Fluorite simple comparison row, Copper's literal table in §G). All structures below share typography, heading hierarchy, spacing, card padding, border/radius language, and image-well treatment — but their internal layouts differ because their teaching tasks differ. This is not one universal comparison component; do not convert Garnet's grouping merely for visual uniformity.</p>
+
+    <div class="kit-subhead">1. Paired comparison / branch cards — <code>.fg-branch-grid</code> / <code>.fg-feldspar-branch-panel</code> (Feldspar)</div>
+    <div class="kit-sample" style="margin-bottom:1.5rem">
+      <div class="fg-branch-grid">
+        <div class="fg-feldspar-branch-panel fg-feldspar-branch--alkali">
+          <div class="fg-branch-title">Branch One</div>
+          <p class="fg-prose">Paired cards work when there are exactly two related groups to hold side by side, each with its own short description.</p>
+        </div>
+        <div class="fg-feldspar-branch-panel fg-feldspar-branch--plagioclase">
+          <div class="fg-branch-title">Branch Two</div>
+          <p class="fg-prose">A restrained top border color distinguishes each branch without needing a full background-color treatment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-subhead">2. Larger-group horizontal thumbnail grouping — <code>.fg-garnet-groups</code> / <code>.fg-garnet-group-panel</code> (Garnet Pyralspite/Ugrandite) — preserve this structure</div>
+    <div class="kit-sample" style="margin-bottom:1.5rem">
+      <div class="fg-garnet-groups">
+        <div class="fg-garnet-group-panel fg-garnet-group-panel--left">
+          <div class="fg-garnet-group-heading">Group One</div>
+          <p class="fg-garnet-group-intro">One sentence naming this group's shared foundation.</p>
+          <div class="fg-garnet-group-item">
+            <div class="fg-garnet-group-item-media"><img src="assets/family-guide-calcite/shapes-pointed-crystals.jpg" alt="Example member thumbnail, uncropped" loading="lazy"></div>
+            <div class="fg-garnet-group-item-text">
+              <div class="fg-garnet-group-item-name">Member One</div>
+              <p class="fg-garnet-group-item-caption">One short identifying trait for this member.</p>
+            </div>
+          </div>
+          <div class="fg-garnet-group-item">
+            <div class="fg-garnet-group-item-media"><img src="assets/family-guide-calcite/recognize-glassy-luster.jpg" alt="Example member thumbnail, uncropped" loading="lazy"></div>
+            <div class="fg-garnet-group-item-text">
+              <div class="fg-garnet-group-item-name">Member Two</div>
+              <p class="fg-garnet-group-item-caption">A second short identifying trait.</p>
+            </div>
+          </div>
+        </div>
+        <div class="fg-garnet-group-panel fg-garnet-group-panel--right">
+          <div class="fg-garnet-group-heading">Group Two</div>
+          <p class="fg-garnet-group-intro">One sentence naming the second group's shared foundation.</p>
+          <div class="fg-garnet-group-item">
+            <div class="fg-garnet-group-item-media"><img src="assets/family-guide-feldspar/Oligoclase-Sunstone from India2.webp" alt="Example member thumbnail, uncropped" loading="lazy"></div>
+            <div class="fg-garnet-group-item-text">
+              <div class="fg-garnet-group-item-name">Member Three</div>
+              <p class="fg-garnet-group-item-caption">A third identifying trait, this group's own foundation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-subhead">3. Simple comparison card row — <code>.fg-namegrid.fg-namegrid--3</code> / <code>.fg-namecard</code> (Fluorite)</div>
+    <div class="kit-sample" style="margin-bottom:1.5rem">
+      <div class="fg-namegrid fg-namegrid--3">
+        <div class="fg-namecard"><div class="fg-namecard-index">1</div><div class="fg-namecard-label">Trait One</div><p class="fg-namecard-body">Compact rows work for several short parallel comparisons read at a glance.</p></div>
+        <div class="fg-namecard"><div class="fg-namecard-index">2</div><div class="fg-namecard-label">Trait Two</div><p class="fg-namecard-body">Each cell shares the same index/label/body structure.</p></div>
+        <div class="fg-namecard"><div class="fg-namecard-index">3</div><div class="fg-namecard-label">Trait Three</div><p class="fg-namecard-body">Chips can replace body copy where a list of examples fits better.</p></div>
+      </div>
+      <div class="kit-note-callout">The shared <code>.fg-namegrid--3</code> modifier (already live on Jasper) collapses 3 → 2 → 1 column at ≤900px / ≤600px — resize to confirm it stacks to one full-width comparison card per row on mobile, preserving the numbered marker, heading, and body copy rather than shrinking into three narrow columns.</div>
+    </div>
+
+    <div class="kit-subhead">4. Image-led decoder — <code>.fg-feldspar-decoder-grid</code> / <code>.fg-relationship-card</code> + clue pill</div>
+    <p class="kit-module-note" style="margin-bottom:0.85rem">The image carries the lesson here, so it must stay large enough for close visual inspection: <strong>two cards across on desktop</strong> (and tablet, only while readability and image detail stay strong), <strong>one card per row on mobile</strong> — this module is <em>not</em> normalized to the 2-column mobile rule used for browsing grids elsewhere in this kit. The shared <code>.fg-feldspar-decoder-grid</code>/<code>.fg-relationship-card</code> rules already do this (2-up ≤900px, 1-up ≤600px with a capped width) — keep this mobile behavior exactly as-is.</p>
+    <div class="kit-sample">
+      <div class="fg-feldspar-decoder-grid">
+        <div class="fg-relationship-card">
+          <button class="fg-relationship-media" type="button" aria-label="Quick View — Decoder Example A"><img src="assets/family-guide-feldspar/Labradorite in two samples showing labradorescence.webp" alt="Decoder example specimen"></button>
+          <div class="fg-relationship-label">Effect A</div>
+          <p class="fg-fact-body">A short description of the optical or visual trait this example teaches.</p>
+          <div class="fg-feldspar-notice" style="margin:0.7rem 1.1rem 0"><span>Best clue:</span>&nbsp;the specific tell to look for.</div>
+        </div>
+        <div class="fg-relationship-card">
+          <button class="fg-relationship-media" type="button" aria-label="Quick View — Decoder Example B"><img src="assets/family-guide-feldspar/Oligoclase-Sunstone from India2.webp" alt="Decoder example specimen"></button>
+          <div class="fg-relationship-label">Effect B</div>
+          <p class="fg-fact-body">Image-led decoders let the photo carry most of the identification work.</p>
+          <div class="fg-feldspar-notice" style="margin:0.7rem 1.1rem 0"><span>Best clue:</span>&nbsp;a second distinguishing tell.</div>
+        </div>
+      </div>
+      <div class="kit-note-callout">Resize to ≤900px and ≤600px — this pair stays 2 across through tablet, then moves to 1 full-width card at mobile (capped width, not stretched edge-to-edge); it does not force a 2-up mobile layout the way browsing grids do.</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ G. TABLE ══════════════════ -->
+  <section class="kit-module" id="mod-g">
+    <div class="kit-module-head"><span class="kit-module-letter">G</span><span class="kit-module-title">Table</span></div>
+    <p class="kit-module-note">Reference: <strong>Copper Minerals'</strong> <code>.fg-table</code> — kept as a genuine table because condition/outcome/example/color relationships are legitimately easier to scan in rows and columns. Tables are retained or converted by function, not redesigned into cards for uniformity's sake; do not convert Copper's table into cards.</p>
+    <div class="kit-sample">
+      <div class="fg-table-wrap" style="margin-top:0">
+        <table class="fg-table">
+          <thead><tr><th>Condition</th><th>Outcome</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Condition A</td><td>Outcome A</td><td>Example specimen A</td></tr>
+            <tr><td>Condition B</td><td>Outcome B</td><td>Example specimen B</td></tr>
+            <tr><td>Condition C</td><td>Outcome C</td><td>Example specimen C</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="kit-note-callout"><strong>Mobile:</strong> below ≤600px this table's existing responsive rule stacks each row into a labeled card instead of scrolling horizontally — resize to confirm.</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ H. QUICK VIEW / GRID AFFORDANCE ══════════════════ -->
+  <section class="kit-module" id="mod-h">
+    <div class="kit-module-head"><span class="kit-module-letter">H</span><span class="kit-module-title">Quick View / Grid Affordance</span></div>
+    <p class="kit-module-note">Quick View appears only on a stone/variety browsing card that represents a valid encyclopedia-resolvable target. Interactive cards use a real <code>&lt;button&gt;</code> image well plus an explicit "Quick View →" link — the click affordance is always visible, never implied by hover alone. A stone/variety card with no linked encyclopedia entry renders with neither, so it never reads as falsely clickable. Teaching cards, comparison explanation cards, decorative modules, and non-stone editorial cards (§E and §F above) never receive Quick View at all, regardless of roster status — the distinction is categorical, not just "linked or not."</p>
+    <div class="kit-sample kit-two-up">
+      <div>
+        <div class="kit-subhead">Interactive stone card — clickable image + Quick View link</div>
+        <div class="fg-mineralcard" style="max-width:260px">
+          <button class="fg-mineralcard-media" type="button" aria-label="Quick View — Linked Example" style="cursor:pointer"><img src="assets/family-guide-calcite/shapes-pointed-crystals.jpg" alt="Linked example specimen"></button>
+          <div class="fg-mineralcard-body">
+            <div class="fg-mineralcard-header"><span class="fg-stonecard-name">LINKED EXAMPLE</span><button class="fg-stonecard-qv" type="button">Quick View →</button></div>
+            <p class="fg-mineralcard-text">Has an encyclopedia entry — the well is a real button and Quick View is present.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="kit-subhead">Non-interactive stone card — <code>.fg-mineralcard--unlinked</code></div>
+        <div class="fg-mineralcard fg-mineralcard--unlinked" style="max-width:260px">
+          <div class="fg-mineralcard-media"><img src="assets/family-guide-calcite/recognize-glassy-luster.jpg" alt="Unlinked example specimen"></div>
+          <div class="fg-mineralcard-body">
+            <div class="fg-mineralcard-header"><span class="fg-stonecard-name">UNLINKED EXAMPLE</span></div>
+            <p class="fg-mineralcard-text">No roster entry — no Quick View link, cursor is default, not pointer. Nothing here implies it's clickable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kit-note-callout"><strong>Compare with §E:</strong> the teaching cards above have no image well, no button, and no Quick View link in their markup at all — they are never candidates for the affordance in the first place, unlike a stone card that simply lacks a roster match.</div>
+  </section>
+
+  <!-- ══════════════════ I. CLOSING MODULES ══════════════════ -->
+  <section class="kit-module" id="mod-i">
+    <div class="kit-module-head"><span class="kit-module-letter">I</span><span class="kit-module-title">Closing Modules — Care for It / Remember This / Watch For</span></div>
+    <p class="kit-module-note">Reference: <strong>Calcite's</strong> <code>.fg-collection-grid</code> markup, corrected here so all three panels share one visual treatment — same fill, border, radius, heading treatment, typography, padding, and visual weight. No category receives permanent visual dominance based on its label; Care for It does not get a wider or differently-filled panel merely because it is listed first. Card widths may vary according to copy length when needed to keep the three cards at approximately the same visual height — when copy lengths are naturally similar, as in this placeholder example, equal-width thirds are preferred (Fluorite/Feldspar-style equal-treatment direction). Three cards is the default; a two-card closing is allowed only when a family genuinely lacks a useful third category — never pad a third card with weak or redundant content merely for symmetry.</p>
+    <div class="kit-sample">
+      <div class="fg-collection-grid kit-closing-equal">
+        <div class="fg-collection-care">
+          <div class="fg-collection-panel-title">Care for It</div>
+          <p class="fg-fact-body">Practical handling guidance — water safety, light exposure, cleaning method — stated plainly, in prose or a short list.</p>
+        </div>
+        <div class="fg-collection-sub">
+          <div class="fg-collection-panel-title">Remember This</div>
+          <p class="fg-fact-body">One or two memorable identifying facts worth carrying away from the page.</p>
+        </div>
+        <div class="fg-collection-sub">
+          <div class="fg-collection-panel-title">Watch For</div>
+          <p class="fg-fact-body">Common confusions, imitations, or misattributions specific to this family.</p>
+        </div>
+      </div>
+      <div class="kit-note-callout"><strong>Width follows content balance, not category:</strong> this example uses equal thirds because the three sample copy lengths are naturally similar. When one category's approved copy runs meaningfully longer or shorter, adjust that card's width instead — the goal is matched visual height across the row, not a rule that any one card must always be wider or narrower.</div>
+      <div class="kit-note-callout"><strong>Mobile:</strong> resize to ≤900px — the three-column row stacks to one full-width card per row. All three cards keep the same fill, border, radius, heading treatment, and type scale they use on desktop; none becomes a narrow vertical strip and none loses its equal treatment to become dominant.</div>
+      <p class="fg-closing-line" style="text-align:center;margin-top:1.5rem">An optional closing or reflective line can follow the cards, using this same italic treatment.</p>
+      <div class="kit-ruler" style="border-left-color:var(--accent);text-align:center;border-left:none"><span class="kit-ruler-label" style="color:var(--accent);font-weight:500">↕ 52–56px closing line → next major section (or the Return pill in §J)</span></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ J. EDITORIAL NAVIGATION PILL ══════════════════ -->
+  <section class="kit-module" id="mod-j">
+    <div class="kit-module-head"><span class="kit-module-letter">J</span><span class="kit-module-title">Editorial Navigation Pill</span></div>
+    <p class="kit-module-note">One pill family, two semantic variants — not two unrelated pill systems. Both variants share the same <code>.fg-copper-pill</code> base (§11): 39px tall, 22px horizontal padding, 13px/500 Jost, no letter-spacing/uppercase, 999px radius, content-sized width, and the same hover/focus quality. The difference is semantic, not decorative: <code>--explore</code> is for forward/deeper navigation (Explore family stones, explore a related mineral set) and may use the stronger outlined/accent treatment; <code>--return</code> is for back-navigation (Return to Crystal Families) and may use the quieter filled/secondary treatment. Do not invent a third variant or swap treatments for visual variety. For ordinary family-guide closing use, Return to Crystal Families remains the expected pill — show only the navigation action(s) the page actually needs, not both by default. The Return to Crystal Families pill is already standardized and is not a redesign target (§2) — preserve its existing treatment exactly. See report for the one shared-CSS note this surfaced.</p>
+    <div class="kit-sample" style="text-align:center">
+      <button class="fg-copper-pill fg-copper-pill--explore" type="button">Explore All Example Minerals</button>
+      &nbsp;&nbsp;
+      <button class="fg-copper-pill fg-copper-pill--return" type="button">Return to Crystal Families</button>
+    </div>
+    <div class="kit-note-callout">Both buttons above share identical height, radius, padding, and typography — only fill/border color and label communicate the forward-vs-return role. That shared geometry, not a distinct component per variant, is what makes this one pill family.</div>
+  </section>
+
+  <!-- ══════════════════ K. RESPONSIVE BEHAVIOR ══════════════════ -->
+  <section class="kit-module" id="mod-k">
+    <div class="kit-module-head"><span class="kit-module-letter">K</span><span class="kit-module-title">Responsive Behavior</span></div>
+    <p class="kit-module-note">Every component on this page inherits its responsive behavior from the shared breakpoints already in <code>styles.css</code> (≤900px tablet/intermediate, ≤600px mobile), layered with the <code>.kit-demo-fg</code> overrides above. Desktop and tablet use the appropriate approved grid column count for each module (a 4-up card grid moves to 2-up at ≤900px, for example). At the mobile breakpoint, stone/variety browsing grids remain <strong>2 columns</strong> — they do not collapse to 1 oversized card per row — and specimen image-well height stays capped at 130–170px regardless of column count, so images never enlarge just because the grid narrows.</p>
+
+    <div class="kit-subhead">Stone / Variety Browsing Grid — 2 Columns on Mobile</div>
+    <div class="kit-sample" style="margin-bottom:1.5rem">
+      <div class="fg-card-grid fg-card-grid--4">
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Mobile Example A"><img src="assets/family-guide-calcite/shapes-pointed-crystals.jpg" alt="Example specimen" loading="lazy"></button>
+          <div class="fg-stonecard-body"><div class="fg-stonecard-name">EXAMPLE A</div><div class="fg-stonecard-phrase">Short tagline.</div></div>
+        </div>
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Mobile Example B"><img src="assets/family-guide-calcite/recognize-glassy-luster.jpg" alt="Example specimen" loading="lazy"></button>
+          <div class="fg-stonecard-body"><div class="fg-stonecard-name">EXAMPLE B</div><div class="fg-stonecard-phrase">Short tagline.</div></div>
+        </div>
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Mobile Example C"><img src="assets/family-guide-calcite/shapes-massive-banded.jpg" alt="Example specimen" loading="lazy"></button>
+          <div class="fg-stonecard-body"><div class="fg-stonecard-name">EXAMPLE C</div><div class="fg-stonecard-phrase">Short tagline.</div></div>
+        </div>
+        <div class="fg-stonecard">
+          <button class="fg-stonecard-media" type="button" aria-label="Quick View — Mobile Example D"><img src="assets/family-guide-calcite/recognize-double-refraction.jpg" alt="Example specimen" loading="lazy"></button>
+          <div class="fg-stonecard-body"><div class="fg-stonecard-name">EXAMPLE D</div><div class="fg-stonecard-phrase">Short tagline.</div></div>
+        </div>
+      </div>
+      <div class="kit-note-callout">Resize to ≤600px — this grid holds 2 columns and image wells step down to 150px (within 130–170px); it does not collapse to 1 oversized card per row.</div>
+    </div>
+
+    <div class="kit-subhead">Environmental / full-width teaching photography — bounded mobile height</div>
+    <div class="kit-sample" style="margin-bottom:1.5rem">
+      <div class="kit-env-photo"><img src="assets/family-guide-feldspar/Labradorite in two samples showing labradorescence.webp" alt="Example environmental teaching photograph" loading="lazy"></div>
+      <div class="kit-note-callout">Desktop height 220px, capped at 160px ≤600px — full-width photography never becomes uncontrolled edge-to-edge visual mass on mobile. This bounds presentation only; the photography itself is unchanged (replacement remains deferred, §9.1).</div>
+    </div>
+
+    <div class="kit-note-callout">
+      <strong>Desktop</strong> — full grid widths shown above (4-up card grids, 3-up comparisons, hero split layout).<br>
+      <strong>Tablet (≤900px)</strong> — card/photo grids move to 2 columns, hero and branch/relationship grids stack to 1 column, major-section gap holds at 60–64px.<br>
+      <strong>Mobile (≤600px)</strong> — stone/variety grids stay at 2 columns (not 1), major-section gap reduces to 44–48px, the reference table stacks into labeled cards, type sizes hold at their approved floors rather than shrinking.
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
