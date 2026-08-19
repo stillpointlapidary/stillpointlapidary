@@ -506,13 +506,19 @@ function fgExpressionCardHtml(member, opts){
       phraseInner = `<span class="fg-stonecard-phrase-p">${escapeAttr(first)}</span><span class="fg-stonecard-phrase-p">${escapeAttr(rest)}</span>`;
     }
   }
+  // opts.hideBadge (2026-08-14, added for Quartz's Phantom Quartz card) —
+  // suppresses only the "FAMILY-GUIDE EXPRESSION" status pill for this one
+  // card while leaving the badge's default-on behavior unchanged for every
+  // other unlinked family-guide-only card (e.g. Fluorite's Yttrium/Candy
+  // Fluorite), which never set this flag.
+  const badgePillHtml = opts.hideBadge ? '' : `<span class="fg-badge">FAMILY-GUIDE EXPRESSION</span>`;
   return `<div class="fg-stonecard fg-stonecard--unlinked">
     <div class="fg-stonecard-media" title="${escapeAttr(name)} — family-guide expression, not a linked encyclopedia entry">${imgHtml}</div>
     <div class="fg-stonecard-body">
       <div class="fg-stonecard-name">${escapeAttr(name)}</div>
       ${identityHtml}
       <div class="${phraseClass}">${phraseInner}</div>
-      <span class="fg-badge">FAMILY-GUIDE EXPRESSION</span>
+      ${badgePillHtml}
     </div>
   </div>`;
 }
@@ -1027,7 +1033,13 @@ function familyGuideQuartzGrowthFormsHtml(guide){
   const growth = g.growthForms||{};
   const incl = g.inclusions||{};
   const growthCards = (growth.items||[]).map(m=>fgExpressionCardHtml(m, {splitPhrase:true})).filter(Boolean).join('');
-  const inclCards = (incl.items||[]).map(m=>fgExpressionCardHtml(m, {splitPhrase:true})).filter(Boolean).join('');
+  // hideBadge:true (2026-08-14) — Phantom Quartz (incl.items[0], no
+  // stoneId) is the only card in this grid, or on the whole Quartz guide,
+  // that renders through fgExpressionCardHtml's unlinked branch; its
+  // "FAMILY-GUIDE EXPRESSION" pill read as an inappropriate public status
+  // label and is suppressed here only. Quick View, name, description, and
+  // photo-pending treatment are all unaffected — see fgExpressionCardHtml.
+  const inclCards = (incl.items||[]).map(m=>fgExpressionCardHtml(m, {splitPhrase:true, hideBadge:true})).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-growth-forms">
     <h2 class="fg-h2">${escapeAttr(g.title||'Growth Forms & Inclusions')}</h2>
     ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}

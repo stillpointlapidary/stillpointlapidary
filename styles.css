@@ -1398,7 +1398,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .c101-wrap{padding:0 0 1.5rem}
 .c101-layout{display:grid;grid-template-columns:190px 1fr;border:0.5px solid var(--border);border-radius:12px;margin-top:0.5rem;align-items:start}
 .c101-sidebar{background:var(--stone2);border-right:0.5px solid var(--border);padding:8px 0;border-radius:12px 0 0 12px;position:sticky;top:148px;max-height:calc(100vh - 168px);overflow-y:auto}
-.c101-sidebar-item{display:block;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s}
+/* Font-size matched to "Crystal Grids" (.c101-sidebar-item--grids, 13px) —
+   was 12px, an unintentional mismatch across the other seven labels.
+   Weight, colors, spacing, indentation, and behavior unchanged. */
+.c101-sidebar-item{display:block;padding:10px 16px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.03em;color:var(--ink2);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s}
 .c101-sidebar-item:hover{background:var(--stone);color:var(--ink)}
 .c101-sidebar-item.active{background:var(--white);border-left-color:var(--accent);color:var(--ink);font-weight:500}
 .c101-sidebar-item--grids{font-size:13px}
@@ -1708,15 +1711,36 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-list{margin:0;padding-left:1.1rem;font-size:13px;line-height:1.7;color:var(--ink2)}
 .fg-list li{margin-bottom:3px}
 
-.fg-section{margin-bottom:2.5rem}
-.fg-h2{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;letter-spacing:0.01em;color:var(--ink);text-align:center;margin:0 0 0.35rem}
+/* Major-section rhythm (Balanced Editorial, EDITORIAL-PAGE-VISUAL-STANDARD.md
+   §8.1) — 62px desktop / 46px at <=900px, shared by every guide instead of
+   eight duplicated per-guide [data-family-slug] overrides (2026-08-13
+   normalization pass). .fg-hero shares the same value since the hero-to-
+   first-section transition uses the same major-section gap. */
+.fg-section{margin-bottom:62px}
+.fg-hero{margin-bottom:62px}
+@media(max-width:900px){
+  .fg-section{margin-bottom:46px}
+  .fg-hero{margin-bottom:46px}
+}
+/* Left-aligned by default per EDITORIAL-PAGE-VISUAL-STANDARD.md §4
+   (2026-08-13 correction — the prior centered default contradicted the
+   standard and had produced repeated per-guide left-align overrides). */
+/* Section heading 20px/19px, per EDITORIAL-PAGE-VISUAL-STANDARD.md §5.1
+   canonical Crystal Family Guide type scale (2026-08-19 promotion — value
+   proven on Jasper/Quartz's approved prototype, now the shared default for
+   all eight completed guides; mobile counterpart sits in the existing
+   max-width:600px breakpoint below). */
+.fg-h2{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;letter-spacing:0.01em;color:var(--ink);text-align:left;margin:0 0 0.35rem}
 
 /* Shared subtitle/lead line — used under every fg-h2 and as the Collection
    section intro. One consistent size/weight/measure across the page instead
    of a mix of oversized italic leads and tiny captions. --wide widens the
    measure only for the two longer, sentence-length intros (Extended Family,
-   Collection) so they don't wrap into an unnecessarily narrow 3-line block. */
-.fg-lead{font-size:19px;line-height:1.55;color:var(--ink2);letter-spacing:0.01em;text-align:center;margin:0.5rem auto 1.75rem;max-width:58ch}
+   Collection) so they don't wrap into an unnecessarily narrow 3-line block.
+   Left-aligned by default per §4 (2026-08-13 correction); the auto side
+   margins that used to center the block are removed for the same reason —
+   max-width/measure is unchanged, only the alignment. */
+.fg-lead{font-size:19px;line-height:1.55;color:var(--ink2);letter-spacing:0.01em;text-align:left;margin:0.5rem 0 1.75rem;max-width:58ch}
 .fg-lead--wide{max-width:82ch}
 /* Extended Family intro only — widened further (2026-07-22) so the approved
    sentence settles into two balanced lines at desktop width instead of
@@ -1736,16 +1760,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-placeholder-note{font-style:italic;color:var(--ink3)!important}
 
 /* 1. Hero — warm near-white split composition, copy left / photo right */
-.fg-hero{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem 2rem;box-shadow:0 8px 24px rgba(42,37,32,0.06);margin-bottom:1.75rem}
+.fg-hero{background:var(--white);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem 2rem;box-shadow:0 8px 24px rgba(42,37,32,0.06)}
 .fg-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,42%);gap:2.25rem;align-items:center}
 .fg-hero-copy{min-width:0}
-.fg-eyebrow{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
-.fg-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:400;line-height:1.15;color:var(--ink);margin:0 0 0.5rem}
+.fg-eyebrow{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+/* Hero title 28px/24px, per EDITORIAL-PAGE-VISUAL-STANDARD.md §5.1 canonical
+   Crystal Family Guide type scale (2026-08-19 promotion — value proven on
+   Jasper/Quartz's approved prototype, now the shared default for all eight
+   completed guides; mobile counterpart sits in the existing
+   max-width:600px breakpoint below). */
+.fg-hero-title{font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;line-height:1.15;color:var(--ink);margin:0 0 0.5rem}
 .fg-hero-sub{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;color:var(--accent);margin:0 0 1rem;line-height:1.4}
 .fg-hero-body{font-size:15px;line-height:1.8;color:var(--ink2);margin:0 0 1rem;max-width:52ch}
 .fg-hero-prompt{border-top:0.5px solid var(--border2);padding-top:1.1rem}
 .fg-hero-prompt-lead{font-size:16px;letter-spacing:0.02em;color:var(--ink2);margin-bottom:0.3rem}
-.fg-hero-question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:28px;line-height:1.2;color:var(--ink);margin-bottom:0.35rem}
+/* Reflective prompt 20px/18px, its own controlled scale per
+   EDITORIAL-PAGE-VISUAL-STANDARD.md §5.1 (2026-08-19 promotion — value
+   proven on Jasper's approved prototype, now the shared default for all
+   eight completed guides; mobile counterpart sits in the existing
+   max-width:600px breakpoint below). Distinct from both the hero title and
+   ordinary section headings so it doesn't compete with either for visual
+   weight. Shared by every guide using this prompt pattern (Calcite,
+   Fluorite, Jasper, Feldspar, Agate). Quartz keeps its own scoped override
+   (see the Quartz typography prototype below) rather than this shared
+   value. */
+.fg-hero-question{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:20px;line-height:1.25;color:var(--ink);margin-bottom:0.35rem}
 .fg-hero-media{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--stone2);border:0.5px solid var(--border)}
 .fg-hero-media-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;width:100%;height:100%}
 /* Two-image hero spread (2026-07-23, Chalcedony's two-member roster) — a
@@ -1796,14 +1835,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-stonecard-noimg--labeled{display:flex;align-items:center;justify-content:center}
 .fg-stonecard-noimg--labeled span{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3)}
 .fg-stonecard-body{padding:0.7rem 0.9rem 0.8rem;display:flex;flex-direction:column;flex:1}
-.fg-stonecard-name{font-size:13px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+/* Card/module name 15px flat (no desktop/mobile split), per
+   EDITORIAL-PAGE-VISUAL-STANDARD.md §5.1 canonical Crystal Family Guide
+   type scale (2026-08-19 promotion — value proven on Jasper/Quartz's
+   approved prototype, now the shared default for all eight completed
+   guides). Applies to every card/module-name role: this class plus
+   .fg-photocard-title, .fg-namecard-label, .fg-relationship-label, and
+   .fg-garnet-collection-card-heading below. */
+.fg-stonecard-name{font-size:15px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
 /* Identity-label line (2026-07-22) — opt-in via opts.showIdentity, used by
    Quartz's eight anchor-expression cards between the stone name and the
    Quick View phrase. Calcite's cards never pass showIdentity, so this class
    never renders there. */
 .fg-stonecard-identity{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:14px;color:var(--accent);margin-bottom:4px}
 .fg-stonecard-phrase{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;line-height:1.24;color:var(--ink);margin-bottom:6px;flex:1}
-.fg-badge{display:inline-block;align-self:flex-start;font-size:9px;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);color:var(--ink3);margin-bottom:6px}
+.fg-badge{display:inline-block;align-self:flex-start;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;border-radius:9px;background:var(--stone2);border:0.5px solid var(--border);color:var(--ink3);margin-bottom:6px}
 .fg-stonecard-qv{align-self:flex-start;background:none;border:none;padding:0;font:inherit;font-size:11px;letter-spacing:0.03em;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 .fg-stonecard-qv:hover{color:var(--ink)}
 .fg-stonecard-qv:focus-visible{outline:1.5px solid var(--accent2);outline-offset:2px}
@@ -1836,8 +1882,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-photocard-swatch--6 .fg-photocard-swatch-cell{background:var(--white);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .fg-photocard-swatch--6 img{width:100%;height:100%;object-fit:contain;display:block;padding:6px}
 .fg-photocard-body{padding:1rem 1.1rem 1.15rem;display:flex;flex-direction:column;flex:1}
-.fg-photocard-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.35rem}
-.fg-photocard-text{font-size:13px;line-height:1.6;color:var(--ink2);margin:0}
+.fg-photocard-title{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);margin-bottom:0.35rem}
+.fg-photocard-text{font-size:16px;line-height:1.6;color:var(--ink2);margin:0}
 
 /* 7. Calcite in Your Collection — compact three-card row on desktop: Care
    for It slightly wider, Remember This / Watch For standard width. Reads
@@ -1867,7 +1913,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-namegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .fg-namecard{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:8px}
 .fg-namecard-index{width:24px;height:24px;border-radius:50%;background:var(--stone2);border:0.5px solid var(--border2);color:var(--accent);font-family:'Jost',sans-serif;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
-.fg-namecard-label{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink)}
+.fg-namecard-label{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink)}
 /* .fg-namecard-category (2026-08-12, added for Quartz's "Why Quartz Names
    Change" naming-decoder correction) — a short eyebrow above the stone
    name identifying which kind of naming logic that card demonstrates
@@ -1904,7 +1950,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-relationship-media{display:block;width:100%;aspect-ratio:6/5;background:var(--stone2);border:none;padding:0;cursor:pointer;overflow:hidden}
 .fg-relationship-media img{width:100%;height:100%;object-fit:contain;display:block}
 .fg-relationship-media:focus-visible{outline:1.5px solid var(--accent2);outline-offset:-2px}
-.fg-relationship-label{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin:0.85rem 1rem 0.35rem}
+.fg-relationship-label{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);margin:0.85rem 1rem 0.35rem}
 .fg-relationship-card .fg-fact-body{padding:0 1.1rem}
 
 /* ══ FLUORITE FAMILY GUIDE — dedicated components (2026-07-22 first
@@ -1948,9 +1994,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    prompt, the placeholder-status banners, and the zoning/many-colors
    image-led modules are left as their existing intentional centered
    exceptions. */
-.fg-guide[data-family-slug="fluorite"] .fg-h2{text-align:left}
+/* .fg-h2 and .fg-lead now left-align by default (§4, 2026-08-13
+   correction); only the width/measure reset below remains guide-specific. */
 .fg-guide[data-family-slug="fluorite"] .fg-lead,
-.fg-guide[data-family-slug="fluorite"] .fg-lead--wide{text-align:left;max-width:none;margin-left:0;margin-right:0;font-size:16px}
+.fg-guide[data-family-slug="fluorite"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0;font-size:16px}
 /* Heading -> first following element (intro, banner, or the module itself
    when a section has neither): ~18px. Banner -> first module beneath it:
    ~30px. Same shared technique as Calcite/Feldspar. */
@@ -1968,25 +2015,25 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    collapse). Prompt copy and markup are unchanged. */
 .fg-guide[data-family-slug="fluorite"] .fg-hero-prompt{border-top:none;padding-top:0;margin-top:30px}
 
-/* 2. Major-section rhythm — 76px desktop / 56px at <=900px (mobile rule
-   sits in the existing max-width:900px breakpoint below). The bridge
-   paragraph is a transitional continuation of the hero, not its own titled
-   section, so it keeps a calmer 40px above/below rather than the full 76px
-   (same reasoning as Calcite's .fg-calcite-bridge). Collection -> Closing
-   keeps the standard ~68px reflective-transition gap via the same
-   :has() margin-collapse technique used site-wide. */
+/* 2. Major-section rhythm — inherits the shared .fg-section 62px desktop /
+   46px mobile base (2026-08-13 normalization pass; no per-guide override
+   needed here). The bridge paragraph is a transitional continuation of the
+   hero, not its own titled section, so it keeps a calmer 40px above/below
+   rather than the full major-section gap (same reasoning as Calcite's
+   .fg-calcite-bridge). Collection -> Closing keeps the standard ~68px
+   reflective-transition gap via the same :has() margin-collapse technique
+   used site-wide. */
 .fg-fluorite-bridge{margin:2.5rem 0}
-.fg-guide[data-family-slug="fluorite"] .fg-section{margin-bottom:76px}
 .fg-guide[data-family-slug="fluorite"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
 
 /* 3. Typography floor — hero body copy and Quick View links raised to the
    standard 16px/13px floors; the true micro-label "Photo pending" caption
    (only rendered for Yttrium Fluorite, which has no retained image) raised
-   from 10px to the 11px micro-label floor; the small identity/status badge
-   raised from 9px to 11px. */
+   from 10px to the 11px micro-label floor. The identity/status badge now
+   inherits the shared .fg-badge 13px label size (2026-08-13 normalization
+   pass); no override needed here. */
 .fg-guide[data-family-slug="fluorite"] .fg-hero-body{font-size:16px}
 .fg-guide[data-family-slug="fluorite"] .fg-stonecard-qv{font-size:13px}
-.fg-guide[data-family-slug="fluorite"] .fg-badge{font-size:11px}
 .fg-guide[data-family-slug="fluorite"] .fg-stonecard-noimg--labeled span{font-size:11px}
 
 /* 4. Meet Eight Fluorite Expressions — calmer, consistent image-well scale
@@ -2021,14 +2068,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* 6. Closing — the old bordered/shadowed tan CTA card and heavy
    .btn.btn-accent button are replaced with the shared bare-line + compact
-   pill treatment already established for Copper/Calcite/Feldspar/Garnet,
-   per the editorial navigation-pill spec (EDITORIAL-PAGE-VISUAL-STANDARD.md
-   §11). The reflective closing line stays centered (an approved
-   exception); its own existing 24px bottom margin already sits inside the
-   standard's ordinary spacing range. */
+   Return pill, per the editorial navigation-pill spec
+   (EDITORIAL-PAGE-VISUAL-STANDARD.md §11). The reflective closing line
+   stays centered (an approved exception); its own existing 24px bottom
+   margin already sits inside the standard's ordinary spacing range.
+   The pill itself is defined once, shared by every guide that calls the
+   common familyGuideClosingHtml() renderer — see the single
+   `.fg-guide .fg-closing-btn` rule below (2026-08-13 normalization pass,
+   replacing six identical per-guide [data-family-slug] copies and
+   extending the same treatment to Jasper, which previously had no
+   override and fell back to the heavy .btn.btn-accent look). Copper uses
+   its own separate closing composition and .fg-copper-pill--return class
+   (already visually identical to this shared pill), so it is untouched. */
 .fg-guide[data-family-slug="fluorite"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
-.fg-guide[data-family-slug="fluorite"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
-.fg-guide[data-family-slug="fluorite"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+.fg-guide .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
+.fg-guide .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
 
 /* 7. One Mineral, Many Colors — rebuilt (2026-08-02 editorial/design pass)
    as a restrained three-panel teaching module (Chemistry / Crystal Lattice
@@ -2047,20 +2101,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* What Does "Opalized Fluorite" Mean? (2026-08-02 correction pass) — a
    compact editorial inset, not a card and not a .fg-section, so it never
-   receives the shared 76px major-section rhythm. Full 1100px frame width,
-   left-aligned, a thin restrained Fluorite-derived left accent rule (the
-   same muted "chemistry" violet already used in How Fluorite Gets Its
-   Color) instead of a full border/box, no background fill, no icon or
-   image — deliberately quieter than every bordered card/panel elsewhere on
-   the page so it reads as a footnote to Expressions, not a new section. */
-.fg-fluorite-opalized-note{max-width:1100px;margin:30px auto 76px;padding:0.15rem 0 0.15rem 1.1rem;border-left:2px solid #8a7a9e}
+   receives the shared .fg-section major-section rhythm directly. Full
+   1100px frame width, left-aligned, a thin restrained Fluorite-derived left
+   accent rule (the same muted "chemistry" violet already used in How
+   Fluorite Gets Its Color) instead of a full border/box, no background
+   fill, no icon or image — deliberately quieter than every bordered
+   card/panel elsewhere on the page so it reads as a footnote to
+   Expressions, not a new section. Its own 62px bottom margin matches the
+   shared major-section value (2026-08-13 normalization pass) so the
+   rhythm into the next section still reads consistently. */
+.fg-fluorite-opalized-note{max-width:1100px;margin:30px auto 62px;padding:0.15rem 0 0.15rem 1.1rem;border-left:2px solid #8a7a9e}
 /* Grid-to-inset spacing correction (2026-08-02) — Expressions is a
-   .fg-section, so its own shared 76px margin-bottom was winning the margin
-   collapse against the inset's 30px margin-top, leaving a 76px gap where
-   28-32px was wanted. Reducing Expressions' own bottom margin specifically
-   when the inset follows it (same :has() technique used site-wide for the
-   Collection -> Closing transition) lets the inset's 30px top margin
-   govern instead. */
+   .fg-section, so its own shared major-section margin-bottom was winning
+   the margin collapse against the inset's 30px margin-top, leaving a
+   larger gap than the 28-32px wanted. Reducing Expressions' own bottom
+   margin specifically when the inset follows it (same :has() technique
+   used site-wide for the Collection -> Closing transition) lets the
+   inset's 30px top margin govern instead. */
 .fg-guide[data-family-slug="fluorite"] #fg-expressions:has(+ .fg-fluorite-opalized-note){margin-bottom:30px}
 .fg-fluorite-opalized-note-title{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.35rem;text-align:left}
 .fg-fluorite-opalized-note-body{font-size:16px;line-height:1.6;color:var(--ink2);margin:0;text-align:left;max-width:82ch}
@@ -2114,9 +2171,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-fluorite-collection-card-body{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
 
 @media(max-width:900px){
-  .fg-guide[data-family-slug="fluorite"] .fg-hero{margin-bottom:56px}
-  .fg-guide[data-family-slug="fluorite"] .fg-section{margin-bottom:56px}
-  .fg-fluorite-opalized-note{margin-bottom:56px}
+  .fg-fluorite-opalized-note{margin-bottom:46px}
   .fg-fluorite-color-panels{grid-template-columns:1fr}
   .fg-guide[data-family-slug="fluorite"] .fg-fluorite-zoning-grid .fg-explain-media{height:220px}
   .fg-fluorite-lesson-grid{grid-template-columns:1fr}
@@ -2230,16 +2285,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    the Copper Minerals baseline (EDITORIAL-PAGE-VISUAL-STANDARD.md §2, §8.1,
    §9), scoped entirely to [data-family-slug="jasper"] so no other guide's
    spacing, alignment, or image treatment changes. ── */
-.fg-guide[data-family-slug="jasper"] .fg-section{margin-bottom:76px}
-/* Hero -> first section (2026-08-05 correction): the shared .fg-hero base
-   rule only ever sets margin-bottom:1.75rem (28px) — every other guide that
-   needs the 76px major-section gap after its hero (Copper, Feldspar) adds
-   its own explicit override, and Jasper's first pass omitted the desktop
-   half of that override (only the 56px mobile rule existed below), which is
-   why the hero-to-"What Jasper Actually Is" gap measured 28px instead of
-   76px. */
-.fg-guide[data-family-slug="jasper"] .fg-hero{margin-bottom:76px}
-.fg-guide[data-family-slug="jasper"] .fg-h2{text-align:left;margin-bottom:18px}
+/* Major-section rhythm and hero -> first-section gap both inherit the
+   shared .fg-section/.fg-hero 62px desktop / 46px mobile base (2026-08-13
+   normalization pass); no per-guide override needed here. */
+.fg-guide[data-family-slug="jasper"] .fg-h2{margin-bottom:18px}
+/* 2026-08-14 Jasper desktop normalization — heading-to-intro gap on the
+   three card-bearing teaching sections matched to approved Quartz's
+   #fg-expressions/#fg-name-change/#fg-growth-forms treatment (9px, tighter
+   than the sitewide 18px default) so the heading sits close to its intro
+   the same way it does on Quartz. #fg-what-jasper-is, #fg-agate-jasper-fit,
+   and #fg-jasper-collection are intentionally left at the 18px default,
+   mirroring Quartz's own #fg-relationship and #fg-garnet-collection
+   sections, which did not receive this tighter treatment either. */
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-h2,
+.fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-h2,
+.fg-guide[data-family-slug="jasper"] #fg-jasper-name .fg-h2{margin-bottom:9px}
 /* Section intro spacing (2026-08-05 correction): heading-to-intro relies on
    .fg-h2's own 18px margin-bottom above (adjacent-sibling margins collapse
    to the larger value, so no separate top margin is needed here). When a
@@ -2247,15 +2307,31 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    paragraph keeps ordinary paragraph spacing between itself and the next,
    and only the final paragraph carries the larger margin into the grid/
    module below (28px, §8.2's introduction-to-module range). */
-.fg-guide[data-family-slug="jasper"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
+/* Ordinary explanatory/intro paragraphs corrected from the shared
+   .fg-section-intro base's oversized italic Georgia treatment (19px) to
+   standard regular Jost paragraph copy (Meet Jasper Expressions, How
+   Jasper Gets Its Patterns, What a Jasper Name Can Tell You, Jasper in
+   Your Collection, Jasper/Agate/Chalcedony) — these are ordinary section
+   intros, not editorial quotations. Existing alignment/margins unchanged. */
+.fg-guide[data-family-slug="jasper"] .fg-section-intro{font-family:'Jost',sans-serif;font-style:normal;font-weight:400;font-size:16px;line-height:1.7;color:var(--ink2);text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
 .fg-guide[data-family-slug="jasper"] .fg-section-intro:last-of-type{margin-bottom:28px}
 /* What Jasper Actually Is' plain-paragraph bridge uses .fg-garnet-bridge p,
    not .fg-section-intro — same two-paragraph ordinary-spacing/final-margin
    logic applies. The bridge div's own 46px margin-bottom (unchanged) still
-   collapses with the section's 76px rule above into the correct 76px gap
-   into Meet Jasper Expressions. */
-.fg-guide[data-family-slug="jasper"] .fg-garnet-bridge p{margin-bottom:12px}
-.fg-guide[data-family-slug="jasper"] .fg-garnet-bridge p:last-of-type{margin-bottom:0}
+   collapses with the section's shared 62px major-section margin above into
+   the correct gap into Meet Jasper Expressions. Visual correction
+   (2026-08-13, Jasper review): the shared .fg-garnet-bridge default
+   (Georgia serif, 21px/18px mobile) was sized for a single short
+   reflective statement and here read as an oversized pull quote rather
+   than ordinary introductory prose — same fix already applied to Agate's
+   and Quartz's equivalent bridges, scoped the same way to this section. */
+.fg-guide[data-family-slug="jasper"] #fg-what-jasper-is .fg-garnet-bridge p{font-family:'Jost',sans-serif;font-size:16px;line-height:1.7;color:var(--ink2);margin-bottom:14px}
+/* The 2026-08-14 :first-child override that reintroduced italic Georgia
+   19px for this section's opening paragraph has been reverted — ordinary
+   explanatory paragraphs use standard regular Jost paragraph copy, not the
+   italic-Georgia intro treatment, so both paragraphs now share the plain
+   Jost rule above. */
+.fg-guide[data-family-slug="jasper"] #fg-what-jasper-is .fg-garnet-bridge p:last-of-type{margin-bottom:0}
 /* Hero — remove the temporary "Family photograph — coming soon" badge (the
    two hero images, Picture and Ocean Jasper, are the guide's own approved
    roster photos, not placeholders) and present both wells restrained, white,
@@ -2263,6 +2339,29 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="jasper"] .fg-hero-media-label{display:none}
 .fg-guide[data-family-slug="jasper"] .fg-hero-media{max-height:300px;background:#FFFFFF}
 .fg-guide[data-family-slug="jasper"] .fg-hero-media-grid img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
+/* 2026-08-14 Jasper desktop normalization — hero body copy and reflective
+   prompt lead matched to approved Quartz's editorial-prose treatment
+   (Georgia serif body instead of the sitewide Jost sans body, restrained
+   14.5px/14px sizing). Hero title, "Jasper asks" question size, and the
+   two-specimen hero image arrangement are unchanged — only this refinement
+   is applied, matching Quartz's own scoped hero pass exactly. */
+.fg-guide[data-family-slug="jasper"] .fg-hero-sub{margin-bottom:18px}
+.fg-guide[data-family-slug="jasper"] .fg-hero-body{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:14.5px;
+  font-style:normal;
+  line-height:1.6;
+  letter-spacing:normal;
+  text-transform:none;
+}
+.fg-guide[data-family-slug="jasper"] .fg-hero-prompt-lead{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:14px;
+  font-style:normal;
+  letter-spacing:normal;
+  text-transform:none;
+  margin-bottom:0.15rem;
+}
 /* Meet Jasper Expressions roster (2026-08-05 correction) — the shared
    .fg-stonecard-media only colors its <img> element white via
    object-fit:contain; the wrapper itself keeps the sitewide tan
@@ -2273,23 +2372,32 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    well's existing height/aspect-ratio. */
 .fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-media{background:#FFFFFF}
 .fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
-/* Meet Jasper Expressions card text hierarchy (2026-08-05 correction) — the
-   shared .fg-stonecard-name/.fg-stonecard-phrase pair is tuned for a small
-   uppercase label above a larger, darker serif phrase, which reads as the
-   description outweighing the name. Jasper's roster instead needs the name
-   visually primary (medium weight, full ink color) and the description
-   secondary (normal weight, lighter ink2, comfortable line height). Quick
-   View (.fg-stonecard-qv) is untouched — it already renders smaller and
-   lighter than both. */
-.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-name{font-family:'Jost',sans-serif;font-weight:500;font-size:15px;letter-spacing:0.01em;text-transform:none;color:var(--ink);margin-bottom:6px}
-.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:var(--ink2)}
+/* 2026-08-14 Jasper desktop normalization — brings the roster name/body pair
+   in line with approved Quartz's compact-card typography (visually approved
+   #fg-expressions/#fg-growth-forms treatment): the name reads as a quiet
+   Georgia identity (matching the approved card/module-name role) rather than
+   a tracked sans-serif label, and the description drops to Quartz's approved
+   14.5px/1.6 compact-card-body size. Jasper's roster has no italic identity
+   subtitle beneath the name (same as Quartz's Growth Forms & Inclusions
+   cards), so margin-bottom below the name matches that role's 10px rather
+   than the identity-bearing #fg-expressions role's 4px. */
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-name{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:15px;line-height:1.25;letter-spacing:normal;text-transform:none;color:var(--ink);margin-bottom:10px}
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:14.5px;line-height:1.6;color:var(--ink2)}
+/* Quick View link (2026-08-14) — approved Quartz treatment is 13px/normal
+   letter-spacing rather than the sitewide 11px/tracked default. */
+.fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-qv{font-size:13px;font-weight:400;letter-spacing:normal}
 /* How Jasper Gets Its Patterns — the four cards reuse existing roster
    photos (Brecciated/Picture/Ocean/Leopard Skin); present them as white
    contain wells rather than the shared .fg-photocard-media's default
    tan-cropped treatment, matching Copper's grow-together module. */
 .fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-media{background:#FFFFFF}
 .fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
-.fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-title{font-weight:500}
+/* 2026-08-14 Jasper desktop normalization — module-name weight/rhythm
+   matched to the approved Quartz card/module-name role (Georgia, regular
+   weight, 1.25 line-height) instead of the prior semi-bold 500 treatment,
+   so the pattern-card titles read consistently with the roster names above
+   and Quartz's own card names. */
+.fg-guide[data-family-slug="jasper"] #fg-jasper-pattern .fg-photocard-title{font-weight:400;line-height:1.25;letter-spacing:normal;margin-bottom:6px}
 /* Jasper, Agate, or Chalcedony comparison cards (2026-08-05 correction) —
    two fixes to the shared .fg-relationship-media/-label/.fg-fact-body
    component, scoped to #fg-agate-jasper-fit within the Jasper guide only so
@@ -2306,10 +2414,19 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
       normal weight) and needs no change. */
 .fg-guide[data-family-slug="jasper"] #fg-agate-jasper-fit .fg-relationship-media{height:150px;aspect-ratio:auto;background:#FFFFFF;display:flex;align-items:center;justify-content:center;padding:10px;box-sizing:border-box}
 .fg-guide[data-family-slug="jasper"] #fg-agate-jasper-fit .fg-relationship-media img{width:auto;height:auto;max-width:130px;max-height:130px;object-fit:contain}
-@media(max-width:900px){
-  .fg-guide[data-family-slug="jasper"] .fg-hero{margin-bottom:56px}
-  .fg-guide[data-family-slug="jasper"] .fg-section{margin-bottom:56px}
-}
+/* 2026-08-14 Jasper desktop normalization — closing module. Jasper was the
+   only one of the seven completed guides still using the original bordered/
+   shadowed .fg-closing card (background var(--stone2), 2.25rem/1.5rem
+   padding, 30px margin-top); every other finished guide (Fluorite, Agate,
+   Calcite, Feldspar, Garnet, Quartz) already carries the plain, unboxed
+   closing treatment from the 2026-08-13 normalization pass. Bringing Jasper
+   onto the same unboxed pattern (identical declarations to Quartz's own
+   override) is a spacing/typography-relationship correction, not a
+   composition redesign — the copy, button, and Return pill are unchanged,
+   only the surrounding box is removed so the module reads as part of the
+   same restrained system as every other guide including Quartz. */
+.fg-guide[data-family-slug="jasper"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:10px 0 0;margin-top:0;margin-bottom:2.5rem}
+.fg-guide[data-family-slug="jasper"] .fg-closing-line{margin-bottom:32px}
 
 /* ── Agate Family Guide (2026-08-07) — brings Agate's page-wide rhythm,
    alignment, and image treatment in line with the Copper Minerals baseline
@@ -2317,9 +2434,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    pattern already established for Jasper above. Scoped entirely to
    [data-family-slug="agate"] so no other guide's spacing, alignment, or
    image treatment changes. ── */
-.fg-guide[data-family-slug="agate"] .fg-hero{margin-bottom:76px}
-.fg-guide[data-family-slug="agate"] .fg-h2{text-align:left;margin-bottom:18px}
-.fg-guide[data-family-slug="agate"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
+.fg-guide[data-family-slug="agate"] .fg-h2{margin-bottom:18px}
+/* Ordinary explanatory/intro paragraphs corrected from the shared
+   .fg-section-intro base's oversized italic Georgia treatment (19px) to
+   standard regular Jost paragraph copy (Meet Ten Agate Expressions, How
+   Agate Gets Its Patterns, Agate/Chalcedony/Jasper comparison, What an
+   Agate Name Can Tell You, Agate in Your Collection) — these are ordinary
+   section intros, not editorial quotations. Size/line-height matched to
+   the same standard already established for Jasper/Garnet/Quartz's
+   equivalent intro paragraphs; existing alignment/margins unchanged. */
+.fg-guide[data-family-slug="agate"] .fg-section-intro{font-family:'Jost',sans-serif;font-style:normal;font-weight:400;font-size:16px;line-height:1.7;color:var(--ink2);text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
 .fg-guide[data-family-slug="agate"] .fg-section-intro:last-of-type{margin-bottom:28px}
 .fg-guide[data-family-slug="agate"] .fg-garnet-bridge p{margin-bottom:12px}
 .fg-guide[data-family-slug="agate"] .fg-garnet-bridge p:last-of-type{margin-bottom:0}
@@ -2342,7 +2466,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    15px/1.75 site-wide) bumped to the brief's explicit 16px floor. */
 .fg-guide[data-family-slug="agate"] #fg-what-agate-is .fg-garnet-bridge p{font-family:'Jost',sans-serif;font-size:16px;line-height:1.7;color:var(--ink2);margin-bottom:14px}
 .fg-guide[data-family-slug="agate"] #fg-what-agate-is .fg-garnet-bridge p:last-of-type{margin-bottom:0}
-.fg-guide[data-family-slug="agate"] .fg-section{margin-bottom:76px}
+/* Major-section rhythm and hero -> first-section gap both inherit the
+   shared .fg-section/.fg-hero 62px desktop / 46px mobile base (2026-08-13
+   normalization pass); no per-guide override needed here. */
 /* Hero — Christie's own approved family photograph is real, not a
    placeholder, so the shared "Family photograph — coming soon" badge is
    removed.
@@ -2409,24 +2535,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-phrase-p{display:block;margin-bottom:0.55em}
 .fg-guide[data-family-slug="agate"] #fg-meet-family .fg-stonecard-phrase-p:last-child{margin-bottom:0}
 /* How Agate Gets Its Patterns — white contain wells, matching Jasper's own
-   pattern-decoder treatment. Description text (2026-08-07 correction):
-   the shared .fg-photocard-text default (13px/1.6) read too small next to
-   the 16px roster-card descriptions elsewhere on this page — these are
-   substantive teaching descriptions, not photo captions. Matches the
-   roster's #fg-meet-family .fg-stonecard-phrase treatment exactly (16px,
-   Jost, 1.6 line-height) so comparable teaching-card copy reads at one
-   consistent scale across the whole page. */
+   pattern-decoder treatment. Description text now inherits the shared
+   .fg-photocard-text 16px base (2026-08-13 normalization pass; the
+   guide-specific 16px override this comment used to describe is no longer
+   needed since the base itself moved to 16px). */
 .fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-media{background:#FFFFFF}
 .fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
 .fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-title{font-weight:500}
-.fg-guide[data-family-slug="agate"] #fg-agate-pattern .fg-photocard-text{font-size:16px;line-height:1.6;color:var(--ink2)}
-/* What an Agate Name Can Tell You — same white contain-well treatment and
-   the same 16px description-text correction as the pattern decoder above,
-   scoped to its own section id. */
+/* What an Agate Name Can Tell You — same white contain-well treatment as
+   the pattern decoder above, scoped to its own section id. */
 .fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-media{background:#FFFFFF}
 .fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
 .fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-title{font-weight:500}
-.fg-guide[data-family-slug="agate"] #fg-agate-naming .fg-photocard-text{font-size:16px;line-height:1.6;color:var(--ink2)}
 /* Agate/Chalcedony/Jasper comparison table — left-align the section intro
    already handled above; the shared .fg-table/.fg-table-wrap component
    needs no Agate-specific override. The "Think of Chalcedony..." note
@@ -2463,12 +2583,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    text-align:center (unchanged), so the reflective line and pill remain
    centered on the open page exactly as the brief asks. */
 .fg-guide[data-family-slug="agate"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
-.fg-guide[data-family-slug="agate"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
-.fg-guide[data-family-slug="agate"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
-@media(max-width:900px){
-  .fg-guide[data-family-slug="agate"] .fg-hero{margin-bottom:56px}
-  .fg-guide[data-family-slug="agate"] .fg-section{margin-bottom:56px}
-}
 
 /* ── Quartz Family Guide Revision (2026-08-08) — brings Quartz's page-wide
    rhythm, alignment, and card/image treatment in line with the Copper
@@ -2479,9 +2593,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    40px .fg-section defaults — so this is the first normalization pass for
    this guide. Scoped entirely to [data-family-slug="quartz"] so no other
    guide's spacing, alignment, or image treatment changes. ── */
-.fg-guide[data-family-slug="quartz"] .fg-hero{margin-bottom:76px}
-.fg-guide[data-family-slug="quartz"] .fg-h2{text-align:left;margin-bottom:18px}
-.fg-guide[data-family-slug="quartz"] .fg-section{margin-bottom:76px}
+.fg-guide[data-family-slug="quartz"] .fg-h2{margin-bottom:18px}
+/* Major-section rhythm and hero -> first-section gap both inherit the
+   shared .fg-section/.fg-hero 62px desktop / 46px mobile base (2026-08-13
+   normalization pass); no per-guide override needed here. */
 .fg-guide[data-family-slug="quartz"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;margin-top:0;margin-bottom:10px}
 .fg-guide[data-family-slug="quartz"] .fg-section-intro:last-of-type{margin-bottom:28px}
 /* Visual correction (2026-08-20): the base .fg-section-intro (19px Georgia
@@ -2523,7 +2638,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    better restored to 16px/1.6. The moniker-to-description spacing
    (.fg-stonecard-identity margin-bottom above) and card hierarchy from
    that pass are unchanged. */
-.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink2)}
+/* 2026-08-14 correction: 16px -> 15px, matching the approved compact-card-
+   description size shared with .fg-namecard-body (Why Quartz Names Change)
+   and the Growth Forms/Inclusions .fg-stonecard-phrase below. line-height
+   stays 1.6, already the value shared by all three compact-card-description
+   roles on this guide. */
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:14.5px;line-height:1.6;color:var(--ink2)}
 /* Growth Forms & Inclusions — visual correction (2026-08-20): description
    size matches the same 14.5px/1.6 correction as Meet Eight Quartz
    Expressions above (was 16px), keeping the existing split-sentence
@@ -2531,10 +2651,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    still reads as two readable beats, just at the corrected scale. */
 .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-media{background:#FFFFFF}
 .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-media img{object-fit:contain;background:#FFFFFF;padding:10px;box-sizing:border-box}
-/* Visual correction (2026-08-21): restored to 16px/1.6 for the same reason
-   as #fg-expressions above — the sentence-split gap (.fg-stonecard-phrase-p)
-   from the 2026-08-20 pass is unchanged. */
-.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink2)}
+/* 2026-08-14 correction: 16px -> 15px, same compact-card-description size
+   as #fg-expressions and .fg-namecard-body above; the sentence-split gap
+   (.fg-stonecard-phrase-p) is unchanged. */
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase{font-family:'Jost',sans-serif;font-weight:400;font-size:14.5px;line-height:1.6;color:var(--ink2)}
 .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase-p{display:block;margin-bottom:0.55em}
 .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-phrase-p:last-child{margin-bottom:0}
 /* Pending-photo wells (2026-08-21) — Phantom Quartz (no catalog Stone ID)
@@ -2599,12 +2719,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    border/padding are removed so only the centered reflective line and the
    compact Return pill remain. */
 .fg-guide[data-family-slug="quartz"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
-.fg-guide[data-family-slug="quartz"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
-.fg-guide[data-family-slug="quartz"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
-@media(max-width:900px){
-  .fg-guide[data-family-slug="quartz"] .fg-hero{margin-bottom:56px}
-  .fg-guide[data-family-slug="quartz"] .fg-section{margin-bottom:56px}
-}
 
 /* Three-category variant of the base five-column .fg-namegrid layout, for
    Jasper's "Pattern Is Not the Same as Identity" reuse of that same
@@ -2830,13 +2944,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    same .fg-guide shell width as every other Copper section instead of
    sitting in its own narrower centered column. Christie's explicit
    direction: the gap from the bottom of the complete Copper image/text
-   block to the table follows the major-section rhythm (§8.1) — 76px
-   desktop, 56px at <=900px (mobile override sits in the existing
-   max-width:900px block) — not the smaller §8.2 intro-to-module range.
-   This is the single spacing owner for that gap — .fg-copper-intro-grid's
-   own margin-bottom is 0, so nothing else contributes or collapses into
-   the rendered distance. */
-.fg-table-wrap{margin:76px 0 0}
+   block to the table follows the major-section rhythm (§8.1) — the shared
+   62px desktop / 46px at <=900px major-section value (mobile override sits
+   in the existing max-width:900px block) — not the smaller §8.2
+   intro-to-module range. This is the single spacing owner for that gap —
+   .fg-copper-intro-grid's own margin-bottom is 0, so nothing else
+   contributes or collapses into the rendered distance. */
+.fg-table-wrap{margin:62px 0 0}
 .fg-table{width:100%;border-collapse:collapse;background:var(--white);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
 .fg-table th,.fg-table td{padding:0.85rem 1.1rem;text-align:left;font-size:16px;line-height:1.55;color:var(--ink2)}
 /* 2026-08-02: shorter header row (reduced vertical padding only — body
@@ -2984,14 +3098,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    classes are shared across Calcite/Quartz/Fluorite/Feldspar/Chalcedony/
    Agate/Jasper/Garnet/Tourmaline/Obsidian and intentionally keep their own
    approved centered treatment. ── */
-/* 2026-08-07: major-section separation, desktop — a single Copper-scoped
-   override of the shared .fg-section margin-bottom (2.5rem elsewhere),
-   increased to 76px. Mobile override (56px) sits in the existing
-   max-width:900px breakpoint below. Internal card/copy spacing is
-   untouched — only the gap between major sections changes. */
-.fg-guide[data-family-slug="copper"] .fg-section{margin-bottom:76px}
-.fg-guide[data-family-slug="copper"] .fg-h2{text-align:left}
-.fg-guide[data-family-slug="copper"] .fg-lead,
+/* Major-section rhythm inherits the shared .fg-section 62px desktop /
+   46px mobile base (2026-08-13 normalization pass); no per-guide override
+   needed here. Internal card/copy spacing is untouched. */
+/* .fg-h2 and .fg-lead now left-align by default (§4, 2026-08-13
+   correction); .fg-section-intro's own default is unchanged, so its
+   left-align/width reset below is still needed. */
+.fg-guide[data-family-slug="copper"] .fg-lead{max-width:none;margin-left:0;margin-right:0}
 .fg-guide[data-family-slug="copper"] .fg-section-intro{text-align:left;max-width:none;margin-left:0;margin-right:0}
 .fg-guide[data-family-slug="copper"] .fg-prose-block{max-width:none;margin:0}
 .fg-guide[data-family-slug="copper"] .fg-prose{text-align:left;font-size:16px}
@@ -3010,8 +3123,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    applies again — no Copper override) since it's secondary navigation,
    not editorial content. Copper's Photo Credits link (below) is the same
    kind of exception, and never had a 16px override to begin with. */
-.fg-guide[data-family-slug="copper"] .fg-stonecard-name{font-size:16px;letter-spacing:0.03em}
-.fg-guide[data-family-slug="copper"] .fg-photocard-text{font-size:16px}
 .fg-guide[data-family-slug="copper"] .fg-hero-body{font-size:16px}
 .fg-guide[data-family-slug="copper"] .btn{font-size:16px}
 /* Hero — full specimen visible (object-fit:contain), comfortable white
@@ -3119,13 +3230,13 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 #fg-other-copper-minerals .fg-card-grid--garnet-roster{align-items:stretch}
 #fg-other-copper-minerals .fg-mineralcard{height:auto;align-self:stretch}
 /* Hero-to-first-section transition — per EDITORIAL-PAGE-VISUAL-STANDARD.md
-   §8.1, this is ordinary major-section separation (76px desktop / 56px at
-   <=900px, see the mobile override below), not a reduced "connective"
-   value. .fg-one-deposit (a plain .fg-section) has no margin-top of its
-   own, so .fg-hero's margin-bottom is the sole spacing owner for this
-   gap — the rendered distance equals this value exactly, no other margin
-   or padding contributes. */
-.fg-guide[data-family-slug="copper"] .fg-hero{margin-bottom:76px}
+   §8.1, this is ordinary major-section separation, inherited from the
+   shared .fg-hero 62px desktop / 46px mobile base (2026-08-13
+   normalization pass; no per-guide override needed here). .fg-one-deposit
+   (a plain .fg-section) has no margin-top of its own, so .fg-hero's
+   margin-bottom is the sole spacing owner for this gap — the rendered
+   distance equals the shared base value exactly, no other margin or
+   padding contributes. */
 /* Closing navigation pill wrapper (2026-08-03) — replaces the shared,
    larger boxed .fg-closing callout for Copper only (see
    familyGuideCopperClosingPillHtml). Centers the pill and adds the gap
@@ -3167,19 +3278,20 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    every introduction reads against the same content frame as its section.
    The reflective closing line (.fg-closing-line, inside .fg-closing) is
    untouched by this rule and stays centered, per the brief. */
-.fg-guide[data-family-slug="calcite"] .fg-h2{text-align:left}
+/* .fg-h2 and .fg-lead now left-align by default (§4, 2026-08-13
+   correction); only the width/measure reset below remains guide-specific. */
 .fg-guide[data-family-slug="calcite"] .fg-lead,
 .fg-guide[data-family-slug="calcite"] .fg-lead--wide,
-.fg-guide[data-family-slug="calcite"] .fg-lead--extended-intro{text-align:left;max-width:none;margin-left:0;margin-right:0;font-size:16px}
+.fg-guide[data-family-slug="calcite"] .fg-lead--extended-intro{max-width:none;margin-left:0;margin-right:0;font-size:16px}
 /* Heading-to-intro gap (~18px) and the intro's own existing 1.75rem/28px
    bottom margin (unchanged) carries the intro-to-grid gap into the
    approved 28-32px range without a second rule. */
 .fg-guide[data-family-slug="calcite"] .fg-h2 + *{margin-top:1.125rem}
-/* 2. Major-section rhythm — 76px desktop / 56px at <=900px (mobile rule
-   sits in the existing max-width:900px breakpoint below), with the
-   reflective closing transition kept at its own ~68px via the same
-   :has() margin-collapse technique already used site-wide. */
-.fg-guide[data-family-slug="calcite"] .fg-section{margin-bottom:76px}
+/* 2. Major-section rhythm inherits the shared .fg-section 62px desktop /
+   46px mobile base (2026-08-13 normalization pass; no per-guide override
+   needed here), with the reflective closing transition kept at its own
+   ~68px via the same :has() margin-collapse technique already used
+   site-wide. */
 .fg-guide[data-family-slug="calcite"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
 /* 3. Calmer, consistent image-well scale for every photo-led module
    (Meet Eight Varieties + Extended Family stone cards, Recognition +
@@ -3219,22 +3331,17 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    Applies to both #fg-varieties and #fg-extended (the extended-family
    cards already read at this smaller, restrained scale, per the brief). */
 .fg-guide[data-family-slug="calcite"] .fg-stonecard-media img{object-fit:contain;padding:10px;box-sizing:border-box}
-/* 5. Typography floor — extended-family classification badges and the
-   hero collage caption (see section 3 below) are both at least 11px;
-   ordinary hero body copy brought up to 16px; Quick View links raised to
-   the standard 13px supporting/navigation size (was the shared 11px
-   utility-link size) without touching the 11px badges. */
-.fg-guide[data-family-slug="calcite"] .fg-badge{font-size:11px}
+/* 5. Typography floor — hero collage caption (see section 3 below) is at
+   least 11px; ordinary hero body copy brought up to 16px; Quick View links
+   raised to the standard 13px supporting/navigation size (was the shared
+   11px utility-link size). Extended-family classification badges now
+   inherit the shared .fg-badge 13px label size (2026-08-13 normalization
+   pass); no override needed here. */
 .fg-guide[data-family-slug="calcite"] .fg-hero-body{font-size:16px}
 .fg-guide[data-family-slug="calcite"] .fg-stonecard-qv{font-size:13px}
-/* 6. Closing return navigation — swaps the heavy, uppercase, full-color
-   .btn.btn-accent treatment for the same quiet neutral compact pill shape
-   already established for Copper's Return button (see .fg-copper-pill--
-   return above), applied here as a scoped override of the shared
-   .fg-closing-btn rather than a new shared class, since only this guide's
-   closing markup needs it. */
-.fg-guide[data-family-slug="calcite"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
-.fg-guide[data-family-slug="calcite"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+/* 6. Closing return navigation — inherits the shared `.fg-guide
+   .fg-closing-btn` quiet neutral pill (2026-08-13 normalization pass; no
+   per-guide override needed here). */
 /* 7. Closing composition (cleanup pass) — the large bordered/tan
    .fg-closing card is removed for Calcite; the reflective line and Return
    pill now sit directly in the open page space. The 68px gap above the
@@ -3292,13 +3399,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    overview paragraph, now unboxed between the hero and "Meet Eight Common
    Calcite Varieties" (familyGuideCalciteBridgeHtml). Comfortable space
    above (clears the hero box) and below (settles before the next
-   heading) without reaching the full 76px major-section rhythm, since
-   this is a transitional bridge line rather than its own titled section.
-   Reuses .fg-hero-intro-text for typography; only spacing is added here. */
+   heading) without reaching the full major-section rhythm, since this is
+   a transitional bridge line rather than its own titled section. Reuses
+   .fg-hero-intro-text for typography; only spacing is added here. */
 .fg-guide[data-family-slug="calcite"] .fg-calcite-bridge{margin:2.5rem 0}
 
 @media(max-width:900px){
-  .fg-guide[data-family-slug="calcite"] .fg-section{margin-bottom:56px}
   .fg-guide[data-family-slug="calcite"] .fg-hero-top{grid-template-columns:1fr;gap:1.25rem}
   .fg-guide[data-family-slug="calcite"] .fg-hero-media-col{order:-1}
   .fg-guide[data-family-slug="calcite"] .fg-hero-media{max-height:260px}
@@ -3309,9 +3415,10 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    .fg-guide[data-family-slug="feldspar"], so no shared unscoped default
    and no other guide's rendering changes. Feldspar's own markup, section
    order, copy, images, and image-well treatment are untouched. ── */
-.fg-guide[data-family-slug="feldspar"] .fg-h2{text-align:left}
+/* .fg-h2 and .fg-lead now left-align by default (§4, 2026-08-13
+   correction); only the width/measure reset below remains guide-specific. */
 .fg-guide[data-family-slug="feldspar"] .fg-lead,
-.fg-guide[data-family-slug="feldspar"] .fg-lead--wide{text-align:left;max-width:none;margin-left:0;margin-right:0}
+.fg-guide[data-family-slug="feldspar"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0}
 /* Heading -> introduction/banner or immediate first content: 18px. */
 .fg-guide[data-family-slug="feldspar"] .fg-h2 + *{margin-top:1.125rem}
 /* Introduction/banner -> first grid, card group, or teaching module: 30px.
@@ -3321,20 +3428,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    are already covered by the .fg-h2 + * rule above, since the module
    itself is then the heading's immediate next element. */
 .fg-guide[data-family-slug="feldspar"] .fg-placeholder-banner{margin-bottom:30px}
-/* Major-section rhythm — 76px desktop / 56px at <=900px (mobile rule sits
-   in the existing max-width:900px breakpoint below), including the hero
-   -> Expressions transition, and the Collection -> closing transition kept
-   at its own restrained ~68px via the same :has() margin-collapse
-   technique already used for Copper/Calcite. Not a new shared default —
-   scoped to Feldspar only. */
-.fg-guide[data-family-slug="feldspar"] .fg-hero{margin-bottom:76px}
-.fg-guide[data-family-slug="feldspar"] .fg-section{margin-bottom:76px}
+/* Major-section rhythm, including the hero -> Expressions transition,
+   inherits the shared .fg-section/.fg-hero 62px desktop / 46px mobile base
+   (2026-08-13 normalization pass; no per-guide override needed here). The
+   Collection -> closing transition is kept at its own restrained ~68px via
+   the same :has() margin-collapse technique already used for
+   Copper/Calcite. */
 .fg-guide[data-family-slug="feldspar"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
-/* Closing return navigation — same compact neutral pill shape already
-   established for Copper/Calcite's Return control, applied here as a
-   scoped override of the shared .fg-closing-btn. */
-.fg-guide[data-family-slug="feldspar"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
-.fg-guide[data-family-slug="feldspar"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+/* Closing return navigation — inherits the shared `.fg-guide
+   .fg-closing-btn` quiet neutral pill (2026-08-13 normalization pass; no
+   per-guide override needed here). */
 
 /* ── Correction pass (2026-08-01, second same-day pass) — supersedes
    feldspar-family-guide-final-copy-and-visual-plan.md wherever the
@@ -3397,13 +3500,18 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    (the shared .fg-feldspar-branch-thumbs is a plain flex-start row,
    correct for the branch panels' 2-3 item rows but not for a single
    centered item here). */
-/* margin-bottom:76px (2026-08-01 cohesion pass) — the Sunstone connector
-   is the conclusion of the branch composition, not a .fg-section, so it
-   never got the shared .fg-section major-section rhythm; without this
-   there was effectively no gap before Glow, Flash, Sparkle. 56px override
-   at the existing max-width:900px breakpoint below. */
-.fg-feldspar-sunstone-connector{max-width:640px;margin:1.875rem auto 76px;padding:1.25rem 1.5rem 1.4rem;text-align:center;border:0.5px solid var(--border);border-radius:12px;border-top-width:3px;border-top-color:#b8874a;background:linear-gradient(90deg,#b8874a 0 50%,#5f7f8f 50% 100%) top/100% 3px no-repeat,var(--white)}
-.fg-feldspar-connector-heading{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;color:var(--ink);margin:0 0 0.5rem}
+/* margin-bottom:62px (2026-08-01 cohesion pass, value updated 2026-08-13) —
+   the Sunstone connector is the conclusion of the branch composition, not
+   a .fg-section, so it never inherits the shared .fg-section major-section
+   rhythm directly; without this there was effectively no gap before Glow,
+   Flash, Sparkle. Its own 62px matches the shared major-section value so
+   the rhythm stays consistent. 46px override at the existing
+   max-width:900px breakpoint below. */
+.fg-feldspar-sunstone-connector{max-width:640px;margin:1.875rem auto 62px;padding:1.25rem 1.5rem 1.4rem;text-align:center;border:0.5px solid var(--border);border-radius:12px;border-top-width:3px;border-top-color:#b8874a;background:linear-gradient(90deg,#b8874a 0 50%,#5f7f8f 50% 100%) top/100% 3px no-repeat,var(--white)}
+/* Font-size matched to .fg-branch-title (Alkali/Plagioclase Feldspar
+   headings directly above, 19px) — was 17px, an unintentional mismatch.
+   Body copy and layout untouched. */
+.fg-feldspar-connector-heading{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:400;color:var(--ink);margin:0 0 0.5rem}
 .fg-feldspar-sunstone-connector .fg-fact-body{margin:0}
 .fg-feldspar-sunstone-thumbs{justify-content:center;margin-top:1rem}
 
@@ -3489,20 +3597,38 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 /* ══ GARNET FAMILY GUIDE — complete rebuild (2026-08-01), per Christie's
    locked brief. Editorial-standard normalization is scoped to
    .fg-guide[data-family-slug="garnet"] exactly like the Copper/Calcite/
-   Feldspar passes above: left-aligned headings/intros, 76px major-section
+   Feldspar passes above: left-aligned headings/intros, shared major-section
    rhythm, white object-fit:contain media. New dedicated component classes
    (hero wells, six-tile roster, two-panel groups, compact name cards,
    text-only collection cards) are Garnet-scoped by name and touch nothing
    shared with another guide. ── */
-.fg-guide[data-family-slug="garnet"] .fg-h2{text-align:left;margin-bottom:0}
-.fg-guide[data-family-slug="garnet"] .fg-section-intro{text-align:left;max-width:none;margin:18px 0 28px;font-size:16px;line-height:1.5}
-.fg-guide[data-family-slug="garnet"] .fg-section{margin-bottom:76px}
+.fg-guide[data-family-slug="garnet"] .fg-h2{margin-bottom:0}
+/* Ordinary explanatory/intro paragraphs corrected from the shared
+   .fg-section-intro base's oversized italic Georgia treatment to standard
+   regular Jost paragraph copy (Six Foundations, Familiar Names, Garnet in
+   Your Collection) — these are ordinary section intros, not editorial
+   quotations. Existing size/spacing (16px/1.5, margin) unchanged, only
+   typeface/style corrected. */
+.fg-guide[data-family-slug="garnet"] .fg-section-intro{font-family:'Jost',sans-serif;font-style:normal;font-weight:400;text-align:left;max-width:none;margin:18px 0 28px;font-size:16px;line-height:1.5}
+/* Meet the Garnets intro — heading-to-introduction gap matched to the
+   effective spacing beneath "Meet Eight Fluorite Expressions" (.fg-lead's
+   own 0.5rem top margin collapsing against its heading, since Fluorite's
+   h2 carries no scoped margin-bottom override). Content width (max-width:
+   none) and the regular Jost paragraph treatment already match via the
+   shared Garnet .fg-section-intro rule above; introduction-to-card-grid
+   spacing (28px) is unchanged. Scoped to this section only — Six
+   Foundations/Familiar Names/Garnet in Your Collection keep their existing
+   18px top margin. */
+.fg-guide[data-family-slug="garnet"] #fg-meet-the-garnets .fg-section-intro{margin-top:0.5rem}
+/* Ordinary major-section rhythm (Six Foundations onward) inherits the
+   shared .fg-section 62px desktop / 46px mobile base (2026-08-13
+   normalization pass; no per-guide override needed here). */
 /* Opening composition (2026-08 correction): the hero, geological lead, and
    entry into Meet the Garnets are treated as one integrated sequence per
    the editorial standard's integrated-composition exception, not spaced
-   with the full 76px major-section gap at every step. Hero-to-bridge and
+   with the full major-section gap at every step. Hero-to-bridge and
    bridge-to-Meet-the-Garnets use their own tighter, explicit values below;
-   the standard 76px/56px rhythm resumes at every later major section
+   the standard major-section rhythm resumes at every later major section
    (Six Foundations onward), which is untouched. */
 .fg-guide[data-family-slug="garnet"] .fg-hero{margin-bottom:38px}
 .fg-guide[data-family-slug="garnet"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
@@ -3514,8 +3640,9 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    flow sits between the line and the button, so this margin *is* the
    measured gap. */
 .fg-guide[data-family-slug="garnet"] .fg-closing-line{max-width:760px;margin:0 auto 68px;text-wrap:balance}
-.fg-guide[data-family-slug="garnet"] .fg-closing-btn{display:inline-flex;align-items:center;justify-content:center;height:39px;padding:0 22px;border-radius:999px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;background:var(--stone3);border:1px solid var(--border);color:var(--ink2);gap:0}
-.fg-guide[data-family-slug="garnet"] .fg-closing-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--white)}
+/* Closing return navigation — inherits the shared `.fg-guide
+   .fg-closing-btn` quiet neutral pill (2026-08-13 normalization pass; no
+   per-guide override needed here). */
 
 /* Hero — three restrained white image wells (Pyrope, Spessartine,
    Uvarovite) in one horizontal row beside left-aligned copy. Distinct
@@ -3566,14 +3693,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 /* Meet the Garnets — normalized to reuse the established Featured Copper
    Minerals card anatomy (.fg-mineralcard/.fg-card-grid--garnet-roster)
-   verbatim; see fgGarnetFeaturedCardHtml in family-guide.js. Only the
-   card-name treatment is nudged to match Copper's own scoped override
-   (16px/0.03em, instead of the shared 13px/uppercase default) so Garnet's
-   header row reads the same as Copper's. No new grid, media, or body
-   CSS is needed — the shared component supplies the 180px white media
-   well, left-aligned header row (name left, Quick View right), and 16px
-   description copy the brief asks for. */
-.fg-guide[data-family-slug="garnet"] .fg-stonecard-name{font-size:16px;letter-spacing:0.03em}
+   verbatim; see fgGarnetFeaturedCardHtml in family-guide.js. The card-name
+   treatment inherits the shared .fg-stonecard-name 17px/16px scale
+   (2026-08-13 normalization pass; no override needed here). No new grid,
+   media, or body CSS is needed — the shared component supplies the 180px
+   white media well, left-aligned header row (name left, Quick View right),
+   and 16px description copy the brief asks for. */
 
 /* Six Foundations, Two Connected Groups — two balanced panels + connecting
    note, treated as one integrated composition (one major-section gap
@@ -3605,7 +3730,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-garnet-group-item-media{flex:0 0 auto;width:50px;height:50px;background:#FFFFFF;border:0.5px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;box-sizing:border-box}
 .fg-garnet-group-item-media img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 .fg-garnet-group-item-text{min-width:0;flex:1}
-.fg-garnet-group-item-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:0.2rem;text-align:left}
+.fg-garnet-group-item-name{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:0.2rem;text-align:left}
 .fg-garnet-group-item-caption{font-size:14px;line-height:1.5;color:var(--ink2);margin:0;text-align:left}
 .fg-garnet-connected-note{font-size:16px;line-height:1.55;color:var(--ink2r);text-align:left;max-width:none;margin:1.4rem 0 0}
 
@@ -3625,17 +3750,16 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    full-width section wrapper). */
 .fg-garnet-collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .fg-garnet-collection-card{background:var(--stone2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;height:100%;box-sizing:border-box}
-.fg-garnet-collection-card-heading{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:0.5rem;text-align:left}
+.fg-garnet-collection-card-heading{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);margin-bottom:0.5rem;text-align:left}
 .fg-garnet-collection-card-body{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
 
 @media(max-width:900px){
   /* Opening-composition transitions, mobile (2026-08 correction): the
-     standard 56px major-section rhythm still applies from Six Foundations
-     onward (.fg-section{margin-bottom:56px} below); the hero-to-bridge and
-     bridge-to-Meet-the-Garnets gaps use their own reduced explicit values
-     per the brief instead. */
+     shared 46px major-section rhythm still applies from Six Foundations
+     onward (inherited from the base .fg-section rule); the hero-to-bridge
+     and bridge-to-Meet-the-Garnets gaps use their own reduced explicit
+     values per the brief instead. */
   .fg-guide[data-family-slug="garnet"] .fg-hero{margin-bottom:30px}
-  .fg-guide[data-family-slug="garnet"] .fg-section{margin-bottom:56px}
   .fg-garnet-bridge{margin-bottom:38px}
   .fg-garnet-groups{grid-template-columns:1fr}
   .fg-garnet-name-grid{grid-template-columns:repeat(2,1fr)}
@@ -3652,9 +3776,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 }
 
 @media(max-width:900px){
-  .fg-guide[data-family-slug="feldspar"] .fg-hero{margin-bottom:56px}
-  .fg-guide[data-family-slug="feldspar"] .fg-section{margin-bottom:56px}
-  .fg-feldspar-sunstone-connector{margin-bottom:56px}
+  .fg-feldspar-sunstone-connector{margin-bottom:46px}
   .fg-feldspar-decoder-grid .fg-relationship-card{flex:0 1 46%}
 }
 @media(max-width:600px){
@@ -3669,7 +3791,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 }
 
 @media(max-width:1200px){
-  .fg-hero-title{font-size:30px}
   .fg-card-grid--12{grid-template-columns:repeat(3,1fr)}
 }
 
@@ -3706,17 +3827,14 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
      column instead of letting it fill the width. */
   .fg-copper-intro-grid{flex-direction:column;align-items:flex-start}
   .fg-copper-intro-media{flex:none;width:150px}
-  /* 2026-08-07: major-section separation, mobile — see the desktop
-     76px rule above (data-family-slug="copper" .fg-section). */
-  .fg-guide[data-family-slug="copper"] .fg-section{margin-bottom:56px}
-  /* Hero-to-first-section transition, mobile — matches the desktop 76px
-     rule's mobile counterpart (see .fg-hero above, §8.1). */
-  .fg-guide[data-family-slug="copper"] .fg-hero{margin-bottom:56px}
+  /* Major-section separation and hero-to-first-section transition, mobile,
+     both inherit the shared .fg-section/.fg-hero 46px base (2026-08-13
+     normalization pass; no per-guide override needed here). */
   /* Copper image/text block-to-table transition, mobile — matches the
-     desktop 76px rule's mobile counterpart (see .fg-table-wrap above,
-     §8.1). Not scoped to [data-family-slug="copper"] since .fg-table-wrap
-     is exclusively Copper's own class (single caller, fgFormationTableHtml). */
-  .fg-table-wrap{margin-top:56px}
+     shared major-section mobile value (see .fg-table-wrap above, §8.1).
+     Not scoped to [data-family-slug="copper"] since .fg-table-wrap is
+     exclusively Copper's own class (single caller, fgFormationTableHtml). */
+  .fg-table-wrap{margin-top:46px}
 }
 
 @media(max-width:600px){
@@ -3730,16 +3848,21 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-table td{border-bottom:none!important;padding:0.25rem 0.85rem;display:flex;gap:0.5em}
   .fg-table td::before{content:attr(data-label);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);flex:0 0 auto;min-width:9.5em}
   .fg-hero{padding:1.25rem 1.25rem 1.5rem;border-radius:14px}
-  .fg-hero-title{font-size:25px}
-  .fg-hero-question{font-size:23px}
-  .fg-section{margin-bottom:2rem}
-  .fg-h2{font-size:20px}
+  /* Hero title, section heading, and reflective prompt mobile values, per
+     EDITORIAL-PAGE-VISUAL-STANDARD.md §5.1 canonical Crystal Family Guide
+     type scale (2026-08-19 promotion — matches the desktop base declared
+     above). Card/module name has no mobile override here since §5.1 defines
+     it as 15px flat at every width, already the .fg-stonecard-name base. */
+  .fg-hero-title{font-size:24px}
+  .fg-hero-question{font-size:18px}
+  .fg-h2{font-size:19px}
   .fg-hero-intro-text{font-size:16px;max-width:none}
-  .fg-lead{font-size:17px;max-width:none;margin:0.4rem auto 1.35rem}
+  .fg-lead{font-size:17px;max-width:none;margin:0.4rem 0 1.35rem}
   .fg-lead--question{font-size:19px}
   .fg-section-intro{font-size:17px}
-  .fg-card-grid--4{grid-template-columns:1fr}
-  .fg-card-grid--10{grid-template-columns:1fr}
+  .fg-collection-panel-title{font-size:16px}
+  .fg-card-grid--4{grid-template-columns:repeat(2,1fr)}
+  .fg-card-grid--10{grid-template-columns:repeat(2,1fr)}
   .fg-photo-grid--4{grid-template-columns:1fr}
   .fg-photocard-swatch--6{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
   .fg-collection-grid{grid-template-columns:1fr}
@@ -3750,7 +3873,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-single-visual{max-width:100%}
   .fg-card-grid--2{grid-template-columns:1fr;max-width:100%}
   .fg-compare-grid{grid-template-columns:1fr;max-width:100%}
-  .fg-card-grid--12{grid-template-columns:1fr}
+  .fg-card-grid--12{grid-template-columns:repeat(2,1fr)}
   .fg-namegrid--3{grid-template-columns:1fr}
   .fg-photo-grid--2{grid-template-columns:1fr}
   .fg-card-grid--garnet-roster .fg-stonecard{flex:0 1 100%;max-width:440px}
@@ -5057,6 +5180,246 @@ body.sotd-sched-open{overflow:hidden}
   .sotd-sched-btn{text-align:center}
 }
 
+/* CRYSTAL FAMILY GUIDE TYPE-SCALE — promoted 2026-08-19. The Jasper/Quartz-
+   scoped prototype that lived here (hero title 28/24, section heading
+   20/19, card/module name 15px flat, reflective prompt 20/18, per
+   EDITORIAL-PAGE-VISUAL-STANDARD.md §5.1) has been promoted onto the shared
+   base classes (.fg-hero-title, .fg-h2, .fg-hero-question, .fg-stonecard-
+   name, .fg-photocard-title, .fg-namecard-label, .fg-relationship-label,
+   .fg-garnet-collection-card-heading — see their declarations above) so all
+   eight completed guides now receive the canonical scale. The scoped rules
+   became exact no-ops against the new base and were removed. */
+
+/* ══ COMPACT HORIZONTAL MOBILE SPECIMEN CARD PROTOTYPE (2026-08-13) —
+   Jasper + Quartz only. Replaces the prior approved 2-column mobile grid
+   for repeated stone/variety browsing cards with the new approved mobile
+   behavior: one card per row, rendered as a compact horizontal panel
+   (capped image well on the left, name + description + Quick View on the
+   right) instead of either a 2-up grid or an oversized stacked vertical
+   card. Scoped to the specific sections that are genuine specimen/variety
+   browsing rosters on these two guides:
+     - Jasper #fg-meet-family ("Meet Jasper Expressions")
+     - Quartz #fg-expressions ("Meet Eight Quartz Expressions" — corrected
+       2026-08-14: Quartz's roster section id is #fg-expressions, not
+       #fg-meet-family; the original selector below never matched anything
+       on the Quartz page, so this mobile treatment was silently inert for
+       Quartz until this fix)
+     - Quartz #fg-growth-forms ("Growth Forms & Inclusions" — its two
+       subgroups are each a set of named, individually-photographed Quartz
+       varieties, i.e. a browsing roster, not a single teaching diagram)
+   Both guides use the shared .fg-card-grid/.fg-stonecard/.fg-stonecard-
+   media component; only these three section scopes are touched, so the
+   other six guides' approved 2-column mobile grid (and every other
+   Jasper/Quartz module — teaching cards, comparisons, decoders, tables,
+   closing cards) is unaffected. Not applied to Quartz's "Where Agate,
+   Chalcedony & Jasper Fit" (plain-prose + pill links, no card grid) or any
+   other non-roster module. ── */
+@media(max-width:600px){
+  .fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-card-grid,
+  .fg-guide[data-family-slug="quartz"] #fg-expressions .fg-card-grid,
+  .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-card-grid{
+    grid-template-columns:1fr;
+  }
+  .fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard,
+  .fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard,
+  .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard{
+    flex-direction:row;
+    align-items:flex-start;
+    height:auto;
+  }
+  /* Image column: roughly 38% of card width (within the brief's approved
+     one-third-to-two-fifths range), fixed 150px height (mid-point of the
+     approved 130-170px mobile image-well range) so the well stays moderate
+     and consistent regardless of description length — the row itself
+     grows to fit the text column instead of stretching the image. */
+  .fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-media,
+  .fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-media,
+  .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-media{
+    flex:0 0 38%;
+    width:38%;
+    aspect-ratio:auto;
+    height:150px;
+  }
+  .fg-guide[data-family-slug="jasper"] #fg-meet-family .fg-stonecard-body,
+  .fg-guide[data-family-slug="quartz"] #fg-expressions .fg-stonecard-body,
+  .fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-body{
+    flex:1;
+    min-width:0;
+  }
+}
+
+/* ══ QUARTZ TYPOGRAPHY PROTOTYPE — IMPLEMENTABLE B DIRECTION (2026-08-14) —
+   Quartz only. Does not touch Jasper or any other guide. Refines the upper
+   hierarchy toward a restrained, modern-editorial two-voice system: Georgia
+   carries editorial identity (hero copy, reflective prompt, section
+   intros, specimen names), Jost carries explanation/utility (specimen
+   descriptions, category labels, Quick View). Body-copy floor (16px) and
+   the previously-approved hero-title/section-heading sizes (28/24, 20/19,
+   from the 2026-08-13 type-scale prototype above) are unchanged — this
+   pass only touches hero body/prompt, section-intro grammar, and specimen
+   card typography. ── */
+
+/* --- Hero: tagline stays close to the title (existing size/treatment is
+   already Georgia italic and not enlarged, so only spacing is tightened);
+   hero body becomes Georgia regular editorial prose instead of the
+   site-wide sans body treatment, distinct from the Jost copy used deeper
+   in the page. --- */
+/* Tagline -> hero body gap (2026-08-14 refinement) — 0.7rem/11.2px read as
+   too close to the body paragraph beneath it; raised ~7px to 18px so the
+   tagline and body paragraph read as distinct roles without opening a
+   large gap or growing hero height more than necessary. */
+.fg-guide[data-family-slug="quartz"] .fg-hero-sub{margin-bottom:18px}
+.fg-guide[data-family-slug="quartz"] .fg-hero-body{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:14.5px;
+  font-style:normal;
+  line-height:1.6;
+  letter-spacing:normal;
+  text-transform:none;
+}
+
+/* --- Reflective prompt: "Quartz asks" + the question read as one
+   editorial unit — both Georgia, no uppercase sans label treatment, tight
+   gap between the two lines, and the question kept below the hero title
+   and section-heading weight (18px vs. the hero title's 28px / section
+   heading's 20px). --- */
+.fg-guide[data-family-slug="quartz"] .fg-hero-prompt-lead{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:14px;
+  font-style:normal;
+  letter-spacing:normal;
+  text-transform:none;
+  margin-bottom:0.15rem;
+}
+.fg-guide[data-family-slug="quartz"] .fg-hero-question{
+  font-size:18px;
+  line-height:1.35;
+}
+
+/* --- Section heading + intro grammar for the three prototype sections
+   (#fg-expressions, #fg-name-change, #fg-growth-forms): heading sits close
+   to its intro (8-10px), intro sits close to the module it introduces
+   (18-22px), and the intro itself reads as restrained Georgia italic prose
+   at the full content width instead of a centered, narrow-measure lead.
+
+   2026-08-14 refinement — root cause of the rendered mismatch: the three
+   intros come from two different shared components. #fg-expressions uses
+   .fg-lead (Why Quartz Names Change / Growth Forms & Inclusions predate
+   that class and use .fg-section-intro instead). The prior pass matched
+   font-size/line-height/text-align/max-width/margin explicitly across both,
+   but left font-family/font-style/color/letter-spacing to inherit from
+   each one's own base rule — and .fg-lead's base sets letter-spacing:0.01em
+   while .fg-section-intro's base sets none (normal). That 0.01em vs normal
+   difference was the actual rendered inconsistency, invisible if you only
+   diff the font-size declarations. Fixed by giving all three an identical,
+   fully explicit declaration (every property stated, nothing left to
+   inherit from either base class) rather than partial overrides. */
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-h2,
+.fg-guide[data-family-slug="quartz"] #fg-name-change .fg-h2,
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-h2{
+  margin-bottom:9px;
+}
+/* #fg-garnet-collection (2026-08-14, "Quartz in Your Collection") added —
+   its moved-in intro paragraph uses the same shared .fg-section-intro
+   component and gets the identical treatment for consistency. Scoped by
+   [data-family-slug="quartz"], so Garnet's own #fg-garnet-collection
+   section (a different guide, same section id) is unaffected. */
+.fg-guide[data-family-slug="quartz"] #fg-expressions .fg-lead,
+.fg-guide[data-family-slug="quartz"] #fg-name-change .fg-section-intro,
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-section-intro,
+.fg-guide[data-family-slug="quartz"] #fg-garnet-collection .fg-section-intro{
+  font-family:Georgia,'Times New Roman',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:16px;
+  line-height:1.55;
+  letter-spacing:normal;
+  color:var(--ink2);
+  text-align:left;
+  max-width:none;
+  margin:0 0 20px;
+}
+
+/* --- Specimen card typography: names read as elegant title-case Georgia
+   identities rather than tracked sans-serif UI labels; taglines (the
+   roster's "The Amplifier"-style identity line) stay Georgia italic but
+   smaller and quieter; descriptions move to Jost so they read as plain
+   explanatory copy distinct from the Georgia identity line above them;
+   Quick View stays understated utility text. Applies across all three
+   card-bearing prototype sections — #fg-expressions (identity + Quick
+   View), #fg-growth-forms (description only, no identity line). --- */
+.fg-guide[data-family-slug="quartz"] .fg-stonecard-name{
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:400;
+  text-transform:none;
+  letter-spacing:normal;
+  line-height:1.25;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.fg-guide[data-family-slug="quartz"] #fg-growth-forms .fg-stonecard-name{
+  margin-bottom:10px;
+}
+.fg-guide[data-family-slug="quartz"] .fg-stonecard-identity{
+  font-size:13px;
+  line-height:1.3;
+  color:var(--ink2);
+  margin-bottom:11px;
+}
+.fg-guide[data-family-slug="quartz"] .fg-stonecard-phrase{
+  font-family:'Jost',sans-serif;
+  font-weight:400;
+  font-size:14.5px;
+  line-height:1.6;
+  color:var(--ink2);
+}
+.fg-guide[data-family-slug="quartz"] .fg-stonecard-qv{
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:normal;
+}
+
+/* --- Growth Forms & Inclusions subgroup labels ("Growth Forms",
+   "Inclusions & Internal Features") — 2026-08-14 refinement: raised from
+   12px/ink2r to 13px/ink2 (slightly stronger, still clearly subordinate to
+   the 20px .fg-h2 above it) since they were easy to miss as a section
+   divider. Scoped to .fg-subgroup-label, which only ever renders these two
+   labels on the Quartz guide (Why Quartz Names Change's LOCALITY/TREATMENT/
+   etc. labels use the separate .fg-namecard-category class and are
+   untouched by this rule). Tracking (0.08em) and uppercase are unchanged —
+   already restrained, not part of the reported defect. --- */
+.fg-guide[data-family-slug="quartz"] .fg-subgroup-label{
+  font-size:13px;
+  font-weight:500;
+  color:var(--ink2);
+}
+
+/* --- Why Quartz Names Change card body (2026-08-14, reverted 2026-08-14) —
+   briefly raised to 15px to match .fg-stonecard-phrase, then reverted to
+   the original approved 14.5px per Christie's visual-review preference
+   after seeing both at 15px. line-height stays 1.6 (matches base and the
+   other three compact-card-description roles); Jost, weight, and color
+   unchanged. This rule is now a no-op vs. the base .fg-namecard-body
+   (font-size:14.5px;line-height:1.6) but is kept explicit here for parity
+   with the other three roles' guide-scoped overrides. */
+.fg-guide[data-family-slug="quartz"] .fg-namecard-body{
+  font-size:14.5px;
+  line-height:1.6;
+}
+
+/* --- Closing reflective line breathing room (2026-08-14 refinement) —
+   #fg-closing-bridge no longer renders on Quartz (its content moved to
+   Quartz in Your Collection's intro), so the gap above the line is
+   currently just the ordinary ~62px major-section margin collapsing off
+   #fg-garnet-collection into Quartz's own .fg-closing{margin-top:0;
+   padding:0} — no closing-specific space of its own. Adding 10px of
+   padding-top (padding doesn't collapse with the sibling's margin, so this
+   reliably adds on top of the existing ~62px rather than replacing it)
+   brings the gap to ~72px, a soft addition rather than a new-section-sized
+   jump. Below the line: base .fg-closing-line{margin:0 0 1.5rem} (24px)
+   governs the gap to the Return pill; raised 8px to 32px. */
+.fg-guide[data-family-slug="quartz"] .fg-closing{padding-top:10px}
+
 /* ═══════════════════════════════════════════════════════════════
    CRYSTAL GRIDS — expanded teaching content (#s101-grids only)
    Scoped under #s101-grids / .cg-* per EDITORIAL-PAGE-VISUAL-STANDARD.md
@@ -5186,3 +5549,4 @@ body.sotd-sched-open{overflow:hidden}
   #s101-grids .cg-role-cards{grid-template-columns:1fr}
   #s101-grids .cg-figure img{max-height:240px}
 }
+.fg-guide[data-family-slug="quartz"] .fg-closing-line{margin-bottom:32px}
