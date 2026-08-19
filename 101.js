@@ -713,371 +713,339 @@ function initFamilies(){
 
 const CRYSTAL_GRIDS = [
   {
-    id: 'protection',
-    name: 'Protection Grid',
-    tagline: 'Clear and shield your energy field',
+    id: 'safe-grounded',
+    name: 'Safe & Grounded',
+    tagline: 'Anchor your energy and strengthen your boundaries',
     moodLink: 4,
-    layout: 'star',
+    layout: 'Hexagram',
     color: '#3a3530',
-    activation: 'I define the boundary of my energy. What is not mine cannot enter here.',
-    use: 'Set at the four corners of a room, or around your bed. Refresh weekly.',
-    intro: 'A protection grid creates a defined energetic boundary — something to deflect what isn\'t yours and transmute what gets through anyway. One of the most practical grids to build and maintain.',
-    stones: [
-      {name:'Black Tourmaline', id:'C-0129', hex:'#3a3530', role:'Center',    purpose:'Primary shield and anchor'},
-      {name:'Labradorite',      id:'C-0028', hex:'#5a8ab0', role:'Inner ×2',  purpose:'Deflects unwanted energy'},
-      {name:'Hematite',         id:'C-0041', hex:'#666666', role:'Inner ×2',  purpose:'Grounds the protective field'},
-      {name:'Smoky Quartz',     id:'C-0103', hex:'#8b6f47', role:'Outer ×4',  purpose:'Transmutes what enters'},
-      {name:'Clear Quartz',     id:'C-0105', hex:'#e0dbd4', role:'Amplifier', purpose:'Amplifies the entire grid'},
+    intro: 'This grid supports the feeling of being steady, contained, and secure within your own energy. Black Tourmaline anchors the intention, Smoky Quartz creates a grounded inner field, and Hematite reinforces the six outer points of the hexagram. The hexagram\'s intersecting triangles create a balanced structure with six strong outer points, making it well suited to grounding and protection.',
+    activation: 'I am grounded, protected, and secure within my own energy.',
+    use: 'Place near an entryway, workspace, or any area where you want a steadier sense of boundary. It can also support recovery after crowded spaces, stressful interactions, or periods of overstimulation.',
+    howToActivate: [
+      'Place Black Tourmaline at the center. Beginning at north, place the six Smoky Quartz stones clockwise around the inner hexagon. Add the six Hematite stones at the outer star points, again beginning at north and moving clockwise.',
+      'With your activator wand, trace from Black Tourmaline to each Smoky Quartz and back, then to each Hematite and back, maintaining the same clockwise order. Seal the grid with one continuous clockwise circle around the outer boundary.',
     ],
-    diagram: drawStarGrid,
+    stones: [
+      {name:'Black Tourmaline', id:'C-0129', slug:'black-tourmaline', hex:'#2e2a26', role:'Center',            purpose:'Anchors the grid and establishes a clear protective focus'},
+      {name:'Smoky Quartz',     id:'C-0103', slug:'smoky-quartz',     hex:'#8b6f47', role:'Inner hexagon ×6',  purpose:"Grounds the field and supports the release of heaviness"},
+      {name:'Hematite',         id:'C-0041', slug:'hematite',         hex:'#6e6a64', role:'Outer star points ×6', purpose:'Adds stability and reinforces the boundary'},
+    ],
+    diagram: drawSafeGroundedGrid,
   },
   {
-    id: 'abundance',
-    name: 'Abundance Grid',
-    tagline: 'Align with prosperity and open flow',
-    moodLink: 17, moodLinks: [17, 18, 19],
-    layout: 'flower',
-    color: '#c9a832',
-    activation: 'I am open to receiving. I am aligned with what I am building.',
-    use: 'On a desk or workspace. Set a specific intention before activating. Refresh monthly.',
-    intro: 'Abundance grids work best when paired with a clear, specific intention. The stones here are magnetic: they don\'t create luck, they help you recognize and act on what\'s already available.',
-    stones: [
-      {name:'Citrine',            id:'C-0121', hex:'#c9a832', role:'Center',    purpose:'Core attractor'},
-      {name:'Pyrite',             id:'C-0137', hex:'#c9b030', role:'Inner ×3',  purpose:'Confidence and magnetic pull'},
-      {name:'Green Aventurine',   id:'C-0178', hex:'#4a8a5a', role:'Outer ×3',  purpose:'Opens to opportunity'},
-      {name:"Tiger's Eye", id:'C-0168', hex:'#b08a30', role:'Outer ×3',  purpose:'Discernment and action'},
-      {name:'Malachite',          id:'C-0020', hex:'#3a7a4a', role:'Base',      purpose:'Growth anchor'},
-      {name:'Clear Quartz',       id:'C-0105', hex:'#e0dbd4', role:'Amplifier', purpose:'Top amplifier'},
+    id: 'opportunity-growth',
+    name: 'Opportunity & Growth',
+    tagline: 'Open to possibility and support purposeful action',
+    moodLink: 20,
+    layout: 'Seed of Life',
+    color: '#4a8a5a',
+    intro: "Opportunity becomes meaningful when openness is paired with action. Green Aventurine holds the intention for growth, Pyrite supports confidence and practical possibility, and Tiger's Eye adds discernment and follow-through. The Seed of Life expands outward from one center, making it a natural shape for beginnings, possibility, and growth.",
+    activation: 'I recognize aligned opportunities and act on them with confidence.',
+    use: 'Place on a desk or near the plans for a business, application, creative project, or new chapter. Write a specific intention for the opportunity you are ready to recognize and support through action.',
+    howToActivate: [
+      'Place Green Aventurine at the center. Beginning at north, fill the six surrounding Seed of Life positions clockwise, alternating Pyrite and Tiger\'s Eye.',
+      'With your activator wand, trace from Green Aventurine to each surrounding stone and back in the same clockwise order. Seal the grid with one continuous clockwise circle around the outer edge of the Seed of Life.',
     ],
-    diagram: drawFlowerGrid,
+    stones: [
+      {name:'Green Aventurine', id:'C-0178', slug:'green-aventurine', hex:'#4a8a5a', role:'Center',            purpose:'Opens the grid toward opportunity, growth, and a fresh beginning'},
+      {name:'Pyrite',           id:'C-0137', slug:'pyrite',           hex:'#c9a832', role:'Surrounding positions ×3', purpose:'Supports confidence, resourcefulness, and practical abundance'},
+      {name:"Tiger's Eye",      id:'C-0168', slug:'tigers-eye',       hex:'#8a5a2a', role:'Surrounding positions ×3', purpose:'Adds discernment, persistence, and purposeful action'},
+    ],
+    diagram: drawOpportunityGrowthGrid,
   },
   {
-    id: 'heart',
-    name: 'Heart Healing Grid',
-    tagline: 'Soften, release, and restore the heart',
-    moodLink: 9,
-    layout: 'circle',
+    id: 'self-love-compassion',
+    name: 'Self-Love & Compassion',
+    tagline: 'Practice compassion, repair, and renewed openness',
+    moodLink: 11,
+    layout: 'Flower of Life',
     color: '#d4839a',
-    activation: 'I am allowed to heal at the pace that is true for me.',
-    use: 'Bedside or in private space. Hold the center stone first, then place the others outward.',
-    intro: 'Built for the slow work — grief, loss, heartbreak, or the accumulated weight of being human for a while. The circle layout has no hard edges: it contains without constraining.',
-    stones: [
-      {name:'Rose Quartz',      id:'C-0108', hex:'#d4839a', role:'Center',   purpose:'Unconditional love, the foundation'},
-      {name:'Rhodochrosite',    id:'C-0213', hex:'#d4739a', role:'Inner ×2', purpose:'Self-love and grief'},
-      {name:'Morganite',        id:'C-0024', hex:'#e0a0b0', role:'Inner ×2', purpose:'Divine love and loss'},
-      {name:'Rhodonite',        id:'C-0214', hex:'#c46880', role:'Outer ×2', purpose:'Forgiveness'},
-      {name:'Green Aventurine', id:'C-0178', hex:'#4a8a5a', role:'Outer ×2', purpose:'Renewal'},
-      {name:'Clear Quartz',     id:'C-0105', hex:'#e0dbd4', role:'Top',      purpose:'Drawing healing inward'},
+    intro: "Self-love is not a demand to feel positive all the time. This grid creates space for compassion, repair, and a gentler relationship with yourself. Rose Quartz holds the center, Rhodonite supports emotional mending, and Green Aventurine opens the work toward renewed heart growth. The Flower of Life's interlocking circles emphasize connection and unfolding, supporting a process of compassion, repair, and renewed openness.",
+    activation: 'I meet myself with compassion. My heart is safe to soften and grow.',
+    use: 'Place beside a journal, near a favorite resting place, or in a private space used for reflection. Return to it when self-criticism is loud, an old hurt is resurfacing, or you want to practice receiving your own care.',
+    howToActivate: [
+      'Place Rose Quartz at the center. Beginning at north, place the six Rhodonite stones clockwise on the first connected flower nodes. Add the six Green Aventurine stones on the selected outer nodes, beginning with the position nearest north and continuing clockwise.',
+      'With your activator wand, trace from Rose Quartz to each Rhodonite and back, then to each Green Aventurine and back. Seal the grid with one continuous clockwise circle around the outer boundary.',
     ],
-    diagram: drawCircleGrid,
+    stones: [
+      {name:'Rose Quartz',      id:'C-0108', slug:'rose-quartz',      hex:'#d4839a', role:'Center',              purpose:'Holds the central intention of compassion and self-regard'},
+      {name:'Rhodonite',        id:'C-0214', slug:'rhodonite',        hex:'#c46880', role:'Inner flower nodes ×6', purpose:'Supports emotional repair, forgiveness, and steadiness'},
+      {name:'Green Aventurine', id:'C-0178', slug:'green-aventurine', hex:'#4a8a5a', role:'Offset outer nodes ×6', purpose:'Encourages renewed openness and heart-centered growth'},
+    ],
+    diagram: drawSelfLoveCompassionGrid,
   },
   {
-    id: 'clarity',
-    name: 'Clarity Grid',
-    tagline: 'Cut through fog, sharpen focus, decide',
+    id: 'clear-focus',
+    name: 'Clear Focus',
+    tagline: 'Organize your thoughts and direct your attention',
     moodLink: 13,
-    layout: 'triangle',
-    color: '#4a6aaa',
-    activation: 'I see clearly. I trust my own reasoning.',
-    use: 'On a desk during work, study, or decision-making. The upward triangle directs energy forward.',
-    intro: 'When the mind is circling without resolution, a clarity grid interrupts the loop. The upward triangle is directed, focused, moving — exactly what mental fog needs.',
-    stones: [
-      {name:'Clear Quartz',   id:'C-0105', hex:'#e0dbd4', role:'Center',    purpose:'Pure amplification'},
-      {name:'Selenite',       id:'C-0175', hex:'#f0ece6', role:'Sides ×2',  purpose:'Clears mental static'},
-      {name:'Sodalite',       id:'C-0218', hex:'#4a6aaa', role:'Corners ×2',purpose:'Logic and pattern recognition'},
-      {name:'Lapis Lazuli',   id:'C-0188', hex:'#2a4a8a', role:'Outer ×2',  purpose:'Truth and wisdom'},
-      {name:'Herkimer Diamond',id:'C-0123',hex:'#e8e4de', role:'Apex',      purpose:'Precision and high attunement'},
+    layout: 'Equilateral triangle',
+    color: '#4a7aaa',
+    intro: "This grid gives scattered thought a clear center and a defined direction. Fluorite supports organization and concentration, Sodalite steadies reasoning at the triangle's three vertices, and Clear Quartz points direct the completed pattern inward. The triangle gives the intention a stable, directed structure, helping gather attention toward one clear center.",
+    activation: 'My mind is clear. I know what matters, and I direct my attention there.',
+    use: 'Place on a desk during study, focused work, planning, or decision-making. Write one question, task, or priority beneath the center so the grid has a defined focus rather than a general request for clarity.',
+    howToActivate: [
+      'Place Fluorite at the center. Beginning at the northern vertex, place the three Sodalite stones clockwise around the triangle. Set one Clear Quartz point directly beyond each Sodalite, with every tip aimed inward toward Fluorite.',
+      'With your activator wand, trace from Fluorite to each Sodalite and back in clockwise order. Then trace from Fluorite through each Sodalite to its Clear Quartz point and back. Seal the grid with one continuous clockwise circle around the three outer points.',
     ],
-    diagram: drawTriangleGrid,
+    stones: [
+      {name:'Rainbow Fluorite', id:'C-0035', slug:'fluorite',     hex:'#6a9a7a', role:'Center',              purpose:'Organizes the central intention and supports concentration'},
+      {name:'Sodalite',         id:'C-0218', slug:'sodalite',     hex:'#4a5f8a', role:'Triangle vertices ×3', purpose:'Supports orderly thought, discernment, and steady reasoning'},
+      {name:'Clear Quartz',     id:'C-0105', slug:'clear-quartz', hex:'#b9c6d1', role:'Points beyond the vertices ×3', purpose:'Directs and amplifies the supporting qualities toward the center'},
+    ],
+    diagram: drawClearFocusGrid,
   },
   {
-    id: 'sleep',
-    name: 'Sleep & Rest Grid',
-    tagline: 'Quiet the mind and invite deep rest',
+    id: 'restful-sleep',
+    name: 'Restful Sleep',
+    tagline: 'Quiet the mind and ease into rest',
     moodLink: 3,
-    layout: 'rectangle',
+    layout: 'Circle',
     color: '#7a5a9a',
-    activation: 'I release the day. My body knows how to rest.',
-    use: 'Place under or around the bed. Activate with breath rather than loud intention.',
-    intro: 'This grid doesn\'t push you to sleep — it removes what\'s in the way. The rectangle mirrors the shape of a bed intentionally. The Black Tourmaline at the foot keeps the sleep space sealed.',
-    stones: [
-      {name:'Amethyst',         id:'C-0119', hex:'#7a5a9a', role:'Center',   purpose:'Calming and protective'},
-      {name:'Howlite',          id:'C-0241', hex:'#e8e4de', role:'Head ×2',  purpose:'Quiets the mental loop'},
-      {name:'Lepidolite',       id:'C-0254', hex:'#9a7ab0', role:'Sides ×2', purpose:'Lithium-calm for anxiety'},
-      {name:'Selenite',         id:'C-0175', hex:'#f0ece6', role:'Sides ×2', purpose:'Cleanses the sleep space'},
-      {name:'Black Tourmaline', id:'C-0129', hex:'#3a3530', role:'Foot',     purpose:'Protection from disturbance'},
+    intro: 'This quiet, non-directional grid supports the transition from a busy day into rest. Amethyst anchors mental settling, Lepidolite softens the inner emotional field, and Howlite forms a calm, balanced outer boundary. The circle creates a quiet, continuous boundary with no directional pull, making it especially suited to rest.',
+    activation: 'I release the day. My mind is quiet, and my body is ready to rest.',
+    use: 'Place on a stable bedside surface or dresser where it will not be disturbed. Activate it as part of your evening transition, then keep the surrounding space visually quiet and free from unrelated objects.',
+    howToActivate: [
+      'Place Amethyst at the center. Beginning at north, place the three Lepidolite stones clockwise around the inner circle to form an even triangle. Place the six Howlite stones clockwise around the outer circle, beginning with the upper position nearest north.',
+      'With your activator wand, trace from Amethyst to each Lepidolite and back, then to each Howlite and back, maintaining a slow clockwise order. Seal the grid with one gentle clockwise circle around the Howlite boundary.',
     ],
-    diagram: drawRectangleGrid,
+    stones: [
+      {name:'Amethyst',   id:'C-0119', slug:'amethyst',   hex:'#7a5a9a', role:'Center',        purpose:'Anchors quiet, mental settling, and the intention to rest'},
+      {name:'Lepidolite', id:'C-0254', slug:'lepidolite', hex:'#9a7ab0', role:'Inner triangle ×3', purpose:"Supports emotional calming and release of the day's tension"},
+      {name:'Howlite',    id:'C-0241', slug:'howlite',    hex:'#d8d4ce', role:'Outer circle ×6',   purpose:'Encourages stillness and creates a quiet outer boundary'},
+    ],
+    diagram: drawRestfulSleepGrid,
   },
   {
-    id: 'transformation',
-    name: 'Transformation Grid',
-    tagline: 'Support deep change and conscious release',
-    moodLink: 24,
-    layout: 'star',
-    color: '#5a8ab0',
-    activation: 'I am willing to release what I have outgrown. I trust what is forming.',
-    use: 'During major life transitions. Not for daily use — this grid moves things.',
-    intro: 'For when you know something has to change and you\'re done waiting. Labradorite anchors the center — it catalyzes transformation while protecting you through the process.',
-    stones: [
-      {name:'Labradorite',   id:'C-0028', hex:'#5a8ab0', role:'Center',   purpose:'Catalyst with built-in protection'},
-      {name:'Malachite',     id:'C-0020', hex:'#3a7a4a', role:'Inner ×2', purpose:'Transformation and truth'},
-      {name:'Charoite',      id:'C-0249', hex:'#7a5a9a', role:'Inner ×2', purpose:'Moving through resistance'},
-      {name:'Smoky Quartz',  id:'C-0103', hex:'#8b6f47', role:'Outer ×2', purpose:'Releasing the old'},
-      {name:'Black Obsidian',id:'C-0139', hex:'#2a2520', role:'Outer ×2', purpose:'Facing what must go'},
-      {name:'Clear Quartz',  id:'C-0105', hex:'#e0dbd4', role:'Top',      purpose:'Amplifier pointing outward'},
+    id: 'release-renewal',
+    name: 'Release & Renewal',
+    tagline: 'Honor what is complete and welcome the next cycle',
+    moodLink: 25,
+    layout: 'Spiral',
+    color: '#68727a',
+    intro: 'Change often asks for two kinds of work: releasing what is complete and making room for what follows. Labradorite anchors the transition, Smoky Quartz begins the path with grounding and release, and Moonstone carries that same path into renewal. The spiral creates a continuous path outward, making release and renewal feel like connected stages of one unfolding process.',
+    activation: 'I honor what is complete and welcome the next chapter with trust.',
+    use: 'Use during a transition, ending, move, habit change, or deliberate new beginning. Place a written statement beneath the center naming what is complete and what you are choosing to welcome next.',
+    howToActivate: [
+      'Place Labradorite at the center. Follow the spiral outward, placing the three Smoky Quartz stones first and then the three Moonstone, one stone at each marked interval.',
+      'With your activator wand, begin at Labradorite and trace along the spiral to the first Smoky Quartz, then return to center. Repeat for each stone in order, moving progressively outward. After linking the final Moonstone, trace the full spiral once from Labradorite to the outer endpoint. Seal the grid with one continuous clockwise circle around its boundary.',
     ],
-    diagram: drawStarGrid,
+    stones: [
+      {name:'Labradorite', id:'C-0028', slug:'labradorite', hex:'#68727a', role:'Center',        purpose:'Anchors transition, transformation, and trust in the process'},
+      {name:'Smoky Quartz',id:'C-0103', slug:'smoky-quartz',hex:'#8b6f47', role:'Inner spiral ×3', purpose:'Supports grounded release as the path begins'},
+      {name:'Moonstone',   id:'C-0162', slug:'moonstone',   hex:'#7a93b0', role:'Outer spiral ×3', purpose:'Continues the movement toward renewal and a new cycle'},
+    ],
+    diagram: drawReleaseRenewalGrid,
   },
 ];
 
 // ── GRID DIAGRAM DRAWING FUNCTIONS ──
+// Shared geometry helpers. Coordinate space is a 400×400 viewBox, center (200,200).
 
-function drawStarGrid(stones, svgId) {
-  const svg = document.getElementById(svgId);
-  if(!svg) return;
-  const cx=100, cy=100, r_inner=35, r_outer=70;
-  let html = '';
-  
-  // Draw lines first
-  const pts_inner = Array.from({length:6},(_,i)=>{
-    const a = i*60-90;
-    return [cx+r_inner*Math.cos(a*Math.PI/180), cy+r_inner*Math.sin(a*Math.PI/180)];
-  });
-  const pts_outer = Array.from({length:6},(_,i)=>{
-    const a = i*60-90;
-    return [cx+r_outer*Math.cos(a*Math.PI/180), cy+r_outer*Math.sin(a*Math.PI/180)];
-  });
-  
-  // Star lines
-  for(let i=0;i<6;i++){
-    const j=(i+2)%6;
-    html+=`<line x1="${pts_outer[i][0]}" y1="${pts_outer[i][1]}" x2="${pts_outer[j][0]}" y2="${pts_outer[j][1]}" stroke="var(--grid-line)" stroke-width="0.5"/>`;
-  }
-  for(let i=0;i<6;i++){
-    html+=`<line x1="${cx}" y1="${cy}" x2="${pts_outer[i][0]}" y2="${pts_outer[i][1]}" stroke="var(--grid-line)" stroke-width="0.5" stroke-dasharray="2,3"/>`;
-  }
-  
-  // Center stone
-  const c = stones[0];
-  html += drawDot(cx, cy, 14, c.hex, c.name, true);
-  
-  // Inner ring (2 stones)
-  const inner2 = stones.filter(s=>s.role.includes('Inner ×2'));
-  inner2.forEach((s,i)=>{
-    html += drawDot(pts_inner[i*3][0], pts_inner[i*3][1], 9, s.hex, s.name, false);
-  });
-  
-  // Outer stones (4 or 2)
-  const outer = stones.filter(s=>s.role.includes('Outer'));
-  const count = parseInt(outer[0]?.role.match(/\d+/)?.[0]||4);
-  for(let i=0;i<Math.min(count,6);i++){
-    html += drawDot(pts_outer[i][0], pts_outer[i][1], 9, outer[0].hex, outer[0].name, false);
-  }
-  
-  // Amplifier at top
-  const amp = stones.find(s=>s.role.includes('Top')||s.role.includes('Amplifier'));
-  if(amp){
-    html += drawDot(cx, cy-r_outer-14, 7, amp.hex, amp.name, false);
-    html += `<line x1="${cx}" y1="${cy-r_outer}" x2="${cx}" y2="${cy-r_outer-8}" stroke="var(--grid-line)" stroke-width="0.5"/>`;
-  }
-  
-  svg.innerHTML = html;
+const GRID_CATEGORY_HEX = {
+  Purple:'#7a5a9a', Blue:'#4a7aaa', Green:'#4a8a5a', Pink:'#d4839a',
+  Red:'#b04a4a', Orange:'#c4683a', Yellow:'#c9a832', Black:'#3a3530',
+  White:'#d8d4ce', Brown:'#8b6f47', Gray:'#8a8a8a',
+};
+
+// Multi-category stones use their first two category colors in a 135° gradient.
+const GRID_STONE_CATS = {
+  'hematite':   ['Gray','Black'],
+  'rhodonite':  ['Pink','Black'],
+  'fluorite':   ['Green','Blue'],
+  'sodalite':   ['Blue','White'],
+  'lepidolite': ['Pink','Purple'],
+  'howlite':    ['Gray','White'],
+  'moonstone':  ['Blue','White'],
+};
+
+function gridTint(hex){
+  const rgb = [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
+  return '#'+rgb.map(v=>Math.round(v+(255-v)*.6).toString(16).padStart(2,'0')).join('');
 }
 
-function drawCircleGrid(stones, svgId) {
-  const svg = document.getElementById(svgId);
-  if(!svg) return;
-  const cx=100, cy=105, r1=30, r2=60;
-  let html = '';
-  
-  // Circles
-  html += `<circle cx="${cx}" cy="${cy}" r="${r1}" fill="none" stroke="var(--grid-line)" stroke-width="0.5"/>`;
-  html += `<circle cx="${cx}" cy="${cy}" r="${r2}" fill="none" stroke="var(--grid-line)" stroke-width="0.5"/>`;
-  
-  // Center
-  html += drawDot(cx, cy, 14, stones[0].hex, stones[0].name, true);
-  
-  // Inner ring (4 stones at cardinal)
-  const inner = stones.filter(s=>s.role.includes('Inner'));
-  const inner_angles = [270, 0, 90, 180]; // top, right, bottom, left  
-  inner_angles.forEach((a,i)=>{
-    if(i >= inner.length*2) return;
-    const s = inner[Math.floor(i/2)];
-    const x = cx + r1*Math.cos(a*Math.PI/180);
-    const y = cy + r1*Math.sin(a*Math.PI/180);
-    html += drawDot(x, y, 9, s.hex, s.name, false);
+function gridStoneStops(slug, hex){
+  if(slug==='pyrite') return ['#f1cf55','#a87516'];
+  if(slug==='tigers-eye') return ['#b8732d','#5f3d24'];
+  const cats = GRID_STONE_CATS[slug];
+  if(cats) return [GRID_CATEGORY_HEX[cats[0]], GRID_CATEGORY_HEX[cats[1]]];
+  return [gridTint(hex), hex];
+}
+
+function gridGradientDefs(uid, stones){
+  const slugs = [...new Set(stones.map(s=>s.slug))];
+  let defs = slugs.map(slug=>{
+    const stone = stones.find(s=>s.slug===slug);
+    const stops = gridStoneStops(slug, stone.hex);
+    return `<linearGradient id="grad-${uid}-${slug}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${stops[0]}"/><stop offset="100%" stop-color="${stops[1]}"/></linearGradient>`;
+  }).join('');
+  if(slugs.includes('clear-quartz')){
+    defs += `<linearGradient id="grad-${uid}-clear-quartz-point" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f7fbff"/><stop offset="100%" stop-color="#aebdca"/></linearGradient>`;
+  }
+  return `<defs>${defs}</defs>`;
+}
+
+function gridNorthMarker(){
+  return '<g aria-hidden="true"><line x1="28" y1="22" x2="28" y2="43" stroke="var(--ink3)" stroke-width="1"/><path d="M24 29 L28 22 L32 29" fill="none" stroke="var(--ink3)" stroke-width="1"/><text x="28" y="15" text-anchor="middle" font-size="11" font-family="Jost,sans-serif" fill="var(--ink3)" letter-spacing="0.08em">N</text></g>';
+}
+
+function gridStoneMarker(x, y, stone, r, uid, isCenter){
+  const cx = (+x).toFixed(2), cy = (+y).toFixed(2);
+  const strokeColor = isCenter ? 'var(--accent)' : 'var(--white)';
+  const sw = isCenter ? 2 : 3;
+  let html = `<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#grad-${uid}-${stone.slug})" stroke="${strokeColor}" stroke-width="${sw}"/>`;
+  if(isCenter) html += `<circle cx="${cx}" cy="${cy}" r="${r+4}" fill="none" stroke="var(--accent)" stroke-width="0.75" opacity="0.4"/>`;
+  html += `<title>${stone.name}</title></g>`;
+  return html;
+}
+
+function gridQuartzPoint(x, y, stone, uid, targetX=200, targetY=200){
+  const angle = Math.atan2(targetX-x, -(targetY-y)) * 180/Math.PI;
+  return `<g><path fill="url(#grad-${uid}-clear-quartz-point)" stroke="var(--ink3)" stroke-width="1" stroke-opacity="0.5" transform="translate(${(+x).toFixed(2)} ${(+y).toFixed(2)}) rotate(${angle.toFixed(4)})" d="M0 -13 L7 7 L0 12 L-7 7 Z"/><title>${stone.name}</title></g>`;
+}
+
+function gridPolarPoints(count, radius, startDegrees=-90){
+  return Array.from({length:count},(_,i)=>{
+    const a = (startDegrees + (360/count)*i) * Math.PI/180;
+    return [200 + radius*Math.cos(a), 200 + radius*Math.sin(a)];
   });
-  
-  // Outer ring (4 stones diagonal)
-  const outer = stones.filter(s=>s.role.includes('Outer'));
-  const outer_angles = [315, 45, 135, 225];
-  outer_angles.forEach((a,i)=>{
-    if(i >= outer.length*2) return;
-    const s = outer[Math.floor(i/2)];
-    const x = cx + r2*Math.cos(a*Math.PI/180);
-    const y = cy + r2*Math.sin(a*Math.PI/180);
-    html += drawDot(x, y, 9, s.hex, s.name, false);
+}
+
+function drawSafeGroundedGrid(stones, svgId){
+  const svg = document.getElementById(svgId);
+  if(!svg) return;
+  const uid = svgId;
+  const outer = [[200,55],[326,127],[326,273],[200,345],[74,273],[74,127]];
+  const inner = [[200,128],[263,164],[263,236],[200,272],[137,236],[137,164]];
+  const poly = pts => pts.map(p=>p.join(',')).join(' ');
+  let geometry = `<polygon points="${poly([outer[0],outer[2],outer[4]])}" fill="none" stroke="var(--grid-line)" stroke-width="1.55"/>`;
+  geometry += `<polygon points="${poly([outer[3],outer[5],outer[1]])}" fill="none" stroke="var(--grid-line)" stroke-width="1.55"/>`;
+  geometry += `<polygon points="${poly(inner)}" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`;
+  geometry += `<circle cx="200" cy="200" r="145" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`;
+  const center = stones.find(s=>s.role==='Center');
+  const smoky = stones.find(s=>s.slug==='smoky-quartz');
+  const hematite = stones.find(s=>s.slug==='hematite');
+  let markers = gridStoneMarker(200,200,center,14,uid,true);
+  inner.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],smoky,10,uid,false); });
+  outer.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],hematite,10,uid,false); });
+  svg.innerHTML = gridGradientDefs(uid, stones) + gridNorthMarker() + geometry + markers;
+}
+
+function drawOpportunityGrowthGrid(stones, svgId){
+  const svg = document.getElementById(svgId);
+  if(!svg) return;
+  const uid = svgId;
+  const centers = [[200,125],[265,162.5],[265,237.5],[200,275],[135,237.5],[135,162.5]];
+  let geometry = `<circle cx="200" cy="200" r="75" fill="none" stroke="var(--grid-line)" stroke-width="1.55"/>`;
+  centers.forEach(p=>{ geometry += `<circle cx="${p[0]}" cy="${p[1]}" r="75" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`; });
+  const center = stones.find(s=>s.role==='Center');
+  const pyrite = stones.find(s=>s.slug==='pyrite');
+  const tigersEye = stones.find(s=>s.slug==='tigers-eye');
+  let markers = gridStoneMarker(200,200,center,14,uid,true);
+  centers.forEach((p,i)=>{
+    const s = i%2===0 ? pyrite : tigersEye;
+    markers += gridStoneMarker(p[0],p[1],s,10,uid,false);
   });
-  
-  // Top amplifier
-  const top = stones.find(s=>s.role==='Top');
-  if(top){
-    html += drawDot(cx, cy-r2-14, 7, top.hex, top.name, false);
-    html += `<line x1="${cx}" y1="${cy-r2}" x2="${cx}" y2="${cy-r2-8}" stroke="var(--grid-line)" stroke-width="0.5"/>`;
-  }
-  
-  svg.innerHTML = html;
+  svg.innerHTML = gridGradientDefs(uid, stones) + gridNorthMarker() + geometry + markers;
 }
 
-function drawTriangleGrid(stones, svgId) {
+function drawSelfLoveCompassionGrid(stones, svgId){
   const svg = document.getElementById(svgId);
   if(!svg) return;
-  const cx=100, cy=110;
-  const tip = [cx, 20];
-  const bl  = [cx-75, 185];
-  const br  = [cx+75, 185];
-  
-  let html = '';
-  
-  // Triangle
-  html += `<polygon points="${tip[0]},${tip[1]} ${bl[0]},${bl[1]} ${br[0]},${br[1]}" fill="none" stroke="var(--grid-line)" stroke-width="0.8"/>`;
-  
-  // Inner triangle
-  const ti2=[cx,52], bl2=[cx-40,155], br2=[cx+40,155];
-  html += `<polygon points="${ti2[0]},${ti2[1]} ${bl2[0]},${bl2[1]} ${br2[0]},${br2[1]}" fill="none" stroke="var(--grid-line)" stroke-width="0.4" stroke-dasharray="3,3"/>`;
-  
-  // Centerpoint
-  const ctr = [cx, 120];
-  html += drawDot(ctr[0], ctr[1], 13, stones[0].hex, stones[0].name, true);
-  
-  // Side stones (×2)
-  const sides = stones.filter(s=>s.role.includes('Sides'));
-  if(sides.length){
-    [[cx-50,130],[cx+50,130]].forEach(([x,y])=>{
-      html += drawDot(x, y, 9, sides[0].hex, sides[0].name, false);
-    });
-  }
-  
-  // Corner stones (×2)
-  const corners = stones.filter(s=>s.role.includes('Corners'));
-  if(corners.length){
-    [[bl[0]+15,bl[1]-10],[br[0]-15,br[1]-10]].forEach(([x,y])=>{
-      html += drawDot(x, y, 9, corners[0].hex, corners[0].name, false);
-    });
-  }
-  
-  // Outer (×2)
-  const outer = stones.filter(s=>s.role.includes('Outer'));
-  if(outer.length){
-    [[bl[0]-8,bl[1]+5],[br[0]+8,br[1]+5]].forEach(([x,y])=>{
-      html += drawDot(x, y, 9, outer[0].hex, outer[0].name, false);
-    });
-  }
-  
-  // Apex
-  const apex = stones.find(s=>s.role==='Apex');
-  if(apex) html += drawDot(tip[0], tip[1]-14, 9, apex.hex, apex.name, false);
-  
-  svg.innerHTML = html;
+  const uid = svgId;
+  const ring1 = [[200,142],[250.23,171],[250.23,229],[200,258],[149.77,229],[149.77,171]];
+  const ring2 = [[200,84],[250.23,113],[300.46,142],[300.46,200],[300.46,258],[250.23,287],[200,316],[149.77,287],[99.54,258],[99.54,200],[99.54,142],[149.77,113]];
+  const allCenters = [[200,200], ...ring1, ...ring2];
+  let geometry = allCenters.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="58" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`).join('');
+  geometry += `<circle cx="200" cy="200" r="116" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`;
+  const outerChosen = [[250.23,113],[300.46,200],[250.23,287],[149.77,287],[99.54,200],[149.77,113]];
+  const center = stones.find(s=>s.role==='Center');
+  const rhodonite = stones.find(s=>s.slug==='rhodonite');
+  const aventurine = stones.find(s=>s.slug==='green-aventurine');
+  let markers = gridStoneMarker(200,200,center,14,uid,true);
+  ring1.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],rhodonite,10,uid,false); });
+  outerChosen.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],aventurine,10,uid,false); });
+  svg.innerHTML = gridGradientDefs(uid, stones) + gridNorthMarker() + geometry + markers;
 }
 
-function drawRectangleGrid(stones, svgId) {
+function drawClearFocusGrid(stones, svgId){
   const svg = document.getElementById(svgId);
   if(!svg) return;
-  const left=30, top=15, w=140, h=140;
-  let html = '';
-  
-  // Rectangle (bed outline)
-  html += `<rect x="${left}" y="${top}" width="${w}" height="${h}" rx="4" fill="none" stroke="var(--grid-line)" stroke-width="0.8"/>`;
-  html += `<text x="${left+w/2}" y="${top+h/2+16}" text-anchor="middle" font-size="9" fill="var(--ink3)" font-family="Jost,sans-serif" opacity="0.5">bed</text>`;
-  
-  // Dashed center line
-  html += `<line x1="${left+w/2}" y1="${top+5}" x2="${left+w/2}" y2="${top+h-5}" stroke="var(--grid-line)" stroke-width="0.4" stroke-dasharray="3,4"/>`;
-  
-  // Center stone (middle of bed)
-  html += drawDot(left+w/2, top+h/2-10, 13, stones[0].hex, stones[0].name, true);
-  
-  // Head stones (top)
-  const head = stones.filter(s=>s.role.includes('Head'));
-  if(head.length){
-    [[left+25,top+20],[left+w-25,top+20]].forEach(([x,y])=>{
-      html += drawDot(x, y, 9, head[0].hex, head[0].name, false);
-    });
-  }
-  
-  // Side stones
-  const sides = stones.filter(s=>s.role.includes('Sides'));
-  if(sides.length>=2){
-    [[left-12,top+h/2-10],[left+w+12,top+h/2-10]].forEach(([x,y],i)=>{
-      html += drawDot(x, y, 9, sides[Math.min(i,sides.length-1)].hex, sides[0].name, false);
-    });
-  }
-  
-  // Foot stone (bottom center)
-  const foot = stones.find(s=>s.role==='Foot');
-  if(foot) html += drawDot(left+w/2, top+h+10, 11, foot.hex, foot.name, false);
-  
-  svg.innerHTML = html;
+  const uid = svgId;
+  const vertices = gridPolarPoints(3,130,-90);
+  const amplifiers = vertices.map(([x,y])=>{
+    const dx = x-200, dy = y-200, len = Math.hypot(dx,dy);
+    return [x+(dx/len)*36, y+(dy/len)*36];
+  });
+  let geometry = `<polygon points="${vertices.map(p=>p.map(n=>n.toFixed(2)).join(',')).join(' ')}" fill="none" stroke="var(--grid-line)" stroke-width="1.55"/>`;
+  geometry += `<circle cx="200" cy="200" r="73" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`;
+  const center = stones.find(s=>s.role==='Center');
+  const sodalite = stones.find(s=>s.slug==='sodalite');
+  const quartz = stones.find(s=>s.slug==='clear-quartz');
+  let markers = gridStoneMarker(200,200,center,14,uid,true);
+  vertices.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],sodalite,10,uid,false); });
+  amplifiers.forEach(p=>{ markers += gridQuartzPoint(p[0],p[1],quartz,uid); });
+  svg.innerHTML = gridGradientDefs(uid, stones) + gridNorthMarker() + geometry + markers;
 }
 
-function drawFlowerGrid(stones, svgId) {
+function drawRestfulSleepGrid(stones, svgId){
   const svg = document.getElementById(svgId);
   if(!svg) return;
-  const cx=100, cy=100, r1=32, r2=68;
-  let html = '';
-  
-  // Petal circles (6)
-  for(let i=0;i<6;i++){
-    const a = i*60-90;
-    const px = cx + r1*Math.cos(a*Math.PI/180);
-    const py = cy + r1*Math.sin(a*Math.PI/180);
-    html += `<circle cx="${px}" cy="${py}" r="${r1}" fill="none" stroke="var(--grid-line)" stroke-width="0.4" opacity="0.6"/>`;
-  }
-  html += `<circle cx="${cx}" cy="${cy}" r="${r1}" fill="none" stroke="var(--grid-line)" stroke-width="0.5"/>`;
-  html += `<circle cx="${cx}" cy="${cy}" r="${r2}" fill="none" stroke="var(--grid-line)" stroke-width="0.4" stroke-dasharray="3,3"/>`;
-  
-  // Center
-  html += drawDot(cx, cy, 14, stones[0].hex, stones[0].name, true);
-  
-  // Inner ring (3 stones)
-  const inner = stones.filter(s=>s.role.includes('Inner'));
-  for(let i=0;i<3;i++){
-    const a = i*120-90;
-    const x = cx + r1*Math.cos(a*Math.PI/180);
-    const y = cy + r1*Math.sin(a*Math.PI/180);
-    html += drawDot(x, y, 9, inner[0].hex, inner[0].name, false);
-  }
-  
-  // Outer ring (6 alternating: aventurine x3, tiger x3)
-  const outer1 = stones.filter(s=>s.role.includes('Outer ×3'))[0];
-  const outer2 = stones.filter(s=>s.role.includes('Outer ×3'))[1];
-  for(let i=0;i<6;i++){
-    const a = i*60-90;
-    const x = cx + r2*Math.cos(a*Math.PI/180);
-    const y = cy + r2*Math.sin(a*Math.PI/180);
-    const s = i%2===0 ? outer1 : outer2;
-    if(s) html += drawDot(x, y, 9, s.hex, s.name, false);
-  }
-  
-  // Base and amplifier
-  const base = stones.find(s=>s.role==='Base');
-  const amp  = stones.find(s=>s.role==='Amplifier');
-  if(base) html += drawDot(cx, cy+r2+14, 9, base.hex, base.name, false);
-  if(amp)  html += drawDot(cx, cy-r2-14, 9, amp.hex,  amp.name,  false);
-  
-  svg.innerHTML = html;
+  const uid = svgId;
+  const inner = gridPolarPoints(3,68,-90);
+  const outer = gridPolarPoints(6,128,-60);
+  let geometry = `<circle cx="200" cy="200" r="128" fill="none" stroke="var(--grid-line)" stroke-width="1.55"/>`;
+  geometry += `<circle cx="200" cy="200" r="68" fill="none" stroke="var(--grid-line)" stroke-width="1" opacity="0.72"/>`;
+  const center = stones.find(s=>s.role==='Center');
+  const lepidolite = stones.find(s=>s.slug==='lepidolite');
+  const howlite = stones.find(s=>s.slug==='howlite');
+  let markers = gridStoneMarker(200,200,center,14,uid,true);
+  inner.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],lepidolite,10,uid,false); });
+  outer.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],howlite,11,uid,false); });
+  svg.innerHTML = gridGradientDefs(uid, stones) + gridNorthMarker() + geometry + markers;
 }
 
-function drawDot(x, y, r, hex, name, isCenter) {
-  const stroke = isCenter ? 'var(--accent)' : 'var(--border)';
-  const sw = isCenter ? '1.5' : '0.8';
-  // Tooltip via title
-  return `<g>
-    <circle cx="${Math.round(x)}" cy="${Math.round(y)}" r="${r}" fill="${hex}" stroke="${stroke}" stroke-width="${sw}" opacity="${isCenter?1:0.9}"/>
-    ${isCenter ? `<circle cx="${Math.round(x)}" cy="${Math.round(y)}" r="${r+4}" fill="none" stroke="var(--accent)" stroke-width="0.5" opacity="0.4"/>` : ''}
-    <title>${name}</title>
-  </g>`;
+function drawReleaseRenewalGrid(stones, svgId){
+  const svg = document.getElementById(svgId);
+  if(!svg) return;
+  const uid = svgId;
+  const spiralPoint = theta => {
+    const radius = 14.7 * theta;
+    const phase = Math.PI * 1.25;
+    return [200 + radius*Math.sin(theta+phase), 200 - radius*Math.cos(theta+phase)];
+  };
+  const endTheta = Math.PI * 2.5;
+  const sampleCount = 240;
+  const samples = Array.from({length:sampleCount+1},(_,i)=>spiralPoint((endTheta*i)/sampleCount));
+  const cumulative = [0];
+  for(let i=1;i<samples.length;i++){
+    cumulative.push(cumulative[i-1] + Math.hypot(samples[i][0]-samples[i-1][0], samples[i][1]-samples[i-1][1]));
+  }
+  const totalLength = cumulative[cumulative.length-1];
+  const pointAtFraction = fraction => {
+    const target = totalLength*fraction;
+    const idx = cumulative.findIndex(len=>len>=target);
+    if(idx<=0) return samples[0];
+    const span = cumulative[idx]-cumulative[idx-1];
+    const mix = span ? (target-cumulative[idx-1])/span : 0;
+    return [
+      samples[idx-1][0] + (samples[idx][0]-samples[idx-1][0])*mix,
+      samples[idx-1][1] + (samples[idx][1]-samples[idx-1][1])*mix,
+    ];
+  };
+  const spiralPath = samples.map((p,i)=>`${i?'L':'M'}${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' ');
+  const geometry = `<path d="${spiralPath}" fill="none" stroke="var(--grid-line)" stroke-width="1.75" opacity="0.75"/>`;
+  const placements = Array.from({length:6},(_,i)=>pointAtFraction((i+1)/6));
+  const release = placements.slice(0,3);
+  const renewal = placements.slice(3);
+  const center = stones.find(s=>s.role==='Center');
+  const smoky = stones.find(s=>s.slug==='smoky-quartz');
+  const moonstone = stones.find(s=>s.slug==='moonstone');
+  let markers = gridStoneMarker(200,200,center,14,uid,true);
+  release.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],smoky,10,uid,false); });
+  renewal.forEach(p=>{ markers += gridStoneMarker(p[0],p[1],moonstone,10,uid,false); });
+  svg.innerHTML = gridGradientDefs(uid, stones) + gridNorthMarker() + geometry + markers;
 }
 
 // ── RENDER GRID CARDS ──
@@ -1091,7 +1059,7 @@ function renderGridCards() {
     const moodLabel = MOOD_DATA[grid.moodLink]?.label || '';
     return `<div class="grid-card" onclick="openGridModal('${grid.id}')">
       <div class="grid-card-swatch" style="background:${grid.color}20;border-color:${grid.color}40">
-        <svg viewBox="0 0 200 200" width="140" height="140" id="card-svg-${grid.id}"></svg>
+        <svg viewBox="0 0 400 400" width="140" height="140" id="card-svg-${grid.id}" role="img" aria-label="${grid.name} grid diagram"></svg>
       </div>
       <div class="grid-card-body">
         <div class="grid-card-name">${grid.name}</div>
@@ -1132,14 +1100,14 @@ function openGridModal(gridId) {
   document.getElementById('grid-modal-content').innerHTML = `
     <div class="grid-modal-actions"><button class="btn btn-sm" onclick="printGridModal();event.stopPropagation();">Print grid</button></div>
     <div style="margin-bottom:1.5rem">
-      <div style="font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">${grid.tagline}</div>
+      <div style="font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink2);font-weight:400;margin-bottom:6px">${grid.tagline}</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--ink);margin-bottom:0.75rem">${grid.name}</div>
       <p style="font-size:13px;color:var(--ink2);line-height:1.7">${grid.intro}</p>
     </div>
     
     <div class="grid-modal-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.5rem">
       <div style="min-width:0">
-        <svg viewBox="0 0 200 220" width="100%" id="modal-svg-${grid.id}" style="max-width:240px;display:block;margin:0 auto"></svg>
+        <svg viewBox="0 0 400 400" width="100%" id="modal-svg-${grid.id}" style="max-width:280px;display:block;margin:0 auto" role="img" aria-label="${grid.name} grid diagram"></svg>
       </div>
       <div style="min-width:0">
         <div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Stones</div>
@@ -1153,7 +1121,7 @@ function openGridModal(gridId) {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
       <div style="background:var(--stone2);border-radius:8px;padding:1rem">
         <div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">Activation</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--ink);line-height:1.5">"${grid.activation}"</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;font-style:italic;color:var(--ink);line-height:1.5">"${grid.activation}"</div>
       </div>
       <div style="background:var(--stone2);border-radius:8px;padding:1rem">
         <div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">Placement & use</div>
@@ -1161,8 +1129,10 @@ function openGridModal(gridId) {
       </div>
     </div>
     
-    <div style="padding:0.75rem 1rem;border-left:2px solid var(--accent2);background:var(--stone2);border-radius:0 6px 6px 0;font-size:12px;color:var(--ink2)">
-      <strong style="color:var(--ink)">How to activate: </strong>Place stones from outside in, ending at the center. Hold your intention clearly, then touch each stone lightly with a clear quartz point to connect them.
+    <div style="padding:0.75rem 1rem;border-left:2px solid var(--accent2);background:var(--stone2);border-radius:0 6px 6px 0">
+      <div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">How to activate</div>
+      <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin:0 0 10px">${grid.howToActivate[0]}</p>
+      <p style="font-size:13px;color:var(--ink2);line-height:1.6;margin:0">${grid.howToActivate[1]}</p>
     </div>`;
   
   document.getElementById('grid-modal-overlay').classList.add('open');
