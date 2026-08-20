@@ -143,7 +143,7 @@ function renderFamilyGuideView(rawSlug, opts){
 function fgSetFooterCreditsLink(slug){
   const link = document.getElementById('footerCreditsLink');
   if(!link) return;
-  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite', garnet:'credits.html#garnet', tourmaline:'credits.html#tourmaline'};
+  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite', garnet:'credits.html#garnet', tourmaline:'credits.html#tourmaline', beryl:'credits.html#beryl'};
   link.setAttribute('href', anchoredSlugs[slug] || 'credits.html');
 }
 
@@ -265,6 +265,23 @@ function fgHeroMediaImgs(guide){
     const src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
     return src ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(c.n)}" loading="lazy">` : '';
   }).filter(Boolean);
+  // guide.hero.mediaFiles (2026-08-19, added for Obsidian's revision pass) —
+  // exact encyclopedia filenames instead of a stoneId lookup. Needed because
+  // firstEncyclopediaPhoto always resolves a stoneId to the FIRST entry in its
+  // ENCYCLOPEDIA_PHOTOS array, which would give Gold Sheen Obsidian
+  // (C-0140) its plain gold-sheen-obsidian.webp — but Obsidian's brief
+  // specifically calls for the "-large-sphere" second array entry in the
+  // hero (while the roster card two sections below correctly keeps the
+  // plain default). No other guide sets this field, so every existing
+  // mediaStoneIds/mediaDynamicFilterValue/image/imageUrl hero is unaffected.
+  if(!imgs.length && guide.hero && Array.isArray(guide.hero.mediaFiles) && guide.hero.mediaFiles.length){
+    guide.hero.mediaFiles.forEach(mf=>{
+      const file = typeof mf==='string' ? mf : (mf && mf.file);
+      if(!file) return;
+      const alt = (mf && mf.alt) || guide.displayName || guide.slug;
+      imgs.push(`<img src="${escapeAttr(SUPABASE_ENC+file)}" alt="${escapeAttr(alt)}" loading="lazy">`);
+    });
+  }
   if(!imgs.length && guide.hero && guide.hero.image){
     imgs.push(`<img src="${escapeAttr(SUPABASE_ENC+guide.hero.image)}" alt="${escapeAttr(guide.displayName||guide.slug)}">`);
   }
@@ -300,7 +317,13 @@ function fgHeroMediaHtml(guide){
 /* Hero bottom band accepts either guide.overview.paragraph (single string,
    Calcite's original shape) or guide.overview.paragraphs (array, used by
    Quartz to preserve its approved two-paragraph introduction break). Both
-   render with the same .fg-hero-intro-text styling. */
+   render with the same .fg-hero-intro-text styling.
+   hero.imageLegend (2026-08-19, added for Beryl) — an optional short
+   identification caption ("1 Golden Beryl · 2 Heliodor · ...") rendered
+   directly beneath the hero photo, distinct from the photo credit (still
+   routed through the shared footer pattern). Only wraps fgHeroMediaHtml's
+   output in an extra column div when the field is set, so every other
+   guide's hero media markup is completely unchanged. */
 function familyGuideHeroHtml(guide){
   const hero = guide.hero||{};
   const ov = guide.overview||{};
@@ -321,7 +344,9 @@ function familyGuideHeroHtml(guide){
           ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
         </div>`:''}
       </div>
-      ${fgHeroMediaHtml(guide)}
+      ${hero.imageLegend
+        ? `<div class="fg-hero-media-col">${fgHeroMediaHtml(guide)}<p class="fg-hero-media-legend">${escapeAttr(hero.imageLegend)}</p></div>`
+        : fgHeroMediaHtml(guide)}
     </div>
     ${introParas.length?`<div class="fg-hero-divider"></div>
     <div class="fg-hero-intro">
@@ -667,7 +692,10 @@ function familyGuideExtendedFamilyHtml(guide){
    kept archived below as essentials, unused). guide.collection.editorialNote
    (added for Quartz's 2026-07-22 first pass, where no approved collection
    copy exists yet) marks the whole section's body text as a placeholder via
-   fg-placeholder-note instead of the normal fg-fact-body styling. ── */
+   fg-placeholder-note instead of the normal fg-fact-body styling.
+   c.rememberThis/c.watchFor (2026-08-19, added for Beryl) now also accept an
+   array of paragraph strings, rendered as separate <p> tags, alongside the
+   original single-string shape every other guide still uses unchanged. ── */
 function familyGuideCollectionHtml(guide){
   const c = guide.collection||{};
   const care = c.careForIt||{};
@@ -691,11 +719,15 @@ function familyGuideCollectionHtml(guide){
       </div>
       <div class="fg-collection-sub">
         <div class="fg-collection-panel-title">Remember This</div>
-        <p class="${bodyClass}">${escapeAttr(c.rememberThis||'')}</p>
+        ${Array.isArray(c.rememberThis)
+          ? c.rememberThis.map(p=>`<p class="${bodyClass}">${escapeAttr(p)}</p>`).join('')
+          : `<p class="${bodyClass}">${escapeAttr(c.rememberThis||'')}</p>`}
       </div>
       <div class="fg-collection-sub">
         <div class="fg-collection-panel-title">Watch For</div>
-        <p class="${bodyClass}">${escapeAttr(c.watchFor||'')}</p>
+        ${Array.isArray(c.watchFor)
+          ? c.watchFor.map(p=>`<p class="${bodyClass}">${escapeAttr(p)}</p>`).join('')
+          : `<p class="${bodyClass}">${escapeAttr(c.watchFor||'')}</p>`}
         ${c.watchForNote?`<p class="fg-fact-body fg-placeholder-note">${escapeAttr(c.watchForNote)}</p>`:''}
       </div>
     </div>
@@ -2661,139 +2693,308 @@ function familyGuideTourmalineHtml(guide){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   OBSIDIAN FAMILY GUIDE — dedicated section renderers (2026-07-23, built
-   per Christie's lean implementation brief, reusing the corrected Garnet/
-   Tourmaline layout patterns: wide prose, one dominant visual, a 3+3
-   roster, one appearance sequence, minimal bordered cards. Purely
-   additive/Obsidian-scoped: nothing here touches a Calcite/Quartz/
-   Fluorite/Feldspar/Chalcedony/Agate/Jasper/Garnet/Tourmaline selector,
-   function, or data field. Roster cards reuse fgStoneCardHtml in
-   placeholder-aware mode (opts.placeholderOk); all six roster stones have
-   a canonical image on file per the Production Master. ══ */
+   BERYL FAMILY GUIDE (2026-08-19, Claude Code Brief: Beryl Family Guide
+   Implementation). Reuses the shared system throughout: familyGuideHeroHtml
+   (with the new hero.imageLegend addition, see above) for the hero,
+   fgTourmalineFamilyCardHtml/.fg-card-grid--garnet-roster (unchanged, same
+   card anatomy already reused by Tourmaline/Obsidian) for the five-card
+   catalog roster, .fg-explain-grid/.fg-explain-copy/.fg-explain-media
+   (already used by Copper's closing essay) for Built in Six Sides,
+   fgFormationTableHtml/.fg-table (already used by Tourmaline's naming
+   table) for the color table, and the shared familyGuideCollectionHtml
+   Care for It/Remember This/Watch For layout (already used by Calcite,
+   with this pass's array-paragraph addition) for the collection section.
+   Only two genuinely new pieces exist: familyGuideBerylNamingHtml's
+   four-card teaching grid (reuses .fg-namegrid/.fg-namecard, styled to a
+   2x2 layout via a guide-scoped styles.css rule since no existing guide
+   needed exactly four undecorated text cards) and familyGuideBerylSixSidesHtml
+   itself (thin wiring around the shared explain-grid). Nothing here touches
+   a Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate/Jasper/Garnet/
+   Tourmaline/Obsidian/Copper selector, function, or data field. ══ */
 
-/* ── Shared bordered title+caption card — reuses .fg-tree-species-item
-   exactly as Tourmaline's fgTripleCaptionGridHtml does, but factored so
-   the wrapping grid class is caller-supplied: Obsidian needs a 2-up
-   comparison (Section 2) and a 4-up comparison (Section 3), neither of
-   which match Tourmaline's fixed 3-up grid. No new CSS: fg-card-grid--2
-   (2 cols, centered, collapses to 1 on mobile) and fg-card-grid--4 (4/2/1
-   responsive) are both existing, already-shipped grid classes reused
-   here for text cards instead of their usual stone-photo cards. ── */
-function fgCaptionCardsHtml(items){
-  return (items||[]).map(it=>`<div class="fg-tree-species-item">
-    <div class="fg-tree-species-name">${escapeAttr(it.title||'')}</div>
-    <p class="fg-tree-species-caption">${escapeAttr(it.body||'')}</p>
-  </div>`).join('');
+/* ── 1. What Beryl Is — two plain left-aligned paragraphs, no emphasis
+   line, no image, matching the brief's explicit "do not italicize the
+   opening and do not add another introduction." Reuses the same
+   .fg-prose-block/.fg-prose pattern as familyGuideWhatTourmalineIsHtml. ── */
+function familyGuideWhatBerylIsHtml(guide){
+  const w = guide.whatBerylIs;
+  if(!w) return '';
+  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-what-beryl-is">
+    <h2 class="fg-h2">${escapeAttr(w.title||'What Beryl Is')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+  </section>`;
 }
 
-/* ── 1. Meet the Obsidian Family — six rostered expressions. Reuses
-   .fg-card-grid--garnet-roster (flex-wrap, centered rows) which, with six
-   cards instead of five, naturally lays out as the requested 3+3 rather
-   than 3+2 — same component, no new modifier needed. ── */
-function familyGuideMeetObsidianFamilyHtml(guide){
-  const m = guide.meetObsidianFamily;
+/* ── 2. Meet Five Beryl Expressions — the five verified catalog stones
+   (Emerald, Aquamarine, Morganite, Heliodor, Goshenite), reusing
+   fgTourmalineFamilyCardHtml/.fg-card-grid--garnet-roster exactly as
+   Obsidian's roster does. Every member here carries a stoneId, so every
+   card renders clickable with a working Quick View — there is no
+   unlinked/teaching-card branch in this section (Red Beryl, the family's
+   one non-catalog example, appears only in familyGuideBerylNamingHtml
+   below, never here). No mem.image is set — each card resolves its photo
+   through fgCrystal(stoneId) + firstEncyclopediaPhoto exactly like the
+   catalog's own first/only entry for that stone (emerald.webp,
+   aquamarine.webp, morganite-tumble-family.webp, heliodor-wc.webp,
+   goshenite.webp — verified against ENCYCLOPEDIA_PHOTOS in app.js), so
+   there is no separate hardcoded image path to drift out of sync. ── */
+function familyGuideMeetBerylFamilyHtml(guide){
+  const m = guide.meetBerylFamily;
   if(!m) return '';
-  const cards = (m.members||[]).map(mem=>fgStoneCardHtml(mem, {showIdentity:true, placeholderOk:true, qvLabel:'QUICK VIEW →'})).filter(Boolean).join('');
-  return `<section class="fg-section" id="fg-meet-obsidian-family">
-    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Obsidian Family')}</h2>
-    ${m.intro?`<p class="fg-section-intro">${escapeAttr(m.intro)}</p>`:''}
+  const cards = (m.members||[]).map(fgTourmalineFamilyCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-beryl-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet Five Beryl Expressions')}</h2>
+    ${m.intro?`<p class="fg-lead">${escapeAttr(m.intro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
   </section>`;
 }
 
-/* ── 2. Obsidian Is Glass, Not Crystal — wide prose plus one simple
-   two-item comparison (Crystalline Mineral vs. Obsidian). No additional
-   taxonomy cards, per the brief. ── */
-function familyGuideObsidianGroupHtml(guide){
-  const g = guide.obsidianGroup;
-  if(!g) return '';
-  const paras = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  return `<section class="fg-section" id="fg-obsidian-group">
-    <h2 class="fg-h2">${escapeAttr(g.title||'Obsidian Is Glass, Not Crystal')}</h2>
-    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
-    <div class="fg-prose-block">${paras}</div>
-    <div class="fg-card-grid fg-card-grid--2">${fgCaptionCardsHtml(g.compare)}</div>
-    ${g.closingLine?`<p class="fg-note-center">${escapeAttr(g.closingLine)}</p>`:''}
+/* ── 3. Built in Six Sides — proportional text-and-image split reusing the
+   existing .fg-explain-grid/.fg-explain-copy/.fg-explain-media component
+   (already used by Copper's closing essay), not a new layout. The image
+   well is forced to a bounded white well via the guide-scoped styles.css
+   override (matching Copper's own .fg-explain-media white-background
+   override) since the base component defaults to the warm --stone2 tone.
+   No visible caption renders beneath this image — its photo credit is
+   guide.imageCredits-only, routed through the shared footer pattern. ── */
+function familyGuideBerylSixSidesHtml(guide){
+  const s = guide.builtInSixSides;
+  if(!s) return '';
+  const paras = (s.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const mediaHtml = s.image
+    ? `<img src="${escapeAttr(s.image)}" alt="${escapeAttr(s.imageAlt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  return `<section class="fg-section" id="fg-beryl-six-sides">
+    <h2 class="fg-h2">${escapeAttr(s.title||'Built in Six Sides')}</h2>
+    <div class="fg-explain-grid">
+      <div class="fg-explain-copy">${paras}</div>
+      <div class="fg-explain-media">${mediaHtml}</div>
+    </div>
   </section>`;
 }
 
-/* ── 3. What the Lava Preserves — the dominant visual section: a
-   four-stage formation sequence (reuses .fg-progression, same component
-   as Garnet's/Tourmaline's stage sequences), a compact four-item "what
-   creates what" comparison, and one caution line. No standalone sections
-   for sheen, rainbow color, Mahogany, or Snowflake, per the brief. ── */
+/* ── 4. How Beryl Gets Its Color — the exact five-variety/color/cause
+   mapping as a comparison table, reusing fgFormationTableHtml/.fg-table
+   verbatim (already approved for Tourmaline's Schorl/Dravite/Elbaite
+   table and Copper's/Agate's own comparison tables), plus two ordinary
+   prose paragraphs after the table. No diagrams, no duplicate photos. ── */
+function familyGuideBerylColorHtml(guide){
+  const c = guide.berylColor;
+  if(!c) return '';
+  const paras = (c.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-beryl-color">
+    <h2 class="fg-h2">${escapeAttr(c.title||"How Beryl Gets Its Color")}</h2>
+    ${c.intro?`<p class="fg-lead">${escapeAttr(c.intro)}</p>`:''}
+    ${fgFormationTableHtml(c.table)}
+    <div class="fg-prose-block">${paras}</div>
+  </section>`;
+}
+
+/* ── 5. Understanding Beryl Names — four compact teaching cards (Emerald/
+   Green Beryl, Heliodor/Golden Beryl, Goshenite, Red Beryl), reusing the
+   existing .fg-namegrid/.fg-namecard components (already established by
+   Quartz's four-card "Why Quartz Names Change" naming decoder) but with no
+   image well, no ex.label category eyebrow, and no numbered index circle —
+   just a Georgia label and one or two plain body paragraphs — per the
+   brief's explicit "do not add images... repeated uppercase eyebrows."
+   Red Beryl's card is text-only teaching copy like the other three: no
+   stoneId is ever read here, so it can never render a Quick View, catalog
+   link, or badge. The guide-scoped styles.css rule below switches the
+   shared 5-column .fg-namegrid to a balanced 2x2 layout for these four
+   cards only. ── */
+function fgBerylNameCardHtml(card){
+  if(!card) return '';
+  const body = card.body || '';
+  const splitAt = body.indexOf('. ');
+  const bodyHtml = splitAt !== -1
+    ? `<p class="fg-namecard-body">${escapeAttr(body.slice(0, splitAt+1))}</p><p class="fg-namecard-body">${escapeAttr(body.slice(splitAt+2))}</p>`
+    : `<p class="fg-namecard-body">${escapeAttr(body)}</p>`;
+  return `<div class="fg-namecard">
+    <div class="fg-namecard-label">${escapeAttr(card.label||'')}</div>
+    ${bodyHtml}
+  </div>`;
+}
+function familyGuideBerylNamingHtml(guide){
+  const n = guide.berylNaming;
+  if(!n) return '';
+  const cards = (n.cards||[]).map(fgBerylNameCardHtml).join('');
+  return `<section class="fg-section" id="fg-beryl-naming">
+    <h2 class="fg-h2">${escapeAttr(n.title||'Understanding Beryl Names')}</h2>
+    ${n.intro?`<p class="fg-lead">${escapeAttr(n.intro)}</p>`:''}
+    <div class="fg-namegrid">${cards}</div>
+  </section>`;
+}
+
+/* ── Beryl guide assembly — approved section order per the brief: Hero,
+   What Beryl Is, Meet Five Beryl Expressions, Built in Six Sides, How
+   Beryl Gets Its Color, Understanding Beryl Names, Beryl in Your
+   Collection (shared familyGuideCollectionHtml, same Care for It/Remember
+   This/Watch For layout as Calcite), Closing (shared familyGuideClosingHtml,
+   no enclosing box per the guide-scoped styles.css override below). Photo
+   credits route through the shared footer-anchored pattern (see
+   fgSetFooterCreditsLink's anchoredSlugs) — no in-page
+   familyGuideImageCreditsHtml call, so credits are not duplicated. ── */
+function familyGuideBerylHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideHeroHtml(guide)}
+    ${familyGuideWhatBerylIsHtml(guide)}
+    ${familyGuideMeetBerylFamilyHtml(guide)}
+    ${familyGuideBerylSixSidesHtml(guide)}
+    ${familyGuideBerylColorHtml(guide)}
+    ${familyGuideBerylNamingHtml(guide)}
+    ${familyGuideCollectionHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+  </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   OBSIDIAN FAMILY GUIDE — visual-correction pass (2026-08-20). Christie's
+   approved reference for section-heading/body-copy scale, content width,
+   left-aligned editorial flow, and spacing is the completed Tourmaline
+   guide (Feldspar is cited only as the model for the final collection-
+   card-row/closing pattern, not as a general template). Purely additive/
+   Obsidian-scoped: nothing here touches a Calcite/Quartz/Fluorite/
+   Feldspar/Chalcedony/Agate/Jasper/Garnet/Tourmaline/Copper selector,
+   function, or data field — this guide now has its own dedicated
+   collection-section function (familyGuideObsidianCollectionHtml) instead
+   of calling the Feldspar-named one, even though it reuses the same
+   generic .fg-feldspar-collection-grid/.fg-collection-sub classes every
+   other guide's collection section already shares. ══ */
+
+/* ── 1. Meet the Obsidian Family — unchanged this pass: six rostered
+   expressions in the brief's exact desktop order (Black, Gold Sheen,
+   Silver Sheen / Rainbow, Snowflake, Mahogany), reusing
+   fgTourmalineFamilyCardHtml's description + "Chosen for:" card anatomy
+   and the shared .fg-card-grid--garnet-roster flex-wrap grid (3+3 desktop,
+   2-up intermediate, 1-up mobile, source order preserved). ── */
+function familyGuideMeetObsidianFamilyHtml(guide){
+  const m = guide.meetObsidianFamily;
+  if(!m) return '';
+  const cards = (m.members||[]).map(fgTourmalineFamilyCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-obsidian-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Obsidian Family')}</h2>
+    ${m.intro?`<p class="fg-lead">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+  </section>`;
+}
+
+/* ── 2. How Lava Becomes Obsidian — replaces "Obsidian Is Glass, Not
+   Crystal" entirely: one left-aligned .fg-lead opening paragraph (no
+   comparison cards, no "lesser version" language, nothing implying a
+   crystal turns into Obsidian), a plain three-step Molten Lava -> Quick
+   Cooling -> Obsidian Glass process (.fg-obsidian-process — text-only
+   boxes joined by a plain chevron, deliberately not the numbered-circle
+   .fg-progression-number sequence used elsewhere on this page, since this
+   must read as one continuous transformation rather than a measured
+   sequence with stops), and a left-aligned closing sentence in
+   .fg-prose-emphasis (the shared Georgia-italic editorial-emphasis
+   treatment already established for Tourmaline's "What Tourmaline
+   Actually Is" — left-aligned and body-scale here, not an oversized
+   centered quotation). ── */
+function familyGuideHowLavaBecomesObsidianHtml(guide){
+  const g = guide.howLavaBecomesObsidian;
+  if(!g) return '';
+  const steps = (g.steps||[]).map((st,i,arr)=>`<div class="fg-obsidian-process-step">
+    <div class="fg-obsidian-process-step-title">${escapeAttr(st.title||'')}</div>
+  </div>${i<arr.length-1?'<div class="fg-obsidian-process-arrow" aria-hidden="true">→</div>':''}`).join('');
+  return `<section class="fg-section" id="fg-how-lava-becomes-obsidian">
+    <h2 class="fg-h2">${escapeAttr(g.title||'How Lava Becomes Obsidian')}</h2>
+    ${g.intro?`<p class="fg-lead">${escapeAttr(g.intro)}</p>`:''}
+    <div class="fg-obsidian-process">${steps}</div>
+    ${g.closing?`<p class="fg-prose-emphasis fg-obsidian-process-closing">${escapeAttr(g.closing)}</p>`:''}
+  </section>`;
+}
+
+/* ── 3. What the Lava Preserves — one .fg-lead intro paragraph, then a
+   proper two-column table (fgFormationTableHtml/.fg-table, the exact
+   shared component already approved for Tourmaline's Schorl/Dravite/
+   Elbaite naming table — rounded container, shaded header row, row
+   dividers, no separate arrow column), replacing the prior arrow-row
+   decoder entirely. ── */
 function familyGuideLavaPreservesHtml(guide){
   const l = guide.lavaPreserves;
   if(!l) return '';
-  const stages = (l.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
-    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
-    <div class="fg-progression-number">${i+1}</div>
-    <div class="fg-progression-body">
-      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
-      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
-    </div>
-  </div>`).join('');
   return `<section class="fg-section" id="fg-lava-preserves">
     <h2 class="fg-h2">${escapeAttr(l.title||'What the Lava Preserves')}</h2>
-    ${l.intro?`<p class="fg-section-intro">${escapeAttr(l.intro)}</p>`:''}
-    <div class="fg-progression">${stages}</div>
-    <div class="fg-card-grid fg-card-grid--4">${fgCaptionCardsHtml(l.comparison)}</div>
-    ${l.cautionNote?`<p class="fg-note-center">${escapeAttr(l.cautionNote)}</p>`:''}
+    ${l.intro?`<p class="fg-lead">${escapeAttr(l.intro)}</p>`:''}
+    ${fgFormationTableHtml(l.table)}
   </section>`;
 }
 
-/* ── 4. How Obsidian Appears — a four-stage sequence (reuses
-   .fg-progression again), a compact recognition list (reuses .fg-list via
-   fgList, same pattern as Garnet's recognitionItems), and one short
-   historical note. ── */
-function familyGuideObsidianAppearanceHtml(guide){
-  const a = guide.obsidianAppearance;
-  if(!a) return '';
-  const stages = (a.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
-    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
-    <div class="fg-progression-number">${i+1}</div>
-    <div class="fg-progression-body">
-      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
-      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
-    </div>
-  </div>`).join('');
-  const recognitionItems = fgList(a.recognitionItems||[], 'fg-garnet-plain-list');
-  return `<section class="fg-section" id="fg-obsidian-appearance">
-    <h2 class="fg-h2">${escapeAttr(a.title||'How Obsidian Appears')}</h2>
-    ${a.intro?`<p class="fg-section-intro">${escapeAttr(a.intro)}</p>`:''}
-    <div class="fg-progression">${stages}</div>
-    <div class="fg-garnet-plain-list-wrap">${recognitionItems}</div>
-    ${a.historicalNote?`<p class="fg-note-center">${escapeAttr(a.historicalNote)}</p>`:''}
-  </section>`;
-}
-
-/* ── 5. Obsidian in Your Collection — a simple compact list only (revised
-   2026-07-23 per Christie's correction: no catalog-link pills, no repeat
-   of the six-card roster gallery from Section 1, no new component —
-   reuses the same .fg-list/.fg-garnet-plain-list treatment as every
-   other guide's compact list). ── */
-function familyGuideObsidianCollectionHtml(guide){
-  const c = guide.obsidianCollection;
+/* ── 4. Color in the Glass, Color in the Light — one .fg-lead intro
+   paragraph, two broad Tourmaline-style photo cards (fgPhotoCardHtml via
+   its item.url branch, each stone's own already-approved encyclopedia
+   photo, white contain-fit wells scoped in styles.css to match
+   Tourmaline's Color Zoning/Ribbing treatment), and the "Names to Verify"
+   subsection: two paragraphs left, the existing yellow-obsidian-family.webp
+   photograph right (small, ~235px, no caption/credit/label of any kind),
+   photo second in DOM so it stacks below the text on mobile. Yellow
+   Obsidian has no stoneId/catalog entry by design and is rendered here by
+   filename only from the local assets/family-guide-obsidian/ folder — it
+   can never be mistaken for a linked encyclopedia entry. ── */
+function familyGuideColorInGlassHtml(guide){
+  const c = guide.colorInGlass;
   if(!c) return '';
-  const listItems = fgList(c.listItems||[], 'fg-garnet-plain-list');
-  return `<section class="fg-section" id="fg-obsidian-collection">
-    <h2 class="fg-h2">${escapeAttr(c.title||'Obsidian in Your Collection')}</h2>
-    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
-    <div class="fg-garnet-plain-list-wrap">${listItems}</div>
+  const cards = (c.cards||[]).map(card=>fgPhotoCardHtml(card)).join('');
+  const n = c.namesToVerify || {};
+  const nParas = (n.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const photo = n.photo;
+  const photoHtml = photo ? `<div class="fg-obsidian-verify-media">
+    <img src="${escapeAttr('assets/family-guide-obsidian/'+photo.image)}" alt="${escapeAttr(photo.alt||'')}" loading="lazy">
+  </div>` : '';
+  return `<section class="fg-section" id="fg-color-in-glass">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Color in the Glass, Color in the Light')}</h2>
+    ${c.intro?`<p class="fg-lead">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--2">${cards}</div>
+    <div class="fg-obsidian-verify">
+      <h2 class="fg-h2">${escapeAttr(n.title||'Names to Verify')}</h2>
+      <div class="fg-obsidian-verify-split">
+        <div class="fg-obsidian-verify-text">${nParas}</div>
+        ${photoHtml}
+      </div>
+    </div>
   </section>`;
 }
 
-/* ── Obsidian guide assembly — its own approved section order. Purely
-   additive: nothing here changes any other guide's assembly, data, or
-   rendered output. ── */
+/* ── 5. Obsidian in Your Collection — its own dedicated function (not a
+   call into familyGuideFeldsparCollectionHtml), keeping the exact approved
+   three-card content/order (Choose the Strength / Turn the Stone / Protect
+   the Polish) and reusing the same generic .fg-feldspar-collection-grid/
+   .fg-collection-sub/.fg-collection-panel-title/.fg-fact-body classes
+   Tourmaline's own collection section already shares — those are existing
+   shared family-guide classes, not Feldspar-exclusive markup, so this
+   satisfies "give Obsidian its own renderer using shared generic classes
+   where appropriate" without a second copy of new CSS. ── */
+function familyGuideObsidianCollectionHtml(guide){
+  const c = guide.collection;
+  if(!c) return '';
+  const cards = (c.cards||[]).map(card=>`<div class="fg-collection-sub">
+    <div class="fg-collection-panel-title">${escapeAttr(card.title||'')}</div>
+    ${(card.paragraphs||[]).map(p=>`<p class="fg-fact-body">${escapeAttr(p)}</p>`).join('')}
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Obsidian in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-lead">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-feldspar-collection-grid">${cards}</div>
+  </section>`;
+}
+
+/* ── Obsidian guide assembly — Hero, Meet the Obsidian Family, How Lava
+   Becomes Obsidian, What the Lava Preserves, Color in the Glass Color in
+   the Light (incl. Names to Verify), Obsidian in Your Collection, then the
+   shared unboxed closing (guide.closingCallout + Return to Crystal
+   Families pill, centered — the only intentionally centered elements on
+   the page) and image credits (empty list — no in-page output). ── */
 function familyGuideObsidianHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
     ${familyGuideMeetObsidianFamilyHtml(guide)}
-    ${familyGuideObsidianGroupHtml(guide)}
+    ${familyGuideHowLavaBecomesObsidianHtml(guide)}
     ${familyGuideLavaPreservesHtml(guide)}
-    ${familyGuideObsidianAppearanceHtml(guide)}
+    ${familyGuideColorInGlassHtml(guide)}
     ${familyGuideObsidianCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
     ${familyGuideImageCreditsHtml(guide)}
@@ -3195,6 +3396,7 @@ function familyGuideHtml(guide){
   if(guide.slug==='obsidian') return familyGuideObsidianHtml(guide);
   if(guide.slug==='copper') return familyGuideCopperHtml(guide);
   if(guide.slug==='quartz') return familyGuideQuartzHtml(guide);
+  if(guide.slug==='beryl') return familyGuideBerylHtml(guide);
   if(guide.slug!=='calcite') return familyGuideGenericHtml(guide);
   // Note (2026-07-31, Calcite normalization pass): the in-page "Image
   // credits" <details> disclosure (familyGuideImageCreditsHtml) is

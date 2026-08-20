@@ -5,7 +5,10 @@
     "encyclopediaFilterValue": "Calcite",
     "editorialStatusNote": "Editorial status: Complete first-page draft for Christie’s holistic review. The metaphysical sections synthesize the approved online source set currently available. Identity-sensitive claims and final energetic distinctions should still receive the normal book-source and technical audit before publication.",
     "closingCallout": "Calcite helps life begin moving again.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
       "image": "blue-calcite.webp",
       "eyebrow": "CRYSTAL FAMILY",
@@ -471,7 +474,14 @@
         {
           "title": "Many Colors and Patterns",
           "body": "The same mineral appears in blues, oranges, pinks, greens, and more, shaped by trace elements and growth conditions.",
-          "swatchStoneIds": ["C-0007", "C-0016", "C-0011", "C-0012", "C-0013", "C-0014"]
+          "swatchStoneIds": [
+            "C-0007",
+            "C-0016",
+            "C-0011",
+            "C-0012",
+            "C-0013",
+            "C-0014"
+          ]
         }
       ]
     },
@@ -862,7 +872,12 @@
     "encyclopediaFilterValue": "Quartz",
     "editorialStatusNote": "Revision pass (2026-08-08) implementing Christie's locked Quartz Family Guide Revision brief: dedicated quartz assembly/CSS (matching the Agate/Copper visual-standardization baseline), the hero's explanatory paragraph moved below the hero as an unboxed bridge, the five-category 'What Changes the Name?' grid replaced by 'Why Quartz Names Change', 'Growth Forms & Inclusions' now carries real approved two-sentence body copy per stone (was placeholder-only), 'Where Agate, Chalcedony & Jasper Fit' simplified to plain prose plus links to the three built guides, and 'Quartz in Your Collection' replaced with three concise text cards. Correction pass (2026-08-12): Arkansas Quartz removed from 'Why Quartz Names Change' per the reversed Arkansas Quartz/Clear Quartz no-merge catalog decision (see ENCYCLOPEDIA-CATALOG-DECISIONS.md §11) — Arkansas Quartz is consolidated into Clear Quartz and no longer gets separate family-guide treatment. The section now runs four cards (Brandberg Amethyst, Tibetan Quartz, Crackle Quartz, Dream Quartz), each carrying a concise naming-category label (Locality / Claimed Locality / Treatment / Collector Name). Dream Quartz's approved copy has been added (was placeholder-only) and the card carries a stable #dream-quartz anchor. One open catalog gap remains: Phantom Quartz has no resolvable Stone ID in the current roster (pipeline/data/structured-values.generated.json has no match), so it renders as a non-clickable family-guide-only card instead of a linked catalog entry. The eight-expression roster, hero media, and 'Quartz asks' prompt are unchanged per the brief's explicit preservation instruction. Copy correction pass (2026-08-12): all eight 'Growth Forms & Inclusions' descriptions replaced with the exact approved copy (Spirit Quartz, Elestial Quartz, Faden Quartz, Lemurian Seed Crystal, Phantom Quartz, Rutilated Quartz, Tourmaline Quartz, Lodolite Quartz) — card names, images, pending-photo states, links, layout, typography, and subgroup structure unchanged. Structural pending-photo wells added (2026-08-12): all four 'Why Quartz Names Change' cards (Brandberg Amethyst, Tibetan Quartz, Crackle Quartz, Dream Quartz) now render a visible white image well with a restrained 'Photo pending' label, identical in dimensions and structure across all four and matching the white-well treatment used elsewhere on this page — no temporary, invented, or external imagery has been sourced or assigned; every well is a structural placeholder only, ready to take an approved image via ex.image with no further markup change. All four still need approved photography; Brandberg Amethyst remains the priority, with the eventual goal of one visually consistent image treatment across the full four-card row.",
     "hero": {
-      "mediaStoneIds": ["C-0105", "C-0119", "C-0121", "C-0108"],
+      "mediaStoneIds": [
+        "C-0105",
+        "C-0119",
+        "C-0121",
+        "C-0108"
+      ],
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Quartz Family Guide",
       "signatureLine": "A family of clarity, amplification, and many distinct expressions.",
@@ -920,10 +935,27 @@
       "title": "Why Quartz Names Change",
       "intro": "Quartz names often tell you what is different about the specimen: where it came from, how it grew, what is inside it, or what happened to it later. The mineral can stay the same while the name changes.",
       "examples": [
-        {"name": "Brandberg Amethyst", "label": "LOCALITY", "body": "Amethyst from Namibia's Brandberg region, known to collectors for its locality and distinctive inclusions. The name describes provenance, not a separate mineral."},
-        {"name": "Tibetan Quartz", "label": "CLAIMED LOCALITY", "body": "A Clear Quartz designation associated with Tibetan origin. The label alone does not prove where a specimen was mined."},
-        {"name": "Crackle Quartz", "label": "TREATMENT", "body": "Quartz that has been deliberately fractured to create its characteristic web of internal cracks."},
-        {"name": "Dream Quartz", "label": "COLLECTOR NAME", "anchor": "dream-quartz", "body": "Clear to smoky quartz holds wispy green Epidote inclusions that create soft, phantomlike scenes inside the crystal. Its collector name reflects both that dreamlike appearance and its modern association with dream awareness and meditative insight."}
+        {
+          "name": "Brandberg Amethyst",
+          "label": "LOCALITY",
+          "body": "Amethyst from Namibia's Brandberg region, known to collectors for its locality and distinctive inclusions. The name describes provenance, not a separate mineral."
+        },
+        {
+          "name": "Tibetan Quartz",
+          "label": "CLAIMED LOCALITY",
+          "body": "A Clear Quartz designation associated with Tibetan origin. The label alone does not prove where a specimen was mined."
+        },
+        {
+          "name": "Crackle Quartz",
+          "label": "TREATMENT",
+          "body": "Quartz that has been deliberately fractured to create its characteristic web of internal cracks."
+        },
+        {
+          "name": "Dream Quartz",
+          "label": "COLLECTOR NAME",
+          "anchor": "dream-quartz",
+          "body": "Clear to smoky quartz holds wispy green Epidote inclusions that create soft, phantomlike scenes inside the crystal. Its collector name reflects both that dreamlike appearance and its modern association with dream awareness and meditative insight."
+        }
       ]
     },
     "growthFormsInclusions": {
@@ -932,19 +964,43 @@
       "growthForms": {
         "label": "Growth Forms",
         "items": [
-          {"stoneId": "C-0104", "headline": "Tiny quartz crystals grow over a larger central crystal, creating a dense, sparkling surface."},
-          {"stoneId": "C-0366", "headline": "Stepped, layered faces form as the crystal grows unevenly, creating its sculptural appearance."},
-          {"stoneId": "C-0304", "headline": "A pale threadlike line records fractures that repeatedly opened and healed during growth."},
-          {"stoneId": "C-0323", "headline": "Horizontal growth striations mark the crystal faces. \"Lemurian\" is a collector and metaphysical designation, not a separate mineral variety."}
+          {
+            "stoneId": "C-0104",
+            "headline": "Tiny quartz crystals grow over a larger central crystal, creating a dense, sparkling surface."
+          },
+          {
+            "stoneId": "C-0366",
+            "headline": "Stepped, layered faces form as the crystal grows unevenly, creating its sculptural appearance."
+          },
+          {
+            "stoneId": "C-0304",
+            "headline": "A pale threadlike line records fractures that repeatedly opened and healed during growth."
+          },
+          {
+            "stoneId": "C-0323",
+            "headline": "Horizontal growth striations mark the crystal faces. \"Lemurian\" is a collector and metaphysical designation, not a separate mineral variety."
+          }
         ]
       },
       "inclusions": {
         "label": "Inclusions & Internal Features",
         "items": [
-          {"name": "Phantom Quartz", "headline": "A ghostlike outline preserves an earlier crystal surface that was later covered by new growth."},
-          {"stoneId": "C-0114", "headline": "Rutile needles become enclosed as quartz grows, forming fine threads or dramatic sprays."},
-          {"stoneId": "C-0112", "headline": "Dark Tourmaline needles or rods remain visible inside the clearer Quartz host."},
-          {"stoneId": "C-0115", "headline": "Mineral inclusions create cloudlike or landscape-like scenes, making each specimen distinct."}
+          {
+            "name": "Phantom Quartz",
+            "headline": "A ghostlike outline preserves an earlier crystal surface that was later covered by new growth."
+          },
+          {
+            "stoneId": "C-0114",
+            "headline": "Rutile needles become enclosed as quartz grows, forming fine threads or dramatic sprays."
+          },
+          {
+            "stoneId": "C-0112",
+            "headline": "Dark Tourmaline needles or rods remain visible inside the clearer Quartz host."
+          },
+          {
+            "stoneId": "C-0115",
+            "headline": "Mineral inclusions create cloudlike or landscape-like scenes, making each specimen distinct."
+          }
         ]
       }
     },
@@ -956,22 +1012,43 @@
         "They belong to the larger Quartz story, but each has enough personality to deserve its own guide."
       ],
       "links": [
-        {"label": "Explore Chalcedony", "slug": "chalcedony"},
-        {"label": "Explore Agate", "slug": "agate"},
-        {"label": "Explore Jasper", "slug": "jasper"}
+        {
+          "label": "Explore Chalcedony",
+          "slug": "chalcedony"
+        },
+        {
+          "label": "Explore Agate",
+          "slug": "agate"
+        },
+        {
+          "label": "Explore Jasper",
+          "slug": "jasper"
+        }
       ]
     },
     "garnetCollection": {
       "title": "Quartz in Your Collection",
       "intro": "Quartz can be clear or clouded, simple or elaborate, nearly empty inside or filled with another mineral's story. Yet beneath all that variety is the same remarkable material.",
       "cards": [
-        {"heading": "Look Closely", "body": "Quartz rewards inspection. Turn a crystal in the light and look for growth lines, phantoms, inclusions, fractures, and changes beneath the surface."},
-        {"heading": "Know the Name", "body": "A Quartz name may describe color, locality, growth, inclusions, or treatment. Knowing what the name refers to tells you much more than the label alone."},
-        {"heading": "Let the Specimen Lead", "body": "Two pieces with the same Quartz name can look completely different. Crystal shape, clarity, inclusions, and individual growth history make each specimen its own object."}
+        {
+          "heading": "Look Closely",
+          "body": "Quartz rewards inspection. Turn a crystal in the light and look for growth lines, phantoms, inclusions, fractures, and changes beneath the surface."
+        },
+        {
+          "heading": "Know the Name",
+          "body": "A Quartz name may describe color, locality, growth, inclusions, or treatment. Knowing what the name refers to tells you much more than the label alone."
+        },
+        {
+          "heading": "Let the Specimen Lead",
+          "body": "Two pieces with the same Quartz name can look completely different. Crystal shape, clarity, inclusions, and individual growth history make each specimen its own object."
+        }
       ]
     },
     "closingCallout": "The more closely you look at Quartz, the less ordinary it becomes.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"}
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    }
   },
   "fluorite": {
     "slug": "fluorite",
@@ -979,9 +1056,17 @@
     "encyclopediaFilterValue": "Fluorite",
     "editorialStatusNote": "Final Visual Cleanup pass (2026-08-02), revising the same-day work in place. Section order, roster, images, Stone IDs, links, collection layout, Yttrium Fluorite placeholder, and all approved copy are unchanged. Three corrections only: (1) the opalized-fluorite inset's spacing corrected — the gap above it (from the Expressions grid) reduced to 30px via a :has()-scoped reduction of Expressions' own major-section bottom margin, and the gap below it (before How Fluorite Gets Its Color) restored to the full 76px desktop/56px mobile major-section rhythm; the inset's own copy, styling, width, and position in the section order are unchanged; (2) the hero title shortened from 'Fluorite Family Guide' to 'Fluorite', with the FAMILY GUIDE eyebrow, subtitle, hero copy, images, and layout unchanged; (3) the shared .fg-hero-prompt component's border-top divider above 'Fluorite asks:' removed for this guide only, replaced with spacing alone (30px margin-top), matching the approved Calcite/Garnet treatment — prompt copy unchanged.",
     "closingCallout": "Fluorite turns structure into something you can see.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
-      "mediaStoneIds": ["C-0034", "C-0032", "C-0031", "C-0036"],
+      "mediaStoneIds": [
+        "C-0034",
+        "C-0032",
+        "C-0031",
+        "C-0036"
+      ],
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Fluorite Family Guide",
       "signatureLine": "A family of clarity, color, and remarkable geometry.",
@@ -993,14 +1078,40 @@
       "title": "Meet Eight Fluorite Expressions",
       "intro": "Fluorite appears under familiar color names, collector terminology, and trade names, but these cards still lead back to one mineral species. Start with the color, then notice how the crystal is built and how that color is arranged.",
       "members": [
-        {"stoneId": "C-0034", "quickView": "The familiar violet expression, ranging from soft lilac to deep grape."},
-        {"stoneId": "C-0032", "quickView": "Fresh mint to saturated green, sometimes paired with purple zoning."},
-        {"stoneId": "C-0031", "quickView": "Cool blue fluorite is less common and often shows striking transparency."},
-        {"stoneId": "C-0036", "quickView": "Honey, gold, and lemon tones bring out fluorite’s glassy clarity."},
-        {"stoneId": "C-0033", "quickView": "A less common expression, often prized in sharp, translucent crystals."},
-        {"stoneId": "C-0035", "quickView": "A collector name for fluorite with visible bands or zones of multiple colors."},
-        {"name": "Yttrium Fluorite", "quickView": "A collector term for fluorite in which yttrium replaces some calcium within the crystal structure."},
-        {"name": "Candy Fluorite", "image": "candy-fluorite.webp", "alt": "Polished Candy Fluorite point with green and purple color zoning", "quickView": "A trade name for vividly banded, multicolored fluorite, especially in polished pieces."}
+        {
+          "stoneId": "C-0034",
+          "quickView": "The familiar violet expression, ranging from soft lilac to deep grape."
+        },
+        {
+          "stoneId": "C-0032",
+          "quickView": "Fresh mint to saturated green, sometimes paired with purple zoning."
+        },
+        {
+          "stoneId": "C-0031",
+          "quickView": "Cool blue fluorite is less common and often shows striking transparency."
+        },
+        {
+          "stoneId": "C-0036",
+          "quickView": "Honey, gold, and lemon tones bring out fluorite’s glassy clarity."
+        },
+        {
+          "stoneId": "C-0033",
+          "quickView": "A less common expression, often prized in sharp, translucent crystals."
+        },
+        {
+          "stoneId": "C-0035",
+          "quickView": "A collector name for fluorite with visible bands or zones of multiple colors."
+        },
+        {
+          "name": "Yttrium Fluorite",
+          "quickView": "A collector term for fluorite in which yttrium replaces some calcium within the crystal structure."
+        },
+        {
+          "name": "Candy Fluorite",
+          "image": "candy-fluorite.webp",
+          "alt": "Polished Candy Fluorite point with green and purple color zoning",
+          "quickView": "A trade name for vividly banded, multicolored fluorite, especially in polished pieces."
+        }
       ]
     },
     "opalizedFluoriteNote": {
@@ -1011,9 +1122,21 @@
       "title": "How Fluorite Gets Its Color",
       "intro": "Fluorite’s colors begin inside the crystal. Tiny changes in chemistry and structure affect which parts of white light are absorbed and which reach our eyes.",
       "panels": [
-        {"label": "Trace elements", "accent": "chemistry", "body": "Small amounts of other elements can enter the crystal as it grows. Their presence may influence the colors a specimen can display."},
-        {"label": "Color centers", "accent": "lattice", "body": "A missing atom or displaced electron can create a color center within fluorite’s crystal lattice. Natural radiation may form or alter these centers, changing how the crystal absorbs light."},
-        {"label": "More than one answer", "accent": "growth", "body": "Fluorite color does not follow one universal recipe. Trace elements, color centers, and other structural changes may work together, so two similarly colored specimens may not owe their appearance to exactly the same cause."}
+        {
+          "label": "Trace elements",
+          "accent": "chemistry",
+          "body": "Small amounts of other elements can enter the crystal as it grows. Their presence may influence the colors a specimen can display."
+        },
+        {
+          "label": "Color centers",
+          "accent": "lattice",
+          "body": "A missing atom or displaced electron can create a color center within fluorite’s crystal lattice. Natural radiation may form or alter these centers, changing how the crystal absorbs light."
+        },
+        {
+          "label": "More than one answer",
+          "accent": "growth",
+          "body": "Fluorite color does not follow one universal recipe. Trace elements, color centers, and other structural changes may work together, so two similarly colored specimens may not owe their appearance to exactly the same cause."
+        }
       ]
     },
     "zoningPhantoms": {
@@ -1021,11 +1144,24 @@
       "intro": "Many collectible fluorite crystals grow from mineral-rich fluids moving through cracks, veins, and open cavities in rock. As those fluids and surrounding conditions change, the next layer of fluorite may grow with a different color or clarity.",
       "image": "Fluorite-Calcite-Chalcopyrite-260129.webp",
       "imageAlt": "Fluorite with Calcite and Chalcopyrite showing internal color zoning and banding",
-      "pendingAsset": {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"},
+      "pendingAsset": {
+        "filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg",
+        "creator": "Rob Lavinsky / iRocks.com",
+        "license": "CC BY-SA 3.0"
+      },
       "terms": [
-        {"label": "Zoning", "body": "A zone is an area of different color or color intensity within one crystal. It marks a change that occurred while the crystal was still growing."},
-        {"label": "Banding", "body": "When growth conditions shift repeatedly, the zones can build into stripes or stacked bands. Slices and polished pieces often make this sequence especially easy to see."},
-        {"label": "Phantoms", "body": "Sometimes a later layer follows the outline of an earlier crystal stage. The older shape remains visible inside as a nested phantom."}
+        {
+          "label": "Zoning",
+          "body": "A zone is an area of different color or color intensity within one crystal. It marks a change that occurred while the crystal was still growing."
+        },
+        {
+          "label": "Banding",
+          "body": "When growth conditions shift repeatedly, the zones can build into stripes or stacked bands. Slices and polished pieces often make this sequence especially easy to see."
+        },
+        {
+          "label": "Phantoms",
+          "body": "Sometimes a later layer follows the outline of an earlier crystal stage. The older shape remains visible inside as a nested phantom."
+        }
       ],
       "closingLine": "Read from the center outward, and a zoned fluorite crystal can act like a small record of changing growth."
     },
@@ -1039,7 +1175,11 @@
           "image": "Fluorite-171715.webp",
           "alt": "Cubic Fluorite crystal with beveled corners, Rob Lavinsky / iRocks.com specimen",
           "placeholderLabel": "Photo pending",
-          "pendingAsset": {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
+          "pendingAsset": {
+            "filename": "Fluorite-171715.jpg",
+            "creator": "Rob Lavinsky / iRocks.com",
+            "license": "CC BY-SA 3.0"
+          }
         },
         {
           "title": "Octahedron",
@@ -1047,7 +1187,11 @@
           "image": "Fluorite-282542.webp",
           "alt": "Naturally grown octahedral Fluorite crystal, Rob Lavinsky / iRocks.com specimen",
           "placeholderLabel": "Photo pending",
-          "pendingAsset": {"filename": "Fluorite-282542.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0"}
+          "pendingAsset": {
+            "filename": "Fluorite-282542.jpg",
+            "creator": "Rob Lavinsky / iRocks.com",
+            "license": "CC BY-SA 3.0"
+          }
         },
         {
           "title": "Cleavage Piece",
@@ -1055,7 +1199,11 @@
           "image": "Diamond-shaped fluorite crystal.webp",
           "alt": "Diamond-shaped Fluorite cleavage fragment showing octahedral cleavage",
           "placeholderLabel": "Photo pending",
-          "pendingAsset": {"filename": "Diamond-shaped fluorite crystal.jpg", "creator": "James St. John", "license": "CC BY 2.0"}
+          "pendingAsset": {
+            "filename": "Diamond-shaped fluorite crystal.jpg",
+            "creator": "James St. John",
+            "license": "CC BY 2.0"
+          }
         }
       ]
     },
@@ -1064,28 +1212,78 @@
       "intro": "Fluorite gave fluorescence its name, but not every specimen glows. The response depends on what is present inside the crystal and on the ultraviolet light used to examine it.",
       "image": "Fluorit uv hg.webp",
       "imageAlt": "Fluorite specimen shown under white light and shortwave UV light, comparing its fluorescent glow",
-      "pendingAsset": {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5"},
+      "pendingAsset": {
+        "filename": "Fluorit uv hg.jpg",
+        "creator": "Hannes Grobe / Alfred Wegener Institute",
+        "license": "CC BY-SA 2.5"
+      },
       "lessons": [
-        {"label": "What is happening?", "body": "Ultraviolet light gives energy to electrons inside the crystal. When those electrons return to a lower-energy state, some of that energy may be released as visible light."},
-        {"label": "Why only some fluorite glows", "body": "Certain trace elements, structural defects, or organic material can act as activators. Without the right activators, a specimen may show little or no visible response."},
-        {"label": "Why the glow varies", "body": "Blue and violet are familiar responses, but other colors can occur. The color and intensity may also differ under long-wave and short-wave ultraviolet light."},
-        {"label": "Fluorescence or afterglow?", "body": "Fluorescence is visible while the ultraviolet source is on. If the light continues after the source is removed, the continuing response is called phosphorescence."}
+        {
+          "label": "What is happening?",
+          "body": "Ultraviolet light gives energy to electrons inside the crystal. When those electrons return to a lower-energy state, some of that energy may be released as visible light."
+        },
+        {
+          "label": "Why only some fluorite glows",
+          "body": "Certain trace elements, structural defects, or organic material can act as activators. Without the right activators, a specimen may show little or no visible response."
+        },
+        {
+          "label": "Why the glow varies",
+          "body": "Blue and violet are familiar responses, but other colors can occur. The color and intensity may also differ under long-wave and short-wave ultraviolet light."
+        },
+        {
+          "label": "Fluorescence or afterglow?",
+          "body": "Fluorescence is visible while the ultraviolet source is on. If the light continues after the source is removed, the continuing response is called phosphorescence."
+        }
       ]
     },
     "collection": {
       "title": "Fluorite in Your Collection",
       "cards": [
-        {"title": "Handle gently", "body": "Fluorite is softer than many familiar collection stones and has perfect cleavage. Give it its own protected space, keep it away from harder specimens, and clean it gently without harsh methods."},
-        {"title": "Change the angle", "body": "Turn fluorite slowly in natural light and look through its edges. Color zones, internal outlines, and changes in transparency often become clearer from a different direction."},
-        {"title": "Look closely", "body": "Small octahedrons may be naturally grown crystals or cleavage pieces. Both reveal fluorite’s geometry, but they arrived at that shape in different ways."}
+        {
+          "title": "Handle gently",
+          "body": "Fluorite is softer than many familiar collection stones and has perfect cleavage. Give it its own protected space, keep it away from harder specimens, and clean it gently without harsh methods."
+        },
+        {
+          "title": "Change the angle",
+          "body": "Turn fluorite slowly in natural light and look through its edges. Color zones, internal outlines, and changes in transparency often become clearer from a different direction."
+        },
+        {
+          "title": "Look closely",
+          "body": "Small octahedrons may be naturally grown crystals or cleavage pieces. Both reveal fluorite’s geometry, but they arrived at that shape in different ways."
+        }
       ]
     },
     "pendingAssets": [
-      {"filename": "Fluorite-171715.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Cube, Octahedron, or Cleavage Piece? — Cubic Crystal position"},
-      {"filename": "Fluorite-282542.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Cube, Octahedron, or Cleavage Piece? — Natural Octahedron position"},
-      {"filename": "Diamond-shaped fluorite crystal.jpg", "creator": "James St. John", "license": "CC BY 2.0", "use": "Cube, Octahedron, or Cleavage Piece? — Cleavage Piece position"},
-      {"filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg", "creator": "Rob Lavinsky / iRocks.com", "license": "CC BY-SA 3.0", "use": "Color Zoning, Banding & Phantoms"},
-      {"filename": "Fluorit uv hg.jpg", "creator": "Hannes Grobe / Alfred Wegener Institute", "license": "CC BY-SA 2.5", "use": "Why Some Fluorite Glows — white light vs. shortwave UV comparison"}
+      {
+        "filename": "Fluorite-171715.jpg",
+        "creator": "Rob Lavinsky / iRocks.com",
+        "license": "CC BY-SA 3.0",
+        "use": "Cube, Octahedron, or Cleavage Piece? — Cubic Crystal position"
+      },
+      {
+        "filename": "Fluorite-282542.jpg",
+        "creator": "Rob Lavinsky / iRocks.com",
+        "license": "CC BY-SA 3.0",
+        "use": "Cube, Octahedron, or Cleavage Piece? — Natural Octahedron position"
+      },
+      {
+        "filename": "Diamond-shaped fluorite crystal.jpg",
+        "creator": "James St. John",
+        "license": "CC BY 2.0",
+        "use": "Cube, Octahedron, or Cleavage Piece? — Cleavage Piece position"
+      },
+      {
+        "filename": "Fluorite-Calcite-Chalcopyrite-260129.jpg",
+        "creator": "Rob Lavinsky / iRocks.com",
+        "license": "CC BY-SA 3.0",
+        "use": "Color Zoning, Banding & Phantoms"
+      },
+      {
+        "filename": "Fluorit uv hg.jpg",
+        "creator": "Hannes Grobe / Alfred Wegener Institute",
+        "license": "CC BY-SA 2.5",
+        "use": "Why Some Fluorite Glows — white light vs. shortwave UV comparison"
+      }
     ]
   },
   "feldspar": {
@@ -1094,9 +1292,17 @@
     "encyclopediaFilterValue": "Feldspar",
     "editorialStatusNote": "Correction pass (2026-08-01, second same-day pass) applied on top of the prior controlled rebuild (commit 6496142), per a follow-up brief that explicitly supersedes feldspar-family-guide-final-copy-and-visual-plan.md wherever the two differ. Changes this pass: bridge deleted (no replacement transition); hero prompt restructured to span the full hero width below the two-column row; Meet Eight Feldspar Expressions given shorter one-sentence-per-stone copy; branch heading changed from 'Potassium Feldspar' to 'Alkali Feldspar' (internal accent key renamed potassium->alkali, same warm color, no visual change) with familiar-stone images enlarged and labeled; the oversized two-image Sunstone comparison section replaced with a compact single-paragraph connector (no image, no placeholder); Glow/Flash/Sparkle re-ordered ('What to notice' above the body paragraph in each card) with updated copy and its trailing closing sentence removed; Moonstone decoder rebuilt as a single five-card 3-2 grid with Green Moonstone as the fifth card (identity label 'Not Feldspar · Usually Garnierite', not a warning badge) — the separate Green Moonstone horizontal strip is gone; Labradorite/Spectrolite/Larvikite given updated body copy with its bottom comparison-line strip removed; closing box treatment removed in favor of a bare italic line + compact pill, matching Calcite/Copper. All eight roster IDs, images, and Stone IDs are unchanged from the prior verified pass. The 'Feldspar in Your Collection' section is UNCHANGED this pass and remains the three care-oriented cards (Display It Where the Light Can Find It / Protect It / Learn the Name) — this brief's replacement three teaching cards ('Two Branches' / 'What Moves the Light' / 'Recognizing Feldspar') do not exist anywhere in this data file or in family-guide.js, so per the brief's own stop condition for that section, no swap was made; flagged for Christie to supply the actual approved card copy or confirm the current cards should stay. No dedicated Feldspar footer Photo Credits anchor exists yet in family-guide.js's fgSetFooterCreditsLink() anchoredSlugs map (unchanged from the prior pass) — footer Photo Credits still falls back to the default credits.html destination, which lists this guide's imageCredits generically.",
     "closingCallout": "Feldspar reminds us that perspective can reveal what structure keeps hidden.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
-      "mediaStoneIds": ["C-0162", "C-0028", "C-0029", "C-0025"],
+      "mediaStoneIds": [
+        "C-0162",
+        "C-0028",
+        "C-0029",
+        "C-0025"
+      ],
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Feldspar Family Guide",
       "signatureLine": "A mineral family shaped by structure, color, and moving light.",
@@ -1108,14 +1314,54 @@
       "title": "Meet Eight Feldspar Expressions",
       "intro": "Feldspar can glow, flash, sparkle, or make its impression through color alone. These eight stones reveal how varied one mineral family can be.",
       "members": [
-        {"stoneId": "C-0162", "paragraphs": ["A soft, floating glow moves beneath the surface. This effect is called adularescence."]},
-        {"stoneId": "C-0395", "paragraphs": ["Warm blush and apricot tones pair with a soft Moonstone sheen."]},
-        {"stoneId": "C-0159", "paragraphs": ["A dark body carries pale streaks, silvery movement, or subtle flash."]},
-        {"stoneId": "C-0030", "paragraphs": ["White Labradorite sold under a Moonstone name, with bright blue or multicolored flash."]},
-        {"stoneId": "C-0028", "paragraphs": ["Broad flashes of blue, green, gold, orange, or violet appear as the angle changes."]},
-        {"stoneId": "C-0166", "paragraphs": ["Finnish Labradorite prized for broad, saturated flashes across several colors."]},
-        {"stoneId": "C-0029", "paragraphs": ["Reflective inclusions create fine glitter, scattered sparks, or larger coppery flashes."]},
-        {"stoneId": "C-0025", "paragraphs": ["Blue-green color and pale streaking give this Feldspar its unmistakable look."]}
+        {
+          "stoneId": "C-0162",
+          "paragraphs": [
+            "A soft, floating glow moves beneath the surface. This effect is called adularescence."
+          ]
+        },
+        {
+          "stoneId": "C-0395",
+          "paragraphs": [
+            "Warm blush and apricot tones pair with a soft Moonstone sheen."
+          ]
+        },
+        {
+          "stoneId": "C-0159",
+          "paragraphs": [
+            "A dark body carries pale streaks, silvery movement, or subtle flash."
+          ]
+        },
+        {
+          "stoneId": "C-0030",
+          "paragraphs": [
+            "White Labradorite sold under a Moonstone name, with bright blue or multicolored flash."
+          ]
+        },
+        {
+          "stoneId": "C-0028",
+          "paragraphs": [
+            "Broad flashes of blue, green, gold, orange, or violet appear as the angle changes."
+          ]
+        },
+        {
+          "stoneId": "C-0166",
+          "paragraphs": [
+            "Finnish Labradorite prized for broad, saturated flashes across several colors."
+          ]
+        },
+        {
+          "stoneId": "C-0029",
+          "paragraphs": [
+            "Reflective inclusions create fine glitter, scattered sparks, or larger coppery flashes."
+          ]
+        },
+        {
+          "stoneId": "C-0025",
+          "paragraphs": [
+            "Blue-green color and pale streaking give this Feldspar its unmistakable look."
+          ]
+        }
       ]
     },
     "branches": {
@@ -1128,8 +1374,14 @@
           "body": "This branch includes Moonstone's floating light and Amazonite's vivid blue-green color.",
           "familiarStonesLabel": "Familiar Stones",
           "thumbs": [
-            {"stoneId": "C-0162", "name": "Moonstone"},
-            {"stoneId": "C-0025", "name": "Amazonite"}
+            {
+              "stoneId": "C-0162",
+              "name": "Moonstone"
+            },
+            {
+              "stoneId": "C-0025",
+              "name": "Amazonite"
+            }
           ]
         },
         {
@@ -1138,9 +1390,18 @@
           "body": "This branch includes Labradorite, Rainbow Moonstone, and Spectrolite, with light that can sweep across dark or pale bodies.",
           "familiarStonesLabel": "Familiar Stones",
           "thumbs": [
-            {"stoneId": "C-0028", "name": "Labradorite"},
-            {"stoneId": "C-0166", "name": "Spectrolite"},
-            {"stoneId": "C-0030", "name": "Rainbow Moonstone"}
+            {
+              "stoneId": "C-0028",
+              "name": "Labradorite"
+            },
+            {
+              "stoneId": "C-0166",
+              "name": "Spectrolite"
+            },
+            {
+              "stoneId": "C-0030",
+              "name": "Rainbow Moonstone"
+            }
           ]
         }
       ]
@@ -1185,29 +1446,82 @@
       "title": "Moonstone Is More Complicated Than Its Name Suggests",
       "intro": "Moonstone names can describe different colors, optical effects, and even different mineral identities. The quickest way to separate them is to notice what the light and body color are doing.",
       "items": [
-        {"stoneId": "C-0162", "label": "Moonstone", "body": "Classic Moonstone is known for adularescence, the soft light that drifts beneath the surface.", "bestClue": "Best clue: A soft internal glow."},
-        {"stoneId": "C-0030", "label": "Rainbow Moonstone", "body": "Rainbow Moonstone is usually white Labradorite, with bright blue or multicolored flash through a pale body.", "bestClue": "Best clue: Bright flash through a pale body."},
-        {"stoneId": "C-0395", "label": "Peach Moonstone", "body": "Warm blush and apricot tones pair with a gentle Moonstone sheen.", "bestClue": "Best clue: Warm color with a soft glow."},
-        {"stoneId": "C-0159", "label": "Black Moonstone", "body": "A darker body carries pale streaks, silver movement, or subtle flash.", "bestClue": "Best clue: Dark color with pale optical movement."},
-        {"stoneId": "C-0399", "label": "Green Moonstone", "identityLabel": "Not Feldspar · Usually Garnierite", "body": "Still Point's Green Moonstone is Garnierite, a nickel-bearing silicate material sold under a Moonstone market name.", "bestClue": "Best clue: Green color without Moonstone's inner glow."}
+        {
+          "stoneId": "C-0162",
+          "label": "Moonstone",
+          "body": "Classic Moonstone is known for adularescence, the soft light that drifts beneath the surface.",
+          "bestClue": "Best clue: A soft internal glow."
+        },
+        {
+          "stoneId": "C-0030",
+          "label": "Rainbow Moonstone",
+          "body": "Rainbow Moonstone is usually white Labradorite, with bright blue or multicolored flash through a pale body.",
+          "bestClue": "Best clue: Bright flash through a pale body."
+        },
+        {
+          "stoneId": "C-0395",
+          "label": "Peach Moonstone",
+          "body": "Warm blush and apricot tones pair with a gentle Moonstone sheen.",
+          "bestClue": "Best clue: Warm color with a soft glow."
+        },
+        {
+          "stoneId": "C-0159",
+          "label": "Black Moonstone",
+          "body": "A darker body carries pale streaks, silver movement, or subtle flash.",
+          "bestClue": "Best clue: Dark color with pale optical movement."
+        },
+        {
+          "stoneId": "C-0399",
+          "label": "Green Moonstone",
+          "identityLabel": "Not Feldspar · Usually Garnierite",
+          "body": "Still Point's Green Moonstone is Garnierite, a nickel-bearing silicate material sold under a Moonstone market name.",
+          "bestClue": "Best clue: Green color without Moonstone's inner glow."
+        }
       ]
     },
     "lsl": {
       "title": "Labradorite, Spectrolite & Larvikite",
       "intro": "These three names often appear beside one another because all can show shifting light. Look beneath the flash, though, and they tell three different stories: a Feldspar mineral, a celebrated Finnish form of that mineral, and a Norwegian Feldspar-rich rock.",
       "items": [
-        {"stoneId": "C-0028", "label": "Labradorite", "body": "Labradorite is a plagioclase Feldspar known for broad fields of blue, green, gold, orange, or multicolored labradorescence."},
-        {"stoneId": "C-0166", "label": "Spectrolite", "body": "Spectrolite is Finnish Labradorite celebrated for especially broad, saturated flashes that may reveal several colors across one polished face."},
-        {"stoneId": "C-0396", "label": "Larvikite", "body": "Larvikite is a Norwegian Feldspar-rich rock rather than a Labradorite variety. Its crystals can produce silvery or blue flashes, but its identity is distinct."}
+        {
+          "stoneId": "C-0028",
+          "label": "Labradorite",
+          "body": "Labradorite is a plagioclase Feldspar known for broad fields of blue, green, gold, orange, or multicolored labradorescence."
+        },
+        {
+          "stoneId": "C-0166",
+          "label": "Spectrolite",
+          "body": "Spectrolite is Finnish Labradorite celebrated for especially broad, saturated flashes that may reveal several colors across one polished face."
+        },
+        {
+          "stoneId": "C-0396",
+          "label": "Larvikite",
+          "body": "Larvikite is a Norwegian Feldspar-rich rock rather than a Labradorite variety. Its crystals can produce silvery or blue flashes, but its identity is distinct."
+        }
       ]
     },
     "collection": {
       "title": "Feldspar in Your Collection",
       "intro": "Feldspar rewards interaction. Its strongest light may hide until the stone turns, and its familiar market name may reveal only part of its identity. A little attention makes the collection more beautiful, more useful, and easier to protect.",
       "cards": [
-        {"title": "Two Branches", "paragraphs": ["Feldspar follows two main mineral branches: Alkali Feldspar and Plagioclase Feldspar. Familiar trade names may sit within either branch, while Sunstone can cross between them."]},
-        {"title": "What Moves the Light", "paragraphs": ["Feldspar's best-known optical effects come from internal structure or reflective inclusions. Moonstone glows, Labradorite flashes, and Sunstone sparkles as the viewing angle changes."]},
-        {"title": "Recognizing Feldspar", "paragraphs": ["Look at both the body of the stone and the way it handles light. Color, streaking, glow, flash, and sparkle can help separate familiar Feldspar expressions."]}
+        {
+          "title": "Two Branches",
+          "paragraphs": [
+            "Feldspar follows two main mineral branches: Alkali Feldspar and Plagioclase Feldspar. Familiar trade names may sit within either branch, while Sunstone can cross between them."
+          ]
+        },
+        {
+          "title": "What Moves the Light",
+          "paragraphs": [
+            "Feldspar's best-known optical effects come from internal structure or reflective inclusions. Moonstone glows, Labradorite flashes, and Sunstone sparkles as the viewing angle changes."
+          ]
+        },
+        {
+          "title": "Recognizing Feldspar",
+          "paragraphs": [
+            "Look at both the body of the stone and the way it handles light. Color, streaking, glow, flash, and sparkle can help separate familiar Feldspar expressions."
+          ]
+        }
       ]
     },
     "imageCredits": [
@@ -1234,8 +1548,18 @@
       }
     ],
     "pendingAssets": [
-      {"filename": "Spectrolite from Ylämaa.jpg", "creator": null, "license": null, "use": "Named in brief but not yet assigned to a rendered section position — reported as unplaced"},
-      {"filename": "Pierrelune.jpg", "creator": null, "license": null, "use": "Named in brief (Polished Moonstone) but not assigned to a section position — Moonstone's card already uses an approved Christie photograph, so this was not forced into a slot; reported as unplaced"}
+      {
+        "filename": "Spectrolite from Ylämaa.jpg",
+        "creator": null,
+        "license": null,
+        "use": "Named in brief but not yet assigned to a rendered section position — reported as unplaced"
+      },
+      {
+        "filename": "Pierrelune.jpg",
+        "creator": null,
+        "license": null,
+        "use": "Named in brief (Polished Moonstone) but not assigned to a section position — Moonstone's card already uses an approved Christie photograph, so this was not forced into a slot; reported as unplaced"
+      }
     ]
   },
   "chalcedony": {
@@ -1245,7 +1569,10 @@
     "editorialStatusNote": "First implementation pass (2026-07-23) for Christie's review. This guide's central job is to bridge Quartz (macrocrystalline) and Agate/Jasper (cataloged as separate families): it explains that Chalcedony is microcrystalline Quartz, not a separate mineral species, without pulling Agate or Jasper roster stones into Chalcedony's own two-member roster (Blue Chalcedony C-0082, Pink Chalcedony C-0084 — both verified live against ENCYCLOPEDIA_PHOTOS/pipeline data 2026-07-23). Hero condensedIntro/overview paragraph, What Chalcedony Actually Is, Chalcedony/Agate/Jasper Fit, Color/Translucency/Surface, Forms, and Wider Quartz Story sections use restrained working copy built only from the facts and structure given in this pass's brief — none of it is Christie's locked final wording, and hero signatureLine/closingCallout are plain working drafts (no 'asks' prompt was written, since no approved emotional-hook copy exists yet for this guide). Roster cards (Meet the Chalcedony Family) carry no identityLabel/quickView copy by design — name and Quick View only, no invented identity or metaphysical claims. No licensed educational photography has been approved for this pass, so What Chalcedony Actually Is (macro/micro comparison), Color/Translucency/Surface, and every Forms card render labeled 'Photo pending' placeholders rather than substituting any other image; nothing is recorded in imageCredits because nothing third-party is actually displayed yet. Chalcedony/Agate/Jasper Fit reuses the same representative stoneIds (C-0077 Moss Agate, C-0099 Red Jasper) already approved and live in the Quartz guide's own relationship section, for the identical illustrative purpose — not a roster change. Agate and Jasper Family Guide links render as disabled 'Family guide coming soon' buttons (not dead links) since those guides don't exist yet; the Quartz Family Guide link is real and functional. Collection section is working draft covering the requested practical distinctions (translucent/opaque, even color/banding, polished/natural surface, trade-name confidence, provenance/treatment uncertainty), flagged pending via editorialNote like Quartz/Feldspar's collection sections. No Production Master or Supabase family-classification values were changed to build this guide.",
     "closingCallout": "Chalcedony is quartz too fine to see on its own — and the quiet bridge to Agate and Jasper.",
     "hero": {
-      "mediaStoneIds": ["C-0082", "C-0084"],
+      "mediaStoneIds": [
+        "C-0082",
+        "C-0084"
+      ],
       "eyebrow": "FAMILY GUIDE",
       "title": "Chalcedony Family Guide",
       "signatureLine": "Working draft — Quartz, grown too fine to see as separate crystals.",
@@ -1258,8 +1585,12 @@
       "title": "Meet the Chalcedony Family",
       "intro": "Two rostered expressions currently carry a standalone Chalcedony entry in this encyclopedia.",
       "members": [
-        {"stoneId": "C-0082"},
-        {"stoneId": "C-0084"}
+        {
+          "stoneId": "C-0082"
+        },
+        {
+          "stoneId": "C-0084"
+        }
       ]
     },
     "whatChalcedonyIs": {
@@ -1275,34 +1606,88 @@
       "intro": "Mineralogically, Chalcedony, Agate, and Jasper all belong to the wider quartz story. This encyclopedia catalogs them as separate families because each has enough of its own naming, pattern vocabulary, and collector history to deserve its own path.",
       "quartzLinkLabel": "Open the Quartz Family Guide",
       "branches": [
-        {"label": "Chalcedony", "stoneId": "C-0082", "description": "Generally unbanded or subtly patterned microcrystalline quartz, often translucent.", "current": true},
-        {"label": "Agate", "stoneId": "C-0077", "description": "Organized separately because banding, pattern terminology, collector identity, and market naming are extensive enough to deserve their own path."},
-        {"label": "Jasper", "stoneId": "C-0099", "description": "Organized separately because it is typically opaque and carries its own large commercial and collector vocabulary."}
+        {
+          "label": "Chalcedony",
+          "stoneId": "C-0082",
+          "description": "Generally unbanded or subtly patterned microcrystalline quartz, often translucent.",
+          "current": true
+        },
+        {
+          "label": "Agate",
+          "stoneId": "C-0077",
+          "description": "Organized separately because banding, pattern terminology, collector identity, and market naming are extensive enough to deserve their own path."
+        },
+        {
+          "label": "Jasper",
+          "stoneId": "C-0099",
+          "description": "Organized separately because it is typically opaque and carries its own large commercial and collector vocabulary."
+        }
       ]
     },
     "colorTranslucencySurface": {
       "title": "Color, Translucency & Surface",
       "intro": "Readers commonly recognize Chalcedony by a handful of visual qualities. None of these is a guaranteed test on its own — surface treatment, polish, and lighting all affect how a specimen looks — but together they describe the family's general character.",
-      "qualities": ["Soft, diffuse translucency", "Waxy luster", "Even color", "Clouding", "Subtle patterning", "Botryoidal surfaces"],
+      "qualities": [
+        "Soft, diffuse translucency",
+        "Waxy luster",
+        "Even color",
+        "Clouding",
+        "Subtle patterning",
+        "Botryoidal surfaces"
+      ],
       "note": "Individual specimens can depart from any single quality above; treat these as common tendencies, not a checklist that must all be present."
     },
     "forms": {
       "title": "Forms Chalcedony Takes",
       "intro": "The same material appears in a range of natural and worked forms.",
       "items": [
-        {"title": "Nodules", "body": "Rounded masses that grew filling a cavity in surrounding rock.", "placeholderLabel": "Photo pending"},
-        {"title": "Seams", "body": "Thin veins filling cracks or fractures in host rock.", "placeholderLabel": "Photo pending"},
-        {"title": "Botryoidal Growth", "body": "Clustered, rounded surface texture, often described as grape-like.", "placeholderLabel": "Photo pending"},
-        {"title": "Polished Cabochons", "body": "Cut and polished into smooth, domed shapes for jewelry.", "placeholderLabel": "Photo pending"},
-        {"title": "Beads", "body": "Shaped and drilled for stringing.", "placeholderLabel": "Photo pending"},
-        {"title": "Carvings", "body": "Worked into decorative or figural forms.", "placeholderLabel": "Photo pending"},
-        {"title": "Rough Masses", "body": "Uncut natural material showing the mineral's raw surface.", "placeholderLabel": "Photo pending"}
+        {
+          "title": "Nodules",
+          "body": "Rounded masses that grew filling a cavity in surrounding rock.",
+          "placeholderLabel": "Photo pending"
+        },
+        {
+          "title": "Seams",
+          "body": "Thin veins filling cracks or fractures in host rock.",
+          "placeholderLabel": "Photo pending"
+        },
+        {
+          "title": "Botryoidal Growth",
+          "body": "Clustered, rounded surface texture, often described as grape-like.",
+          "placeholderLabel": "Photo pending"
+        },
+        {
+          "title": "Polished Cabochons",
+          "body": "Cut and polished into smooth, domed shapes for jewelry.",
+          "placeholderLabel": "Photo pending"
+        },
+        {
+          "title": "Beads",
+          "body": "Shaped and drilled for stringing.",
+          "placeholderLabel": "Photo pending"
+        },
+        {
+          "title": "Carvings",
+          "body": "Worked into decorative or figural forms.",
+          "placeholderLabel": "Photo pending"
+        },
+        {
+          "title": "Rough Masses",
+          "body": "Uncut natural material showing the mineral's raw surface.",
+          "placeholderLabel": "Photo pending"
+        }
       ]
     },
     "widerQuartzStory": {
       "title": "Chalcedony in the Wider Quartz Story",
       "intro": "The chalcedony umbrella intersects with many familiar market names and textures. These are educational relationships, not a statement about how this encyclopedia currently browses or groups every stone below — Carnelian and Chrysoprase, for example, are not necessarily filed under the Chalcedony family here.",
-      "examples": ["Carnelian", "Chrysoprase", "Onyx", "Agate", "Jasper"],
+      "examples": [
+        "Carnelian",
+        "Chrysoprase",
+        "Onyx",
+        "Agate",
+        "Jasper"
+      ],
       "note": "Names above are shown for educational context only and are not linked to catalog entries or roster assignments in this pass."
     },
     "collection": {
@@ -1333,7 +1718,10 @@
     ],
     "closingCallout": "Agate does not reveal everything at once.",
     "closingEmphasis": "It rewards the second look.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Agate Family Guide",
@@ -1362,37 +1750,103 @@
       "gridClass": "fg-card-grid--10",
       "splitPhrase": true,
       "members": [
-        {"stoneId": "C-0069", "headline": "Soft blue and white bands curve through this translucent chalcedony in fine, lace-like lines. Its identity comes from the delicacy of the banding rather than from one exact shade of blue."},
-        {"stoneId": "C-0070", "headline": "Botswana Agate is known for closely spaced parallel bands, often layered in gray, brown, white, pink, or muted violet. Its name joins a distinctive banded appearance with the country for which the material is known."},
-        {"stoneId": "C-0071", "headline": "Loops, eyes, waves, and crowded bands give Crazy Lace Agate its animated pattern. The name describes the visual effect rather than a separate mineral identity."},
-        {"stoneId": "C-0072", "headline": "Dark mineral inclusions branch through pale chalcedony in forms that resemble ferns, trees, or frost. They are mineral growths, not preserved plants."},
-        {"stoneId": "C-0074", "headline": "Fire Agate can flash green, gold, orange, or red when light meets extremely thin iron-bearing layers within the chalcedony. The effect shifts with the viewing angle, so a still photograph must catch the light carefully to show it."},
-        {"stoneId": "C-0075", "headline": "Flower Agate contains soft plumes or clustered internal markings that resemble blossoms. The familiar name describes that appearance without making the material a separate mineral variety."},
-        {"stoneId": "C-0076", "headline": "Grape Agate grows as closely packed rounded forms that resemble a cluster of grapes. Despite the name, it is more precisely described as botryoidal chalcedony, and its surface growth is the feature that sets it apart."},
-        {"stoneId": "C-0077", "headline": "Moss Agate contains wispy, branching, or suspended mineral inclusions that can look like moss spreading through translucent chalcedony. It usually has little or none of the regular banding associated with classic Agate."},
-        {"stoneId": "C-0078", "headline": "Orca Agate is a modern trade name for chalcedony patterned with rounded pools and patches, often in gray, white, or blue-gray. The name captures its marine appearance rather than a formal mineral distinction."},
-        {"stoneId": "C-0079", "headline": "Tree Agate is commonly used for pale, more opaque chalcedony marked by green branching inclusions. Its boundary with Moss Agate is not rigid, and the two names are often applied according to appearance and trade convention."}
+        {
+          "stoneId": "C-0069",
+          "headline": "Soft blue and white bands curve through this translucent chalcedony in fine, lace-like lines. Its identity comes from the delicacy of the banding rather than from one exact shade of blue."
+        },
+        {
+          "stoneId": "C-0070",
+          "headline": "Botswana Agate is known for closely spaced parallel bands, often layered in gray, brown, white, pink, or muted violet. Its name joins a distinctive banded appearance with the country for which the material is known."
+        },
+        {
+          "stoneId": "C-0071",
+          "headline": "Loops, eyes, waves, and crowded bands give Crazy Lace Agate its animated pattern. The name describes the visual effect rather than a separate mineral identity."
+        },
+        {
+          "stoneId": "C-0072",
+          "headline": "Dark mineral inclusions branch through pale chalcedony in forms that resemble ferns, trees, or frost. They are mineral growths, not preserved plants."
+        },
+        {
+          "stoneId": "C-0074",
+          "headline": "Fire Agate can flash green, gold, orange, or red when light meets extremely thin iron-bearing layers within the chalcedony. The effect shifts with the viewing angle, so a still photograph must catch the light carefully to show it."
+        },
+        {
+          "stoneId": "C-0075",
+          "headline": "Flower Agate contains soft plumes or clustered internal markings that resemble blossoms. The familiar name describes that appearance without making the material a separate mineral variety."
+        },
+        {
+          "stoneId": "C-0076",
+          "headline": "Grape Agate grows as closely packed rounded forms that resemble a cluster of grapes. Despite the name, it is more precisely described as botryoidal chalcedony, and its surface growth is the feature that sets it apart."
+        },
+        {
+          "stoneId": "C-0077",
+          "headline": "Moss Agate contains wispy, branching, or suspended mineral inclusions that can look like moss spreading through translucent chalcedony. It usually has little or none of the regular banding associated with classic Agate."
+        },
+        {
+          "stoneId": "C-0078",
+          "headline": "Orca Agate is a modern trade name for chalcedony patterned with rounded pools and patches, often in gray, white, or blue-gray. The name captures its marine appearance rather than a formal mineral distinction."
+        },
+        {
+          "stoneId": "C-0079",
+          "headline": "Tree Agate is commonly used for pale, more opaque chalcedony marked by green branching inclusions. Its boundary with Moss Agate is not rigid, and the two names are often applied according to appearance and trade convention."
+        }
       ]
     },
     "agatePatternDecoder": {
       "title": "How Agate Gets Its Patterns",
       "intro": "Agate patterns are records of growth. Their lines, branches, rounded surfaces, and flashes come from different processes, so similar names do not always point to the same kind of structure.",
       "items": [
-        {"title": "Built in layers", "singleStoneId": "C-0070", "alt": "Botswana Agate showing closely spaced parallel banding", "body": "In many Agates, chalcedony accumulated along the walls of an opening in repeated stages. Each stage could differ slightly in color, translucency, or texture, creating bands that follow the shape of the cavity. Blue Lace, Botswana, and Crazy Lace Agate show very different results from this layered growth."},
-        {"title": "Drawn by inclusions", "singleStoneId": "C-0077", "alt": "Moss Agate showing wispy, moss-like mineral inclusions", "body": "Moss, Tree, and Dendritic Agate owe much of their pattern to minerals enclosed in or deposited through the chalcedony. Wisps, branches, and fern-like shapes may look organic, but they are not leaves, moss, or tiny fossilized trees."},
-        {"title": "Rounded as it grows", "singleStoneId": "C-0076", "alt": "Grape Agate showing rounded, botryoidal growth", "body": "The rounded surface of Grape Agate is called botryoidal growth, from a word meaning bunch of grapes. Here, the shape of the chalcedony is the main event. The material is better understood as botryoidal chalcedony than as a classically banded Agate."},
-        {"title": "Lit from within", "image": "fire-agate-iridescence-wc.webp", "alt": "Fire Agate specimen showing iridescent play-of-color", "body": "Fire Agate creates color through light interference. Extremely thin layers containing iron minerals interact with light, producing flashes that can appear and disappear as the stone or viewer moves. Its fire is an optical effect, not a painted surface or an internal flame."}
+        {
+          "title": "Built in layers",
+          "singleStoneId": "C-0070",
+          "alt": "Botswana Agate showing closely spaced parallel banding",
+          "body": "In many Agates, chalcedony accumulated along the walls of an opening in repeated stages. Each stage could differ slightly in color, translucency, or texture, creating bands that follow the shape of the cavity. Blue Lace, Botswana, and Crazy Lace Agate show very different results from this layered growth."
+        },
+        {
+          "title": "Drawn by inclusions",
+          "singleStoneId": "C-0077",
+          "alt": "Moss Agate showing wispy, moss-like mineral inclusions",
+          "body": "Moss, Tree, and Dendritic Agate owe much of their pattern to minerals enclosed in or deposited through the chalcedony. Wisps, branches, and fern-like shapes may look organic, but they are not leaves, moss, or tiny fossilized trees."
+        },
+        {
+          "title": "Rounded as it grows",
+          "singleStoneId": "C-0076",
+          "alt": "Grape Agate showing rounded, botryoidal growth",
+          "body": "The rounded surface of Grape Agate is called botryoidal growth, from a word meaning bunch of grapes. Here, the shape of the chalcedony is the main event. The material is better understood as botryoidal chalcedony than as a classically banded Agate."
+        },
+        {
+          "title": "Lit from within",
+          "image": "fire-agate-iridescence-wc.webp",
+          "alt": "Fire Agate specimen showing iridescent play-of-color",
+          "body": "Fire Agate creates color through light interference. Extremely thin layers containing iron minerals interact with light, producing flashes that can appear and disappear as the stone or viewer moves. Its fire is an optical effect, not a painted surface or an internal flame."
+        }
       ]
     },
     "agateComparison": {
       "title": "Agate, Chalcedony, or Jasper?",
       "intro": "These names overlap because they describe closely related silica materials. The practical distinction begins with texture, translucency, and pattern rather than three unrelated mineral identities.",
       "table": {
-        "headers": ["Material", "What it tells you", "What to notice"],
+        "headers": [
+          "Material",
+          "What it tells you",
+          "What to notice"
+        ],
         "rows": [
-          ["Chalcedony", "The broad microcrystalline quartz material", "Compact texture; may be plain, patterned, translucent, or opaque"],
-          ["Agate", "A patterned expression, most clearly associated with banding", "Bands, translucency, inclusions, or named growth forms"],
-          ["Jasper", "The opaque, mineral-rich side of microcrystalline quartz", "Opacity, mottling, spots, or scenic pattern"]
+          [
+            "Chalcedony",
+            "The broad microcrystalline quartz material",
+            "Compact texture; may be plain, patterned, translucent, or opaque"
+          ],
+          [
+            "Agate",
+            "A patterned expression, most clearly associated with banding",
+            "Bands, translucency, inclusions, or named growth forms"
+          ],
+          [
+            "Jasper",
+            "The opaque, mineral-rich side of microcrystalline quartz",
+            "Opacity, mottling, spots, or scenic pattern"
+          ]
         ]
       },
       "note": "Think of Chalcedony as the broad family, Agate as the more translucent and often banded side, and Jasper as the more opaque side. Nature does not always respect a clean dividing line. A single piece can move between translucent Agate and opaque Jasper, which is why names such as jasp-agate exist."
@@ -1404,22 +1858,53 @@
         "Names such as Grape Agate show how appearance can become a useful shorthand. Its rounded, clustered surface resembles a bunch of grapes, while the material itself is more precisely described as botryoidal chalcedony. Other names tell different kinds of stories."
       ],
       "items": [
-        {"title": "A place", "singleStoneId": "C-0409", "alt": "Gobi Agate specimen from the Gobi Desert region", "body": "Gobi Agate carries the name of the desert region where the featured material originated. Here, the geographic name is supported by provenance rather than inferred from appearance alone. That distinction matters because a locality-sounding name does not prove where an undocumented specimen was found."},
-        {"title": "A larger formation", "singleStoneId": "C-0349", "alt": "Thunderegg cross-section showing an Agate-lined interior", "body": "A Thunderegg is a rounded rock structure formed in volcanic material. When cut open, it may reveal Agate, Jasper, opal, crystalline quartz, or other silica filling. The whole object is the Thunderegg. Agate may be one part of what is inside it."},
-        {"title": "A name history got wrong", "singleStoneId": "C-0080", "alt": "Turritella Agate showing fossil spiral shells preserved in chalcedony", "body": "Turritella Agate is a long-standing trade name for fossil-rich chalcedony from the Green River Formation. The visible spiral shells are freshwater snails of the genus Elimia, not the marine genus Turritella. The traditional name survived even after the fossil identity was corrected."}
+        {
+          "title": "A place",
+          "singleStoneId": "C-0409",
+          "alt": "Gobi Agate specimen from the Gobi Desert region",
+          "body": "Gobi Agate carries the name of the desert region where the featured material originated. Here, the geographic name is supported by provenance rather than inferred from appearance alone. That distinction matters because a locality-sounding name does not prove where an undocumented specimen was found."
+        },
+        {
+          "title": "A larger formation",
+          "singleStoneId": "C-0349",
+          "alt": "Thunderegg cross-section showing an Agate-lined interior",
+          "body": "A Thunderegg is a rounded rock structure formed in volcanic material. When cut open, it may reveal Agate, Jasper, opal, crystalline quartz, or other silica filling. The whole object is the Thunderegg. Agate may be one part of what is inside it."
+        },
+        {
+          "title": "A name history got wrong",
+          "singleStoneId": "C-0080",
+          "alt": "Turritella Agate showing fossil spiral shells preserved in chalcedony",
+          "body": "Turritella Agate is a long-standing trade name for fossil-rich chalcedony from the Green River Formation. The visible spiral shells are freshwater snails of the genus Elimia, not the marine genus Turritella. The traditional name survived even after the fossil identity was corrected."
+        }
       ]
     },
     "agateCollection": {
       "title": "Agate in Your Collection",
       "intro": "Agate is durable enough for regular handling, display, and jewelry, but good care begins with knowing whether a piece is natural, dyed, fractured, coated, or assembled.",
       "cards": [
-        {"heading": "Clean it simply", "body": "Use lukewarm water, mild soap when needed, and a soft cloth or brush. Rinse away residue and dry the piece completely. Avoid harsh chemicals and sudden temperature changes."},
-        {"heading": "Treat unknown pieces conservatively", "body": "Agate is commonly dyed to intensify color or emphasize bands. If treatment is unknown, avoid prolonged soaking, strong cleaners, and unnecessary exposure to intense light or heat. Ask the seller about treatment when color is an important part of the purchase."},
-        {"heading": "Let the pattern guide display", "body": "Bands, inclusions, and optical effects can change dramatically with direction and lighting. Turn a specimen slowly, try light from the side as well as the front, and choose an angle that reveals its strongest structure without forcing glare."}
+        {
+          "heading": "Clean it simply",
+          "body": "Use lukewarm water, mild soap when needed, and a soft cloth or brush. Rinse away residue and dry the piece completely. Avoid harsh chemicals and sudden temperature changes."
+        },
+        {
+          "heading": "Treat unknown pieces conservatively",
+          "body": "Agate is commonly dyed to intensify color or emphasize bands. If treatment is unknown, avoid prolonged soaking, strong cleaners, and unnecessary exposure to intense light or heat. Ask the seller about treatment when color is an important part of the purchase."
+        },
+        {
+          "heading": "Let the pattern guide display",
+          "body": "Bands, inclusions, and optical effects can change dramatically with direction and lighting. Turn a specimen slowly, try light from the side as well as the front, and choose an angle that reveals its strongest structure without forcing glare."
+        }
       ]
     },
     "imageCredits": [
-      {"title": "Fire Agate, Calvillo, Aguascalientes, Mexico", "creator": "Lech Darski", "source": "https://commons.wikimedia.org/wiki/File:Agat_ognisty_-_Calvillo,_Aguascalientes,_Meksyk.jpg", "license": "CC BY-SA 4.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/", "modified": "Background removed, cropped, and color and lighting adjusted."}
+      {
+        "title": "Fire Agate, Calvillo, Aguascalientes, Mexico",
+        "creator": "Lech Darski",
+        "source": "https://commons.wikimedia.org/wiki/File:Agat_ognisty_-_Calvillo,_Aguascalientes,_Meksyk.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "modified": "Background removed, cropped, and color and lighting adjusted."
+      }
     ]
   },
   "jasper": {
@@ -1428,9 +1913,15 @@
     "encyclopediaFilterValue": "Jasper",
     "editorialStatusNote": "Revision pass (2026-08-04) implementing Christie's locked Jasper Family Guide Revision brief verbatim: approved copy, approved 8-section order, and an 11-stone roster (Laguna Jasper removed, not replaced). Both rough-vs-polished modules and the prior five-category naming grid are fully removed, along with their empty cards, missing-image wells, and working-draft placeholder language. All 11 retained stoneIds were re-verified against pipeline/data/structured-values.generated.json (Production-Master-derived) and app.js's ENCYCLOPEDIA_PHOTOS map (2026-08-04): Brecciated C-0087, Dragon's Blood C-0089, Leopard Skin C-0092, Mookaite C-0094, Ocean C-0095, Picture C-0097, Polychrome C-0098, Red C-0099, Star C-0100, Yellow C-0101, Zebra C-0102 — every name/ID pair matches exactly and every stone has an approved encyclopedia photo on file. Laguna Jasper (C-0091) is confirmed removed from the roster and has no entry in ENCYCLOPEDIA_PHOTOS. How Jasper Gets Its Patterns reuses the four named roster stones' own existing approved encyclopedia photos (Brecciated/Picture/Ocean/Leopard Skin) via fgPhotoCardHtml's singleStoneId branch — no new photography sourced or uploaded. The Jasper, Agate, or Chalcedony branch cards keep their prior representative stoneIds (Chalcedony C-0082, Agate C-0077) and real Family Guide links, unchanged. What a Jasper Name Can Tell You and Jasper in Your Collection both reuse the existing generic three-card heading/body component (fgGarnetCollectionCardHtml/.fg-garnet-collection-grid, first built for Garnet) rather than introducing new card markup. No Production Master, Supabase, family, or species values were changed to build this guide.",
     "closingCallout": "Jasper rewards the second look. What first appears solid can hold fractures, layers, circles, and an entire landscape.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
-      "mediaStoneIds": ["C-0097", "C-0095"],
+      "mediaStoneIds": [
+        "C-0097",
+        "C-0095"
+      ],
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Jasper Family Guide",
       "signatureLine": "Where silica becomes landscape.",
@@ -1454,36 +1945,98 @@
       ],
       "gridClass": "fg-card-grid--12",
       "members": [
-        {"stoneId": "C-0087", "headline": "The stone broke into angular pieces before silica and other minerals filled the spaces and joined it together again. Polishing brings its natural mosaic into sharp focus."},
-        {"stoneId": "C-0089", "headline": "This collector name usually refers to green epidote patterned with red piemontite, rather than true Jasper. The strong color contrast makes it popular for carvings and polished pieces."},
-        {"stoneId": "C-0092", "headline": "Usually a patterned rhyolite rather than true Jasper. Its spots developed as volcanic rock was altered and its minerals changed or regrouped."},
-        {"stoneId": "C-0094", "headline": "This Australian material is a silica-rich sedimentary rock. Iron-bearing minerals contribute its bands and patches of red, yellow, cream, and plum."},
-        {"stoneId": "C-0095", "headline": "Tiny silica crystals grew outward from central points, creating the rounded forms seen throughout the material. Cutting across those structures reveals its circles and rings."},
-        {"stoneId": "C-0097", "headline": "Fine layers, fractures, and mineral staining overlap to create scenes that resemble hills, horizons, or desert terrain. Its landscape-like patterns are especially prized in cabochons and polished slabs."},
-        {"stoneId": "C-0098", "headline": "Different mineral-rich areas created broad fields of red, tan, brown, and blue-gray. A polished surface reveals how those colors flow through the stone."},
-        {"stoneId": "C-0099", "headline": "Tiny particles of iron oxide, especially hematite, give this Jasper its brick-red color. It is widely used for beads, carvings, cabochons, and tumbled stones."},
-        {"stoneId": "C-0100", "headline": "Branching mineral markings spread across a lighter background, forming the star-like patterns behind its collector name. The exact material sold under this trade name can vary."},
-        {"stoneId": "C-0101", "headline": "Iron-bearing minerals give this Jasper its warm yellow, ochre, and golden-brown color. It is commonly polished into tumbles, beads, and decorative forms."},
-        {"stoneId": "C-0102", "headline": "Contrasting mineral-rich layers create its striped or patchy appearance. Because Zebra Jasper is a broadly used trade name, its exact composition can vary from one source to another."}
+        {
+          "stoneId": "C-0087",
+          "headline": "The stone broke into angular pieces before silica and other minerals filled the spaces and joined it together again. Polishing brings its natural mosaic into sharp focus."
+        },
+        {
+          "stoneId": "C-0089",
+          "headline": "This collector name usually refers to green epidote patterned with red piemontite, rather than true Jasper. The strong color contrast makes it popular for carvings and polished pieces."
+        },
+        {
+          "stoneId": "C-0092",
+          "headline": "Usually a patterned rhyolite rather than true Jasper. Its spots developed as volcanic rock was altered and its minerals changed or regrouped."
+        },
+        {
+          "stoneId": "C-0094",
+          "headline": "This Australian material is a silica-rich sedimentary rock. Iron-bearing minerals contribute its bands and patches of red, yellow, cream, and plum."
+        },
+        {
+          "stoneId": "C-0095",
+          "headline": "Tiny silica crystals grew outward from central points, creating the rounded forms seen throughout the material. Cutting across those structures reveals its circles and rings."
+        },
+        {
+          "stoneId": "C-0097",
+          "headline": "Fine layers, fractures, and mineral staining overlap to create scenes that resemble hills, horizons, or desert terrain. Its landscape-like patterns are especially prized in cabochons and polished slabs."
+        },
+        {
+          "stoneId": "C-0098",
+          "headline": "Different mineral-rich areas created broad fields of red, tan, brown, and blue-gray. A polished surface reveals how those colors flow through the stone."
+        },
+        {
+          "stoneId": "C-0099",
+          "headline": "Tiny particles of iron oxide, especially hematite, give this Jasper its brick-red color. It is widely used for beads, carvings, cabochons, and tumbled stones."
+        },
+        {
+          "stoneId": "C-0100",
+          "headline": "Branching mineral markings spread across a lighter background, forming the star-like patterns behind its collector name. The exact material sold under this trade name can vary."
+        },
+        {
+          "stoneId": "C-0101",
+          "headline": "Iron-bearing minerals give this Jasper its warm yellow, ochre, and golden-brown color. It is commonly polished into tumbles, beads, and decorative forms."
+        },
+        {
+          "stoneId": "C-0102",
+          "headline": "Contrasting mineral-rich layers create its striped or patchy appearance. Because Zebra Jasper is a broadly used trade name, its exact composition can vary from one source to another."
+        }
       ]
     },
     "patternGuide": {
       "title": "How Jasper Gets Its Patterns",
       "sectionIntro": "Jasper does not have one pattern-making process. Its markings may record breakage, layering, mineral growth, or changes within an older rock.",
       "categories": [
-        {"title": "Broken and Rejoined", "singleStoneId": "C-0087", "alt": "Brecciated Jasper showing broken fragments cemented into a new pattern", "body": "The stone fractured into angular pieces. Later silica and minerals filled the gaps, cementing the fragments into a new pattern."},
-        {"title": "Layered and Scenic", "singleStoneId": "C-0097", "alt": "Picture Jasper showing layered, scenic markings that resemble a painted landscape", "body": "Layers and mineral-rich fluids left changing bands of color. When the stone is cut, those bands can look like hills, horizons, or painted landscapes."},
-        {"title": "Rounded and Orbicular", "singleStoneId": "C-0095", "alt": "Ocean Jasper showing rounded, orbicular structures", "body": "Silica crystals grew outward around many small centers. A cut through those rounded structures reveals circles, rings, and flower-like forms."},
-        {"title": "Spotted and Mottled", "singleStoneId": "C-0092", "alt": "Leopard Skin Jasper showing spotted, mottled patterning", "body": "Changes within volcanic rock created rounded areas with different minerals and colors. Polishing exposes those spots more clearly than a rough surface can."}
+        {
+          "title": "Broken and Rejoined",
+          "singleStoneId": "C-0087",
+          "alt": "Brecciated Jasper showing broken fragments cemented into a new pattern",
+          "body": "The stone fractured into angular pieces. Later silica and minerals filled the gaps, cementing the fragments into a new pattern."
+        },
+        {
+          "title": "Layered and Scenic",
+          "singleStoneId": "C-0097",
+          "alt": "Picture Jasper showing layered, scenic markings that resemble a painted landscape",
+          "body": "Layers and mineral-rich fluids left changing bands of color. When the stone is cut, those bands can look like hills, horizons, or painted landscapes."
+        },
+        {
+          "title": "Rounded and Orbicular",
+          "singleStoneId": "C-0095",
+          "alt": "Ocean Jasper showing rounded, orbicular structures",
+          "body": "Silica crystals grew outward around many small centers. A cut through those rounded structures reveals circles, rings, and flower-like forms."
+        },
+        {
+          "title": "Spotted and Mottled",
+          "singleStoneId": "C-0092",
+          "alt": "Leopard Skin Jasper showing spotted, mottled patterning",
+          "body": "Changes within volcanic rock created rounded areas with different minerals and colors. Polishing exposes those spots more clearly than a rough surface can."
+        }
       ]
     },
     "whatJasperNameTells": {
       "title": "What a Jasper Name Can Tell You",
       "intro": "Jasper names do different jobs. Some describe what the stone looks like. Others preserve a place, deposit, or familiar trade name.",
       "panels": [
-        {"heading": "Appearance", "body": "Color, spots, bands, fractures, or landscape-like patterns may inspire the name."},
-        {"heading": "Place", "body": "Some names belong to material associated with a particular locality or deposit."},
-        {"heading": "Trade Use", "body": "A market name may identify a familiar collector material even when it is not true Jasper."}
+        {
+          "heading": "Appearance",
+          "body": "Color, spots, bands, fractures, or landscape-like patterns may inspire the name."
+        },
+        {
+          "heading": "Place",
+          "body": "Some names belong to material associated with a particular locality or deposit."
+        },
+        {
+          "heading": "Trade Use",
+          "body": "A market name may identify a familiar collector material even when it is not true Jasper."
+        }
       ],
       "note": "The name is a useful clue, but it may not tell the stone's entire geological story."
     },
@@ -1493,18 +2046,42 @@
       "intro": "Jasper and Agate both belong to the broader Chalcedony family. Their appearance gives us the most useful starting point for telling them apart.",
       "quartzLinkLabel": "Explore the Quartz Family Guide",
       "branches": [
-        {"label": "Chalcedony", "stoneId": "C-0082", "description": "The broader fine-grained silica family. It is often translucent or more evenly colored.", "guideSlug": "chalcedony"},
-        {"label": "Agate", "stoneId": "C-0077", "description": "Chalcedony known for organized bands and layers, usually with some translucency.", "guideSlug": "agate"},
-        {"label": "Jasper", "stoneId": "C-0099", "description": "Usually opaque, with color and pattern created by other minerals and rock material.", "current": true}
+        {
+          "label": "Chalcedony",
+          "stoneId": "C-0082",
+          "description": "The broader fine-grained silica family. It is often translucent or more evenly colored.",
+          "guideSlug": "chalcedony"
+        },
+        {
+          "label": "Agate",
+          "stoneId": "C-0077",
+          "description": "Chalcedony known for organized bands and layers, usually with some translucency.",
+          "guideSlug": "agate"
+        },
+        {
+          "label": "Jasper",
+          "stoneId": "C-0099",
+          "description": "Usually opaque, with color and pattern created by other minerals and rock material.",
+          "current": true
+        }
       ],
       "note": "These distinctions are useful, but nature does not always draw the boundaries neatly."
     },
     "jasperCollection": {
       "title": "Jasper in Your Collection",
       "cards": [
-        {"heading": "Everyday Handling", "body": "Jasper works well for display, carving, and regular handling. Protect polished pieces from hard impacts that could chip an edge or damage the finish."},
-        {"heading": "Care & Cleaning", "body": "Use warm water, mild soap, and a soft cloth or brush. Avoid harsh chemicals and prolonged soaking, particularly when a piece may be dyed or treated."},
-        {"heading": "Buying by Name", "body": "A Jasper label may describe appearance, locality, or trade usage. Look at the individual stone and expect natural variation within every named type."}
+        {
+          "heading": "Everyday Handling",
+          "body": "Jasper works well for display, carving, and regular handling. Protect polished pieces from hard impacts that could chip an edge or damage the finish."
+        },
+        {
+          "heading": "Care & Cleaning",
+          "body": "Use warm water, mild soap, and a soft cloth or brush. Avoid harsh chemicals and prolonged soaking, particularly when a piece may be dyed or treated."
+        },
+        {
+          "heading": "Buying by Name",
+          "body": "A Jasper label may describe appearance, locality, or trade usage. Look at the individual stone and expect natural variation within every named type."
+        }
       ]
     },
     "imageCredits": []
@@ -1515,7 +2092,10 @@
     "encyclopediaFilterValue": "Garnet",
     "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Garnet Family-Guide Rebuild brief (2026-08-01), built strictly from the supplied copy, structure, and section order. Rhodolite, Tsavorite, Hessonite, and Demantoid have no canonical Stone ID and are used only as compact familiar-name teaching cards, not as encyclopedia links. Pyrope has no approved Stone ID and renders as a visually ordinary but intentionally non-clicking species tile in Meet the Garnets. Almandine (C-0048), Spessartine (C-0131), Grossular (C-0061), Andradite (C-0275), and Uvarovite (C-0355) preserve their exact existing canonical names, Stone IDs, and encyclopedia links from the prior implementation. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
     "closingCallout": "Garnet is one family expressed through many colors and names. Once the relationships come into focus, every specimen becomes part of a much larger story.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Garnet Family Guide",
@@ -1524,21 +2104,57 @@
       "promptLeadIn": "Garnet asks:",
       "question": "What are you ready to commit to?",
       "media": [
-        {"name": "Pyrope", "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/pyrope-garnet-wc.webp", "alt": "Pyrope Garnet specimen"},
-        {"name": "Spessartine", "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/spessartine-garnet-wc.webp", "alt": "Spessartine Garnet specimen"},
-        {"name": "Uvarovite", "stoneId": "C-0355"}
+        {
+          "name": "Pyrope",
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/pyrope-garnet-wc.webp",
+          "alt": "Pyrope Garnet specimen"
+        },
+        {
+          "name": "Spessartine",
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/spessartine-garnet-wc.webp",
+          "alt": "Spessartine Garnet specimen"
+        },
+        {
+          "name": "Uvarovite",
+          "stoneId": "C-0355"
+        }
       ]
     },
     "meetTheGarnets": {
       "title": "Meet the Garnets",
       "intro": "Garnet is a mineral group, not a single gemstone. These six species share the same basic crystal structure, but changes in chemistry produce their familiar reds, oranges, greens, and golds. Start with the species, then notice how composition shapes color and appearance.",
       "members": [
-        {"name": "Pyrope", "caption": "A magnesium-rich Garnet known especially for deep red, purplish-red, and brownish-red color.", "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/pyrope-garnet-wc.webp"},
-        {"name": "Almandine", "caption": "An iron-rich Garnet whose familiar palette runs from deep red to reddish brown.", "stoneId": "C-0048"},
-        {"name": "Spessartine", "caption": "A manganese-rich Garnet recognized for orange, reddish-orange, and warm red color.", "stoneId": "C-0131", "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/spessartine-garnet-wc.webp"},
-        {"name": "Andradite", "caption": "A calcium-iron Garnet whose colors can range from yellow and green to brown and black.", "stoneId": "C-0275"},
-        {"name": "Grossular", "caption": "A calcium-rich Garnet with an unusually broad range that includes green, gold, cinnamon, and nearly colorless forms.", "stoneId": "C-0061"},
-        {"name": "Uvarovite", "caption": "A chromium-rich Garnet best known for vivid green crystals, often sparkling closely together on matrix.", "stoneId": "C-0355"}
+        {
+          "name": "Pyrope",
+          "caption": "A magnesium-rich Garnet known especially for deep red, purplish-red, and brownish-red color.",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/pyrope-garnet-wc.webp"
+        },
+        {
+          "name": "Almandine",
+          "caption": "An iron-rich Garnet whose familiar palette runs from deep red to reddish brown.",
+          "stoneId": "C-0048"
+        },
+        {
+          "name": "Spessartine",
+          "caption": "A manganese-rich Garnet recognized for orange, reddish-orange, and warm red color.",
+          "stoneId": "C-0131",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/family-guides/garnet/spessartine-garnet-wc.webp"
+        },
+        {
+          "name": "Andradite",
+          "caption": "A calcium-iron Garnet whose colors can range from yellow and green to brown and black.",
+          "stoneId": "C-0275"
+        },
+        {
+          "name": "Grossular",
+          "caption": "A calcium-rich Garnet with an unusually broad range that includes green, gold, cinnamon, and nearly colorless forms.",
+          "stoneId": "C-0061"
+        },
+        {
+          "name": "Uvarovite",
+          "caption": "A chromium-rich Garnet best known for vivid green crystals, often sparkling closely together on matrix.",
+          "stoneId": "C-0355"
+        }
       ]
     },
     "sixFoundationsTwoGroups": {
@@ -1548,18 +2164,36 @@
         "heading": "Pyralspite Group",
         "intro": "Aluminum forms the shared foundation.",
         "items": [
-          {"name": "Pyrope", "caption": "Magnesium is closely associated with many of the group's deep red tones."},
-          {"name": "Almandine", "caption": "Iron commonly produces rich red to reddish-brown color."},
-          {"name": "Spessartine", "caption": "Manganese is closely associated with orange and reddish-orange color."}
+          {
+            "name": "Pyrope",
+            "caption": "Magnesium is closely associated with many of the group's deep red tones."
+          },
+          {
+            "name": "Almandine",
+            "caption": "Iron commonly produces rich red to reddish-brown color."
+          },
+          {
+            "name": "Spessartine",
+            "caption": "Manganese is closely associated with orange and reddish-orange color."
+          }
         ]
       },
       "rightPanel": {
         "heading": "Ugrandite Group",
         "intro": "Calcium forms the shared foundation.",
         "items": [
-          {"name": "Andradite", "caption": "Iron supports colors from yellow and green to brown and black."},
-          {"name": "Grossular", "caption": "Aluminum allows an unusually broad range, including green, gold, and cinnamon."},
-          {"name": "Uvarovite", "caption": "Chromium gives this Garnet its unmistakable vivid green."}
+          {
+            "name": "Andradite",
+            "caption": "Iron supports colors from yellow and green to brown and black."
+          },
+          {
+            "name": "Grossular",
+            "caption": "Aluminum allows an unusually broad range, including green, gold, and cinnamon."
+          },
+          {
+            "name": "Uvarovite",
+            "caption": "Chromium gives this Garnet its unmistakable vivid green."
+          }
         ]
       },
       "connectedNote": "These groups are useful guides, not sealed boxes. Natural Garnets often blend chemically between species, creating colors and familiar names that sit along a spectrum."
@@ -1598,9 +2232,18 @@
       "title": "Garnet in Your Collection",
       "intro": "A Garnet label can tell you several different things. These three habits make it easier to understand what you are looking at without expecting color alone to provide the whole answer.",
       "cards": [
-        {"heading": "Read the full name", "body": "A label may say Garnet, name a foundational species such as Almandine, or use a familiar variety name such as Tsavorite. Each level adds useful information."},
-        {"heading": "Let color guide, not decide", "body": "Color can narrow the possibilities, but Garnet species overlap. A red stone is not automatically Almandine, and a green one is not automatically Tsavorite."},
-        {"heading": "Notice how it occurs", "body": "Loose crystals, matrix specimens, polished stones, and faceted gems reveal different parts of Garnet's character. Shape and setting can offer clues alongside color and label."}
+        {
+          "heading": "Read the full name",
+          "body": "A label may say Garnet, name a foundational species such as Almandine, or use a familiar variety name such as Tsavorite. Each level adds useful information."
+        },
+        {
+          "heading": "Let color guide, not decide",
+          "body": "Color can narrow the possibilities, but Garnet species overlap. A red stone is not automatically Almandine, and a green one is not automatically Tsavorite."
+        },
+        {
+          "heading": "Notice how it occurs",
+          "body": "Loose crystals, matrix specimens, polished stones, and faceted gems reveal different parts of Garnet's character. Shape and setting can offer clues alongside color and label."
+        }
       ]
     },
     "imageCredits": [
@@ -1666,7 +2309,11 @@
       "condensedIntro": "Black, brown, green, blue, pink, and sometimes several colors at once, Tourmaline can look like a collection of unrelated stones.",
       "promptLeadIn": "Tourmaline asks:",
       "question": "What in your life needs support right now?",
-      "mediaStoneIds": ["C-0129", "C-0055", "C-0056"]
+      "mediaStoneIds": [
+        "C-0129",
+        "C-0055",
+        "C-0056"
+      ]
     },
     "whatTourmalineIs": {
       "title": "What Tourmaline Actually Is",
@@ -1680,23 +2327,74 @@
       "title": "Meet the Tourmaline Family",
       "intro": "These six expressions show some of the family's range. Their familiar names describe what the stones look like.",
       "members": [
-        {"name": "Black Tourmaline", "stoneId": "C-0129", "image": "assets/family-guide-tourmaline/black-tourmaline.webp", "identSentence": "Usually opaque and strongly ribbed, Black Tourmaline often forms rough columns or prisms.", "chosenFor": "Protection and grounding"},
-        {"name": "Brown Tourmaline", "stoneId": "C-0053", "image": "assets/family-guide-tourmaline/brown-tourmaline.webp", "identSentence": "Brown Tourmaline ranges from warm honey brown to such deep shades that it can appear almost black.", "chosenFor": "Grounding and inner strength"},
-        {"name": "Green Tourmaline", "stoneId": "C-0057", "image": "assets/family-guide-tourmaline/green-tourmaline-wc.webp", "identSentence": "Green Tourmaline ranges from opaque forest green to bright, transparent gem material.", "chosenFor": "Vitality, growth, and abundance"},
-        {"name": "Blue Tourmaline", "image": "assets/family-guide-tourmaline/blue-tourmaline-wc.webp", "identSentence": "Blue Tourmaline ranges from deep blue to greenish blue. The name Indicolite is commonly used for this color range.", "chosenFor": "Clear communication and intuition"},
-        {"name": "Pink Tourmaline", "stoneId": "C-0055", "image": "assets/family-guide-tourmaline/pink-tourmaline-specimen.webp", "identSentence": "Pink Tourmaline ranges from pale blush to saturated rose and may appear as single crystals or in matrix.", "chosenFor": "Love, compassion, and emotional healing"},
-        {"name": "Watermelon Tourmaline", "stoneId": "C-0056", "image": "assets/family-guide-tourmaline/watermelon-tourmaline.webp", "identSentence": "Watermelon Tourmaline shows pink and green color zoning. A cross section may reveal a pink center surrounded by green outer growth.", "chosenFor": "Love, emotional balance, and joy"}
+        {
+          "name": "Black Tourmaline",
+          "stoneId": "C-0129",
+          "image": "assets/family-guide-tourmaline/black-tourmaline.webp",
+          "identSentence": "Usually opaque and strongly ribbed, Black Tourmaline often forms rough columns or prisms.",
+          "chosenFor": "Protection and grounding"
+        },
+        {
+          "name": "Brown Tourmaline",
+          "stoneId": "C-0053",
+          "image": "assets/family-guide-tourmaline/brown-tourmaline.webp",
+          "identSentence": "Brown Tourmaline ranges from warm honey brown to such deep shades that it can appear almost black.",
+          "chosenFor": "Grounding and inner strength"
+        },
+        {
+          "name": "Green Tourmaline",
+          "stoneId": "C-0057",
+          "image": "assets/family-guide-tourmaline/green-tourmaline-wc.webp",
+          "identSentence": "Green Tourmaline ranges from opaque forest green to bright, transparent gem material.",
+          "chosenFor": "Vitality, growth, and abundance"
+        },
+        {
+          "name": "Blue Tourmaline",
+          "image": "assets/family-guide-tourmaline/blue-tourmaline-wc.webp",
+          "identSentence": "Blue Tourmaline ranges from deep blue to greenish blue. The name Indicolite is commonly used for this color range.",
+          "chosenFor": "Clear communication and intuition"
+        },
+        {
+          "name": "Pink Tourmaline",
+          "stoneId": "C-0055",
+          "image": "assets/family-guide-tourmaline/pink-tourmaline-specimen.webp",
+          "identSentence": "Pink Tourmaline ranges from pale blush to saturated rose and may appear as single crystals or in matrix.",
+          "chosenFor": "Love, compassion, and emotional healing"
+        },
+        {
+          "name": "Watermelon Tourmaline",
+          "stoneId": "C-0056",
+          "image": "assets/family-guide-tourmaline/watermelon-tourmaline.webp",
+          "identSentence": "Watermelon Tourmaline shows pink and green color zoning. A cross section may reveal a pink center surrounded by green outer growth.",
+          "chosenFor": "Love, emotional balance, and joy"
+        }
       ]
     },
     "namingDecoder": {
       "title": "Schorl, Dravite, Elbaite: What Do Those Names Mean?",
       "intro": "Tourmaline names do different jobs.",
       "table": {
-        "headers": ["Kind of name", "Examples", "What it tells you"],
+        "headers": [
+          "Kind of name",
+          "Examples",
+          "What it tells you"
+        ],
         "rows": [
-          ["Mineral species", "Schorl · Dravite · Elbaite", "The material's mineral identity, determined by chemistry."],
-          ["Color name", "Black · Brown · Green · Blue · Pink · Indicolite", "What the Tourmaline looks like, not its species."],
-          ["Pattern name", "Watermelon Tourmaline", "A recognized pink-and-green zoning pattern, not a separate species."]
+          [
+            "Mineral species",
+            "Schorl · Dravite · Elbaite",
+            "The material's mineral identity, determined by chemistry."
+          ],
+          [
+            "Color name",
+            "Black · Brown · Green · Blue · Pink · Indicolite",
+            "What the Tourmaline looks like, not its species."
+          ],
+          [
+            "Pattern name",
+            "Watermelon Tourmaline",
+            "A recognized pink-and-green zoning pattern, not a separate species."
+          ]
         ]
       }
     },
@@ -1712,8 +2410,16 @@
       "intro": "The chemistry available to a Tourmaline crystal can change as it grows. New layers may take in a different chemical mix, creating visible bands or zones of color.",
       "leadIn": "Watermelon Tourmaline makes both directions of color zoning easy to see: color can develop along a crystal or outward from its center.",
       "examples": [
-        {"title": "Along the Crystal", "body": "Zoning that runs along a crystal, from one end to the other.", "image": "watermelon-tourmaline.webp"},
-        {"title": "Center Outward", "body": "Zoning that grows outward from the crystal's center, as seen in this polished slice.", "image": "watermelon-tourmaline-wc.webp"}
+        {
+          "title": "Along the Crystal",
+          "body": "Zoning that runs along a crystal, from one end to the other.",
+          "image": "watermelon-tourmaline.webp"
+        },
+        {
+          "title": "Center Outward",
+          "body": "Zoning that grows outward from the crystal's center, as seen in this polished slice.",
+          "image": "watermelon-tourmaline-wc.webp"
+        }
       ]
     },
     "tourmalineRibbing": {
@@ -1723,8 +2429,16 @@
         "From the end, a crystal may show another clue: a triangular or rounded-triangular cross section. This shape reflects Tourmaline's trigonal crystal structure, although it will not be visible in every specimen."
       ],
       "examples": [
-        {"title": "Lengthwise Ribs", "body": "Look for an elongated form and lengthwise ribs.", "image": "black-tourmaline.webp"},
-        {"title": "Rounded-Triangular Cross Section", "body": "A broken end may still show a rounded-triangular outline.", "image": "watermelon-tourmaline-wc.webp"}
+        {
+          "title": "Lengthwise Ribs",
+          "body": "Look for an elongated form and lengthwise ribs.",
+          "image": "black-tourmaline.webp"
+        },
+        {
+          "title": "Rounded-Triangular Cross Section",
+          "body": "A broken end may still show a rounded-triangular outline.",
+          "image": "watermelon-tourmaline-wc.webp"
+        }
       ]
     },
     "electrical": {
@@ -1736,8 +2450,14 @@
           "secondary": "Temperature change",
           "body": "When Tourmaline warms or cools, its electrical polarization changes.",
           "facts": [
-            {"label": "What happens", "value": "Opposite surface charges develop at opposite ends of the crystal."},
-            {"label": "What you may observe", "value": "The charged crystal may attract extremely light particles such as ash or dust."}
+            {
+              "label": "What happens",
+              "value": "Opposite surface charges develop at opposite ends of the crystal."
+            },
+            {
+              "label": "What you may observe",
+              "value": "The charged crystal may attract extremely light particles such as ash or dust."
+            }
           ]
         },
         {
@@ -1745,8 +2465,14 @@
           "secondary": "Pressure",
           "body": "When pressure is applied in the appropriate direction, Tourmaline's electrical polarization changes.",
           "facts": [
-            {"label": "What happens", "value": "Opposite charges develop at the crystal's poles."},
-            {"label": "Why it matters", "value": "The electrical response can be measured, revealing how the crystal's internal structure reacts to force."}
+            {
+              "label": "What happens",
+              "value": "Opposite charges develop at the crystal's poles."
+            },
+            {
+              "label": "Why it matters",
+              "value": "The electrical response can be measured, revealing how the crystal's internal structure reacts to force."
+            }
           ]
         }
       ],
@@ -1757,23 +2483,61 @@
       "title": "How Tourmaline Appears in a Collection",
       "intro": "Tourmaline can look very different once it is broken, sliced, polished, or left in matrix.",
       "items": [
-        {"title": "Rough, Ribbed Crystals", "body": "Look for long, column-like crystals with grooves running lengthwise. A broken end may still show a rounded-triangular outline.", "image": "black-tourmaline.webp"},
-        {"title": "Crystals in Matrix", "body": "Tourmaline may grow with quartz, feldspar, mica, and other minerals. Matrix pieces preserve some of that setting.", "image": "pink-tourmaline-specimen.webp"},
-        {"title": "Slices and Zoned Crystals", "body": "A cross section may reveal color zones and triangular growth patterns that were hidden inside the crystal.", "image": "watermelon-tourmaline-wc.webp"},
-        {"title": "Tumbled and Polished Stones", "body": "Polishing removes the natural ribs and softens the original outline, making color more useful than crystal form as a visual clue.", "image": "black-tourmaline-tumble.webp"},
-        {"title": "Transparent Crystal Material", "body": "Transparent Tourmaline may occur as pale or nearly colorless crystals, sometimes preserved in matrix. When cut or polished, its color, zoning, inclusions, and internal tubes become easier to see.", "image": "transparent-tourmaline-wc.webp"}
+        {
+          "title": "Rough, Ribbed Crystals",
+          "body": "Look for long, column-like crystals with grooves running lengthwise. A broken end may still show a rounded-triangular outline.",
+          "image": "black-tourmaline.webp"
+        },
+        {
+          "title": "Crystals in Matrix",
+          "body": "Tourmaline may grow with quartz, feldspar, mica, and other minerals. Matrix pieces preserve some of that setting.",
+          "image": "pink-tourmaline-specimen.webp"
+        },
+        {
+          "title": "Slices and Zoned Crystals",
+          "body": "A cross section may reveal color zones and triangular growth patterns that were hidden inside the crystal.",
+          "image": "watermelon-tourmaline-wc.webp"
+        },
+        {
+          "title": "Tumbled and Polished Stones",
+          "body": "Polishing removes the natural ribs and softens the original outline, making color more useful than crystal form as a visual clue.",
+          "image": "black-tourmaline-tumble.webp"
+        },
+        {
+          "title": "Transparent Crystal Material",
+          "body": "Transparent Tourmaline may occur as pale or nearly colorless crystals, sometimes preserved in matrix. When cut or polished, its color, zoning, inclusions, and internal tubes become easier to see.",
+          "image": "transparent-tourmaline-wc.webp"
+        }
       ]
     },
     "collection": {
       "title": "Tourmaline in Your Collection",
       "cards": [
-        {"title": "Care for It", "paragraphs": ["Tourmaline resists many everyday scratches, but it can chip or fracture from impact. Protect crystals and terminations from hard knocks and sudden temperature changes. Clean with warm soapy water when appropriate for the specimen and its matrix. Avoid steam and ultrasonic cleaning."]},
-        {"title": "Remember This", "paragraphs": ["Tourmaline is a broad family of related minerals. Its members share a basic structure, while differences in chemistry create many species, colors, and growth patterns."]},
-        {"title": "Watch For", "paragraphs": ["A color name tells you what you see. A species name tells you about composition. Black, brown, green, blue, pink, Indicolite, and Watermelon are not interchangeable with Schorl, Dravite, or Elbaite."]}
+        {
+          "title": "Care for It",
+          "paragraphs": [
+            "Tourmaline resists many everyday scratches, but it can chip or fracture from impact. Protect crystals and terminations from hard knocks and sudden temperature changes. Clean with warm soapy water when appropriate for the specimen and its matrix. Avoid steam and ultrasonic cleaning."
+          ]
+        },
+        {
+          "title": "Remember This",
+          "paragraphs": [
+            "Tourmaline is a broad family of related minerals. Its members share a basic structure, while differences in chemistry create many species, colors, and growth patterns."
+          ]
+        },
+        {
+          "title": "Watch For",
+          "paragraphs": [
+            "A color name tells you what you see. A species name tells you about composition. Black, brown, green, blue, pink, Indicolite, and Watermelon are not interchangeable with Schorl, Dravite, or Elbaite."
+          ]
+        }
       ]
     },
     "closingCallout": "Tourmaline reminds us that one strong foundation can support many ways of becoming.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "imageCredits": [
       {
         "title": "Blue Tourmaline",
@@ -1813,101 +2577,192 @@
     "slug": "obsidian",
     "displayName": "Obsidian",
     "encyclopediaFilterValue": "Obsidian",
-    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Obsidian Family Guide brief (2026-07-23), built strictly from the supplied copy, labels, roster, and section order, reusing the corrected Garnet/Tourmaline layout patterns. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
+    "editorialStatusNote": "Visual-correction pass (2026-08-20) applied on top of the 2026-08-19 revision, per Christie's approved mockup with Tourmaline set as the reference for heading/body/content-width/spacing/left-alignment and Feldspar cited only for the final collection-card-row/closing pattern (not the general template). Revises the existing obsidian record in place -- no duplicate guide created, no other guide touched. Section 2 renamed 'Obsidian Is Glass, Not Crystal' -> 'How Lava Becomes Obsidian' (key renamed obsidianIsGlass -> howLavaBecomesObsidian to match); its Crystal-Growth-vs-Volcanic-Glass comparison cards and 'Glass is not a lesser version of crystal...' line are removed and replaced with the brief's exact opening paragraph, a three-step Molten-Lava/Quick-Cooling/Obsidian-Glass process (labels only, no per-step body copy was given in the brief), and the brief's exact positive closing sentence. Section 3 (What the Lava Preserves) keeps its title but drops the old three-stage numbered strip and four small outcome cards for the brief's exact intro paragraph plus a four-row cause-to-result decoder (causePairs). Section 4 (Color in the Glass, Color in the Light) drops its two small text-only comparison cards for two real Tourmaline-style photo cards using each stone's own already-approved encyclopedia photo (mahogany-obsidian-tumble.webp, rainbow-obsidian.webp, both already live in ENCYCLOPEDIA_PHOTOS under C-0141/C-0142 and now also referenced here by direct Supabase URL, matching the existing item.url pattern already used by Copper's Plancheite feature -- no new photography). Names to Verify's photo caption field (added last pass, never rendered per this pass's own no-caption instruction) is removed; the photo now renders through a small left-text/right-photo split with no caption or credit anywhere, per Christie's repeated confirmation this first-party photo needs none. Obsidian in Your Collection keeps its exact approved three-card content/order unchanged, now rendered by a new dedicated familyGuideObsidianCollectionHtml function (family-guide.js) instead of calling the Feldspar-named function -- same generic .fg-feldspar-collection-grid/.fg-collection-sub/.fg-collection-panel-title/.fg-fact-body classes already used across guides, per the brief's explicit instruction that those are acceptable as generic shared classes even though the call site itself must be Obsidian's own. No em dashes appear in any public-facing copy field below.",
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
-      "eyebrow": "FAMILY GUIDE",
-      "title": "The Obsidian Family",
-      "signatureLine": "Born from fire. Cooled before crystals could form.",
-      "condensedIntro": "Obsidian begins as silica-rich lava that cools so quickly its atoms cannot organize into a crystal structure. The result is natural volcanic glass: smooth, dark, sharply fractured, and capable of preserving bubbles, flow patterns, mineral growth, and flashes of reflected light.",
-      "emphasisLine": "Obsidian records what happened while molten rock became glass.",
-      "promptLeadIn": "Obsidian asks:",
-      "question": "What did the fire leave behind?",
-      "mediaStoneIds": ["C-0139", "C-0140", "C-0142", "C-0143"]
+      "eyebrow": "CRYSTAL FAMILY",
+      "title": "Obsidian",
+      "signatureLine": "Natural volcanic glass. A history of fire held still.",
+      "condensedIntro": "Obsidian forms when silica-rich lava cools before a crystal structure can develop. Its familiar black glass can carry iron-rich color, pale snowflakes, metallic sheen, or bands of hidden rainbow, each preserving a different part of the lava’s story.",
+      "mediaFiles": [
+        {
+          "file": "black-obsidian.webp",
+          "alt": "Black Obsidian"
+        },
+        {
+          "file": "gold-sheen-obsidian-large-sphere.webp",
+          "alt": "Gold Sheen Obsidian sphere"
+        },
+        {
+          "file": "rainbow-obsidian.webp",
+          "alt": "Rainbow Obsidian"
+        },
+        {
+          "file": "snowflake-obsidian.webp",
+          "alt": "Snowflake Obsidian"
+        }
+      ]
     },
     "meetObsidianFamily": {
       "title": "Meet the Obsidian Family",
-      "intro": "Six Obsidian entries in the Still Point catalog show how one volcanic glass can preserve very different patterns and optical effects.",
+      "intro": "Obsidian may begin as dark volcanic glass, but bubbles, mineral-rich patches, crystals, and hidden layers can transform how each variety looks and reflects light.",
       "members": [
-        {"stoneId": "C-0139", "identityLabel": "CLASSIC VOLCANIC GLASS", "headline": "Dark, uniform Obsidian with the family's familiar glassy surface and sharp fracture"},
-        {"stoneId": "C-0140", "identityLabel": "REFLECTIVE BUBBLE LAYERS", "headline": "Fine aligned bubbles create a warm golden reflection beneath the dark surface"},
-        {"stoneId": "C-0141", "identityLabel": "IRON-RICH PATTERNING", "headline": "Reddish-brown areas interrupt the black glass with earthy patches and bands"},
-        {"stoneId": "C-0142", "identityLabel": "LAYERED IRIDESCENCE", "headline": "Thin internal layers produce shifting bands of color when light strikes at the right angle"},
-        {"stoneId": "C-0427", "identityLabel": "REFLECTIVE BUBBLE LAYERS", "headline": "Fine internal structures create a cool silver reflection across the dark glass"},
-        {"stoneId": "C-0143", "identityLabel": "CRYSTAL GROWTH IN GLASS", "headline": "Pale radial clusters interrupt the black ground with snowflake-like patterns"}
+        {
+          "stoneId": "C-0139",
+          "name": "Black Obsidian",
+          "identSentence": "The clearest expression of Obsidian’s dark volcanic glass.",
+          "chosenFor": "Grounding, protection, and direct self-honesty."
+        },
+        {
+          "stoneId": "C-0140",
+          "name": "Gold Sheen Obsidian",
+          "identSentence": "Fine internal features return the light as a warm golden glow.",
+          "chosenFor": "Personal power, direction, and recognizing what supports forward movement."
+        },
+        {
+          "stoneId": "C-0427",
+          "name": "Silver Sheen Obsidian",
+          "identSentence": "Reflective internal layers create a cool silver glow across the dark surface.",
+          "chosenFor": "Clarity, reflection, and seeing beneath appearances."
+        },
+        {
+          "stoneId": "C-0142",
+          "name": "Rainbow Obsidian",
+          "identSentence": "Hidden bands reveal changing colors when the stone turns in the light.",
+          "chosenFor": "Emotional healing, hope, and approaching difficult truths with greater softness."
+        },
+        {
+          "stoneId": "C-0143",
+          "name": "Snowflake Obsidian",
+          "identSentence": "Pale radiating crystals mark places where part of the volcanic glass began to change.",
+          "chosenFor": "Balance, grounded perspective, and recognizing patterns."
+        },
+        {
+          "stoneId": "C-0141",
+          "name": "Mahogany Obsidian",
+          "identSentence": "Iron-rich reddish-brown areas interrupt the black glass with earthy color.",
+          "chosenFor": "Steady grounding, strength, and gentler emotional work."
+        }
       ]
     },
-    "obsidianGroup": {
-      "title": "Obsidian Is Glass, Not Crystal",
-      "intro": "Obsidian forms when lava cools too quickly for an orderly crystal structure to develop.",
-      "paragraphs": [
-        "Most minerals are built from atoms arranged in repeating structures. Obsidian is different. It is an amorphous volcanic glass formed when silica-rich lava cools rapidly enough to freeze a disordered structure in place.",
-        "That distinction explains its smooth glassy luster and conchoidal fracture. Obsidian can resemble a dark crystal in a collection, but scientifically it is a mineraloid rather than a mineral species."
+    "howLavaBecomesObsidian": {
+      "title": "How Lava Becomes Obsidian",
+      "intro": "Obsidian begins as silica-rich lava. When the lava cools very quickly, its ingredients are held in place before they can arrange into a repeating crystal structure. The result is natural volcanic glass.",
+      "steps": [
+        {
+          "title": "Molten Lava"
+        },
+        {
+          "title": "Quick Cooling"
+        },
+        {
+          "title": "Obsidian Glass"
+        }
       ],
-      "compare": [
-        {"title": "CRYSTALLINE MINERAL", "body": "Atoms form an ordered repeating structure"},
-        {"title": "OBSIDIAN", "body": "Rapid cooling preserves a disordered glass structure"}
-      ],
-      "closingLine": "The difference is not how polished it looks. The difference is how its structure formed."
+      "closing": "Its glassy structure gives Obsidian its smooth polish, curved fracture, and ability to preserve bubbles, layers, and patterns from the moving lava."
     },
     "lavaPreserves": {
       "title": "What the Lava Preserves",
-      "intro": "Before the lava became solid glass, movement, gas, chemistry, and early mineral growth left visible traces behind.",
-      "stages": [
-        {"title": "MOLTEN LAVA", "body": "Silica-rich lava moves while hot and fluid."},
-        {"title": "RAPID COOLING", "body": "The outer material cools before crystals can organize."},
-        {"title": "FEATURES BECOME TRAPPED", "body": "Bubbles, flow layers, chemical differences, and early crystal growth remain inside the glass."},
-        {"title": "FINISHED OBSIDIAN", "body": "The solid glass preserves patterns that appear as sheen, color bands, patches, or pale clusters."}
-      ],
-      "comparison": [
-        {"title": "BUBBLES AND FLOW LAYERS", "body": "May produce gold or silver sheen"},
-        {"title": "THIN INTERNAL LAYERS", "body": "May produce rainbow iridescence"},
-        {"title": "IRON-RICH AREAS", "body": "Create reddish-brown Mahogany patterning"},
-        {"title": "CRYSTOBALITE CLUSTERS", "body": "Create Snowflake Obsidian's pale radial forms"}
-      ],
-      "cautionNote": "Appearance names describe what the glass displays. They do not represent separate mineral species."
+      "intro": "Before it hardened, Obsidian was moving lava. Bubbles, iron-rich patches, and very thin layers were stretched and held in place as the glass cooled. Those traces became the patterns collectors recognize today.",
+      "table": {
+        "headers": [
+          "WHAT WAS HELD IN THE GLASS",
+          "WHAT YOU SEE"
+        ],
+        "rows": [
+          [
+            "Iron-rich patches",
+            "Mahogany’s earthy red-and-black pattern"
+          ],
+          [
+            "Tiny aligned bubbles",
+            "Gold and Silver Sheen"
+          ],
+          [
+            "Very thin internal layers",
+            "Rainbow and Fire color"
+          ],
+          [
+            "Small crystals forming in the glass",
+            "Snowflake’s pale patterns"
+          ]
+        ]
+      }
     },
-    "obsidianAppearance": {
-      "title": "How Obsidian Appears",
-      "intro": "Surface, fracture, thickness, and lighting can make the same dark glass look dramatically different.",
-      "stages": [
-        {"title": "Natural Rough", "body": "A dark glassy surface may show curved fracture, weathering, or attached volcanic matrix."},
-        {"title": "Fresh Fracture", "body": "Conchoidal breaks create smooth curved surfaces and extremely sharp edges."},
-        {"title": "Polished Stone", "body": "Polishing reveals depth, patterning, and reflective effects hidden by a rough exterior."},
-        {"title": "Held to the Light", "body": "Thin edges or slices may reveal translucency, flow bands, or internal structure."}
+    "colorInGlass": {
+      "title": "Color in the Glass, Color in the Light",
+      "intro": "Some Obsidian carries color in the glass itself. Other pieces look dark until light catches hidden layers inside.",
+      "cards": [
+        {
+          "title": "Color in the Glass",
+          "body": "Mahogany Obsidian’s earthy red-brown areas belong to the glass itself.",
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/mahogany-obsidian-tumble.webp",
+          "alt": "Mahogany Obsidian tumbled stone"
+        },
+        {
+          "title": "Color in the Light",
+          "body": "Rainbow Obsidian’s hidden bands appear when the stone turns in the light.",
+          "url": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/rainbow-obsidian.webp",
+          "alt": "Rainbow Obsidian showing iridescent bands"
+        }
       ],
-      "recognitionItems": [
-        "Glassy rather than granular texture",
-        "Smooth curved conchoidal fracture",
-        "Very sharp fresh edges",
-        "No visible cleavage",
-        "Often black, brown, or dark gray in ordinary light",
-        "Optical effects may appear only at a particular angle",
-        "Exact identification should not rely on color alone"
-      ],
-      "historicalNote": "Because fresh fractures can produce exceptionally sharp edges, Obsidian has long been shaped into cutting tools and points."
+      "namesToVerify": {
+        "title": "Names to Verify",
+        "paragraphs": [
+          "Bright, evenly colored pink, yellow, aqua, blue, or purple pieces sold as Obsidian are often manufactured glass. Natural Obsidian can flash some of these colors in reflected light, but that is not the same as having a uniformly colored body.",
+          "Manufactured glass can still hold metaphysical meaning. In modern practice, yellow versions are commonly chosen for confidence, joy, and Solar Plexus work, while pink versions are associated with love, compassion, and heart-centered healing. These associations come primarily from color and intention rather than a verified natural Obsidian identity."
+        ],
+        "photo": {
+          "image": "yellow-obsidian-family.webp",
+          "alt": "Material sold under the market name Yellow Obsidian"
+        }
+      }
     },
-    "obsidianCollection": {
+    "collection": {
       "title": "Obsidian in Your Collection",
-      "intro": "Obsidian rewards comparison because its differences often appear through light, surface, and internal structure rather than mineral species. A strong collection might include one plain black piece, one sheen variety, one patterned variety, and one rough specimen that still shows its volcanic character.",
-      "listItems": [
-        "For contrast — Pair Black Obsidian with Gold Sheen, Silver Sheen, or Rainbow Obsidian.",
-        "For pattern — Include Mahogany or Snowflake Obsidian.",
-        "For context — Keep at least one rough or naturally fractured piece beside polished material.",
-        "For handling — Store chipped specimens carefully because fresh edges can be extremely sharp."
+      "intro": "Obsidian rewards looking beyond black. The right piece depends on whether you want the family’s most direct grounding presence, a steadier patterned form, or reflective color that only appears when the stone moves.",
+      "cards": [
+        {
+          "title": "Choose the Strength",
+          "paragraphs": [
+            "Black Obsidian offers the family’s most direct grounding and protective presence. Mahogany and Snowflake Obsidian can feel steadier and gentler, while Rainbow Obsidian brings a more heart-centered form of emotional perspective."
+          ]
+        },
+        {
+          "title": "Turn the Stone",
+          "paragraphs": [
+            "Gold Sheen, Silver Sheen, and Rainbow Obsidian reveal themselves through changing light. Turn the piece slowly rather than judging it from a single angle."
+          ]
+        },
+        {
+          "title": "Protect the Polish",
+          "paragraphs": [
+            "Obsidian is glass. Protect polished pieces from knocks and harder stones, and clean them gently to preserve their surface."
+          ]
+        }
       ]
     },
-    "closingCallout": "Obsidian forms in a moment of rapid cooling, yet the glass can preserve an entire history of movement, fire, and change.",
-    "closingSupportingCopy": "Look past the dark surface and the frozen lava begins to speak.",
+    "closingCallout": "Obsidian reminds us that what looks still and dark may carry a history of fire, movement, and hidden light.",
     "imageCredits": []
-  }  ,
+  },
   "copper": {
     "slug": "copper",
     "displayName": "Copper Minerals",
     "encyclopediaFilterValue": "Copper Minerals",
     "editorialStatusNote": "First implementation pass (2026-07-31) built from Christie's approved copper-minerals-family-guide.md and copper-minerals-visual-plan.md. Every section below uses that locked copy verbatim (markdown bold markers stripped only where the site's plain-text rendering requires it). This guide has its own dedicated section renderers (oneDeposit/formationTable, meetCopperFamily, colorGroups, growTogether, copperCare, closingEssay) rather than reusing Calcite's metaphysical/energy-role schema, per Christie's explicit direction that Copper carries no chakra, badge, or energetic-role content. Roster stoneIds verified live against Supabase (2026-07-31): Azurite C-0006, Malachite C-0020, Chrysocolla C-0052, Shattuckite C-0130, Dioptase C-0019, Cuprite C-0298, Turquoise C-0228, Ajoite C-0271, Azurmalachite C-0430, Quantum Quattro C-0368. All but Quantum Quattro have an approved ENCYCLOPEDIA_PHOTOS entry; Quantum Quattro has none, so its grow-together feature renders as a labeled 'Photo pending' placeholder rather than substituting another stone's photo. Sonora Sunrise and Chrysocolla-in-Quartz/Gem Silica are not canonical roster entries and have no approved dedicated photography distinguishing them from plain Chrysocolla, so both grow-together features also render as labeled placeholders rather than reusing a visually-similar but compositionally-different stone's image.",
-    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
     "hero": {
-      "mediaStoneIds": ["C-0006", "C-0020", "C-0052"],
+      "mediaStoneIds": [
+        "C-0006",
+        "C-0020",
+        "C-0052"
+      ],
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Copper Minerals Family Guide",
       "signatureLine": "Copper paints in blue and green.",
@@ -1921,12 +2776,37 @@
       ]
     },
     "formationTable": {
-      "headers": ["Condition", "Outcome", "Examples", "Color"],
+      "headers": [
+        "Condition",
+        "Outcome",
+        "Examples",
+        "Color"
+      ],
       "rows": [
-        ["Carbonate-rich", "Copper carbonates form", "Azurite, Malachite", "Deep blue or green"],
-        ["Silica-rich", "Copper silicates form", "Chrysocolla, Shattuckite", "Blue to blue-green"],
-        ["Other local chemistry", "Different copper minerals form", "Cuprite, Dioptase, Turquoise, Ajoite", "Red, emerald green, or compact blue-green"],
-        ["Conditions change", "Minerals overlap or replace one another", "Azurmalachite, mixed copper specimens", "Blue-green mixtures and contrasting bands"]
+        [
+          "Carbonate-rich",
+          "Copper carbonates form",
+          "Azurite, Malachite",
+          "Deep blue or green"
+        ],
+        [
+          "Silica-rich",
+          "Copper silicates form",
+          "Chrysocolla, Shattuckite",
+          "Blue to blue-green"
+        ],
+        [
+          "Other local chemistry",
+          "Different copper minerals form",
+          "Cuprite, Dioptase, Turquoise, Ajoite",
+          "Red, emerald green, or compact blue-green"
+        ],
+        [
+          "Conditions change",
+          "Minerals overlap or replace one another",
+          "Azurmalachite, mixed copper specimens",
+          "Blue-green mixtures and contrasting bands"
+        ]
       ]
     },
     "copperFeature": {
@@ -2022,9 +2902,28 @@
         "Texture often gives the next clue. Distinct glassy crystals suggest something different from a soft-looking coating, a fibrous growth, or a polished banded surface. The surrounding matrix and associated minerals also matter."
       ],
       "groups": [
-        {"label": "Mostly Blue", "stoneIds": ["C-0006", "C-0130"]},
-        {"label": "Mostly Green", "stoneIds": ["C-0020", "C-0019"]},
-        {"label": "Blue-Green or Variable", "stoneIds": ["C-0052", "C-0228", "C-0271"]}
+        {
+          "label": "Mostly Blue",
+          "stoneIds": [
+            "C-0006",
+            "C-0130"
+          ]
+        },
+        {
+          "label": "Mostly Green",
+          "stoneIds": [
+            "C-0020",
+            "C-0019"
+          ]
+        },
+        {
+          "label": "Blue-Green or Variable",
+          "stoneIds": [
+            "C-0052",
+            "C-0228",
+            "C-0271"
+          ]
+        }
       ],
       "pullQuote": "A blue-green color can narrow the possibilities, but it cannot identify the stone by itself."
     },
@@ -2114,6 +3013,176 @@
         "license": "CC BY-SA 3.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
         "modified": "Background removed and image prepared for Still Point Lapidary."
+      }
+    ]
+  },
+  "beryl": {
+    "slug": "beryl",
+    "displayName": "Beryl",
+    "encyclopediaFilterValue": "Beryl",
+    "editorialStatusNote": "Built per Claude Code Brief: Beryl Family Guide Implementation, reusing the shared family-guide system exactly (fgHeroMediaHtml/hero.imageUrl+imageLegend, fgTourmalineFamilyCardHtml/.fg-card-grid--garnet-roster for the five-card expression roster, .fg-explain-grid for Built in Six Sides, fgFormationTableHtml/.fg-table for the color table, .fg-namegrid/.fg-namecard for the four-card naming decoder, and the shared familyGuideCollectionHtml Care for It/Remember This/Watch For layout already used by Calcite). The five catalog stones (Emerald C-0022, Aquamarine C-0021, Morganite C-0024, Heliodor C-0023, Goshenite C-0404) resolve through fgCrystal/firstEncyclopediaPhoto exactly like every other guide's roster; Chrysoberyl is not part of this family and is not referenced anywhere in this guide. Red Beryl is a non-catalog teaching card in berylNaming only — no stoneId, no Quick View, no catalog link, no badge. Hero and Built in Six Sides photography are new Wikimedia-sourced assets (Vzb83 / Carles Millan, see imageCredits below and BERYL-FAMILY-IMAGE-CREDITS.md) converted to WebP and stored under assets/family-guide-beryl/; Heliodor's existing catalog credit (Robert M. Lavinsky, in data/encyclopedia-photo-credits.json) is untouched and not duplicated here.",
+    "hero": {
+      "eyebrow": "CRYSTAL FAMILY",
+      "title": "Beryl Family Guide",
+      "imageUrl": "assets/family-guide-beryl/beryl-family-varieties.webp",
+      "imageAlt": "Five numbered Beryl variety specimens: Golden Beryl, Heliodor, Emerald, Aquamarine, and Morganite",
+      "imageLegend": "1 Golden Beryl · 2 Heliodor · 3 Emerald · 4 Aquamarine · 5 Morganite",
+      "condensedIntro": "Beryl is the family hiding in plain sight. The ocean blue of Aquamarine, the lush green of Emerald, the blush of Morganite, and the glow of Heliodor all begin with the same crystal. Change only a few trace ingredients, and one mineral becomes an entire color story."
+    },
+    "whatBerylIs": {
+      "title": "What Beryl Is",
+      "paragraphs": [
+        "Emerald feels like its own world. So does Aquamarine. But beneath their dramatically different colors, both share Beryl's clear, six-sided architecture.",
+        "Morganite brings pink and peach. Heliodor brings yellow and gold. Goshenite reveals the family with the color turned off. Each is Beryl, shaped by the small amounts of other elements present while the crystal was growing."
+      ]
+    },
+    "meetBerylFamily": {
+      "title": "Meet Five Beryl Expressions",
+      "intro": "The five Beryl varieties in the Still Point Lapidary catalog share one mineral identity but offer distinctly different colors, appearances, and energetic traditions.",
+      "members": [
+        {
+          "name": "Emerald",
+          "stoneId": "C-0022",
+          "identSentence": "Emerald ranges from vivid green to bluish green. Natural inclusions may give it a mossy or garden-like interior.",
+          "chosenFor": "Love, loyalty, and lasting growth"
+        },
+        {
+          "name": "Aquamarine",
+          "stoneId": "C-0021",
+          "identSentence": "Aquamarine ranges from pale blue to blue-green and is often transparent with a clear, glassy appearance.",
+          "chosenFor": "Calm communication, courage, and emotional steadiness"
+        },
+        {
+          "name": "Morganite",
+          "stoneId": "C-0024",
+          "identSentence": "Morganite ranges from pale pink to peach, usually with a soft, luminous clarity.",
+          "chosenFor": "Love, trust, and compassion"
+        },
+        {
+          "name": "Heliodor",
+          "stoneId": "C-0023",
+          "identSentence": "Heliodor ranges from pale yellow to rich golden yellow and may carry a subtle greenish tone.",
+          "chosenFor": "Confidence, clarity, and purpose"
+        },
+        {
+          "name": "Goshenite",
+          "stoneId": "C-0404",
+          "identSentence": "Goshenite is colorless Beryl. It may be transparent and glassy or softly clouded by natural inclusions.",
+          "chosenFor": "Clarity, truth, and discernment"
+        }
+      ]
+    },
+    "builtInSixSides": {
+      "title": "Built in Six Sides",
+      "image": "assets/family-guide-beryl/beryl-on-muscovite.webp",
+      "imageAlt": "Beryl crystal on Muscovite matrix showing a six-sided columnar form",
+      "paragraphs": [
+        "Beryl belongs to the hexagonal crystal system and commonly grows as a six-sided column. Crystals may be short and broad or long and slender, with flat sides running along their length.",
+        "The six-sided outline is especially clear when the crystal's end remains intact. Some crystals finish with a broad, flat top, while others are broken or partly embedded in surrounding rock.",
+        "This shape can help connect specimens that otherwise appear unrelated. A green Emerald crystal and a blue Aquamarine crystal may share the same columnar form even though their colors are completely different.",
+        "Beryl may also grow much larger than many collectors expect. When a crystal has enough room and time to develop, it can form substantial columns with clearly defined faces."
+      ]
+    },
+    "berylColor": {
+      "title": "How Beryl Gets Its Color",
+      "intro": "Pure Beryl is colorless. Its varieties appear when very small amounts of other elements become part of the crystal as it grows.",
+      "table": {
+        "headers": [
+          "Variety",
+          "Typical color",
+          "Main color influence"
+        ],
+        "rows": [
+          [
+            "Emerald",
+            "Green to bluish green",
+            "Chromium, vanadium, or both"
+          ],
+          [
+            "Aquamarine",
+            "Pale blue to blue-green",
+            "Iron"
+          ],
+          [
+            "Morganite",
+            "Pink to peach",
+            "Manganese"
+          ],
+          [
+            "Heliodor",
+            "Yellow to golden yellow",
+            "Iron in a different state"
+          ],
+          [
+            "Goshenite",
+            "Colorless",
+            "Little color-producing material"
+          ]
+        ]
+      },
+      "paragraphs": [
+        "Aquamarine and Heliodor offer one of the family's most interesting comparisons. Iron contributes to both varieties, but differences within the crystal determine whether the result appears blue or yellow.",
+        "Color can also vary within a single crystal. A specimen may be darker at one end, paler through the center, or divided into visible zones that record changes during growth."
+      ]
+    },
+    "berylNaming": {
+      "title": "Understanding Beryl Names",
+      "intro": "Most Beryl variety names describe color, but some boundaries are less exact than others.",
+      "cards": [
+        {
+          "label": "Emerald and Green Beryl",
+          "body": "Emerald is the name used for strongly colored green to bluish-green Beryl. Lighter or less saturated material may be sold simply as Green Beryl. Experts do not always agree on the precise point where Green Beryl becomes Emerald."
+        },
+        {
+          "label": "Heliodor and Golden Beryl",
+          "body": "Heliodor, Golden Beryl, and Yellow Beryl are used for the family's yellow range. The names often overlap, although some sellers reserve Heliodor for stronger golden or slightly greenish material."
+        },
+        {
+          "label": "Goshenite",
+          "body": "Goshenite is the accepted variety name for colorless Beryl. It may also be described plainly as Colorless Beryl."
+        },
+        {
+          "label": "Red Beryl",
+          "body": "Red Beryl is a genuine but exceptionally rare Beryl variety colored by manganese. It belongs in the family lesson, but it is not part of the fixed Still Point Lapidary catalog. It receives no Stone ID, Quick View link, or catalog badge."
+        }
+      ]
+    },
+    "collection": {
+      "title": "Beryl in Your Collection",
+      "intro": "Beryl is durable, but crystal edges and natural fractures can still chip. Emerald needs extra care because inclusions and clarity treatments may make it more vulnerable than other members of the family.",
+      "careForIt": {
+        "intro": "Beryl resists ordinary scratching but can still chip or fracture.",
+        "bullets": [
+          "Dust gently with a clean, soft cloth or very soft brush.",
+          "When appropriate, use lukewarm water and mild soap, then dry thoroughly.",
+          "Avoid harsh cleaners, sudden temperature changes, and prolonged soaking.",
+          "Never steam or ultrasonically clean Emeralds or pieces with unknown treatments."
+        ]
+      },
+      "rememberThis": "Beryl ranks 7.5 to 8 on the Mohs scale, but hardness is not toughness. It resists scratches; it does not resist every impact. Crystal points, thin edges, and existing fractures remain vulnerable.",
+      "watchFor": "Many Emeralds are clarity enhanced with oil or resin inside surface-reaching fractures. Heat, chemicals, steam, and ultrasonic cleaning can damage the filling or the stone. Ask about treatments before cleaning valuable Beryl."
+    },
+    "closingCallout": "Beryl shows how one enduring structure can make room for many distinct expressions.",
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    },
+    "imageCredits": [
+      {
+        "title": "Beryl Varieties",
+        "creator": "Vzb83",
+        "source": "https://commons.wikimedia.org/wiki/File:Beryl.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Background and surface replaced with seamless white; exposure and white balance adjusted conservatively. The numbered specimen arrangement was retained."
+      },
+      {
+        "title": "Beryl on Muscovite",
+        "creator": "Carles Millan",
+        "source": "https://commons.wikimedia.org/wiki/File:8216M-beryl1.png",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "modified": "Black background and man-made display base removed; seamless white background added; exposure and white balance adjusted conservatively."
       }
     ]
   }

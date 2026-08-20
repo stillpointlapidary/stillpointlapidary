@@ -2848,11 +2848,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    wrapping 3-then-3 like every other roster grid using this class. */
 .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 310px;max-width:330px}
 
-/* Widened reading measure for Obsidian's own prose-block sections (this
-   guide's own prose-block only; the shared .fg-prose-block used by
-   Chalcedony/Agate is untouched). Garnet's equivalent section was
-   replaced entirely by the 2026-08-01 rebuild. */
-#fg-obsidian-group .fg-prose-block{max-width:92ch}
 /* Tourmaline (Claude Code Brief: Correct Tourmaline to the Finalized
    Family-Guide Standard) — the shared .fg-prose-block base is narrow and
    auto-centered (max-width:78ch;margin:0 auto), producing a small centered
@@ -2933,11 +2928,96 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    former section-intro paragraphs now use .fg-lead, matching the deployed
    Fluorite treatment (see the Fluorite-mirroring rule below), so its
    section ids have been removed from this legacy centered/narrow group. */
-#fg-meet-obsidian-family .fg-section-intro,
-#fg-obsidian-group .fg-section-intro,
-#fg-lava-preserves .fg-section-intro,
-#fg-obsidian-appearance .fg-section-intro,
-#fg-obsidian-collection .fg-section-intro{max-width:860px}
+/* ══════════════════════════════════════════════════════════════════════
+   OBSIDIAN FAMILY GUIDE — visual-correction pass (2026-08-20). Christie's
+   approved reference for section-heading/body-copy scale, content width,
+   left-aligned editorial flow, and spacing is the completed Tourmaline
+   guide, so this guide now mirrors Tourmaline's own guide-scoped .fg-lead/
+   .fg-h2-spacing/.fg-prose overrides directly (see the three rules
+   immediately below, each a byte-for-byte copy of Tourmaline's own rule
+   just above, scoped to [data-family-slug="obsidian"] instead). The old
+   #fg-meet-obsidian-family/#fg-color-in-glass .fg-section-intro widening
+   rule and all of Section 2/3/4's small centered/numbered/tiny-card
+   components from the prior pass are removed entirely — replaced by the
+   left-aligned, Tourmaline-scale components below. ══ */
+.fg-guide[data-family-slug="obsidian"] .fg-lead,
+.fg-guide[data-family-slug="obsidian"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0;font-size:16px}
+.fg-guide[data-family-slug="obsidian"] .fg-h2 + *{margin-top:1.125rem}
+.fg-guide[data-family-slug="obsidian"] .fg-prose-block{max-width:none;margin:0}
+.fg-guide[data-family-slug="obsidian"] .fg-prose{text-align:left;font-size:16px}
+
+/* Hero — the hero already carries four real photographs (not a
+   placeholder collage), so the shared "Family photograph — coming soon"
+   label is hidden, same established mechanism Jasper/Agate already use
+   for their own real hero photography. */
+.fg-guide[data-family-slug="obsidian"] .fg-hero-media-label{display:none}
+
+/* "How Lava Becomes Obsidian" — a plain-language three-step process
+   ("Molten Lava → Quick Cooling → Obsidian Glass"), deliberately NOT the
+   numbered-circle/connecting-line .fg-progression-number treatment used
+   elsewhere on this page (that reads as a measured sequence with stops;
+   this must read as one continuous transformation). Three left-aligned
+   text steps in one row on desktop, connected by a plain chevron; stacks
+   in order on mobile with the chevron rotated to point downward. No
+   numbers, dots, or diagram chrome of any kind. Per Christie's correction,
+   only this pill row is narrowed/centered to approximately 82% of the
+   section's width (max-width:82%;margin:0 auto) — the section's own
+   heading, intro paragraph, and closing sentence stay at the guide's
+   normal full content width. Reverts to full width at the same 700px
+   mobile breakpoint used elsewhere in this guide. */
+.fg-obsidian-process{display:flex;align-items:stretch;gap:14px;margin-top:1.5rem;max-width:82%;margin-left:auto;margin-right:auto}
+.fg-obsidian-process-step{flex:1;background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.3rem}
+.fg-obsidian-process-step-title{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink)}
+.fg-obsidian-process-arrow{flex:0 0 auto;display:flex;align-items:center;font-size:20px;color:var(--accent)}
+.fg-obsidian-process-closing{margin-top:1.5rem;font-family:'Jost',sans-serif;font-style:normal;font-weight:400}
+@media(max-width:700px){
+  .fg-obsidian-process{flex-direction:column;align-items:stretch;max-width:none}
+  .fg-obsidian-process-arrow{transform:rotate(90deg);padding:2px 0;align-self:flex-start;margin-left:1.3rem}
+}
+
+/* "What the Lava Preserves" now renders through the shared
+   fgFormationTableHtml/.fg-table component (same as Tourmaline's Schorl/
+   Dravite/Elbaite naming table) instead of the prior arrow-row decoder —
+   no dedicated CSS needed here; .fg-table already supplies the rounded
+   container, shaded header row, and row dividers at the guide's normal
+   content width. */
+
+/* "Color in the Glass, Color in the Light" — two broad Tourmaline-style
+   photo cards, reusing fgPhotoCardHtml/.fg-photo-grid--2 with the same
+   white contain-fit image well already established for Tourmaline's own
+   Color Zoning/Ribbing sections (see .fg-guide[data-family-slug=
+   "tourmaline"] #fg-tourmaline-zoning .fg-photocard-media above) instead
+   of the default gray/beige-tinted cover-fit well. */
+.fg-guide[data-family-slug="obsidian"] #fg-color-in-glass .fg-photocard-media{aspect-ratio:auto;height:220px;background:#FFFFFF}
+.fg-guide[data-family-slug="obsidian"] #fg-color-in-glass .fg-photocard-media img{object-fit:contain;padding:14px;box-sizing:border-box}
+.fg-guide[data-family-slug="obsidian"] #fg-color-in-glass .fg-photocard-title{font-size:17px}
+@media(max-width:600px){
+  .fg-guide[data-family-slug="obsidian"] #fg-color-in-glass .fg-photocard-media{height:180px}
+}
+
+/* "Names to Verify" — an editorial text-and-photo split (text left,
+   photograph right; photograph second on mobile, preserving reading
+   order), not a centered caption block. The photo is intentionally small
+   (approximately 205px on desktop, narrowed from 235px per Christie's
+   correction so its white image block visually matches the height of the
+   adjacent text) so it supports the text rather than dominating the
+   section, and carries no caption or credit line of any kind per
+   Christie's confirmation this first-party photo needs none. */
+.fg-obsidian-verify{margin-top:2.5rem;padding-top:1.75rem;border-top:0.5px solid var(--border2)}
+.fg-obsidian-verify-split{display:flex;align-items:flex-start;gap:28px}
+.fg-obsidian-verify-text{flex:1;min-width:0}
+.fg-obsidian-verify-media{flex:0 0 205px;width:205px}
+.fg-obsidian-verify-media img{width:100%;border-radius:10px;display:block}
+@media(max-width:700px){
+  .fg-obsidian-verify-split{flex-direction:column}
+  .fg-obsidian-verify-media{flex:0 0 auto;width:100%;max-width:205px}
+}
+
+/* Unboxed closing — background/border/shadow removed so the ending
+   sentence and Return pill render as a bare centered line plus a compact
+   pill, matching the established Fluorite/Agate/Jasper/Quartz/Tourmaline
+   treatment. Unchanged from the prior pass. */
+.fg-guide[data-family-slug="obsidian"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
 
 /* ══════════════════════════════════════════════════════════════════════
    TOURMALINE FAMILY GUIDE — dedicated styles, corrected (Claude Code
@@ -3462,6 +3542,84 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    (68px there, via .fg-section:has(+ .fg-closing)). Same technique,
    applied to Copper's own closing-pill wrapper. */
 .fg-guide[data-family-slug="copper"] .fg-section:has(+ .fg-copper-closing-pill-wrap){margin-bottom:68px}
+
+/* ══ BERYL FAMILY GUIDE (2026-08-19) — narrowly scoped additions only.
+   Reuses the shared .fg-hero-media/.fg-explain-grid/.fg-namegrid/
+   .fg-namecard/.fg-closing components exactly as every prior guide does;
+   nothing below redefines a shared class's base rule, only adds
+   [data-family-slug="beryl"]-scoped overrides (matching the existing
+   Jasper/Agate/Obsidian/Copper hero-photo and image-well precedents) plus
+   one new, generic, reusable small-caption class (.fg-hero-media-legend)
+   for the hero's numbered-specimen identification line. ══ */
+/* Hero photograph is a real numbered identification photo, not a curated
+   collage — hide the "Family photograph — coming soon" overlay label
+   (same technique already used by Jasper/Agate/Obsidian) and force the
+   media well to a bounded white background with object-fit:contain so the
+   complete photo, including every numbered specimen, stays fully visible
+   and uncropped rather than being cover-cropped to fill the 16:9 frame.
+   Correction (2026-08-19 follow-up): the base .fg-hero-media-grid is a 2x2
+   grid (grid-template-columns/rows:1fr 1fr) meant for a 4-photo collage;
+   fgHeroMediaHtml only adds a --2/--3 single-row modifier for exactly 2 or
+   3 images, so Beryl's single hero photo was silently confined to one
+   quarter-cell of that grid — the actual cause of the photo rendering as a
+   small thumbnail inside a much larger well. Reusing Agate's own
+   single-image precedent (display:block;height:100%) fixes this: the image
+   now sizes to the full well while object-fit:contain (below) still keeps
+   the complete photo, every specimen, and every printed number uncropped. */
+.fg-guide[data-family-slug="beryl"] .fg-hero-media-label{display:none}
+.fg-guide[data-family-slug="beryl"] .fg-hero-media{background:#FFFFFF}
+.fg-guide[data-family-slug="beryl"] .fg-hero-media-grid{display:block;height:100%}
+.fg-guide[data-family-slug="beryl"] .fg-hero-media-grid img{width:100%;height:100%;object-fit:contain;background:#FFFFFF;padding:14px;box-sizing:border-box;display:block}
+/* .fg-hero-media-legend (generic, unscoped) — a small, restrained Jost
+   identification caption directly beneath the hero photo, distinct from
+   the photo credit (still routed only through the shared footer pattern).
+   Only Beryl sets guide.hero.imageLegend today; any future guide may reuse
+   this class the same way. Bumped 12px -> 13px (2026-08-19 follow-up) for
+   comfortable legibility now that the hero photo itself reads much larger;
+   still the same restrained small-caption treatment otherwise. */
+.fg-hero-media-legend{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.02em;color:var(--ink2r);text-align:center;margin-top:0.6rem}
+/* Built in Six Sides — bounded white image well, matching Copper's own
+   .fg-explain-media override exactly (object-fit:contain so the specimen
+   photo is never cropped or stretched). */
+.fg-guide[data-family-slug="beryl"] .fg-explain-media{background:#FFFFFF}
+.fg-guide[data-family-slug="beryl"] .fg-explain-media img{object-fit:contain;background:#FFFFFF;padding:14px;box-sizing:border-box}
+/* Full standard section width (2026-08-19 follow-up) — the base
+   .fg-prose-block (max-width:78ch;margin:0 auto) and .fg-lead/.fg-lead--wide
+   (max-width:58ch/82ch) are both narrow, centered-by-default components;
+   every other guide that uses them (Tourmaline/Obsidian/Copper) already
+   adds this exact same guide-scoped override, which Beryl was missing.
+   Fixes "What Beryl Is" and the two trailing paragraphs in "How Beryl Gets
+   Its Color" (.fg-prose-block/.fg-prose), and the section introductions for
+   Meet Five Beryl Expressions/How Beryl Gets Its Color/Understanding Beryl
+   Names (.fg-lead) — all now run the full standard content width, flush
+   with their heading's left edge, instead of a narrow indented column. */
+.fg-guide[data-family-slug="beryl"] .fg-prose-block{max-width:none;margin:0}
+.fg-guide[data-family-slug="beryl"] .fg-prose{text-align:left;font-size:16px}
+/* How Beryl Gets Its Color — spacing correction (2026-08-20): the
+   .fg-prose-block above has its own top margin zeroed (guide-wide rule
+   directly above), so the "Aquamarine and Heliodor..." paragraphs sat
+   flush against the comparison table's bottom edge with no separation.
+   Adds space only to the post-table prose block, matching the ~28px
+   normal paragraph gap already established elsewhere (Copper's own
+   .fg-prose + .fg-card-grid rule below). Does not touch .fg-table/
+   .fg-table-wrap or add space inside the table itself. */
+.fg-guide[data-family-slug="beryl"] #fg-beryl-color .fg-table-wrap + .fg-prose-block{margin-top:1.75rem}
+.fg-guide[data-family-slug="beryl"] .fg-lead,
+.fg-guide[data-family-slug="beryl"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0;font-size:16px}
+/* Understanding Beryl Names — four plain teaching cards in a balanced 2x2
+   grid (the shared .fg-namegrid defaults to 5 columns; Quartz's own
+   four-card naming decoder already narrows it to 4, so this narrows it to
+   2 for Beryl's four-card layout). Correction (2026-08-19 follow-up): the
+   grid no longer carries its own max-width/margin:0 auto — that was
+   confining it to a narrow centered box instead of the full standard
+   section width. Equal column widths and the 2x2 arrangement are unchanged
+   (repeat(2,1fr) alone already guarantees both); matching mobile overrides
+   live in the existing 900px/600px media queries alongside Quartz's own,
+   below. */
+.fg-guide[data-family-slug="beryl"] #fg-beryl-naming .fg-namegrid{grid-template-columns:repeat(2,1fr)}
+/* Closing — no enclosing box, matching the same established treatment
+   already used by Fluorite/Jasper/Agate/Quartz/Obsidian. */
+.fg-guide[data-family-slug="beryl"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
 
 /* ── Unified Copper navigation-pill system (2026-08-06) ──────────────
    One shared base (fg-copper-pill) for both "Explore All Copper
@@ -4021,6 +4179,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-lead{font-size:18px}
   .fg-namegrid{grid-template-columns:repeat(2,1fr)}
   .fg-guide[data-family-slug="quartz"] #fg-name-change .fg-namegrid{grid-template-columns:repeat(2,1fr)}
+  .fg-guide[data-family-slug="beryl"] #fg-beryl-naming .fg-namegrid{grid-template-columns:repeat(2,1fr)}
   .fg-relationship-grid{grid-template-columns:1fr}
   .fg-branch-grid{grid-template-columns:1fr}
   .fg-card-grid--2{max-width:420px}
@@ -4053,7 +4212,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-what-tourmaline-is,#fg-tourmaline-naming,#fg-tourmaline-color,#fg-tourmaline-zoning,#fg-tourmaline-ribbing,#fg-tourmaline-electrical,#fg-tourmaline-collection-forms,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay,#fg-agate-pattern,#fg-agate-comparison,#fg-agate-naming,#fg-agate-collection,#fg-closing-bridge{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-what-tourmaline-is,#fg-tourmaline-naming,#fg-tourmaline-color,#fg-tourmaline-zoning,#fg-tourmaline-ribbing,#fg-tourmaline-electrical,#fg-tourmaline-collection-forms,#fg-meet-obsidian-family,#fg-how-lava-becomes-obsidian,#fg-lava-preserves,#fg-color-in-glass,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay,#fg-agate-pattern,#fg-agate-comparison,#fg-agate-naming,#fg-agate-collection,#fg-closing-bridge,#fg-what-beryl-is,#fg-meet-beryl-family,#fg-beryl-six-sides,#fg-beryl-color,#fg-beryl-naming{scroll-margin-top:132px}
   .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:16px}
   .fg-table thead{display:none}
   .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}
@@ -4084,6 +4243,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-section:has(+ .fg-closing){margin-bottom:26px}
   .fg-namegrid{grid-template-columns:1fr}
   .fg-guide[data-family-slug="quartz"] #fg-name-change .fg-namegrid{grid-template-columns:1fr}
+  .fg-guide[data-family-slug="beryl"] #fg-beryl-naming .fg-namegrid{grid-template-columns:1fr}
   .fg-single-visual{max-width:100%}
   .fg-card-grid--2{grid-template-columns:1fr;max-width:100%}
   .fg-compare-grid{grid-template-columns:1fr;max-width:100%}
@@ -4094,12 +4254,6 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 100%;max-width:440px}
   .fg-tree-parent{max-width:100%}
   .fg-progression{grid-template-columns:1fr}
-  #fg-meet-obsidian-family .fg-section-intro,
-  #fg-obsidian-group .fg-section-intro,
-  #fg-lava-preserves .fg-section-intro,
-  #fg-obsidian-appearance .fg-section-intro,
-  #fg-obsidian-collection .fg-section-intro{max-width:none}
-  #fg-obsidian-group .fg-prose-block{max-width:none}
 }
 
 /* ── MOBILE POLISH PASS ── */
