@@ -1483,9 +1483,9 @@ function familyGuideFeldsparSunstoneConnectorHtml(guide){
 }
 
 /* ── 5. Glow, Flash, Sparkle — three equal comparison cards. "What to
-   notice" now renders immediately below the secondary technical term,
-   above the explanatory body paragraph (moved up per this pass). No
-   closing sentence beneath the cards. ── */
+   notice" renders as a quiet inline closing line after the explanatory
+   body paragraph (2026-08-20 simplification pass — no more beige inset
+   box). No closing sentence beneath the cards. ── */
 function fgFeldsparLightCardHtml(item){
   const imgHtml = item.image
     ? `<img src="${escapeAttr('assets/family-guide-feldspar/'+item.image)}" alt="${escapeAttr(item.alt||'')}" loading="lazy">`
@@ -1495,8 +1495,8 @@ function fgFeldsparLightCardHtml(item){
     <div class="fg-photocard-body">
       <div class="fg-feldspar-light-word">${escapeAttr(item.plainWord||'')}</div>
       <div class="fg-feldspar-light-term">${escapeAttr(item.technicalTerm||'')}</div>
-      ${item.whatToNotice?`<div class="fg-feldspar-notice"><span>What to notice:</span> ${escapeAttr(item.whatToNotice)}</div>`:''}
       <p class="fg-photocard-text">${escapeAttr(item.body||'')}</p>
+      ${item.whatToNotice?`<p class="fg-feldspar-notice"><span>What to notice:</span> ${escapeAttr(item.whatToNotice)}</p>`:''}
     </div>
   </div>`;
 }
@@ -1521,13 +1521,14 @@ function familyGuideFeldsparLightHtml(guide){
    plain caption line directly beneath the stone name, styled like any
    other body text — never as an alarming warning badge. Each card's
    bestClue string (e.g. "Best clue: A soft internal glow.") is split at
-   its leading label so it can share the exact same restrained pill
-   treatment as "What to notice" in Glow, Flash, Sparkle (2026-08-01
-   cohesion pass) — the label bolded, the rest regular weight, both in one
-   tinted rounded pill (see .fg-feldspar-notice in styles.css, now reused
-   by both components instead of the old flat-bold .fg-feldspar-best-clue
-   line). The stored wording itself is untouched — only how it's split
-   into label/remainder for rendering. ── */
+   its leading label so it can share the exact same quiet inline-line
+   treatment as "What to notice" in Glow, Flash, Sparkle — the label
+   bolded, the rest regular weight, no background/border/rounded
+   container (see .fg-feldspar-notice in styles.css). The clue now closes
+   the card after the explanatory paragraph (2026-08-20 simplification
+   pass — previously it rendered as a beige box above the paragraph). The
+   stored wording itself is untouched — only how it's split into
+   label/remainder for rendering. ── */
 function fgFeldsparCluePillHtml(clue){
   if(!clue) return '';
   const m = /^([^:]+:)\s*(.*)$/.exec(clue);
@@ -1546,8 +1547,8 @@ function fgFeldsparDecoderCardHtml(item){
     <button type="button" class="fg-relationship-media" onclick="openDetail('${escapeAttr(c.i)}')" title="Open ${escapeAttr(c.n)} in Quick View">${imgHtml}</button>
     <div class="fg-relationship-label">${escapeAttr(item.label||c.n)}</div>
     ${item.identityLabel?`<div class="fg-feldspar-identity-label">${escapeAttr(item.identityLabel)}</div>`:''}
-    ${fgFeldsparCluePillHtml(item.bestClue)}
     ${item.body?`<p class="fg-fact-body">${escapeAttr(item.body)}</p>`:''}
+    ${fgFeldsparCluePillHtml(item.bestClue)}
   </div>`;
 }
 function familyGuideFeldsparMoonstoneDecoderHtml(guide){
