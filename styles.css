@@ -2848,14 +2848,28 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    wrapping 3-then-3 like every other roster grid using this class. */
 .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 310px;max-width:330px}
 
-/* Widened reading measure for Tourmaline's/Obsidian's "is a group, not one
-   stone" prose sections (this guide's own prose-block only; the shared
-   .fg-prose-block used by Chalcedony/Agate is untouched). Garnet's
-   equivalent section was replaced entirely by the 2026-08-01 rebuild. */
-#fg-tourmaline-group .fg-prose-block,
-#fg-growth-recording .fg-prose-block,
+/* Widened reading measure for Obsidian's own prose-block sections (this
+   guide's own prose-block only; the shared .fg-prose-block used by
+   Chalcedony/Agate is untouched). Garnet's equivalent section was
+   replaced entirely by the 2026-08-01 rebuild. */
 #fg-obsidian-group .fg-prose-block{max-width:92ch}
-.fg-prose-emphasis{font-style:italic;color:var(--accent);margin-top:0.9em}
+/* Tourmaline (Claude Code Brief: Correct Tourmaline to the Finalized
+   Family-Guide Standard) — the shared .fg-prose-block base is narrow and
+   auto-centered (max-width:78ch;margin:0 auto), producing a small centered
+   text island instead of aligning with the section heading and the rest
+   of the shared content frame. Same correction already established for
+   Copper (.fg-guide[data-family-slug="copper"] .fg-prose-block below). */
+.fg-guide[data-family-slug="tourmaline"] .fg-prose-block{max-width:none;margin:0}
+.fg-guide[data-family-slug="tourmaline"] .fg-prose{text-align:left;font-size:16px}
+/* Font-family/size completed (Claude Code Brief: Final Tourmaline
+   Corrections) — this class was previously missing them, so its only
+   consumer (Tourmaline's "Shared structure. Variable chemistry." identity
+   takeaway) rendered as plain Jost body copy instead of the intentional
+   editorial emphasis. Matched to the same Georgia-italic/16px/accent-color
+   treatment already approved for restrained mid-page emphasis elsewhere
+   (.fg-hero-emphasis). Left-aligned via inherited default — no override
+   needed. */
+.fg-prose-emphasis{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;line-height:1.6;color:var(--accent);margin-top:0.9em}
 
 /* The Major Garnet Branches — parent-and-branches diagram, widened to be
    the dominant visual section of the page, plus the color explanation and
@@ -2907,24 +2921,224 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-catalog-link{font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:0.03em;color:var(--accent);background:var(--stone2);border:0.5px solid var(--border2);border-radius:20px;padding:6px 14px;cursor:pointer}
 .fg-catalog-link:hover{color:var(--white);background:var(--accent)}
 
-/* Tourmaline/Obsidian-scoped widening of the shared section-intro
-   component (see .fg-section-intro base rule above) so short sentences
-   read at a roomier measure on these guides only — every other guide's
-   section-intro usage is untouched since the selector is scoped to their
-   own section IDs. Garnet now sets its own left-aligned, full-width
-   section-intro treatment via .fg-guide[data-family-slug="garnet"]
-   .fg-section-intro (see the Garnet rebuild block below) instead of this
-   centered/widened pattern. */
-#fg-meet-tourmaline-family .fg-section-intro,
-#fg-tourmaline-group .fg-section-intro,
-#fg-growth-recording .fg-section-intro,
-#fg-tourmaline-appearance .fg-section-intro,
-#fg-tourmaline-collection .fg-section-intro,
+/* Obsidian-scoped widening of the shared section-intro component (see
+   .fg-section-intro base rule above) so short sentences read at a roomier
+   measure on this guide only — every other guide's section-intro usage is
+   untouched since the selector is scoped to their own section IDs. Garnet
+   now sets its own left-aligned, full-width section-intro treatment via
+   .fg-guide[data-family-slug="garnet"] .fg-section-intro (see the Garnet
+   rebuild block below) instead of this centered/widened pattern.
+   Tourmaline no longer uses .fg-section-intro anywhere (Claude Code Brief:
+   Correct Tourmaline to the Finalized Family-Guide Standard) — its five
+   former section-intro paragraphs now use .fg-lead, matching the deployed
+   Fluorite treatment (see the Fluorite-mirroring rule below), so its
+   section ids have been removed from this legacy centered/narrow group. */
 #fg-meet-obsidian-family .fg-section-intro,
 #fg-obsidian-group .fg-section-intro,
 #fg-lava-preserves .fg-section-intro,
 #fg-obsidian-appearance .fg-section-intro,
 #fg-obsidian-collection .fg-section-intro{max-width:860px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TOURMALINE FAMILY GUIDE — dedicated styles, corrected (Claude Code
+   Brief: Correct Tourmaline to the Finalized Family-Guide Standard). The
+   guide's five ordinary section introductions now use the shared .fg-lead
+   component with the exact same guide-scoped override Fluorite already
+   uses (max-width:none;margin-left:0;margin-right:0;font-size:16px) — the
+   deployed reference this correction is built from — instead of the
+   legacy centered/italic .fg-section-intro default. Additive only:
+   nothing here changes any other guide's selectors or output. ══ */
+
+/* Section-intro typography and heading-to-intro spacing — mirrors
+   .fg-guide[data-family-slug="fluorite"] .fg-lead/.fg-h2 + * exactly. */
+.fg-guide[data-family-slug="tourmaline"] .fg-lead,
+.fg-guide[data-family-slug="tourmaline"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0;font-size:16px}
+.fg-guide[data-family-slug="tourmaline"] .fg-h2 + *{margin-top:1.125rem}
+
+/* Naming table (Schorl, Dravite, Elbaite) — the shared .fg-table-wrap's
+   62px top margin (approved elsewhere for Agate/Copper, whose comparison
+   tables sit further down their pages) read as excessive directly beneath
+   this section's one-line lead-in; reduced to a comfortable editorial
+   transition. Header row quieted: font-weight 600 (was inheriting the
+   browser <th> bold default) and font-size reduced ~1px (16px base ->
+   15px), letter-spacing/alignment/uppercase untouched. First column
+   neutralized to match columns two/three exactly (Two Final Tourmaline
+   Visual Corrections): the shared .fg-table td:first-child/th:first-child
+   rule (color:ink, font-weight:500), approved elsewhere for genuinely
+   row-header-style tables, made this table's "Kind of name" column read
+   heavier than "Examples"/"What it tells you". Overridden here, scoped to
+   this table only, back to each cell's own ordinary type color/weight —
+   ink2r/600 for the header cell (matching the other header cells above),
+   ink2/400 for the body cells (matching the other body cells, browser
+   default td weight). Column widths, table background, dividers, and
+   mobile stacked treatment are all untouched. */
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-naming .fg-table-wrap{margin-top:38px}
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-naming .fg-table th{font-weight:600;font-size:15px}
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-naming .fg-table th:first-child{color:var(--ink2r);font-weight:600}
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-naming .fg-table td:first-child{color:var(--ink2);font-weight:400}
+@media(max-width:600px){
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-naming .fg-table-wrap{margin-top:26px}
+}
+
+/* Color Zoning lead-in sentence ("Watermelon Tourmaline makes both
+   directions...") — moved above the two image cards (Claude Code Brief:
+   Tourmaline Family Guide: Final Layout Corrections). Reuses .fg-lead's
+   own top spacing (normal paragraph rhythm from the preceding intro is
+   untouched); only its own bottom margin is corrected from the shared
+   28px to the requested ~24px gap into the card row below. */
+.fg-guide[data-family-slug="tourmaline"] .fg-tourmaline-zoning-leadin{margin-bottom:24px}
+
+/* Prose-to-photo-grid spacing — Why Tourmaline Crystals Are So Ribbed's
+   closing paragraph sat directly against the image-card row because the
+   guide-wide .fg-prose-block override above zeroes its own margin. Same
+   technique already established for Feldspar (.fg-prose + {grid types}),
+   scoped narrowly to the one Tourmaline section with this exact "prose
+   immediately before a photo grid" shape — no other Tourmaline section
+   currently has it (the others use .fg-lead, whose own 28px bottom margin
+   already provides adequate separation). */
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-ribbing .fg-prose-block + .fg-photo-grid{margin-top:24px}
+@media(max-width:600px){
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-ribbing .fg-prose-block + .fg-photo-grid{margin-top:20px}
+}
+
+/* Meet the Tourmaline Family roster — 3 columns desktop (unchanged, via
+   the shared .fg-card-grid--garnet-roster flex-wrap). Correction: keep 2
+   columns at the narrow mobile breakpoint too, per this guide's approved
+   grid spec, instead of the shared roster grid's usual 1-column-at-600px
+   default (see .fg-card-grid--garnet-roster .fg-mineralcard below). */
+@media(max-width:600px){
+  .fg-guide[data-family-slug="tourmaline"] .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 46%;max-width:400px}
+}
+
+/* "Chosen for:" line on the Meet the Tourmaline Family cards — visibly
+   distinct from the physical-identification sentence above it through a
+   quiet accent rule (thin top border) and accent color, per the brief,
+   rather than a nested box. */
+.fg-tourmaline-chosen-for{font-size:14px;line-height:1.5;color:var(--accent);margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border2)}
+.fg-tourmaline-chosen-label{font-family:'Jost',sans-serif;font-weight:500;color:var(--ink2);margin-right:3px}
+
+/* Naming decoder now uses the shared fgFormationTableHtml/.fg-table
+   component (see familyGuideTourmalineNamingHtml) — full shared width,
+   quiet uppercase column headings, fine row dividers, no card boxes, and
+   built-in narrow-mobile stacking with field labels. No Tourmaline-scoped
+   override needed; matches Agate's identical unscoped usage. */
+
+/* Color Zoning / Ribbing / Collection Forms specimen photography — white
+   bounded wells at the approved family-guide image-well scale (170-190px
+   desktop, 130-170px mobile), object-fit:contain, matching the same
+   correction already established for Fluorite's Cube/Octahedron/Cleavage,
+   Jasper's pattern decoder, and Agate's pattern/naming decoders. Replaces
+   the base .fg-photocard-media default (aspect-ratio:4/3, stone2 ground,
+   object-fit:cover), which let these wells grow far too tall on a
+   two-column card and never gave a white ground. */
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-zoning .fg-photocard-media,
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-ribbing .fg-photocard-media,
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photocard-media{aspect-ratio:auto;height:180px;background:#FFFFFF}
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-zoning .fg-photocard-media img,
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-ribbing .fg-photocard-media img,
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photocard-media img{object-fit:contain;padding:10px;box-sizing:border-box}
+@media(max-width:900px){
+  /* Ribbing lesson stacks at 900px and below, per the approved grid spec
+     (Color Zoning keeps the shared .fg-photo-grid--2 default, which
+     stacks only at the narrower 600px breakpoint). */
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-ribbing .fg-photo-grid--2{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-zoning .fg-photocard-media,
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-ribbing .fg-photocard-media,
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photocard-media{height:150px}
+}
+
+/* Collection Forms grid — corrected so a shorter final row (five cards in
+   three columns leaves two on their own row) centers instead of either
+   left-aligning against an empty cell or stretching to fill it. No
+   existing shared component supports this exact "equal-width, centered,
+   non-stretched" pattern for .fg-photocard (the closest, .fg-card-grid--
+   garnet-roster, is built for .fg-mineralcard/.fg-stonecard instead), so
+   this converts the section's own .fg-photo-grid--3 from CSS Grid to the
+   same flex-wrap/justify-content:center technique that component already
+   uses, scoped to this section only. Two columns at 900px, one at 600px,
+   per the approved responsive spec — matches .fg-card-grid--garnet-
+   roster's own breakpoint values exactly. */
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photo-grid--3{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photocard{flex:0 1 310px;max-width:330px}
+@media(max-width:900px){
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photocard{flex:0 1 46%;max-width:400px}
+}
+@media(max-width:600px){
+  .fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-collection-forms .fg-photocard{flex:0 1 100%;max-width:440px}
+}
+
+/* Electrical module — rebuilt as two substantial equal sibling panels
+   using the approved Feldspar branch-panel format as the visual model.
+   Reuses the shared .fg-branch-grid (2 columns desktop, stacks at 900px —
+   already Feldspar's own behavior, no override needed) and the generic
+   .fg-branch-title class; only left-aligns it here since the base rule
+   centers it and Feldspar's own left-align override is scoped to
+   .fg-feldspar-branch-panel, not this panel. Panel chrome (white ground,
+   thin border, 12px radius, 3px accent top border) copies Feldspar's
+   .fg-feldspar-branch-panel property values rather than reusing that
+   class directly, since it is named/scoped to Feldspar; the two accent
+   colors reuse the same warm/cool pair already approved for Feldspar's
+   own two branches (#b8874a / #5f7f8f). */
+.fg-tourmaline-electric-panel{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;border-top-width:3px}
+.fg-tourmaline-electric-panel--a{border-top-color:#b8874a}
+.fg-tourmaline-electric-panel--b{border-top-color:#5f7f8f}
+.fg-tourmaline-electric-panel .fg-branch-title{text-align:left;margin-bottom:0.2rem}
+.fg-tourmaline-electric-secondary{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2r);margin-bottom:0.7rem}
+/* Facts — quiet teaching rows (Claude Code Brief: refine the electrical-
+   panel information hierarchy). Corrected from an uppercase/letter-spaced
+   label treatment, which competed with the panel's own TEMPERATURE
+   CHANGE/PRESSURE eyebrow, to sentence case at a smaller size/medium
+   weight with no letter-spacing — a distinctly quieter register than the
+   eyebrow. Each fact unit gets its own fine top divider (including the
+   first, separating the row set from the explanatory paragraph above);
+   answer uses ordinary Jost paragraph styling directly beneath its label. */
+.fg-tourmaline-electric-facts{margin-top:1rem;display:flex;flex-direction:column;gap:0.85rem}
+.fg-tourmaline-electric-fact{display:flex;flex-direction:column;gap:0.3rem;text-align:left;padding-top:0.85rem;border-top:0.5px solid var(--border2)}
+.fg-tourmaline-electric-fact-label{font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:normal;text-transform:none;color:var(--ink2r)}
+.fg-tourmaline-electric-fact-value{font-size:15px;line-height:1.6;color:var(--ink2);margin:0;text-align:left}
+
+/* Shared quiet takeaway strip — a labeled full-width conclusion line, not
+   a card: a thin top divider, small uppercase label, and one ordinary
+   left-aligned Jost paragraph. Used by both the Electrical module's "THE
+   ASH PULLER" historical note and Color Zoning's "WHAT THIS SHOWS" note,
+   at the shared section content width (no max-width cap of its own). */
+.fg-tourmaline-takeaway{margin-top:28px;padding-top:16px;border-top:0.5px solid var(--border2)}
+.fg-tourmaline-takeaway-label{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);margin-bottom:0.5rem}
+.fg-tourmaline-takeaway-body{font-size:16px;line-height:1.7;color:var(--ink2);margin:0;text-align:left}
+/* "THE ASH PULLER" eyebrow — softened (this is now this class's only
+   remaining consumer, since Color Zoning's takeaway was removed). Uses
+   the muted bronze/gold editorial-eyebrow color already established
+   elsewhere (--accent, the same color as .fg-eyebrow) at medium weight,
+   rather than the previous darker/bolder --ink2 600 treatment. Size,
+   letter-spacing, uppercase treatment, placement, and divider are
+   unchanged. */
+.fg-guide[data-family-slug="tourmaline"] #fg-tourmaline-electrical .fg-tourmaline-takeaway-label{color:var(--accent);font-weight:500}
+
+/* Tourmaline in Your Collection — intro-to-card-grid spacing, mirroring
+   Feldspar's own identical rule for its .fg-prose + .fg-feldspar-
+   collection-grid transition exactly (30px). Card typography, padding,
+   border, background, radius, and equal-height behavior all come for
+   free from the shared .fg-collection-sub/.fg-collection-panel-title/
+   .fg-fact-body/.fg-feldspar-collection-grid rules Feldspar already uses
+   unscoped — no Tourmaline-specific override needed for any of those. */
+.fg-guide[data-family-slug="tourmaline"] .fg-prose + .fg-feldspar-collection-grid{margin-top:1.875rem}
+/* Cards-to-concluding-sentence gap — mirrors Feldspar's identical
+   :has(+ .fg-closing) reflective-transition rule exactly (68px). */
+.fg-guide[data-family-slug="tourmaline"] .fg-section:has(+ .fg-closing){margin-bottom:68px}
+
+/* Return to Crystal Families — removes the base .fg-closing card's large
+   bordered/shadowed box (background/border/border-radius/box-shadow/
+   padding) so only the neutral Return pill remains with ordinary section
+   spacing, matching Garnet's and Fluorite's identical scoped override
+   exactly. guide.closingCallout now carries the approved closing
+   reflection line, rendered by the shared familyGuideClosingHtml as
+   .fg-closing-line (Georgia italic, centered, per the established
+   family-guide closing treatment) directly above the Return pill — both
+   inherit the base .fg-closing's centered text-align, which this override
+   does not touch. */
+.fg-guide[data-family-slug="tourmaline"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
 
 /* ══════════════════════════════════════════════════════════════════════
    COPPER MINERALS FAMILY GUIDE — dedicated styles (2026-07-31). Additive
@@ -3839,7 +4053,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 
 @media(max-width:600px){
   #tab-family{padding:1rem}
-  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-tourmaline-group,#fg-growth-recording,#fg-tourmaline-appearance,#fg-tourmaline-collection,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay,#fg-agate-pattern,#fg-agate-comparison,#fg-agate-naming,#fg-agate-collection,#fg-closing-bridge{scroll-margin-top:132px}
+  #fg-hero,#fg-varieties,#fg-recognize,#fg-shapes,#fg-extended,#fg-collection,#fg-closing,#fg-expressions,#fg-name-change,#fg-growth-forms,#fg-relationship,#fg-many-colors,#fg-cube-octahedron,#fg-zoning,#fg-fluorescence,#fg-branches,#fg-light-moves,#fg-moonstone-decoder,#fg-lsl,#fg-sunstone,#fg-meet-family,#fg-what-chalcedony-is,#fg-what-agate-is,#fg-agate-jasper-fit,#fg-color-translucency,#fg-forms,#fg-wider-quartz-story,#fg-what-jasper-is,#fg-jasper-pattern,#fg-jasper-name,#fg-jasper-collection,#fg-meet-the-garnets,#fg-six-foundations,#fg-familiar-names,#fg-garnet-collection,#fg-meet-tourmaline-family,#fg-what-tourmaline-is,#fg-tourmaline-naming,#fg-tourmaline-color,#fg-tourmaline-zoning,#fg-tourmaline-ribbing,#fg-tourmaline-electrical,#fg-tourmaline-collection-forms,#fg-meet-obsidian-family,#fg-obsidian-group,#fg-lava-preserves,#fg-obsidian-appearance,#fg-obsidian-collection,#fg-one-deposit,#fg-meet-copper-family,#fg-other-copper-minerals,#fg-color-comparison,#fg-grow-together,#fg-copper-care,#fg-copper-closing-essay,#fg-agate-pattern,#fg-agate-comparison,#fg-agate-naming,#fg-agate-collection,#fg-closing-bridge{scroll-margin-top:132px}
   .fg-table th,.fg-table td{padding:0.7rem 0.85rem;font-size:16px}
   .fg-table thead{display:none}
   .fg-table,.fg-table tbody,.fg-table tr,.fg-table td{display:block;width:100%}
@@ -3880,17 +4094,11 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .fg-card-grid--garnet-roster .fg-mineralcard{flex:0 1 100%;max-width:440px}
   .fg-tree-parent{max-width:100%}
   .fg-progression{grid-template-columns:1fr}
-  #fg-meet-tourmaline-family .fg-section-intro,
-  #fg-tourmaline-group .fg-section-intro,
-  #fg-growth-recording .fg-section-intro,
-  #fg-tourmaline-appearance .fg-section-intro,
-  #fg-tourmaline-collection .fg-section-intro,
   #fg-meet-obsidian-family .fg-section-intro,
   #fg-obsidian-group .fg-section-intro,
   #fg-lava-preserves .fg-section-intro,
   #fg-obsidian-appearance .fg-section-intro,
   #fg-obsidian-collection .fg-section-intro{max-width:none}
-  #fg-tourmaline-group .fg-prose-block{max-width:none}
   #fg-obsidian-group .fg-prose-block{max-width:none}
 }
 

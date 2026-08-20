@@ -138,12 +138,12 @@ function renderFamilyGuideView(rawSlug, opts){
 // the start of every tab switch; this function then runs afterward, once
 // per family-guide render, and only overrides it to an anchored
 // "credits.html#<slug>" destination for guides listed in anchoredSlugs
-// below (Copper, Calcite). Every other guide/tab keeps the default reset
-// value untouched.
+// below (Copper, Calcite, Garnet, Tourmaline). Every other guide/tab keeps
+// the default reset value untouched.
 function fgSetFooterCreditsLink(slug){
   const link = document.getElementById('footerCreditsLink');
   if(!link) return;
-  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite', garnet:'credits.html#garnet'};
+  const anchoredSlugs = {copper:'credits.html#copper-minerals', calcite:'credits.html#calcite', garnet:'credits.html#garnet', tourmaline:'credits.html#tourmaline'};
   link.setAttribute('href', anchoredSlugs[slug] || 'credits.html');
 }
 
@@ -2377,176 +2377,286 @@ function familyGuideGarnetHtml(guide){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   TOURMALINE FAMILY GUIDE — dedicated section renderers (2026-07-23,
-   built per Christie's lean implementation brief, reusing the corrected
-   Garnet layout pattern: wide prose, one dominant visual, a 3+2 roster,
-   one appearance sequence, minimal bordered cards. Purely additive/
-   Tourmaline-scoped: nothing here touches a Calcite/Quartz/Fluorite/
-   Feldspar/Chalcedony/Agate/Jasper/Garnet selector, function, or data
-   field. Roster cards reuse fgStoneCardHtml in placeholder-aware mode
-   (opts.placeholderOk) since Watermelon Tourmaline has no canonical photo
-   on file yet — see the brief's explicit pending-photo allowance. ══ */
+   TOURMALINE FAMILY GUIDE — controlled rebuild (Claude Code Brief:
+   Tourmaline Family Guide Rebuild), replacing the prior 2026-07-23
+   implementation entirely rather than patching it. Built directly in the
+   finalized shared family-guide system per the approved Markdown
+   (Tourmaline-Family-Guide.md) and visual plan
+   (Tourmaline-Family-Guide-Visual-Plan.md), with this brief's explicit
+   corrections controlling wherever it differs from those sources (hero
+   eyebrow/prompt copy, "Chosen for:" label, exact metaphysical-use lines,
+   and the two-step "How Tourmaline Gets Its Color" / "Color Zoning" split).
+   Reuses shared components wherever one already fits (fgPhotoCardHtml,
+   fgFormationTableHtml, .fg-branch-grid, .fg-prose-block/.fg-prose,
+   .fg-lead, familyGuideCollectionHtml, familyGuideClosingHtml); new
+   markup/CSS is confined to the genuinely unique pieces this guide needs
+   (the "Chosen for:" line, the takeaway-strip component, and the
+   electrical module's panel/facts composition). Nothing here touches a
+   Calcite/Quartz/
+   Fluorite/Feldspar/Chalcedony/Agate/Jasper/Garnet/Obsidian/Copper
+   selector, function, or data field. ══ */
 
-/* ── 1. Meet the Tourmaline Family — five rostered species/expressions.
-   Reuses .fg-card-grid--garnet-roster: a flex-wrap, centered-row layout
-   (3 cards, then 2 centered) that is not garnet-specific in behavior,
-   only in its original naming — the exact 3+2/2-col/1-col responsive
-   pattern the brief asks this guide to reuse. ── */
+/* ── 1. Meet the Tourmaline Family — six featured cards (five catalog
+   stones plus Blue Tourmaline as a non-catalog teaching card). Reuses the
+   shared .fg-mineralcard/-media/-header/.fg-stonecard-name/.fg-stonecard-qv
+   grammar (same anatomy as Garnet's/Copper's featured rosters) but needs
+   its own card function because this guide's brief calls for two
+   independent body lines per card — a physical-identification sentence
+   and a distinctly separated "Chosen for:" metaphysical-use line — which
+   neither fgGarnetFeaturedCardHtml nor fgStoneCardHtml supports. Blue
+   Tourmaline (no stoneId) renders through the same unlinked branch already
+   established by fgGarnetFeaturedCardHtml for Garnet's Pyrope: no Stone
+   ID, slug, Quick View, or invented catalog link. ── */
+function fgTourmalineFamilyCardHtml(mem){
+  if(!mem) return '';
+  const crystal = mem.stoneId ? fgCrystal(mem.stoneId) : null;
+  const src = mem.image || (crystal && typeof firstEncyclopediaPhoto==='function' ? firstEncyclopediaPhoto(crystal) : '');
+  const imgHtml = src
+    ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(mem.name||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const clickable = !!crystal;
+  const mediaHtml = clickable
+    ? `<button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(crystal.i)}')" title="Open ${escapeAttr(mem.name||crystal.n)} in Quick View">${imgHtml}</button>`
+    : `<div class="fg-mineralcard-media" title="${escapeAttr(mem.name||'')} — family-guide teaching card, not a linked encyclopedia entry">${imgHtml}</div>`;
+  const qvHtml = clickable
+    ? `<button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(crystal.i)}')">Quick View</button>`
+    : '';
+  return `<div class="fg-mineralcard${clickable?'':' fg-mineralcard--unlinked'}">
+    ${mediaHtml}
+    <div class="fg-mineralcard-body">
+      <div class="fg-mineralcard-header">
+        <div class="fg-stonecard-name">${escapeAttr(mem.name||'')}</div>
+        ${qvHtml}
+      </div>
+      <p class="fg-mineralcard-text">${escapeAttr(mem.identSentence||'')}</p>
+      ${mem.chosenFor?`<div class="fg-tourmaline-chosen-for"><span class="fg-tourmaline-chosen-label">Chosen for:</span> ${escapeAttr(mem.chosenFor)}</div>`:''}
+    </div>
+  </div>`;
+}
 function familyGuideMeetTourmalineFamilyHtml(guide){
   const m = guide.meetTourmalineFamily;
   if(!m) return '';
-  const cards = (m.members||[]).map(mem=>fgStoneCardHtml(mem, {showIdentity:true, placeholderOk:true, qvLabel:'QUICK VIEW →'})).filter(Boolean).join('');
+  const cards = (m.members||[]).map(fgTourmalineFamilyCardHtml).filter(Boolean).join('');
   return `<section class="fg-section" id="fg-meet-tourmaline-family">
     <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Tourmaline Family')}</h2>
-    ${m.intro?`<p class="fg-section-intro">${escapeAttr(m.intro)}</p>`:''}
+    ${m.intro?`<p class="fg-lead">${escapeAttr(m.intro)}</p>`:''}
     <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
   </section>`;
 }
 
-/* ── Shared triple-caption grid — three bordered title+caption cards in a
-   centered 3-column grid. Reuses .fg-namegrid--3 (grid layout only) and
-   .fg-tree-species-item (bordered card, Georgia name + caption) exactly
-   as already styled for Garnet's branch species list — no new CSS. Used
-   twice below: the growth-pattern comparison (Section 3) and the species
-   comparison (Section 4). ── */
-function fgTripleCaptionGridHtml(items){
-  const cards = (items||[]).map(it=>`<div class="fg-tree-species-item">
-    <div class="fg-tree-species-name">${escapeAttr(it.title||'')}</div>
-    <p class="fg-tree-species-caption">${escapeAttr(it.body||'')}</p>
-  </div>`).join('');
-  return `<div class="fg-namegrid fg-namegrid--3">${cards}</div>`;
-}
-
-/* ── 2. Tourmaline Is a Group, Not One Species — wide prose plus one
-   simple relationship visual (TOURMALINE -> Schorl/Dravite/Elbaite).
-   Reuses .fg-tree/.fg-tree-parent/.fg-tree-branches/.fg-tree-branch as
-   Garnet's branch diagram does, but omits the nested species list (this
-   guide's branches map directly to a roster color group, not to further
-   species), so .fg-tree-species is never rendered empty. ── */
-function familyGuideTourmalineGroupHtml(guide){
-  const g = guide.tourmalineGroup;
-  if(!g) return '';
-  const paras = (g.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const tree = g.tree||{};
-  const branchesHtml = (tree.branches||[]).map(br=>`<div class="fg-tree-branch">
-    <div class="fg-tree-branch-title">${escapeAttr(br.title||'')}</div>
-    ${br.secondaryLabel?`<div class="fg-tree-branch-secondary">${escapeAttr(br.secondaryLabel)}</div>`:''}
-  </div>`).join('');
-  return `<section class="fg-section" id="fg-tourmaline-group">
-    <h2 class="fg-h2">${escapeAttr(g.title||'Tourmaline Is a Group, Not One Species')}</h2>
-    ${g.intro?`<p class="fg-section-intro">${escapeAttr(g.intro)}</p>`:''}
-    <div class="fg-prose-block">${paras}</div>
-    <div class="fg-tree">
-      <div class="fg-tree-parent">
-        <div class="fg-tree-parent-title">${escapeAttr((tree.parent&&tree.parent.title)||'TOURMALINE')}</div>
-        <div class="fg-tree-parent-sub">${escapeAttr((tree.parent&&tree.parent.sub)||'')}</div>
-      </div>
-      <div class="fg-tree-branches">${branchesHtml}</div>
-    </div>
-    ${g.closingLine?`<p class="fg-note-center">${escapeAttr(g.closingLine)}</p>`:''}
+/* ── 2. What Tourmaline Actually Is — short text-led identity section:
+   two plain paragraphs and one restrained typographic emphasis line
+   ("Shared structure. Variable chemistry."), reusing the existing
+   .fg-prose-block/.fg-prose pattern already established for What
+   Chalcedony Actually Is, plus the previously-defined-but-unused shared
+   .fg-prose-emphasis class for the takeaway line. No card grid and no
+   image, per the visual plan — the titled section sits directly after the
+   hero, with no untitled bridge paragraph. ── */
+function familyGuideWhatTourmalineIsHtml(guide){
+  const w = guide.whatTourmalineIs;
+  if(!w) return '';
+  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-what-tourmaline-is">
+    <h2 class="fg-h2">${escapeAttr(w.title||'What Tourmaline Actually Is')}</h2>
+    <div class="fg-prose-block">${paras}${w.emphasis?`<p class="fg-prose-emphasis">${escapeAttr(w.emphasis)}</p>`:''}</div>
   </section>`;
 }
 
-/* ── 3. How Tourmaline Records Growth — the dominant visual section: a
-   four-stage growth diagram (reuses .fg-progression, same component as
-   Garnet's appearance-stage sequence), a compact three-way comparison
-   (fgTripleCaptionGridHtml), a Watermelon note (reuses .fg-names-note),
-   and one short recognition line. ── */
-function familyGuideGrowthRecordingHtml(guide){
-  const r = guide.growthRecording;
+/* ── 4. Schorl, Dravite, Elbaite: What Do Those Names Mean? — rebuilt
+   again (Claude Code Brief: Final Tourmaline Corrections) as one
+   full-width editorial comparison table, replacing the two-row card
+   arrangement (and its "The Species Beneath the Color" subheading)
+   entirely. Reuses fgFormationTableHtml/.fg-table verbatim — the same
+   shared component already approved for Copper's "One Deposit, Many
+   Outcomes" and Agate's Agate/Chalcedony/Jasper comparison, including its
+   built-in narrow-mobile behavior (stacked rows with field labels, no
+   horizontal scroll). No Tourmaline-specific table CSS needed. ── */
+function familyGuideTourmalineNamingHtml(guide){
+  const n = guide.namingDecoder;
+  if(!n) return '';
+  return `<section class="fg-section" id="fg-tourmaline-naming">
+    <h2 class="fg-h2">${escapeAttr(n.title||'Schorl, Dravite, Elbaite: What Do Those Names Mean?')}</h2>
+    ${n.intro?`<p class="fg-lead">${escapeAttr(n.intro)}</p>`:''}
+    ${fgFormationTableHtml(n.table)}
+  </section>`;
+}
+
+/* ── 5. How Tourmaline Gets Its Color — plain prose only, no image. Kept
+   as its own titled section, separate from Color Zoning below, per this
+   brief's explicit numbered page structure (steps 5 and 6), which
+   supersedes the visual plan's embedded single-section treatment. ── */
+function familyGuideTourmalineColorHtml(guide){
+  const c = guide.tourmalineColor;
+  if(!c) return '';
+  const paras = (c.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-tourmaline-color">
+    <h2 class="fg-h2">${escapeAttr(c.title||'How Tourmaline Gets Its Color')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+  </section>`;
+}
+
+/* ── 6. Color Zoning — one integrated image-led teaching composition
+   (Claude Code Brief: Tourmaline Family Guide: Final Layout Corrections):
+   intro paragraph, then a short lead-in sentence immediately above the
+   two matched zoning examples (longitudinal and center-outward), reusing
+   fgPhotoCardHtml/.fg-photo-grid--2 exactly as every other guide's two-up
+   image comparison already does. The prior post-card "WHAT THIS SHOWS"
+   eyebrow/divider treatment is removed entirely — this sentence now reads
+   as an ordinary body lead-in before the cards, not a labeled takeaway
+   after them. .fg-tourmaline-zoning-leadin only overrides the lead-in's
+   own bottom margin (~24px to the card row); normal paragraph spacing
+   from the intro above is untouched (see styles.css). ── */
+function familyGuideTourmalineZoningHtml(guide){
+  const z = guide.colorZoning;
+  if(!z) return '';
+  const cards = (z.examples||[]).map(ex=>fgPhotoCardHtml(ex, {folder:'family-guide-tourmaline'})).join('');
+  return `<section class="fg-section" id="fg-tourmaline-zoning">
+    <h2 class="fg-h2">${escapeAttr(z.title||'Color Zoning')}</h2>
+    ${z.intro?`<p class="fg-lead">${escapeAttr(z.intro)}</p>`:''}
+    ${z.leadIn?`<p class="fg-lead fg-tourmaline-zoning-leadin">${escapeAttr(z.leadIn)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--2">${cards}</div>
+  </section>`;
+}
+
+/* ── 7. Why Tourmaline Crystals Are So Ribbed — intro prose plus a
+   compact two-part visual lesson (lengthwise ribs, rounded-triangular
+   cross section), reusing fgPhotoCardHtml/.fg-photo-grid--2 exactly as
+   Color Zoning above. ── */
+function familyGuideTourmalineRibbingHtml(guide){
+  const r = guide.tourmalineRibbing;
   if(!r) return '';
   const paras = (r.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
-  const stages = (r.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
-    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
-    <div class="fg-progression-number">${i+1}</div>
-    <div class="fg-progression-body">
-      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
-      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
-    </div>
-  </div>`).join('');
-  const w = r.watermelonNote||{};
-  return `<section class="fg-section" id="fg-growth-recording">
-    <h2 class="fg-h2">${escapeAttr(r.title||'How Tourmaline Records Growth')}</h2>
-    ${r.intro?`<p class="fg-section-intro">${escapeAttr(r.intro)}</p>`:''}
+  const cards = (r.examples||[]).map(ex=>fgPhotoCardHtml(ex, {folder:'family-guide-tourmaline'})).join('');
+  return `<section class="fg-section" id="fg-tourmaline-ribbing">
+    <h2 class="fg-h2">${escapeAttr(r.title||'Why Tourmaline Crystals Are So Ribbed')}</h2>
     <div class="fg-prose-block">${paras}</div>
-    <div class="fg-progression">${stages}</div>
-    ${fgTripleCaptionGridHtml(r.comparison)}
-    ${w.body?`<div class="fg-names-note">
-      <div class="fg-names-note-title">${escapeAttr(w.title||'Why Watermelon Looks Like Watermelon')}</div>
-      <p class="fg-fact-body fg-note-center">${escapeAttr(w.body)}</p>
-    </div>`:''}
-    ${r.recognitionNote?`<p class="fg-note-center">${escapeAttr(r.recognitionNote)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--2">${cards}</div>
   </section>`;
 }
 
-/* ── 4. How Tourmaline Appears — a four-stage sequence (reuses
-   .fg-progression again), a species comparison (fgTripleCaptionGridHtml),
-   a matrix note, and one contextual link to the Tourmaline Quartz Quartz-
-   family entry (reuses .fg-catalog-link — not a sixth roster card, no
-   Quick View grid slot, no family-guide route). ── */
-function familyGuideTourmalineAppearanceHtml(guide){
-  const a = guide.tourmalineAppearance;
-  if(!a) return '';
-  const stages = (a.stages||[]).map((st,i)=>`<div class="fg-progression-stage">
-    <div class="fg-progression-media"><div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div></div>
-    <div class="fg-progression-number">${i+1}</div>
-    <div class="fg-progression-body">
-      <div class="fg-progression-title">${escapeAttr(st.title||'')}</div>
-      <p class="fg-progression-text">${escapeAttr(st.body||'')}</p>
-    </div>
-  </div>`).join('');
-  const q = a.quartzLink||{};
-  const qc = q.stoneId ? fgCrystal(q.stoneId) : null;
-  return `<section class="fg-section" id="fg-tourmaline-appearance">
-    <h2 class="fg-h2">${escapeAttr(a.title||'How Tourmaline Appears')}</h2>
-    ${a.intro?`<p class="fg-section-intro">${escapeAttr(a.intro)}</p>`:''}
-    <div class="fg-progression">${stages}</div>
-    ${fgTripleCaptionGridHtml(a.speciesComparison)}
-    ${a.matrixNote?`<p class="fg-note-center">${escapeAttr(a.matrixNote)}</p>`:''}
-    ${qc?`<div class="fg-names-note">
-      <div class="fg-names-note-title">${escapeAttr(q.title||'Tourmaline Quartz')}</div>
-      <p class="fg-fact-body fg-note-center">${escapeAttr(q.body||'')}</p>
-      <div class="fg-catalog-links"><button type="button" class="fg-catalog-link" onclick="openDetail('${escapeAttr(qc.i)}')">${escapeAttr(q.linkLabel||'Tourmaline Quartz')}</button></div>
+/* ── 8. Tourmaline's Electrical Quirk — rebuilt (Claude Code Brief: Final
+   Tourmaline Corrections) as two substantial equal sibling panels using
+   the approved Feldspar branch-panel format as the visual model, per the
+   brief. Reuses the shared .fg-branch-grid (2 columns desktop, stacks at
+   900px — already the exact behavior Feldspar's own branch grid uses) and
+   the generic .fg-branch-title class for each panel's Georgia name.
+   .fg-tourmaline-electric-panel copies Feldspar's .fg-feldspar-branch-
+   panel property values (white ground, thin border, 12px radius, 3px
+   accent top border) rather than reusing that class directly, since it is
+   named/scoped to Feldspar; two quiet, distinct accent colors reuse the
+   same warm/cool pair already approved for Feldspar's own two branches.
+   The prior shallow comparison cards and oversized development-
+   placeholder illustration well are both removed entirely — no
+   replacement image, diagram, icon, or decorative graphic, per the brief.
+   The historical note becomes a full-width "THE ASH PULLER" takeaway
+   strip (shared .fg-tourmaline-takeaway component, also used by Color
+   Zoning's "WHAT THIS SHOWS" note), read as the conclusion of the same
+   composition rather than a separate card. The prior disclaimer sentence
+   ("These are physical properties...") is removed per the brief. ── */
+function fgTourmalineElectricFactHtml(fact){
+  if(!fact) return '';
+  return `<div class="fg-tourmaline-electric-fact">
+    <div class="fg-tourmaline-electric-fact-label">${escapeAttr(fact.label||'')}</div>
+    <p class="fg-tourmaline-electric-fact-value">${escapeAttr(fact.value||'')}</p>
+  </div>`;
+}
+function fgTourmalineElectricPanelHtml(panel, modifier){
+  if(!panel) return '';
+  const facts = (panel.facts||[]).map(fgTourmalineElectricFactHtml).join('');
+  return `<div class="fg-tourmaline-electric-panel fg-tourmaline-electric-panel--${escapeAttr(modifier)}">
+    <div class="fg-branch-title">${escapeAttr(panel.title||'')}</div>
+    ${panel.secondary?`<div class="fg-tourmaline-electric-secondary">${escapeAttr(panel.secondary)}</div>`:''}
+    ${panel.body?`<p class="fg-prose">${escapeAttr(panel.body)}</p>`:''}
+    ${facts?`<div class="fg-tourmaline-electric-facts">${facts}</div>`:''}
+  </div>`;
+}
+function familyGuideTourmalineElectricalHtml(guide){
+  const e = guide.electrical;
+  if(!e) return '';
+  const panels = (e.panels||[]).map((p,i)=>fgTourmalineElectricPanelHtml(p, i===0?'a':'b')).join('');
+  return `<section class="fg-section" id="fg-tourmaline-electrical">
+    <h2 class="fg-h2">${escapeAttr(e.title||"Tourmaline's Electrical Quirk")}</h2>
+    ${e.intro?`<p class="fg-lead">${escapeAttr(e.intro)}</p>`:''}
+    <div class="fg-branch-grid">${panels}</div>
+    ${e.takeaway?`<div class="fg-tourmaline-takeaway">
+      ${e.takeawayLabel?`<div class="fg-tourmaline-takeaway-label">${escapeAttr(e.takeawayLabel)}</div>`:''}
+      <p class="fg-tourmaline-takeaway-body">${escapeAttr(e.takeaway)}</p>
     </div>`:''}
   </section>`;
 }
 
-/* ── 5. Tourmaline in Your Collection — a simple compact list, one small
-   terminology note (Indicolite/Rubellite/Watermelon are names, not
-   separate species/roster cards — no cards, routes, or Quick View
-   entries are added for them), and the five linked catalog pills. ── */
-function familyGuideTourmalineCollectionHtml(guide){
-  const c = guide.tourmalineCollection;
+/* ── 9. How Tourmaline Appears in a Collection — five compact recognition
+   cards (form name, one representative image, one "look for" statement),
+   reusing fgPhotoCardHtml/.fg-photo-grid--3 (the existing readable 3-up
+   shared grid, wrapping 3-then-2) — corrected from the original .fg-photo-
+   grid--5 modifier, which packed five text-heavy cards into one unreadable
+   row and has been removed from styles.css since nothing else used it. No
+   Quick View on any card — each represents a general form, not one exact
+   resolvable stone, per the visual plan's explicit guardrail. ── */
+function familyGuideTourmalineCollectionFormsHtml(guide){
+  const c = guide.collectionForms;
   if(!c) return '';
-  const listItems = fgList(c.listItems||[], 'fg-garnet-plain-list');
-  const links = (c.catalogLinks||[]).map(l=>{
-    const cr = fgCrystal(l.stoneId);
-    if(!cr) return '';
-    return `<button type="button" class="fg-catalog-link" onclick="openDetail('${escapeAttr(cr.i)}')">${escapeAttr(l.name||cr.n)}</button>`;
-  }).filter(Boolean).join('');
-  return `<section class="fg-section" id="fg-tourmaline-collection">
-    <h2 class="fg-h2">${escapeAttr(c.title||'Tourmaline in Your Collection')}</h2>
-    ${c.intro?`<p class="fg-section-intro">${escapeAttr(c.intro)}</p>`:''}
-    <div class="fg-garnet-plain-list-wrap">${listItems}</div>
-    ${c.terminologyNote?`<p class="fg-fact-body fg-note-center">${escapeAttr(c.terminologyNote)}</p>`:''}
-    <div class="fg-catalog-links">${links}</div>
+  const cards = (c.items||[]).map(it=>fgPhotoCardHtml(it, {folder:'family-guide-tourmaline'})).join('');
+  return `<section class="fg-section" id="fg-tourmaline-collection-forms">
+    <h2 class="fg-h2">${escapeAttr(c.title||'How Tourmaline Appears in a Collection')}</h2>
+    ${c.intro?`<p class="fg-lead">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-photo-grid fg-photo-grid--3">${cards}</div>
   </section>`;
 }
 
-/* ── Tourmaline guide assembly — its own approved section order. Purely
-   additive: nothing here changes any other guide's assembly, data, or
-   rendered output. ── */
+/* ── 10. Tourmaline in Your Collection — rebuilt (Claude Code Brief:
+   Tourmaline Family Guide: Final Layout Corrections) to structurally and
+   visually match the approved Feldspar "In Your Collection" implementation
+   (familyGuideFeldsparCollectionHtml) exactly: equal three-column card
+   grid (.fg-feldspar-collection-grid — equal thirds, no permanently wider
+   "Care for It" panel), uniform .fg-collection-sub card treatment for all
+   three cards (same fill/border/radius/padding on every card, no white-
+   vs-stone2 split), and .fg-collection-panel-title/.fg-fact-body card
+   typography. Replaces the prior familyGuideCollectionHtml call, whose
+   shared .fg-collection-grid gives Care for It a wider 1.55fr column and a
+   different (white) background than the other two — exactly the
+   inconsistency this correction removes. Card content (titles Care for
+   It/Remember This/Watch For, and their approved copy) is unchanged —
+   only guide.collection's shape moved from {careForIt,rememberThis,
+   watchFor} to Feldspar's {cards:[{title,paragraphs}]} array. ── */
+function familyGuideTourmalineCollectionHtml(guide){
+  const c = guide.collection;
+  if(!c) return '';
+  const cards = (c.cards||[]).map(card=>`<div class="fg-collection-sub">
+    <div class="fg-collection-panel-title">${escapeAttr(card.title||'')}</div>
+    ${(card.paragraphs||[]).map(p=>`<p class="fg-fact-body">${escapeAttr(p)}</p>`).join('')}
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'Tourmaline in Your Collection')}</h2>
+    ${c.intro?`<p class="fg-prose">${escapeAttr(c.intro)}</p>`:''}
+    <div class="fg-feldspar-collection-grid">${cards}</div>
+  </section>`;
+}
+
+/* ── Tourmaline guide assembly — approved public section order per this
+   brief's page structure. 10. Tourmaline in Your Collection (see above).
+   11. Return to Crystal Families reuses the shared familyGuideClosingHtml
+   for its centered italic reflective line (guide.closingCallout) and
+   Return pill — matching the same established family-guide closing
+   treatment (no enclosing box) already used by Garnet/Fluorite/Feldspar.
+   Photo credits route through the shared footer-anchored pattern (see
+   fgSetFooterCreditsLink's anchoredSlugs) matching Copper/Calcite/Garnet —
+   no in-page familyGuideImageCreditsHtml call, so credits are not
+   duplicated. ── */
 function familyGuideTourmalineHtml(guide){
   return `
   <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
     ${familyGuideHeroHtml(guide)}
+    ${familyGuideWhatTourmalineIsHtml(guide)}
     ${familyGuideMeetTourmalineFamilyHtml(guide)}
-    ${familyGuideTourmalineGroupHtml(guide)}
-    ${familyGuideGrowthRecordingHtml(guide)}
-    ${familyGuideTourmalineAppearanceHtml(guide)}
+    ${familyGuideTourmalineNamingHtml(guide)}
+    ${familyGuideTourmalineColorHtml(guide)}
+    ${familyGuideTourmalineZoningHtml(guide)}
+    ${familyGuideTourmalineRibbingHtml(guide)}
+    ${familyGuideTourmalineElectricalHtml(guide)}
+    ${familyGuideTourmalineCollectionFormsHtml(guide)}
     ${familyGuideTourmalineCollectionHtml(guide)}
     ${familyGuideClosingHtml(guide)}
-    ${familyGuideImageCreditsHtml(guide)}
   </div>`;
 }
 

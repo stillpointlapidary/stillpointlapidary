@@ -137,12 +137,13 @@ async function pcLoadFamilyGuideSection(){
     // Credits link (credits.html#copper-minerals) can target it directly.
     // pcOpenFromHash() below already force-opens the closest details.pc-
     // section and scrolls/highlights any matched id, so no new anchor
-    // logic is needed here — just the id itself. Calcite (2026-07-31) gets
-    // the same treatment with a plain "calcite" id, now that its own guide
-    // page routes its footer Photo Credits link to credits.html#calcite
+    // logic is needed here — just the id itself. Calcite (2026-07-31) and
+    // Garnet get the same treatment with plain "calcite"/"garnet" ids.
+    // Tourmaline (rebuild) gets a plain "tourmaline" id, now that its guide
+    // page routes its footer Photo Credits link to credits.html#tourmaline
     // instead of a redundant in-page disclosure. Every other guide's
     // subgroup still has no id.
-    const stableIds = {copper:'copper-minerals', calcite:'calcite', garnet:'garnet'};
+    const stableIds = {copper:'copper-minerals', calcite:'calcite', garnet:'garnet', tourmaline:'tourmaline'};
     const idAttr = stableIds[g.slug] ? ` id="${pcEscapeHtml(stableIds[g.slug])}"` : '';
     return `<div class="pc-subgroup"${idAttr}>
       <h3 class="pc-subgroup-title">${pcEscapeHtml(g.displayName||g.slug)} <a class="pc-subgroup-link" href="encyclopedia.html?tab=family&amp;family=${pcEscapeHtml(g.slug)}">View guide</a></h3>

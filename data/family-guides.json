@@ -1658,113 +1658,156 @@
     "slug": "tourmaline",
     "displayName": "Tourmaline",
     "encyclopediaFilterValue": "Tourmaline",
-    "editorialStatusNote": "Editorial status: Approved runtime implementation of Christie's locked Tourmaline Family Guide brief (2026-07-23), built strictly from the supplied copy, labels, roster, and section order, reusing the corrected Garnet layout pattern. No new scientific terms, gem varieties, trade names, or claims were added beyond what the brief specifies.",
+    "editorialStatusNote": "Controlled rebuild (Claude Code Brief: Tourmaline Family Guide Rebuild), replacing the prior 2026-07-23 implementation entirely. Built from the approved Tourmaline-Family-Guide.md and Tourmaline-Family-Guide-Visual-Plan.md, with this brief's explicit corrections controlling: hero eyebrow CRYSTAL FAMILY, hero prompt copy, 'Chosen for:' label (not 'Traditionally chosen for:'), the six approved metaphysical-use lines, and 'How Tourmaline Gets Its Color' split from 'Color Zoning' into two titled sections per the brief's numbered page structure. Blue Tourmaline is a family-guide teaching card only — no Stone ID, slug, or Quick View. The ash-puller electrical illustration is not yet final; the electrical module renders a labeled development placeholder in its image well pending the approved raster asset.",
     "hero": {
-      "eyebrow": "FAMILY GUIDE",
-      "title": "The Tourmaline Family",
-      "signatureLine": "One family. A world of color.",
-      "condensedIntro": "Tourmaline can appear black, brown, green, pink, blue, or several colors at once. As a crystal grows, changing conditions may be preserved as bands, cores, rims, and color shifts inside it.",
-      "emphasisLine": "A Tourmaline crystal can become a timeline of its own growth.",
+      "eyebrow": "CRYSTAL FAMILY",
+      "title": "Tourmaline Family Guide",
+      "signatureLine": "One structure. A world of color.",
+      "condensedIntro": "Black, brown, green, blue, pink, and sometimes several colors at once, Tourmaline can look like a collection of unrelated stones.",
       "promptLeadIn": "Tourmaline asks:",
-      "question": "What changed as you grew?",
-      "mediaStoneIds": ["C-0129", "C-0053", "C-0057", "C-0055"]
+      "question": "What in your life needs support right now?",
+      "mediaStoneIds": ["C-0129", "C-0055", "C-0056"]
+    },
+    "whatTourmalineIs": {
+      "title": "What Tourmaline Actually Is",
+      "paragraphs": [
+        "Tourmaline is the name for a large family of related minerals, not one single mineral. Scientists call it a mineral supergroup, a broad category containing several related mineral groups and species.",
+        "Every member is a borosilicate mineral built on the same basic crystal structure. Different elements can enter that structure, changing the chemistry and creating different species, colors, and appearances."
+      ],
+      "emphasis": "Shared structure. Variable chemistry."
     },
     "meetTourmalineFamily": {
       "title": "Meet the Tourmaline Family",
-      "intro": "Five Tourmalines in the Still Point catalog show how species, color, and growth pattern can overlap without meaning the same thing.",
+      "intro": "These six expressions show some of the family's range. Their familiar names describe what the stones look like.",
       "members": [
-        {"stoneId": "C-0129", "identityLabel": "SCHORL", "headline": "The iron-rich species behind most material sold as Black Tourmaline"},
-        {"stoneId": "C-0053", "identityLabel": "DRAVITE", "headline": "A magnesium-rich species commonly seen in brown, honey, and nearly black crystals"},
-        {"stoneId": "C-0057", "identityLabel": "ELBAITE", "headline": "Green Elbaite showing the color range possible within one Tourmaline species"},
-        {"stoneId": "C-0055", "identityLabel": "ELBAITE", "headline": "Pink to red-pink Elbaite, sometimes preserving visible changes in color intensity"},
-        {"stoneId": "C-0056", "identityLabel": "COLOR-ZONED ELBAITE", "headline": "A growth pattern with a pink interior and green outer zone"}
+        {"name": "Black Tourmaline", "stoneId": "C-0129", "image": "assets/family-guide-tourmaline/black-tourmaline.webp", "identSentence": "Usually opaque and strongly ribbed, Black Tourmaline often forms rough columns or prisms.", "chosenFor": "Protection and grounding"},
+        {"name": "Brown Tourmaline", "stoneId": "C-0053", "image": "assets/family-guide-tourmaline/brown-tourmaline.webp", "identSentence": "Brown Tourmaline ranges from warm honey brown to such deep shades that it can appear almost black.", "chosenFor": "Grounding and inner strength"},
+        {"name": "Green Tourmaline", "stoneId": "C-0057", "image": "assets/family-guide-tourmaline/green-tourmaline-wc.webp", "identSentence": "Green Tourmaline ranges from opaque forest green to bright, transparent gem material.", "chosenFor": "Vitality, growth, and abundance"},
+        {"name": "Blue Tourmaline", "image": "assets/family-guide-tourmaline/blue-tourmaline-wc.webp", "identSentence": "Blue Tourmaline ranges from deep blue to greenish blue. The name Indicolite is commonly used for this color range.", "chosenFor": "Clear communication and intuition"},
+        {"name": "Pink Tourmaline", "stoneId": "C-0055", "image": "assets/family-guide-tourmaline/pink-tourmaline-specimen.webp", "identSentence": "Pink Tourmaline ranges from pale blush to saturated rose and may appear as single crystals or in matrix.", "chosenFor": "Love, compassion, and emotional healing"},
+        {"name": "Watermelon Tourmaline", "stoneId": "C-0056", "image": "assets/family-guide-tourmaline/watermelon-tourmaline.webp", "identSentence": "Watermelon Tourmaline shows pink and green color zoning. A cross section may reveal a pink center surrounded by green outer growth.", "chosenFor": "Love, emotional balance, and joy"}
       ]
     },
-    "tourmalineGroup": {
-      "title": "Tourmaline Is a Group, Not One Species",
-      "intro": "Tourmaline names may describe a mineral species, a color, or a growth pattern, and those are not interchangeable ideas.",
-      "paragraphs": [
-        "Tourmaline is a mineral group built around a shared structural framework. Different elements can occupy important positions inside that structure, creating distinct mineral species.",
-        "The Still Point catalog introduces three of the most familiar species: Schorl, Dravite, and Elbaite. Black Tourmaline is usually Schorl, Brown Tourmaline is represented by Dravite, and the catalog's green, pink, and Watermelon Tourmalines are expressions of Elbaite."
-      ],
-      "tree": {
-        "parent": {"title": "TOURMALINE", "sub": "The mineral group"},
-        "branches": [
-          {"title": "SCHORL", "secondaryLabel": "Black Tourmaline"},
-          {"title": "DRAVITE", "secondaryLabel": "Brown Tourmaline"},
-          {"title": "ELBAITE", "secondaryLabel": "Green, Pink, and Watermelon Tourmaline"}
+    "namingDecoder": {
+      "title": "Schorl, Dravite, Elbaite: What Do Those Names Mean?",
+      "intro": "Tourmaline names do different jobs.",
+      "table": {
+        "headers": ["Kind of name", "Examples", "What it tells you"],
+        "rows": [
+          ["Mineral species", "Schorl · Dravite · Elbaite", "The material's mineral identity, determined by chemistry."],
+          ["Color name", "Black · Brown · Green · Blue · Pink · Indicolite", "What the Tourmaline looks like, not its species."],
+          ["Pattern name", "Watermelon Tourmaline", "A recognized pink-and-green zoning pattern, not a separate species."]
         ]
-      },
-      "closingLine": "These are the three species needed to understand the Still Point catalog, not the entire Tourmaline group."
-    },
-    "growthRecording": {
-      "title": "How Tourmaline Records Growth",
-      "intro": "As growth conditions change, a Tourmaline crystal may preserve those changes in each new layer.",
-      "paragraphs": [
-        "A crystal grows by adding material to its existing surfaces. If the surrounding fluid changes while Tourmaline is forming, the chemistry entering the crystal may change too.",
-        "The finished crystal may preserve a darker core, a contrasting rim, a shift from one end to the other, or several irregular bands. These patterns belong to the growth history of the crystal."
-      ],
-      "stages": [
-        {"title": "EARLY GROWTH", "body": "The crystal begins under one chemical environment."},
-        {"title": "CHANGING CONDITIONS", "body": "The surrounding fluid and available elements begin to shift."},
-        {"title": "LATER GROWTH", "body": "New layers preserve the changed chemistry and may develop a different color."},
-        {"title": "FINISHED CRYSTAL", "body": "The completed crystal retains cores, rims, bands, or lengthwise color changes."}
-      ],
-      "comparison": [
-        {"title": "ALONG THE CRYSTAL", "body": "Color changes from one end to the other."},
-        {"title": "CORE AND RIM", "body": "A cross-section reveals earlier growth inside later growth."},
-        {"title": "PATCHES AND BANDS", "body": "Uneven changes preserve fluctuating conditions."}
-      ],
-      "watermelonNote": {
-        "title": "Why Watermelon Looks Like Watermelon",
-        "body": "Watermelon Tourmaline is color-zoned Elbaite. The familiar pattern places a pink or reddish center inside a green outer zone, sometimes with a pale band between them. The name describes the appearance and growth pattern, not a separate species."
-      },
-      "recognitionNote": "Lengthwise surface striations follow the direction of crystal growth."
-    },
-    "tourmalineAppearance": {
-      "title": "How Tourmaline Appears",
-      "intro": "Species, matrix, growth direction, and preparation all change what the Tourmaline story looks like in the hand.",
-      "stages": [
-        {"title": "Crystal in Matrix", "body": "The surrounding minerals preserve geological context and show how the Tourmaline grew in place."},
-        {"title": "Loose Prismatic Crystal", "body": "The natural prism exposes striations, terminations, and color changes along the crystal."},
-        {"title": "Lengthwise Polished Piece", "body": "A polish along the long axis can reveal bands, inclusions, and changes from one end to the other."},
-        {"title": "Cross-Sectional Slice", "body": "A slice across the crystal reveals cores, rims, and concentric zoning."}
-      ],
-      "speciesComparison": [
-        {"title": "Schorl", "body": "Usually black, commonly opaque, often strongly striated"},
-        {"title": "Dravite", "body": "Often brown to nearly black, commonly earthy in appearance"},
-        {"title": "Elbaite", "body": "Broader color range, often more transparent, frequently zoned"}
-      ],
-      "matrixNote": "Tourmaline commonly grows with Quartz, Feldspar, and Mica. These associations preserve geological context and may reveal relative growth.",
-      "quartzLink": {
-        "title": "Tourmaline Quartz",
-        "body": "Tourmaline Quartz is a Quartz entry containing visible Tourmaline inclusions. It is not a sixth Tourmaline-family roster card.",
-        "stoneId": "C-0112",
-        "linkLabel": "Tourmaline Quartz"
       }
     },
-    "tourmalineCollection": {
-      "title": "Tourmaline in Your Collection",
-      "intro": "A thoughtful Tourmaline collection compares species, growth direction, matrix, and zoning rather than collecting color names alone.",
-      "listItems": [
-        "Compare Schorl, Dravite, and Elbaite.",
-        "Look both along and across the crystal.",
-        "Keep matrix examples when geological context matters.",
-        "Preserve reliable locality information.",
-        "Distinguish species names from color and growth-pattern names."
-      ],
-      "terminologyNote": "Indicolite is a blue Tourmaline name, commonly used for blue Elbaite. Rubellite refers to strongly pink or red Tourmaline. Watermelon and bicolor describe visible color zoning, not separate species.",
-      "catalogLinks": [
-        {"name": "Black Tourmaline", "stoneId": "C-0129"},
-        {"name": "Brown Tourmaline", "stoneId": "C-0053"},
-        {"name": "Green Tourmaline", "stoneId": "C-0057"},
-        {"name": "Pink Tourmaline", "stoneId": "C-0055"},
-        {"name": "Watermelon Tourmaline", "stoneId": "C-0056"}
+    "tourmalineColor": {
+      "title": "How Tourmaline Gets Its Color",
+      "paragraphs": [
+        "Tourmaline's color comes from the way its chemistry affects light, but there is no simple one-element, one-color rule. Iron contributes to many black, brown, green, and blue Tourmalines. Manganese is important in many pink and red examples. Copper can create vivid blue and green colors.",
+        "Much colorful gem Tourmaline forms in pegmatites, coarse-grained rocks where boron, lithium, and other elements can become concentrated. The family also forms in other settings."
       ]
     },
-    "closingCallout": "Tourmaline turns growth into color, leaving each crystal with a record written from the inside out.",
-    "closingSupportingCopy": "Follow the lines, read the zones, and let the crystal show how its surroundings changed.",
-    "imageCredits": []
+    "colorZoning": {
+      "title": "Color Zoning",
+      "intro": "The chemistry available to a Tourmaline crystal can change as it grows. New layers may take in a different chemical mix, creating visible bands or zones of color.",
+      "leadIn": "Watermelon Tourmaline makes both directions of color zoning easy to see: color can develop along a crystal or outward from its center.",
+      "examples": [
+        {"title": "Along the Crystal", "body": "Zoning that runs along a crystal, from one end to the other.", "image": "watermelon-tourmaline.webp"},
+        {"title": "Center Outward", "body": "Zoning that grows outward from the crystal's center, as seen in this polished slice.", "image": "watermelon-tourmaline-wc.webp"}
+      ]
+    },
+    "tourmalineRibbing": {
+      "title": "Why Tourmaline Crystals Are So Ribbed",
+      "paragraphs": [
+        "Tourmaline commonly grows as elongated prisms or columns. The grooves running along the crystal are growth features created by repeating prism faces. They are not scratches.",
+        "From the end, a crystal may show another clue: a triangular or rounded-triangular cross section. This shape reflects Tourmaline's trigonal crystal structure, although it will not be visible in every specimen."
+      ],
+      "examples": [
+        {"title": "Lengthwise Ribs", "body": "Look for an elongated form and lengthwise ribs.", "image": "black-tourmaline.webp"},
+        {"title": "Rounded-Triangular Cross Section", "body": "A broken end may still show a rounded-triangular outline.", "image": "watermelon-tourmaline-wc.webp"}
+      ]
+    },
+    "electrical": {
+      "title": "Tourmaline's Electrical Quirk",
+      "intro": "Tourmaline is polar: the two ends of a complete crystal are structurally different. That asymmetry allows changes in temperature or pressure to alter its electrical polarization, producing opposite charges at the crystal's ends. The response is real and measurable, but Tourmaline does not continuously produce electricity like a battery.",
+      "panels": [
+        {
+          "title": "Pyroelectricity",
+          "secondary": "Temperature change",
+          "body": "When Tourmaline warms or cools, its electrical polarization changes.",
+          "facts": [
+            {"label": "What happens", "value": "Opposite surface charges develop at opposite ends of the crystal."},
+            {"label": "What you may observe", "value": "The charged crystal may attract extremely light particles such as ash or dust."}
+          ]
+        },
+        {
+          "title": "Piezoelectricity",
+          "secondary": "Pressure",
+          "body": "When pressure is applied in the appropriate direction, Tourmaline's electrical polarization changes.",
+          "facts": [
+            {"label": "What happens", "value": "Opposite charges develop at the crystal's poles."},
+            {"label": "Why it matters", "value": "The electrical response can be measured, revealing how the crystal's internal structure reacts to force."}
+          ]
+        }
+      ],
+      "takeawayLabel": "THE ASH PULLER",
+      "takeaway": "In early eighteenth-century Europe, Dutch traders noticed that warming or cooling Tourmaline could attract ash from pipes. They called it ash-entrekker, or \"ash puller.\" Later experiments showed that the attraction came from opposite charges developing at opposite ends of the crystal."
+    },
+    "collectionForms": {
+      "title": "How Tourmaline Appears in a Collection",
+      "intro": "Tourmaline can look very different once it is broken, sliced, polished, or left in matrix.",
+      "items": [
+        {"title": "Rough, Ribbed Crystals", "body": "Look for long, column-like crystals with grooves running lengthwise. A broken end may still show a rounded-triangular outline.", "image": "black-tourmaline.webp"},
+        {"title": "Crystals in Matrix", "body": "Tourmaline may grow with quartz, feldspar, mica, and other minerals. Matrix pieces preserve some of that setting.", "image": "pink-tourmaline-specimen.webp"},
+        {"title": "Slices and Zoned Crystals", "body": "A cross section may reveal color zones and triangular growth patterns that were hidden inside the crystal.", "image": "watermelon-tourmaline-wc.webp"},
+        {"title": "Tumbled and Polished Stones", "body": "Polishing removes the natural ribs and softens the original outline, making color more useful than crystal form as a visual clue.", "image": "black-tourmaline-tumble.webp"},
+        {"title": "Transparent Crystal Material", "body": "Transparent Tourmaline may occur as pale or nearly colorless crystals, sometimes preserved in matrix. When cut or polished, its color, zoning, inclusions, and internal tubes become easier to see.", "image": "transparent-tourmaline-wc.webp"}
+      ]
+    },
+    "collection": {
+      "title": "Tourmaline in Your Collection",
+      "cards": [
+        {"title": "Care for It", "paragraphs": ["Tourmaline resists many everyday scratches, but it can chip or fracture from impact. Protect crystals and terminations from hard knocks and sudden temperature changes. Clean with warm soapy water when appropriate for the specimen and its matrix. Avoid steam and ultrasonic cleaning."]},
+        {"title": "Remember This", "paragraphs": ["Tourmaline is a broad family of related minerals. Its members share a basic structure, while differences in chemistry create many species, colors, and growth patterns."]},
+        {"title": "Watch For", "paragraphs": ["A color name tells you what you see. A species name tells you about composition. Black, brown, green, blue, pink, Indicolite, and Watermelon are not interchangeable with Schorl, Dravite, or Elbaite."]}
+      ]
+    },
+    "closingCallout": "Tourmaline reminds us that one strong foundation can support many ways of becoming.",
+    "closingButton": {"label": "Return to Crystal Families", "target": "crystalFamilies"},
+    "imageCredits": [
+      {
+        "title": "Blue Tourmaline",
+        "creator": "Robert M. Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Tourmaline-259814.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Background and display hardware removed; specimen prepared on white for Still Point Lapidary."
+      },
+      {
+        "title": "Green Tourmaline",
+        "creator": "Robert M. Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Tourmaline-41445.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Background and display hardware removed; specimen prepared on white for Still Point Lapidary."
+      },
+      {
+        "title": "Transparent Tourmaline",
+        "creator": "Robert M. Lavinsky, iRocks.com",
+        "source": "https://commons.wikimedia.org/wiki/File:Tourmaline-Microcline-Quartz-24545.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "modified": "Background and display hardware removed; specimen prepared on white for Still Point Lapidary."
+      },
+      {
+        "title": "Watermelon Tourmaline (cross section)",
+        "creator": "Graeme Churchard",
+        "source": "https://commons.wikimedia.org/wiki/File:Maine_Mineral_and_Gem_Museum,_Bethel_-_Elbaite_tourmaline_-_watermelon_tourmaline.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "modified": "Museum background, stand, and retaining wires removed; specimen prepared on white for Still Point Lapidary."
+      }
+    ]
   },
   "obsidian": {
     "slug": "obsidian",
