@@ -3024,9 +3024,6 @@
     "hero": {
       "eyebrow": "CRYSTAL FAMILY",
       "title": "Beryl Family Guide",
-      "imageUrl": "assets/family-guide-beryl/beryl-family-varieties.webp",
-      "imageAlt": "Five numbered Beryl variety specimens: Golden Beryl, Heliodor, Emerald, Aquamarine, and Morganite",
-      "imageLegend": "1 Golden Beryl · 2 Heliodor · 3 Emerald · 4 Aquamarine · 5 Morganite",
       "condensedIntro": "Beryl is the family hiding in plain sight. The ocean blue of Aquamarine, the lush green of Emerald, the blush of Morganite, and the glow of Heliodor all begin with the same crystal. Change only a few trace ingredients, and one mineral becomes an entire color story."
     },
     "whatBerylIs": {
@@ -3086,40 +3083,42 @@
     "berylColor": {
       "title": "How Beryl Gets Its Color",
       "intro": "Pure Beryl is colorless. Its varieties appear when very small amounts of other elements become part of the crystal as it grows.",
-      "table": {
-        "headers": [
-          "Variety",
-          "Typical color",
-          "Main color influence"
-        ],
-        "rows": [
-          [
-            "Emerald",
-            "Green to bluish green",
-            "Chromium, vanadium, or both"
-          ],
-          [
-            "Aquamarine",
-            "Pale blue to blue-green",
-            "Iron"
-          ],
-          [
-            "Morganite",
-            "Pink to peach",
-            "Manganese"
-          ],
-          [
-            "Heliodor",
-            "Yellow to golden yellow",
-            "Iron in a different state"
-          ],
-          [
-            "Goshenite",
-            "Colorless",
-            "Little color-producing material"
-          ]
-        ]
+      "comparisonImage": {
+        "imageUrl": "assets/family-guide-beryl/beryl-family-varieties.webp",
+        "imageAlt": "Five numbered Beryl variety specimens: Golden Beryl, Heliodor, Emerald, Aquamarine, and Morganite"
       },
+      "specimenRows": [
+        {
+          "number": "01",
+          "name": "Golden Beryl",
+          "colorRange": "Yellow to golden yellow",
+          "cause": "Iron"
+        },
+        {
+          "number": "02",
+          "name": "Heliodor",
+          "colorRange": "Golden to slightly greenish yellow",
+          "cause": "Iron"
+        },
+        {
+          "number": "03",
+          "name": "Emerald",
+          "colorRange": "Green to bluish green",
+          "cause": "Chromium, vanadium, or both"
+        },
+        {
+          "number": "04",
+          "name": "Aquamarine",
+          "colorRange": "Pale blue to blue-green",
+          "cause": "Iron"
+        },
+        {
+          "number": "05",
+          "name": "Morganite",
+          "colorRange": "Pink to peach",
+          "cause": "Manganese"
+        }
+      ],
       "paragraphs": [
         "Aquamarine and Heliodor offer one of the family's most interesting comparisons. Iron contributes to both varieties, but differences within the crystal determine whether the result appears blue or yellow.",
         "Color can also vary within a single crystal. A specimen may be darker at one end, paler through the center, or divided into visible zones that record changes during growth."
@@ -3143,7 +3142,7 @@
         },
         {
           "label": "Red Beryl",
-          "body": "Red Beryl is a genuine but exceptionally rare Beryl variety colored by manganese. It belongs in the family lesson, but it is not part of the fixed Still Point Lapidary catalog. It receives no Stone ID, Quick View link, or catalog badge."
+          "body": "Red Beryl is an exceptionally rare Beryl variety colored by manganese, usually appearing in vivid raspberry to deep red. Its crystals are typically small, and fine specimens are especially prized by collectors."
         }
       ]
     },

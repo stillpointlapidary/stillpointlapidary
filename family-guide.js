@@ -2775,19 +2775,42 @@ function familyGuideBerylSixSidesHtml(guide){
   </section>`;
 }
 
-/* ── 4. How Beryl Gets Its Color — the exact five-variety/color/cause
-   mapping as a comparison table, reusing fgFormationTableHtml/.fg-table
-   verbatim (already approved for Tourmaline's Schorl/Dravite/Elbaite
-   table and Copper's/Agate's own comparison tables), plus two ordinary
-   prose paragraphs after the table. No diagrams, no duplicate photos. ── */
+/* ── 4. How Beryl Gets Its Color — annotated-image + numbered-row teaching
+   module (2026-08-20 rebuild, replacing the earlier standalone comparison
+   photo + three-column .fg-table). The numbered photograph sits left,
+   five compact editorial rows sit right, each row performing the job the
+   photo's numbered legend used to do (so the legend itself no longer
+   renders). Two ordinary prose paragraphs still follow beneath, unchanged.
+   All markup/classes here (.fg-beryl-teach*) are new and Beryl-scoped only
+   — no shared component is redefined, and fgFormationTableHtml is simply
+   no longer called for this section. ── */
+function fgBerylTeachRowHtml(row){
+  if(!row) return '';
+  return `<div class="fg-beryl-teach-row">
+    <div class="fg-beryl-teach-head">
+      <span class="fg-beryl-teach-num">${escapeAttr(row.number||'')}</span>
+      <span class="fg-beryl-teach-name">${escapeAttr(row.name||'')}</span>
+    </div>
+    <div class="fg-beryl-teach-detail"><span class="fg-beryl-teach-label">Color:</span> ${escapeAttr(row.colorRange||'')}</div>
+    <div class="fg-beryl-teach-detail"><span class="fg-beryl-teach-label">Color influence:</span> ${escapeAttr(row.cause||'')}</div>
+  </div>`;
+}
 function familyGuideBerylColorHtml(guide){
   const c = guide.berylColor;
   if(!c) return '';
   const paras = (c.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const img = c.comparisonImage;
+  const rows = (c.specimenRows||[]).map(fgBerylTeachRowHtml).join('');
+  const teachHtml = (img && img.imageUrl)
+    ? `<div class="fg-beryl-teach">
+        <div class="fg-beryl-teach-photo"><img src="${escapeAttr(img.imageUrl)}" alt="${escapeAttr(img.imageAlt||'')}" loading="lazy"></div>
+        <div class="fg-beryl-teach-rows">${rows}</div>
+      </div>`
+    : '';
   return `<section class="fg-section" id="fg-beryl-color">
     <h2 class="fg-h2">${escapeAttr(c.title||"How Beryl Gets Its Color")}</h2>
     ${c.intro?`<p class="fg-lead">${escapeAttr(c.intro)}</p>`:''}
-    ${fgFormationTableHtml(c.table)}
+    ${teachHtml}
     <div class="fg-prose-block">${paras}</div>
   </section>`;
 }

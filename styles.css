@@ -3551,33 +3551,51 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
    Jasper/Agate/Obsidian/Copper hero-photo and image-well precedents) plus
    one new, generic, reusable small-caption class (.fg-hero-media-legend)
    for the hero's numbered-specimen identification line. ══ */
-/* Hero photograph is a real numbered identification photo, not a curated
-   collage — hide the "Family photograph — coming soon" overlay label
-   (same technique already used by Jasper/Agate/Obsidian) and force the
-   media well to a bounded white background with object-fit:contain so the
-   complete photo, including every numbered specimen, stays fully visible
-   and uncropped rather than being cover-cropped to fill the 16:9 frame.
-   Correction (2026-08-19 follow-up): the base .fg-hero-media-grid is a 2x2
-   grid (grid-template-columns/rows:1fr 1fr) meant for a 4-photo collage;
-   fgHeroMediaHtml only adds a --2/--3 single-row modifier for exactly 2 or
-   3 images, so Beryl's single hero photo was silently confined to one
-   quarter-cell of that grid — the actual cause of the photo rendering as a
-   small thumbnail inside a much larger well. Reusing Agate's own
-   single-image precedent (display:block;height:100%) fixes this: the image
-   now sizes to the full well while object-fit:contain (below) still keeps
-   the complete photo, every specimen, and every printed number uncropped. */
-.fg-guide[data-family-slug="beryl"] .fg-hero-media-label{display:none}
-.fg-guide[data-family-slug="beryl"] .fg-hero-media{background:#FFFFFF}
-.fg-guide[data-family-slug="beryl"] .fg-hero-media-grid{display:block;height:100%}
-.fg-guide[data-family-slug="beryl"] .fg-hero-media-grid img{width:100%;height:100%;object-fit:contain;background:#FFFFFF;padding:14px;box-sizing:border-box;display:block}
+/* Hero (2026-08-20 correction): the family photograph originally placed
+   here was actually a labeled teaching/comparison image, not a hero
+   photograph, and has moved into the "How Beryl Gets Its Color" section
+   below (.fg-beryl-comparison). The hero now uses the shared default
+   reserved-photo treatment (fgHeroMediaHtml's "Family photograph — coming
+   soon" placeholder) like every guide awaiting its own photography, so no
+   [data-family-slug="beryl"] hero-media overrides remain here. */
 /* .fg-hero-media-legend (generic, unscoped) — a small, restrained Jost
-   identification caption directly beneath the hero photo, distinct from
-   the photo credit (still routed only through the shared footer pattern).
-   Only Beryl sets guide.hero.imageLegend today; any future guide may reuse
-   this class the same way. Bumped 12px -> 13px (2026-08-19 follow-up) for
-   comfortable legibility now that the hero photo itself reads much larger;
-   still the same restrained small-caption treatment otherwise. */
+   caption class introduced for Beryl's earlier standalone comparison image.
+   No longer used by Beryl (see .fg-beryl-teach below, whose numbered rows
+   now perform that identification job), but left in place as a generic,
+   reusable class in case a future guide wants a simple photo caption. */
 .fg-hero-media-legend{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.02em;color:var(--ink2r);text-align:center;margin-top:0.6rem}
+/* How Beryl Gets Its Color — annotated-image + numbered-row teaching module
+   (2026-08-20 rebuild; 2026-08-20 refinement pass below). Two-column grid:
+   numbered photo left (~53% width, "slightly more than half"), five
+   compact editorial rows right. No align-items override here — grid's
+   default stretch makes .fg-beryl-teach-rows fill the exact row-track
+   height set by the photo (the taller natural-content column), so both
+   columns share the same top and bottom edge without cropping, distorting,
+   or resizing the photo itself (which keeps its own intrinsic aspect
+   ratio via width:100%/height:auto). Inside that stretched column,
+   justify-content:space-between spreads the five rows evenly across the
+   full height so they visually match the photo's height without added
+   padding or enlarged type. Row styling stays tight (small type, no card
+   background/border/shadow) so five rows read as one compact stack, not
+   five large cards. */
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem;margin:1.75rem 0 2rem}
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-photo img{display:block;width:100%;height:auto;border-radius:12px;overflow:hidden;border:0.5px solid var(--border)}
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-rows{display:flex;flex-direction:column;justify-content:space-between;gap:0.5rem}
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-row{border-left:2px solid var(--accent2);padding:0.1rem 0 0.1rem 0.85rem}
+/* Number + name on one line, same baseline, modest gap (refinement pass). */
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-head{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.2rem}
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-num{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-name{font-family:Georgia,'Times New Roman',serif;font-size:16.5px;color:var(--ink)}
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-detail{font-family:'Jost',sans-serif;font-size:12.5px;font-weight:400;line-height:1.4;color:var(--ink2r)}
+/* "Color:" / "Color influence:" labels — same Jost family/size/color/
+   spacing as their values, font-weight:500 only (reduced from 600, per
+   2026-08-20 weight refinement), not an uppercase eyebrow or a separate
+   column. */
+.fg-guide[data-family-slug="beryl"] .fg-beryl-teach-label{font-weight:500;color:var(--ink2)}
+@media(max-width:900px){
+  .fg-guide[data-family-slug="beryl"] .fg-beryl-teach{grid-template-columns:1fr;gap:1.1rem}
+  .fg-guide[data-family-slug="beryl"] .fg-beryl-teach-rows{gap:0.8rem}
+}
 /* Built in Six Sides — bounded white image well, matching Copper's own
    .fg-explain-media override exactly (object-fit:contain so the specimen
    photo is never cropped or stretched). */
@@ -3597,13 +3615,12 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .fg-guide[data-family-slug="beryl"] .fg-prose{text-align:left;font-size:16px}
 /* How Beryl Gets Its Color — spacing correction (2026-08-20): the
    .fg-prose-block above has its own top margin zeroed (guide-wide rule
-   directly above), so the "Aquamarine and Heliodor..." paragraphs sat
-   flush against the comparison table's bottom edge with no separation.
-   Adds space only to the post-table prose block, matching the ~28px
+   directly above), so the "Aquamarine and Heliodor..." paragraphs would sit
+   flush against the teaching module's bottom edge with no separation.
+   Adds space only to the post-module prose block, matching the ~28px
    normal paragraph gap already established elsewhere (Copper's own
-   .fg-prose + .fg-card-grid rule below). Does not touch .fg-table/
-   .fg-table-wrap or add space inside the table itself. */
-.fg-guide[data-family-slug="beryl"] #fg-beryl-color .fg-table-wrap + .fg-prose-block{margin-top:1.75rem}
+   .fg-prose + .fg-card-grid rule below). */
+.fg-guide[data-family-slug="beryl"] #fg-beryl-color .fg-beryl-teach + .fg-prose-block{margin-top:1.75rem}
 .fg-guide[data-family-slug="beryl"] .fg-lead,
 .fg-guide[data-family-slug="beryl"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0;font-size:16px}
 /* Understanding Beryl Names — four plain teaching cards in a balanced 2x2
