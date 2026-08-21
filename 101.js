@@ -617,11 +617,7 @@ function renderPrimaryFamilies(){
 // Supabase pass (both verified via save/reopen/reread — see task report).
 // All six families now have a working, verified Explore link.
 const C101_SECONDARY_FAMILIES=[
-  {n:'Gypsum',
-    foundation:"Gypsum can grow in forms that look remarkably different while sharing the same mineral identity.",
-    names:"Selenite, Satin Spar, and Desert Rose.",
-    distinct:"Selenite and Satin Spar have different crystal habits, while Desert Rose forms as Gypsum grows with sand.",
-    photo:SUPABASE_ENC+"desert-rose-specimen.webp", linkFamily:'Gypsum', linkLabel:'Explore Gypsum'},
+  {n:'Gypsum', linkFamily:'Gypsum', linkLabel:'Explore Gypsum'},
   {n:'Mica',
     foundation:"Mica is a family of minerals united by a layered structure and an unmistakable shimmer.",
     names:"Muscovite, Lepidolite, and Fuchsite, the green chromium-rich variety of Muscovite.",
@@ -648,6 +644,229 @@ const C101_SECONDARY_FAMILIES=[
     distinct:"Their mineral structures differ, but both are exceptionally tough because tiny crystals interlock rather than separating easily. That toughness allowed Jade to become tools, ornaments, and intricate carvings across many cultures.",
     photo:SUPABASE_ENC+"jadeite-wc.webp", linkFamily:'Jade', linkLabel:'Explore Jade'},
 ];
+// ── Gypsum expanded teaching card (2026-08-20, approved "Editorial Split"
+// design) — Gypsum is the one Smaller-Families entry rich enough (three
+// named growth forms, each with its own recognizable habit) to warrant a
+// dedicated in-place layout instead of the shared three-fact/one-photo
+// .smallfam-card template every other secondary family still uses below.
+// Kept as its own data object (not folded into the C101_SECONDARY_FAMILIES
+// Gypsum entry above) so renderGypsumSecondaryFamily()'s shape is obvious
+// and self-contained. Satin Spar is a teaching-only growth form here: it
+// has no Stone ID and is NOT part of the 333-stone roster, so its card
+// stays a plain, non-interactive teaching unit — no Quick View, no link,
+// no fabricated catalog destination. Selenite and Desert Rose ARE real,
+// routable stones, so their cards (stoneId/cardKey below) are interactive
+// and open Quick View for their exact Stone ID via
+// jumpToGypsumStoneDetail() (see renderGypsumSecondaryFamily). Satin
+// Spar's photo is a locally hosted licensed Wikimedia Commons image
+// (credited in credits.html), not a Supabase encyclopedia asset — see
+// assets/101/gypsum/satin-spar-gypsum-WC.webp.
+const C101_GYPSUM_CARD={
+  name:'Gypsum',
+  summary:{
+    headline:'One mineral. Three very different forms.',
+    subline:'See what connects them, and how to recognize Gypsum.',
+    action:'Open the family lesson'
+  },
+  intro:{
+    whatItIs:{
+      label:'Shared Identity',
+      text:"Gypsum is a very soft, water-bearing calcium sulfate mineral. Water is actually built into its crystal structure, and a fingernail can scratch it."
+    },
+    whyDifferent:{
+      label:'Changing Form',
+      text:"Selenite, Satin Spar, and Gypsum Desert Rose share the same mineral identity. Their appearances change because the crystals grow in different habits and, in Desert Rose, around grains of sand."
+    }
+  },
+  stonesLabel:'Three Stones to Know',
+  // stoneId + cardKey (2026-08-21) mark Selenite and Desert Rose as real,
+  // cataloged stones — clicking either opens Quick View for that exact
+  // Stone ID. Satin Spar carries neither field: it has no Stone ID (see
+  // the read-only Supabase audit that confirmed no "Satin Spar" or "Satin
+  // Spar Gypsum" row exists in `stones`), so its card stays a plain,
+  // non-interactive teaching unit — renderGypsumSecondaryFamily() below
+  // only adds the interactive/clickable treatment when stoneId is present.
+  forms:[
+    {name:'Selenite', text:'Clear or transparent crystalline Gypsum.',
+      image:SUPABASE_ENC+'selenite.webp',
+      alt:'Clear bladed Selenite crystal specimen on a white background',
+      stoneId:'C-0175', cardKey:'selenite'},
+    {name:'Satin Spar', text:'Fibrous Gypsum with a silky sheen.',
+      image:'assets/101/gypsum/satin-spar-gypsum-WC.webp',
+      alt:'White fibrous Satin Spar Gypsum specimen on a white background'},
+    {name:'Desert Rose', text:'Rosette-shaped Gypsum that grows with sand.',
+      image:SUPABASE_ENC+'desert-rose-specimen.webp',
+      alt:'Gypsum Desert Rose specimen on a white background',
+      stoneId:'C-0172', cardKey:'desert-rose'},
+  ],
+  recognition:{
+    label:'How to Recognize Gypsum',
+    clues:[
+      {title:'Very Soft', text:'Mohs 2. A fingernail can scratch it.'},
+      {title:'Variable Luster', text:'Glassy, pearly, or silky depending on its growth form.'},
+      {title:'Perfect Cleavage', text:'Often separates along smooth, flat surfaces.'},
+    ]
+  },
+  keyDistinction:{
+    label:'The Key Distinction',
+    text:'Much of the silky white material sold as “Selenite” is actually Satin Spar. Both are Gypsum, but they are different growth forms.'
+  }
+};
+// Dedicated renderer for the Gypsum card only — every other secondary
+// family keeps rendering through the shared .smallfam-card template in
+// renderSecondaryFamilies() below, byte-for-byte unchanged. f (the roster
+// entry from C101_SECONDARY_FAMILIES) supplies only linkFamily/linkLabel
+// for the existing "Explore Gypsum" button, which still calls the same
+// jumpToSmallFamilyProfile('Gypsum') path via the delegated
+// .smallfam-explore-link[data-jump-family] listener in initFamilies().
+function renderGypsumSecondaryFamily(f){
+  const g=C101_GYPSUM_CARD;
+  // Selenite/Desert Rose cards (stoneId present) get the same
+  // tabindex/role="button"/onkeydown Enter-or-Space idiom already used by
+  // .fam-card above — no inline onclick with interpolated arguments (see
+  // the jsArg double-quote-corruption note on the Explore button below);
+  // the click itself is handled by the delegated listener in
+  // initFamilies(), keyed off data-stone-id/data-stone-key. Satin Spar
+  // (no stoneId) renders as the same plain, non-interactive card it
+  // always has been — no tabindex, no role, no click handler, no link.
+  const formsHtml=g.forms.map(s=>{
+    const interactive=!!s.stoneId;
+    const cls='smallfam-gypsum-form'+(interactive?' smallfam-gypsum-form--interactive':'');
+    const attrs=interactive
+      ?` data-stone-id="${escapeAttr(s.stoneId)}" data-stone-key="${escapeAttr(s.cardKey)}" tabindex="0" role="button" aria-label="Open ${escapeAttr(s.name)} in Quick View" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"`
+      :'';
+    return`<div class="${cls}"${attrs}>
+    <div class="smallfam-gypsum-form-image"><img src="${escapeAttr(s.image)}" alt="${escapeAttr(s.alt)}" loading="lazy"></div>
+    <div class="smallfam-gypsum-form-body">
+      <div class="smallfam-gypsum-form-name">${escapeAttr(s.name)}</div>
+      <p class="smallfam-gypsum-form-text">${escapeAttr(s.text)}</p>
+    </div>
+  </div>`;
+  }).join('');
+  const cluesHtml=g.recognition.clues.map((c,i)=>`<div class="smallfam-gypsum-recognition-item">
+    <div class="smallfam-gypsum-recognition-num">${escapeAttr(String(i+1).padStart(2,'0'))}</div>
+    <div class="smallfam-gypsum-recognition-title">${escapeAttr(c.title)}</div>
+    <p class="smallfam-gypsum-recognition-text">${escapeAttr(c.text)}</p>
+  </div>`).join('');
+  const linkHtml=f.linkFamily
+    ?`<button type="button" class="smallfam-explore-link" data-jump-family="${escapeAttr(f.linkFamily)}">${escapeAttr(f.linkLabel)}</button>`
+    :'';
+  // .smallfam-name (alongside the Gypsum-specific .smallfam-gypsum-name) is
+  // required, not decorative: the shared Back-navigation popstate handler
+  // in family-guide.js (profile-scroll restoration for every "Explore
+  // <Family>" button, added 2026-08-05) looks up the target card via
+  // `.smallfam-card .smallfam-name` textContent — a selector Gypsum's own
+  // custom markup never matched once it stopped using the generic
+  // .smallfam-content template. Without this class, "Explore Gypsum" ->
+  // Back would silently fail to scroll back to the Gypsum card (the
+  // popstate handler itself is unchanged; this just makes Gypsum
+  // resolvable by the same existing, unmodified lookup every other
+  // secondary family already relies on).
+  return`<div class="smallfam-card smallfam-gypsum">
+    <div class="smallfam-gypsum-header">
+      <div class="smallfam-name smallfam-gypsum-name">${escapeAttr(g.name)}</div>
+      <div class="smallfam-gypsum-name-rule" aria-hidden="true"></div>
+    </div>
+    <div class="smallfam-gypsum-stones">
+      <div class="smallfam-gypsum-section-label">${escapeAttr(g.stonesLabel)}</div>
+      <div class="smallfam-gypsum-forms">${formsHtml}</div>
+    </div>
+    <details class="smallfam-gypsum-disclosure">
+      <summary class="smallfam-gypsum-summary">
+        <span class="smallfam-gypsum-summary-copy">
+          <span class="smallfam-gypsum-summary-headline">${escapeAttr(g.summary.headline)}</span>
+          <span class="smallfam-gypsum-summary-subline">${escapeAttr(g.summary.subline)}</span>
+        </span>
+        <span class="smallfam-gypsum-summary-action">
+          <span class="smallfam-gypsum-summary-action-text">${escapeAttr(g.summary.action)}</span>
+          <span class="smallfam-gypsum-summary-caret" aria-hidden="true">&#9662;</span>
+        </span>
+      </summary>
+      <div class="smallfam-gypsum-disclosure-body">
+        <div class="smallfam-gypsum-intro">
+          <div class="smallfam-gypsum-intro-col">
+            <div class="smallfam-gypsum-intro-label">${escapeAttr(g.intro.whatItIs.label)}</div>
+            <p class="smallfam-gypsum-intro-text">${escapeAttr(g.intro.whatItIs.text)}</p>
+          </div>
+          <div class="smallfam-gypsum-intro-col">
+            <div class="smallfam-gypsum-intro-label">${escapeAttr(g.intro.whyDifferent.label)}</div>
+            <p class="smallfam-gypsum-intro-text">${escapeAttr(g.intro.whyDifferent.text)}</p>
+          </div>
+        </div>
+        <div class="smallfam-gypsum-recognition">
+          <div class="smallfam-gypsum-recognition-label">${escapeAttr(g.recognition.label)}</div>
+          <div class="smallfam-gypsum-recognition-items">${cluesHtml}</div>
+        </div>
+        <div class="smallfam-gypsum-key">
+          <div class="smallfam-gypsum-key-label">${escapeAttr(g.keyDistinction.label)}</div>
+          <p class="smallfam-gypsum-key-text">${escapeAttr(g.keyDistinction.text)}</p>
+        </div>
+      </div>
+    </details>
+    <div class="smallfam-gypsum-explore">${linkHtml}</div>
+  </div>`;
+}
+// ── Gypsum stone-card Quick View + Back navigation (2026-08-21) — mirrors
+// jumpToSmallFamilyProfile()'s existing origin-patch-then-push pattern
+// (same file, above) rather than inventing a new mechanism: replaceState
+// the CURRENT entry so its URL records where to land (tab=101, Crystal
+// Families, Gypsum's profile marker, which stone card, and whether the
+// disclosure was open), then pushState a new entry before opening the
+// Quick View drawer so Back has that patched entry to pop to. openDetail()
+// itself (app.js) has no history awareness at all — it only toggles the
+// drawer's open classes — so without this push, Back while the drawer is
+// open would leave the Crystal Families page entirely instead of closing
+// the drawer in place.
+function jumpToGypsumStoneDetail(stoneId,cardKey){
+  try{
+    const originParams=new URLSearchParams(window.location.search);
+    originParams.set('tab','101');
+    originParams.set('section','families');
+    originParams.set('profile','Gypsum');
+    const disclosure=document.querySelector('.smallfam-gypsum-disclosure');
+    originParams.set('gOpen',(disclosure&&disclosure.open)?'1':'0');
+    originParams.set('gStone',cardKey);
+    const originUrl=window.location.pathname+'?'+originParams.toString()+window.location.hash;
+    history.replaceState(history.state,'',originUrl);
+    history.pushState({gypsumStoneDetail:stoneId},'',originUrl);
+  }catch(e){}
+  if(typeof openDetail==='function')openDetail(stoneId);
+}
+// This listener is additive, not a replacement for the single shared
+// popstate handler in family-guide.js (which already restores tab=101 ->
+// Crystal Families -> scrolls to the Gypsum card via the generic
+// .smallfam-name profile lookup). Every bit of DOM work here is deferred
+// one tick (setTimeout 0) specifically so it always runs *after* that
+// handler's synchronous switchTabByName('101')/show101('families') calls
+// have finished rebuilding the secondary-families grid — without the
+// deferral, this listener (registered when 101.js loads, before
+// family-guide.js) would run first and find either a stale DOM or no
+// .smallfam-gypsum-disclosure yet. The early return below makes this a
+// no-op for every popstate that isn't specifically a Gypsum-stone-detail
+// return (i.e. every other tab switch, every other family guide, and
+// every other Smaller-Families "Explore" Back-navigation), so it can never
+// affect Mica/Corundum/Spodumene/Zoisite/Jade or any routed family guide.
+window.addEventListener('popstate',function(){
+  setTimeout(function(){
+    let params;
+    try{ params=new URLSearchParams(window.location.search); }catch(e){ return; }
+    if(params.get('tab')!=='101'||params.get('section')!=='families'||params.get('profile')!=='Gypsum')return;
+    const gStone=params.get('gStone');
+    if(!gStone)return;
+    if(typeof closeDrawer==='function')closeDrawer();
+    const gOpen=params.get('gOpen')==='1';
+    const restoreGypsumStoneFocus=function(){
+      const disclosure=document.querySelector('.smallfam-gypsum-disclosure');
+      if(disclosure)disclosure.open=gOpen;
+      const card=document.querySelector('.smallfam-gypsum-form[data-stone-key="'+gStone+'"]');
+      if(!card)return;
+      try{ card.scrollIntoView({behavior:'auto',block:'center'}); }catch(e){ card.scrollIntoView(); }
+      try{ card.focus({preventScroll:true}); }catch(e){ card.focus(); }
+    };
+    requestAnimationFrame(function(){ requestAnimationFrame(restoreGypsumStoneFocus); });
+    [150,350,600,900].forEach(function(ms){ setTimeout(restoreGypsumStoneFocus,ms); });
+  },0);
+});
 function renderSecondaryFamilies(){
   const fc=document.getElementById('fam-cards-secondary');
   if(!fc)return;
@@ -657,6 +876,11 @@ function renderSecondaryFamilies(){
   }
   const fact=(label,text)=>`<div class="smallfam-fact"><div class="smallfam-fact-label">${label}</div><p class="smallfam-fact-text">${text}</p></div>`;
   fc.innerHTML=C101_SECONDARY_FAMILIES.map(f=>{
+    // Gypsum renders through its own dedicated markup (see
+    // renderGypsumSecondaryFamily above); every other secondary family
+    // continues through this shared three-fact/one-photo template below,
+    // unchanged.
+    if(f.n==='Gypsum') return renderGypsumSecondaryFamily(f);
     // Real <button type="button"> with a data-jump-family attribute, read by
     // the delegated listener in initFamilies() below — no href="#" fallback
     // that could ever fall through to a default anchor navigation, and no
@@ -695,12 +919,46 @@ function initFamilies(){
     fcSecondary.dataset.familyDelegated='1';
     fcSecondary.addEventListener('click',function(e){
       const link=e.target.closest('.smallfam-explore-link');
-      if(!link)return;
-      const fam=link.getAttribute('data-jump-family');
-      if(!fam)return;
-      e.preventDefault();
-      e.stopPropagation();
-      jumpToSmallFamilyProfile(fam);
+      if(link){
+        const fam=link.getAttribute('data-jump-family');
+        if(!fam)return;
+        e.preventDefault();
+        e.stopPropagation();
+        // Gypsum-only cleanup: strip any leftover gStone/gOpen markers a
+        // prior Selenite/Desert Rose Quick View may have left on the URL
+        // (see jumpToGypsumStoneDetail above) before jumpToSmallFamilyProfile
+        // does its own replaceState below. Without this, a later Back from
+        // the filtered-encyclopedia view could re-trigger the Gypsum-stone
+        // popstate listener using a stale gStone value instead of just
+        // landing generically on the Gypsum card. No-op for every other
+        // family, whose profiles never set these params.
+        if(fam==='Gypsum'){
+          try{
+            const p=new URLSearchParams(window.location.search);
+            if(p.has('gStone')||p.has('gOpen')){
+              p.delete('gStone');p.delete('gOpen');
+              const url=window.location.pathname+'?'+p.toString()+window.location.hash;
+              history.replaceState(history.state,'',url);
+            }
+          }catch(err){}
+        }
+        jumpToSmallFamilyProfile(fam);
+        return;
+      }
+      // Gypsum-only: Selenite/Desert Rose stone cards carry data-stone-id +
+      // data-stone-key (see renderGypsumSecondaryFamily above); Satin
+      // Spar's card has neither attribute and is never matched here, so it
+      // stays inert. This same delegated listener is what the cards'
+      // onkeydown="...this.click()" idiom relies on for Enter/Space.
+      const stoneCard=e.target.closest('.smallfam-gypsum-form--interactive');
+      if(stoneCard){
+        const stoneId=stoneCard.getAttribute('data-stone-id');
+        const stoneKey=stoneCard.getAttribute('data-stone-key');
+        if(!stoneId||!stoneKey)return;
+        e.preventDefault();
+        e.stopPropagation();
+        jumpToGypsumStoneDetail(stoneId,stoneKey);
+      }
     });
   }
   renderPrimaryFamilies();

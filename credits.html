@@ -47,6 +47,31 @@
   <div id="pc-sections" aria-live="polite">
     <p class="pc-loading">Loading credits…</p>
   </div>
+
+  <!-- Crystals 101 — Smaller Families teaching photography. Static markup,
+       not JS-driven like the sections above: this single credit belongs to
+       the Gypsum teaching card's Satin Spar image (a local, non-catalog
+       asset with no Stone ID and no entry in data/encyclopedia-photo-
+       credits.json or data/family-guides.json), so it can't reuse either
+       existing dynamic loader without misrepresenting it as a catalog or
+       family-guide photo. Uses the exact same .pc-section/.pc-item markup
+       pcCreditItemHtml() renders above, so it matches the page's visual
+       format byte-for-byte. -->
+  <details class="pc-section" id="pc-section-crystals-101" open>
+    <summary class="pc-section-summary">Crystals 101 <span class="pc-section-count">(1)</span></summary>
+    <div class="pc-item-grid">
+      <div class="pc-item" id="credit-101-gypsum-satin-spar">
+        <div class="pc-item-title">Satin Spar Gypsum</div>
+        <div class="pc-item-meta">
+          <span class="pc-item-creator">Photo: James St. John</span>
+          <span class="pc-item-license">Creative Commons Attribution 2.0 Generic</span>
+          <a href="https://commons.wikimedia.org/wiki/File:Satin_spar_gypsum_(Cropwell_Bishop_Formation,_Lower_Triassic;_near_Derby,_England)_1.jpg" target="_blank" rel="noopener noreferrer">View source</a>
+          <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">View license</a>
+        </div>
+        <div class="pc-item-modified">Adapted for site use: square composition, background replacement, and lighting cleanup.</div>
+      </div>
+    </div>
+  </details>
 </main>
 
 <footer style="background:var(--stone);border-top:0.5px solid var(--border);padding:3rem 1.5rem 2rem;text-align:center">
