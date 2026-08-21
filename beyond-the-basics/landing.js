@@ -200,9 +200,9 @@
     btn.appendChild(el('div', { class: 'btbl-tile-scrim', 'aria-hidden': 'true' }));
 
     var heading = el('span', { class: 'btbl-drawer-heading' }, [
-      document.createTextNode('Open a'),
+      document.createTextNode('Open a Mystery'),
       el('br'),
-      document.createTextNode('Mystery Drawer')
+      document.createTextNode('Drawer')
     ]);
     var arrow = el('span', { class: 'btbl-drawer-arrow', 'aria-hidden': 'true', text: '→' });
     var desc = el('span', { class: 'btbl-drawer-desc' }, [

@@ -76,6 +76,7 @@ div.btbl-tile{cursor:default}
   object-position:62% top;
 }
 .btbl-tile--article-01 .btbl-tile-body{max-width:58%}
+.btbl-tile--article-01 .btbl-tile-title{font-size:clamp(28px,3.2vw,40px);line-height:1.06}
 
 /* Article 02 — kyanite on the right; copy sits left, roughly centered */
 .btbl-tile--article-02 .btbl-tile-media{object-position:82% 48%}
@@ -119,9 +120,9 @@ div.btbl-tile{cursor:default}
 .btbl-tile--drawer .btbl-tile-media{object-fit:cover;object-position:center center;transform:none}
 .btbl-tile--drawer:hover .btbl-tile-media{transform:scale(1.015)}
 .btbl-tile--drawer .btbl-tile-scrim{background:linear-gradient(90deg,rgba(20,14,10,0.52) 0%,rgba(20,14,10,0.22) 43%,rgba(20,14,10,0) 64%)}
-.btbl-tile--drawer .btbl-tile-body{align-items:flex-start;text-align:left;max-width:48%;gap:0.55rem;padding-left:1.55rem}
-.btbl-drawer-heading{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.7vw,23px);line-height:1.22;letter-spacing:0.03em;text-transform:uppercase;color:var(--white)}
-.btbl-drawer-desc{margin:0;font-size:12.5px;line-height:1.55;color:rgba(250,248,246,0.88)}
+.btbl-tile--drawer .btbl-tile-body{align-items:flex-start;text-align:left;max-width:52%;gap:0.55rem;padding-left:1.55rem}
+.btbl-drawer-heading{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(18px,1.6vw,24px);line-height:1.22;letter-spacing:0;text-transform:none;color:var(--white)}
+.btbl-drawer-desc{margin:0;font-size:14.5px;line-height:1.48;color:rgba(250,248,246,0.88)}
 .btbl-drawer-arrow{margin-left:0.4rem;font-size:18px;color:var(--accent2);display:inline-block;transition:transform 0.2s}
 .btbl-tile--drawer:hover .btbl-drawer-arrow{transform:translateX(5px)}
 @media(prefers-reduced-motion:reduce){.btbl-drawer-arrow{transition:none}.btbl-tile--drawer:hover .btbl-drawer-arrow{transform:none}}
@@ -209,7 +210,7 @@ a.btbl-card:hover .btbl-card-cta{gap:9px}
   .btbl-tile--article-06{min-height:250px}
   .btbl-tile--article-06 .btbl-tile-body{max-width:52%}
   .btbl-tile--drawer{min-height:245px}
-  .btbl-tile--drawer .btbl-tile-body{max-width:52%;padding-left:1rem}
+  .btbl-tile--drawer .btbl-tile-body{max-width:76%;padding-left:1rem}
 }
 
 @media(max-width:520px){
