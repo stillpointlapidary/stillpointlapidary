@@ -644,227 +644,532 @@ const C101_SECONDARY_FAMILIES=[
     distinct:"Their mineral structures differ, but both are exceptionally tough because tiny crystals interlock rather than separating easily. That toughness allowed Jade to become tools, ornaments, and intricate carvings across many cultures.",
     photo:SUPABASE_ENC+"jadeite-wc.webp", linkFamily:'Jade', linkLabel:'Explore Jade'},
 ];
-// ── Gypsum expanded teaching card (2026-08-20, approved "Editorial Split"
-// design) — Gypsum is the one Smaller-Families entry rich enough (three
-// named growth forms, each with its own recognizable habit) to warrant a
-// dedicated in-place layout instead of the shared three-fact/one-photo
+// ── Small-family teaching card system (2026-08-20, approved "Editorial
+// Split" design, first built for Gypsum; generalized 2026-08-21 to also
+// cover Mica, Corundum, Spodumene, Zoisite, and Jade) — these six
+// Smaller-Families entries are rich enough (two or three named/gem
+// examples, each with its own recognizable habit) to warrant the dedicated
+// expandable layout instead of the shared three-fact/one-photo
 // .smallfam-card template every other secondary family still uses below.
-// Kept as its own data object (not folded into the C101_SECONDARY_FAMILIES
-// Gypsum entry above) so renderGypsumSecondaryFamily()'s shape is obvious
-// and self-contained. Satin Spar is a teaching-only growth form here: it
-// has no Stone ID and is NOT part of the 333-stone roster, so its card
-// stays a plain, non-interactive teaching unit — no Quick View, no link,
-// no fabricated catalog destination. Selenite and Desert Rose ARE real,
-// routable stones, so their cards (stoneId/cardKey below) are interactive
-// and open Quick View for their exact Stone ID via
-// jumpToGypsumStoneDetail() (see renderGypsumSecondaryFamily). Satin
-// Spar's photo is a locally hosted licensed Wikimedia Commons image
-// (credited in credits.html), not a Supabase encyclopedia asset — see
-// assets/101/gypsum/satin-spar-gypsum-WC.webp.
-const C101_GYPSUM_CARD={
-  name:'Gypsum',
-  summary:{
-    headline:'One mineral. Three very different forms.',
-    subline:'See what connects them, and how to recognize Gypsum.',
-    action:'Open the family lesson'
-  },
-  intro:{
-    whatItIs:{
-      label:'Shared Identity',
-      text:"Gypsum is a very soft, water-bearing calcium sulfate mineral. Water is actually built into its crystal structure, and a fingernail can scratch it."
+// Kept as its own keyed data object (not folded into the
+// C101_SECONDARY_FAMILIES entries above) so renderTeachingCard()'s shape
+// is obvious and self-contained; C101_SECONDARY_FAMILIES still supplies
+// only linkFamily/linkLabel for each family's "Explore <Family>" button.
+// Every example below with a `stoneId` is a real, routable, cataloged
+// stone — clicking (or Enter/Space) opens Quick View for that exact Stone
+// ID via jumpToTeachingStoneDetail(). Examples with no `stoneId` (Satin
+// Spar, Triphane) are teaching-only: no catalog record, so their cards
+// stay plain and non-interactive — no Quick View, no link, no fabricated
+// destination. Satin Spar's photo is a locally hosted licensed Wikimedia
+// Commons image (credited in credits.html), not a Supabase encyclopedia
+// asset — see assets/101/gypsum/satin-spar-gypsum-WC.webp. Triphane has no
+// approved photograph at all, so it has no `image` field — the renderer
+// falls back to a restrained typographic placeholder instead of an image
+// (see renderTeachingCard below). Ruby Zoisite (stoneId C-0196) is
+// cataloged under the `Aggregate` family, not the exact `Zoisite` filter —
+// that's fine for a linked teaching example here; it does not change its
+// Production Master/Supabase family, taxonomy, or the "Explore Zoisite"
+// destination, which still filters the exact `Zoisite` family via
+// linkFamily on the Zoisite entry in C101_SECONDARY_FAMILIES above.
+const C101_TEACHING_CARDS={
+  Gypsum:{
+    name:'Gypsum',
+    summary:{
+      headline:'One mineral. Three very different forms.',
+      subline:'See what connects them, and how to recognize Gypsum.',
+      action:'Open the family lesson'
     },
-    whyDifferent:{
-      label:'Changing Form',
-      text:"Selenite, Satin Spar, and Gypsum Desert Rose share the same mineral identity. Their appearances change because the crystals grow in different habits and, in Desert Rose, around grains of sand."
+    intro:{
+      whatItIs:{
+        label:'Shared Identity',
+        text:"Gypsum is a very soft, water-bearing calcium sulfate mineral. Water is actually built into its crystal structure, and a fingernail can scratch it."
+      },
+      whyDifferent:{
+        label:'Changing Form',
+        text:"Selenite, Satin Spar, and Gypsum Desert Rose share the same mineral identity. Their appearances change because the crystals grow in different habits and, in Desert Rose, around grains of sand."
+      }
+    },
+    stonesLabel:'Three Stones to Know',
+    forms:[
+      {name:'Selenite', caption:'Clear, glassy Gypsum crystals with broad natural faces.',
+        image:SUPABASE_ENC+'selenite.webp',
+        alt:'Clear bladed Selenite crystal specimen on a white background',
+        stoneId:'C-0175', cardKey:'selenite'},
+      {name:'Satin Spar', caption:'Parallel Gypsum fibers create a silky band of moving light.',
+        image:'assets/101/gypsum/satin-spar-gypsum-WC.webp',
+        alt:'White fibrous Satin Spar Gypsum specimen on a white background'},
+      {name:'Desert Rose', caption:'Bladed Gypsum crystals gather around sand into flower-like rosettes.',
+        image:SUPABASE_ENC+'desert-rose-specimen.webp',
+        alt:'Gypsum Desert Rose specimen on a white background',
+        stoneId:'C-0172', cardKey:'desert-rose'},
+    ],
+    recognition:{
+      label:'How to Recognize Gypsum',
+      clues:[
+        {title:'Very Soft', text:'Mohs 2. A fingernail can scratch it.'},
+        {title:'Variable Luster', text:'Glassy, pearly, or silky depending on its growth form.'},
+        {title:'Perfect Cleavage', text:'Often separates along smooth, flat surfaces.'},
+      ]
+    },
+    keyDistinction:{
+      label:'The Key Distinction',
+      text:'Much of the silky white material sold as “Selenite” is actually Satin Spar. Both are Gypsum, but they are different growth forms.'
     }
   },
-  stonesLabel:'Three Stones to Know',
-  // stoneId + cardKey (2026-08-21) mark Selenite and Desert Rose as real,
-  // cataloged stones — clicking either opens Quick View for that exact
-  // Stone ID. Satin Spar carries neither field: it has no Stone ID (see
-  // the read-only Supabase audit that confirmed no "Satin Spar" or "Satin
-  // Spar Gypsum" row exists in `stones`), so its card stays a plain,
-  // non-interactive teaching unit — renderGypsumSecondaryFamily() below
-  // only adds the interactive/clickable treatment when stoneId is present.
-  forms:[
-    {name:'Selenite', text:'Clear or transparent crystalline Gypsum.',
-      image:SUPABASE_ENC+'selenite.webp',
-      alt:'Clear bladed Selenite crystal specimen on a white background',
-      stoneId:'C-0175', cardKey:'selenite'},
-    {name:'Satin Spar', text:'Fibrous Gypsum with a silky sheen.',
-      image:'assets/101/gypsum/satin-spar-gypsum-WC.webp',
-      alt:'White fibrous Satin Spar Gypsum specimen on a white background'},
-    {name:'Desert Rose', text:'Rosette-shaped Gypsum that grows with sand.',
-      image:SUPABASE_ENC+'desert-rose-specimen.webp',
-      alt:'Gypsum Desert Rose specimen on a white background',
-      stoneId:'C-0172', cardKey:'desert-rose'},
-  ],
-  recognition:{
-    label:'How to Recognize Gypsum',
-    clues:[
-      {title:'Very Soft', text:'Mohs 2. A fingernail can scratch it.'},
-      {title:'Variable Luster', text:'Glassy, pearly, or silky depending on its growth form.'},
-      {title:'Perfect Cleavage', text:'Often separates along smooth, flat surfaces.'},
-    ]
+  Mica:{
+    name:'Mica',
+    summary:{
+      headline:'The structure behind the shimmer',
+      subline:'Open the layers and see what makes a mica.',
+      action:'Open the family lesson'
+    },
+    intro:{
+      whatItIs:{
+        label:'What It Is',
+        text:"Mica is not one mineral. It is a group of sheet silicates built from thin layers stacked like pages in a book. Each mica has a different chemical recipe, but all share that same layered architecture."
+      },
+      whyDifferent:{
+        label:'Why They Look Different',
+        text:"Different elements enter the structure and change the color. Muscovite is commonly pale or silvery, lithium helps give Lepidolite its lilac and pink tones, and chromium turns Fuchsite green. The chemistry changes, but the layered habit remains."
+      }
+    },
+    stonesLabel:'Micas to Know',
+    forms:[
+      {name:'Muscovite', caption:'Pale, silvery sheets with mica’s classic pearly flash.',
+        image:SUPABASE_ENC+'muscovite-specimen.webp',
+        alt:'Pale silvery Muscovite mica specimen on a white background',
+        stoneId:'C-0260', cardKey:'muscovite'},
+      {name:'Lepidolite', caption:'Lilac to pink, lithium-rich mica.',
+        image:SUPABASE_ENC+'lepidolite.webp',
+        alt:'Lilac Lepidolite mica specimen on a white background',
+        stoneId:'C-0254', cardKey:'lepidolite'},
+      {name:'Fuchsite', caption:'Green, chromium-rich mica with layered shimmer.',
+        image:SUPABASE_ENC+'fuchsite.webp',
+        alt:'Green Fuchsite mica specimen on a white background',
+        stoneId:'C-0252', cardKey:'fuchsite'},
+    ],
+    recognition:{
+      label:'How to Recognize Mica',
+      clues:[
+        {title:'Thin Sheets', text:'Mica separates along one perfect direction into thin layers. Individual sheets may flex instead of snapping immediately.'},
+        {title:'Pearly Flash', text:'Light reflects from the broad cleavage surfaces, creating the familiar pearly, silvery, or glittering shimmer.'},
+        {title:'Layered Edges', text:'Crystals may form flat plates, stacked books, flakes, or scaly masses. Look for visible layers rather than sparkle alone.'},
+      ]
+    },
+    keyDistinction:{
+      label:'The Key Distinction',
+      text:'Mica is a mineral group, not the name of one mineral. Its members share a layered structure, but sparkle by itself does not make a stone mica.'
+    }
   },
-  keyDistinction:{
-    label:'The Key Distinction',
-    text:'Much of the silky white material sold as “Selenite” is actually Satin Spar. Both are Gypsum, but they are different growth forms.'
+  Corundum:{
+    name:'Corundum',
+    summary:{
+      headline:'One crystal. An entire color spectrum.',
+      subline:'See how tiny traces of other elements transform Corundum.',
+      action:'Open the family lesson'
+    },
+    intro:{
+      whatItIs:{
+        label:'What It Is',
+        text:"Corundum is one of nature’s toughest minerals. Aluminum and oxygen lock together in an exceptionally strong crystal structure, creating a mineral hard enough to survive years of wear. When Corundum develops gem color and clarity, we know its most famous expressions as Ruby and Sapphire."
+      },
+      whyDifferent:{
+        label:'Why They Look Different',
+        text:"Nearly pure Corundum is colorless. Tiny traces of other elements create its colors. Chromium produces Ruby’s red, while iron and titanium commonly work together to create blue Sapphire. Other trace-element combinations produce pink, yellow, green, purple, and colorless Sapphires."
+      }
+    },
+    stonesLabel:'Two Gem Names to Know',
+    forms:[
+      {name:'Ruby', caption:'Red Corundum colored by chromium.',
+        image:SUPABASE_ENC+'ruby-tumble-family.webp',
+        alt:'Red Ruby Corundum specimen on a white background',
+        stoneId:'C-0038', cardKey:'ruby'},
+      {name:'Sapphire', caption:'Gem-quality Corundum in every color except Ruby red.',
+        image:SUPABASE_ENC+'sapphire-2.webp',
+        alt:'Blue Sapphire Corundum specimen on a white background',
+        stoneId:'C-0039', cardKey:'sapphire'},
+    ],
+    recognition:{
+      label:'How to Recognize Corundum',
+      clues:[
+        {title:'Remarkably Hard', text:'At 9 on the Mohs scale, Corundum is harder than almost every natural material except Diamond.'},
+        {title:'Chunky Crystals', text:'Natural crystals often form sturdy six-sided prisms or barrel-like shapes rather than delicate points.'},
+        {title:'No Easy Split', text:'Corundum has no true cleavage plane. Its tightly bonded structure does not separate neatly into sheets or blocks.'},
+      ]
+    },
+    keyDistinction:{
+      label:'The Key Distinction',
+      text:'Ruby and Sapphire are not two different minerals. Both are Corundum. Red gem Corundum is called Ruby, while every other gem color belongs under the name Sapphire.'
+    }
+  },
+  Spodumene:{
+    name:'Spodumene',
+    summary:{
+      headline:'Hard, beautiful, and surprisingly easy to split',
+      subline:'Discover why Spodumene demands both admiration and care.',
+      action:'Open the family lesson'
+    },
+    intro:{
+      whatItIs:{
+        label:'What It Is',
+        text:"Spodumene is a lithium-bearing mineral that grows in pegmatites, where unusually large crystals can develop from the last mineral-rich fluids of cooling magma. It often forms long blades or prisms, sometimes reaching spectacular sizes."
+      },
+      whyDifferent:{
+        label:'Why They Look Different',
+        text:"Small changes in chemistry create Spodumene’s color names. Manganese produces pink to violet Kunzite, chromium produces green Hiddenite, and iron can contribute yellow tones to Triphane. Kunzite and Hiddenite may also show pleochroism, shifting in color intensity as the crystal turns."
+      }
+    },
+    stonesLabel:'Color Names to Know',
+    forms:[
+      {name:'Kunzite', caption:'Pink to violet Spodumene colored by manganese.',
+        image:SUPABASE_ENC+'kunzite.webp',
+        alt:'Pink Kunzite Spodumene specimen on a white background',
+        stoneId:'C-0245', cardKey:'kunzite'},
+      {name:'Hiddenite', caption:'Green Spodumene colored by chromium.',
+        image:SUPABASE_ENC+'hiddenite.webp',
+        alt:'Green Hiddenite Spodumene specimen on a white background',
+        stoneId:'C-0161', cardKey:'hiddenite'},
+      {name:'Triphane', caption:'Yellow to colorless Spodumene, often influenced by iron.',
+        placeholderLabel:'Triphane'},
+    ],
+    recognition:{
+      label:'How to Recognize Spodumene',
+      clues:[
+        {title:'Long Blades', text:'Spodumene commonly grows as elongated, flattened crystals with strong lengthwise lines.'},
+        {title:'Color in Motion', text:'In transparent material, color may deepen, soften, or shift as the crystal is viewed from different directions.'},
+        {title:'Clean, Sudden Breaks', text:'Perfect cleavage gives Spodumene directions where it can split surprisingly easily, despite its considerable hardness.'},
+      ]
+    },
+    keyDistinction:{
+      label:'The Key Distinction',
+      text:'Hardness is not toughness. Spodumene resists scratching, but its perfect cleavage can make it fragile when struck. A stone can be hard and still be easy to break.'
+    }
+  },
+  Zoisite:{
+    name:'Zoisite',
+    summary:{
+      headline:'One mineral hiding behind three identities',
+      subline:'Meet the famous stones that rarely introduce themselves as Zoisite.',
+      action:'Open the family lesson'
+    },
+    intro:{
+      whatItIs:{
+        label:'What It Is',
+        text:"Zoisite is a mineral with an extraordinary range of appearances. It may grow as distinct elongated crystals, form opaque pink masses, or become part of a colorful combination stone. Its best-known expressions are so visually different that many people never realize they share Zoisite."
+      },
+      whyDifferent:{
+        label:'Why They Look Different',
+        text:"Trace elements and mineral companions rewrite the appearance. Vanadium gives Tanzanite its blue and violet color, manganese creates pink Thulite, and Ruby Zoisite places green Zoisite beside red Corundum and often dark Pargasite. Sometimes the change comes from color. Sometimes it comes from the company Zoisite keeps."
+      }
+    },
+    stonesLabel:'Three Ways to Meet Zoisite',
+    forms:[
+      {name:'Tanzanite', caption:'Blue to violet Zoisite colored by vanadium.',
+        image:SUPABASE_ENC+'tanzanite.webp',
+        alt:'Blue violet Tanzanite Zoisite specimen on a white background',
+        stoneId:'C-0226', cardKey:'tanzanite'},
+      {name:'Thulite', caption:'Pink to rose Zoisite colored by manganese.',
+        image:SUPABASE_ENC+'thulite.webp',
+        alt:'Pink Thulite Zoisite specimen on a white background',
+        stoneId:'C-0267', cardKey:'thulite'},
+      {name:'Ruby Zoisite', caption:'Red Ruby set in green Zoisite, often with dark Pargasite.',
+        image:SUPABASE_ENC+'ruby-in-zoisite-heart.webp',
+        alt:'Ruby in Zoisite combination specimen on a white background',
+        stoneId:'C-0196', cardKey:'ruby-zoisite'},
+    ],
+    recognition:{
+      label:'How to Recognize Zoisite',
+      clues:[
+        {title:'Elongated Crystals', text:'Crystalline Zoisite may form long, striated prisms, especially in transparent gem material such as Tanzanite.'},
+        {title:'Glassy or Granular', text:'Zoisite can appear glassy in distinct crystals or dense and granular in massive material such as Thulite and Ruby Zoisite.'},
+        {title:'Brittle with Cleavage', text:'Zoisite can split along cleavage directions and is more vulnerable to impact than its solid appearance may suggest.'},
+      ]
+    },
+    keyDistinction:{
+      label:'The Key Distinction',
+      text:'Tanzanite and Thulite are varieties of Zoisite. Ruby Zoisite contains Zoisite, but it is a combination material rather than a variety of the mineral by itself.'
+    }
+  },
+  Jade:{
+    name:'Jade',
+    summary:{
+      headline:'What made both of them Jade',
+      subline:'The answer is not color. It is the way their crystals hold together.',
+      action:'Open the family lesson'
+    },
+    intro:{
+      whatItIs:{
+        label:'What It Is',
+        text:"Jade is an ancient gem name, not the name of a single mineral. It covers two different materials: Jadeite jade, built mostly from tightly interlocked pyroxene grains, and Nephrite jade, woven from microscopic amphibole fibers. Their chemistry and crystal structures differ, but both can be carved, polished, and handled without breaking easily."
+      },
+      whyDifferent:{
+        label:'Why They Look Different',
+        text:"Jadeite is built from interlocking grains. Nephrite is built from tangled mineral fibers. That hidden architecture affects how each stone looks and feels. Jadeite often takes a brighter, glassier polish, while Nephrite commonly appears softer, waxier, or silky. Both occur in colors beyond green, so color alone cannot tell you which Jade you have."
+      }
+    },
+    stonesLabel:'Two Materials Called Jade',
+    forms:[
+      {name:'Jadeite', caption:'The pyroxene mineral behind dense, finely grained Jadeite jade.',
+        image:SUPABASE_ENC+'jadeite-wc.webp',
+        alt:'Green Jadeite specimen on a white background',
+        stoneId:'C-0062', cardKey:'jadeite'},
+      {name:'Nephrite Jade', caption:'Jade woven from microscopic amphibole fibers.',
+        image:SUPABASE_ENC+'nephrite-jade-tumble.webp',
+        alt:'Green Nephrite Jade specimen on a white background',
+        stoneId:'C-0047', cardKey:'nephrite-jade'},
+    ],
+    recognition:{
+      label:'How to Recognize Jade',
+      clues:[
+        {title:'Dense, Interlocking Texture', text:'True Jade feels compact rather than crumbly because its microscopic crystals are locked or woven together.'},
+        {title:'Tough, Not Unscratchable', text:'Jade resists breaking and chipping extraordinarily well, even though harder materials can still scratch it. Hardness and toughness are not the same thing.'},
+        {title:'Color Is Not Proof', text:'Both Jadeite and Nephrite occur in more than green, and many unrelated stones are sold under Jade-like names. Appearance alone rarely settles the identification.'},
+      ]
+    },
+    keyDistinction:{
+      label:'The Key Distinction',
+      text:'Jadeite and Nephrite are not varieties of one mineral. The name Jade records human experience rather than mineral kinship. People grouped these stones together because both could survive carving, tools, jewelry, and generations of handling, long before mineralogy revealed how different they were inside.'
+    }
   }
 };
-// Dedicated renderer for the Gypsum card only — every other secondary
-// family keeps rendering through the shared .smallfam-card template in
-// renderSecondaryFamilies() below, byte-for-byte unchanged. f (the roster
-// entry from C101_SECONDARY_FAMILIES) supplies only linkFamily/linkLabel
-// for the existing "Explore Gypsum" button, which still calls the same
-// jumpToSmallFamilyProfile('Gypsum') path via the delegated
+// ── Smaller-family teaching-card lesson disclosure (2026-08-21, "header
+// control" pass; button moved after the lesson region 2026-08-22) —
+// replaces the former native <details>/<summary>, whose summary-must-
+// precede-content structure can't place the button after the region it
+// discloses while also having that region sit below other always-visible
+// content (the header, then the specimen strip). This is a real <button>
+// (native keyboard/click activation for free) plus a plain lesson <div>,
+// wired together purely by aria-controls/id and the `hidden` attribute —
+// no custom keydown handling needed. The button is now the last element
+// in the card, after .smallfam-teach-lesson (see renderTeachingCard
+// below): collapsed, the hidden lesson collapses to zero height so the
+// button reads as sitting right after the strip; expanded, the lesson's
+// content pushes the same button down to the true bottom, with nothing
+// else (no separate "Explore" pill) competing for that position. One
+// shared setter + one shared toggle function serve all six families; see
+// the single delegated click listener in initFamilies() below and the
+// popstate restoration further down, neither of which duplicates this
+// per family.
+function setTeachLessonOpen(btn, open){
+  if(!btn) return;
+  const lesson=document.getElementById(btn.getAttribute('aria-controls'));
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if(lesson) lesson.hidden = !open;
+}
+function toggleTeachLesson(btn){
+  setTeachLessonOpen(btn, btn.getAttribute('aria-expanded') !== 'true');
+}
+// Shared renderer for every small-family teaching card (Gypsum, Mica,
+// Corundum, Spodumene, Zoisite, Jade). f (the roster entry from
+// C101_SECONDARY_FAMILIES) supplies only linkFamily/linkLabel for the
+// "Explore <Family>" button, which still calls the same
+// jumpToSmallFamilyProfile(family) path via the delegated
 // .smallfam-explore-link[data-jump-family] listener in initFamilies().
-function renderGypsumSecondaryFamily(f){
-  const g=C101_GYPSUM_CARD;
-  // Selenite/Desert Rose cards (stoneId present) get the same
+// Every card carries data-family so the shared stone-detail Back
+// navigation below (jumpToTeachingStoneDetail + the single popstate
+// listener) can scope its DOM lookups to the one card that actually
+// launched Quick View, instead of one family accidentally restoring
+// another's.
+function renderTeachingCard(f){
+  const g=C101_TEACHING_CARDS[f.n];
+  // Examples with a stoneId are real, cataloged stones — they get the same
   // tabindex/role="button"/onkeydown Enter-or-Space idiom already used by
   // .fam-card above — no inline onclick with interpolated arguments (see
   // the jsArg double-quote-corruption note on the Explore button below);
   // the click itself is handled by the delegated listener in
-  // initFamilies(), keyed off data-stone-id/data-stone-key. Satin Spar
-  // (no stoneId) renders as the same plain, non-interactive card it
-  // always has been — no tabindex, no role, no click handler, no link.
+  // initFamilies(), keyed off data-stone-id/data-stone-key — but that
+  // attribute pair now lives on the name/caption button specifically
+  // (see below), not on the outer column, since the column itself is no
+  // longer a single click target. Examples with no stoneId (Satin Spar,
+  // Triphane) get a plain, non-interactive name/caption block instead —
+  // no button, no click handler, no link.
+  //
+  // Structural pattern (2026-08-21, "enlarge the photograph" pass) — each
+  // column is now a NONINTERACTIVE structural <div> containing up to two
+  // separate, sibling interactive controls, never one nested inside the
+  // other:
+  //   1. an image <button> dedicated to openEncLightbox() (the same
+  //      lightbox app.js/encyclopedia.js/family-guide.js already use
+  //      elsewhere — see openEncLightbox/closeEncLightbox above), present
+  //      whenever `s.image` exists (every photographed example, including
+  //      uncataloged Satin Spar);
+  //   2. a name/caption <button> dedicated to Quick View, present only
+  //      when `s.stoneId` exists.
+  // A real <button> gets native keyboard activation and click semantics
+  // for free (no manual onkeydown/tabindex/role plumbing needed), and
+  // openEncLightbox's own `if(e) e.stopPropagation()` (see above) keeps an
+  // image click from ever reaching the delegated Quick View listener in
+  // initFamilies() below. Triphane has neither control: no image to
+  // enlarge, no Stone ID to open — just its existing inert typographic
+  // placeholder and plain-text name/caption.
   const formsHtml=g.forms.map(s=>{
-    const interactive=!!s.stoneId;
-    const cls='smallfam-gypsum-form'+(interactive?' smallfam-gypsum-form--interactive':'');
-    const attrs=interactive
-      ?` data-stone-id="${escapeAttr(s.stoneId)}" data-stone-key="${escapeAttr(s.cardKey)}" tabindex="0" role="button" aria-label="Open ${escapeAttr(s.name)} in Quick View" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"`
-      :'';
-    return`<div class="${cls}"${attrs}>
-    <div class="smallfam-gypsum-form-image"><img src="${escapeAttr(s.image)}" alt="${escapeAttr(s.alt)}" loading="lazy"></div>
-    <div class="smallfam-gypsum-form-body">
-      <div class="smallfam-gypsum-form-name">${escapeAttr(s.name)}</div>
-      <p class="smallfam-gypsum-form-text">${escapeAttr(s.text)}</p>
-    </div>
+    const hasStone=!!s.stoneId;
+    const imageHtml=s.image
+      ?`<button type="button" class="smallfam-teach-specimen-image-btn" onclick="openEncLightbox('${escapeAttr(s.image)}','${escapeAttr(s.name)}',event)" aria-label="Enlarge ${escapeAttr(s.name)} image"><span class="smallfam-teach-specimen-image"><img src="${escapeAttr(s.image)}" alt="${escapeAttr(s.alt)}" loading="lazy"></span></button>`
+      :`<div class="smallfam-teach-specimen-image smallfam-teach-specimen-image--placeholder" aria-hidden="true"><span class="smallfam-teach-specimen-placeholder-label">${escapeAttr((s.placeholderLabel||s.name).toUpperCase())}</span></div>`;
+    const bodyInner=`<div class="smallfam-teach-specimen-name">${escapeAttr(s.name)}</div><p class="smallfam-teach-specimen-caption">${escapeAttr(s.caption)}</p>`;
+    const bodyHtml=hasStone
+      ?`<button type="button" class="smallfam-teach-specimen-body smallfam-teach-specimen-body--interactive" data-stone-id="${escapeAttr(s.stoneId)}" data-stone-key="${escapeAttr(s.cardKey)}" aria-label="Open ${escapeAttr(s.name)} in Quick View">${bodyInner}</button>`
+      :`<div class="smallfam-teach-specimen-body">${bodyInner}</div>`;
+    return`<div class="smallfam-teach-specimen">
+    ${imageHtml}
+    ${bodyHtml}
   </div>`;
   }).join('');
-  const cluesHtml=g.recognition.clues.map((c,i)=>`<div class="smallfam-gypsum-recognition-item">
-    <div class="smallfam-gypsum-recognition-num">${escapeAttr(String(i+1).padStart(2,'0'))}</div>
-    <div class="smallfam-gypsum-recognition-title">${escapeAttr(c.title)}</div>
-    <p class="smallfam-gypsum-recognition-text">${escapeAttr(c.text)}</p>
+  const cluesHtml=g.recognition.clues.map((c,i)=>`<div class="smallfam-teach-recognition-item">
+    <div class="smallfam-teach-recognition-num">${escapeAttr(String(i+1).padStart(2,'0'))}</div>
+    <div class="smallfam-teach-recognition-title">${escapeAttr(c.title)}</div>
+    <p class="smallfam-teach-recognition-text">${escapeAttr(c.text)}</p>
   </div>`).join('');
-  const linkHtml=f.linkFamily
-    ?`<button type="button" class="smallfam-explore-link" data-jump-family="${escapeAttr(f.linkFamily)}">${escapeAttr(f.linkLabel)}</button>`
-    :'';
-  // .smallfam-name (alongside the Gypsum-specific .smallfam-gypsum-name) is
-  // required, not decorative: the shared Back-navigation popstate handler
-  // in family-guide.js (profile-scroll restoration for every "Explore
-  // <Family>" button, added 2026-08-05) looks up the target card via
-  // `.smallfam-card .smallfam-name` textContent — a selector Gypsum's own
-  // custom markup never matched once it stopped using the generic
-  // .smallfam-content template. Without this class, "Explore Gypsum" ->
-  // Back would silently fail to scroll back to the Gypsum card (the
-  // popstate handler itself is unchanged; this just makes Gypsum
-  // resolvable by the same existing, unmodified lookup every other
-  // secondary family already relies on).
-  return`<div class="smallfam-card smallfam-gypsum">
-    <div class="smallfam-gypsum-header">
-      <div class="smallfam-name smallfam-gypsum-name">${escapeAttr(g.name)}</div>
-      <div class="smallfam-gypsum-name-rule" aria-hidden="true"></div>
+  // .smallfam-name (alongside the teaching-card-specific .smallfam-teach-
+  // name) is kept even though these six cards no longer render an
+  // "Explore <Family>" pill of their own (removed 2026-08-22, see below):
+  // the shared Back-navigation popstate handler in family-guide.js still
+  // looks up secondary-family cards generically via
+  // `.smallfam-card .smallfam-name` textContent for the OTHER, plain
+  // (non-teaching) secondary families that still have their own Explore
+  // button (see the fallback template in renderSecondaryFamilies below).
+  // Collapsed-top redesign (2026-08-21, approved "Option 1: Editorial
+  // Specimen Strip") — the family title stands alone (no gold rule, no
+  // divider beneath it), the specimen-row label sits directly above the
+  // photos, and the old bordered .smallfam-teach-form cards are replaced
+  // by one continuous .smallfam-teach-strip of unboxed
+  // .smallfam-teach-specimen columns.
+  //
+  // Intrinsic header lockup (2026-08-22, approved final structural
+  // correction) — the header is a single flex row, not a percentage/
+  // fractional grid: family name and the vertical divider are intrinsic
+  // (flex:0 0 auto, sized only to their own content), the headline is the
+  // one flexible item (flex:1 1 auto, so a long headline wraps within the
+  // remaining space instead of overflowing) — see styles.css for the
+  // 20-24px gaps and the divider's visible size/color. The former second
+  // invitation line is not rendered at all (g.summary.subline is never
+  // read here).
+  //
+  // Button-after-lesson pass (2026-08-22) — the disclosure button is now
+  // the LAST element in the card, after .smallfam-teach-lesson rather than
+  // before it. Collapsed, the lesson's `hidden` attribute collapses it to
+  // zero height, so the button reads as sitting right after the specimen
+  // strip; expanded, the lesson's full content pushes the same button down
+  // to the true bottom of the lesson — no separate "moved" element, just
+  // ordinary document flow around one `hidden` toggle. This also removes
+  // the "Explore <Family>" pill entirely (its own .smallfam-teach-explore
+  // wrapper and the button it held) — there is now exactly one pill in
+  // each card, and it only ever controls the disclosure, never navigates
+  // away. The lesson region itself (WHAT IT IS/WHY THEY LOOK DIFFERENT,
+  // recognition, key distinction) is byte-for-byte unchanged from the
+  // prior pass — same markup, same classes, same copy.
+  const stripCountCls=g.forms.length===2?' smallfam-teach-strip--count-2':'';
+  // Discovery-pill copy (2026-08-22) — family-specific pair computed
+  // directly from g.name, with the arrow glyph inline in the label text
+  // itself rather than a separately rotated caret element.
+  const openActionText='Discover the '+g.name+' Story ↓';
+  const closeActionText='Close the '+g.name+' Story ↑';
+  const lessonId='smallfam-teach-lesson-'+g.name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  return`<div class="smallfam-card smallfam-teach" data-family="${escapeAttr(g.name)}">
+    <div class="smallfam-teach-header">
+      <div class="smallfam-name smallfam-teach-name">${escapeAttr(g.name)}</div>
+      <span class="smallfam-teach-header-divider" aria-hidden="true"></span>
+      <div class="smallfam-teach-hook-headline">${escapeAttr(g.summary.headline)}</div>
     </div>
-    <div class="smallfam-gypsum-stones">
-      <div class="smallfam-gypsum-section-label">${escapeAttr(g.stonesLabel)}</div>
-      <div class="smallfam-gypsum-forms">${formsHtml}</div>
+    <div class="smallfam-teach-stones">
+      <div class="smallfam-teach-section-label">${escapeAttr(g.stonesLabel)}</div>
+      <div class="smallfam-teach-strip${stripCountCls}">${formsHtml}</div>
     </div>
-    <details class="smallfam-gypsum-disclosure">
-      <summary class="smallfam-gypsum-summary">
-        <span class="smallfam-gypsum-summary-copy">
-          <span class="smallfam-gypsum-summary-headline">${escapeAttr(g.summary.headline)}</span>
-          <span class="smallfam-gypsum-summary-subline">${escapeAttr(g.summary.subline)}</span>
-        </span>
-        <span class="smallfam-gypsum-summary-action">
-          <span class="smallfam-gypsum-summary-action-text">${escapeAttr(g.summary.action)}</span>
-          <span class="smallfam-gypsum-summary-caret" aria-hidden="true">&#9662;</span>
-        </span>
-      </summary>
-      <div class="smallfam-gypsum-disclosure-body">
-        <div class="smallfam-gypsum-intro">
-          <div class="smallfam-gypsum-intro-col">
-            <div class="smallfam-gypsum-intro-label">${escapeAttr(g.intro.whatItIs.label)}</div>
-            <p class="smallfam-gypsum-intro-text">${escapeAttr(g.intro.whatItIs.text)}</p>
-          </div>
-          <div class="smallfam-gypsum-intro-col">
-            <div class="smallfam-gypsum-intro-label">${escapeAttr(g.intro.whyDifferent.label)}</div>
-            <p class="smallfam-gypsum-intro-text">${escapeAttr(g.intro.whyDifferent.text)}</p>
-          </div>
+    <div class="smallfam-teach-lesson" id="${escapeAttr(lessonId)}" hidden>
+      <div class="smallfam-teach-intro">
+        <div class="smallfam-teach-intro-col">
+          <div class="smallfam-teach-intro-label">${escapeAttr(g.intro.whatItIs.label)}</div>
+          <p class="smallfam-teach-intro-text">${escapeAttr(g.intro.whatItIs.text)}</p>
         </div>
-        <div class="smallfam-gypsum-recognition">
-          <div class="smallfam-gypsum-recognition-label">${escapeAttr(g.recognition.label)}</div>
-          <div class="smallfam-gypsum-recognition-items">${cluesHtml}</div>
-        </div>
-        <div class="smallfam-gypsum-key">
-          <div class="smallfam-gypsum-key-label">${escapeAttr(g.keyDistinction.label)}</div>
-          <p class="smallfam-gypsum-key-text">${escapeAttr(g.keyDistinction.text)}</p>
+        <div class="smallfam-teach-intro-col">
+          <div class="smallfam-teach-intro-label">${escapeAttr(g.intro.whyDifferent.label)}</div>
+          <p class="smallfam-teach-intro-text">${escapeAttr(g.intro.whyDifferent.text)}</p>
         </div>
       </div>
-    </details>
-    <div class="smallfam-gypsum-explore">${linkHtml}</div>
+      <div class="smallfam-teach-recognition">
+        <div class="smallfam-teach-recognition-label">${escapeAttr(g.recognition.label)}</div>
+        <div class="smallfam-teach-recognition-items">${cluesHtml}</div>
+      </div>
+      <div class="smallfam-teach-key">
+        <div class="smallfam-teach-key-label">${escapeAttr(g.keyDistinction.label)}</div>
+        <p class="smallfam-teach-key-text">${escapeAttr(g.keyDistinction.text)}</p>
+      </div>
+    </div>
+    <button type="button" class="smallfam-teach-toggle smallfam-explore-link" aria-expanded="false" aria-controls="${escapeAttr(lessonId)}">
+      <span class="smallfam-teach-toggle-text smallfam-teach-toggle-text--open">${escapeAttr(openActionText)}</span>
+      <span class="smallfam-teach-toggle-text smallfam-teach-toggle-text--close">${escapeAttr(closeActionText)}</span>
+    </button>
   </div>`;
 }
-// ── Gypsum stone-card Quick View + Back navigation (2026-08-21) — mirrors
+// ── Teaching-card stone Quick View + Back navigation (2026-08-21, first
+// built for Gypsum, generalized the same day to cover every teaching-card
+// family with one shared listener instead of one per family) — mirrors
 // jumpToSmallFamilyProfile()'s existing origin-patch-then-push pattern
 // (same file, above) rather than inventing a new mechanism: replaceState
 // the CURRENT entry so its URL records where to land (tab=101, Crystal
-// Families, Gypsum's profile marker, which stone card, and whether the
+// Families, which family's profile, which stone card, and whether the
 // disclosure was open), then pushState a new entry before opening the
 // Quick View drawer so Back has that patched entry to pop to. openDetail()
 // itself (app.js) has no history awareness at all — it only toggles the
 // drawer's open classes — so without this push, Back while the drawer is
 // open would leave the Crystal Families page entirely instead of closing
 // the drawer in place.
-function jumpToGypsumStoneDetail(stoneId,cardKey){
+function jumpToTeachingStoneDetail(family,stoneId,cardKey){
   try{
     const originParams=new URLSearchParams(window.location.search);
     originParams.set('tab','101');
     originParams.set('section','families');
-    originParams.set('profile','Gypsum');
-    const disclosure=document.querySelector('.smallfam-gypsum-disclosure');
-    originParams.set('gOpen',(disclosure&&disclosure.open)?'1':'0');
-    originParams.set('gStone',cardKey);
+    originParams.set('profile',family);
+    const toggleBtn=document.querySelector('.smallfam-teach[data-family="'+family+'"] .smallfam-teach-toggle');
+    originParams.set('sfOpen',(toggleBtn&&toggleBtn.getAttribute('aria-expanded')==='true')?'1':'0');
+    originParams.set('sfStone',cardKey);
     const originUrl=window.location.pathname+'?'+originParams.toString()+window.location.hash;
     history.replaceState(history.state,'',originUrl);
-    history.pushState({gypsumStoneDetail:stoneId},'',originUrl);
+    history.pushState({teachStoneDetail:stoneId},'',originUrl);
   }catch(e){}
   if(typeof openDetail==='function')openDetail(stoneId);
 }
-// This listener is additive, not a replacement for the single shared
+// This single listener is additive, not a replacement for the shared
 // popstate handler in family-guide.js (which already restores tab=101 ->
-// Crystal Families -> scrolls to the Gypsum card via the generic
-// .smallfam-name profile lookup). Every bit of DOM work here is deferred
-// one tick (setTimeout 0) specifically so it always runs *after* that
-// handler's synchronous switchTabByName('101')/show101('families') calls
-// have finished rebuilding the secondary-families grid — without the
-// deferral, this listener (registered when 101.js loads, before
-// family-guide.js) would run first and find either a stale DOM or no
-// .smallfam-gypsum-disclosure yet. The early return below makes this a
-// no-op for every popstate that isn't specifically a Gypsum-stone-detail
-// return (i.e. every other tab switch, every other family guide, and
-// every other Smaller-Families "Explore" Back-navigation), so it can never
-// affect Mica/Corundum/Spodumene/Zoisite/Jade or any routed family guide.
+// Crystal Families -> scrolls to the right card via the generic
+// .smallfam-name profile lookup). It is family-scoped generically via the
+// URL's `profile` param plus data-family lookups (see jumpToTeachingStoneDetail
+// above) rather than one listener per family, so Gypsum/Mica/Corundum/
+// Spodumene/Zoisite/Jade all share this same code path and one family can
+// never restore another's card. Every bit of DOM work here is deferred one
+// tick (setTimeout 0) specifically so it always runs *after* family-
+// guide.js's handler's synchronous switchTabByName('101')/show101('families')
+// calls have finished rebuilding the secondary-families grid — without the
+// deferral, this listener (registered when 101.js loads, before family-
+// guide.js) would run first and find either a stale DOM or no
+// .smallfam-teach-toggle yet. The early returns below make this a
+// no-op for every popstate that isn't specifically a teaching-card-stone-
+// detail return (i.e. every other tab switch, every other family guide,
+// and every other Smaller-Families "Explore" Back-navigation).
 window.addEventListener('popstate',function(){
   setTimeout(function(){
     let params;
     try{ params=new URLSearchParams(window.location.search); }catch(e){ return; }
-    if(params.get('tab')!=='101'||params.get('section')!=='families'||params.get('profile')!=='Gypsum')return;
-    const gStone=params.get('gStone');
-    if(!gStone)return;
+    if(params.get('tab')!=='101'||params.get('section')!=='families')return;
+    const family=params.get('profile');
+    if(!family||!C101_TEACHING_CARDS[family])return;
+    const sfStone=params.get('sfStone');
+    if(!sfStone)return;
     if(typeof closeDrawer==='function')closeDrawer();
-    const gOpen=params.get('gOpen')==='1';
-    const restoreGypsumStoneFocus=function(){
-      const disclosure=document.querySelector('.smallfam-gypsum-disclosure');
-      if(disclosure)disclosure.open=gOpen;
-      const card=document.querySelector('.smallfam-gypsum-form[data-stone-key="'+gStone+'"]');
+    const sfOpen=params.get('sfOpen')==='1';
+    const restoreTeachStoneFocus=function(){
+      const card=document.querySelector('.smallfam-teach[data-family="'+family+'"]');
       if(!card)return;
-      try{ card.scrollIntoView({behavior:'auto',block:'center'}); }catch(e){ card.scrollIntoView(); }
-      try{ card.focus({preventScroll:true}); }catch(e){ card.focus(); }
+      const toggleBtn=card.querySelector('.smallfam-teach-toggle');
+      if(toggleBtn)setTeachLessonOpen(toggleBtn,sfOpen);
+      const stoneCard=card.querySelector('.smallfam-teach-specimen-body[data-stone-key="'+sfStone+'"]');
+      if(!stoneCard)return;
+      try{ stoneCard.scrollIntoView({behavior:'auto',block:'center'}); }catch(e){ stoneCard.scrollIntoView(); }
+      try{ stoneCard.focus({preventScroll:true}); }catch(e){ stoneCard.focus(); }
     };
-    requestAnimationFrame(function(){ requestAnimationFrame(restoreGypsumStoneFocus); });
-    [150,350,600,900].forEach(function(ms){ setTimeout(restoreGypsumStoneFocus,ms); });
+    requestAnimationFrame(function(){ requestAnimationFrame(restoreTeachStoneFocus); });
+    [150,350,600,900].forEach(function(ms){ setTimeout(restoreTeachStoneFocus,ms); });
   },0);
 });
 function renderSecondaryFamilies(){
@@ -876,11 +1181,12 @@ function renderSecondaryFamilies(){
   }
   const fact=(label,text)=>`<div class="smallfam-fact"><div class="smallfam-fact-label">${label}</div><p class="smallfam-fact-text">${text}</p></div>`;
   fc.innerHTML=C101_SECONDARY_FAMILIES.map(f=>{
-    // Gypsum renders through its own dedicated markup (see
-    // renderGypsumSecondaryFamily above); every other secondary family
+    // Any family with a C101_TEACHING_CARDS entry (Gypsum, Mica, Corundum,
+    // Spodumene, Zoisite, Jade) renders through the shared teaching-card
+    // markup (see renderTeachingCard above); every other secondary family
     // continues through this shared three-fact/one-photo template below,
     // unchanged.
-    if(f.n==='Gypsum') return renderGypsumSecondaryFamily(f);
+    if(C101_TEACHING_CARDS[f.n]) return renderTeachingCard(f);
     // Real <button type="button"> with a data-jump-family attribute, read by
     // the delegated listener in initFamilies() below — no href="#" fallback
     // that could ever fall through to a default anchor navigation, and no
@@ -918,46 +1224,63 @@ function initFamilies(){
   if(fcSecondary&&fcSecondary.dataset.familyDelegated!=='1'){
     fcSecondary.dataset.familyDelegated='1';
     fcSecondary.addEventListener('click',function(e){
+      // Teaching-card family-lesson toggle (see setTeachLessonOpen/
+      // toggleTeachLesson above) — one shared handler for all six
+      // families, keyed off the button's own aria-expanded/aria-controls
+      // rather than any per-family branching.
+      const toggleBtn=e.target.closest('.smallfam-teach-toggle');
+      if(toggleBtn){
+        e.preventDefault();
+        e.stopPropagation();
+        toggleTeachLesson(toggleBtn);
+        return;
+      }
       const link=e.target.closest('.smallfam-explore-link');
       if(link){
         const fam=link.getAttribute('data-jump-family');
         if(!fam)return;
         e.preventDefault();
         e.stopPropagation();
-        // Gypsum-only cleanup: strip any leftover gStone/gOpen markers a
-        // prior Selenite/Desert Rose Quick View may have left on the URL
-        // (see jumpToGypsumStoneDetail above) before jumpToSmallFamilyProfile
+        // Strip any leftover sfStone/sfOpen markers a prior teaching-card
+        // Quick View may have left on the URL (see
+        // jumpToTeachingStoneDetail above) before jumpToSmallFamilyProfile
         // does its own replaceState below. Without this, a later Back from
-        // the filtered-encyclopedia view could re-trigger the Gypsum-stone
-        // popstate listener using a stale gStone value instead of just
-        // landing generically on the Gypsum card. No-op for every other
-        // family, whose profiles never set these params.
-        if(fam==='Gypsum'){
-          try{
-            const p=new URLSearchParams(window.location.search);
-            if(p.has('gStone')||p.has('gOpen')){
-              p.delete('gStone');p.delete('gOpen');
-              const url=window.location.pathname+'?'+p.toString()+window.location.hash;
-              history.replaceState(history.state,'',url);
-            }
-          }catch(err){}
-        }
+        // the filtered-encyclopedia view could re-trigger the teaching-
+        // card-stone popstate listener using a stale sfStone value instead
+        // of just landing generically on the family card. No-op whenever
+        // these params were never set.
+        try{
+          const p=new URLSearchParams(window.location.search);
+          if(p.has('sfStone')||p.has('sfOpen')){
+            p.delete('sfStone');p.delete('sfOpen');
+            const url=window.location.pathname+'?'+p.toString()+window.location.hash;
+            history.replaceState(history.state,'',url);
+          }
+        }catch(err){}
         jumpToSmallFamilyProfile(fam);
         return;
       }
-      // Gypsum-only: Selenite/Desert Rose stone cards carry data-stone-id +
-      // data-stone-key (see renderGypsumSecondaryFamily above); Satin
-      // Spar's card has neither attribute and is never matched here, so it
-      // stays inert. This same delegated listener is what the cards'
-      // onkeydown="...this.click()" idiom relies on for Enter/Space.
-      const stoneCard=e.target.closest('.smallfam-gypsum-form--interactive');
+      // Teaching-card examples with a legitimate Stone ID (see
+      // C101_TEACHING_CARDS/renderTeachingCard above) render a real
+      // .smallfam-teach-specimen-body--interactive <button> carrying
+      // data-stone-id + data-stone-key; unlinked examples (Satin Spar,
+      // Triphane) render a plain, non-button .smallfam-teach-specimen-body
+      // with neither attribute, so they're never matched here and stay
+      // inert. This button is a sibling of, never nested inside, the
+      // specimen's separate image-enlarge button — a click on the image
+      // never reaches this listener (openEncLightbox stops its own
+      // event's propagation; see the call above), and a click here never
+      // touches the image.
+      const stoneCard=e.target.closest('.smallfam-teach-specimen-body--interactive');
       if(stoneCard){
         const stoneId=stoneCard.getAttribute('data-stone-id');
         const stoneKey=stoneCard.getAttribute('data-stone-key');
-        if(!stoneId||!stoneKey)return;
+        const familyCard=stoneCard.closest('.smallfam-teach[data-family]');
+        const family=familyCard&&familyCard.getAttribute('data-family');
+        if(!stoneId||!stoneKey||!family)return;
         e.preventDefault();
         e.stopPropagation();
-        jumpToGypsumStoneDetail(stoneId,stoneKey);
+        jumpToTeachingStoneDetail(family,stoneId,stoneKey);
       }
     });
   }

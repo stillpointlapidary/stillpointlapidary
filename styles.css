@@ -1421,6 +1421,23 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .c101-sub.c101-tagline{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:16px;line-height:1.4;color:#765f4b;letter-spacing:0.01em}
 .c101-block{margin-bottom:1.75rem}
 .c101-h2{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;letter-spacing:0.01em;text-transform:none;color:var(--ink);margin-bottom:0.75rem}
+/* Shared Families-page section intro (2026-08-21) — used by both the
+   Twelve Families and Smaller Families introductory paragraphs so their
+   typography can never drift apart. Values match the visual treatment of
+   the corrected .fg-section-intro overrides on completed family-guide
+   pages (Jost, normal, 16px, left-aligned), but this is its own
+   Crystals-101-scoped class, not a borrowed .fg-* selector — it does not
+   couple this page to the full family-guide component or its many
+   per-family .fg-section-intro overrides. Replaces the former direct
+   .fg-section-intro usage (legacy centered/italic Georgia default) and
+   the one-off .smallfam-section-intro override that used to correct it
+   for the Smaller Families paragraph only. */
+/* Width correction (2026-08-22) — this paragraph was capped at 640px as
+   a leftover prose-width habit, ending well before the right edge of the
+   family grid below it. Scoped to .c101-section-intro only (the Twelve
+   Families and Smaller Families introductions) — no other prose width in
+   the encyclopedia or family guides uses this class. */
+.c101-section-intro{font-family:'Jost',sans-serif;font-style:normal;font-weight:400;font-size:16px;line-height:1.7;color:var(--ink2);text-align:left;width:100%;max-width:none;inline-size:100%;margin:0 0 1.25rem}
 .c101-body{font-size:14px;line-height:1.8;color:var(--ink2);margin-bottom:1rem}
 .c101-photo-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,220px);gap:1.5rem;align-items:start;margin:0 0 1.15rem}
 .c101-photo-intro--families{margin-bottom:0.95rem}
@@ -1639,74 +1656,153 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
   .smallfam-photo-img{max-width:140px;max-height:140px}
   .smallfam-content{padding:1.15rem 1.2rem 1.25rem}
 }
-/* ── Gypsum expanded teaching card (2026-08-20, approved "Editorial Split"
-   design) — Gypsum-scoped only. Every selector below is prefixed
-   .smallfam-gypsum so nothing here can affect Mica/Corundum/Spodumene/
-   Zoisite/Jade, which keep using the shared .smallfam-card/.smallfam-
-   content, .smallfam-fact, and .smallfam-photo rules above unmodified. The
-   outer .smallfam-gypsum element also carries the base .smallfam-card
-   class (for the shared border/radius/background), but its internal
-   layout is entirely its own — it does not use .smallfam-content or
-   .smallfam-photo at all. */
-.smallfam-gypsum{display:flex;flex-direction:column;align-items:stretch;padding:1.5rem 1.7rem 1.6rem;border:1px solid rgba(42,37,32,0.22)}
-.smallfam-gypsum-header{display:flex;flex-direction:column;align-items:flex-start;padding-bottom:1rem;margin-bottom:1.3rem;border-bottom:0.5px solid var(--border)}
-.smallfam-gypsum-header .smallfam-gypsum-name{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:400;color:var(--ink);margin-bottom:0}
-.smallfam-gypsum-name-rule{width:54px;height:2px;background:var(--accent2);margin-top:10px;border-radius:1px}
-.smallfam-gypsum-intro{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.1rem}
-.smallfam-gypsum-intro-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:6px}
-.smallfam-gypsum-intro-text{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
-.smallfam-gypsum-section-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:0.75rem}
-.smallfam-gypsum-stones{margin-bottom:1.1rem}
-.smallfam-gypsum-forms{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.smallfam-gypsum-form{display:flex;align-items:center;gap:15px;padding:12px;border:0.5px solid var(--border);border-radius:10px;background:var(--white)}
-.smallfam-gypsum-form--interactive{cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s}
-.smallfam-gypsum-form--interactive:hover,.smallfam-gypsum-form--interactive:focus-visible{border-color:var(--accent2);box-shadow:0 2px 10px rgba(42,37,32,0.07)}
-.smallfam-gypsum-form--interactive:focus-visible{outline:1.5px solid var(--accent2);outline-offset:2px}
-.smallfam-gypsum-form-image{flex:0 0 112px;width:112px;height:112px;border-radius:6px;overflow:hidden;background:var(--white);display:flex;align-items:center;justify-content:center}
-.smallfam-gypsum-form-image img{width:100%;height:100%;object-fit:contain;display:block}
-.smallfam-gypsum-form-body{min-width:0}
-.smallfam-gypsum-form-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin-bottom:3px}
-.smallfam-gypsum-form-text{font-size:14px;line-height:1.45;color:var(--ink2);margin:0}
-.smallfam-gypsum-recognition{margin-bottom:1.1rem}
-.smallfam-gypsum-recognition-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:0.75rem}
-.smallfam-gypsum-recognition-items{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.smallfam-gypsum-recognition-item{padding:0 1.25rem;border-left:0.5px solid var(--border)}
-.smallfam-gypsum-recognition-item:first-child{border-left:none;padding-left:0}
-.smallfam-gypsum-recognition-num{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:500;color:#a1750f;line-height:1;margin-bottom:6px}
-.smallfam-gypsum-recognition-title{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink);margin-bottom:4px}
-.smallfam-gypsum-recognition-text{font-size:14px;line-height:1.5;color:var(--ink2);margin:0}
-.smallfam-gypsum-key{margin-bottom:0}
-.smallfam-gypsum-key-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:6px}
-.smallfam-gypsum-key-text{font-family:'Jost',sans-serif;font-style:normal;font-size:15px;font-weight:400;line-height:1.65;color:var(--ink2);margin:0}
-.smallfam-gypsum-disclosure{margin-bottom:0}
-.smallfam-gypsum-summary{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;cursor:pointer;list-style:none;padding:0.7rem 0;user-select:none}
-.smallfam-gypsum-summary::-webkit-details-marker{display:none}
-.smallfam-gypsum-summary:focus-visible{outline:1.5px solid var(--accent2);outline-offset:2px;border-radius:4px}
-.smallfam-gypsum-summary-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
-.smallfam-gypsum-summary-headline{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink)}
-.smallfam-gypsum-summary-subline{font-family:'Jost',sans-serif;font-size:13px;color:var(--ink3)}
-.smallfam-gypsum-summary-action{display:flex;align-items:center;gap:8px;flex-shrink:0;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent2);font-weight:500;white-space:nowrap;transition:color 0.15s}
-.smallfam-gypsum-summary:hover .smallfam-gypsum-summary-action{color:var(--accent)}
-.smallfam-gypsum-summary-caret{flex-shrink:0;font-size:11px;line-height:1;transition:transform 0.2s ease}
-.smallfam-gypsum-disclosure[open]>.smallfam-gypsum-summary .smallfam-gypsum-summary-caret{transform:rotate(180deg)}
-.smallfam-gypsum-disclosure-body{padding-top:0.9rem}
-.smallfam-gypsum-explore{align-self:center;margin-top:0.9rem}
-.smallfam-gypsum-explore .smallfam-explore-link{margin-top:0}
+/* ── Small-family teaching card system (2026-08-20, approved "Editorial
+   Split" design; generalized 2026-08-21 from the original Gypsum-only
+   build to also cover Mica, Corundum, Spodumene, Zoisite, and Jade).
+   Every selector below is prefixed .smallfam-teach so nothing here can
+   affect the plain profile-row secondary families (any future entry that
+   isn't wired into C101_TEACHING_CARDS), which keep using the shared
+   .smallfam-card/.smallfam-content, .smallfam-fact, and .smallfam-photo
+   rules above unmodified. The outer .smallfam-teach element also carries
+   the base .smallfam-card class (for the shared border/radius/
+   background), but its internal layout is entirely its own — it does not
+   use .smallfam-content or .smallfam-photo at all. Visual appearance is
+   identical to the originally approved Gypsum card; only the class names
+   and the addition of the two-example and placeholder-image variants
+   below are new. */
+.smallfam-teach{display:flex;flex-direction:column;align-items:stretch;padding:1.5rem 1.7rem 1.6rem;border:1px solid rgba(42,37,32,0.22)}
+/* Intrinsic header lockup (2026-08-22, approved final structural
+   correction) — a real flex row, not a percentage/fractional grid: family
+   name and the vertical divider are intrinsic (flex:0 0 auto, sized only
+   to their own content — never a proportional column), the headline is
+   the one flexible item so a long headline wraps within the remaining
+   space instead of overflowing. column-gap gives ~22px on both sides of
+   the divider. The divider itself is deliberately more visible than a
+   hairline (1px wide, 36px tall, solid warm gray) — a real dividing mark,
+   not a nearly-invisible border. align-items:center vertically centers
+   all three pieces as one compact identity row; the row is left-anchored
+   by ordinary flex layout (no justify-content needed, no absolute
+   positioning). The invitation line that used to sit under the headline
+   is gone from the markup entirely (see renderTeachingCard in 101.js) —
+   not hidden, not zero-height, removed — so the header's total height is
+   purely the taller of the 26px name / 16px headline, plus its own
+   margin-bottom, never a leftover two-line allowance. No underline, box,
+   background panel, or other ornament on the name itself. */
+.smallfam-teach-header{display:flex;align-items:center;flex-wrap:wrap;column-gap:22px;row-gap:6px;margin-bottom:0.85rem}
+.smallfam-teach-name{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:400;color:var(--ink);margin:0;flex:0 0 auto}
+.smallfam-teach-header-divider{flex:0 0 auto;width:1px;height:36px;background:var(--ink3)}
+.smallfam-teach-hook-headline{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:400;color:var(--ink);margin:0;flex:1 1 auto;min-width:120px}
+/* Family-lesson toggle (2026-08-22) — the single remaining pill in each
+   card (the former separate "Explore <Family>" pill has been removed
+   entirely, see renderTeachingCard in 101.js). Reuses
+   .smallfam-explore-link's own pill visuals (border, radius, height,
+   padding, hover) rather than a second visual system; centered rather
+   than flex-start, with breathing room above it. Still a real <button>
+   with aria-expanded/aria-controls, not a repositioned <summary> — see
+   setTeachLessonOpen/toggleTeachLesson in 101.js. Positioned as the LAST
+   element in the card, after .smallfam-teach-lesson, so margin-top alone
+   (not a value on the lesson) gives consistent spacing whether the
+   preceding sibling is the hidden lesson (collapsed — margin-top then
+   reads as spacing after the strip) or the visible lesson (expanded —
+   spacing after the complete lesson). The Open/Close arrow is now part of
+   the label text itself (↓ / ↑), so there is no separate caret element or
+   rotation to maintain. */
+.smallfam-teach-toggle{align-self:center;margin-top:1.1rem}
+/* Open/Close label swap — CSS-only, driven by the button's own
+   aria-expanded attribute (both spans always render; the inactive one is
+   hidden). No JS text-swap needed. */
+.smallfam-teach-toggle-text--close{display:none}
+.smallfam-teach-toggle[aria-expanded="true"] .smallfam-teach-toggle-text--open{display:none}
+.smallfam-teach-toggle[aria-expanded="true"] .smallfam-teach-toggle-text--close{display:inline}
+.smallfam-teach-intro{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.1rem}
+.smallfam-teach-intro-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:6px}
+.smallfam-teach-intro-text{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
+/* Specimen-row label — belongs to the specimens, sits directly above the
+   strip, not inside the title header. */
+.smallfam-teach-section-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:0.75rem}
+.smallfam-teach-stones{margin-bottom:1.1rem}
+/* Editorial specimen strip — one continuous surface (not a separate box
+   per photo) divided into equal columns by subtle vertical hairlines
+   only; no individual card borders, radii, or shadows. */
+.smallfam-teach-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--stone);border-radius:10px;padding:1.4rem 0}
+/* Two-example families (Corundum, Jade) — center two balanced columns at
+   roughly the same per-column width the three-example families use,
+   rather than stretching two specimens across the full row. */
+.smallfam-teach-strip--count-2{grid-template-columns:repeat(2,1fr);max-width:68%;margin:0 auto}
+.smallfam-teach-specimen{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:0 1.5rem;border-left:0.5px solid var(--border)}
+.smallfam-teach-specimen:first-child{border-left:none}
+/* Image-enlarge control (2026-08-21) — a dedicated button, sibling to the
+   name/caption control below, never nested inside it or vice versa. Reset
+   to a plain, borderless wrapper so only the photo itself reads as
+   interactive; openEncLightbox (defined above) is the same lightbox
+   already used elsewhere on the encyclopedia and family-guide pages. */
+.smallfam-teach-specimen-image-btn{display:block;padding:0;margin:0;border:0;background:none;cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+.smallfam-teach-specimen-image-btn:focus-visible{outline:1.5px solid var(--accent2);outline-offset:4px;border-radius:6px}
+.smallfam-teach-specimen-image-btn:hover .smallfam-teach-specimen-image img,
+.smallfam-teach-specimen-image-btn:focus-visible .smallfam-teach-specimen-image img{transform:scale(1.035)}
+.smallfam-teach-specimen-image{width:140px;height:140px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.smallfam-teach-specimen-image img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;transition:transform 0.2s ease}
+/* Unlinked, unphotographed example (Triphane only) — a restrained
+   typographic color field standing in for a specimen image, integrated
+   into the same unboxed strip. No icon, no invented photograph, nothing
+   implying an approved image exists. */
+.smallfam-teach-specimen-image--placeholder{background:linear-gradient(145deg,#f4ede3 0%,#e6d9c7 100%);border-radius:6px}
+.smallfam-teach-specimen-placeholder-label{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3);text-align:center;padding:0 6px}
+.smallfam-teach-specimen-body{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+/* Quick View control (2026-08-21) — a real <button> only when the example
+   has a legitimate Stone ID (see renderTeachingCard above); reset to look
+   identical to the plain, non-interactive .smallfam-teach-specimen-body
+   text block above, so the strip never turns back into a bordered card at
+   rest. Restrained hover/focus on the name only — no box, no shadow. */
+.smallfam-teach-specimen-body--interactive{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;min-width:0;width:100%;padding:0;margin:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.smallfam-teach-specimen-body--interactive:focus-visible{outline:1.5px solid var(--accent2);outline-offset:6px;border-radius:6px}
+.smallfam-teach-specimen-body--interactive:hover .smallfam-teach-specimen-name,
+.smallfam-teach-specimen-body--interactive:focus-visible .smallfam-teach-specimen-name{color:var(--accent)}
+.smallfam-teach-specimen-name{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:var(--ink);margin:0}
+.smallfam-teach-specimen-caption{font-family:'Jost',sans-serif;font-size:13px;line-height:1.5;color:var(--ink2);margin:0}
+.smallfam-teach-recognition{margin-bottom:1.1rem}
+.smallfam-teach-recognition-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:0.75rem}
+.smallfam-teach-recognition-items{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.smallfam-teach-recognition-item{padding:0 1.25rem;border-left:0.5px solid var(--border)}
+.smallfam-teach-recognition-item:first-child{border-left:none;padding-left:0}
+.smallfam-teach-recognition-num{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:500;color:#a1750f;line-height:1;margin-bottom:6px}
+.smallfam-teach-recognition-title{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:var(--ink);margin-bottom:4px}
+.smallfam-teach-recognition-text{font-size:14px;line-height:1.5;color:var(--ink2);margin:0}
+.smallfam-teach-key{margin-bottom:0}
+.smallfam-teach-key-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:6px}
+.smallfam-teach-key-text{font-family:'Jost',sans-serif;font-style:normal;font-size:15px;font-weight:400;line-height:1.65;color:var(--ink2);margin:0}
+/* Lesson region (2026-08-21, position revised 2026-08-22) — replaces the
+   former <details>/.smallfam-teach-disclosure-body. Hidden by default via
+   the `hidden` attribute (set/cleared by setTeachLessonOpen in 101.js),
+   sitting directly after the specimen strip and before the single
+   disclosure button (see .smallfam-teach-toggle above) — no separate
+   "Explore <Family>" pill exists any more, so nothing else competes for
+   space here in either state. */
 @media(max-width:900px){
-  .smallfam-gypsum-forms{grid-template-columns:1fr}
-  .smallfam-gypsum-recognition-items{grid-template-columns:1fr;gap:0.9rem}
-  .smallfam-gypsum-recognition-item{border-left:none;padding-left:0;border-top:0.5px solid var(--border);padding-top:0.9rem}
-  .smallfam-gypsum-recognition-item:first-child{border-top:none;padding-top:0}
+  /* Collapsed top on mobile — no tiny three-across columns. Each specimen
+     becomes a spacious full-width row (image left, name + caption right)
+     with a subtle horizontal hairline between rows instead of the
+     desktop's vertical ones; no individual rounded cards either way. */
+  .smallfam-teach-strip{grid-template-columns:1fr;padding:0.2rem 0}
+  .smallfam-teach-strip--count-2{max-width:none;margin:0}
+  .smallfam-teach-specimen{flex-direction:row;align-items:center;text-align:left;gap:16px;padding:0.9rem 0;border-left:none;border-top:0.5px solid var(--border)}
+  .smallfam-teach-specimen:first-child{border-top:none;padding-top:0}
+  .smallfam-teach-specimen-image{width:88px;height:88px;flex:0 0 88px}
+  .smallfam-teach-specimen-body,
+  .smallfam-teach-specimen-body--interactive{align-items:flex-start;text-align:left;flex:1;gap:4px}
+  .smallfam-teach-recognition-items{grid-template-columns:1fr;gap:0.9rem}
+  .smallfam-teach-recognition-item{border-left:none;padding-left:0;border-top:0.5px solid var(--border);padding-top:0.9rem}
+  .smallfam-teach-recognition-item:first-child{border-top:none;padding-top:0}
 }
 @media(max-width:600px){
-  .smallfam-gypsum{padding:1.25rem 1.2rem 1.35rem}
-  .smallfam-gypsum-intro{grid-template-columns:1fr;gap:1.2rem}
-  .smallfam-gypsum-summary{flex-direction:column;align-items:flex-start;gap:0.5rem}
+  .smallfam-teach{padding:1.25rem 1.2rem 1.35rem}
+  .smallfam-teach-intro{grid-template-columns:1fr;gap:1.2rem}
+  /* Editorial header stacks naturally on mobile: name above headline, no
+     vertical divider (it only makes sense as a side-by-side separator). */
+  .smallfam-teach-header{flex-direction:column;align-items:flex-start;row-gap:4px}
+  .smallfam-teach-header-divider{display:none}
+  .smallfam-teach-hook-headline{min-width:0}
 }
-/* Smaller Families intro — scoped override only for this one paragraph.
-   Base .fg-section-intro is centered with a 720px max-width and is shared
-   by many family-guide sections elsewhere; do not change the base rule. */
-.fg-section-intro.smallfam-section-intro{text-align:left;max-width:none;margin:0.35rem 0 1.6rem}
 /* Closing line beneath the Smaller Families cards — restrained, no card or
    banner treatment, full primary content width (no artificial max-width).
    Two explicit, independently-tuned gaps per Christie's spacing correction
