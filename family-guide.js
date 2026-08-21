@@ -2874,6 +2874,368 @@ function familyGuideBerylHtml(guide){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   ZEOLITES FAMILY GUIDE — first implementation pass. Reuses the shared
+   system exactly (familyGuideHeroHtml/hero.imageUrl for the hero,
+   .fg-prose-block/.fg-prose/.fg-prose-emphasis for the plain-text intro,
+   .fg-card-grid--garnet-roster for the five-member roster, and
+   familyGuideClosingHtml for the final reflective line + Return pill).
+   Five section types are genuinely new (Zeolites-scoped only, prefixed
+   .fg-zeolites-*): the four-stage cavity sequence (a single non-generative
+   crop/position of assets/family-guide-zeolites/zeolites-cavity-sequence.png,
+   never regenerated or edited), the compact "Built with Room Inside"
+   text-led connection thread, the horizontal crystal-habit comparison rows
+   (deliberately distinct in layout from the roster's card grid), the
+   two-pathway "Same Cavity, Different Family" comparison (solid-bordered
+   true-Zeolite column vs. dashed-bordered pocket-companion column, so the
+   distinction isn't color-only), and the modest image-led collection note
+   (built on the existing .fg-explain-grid component). Mesolite has no
+   Stone ID yet, so its roster card and habit row both render through the
+   same unlinked/inert branch already established for a no-stoneId member —
+   no role, no tabindex, no click handler, no invented Stone ID — with a
+   visible "PENDING ADDITION" text status. Apophyllite and Okenite are never
+   given a stoneId-linked roster card anywhere on this page; they appear
+   only as pocket companions in "Same Cavity, Different Family". Nothing
+   here touches a Calcite/Quartz/Fluorite/Feldspar/Chalcedony/Agate/Jasper/
+   Garnet/Tourmaline/Obsidian/Copper/Beryl selector, function, or data
+   field. ══ */
+
+/* ── 1. Meet the Zeolite Family — reuses fgTourmalineFamilyCardHtml's
+   linked/unlinked card anatomy and the shared .fg-card-grid--garnet-roster
+   flex-wrap grid (the same component Beryl/Tourmaline/Garnet use for a
+   five-member roster, wrapping 3-up then a centered 2-up at this card's
+   flex-basis). The one addition, member.statusLabel, renders a small text
+   pill for Mesolite's "PENDING ADDITION" state; every other member leaves
+   it unset, so their cards are unaffected. ── */
+function fgZeolitesFamilyCardHtml(mem){
+  if(!mem) return '';
+  const crystal = mem.stoneId ? fgCrystal(mem.stoneId) : null;
+  const src = mem.image || (crystal && typeof firstEncyclopediaPhoto==='function' ? firstEncyclopediaPhoto(crystal) : '');
+  const imgHtml = src
+    ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(mem.imageAlt||mem.name||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const clickable = !!crystal;
+  const mediaTitle = mem.statusLabel
+    ? `${mem.name||''} — ${mem.statusLabel}, not yet a linked encyclopedia entry`
+    : `${mem.name||''} — family-guide teaching card, not a linked encyclopedia entry`;
+  const mediaHtml = clickable
+    ? `<button type="button" class="fg-mineralcard-media" onclick="openDetail('${escapeAttr(crystal.i)}')" title="Open ${escapeAttr(mem.name||crystal.n)} in Quick View">${imgHtml}</button>`
+    : `<div class="fg-mineralcard-media" title="${escapeAttr(mediaTitle)}">${imgHtml}</div>`;
+  const qvHtml = clickable
+    ? `<button type="button" class="fg-stonecard-qv" onclick="openDetail('${escapeAttr(crystal.i)}')">Quick View</button>`
+    : '';
+  const statusHtml = mem.statusLabel ? `<span class="fg-zeolites-status-pill">${escapeAttr(mem.statusLabel)}</span>` : '';
+  return `<div class="fg-mineralcard${clickable?'':' fg-mineralcard--unlinked'}">
+    ${mediaHtml}
+    <div class="fg-mineralcard-body">
+      <div class="fg-mineralcard-header">
+        <div class="fg-stonecard-name">${escapeAttr(mem.name||'')}</div>
+        ${qvHtml}${statusHtml}
+      </div>
+      <p class="fg-mineralcard-text">${escapeAttr(mem.identSentence||'')}</p>
+    </div>
+  </div>`;
+}
+function familyGuideMeetZeoliteFamilyHtml(guide){
+  const m = guide.meetZeoliteFamily;
+  if(!m) return '';
+  const cards = (m.members||[]).map(fgZeolitesFamilyCardHtml).filter(Boolean).join('');
+  return `<section class="fg-section" id="fg-meet-zeolite-family">
+    <h2 class="fg-h2">${escapeAttr(m.title||'Meet the Zeolite Family')}</h2>
+    ${m.intro?`<p class="fg-lead">${escapeAttr(m.intro)}</p>`:''}
+    <div class="fg-card-grid fg-card-grid--garnet-roster">${cards}</div>
+  </section>`;
+}
+
+/* ── 2. A Mineral Family Built with Room Inside — plain left-aligned
+   editorial introduction, reusing the same .fg-prose-block/.fg-prose/
+   .fg-prose-emphasis pattern already established for What Beryl Is and
+   What Tourmaline Actually Is. Not a boxed teaching module. ── */
+function familyGuideZeolitesWhatItIsHtml(guide){
+  const w = guide.whatZeolitesAre;
+  if(!w) return '';
+  const paras = (w.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const emphasis = w.emphasisLine ? `<p class="fg-prose-emphasis">${escapeAttr(w.emphasisLine)}</p>` : '';
+  return `<section class="fg-section" id="fg-zeolites-what-it-is">
+    <h2 class="fg-h2">${escapeAttr(w.title||'A Mineral Family Built with Room Inside')}</h2>
+    <div class="fg-prose-block">${paras}${emphasis}</div>
+  </section>`;
+}
+
+/* ── 3. How a Volcanic Cavity Becomes a Crystal Garden — four equal
+   image-led stages cropped from the single approved teaching illustration
+   (assets/family-guide-zeolites/zeolites-cavity-sequence.png, 1905×825,
+   four panels). Each stage renders the SAME full <img>, cropped purely via
+   CSS (position:absolute + percentage width/left inside an
+   overflow:hidden box, the .fg-zeolites-stage-media--1..4 modifiers in
+   styles.css) — the source pixels are never edited, regenerated, or
+   recolored. Every stage gets its own descriptive alt text (the visible
+   change at that stage), not a repeated generic caption. Stage number and
+   title render as ordinary text beside the image, so nothing here depends
+   on text baked into the artwork. ── */
+function familyGuideZeolitesSequenceHtml(guide){
+  const s = guide.cavitySequence;
+  if(!s) return '';
+  const stages = (s.stages||[]).map((st,i)=>`<div class="fg-zeolites-stage">
+    <div class="fg-zeolites-stage-media fg-zeolites-stage-media--${i+1}"><img src="assets/family-guide-zeolites/zeolites-cavity-sequence.png" alt="${escapeAttr(st.alt||'')}" loading="lazy"></div>
+    <div class="fg-zeolites-stage-num">${escapeAttr(st.number||'')} &middot; ${escapeAttr(st.title||'')}</div>
+    <p class="fg-zeolites-stage-text">${escapeAttr(st.text||'')}</p>
+  </div>`).join('');
+  return `<section class="fg-section" id="fg-zeolites-sequence">
+    <h2 class="fg-h2">${escapeAttr(s.title||'How a Volcanic Cavity Becomes a Crystal Garden')}</h2>
+    ${s.intro?`<p class="fg-lead">${escapeAttr(s.intro)}</p>`:''}
+    <div class="fg-zeolites-sequence">${stages}</div>
+  </section>`;
+}
+
+/* ── 4. Built with Room Inside — approved open-framework illustration
+   (assets/family-guide-zeolites/zeolites-open-framework.webp, a single
+   existing 3:2 teaching graphic, never cropped/stretched/backgrounded)
+   directly under the section intro, followed by the three-panel
+   Structure/Behavior/Result module, an italic inline clue, and one
+   closing paragraph. ── */
+function familyGuideZeolitesThreadHtml(guide){
+  const t = guide.builtWithRoom;
+  if(!t) return '';
+  const items = (t.links||[]).map(l=>`<div class="fg-zeolites-thread-item">
+    <div class="fg-zeolites-thread-label">${escapeAttr(l.label||'')}</div>
+    <div class="fg-zeolites-thread-title">${escapeAttr(l.title||'')}</div>
+    <p class="fg-zeolites-thread-body">${escapeAttr(l.body||'')}</p>
+  </div>`).join('');
+  const illustrationHtml = `<div class="fg-zeolites-framework-illustration">
+    <img src="assets/family-guide-zeolites/zeolites-open-framework.webp" alt="Illustration of a zeolite specimen with a magnified view of its open internal framework, showing water and ions occupying connected spaces." loading="lazy">
+  </div>`;
+  return `<section class="fg-section" id="fg-zeolites-thread">
+    <h2 class="fg-h2">${escapeAttr(t.title||'Built with Room Inside')}</h2>
+    ${t.intro?`<p class="fg-lead">${escapeAttr(t.intro)}</p>`:''}
+    ${illustrationHtml}
+    <div class="fg-zeolites-thread">${items}</div>
+    ${t.clue?`<p class="fg-zeolites-thread-clue">${escapeAttr(t.clue)}</p>`:''}
+    ${t.closing?`<p class="fg-prose fg-zeolites-thread-closing">${escapeAttr(t.closing)}</p>`:''}
+  </section>`;
+}
+
+/* ── 5. One Family, Many Crystal Habits — horizontal comparison rows,
+   deliberately a different layout from Section 1's card grid (full-width
+   rows with a top divider, not bordered cards). Stilbite/Heulandite/
+   Thomsonite/Natrolite resolve their photo through fgCrystal/
+   firstEncyclopediaPhoto exactly like the roster cards; Mesolite supplies
+   row.image directly (no stoneId, so still no Quick View/catalog link).
+   2026-08-21 fifth correction pass: every photo (including Mesolite's,
+   which stays otherwise unlinked/inert) is now click-to-enlarge via
+   openPhotoLightbox — the same single-image lightbox app.js already uses
+   elsewhere on the encyclopedia pages (#photo-lightbox), not a new modal.
+   The well is a real <button> (native Enter/Space activation, no manual
+   keydown handling needed) with an explicit "Enlarge <name> specimen
+   image" aria-label; only the photo is interactive, the row's text stays
+   plain. ── */
+function fgZeolitesHabitRowHtml(row){
+  if(!row) return '';
+  const crystal = row.stoneId ? fgCrystal(row.stoneId) : null;
+  const src = row.image || (crystal && typeof firstEncyclopediaPhoto==='function' ? firstEncyclopediaPhoto(crystal) : '');
+  const imgHtml = src
+    ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(row.alt||row.name||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  const mediaHtml = src
+    ? `<button type="button" class="fg-zeolites-habit-media" onclick="openPhotoLightbox('${escapeAttr(src)}','${escapeAttr(row.name||'')}')" aria-label="Enlarge ${escapeAttr(row.name||'specimen')} specimen image">${imgHtml}</button>`
+    : `<div class="fg-zeolites-habit-media">${imgHtml}</div>`;
+  return `<div class="fg-zeolites-habit-row">
+    ${mediaHtml}
+    <div class="fg-zeolites-habit-body">
+      <div class="fg-zeolites-habit-heading">${escapeAttr(row.number||'')} ${escapeAttr(row.name||'')}</div>
+      <div class="fg-zeolites-habit-line"><span class="fg-zeolites-habit-label">Common habit:</span> ${escapeAttr(row.habit||'')}</div>
+      <div class="fg-zeolites-habit-line"><span class="fg-zeolites-habit-label">What to notice:</span> ${escapeAttr(row.notice||'')}</div>
+    </div>
+  </div>`;
+}
+function familyGuideZeolitesHabitsHtml(guide){
+  const h = guide.habitRows;
+  if(!h) return '';
+  const rows = (h.rows||[]).map(fgZeolitesHabitRowHtml).join('');
+  return `<section class="fg-section" id="fg-zeolites-habits">
+    <h2 class="fg-h2">${escapeAttr(h.title||'One Family, Many Crystal Habits')}</h2>
+    ${h.intro?`<p class="fg-lead">${escapeAttr(h.intro)}</p>`:''}
+    <div class="fg-zeolites-habit-rows">${rows}</div>
+  </section>`;
+}
+
+/* ── 6. Same Cavity, Different Family — an image-led shared-setting block
+   (reusing the mature-pocket crop from Section 3's sequence image via the
+   same .fg-zeolites-stage-media--4 crop modifier, non-generative) followed
+   by two visually distinct pathway columns: a solid-bordered "Belongs to
+   the Zeolite Group" column and a dashed-bordered, tinted "Common Pocket
+   Companions" column — the distinction is structural (border style +
+   background), not color-only, matching the accessibility requirement.
+   Apophyllite and Okenite never receive a stoneId lookup here, so they can
+   never render as a linked/roster-style card. ── */
+function familyGuideZeolitesSameCavityHtml(guide){
+  const s = guide.sameCavity;
+  if(!s) return '';
+  const shared = s.shared||{};
+  const pathwayHtml = (pw, mod) => {
+    if(!pw) return '';
+    const items = (pw.items||[]).map(it=>`<div class="fg-zeolites-pathway-item">
+      <div class="fg-zeolites-pathway-name">${escapeAttr(it.name||'')}</div>
+      <p class="fg-zeolites-pathway-text">${escapeAttr(it.text||'')}</p>
+    </div>`).join('');
+    return `<div class="fg-zeolites-pathway fg-zeolites-pathway--${mod}">
+      <div class="fg-zeolites-pathway-label">${escapeAttr(pw.label||'')}</div>
+      ${items}
+    </div>`;
+  };
+  // Recomposed (2026-08-21 fourth correction pass) into one coherent
+  // two-column module: image left, and the Shared Setting copy + both
+  // comparison panels together in the right column (was: image+copy in
+  // one row, then the panels detached as a separate full-width row
+  // below). Mobile stacking order is preserved by plain DOM source order
+  // — image, then copy, then Belongs-to-Zeolite-Group, then Common-
+  // Pocket-Companions — with no flex/grid order overrides needed.
+  const moduleHtml = `<div class="fg-zeolites-samecavity-grid">
+    <div class="fg-zeolites-pocket-media fg-zeolites-stage-media fg-zeolites-stage-media--4"><img src="assets/family-guide-zeolites/zeolites-cavity-sequence.png" alt="${escapeAttr(shared.imageAlt||'')}" loading="lazy"></div>
+    <div class="fg-zeolites-samecavity-right">
+      <div class="fg-zeolites-pocket-copy">
+        <div class="fg-zeolites-thread-label">${escapeAttr(shared.label||'')}</div>
+        <div class="fg-zeolites-thread-title">${escapeAttr(shared.title||'')}</div>
+        <p class="fg-zeolites-thread-body">${escapeAttr(shared.text||'')}</p>
+      </div>
+      <div class="fg-zeolites-pathways">${pathwayHtml(s.pathwayZeolite,'zeolite')}${pathwayHtml(s.pathwayCompanion,'companion')}</div>
+    </div>
+  </div>`;
+  return `<section class="fg-section" id="fg-zeolites-same-cavity">
+    <h2 class="fg-h2">${escapeAttr(s.title||'Same Cavity, Different Family')}</h2>
+    ${s.intro?`<p class="fg-lead">${escapeAttr(s.intro)}</p>`:''}
+    ${moduleHtml}
+    ${s.clue?`<p class="fg-zeolites-thread-clue">${escapeAttr(s.clue)}</p>`:''}
+  </section>`;
+}
+
+/* ── 7. In Your Collection — modest image-led handling note built on the
+   existing .fg-explain-grid/.fg-explain-copy/.fg-explain-media component
+   (already used by Beryl's Built in Six Sides), not the larger Care for
+   It/Remember This/Watch For grid the other guides use — quiet and
+   practical, no safety-alert styling or warning color. Uses the credited
+   Natrolite photo, which clearly shows the fine, vulnerable needle sprays
+   the copy describes. ── */
+function familyGuideZeolitesCollectionHtml(guide){
+  const c = guide.inYourCollection;
+  if(!c) return '';
+  const paras = (c.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  const emphasis = c.emphasisLine ? `<p class="fg-prose-emphasis">${escapeAttr(c.emphasisLine)}</p>` : '';
+  const mediaHtml = c.image
+    ? `<img src="${escapeAttr(SUPABASE_ENC+c.image)}" alt="${escapeAttr(c.imageAlt||'')}" loading="lazy">`
+    : `<div class="fg-stonecard-noimg fg-stonecard-noimg--labeled"><span>Photo pending</span></div>`;
+  // Caption (2026-08-21 fifth correction pass) — a plain specimen name,
+  // no number or descriptive sentence, styled to match the family-card
+  // mineral-name treatment (.fg-stonecard-name, seen on Stilbite/
+  // Heulandite/Thomsonite) via .fg-zeolites-collection-caption, not the
+  // plainer generic .fg-hero-media-legend used before.
+  const captionHtml = c.imageCaption ? `<p class="fg-zeolites-collection-caption">${escapeAttr(c.imageCaption)}</p>` : '';
+  return `<section class="fg-section" id="fg-zeolites-collection">
+    <h2 class="fg-h2">${escapeAttr(c.title||'In Your Collection')}</h2>
+    <div class="fg-explain-grid fg-zeolites-collection-grid">
+      <div class="fg-explain-copy">${paras}${emphasis}</div>
+      <div class="fg-zeolites-collection-media-wrap">
+        <div class="fg-explain-media fg-zeolites-collection-media">${mediaHtml}</div>
+        ${captionHtml}
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ── 8. Closing essay — plain titled prose (h2 + two paragraphs), reusing
+   .fg-prose-block/.fg-prose exactly like Section 2. The final italic
+   takeaway line and the Return to Crystal Families pill are NOT built
+   here — they come from the shared familyGuideClosingHtml (guide.
+   closingCallout + guide.closingButton), the exact same component every
+   other guide's closing pill uses, called immediately after this
+   function in the assembly below. ── */
+function familyGuideZeolitesClosingEssayHtml(guide){
+  const c = guide.closingEssay;
+  if(!c) return '';
+  const paras = (c.paragraphs||[]).map(p=>`<p class="fg-prose">${escapeAttr(p)}</p>`).join('');
+  return `<section class="fg-section" id="fg-zeolites-closing-essay">
+    <h2 class="fg-h2">${escapeAttr(c.title||'')}</h2>
+    <div class="fg-prose-block">${paras}</div>
+  </section>`;
+}
+
+/* ── Zeolites guide assembly — approved section order: Hero, A Mineral
+   Family Built with Room Inside, Meet the Zeolite Family, How a Volcanic
+   Cavity Becomes a Crystal Garden, Built with Room Inside, One Family Many
+   Crystal Habits, Same Cavity Different Family, In Your Collection,
+   closing essay, then the shared unboxed closing pill (no in-page
+   familyGuideImageCreditsHtml call — every image here is either existing,
+   already-credited encyclopedia photography or the internal, uncredited
+   Still Point teaching illustration; no new third-party photography was
+   sourced for this guide). ── */
+/* ── Zeolites-only hero (2026-08-21 second correction pass) — the shared
+   familyGuideHeroHtml/fgHeroMediaHtml resolve a photo collage only from
+   stoneId-linked roster members (guide.hero.mediaStoneIds), and Mesolite
+   has no stoneId yet. Rather than change that shared resolution logic
+   (which every other guide's hero also depends on), this dedicated
+   function reuses familyGuideHeroHtml's exact copy-column markup
+   (eyebrow/title/signatureLine/condensedIntro/promptLeadIn+question,
+   same classes, same fields) verbatim, and builds its own restrained 2x2
+   photo grid directly from the four roster photos already used
+   elsewhere in this guide: Stilbite/Heulandite/Thomsonite resolved
+   through fgCrystal/firstEncyclopediaPhoto exactly like every other
+   guide's hero collage, and Mesolite's own existing encyclopedia URL
+   (the same one already used in meetZeoliteFamily/habitRows) used as-is.
+   No new photography, no shared function touched, so every other
+   guide's hero is completely unaffected. Mesolite stays unlinked here
+   exactly as everywhere else on this page — a plain photo in a hero
+   collage, never a Quick View affordance. ── */
+function familyGuideZeolitesHeroHtml(guide){
+  const hero = guide.hero||{};
+  const collageSpecs = [
+    {stoneId:'C-0346', alt:'Stilbite specimen showing a sheaf-like radiating fan of bladed crystals'},
+    {stoneId:'C-0358', alt:'Heulandite specimen showing pale tabular crystals with broad, flatter faces'},
+    {stoneId:'C-0176', alt:'Thomsonite specimen showing a rounded aggregate with a fine radiating surface texture'},
+    {url:'https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/mesolite.webp', alt:'Mesolite specimen, a pale crystal formation not yet added to the encyclopedia catalog'}
+  ];
+  const imgs = collageSpecs.map(spec=>{
+    let src = spec.url || '';
+    if(!src && spec.stoneId){
+      const c = fgCrystal(spec.stoneId);
+      src = (c && typeof firstEncyclopediaPhoto==='function') ? firstEncyclopediaPhoto(c) : '';
+    }
+    return src ? `<img src="${escapeAttr(src)}" alt="${escapeAttr(spec.alt)}" loading="lazy">` : '';
+  }).filter(Boolean).join('');
+  return `<section class="fg-hero" id="fg-hero">
+    <div class="fg-hero-grid">
+      <div class="fg-hero-copy">
+        ${hero.eyebrow?`<div class="fg-eyebrow">${escapeAttr(hero.eyebrow)}</div>`:''}
+        <h1 class="fg-hero-title">${escapeAttr(hero.title||guide.displayName)}</h1>
+        ${hero.signatureLine?`<p class="fg-hero-sub">${escapeAttr(hero.signatureLine)}</p>`:''}
+        ${hero.condensedIntro?`<p class="fg-hero-body">${escapeAttr(hero.condensedIntro)}</p>`:''}
+        ${hero.question?`<div class="fg-hero-prompt">
+          ${hero.promptLeadIn?`<div class="fg-hero-prompt-lead">${escapeAttr(hero.promptLeadIn)}</div>`:''}
+          <div class="fg-hero-question">${escapeAttr(hero.question)}</div>
+          ${hero.supportingLine?`<div class="fg-hero-supporting">${escapeAttr(hero.supportingLine)}</div>`:''}
+        </div>`:''}
+      </div>
+      <div class="fg-hero-media">
+        <div class="fg-hero-media-grid">${imgs}</div>
+      </div>
+    </div>
+  </section>`;
+}
+function familyGuideZeolitesHtml(guide){
+  return `
+  <div class="fg-guide" data-family-slug="${escapeAttr(guide.slug)}">
+    ${familyGuideZeolitesHeroHtml(guide)}
+    ${familyGuideZeolitesWhatItIsHtml(guide)}
+    ${familyGuideMeetZeoliteFamilyHtml(guide)}
+    ${familyGuideZeolitesSequenceHtml(guide)}
+    ${familyGuideZeolitesThreadHtml(guide)}
+    ${familyGuideZeolitesHabitsHtml(guide)}
+    ${familyGuideZeolitesSameCavityHtml(guide)}
+    ${familyGuideZeolitesCollectionHtml(guide)}
+    ${familyGuideZeolitesClosingEssayHtml(guide)}
+    ${familyGuideClosingHtml(guide)}
+  </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    OBSIDIAN FAMILY GUIDE — visual-correction pass (2026-08-20). Christie's
    approved reference for section-heading/body-copy scale, content width,
    left-aligned editorial flow, and spacing is the completed Tourmaline
@@ -3421,6 +3783,7 @@ function familyGuideHtml(guide){
   if(guide.slug==='copper') return familyGuideCopperHtml(guide);
   if(guide.slug==='quartz') return familyGuideQuartzHtml(guide);
   if(guide.slug==='beryl') return familyGuideBerylHtml(guide);
+  if(guide.slug==='zeolites') return familyGuideZeolitesHtml(guide);
   if(guide.slug!=='calcite') return familyGuideGenericHtml(guide);
   // Note (2026-07-31, Calcite normalization pass): the in-page "Image
   // credits" <details> disclosure (familyGuideImageCreditsHtml) is

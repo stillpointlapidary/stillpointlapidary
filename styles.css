@@ -5995,3 +5995,233 @@ body.sotd-sched-open{overflow:hidden}
   #s101-grids .cg-figure img{max-height:240px}
 }
 .fg-guide[data-family-slug="quartz"] .fg-closing-line{margin-bottom:32px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ZEOLITES FAMILY GUIDE — first implementation pass. Every selector below
+   is prefixed .fg-zeolites so nothing here can affect any other guide's
+   shared components. Reuses .fg-card-grid--garnet-roster/.fg-mineralcard,
+   .fg-prose-block/.fg-prose/.fg-prose-emphasis, and .fg-explain-grid
+   as-is (no rule below redefines those base classes); only genuinely new
+   Zeolites-only layouts get new selectors here. Closing pill is unboxed
+   per the same pattern already established for Beryl/Tourmaline/Obsidian/
+   Calcite/Garnet/Feldspar/Agate/Fluorite. ══ */
+.fg-guide[data-family-slug="zeolites"] .fg-closing{background:none;border:none;border-radius:0;box-shadow:none;padding:0;margin-top:0;margin-bottom:2.5rem}
+/* Hero photo collage (2026-08-21 second correction pass) — a restrained
+   2x2 collage of four existing roster photos (Stilbite/Heulandite/
+   Thomsonite/Mesolite), built by the dedicated familyGuideZeolitesHeroHtml
+   function. This is a genuine curated spread, not a "coming soon"
+   placeholder, so the base collage label stays hidden — same established
+   pattern already used by Jasper/Agate/Obsidian once their hero
+   photography was finalized. The base .fg-hero-media-grid/.fg-hero-media
+   2x2 cover-fit treatment is used completely unmodified, matching every
+   other full family guide's hero exactly. */
+.fg-guide[data-family-slug="zeolites"] .fg-hero-media-label{display:none}
+
+/* Frame/typography normalization (2026-08-21 visual-correction pass) —
+   Christie's flagged defect: the two .fg-prose-block sections (What
+   Makes a Zeolite?, and the closing essay) were centered via the shared
+   .fg-prose-block's own max-width:78ch;margin:0 auto, which insets them
+   toward the page center while every other section (Meet the Family,
+   the cavity sequence, the habit rows, etc.) runs to the same shared
+   left boundary as the section heading above it. Same fix already
+   established for Tourmaline/Obsidian: drop the centering max-width so
+   prose runs the same left-aligned width as the rest of the guide, bump
+   .fg-prose to the guide's normal 16px body-copy scale (was 15px), and
+   restore normal breathing room under a heading that's followed directly
+   by prose rather than a .fg-lead (whose own margin-top already covers
+   it). Scoped to zeolites only. */
+.fg-guide[data-family-slug="zeolites"] .fg-prose-block{max-width:none;margin:0}
+.fg-guide[data-family-slug="zeolites"] .fg-prose{text-align:left;font-size:16px}
+.fg-guide[data-family-slug="zeolites"] .fg-h2 + *{margin-top:1.125rem}
+/* Section-introduction width fix (2026-08-21 third correction pass) — the
+   first pass only widened .fg-prose-block (used by the two plain-prose
+   sections); it missed .fg-lead, the shared component every OTHER Zeolites
+   section intro actually uses (Meet the Family, the cavity sequence, Built
+   with Room Inside, the habit rows, Same Cavity). .fg-lead's own base rule
+   caps it at max-width:58ch, which is why those introductions still read
+   as a narrow, roughly-half-width column under a full-width heading. Same
+   exact fix already established for Obsidian/Tourmaline/Beryl/Copper:
+   drop the cap so the paragraph runs the full shared content frame. */
+.fg-guide[data-family-slug="zeolites"] .fg-lead,
+.fg-guide[data-family-slug="zeolites"] .fg-lead--wide{max-width:none;margin-left:0;margin-right:0;font-size:16px}
+
+/* Meet the Zeolite Family — Mesolite's "PENDING ADDITION" status pill.
+   Plain text pill, not color-only signaling: the word "PENDING ADDITION"
+   itself carries the meaning. Rendered inline in the name/Quick-View row
+   (fgZeolitesFamilyCardHtml) rather than as its own block between the
+   header and the description — it previously sat there as a block-level
+   sibling, which stretched full-width under the header's flex column
+   (.fg-mineralcard-body's flex-direction:column/align-items:stretch) and
+   pushed the description down, making Mesolite's card taller than its
+   four siblings. */
+.fg-zeolites-status-pill{display:inline-block;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2r);background:var(--stone2);border:0.5px solid var(--border2);border-radius:20px;padding:3px 10px;margin:0}
+
+/* How a Volcanic Cavity Becomes a Crystal Garden — four equal stages, one
+   shared source image (assets/family-guide-zeolites/zeolites-cavity-
+   sequence.png, 1905×825, four ~465px-wide panels with rows 111–716
+   shared across all four). Each .fg-zeolites-stage-media--N modifier crops
+   a different panel via percentage-based position/width on the same full
+   <img> — a pure CSS crop, not a separate cropped file, so the source
+   artwork is never edited. The percentages were derived directly from the
+   source image's panel geometry (measured programmatically), not guessed. */
+/* Moderate editorial scale (2026-08-21 third correction pass) — reference:
+   Obsidian's How Lava Becomes Obsidian process module, which caps its own
+   three-step row at max-width:82%, centered, rather than filling the full
+   guide frame. The cavity sequence gets the same restrained treatment:
+   capped width + proportionally smaller images/gaps/caption type so four
+   stages read as a moderate teaching module, not a page-dominating strip.
+   Panel crop percentages below are unchanged (still measured from the
+   source artwork's actual geometry), since shrinking the container scales
+   every panel uniformly and does not affect the crop math. */
+/* Caption scale (2026-08-21 fourth correction pass) — both caption levels
+   raised exactly 1px (10.5→11.5 / 13.5→14.5) at the user's explicit
+   request; images stay at their approved size (only the container's own
+   dimensions govern image size, untouched here). Gap widened 14→20px for
+   clearer column separation, and stage-num gets a touch more bottom
+   margin plus an explicit line-height so the longest label ("04 · A
+   Crystal Garden Develops"), which wraps to two lines at this width/size,
+   has clean clearance above the caption paragraph instead of crowding it. */
+.fg-zeolites-sequence{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:80%;margin:0 auto}
+.fg-zeolites-stage{display:flex;flex-direction:column}
+.fg-zeolites-stage-media{position:relative;width:100%;aspect-ratio:465/605;overflow:hidden;border-radius:10px;background:var(--stone2);border:0.5px solid var(--border)}
+.fg-zeolites-stage-media img{position:absolute;top:-18.36%;left:0;width:409.68%;max-width:none;height:auto;display:block}
+.fg-zeolites-stage-media--1 img{left:-2.15%}
+.fg-zeolites-stage-media--2 img{left:-103.23%}
+.fg-zeolites-stage-media--3 img{left:-205.38%}
+.fg-zeolites-stage-media--4 img{left:-307.53%}
+.fg-zeolites-stage-num{font-family:'Jost',sans-serif;font-size:11.5px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-top:0.7rem;margin-bottom:0.4rem}
+.fg-zeolites-stage-text{font-size:14.5px;line-height:1.5;color:var(--ink2);margin:0}
+@media(max-width:900px){
+  .fg-zeolites-sequence{grid-template-columns:1fr;gap:22px;max-width:420px}
+}
+
+/* Built with Room Inside — Structure/Behavior/Result teaching module
+   (2026-08-21 visual-correction pass). Previously a thin vertical list —
+   three items stacked in source order under one shared left rule, with
+   11px labels — that read as ordinary body copy rather than a designed
+   three-stage lesson. Rebuilt as a balanced horizontal three-part grid on
+   desktop (one bordered panel per stage, equal width/height so Structure,
+   Behavior, and Result carry identical visual hierarchy), stacking to a
+   single column on mobile. The italic "Do not miss" clue and the closing
+   paragraph remain full-width elements below the module, unchanged. */
+/* Open-framework illustration (2026-08-21 third correction pass) — the
+   approved teaching graphic, placed between the section intro and the
+   Structure/Behavior/Result module below. Same restrained rounding/
+   border treatment as the cavity-sequence teaching image
+   (.fg-zeolites-stage-media: 10px radius, 0.5px border). Reference scale:
+   Beryl's Built in Six Sides teaching photo, which runs at roughly
+   1.15fr of a two-column ~1004px frame (≈480px) rather than spanning the
+   guide. 480px keeps the native 3:2 ratio (no forced height, no
+   object-fit crop) while reading as a moderate, visually subordinate
+   teaching image instead of the dominant object on the page; centered
+   within the shared content frame via auto margins. */
+.fg-zeolites-framework-illustration{max-width:480px;margin:0 auto 1.5rem;border-radius:10px;overflow:hidden;border:0.5px solid var(--border)}
+.fg-zeolites-framework-illustration img{display:block;width:100%;height:auto}
+.fg-zeolites-thread{max-width:none;margin:0.1rem 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;align-items:stretch}
+.fg-zeolites-thread-item{border:0.5px solid var(--border);border-radius:10px;background:var(--white);padding:1.1rem 1.2rem;border-left:0.5px solid var(--border)}
+.fg-zeolites-thread-item:last-child{padding-bottom:1.1rem}
+.fg-zeolites-thread-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:6px}
+.fg-zeolites-thread-title{font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--ink);margin-bottom:6px}
+.fg-zeolites-thread-body{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0}
+/* Matches the shared .fg-prose-emphasis italic-takeaway treatment (16px)
+   used site-wide for this exact role, instead of a slightly-smaller
+   locally-invented size. */
+.fg-zeolites-thread-clue{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;line-height:1.6;color:var(--accent);margin:1.4rem 0 1.4rem;max-width:none}
+.fg-zeolites-thread-closing{max-width:none}
+@media(max-width:760px){
+  .fg-zeolites-thread{grid-template-columns:1fr}
+}
+
+/* One Family, Many Crystal Habits — horizontal comparison rows, distinct
+   from the Meet the Family card grid (full-width rows with a top divider,
+   not bordered/shadowed cards). No interactive affordance on any row. */
+/* Photo wells enlarged ~17% (150→175px, 2026-08-21 fourth correction
+   pass) so the specimens carry more visual weight for habit comparison;
+   the text column narrows to accommodate (flex:1 on the body absorbs the
+   difference automatically since the row's own width is unchanged). */
+.fg-zeolites-habit-rows{display:flex;flex-direction:column}
+.fg-zeolites-habit-row{display:flex;gap:1.75rem;align-items:center;padding:1.1rem 0;border-top:0.5px solid var(--border2)}
+.fg-zeolites-habit-row:first-child{border-top:none;padding-top:0}
+/* Click-to-enlarge (2026-08-21 fifth correction pass) — the media well is
+   now a real <button> (fgZeolitesHabitRowHtml) wrapping openPhotoLightbox,
+   the existing single-image lightbox already used elsewhere on the
+   encyclopedia pages, so no new modal/lightbox system is introduced.
+   Button-reset (padding/font/appearance) keeps the well visually
+   identical to the previous plain <div> at the same 175px size; the
+   focus-visible ring matches the established .fg-stonecard-media
+   treatment used for every other clickable specimen photo. */
+.fg-zeolites-habit-media{flex:0 0 175px;width:175px;height:175px;border-radius:10px;overflow:hidden;background:#FFFFFF;border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;padding:0;margin:0;font:inherit;cursor:pointer;appearance:none}
+.fg-zeolites-habit-media img{width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box;display:block}
+.fg-zeolites-habit-media:focus-visible{outline:1.5px solid var(--accent2);outline-offset:-2px}
+.fg-zeolites-habit-body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px}
+/* Mineral-name/specimen-row typography matched to Beryl's established
+   comparison-row treatment (.fg-beryl-teach-name: 16.5px Georgia; was a
+   locally-invented 19px here, larger than any other guide's specimen-row
+   name). */
+.fg-zeolites-habit-heading{font-family:Georgia,'Times New Roman',serif;font-size:16.5px;color:var(--ink)}
+.fg-zeolites-habit-line{font-size:14.5px;line-height:1.6;color:var(--ink2)}
+.fg-zeolites-habit-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-right:4px}
+@media(max-width:640px){
+  .fg-zeolites-habit-row{flex-direction:column;gap:0.9rem}
+  .fg-zeolites-habit-media{width:100%;height:auto;aspect-ratio:1/1}
+}
+
+/* Same Cavity, Different Family — recomposed (2026-08-21 fourth
+   correction pass) into one coherent two-column module instead of an
+   oversized portrait image + a short text block over a large empty area,
+   with the two comparison panels detached below as a separate full-width
+   row. Left column: the pocket image, now a fixed moderate width (was an
+   uncapped 32%-of-frame portrait) — still the same non-generative crop at
+   its native aspect ratio, just displayed smaller. Right column: the
+   Shared Setting label/heading/paragraph directly above the two
+   comparison panels, all inside the same column so the panels sit
+   compactly under the explanation instead of spanning the full frame
+   underneath it — the combined copy+panels height now uses the image's
+   own height instead of leaving dead space beside it. align-items:start
+   (not center) because the right column now holds more content than the
+   image's own vertical center. */
+.fg-zeolites-samecavity-grid{display:grid;grid-template-columns:230px 1fr;gap:1.75rem;align-items:start;margin-bottom:1.6rem}
+.fg-zeolites-pocket-media{border-radius:10px}
+.fg-zeolites-samecavity-right{min-width:0;display:flex;flex-direction:column}
+.fg-zeolites-pocket-copy{min-width:0}
+.fg-zeolites-pathways{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.1rem}
+.fg-zeolites-pathway{padding:1rem 1.1rem;border-radius:10px}
+.fg-zeolites-pathway--zeolite{border:1px solid var(--border);background:var(--white)}
+.fg-zeolites-pathway--companion{border:1px dashed var(--border2);background:var(--stone2)}
+.fg-zeolites-pathway-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent2);font-weight:500;margin-bottom:0.75rem}
+.fg-zeolites-pathway-item{margin-bottom:0.85rem}
+.fg-zeolites-pathway-item:last-child{margin-bottom:0}
+.fg-zeolites-pathway-name{font-family:Georgia,'Times New Roman',serif;font-size:16.5px;color:var(--ink);margin-bottom:2px}
+.fg-zeolites-pathway-text{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
+@media(max-width:760px){
+  .fg-zeolites-samecavity-grid{grid-template-columns:1fr}
+  .fg-zeolites-pathways{grid-template-columns:1fr;gap:1rem}
+}
+
+/* In Your Collection — modest image-led handling note on the shared
+   .fg-explain-grid component; only the media well gets a white background
+   and contain-fit so the Natrolite needle photo isn't cropped. The
+   media well sits in a wrapper alongside its caption so the caption can
+   sit outside the well's own overflow:hidden/fixed-aspect box.
+   2026-08-21 fifth correction pass: the caption was using
+   .fg-hero-media-legend (a plain, lowercase-reading generic legend
+   style) — replaced with .fg-zeolites-collection-caption, which matches
+   the family-card mineral-name treatment (.fg-stonecard-name: Jost,
+   uppercase, 15px/400/0.05em letter-spacing, var(--ink2)) seen on
+   Stilbite/Heulandite/Thomsonite, just centered instead of left-aligned
+   to sit beneath a single photo rather than beside one. */
+.fg-zeolites-collection-media-wrap{min-width:0}
+.fg-zeolites-collection-caption{font-family:'Jost',sans-serif;font-size:15px;font-weight:400;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2);text-align:center;margin:0.6rem 0 0}
+.fg-zeolites-collection-media{background:#FFFFFF}
+.fg-zeolites-collection-media img{object-fit:contain;padding:10px;box-sizing:border-box}
+/* Heading-to-paragraph spacing fix — the shared .fg-explain-grid's own
+   align-items:center was vertically centering the shorter copy column
+   against the taller media column (now taller still with the caption
+   added below it), pushing the first paragraph well below the heading
+   even though the box-level heading-margin/grid-margin gap measured
+   identical to every other section on this page (18px either way).
+   Exact same diagnosis + fix already established for Copper's closing
+   essay (#fg-copper-closing-essay .fg-explain-grid): start both columns
+   at the top instead of centering them. Scoped to this one section only
+   — every other guide's .fg-explain-grid keeps its centered alignment. */
+.fg-guide[data-family-slug="zeolites"] #fg-zeolites-collection .fg-explain-grid{align-items:flex-start}

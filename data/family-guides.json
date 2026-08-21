@@ -3183,5 +3183,224 @@
         "modified": "Black background and man-made display base removed; seamless white background added; exposure and white balance adjusted conservatively."
       }
     ]
+  },
+  "zeolites": {
+    "slug": "zeolites",
+    "displayName": "Zeolites",
+    "editorialStatusNote": "Built per the Zeolites Family Guide implementation brief, reusing the shared family-guide system exactly (familyGuideHeroHtml/hero.imageUrl for the hero, fgTourmalineFamilyCardHtml's unlinked-card pattern via a dedicated fgZeolitesFamilyCardHtml for the five-member roster in .fg-card-grid--garnet-roster, and familyGuideClosingHtml for the closing pill). The four true catalog members with a resolvable Stone ID (Stilbite C-0346, Heulandite C-0358, Thomsonite C-0176, Natrolite C-0261) resolve their photos through fgCrystal/firstEncyclopediaPhoto exactly like every other guide's roster. Mesolite has no Stone ID yet (Catalog Change Queue: approved in principle, addition pending) and is included as a full but unlinked/inert teaching member per explicit direction, carrying no stoneId, no Quick View, and a visible 'PENDING ADDITION' status. Apophyllite and Okenite are grouped in 'Same Cavity, Different Family' as common pocket companions, never as Zeolite members. Hero image uses heulandite-wc.webp (already credited in data/encyclopedia-photo-credits.json) rather than mesolite.webp, because mesolite.webp, stilbite-secondary.webp, thomsonite.webp, and apophyllite.webp have no credit record anywhere in the repo as of this build. All photography here is existing, already-approved encyclopedia photography reused as-is (no new photography); the four-panel teaching illustration at assets/family-guide-zeolites/zeolites-cavity-sequence.png is displayed via CSS crop/position only, with the source pixels untouched.",
+    "hero": {
+      "eyebrow": "CRYSTAL FAMILY",
+      "title": "Zeolites",
+      "signatureLine": "A family of delicate forms, open frameworks, and room within.",
+      "condensedIntro": "Often formed within hidden cavities in volcanic rock, Zeolites grow as delicate fans, plates, and needle-like sprays. Beneath those varied forms lies the open, water-bearing architecture that defines the family.",
+      "promptLeadIn": "Zeolite asks:",
+      "question": "What becomes possible when you make room within?",
+      "imageUrl": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/heulandite-wc.webp",
+      "imageAlt": "Heulandite specimen showing pale tabular crystals lining the inside of a mineral-filled volcanic cavity"
+    },
+    "whatZeolitesAre": {
+      "title": "What Makes a Zeolite?",
+      "paragraphs": [
+        "Zeolites are not one mineral but a large group of related minerals. Their shared identity comes from open frameworks built primarily from silicon, aluminum, and oxygen. Unlike a tightly packed structure, a Zeolite framework contains tiny connected cavities and channels.",
+        "Water molecules and exchangeable ions can occupy those internal spaces. In many Zeolites, water can enter or leave while the surrounding framework remains intact. This unusual architecture connects minerals that may look remarkably different on the outside."
+      ],
+      "emphasisLine": "The stone is solid, but its structure is not packed solid."
+    },
+    "meetZeoliteFamily": {
+      "title": "Meet the Zeolite Family",
+      "intro": "Fans, plates, needles, and rounded aggregates can all grow from the same underlying kind of mineral architecture. Each family member has its own chemistry and characteristic habits, but all belong to the larger Zeolite group.",
+      "members": [
+        {
+          "name": "Stilbite",
+          "stoneId": "C-0346",
+          "identSentence": "Often grows in sheaf-like clusters that spread into soft fans, bows, or bundled sprays.",
+          "imageAlt": "Stilbite specimen showing a sheaf-like radiating fan of bladed crystals"
+        },
+        {
+          "name": "Heulandite",
+          "stoneId": "C-0358",
+          "identSentence": "Usually forms tabular or plate-like crystals with broader faces and a more geometric silhouette.",
+          "imageAlt": "Heulandite specimen showing pale tabular crystals with broad, flatter faces"
+        },
+        {
+          "name": "Thomsonite",
+          "stoneId": "C-0176",
+          "identSentence": "May appear as radiating fibers, slender blades, or rounded aggregates built from growth spreading outward from a center.",
+          "imageAlt": "Thomsonite specimen showing a rounded aggregate with a fine radiating surface texture"
+        },
+        {
+          "name": "Natrolite",
+          "stoneId": "C-0261",
+          "identSentence": "Known for slender prismatic crystals that gather into straight needles and radiating sprays.",
+          "imageAlt": "Natrolite specimen showing a radiating spray of slender white needle-like crystals"
+        },
+        {
+          "name": "Mesolite",
+          "statusLabel": "PENDING ADDITION",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/mesolite.webp",
+          "imageAlt": "Mesolite specimen, a pale crystal formation not yet added to the encyclopedia catalog",
+          "identSentence": "Forms especially fine needles and fibers, often gathered into delicate, hairlike sprays."
+        }
+      ]
+    },
+    "cavitySequence": {
+      "title": "How a Volcanic Cavity Becomes a Crystal Garden",
+      "intro": "Many Zeolites form during the low-temperature alteration of volcanic material. The process can turn an empty space in dark volcanic rock into a pocket lined with pale, intricate crystals.",
+      "stages": [
+        {
+          "number": "01",
+          "title": "A Cavity Remains",
+          "text": "Gas bubbles, fractures, and other openings can leave empty spaces within volcanic rock after it forms.",
+          "alt": "Illustration of a dark, pitted volcanic rock with an empty, bare cavity and no crystal growth"
+        },
+        {
+          "number": "02",
+          "title": "Water Moves Through",
+          "text": "Water passes through the rock and interacts with volcanic glass and minerals, carrying dissolved components into its open spaces.",
+          "alt": "Illustration of the same cavity with water pooling and trickling along cracks in the surrounding rock"
+        },
+        {
+          "number": "03",
+          "title": "Crystals Begin to Grow",
+          "text": "As alteration continues and conditions become favorable, mineral crystals begin growing along the cavity walls.",
+          "alt": "Illustration of the cavity walls beginning to show small crystal growth forming above the pooled water"
+        },
+        {
+          "number": "04",
+          "title": "A Crystal Garden Develops",
+          "text": "Continued growth can fill the pocket with fans, plates, needles, and other crystal forms. Zeolites may grow beside other minerals that formed in the same cavity.",
+          "alt": "Illustration of the cavity fully lined with pale fan-, plate-, and needle-shaped crystal formations"
+        }
+      ]
+    },
+    "builtWithRoom": {
+      "title": "Built with Room Inside",
+      "intro": "A Zeolite may look completely solid, but its atomic framework contains an interconnected system of openings. That hidden space explains some of the family's most unusual behavior.",
+      "links": [
+        {
+          "label": "STRUCTURE",
+          "title": "Open Framework",
+          "body": "The framework contains tiny channels and cavities rather than forming one tightly packed mass."
+        },
+        {
+          "label": "BEHAVIOR",
+          "title": "Water and Ions Occupy the Spaces",
+          "body": "Water molecules and exchangeable ions can be held within the openings in the framework."
+        },
+        {
+          "label": "RESULT",
+          "title": "The Contents Can Change While the Framework Remains",
+          "body": "Many Zeolites can release and take up water or exchange certain ions without losing the basic structure that makes them Zeolites."
+        }
+      ],
+      "clue": "The surprising part: Water is held within the mineral's architecture, not simply resting on the specimen's surface.",
+      "closing": "Because these internal openings admit some particles more readily than others, Zeolites can behave like molecular sieves. Their ability to hold and exchange materials is one reason this mineral architecture matters far beyond the display shelf."
+    },
+    "habitRows": {
+      "title": "One Family, Many Crystal Habits",
+      "intro": "A crystal's habit is its characteristic outward growth form. Zeolites share a foundational kind of internal structure, but their crystals do not all build the same silhouettes. Learning the habits helps explain how such different-looking specimens can still belong to one mineral group.",
+      "rows": [
+        {
+          "number": "01",
+          "name": "Stilbite",
+          "stoneId": "C-0346",
+          "alt": "Stilbite specimen showing a sheaf-like radiating fan of bladed crystals",
+          "habit": "Sheaves, fans, and bow-like clusters",
+          "notice": "Individual crystals gather into bundles that often widen toward their ends, giving the cluster a soft, spreading shape."
+        },
+        {
+          "number": "02",
+          "name": "Heulandite",
+          "stoneId": "C-0358",
+          "alt": "Heulandite specimen showing pale tabular crystals with broad, flatter faces",
+          "habit": "Tabular or plate-like crystals",
+          "notice": "Broad, flatter faces create a more angular and clearly geometric appearance than the sprays of many other Zeolites."
+        },
+        {
+          "number": "03",
+          "name": "Thomsonite",
+          "stoneId": "C-0176",
+          "alt": "Thomsonite specimen showing a rounded aggregate with a fine radiating surface texture",
+          "habit": "Radiating, fibrous, bladed, or rounded aggregates",
+          "notice": "Growth often spreads outward from a center. Depending on the specimen, that structure may appear as visible rays or as a compact rounded surface."
+        },
+        {
+          "number": "04",
+          "name": "Natrolite",
+          "stoneId": "C-0261",
+          "alt": "Natrolite specimen showing a radiating spray of slender white needle-like crystals",
+          "habit": "Slender needles and radiating sprays",
+          "notice": "Straight, narrow crystals remain individually visible as they rise together or spread outward from the matrix."
+        },
+        {
+          "number": "05",
+          "name": "Mesolite",
+          "image": "https://vxujlgyhgnihnqrxzefw.supabase.co/storage/v1/object/public/stone-images/encyclopedia/mesolite.webp",
+          "alt": "Mesolite specimen, a pale crystal formation not yet added to the encyclopedia catalog",
+          "habit": "Fine fibrous or needle-like sprays",
+          "notice": "The crystals are often finer and more hairlike than Natrolite, creating dense, airy tufts with a particularly delicate appearance."
+        }
+      ]
+    },
+    "sameCavity": {
+      "title": "Same Cavity, Different Family",
+      "intro": "Minerals that grow together do not necessarily belong to the same mineral family. Volcanic cavities can host several species at once, which is why collectors often associate Apophyllite and Okenite so closely with Zeolites.",
+      "shared": {
+        "label": "SHARED SETTING",
+        "title": "A Mineral Pocket in Volcanic Rock",
+        "text": "The same cavity, moving water, and changing mineral conditions can support several stages or kinds of crystal growth. A finished pocket may preserve more than one mineral identity.",
+        "imageAlt": "Illustration of a mature volcanic cavity lined with pale crystal growth, representing a finished mineral pocket"
+      },
+      "pathwayZeolite": {
+        "label": "BELONGS TO THE ZEOLITE GROUP",
+        "items": [
+          {
+            "name": "Stilbite",
+            "text": "Its open, water-bearing framework places it within the Zeolite mineral group."
+          },
+          {
+            "name": "Heulandite",
+            "text": "Its chemistry and internal framework identify it as a true Zeolite, even when its broad crystals look unlike Stilbite fans."
+          }
+        ]
+      },
+      "pathwayCompanion": {
+        "label": "COMMON POCKET COMPANIONS",
+        "items": [
+          {
+            "name": "Apophyllite",
+            "text": "Apophyllite is a phyllosilicate that commonly grows with Zeolites, but it does not share the defining Zeolite framework."
+          },
+          {
+            "name": "Okenite",
+            "text": "Okenite is a separate silicate mineral. Its soft-looking fibrous clusters can occur in the same volcanic cavities without making it a Zeolite."
+          }
+        ]
+      },
+      "clue": "The key distinction: A collector may describe the entire association as a \"zeolite pocket,\" but not every mineral growing inside that pocket belongs to the Zeolite group."
+    },
+    "inYourCollection": {
+      "title": "In Your Collection",
+      "image": "natrolite-wc.webp",
+      "imageAlt": "Natrolite specimen showing delicate white needle-like crystal sprays vulnerable to pressure",
+      "imageCaption": "Natrolite",
+      "paragraphs": [
+        "Fine needles, fans, plates, and fibrous clusters can be damaged by pressure that would not harm a more compact specimen. Lift a Zeolite specimen from its solid matrix or broadest stable base rather than grasping the crystal growth.",
+        "Leave open clearance around exposed tips and sprays, both on display and in storage. For routine dust control, protecting the display is safer than repeatedly brushing delicate crystals. Begin with dry, gentle care, and avoid soaking a matrix specimen unless the Zeolite species and every associated mineral have been considered individually."
+      ],
+      "emphasisLine": "The safest way to preserve a delicate crystal garden is to give it room."
+    },
+    "closingEssay": {
+      "title": "A Family Defined from the Inside Out",
+      "paragraphs": [
+        "Zeolites may grow as fans, plates, needles, fibers, or rounded aggregates. What connects them is not one color or outward shape, but a spacious internal framework that can hold water and exchangeable ions.",
+        "Their visible delicacy is only part of the story. Inside each crystal is an architecture built around openings, movement, and room to change."
+      ]
+    },
+    "closingCallout": "Many outward forms. One remarkably open foundation.",
+    "closingButton": {
+      "label": "Return to Crystal Families",
+      "target": "crystalFamilies"
+    }
   }
 }
