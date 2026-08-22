@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>What&rsquo;s Inside a Crystal? — Still Point Lapidary</title>
+  <meta name="description" content="A clear crystal is rarely truly empty. Look closely and you may find golden needles, misty clouds, tiny bubbles, branching forests, flashes of rainbow, or the outline of an earlier crystal suspended inside.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="btb-shared.css">
+
+  <!-- Article 02 (What's Inside a Crystal?) — built from the approved
+       article-02-whats-inside-a-crystal-revised.md copy (verbatim) and the
+       article-02-whats-inside-a-crystal-visual-plan.md / -mockup.html
+       composition. Page-scoped .wic- rules only; btb-shared.css untouched
+       by this pass. RESCALED 2026-08-22 per Christie's correction: the
+       mockup's numeric caps (hero title 58px, section headings 36px,
+       section padding 72px, etc.) ran substantially larger than the site's
+       committed scale and have been discarded. Typography, container
+       width, and section rhythm are now calibrated directly against the
+       live why-some-crystals-glow.html (.wsg- rules) at the same viewport
+       — hero title/sub, section-heading cap, and content width match wsg
+       exactly; article-02-specific visuals with no wsg equivalent
+       (specimen diagram, dendrite photo, paired art, story cards, fluid
+       view, takeaway panels) are reduced ~20% from the prior pass.
+       Composition, copy, colors, section order, and header are unchanged.
+       The header below is the exact current production header reused
+       verbatim from why-some-crystals-glow.html — the mockup's schematic
+       header is not implementation authority. Christie's dendritic opal
+       heart is the one real photograph used on this page; every other
+       visual is an intentional placeholder matching the approved mockup,
+       unchanged pending Christie's photo selections. Not yet linked from
+       beyond-the-basics.html per the build brief. -->
+  <style>
+    body.btb-body{background:var(--white)}
+
+    .wic-article{
+      --wic-ink:#524d47;
+      --wic-body:#6b6560;
+      --wic-bronze:#8b7355;
+      --wic-night:#1c1925;
+      width:min(var(--btb-max-width), calc(100% - 48px));
+      margin:0 auto;
+      padding:0;
+    }
+    .wic-article h1,.wic-article h2,.wic-article h3{
+      font-family:var(--btb-serif);font-weight:400;color:var(--wic-ink);
+    }
+    .wic-article h3{font-size:18px}
+    .wic-article p{
+      font-family:var(--btb-sans);font-size:16px;line-height:1.72;color:var(--wic-body);
+      margin:0 0 18px;
+    }
+    .wic-article p:last-child{margin-bottom:0}
+
+    .wic-eyebrow{
+      font-family:var(--btb-sans);font-size:12px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--wic-bronze);margin:0 0 12px;
+    }
+
+    /* ---- 1. Hero (matches wsg-hero exactly) ---- */
+    .wic-hero{
+      display:grid;grid-template-columns:minmax(0,1.06fr) minmax(260px,.94fr);
+      gap:56px;align-items:center;
+      padding:46px 0 44px;border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wic-hero-kicker{margin-bottom:14px}
+    .wic-hero h1{
+      font-size:clamp(32px,4vw,46px);line-height:1.1;letter-spacing:-.015em;
+      margin:0 0 10px;max-width:640px;
+    }
+    .wic-hero-sub{
+      font-family:var(--btb-serif);font-weight:400;font-size:clamp(18px,2vw,23px);
+      line-height:1.3;color:var(--wic-body);margin:0 0 18px;
+    }
+    .wic-hero-dek{
+      font-family:var(--btb-serif);font-size:19px;line-height:1.5;color:var(--wic-body);
+      margin:0 0 18px;max-width:560px;
+    }
+    .wic-hero-meta{
+      font-family:var(--btb-sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--wic-bronze);margin:0;
+    }
+    .wic-hero-media{width:100%;max-width:330px;justify-self:end}
+    .wic-hero-visual{
+      position:relative;height:272px;width:100%;overflow:hidden;
+      background:linear-gradient(135deg,#d3c9bb,#81776d);border:1px solid #c8bcad;
+    }
+    .wic-hero-crystal{
+      position:absolute;inset:13% 15%;
+      background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(193,205,202,.38));
+      clip-path:polygon(50% 0,89% 25%,82% 100%,18% 100%,11% 25%);border:1px solid #fff;
+    }
+    .wic-needle{position:absolute;width:2px;height:120px;background:#8e5b35;left:50%;top:72px;transform-origin:center}
+    .wic-needle:nth-child(2){transform:rotate(20deg)}
+    .wic-needle:nth-child(3){transform:rotate(-27deg)}
+    .wic-needle:nth-child(4){transform:rotate(52deg);height:96px}
+    .wic-photo-label{
+      position:absolute;left:14px;bottom:12px;padding:6px 9px;background:rgba(55,49,44,.76);
+      color:#fff;font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-family:var(--btb-sans);
+    }
+    .wic-photo-note{
+      position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:14%;
+      color:#fff;font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-family:var(--btb-sans);
+    }
+    @media (max-width:850px){
+      .wic-hero{grid-template-columns:1fr;gap:22px;padding:30px 0 30px}
+      .wic-hero-media{max-width:none;justify-self:stretch}
+      .wic-hero-visual{height:240px}
+    }
+    @media (max-width:560px){ .wic-hero h1{font-size:30px} .wic-hero-dek{font-size:16px} }
+
+    /* ---- 2. Opening ---- */
+    .wic-opening{
+      display:grid;grid-template-columns:minmax(0,720px) 1fr;gap:50px;align-items:end;
+      padding:32px 0 24px;
+    }
+    .wic-opening-note{
+      border-left:1px solid var(--wic-bronze);padding:6px 0 6px 20px;
+      color:var(--wic-body);font:italic 15px/1.46 var(--btb-serif);
+    }
+    @media (max-width:850px){
+      .wic-opening{grid-template-columns:1fr;gap:0;padding:22px 0 20px}
+      .wic-opening-note{display:none}
+    }
+
+    /* ---- shared section rhythm (heading cap matches wsg-section-heading) ---- */
+    .wic-section{margin:0 0 44px;padding:28px 0;border-bottom:1px solid var(--btb-border-soft)}
+    .wic-section:last-of-type{border-bottom:0}
+    .wic-section-heading{
+      font-size:clamp(22px,2.6vw,33px);line-height:1.2;letter-spacing:-.01em;margin:0 0 14px;
+    }
+    .wic-section-intro{max-width:720px;color:var(--wic-body);margin:0 0 22px}
+    @media (max-width:560px){ .wic-section{margin-bottom:34px;padding:22px 0} .wic-section-heading{font-size:23px} }
+
+    /* ---- 3. First, Know Where It Is ---- */
+    .wic-locator{
+      display:grid;grid-template-columns:.5fr .5fr;gap:45px;align-items:center;
+    }
+    .wic-locator-copy{max-width:440px}
+    .wic-location-terms{margin-top:20px;border-top:1px solid var(--wic-bronze)}
+    .wic-term{
+      display:grid;grid-template-columns:96px 1fr;gap:14px;padding:10px 0;
+      border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wic-term b{font:400 14px var(--btb-serif);color:var(--wic-ink)}
+    .wic-term span{font-family:var(--btb-sans);font-size:12px;color:var(--wic-body)}
+    .wic-takeaway{
+      margin-top:18px;padding:14px 18px;background:var(--btb-paper-2);border-left:2px solid var(--wic-bronze);
+      font:italic 14px/1.5 var(--btb-serif);color:var(--wic-body);
+    }
+    .wic-specimen-map{height:336px;background:var(--btb-paper-2);position:relative;overflow:hidden}
+    .wic-sm-matrix{
+      position:absolute;left:0;right:0;bottom:0;height:108px;background:#857466;
+      clip-path:polygon(0 32%,15% 17%,29% 35%,46% 10%,61% 31%,77% 5%,100% 26%,100% 100%,0 100%);
+    }
+    .wic-sm-host{
+      position:absolute;left:18%;top:32px;width:44%;height:240px;
+      background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(182,200,197,.52));
+      clip-path:polygon(50% 0,93% 26%,84% 100%,16% 100%,7% 26%);border:1px solid #b8c1bd;
+    }
+    .wic-sm-inclusion{
+      position:absolute;left:38%;top:94px;width:5px;height:118px;background:#9f6440;
+      transform:rotate(31deg);box-shadow:26px 10px 0 -2px #85563b,-30px 15px 0 -2px #a86a42;
+    }
+    .wic-map-label{
+      position:absolute;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#5e554e;
+      font-family:var(--btb-sans);
+    }
+    .wic-map-label:after{content:"";position:absolute;top:50%;height:1px;background:var(--wic-bronze)}
+    .wic-host-label{top:46px;right:6%}
+    .wic-host-label:after{right:105%;width:36px}
+    .wic-inc-label{top:152px;right:4%}
+    .wic-inc-label:after{right:105%;width:29px}
+    .wic-matrix-label{bottom:38px;left:6%;color:#fff}
+    .wic-matrix-label:after{left:105%;width:29px;background:#fff}
+    @media (max-width:850px){
+      .wic-locator{grid-template-columns:1fr;gap:20px}
+      .wic-specimen-map{height:272px}
+    }
+
+    /* ---- 4. Six Stories intro ---- */
+    .wic-sequence-head{display:grid;grid-template-columns:1fr .75fr;gap:45px;align-items:end;margin-bottom:26px}
+    .wic-sequence-head p{margin:0}
+    @media (max-width:850px){ .wic-sequence-head{grid-template-columns:1fr;gap:12px} }
+
+    /* ---- Stories 01/02: two-column comparison ---- */
+    .wic-two-stories{
+      display:grid;grid-template-columns:1fr 1fr;
+      border-top:1px solid var(--wic-bronze);border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wic-story{display:grid;grid-template-columns:36px 1fr;gap:13px;padding:24px 22px}
+    .wic-story + .wic-story{border-left:1px solid var(--btb-border-soft)}
+    .wic-story-num{font:400 24px/1 var(--btb-serif);color:#b58a63}
+    .wic-story-visual{
+      height:120px;margin-bottom:16px;position:relative;overflow:hidden;background:#d8d0c5;
+    }
+    .wic-story-visual.wic-needles{background:linear-gradient(135deg,#ded8d0,#a89d90)}
+    .wic-story-visual.wic-needles:after{
+      content:"";position:absolute;left:50%;top:-24px;width:3px;height:160px;background:#9d623d;
+      transform:rotate(25deg);box-shadow:27px 10px 0 -1px #80513a,-30px 15px 0 -1px #aa704d;
+    }
+    .wic-story-visual.wic-phantom{background:linear-gradient(145deg,#d6d1c9,#aaa7a1)}
+    .wic-story-visual.wic-phantom:after{
+      content:"";position:absolute;inset:20px 46px;background:transparent;
+      border:3px solid rgba(95,87,80,.65);clip-path:polygon(50% 0,92% 26%,82% 100%,18% 100%,8% 26%);
+    }
+    .wic-story h3{margin:0 0 8px}
+    .wic-story p{font-size:13px;line-height:1.6}
+    .wic-micro-quote{margin-top:11px;font:italic 13px/1.45 var(--btb-serif);color:var(--wic-body)}
+    @media (max-width:850px){
+      .wic-two-stories{grid-template-columns:1fr}
+      .wic-story + .wic-story{border-left:0;border-top:1px solid var(--btb-border-soft)}
+    }
+
+    /* ---- Story 03: Dendrites (Christie's photo) ---- */
+    .wic-dendrite{
+      display:grid;grid-template-columns:.56fr .44fr;gap:42px;align-items:center;
+      padding:45px 0;
+    }
+    .wic-opal-photo{
+      height:344px;width:100%;overflow:hidden;background:var(--btb-white);
+      border:1px solid var(--btb-border);border-radius:8px;padding:8px;
+    }
+    .wic-opal-photo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
+    .wic-feature-copy .wic-takeaway{margin:18px 0}
+    @media (max-width:850px){
+      .wic-dendrite{grid-template-columns:1fr;gap:20px;padding:32px 0}
+      .wic-opal-photo{height:290px}
+    }
+
+    /* ---- Stories 04/05: paired comparison ---- */
+    .wic-paired{
+      display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--btb-border-soft);
+      border-top:1px solid var(--wic-bronze);border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wic-pair{background:var(--btb-paper);padding:24px}
+    .wic-pair-art{height:132px;background:var(--wic-night);margin-bottom:16px;position:relative;overflow:hidden}
+    .wic-pair-art.wic-veil:after{
+      content:"";position:absolute;inset:16px;
+      background:repeating-linear-gradient(35deg,transparent 0 12px,rgba(226,220,255,.42) 13px 14px);
+    }
+    .wic-pair-art .wic-rainbow{
+      position:absolute;width:96px;height:1px;left:26px;top:56px;transform:rotate(-20deg);
+      background:linear-gradient(90deg,#ff6a6a,#ffcd57,#71ed8c,#63b9ff,#b480ff);
+    }
+    .wic-pair-art.wic-zoning{background:linear-gradient(135deg,#ddd4ca,#78747a)}
+    .wic-pair-art.wic-zoning:after{
+      content:"";position:absolute;inset:16px 44px;
+      background:repeating-linear-gradient(0deg,rgba(100,62,125,.7) 0 18px,rgba(143,99,158,.5) 19px 36px);
+      clip-path:polygon(50% 0,91% 25%,82% 100%,18% 100%,9% 25%);
+    }
+    .wic-pair h3{margin:0 0 8px}
+    .wic-pair p{font-size:13px;line-height:1.6}
+    @media (max-width:850px){ .wic-paired{grid-template-columns:1fr} }
+
+    /* ---- Story 06: Fluid Inclusions ---- */
+    .wic-fluid{
+      display:grid;grid-template-columns:.44fr .56fr;gap:42px;align-items:center;padding-top:38px;
+    }
+    .wic-bubble-view{height:248px;background:#cfc5ba;position:relative}
+    .wic-cavity{
+      position:absolute;left:16%;top:51px;width:56%;height:132px;background:rgba(248,246,239,.72);
+      border:2px solid rgba(103,94,85,.35);border-radius:48% 55% 51% 45%;
+    }
+    .wic-bubble{
+      position:absolute;right:14%;top:25px;width:42px;height:42px;border-radius:50%;
+      background:rgba(255,255,255,.72);border:1px solid #82786d;
+    }
+    .wic-bubble-label{
+      position:absolute;right:6%;top:76px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+      color:#625950;font-family:var(--btb-sans);
+    }
+    @media (max-width:850px){
+      .wic-fluid{grid-template-columns:1fr;gap:20px;padding-top:26px}
+      .wic-bubble-view{height:210px}
+    }
+
+    /* ---- Inclusion or Flaw? ---- */
+    .wic-value{display:grid;grid-template-columns:.47fr .53fr;gap:45px}
+    .wic-contexts{border-top:1px solid var(--wic-bronze)}
+    .wic-context{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--btb-border-soft)}
+    .wic-context b{font:400 15px var(--btb-serif);color:var(--wic-ink)}
+    .wic-context p{margin:0;font-size:13px}
+    @media (max-width:850px){
+      .wic-value{grid-template-columns:1fr;gap:16px}
+      .wic-context{grid-template-columns:1fr;gap:6px}
+    }
+
+    /* ---- The Story Within (closing) ---- */
+    .wic-closing{
+      display:grid;grid-template-columns:1fr .75fr;gap:45px;align-items:center;padding:35px 0 37px;
+    }
+    .wic-closing-line{
+      border-top:1px solid var(--wic-bronze);padding-top:18px;
+      font:400 clamp(17px,1.8vw,22px)/1.4 var(--btb-serif);color:var(--wic-ink);margin:0;
+    }
+    @media (max-width:850px){ .wic-closing{grid-template-columns:1fr;gap:18px;padding:28px 0 30px} }
+
+    /* ---- HARD TYPE OVERRIDES (Christie's 2026-08-22 balancing pass) ----
+       Targeted reduction of headings/eyebrows plus a body-readability fix:
+       .btb-body sets font-weight:300 site-wide, which was silently thinning
+       every paragraph, dek, and quote on this page — these rules restore
+       font-weight:400 and the wsg-matching body color explicitly. Every
+       rule here pins an exact computed value, superseding every clamp()/vw
+       rule, inherited heading size, and the site-wide font-weight above via
+       selector specificity — verified by computed style, not just source.
+       Desktop sizes are unconditional; the mobile block re-pins the
+       handful that must shrink further and wins on cascade because it is
+       more specific AND declared later. This is a heading/body-weight
+       correction only — layout, spacing, images, copy, and colors below
+       are unchanged. */
+    .wic-article .wic-hero-kicker{font-size:10px!important}
+    .wic-article .wic-hero h1{font-size:36px!important}
+    .wic-article .wic-hero-sub{font-size:18px!important}
+    .wic-article .wic-hero-meta{font-size:10px!important}
+    .wic-article .wic-eyebrow{font-size:9px!important}
+    .wic-article .wic-section-heading{font-size:26px!important}
+    .wic-article .wic-story h3,
+    .wic-article .wic-pair h3,
+    .wic-article .wic-feature-copy h3{font-size:20px!important}
+    .wic-article .wic-term b,
+    .wic-article .wic-context b{font-size:17px!important}
+    .wic-article .wic-hero-dek{
+      font-size:17px!important;font-weight:400!important;line-height:1.7!important;
+      color:var(--wic-body)!important;
+    }
+    .wic-article p:not(.wic-eyebrow):not(.wic-hero-kicker):not(.wic-hero-meta):not(.wic-hero-dek):not(.wic-opening-note),
+    .wic-article .wic-story p,
+    .wic-article .wic-pair p,
+    .wic-article .wic-context p{
+      font-size:16px!important;font-weight:400!important;line-height:1.7!important;
+      color:var(--wic-body)!important;
+    }
+    .wic-article .wic-eyebrow,
+    .wic-article .wic-hero-kicker,
+    .wic-article .wic-hero-meta{font-weight:500!important;color:var(--wic-bronze)!important}
+    .wic-article .wic-takeaway,
+    .wic-article .wic-micro-quote,
+    .wic-article .wic-opening-note{
+      font-size:16px!important;font-weight:400!important;font-style:italic!important;
+      color:var(--wic-body)!important;
+    }
+    .wic-article .wic-map-label,
+    .wic-article .wic-photo-label,
+    .wic-article .wic-photo-note,
+    .wic-article .wic-bubble-label{font-size:9px!important}
+    @media (max-width:850px){
+      .wic-article .wic-hero h1{font-size:31px!important}
+      .wic-article .wic-hero-sub{font-size:17px!important}
+      .wic-article .wic-section-heading{font-size:24px!important}
+      .wic-article .wic-story h3,
+      .wic-article .wic-pair h3,
+      .wic-article .wic-feature-copy h3{font-size:19px!important}
+      .wic-article .wic-hero-dek,
+      .wic-article p:not(.wic-eyebrow):not(.wic-hero-kicker):not(.wic-hero-meta):not(.wic-opening-note),
+      .wic-article .wic-story p,
+      .wic-article .wic-pair p,
+      .wic-article .wic-context p{font-size:16px!important;font-weight:400!important}
+    }
+  </style>
+</head>
+<body class="btb-body">
+<div class="app-shell">
+
+  <header class="topbar">
+    <a href="../index.html" class="brand-home" aria-label="Return to Encyclopedia home">
+      <div class="brand-block">
+        <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+       <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+        </div>
+      </div>
+    </a>
+    <div class="topbar-right">
+      <span class="stone-count" id="stone-count"></span>
+      <div class="topbar-auth" id="topbar-auth"></div>
+      <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
+      <a class="btn btn-sm" id="request-entry-btn" href="../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
+      <a class="btn btn-sm" id="guide-btn" href="../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
+      <a class="btn btn-sm" id="manage-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main-nav-wrap"><nav class="main-nav">
+    <a class="nav-tab" href="../index.html">Home</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=mood">Choose by Intention</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=identify">Identify</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=collection">My Collection</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=101">Crystals 101</a>
+    <a class="nav-tab active" href="../beyond-the-basics.html" aria-current="page">Beyond the Basics</a>
+  </nav></div>
+
+  <main class="wic-article">
+
+    <!-- 1. Editorial hero -->
+    <section class="wic-hero">
+      <div class="wic-hero-text">
+        <p class="btb-category wic-hero-kicker">Formation<span class="sep">·</span>Inside the Stone</p>
+        <h1>What&rsquo;s Inside a Crystal?</h1>
+        <h2 class="wic-hero-sub">Inclusions, Phantoms, Dendrites, Veils, and the Story of Growth</h2>
+        <p class="wic-hero-dek">A clear crystal is rarely truly empty. Look closely and you may find golden needles, misty clouds, tiny bubbles, branching forests, flashes of rainbow, or the outline of an earlier crystal suspended inside.</p>
+        <p class="wic-hero-meta">About 7 minutes</p>
+      </div>
+      <figure class="wic-hero-media">
+        <div class="wic-hero-visual">
+          <div class="wic-hero-crystal"></div>
+          <i class="wic-needle"></i><i class="wic-needle"></i><i class="wic-needle"></i><i class="wic-needle"></i>
+          <div class="wic-photo-note">Approved macro inclusion photograph pending</div>
+          <span class="wic-photo-label">Inside the crystal</span>
+        </div>
+      </figure>
+    </section>
+
+    <!-- 2. Opening -->
+    <section class="wic-opening">
+      <div class="wic-opening-copy">
+        <p>These features are not just decoration. They can show what the crystal grew around, how conditions changed while it was forming, and what happened after its earliest stages of growth.</p>
+      </div>
+      <p class="wic-opening-note">A crystal&rsquo;s interior can preserve its story.</p>
+    </section>
+
+    <!-- 3. First, Know Where It Is -->
+    <section class="wic-section wic-locator" aria-label="First, Know Where It Is">
+      <div class="wic-locator-copy">
+        <p class="wic-eyebrow">Start With Location</p>
+        <h2 class="wic-section-heading">First, Know Where It Is</h2>
+        <p>Before naming an internal feature, it helps to separate three basic ideas.</p>
+        <div class="wic-location-terms">
+          <div class="wic-term"><b>Host crystal</b><span>The main crystal containing or surrounding the feature</span></div>
+          <div class="wic-term"><b>Inclusion</b><span>Material or a feature enclosed inside the host</span></div>
+          <div class="wic-term"><b>Matrix</b><span>The rock or mineral material the crystal grew on or within</span></div>
+        </div>
+        <p style="margin-top:24px">In rutilated quartz, quartz is the <strong>host crystal</strong> and the rutile needles are the <strong>inclusions</strong>. In a fluorite specimen attached to rock, the rock beneath the cubes is the <strong>matrix</strong>.</p>
+        <div class="wic-takeaway">An inclusion is inside the crystal. Matrix is the material around or beneath it.</div>
+      </div>
+      <div class="wic-specimen-map">
+        <div class="wic-sm-host"></div>
+        <div class="wic-sm-inclusion"></div>
+        <div class="wic-sm-matrix"></div>
+        <span class="wic-map-label wic-host-label">Host crystal</span>
+        <span class="wic-map-label wic-inc-label">Inclusion</span>
+        <span class="wic-map-label wic-matrix-label">Matrix</span>
+      </div>
+    </section>
+
+    <!-- 4. Six Stories a Crystal Can Hold -->
+    <section class="wic-section" aria-label="Six Stories a Crystal Can Hold">
+      <div class="wic-sequence-head">
+        <div>
+          <p class="wic-eyebrow">A Record of Formation</p>
+          <h2 class="wic-section-heading">Six Stories a Crystal Can Hold</h2>
+        </div>
+        <p>Not every internal feature formed at the same moment. Some were surrounded as the crystal grew. Others mark an earlier growth surface, a change in chemistry, or a fracture that formed later.</p>
+      </div>
+
+      <!-- Stories 01 & 02 -->
+      <div class="wic-two-stories">
+        <article class="wic-story">
+          <div class="wic-story-num">01</div>
+          <div>
+            <div class="wic-story-visual wic-needles"></div>
+            <h3>Mineral Inclusions</h3>
+            <p>Needles, grains, sprays, and tiny crystals can become enclosed inside a growing host. Quartz displays them especially well because its transparency lets us see what was captured.</p>
+            <p>Rutilated quartz contains rutile needles. Tourmalinated quartz contains tourmaline. These names identify both parts of the specimen, while <strong>included quartz</strong> simply means that quartz contains another material or feature.</p>
+          </div>
+        </article>
+        <article class="wic-story">
+          <div class="wic-story-num">02</div>
+          <div>
+            <div class="wic-story-visual wic-phantom"></div>
+            <h3>Phantoms</h3>
+            <p>A phantom may look like a smaller crystal suspended inside a larger one, but it is usually an earlier exterior surface preserved by later growth. Conditions changed, or fine material settled onto the crystal&rsquo;s faces, before growth resumed around the marked surface.</p>
+            <div class="wic-micro-quote">A phantom is an earlier exterior surface remembered inside later growth.</div>
+            <p>The crystal grew around its own past.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Story 03: Dendrites — Christie's dendritic opal heart -->
+      <div class="wic-dendrite">
+        <figure class="wic-opal-photo">
+          <img src="../assets/beyond-the-basics/dendritic-opal-heart.png" alt="Polished dendritic opal heart with branching dark mineral markings">
+        </figure>
+        <div class="wic-feature-copy">
+          <p class="wic-eyebrow">Story 03 &middot; Feature Specimen</p>
+          <h2 class="wic-section-heading">Dendrites</h2>
+          <p>Dendrites are branching mineral deposits that resemble trees, moss, or miniature landscapes. They can form when mineral-bearing fluids move through fractures, across surfaces, or through porous material and leave deposits behind. The patterns are mineral, not trapped plants.</p>
+          <h3>Dendritic Opal Heart</h3>
+          <p>The dark markings spread through the opal like a miniature forest. The opal is the host material, and branching mineral deposits create the pattern.</p>
+          <div class="wic-takeaway">&ldquo;Dendritic opal&rdquo; describes opal with branching mineral markings.</div>
+          <p>Knowing that the &ldquo;trees&rdquo; are mineral growths gives you a second reason to keep looking.</p>
+        </div>
+      </div>
+
+      <!-- Stories 04 & 05 -->
+      <div class="wic-paired">
+        <article class="wic-pair">
+          <p class="wic-eyebrow">Story 04</p>
+          <div class="wic-pair-art wic-veil"><span class="wic-rainbow"></span></div>
+          <h3>Veils and Rainbow Fractures</h3>
+          <p>Some fractures partly heal, trapping networks of tiny fluid inclusions that look like mist, feathers, or fingerprints. These are often described as veils. Rainbow flashes have a related but distinct cause: light interacting with thin internal fracture surfaces. A veil and a rainbow may occur together, but not every rainbow fracture is a healed veil.</p>
+        </article>
+        <article class="wic-pair">
+          <p class="wic-eyebrow">Story 05</p>
+          <div class="wic-pair-art wic-zoning"></div>
+          <h3>Growth Zoning</h3>
+          <p>A crystal&rsquo;s environment can change while it grows. Shifts in chemistry, trace elements, temperature, or growth rate may create visible bands or internal regions known as <strong>zoning</strong>.</p>
+          <p>Fluorite may show alternating color bands. Tourmaline may change from the center outward. Amethyst may deepen toward particular faces. Because zoning often follows the crystal&rsquo;s geometry, it can show that growth continued while surrounding conditions changed.</p>
+        </article>
+      </div>
+
+      <!-- Story 06: Fluid Inclusions -->
+      <div class="wic-fluid">
+        <div class="wic-fluid-copy">
+          <p class="wic-eyebrow">Story 06</p>
+          <h2 class="wic-section-heading">Fluid Inclusions</h2>
+          <p>Some crystals contain tiny sealed cavities holding liquid, gas, tiny crystals, or several phases together. Occasionally, a bubble moves when the specimen is tilted. These inclusions can preserve traces of fluids present during growth or later geological change.</p>
+          <p>In the right specimen, a tiny pocket from an ancient geological environment may still be sealed inside the crystal you are holding. That is not a metaphor.</p>
+        </div>
+        <div class="wic-bubble-view">
+          <div class="wic-cavity"><div class="wic-bubble"></div></div>
+          <span class="wic-bubble-label">Moving bubble</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Inclusion or Flaw? -->
+    <section class="wic-section wic-value" aria-label="Inclusion or Flaw?">
+      <div>
+        <p class="wic-eyebrow">Collector Perspective</p>
+        <h2 class="wic-section-heading">Inclusion or Flaw?</h2>
+        <p>Sometimes an inclusion reduces clarity. Sometimes it becomes the entire reason a specimen is collected.</p>
+        <p>Value depends on the mineral, rarity, beauty, condition, identification, and the kind of collection being built. There is no single rule. An inclusion can become part of a specimen&rsquo;s identity rather than a flaw.</p>
+      </div>
+      <div class="wic-contexts">
+        <div class="wic-context"><b>Faceted gemstone</b><p>Visual cleanliness may be emphasized.</p></div>
+        <div class="wic-context"><b>Collector specimen</b><p>Internal character may matter more, especially when it creates dramatic needles, a clear phantom, beautiful zoning, branching dendrites, a moving bubble, or a striking rainbow.</p></div>
+      </div>
+    </section>
+
+    <!-- 6. The Story Within -->
+    <section class="wic-closing" aria-label="The Story Within">
+      <div>
+        <p class="wic-eyebrow">Closing Thought</p>
+        <h2 class="wic-section-heading">The Story Within</h2>
+        <p>A crystal may hold another mineral, an earlier growth surface, a sealed fluid pocket, a healed fracture, or a branching deposit. Each feature records part of what happened while the specimen was forming.</p>
+        <p>Understanding those features does not make the interior less mysterious. It gives the mystery structure.</p>
+      </div>
+      <p class="wic-closing-line">Once you know what to look for, a crystal stops being simply clear, cloudy, included, or fractured. It becomes a record of growth, change, interruption, and time.</p>
+    </section>
+
+    <!-- 7. Related Reading, Credits, and Return Navigation -->
+    <div class="btb-footer-links">
+      <section class="btb-related" aria-label="Related Encyclopedia Entries">
+        <h2>Related Encyclopedia Entries</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">Quartz</span></li>
+          <li><span class="btb-related-quiet">Fluorite</span></li>
+          <li><span class="btb-related-quiet">Tourmaline</span></li>
+          <li><span class="btb-related-quiet">Opal</span></li>
+        </ul>
+      </section>
+
+      <section class="btb-related" aria-label="Continue Exploring">
+        <h2>Continue Exploring</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">Why Some Crystals Glow</span></li>
+          <li><span class="btb-related-quiet">How Crystals Form</span></li>
+          <li><span class="btb-related-quiet">Fossils in a Crystal Collection: What Are You Actually Holding?</span></li>
+          <li><span class="btb-related-quiet">Can Science and Crystal Tradition Coexist?</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <details class="btb-credits">
+      <summary class="btb-credits-summary">Photo Credits</summary>
+      <ul class="btb-credits-list">
+        <li class="btb-credit-item">
+          <span class="btb-credit-title">Dendritic Opal Heart (Dendrites feature image)</span>
+          <span class="btb-credit-meta">Original Still Point Lapidary photography.</span>
+        </li>
+        <li class="btb-credit-item">
+          <span class="btb-credit-title">Hero, specimen-map, story, paired, and fluid-inclusion visuals</span>
+          <span class="btb-credit-meta">Placeholder — no photograph has been sourced, generated, or chosen for this pass. Pending Christie's selection.</span>
+        </li>
+      </ul>
+    </details>
+
+    <div class="btb-return-bottom">
+      <a class="btb-return" href="../beyond-the-basics.html">&larr; Back to Beyond the Basics</a>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Sign-in modal markup required by auth.js's _openAuth()/closeAuthModal(),
+     copied verbatim from index.html so "Sign In" in the shared header
+     actually works on this page, matching the homepage exactly. -->
+<div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
+    <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
+    <div style="margin-bottom:1rem">
+      <label for="auth-email-input" style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" name="email" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+    </div>
+    <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
+    <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
+    <div style="font-size:11px;color:#b0a89e;text-align:center;margin-top:1rem;line-height:1.6">Your collection saves across all your devices.<br>Open the link in the email on this device.</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../app.js"></script>
+<script src="../auth.js"></script>
+</body>
+</html>
