@@ -15,8 +15,10 @@
  * here edits canonical article Markdown, front matter, or the production
  * plan.
  *
- * Only Article 13 (the fossils article) has a verified, live HTML route
- * today, so it is the only clickable card anywhere on the page.
+ * Verified, live HTML routes today: Article 1 (Why Some Crystals Glow),
+ * Article 2 (What's Inside a Crystal?), Article 3 (How Crystals Form), and
+ * Article 13 (the fossils article). Those are the only clickable cards
+ * anywhere on the page.
  */
 (function (global) {
   'use strict';
@@ -103,11 +105,21 @@
       image: IMG_02, alt: ALT_02, slug: null, route: null, available: false
     },
     {
+      // Per Christie's production-order reconciliation (this implementation
+      // phase): the Master Production Order now controls Article 3 identity
+      // and supersedes the 2026-07-27 mockup-numbering placeholder that
+      // previously occupied this slot ("What an Inclusion Remembers").
       id: 'archive-03', showIn: ['archive'], archivePosition: 3,
-      number: '03', category: 'Collecting',
-      title: 'What an Inclusion Remembers',
-      description: 'Tiny time capsules inside your crystals.',
-      image: IMG_03, alt: ALT_03, slug: null, route: null, available: false
+      number: '03', category: 'Formation',
+      title: 'How Crystals Form',
+      description: 'Why crystals can look so different.',
+      // No approved tile image exists for this canonical identity: IMG_03/
+      // ALT_03 are the retired "What an Inclusion Remembers" dendritic-opal
+      // photo (article-03-tile-image.webp) and would misrepresent this
+      // article. Left unset until Christie supplies an approved Article 3
+      // tile image rather than authoring a substitute.
+      image: null, alt: '', slug: 'how-crystals-form',
+      route: 'beyond-the-basics/how-crystals-form.html', available: true
     },
     {
       id: 'archive-04', showIn: ['archive'], archivePosition: 4,
@@ -152,11 +164,15 @@
       image: null, alt: '', slug: null, route: null, available: false
     },
     {
+      // Production HTML exists (Website/beyond-the-basics/whats-inside-a-crystal.html)
+      // and is now wired live; not a broader renumbering, only the route/
+      // availability fields required to resolve this completed article.
       id: 'archive-10', showIn: ['archive'], archivePosition: 10,
       number: '10', category: 'Materials',
       title: 'What’s Inside a Crystal?',
       description: 'Inclusions, phantoms, and the story a crystal’s interior can tell.',
-      image: null, alt: '', slug: null, route: null, available: false
+      image: null, alt: '', slug: 'whats-inside-a-crystal',
+      route: 'beyond-the-basics/whats-inside-a-crystal.html', available: true
     },
     {
       id: 'archive-11', showIn: ['archive'], archivePosition: 11,

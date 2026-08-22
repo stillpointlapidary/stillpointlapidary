@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>How Crystals Form — Still Point Lapidary</title>
+  <meta name="description" content="Where a crystal grows helps explain what it looks like.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="btb-shared.css">
+
+  <!-- Article 3 (How Crystals Form) — rebuilt from the approved
+       article-03-how-crystals-form-prototype.html composition
+       (Content\Beyond the Basics\html files\). Page-scoped .hcf- rules
+       only; btb-shared.css untouched by this pass. The prototype's own
+       hex palette is remapped onto the locked EDITORIAL-PAGE-VISUAL-
+       STANDARD.md §5.2 Beyond the Basics type/color system (matching
+       styles.css --ink/--ink2/--accent/--border, the same values used
+       for Article 13/Fossils), rather than the prototype's own
+       approximate hex values. All prototype layout numbers, grid
+       proportions, and photo-placeholder wells/dimensions are preserved
+       exactly, just renamed under the .hcf- prefix. Every image slot
+       remains a placeholder div — no photography is assigned yet. -->
+  <style>
+    /* Match the article background to the site header's background
+       (var(--white), styles.css) rather than the warmer btb-shared.css
+       --btb-paper cream, matching the Article 13/Fossils precedent. */
+    body.btb-body{background:var(--white)}
+
+    .hcf-article{
+      --hcf-ink:#524d47;
+      --hcf-body:#6b6560;
+      --hcf-bronze:#8b7355;
+      --hcf-bronze-soft:rgba(139,115,85,.35);
+      --hcf-line:rgba(42,37,32,.12);
+      --hcf-line-strong:rgba(42,37,32,.22);
+      --hcf-white:#fcfaf6;
+      --hcf-paper-2:#f8f4ed;
+      --hcf-paper-3:#efe8de;
+      --hcf-stone2:#ede9e3;
+      --hcf-stone3:#e3ddd6;
+      --hcf-shadow:0 18px 40px rgba(42,37,32,.08);
+      --hcf-radius-lg:24px;
+      --hcf-radius-md:16px;
+      --hcf-radius-sm:12px;
+      width:min(var(--btb-max-width), calc(100% - 48px));
+      margin:0 auto;
+      padding:0 0 24px;
+    }
+    .hcf-article h1,.hcf-article h2,.hcf-article h3{
+      font-family:Georgia,'Times New Roman',serif;font-weight:400;color:var(--hcf-ink);margin:0;
+    }
+    .hcf-article p{font-family:'Jost',Arial,sans-serif;font-size:16px;line-height:1.7;color:var(--hcf-body);margin:0 0 18px}
+    .hcf-article p:last-child{margin-bottom:0}
+
+    /* ---- shared placeholder well: gradient + pill label, kept from the
+       prototype's approved composition, recolored onto canonical
+       neutral/border/ink tokens instead of the prototype's own hexes ---- */
+    .hcf-photo-placeholder{
+      position:relative;overflow:hidden;
+      background:
+        radial-gradient(circle at 27% 20%, rgba(255,255,255,.75), transparent 32%),
+        linear-gradient(145deg, var(--hcf-stone2), var(--hcf-stone3));
+      border:1px solid var(--hcf-line);
+      color:var(--hcf-body);
+    }
+    .hcf-photo-placeholder::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(135deg,transparent 0 45%,rgba(255,255,255,.22) 45% 46%,transparent 46% 100%),
+        radial-gradient(circle at 75% 28%,rgba(139,115,85,.11),transparent 28%);
+      pointer-events:none;
+    }
+    .hcf-photo-placeholder .hcf-ph-label{
+      position:absolute;left:12px;bottom:11px;z-index:2;
+      padding:5px 8px;border-radius:999px;
+      background:rgba(250,248,246,.88);backdrop-filter:blur(8px);
+      font-size:9px;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+      color:var(--hcf-body);border:1px solid var(--hcf-line);
+    }
+
+    /* ---- 1. Hero ---- */
+    .hcf-hero{
+      padding:46px 0 44px;display:grid;
+      grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr);
+      gap:54px;align-items:center;border-bottom:1px solid var(--btb-border-soft);
+    }
+    .hcf-hero-copy{min-width:0}
+    .hcf-eyebrow{
+      margin:0 0 14px;font-family:'Jost',Arial,sans-serif;font-size:12px;font-weight:500;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--hcf-bronze);
+    }
+    .hcf-hero h1{font-size:clamp(32px,4vw,36px);line-height:1.1;letter-spacing:-.015em}
+    .hcf-hero-subtitle{
+      margin:16px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.3;
+      font-weight:400;color:var(--hcf-body);
+    }
+    .hcf-hero-meta{
+      margin-top:18px;font-family:'Jost',Arial,sans-serif;font-size:10px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--btb-muted);
+    }
+    .hcf-hero-intro{margin:26px 0 0;max-width:630px;font-size:17px;line-height:1.7;color:var(--hcf-body)}
+    .hcf-hero-intro p{margin:0 0 16px}
+    .hcf-hero-intro p:last-child{margin-bottom:0}
+    .hcf-key-line{
+      margin-top:22px;padding-left:18px;border-left:2px solid var(--hcf-bronze-soft);
+      font-family:Georgia,'Times New Roman',serif;font-size:17px;color:var(--hcf-ink);
+    }
+    .hcf-hero-visual{position:relative;min-height:430px}
+    .hcf-hero-collage{position:relative;width:100%;height:430px}
+    .hcf-hero-ph-a{position:absolute;left:0;top:20px;width:54%;height:235px;border-radius:26px}
+    .hcf-hero-ph-b{position:absolute;right:0;top:0;width:40%;height:185px;border-radius:22px}
+    .hcf-hero-ph-c{position:absolute;right:10px;bottom:5px;width:50%;height:218px;border-radius:26px}
+    .hcf-hero-ph-d{position:absolute;left:32px;bottom:0;width:33%;height:155px;border-radius:20px}
+    .hcf-hero-tag{
+      position:absolute;right:16px;top:196px;width:178px;padding:13px 15px;
+      background:var(--hcf-white);border:1px solid var(--btb-border);border-radius:14px;
+      box-shadow:var(--hcf-shadow);
+      font-family:Georgia,'Times New Roman',serif;font-size:14px;line-height:1.4;color:var(--hcf-ink);
+    }
+    @media (max-width:900px){
+      .hcf-hero{grid-template-columns:1fr;gap:32px}
+      .hcf-hero-visual{max-width:640px}
+    }
+    @media (max-width:640px){
+      .hcf-hero{padding:34px 0 34px}
+      .hcf-hero h1{font-size:31px}
+      .hcf-hero-subtitle{font-size:17px}
+      .hcf-hero-intro{font-size:16px}
+      .hcf-hero-visual{min-height:360px}
+      .hcf-hero-collage{height:360px}
+      .hcf-hero-ph-a{height:195px}
+      .hcf-hero-ph-b{height:155px}
+      .hcf-hero-ph-c{height:178px}
+      .hcf-hero-ph-d{height:130px;left:15px}
+      .hcf-hero-tag{top:165px;right:6px;width:155px;font-size:12px}
+    }
+
+    /* ---- shared section rhythm ---- */
+    .hcf-section{padding:60px 0;border-top:1px solid var(--btb-border-soft)}
+    .hcf-section:first-of-type{border-top:0}
+    .hcf-section-head{margin-bottom:32px}
+    .hcf-section-kicker{
+      margin:0 0 10px;font-family:'Jost',Arial,sans-serif;font-size:9px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--hcf-bronze);
+    }
+    .hcf-section h2{font-size:clamp(24px,3vw,26px);line-height:1.2;letter-spacing:-.01em}
+    .hcf-section h3{font-size:20px;line-height:1.35}
+    .hcf-section-copy p:last-child{margin-bottom:0}
+    @media (max-width:640px){
+      .hcf-section{padding:44px 0}
+      .hcf-section h2{font-size:24px}
+      .hcf-section h3{font-size:19px}
+    }
+
+    .hcf-teaching-line{
+      margin:34px 0 4px;padding:28px 30px;border-radius:var(--hcf-radius-md);
+      background:linear-gradient(120deg, var(--hcf-paper-3), var(--hcf-paper-2));
+      border:1px solid var(--hcf-bronze-soft);
+      display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+    }
+    .hcf-teaching-mark{
+      width:42px;height:42px;border-radius:50%;border:1px solid var(--hcf-bronze-soft);
+      display:grid;place-items:center;color:var(--hcf-bronze);
+      font-family:Georgia,'Times New Roman',serif;font-size:20px;
+    }
+    .hcf-teaching-line strong{
+      display:block;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.4;
+      font-weight:400;color:var(--hcf-ink);
+    }
+    @media (max-width:640px){ .hcf-teaching-line{padding:22px 20px;grid-template-columns:1fr} }
+
+    /* ---- Where Crystals Grow: 4-card grid ---- */
+    .hcf-growth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .hcf-growth-card{
+      display:grid;grid-template-columns:170px 1fr;min-height:205px;
+      background:var(--hcf-white);border:1px solid var(--hcf-line);border-radius:var(--hcf-radius-md);
+      overflow:hidden;
+    }
+    .hcf-growth-card .hcf-photo-placeholder{border:0;border-right:1px solid var(--hcf-line);border-radius:0;min-height:205px}
+    .hcf-growth-content{padding:24px 24px 22px}
+    .hcf-growth-num{
+      font-family:'Jost',Arial,sans-serif;font-size:9px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--hcf-bronze);margin-bottom:8px;
+    }
+    .hcf-growth-card h3{font-size:18px;margin-bottom:10px}
+    .hcf-growth-card p{margin:0 0 10px;font-size:14px;line-height:1.55;color:var(--hcf-body)}
+    .hcf-clue{padding-top:10px;border-top:1px solid var(--hcf-line);font-size:12px;line-height:1.5;color:var(--hcf-body)}
+    .hcf-clue b{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--hcf-bronze);margin-right:6px}
+    @media (max-width:900px){
+      .hcf-growth-grid{grid-template-columns:1fr}
+      .hcf-growth-card{grid-template-columns:190px 1fr}
+    }
+    @media (max-width:640px){
+      .hcf-growth-card{grid-template-columns:1fr}
+      .hcf-growth-card .hcf-photo-placeholder{height:190px;min-height:0;border-right:0;border-bottom:1px solid var(--hcf-line)}
+    }
+
+    /* ---- Inside Cooling Rock: split + compare-pair ---- */
+    .hcf-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.86fr);gap:46px;align-items:start}
+    .hcf-compare-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .hcf-compare-item{border:1px solid var(--hcf-line);background:var(--hcf-white);border-radius:var(--hcf-radius-md);overflow:hidden}
+    .hcf-compare-item .hcf-photo-placeholder{height:235px;border:0;border-bottom:1px solid var(--hcf-line)}
+    .hcf-compare-caption{padding:14px 16px 16px}
+    .hcf-compare-caption strong{
+      display:block;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;
+      color:var(--hcf-ink);margin-bottom:2px;
+    }
+    .hcf-compare-caption span{font-size:12px;line-height:1.45;color:var(--btb-muted)}
+    @media (max-width:900px){ .hcf-split{grid-template-columns:1fr} }
+    @media (max-width:640px){
+      .hcf-compare-pair{grid-template-columns:1fr}
+      .hcf-compare-item .hcf-photo-placeholder{height:220px}
+    }
+
+    /* ---- In Cracks and Open Pockets: sequence/steps ---- */
+    .hcf-sequence{
+      margin-top:34px;padding:26px;background:var(--hcf-paper-2);border-radius:var(--hcf-radius-md);
+      border:1px solid var(--hcf-line);
+    }
+    .hcf-sequence-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:18px}
+    .hcf-sequence-head p{margin:0;max-width:500px;font-size:13px;line-height:1.55;color:var(--btb-muted)}
+    .hcf-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .hcf-step{
+      position:relative;min-height:145px;padding:18px 16px 16px;
+      background:rgba(252,250,246,.74);border:1px solid var(--hcf-line);border-radius:12px;
+    }
+    .hcf-step-no{
+      display:inline-grid;place-items:center;width:25px;height:25px;margin-bottom:16px;
+      border-radius:50%;border:1px solid var(--hcf-bronze-soft);color:var(--hcf-bronze);
+      font-family:'Jost',Arial,sans-serif;font-size:10px;font-weight:500;
+    }
+    .hcf-step strong{
+      display:block;font-family:Georgia,'Times New Roman',serif;font-size:14px;line-height:1.35;
+      font-weight:400;color:var(--hcf-ink);
+    }
+    @media (max-width:640px){
+      .hcf-sequence{padding:20px}
+      .hcf-sequence-head{display:block}
+      .hcf-sequence-head p{margin-top:8px}
+      .hcf-steps{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:390px){ .hcf-steps{grid-template-columns:1fr} }
+
+    /* ---- As Water Dries Up: evaporate grid ---- */
+    .hcf-evaporate{
+      margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+      border:1px solid var(--hcf-line);border-radius:var(--hcf-radius-md);overflow:hidden;background:var(--hcf-white);
+    }
+    .hcf-ev-step{padding:22px 18px;min-height:125px;border-right:1px solid var(--hcf-line)}
+    .hcf-ev-step:last-child{border-right:0}
+    .hcf-ev-step span{
+      display:block;margin-bottom:14px;font-family:'Jost',Arial,sans-serif;font-size:9px;letter-spacing:.14em;
+      text-transform:uppercase;font-weight:500;color:var(--hcf-bronze);
+    }
+    .hcf-ev-step strong{font-family:Georgia,'Times New Roman',serif;font-size:14px;line-height:1.4;font-weight:400;color:var(--hcf-ink)}
+    @media (max-width:640px){
+      .hcf-evaporate{grid-template-columns:1fr 1fr}
+      .hcf-ev-step:nth-child(2){border-right:0}
+      .hcf-ev-step:nth-child(-n+2){border-bottom:1px solid var(--hcf-line)}
+    }
+    @media (max-width:390px){
+      .hcf-evaporate{grid-template-columns:1fr}
+      .hcf-ev-step{border-right:0;border-bottom:1px solid var(--hcf-line)}
+      .hcf-ev-step:last-child{border-bottom:0}
+    }
+
+    /* ---- Inside Older Rock: matrix-compare ---- */
+    .hcf-matrix-compare{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .hcf-matrix-card{overflow:hidden;background:var(--hcf-white);border:1px solid var(--hcf-line);border-radius:var(--hcf-radius-md)}
+    .hcf-matrix-card .hcf-photo-placeholder{height:290px;border:0;border-bottom:1px solid var(--hcf-line)}
+    .hcf-matrix-text{padding:18px 20px 20px}
+    .hcf-matrix-text strong{
+      display:block;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.35;
+      font-weight:400;color:var(--hcf-ink);margin-bottom:5px;
+    }
+    .hcf-matrix-text span{font-size:13px;color:var(--btb-muted)}
+    .hcf-matrix-note{
+      margin-top:16px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;
+      line-height:1.55;color:var(--hcf-body);
+    }
+    @media (max-width:640px){
+      .hcf-matrix-compare{grid-template-columns:1fr}
+      .hcf-matrix-card .hcf-photo-placeholder{height:230px}
+    }
+
+    /* ---- Why Some Crystals Grow Large: conditions grid ---- */
+    .hcf-conditions{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .hcf-condition{
+      padding:22px 18px 20px;min-height:135px;border-radius:14px;
+      background:var(--hcf-white);border:1px solid var(--hcf-line);
+    }
+    .hcf-condition::before{content:"";display:block;width:26px;height:2px;background:var(--hcf-bronze-soft);margin-bottom:16px}
+    .hcf-condition strong{
+      display:block;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.35;
+      font-weight:400;color:var(--hcf-ink);margin-bottom:7px;
+    }
+    .hcf-condition span{display:block;font-size:12px;line-height:1.5;color:var(--btb-muted)}
+    .hcf-central-note{
+      margin:14px 0 0;text-align:center;font-family:Georgia,'Times New Roman',serif;font-style:italic;
+      font-size:16px;color:var(--hcf-body);
+    }
+    @media (max-width:900px){ .hcf-conditions{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:640px){ .hcf-conditions{grid-template-columns:1fr 1fr} }
+    @media (max-width:390px){ .hcf-conditions{grid-template-columns:1fr} }
+
+    /* ---- Same Mineral, Different Form: quartz-gallery + twist ---- */
+    .hcf-quartz-feature{
+      margin-top:34px;padding:28px;background:var(--hcf-paper-3);border-radius:var(--hcf-radius-lg);
+      border:1px solid var(--hcf-line);
+    }
+    .hcf-quartz-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .hcf-quartz-item{background:rgba(252,250,246,.8);border:1px solid var(--hcf-line);border-radius:14px;overflow:hidden}
+    .hcf-quartz-item .hcf-photo-placeholder{height:210px;border:0;border-bottom:1px solid var(--hcf-line)}
+    .hcf-quartz-name{padding:12px 14px 14px;font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--hcf-ink)}
+    .hcf-quote-feature{
+      margin:28px auto 0;max-width:760px;text-align:center;font-family:Georgia,'Times New Roman',serif;
+      font-style:italic;font-size:20px;line-height:1.5;color:var(--hcf-ink);
+    }
+    .hcf-twist{
+      margin-top:34px;display:grid;grid-template-columns:200px 1fr;overflow:hidden;
+      border:1px solid var(--hcf-bronze-soft);border-radius:var(--hcf-radius-md);
+      background:linear-gradient(120deg, var(--hcf-paper-3), var(--hcf-white));
+    }
+    .hcf-twist .hcf-photo-placeholder{min-height:190px;border:0;border-right:1px solid var(--hcf-line);border-radius:0}
+    .hcf-twist-copy{padding:28px}
+    .hcf-twist-copy .hcf-section-kicker{margin-bottom:7px}
+    .hcf-twist-copy h3{margin-bottom:10px}
+    .hcf-twist-copy p{margin:0;max-width:620px}
+    @media (max-width:900px){ .hcf-quartz-gallery{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:640px){
+      .hcf-quartz-feature{padding:18px}
+      .hcf-quartz-item .hcf-photo-placeholder{height:165px}
+      .hcf-quote-feature{font-size:18px}
+      .hcf-twist{grid-template-columns:1fr}
+      .hcf-twist .hcf-photo-placeholder{height:180px;min-height:0;border-right:0;border-bottom:1px solid var(--hcf-line)}
+    }
+    @media (max-width:390px){ .hcf-quartz-gallery{grid-template-columns:1fr} }
+
+    /* ---- Closing ---- */
+    .hcf-closing{padding:72px 0 16px;border-top:1px solid var(--btb-border-soft)}
+    .hcf-closing h2{font-size:28px}
+    .hcf-closing p{margin:20px 0 0}
+    .hcf-closing-line{
+      margin:30px 0 0;font-family:Georgia,'Times New Roman',serif;font-style:italic;
+      font-size:21px;line-height:1.5;color:var(--hcf-ink);
+    }
+    @media (max-width:640px){
+      .hcf-closing{padding-top:56px}
+      .hcf-closing h2{font-size:25px}
+      .hcf-closing-line{font-size:19px}
+    }
+  </style>
+</head>
+<body class="btb-body">
+<div class="app-shell">
+
+  <header class="topbar">
+    <a href="../index.html" class="brand-home" aria-label="Return to Encyclopedia home">
+      <div class="brand-block">
+        <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+       <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+        </div>
+      </div>
+    </a>
+    <div class="topbar-right">
+      <span class="stone-count" id="stone-count"></span>
+      <div class="topbar-auth" id="topbar-auth"></div>
+      <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
+      <a class="btn btn-sm" id="request-entry-btn" href="../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
+      <a class="btn btn-sm" id="guide-btn" href="../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
+      <a class="btn btn-sm" id="manage-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main-nav-wrap"><nav class="main-nav">
+    <a class="nav-tab" href="../index.html">Home</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=mood">Choose by Intention</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=identify">Identify</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=collection">My Collection</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=101">Crystals 101</a>
+    <a class="nav-tab active" href="../beyond-the-basics.html" aria-current="page">Beyond the Basics</a>
+  </nav></div>
+
+  <main class="hcf-article">
+
+    <!-- 1. Hero -->
+    <section class="hcf-hero" aria-labelledby="article-title">
+      <div class="hcf-hero-copy">
+        <p class="hcf-eyebrow">Formation</p>
+        <h1 id="article-title">How Crystals Form</h1>
+        <p class="hcf-hero-subtitle">Why Crystals Can Look So Different</p>
+        <p class="hcf-hero-meta">About 6 minutes</p>
+
+        <div class="hcf-hero-intro">
+          <p>Some crystals grow as sharp points. Others form cubes, blades, clusters, rounded masses, or tiny grains hidden inside rock. They may look completely unrelated, even when they are made from the same mineral.</p>
+          <p>So what decides the final form?</p>
+          <p>A crystal begins when its building blocks settle into a repeating internal pattern. From there, the environment takes over. Where the crystal grows, how much room it has, how quickly conditions change, and what material is available all help shape what we eventually see.</p>
+        </div>
+
+        <div class="hcf-key-line"><strong>Where a crystal grows helps explain what it looks like.</strong></div>
+      </div>
+
+      <div class="hcf-hero-visual" aria-label="Photo placeholders for quartz point, fluorite cube, garnet in matrix, and druzy surface">
+        <div class="hcf-hero-collage">
+          <div class="hcf-photo-placeholder hcf-hero-ph-a"><span class="hcf-ph-label">Photo · Quartz point</span></div>
+          <div class="hcf-photo-placeholder hcf-hero-ph-b"><span class="hcf-ph-label">Photo · Fluorite cube</span></div>
+          <div class="hcf-photo-placeholder hcf-hero-ph-c"><span class="hcf-ph-label">Photo · Garnet in matrix</span></div>
+          <div class="hcf-photo-placeholder hcf-hero-ph-d"><span class="hcf-ph-label">Photo · Druzy surface</span></div>
+          <div class="hcf-hero-tag">One mineral world. Many possible bodies.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. What Crystal Growth Actually Means -->
+    <section class="hcf-section" id="crystal-growth">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">Start here</p>
+        <h2>What Crystal Growth Actually Means</h2>
+      </div>
+      <div class="hcf-section-copy">
+        <p>A crystal is defined by its internal order. Atoms, ions, or molecules arrange themselves in a repeating pattern as the material becomes solid, and new particles continue joining that pattern as the crystal grows.</p>
+        <p>When there is enough room, that internal order may show itself as flat faces, sharp edges, points, or cubes. When neighboring material crowds the crystal, those ideal outer shapes may never have space to develop.</p>
+        <p>That is why a crystal does not need to look like a flawless display specimen to be a crystal. The repeating structure inside matters more than whether the outside looks picture-perfect.</p>
+      </div>
+      <div class="hcf-teaching-line">
+        <div class="hcf-teaching-mark">◇</div>
+        <strong>The pattern is inside. The visible shape depends on how much freedom that pattern had to grow.</strong>
+      </div>
+    </section>
+
+    <!-- 3. Where Crystals Grow -->
+    <section class="hcf-section" id="where-crystals-grow">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">Four growth settings</p>
+        <h2>Where Crystals Grow</h2>
+      </div>
+      <div class="hcf-section-copy" style="margin-bottom:28px">
+        <p>Most collector specimens can be understood through four broad growth settings.</p>
+      </div>
+
+      <div class="hcf-growth-grid">
+        <article class="hcf-growth-card">
+          <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Granite</span></div>
+          <div class="hcf-growth-content">
+            <div class="hcf-growth-num">01 · Inside cooling rock</div>
+            <h3>Molten rock cools underground</h3>
+            <p>Minerals form within the cooling rock.</p>
+            <div class="hcf-clue"><b>Collector clue</b> Several minerals locked together.</div>
+          </div>
+        </article>
+
+        <article class="hcf-growth-card">
+          <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Quartz / fluorite pocket</span></div>
+          <div class="hcf-growth-content">
+            <div class="hcf-growth-num">02 · Cracks and open pockets</div>
+            <h3>Mineral-rich water deposits material</h3>
+            <p>Crystals grow inside openings as conditions change.</p>
+            <div class="hcf-clue"><b>Collector clue</b> Points, clusters, veins, cavity linings.</div>
+          </div>
+        </article>
+
+        <article class="hcf-growth-card">
+          <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Halite / gypsum</span></div>
+          <div class="hcf-growth-content">
+            <div class="hcf-growth-num">03 · As water dries up</div>
+            <h3>Evaporation leaves material behind</h3>
+            <p>Dissolved ingredients become concentrated enough to crystallize.</p>
+            <div class="hcf-clue"><b>Collector clue</b> Simple crystal groups or layered deposits.</div>
+          </div>
+        </article>
+
+        <article class="hcf-growth-card">
+          <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Garnet in schist</span></div>
+          <div class="hcf-growth-content">
+            <div class="hcf-growth-num">04 · Inside older rock</div>
+            <h3>Heat, pressure, and fluids reorganize minerals</h3>
+            <p>New crystals form without the rock fully melting.</p>
+            <div class="hcf-clue"><b>Collector clue</b> Crystals embedded in matrix.</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="hcf-section-copy" style="margin-top:24px">
+        <p>These settings are not just geological categories. They leave visible clues in the finished specimen.</p>
+      </div>
+    </section>
+
+    <!-- 4. Inside Cooling Rock -->
+    <section class="hcf-section" id="cooling-rock">
+      <div class="hcf-split">
+        <div>
+          <div class="hcf-section-head">
+            <p class="hcf-section-kicker">Growth setting 01</p>
+            <h2>Inside Cooling Rock</h2>
+          </div>
+          <div class="hcf-section-copy">
+            <p>Molten rock beneath Earth&rsquo;s surface cools and becomes solid. As it does, different minerals begin forming within it, including quartz, feldspar, mica, olivine, and many others.</p>
+            <p>Cooling speed matters. When rock cools slowly underground, crystals generally have more time to grow larger. Faster cooling near the surface usually produces much smaller crystals.</p>
+            <p>That contrast helps explain why granite can show visible quartz, feldspar, and mica grains packed together, while rapidly cooled volcanic rock may look far finer.</p>
+            <p><strong>What the specimen may show:</strong> several minerals interlocked inside one rock.</p>
+          </div>
+        </div>
+        <div class="hcf-compare-pair" aria-label="Cooling speed photo comparison placeholders">
+          <div class="hcf-compare-item">
+            <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Coarse granite</span></div>
+            <div class="hcf-compare-caption">
+              <strong>Slower cooling</strong>
+              <span>Larger visible grains</span>
+            </div>
+          </div>
+          <div class="hcf-compare-item">
+            <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Fine volcanic rock</span></div>
+            <div class="hcf-compare-caption">
+              <strong>Faster cooling</strong>
+              <span>Much finer grains</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. In Cracks and Open Pockets -->
+    <section class="hcf-section" id="open-pockets">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">Growth setting 02</p>
+        <h2>In Cracks and Open Pockets</h2>
+      </div>
+      <div class="hcf-section-copy">
+        <p>Water moving through rock can carry dissolved mineral ingredients. When temperature, pressure, or chemistry changes, some of that material may begin crystallizing along cracks, veins, cavities, and open pockets.</p>
+        <p>Quartz, calcite, fluorite, barite, and many other collector minerals commonly form in settings like these.</p>
+        <p>Open space makes a visible difference. In a roomy cavity, crystals can grow outward and develop distinct faces, edges, and points. In a narrow crack, the same mineral may line the walls, form a thin vein, or grow until opposing crystals meet.</p>
+        <p>A pocket can also preserve more than one stage of growth. Later minerals may form beside, over, or between earlier ones, turning a single cavity into a record of changing conditions.</p>
+      </div>
+
+      <div class="hcf-sequence">
+        <div class="hcf-sequence-head">
+          <h3>From Crack to Crystal Pocket</h3>
+          <p>A compact visual sequence, designed to support the article rather than become a geology diagram.</p>
+        </div>
+        <div class="hcf-steps">
+          <div class="hcf-step"><span class="hcf-step-no">1</span><strong>An opening exists in the rock.</strong></div>
+          <div class="hcf-step"><span class="hcf-step-no">2</span><strong>Mineral-rich water enters.</strong></div>
+          <div class="hcf-step"><span class="hcf-step-no">3</span><strong>Crystals begin growing on the walls.</strong></div>
+          <div class="hcf-step"><span class="hcf-step-no">4</span><strong>Later growth may add minerals or coatings.</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. As Water Dries Up -->
+    <section class="hcf-section" id="water-dries">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">Growth setting 03</p>
+        <h2>As Water Dries Up</h2>
+      </div>
+      <div class="hcf-section-copy">
+        <p>Some crystals form because water leaves.</p>
+        <p>As mineral-rich water evaporates, the dissolved material becomes more concentrated. Eventually there is more material in solution than the shrinking volume of water can comfortably hold, and crystals begin to form.</p>
+        <p>Halite and gypsum are familiar examples from saline lakes, dry basins, lagoons, and restricted seas.</p>
+        <p>The sequence is simple:</p>
+      </div>
+      <div class="hcf-evaporate">
+        <div class="hcf-ev-step"><span>01</span><strong>Water contains dissolved material.</strong></div>
+        <div class="hcf-ev-step"><span>02</span><strong>Water begins to evaporate.</strong></div>
+        <div class="hcf-ev-step"><span>03</span><strong>The dissolved material becomes increasingly concentrated.</strong></div>
+        <div class="hcf-ev-step"><span>04</span><strong>Crystals form.</strong></div>
+      </div>
+      <div class="hcf-section-copy" style="margin-top:24px">
+        <p>It is a quiet process, but the result can be striking. A landscape loses water, and mineral structure appears.</p>
+      </div>
+    </section>
+
+    <!-- 7. Inside Older Rock -->
+    <section class="hcf-section" id="older-rock">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">Growth setting 04</p>
+        <h2>Inside Older Rock</h2>
+      </div>
+      <div class="hcf-section-copy">
+        <p>A rock does not need to melt completely for new crystals to form.</p>
+        <p>Deep underground, heat, pressure, and fluids can reorganize minerals that are already present. New crystals may grow inside the solid rock while the surrounding material is changing too.</p>
+        <p>Garnet and kyanite are familiar examples. A garnet in schist may have grown while the rock around it was being transformed, without ever having the open cavity a quartz point might need.</p>
+        <p>That difference is often visible in the finished specimen. Crystals lining a cavity grew into open space. Garnet embedded in schist grew within changing rock, and the matrix still preserves part of that environment.</p>
+      </div>
+
+      <div class="hcf-matrix-compare">
+        <article class="hcf-matrix-card">
+          <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Crystal-lined cavity</span></div>
+          <div class="hcf-matrix-text">
+            <strong>Grew into open space</strong>
+            <span>Faces and points had room to develop.</span>
+          </div>
+        </article>
+        <article class="hcf-matrix-card">
+          <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Garnet in schist</span></div>
+          <div class="hcf-matrix-text">
+            <strong>Grew inside changing rock</strong>
+            <span>The matrix remains part of the formation story.</span>
+          </div>
+        </article>
+      </div>
+      <div class="hcf-matrix-note">The matrix may preserve part of the environment in which the crystal formed.</div>
+    </section>
+
+    <!-- 8. Why Some Crystals Grow Large -->
+    <section class="hcf-section" id="large-crystals">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">What makes size possible</p>
+        <h2>Why Some Crystals Grow Large</h2>
+      </div>
+      <div class="hcf-section-copy">
+        <p>Large crystals need more than the right ingredients. They usually benefit from a favorable combination of time, material, relative stability, and space.</p>
+      </div>
+      <div class="hcf-conditions">
+        <div class="hcf-condition"><strong>Time</strong><span>The crystal has longer to grow.</span></div>
+        <div class="hcf-condition"><strong>Material</strong><span>New building blocks remain available.</span></div>
+        <div class="hcf-condition"><strong>Stable conditions</strong><span>Growth can continue without repeated disruption.</span></div>
+        <div class="hcf-condition"><strong>Space</strong><span>The crystal can develop without colliding with neighbors.</span></div>
+      </div>
+      <div class="hcf-central-note">Large crystals need several favorable conditions to cooperate.</div>
+      <div class="hcf-section-copy" style="margin-top:26px">
+        <p>No single factor guarantees a giant crystal. A crystal can have plenty of time but too little space, or abundant material but changing conditions that repeatedly interrupt growth.</p>
+        <p>Large crystals are not simply older versions of small ones. They are evidence that several conditions happened to cooperate.</p>
+      </div>
+    </section>
+
+    <!-- 9. Same Mineral, Different Form -->
+    <section class="hcf-section" id="different-form">
+      <div class="hcf-section-head">
+        <p class="hcf-section-kicker">The collector-facing clue</p>
+        <h2>Same Mineral, Different Form</h2>
+      </div>
+      <div class="hcf-section-copy">
+        <p>This is where crystal formation becomes especially useful for collectors.</p>
+        <p>Quartz can appear as a single point, an intergrown cluster, a sparkling druzy coating, or dense chalcedony with no visible points at all. The internal mineral structure remains related, but the visible form can change dramatically.</p>
+        <p>Temperature, chemistry, impurities, growth speed, and available space all influence the result.</p>
+      </div>
+
+      <div class="hcf-quartz-feature">
+        <div class="hcf-quartz-gallery">
+          <div class="hcf-quartz-item">
+            <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo</span></div>
+            <div class="hcf-quartz-name">Single point</div>
+          </div>
+          <div class="hcf-quartz-item">
+            <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo</span></div>
+            <div class="hcf-quartz-name">Intergrown cluster</div>
+          </div>
+          <div class="hcf-quartz-item">
+            <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo</span></div>
+            <div class="hcf-quartz-name">Druzy coating</div>
+          </div>
+          <div class="hcf-quartz-item">
+            <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo</span></div>
+            <div class="hcf-quartz-name">Chalcedony</div>
+          </div>
+        </div>
+        <div class="hcf-quote-feature"><strong>Same mineral. Different conditions. Different form.</strong></div>
+      </div>
+
+      <div class="hcf-section-copy" style="margin-top:28px">
+        <p>That is why a familiar mineral can keep surprising you. Learning the species name is only the beginning. The form tells you something about the environment in which that particular specimen developed.</p>
+        <p>Crystal growth can also pause and restart. Later layers, coatings, healing, or partial replacement may add another chapter to the same piece.</p>
+      </div>
+
+      <div class="hcf-twist">
+        <div class="hcf-photo-placeholder"><span class="hcf-ph-label">Photo · Regrowth / coating</span></div>
+        <div class="hcf-twist-copy">
+          <p class="hcf-section-kicker">One more twist</p>
+          <h3>Growth Can Pause and Restart</h3>
+          <p>Later layers, coatings, healing, or partial replacement may add another chapter to the same specimen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Closing -->
+    <section class="hcf-closing" id="story-shape">
+      <div class="hcf-closing-inner">
+        <p class="hcf-section-kicker">Look again</p>
+        <h2>The Story in the Shape</h2>
+        <p>A crystal&rsquo;s final form is not random. It reflects where it grew, how much room it had, what material was available, and how conditions changed around it.</p>
+        <p>Once you start looking for those clues, points, clusters, grains, veins, and matrix stop feeling like unrelated forms. They become different outcomes of crystal growth.</p>
+        <div class="hcf-closing-line">The shape is not the whole story, but it is often where the story starts.</div>
+      </div>
+    </section>
+
+    <!-- 11. Related Reading and Return Navigation -->
+    <div class="btb-footer-links">
+      <section class="btb-related" aria-label="Related Encyclopedia Entries">
+        <h2>Related Encyclopedia Entries</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">Quartz</span></li>
+          <li><span class="btb-related-quiet">Fluorite</span></li>
+          <li><span class="btb-related-quiet">Garnet</span></li>
+          <li><span class="btb-related-quiet">Chalcedony</span></li>
+        </ul>
+      </section>
+
+      <section class="btb-related" aria-label="Continue Exploring">
+        <h2>Continue Exploring</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">What's Inside a Crystal?</span></li>
+          <li><span class="btb-related-quiet">Fossils in a Crystal Collection: What Are You Actually Holding?</span></li>
+          <li><span class="btb-related-quiet">Why Some Crystals Glow</span></li>
+          <li><span class="btb-related-quiet">Commercial Name or Mineral Name?</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="btb-return-bottom">
+      <a class="btb-return" href="../beyond-the-basics.html">← Back to Beyond the Basics</a>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Sign-in modal markup required by auth.js's _openAuth()/closeAuthModal(),
+     copied verbatim from index.html so "Sign In" in the shared header
+     actually works on this page, matching the homepage exactly. -->
+<div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
+    <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
+    <div style="margin-bottom:1rem">
+      <label for="auth-email-input" style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" name="email" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+    </div>
+    <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
+    <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
+    <div style="font-size:11px;color:#b0a89e;text-align:center;margin-top:1rem;line-height:1.6">Your collection saves across all your devices.<br>Open the link in the email on this device.</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../app.js"></script>
+<script src="../auth.js"></script>
+</body>
+</html>
