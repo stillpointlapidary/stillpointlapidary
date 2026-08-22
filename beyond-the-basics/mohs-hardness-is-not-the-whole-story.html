@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mohs Hardness Is Not the Whole Story — Still Point Lapidary</title>
+  <meta name="description" content="Mohs hardness tells you who can scratch whom. It does not tell you whether a stone will chip, how well it handles impact, or whether heat, light, water, or chemicals can affect it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="btb-shared.css">
+
+  <!-- Article 4 (Mohs Hardness Is Not the Whole Story) — rebuilt from the
+       approved article-04-mohs-hardness-is-not-the whole-story.html
+       prototype (Content\Beyond the Basics\html files\). Page-scoped
+       .mhs- rules only; btb-shared.css untouched by this pass. The
+       prototype's own hex palette is remapped onto the locked
+       EDITORIAL-PAGE-VISUAL-STANDARD.md §5.2 Beyond the Basics
+       type/color system (matching styles.css --ink/--ink2/--accent/
+       --border), the same mapping approach used for Article 3/How
+       Crystals Form. All prototype layout numbers, grid proportions,
+       and photo-placeholder wells/dimensions are preserved exactly,
+       just renamed under the .mhs- prefix. Every image slot remains a
+       placeholder div — no photography is assigned yet. The prototype's
+       decorative Mohs-scale step-tint gradient colors (rose/sand/sage/
+       mist/blue) are preserved as-is since they are a deliberate small
+       multi-step visual, not body copy color. -->
+  <style>
+    /* Match the article background to the site header's background
+       (var(--white), styles.css) rather than the warmer btb-shared.css
+       --btb-paper cream, matching the Article 3/How Crystals Form
+       precedent. */
+    body.btb-body{background:var(--white)}
+
+    .mhs-article{
+      --mhs-ink:#524d47;
+      --mhs-body:#6b6560;
+      --mhs-muted:#8b847c;
+      --mhs-bronze:#8b7355;
+      --mhs-bronze-soft:rgba(139,115,85,.35);
+      --mhs-line:rgba(42,37,32,.12);
+      --mhs-line-strong:rgba(42,37,32,.22);
+      --mhs-white:#fcfaf6;
+      --mhs-paper-2:#f8f4ed;
+      --mhs-paper-3:#efe8de;
+      --mhs-stone2:#ede9e3;
+      --mhs-stone3:#e3ddd6;
+      --mhs-rose:#eaded8;
+      --mhs-sand:#ece2d3;
+      --mhs-sage:#dfe4dc;
+      --mhs-mist:#e1e5e6;
+      --mhs-blue:#dde2e7;
+      --mhs-shadow:0 18px 40px rgba(42,37,32,.08);
+      --mhs-radius-lg:24px;
+      --mhs-radius-md:16px;
+      --mhs-radius-sm:12px;
+      width:min(var(--btb-max-width), calc(100% - 48px));
+      margin:0 auto;
+      padding:0 0 24px;
+    }
+    .mhs-article h1,.mhs-article h2,.mhs-article h3{
+      font-family:Georgia,'Times New Roman',serif;font-weight:400;color:var(--mhs-ink);margin:0;
+    }
+    .mhs-article p{font-family:'Jost',Arial,sans-serif;font-size:16px;line-height:1.7;color:var(--mhs-body);margin:0 0 18px}
+    .mhs-article p:last-child{margin-bottom:0}
+
+    /* ---- shared placeholder well: gradient + pill label, kept from the
+       prototype's approved composition, recolored onto canonical
+       neutral/border/ink tokens instead of the prototype's own hexes ---- */
+    .mhs-photo-placeholder{
+      position:relative;overflow:hidden;
+      background:
+        radial-gradient(circle at 27% 20%, rgba(255,255,255,.75), transparent 32%),
+        linear-gradient(145deg, var(--mhs-stone2), var(--mhs-stone3));
+      border:1px solid var(--mhs-line);
+      color:var(--mhs-body);
+    }
+    .mhs-photo-placeholder::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(135deg,transparent 0 45%,rgba(255,255,255,.22) 45% 46%,transparent 46% 100%),
+        radial-gradient(circle at 75% 28%,rgba(139,115,85,.11),transparent 28%);
+      pointer-events:none;
+    }
+    .mhs-photo-placeholder .mhs-ph-label{
+      position:absolute;left:12px;bottom:11px;z-index:2;
+      padding:5px 8px;border-radius:999px;
+      background:rgba(250,248,246,.88);backdrop-filter:blur(8px);
+      font-size:9px;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+      color:var(--mhs-body);border:1px solid var(--mhs-line);
+    }
+
+    /* ---- 1. Hero ---- */
+    .mhs-hero{
+      padding:46px 0 44px;display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);
+      gap:54px;align-items:center;border-bottom:1px solid var(--btb-border-soft);
+    }
+    .mhs-hero-copy{min-width:0}
+    .mhs-eyebrow{
+      margin:0 0 14px;font-family:'Jost',Arial,sans-serif;font-size:12px;font-weight:500;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--mhs-bronze);
+    }
+    .mhs-hero h1{font-size:clamp(32px,4vw,36px);line-height:1.1;letter-spacing:-.025em}
+    .mhs-hero-subtitle{
+      margin:16px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.3;
+      font-weight:400;color:var(--mhs-body);
+    }
+    .mhs-hero-meta{
+      margin-top:18px;font-family:'Jost',Arial,sans-serif;font-size:10px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--btb-muted);
+    }
+    .mhs-hero-intro{margin:26px 0 0;max-width:630px;font-size:17px;line-height:1.7;color:var(--mhs-body)}
+    .mhs-hero-intro p{margin:0 0 15px}
+    .mhs-hero-intro p:last-child{margin-bottom:0}
+    .mhs-hero-question{
+      margin-top:22px;padding:17px 19px;border-left:2px solid var(--mhs-bronze-soft);
+      font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:1.4;color:var(--mhs-ink);
+    }
+    .mhs-hero-visual{position:relative;min-height:420px}
+    .mhs-hero-stage{position:relative;height:420px}
+    .mhs-hero-quartz{position:absolute;left:5px;top:30px;width:55%;height:330px;border-radius:28px}
+    .mhs-hero-fluorite{position:absolute;right:0;top:0;width:43%;height:250px;border-radius:24px}
+    .mhs-hero-chip{
+      position:absolute;right:14px;bottom:26px;width:190px;padding:16px 17px;background:var(--mhs-white);
+      border:1px solid var(--btb-border);border-radius:15px;box-shadow:var(--mhs-shadow);
+    }
+    .mhs-hero-chip b{display:block;font-family:Georgia,'Times New Roman',serif;font-size:25px;font-weight:400;color:var(--mhs-ink)}
+    .mhs-hero-chip span{font-size:11px;color:var(--btb-muted)}
+    @media (max-width:900px){
+      .mhs-hero{grid-template-columns:1fr;gap:30px}
+      .mhs-hero-visual{max-width:640px}
+    }
+    @media (max-width:640px){
+      .mhs-hero{padding:38px 0 42px}
+      .mhs-hero h1{font-size:31px}
+      .mhs-hero-subtitle{font-size:17px}
+      .mhs-hero-intro{font-size:16px}
+      .mhs-hero-stage,.mhs-hero-visual{height:350px;min-height:350px}
+      .mhs-hero-quartz{height:260px}
+      .mhs-hero-fluorite{height:190px}
+      .mhs-hero-chip{width:164px;right:5px;bottom:18px}
+    }
+
+    /* ---- shared section rhythm ---- */
+    .mhs-section{padding:60px 0;border-top:1px solid var(--btb-border-soft)}
+    .mhs-section:first-of-type{border-top:0}
+    .mhs-section-head{width:100%;max-width:none;margin-bottom:30px}
+    .mhs-section-kicker{
+      margin:0 0 10px;font-family:'Jost',Arial,sans-serif;font-size:9px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--mhs-bronze);
+    }
+    .mhs-section h2{font-size:clamp(24px,3vw,26px);line-height:1.2;letter-spacing:-.015em}
+    .mhs-section h3{font-size:20px;line-height:1.35}
+    .mhs-section-copy{width:100%;max-width:none}
+    .mhs-section-copy p:last-child{margin-bottom:0}
+    @media (max-width:640px){
+      .mhs-section{padding:52px 0}
+      .mhs-section h2{font-size:24px}
+      .mhs-section h3{font-size:19px}
+    }
+
+    /* ---- What the Number Actually Tells You: rule callout ---- */
+    .mhs-rule-callout{
+      margin-top:30px;padding:24px 26px;border-radius:var(--mhs-radius-md);
+      background:linear-gradient(120deg, var(--mhs-paper-3), var(--mhs-paper-2));
+      border:1px solid var(--mhs-bronze-soft);
+      font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.5;color:var(--mhs-ink);
+    }
+
+    /* ---- The Mohs Scale at a Glance ---- */
+    .mhs-mohs-wrap{
+      margin-top:30px;padding:28px 26px 24px;border:1px solid var(--mhs-line);border-radius:22px;background:var(--mhs-white);
+    }
+    .mhs-scale-title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:18px}
+    .mhs-scale-title p{margin:0;font-size:12px;color:var(--btb-muted)}
+    .mhs-mohs-scale{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;align-items:end}
+    .mhs-mohs-item{
+      min-width:0;border-radius:12px;padding:13px 8px 11px;border:1px solid var(--mhs-line);
+      display:flex;flex-direction:column;justify-content:flex-end;position:relative;
+    }
+    .mhs-mohs-item:nth-child(1){height:104px;background:#eee8e3}
+    .mhs-mohs-item:nth-child(2){height:112px;background:#eee5dc}
+    .mhs-mohs-item:nth-child(3){height:120px;background:#ece2d6}
+    .mhs-mohs-item:nth-child(4){height:128px;background:#e5e4da}
+    .mhs-mohs-item:nth-child(5){height:136px;background:#e0e4dc}
+    .mhs-mohs-item:nth-child(6){height:144px;background:#dfe4e3}
+    .mhs-mohs-item:nth-child(7){height:152px;background:var(--mhs-blue)}
+    .mhs-mohs-item:nth-child(8){height:160px;background:#e2dfe8}
+    .mhs-mohs-item:nth-child(9){height:168px;background:#e8dfe3}
+    .mhs-mohs-item:nth-child(10){height:176px;background:var(--mhs-rose)}
+    .mhs-mohs-num{font-family:Georgia,'Times New Roman',serif;font-size:24px;line-height:1;color:var(--mhs-ink)}
+    .mhs-mohs-mineral{margin-top:7px;font-size:11px;line-height:1.25;font-weight:500;color:var(--mhs-ink)}
+    .mhs-mohs-anchor{margin-top:5px;font-size:9px;line-height:1.25;color:var(--btb-muted)}
+    .mhs-scale-caption{
+      margin:18px 0 0;text-align:center;font-family:Georgia,'Times New Roman',serif;
+      font-style:italic;font-size:16px;color:var(--mhs-body);
+    }
+    @media (max-width:900px){
+      .mhs-mohs-wrap{overflow-x:auto}
+      .mhs-mohs-scale{min-width:820px}
+    }
+    @media (max-width:640px){
+      .mhs-mohs-wrap{padding:22px 18px 20px}
+      .mhs-scale-title{display:block}
+      .mhs-scale-title p{margin-top:7px}
+    }
+
+    /* ---- What Mohs Helps You Understand: 3-card use-grid ---- */
+    .mhs-use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+    .mhs-use-card{padding:24px 22px;background:var(--mhs-white);border:1px solid var(--mhs-line);border-radius:var(--mhs-radius-md)}
+    .mhs-use-no{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mhs-bronze);font-weight:500;margin-bottom:12px}
+    .mhs-use-card h3{font-size:18px;margin-bottom:9px}
+    .mhs-use-card p{margin:0;font-size:13px;line-height:1.55;color:var(--mhs-body)}
+    @media (max-width:900px){ .mhs-use-grid{grid-template-columns:1fr} }
+
+    /* ---- A Higher Number Does Not Mean Stronger: compare-feature ---- */
+    .mhs-compare-feature{
+      margin-top:32px;padding:28px;background:var(--mhs-paper-3);border:1px solid var(--mhs-line);border-radius:var(--mhs-radius-lg);
+    }
+    .mhs-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .mhs-material-card{background:rgba(255,253,250,.88);border:1px solid var(--mhs-line);border-radius:var(--mhs-radius-md);overflow:hidden}
+    .mhs-material-card .mhs-photo-placeholder{height:260px;border:0;border-bottom:1px solid var(--mhs-line)}
+    .mhs-material-info{padding:20px}
+    .mhs-material-top{display:flex;justify-content:space-between;gap:14px;align-items:start;margin-bottom:14px}
+    .mhs-material-info h3{font-size:19px}
+    .mhs-big-mohs{
+      flex:none;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
+      background:var(--mhs-paper-2);border:1px solid var(--mhs-bronze-soft);
+      font-family:Georgia,'Times New Roman',serif;font-size:25px;color:var(--mhs-ink);
+    }
+    .mhs-stat-row{display:grid;grid-template-columns:104px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--mhs-line);font-size:12px;line-height:1.45}
+    .mhs-stat-row b{font-weight:500;color:var(--mhs-ink)}
+    .mhs-stat-row span{color:var(--mhs-body)}
+    .mhs-compare-conclusion{
+      margin:22px 0 0;width:100%;max-width:none;text-align:left;font-family:Georgia,'Times New Roman',serif;
+      font-style:italic;font-size:20px;color:var(--mhs-ink);
+    }
+    @media (max-width:640px){
+      .mhs-compare-grid{grid-template-columns:1fr}
+      .mhs-material-card .mhs-photo-placeholder{height:230px}
+    }
+
+    /* ---- What Are You Trying to Learn?: question-grid ---- */
+    .mhs-question-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+    .mhs-question-card{padding:22px 20px;background:var(--mhs-white);border:1px solid var(--mhs-line);border-radius:15px}
+    .mhs-question-card.primary{background:var(--mhs-paper-3);border-color:var(--mhs-bronze-soft)}
+    .mhs-question-card .q{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.35;color:var(--mhs-ink)}
+    .mhs-question-card .a{margin-top:10px;font-size:12px;line-height:1.5;color:var(--btb-muted)}
+    @media (max-width:900px){ .mhs-question-grid{grid-template-columns:1fr} }
+
+    /* ---- The Shape of the Stone Matters Too: shape-feature ---- */
+    .mhs-shape-feature{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+    .mhs-shape-card{position:relative;overflow:hidden;background:var(--mhs-white);border:1px solid var(--mhs-line);border-radius:18px}
+    .mhs-shape-card .mhs-photo-placeholder{height:300px;border:0;border-bottom:1px solid var(--mhs-line)}
+    .mhs-shape-mohs{
+      position:absolute;right:14px;top:14px;padding:7px 10px;border-radius:999px;background:rgba(250,248,246,.92);
+      border:1px solid var(--mhs-line);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mhs-ink);
+    }
+    .mhs-shape-copy{padding:18px 20px 20px}
+    .mhs-shape-copy strong{display:block;font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;color:var(--mhs-ink)}
+    .mhs-shape-copy span{font-size:12px;color:var(--btb-muted)}
+    .mhs-shape-line{
+      margin:22px 0 0;width:100%;text-align:left;font-family:Georgia,'Times New Roman',serif;
+      font-style:italic;font-size:19px;color:var(--mhs-ink);
+    }
+    @media (max-width:640px){
+      .mhs-shape-feature{grid-template-columns:1fr}
+      .mhs-shape-card .mhs-photo-placeholder{height:230px}
+    }
+
+    /* ---- Why This Is Useful for Collectors: takeaway checklist ---- */
+    .mhs-takeaway{
+      margin-top:30px;padding:28px 30px;border-radius:var(--mhs-radius-md);
+      background:linear-gradient(120deg, var(--mhs-paper-3), var(--mhs-paper-2));
+      border:1px solid var(--mhs-bronze-soft);
+    }
+    .mhs-takeaway h3{margin-bottom:14px}
+    .mhs-takeaway ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+    .mhs-takeaway li{position:relative;padding-left:18px;font-size:13px;line-height:1.5;color:var(--mhs-body)}
+    .mhs-takeaway li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:1px;background:var(--mhs-bronze)}
+    @media (max-width:640px){
+      .mhs-takeaway{padding:23px 21px}
+      .mhs-takeaway ul{grid-template-columns:1fr}
+    }
+
+    /* ---- Closing ---- */
+    .mhs-closing{padding:72px 0 16px;border-top:1px solid var(--btb-border-soft);text-align:left}
+    .mhs-closing-inner{width:100%;max-width:none;margin:0}
+    .mhs-closing h2{font-size:28px}
+    .mhs-closing p{width:100%;max-width:none;margin:20px 0 0}
+    .mhs-closing-line{
+      margin:30px 0 0;width:100%;max-width:none;text-align:left;
+      font-family:Georgia,'Times New Roman',serif;font-style:italic;
+      font-size:21px;line-height:1.5;color:var(--mhs-ink);
+    }
+    @media (max-width:640px){
+      .mhs-closing{padding-top:56px}
+      .mhs-closing h2{font-size:25px}
+      .mhs-closing-line{font-size:19px}
+    }
+  </style>
+</head>
+<body class="btb-body">
+<div class="app-shell">
+
+  <header class="topbar">
+    <a href="../index.html" class="brand-home" aria-label="Return to Encyclopedia home">
+      <div class="brand-block">
+        <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+       <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+        </div>
+      </div>
+    </a>
+    <div class="topbar-right">
+      <span class="stone-count" id="stone-count"></span>
+      <div class="topbar-auth" id="topbar-auth"></div>
+      <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
+      <a class="btn btn-sm" id="request-entry-btn" href="../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
+      <a class="btn btn-sm" id="guide-btn" href="../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
+      <a class="btn btn-sm" id="manage-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main-nav-wrap"><nav class="main-nav">
+    <a class="nav-tab" href="../index.html">Home</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=mood">Choose by Intention</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=identify">Identify</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=collection">My Collection</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=101">Crystals 101</a>
+    <a class="nav-tab active" href="../beyond-the-basics.html" aria-current="page">Beyond the Basics</a>
+  </nav></div>
+
+  <main class="mhs-article">
+
+    <!-- 1. Hero -->
+    <section class="mhs-hero" aria-labelledby="article-title">
+      <div class="mhs-hero-copy">
+        <p class="mhs-eyebrow">Care</p>
+        <h1 id="article-title">Mohs Hardness Is Not the Whole Story</h1>
+        <p class="mhs-hero-subtitle">What Scratch Resistance Can Tell You, and What It Cannot</p>
+        <p class="mhs-hero-meta">About 5 minutes</p>
+
+        <div class="mhs-hero-intro">
+          <p>You look up a stone and see <strong>Mohs 7</strong>. That sounds reassuring. Seven is fairly high, so the stone must be sturdy.</p>
+          <p>A high Mohs number can help explain why one stone keeps a smooth polish while another picks up scratches. What it cannot tell you is whether a crystal point will chip, how well a stone handles impact, or whether heat, light, water, or chemicals can affect it.</p>
+          <p><strong>Mohs measures scratch resistance, not overall strength.</strong></p>
+        </div>
+
+        <div class="mhs-hero-question">But sturdy in what way?</div>
+      </div>
+
+      <div class="mhs-hero-visual">
+        <div class="mhs-hero-stage">
+          <div class="mhs-photo-placeholder mhs-hero-quartz"><span class="mhs-ph-label">Photo · Polished quartz</span></div>
+          <div class="mhs-photo-placeholder mhs-hero-fluorite"><span class="mhs-ph-label">Photo · Fluorite</span></div>
+          <div class="mhs-hero-chip"><b>7 vs. 4</b><span>Quartz can scratch fluorite. That is exactly what Mohs was built to tell you.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. What the Number Actually Tells You -->
+    <section class="mhs-section" id="what-mohs-means">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">The job of the number</p>
+        <h2>What the Number Actually Tells You</h2>
+      </div>
+      <div class="mhs-section-copy">
+        <p>Quartz makes the distinction easy to see. Quartz has a Mohs hardness of 7. Fluorite is 4. Quartz can scratch fluorite because it ranks higher on the scale.</p>
+        <p>That is exactly what Mohs was built to tell you.</p>
+      </div>
+      <div class="mhs-rule-callout"><strong>Mohs answers one precise question:</strong> how resistant is this material to scratching?</div>
+    </section>
+
+    <!-- 3. The Mohs Scale at a Glance -->
+    <section class="mhs-section" id="mohs-scale">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">Primary teaching visual</p>
+        <h2>The Mohs Scale at a Glance</h2>
+      </div>
+      <div class="mhs-section-copy">
+        <p>The scale uses ten reference minerals. The numbers give you the order, but the gaps between them are not equal.</p>
+      </div>
+
+      <div class="mhs-mohs-wrap">
+        <div class="mhs-scale-title">
+          <h3>Softest to Hardest</h3>
+          <p>Scroll horizontally on smaller screens.</p>
+        </div>
+        <div class="mhs-mohs-scale" aria-label="Mohs hardness scale">
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">1</span><span class="mhs-mohs-mineral">Talc</span><span class="mhs-mohs-anchor">Extremely soft</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">2</span><span class="mhs-mohs-mineral">Gypsum</span><span class="mhs-mohs-anchor">Fingernail</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">3</span><span class="mhs-mohs-mineral">Calcite</span><span class="mhs-mohs-anchor">Soft surface</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">4</span><span class="mhs-mohs-mineral">Fluorite</span><span class="mhs-mohs-anchor">Softer than glass</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">5</span><span class="mhs-mohs-mineral">Apatite</span><span class="mhs-mohs-anchor">Mid-scale</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">6</span><span class="mhs-mohs-mineral">Feldspar</span><span class="mhs-mohs-anchor">Around glass</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">7</span><span class="mhs-mohs-mineral">Quartz</span><span class="mhs-mohs-anchor">Scratches glass</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">8</span><span class="mhs-mohs-mineral">Topaz</span><span class="mhs-mohs-anchor">High resistance</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">9</span><span class="mhs-mohs-mineral">Corundum</span><span class="mhs-mohs-anchor">Ruby + sapphire</span></div>
+          <div class="mhs-mohs-item"><span class="mhs-mohs-num">10</span><span class="mhs-mohs-mineral">Diamond</span><span class="mhs-mohs-anchor">Hardest reference</span></div>
+        </div>
+        <div class="mhs-scale-caption">A ranking, not an evenly spaced ruler.</div>
+      </div>
+
+      <div class="mhs-section-copy" style="margin-top:26px">
+        <p>Diamond is not simply a little harder than corundum because 10 comes after 9. The scale tells you the order. It does not tell you that each step represents the same amount of difference.</p>
+      </div>
+    </section>
+
+    <!-- 4. What Mohs Helps You Understand -->
+    <section class="mhs-section" id="what-mohs-helps">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">Keep the job narrow</p>
+        <h2>What Mohs Helps You Understand</h2>
+      </div>
+      <div class="mhs-use-grid">
+        <article class="mhs-use-card">
+          <div class="mhs-use-no">01 · Stone against stone</div>
+          <h3>Which stone can scratch another?</h3>
+          <p>Quartz can scratch fluorite, calcite, gypsum, and other softer minerals. That matters in drawers, travel pouches, and storage.</p>
+        </article>
+        <article class="mhs-use-card">
+          <div class="mhs-use-no">02 · Surface wear</div>
+          <h3>How easily might a polish show wear?</h3>
+          <p>A softer polished stone may pick up fine scratches more readily under the same kind of contact.</p>
+        </article>
+        <article class="mhs-use-card">
+          <div class="mhs-use-no">03 · Identification clue</div>
+          <h3>Can scratching help identify a mineral?</h3>
+          <p>Scratch resistance can narrow the possibilities, but it is only one clue rather than a complete identification method.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5. A Higher Number Does Not Mean Stronger in Every Way -->
+    <section class="mhs-section" id="hardness-toughness">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">The central twist</p>
+        <h2>A Higher Number Does Not Mean Stronger in Every Way</h2>
+      </div>
+      <div class="mhs-section-copy">
+        <p>Topaz has a Mohs hardness of 8. Nephrite jade is usually around 6 to 6.5, so topaz resists scratching better.</p>
+        <p>Jade, however, is generally tougher. Its structure makes it better able to withstand breaking and chipping.</p>
+      </div>
+
+      <div class="mhs-compare-feature">
+        <div class="mhs-compare-grid">
+          <article class="mhs-material-card">
+            <div class="mhs-photo-placeholder"><span class="mhs-ph-label">Photo · Topaz</span></div>
+            <div class="mhs-material-info">
+              <div class="mhs-material-top"><h3>Topaz</h3><div class="mhs-big-mohs">8</div></div>
+              <div class="mhs-stat-row"><b>Resists best</b><span>Scratches</span></div>
+              <div class="mhs-stat-row"><b>Main lesson</b><span>Harder surface</span></div>
+            </div>
+          </article>
+
+          <article class="mhs-material-card">
+            <div class="mhs-photo-placeholder"><span class="mhs-ph-label">Photo · Nephrite jade</span></div>
+            <div class="mhs-material-info">
+              <div class="mhs-material-top"><h3>Nephrite jade</h3><div class="mhs-big-mohs">6–6.5</div></div>
+              <div class="mhs-stat-row"><b>Resists best</b><span>Breaking and impact</span></div>
+              <div class="mhs-stat-row"><b>Main lesson</b><span>Tougher structure</span></div>
+            </div>
+          </article>
+        </div>
+        <div class="mhs-compare-conclusion">They are strong in different ways.</div>
+      </div>
+
+      <div class="mhs-section-copy" style="margin-top:26px">
+        <p>Neither material is simply “stronger.” Hardness and toughness answer different questions. Mohs is excellent at the one it was designed for: scratch resistance.</p>
+      </div>
+    </section>
+
+    <!-- 6. What Are You Trying to Learn? -->
+    <section class="mhs-section" id="three-questions">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">Choose the right question</p>
+        <h2>What Are You Trying to Learn?</h2>
+      </div>
+      <div class="mhs-section-copy">
+        <p>When you want to understand how a stone may behave, first ask what you are actually trying to learn.</p>
+      </div>
+      <div class="mhs-question-grid">
+        <article class="mhs-question-card primary"><div class="q">Will it scratch?</div><div class="a"><strong>Mohs hardness</strong><br>This is the question the scale answers beautifully.</div></article>
+        <article class="mhs-question-card"><div class="q">Will it chip or break?</div><div class="a"><strong>Toughness and internal structure</strong><br>You need different information.</div></article>
+        <article class="mhs-question-card"><div class="q">Can its surroundings affect it?</div><div class="a"><strong>Stability</strong><br>Think heat, light, water, and chemicals.</div></article>
+      </div>
+      <div class="mhs-section-copy" style="margin-top:24px">
+        <p>This is less about memorizing three categories than knowing which question you are asking.</p>
+      </div>
+    </section>
+
+    <!-- 7. The Shape of the Stone Matters Too -->
+    <section class="mhs-section" id="shape-matters">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">Same mineral, different object</p>
+        <h2>The Shape of the Stone Matters Too</h2>
+      </div>
+      <div class="mhs-section-copy">
+        <p>A quartz sphere and a quartz cluster both have a Mohs hardness of 7, but they are not equally vulnerable in practice.</p>
+      </div>
+
+      <div class="mhs-shape-feature">
+        <article class="mhs-shape-card">
+          <div class="mhs-photo-placeholder"><span class="mhs-ph-label">Photo · Quartz sphere</span></div>
+          <div class="mhs-shape-mohs">Mohs 7</div>
+          <div class="mhs-shape-copy"><strong>Sphere</strong><span>Smooth, compact form</span></div>
+        </article>
+        <article class="mhs-shape-card">
+          <div class="mhs-photo-placeholder"><span class="mhs-ph-label">Photo · Quartz cluster</span></div>
+          <div class="mhs-shape-mohs">Mohs 7</div>
+          <div class="mhs-shape-copy"><strong>Cluster</strong><span>Many exposed points, small contact areas, and possible natural fractures</span></div>
+        </article>
+      </div>
+
+      <div class="mhs-shape-line">The mineral is the same. The object is not.</div>
+
+      <div class="mhs-section-copy" style="margin-top:26px">
+        <p>That is why a hardness number should never replace looking at the actual specimen in front of you.</p>
+      </div>
+    </section>
+
+    <!-- 8. Why This Is Useful for Collectors -->
+    <section class="mhs-section" id="collector-use">
+      <div class="mhs-section-head">
+        <p class="mhs-section-kicker">Put it to work</p>
+        <h2>Why This Is Useful for Collectors</h2>
+      </div>
+      <div class="mhs-section-copy">
+        <p>Once you know what Mohs actually measures, several everyday choices become easier to understand.</p>
+      </div>
+
+      <div class="mhs-takeaway">
+        <h3>Use Mohs for the Surface</h3>
+        <ul>
+          <li>Keep harder stones from rubbing against softer ones.</li>
+          <li>Remove gritty dust gently instead of grinding it across polish.</li>
+          <li>Treat fine points and delicate clusters according to their shape.</li>
+          <li>Check heat, light, water, and cleaning guidance separately.</li>
+        </ul>
+      </div>
+
+      <div class="mhs-section-copy" style="margin-top:26px">
+        <p>None of this means the Mohs scale is incomplete. It means the scale is precise. It answers one question extremely well, which makes it more useful once you stop asking it to answer the others.</p>
+      </div>
+    </section>
+
+    <!-- 9. Closing -->
+    <section class="mhs-closing" id="number-beginning">
+      <div class="mhs-closing-inner">
+        <p class="mhs-section-kicker">The number is the beginning</p>
+        <h2>Now the Number Means Something</h2>
+        <p>Mohs hardness tells you who can scratch whom. Once that distinction clicks, the number stops being a vague signal of “strength” and becomes a specific piece of information you can actually use.</p>
+        <div class="mhs-closing-line">The number matters because now you know exactly what it means.</div>
+      </div>
+    </section>
+
+    <!-- 10. Related Reading and Return Navigation -->
+    <div class="btb-footer-links">
+      <section class="btb-related" aria-label="Related Encyclopedia Entries">
+        <h2>Related Encyclopedia Entries</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">Quartz</span></li>
+          <li><span class="btb-related-quiet">Fluorite</span></li>
+          <li><span class="btb-related-quiet">Topaz</span></li>
+          <li><span class="btb-related-quiet">Diamond</span></li>
+        </ul>
+      </section>
+
+      <section class="btb-related" aria-label="Continue Exploring">
+        <h2>Continue Exploring</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">How Crystals Form</span></li>
+          <li><span class="btb-related-quiet">What's Inside a Crystal?</span></li>
+          <li><span class="btb-related-quiet">Why Some Crystals Glow</span></li>
+          <li><span class="btb-related-quiet">Fossils in a Crystal Collection: What Are You Actually Holding?</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="btb-return-bottom">
+      <a class="btb-return" href="../beyond-the-basics.html">← Back to Beyond the Basics</a>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Sign-in modal markup required by auth.js's _openAuth()/closeAuthModal(),
+     copied verbatim from index.html so "Sign In" in the shared header
+     actually works on this page, matching the homepage exactly. -->
+<div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
+    <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
+    <div style="margin-bottom:1rem">
+      <label for="auth-email-input" style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" name="email" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+    </div>
+    <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
+    <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
+    <div style="font-size:11px;color:#b0a89e;text-align:center;margin-top:1rem;line-height:1.6">Your collection saves across all your devices.<br>Open the link in the email on this device.</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../app.js"></script>
+<script src="../auth.js"></script>
+</body>
+</html>

@@ -16,9 +16,9 @@
  * plan.
  *
  * Verified, live HTML routes today: Article 1 (Why Some Crystals Glow),
- * Article 2 (What's Inside a Crystal?), Article 3 (How Crystals Form), and
- * Article 13 (the fossils article). Those are the only clickable cards
- * anywhere on the page.
+ * Article 2 (What's Inside a Crystal?), Article 3 (How Crystals Form),
+ * Article 4 (Mohs Hardness Is Not the Whole Story), and Article 13 (the
+ * fossils article). Those are the only clickable cards anywhere on the page.
  */
 (function (global) {
   'use strict';
@@ -122,11 +122,20 @@
       route: 'beyond-the-basics/how-crystals-form.html', available: true
     },
     {
+      // Per Christie's production-order reconciliation (same resolution as
+      // Article 3): the Master Production Order now controls Article 4
+      // identity and supersedes the 2026-07-27 mockup-numbering placeholder
+      // that previously occupied this slot ("The Truth About Mohs Hardness").
       id: 'archive-04', showIn: ['archive'], archivePosition: 4,
-      number: '04', category: 'Collecting',
-      title: 'The Truth About Mohs Hardness',
-      description: 'What the scale measures, and what it doesn’t.',
-      image: IMG_04, alt: ALT_04, slug: null, route: null, available: false
+      number: '04', category: 'Care',
+      title: 'Mohs Hardness Is Not the Whole Story',
+      description: 'What scratch resistance can tell you, and what it cannot.',
+      // No approved tile image exists for this canonical identity: IMG_04/
+      // ALT_04 are the retired "The Truth About Mohs Hardness" mockup photo
+      // (a diamond with a scribe) and would misrepresent this article. Left
+      // unset until Christie supplies an approved Article 4 tile image.
+      image: null, alt: '', slug: 'mohs-hardness-is-not-the-whole-story',
+      route: 'beyond-the-basics/mohs-hardness-is-not-the-whole-story.html', available: true
     },
     {
       id: 'archive-05', showIn: ['archive'], archivePosition: 5,
