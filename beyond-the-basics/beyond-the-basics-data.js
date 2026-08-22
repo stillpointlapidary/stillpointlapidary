@@ -67,8 +67,7 @@
       number: '03', category: 'Formation',
       title: 'How Crystals Form',
       description: 'Why crystals can look so different.',
-      // No approved tile image exists for this identity (see archive-03).
-      image: null, alt: '', slug: 'how-crystals-form',
+      image: IMG_03, alt: ALT_03, slug: 'how-crystals-form',
       route: 'beyond-the-basics/how-crystals-form.html', available: true
     },
     {
@@ -78,8 +77,7 @@
       number: '04', category: 'Care',
       title: 'Mohs Hardness Is Not the Whole Story',
       description: 'What scratch resistance can tell you, and what it cannot.',
-      // No approved tile image exists for this identity (see archive-04).
-      image: null, alt: '', slug: 'mohs-hardness-is-not-the-whole-story',
+      image: IMG_04, alt: ALT_04, slug: 'mohs-hardness-is-not-the-whole-story',
       route: 'beyond-the-basics/mohs-hardness-is-not-the-whole-story.html', available: true
     },
     {
@@ -124,12 +122,7 @@
       number: '03', category: 'Formation',
       title: 'How Crystals Form',
       description: 'Why crystals can look so different.',
-      // No approved tile image exists for this canonical identity: IMG_03/
-      // ALT_03 are the retired "What an Inclusion Remembers" dendritic-opal
-      // photo (article-03-tile-image.webp) and would misrepresent this
-      // article. Left unset until Christie supplies an approved Article 3
-      // tile image rather than authoring a substitute.
-      image: null, alt: '', slug: 'how-crystals-form',
+      image: IMG_03, alt: ALT_03, slug: 'how-crystals-form',
       route: 'beyond-the-basics/how-crystals-form.html', available: true
     },
     {
@@ -141,11 +134,7 @@
       number: '04', category: 'Care',
       title: 'Mohs Hardness Is Not the Whole Story',
       description: 'What scratch resistance can tell you, and what it cannot.',
-      // No approved tile image exists for this canonical identity: IMG_04/
-      // ALT_04 are the retired "The Truth About Mohs Hardness" mockup photo
-      // (a diamond with a scribe) and would misrepresent this article. Left
-      // unset until Christie supplies an approved Article 4 tile image.
-      image: null, alt: '', slug: 'mohs-hardness-is-not-the-whole-story',
+      image: IMG_04, alt: ALT_04, slug: 'mohs-hardness-is-not-the-whole-story',
       route: 'beyond-the-basics/mohs-hardness-is-not-the-whole-story.html', available: true
     },
     {
