@@ -54,11 +54,17 @@
       route: 'beyond-the-basics/why-some-crystals-glow.html', available: true
     },
     {
+      // Mirrors archive-10's production-order reconciliation: supersedes
+      // the stale "Born Under Pressure" mockup identity, which had no
+      // production article behind it anywhere in the codebase.
       id: 'featured-02', showIn: ['featured'], featuredPosition: 2,
-      number: '02', category: 'Formation',
-      title: 'Born Under Pressure',
-      description: 'How minerals respond to the forces that shape them.',
-      image: IMG_02, alt: ALT_02, slug: null, route: null, available: false
+      number: '02', category: 'Materials',
+      title: 'What’s Inside a Crystal?',
+      description: 'Inclusions, phantoms, and the story a crystal’s interior can tell.',
+      // No approved tile image exists for this identity (see archive-10);
+      // IMG_02/ALT_02 are the retired "Born Under Pressure" kyanite photo.
+      image: null, alt: '', slug: 'whats-inside-a-crystal',
+      route: 'beyond-the-basics/whats-inside-a-crystal.html', available: true
     },
     {
       // Mirrors archive-03's production-order reconciliation: supersedes
@@ -184,11 +190,13 @@
       image: null, alt: '', slug: null, route: null, available: false
     },
     {
-      // Production HTML exists (Website/beyond-the-basics/whats-inside-a-crystal.html)
-      // and is now wired live; not a broader renumbering, only the route/
-      // availability fields required to resolve this completed article.
+      // This is canonical Article 2 (see CLAUDE-BRIEF-ARTICLE-02-WHATS-
+      // INSIDE-A-CRYSTAL.md / article-02-whats-inside-a-crystal-revised.md).
+      // Number corrected from the stale mockup's "10" to the Master
+      // Production Order's "02" so the badge matches the real article
+      // number; mirrors the archive-03/archive-04 reconciliation.
       id: 'archive-10', showIn: ['archive'], archivePosition: 10,
-      number: '10', category: 'Materials',
+      number: '02', category: 'Materials',
       title: 'What’s Inside a Crystal?',
       description: 'Inclusions, phantoms, and the story a crystal’s interior can tell.',
       image: null, alt: '', slug: 'whats-inside-a-crystal',
