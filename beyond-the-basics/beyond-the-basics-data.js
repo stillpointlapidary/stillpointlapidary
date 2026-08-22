@@ -44,11 +44,14 @@
 
     // ── Featured mosaic (approved mockup copy, exact) ──────────────────────
     {
+      // Mirrors archive-01: this article is live, the featured mosaic's
+      // copy of it was simply never wired to available/route.
       id: 'featured-01', showIn: ['featured'], featuredPosition: 1,
       number: '01', category: 'Phenomena',
       title: 'Why Some\nCrystals Glow',
       description: ['Fluorescence, phosphorescence,', 'and what ultraviolet light reveals.'],
-      image: IMG_01, alt: ALT_01, slug: null, route: null, available: false
+      image: IMG_01, alt: ALT_01, slug: null,
+      route: 'beyond-the-basics/why-some-crystals-glow.html', available: true
     },
     {
       id: 'featured-02', showIn: ['featured'], featuredPosition: 2,
@@ -58,18 +61,26 @@
       image: IMG_02, alt: ALT_02, slug: null, route: null, available: false
     },
     {
+      // Mirrors archive-03's production-order reconciliation: supersedes
+      // the stale "What an Inclusion Remembers" mockup identity here too.
       id: 'featured-03', showIn: ['featured'], featuredPosition: 3,
-      number: '03', category: 'Collecting',
-      title: 'What an Inclusion Remembers',
-      description: 'Tiny time capsules inside your crystals.',
-      image: IMG_03, alt: ALT_03, slug: null, route: null, available: false
+      number: '03', category: 'Formation',
+      title: 'How Crystals Form',
+      description: 'Why crystals can look so different.',
+      // No approved tile image exists for this identity (see archive-03).
+      image: null, alt: '', slug: 'how-crystals-form',
+      route: 'beyond-the-basics/how-crystals-form.html', available: true
     },
     {
+      // Mirrors archive-04's production-order reconciliation: supersedes
+      // the stale "The Truth About Mohs Hardness" mockup identity here too.
       id: 'featured-04', showIn: ['featured'], featuredPosition: 4,
-      number: '04', category: 'Collecting',
-      title: 'The Truth About Mohs Hardness',
-      description: 'What the scale measures, and what it doesn’t.',
-      image: IMG_04, alt: ALT_04, slug: null, route: null, available: false
+      number: '04', category: 'Care',
+      title: 'Mohs Hardness Is Not the Whole Story',
+      description: 'What scratch resistance can tell you, and what it cannot.',
+      // No approved tile image exists for this identity (see archive-04).
+      image: null, alt: '', slug: 'mohs-hardness-is-not-the-whole-story',
+      route: 'beyond-the-basics/mohs-hardness-is-not-the-whole-story.html', available: true
     },
     {
       id: 'featured-05', showIn: ['featured'], featuredPosition: 5,
