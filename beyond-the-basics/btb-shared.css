@@ -15,15 +15,20 @@
   --btb-ink:#30231a;
   --btb-muted:#725e50;
   --btb-bronze:#9b6a3d;
-  --btb-line:rgba(155,106,61,.3);
-  --btb-line-soft:rgba(155,106,61,.18);
+  /* neutral ink-based borders, matching the shared family-guide system
+     (styles.css --border/--border2) rather than tinted bronze outlines.
+     Bronze is reserved for small accents: eyebrows, icons, restrained rules. */
+  --btb-border:rgba(42,37,32,.14);
+  --btb-border-soft:rgba(42,37,32,.08);
+  --btb-line:var(--btb-border);
+  --btb-line-soft:var(--btb-border-soft);
   --btb-white:#fcfaf6;
   --btb-serif:Georgia,'Times New Roman',serif;
   --btb-sans:'Jost',Arial,sans-serif;
   --btb-max-width:1120px;
   --btb-prose-width:780px;
-  --btb-tan-band:#e7dac6;
-  --btb-rose-band:#efe0d2;
+  --btb-section-gap:76px;
+  --btb-section-gap-mobile:56px;
 }
 
 .btb-body{
@@ -44,15 +49,21 @@
 .btb-brand-name{font-family:var(--btb-serif);font-size:19px;line-height:.9;letter-spacing:.16em}
 .btb-brand-name small{display:block;margin-top:8px;text-align:center;font:10px var(--btb-sans);letter-spacing:.45em}
 
-/* ---- return links (top + final) ---- */
+/* ---- return links (top + final): compact editorial pill per
+   EDITORIAL-PAGE-VISUAL-STANDARD.md §11 ---- */
 .btb-return{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:fit-content;height:39px;padding:0 22px;
+  border-radius:999px;border:1px solid var(--btb-line);
+  background:var(--btb-paper-2);
   font-family:var(--btb-sans);
-  font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  font-size:13px;font-weight:500;letter-spacing:.01em;text-transform:none;
   color:var(--btb-bronze);text-decoration:none;
 }
-.btb-return:hover{color:var(--btb-ink)}
+.btb-return:hover{color:var(--btb-ink);border-color:var(--btb-bronze)}
 .btb-return-top{margin:22px 0 8px}
+/* wraps the closing return pill so the divider spans the article width
+   while the pill itself stays content-sized and centered beneath it */
 .btb-return-bottom{
   display:flex;justify-content:center;margin:48px 0 40px;
   padding-top:26px;border-top:1px solid var(--btb-line-soft);
@@ -120,13 +131,12 @@
   font-family:var(--btb-serif);font-style:italic;font-size:15px;color:var(--btb-muted);
   max-width:40ch;
 }
-.btb-four-item .btb-image-box{aspect-ratio:1/1}
 
 /* ---- compact teaching sections ---- */
-.btb-section{margin:0 0 36px}
+.btb-section{margin:0 0 var(--btb-section-gap)}
 .btb-section h2{
   font-family:var(--btb-serif);font-weight:400;
-  font-size:clamp(26px,3vw,32px);line-height:1.22;margin:0 0 16px;
+  font-size:clamp(26px,3vw,32px);line-height:1.22;margin:0 0 18px;
 }
 .btb-section h3{
   font-family:var(--btb-serif);font-weight:400;
@@ -146,175 +156,39 @@
 @media (max-width:600px){
   .btb-section p,.btb-plain-list li{font-size:16px}
 }
-
-/* ---- Big Idea: full-bleed color band spanning the article shell width,
-   its own row (not paired beside the intro text). The mockup calls for a
-   low-opacity line-art spiral/chamber motif in the right-hand graphic
-   slot — that asset is Lyra's to draw (original line art, not a stock
-   substitute) and has not been delivered yet, so the slot ships empty/
-   plain tan until it arrives. Do not add a CSS-drawn or stock stand-in
-   graphic here. ---- */
-.btb-bigidea{
-  background:var(--btb-tan-band);width:100%;
-  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:32px;
-  min-height:230px;margin:0 0 40px;
-}
-.btb-bigidea-copy{padding:40px 8px 40px 0;max-width:520px}
-.btb-bigidea-label{
-  font-family:var(--btb-sans);font-size:12px;font-weight:500;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--btb-bronze);margin:0 0 14px;
-}
-.btb-bigidea-text{
-  font-family:var(--btb-serif);font-size:clamp(22px,2.6vw,28px);line-height:1.42;
-  color:var(--btb-ink);margin:0;
-}
-.btb-bigidea-graphic{height:100%;min-height:230px}
 @media (max-width:700px){
-  .btb-bigidea{grid-template-columns:1fr;padding:28px 26px}
-  .btb-bigidea-copy{padding:0;max-width:none}
-  .btb-bigidea-graphic{display:none}
+  .btb-section{margin-bottom:var(--btb-section-gap-mobile)}
 }
 
 /* ---- image-and-text feature: e.g. "Start With Orthoceras" — image runs
    large and un-boxed (minimal border, no inset padding), not a small
    photo inside a heavily padded card. ---- */
 .btb-feature{
-  display:grid;grid-template-columns:380px 1fr;gap:44px;align-items:start;
-  margin:0 0 40px;
+  display:grid;grid-template-columns:340px 1fr;gap:44px;align-items:start;
+  margin:0 0 var(--btb-section-gap);
 }
 .btb-feature-media .btb-image-box{
-  border-radius:4px;aspect-ratio:1/1;border:1px solid var(--btb-line);padding:0;
+  border-radius:8px;aspect-ratio:1/1;border:1px solid var(--btb-border);padding:10px;
   background:var(--btb-white);
 }
 .btb-feature-media .btb-image-box img{width:100%;height:100%;object-fit:contain}
-.btb-feature-text h2{margin:0 0 16px}
+.btb-feature-text h2{margin:0 0 18px}
 .btb-feature-text p{max-width:none}
 @media (max-width:760px){
-  .btb-feature{grid-template-columns:1fr;gap:24px}
-  .btb-feature-media .btb-image-box{aspect-ratio:1/1;max-width:360px;margin:0 auto}
+  .btb-feature{grid-template-columns:1fr;gap:24px;margin-bottom:var(--btb-section-gap-mobile)}
+  .btb-feature-media .btb-image-box{aspect-ratio:1/1;max-width:340px;margin:0 auto}
 }
 
-/* ---- What Survives: full-bleed rose-tan band spanning the article
-   shell width (same technique as Big Idea, different tone). Only the
-   section background treatment changes — the five-card content below
-   is unchanged. ---- */
-.btb-survives-band{background:var(--btb-rose-band);width:100%;padding:48px 0;margin:0 0 40px}
-.btb-survives-band .btb-section{margin:0}
-
-.btb-survives-row{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:18px;
-  margin:0 0 8px;
-}
-.btb-survives-item{
-  border:1px solid var(--btb-line);border-top:3px solid var(--btb-bronze);
-  border-radius:8px;background:var(--btb-white);padding:20px 18px;min-width:0;
-}
-.btb-survives-icon{margin:0 0 14px;color:var(--btb-bronze)}
-.btb-survives-icon svg{width:26px;height:26px;display:block}
-.btb-survives-title{
-  font-family:var(--btb-sans);font-size:14.5px;font-weight:500;color:var(--btb-ink);
-  display:block;margin:0 0 8px;
-}
-.btb-survives-desc{
-  font-family:var(--btb-sans);font-size:13.5px;line-height:1.55;color:var(--btb-muted);margin:0;
-}
-@media (max-width:900px){
-  .btb-survives-row{grid-template-columns:repeat(3,1fr)}
-}
-@media (max-width:600px){
-  .btb-survives-row{grid-template-columns:1fr 1fr}
-}
-
-/* ---- reusable distinction / comparison module ---- */
-.btb-distinction{margin:0 0 30px;border:1px solid var(--btb-line);border-radius:8px;overflow:hidden;background:var(--btb-white)}
-.btb-distinction-row{
-  display:grid;grid-template-columns:1fr 1.4fr;gap:4px 20px;
-  padding:15px 20px;border-bottom:1px solid var(--btb-line-soft);
-}
-.btb-distinction-row:last-child{border-bottom:0}
-.btb-distinction-row:nth-child(odd){background:var(--btb-paper-2)}
-.btb-distinction-term{
-  font-family:var(--btb-sans);font-size:14.5px;font-weight:500;color:var(--btb-ink);
-  align-self:center;
-}
-.btb-distinction-desc{font-family:var(--btb-sans);font-size:14px;line-height:1.55;color:var(--btb-muted);align-self:center}
-@media (max-width:560px){
-  .btb-distinction-row{grid-template-columns:1fr;gap:4px}
-  .btb-distinction-term:after{content:"";display:block;width:28px;height:1px;background:var(--btb-line);margin-top:6px}
-}
-
-/* ---- Four Familiar Fossils: 2x2 grid, image-left cards ---- */
-.btb-four-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:0 0 30px;
-}
-.btb-four-item{
-  display:flex;gap:16px;align-items:flex-start;
-  border:1px solid var(--btb-line);border-left:3px solid var(--btb-bronze);
-  border-radius:8px;overflow:hidden;background:var(--btb-white);padding:16px;min-width:0;
-}
-.btb-four-item .btb-image-box{
-  width:112px;height:112px;flex-shrink:0;border-radius:6px;
-}
-.btb-four-text{min-width:0}
-.btb-four-item h3{font-size:16px;margin:0 0 6px}
-.btb-four-item p{font-family:var(--btb-sans);font-size:13.5px;line-height:1.6;margin:0 0 8px;color:var(--btb-muted)}
-.btb-four-item p:last-child{margin-bottom:0}
-@media (max-width:760px){
-  .btb-four-grid{grid-template-columns:1fr}
-}
-@media (max-width:480px){
-  .btb-four-item{flex-direction:column}
-  .btb-four-item .btb-image-box{width:100%;height:auto;aspect-ratio:16/10}
-}
-
-/* ---- Quiet Practice: modern practice card ---- */
-.btb-practice{
-  background:var(--btb-paper-2);border:1px solid var(--btb-line);border-left:3px solid var(--btb-bronze);
-  border-radius:0 10px 10px 0;padding:26px 28px;margin:0 0 30px;
-}
-.btb-practice-label{
-  font-family:var(--btb-sans);font-size:11px;font-weight:600;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--btb-bronze);margin:0 0 14px;
-}
-.btb-practice-intro{font-family:var(--btb-sans);font-size:14.5px;color:var(--btb-muted);line-height:1.65;margin:0 0 14px}
-.btb-practice-question{
-  font-family:var(--btb-serif);font-size:22px;line-height:1.42;color:var(--btb-ink);margin:0 0 18px;
-}
-.btb-practice-list{
-  list-style:none;margin:0 0 16px;padding:0;
-  display:grid;grid-template-columns:1fr 1fr;gap:9px 24px;
-}
-.btb-practice-list li{
-  font-family:var(--btb-sans);font-size:13.5px;color:var(--btb-ink);line-height:1.5;
-  padding-left:14px;position:relative;
-}
-.btb-practice-list li::before{content:"–";position:absolute;left:0;color:var(--btb-bronze)}
-.btb-practice-close{font-family:var(--btb-sans);font-size:13.5px;color:var(--btb-muted);line-height:1.65;margin:0}
-@media (max-width:600px){
-  .btb-practice-list{grid-template-columns:1fr}
-}
-
-/* ---- "Why This Matters" callout: plain concluding box, left-aligned ---- */
-.btb-callout{
-  background:var(--btb-paper-2);border:1px solid var(--btb-line);border-left:3px solid var(--btb-bronze);
-  border-radius:0 8px 8px 0;padding:22px 26px;margin:0 0 36px;
-}
-.btb-callout .btb-callout-eyebrow{
-  font-family:var(--btb-sans);
-  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--btb-bronze);margin:0 0 10px;
-}
-.btb-callout p{font-family:var(--btb-sans);font-size:14.5px;line-height:1.68;margin:0 0 9px;color:var(--btb-ink)}
-.btb-callout p:last-child{margin-bottom:0}
-
-/* ---- footer panel: houses Related Encyclopedia Entries + Continue Exploring ---- */
+/* ---- footer: quiet two-column composition for Related Encyclopedia
+   Entries + Continue Exploring — a restrained top divider, plain
+   background, no filled card. ---- */
 .btb-footer-links{
   display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;
-  background:var(--btb-paper-2);border:1px solid var(--btb-line);border-radius:10px;
-  padding:26px 30px;margin:0 0 30px;
+  border-top:1px solid var(--btb-border-soft);
+  padding:28px 0 0;margin:0 0 30px;
 }
 @media (max-width:700px){
-  .btb-footer-links{grid-template-columns:1fr;gap:26px;padding:22px 22px}
+  .btb-footer-links{grid-template-columns:1fr;gap:24px;padding-top:24px}
 }
 
 /* ---- related content: quiet, non-clickable when unavailable ---- */
