@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Why Some Crystals Glow — Still Point Lapidary</title>
+  <meta name="description" content="A mineral can look completely ordinary in daylight, then flare orange, green, red, blue, or violet beneath an ultraviolet lamp. Nothing about the specimen has changed — what has changed is what we are able to see.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="btb-shared.css">
+
+  <!-- Article 01 (Why Some Crystals Glow) — built from the approved
+       article-01-why-some-crystals-glow-mockup.html / -visual-mockup.pdf
+       composition and the canonical 01-why-some-crystals-glow(2).md text.
+       Page-scoped .wsg- rules only; btb-shared.css untouched by this pass.
+       The mockup's dark "hero-visual"/"split-visual"/"scan" panels are
+       themselves the approved labeled photo placeholders (e.g. "Daylight" /
+       "Under UV" / "Approved split-light mineral photograph") — reproduced
+       here as-is rather than swapped for a different placeholder treatment,
+       per "do not reinterpret or redesign the approved composition." No
+       photographs have been sourced, generated, or chosen for this pass.
+       Typography follows the established site standard (Jost sans-serif /
+       Georgia serif) rather than the mockup's own font stack, matching the
+       departure already made for Article 13 (Fossils). Not yet linked from
+       beyond-the-basics.html per the build brief. -->
+  <style>
+    body.btb-body{background:var(--white)}
+
+    .wsg-article{
+      --wsg-night:#171523;
+      --wsg-night-2:#242135;
+      --wsg-violet:#a87cff;
+      --wsg-orange:#ff933f;
+      --wsg-green:#b7ff63;
+      --wsg-ink:#524d47;
+      --wsg-body:#6b6560;
+      --wsg-bronze:#8b7355;
+      width:min(var(--btb-max-width), calc(100% - 48px));
+      margin:0 auto;
+      padding:0;
+    }
+    .wsg-article h1,.wsg-article h2,.wsg-article h3{
+      font-family:var(--btb-serif);font-weight:400;color:var(--wsg-ink);
+    }
+    .wsg-article p{
+      font-family:var(--btb-sans);font-size:16px;line-height:1.72;color:var(--wsg-body);
+      margin:0 0 18px;
+    }
+    .wsg-article p:last-child{margin-bottom:0}
+
+    .wsg-eyebrow{
+      font-family:var(--btb-sans);font-size:12px;font-weight:500;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--wsg-bronze);margin:0 0 12px;
+    }
+
+    /* ---- 1. Hero ---- */
+    .wsg-hero{
+      display:grid;grid-template-columns:minmax(0,1.06fr) minmax(320px,.94fr);
+      gap:56px;align-items:center;
+      padding:46px 0 44px;border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wsg-hero-kicker{margin-bottom:14px}
+    .wsg-hero h1{
+      font-size:clamp(32px,4vw,46px);line-height:1.1;letter-spacing:-.015em;
+      margin:0 0 10px;max-width:640px;
+    }
+    .wsg-hero-sub{
+      font-family:var(--btb-serif);font-weight:400;font-size:clamp(18px,2vw,23px);
+      line-height:1.3;color:var(--wsg-body);margin:0 0 18px;
+    }
+    .wsg-hero-dek{
+      font-family:var(--btb-serif);font-size:19px;line-height:1.5;color:var(--wsg-body);
+      margin:0 0 18px;max-width:560px;
+    }
+    .wsg-hero-meta{
+      font-family:var(--btb-sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--wsg-bronze);margin:0;
+    }
+    .wsg-hero-visual{
+      position:relative;height:420px;background:var(--wsg-night);overflow:hidden;
+      border:1px solid #302b43;
+    }
+    .wsg-hero-half{
+      position:absolute;inset:0 50% 0 0;
+      background:radial-gradient(circle at 56% 42%,#8c8075 0 12%,#5b5149 13% 17%,#312e2c 18% 26%,transparent 27%),
+                 linear-gradient(135deg,#77736c,#272827);
+    }
+    .wsg-hero-half.uv{
+      inset:0 0 0 50%;
+      background:radial-gradient(circle at 43% 42%,#ffd468 0 6%,#ff7e32 7% 14%,#802d8c 16% 21%,#39205f 24% 31%,transparent 32%),
+                 radial-gradient(circle at 70% 68%,#d0ff88 0 6%,#38a35d 8% 14%,transparent 17%),
+                 linear-gradient(135deg,#100d20,#282047);
+    }
+    .wsg-hero-visual:after{
+      content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#ead9bd;
+    }
+    .wsg-visual-label{
+      position:absolute;bottom:18px;padding:7px 10px;background:rgba(18,16,27,.74);
+      color:#fff;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-family:var(--btb-sans);
+    }
+    .wsg-label-left{left:18px}
+    .wsg-label-right{right:18px}
+    .wsg-photo-note{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74%;text-align:center;
+      color:#fff;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.78;
+      font-family:var(--btb-sans);
+    }
+    @media (max-width:850px){
+      .wsg-hero{grid-template-columns:1fr;gap:26px;padding:34px 0 34px}
+      .wsg-hero-visual{height:300px}
+    }
+    @media (max-width:560px){ .wsg-hero h1{font-size:32px} .wsg-hero-dek{font-size:17px} }
+
+    /* ---- 2. Opening ---- */
+    .wsg-opening{
+      display:grid;grid-template-columns:minmax(0,720px) 1fr;gap:64px;
+      padding:40px 0 30px;
+    }
+    .wsg-opening-note{
+      border-left:1px solid var(--wsg-bronze);padding:6px 0 6px 24px;align-self:center;
+      color:var(--wsg-body);font-family:var(--btb-serif);font-size:17px;line-height:1.5;
+    }
+    @media (max-width:850px){
+      .wsg-opening{grid-template-columns:1fr;gap:0;padding:28px 0 24px}
+      .wsg-opening-note{display:none}
+    }
+
+    /* ---- 3. The Big Idea ---- */
+    .wsg-big-idea{
+      border-top:1px solid var(--wsg-bronze);border-bottom:1px solid var(--btb-border-soft);
+      padding:36px 0 38px;margin:0 0 48px;
+      display:grid;grid-template-columns:170px minmax(0,760px);gap:34px;align-items:start;
+    }
+    .wsg-big-idea .wsg-eyebrow{margin:0}
+    .wsg-big-idea p{
+      font-family:var(--btb-serif);font-weight:400;color:var(--wsg-ink);
+      font-size:clamp(21px,2.4vw,26px);line-height:1.35;margin:0;
+    }
+    @media (max-width:850px){
+      .wsg-big-idea{grid-template-columns:1fr;gap:12px;padding:32px 0 34px;margin-bottom:40px}
+    }
+
+    /* ---- shared section rhythm ---- */
+    .wsg-section{margin:0 0 54px}
+    .wsg-section-heading{
+      font-size:clamp(26px,3vw,33px);line-height:1.2;letter-spacing:-.01em;margin:0 0 18px;
+    }
+    .wsg-section-intro{max-width:720px;color:var(--wsg-body);margin:0 0 28px}
+    @media (max-width:560px){ .wsg-section{margin-bottom:42px} .wsg-section-heading{font-size:26px} }
+
+    /* ---- 4. Fluorescence or Phosphorescence? ---- */
+    .wsg-switchboard{
+      display:grid;grid-template-columns:.36fr .64fr;gap:52px;align-items:start;
+      padding-bottom:12px;
+    }
+    .wsg-switch-intro{max-width:340px}
+    .wsg-switch-intro p{color:var(--wsg-body)}
+    .wsg-memory-line{
+      margin-top:22px;border-left:1px solid var(--wsg-bronze);padding:4px 0 4px 20px;
+      font:italic 17px/1.5 var(--btb-serif);color:var(--wsg-body);
+    }
+    .wsg-memory-line--takeaway{margin-top:30px}
+    .wsg-light-states{
+      background:var(--wsg-night);color:#ede8f0;padding:0 30px;border-top:1px solid #7d649b;
+    }
+    .wsg-state{
+      display:grid;grid-template-columns:60px 1fr 150px;align-items:center;gap:18px;
+      padding:28px 0;border-bottom:1px solid #393449;
+    }
+    .wsg-state:last-child{border-bottom:0}
+    .wsg-state-num{color:#d89a5a;font-size:12px;letter-spacing:.12em;font-family:var(--btb-sans)}
+    .wsg-state h3{color:#fff;margin:0;font-size:20px}
+    .wsg-state p{margin:5px 0 0;color:#c7c0ce;font-size:13.5px;line-height:1.55;font-family:var(--btb-sans)}
+    .wsg-lamp{
+      justify-self:end;width:104px;height:48px;border:1px solid #5e576d;
+      display:grid;place-items:center;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+      font-family:var(--btb-sans);position:relative;text-align:center;
+    }
+    .wsg-lamp.on{box-shadow:inset 0 0 30px rgba(168,124,255,.35),0 0 20px rgba(168,124,255,.18);color:#e4d6ff}
+    .wsg-lamp.after{box-shadow:inset 0 0 24px rgba(183,255,99,.15);color:#cef69d}
+    @media (max-width:850px){
+      .wsg-switchboard{grid-template-columns:1fr;gap:26px}
+      .wsg-switch-intro{max-width:none}
+    }
+    @media (max-width:560px){
+      .wsg-state{grid-template-columns:44px 1fr}
+      .wsg-lamp{display:none}
+    }
+
+    /* ---- 5. Why Does One Glow and Another Does Not? ---- */
+    .wsg-factors{
+      display:grid;grid-template-columns:1fr 1fr;gap:56px;
+      padding:40px 0 36px;border-top:1px solid var(--btb-border-soft);border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wsg-factor-list{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 0}
+    .wsg-factor-list span{
+      padding:8px 13px;border:1px solid var(--btb-border);background:var(--btb-paper-2);
+      font-size:12px;color:#665c54;font-family:var(--btb-sans);
+    }
+    .wsg-factor-panel{padding-top:2px}
+    .wsg-possibility{
+      padding:22px 26px;background:#eee7dc;border-left:3px solid var(--wsg-bronze);margin-top:6px;
+    }
+    .wsg-possibility strong{
+      display:block;font:400 22px/1.28 var(--btb-serif);color:var(--wsg-ink);margin-bottom:6px;
+    }
+    .wsg-possibility p{margin:0;font-size:15px}
+    @media (max-width:850px){
+      .wsg-factors{grid-template-columns:1fr;gap:24px;padding:30px 0}
+    }
+
+    /* ---- 6. Why the Glow May Be a Different Color ---- */
+    .wsg-identity{
+      display:grid;grid-template-columns:.43fr .57fr;gap:52px;align-items:center;
+      padding-top:42px;
+    }
+    .wsg-split-visual{
+      height:380px;display:grid;grid-template-columns:1fr 1fr;background:#222;position:relative;
+    }
+    .wsg-split-day{
+      background:radial-gradient(circle at 52% 48%,#78956a 0 18%,#516244 19% 24%,#d1c7b7 25% 27%,transparent 28%),
+                 linear-gradient(145deg,#ded5c8,#7c776d);
+    }
+    .wsg-split-uv{
+      background:radial-gradient(circle at 48% 48%,#b5a9ff 0 12%,#6754d6 13% 22%,#392778 24% 30%,transparent 31%),
+                 linear-gradient(145deg,#130f23,#35295c);
+    }
+    .wsg-split-visual:after{
+      content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.47);
+    }
+    .wsg-split-caption{
+      position:absolute;bottom:14px;color:#fff;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+      font-family:var(--btb-sans);
+    }
+    .wsg-split-caption.left{left:14px}
+    .wsg-split-caption.right{right:14px}
+    @media (max-width:850px){
+      .wsg-identity{grid-template-columns:1fr;gap:24px;padding-top:26px}
+      .wsg-split-visual{height:280px}
+    }
+
+    /* ---- 7. Longwave and Shortwave UV ---- */
+    .wsg-wavelengths{
+      display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--btb-border);
+      border-top:1px solid var(--wsg-bronze);border-bottom:1px solid var(--btb-border-soft);
+      margin-bottom:24px;
+    }
+    .wsg-wave{background:var(--btb-paper);padding:32px 36px}
+    .wsg-wave-label{
+      font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--wsg-bronze);
+      font-family:var(--btb-sans);
+    }
+    .wsg-wave-nm{font:400 38px/1 var(--btb-serif);color:var(--wsg-ink);margin:10px 0}
+    .wsg-wave p{color:var(--wsg-body);margin:0}
+    .wsg-wave-note{
+      margin-top:22px;max-width:760px;font:italic 17px/1.55 var(--btb-serif);color:var(--wsg-body);
+    }
+    @media (max-width:700px){ .wsg-wavelengths{grid-template-columns:1fr} }
+
+    /* ---- 8. A Small Cabinet of Glowing Minerals ---- */
+    .wsg-cabinet-head{
+      display:grid;grid-template-columns:1fr .78fr;gap:60px;align-items:end;margin-bottom:30px;
+    }
+    .wsg-cabinet-head p{margin:0;color:var(--wsg-body)}
+    .wsg-cabinet{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      border-top:1px solid var(--wsg-bronze);border-left:1px solid var(--btb-border-soft);
+    }
+    .wsg-mineral{
+      min-height:238px;padding:28px;
+      border-right:1px solid var(--btb-border-soft);border-bottom:1px solid var(--btb-border-soft);
+      position:relative;background:var(--btb-paper-2);
+    }
+    .wsg-mineral:nth-child(even){background:#f2ece3}
+    .wsg-glow{
+      height:84px;margin-bottom:20px;
+      background:radial-gradient(ellipse at center,var(--glow) 0 12%,color-mix(in srgb,var(--glow),transparent 45%) 13% 28%,transparent 55%),#1b1827;
+    }
+    .wsg-mineral h3{font-size:21px;font-weight:400;color:var(--wsg-ink);margin:0 0 10px}
+    .wsg-mineral p{font-size:13px;line-height:1.62;color:#736960;margin:0}
+    .wsg-response{
+      font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--wsg-bronze);
+      margin-bottom:8px;font-family:var(--btb-sans);
+    }
+    @media (max-width:850px){ .wsg-cabinet-head{grid-template-columns:1fr;gap:14px} .wsg-cabinet{grid-template-columns:1fr 1fr} }
+    @media (max-width:520px){ .wsg-cabinet{grid-template-columns:1fr} }
+
+    /* ---- 9. What UV Light Can Reveal ---- */
+    .wsg-reveal{
+      display:grid;grid-template-columns:.6fr .4fr;gap:56px;align-items:center;
+    }
+    .wsg-scan{
+      height:380px;background:linear-gradient(90deg,#ccc1b1 0 49.8%,#1b1726 50.2% 100%);
+      position:relative;overflow:hidden;
+    }
+    .wsg-scan:before{
+      content:"";position:absolute;inset:52px 12%;
+      background:radial-gradient(circle at 35% 30%,#8a7d6b 0 8%,transparent 9%),
+                 radial-gradient(circle at 65% 60%,#745f55 0 13%,transparent 14%),
+                 radial-gradient(circle at 56% 36%,#f98c45 0 9%,#89336d 10% 16%,transparent 18%),
+                 radial-gradient(circle at 76% 70%,#9cff70 0 7%,transparent 14%);
+    }
+    .wsg-reveal-list{margin:24px 0 0;padding:0;list-style:none;border-top:1px solid var(--btb-border-soft)}
+    .wsg-reveal-list li{
+      padding:11px 0;border-bottom:1px solid var(--btb-border-soft);font-size:13px;color:var(--wsg-body);
+      font-family:var(--btb-sans);
+    }
+    @media (max-width:850px){ .wsg-reveal{grid-template-columns:1fr;gap:24px} .wsg-scan{height:280px} }
+
+    /* ---- 10. Trying It at Home ---- */
+    .wsg-home{display:grid;grid-template-columns:.43fr .57fr;gap:56px}
+    .wsg-steps{border-top:1px solid var(--wsg-bronze)}
+    .wsg-step{
+      display:grid;grid-template-columns:38px 1fr;gap:14px;padding:18px 0;
+      border-bottom:1px solid var(--btb-border-soft);
+    }
+    .wsg-step b{font-weight:500;color:var(--wsg-bronze);font-family:var(--btb-sans)}
+    .wsg-step span{font-family:var(--btb-sans);font-size:15px;color:var(--wsg-ink)}
+    .wsg-safety{
+      margin-top:26px;background:#eee7dc;padding:22px 26px;border-left:3px solid var(--wsg-bronze);
+    }
+    .wsg-safety .wsg-eyebrow{margin-bottom:10px}
+    .wsg-safety p{margin:0;font-size:14px}
+    @media (max-width:850px){ .wsg-home{grid-template-columns:1fr;gap:24px} }
+
+    /* ---- 11. A Second View of the Stone ---- */
+    .wsg-closing{
+      display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:56px;align-items:center;
+      padding:44px 0 46px;border-top:1px solid var(--btb-border-soft);
+    }
+    .wsg-closing-line{
+      font-family:var(--btb-serif);font-size:clamp(24px,2.8vw,32px);line-height:1.3;font-style:italic;
+      color:var(--wsg-bronze);border-left:1px solid var(--wsg-bronze);padding-left:28px;margin:0;
+    }
+    @media (max-width:850px){ .wsg-closing{grid-template-columns:1fr;gap:22px;padding:34px 0 36px} }
+    @media (max-width:560px){ .wsg-closing-line{font-size:24px} }
+  </style>
+</head>
+<body class="btb-body">
+<div class="app-shell">
+
+  <header class="topbar">
+    <a href="../index.html" class="brand-home" aria-label="Return to Encyclopedia home">
+      <div class="brand-block">
+        <img src="../assets/still-point-lapidary-logo.png" alt="Still Point Lapidary" class="brand-logo">
+       <div class="brand-block-text">
+        <span class="wordmark">STILL POINT <em>Lapidary</em></span>
+        <span class="brand-block-sub">Crystal Reference Library</span>
+        </div>
+      </div>
+    </a>
+    <div class="topbar-right">
+      <span class="stone-count" id="stone-count"></span>
+      <div class="topbar-auth" id="topbar-auth"></div>
+      <a class="btn btn-sm" id="add-entry-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=add-entry">+ Entry</a>
+      <a class="btn btn-sm" id="request-entry-btn" href="../encyclopedia.html?tab=encyclopedia&action=request-entry">Request entry</a>
+      <a class="btn btn-sm" id="guide-btn" href="../encyclopedia.html?tab=encyclopedia&action=guide">? Guide</a>
+      <a class="btn btn-sm" id="manage-btn" style="display:none" href="../encyclopedia.html?tab=encyclopedia&action=manage">Manage</a>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main-nav-wrap"><nav class="main-nav">
+    <a class="nav-tab" href="../index.html">Home</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=mood">Choose by Intention</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=encyclopedia">Encyclopedia</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=identify">Identify</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=collection">My Collection</a>
+    <a class="nav-tab" href="../encyclopedia.html?tab=101">Crystals 101</a>
+    <a class="nav-tab active" href="../beyond-the-basics.html" aria-current="page">Beyond the Basics</a>
+  </nav></div>
+
+  <main class="wsg-article">
+
+    <!-- 1. Hero -->
+    <section class="wsg-hero">
+      <div class="wsg-hero-text">
+        <p class="btb-category wsg-hero-kicker">Curious Phenomena<span class="sep">·</span>Inside the Stone</p>
+        <h1>Why Some Crystals Glow</h1>
+        <h2 class="wsg-hero-sub">What Ultraviolet Light Reveals</h2>
+        <p class="wsg-hero-dek">A mineral can look completely ordinary in daylight, then flare orange, green, red, blue, or violet beneath an ultraviolet lamp.</p>
+        <p class="wsg-hero-meta">About 7 minutes</p>
+      </div>
+      <figure class="wsg-hero-visual">
+        <div class="wsg-hero-half"></div>
+        <div class="wsg-hero-half uv"></div>
+        <span class="wsg-visual-label wsg-label-left">Daylight</span>
+        <span class="wsg-visual-label wsg-label-right">Under UV</span>
+        <div class="wsg-photo-note">Placeholder — approved split-light mineral photograph pending</div>
+      </figure>
+    </section>
+
+    <!-- 2. Opening -->
+    <section class="wsg-opening">
+      <div class="wsg-opening-copy">
+        <p>Fluorite may flash blue-violet. Willemite can turn electric green. A plain gray Yooperlite may suddenly reveal bright orange patches.</p>
+        <p>Nothing about the specimen has changed. What has changed is what we are able to see.</p>
+        <p>Some minerals absorb invisible ultraviolet energy and release part of it as visible light. The result can feel almost theatrical, but the process is physical. UV simply reveals a response that ordinary light leaves hidden.</p>
+      </div>
+      <p class="wsg-opening-note">The specimen stays the same. The available light changes what becomes visible.</p>
+    </section>
+
+    <!-- 3. The Big Idea -->
+    <section class="wsg-big-idea" aria-label="The Big Idea">
+      <p class="wsg-eyebrow">The Big Idea</p>
+      <p>Ultraviolet light can reveal a visible response that ordinary light leaves hidden.</p>
+    </section>
+
+    <!-- 4. Fluorescence or Phosphorescence? -->
+    <section class="wsg-section" aria-label="Fluorescence or Phosphorescence?">
+      <div class="wsg-switchboard">
+        <div class="wsg-switch-intro">
+          <p class="wsg-eyebrow">Two Effects</p>
+          <h2 class="wsg-section-heading">Fluorescence or Phosphorescence?</h2>
+          <p>These two effects are easy to tell apart once you know what to watch for.</p>
+          <div class="wsg-memory-line">Sometimes the interesting part begins after the light is gone.</div>
+        </div>
+        <div>
+          <div class="wsg-light-states">
+            <div class="wsg-state">
+              <div class="wsg-state-num">01</div>
+              <div><h3>Fluorescence</h3><p>The mineral glows while the UV lamp is on.</p></div>
+              <div class="wsg-lamp on">Lamp on</div>
+            </div>
+            <div class="wsg-state">
+              <div class="wsg-state-num">02</div>
+              <div><h3>Phosphorescence</h3><p>The glow continues after the lamp is switched off. An afterglow may disappear almost immediately or remain visible for several seconds.</p></div>
+              <div class="wsg-lamp after">Still glowing</div>
+            </div>
+          </div>
+          <div class="wsg-memory-line wsg-memory-line--takeaway">Lamp on: fluorescence. Lamp off and still glowing: phosphorescence.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Why Does One Glow and Another Does Not? -->
+    <section class="wsg-factors" aria-label="Why Does One Glow and Another Does Not?">
+      <div>
+        <p class="wsg-eyebrow">Specimen by Specimen</p>
+        <h2 class="wsg-section-heading">Why Does One Glow and Another Does Not?</h2>
+        <p>A mineral name alone cannot predict exactly what a specimen will do under UV. Trace elements, impurities, internal structure, locality, growth conditions, and the wavelength of the lamp can all influence the response.</p>
+        <div class="wsg-factor-list">
+          <span>Trace elements</span><span>Impurities</span><span>Internal structure</span>
+          <span>Locality</span><span>Growth conditions</span><span>Lamp wavelength</span>
+        </div>
+      </div>
+      <div class="wsg-factor-panel">
+        <p>Chromium helps produce red fluorescence in some rubies. Manganese can contribute orange or red fluorescence in some calcites. Even two specimens of the same mineral may react differently beneath the same lamp.</p>
+        <p>That is why the most useful collector language is not &ldquo;this mineral fluoresces,&rdquo; but:</p>
+        <div class="wsg-possibility">
+          <strong>This mineral can fluoresce.</strong>
+          <p>The possibility belongs to the material. The actual performance belongs to the specimen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Why the Glow May Be a Different Color -->
+    <section class="wsg-identity wsg-section" aria-label="Why the Glow May Be a Different Color">
+      <figure class="wsg-split-visual">
+        <div class="wsg-split-day"></div>
+        <div class="wsg-split-uv"></div>
+        <span class="wsg-split-caption left">Visible light</span>
+        <span class="wsg-split-caption right">Ultraviolet light</span>
+      </figure>
+      <div>
+        <p class="wsg-eyebrow">A Second Visual Identity</p>
+        <h2 class="wsg-section-heading">Why the Glow May Be a Different Color</h2>
+        <p>What a stone looks like in daylight gives you surprisingly little warning about what may happen under UV.</p>
+        <p>A green fluorite may glow blue-violet. Pale calcite may turn orange-red. Ruby can become an even more intense red. The fluorescent color does not need to resemble the color you see under ordinary light because the two appearances come from different interactions with light.</p>
+        <p>That contrast is one of the pleasures of fluorescence. A familiar specimen can have an entire second visual identity waiting in the dark.</p>
+      </div>
+    </section>
+
+    <!-- 7. Longwave and Shortwave UV -->
+    <section class="wsg-section" aria-label="Longwave and Shortwave UV">
+      <p class="wsg-eyebrow">The Lamp Matters</p>
+      <h2 class="wsg-section-heading">Longwave and Shortwave UV</h2>
+      <p class="wsg-section-intro">Ultraviolet light covers a range of wavelengths, but collectors usually encounter two main types.</p>
+      <div class="wsg-wavelengths">
+        <div class="wsg-wave">
+          <div class="wsg-wave-label">Longwave UV</div>
+          <div class="wsg-wave-nm">Around 365 nm</div>
+          <p>Lower-energy UV with a longer wavelength; common flashlights make it an accessible starting point.</p>
+        </div>
+        <div class="wsg-wave">
+          <div class="wsg-wave-label">Shortwave UV</div>
+          <div class="wsg-wave-nm">Around 254 nm</div>
+          <p>Higher-energy UV with a shorter wavelength; some minerals respond much more strongly beneath it.</p>
+        </div>
+      </div>
+      <p class="wsg-wave-note">A specimen may react under both, only one, or even show different colors beneath each.</p>
+      <p>Longwave lamps are convenient for casual viewing and hunting fluorescent rocks. Shortwave equipment is more specialized and requires greater protection because the radiation is more energetic. Neither wavelength is universally &ldquo;better.&rdquo; They simply reveal different possibilities.</p>
+    </section>
+
+    <!-- 8. A Small Cabinet of Glowing Minerals -->
+    <section class="wsg-section" aria-label="A Small Cabinet of Glowing Minerals">
+      <div class="wsg-cabinet-head">
+        <div>
+          <p class="wsg-eyebrow">Eight Specimens to Know</p>
+          <h2 class="wsg-section-heading">A Small Cabinet of Glowing Minerals</h2>
+        </div>
+        <p>Once you start looking, the range of responses becomes wonderfully unpredictable. These examples show how different one UV session can look from the next.</p>
+      </div>
+      <div class="wsg-cabinet">
+        <article class="wsg-mineral" style="--glow:#9c86ff">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Blue · violet · cream · green</div>
+          <h3>Fluorite</h3>
+          <p>Fluorescence was named after fluorite, although not every fluorite glows.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#b8ff63">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Brilliant green</div>
+          <h3>Willemite</h3>
+          <p>A classic fluorescent mineral, especially from Franklin and Sterling Hill, New Jersey.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#ff7e47">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Orange · red · pink · cream · blue</div>
+          <h3>Calcite</h3>
+          <p>One of the most varied fluorescent minerals. Some examples also phosphoresce.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#ff9a45">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Orange-yellow patches</div>
+          <h3>Yooperlite</h3>
+          <p>A trade name for sodalite-bearing syenite found around the Great Lakes.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#bce6ff">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Commonly blue-white</div>
+          <h3>Scheelite</h3>
+          <p>UV lamps were historically useful for locating tungsten-bearing scheelite ore.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#ff3d5d">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Strong red</div>
+          <h3>Ruby</h3>
+          <p>Chromium can intensify its red response.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#f5e879">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Yellow · white · blue · greenish</div>
+          <h3>Aragonite</h3>
+          <p>Some examples continue glowing after the lamp is removed.</p>
+        </article>
+        <article class="wsg-mineral" style="--glow:#ffd75d">
+          <div class="wsg-glow"></div>
+          <div class="wsg-response">Yellow or red</div>
+          <h3>Scapolite</h3>
+          <p>A less familiar mineral that can produce surprisingly vivid fluorescence.</p>
+        </article>
+      </div>
+      <p class="wsg-wave-note">Individual specimens vary, which is exactly why testing them can be so satisfying. Knowing what a mineral <em>can</em> do gives you a clue. The specimen still gets the final word.</p>
+    </section>
+
+    <!-- 9. What UV Light Can Reveal -->
+    <section class="wsg-reveal wsg-section" aria-label="What UV Light Can Reveal">
+      <figure class="wsg-scan">
+        <span class="wsg-split-caption left">Ordinary light</span>
+        <span class="wsg-split-caption right">Under UV</span>
+      </figure>
+      <div>
+        <p class="wsg-eyebrow">Look More Closely</p>
+        <h2 class="wsg-section-heading">What UV Light Can Reveal</h2>
+        <p>Fluorescence is beautiful, but UV can also be useful.</p>
+        <p>A lamp may reveal zoning within a crystal, different minerals growing together in one specimen, coatings, glue or repair lines, fracture filling, or patterns that disappear in ordinary light. Something that looks uniform on a shelf may separate into distinct glowing regions once the room goes dark.</p>
+        <p>UV does not automatically tell you what caused the difference. It tells you that a difference is there. That alone can change what you notice and what questions you ask next.</p>
+        <ul class="wsg-reveal-list">
+          <li>Zoning within a crystal</li>
+          <li>Different minerals growing together</li>
+          <li>Coatings, glue, or repair lines</li>
+          <li>Fracture filling and hidden patterns</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 10. Trying It at Home -->
+    <section class="wsg-home wsg-section" aria-label="Trying It at Home">
+      <div>
+        <p class="wsg-eyebrow">A Simple Observation</p>
+        <h2 class="wsg-section-heading">Trying It at Home</h2>
+        <p>A simple viewing setup does not need to be elaborate. Start with a reputable UV lamp, a dark room or viewing box, appropriate UV-blocking eyewear, and an ordinary white light for comparison.</p>
+      </div>
+      <div>
+        <div class="wsg-steps">
+          <div class="wsg-step"><b>01</b><span>Look at the specimen first in normal light.</span></div>
+          <div class="wsg-step"><b>02</b><span>Turn on the UV lamp and notice which areas respond.</span></div>
+          <div class="wsg-step"><b>03</b><span>Switch it off and watch briefly for any afterglow.</span></div>
+        </div>
+        <div class="wsg-safety">
+          <p class="wsg-eyebrow">UV Safety</p>
+          <p>Never look directly into the beam or aim it toward another person. Shortwave equipment requires additional care because it uses higher-energy UV, and children should be supervised around any UV lamp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. A Second View of the Stone -->
+    <section class="wsg-closing" aria-label="A Second View of the Stone">
+      <div>
+        <p class="wsg-eyebrow">Closing Thought</p>
+        <h2 class="wsg-section-heading">A Second View of the Stone</h2>
+        <p>Ordinary light shows you color, luster, transparency, and form. Ultraviolet light may reveal glowing zones, unexpected mineral combinations, hidden repairs, or colors that never appear in daylight.</p>
+        <p>That is what makes fluorescence so compelling. It does not replace the specimen you already know.</p>
+      </div>
+      <p class="wsg-closing-line">It reminds you that there may still be more to see.</p>
+    </section>
+
+    <!-- 12. Related Reading, Credits, and Return Navigation -->
+    <div class="btb-footer-links">
+      <section class="btb-related" aria-label="Related Encyclopedia Entries">
+        <h2>Related Encyclopedia Entries</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">Fluorite</span></li>
+          <li><span class="btb-related-quiet">Calcite</span></li>
+          <li><span class="btb-related-quiet">Ruby</span></li>
+          <li><span class="btb-related-quiet">Sodalite</span></li>
+        </ul>
+      </section>
+
+      <section class="btb-related" aria-label="Continue Exploring">
+        <h2>Continue Exploring</h2>
+        <ul class="btb-related-list">
+          <li><span class="btb-related-quiet">What's Inside a Crystal?</span></li>
+          <li><span class="btb-related-quiet">How Crystals Form</span></li>
+          <li><span class="btb-related-quiet">When Light Moves Through a Stone</span></li>
+          <li><span class="btb-related-quiet">Can Science and Crystal Tradition Coexist?</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <details class="btb-credits">
+      <summary class="btb-credits-summary">Photo Credits</summary>
+      <ul class="btb-credits-list">
+        <li class="btb-credit-item">
+          <span class="btb-credit-title">Hero, second-identity, and UV-reveal photography</span>
+          <span class="btb-credit-meta">Placeholder — no photograph has been sourced, generated, or chosen for this pass. Pending Christie's selection.</span>
+        </li>
+      </ul>
+    </details>
+
+    <div class="btb-return-bottom">
+      <a class="btb-return" href="../beyond-the-basics.html">← Back to Beyond the Basics</a>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Sign-in modal markup required by auth.js's _openAuth()/closeAuthModal(),
+     copied verbatim from index.html so "Sign In" in the shared header
+     actually works on this page, matching the homepage exactly. -->
+<div class="auth-modal-overlay" id="auth-modal-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-modal" style="background:#faf8f6;border-radius:14px;padding:2rem 1.75rem 1.75rem;width:min(420px,100%);position:relative;box-shadow:0 12px 48px rgba(42,37,32,0.18)">
+    <button onclick="closeAuthModal()" style="position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;border:0.5px solid rgba(42,37,32,0.1);background:transparent;cursor:pointer;font-size:16px;color:#5a5149;display:flex;align-items:center;justify-content:center">✕</button>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#b0a89e;margin-bottom:0.4rem">Still Point Lapidary</div>
+    <div id="auth-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.2;color:#2a2520;margin-bottom:0.4rem">Sign in to your collection</div>
+    <div id="auth-modal-sub" style="font-size:13px;color:#5a5149;line-height:1.7;margin-bottom:1.5rem">Enter your email and we'll send you a magic link — no password needed.</div>
+    <div style="margin-bottom:1rem">
+      <label for="auth-email-input" style="display:block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6b5f56;margin-bottom:6px">Email address</label>
+      <input type="email" id="auth-email-input" name="email" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitMagicLink()" style="width:100%;padding:10px 14px;border:0.5px solid rgba(42,37,32,0.1);border-radius:8px;font-family:'Jost',sans-serif;font-size:14px;color:#2a2520;outline:none;background:#f7f5f2;box-sizing:border-box">
+    </div>
+    <button id="auth-submit-btn" onclick="submitMagicLink()" style="width:100%;padding:11px 0;background:#8b7355;color:#faf8f6;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;cursor:pointer">Send magic link</button>
+    <div id="auth-msg" style="font-size:12px;color:#8b7355;margin-top:0.75rem;line-height:1.6;text-align:center;min-height:18px"></div>
+    <div style="font-size:11px;color:#b0a89e;text-align:center;margin-top:1rem;line-height:1.6">Your collection saves across all your devices.<br>Open the link in the email on this device.</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../app.js"></script>
+<script src="../auth.js"></script>
+</body>
+</html>
