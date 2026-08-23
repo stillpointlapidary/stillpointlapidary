@@ -66,6 +66,7 @@ const ALLOWED_COLUMNS = [
   'Next Slug',
   'Family',
   'Species',
+  'Material Type',
   'Element',
   'Zodiac',
   'Primary Chakra',
