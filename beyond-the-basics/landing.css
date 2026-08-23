@@ -16,6 +16,25 @@
 .btbl-pill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .btbl-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
+/* ── TEMP: growing banner — approved per beyond-the-basics-growing-header-approved.html ── */
+.btb-growing-banner{position:relative;margin:0 1rem 1rem;min-height:230px;display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;gap:42px;padding:34px 42px;background:linear-gradient(90deg,rgba(250,248,246,0.99) 0%,rgba(250,248,246,0.98) 62%,rgba(247,244,240,0.94) 100%);border:1px solid rgba(42,37,32,0.18);border-radius:16px;overflow:hidden}
+.btb-growing-copy{position:relative;z-index:1;max-width:650px}
+.btb-growing-eyebrow{display:inline-flex;align-items:center;gap:12px;margin:0 0 18px;color:var(--accent);font-family:'Jost',Arial,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;line-height:1;text-transform:uppercase;white-space:nowrap}
+.btb-growing-eyebrow::before,.btb-growing-eyebrow::after{content:"";display:inline-block;width:34px;height:1px;background:var(--accent2);opacity:0.9}
+.btb-growing-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:34px;line-height:1.15;font-weight:400;color:var(--ink)}
+.btb-growing-copy p{margin:18px 0 0;color:var(--ink2);font-size:16px;line-height:1.62}
+.btb-growing-copy .btb-growing-invitation{color:var(--accent);font-weight:500}
+
+/* TEMP: full environmental hero photograph, layered behind the text and
+   masked so it fades into the ivory field rather than showing a hard edge. */
+.btb-growing-env{position:absolute;inset:0;z-index:0;background-image:url('/assets/beyond-the-basics/beyond-the-basics-editorial-environment.png');background-size:cover;background-position:center right;-webkit-mask-image:linear-gradient(to right,transparent 0%,transparent 38%,rgba(0,0,0,0.5) 56%,#000 76%,#000 100%);mask-image:linear-gradient(to right,transparent 0%,transparent 38%,rgba(0,0,0,0.5) 56%,#000 76%,#000 100%)}
+
+@media(max-width:760px){
+  .btb-growing-banner{grid-template-columns:1fr;gap:20px;padding:30px 26px 26px}
+  .btb-growing-title{font-size:30px}
+  .btb-growing-env{display:none}
+}
+
 /* ── Featured mosaic ────────────────────────────────────────────────── */
 /* Every featured tile (Articles 01-06 + Mystery Drawer) is one unbroken
    full-bleed image card with live-HTML text overlaid on the image — no

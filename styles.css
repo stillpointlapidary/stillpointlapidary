@@ -4744,6 +4744,40 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .enc-hero-btns .btn{font-size:12px;padding:10px 20px;min-height:42px}
 
+/* TEMP: existing hero hidden while enc-growing-hero is live. Remove this rule to restore. */
+.enc-hero-temp-hidden{display:none}
+
+/* TEMP: growing-library hero — approved per encyclopedia-growing-hero-locked.html */
+.enc-growing-hero{position:relative;max-width:1100px;min-height:330px;margin:0 auto 1.25rem;display:grid;grid-template-columns:0.78fr 1.35fr 0.87fr;align-items:center;gap:22px;padding:46px 44px 38px;background:linear-gradient(90deg,rgba(250,248,246,0.98) 0%,rgba(250,248,246,0.97) 58%,rgba(247,244,240,0.94) 100%);border:1px solid rgba(42,37,32,0.18);border-radius:16px;overflow:hidden}
+.enc-growing-heading{align-self:center}
+.enc-growing-eyebrow{font-family:'Jost',Arial,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;line-height:1;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;margin:0 0 22px;color:var(--accent);white-space:nowrap}
+.enc-growing-eyebrow::before,.enc-growing-eyebrow::after{content:"";display:inline-block;width:26px;height:1px;background:var(--gold,var(--accent2));opacity:0.9}
+.enc-growing-title{margin:0;max-width:300px;font-family:Georgia,'Times New Roman',serif;font-size:42px;line-height:1.12;font-weight:400;color:var(--ink)}
+.enc-growing-copy{position:relative;padding-left:18px}
+.enc-growing-copy::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:1px;background:var(--border2,var(--border))}
+.enc-growing-copy p{margin:0;color:var(--ink2);font-size:15px;line-height:1.62}
+.enc-growing-copy .enc-growing-invitation{margin-top:24px;color:var(--accent);font-weight:500}
+.enc-growing-heading,.enc-growing-copy{position:relative;z-index:1}
+
+/* TEMP: full environmental hero photograph, layered behind the text and
+   masked so it fades into the ivory field rather than showing a hard edge. */
+.enc-growing-env{position:absolute;inset:0;z-index:0;background-image:url('/assets/encyclopedia-living-library-environment.png');background-size:contain;background-repeat:no-repeat;background-position:right center;-webkit-mask-image:linear-gradient(to right,transparent 0%,transparent 32%,rgba(0,0,0,0.5) 50%,#000 72%,#000 100%);mask-image:linear-gradient(to right,transparent 0%,transparent 32%,rgba(0,0,0,0.5) 50%,#000 72%,#000 100%)}
+
+@media(max-width:860px){
+  .enc-growing-hero{grid-template-columns:1fr 0.9fr;gap:26px;padding:36px 32px}
+  .enc-growing-env{-webkit-mask-image:linear-gradient(to right,transparent 0%,transparent 22%,rgba(0,0,0,0.5) 42%,#000 66%,#000 100%);mask-image:linear-gradient(to right,transparent 0%,transparent 22%,rgba(0,0,0,0.5) 42%,#000 66%,#000 100%)}
+}
+@media(max-width:620px){
+  .enc-growing-hero{min-height:0;grid-template-columns:1fr;gap:24px;padding:30px 24px 26px;border-radius:14px}
+  .enc-growing-eyebrow{margin-bottom:18px}
+  .enc-growing-title{font-size:34px;max-width:none}
+  .enc-growing-copy{padding-left:0;padding-top:22px;border-top:1px solid var(--border2,var(--border))}
+  .enc-growing-copy::before{display:none}
+  .enc-growing-copy p{font-size:15px}
+  .enc-growing-copy .enc-growing-invitation{margin-top:18px}
+  .enc-growing-env{display:none}
+}
+
 /* Pathway panel */
 .enc-library-panel{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:1.75rem 1.75rem 1.5rem;margin-bottom:1.25rem;box-shadow:0 6px 22px rgba(42,37,32,0.04)}
 .enc-panel-heading{text-align:center;margin-bottom:1.5rem}
