@@ -4771,6 +4771,8 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 .enc-panel-search-input{flex:1;border:none;outline:none;background:transparent;padding:11px 14px 11px 0;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);letter-spacing:0.02em}
 .enc-panel-search-input::placeholder{color:var(--ink3)}
 .enc-mobile-search-head,.enc-mobile-search-wrap,.enc-mobile-or-divider{display:none}
+.enc-search-results-panel.enc-active-view{margin-top:1.5rem}
+.enc-search-results-panel.enc-active-view .enc-mobile-search-wrap{display:flex;align-items:center;gap:0;border:0.5px solid var(--border);border-radius:10px;background:var(--stone);overflow:hidden;margin-bottom:0.85rem}
 .enc-active-filter-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 0.75rem}
 .enc-active-filter-row:empty{display:none}
 .enc-active-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);width:100%}

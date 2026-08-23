@@ -789,9 +789,11 @@ function dismissEncDoorway(){
   const landing=document.getElementById('enc-landing');
   const tierLanding=document.getElementById('enc-tier-landing');
   const orDivider=document.getElementById('enc-mobile-or-divider');
+  const resultsPanel=document.getElementById('enc-search-results-panel');
   if(landing)landing.style.display='none';
   if(tierLanding)tierLanding.style.display='none';
   if(orDivider)orDivider.style.display='none';
+  if(resultsPanel)resultsPanel.classList.add('enc-active-view');
 }
 
 function restoreEncLanding(){
@@ -799,9 +801,11 @@ function restoreEncLanding(){
   const landing=document.getElementById('enc-landing');
   const tierLanding=document.getElementById('enc-tier-landing');
   const orDivider=document.getElementById('enc-mobile-or-divider');
+  const resultsPanel=document.getElementById('enc-search-results-panel');
   if(landing)landing.style.display='';
   if(tierLanding)tierLanding.style.display='';
   if(orDivider)orDivider.style.display='';
+  if(resultsPanel)resultsPanel.classList.remove('enc-active-view');
   const grid=document.getElementById('crystal-grid');
   if(grid)grid.innerHTML='';
   const loadMore=document.getElementById('load-more-wrap');
