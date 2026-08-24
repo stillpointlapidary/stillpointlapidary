@@ -4769,7 +4769,7 @@ body{font-family:'Jost',sans-serif;background:var(--stone);color:var(--ink);min-
 }
 @media(max-width:620px){
   .enc-growing-hero{min-height:0;grid-template-columns:1fr;gap:0;padding:0 0 26px;border-radius:14px}
-  .enc-growing-heading{position:absolute;top:0;left:0;right:0;height:220px;z-index:1;margin:0;padding:20px 22px;border-radius:0;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(100deg,rgba(250,248,246,0.95) 0%,rgba(250,248,246,0.86) 34%,rgba(250,248,246,0.38) 56%,rgba(250,248,246,0) 72%)}
+  .enc-growing-heading{position:absolute;top:0;left:0;right:0;height:220px;z-index:1;margin:0;padding:20px 22px 44px;border-radius:0;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(100deg,rgba(250,248,246,0.95) 0%,rgba(250,248,246,0.86) 34%,rgba(250,248,246,0.38) 56%,rgba(250,248,246,0) 72%)}
   .enc-growing-eyebrow{margin-bottom:10px}
   .enc-growing-title{font-size:25px;max-width:68%;line-height:1.18}
   .enc-growing-copy{padding:22px 24px 0;border-top:1px solid var(--border2,var(--border))}
