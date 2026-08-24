@@ -5,20 +5,24 @@
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ── Header ─────────────────────────────────────────────────────────── */
-.btbl-head{text-align:center;padding:1.75rem 1rem 1.25rem}
+.btbl-head{text-align:center;padding:1.75rem 1rem 2.25rem}
 .btbl-title{margin:0 0 0.6rem;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(38px,5.5vw,58px);letter-spacing:-0.01em;color:var(--ink)}
 .btbl-subtitle{margin:0 auto;max-width:560px;font-size:15px;color:var(--ink2);line-height:1.6}
 
 /* ── Category pills ─────────────────────────────────────────────────── */
-.btbl-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;padding:1.25rem 1rem 1.75rem}
+/* TEMP: hidden until the article library is large enough to benefit from
+   filtering. Markup/JS filtering logic left intact in beyond-the-basics.html
+   and landing.js so this can be restored by removing this rule. */
+.btbl-pills{display:none}
 .btbl-pill{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 18px;border-radius:999px;border:0.5px solid var(--border);background:var(--white);color:var(--ink2);cursor:pointer;transition:all 0.15s}
 .btbl-pill:hover{border-color:var(--accent2);color:var(--ink)}
 .btbl-pill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .btbl-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ── TEMP: growing banner — approved per beyond-the-basics-growing-header-approved.html ── */
-.btb-growing-banner{position:relative;margin:0 1rem 1rem;min-height:230px;display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;gap:42px;padding:34px 42px;background:linear-gradient(90deg,rgba(250,248,246,0.99) 0%,rgba(250,248,246,0.98) 62%,rgba(247,244,240,0.94) 100%);border:1px solid rgba(42,37,32,0.18);border-radius:16px;overflow:hidden}
-.btb-growing-copy{position:relative;z-index:1;max-width:650px}
+.btb-growing-banner{position:relative;margin:0 1rem 1rem;min-height:230px;display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;column-gap:42px;row-gap:0;padding:34px 42px;background:linear-gradient(90deg,rgba(250,248,246,0.99) 0%,rgba(250,248,246,0.98) 62%,rgba(247,244,240,0.94) 100%);border:1px solid rgba(42,37,32,0.18);border-radius:16px;overflow:hidden}
+.btb-growing-heading{position:relative;z-index:1;grid-column:1;max-width:650px}
+.btb-growing-copy{position:relative;z-index:1;grid-column:1;max-width:650px}
 .btb-growing-eyebrow{display:inline-flex;align-items:center;gap:12px;margin:0 0 18px;color:var(--accent);font-family:'Jost',Arial,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;line-height:1;text-transform:uppercase;white-space:nowrap}
 .btb-growing-eyebrow::before,.btb-growing-eyebrow::after{content:"";display:inline-block;width:34px;height:1px;background:var(--accent2);opacity:0.9}
 .btb-growing-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:34px;line-height:1.15;font-weight:400;color:var(--ink)}
@@ -31,8 +35,10 @@
 
 @media(max-width:760px){
   .btb-growing-banner{grid-template-columns:1fr;gap:20px;padding:30px 26px 26px}
-  .btb-growing-title{font-size:30px}
-  .btb-growing-env{display:none}
+  .btb-growing-heading{position:absolute;top:30px;left:26px;right:26px;height:170px;z-index:1;margin:0;padding:16px 18px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(100deg,rgba(250,248,246,0.96) 0%,rgba(250,248,246,0.88) 34%,rgba(250,248,246,0.4) 56%,rgba(250,248,246,0) 72%)}
+  .btb-growing-eyebrow{margin-bottom:8px}
+  .btb-growing-title{font-size:23px;max-width:68%;line-height:1.18}
+  .btb-growing-env{position:static;order:-1;width:100%;height:170px;border-radius:10px;background-size:cover;background-position:center right;-webkit-mask-image:none;mask-image:none}
 }
 
 /* ── Featured mosaic ────────────────────────────────────────────────── */

@@ -33,7 +33,10 @@
     </div>
   </a>
   <div class="topbar-right">
-    <a class="btn btn-sm" href="encyclopedia.html?tab=encyclopedia">Back to Encyclopedia</a>
+    <a class="btn btn-sm topbar-back-link" href="encyclopedia.html?tab=encyclopedia">Back to Encyclopedia</a>
+    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -60,10 +63,11 @@
     <!-- TEMP: growing banner, approved per beyond-the-basics-growing-header-approved.html -->
     <section class="btb-growing-banner" aria-labelledby="btb-growing-title">
       <div class="btb-growing-env" aria-hidden="true" role="presentation"></div>
-      <div class="btb-growing-copy">
+      <div class="btb-growing-heading">
         <div class="btb-growing-eyebrow">From the Editorial Desk</div>
         <h2 class="btb-growing-title" id="btb-growing-title">More stories are on the way!</h2>
-
+      </div>
+      <div class="btb-growing-copy">
         <p>
           We&rsquo;re writing new articles and adding photography and visual storytelling that help bring each lesson to life.
         </p>
@@ -123,6 +127,17 @@
 
 </div>
 
+<script>
+function toggleMobileNav(btn){
+  const open=!document.body.classList.contains('mobile-nav-open');
+  document.body.classList.toggle('mobile-nav-open', open);
+  document.querySelectorAll('.mobile-menu-toggle').forEach(b=>{
+    b.classList.toggle('active', open);
+    b.setAttribute('aria-expanded', String(open));
+    b.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  });
+}
+</script>
 <script src="beyond-the-basics/beyond-the-basics-data.js"></script>
 <script src="beyond-the-basics/landing.js"></script>
 </body>

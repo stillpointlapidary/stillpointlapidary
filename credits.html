@@ -24,7 +24,10 @@
     </div>
   </a>
   <div class="topbar-right">
-    <a class="btn btn-sm" href="encyclopedia.html?tab=encyclopedia">Back to Encyclopedia</a>
+    <a class="btn btn-sm topbar-back-link" href="encyclopedia.html?tab=encyclopedia">Back to Encyclopedia</a>
+    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav(this)">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -90,6 +93,17 @@
 </footer>
 </div>
 
+<script>
+function toggleMobileNav(btn){
+  const open=!document.body.classList.contains('mobile-nav-open');
+  document.body.classList.toggle('mobile-nav-open', open);
+  document.querySelectorAll('.mobile-menu-toggle').forEach(b=>{
+    b.classList.toggle('active', open);
+    b.setAttribute('aria-expanded', String(open));
+    b.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  });
+}
+</script>
 <script>
 /* ── Central Photo Credits page ──
    Pulls two independent, read-only data sources and renders each as a
