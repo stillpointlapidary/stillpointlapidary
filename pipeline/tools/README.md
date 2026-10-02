@@ -46,37 +46,15 @@ catalog-wide or structural changes.
 
 ### Allowed columns
 
-This is the exact, current `ALLOWED_COLUMNS` list in the script. If a
-requested column isn't on this list, or isn't found in the workbook under its
-exact expected header, the script reports the problem and stops — it never
-guesses.
-
 ```
-Canonical Name
-Alternate Names
-Slug
-Collection Tier
-Previous Stone
-Previous Slug
-Next Stone
-Next Slug
-Family
-Species
-Material Type
 Element
 Zodiac
 Primary Chakra
 Secondary Chakra
 Styling Chakra
 Encyclopedia Energetic Role
-Energetic Role 1
-Energetic Role 2
+Energetic Role Icon
 Color Energy
-Best For
-Use When
-Affirmation
-Discovery Tags
-Exception / Identity Flag
 Encyclopedia Production Status
 Research Status
 Canonical MD Status
@@ -87,43 +65,49 @@ Notes
 Image URL
 Image Filename
 Image Status
-SOTD Essence
-SOTD Energy Label
-SOTD Question
-SOTD Takeaway
-SOTD Review Status
-SOTD Review Source
-SOTD Reviewed By
-SOTD Reviewed At
-SOTD Notes / Blocker
 ```
 
-#### Guardrails on specific columns
+`Image URL`, `Image Filename`, `Image Status` were added 2026-07-20 to close the
+photo-linking gap — the "Group I — Card & Image" columns existed in the
+workbook but were unwritten catalog-wide (0/333 rows) and unreachable through
+this tool until then.
 
-`Canonical Name`, `Alternate Names`, `Slug`, `Previous Stone`, `Previous
-Slug`, `Next Stone`, `Next Slug`, `Collection Tier`, `Family`, `Species`, and
-`Exception / Identity Flag` are structural/identity fields, not routine
-workflow status. Use them only for an explicit approved identity, catalog-wide,
-or paired-replacement decision — never for an unapproved or routine
-single-stone change.
+`Canonical Name`, `Alternate Names`, `Slug`, `Previous Stone`, `Previous Slug`,
+`Next Stone`, `Next Slug` were added 2026-07-21 for the approved C-0264
+Rhyolite -> Rainforest Jasper catalog rename (roster-identity and navigation
+fields, needed for that single explicitly-approved rename plus its two
+navigation-neighbor rows). These are structural/identity fields, not routine
+workflow status — do not reuse them for an unapproved or catalog-wide rename;
+each use should trace back to an explicit approved identity decision like this
+one.
 
-`Best For`, `Use When`, `Affirmation`, `Energetic Role 1`, `Energetic Role 2`
-are retained legacy fields — see the Production Master's `Field Dictionary`
-sheet for their current legacy status. They are not current encyclopedia
-authority and are not a source for new editorial drafting. `Energetic Role 3`
-still exists in the workbook but is intentionally not on this allow-list.
+`Family`, `Species`, `Energetic Role 1`, `Energetic Role 2`, `Best For`,
+`Use When`, `Affirmation`, `Card Properties`, `Exception / Identity Flag` were
+added 2026-07-21 for the approved C-0334 Pink Halite -> Asbolane paired
+catalog replacement (converting the retained Pink Halite seat into the
+Asbolane addition, per `ENCYCLOPEDIA-CATALOG-DECISIONS.md` §17). Asbolane's
+metaphysical values are an explicitly approved thin-source exception; these
+columns exist to write and, where no approved value exists (`Use When`,
+`Affirmation`), to blank stale content from the retired seat. Do not reuse
+these columns for routine single-stone editorial correction — each use should
+trace back to an explicit approved identity or paired-replacement decision
+like this one.
 
-`Discovery Tags` — up to three short reader-facing descriptors used on
-discovery/catalog cards. They are distinct from the single canonical
-Energetic Role and from canonical-MD Property Pills. This tool does not
-validate their content or count; it only writes what you put in `updates`.
+`Collection Tier` was added 2026-07-24 for the approved six-for-six catalog
+swap (`ENCYCLOPEDIA-CATALOG-DECISIONS.md` §18/§19): two reused seats change
+tier when their identity changes (C-0106, C-0150), and four existing rows
+are promoted (Galena, Astrophyllite: Tier 3 → Tier 2; Cobaltoan Calcite,
+Cavansite: Tier 4 → Tier 3). Workbook header confirmed as
+`Group B — Catalog Structure | Collection Tier`, which strips to the exact
+allow-list entry `Collection Tier`. Do not reuse this column for a routine
+single-stone tier change — each use should trace back to an explicit
+approved catalog-wide tier decision like this one. `Cohort`, `Catalog
+Display Order`, and `Navigation Display Order` remain intentionally
+unwritable through this tool.
 
-`Energetic Role Icon` is derived from `Encyclopedia Energetic Role` and is not
-independently written to the Production Master. It has no allow-list entry
-and no replacement column, and is not writable through this tool.
-
-`Cohort` and `Catalog Display Order` remain intentionally unwritable through
-this tool.
+If a requested column isn't on this list, or isn't found in the workbook
+under its exact expected header, the script reports the problem and stops —
+it never guesses.
 
 ### Example input
 
