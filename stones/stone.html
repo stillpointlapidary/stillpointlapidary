@@ -8,6 +8,8 @@
 <meta id="meta-description" content="" name="description"/>
 <meta id="meta-og-title" content="" property="og:title"/>
 <meta content="website" property="og:type"/>
+<meta id="meta-og-url" content="" property="og:url"/>
+<link id="link-canonical" href="" rel="canonical"/>
 <meta id="meta-theme-color" content="#888888" name="theme-color"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -1348,6 +1350,9 @@ async function init() {
   document.getElementById('page-title').textContent         = `${stoneName} | Still Point Lapidary Encyclopedia`;
   document.getElementById('meta-description').content       = `${stoneName} encyclopedia entry — metaphysical properties, mineral profile, energetic themes, and collector notes from Still Point Lapidary.`;
   document.getElementById('meta-og-title').content          = `${stoneName} | Still Point Lapidary Encyclopedia`;
+  const canonicalUrl = `https://stillpointlapidary.com/stones/stone.html?slug=${encodeURIComponent(slug)}`;
+  document.getElementById('link-canonical').href            = canonicalUrl;
+  document.getElementById('meta-og-url').content            = canonicalUrl;
   document.getElementById('meta-theme-color').content       = stone.color_hex || accentHex || '#888888';
   document.getElementById('sidebar-stone-name').textContent = stoneName;
 

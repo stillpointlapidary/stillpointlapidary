@@ -191,6 +191,35 @@ for (const rel of DATA_FILES) {
   console.log(`  OK  ${rel}`);
 }
 
+// 7. sitemap.xml — add published encyclopedia stone URLs (shared dynamic
+// template, so one URL per published slug; no static stone pages). Reads the
+// public publishable key already shipped in stones/stone.html. If the fetch
+// fails the committed static sitemap.xml is left as copied and a warning is
+// printed — the build is not failed over SEO coverage.
+async function addStoneSitemapUrls() {
+  console.log('\nsitemap.xml stone URLs:');
+  try {
+    const tpl = fs.readFileSync(path.join(ROOT, 'stones', 'stone.html'), 'utf8');
+    const url = tpl.match(/const SUPABASE_URL\s*=\s*'([^']+)'/)?.[1];
+    const key = tpl.match(/const SUPABASE_KEY\s*=\s*'([^']+)'/)?.[1];
+    if (!url || !key) throw new Error('could not read Supabase constants from stones/stone.html');
+    const res = await fetch(`${url}/rest/v1/enc_stone_content?select=slug&published=eq.true&order=slug`, {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
+    });
+    if (!res.ok) throw new Error(`Supabase responded ${res.status}`);
+    const slugs = (await res.json()).map(r => r.slug).filter(s => /^[a-z0-9-]+$/.test(s));
+    const smPath = path.join(DIST, 'sitemap.xml');
+    const entries = slugs.map(s =>
+      `  <url>\n    <loc>https://stillpointlapidary.com/stones/stone.html?slug=${s}</loc>\n  </url>\n`).join('');
+    fs.writeFileSync(smPath, fs.readFileSync(smPath, 'utf8').replace('</urlset>', `${entries}</urlset>`));
+    console.log(`  OK  ${slugs.length} published stone URL(s) added`);
+  } catch (err) {
+    console.warn(`  WARN  stone URLs not added to sitemap: ${err.message}`);
+  }
+}
+
 // ── DONE ─────────────────────────────────────────────────────────────────────
 
-console.log(`\nBuild complete. ${totalFiles} files written to dist/`);
+addStoneSitemapUrls().then(() => {
+  console.log(`\nBuild complete. ${totalFiles} files written to dist/`);
+});
