@@ -117,6 +117,15 @@ compact `PASS`/`BLOCKED` report (see `pipeline/run-gate4-stone.js` for the
 exact field list). Does not support an explicit unpublished hold; run the
 steps below by hand for that case.
 
+Legacy-live wording-only correction exception: `--legacy-live-copy-correction`
+is an explicit opt-in flag that bypasses ONLY the missing individual
+research-record check, and only after the runner proves the stone already has
+a published `enc_stone_content` row, is `Full Entry Live` in both the
+Production Master and `stones`, and has a canonical MD (an UPDATE, never a
+first publication). The bypass is reported as a warning; every other check
+still runs. Use only when Christie has approved exact replacement wording —
+see `ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md` §17.
+
 ## Approved Stone → Gate 4 checklist
 
 What the runner above does, spelled out — short enough to paste into a

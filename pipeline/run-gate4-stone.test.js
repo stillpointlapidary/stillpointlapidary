@@ -6,7 +6,7 @@ const path = require('path');
 const {
   parseArgs, resolveMdPath, resolveResearchRecordPath, resolvePacketPath,
   buildPmUpdatePayload, parseImportReportLine, parsePmUpdateResult,
-  formatReport,
+  formatReport, legacyLiveEligibilityProblems, LEGACY_LIVE_RECORD_WARNING,
 } = require('./run-gate4-stone');
 const { CANONICAL_MDS_ROOT, RESEARCH_ROOT, PIPELINE_OUTPUT_DIR, PRODUCTION_MASTER_PATH } = require('./lib/paths');
 
@@ -117,4 +117,36 @@ test('formatReport surfaces the blocker reason and marks unreached steps', () =>
   assert.equal(report.split('\n')[0], 'BLOCKED');
   assert.ok(report.includes('Canonical MD: not reached'));
   assert.ok(report.includes('Blocker: Canonical MD not found at ...'));
+});
+
+test('parseArgs defaults legacyLiveCopyCorrection to false and sets it only on the explicit flag', () => {
+  assert.equal(parseArgs(['--stone', 'amazonite']).legacyLiveCopyCorrection, false);
+  assert.equal(parseArgs(['--stone', 'amazonite', '--legacy-live-copy-correction']).legacyLiveCopyCorrection, true);
+});
+
+test('legacyLiveEligibilityProblems: published Full Entry Live update with MD is eligible', () => {
+  assert.deepEqual(legacyLiveEligibilityProblems({
+    canonicalMdExists: true, rowExists: true, published: true,
+    pmStatus: 'Full Entry Live', dbStatus: 'Full Entry Live',
+  }), []);
+});
+
+test('legacyLiveEligibilityProblems: first publication (no row) is never eligible', () => {
+  const p = legacyLiveEligibilityProblems({
+    canonicalMdExists: true, rowExists: false, published: null,
+    pmStatus: 'Full Entry Live', dbStatus: 'Full Entry Live',
+  });
+  assert.equal(p.length, 1);
+  assert.match(p[0], /first publication/);
+});
+
+test('legacyLiveEligibilityProblems: unpublished, non-live, or missing MD each block', () => {
+  assert.equal(legacyLiveEligibilityProblems({ canonicalMdExists: true, rowExists: true, published: false, pmStatus: 'Full Entry Live', dbStatus: 'Full Entry Live' }).length, 1);
+  assert.equal(legacyLiveEligibilityProblems({ canonicalMdExists: true, rowExists: true, published: true, pmStatus: 'Draft', dbStatus: 'Full Entry Live' }).length, 1);
+  assert.equal(legacyLiveEligibilityProblems({ canonicalMdExists: true, rowExists: true, published: true, pmStatus: 'Full Entry Live', dbStatus: null }).length, 1);
+  assert.equal(legacyLiveEligibilityProblems({ canonicalMdExists: false, rowExists: true, published: true, pmStatus: 'Full Entry Live', dbStatus: 'Full Entry Live' }).length, 1);
+});
+
+test('legacy-live warning text is the approved wording', () => {
+  assert.equal(LEGACY_LIVE_RECORD_WARNING, 'Legacy-live wording-only correction: retained research record missing; approved exception applied.');
 });

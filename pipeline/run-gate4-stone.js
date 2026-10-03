@@ -30,6 +30,16 @@
  * passes — updates the Production Master status fields via the existing
  * approved pipeline/tools/update-production-master-row.js.
  *
+ * --legacy-live-copy-correction (explicit opt-in, requires --stone): the
+ * approved Legacy-Live Wording-Only Correction Exception. It converts ONE
+ * condition — the missing individual research record — from a blocker into
+ * an explicit warning, and only after the runner proves the stone is an
+ * already-published, Full Entry Live UPDATE with an existing canonical MD.
+ * Every other check (identity, schema, packet validation, precheck, atomic
+ * import, verify-stone, Production Master update) still runs unchanged.
+ * Never valid for a first publication. Christie must have approved the exact
+ * replacement wording; see ENCYCLOPEDIA-PRODUCTION-WORKFLOW.md §17.
+ *
  * Does not support an explicit unpublished hold (--hold on
  * generate-packet.js) — that is a Christie/Dustin-requested exception case,
  * not the normal path this runner automates. Run the individual pipeline
@@ -65,10 +75,11 @@ class BlockerError extends Error {}
 // ---------------------------------------------------------------------------
 
 function parseArgs(argv) {
-  const opts = { apply: false, stone: null };
+  const opts = { apply: false, stone: null, legacyLiveCopyCorrection: false };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--stone') opts.stone = argv[++i];
     else if (argv[i] === '--apply') opts.apply = true;
+    else if (argv[i] === '--legacy-live-copy-correction') opts.legacyLiveCopyCorrection = true;
   }
   return opts;
 }
@@ -147,6 +158,24 @@ function formatReport(state) {
 }
 
 // ---------------------------------------------------------------------------
+// Legacy-live wording-only correction exception — eligibility (pure, exported
+// for testing). Returns the list of unmet conditions; empty means eligible.
+// ---------------------------------------------------------------------------
+
+const LEGACY_LIVE_RECORD_WARNING =
+  'Legacy-live wording-only correction: retained research record missing; approved exception applied.';
+
+function legacyLiveEligibilityProblems({ canonicalMdExists, rowExists, published, pmStatus, dbStatus }) {
+  const problems = [];
+  if (!canonicalMdExists) problems.push('canonical MD does not exist');
+  if (!rowExists) problems.push('no existing enc_stone_content row (this would be a first publication, not an update)');
+  else if (published !== true) problems.push('enc_stone_content.published is not true');
+  if (pmStatus !== 'Full Entry Live') problems.push(`Production Master status is "${pmStatus || '(blank)'}", not "Full Entry Live"`);
+  if (dbStatus !== 'Full Entry Live') problems.push(`stones.enc_production_status is "${dbStatus || '(blank)'}", not "Full Entry Live"`);
+  return problems;
+}
+
+// ---------------------------------------------------------------------------
 // Identity resolution — reuses gate0.js's own Production Master name/slug
 // lookup rather than re-implementing it.
 // ---------------------------------------------------------------------------
@@ -169,6 +198,7 @@ function resolveStoneIdentity(query) {
     stoneId: get('Stone ID'),
     stoneName: get('Canonical Name'),
     slug: get('Slug'),
+    productionStatus: get('Encyclopedia Production Status'),
   };
 }
 
@@ -207,7 +237,7 @@ async function main() {
 
   try {
     if (!opts.stone) {
-      throw new BlockerError('Usage: node pipeline/run-gate4-stone.js --stone <name-or-slug-or-id> [--apply]');
+      throw new BlockerError('Usage: node pipeline/run-gate4-stone.js --stone <name-or-slug-or-id> [--apply] [--legacy-live-copy-correction]');
     }
     if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
       throw new BlockerError('SUPABASE_URL and SUPABASE_SERVICE_KEY env vars are required.');
@@ -226,10 +256,32 @@ async function main() {
 
     // --- 2. Research record exists ---
     const researchPath = resolveResearchRecordPath(identity.slug);
-    if (!fs.existsSync(researchPath)) {
+    if (fs.existsSync(researchPath)) {
+      state.researchRecord = 'found';
+    } else if (!opts.legacyLiveCopyCorrection) {
       throw new BlockerError(`Research record not found at ${researchPath}`);
+    } else {
+      // Approved exception: prove eligibility before bypassing this ONE check.
+      const { createClient: createEligibilityClient } = require('@supabase/supabase-js');
+      const sb = createEligibilityClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+      const { data: contentRow, error: contentErr } = await sb
+        .from('enc_stone_content').select('stone_id, published').eq('stone_id', identity.stoneId).maybeSingle();
+      if (contentErr) throw new BlockerError(`Legacy-live eligibility check could not read enc_stone_content: ${contentErr.message}`);
+      const { data: stoneRow, error: stoneErr } = await sb
+        .from('stones').select('enc_production_status').eq('id', identity.stoneId).maybeSingle();
+      if (stoneErr) throw new BlockerError(`Legacy-live eligibility check could not read stones: ${stoneErr.message}`);
+      const problems = legacyLiveEligibilityProblems({
+        canonicalMdExists: true, // already proven in step 1
+        rowExists: !!contentRow,
+        published: contentRow ? contentRow.published : null,
+        pmStatus: identity.productionStatus,
+        dbStatus: stoneRow ? stoneRow.enc_production_status : null,
+      });
+      if (problems.length > 0) {
+        throw new BlockerError(`Research record not found at ${researchPath}, and --legacy-live-copy-correction is not permitted for this stone: ${problems.join('; ')}.`);
+      }
+      state.researchRecord = `MISSING — ${LEGACY_LIVE_RECORD_WARNING}`;
     }
-    state.researchRecord = 'found';
 
     // --- 3. Export/regenerate structured values ---
     const exportResult = runNodeScript('export-structured-values.js', []);
@@ -360,5 +412,7 @@ module.exports = {
   reportLine,
   formatReport,
   resolveStoneIdentity,
+  legacyLiveEligibilityProblems,
+  LEGACY_LIVE_RECORD_WARNING,
   BlockerError,
 };
