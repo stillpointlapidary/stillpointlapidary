@@ -696,12 +696,12 @@ function noPhotoZoneHtml(c){
   return`<div class="card-img-zone no-photo"><span class="no-photo-orb" style="--orb:${orb};background:${orb}"></span></div>`;
 }
 
-// Canonical card role-tag source, shared by every card renderer: prefer
-// parsed card_props when present, else fall back to energetic_role_1/2/3.
+// Canonical card role-tag source, shared by every card renderer: parsed
+// card_props (Discovery Tags) only — no legacy energetic_role_1/2/3 fallback.
 // Preserves order, drops blanks, deduplicates by normalized value, caps at
-// `limit` (default 3).
+// `limit` (default 3). Empty card_props renders no pills.
 function canonicalRoleTags(c, limit=3){
-  const raw = (c.card_props && c.card_props.length) ? c.card_props : [c.er1, c.er2, c.er3];
+  const raw = c.card_props || [];
   const seen = new Set();
   const out = [];
   (raw || []).forEach(t => {
@@ -804,9 +804,17 @@ function drawerPhotoGoto(idx){
 function encContentFor(c){
   return (_encContentById && _encContentById.get(c.i)) || null;
 }
+// Single canonical Energetic Role source, shared by the drawer's At a Glance
+// role field and by drawerThemeChips()'s no-themes fallback: published
+// encyclopedia energetic_role where available, else the Production-Master-
+// derived runtime role (c.pmRole). Never ER1/2/3.
+function canonicalEnergeticRole(c){
+  const ec=encContentFor(c);
+  return (ec&&ec.energetic_role)||c.pmRole||'';
+}
 function drawerFieldSet(c){
   const ec=encContentFor(c);
-  const role=(ec&&ec.energetic_role)||c.pmRole||'';
+  const role=canonicalEnergeticRole(c);
   let roleIcon=ENERGETIC_ROLE_ICONS[role]||'';
   if(role&&!roleIcon)console.warn(`[enc] Energetic Role "${role}" (stone ${c.i}) has no entry in ENERGETIC_ROLE_ICONS`);
   return{
@@ -854,16 +862,17 @@ function normalizeUseWhenText(text){
 }
 // Up to 3 Energetic Theme chips: published stones use enc_themes (primary
 // titles first, then secondary, in display_order — 'occasional' tier is never
-// shown). Stones with no enc_themes rows (unfinished entries) fall back to
-// the legacy energetic_role_1/2/3 triple as temporary chips — those legacy
-// values are never treated as the canonical Energetic Role.
+// shown). Stones with no enc_themes rows fall back to a single chip for the
+// canonical Energetic Role (see canonicalEnergeticRole()) — never ER1/2/3.
+// No themes and no canonical role means no chip at all.
 function drawerThemeChips(c){
   const enc=_encThemesById&&_encThemesById.get(c.i);
   if(enc){
     const titles=[...enc.primary,...enc.secondary].map(t=>t.title).filter(Boolean);
     if(titles.length)return titles.slice(0,3);
   }
-  return[c.er1,c.er2,c.er3].filter(Boolean);
+  const role=canonicalEnergeticRole(c);
+  return role?[role]:[];
 }
 function renderDrawerContent(c){
   const toxMsg=TOXIC_NOTES[c.n]||c.tox||'';
@@ -1075,13 +1084,22 @@ function loadEncThemesById(){
   return _encThemesByIdPromise;
 }
 
+// Eligibility and slug both come from the published enc_stone_content row,
+// keyed by stone_id. The cached stones row (c.slug) is only a fallback for
+// the slug text, so a stale localStorage stones cache can't hide the link.
+function publishedFullEntrySlug(c,encById){
+  const row=encById&&c?encById.get(c.i):null;
+  if(!row)return '';
+  return String(row.slug||c.slug||'').trim().toLowerCase();
+}
+
 function updateDrawerFullEntryLink(c){
   const link=document.getElementById('d-full-entry-link');
   if(!link||!c)return;
-  const slug=String(c.slug||'').trim().toLowerCase();
-  const applyIfCurrent=(set)=>{
+  const applyIfCurrent=()=>{
     if(!currentCrystal||currentCrystal.i!==c.i)return;
-    if(slug&&set.has(slug)){
+    const slug=publishedFullEntrySlug(c,_encContentById);
+    if(slug){
       link.href=`stones/stone.html?slug=${encodeURIComponent(slug)}`;
       link.style.display='';
     }else{
@@ -1090,11 +1108,10 @@ function updateDrawerFullEntryLink(c){
     }
   };
   link.style.display='none';
-  if(!slug)return;
-  if(_publishedFullEntrySlugs){
-    applyIfCurrent(_publishedFullEntrySlugs);
+  if(_encContentById){
+    applyIfCurrent();
   }else{
-    loadEncContentById().then(()=>applyIfCurrent(_publishedFullEntrySlugs));
+    loadEncContentById().then(applyIfCurrent);
   }
 }
 
@@ -1422,16 +1439,11 @@ function stonePhotoFile(c){
 function crystalToFeaturedStone(c){
   if(!c)return null;
   const photo=stonePhotoFile(c);
-  const qualities=[c.er1,c.er2,c.er3].filter(Boolean).slice(0,3);
-  const fallbackThemes=(c.all_themes||[]).filter(Boolean).slice(0,3);
-  const finalQualities=(qualities.length?qualities:fallbackThemes).slice(0,3);
   return {
     id:c.i,
     name:c.n,
     hex:c.ch || '#c8bca8',
     photo,
-    qualities:finalQualities,
-    use:finalQualities.join(' Â· '),
     bestFor:c.uw || '',
     intention:c.aff || '',
     tier:Number(c.tier)||0
