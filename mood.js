@@ -634,6 +634,30 @@ function compactIntentionReason(text){
     .replace(/[.!?]+$/,'');
 }
 
+// Display-only: turns a stripped use_when body into a complete verb-led card
+// sentence. Never alters the stored use_when and is never applied to curated
+// reason_text.
+//  - "need X..." / "want X..." (plain object, no second clause) -> "Supports/Brings/Builds X..."
+//  - any other verb-initial fragment (feel/are/have/need to/want to/...) -> "Supports you when you <fragment>."
+//  - subject-initial fragment (your.../something.../you're.../change is...) -> "Supports you when <fragment>."
+// Wording is preserved; only the opening is added. Blank input stays blank.
+function verbLedUseWhen(body){
+  let text=String(body||'').trim().replace(/[.!?]+$/,'');
+  if(!text)return'';
+  text=text.replace(/^you\s+(?=[a-z])/i,'');
+  text=text.charAt(0).toLowerCase()+text.slice(1);
+  const m=text.match(/^(need|want)\s+(.+)$/);
+  if(m){
+    const rest=m[2];
+    if(!/^(to|help)\b/.test(rest)&&!/\b(and|or|but)( also)? (need|want|feel|are|have)\b/.test(rest)){
+      const verb=m[1]==='want'?'Brings':(/^confidence\b/.test(rest)?'Builds':'Supports');
+      return sentenceWithPeriod(verb+' '+rest.replace(/\b(and|or) help (\w+ing)\b/gi,'$1 helps with $2'));
+    }
+  }
+  if(/^(need|want|feel|are|have|sense|know)\b/.test(text))return sentenceWithPeriod('Supports you when you '+text);
+  return sentenceWithPeriod('Supports you when '+text);
+}
+
 function selectedIntentionContextLabel(){
   if(activeIntentionFilter&&activeIntentionFilter!=='all')return activeIntentionFilter;
   if(activeIntentionMode==='mood'&&activeMoodIdx!==null){
@@ -707,7 +731,8 @@ function selectedIntentionPhrase(stone){
 
 function normalizeUseWhenToWhy(stone){
   const compact=compactIntentionReason(stone&&stone.uw);
-  if(compact&&!isGenericBlurb(compact))return compact;
+  if(!compact)return'';
+  if(compact&&!isGenericBlurb(compact))return verbLedUseWhen(compact);
   return selectedIntentionPhrase(stone);
 }
 
@@ -725,7 +750,8 @@ function getStoneWhyText(stone, parentSlug, subSlug){
 
 function intentionBestForText(stone){
   if(activeIntentionMode==='ai'){
-    const reason=compactIntentionReason(getIntentionCardDescription(stone, activeIntentionQuery));
+    if(!String(stone&&stone.uw||'').trim())return'';
+    const reason=verbLedUseWhen(compactIntentionReason(getIntentionCardDescription(stone, activeIntentionQuery)));
     if(reason)return reason;
   }
   if(activeCuratedSlug){
@@ -757,7 +783,7 @@ function intentionStoneCardHtml(c){
     :noPhotoZoneHtml(c);
   const reason=intentionBestForText(c);
   const whyHtml=reason&&(activeCuratedSlug||!isGenericBlurb(reason))?`<div class="mood-why-match"><span class="mood-why-value">${escapeAttr(reason)}</span></div>`:'';
-  const themes=(c.all_themes||[]).filter(Boolean).slice(0,3);
+  const themes=canonicalRoleTags(c,3);
   const themeTagsHtml=themes.length?`<div class="mood-theme-tags">${themes.map(t=>`<span class="mood-theme-tag">${escapeAttr(t)}</span>`).join('')}</div>`:'';
   return `<div class="crystal-card mood-result-card" onclick="openIntentionDetail('${c.i}')" style="cursor:pointer">${imgZone}<div class="card-body"><div class="mood-card-header"><div class="card-name">${escapeAttr(c.n)}</div></div>${whyHtml}${themeTagsHtml}</div></div>`;
 }
