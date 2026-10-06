@@ -1,6 +1,7 @@
 'use strict';
 
 const fs   = require('fs');
+const crypto = require('crypto');
 const path = require('path');
 
 // ── PATHS ────────────────────────────────────────────────────────────────────
@@ -190,6 +191,44 @@ for (const rel of DATA_FILES) {
   totalFiles++;
   console.log(`  OK  ${rel}`);
 }
+
+// 6b. Version local CSS/JS references with a content hash (e.g. styles.css?v=1a2b3c4d5e).
+// The HTML is always revalidated, but CSS/JS are served with a multi-hour cache (CDN + browser) under
+// unchanging filenames. Without a version in the URL, a visitor holding an older cached styles.css/identify.js
+// gets the new HTML with old assets (unstyled, missing Photo ID). The hash changes only when the file does, so
+// unchanged files stay cached and changed files are fetched immediately. Source HTML is not modified.
+function versionAssetRefs() {
+  console.log('\nAsset versioning (dist HTML):');
+  const hashCache = new Map();
+  const hashOf = (file) => {
+    if (!hashCache.has(file)) {
+      hashCache.set(file, crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').slice(0, 10));
+    }
+    return hashCache.get(file);
+  };
+  const htmlFiles = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) { if (p !== path.join(DIST, 'assets')) walk(p); }
+      else if (e.name.endsWith('.html')) htmlFiles.push(p);
+    }
+  })(DIST);
+  const ref = /\b(href|src)=(["'])((?!https?:|\/\/|\/|data:|#)[^"'?#]+\.(?:css|js))\2/g;
+  let versioned = 0;
+  for (const html of htmlFiles) {
+    const before = fs.readFileSync(html, 'utf8');
+    const after = before.replace(ref, (m, attr, q, rel) => {
+      const target = path.resolve(path.dirname(html), rel);
+      if (!target.startsWith(DIST + path.sep) || !fs.existsSync(target) || !fs.statSync(target).isFile()) return m;
+      versioned++;
+      return `${attr}=${q}${rel}?v=${hashOf(target)}${q}`;
+    });
+    if (after !== before) fs.writeFileSync(html, after);
+  }
+  console.log(`  OK  ${versioned} CSS/JS reference(s) versioned across ${htmlFiles.length} HTML file(s)`);
+}
+versionAssetRefs();
 
 // 7. sitemap.xml — add published encyclopedia stone URLs (shared dynamic
 // template, so one URL per published slug; no static stone pages). Reads the
