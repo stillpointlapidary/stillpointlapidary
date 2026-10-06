@@ -485,7 +485,7 @@ if(typeof updateDrawerStatus==='function'){
 function pidAddHtml(enc){
   if(typeof CRYSTALS==='undefined'||!CRYSTALS.some(x=>x.i===enc.id))return '';
   const isOwned=pidOwned(enc.id);
-  return `<button type="button" data-stone="${pidEsc(enc.id)}" class="drawer-pill pid-coll${isOwned?' drawer-pill-active':''}" onclick="pidAddToCollection(${pidEsc(JSON.stringify(enc.id))})"><span class="pid-heart" aria-hidden="true"><span class="enc-icon icon-add-piece"></span></span><span class="drawer-pill-label">${isOwned?'In your collection':'Add to collection'}</span></button>`;
+  return `<button type="button" data-stone="${pidEsc(enc.id)}" class="drawer-pill pid-coll${isOwned?' drawer-pill-active':''}" onclick="pidAddToCollection(${pidEsc(JSON.stringify(enc.id))})"><span class="pid-heart" aria-hidden="true"><span class="enc-icon icon-collection-heart"></span></span><span class="drawer-pill-label">${isOwned?'In your collection':'Add to collection'}</span></button>`;
 }
 
 function pidExploreHtml(enc){

@@ -1877,7 +1877,7 @@ function renderDesktopSotdCard(s){
         ${s.card_use_when?`<div class="sotd-use-when-block"><span class="sotd-use-label">Use When</span><p class="sotd-use-when">${escapeAttr(s.card_use_when)}</p></div>`:''}
         <div class="sotd-actions">
           <button class="sotd-button sotd-button-primary sfc-btn-enc" type="button"><span class="sotd-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="sotd-action-label">View Full Entry</span></button>
-          <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}"><span class="sotd-action-icon" aria-hidden="true"><span class="enc-icon icon-add-piece"></span></span><span class="sotd-action-label">Add to Collection</span></button>
+          <button class="sotd-button sotd-button-secondary sfc-btn-coll" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}"><span class="sotd-action-icon" aria-hidden="true"><span class="enc-icon icon-collection-heart"></span></span><span class="sotd-action-label">Add to Collection</span></button>
           <button class="sotd-button sotd-button-secondary sotd-button-wish sfc-btn-wish" type="button" data-sotd-id="${escapeAttr(String(s.id))}" data-sotd-name="${escapeAttr(s.name)}" aria-pressed="false"><span class="sotd-action-icon" aria-hidden="true"><svg class="sotd-wish-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span><span class="sotd-action-label">Wishlist</span></button>
         </div>
       </div>
@@ -2027,7 +2027,7 @@ function renderMobileSotdCard(s){
   let useWhenText=s.card_use_when||'';
   useWhenText=useWhenText.replace(/^Use when you\s+/i,'You ').replace(/^Use when\s+/i,'');
   const SVG_BOOK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`;
-  const SVG_HEART=`<span class="enc-icon icon-add-piece"></span>`;
+  const SVG_HEART=`<span class="enc-icon icon-collection-heart"></span>`;
   const SVG_BOOKMARK=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
   // Reused verbatim from the previous SOTD Best For / Chakra rows.
   const SVG_BESTFOR=`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 10c-9.4 0-17 7.6-17 17 0 5.8 2.9 10.9 7.3 14v10h18v-8.2c5.2-2.9 8.7-8.5 8.7-14.8C44 18.1 36.4 10 27 10Z"/><path d="M22 22c2.4-4.8 9.8-4.8 12.2 0 4.8-.2 7.1 5.7 3.4 8.7 2.2 4.4-2.4 8.8-6.7 6.6-3 3.7-8.8 1.4-8.6-3.4-4.7-.9-5.9-7.1-1.8-9.6.1-.8.6-1.6 1.5-2.3Z"/></svg>`;
